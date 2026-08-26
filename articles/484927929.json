@@ -1,0 +1,3319 @@
+{
+  "articleId": "484927929",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484927929.html",
+  "sourceHash": "200e3db99b312205d38493c94f241a114d5f28227fac1a8fecba362534b4e0f1",
+  "translatedAt": "2026-08-26T14:41:15.8153524+09:00",
+  "title": "Implementing a Map Selection \u0026 Transfer Screen【RPG Maker MZ\u0006MV Plugin】",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "マップ選択＆移動画面を実装【RPGツクールMZ\u0026MVプラグイン】",
+      "sourceHash": "c28d89fdabcd15d2c0ec8b9fe69db5d3f9784d6d6ba8c579b6371989949dc419",
+      "translation": "Implementing a Map Selection \u0026 Transfer Screen【RPG Maker MZ\u0006MV Plugin】"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "選択した地点（マップ）に移動するための画面を実装します。",
+      "sourceHash": "cd9ada5b2eaba63fa3961876fa2a27ea1c35b70ecf5fd6c2bd5979ce708d504c",
+      "translation": "Implements a screen for transferring to a selected location (map)."
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "※いわゆるファストトラベルやルーラに相当する機能です。",
+      "sourceHash": "681cf1c1049070796a3f80ca50e0cab0cd5ae9228a2ee29c6f52350ebfb242e6",
+      "translation": "* This is a feature equivalent to so-called fast travel or Zoom."
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な特徴",
+      "sourceHash": "c7fb76399b9568f4cfa5b95c390dc1c81d1bd16e5410cacba7db395a8d6d999e",
+      "translation": "Main Features"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "フィールドと地図を対応させて各地点を表示",
+      "sourceHash": "2196f4ed6c1023036c00bc13947d58df9316e9eefe6e30985acb7608eb32e2a7",
+      "translation": "Displays each location by associating the field with a map"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "地図画像はエディタから出力するだけでＯＫ",
+      "sourceHash": "b48329ea8fbe043f2f023122361a9054477a6029ef1369da86b85abdde7a2959",
+      "translation": "Map images only need to be exported from the editor"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "コモンイベントによって演出可能",
+      "sourceHash": "67804b5d8c24080558d877f8ea8056b43d73b2ce54c81d5778af8f8027718dd7",
+      "translation": "Can be enhanced using common events"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "メニュー画面に追加可能",
+      "sourceHash": "d40c894fd10eaa9499283697095ce1b21cb16895d24af8cccc24d3b5dd27c997",
+      "translation": "Can be added to the menu screen"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "地点名の横にスイッチ切替によるアイコン表示が可能",
+      "sourceHash": "ca1d08d00e7458313d2cfbfebad4b7765c94b90a0a71fd3ea7e9b04bc54a48df",
+      "translation": "Can display icons next to location names by switching them with switches"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "イベント発生中の地点を知らせるなど。",
+      "sourceHash": "d14ac36f7c1245f7c8662f209a5f5913d0d5e938cdb3cae88c75c63b88a7d0fe",
+      "translation": "Can indicate locations where events are occurring, and so on."
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "移動を禁止すれば、単なる地図としても利用可能",
+      "sourceHash": "93bc5c4b36d64aa68a84a3547e046fb71b4bf70f2c965817e026f360f0e6d336",
+      "translation": "Can also be used as a simple map by prohibiting transfers"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "当プラグイン内で指す『フィールド』とは地図に対応するマップを意味します。",
+      "sourceHash": "3abd48a033ae4d9e7d2f0a259439f3d4cbc2519e71d1b50e010aba03cc9e1a32",
+      "translation": "In this plugin, “field” refers to the map corresponding to the map image."
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "基本的にはフィールドと地点（町やダンジョン）を対応させる想定ですが、以下のような町と施設を対応させた移動画面を作成しても構いません。",
+      "sourceHash": "9b14287250cd23570ede65fd4d487719c9ca4aa3c88bd4fe37d5957ce52243bc",
+      "translation": "The basic assumption is to associate a field with locations (towns and dungeons), but you may also create a transfer screen that associates a town with its facilities, as shown below."
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "素材（Material）",
+      "sourceHash": "866904fed462154937bbbc1297ff0eb78426c5fdd7709345d3153977161ed29b",
+      "translation": "Materials (Material)"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "基本",
+      "sourceHash": "25c2fd632ab205de5cd60ddd481eacde3047c6f1c6ce946ebab2d9d4f820aad4",
+      "translation": "Basic"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "移動演出を追加",
+      "sourceHash": "5bafa3b2ee992741af9e2008a4ecdc21dc7acfc7c61319894ea2a32d0c52caf9",
+      "translation": "Adding Transfer Effects"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "地図を表示",
+      "sourceHash": "9c1f15231a34843839c460f0c2614114dc6427d76caebe615f5a8a6bea06f4cd",
+      "translation": "Displaying the Map"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "地図上に地点を表示",
+      "sourceHash": "117364067409497e22eecd0be23a9d462d6e63307c0761b684e1c7a04f35debe",
+      "translation": "Displaying Locations on the Map"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "現在地の表示",
+      "sourceHash": "29b188d5a71378adbd5487e7478b781ee59c59d4bf630e21464b4dd579d01432",
+      "translation": "Displaying the Current Location"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "MZ Plugin Commands (Plugin Command MZ)"
+    },
+    {
+      "id": "link-011",
+      "type": "link",
+      "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+      "sourceHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075",
+      "translation": "MV Plugin Commands (Plugin Command MV)"
+    },
+    {
+      "id": "link-012",
+      "type": "link",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters"
+    },
+    {
+      "id": "link-013",
+      "type": "link",
+      "source": "地点一覧（SpotList）",
+      "sourceHash": "70daa3dda4196134152820a2cb85c9fd516955ca3cb7a558fb6cdde819cdbded",
+      "translation": "Spot List (SpotList)"
+    },
+    {
+      "id": "link-014",
+      "type": "link",
+      "source": "地図設定一覧（FieldMapList）",
+      "sourceHash": "c7ac5e3987aea835b70a578dec28379ae43700b79353a6a970c74217e799ab84",
+      "translation": "Field Map List (FieldMapList)"
+    },
+    {
+      "id": "link-015",
+      "type": "link",
+      "source": "シンボル画像一覧（SymbolList）",
+      "sourceHash": "6267b5c2ee4fea8e8fd0167daff1c2efc03ae9a95837ec22bfaa97cb4550e9a1",
+      "translation": "Symbol Image List (SymbolList)"
+    },
+    {
+      "id": "link-016",
+      "type": "link",
+      "source": "移動用コモンイベント（TransferCommonEvent）",
+      "sourceHash": "57f75746c40b9c77d8c182c588f0023431996db547f4dc4e99d27c92dee36d4d",
+      "translation": "Transfer Common Event (TransferCommonEvent)"
+    },
+    {
+      "id": "link-017",
+      "type": "link",
+      "source": "マップＩＤ変数（MapIdVariable）",
+      "sourceHash": "6199900950cbdd43d6f0179d0afc9ebcd5bea360ca2f8c41a87cf914132f3751",
+      "translation": "Map ID Variable (MapIdVariable)"
+    },
+    {
+      "id": "link-018",
+      "type": "link",
+      "source": "Ｘ座標変数（XVariable）",
+      "sourceHash": "add846f7fcf3dceecd901cca1f24ff19bad16fa2985bbc55296b4d08b19e694a",
+      "translation": "X Coordinate Variable (XVariable)"
+    },
+    {
+      "id": "link-019",
+      "type": "link",
+      "source": "Ｙ座標変数（YVariable）",
+      "sourceHash": "3454691d9b8c3a3daafac4c27c762107a28e694628e04dd8529199b7b5d28b3c",
+      "translation": "Y Coordinate Variable (YVariable)"
+    },
+    {
+      "id": "link-020",
+      "type": "link",
+      "source": "識別用変数（IdentifierVariable）",
+      "sourceHash": "6af2ab52cd0c40af44a3ca0c26ab5daff60ddd181dcec5ac1b4f198b7ae162f3",
+      "translation": "Identifier Variable (IdentifierVariable)"
+    },
+    {
+      "id": "link-021",
+      "type": "link",
+      "source": "自動更新(フィールド脱出)（UpdateWhenExitField）",
+      "sourceHash": "f9359377baa8f9a00001065a929d117d7a2ed2bce7769c84028505b6f1d18d29",
+      "translation": "Automatic Update (Exit Field) (UpdateWhenExitField)"
+    },
+    {
+      "id": "link-022",
+      "type": "link",
+      "source": "自動更新(地点進入)（UpdateWhenEnterSpot）",
+      "sourceHash": "604c99bdbb24c6fc589a2f2fe82ec307b9fb7e153116006b7bd8ebcfba0f93f6",
+      "translation": "Automatic Update (Enter Spot) (UpdateWhenEnterSpot)"
+    },
+    {
+      "id": "link-023",
+      "type": "link",
+      "source": "最寄の地点を初期選択（SelectNearestSpot）",
+      "sourceHash": "846074d9e29d62eb8ba85dbd637c25137b3111036131eae1670d84872d1a0b72",
+      "translation": "Initially Select Nearest Spot (SelectNearestSpot)"
+    },
+    {
+      "id": "link-024",
+      "type": "link",
+      "source": "現在地のシンボルＩＤ（CurrentSymbolId）",
+      "sourceHash": "910315932ab32886f4a8decd64ab4a5ba94e99bb93dcababde3b7eae0b2f0c74",
+      "translation": "Current Location Symbol ID (CurrentSymbolId)"
+    },
+    {
+      "id": "link-025",
+      "type": "link",
+      "source": "選択地点のシンボルＩＤ（SelectedSymbolId）",
+      "sourceHash": "49672c4bc7fdc80d6959b82ac17ce1921e1518c05d4b478ef0c6d5b6a38d54dc",
+      "translation": "Selected Location Symbol ID (SelectedSymbolId)"
+    },
+    {
+      "id": "link-026",
+      "type": "link",
+      "source": "地点一覧の横幅（SpotListWidth）",
+      "sourceHash": "be20c23789e4944409955725fc15befebd8f4ddf69f8b5f68f1df8c6c5d052d6",
+      "translation": "Spot List Width (SpotListWidth)"
+    },
+    {
+      "id": "link-027",
+      "type": "link",
+      "source": "地点一覧の一行の縦幅（SpotListLineHeight）",
+      "sourceHash": "23b65b618c36343852c20fef364847bcc3d78a5c7b9f51e4a8c48eacb590ae3d",
+      "translation": "Spot List Line Height (SpotListLineHeight)"
+    },
+    {
+      "id": "link-028",
+      "type": "link",
+      "source": "地点一覧のフォントサイズ（SpotListFontSize）",
+      "sourceHash": "4abd370273b072f5bbbffed4393aafb447c4b217783724e9b85365bad15b9adb",
+      "translation": "Spot List Font Size (SpotListFontSize)"
+    },
+    {
+      "id": "link-029",
+      "type": "link",
+      "source": "解説枠の縦幅（HelpHeight）",
+      "sourceHash": "ba10baad1c5a02b42b2ad8a80f51a21e2ac544c6b4196ea395f5337b6f76d06e",
+      "translation": "Help Window Height (HelpHeight)"
+    },
+    {
+      "id": "link-030",
+      "type": "link",
+      "source": "解説文のＹ座標補正（HelpTextAdjustY）",
+      "sourceHash": "59f68e30aeb3145e42eb788e63afe35e23d443abf28a8eb6fcd4995d245e38cb",
+      "translation": "Help Text Y Coordinate Adjustment (HelpTextAdjustY)"
+    },
+    {
+      "id": "link-031",
+      "type": "link",
+      "source": "解説文のフォントサイズ（HelpTextFontSize）",
+      "sourceHash": "9a62456335c9226869f048a52dc90fd560ed914348b67b4e7a0536dcf63ba772",
+      "translation": "Help Text Font Size (HelpTextFontSize)"
+    },
+    {
+      "id": "link-032",
+      "type": "link",
+      "source": "参照専用時は灰色表示（ReadOnlyGray）",
+      "sourceHash": "6ee71ae246208d2f810a7445cd178b9acea7b8f5ffbd5afea15107f13107a8c7",
+      "translation": "Display in Gray When Read-Only (ReadOnlyGray)"
+    },
+    {
+      "id": "link-033",
+      "type": "link",
+      "source": "メニューコマンドに表示（ShowMenuCommand）",
+      "sourceHash": "4eed4339f37cbc719335d18cab6a52dde015c49b34c55352bf1271d7ff1d0d86",
+      "translation": "Show in Menu Commands (ShowMenuCommand)"
+    },
+    {
+      "id": "link-034",
+      "type": "link",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu Command Insertion Position (ShowMenuCommandPosition)"
+    },
+    {
+      "id": "link-035",
+      "type": "link",
+      "source": "メニュー表示名（TravelName）",
+      "sourceHash": "5900f912d5b7c07aca34b3bda4d892dc61bd2e76e900c3f89ff8af1caa8c6684",
+      "translation": "Menu Display Name (TravelName)"
+    },
+    {
+      "id": "link-036",
+      "type": "link",
+      "source": "表示許可するスイッチ（MenuCommandSwitch）",
+      "sourceHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81",
+      "translation": "Switch to Allow Display (MenuCommandSwitch)"
+    },
+    {
+      "id": "link-037",
+      "type": "link",
+      "source": "マスク文字列（MaskString）",
+      "sourceHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d",
+      "translation": "Mask String (MaskString)"
+    },
+    {
+      "id": "link-038",
+      "type": "link",
+      "source": "禁止するスイッチ（DisableSwitch）",
+      "sourceHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b",
+      "translation": "Disable Switch (DisableSwitch)"
+    },
+    {
+      "id": "link-039",
+      "type": "link",
+      "source": "[上級]記号（TravelSymbol）",
+      "sourceHash": "28f02f360ba296ad1236e2d95e93615161b9d2a1175416383a325a53e74f27b9",
+      "translation": "[Advanced] Symbol (TravelSymbol)"
+    },
+    {
+      "id": "link-040",
+      "type": "link",
+      "source": "参照専用（ReadOnlyMenu）",
+      "sourceHash": "e90b83cc0a549bdde02cd40b508ea41b4b97d976e0015a35b8d866372dc319d4",
+      "translation": "Read-Only (ReadOnlyMenu)"
+    },
+    {
+      "id": "link-041",
+      "type": "link",
+      "source": "開始時コモンイベント（StartCommonEvent）",
+      "sourceHash": "ae1cac7992784101f88e2eca20f14c1f7a295fccd734e193ac41a3f8288e5ad6",
+      "translation": "Start Common Event (StartCommonEvent)"
+    },
+    {
+      "id": "link-042",
+      "type": "link",
+      "source": "プラグインパラメータ（地点情報）",
+      "sourceHash": "debb1fdc0cf081f70570aa03f902e18612e8d129883df27b6522956335795ca3",
+      "translation": "Plugin Parameter (Location Information)"
+    },
+    {
+      "id": "link-043",
+      "type": "link",
+      "source": "地点名（SpotName）",
+      "sourceHash": "2bae68813b927ba1d660d8e01defc20eec98e881a6db77da3dcaa9734f2d9152",
+      "translation": "Spot Name (SpotName)"
+    },
+    {
+      "id": "link-044",
+      "type": "link",
+      "source": "説明文（Description）",
+      "sourceHash": "ab97080c6234785442e963275410ba879a3e89a1a802b5935d442459baf2b69e",
+      "translation": "Description (Description)"
+    },
+    {
+      "id": "link-045",
+      "type": "link",
+      "source": "移動先マップＩＤ（TransferMapId）",
+      "sourceHash": "dfd9e13ed63b6aef00feb5bb08900b9e009f1a429e30a80c7dcd12275a9eaeed",
+      "translation": "Transfer Map ID (TransferMapId)"
+    },
+    {
+      "id": "link-046",
+      "type": "link",
+      "source": "移動先Ｘ座標（TransferX）",
+      "sourceHash": "4020a33fe4ab62b340e8f1881284805d2c3dbbd4e9e4fd4888601195909b2d79",
+      "translation": "Transfer X Coordinate (TransferX)"
+    },
+    {
+      "id": "link-047",
+      "type": "link",
+      "source": "移動先Ｙ座標（TransferY）",
+      "sourceHash": "10596e1ad5ecc5f02c3d2c7bbb3d900359fd0aa3c881db68a5a4c72e8b2eda7c",
+      "translation": "Transfer Y Coordinate (TransferY)"
+    },
+    {
+      "id": "link-048",
+      "type": "link",
+      "source": "移動後の向き（TransferDirection）",
+      "sourceHash": "3d969ceb2a71a2ca5526ac25760c962d4df2d9d0cde6731f52faf1a35f985640",
+      "translation": "Direction After Transfer (TransferDirection)"
+    },
+    {
+      "id": "link-049",
+      "type": "link",
+      "source": "移動先識別値（TransferIdentifier）",
+      "sourceHash": "8016d6263d2c93886ce03ac9e2c06802e1d19a6973214b7f4b1ecc4233ceff93",
+      "translation": "Transfer Identifier (TransferIdentifier)"
+    },
+    {
+      "id": "link-050",
+      "type": "link",
+      "source": "移動用コモンイベント（TransferCommonEvent）",
+      "sourceHash": "57f75746c40b9c77d8c182c588f0023431996db547f4dc4e99d27c92dee36d4d",
+      "translation": "Transfer Common Event (TransferCommonEvent)"
+    },
+    {
+      "id": "link-051",
+      "type": "link",
+      "source": "移動先（複数）（ChoiceSpots）",
+      "sourceHash": "08e8ff81f35fdc392f3c65e3f42280cb613b428d7708748d085bc983358de05e",
+      "translation": "Transfer Destinations (Multiple) (ChoiceSpots)"
+    },
+    {
+      "id": "link-052",
+      "type": "link",
+      "source": "アイコン（複数）（Icons）",
+      "sourceHash": "d08baded5cae2518ae77b9dc297d7b22a06558afad83887ea7f00dce8d5afba9",
+      "translation": "Icons (Multiple) (Icons)"
+    },
+    {
+      "id": "link-053",
+      "type": "link",
+      "source": "地図用マップＩＤ（FieldMapId）",
+      "sourceHash": "4e2c11c306597de9384268d4ac7a49469219eab79e1fa2a91e5257f641b2fb8a",
+      "translation": "Field Map ID (FieldMapId)"
+    },
+    {
+      "id": "link-054",
+      "type": "link",
+      "source": "地図用Ｘ座標（FieldX）",
+      "sourceHash": "2f47d0b7c270caa5a9a5f2fe4db5edecea55b6da99a31b5eb8a78d44aea1c722",
+      "translation": "Field X Coordinate (FieldX)"
+    },
+    {
+      "id": "link-055",
+      "type": "link",
+      "source": "地図用Ｙ座標（FieldY）",
+      "sourceHash": "63c1626db9e7291aa73a091ec41fc6bf088720c68a592222800b4a5e36efdeed",
+      "translation": "Field Y Coordinate (FieldY)"
+    },
+    {
+      "id": "link-056",
+      "type": "link",
+      "source": "座標更新用マップＩＤ（LocationUpdateMapId）",
+      "sourceHash": "8865b84214cf42746283af827d0ce9db4f9904a37c49798674b35d6510e4e0b1",
+      "translation": "Coordinate Update Map ID (LocationUpdateMapId)"
+    },
+    {
+      "id": "link-057",
+      "type": "link",
+      "source": "シンボルＩＤ（SymbolId）",
+      "sourceHash": "bddd22a67f0a04010b8b311cdf41b1fa30b8ba2c601e99a6dfc04587251f6728",
+      "translation": "Symbol ID (SymbolId)"
+    },
+    {
+      "id": "link-058",
+      "type": "link",
+      "source": "一覧表示スイッチ（ListingSwitch）",
+      "sourceHash": "b729964cbac7373046075233bbe24c61a65786230b71e7fe5cebeaf8007b432a",
+      "translation": "List Display Switch (ListingSwitch)"
+    },
+    {
+      "id": "link-059",
+      "type": "link",
+      "source": "点表示スイッチ（PointSwitch）",
+      "sourceHash": "c9246ed21e501e8d5d99920931aff07397dee2f196ac23a80b563431c557e4e3",
+      "translation": "Point Display Switch (PointSwitch)"
+    },
+    {
+      "id": "link-060",
+      "type": "link",
+      "source": "選択禁止スイッチ（DisableSwitch）",
+      "sourceHash": "e1771fdfc0c49a846dba5786e4a50204b07979146c5305e55c48d2f29e9d85bd",
+      "translation": "Selection Disable Switch (DisableSwitch)"
+    },
+    {
+      "id": "link-061",
+      "type": "link",
+      "source": "プラグインパラメータ（地図情報）",
+      "sourceHash": "2c76c8640f220b28b12ee99f4b8efad6be10ba450e0108b950a84f12d1c55981",
+      "translation": "Plugin Parameter (Map Information)"
+    },
+    {
+      "id": "link-062",
+      "type": "link",
+      "source": "マップＩＤ（MapId）",
+      "sourceHash": "0cdd9823d046c552ada86874792a7a755cd48c8f0b701def5eb30e0269a003ba",
+      "translation": "Map ID (MapId)"
+    },
+    {
+      "id": "link-063",
+      "type": "link",
+      "source": "マップ画像（MapImage）",
+      "sourceHash": "77292babed3b1855a633de83dbe9ba929c9d485f227d3949a220f05f6236d85f",
+      "translation": "Map Image (MapImage)"
+    },
+    {
+      "id": "link-064",
+      "type": "link",
+      "source": "背景色（BackgroundColor）",
+      "sourceHash": "9d705081a23986f97277c8fbfe609a42f0afb1a8f70970c7f9aa6b0b9960d363",
+      "translation": "Background Color (BackgroundColor)"
+    },
+    {
+      "id": "link-065",
+      "type": "link",
+      "source": "現在地用マップＩＤ変数（CurrentMapIdVariable）",
+      "sourceHash": "27a1075df273b3d778f42f3f000ae7d0d0769509fdff263f2e508a9db7dd260d",
+      "translation": "Current Location Map ID Variable (CurrentMapIdVariable)"
+    },
+    {
+      "id": "link-066",
+      "type": "link",
+      "source": "現在地用Ｘ座標変数（CurrentXVariable）",
+      "sourceHash": "3c53d2c615c7994add8d55603e6ba9b1ca52e7bfde6c24fc2ee99531b2e97159",
+      "translation": "Current Location X Coordinate Variable (CurrentXVariable)"
+    },
+    {
+      "id": "link-067",
+      "type": "link",
+      "source": "現在地用Ｙ座標変数（CurrentYVariable）",
+      "sourceHash": "acc504c7145f9e8f1ebecaaffc9aad47c3beff2911e74b0ade4123569f7f98da",
+      "translation": "Current Location Y Coordinate Variable (CurrentYVariable)"
+    },
+    {
+      "id": "link-068",
+      "type": "link",
+      "source": "有効とするスイッチ（ValidSwitch）",
+      "sourceHash": "19802799cc87906b949a36b07afd994b626ba5b2643732ef7fb629d0fdb66692",
+      "translation": "Valid Switch (ValidSwitch)"
+    },
+    {
+      "id": "link-069",
+      "type": "link",
+      "source": "プラグインパラメータ（シンボル情報）",
+      "sourceHash": "fc6c3cd6423dd552e5584c6c3a98c1a7ce69ad6c6f3e99f3e6f9c5c5d961a266",
+      "translation": "Plugin Parameter (Symbol Information)"
+    },
+    {
+      "id": "link-070",
+      "type": "link",
+      "source": "シンボルＩＤ（SymbolId）",
+      "sourceHash": "bddd22a67f0a04010b8b311cdf41b1fa30b8ba2c601e99a6dfc04587251f6728",
+      "translation": "Symbol ID (SymbolId)"
+    },
+    {
+      "id": "link-071",
+      "type": "link",
+      "source": "メモ（Memo）",
+      "sourceHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8",
+      "translation": "Memo (Memo)"
+    },
+    {
+      "id": "link-072",
+      "type": "link",
+      "source": "シンボル画像（SymbolImage）",
+      "sourceHash": "e896c29c46b93d34ce7ae723f2d89cd1141434dcbbbb2c7ab59937f1b2a503a3",
+      "translation": "Symbol Image (SymbolImage)"
+    },
+    {
+      "id": "link-073",
+      "type": "link",
+      "source": "点滅周期（BlinkPeriod）",
+      "sourceHash": "e98119a437b3bf2d3256194d7debea67f014d03f1d9063923cbe86e9242de4a0",
+      "translation": "Blink Period (BlinkPeriod)"
+    },
+    {
+      "id": "link-074",
+      "type": "link",
+      "source": "不透明度（Opacity）",
+      "sourceHash": "16e0b19c4c61b542e2d50b47302f2445273363cb1e951a39f613b4c900a41853",
+      "translation": "Opacity (Opacity)"
+    },
+    {
+      "id": "link-075",
+      "type": "link",
+      "source": "シンボルの色（SymbolColor）",
+      "sourceHash": "49e852a2bd3a3a935422376e6ca5c3e2ac0a1af60981748060a8a0b70fb195fd",
+      "translation": "Symbol Color (SymbolColor)"
+    },
+    {
+      "id": "link-076",
+      "type": "link",
+      "source": "シンボルの半径（SymbolRadius）",
+      "sourceHash": "7d1f0c6fa86a5368c153a8618ca1c008ff9de0e30ac47c2bcfc96eb5b096f057",
+      "translation": "Symbol Radius (SymbolRadius)"
+    },
+    {
+      "id": "link-077",
+      "type": "link",
+      "source": "プラグインパラメータ（アイコン情報）",
+      "sourceHash": "c4bf492a1a5f279b58d6f035185e55546988047c4440be4bc937e1a2142ccdc4",
+      "translation": "Plugin Parameter (Icon Information)"
+    },
+    {
+      "id": "link-078",
+      "type": "link",
+      "source": "アイコン番号（IconIndex）",
+      "sourceHash": "d6328b3f51f9cc8499920377667789ada80959ecfebe37df6f72b539b36dc583",
+      "translation": "Icon Index (IconIndex)"
+    },
+    {
+      "id": "link-079",
+      "type": "link",
+      "source": "文字色（NameColor）",
+      "sourceHash": "5b19b6ebb11c2b92cbe91ac80db889afa31a755a981b0f12dbaf21eb60b31ac3",
+      "translation": "Text Color (NameColor)"
+    },
+    {
+      "id": "link-080",
+      "type": "link",
+      "source": "表示スイッチ（DispSwitch）",
+      "sourceHash": "d4e53d9269306a96990a2db8f73c76f1f6a286027c13cb3bff7e41296164cb38",
+      "translation": "Display Switch (DispSwitch)"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the function ON from the Plugin Manager in RPG Maker."
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "* This plugin works with both MV and MZ."
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "素材（Material）",
+      "sourceHash": "866904fed462154937bbbc1297ff0eb78426c5fdd7709345d3153977161ed29b",
+      "translation": "Material (Material)"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "上記のサンプルで使用している現在地用のシンボル画像です。武器画像のロッドを改変したものですが、お好みでご使用ください。",
+      "sourceHash": "a73ef8b8c5b470b9c0927f90053d17c463291f921130fe566037900f154b938b",
+      "translation": "This is the symbol image for the current location used in the sample above. It is a modified rod weapon image, but feel free to use it as you like."
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ちなみに画像を設定しない初期状態だと、水色の丸で現在地を表示します。",
+      "sourceHash": "8ae8dd6d9537506e8c3c932efb795f98b969d231dcdbb47ad6c8c32ef26788f7",
+      "translation": "Incidentally, when no image is set in the initial state, the current location is displayed as a light blue circle."
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)"
+    },
+    {
+      "id": "link-081",
+      "type": "link",
+      "source": "地点一覧の一行の縦幅",
+      "sourceHash": "95e84351fe5e3b83686ef437a8d2d9bc2128a5f3e5717fe7180a31fb693922f0",
+      "translation": "One-line height of the location list"
+    },
+    {
+      "id": "link-082",
+      "type": "link",
+      "source": "地点一覧のフォントサイズ",
+      "sourceHash": "5af3f1587cc99f2e648b23dd884718d3c39c30868a0eb4f57d079308d4a52c6c",
+      "translation": "Font size of the location list"
+    },
+    {
+      "id": "link-083",
+      "type": "link",
+      "source": "解説文のＹ座標補正",
+      "sourceHash": "fe95830fb3c135dc8b6d80342ddad343ca5a8182778733fa401b8650464e43ec",
+      "translation": "Y-coordinate adjustment for the description"
+    },
+    {
+      "id": "link-084",
+      "type": "link",
+      "source": "解説文のフォントサイズ",
+      "sourceHash": "810fb290268002187c3f965b958cf0142804083c1bc790ec3a1ab1299fb040d9",
+      "translation": "Font size of the description"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "をプラグインパラメータに追加した。",
+      "sourceHash": "5fe92f597f30407fd4c27fcbc2d6897bcf358a38678f9d70ecb3471f53df8bdd",
+      "translation": " was added to the plugin parameters."
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "プラグイン内の英語解説を分かりやすく修正した。",
+      "sourceHash": "0d663c12124aa0b96bb01d04f3674487f493cdffd010da6bfd2778afe5e943ad",
+      "translation": "The English explanation in the plugin was revised for clarity."
+    },
+    {
+      "id": "link-085",
+      "type": "link",
+      "source": "参照専用の場合は地点名を灰色表示",
+      "sourceHash": "5158b80ac1e865cfc4c9208989e0823a183d62bef9f3f8afa6316814a7306611",
+      "translation": "Display location names in gray when read-only"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "できるようにした。",
+      "sourceHash": "17ce85c5025ea7c64b283e7336a2ee70409985cac3b8cb8522d54cd488094d4c",
+      "translation": " was made possible."
+    },
+    {
+      "id": "link-086",
+      "type": "link",
+      "source": "最寄りの地点を初期選択",
+      "sourceHash": "414122b94259167f96f3a4b7e0b55a2dfce89f0378120310dfd7d2934168a3db",
+      "translation": "Initially select the nearest location"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "する機能を追加した。",
+      "sourceHash": "5455d9440c292a046739f93820b94a3bd1719e9ae80c85c6cc85bf2455d8261e",
+      "translation": " functionality was added."
+    },
+    {
+      "id": "link-087",
+      "type": "link",
+      "source": "移動先をさらに複数の候補から選択",
+      "sourceHash": "4f3b9c0a49ec8499f860e2b05de1a855e551ab04e94a54fefc814a7d933de609",
+      "translation": "Select a destination from multiple candidates"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "する機能を実装した。",
+      "sourceHash": "9fbbdf4e7e0e160e0f244106ca1537bc03959c408a9ec2d37a39d7dfcba290e4",
+      "translation": " functionality was implemented."
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "※ＭＺのみの機能です。ＭＶでは挙動が怪しく、候補先名が表示されません。",
+      "sourceHash": "ab42bb2d5c12d2cb6daa6179c68bf2d5f3a87b9355c56df7127429765651b663",
+      "translation": "* This feature is available only in MZ. In MV, its behavior is unreliable and candidate destination names are not displayed."
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "シーン開始のプラグインコマンドに",
+      "sourceHash": "073157abdca8b05cc44b53a836bb206330aefab651594907191fb33d26cb9403",
+      "translation": "Added the "
+    },
+    {
+      "id": "link-088",
+      "type": "link",
+      "source": "カーソルの初期識別値",
+      "sourceHash": "787b9dc7afdb4cada29d599aab8c79b2d68cf2d3afd7b2ae284fa9d9993800d0",
+      "translation": "initial cursor identifier"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "を追加した。",
+      "sourceHash": "f73a7db2df2b4e92a287218e6bca0a404cb47dcbebbd21db3151249cb49fdaa9",
+      "translation": " to the plugin command for starting the scene."
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "ＭＶにて、アイコン表示時にエラーとなる不具合修正。",
+      "sourceHash": "843e6084941668047a74ac211f41b71bbe9d38c00d695f50506d88c71e441913",
+      "translation": "Fixed an error that occurred when displaying icons in MV."
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "ＭＶにて、アイコンが表示されない不具合修正。（2024/11/01 ver1.042）",
+      "sourceHash": "1b03495c4f3ca5ecc1ed9e87e33809ac0c722fd246cf242b525101be053577a3",
+      "translation": "Fixed an issue in MV where icons were not displayed. (2024/11/01 ver1.042)"
+    },
+    {
+      "id": "link-089",
+      "type": "link",
+      "source": "コマンドのマスク表示機能",
+      "sourceHash": "3ca2f3d643438248b89410554b27d7484da4414b6237b30550f5036e0f214d53",
+      "translation": "Command masking feature"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "を追加。",
+      "sourceHash": "7bcb0eb4714a78cae4994f5780fa62dbc1d261d4894f73ae1675fcfe6464ca06",
+      "translation": " was added."
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "AdditionalDescription.jsとの競合対策用に調整。（2024/08/08 ver1.031）",
+      "sourceHash": "1a462ab11024df9d5d1d709871c893e23c449c1e869172f5be9f41fd6f97ba2a",
+      "translation": "Adjusted to prevent conflicts with AdditionalDescription.js. (2024/08/08 ver1.031)"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "別フィールドのマップを表示している時も、地図に現在地が表示されてしまう不具合修正。",
+      "sourceHash": "7896828df294e8bc9b41c1013f954ae121e1062d65d30f4c26d9bbb4d2343603",
+      "translation": "Fixed an issue where the current location was displayed on the map even when displaying a map from another field."
+    },
+    {
+      "id": "link-090",
+      "type": "link",
+      "source": "地点名の文字色変更機能",
+      "sourceHash": "fa5473402a3b58b034f1429fa87fbbdc859e2e43a13e735896b25e8ad2c263da",
+      "translation": "Feature for changing the text color of location names"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "を追加。",
+      "sourceHash": "7bcb0eb4714a78cae4994f5780fa62dbc1d261d4894f73ae1675fcfe6464ca06",
+      "translation": " was added."
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "ＭＶで動作しない不具合修正。（2022/11/05 ver1.021）",
+      "sourceHash": "b94d78c5d916f5c76ccdcfb5e91ef8ce293dd25a6312922c177dff1a777ee8f2",
+      "translation": "Fixed an issue where it did not work in MV. (2022/11/05 ver1.021)"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "メニューコマンドの挿入位置が想定通りにならないことがある不具合修正。",
+      "sourceHash": "394367b49c55e0a66de44d62c0ce87f3ac70e1b22c557d7ed3b6b8761dd4d085",
+      "translation": "Fixed an issue where the insertion position of the menu command was sometimes incorrect."
+    },
+    {
+      "id": "link-091",
+      "type": "link",
+      "source": "コマンド禁止用のスイッチ",
+      "sourceHash": "7d739843d7a7a32cf182c39cd2fb45ad69df094414f20af7e20dabdd1ba9a06f",
+      "translation": "Switch for disabling commands"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "を追加。",
+      "sourceHash": "7bcb0eb4714a78cae4994f5780fa62dbc1d261d4894f73ae1675fcfe6464ca06",
+      "translation": " was added."
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "表示する地点がない場合にエラーとなる不具合修正。",
+      "sourceHash": "4e98c57bfaf1ca4f601773bacc4f9b407edfa3e151927490c10dda53b2f20850",
+      "translation": "Fixed an issue where an error occurred when there were no locations to display."
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "設定内容の多いプラグインなので、段階に分けて説明します。",
+      "sourceHash": "2ea92515d3fd91e6e7b9d06308d8f49eb47bc564142eb277c3cbcb99464ea1bb",
+      "translation": "Since this plugin has many settings, they will be explained in stages."
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "まずは地図を使わない方法から始めます。",
+      "sourceHash": "0e5514c864522e29ae642071f14a5043c1b825d75b7e6657749841c9d90bd91c",
+      "translation": "First, we will start with a method that does not use a map."
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "基本",
+      "sourceHash": "25c2fd632ab205de5cd60ddd481eacde3047c6f1c6ce946ebab2d9d4f820aad4",
+      "translation": "Basics"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "まず地点一覧をプラグインパラメータに登録します。",
+      "sourceHash": "6cbb193ea3314ea133a1147779414e4db5a598fb9276378358cf8c08925f1798",
+      "translation": "First, register the location list in the plugin parameters."
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "『地点名』",
+      "sourceHash": "ebbb1d3166bda3760d29d33c63c1fd63222cf41748bb2c95c5e3b3bf2916ad90",
+      "translation": "Location Name"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "『移動先マップＩＤ』",
+      "sourceHash": "a60c20bf7d390d58f05cf0bda405bda4f34cf304116b11184482eb24704740cd",
+      "translation": "Destination Map ID"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "『移動先Ｘ座標』",
+      "sourceHash": "1530a3f2d07ed5b19be0d6a70337838e6ba162998e22440f3fd1088e468ec1f6",
+      "translation": "Destination X Coordinate"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "『移動先Ｙ座標』",
+      "sourceHash": "00a2e28a7d8ea9790d1af0e1cb195075fc2c1ea0afcaa1d3dcfe6b128122a02e",
+      "translation": "Destination Y Coordinate"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "などの情報を指定してください。",
+      "sourceHash": "68710e7987a5dab586c2e0834a2a828304a8fa0fa263995d0ede5c00716b56ae",
+      "translation": "Specify information such as the above."
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "また『一覧表示スイッチ』を指定すれば、スイッチがオンになるまで地点は表示されなくなります。",
+      "sourceHash": "764cb0e9bc2247505529a95262ab8de09ea22c5918c2cc20fae0ec4720d77a90",
+      "translation": "You can also specify the \u0022List Display Switch\u0022 to hide locations until the switch is turned on."
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "これでプラグインコマンドを実行すればＯＫです。",
+      "sourceHash": "e95cb687829f460dd409c94cac040bb1cc7b01b0f08c01f8369b1cf5e52f4668",
+      "translation": "Now simply execute the plugin command."
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※パラメータは指定不要",
+      "sourceHash": "c1df2dff0836cd2df61211fac282eed01c9ab526b76d2905abf7c3f23c290a27",
+      "translation": "* No parameter needs to be specified"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "シンプルなマップ選択＆移動画面が実現できます。",
+      "sourceHash": "bf2b86d08fbc49b55d8fa7a09a594cbefa4fbb9be01734a7d5db96802893807d",
+      "translation": "This provides a simple map selection and movement screen."
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "移動演出を追加",
+      "sourceHash": "5bafa3b2ee992741af9e2008a4ecdc21dc7acfc7c61319894ea2a32d0c52caf9",
+      "translation": "Add Movement Effects"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "しかしながら、上記だけでは場所移動の演出もなく味気ないです。",
+      "sourceHash": "291c9878754b67f41a7d138a8570e98c779305b09333d4241fadaecc70de4fd4",
+      "translation": "However, the above alone is rather dull, with no effects for moving between locations."
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "そこでコモンイベントを呼び出すことで演出を追加します。",
+      "sourceHash": "d54beb74bfd4ec9072880093f049985267e98d61f115c1b3e5343e664bb55d47",
+      "translation": "You can add effects by calling a common event."
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "『移動用コモンイベント』",
+      "sourceHash": "057c64c16941171c33daa45c4b17e5de38c33816ec93d200fd79bfc124cf3ae1",
+      "translation": "Movement Common Event"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "『マップＩＤ変数』",
+      "sourceHash": "9cb580b313e0237155e9698323bac7dab897cbd747443b3544e899c3d7a8d623",
+      "translation": "Map ID Variable"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "『Ｘ座標変数』",
+      "sourceHash": "88d634442941c17e6bdd4c9d715d5929d3c1fbc0b38ef5dceda9bbedb581142d",
+      "translation": "『Ｘ座標変数』"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "『Ｙ座標変数』",
+      "sourceHash": "ccec93bafd55317b1b7a720e6b008110f79caea1d589a0ba116b456766ca45da",
+      "translation": "『Ｙ座標変数』"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "の各プラグインパラメータを設定してください。",
+      "sourceHash": "ae5737758bc0aeff83f85b3aa546a3cf83cf3f113566171c8fd9faf4f98b9c53",
+      "translation": " plugin parameters."
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "※いずれも地点一覧ではなく通常のパラメータです。",
+      "sourceHash": "c7a748677553efffb6f731ddde275eb6b88da547acd813c2c9865e80acf1b1f2",
+      "translation": "※These are all regular parameters, not location lists."
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "この際、指定したコモンイベント内に、自力で場所移動処理を記述する必要があります。パラメータで指定した変数に座標情報が格納されるので、場所移動先をその変数で指定してください。",
+      "sourceHash": "314b4c1250d7fcfafc8f990ae6d4a24dc466336fc138d03c7f59d9c07ceeb1cf",
+      "translation": "In this case, you must write the transfer processing yourself within the specified common event. Coordinate information is stored in the variables specified by the parameters, so specify the transfer destination using those variables."
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "後はイベントコマンドで好きなように演出を追加してください。",
+      "sourceHash": "00783a890855e47e822c92693f34dc658dfe10978bf857548517cc82dab5f066",
+      "translation": "After that, add any desired effects using event commands."
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "移動に失敗して、別の場所に飛ばされるなんて変わったこともできます。",
+      "sourceHash": "0397e3c5a2af049145bde9f278767b504d6597d8f3fcfe91f2a234bb4316b574",
+      "translation": "You can even do unusual things, such as having the player sent to another location when movement fails."
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "地図を表示",
+      "sourceHash": "9c1f15231a34843839c460f0c2614114dc6427d76caebe615f5a8a6bea06f4cd",
+      "translation": "Display the Map"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "フィールドに対応する地図を表示し、各地点を地図上の点（シンボル）として表示することが可能です。",
+      "sourceHash": "d1853a2bb67f491c191af5724bba2c6a26580ecde7812eb328bc7cec02c345bf",
+      "translation": "You can display a map corresponding to the field and show each location as a point (symbol) on the map."
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "まずは地図画像を用意してください。",
+      "sourceHash": "d79090a5bccdbca729298d2c071e6ecdabe1085a55b92f19855dedc983afa859",
+      "translation": "First, prepare a map image."
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "最も簡単なのはマップツリー上で地図を作成したいマップを選択し、右クリックで「画像として保存」を選択して出力する方法です。",
+      "sourceHash": "dda870d6ba44f9a3c9fec7b30687692310493b28293d3abbf420f95385033276",
+      "translation": "The easiest method is to select the map you want to create on the map tree, right-click it, select “Save as Image,” and export it."
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "用意した画像をピクチャーとして『地図設定一覧』に登録し、マップＩＤと紐付けてください。",
+      "sourceHash": "668d5bbf36a1f38b0de0887dcbc1eda97e22c177511d765bd4ddecd6ffcbee12",
+      "translation": "Register the prepared image as a picture in 『地図設定一覧』 and associate it with the map ID."
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "なお、自力で地図を加工したり完全に自作しても構いません。",
+      "sourceHash": "39dab102d040034f43b096e71120d754a460d2d404475ec65e5f8a3e496ae666",
+      "translation": "You can also edit the map yourself or create one entirely from scratch."
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "比率さえ合っていれば、地図のサイズも自由です。",
+      "sourceHash": "ac58d2f01e4aed720e3c6dc62fad5287f8300a697643558ac86d01160945c5ed",
+      "translation": "The map size is unrestricted as long as the proportions match."
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "地図上に地点を表示",
+      "sourceHash": "117364067409497e22eecd0be23a9d462d6e63307c0761b684e1c7a04f35debe",
+      "translation": "Display Locations on the Map"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "『移動先マップＩＤ』『移動先Ｘ座標』『移動先Ｙ座標』の各項目にフィールド上の座標を設定しているならば、この時点で地図上に地点がシンボルとして表示されるようになります。",
+      "sourceHash": "7ee08f672981f40e8cf1a30958c8406457302a80dec864ba8f32f1e62538ca45",
+      "translation": "If you have set the field coordinates for 『移動先マップＩＤ』, 『移動先Ｘ座標』, and 『移動先Ｙ座標』, locations will be displayed as symbols on the map from this point onward."
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "問題は、移動先が町の中などフィールド以外だった場合です。",
+      "sourceHash": "7fa9fd5881e3bd222569231bc93a36775f54f4fbee74f83b62cd04925acef68b",
+      "translation": "The problem arises when the destination is somewhere other than the field, such as inside a town."
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "その町が世界地図上のどの座標にあるのかを設定しなければなりません。地点毎に対応する座標を入力する必要があります。",
+      "sourceHash": "b2d7db7b95f5ad452755d96b6a83f3a04d86f37eea459e86888b3d8f828a881b",
+      "translation": "You must set the coordinates of that town on the world map. You need to enter the corresponding coordinates for each location."
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "『地図用マップＩＤ』",
+      "sourceHash": "6a4e77e96eb83d60cb111100a233166c6c38408ff5e08b929a0ad3b64a656f7d",
+      "translation": "『地図用マップＩＤ』"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "『地図用Ｘ座標』",
+      "sourceHash": "8176289fa764c68ef1132a98a3ac8f3a859f0b609b2d9913eb7b752800c00fcb",
+      "translation": "『地図用Ｘ座標』"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "『地図用Ｙ座標』",
+      "sourceHash": "6275c60a1c7d256cce188898351cfbfb3c4f30eb537eac153cb0c495d58c747a",
+      "translation": "『地図用Ｙ座標』"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "の各項目を設定してください。",
+      "sourceHash": "9e60a6c0e342787e6efad0abd44373c94706af4b173062db8dad826e3d451a09",
+      "translation": "Set each of these items."
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "なお、シンボルをゲームの開始時から表示したくないという場合は『点表示スイッチ』を設定して切り替えてください。",
+      "sourceHash": "0c8e9add3ff2368c7797ad4ea0a2b31425d18d19685caa0c1fd67114b33290ea",
+      "translation": "If you do not want the symbol to be displayed from the start of the game, set 『点表示スイッチ』 to toggle its display."
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "『一覧表示スイッチ』と同じ番号のスイッチでも構いません。",
+      "sourceHash": "f6a16ad0c6d6314cde7255e1ee717269385b5dc710fb00edb15b498689fd79c1",
+      "translation": "You can use a switch with the same number as 『一覧表示スイッチ』."
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "現在地の表示",
+      "sourceHash": "29b188d5a71378adbd5487e7478b781ee59c59d4bf630e21464b4dd579d01432",
+      "translation": "Display the Current Location"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "地図上にプレイヤーの現在地を表示するのは意外に困難です。",
+      "sourceHash": "4442efeede8309db34ad362abf16c029b25e8a150ad02c34f3def8d3b960b60b",
+      "translation": "Displaying the player\u0027s current location on the map is surprisingly difficult."
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "フィールド上にプレイヤーがいるなら、現在の座標を参照するだけですが、町やダンジョン内にいる場合は、そうもいきません。",
+      "sourceHash": "e6f1028065de675a6d9ab1b786cd66e72c8361980aa852aef3e180493304725f",
+      "translation": "If the player is on the field, you only need to reference the current coordinates, but that is not possible when the player is in a town or dungeon."
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "よって、地点内にいる場合もフィールドの座標情報を保持する必要があります。",
+      "sourceHash": "4724088596f6e8935c121be42320161983537b53ebaa23a06ce4498d2d3a3bca",
+      "translation": "Therefore, you must retain the field\u0027s coordinate information even while inside a location."
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "まず、プラグインパラメータの地図情報に以下項目を設定し、保持する変数を決めてください。",
+      "sourceHash": "d0aece41ae021fb1eba289f719296184a04fb34f9e46b96eabd70592393e653e",
+      "translation": "First, set the following items in the map information under the plugin parameters and determine which variables will retain the information."
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "『現在地用マップＩＤ変数』",
+      "sourceHash": "62f9879c1cbbadb011fdbf31b993708018c51164cef8079aee8778bb1852e3b7",
+      "translation": "『現在地用マップＩＤ変数』"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "『現在地用Ｘ座標変数』",
+      "sourceHash": "0442658289fe71043859d4a10074238072861c16df80149143338a8b01bc1c11",
+      "translation": "『現在地用Ｘ座標変数』"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "『現在地用Ｙ座標変数』",
+      "sourceHash": "8c31cf1311e86bae640ec12eea20b745e8faaa1355292835fb70632eb82ad638",
+      "translation": "『現在地用Ｙ座標変数』"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "このプラグインでは、以下二つの自動化手段を用意しています。",
+      "sourceHash": "e012bd6d568bb4b91510fca0670d3b1db23a3627b13624495718f88581f1952c",
+      "translation": "This plugin provides the following two automation methods."
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "１．フィールドから地点へ場所移動した際の座標を保持する。",
+      "sourceHash": "8ad53f326456d0896145651f5a1264f4526112e709b8be4954689b88d0e6844e",
+      "translation": "1. Retain the coordinates when transferring from the field to a location."
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "ただし、イベントなどで地点から地点へ移動した際は当てになりません。",
+      "sourceHash": "3b4540df5580a55e31294bdc3f2a04b711049e6a2b4e3fd26ffb3eff350b032e",
+      "translation": "However, these coordinates cannot be relied upon when moving from one location to another through an event or similar means."
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "最初に入った地点の座標が保持されたままになります。",
+      "sourceHash": "8f71b7f0c12cfb3183943b9e31afb7a4478fb38bfcb1cd163af8873e82e7013d",
+      "translation": "The coordinates of the first location entered will remain stored."
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "また、イベントの演出で一時的にフィールドへ場所移動した場合、この処理の対象になってしまうことも注意してください。",
+      "sourceHash": "b7681522f7419535855432c014dd71f90c910c0d0733c3bc220e6c9e033acb44",
+      "translation": "Also note that temporarily transferring to the field as part of an event\u0027s effects may be processed by this function."
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "２．地点へ場所移動した際に、地図用座標を取得する。",
+      "sourceHash": "9bbbc606e3556e2d03755f39cf44340b1f18827a08a25212ac8710b00b6b6471",
+      "translation": "2. Obtain the map coordinates when transferring to a location."
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "該当の地点かどうかの判定は、『移動先マップＩＤ』で行います。",
+      "sourceHash": "b92d88a352db742673fbed9cf94d3c42912cba60aa280dbbbdb24139eaf470da",
+      "translation": "Whether it is the relevant location is determined using 『移動先マップＩＤ』."
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "それだけでは不十分な場合は『座標更新用マップＩＤ』に追加できます。",
+      "sourceHash": "fa4458f8735ac3945ff0be8f5db63b62f56e5669c2a4e878217c1cfdd30de13d",
+      "translation": "If that is insufficient, you can add maps to 『座標更新用マップＩＤ』."
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "もっとも、地点に属する全てのマップを登録するのは非現実的です。",
+      "sourceHash": "f454c3ca26457eb1c776ea76961722a373a00cb23975a233cc104464b1f3485c",
+      "translation": "However, registering every map belonging to a location is impractical."
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "外部から遷移する可能性があるマップだけで十分です。",
+      "sourceHash": "ae53b1215f652ce7146d770bcdf2de9618fb3a059741808cdf6fe0a4cbc33b7e",
+      "translation": "It is sufficient to register only maps that may be entered from outside."
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "※ダンジョンなど地図上に表示しない地点を登録したい場合は『移動先マップＩＤ』を空欄にした上で、さらに『座標更新用マップＩＤ』だけを設定してください。",
+      "sourceHash": "5268937ee71fab9b103b210fc27cc6b5f9b89fb34e1296ff0e4ca6728e67c629",
+      "translation": "※If you want to register a location, such as a dungeon, that is not displayed on the map, leave 『移動先マップＩＤ』 blank and set only 『座標更新用マップＩＤ』."
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "※ＭＺ用プラグインコマンドの『地点一覧（追加）』で追加した地点についてはこの機能は働きません。ご注意ください。",
+      "sourceHash": "8c97a1518f24709dfc0dba58b110dae00e1e5008b06762b260fafda0bf5074b7",
+      "translation": "※This function does not work for locations added using the MZ plugin command 『地点一覧（追加）』. Please be aware of this."
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "上記の自動取得機能を停止したい場合は、プラグインパラメータで切替も可能です。",
+      "sourceHash": "ef3e9225bfbdc61b2799dcd9ab4901238ffdf6dac5da8bc4fd0417105caf9fde",
+      "translation": "You can also toggle the above automatic acquisition functions through the plugin parameters."
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "自動取得せずに、手動で上記の変数に値を設定しても構いません。",
+      "sourceHash": "d067b496f9a2bd71ab228e3060c952cb2f22ca495034d8cbc9f543e0e154e4e0",
+      "translation": "You can also set values manually in the above variables without using automatic acquisition."
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "状況によって柔軟に対応してください。",
+      "sourceHash": "808df6802c2944cbf4fccdd3da9251f1b6879e497f044afe8e766fc56eb6949e",
+      "translation": "Respond flexibly according to the situation."
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "例えば、ダンジョンからの脱出座標などと共有する方法もあります。",
+      "sourceHash": "0544511233d27b28f0e595583b6574b784f0616c47bd6fba123e3b1dcdf230bb",
+      "translation": "For example, you could share them with coordinates used to escape from a dungeon."
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "MZ Plugin Commands（Plugin Command MZ）"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "シーン開始",
+      "sourceHash": "2aa97e25a655180f18fd14290ccf41815e5a62d4ec3f18d3b5b98a9b1f5756ce",
+      "translation": "Start Scene"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "マップ選択画面を表示します。",
+      "sourceHash": "5a8c0c6b385a41af5420e7bb9fe5fed66ffe9f18901e560a451fc99b35ea0bd8",
+      "translation": "Displays the map selection screen."
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "地点一覧（追加）",
+      "sourceHash": "5770b91f00c933c043b202eaa755c09e985cc26097b7e75a98ad16af1baac103",
+      "translation": "Spot List (Additional)"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "表示される地点一覧の追加分です。",
+      "sourceHash": "f15f5a1d7364879e814710af81e768d55b0ae69448176dc1a0a8b44167ed9e52",
+      "translation": "The additional spots in the displayed spot list."
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "プラグインパラメータの地点一覧に結合します。",
+      "sourceHash": "a4ac88fe09fc47039b43a0abb63dd21d4b8cd6d827c4a10491d3300274319c9c",
+      "translation": "Merges with the spot list in the plugin parameters."
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "表示専用",
+      "sourceHash": "0599397b109da112247836b71c5f96abe6701a4cee4645e0595222fc9abc6d40",
+      "translation": "Display Only"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "場所移動を禁止します。",
+      "sourceHash": "5347e2b4da7894a03322daf4b257c9ff82770510a0479ff7e6ebf2676856b9f2",
+      "translation": "Prohibits transfers."
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "純粋に地図として使用する場合を想定しています。",
+      "sourceHash": "2677a5630243f51bb0795cf24aa7bef1add2b69ff71bb5bb716b9eddf2e22d6a",
+      "translation": "Intended for cases where it is used purely as a map."
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "共通一覧を非表示",
+      "sourceHash": "c0af3be4b0202759c5642ccfbb26551d006370dada8da2bf9711fa0e53e7fee0",
+      "translation": "Hide Common List"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "プラグインパラメータで設定した共通の地点一覧を表示せず、地点一覧（追加）で指定した地点だけを表示します。",
+      "sourceHash": "1e5bf5be636d185fc04a14dee70f7638664f9e7afe77b49cebcb2e9414358c1e",
+      "translation": "Displays only the spots specified in Spot List (Additional), without displaying the common spot list configured in the plugin parameters."
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "カーソルの初期識別値",
+      "sourceHash": "787b9dc7afdb4cada29d599aab8c79b2d68cf2d3afd7b2ae284fa9d9993800d0",
+      "translation": "Initial Cursor Identifier"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "画面を開いた時のカーソルの初期選択地点を設定します。",
+      "sourceHash": "60a0b962255c26c638bda4fcc5b784a7d4fb9329f9464dbb1c3432f72b4de181",
+      "translation": "Sets the cursor\u0027s initially selected spot when the screen is opened."
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "値はプラグインパラメータ（地点情報）の",
+      "sourceHash": "d2d6d298c1833ab0072b2ca4e6d9f87aed534689756857fe9bb90f3af68dfd64",
+      "translation": "The value corresponds to the "
+    },
+    {
+      "id": "link-092",
+      "type": "link",
+      "source": "移動先識別値",
+      "sourceHash": "26d6be99d38962b3e729f0d2a15a0d71af475c7f7c092c59c7b9960405227ff0",
+      "translation": "Destination Identifier"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "に対応します。",
+      "sourceHash": "39dec2e5f6e5726590ff490528f26b7a63c50837d720795c81e946db477c2638",
+      "translation": "."
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+      "sourceHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075",
+      "translation": "Plugin Command MV"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "機能はＭＺ版と同じため、説明は割愛します。",
+      "sourceHash": "a2fd38671ddde00b1fa26824f4e255b3fb4bb1fa9bb197fc1d071de29b2633c7",
+      "translation": "The functionality is the same as in the MZ version, so the explanation is omitted."
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "※大文字個別は区別しません。",
+      "sourceHash": "68a8bf8f089bd00fb95083997ddd73244da2d30d12044f927ce28e4b3ea629d7",
+      "translation": "Uppercase and lowercase are not distinguished."
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "シーン開始",
+      "sourceHash": "2aa97e25a655180f18fd14290ccf41815e5a62d4ec3f18d3b5b98a9b1f5756ce",
+      "translation": "Scene Start"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "また、以下で表示専用になります。",
+      "sourceHash": "934c76c075a0083de0e8c7e09db7dd056ee75f9878f6718d0c691abdbd13e88c",
+      "translation": "The following also makes it display-only."
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "地点一覧（SpotList）",
+      "sourceHash": "70daa3dda4196134152820a2cb85c9fd516955ca3cb7a558fb6cdde819cdbded",
+      "translation": "Spot List (SpotList)"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "表示される地点の一覧です。",
+      "sourceHash": "a9751ca778cd001f07bde038e127c5cdd5504924d004be4d398da706aa9bc18e",
+      "translation": "A list of the spots to be displayed."
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "表示条件なども含めて登録してください。",
+      "sourceHash": "fa0d053488a452c5b6cdcca205c91c1869365b68e06baa551d696fc3d0ef3cb2",
+      "translation": "Register them along with display conditions and so on."
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "詳細は",
+      "sourceHash": "c0f2b3b3b4ec621a08f0132d10206ede1ec5293797ddd495101342c8dc354d37",
+      "translation": "For details, see "
+    },
+    {
+      "id": "link-093",
+      "type": "link",
+      "source": "プラグインパラメータ（地点情報）",
+      "sourceHash": "debb1fdc0cf081f70570aa03f902e18612e8d129883df27b6522956335795ca3",
+      "translation": "the Plugin Parameters (Spot Information)"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "をご確認ください。",
+      "sourceHash": "e73ea8cf740e476f56e1aed9b27331783e3d35fdf82b96629be05ee8de534a0f",
+      "translation": "."
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "地図情報一覧（FieldMapList）",
+      "sourceHash": "03f052a1378c2ed81f52251ba310fb79731f21e4376bf6b1ec8ba74b086d3148",
+      "translation": "Field Map List (FieldMapList)"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "地図として表示されるフィールドマップの一覧です。",
+      "sourceHash": "c0dd1f340bddbd9071cf792d8ee64a900fa3d19ed80e474f7613cdb051d3858f",
+      "translation": "A list of field maps displayed as a map."
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "マップＩＤや画像などを登録してください。",
+      "sourceHash": "8a0076fc9b72579fedfab921edd645f6cd1fa10e5240c0bba5a27b056eb9585f",
+      "translation": "Register the map IDs, images, and so on."
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "シンボル画像一覧（SymbolList）",
+      "sourceHash": "6267b5c2ee4fea8e8fd0167daff1c2efc03ae9a95837ec22bfaa97cb4550e9a1",
+      "translation": "Symbol Image List (SymbolList)"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "地図上に表示されるシンボル（各地点、選択地点、現在地）の一覧です。",
+      "sourceHash": "dc7fb65839a513b089f933fc50d94dd3cf394075a09ba60923f6c203700ce61c",
+      "translation": "A list of the symbols displayed on the map (each spot, the selected spot, and the current location)."
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "移動用コモンイベント（TransferCommonEvent）",
+      "sourceHash": "57f75746c40b9c77d8c182c588f0023431996db547f4dc4e99d27c92dee36d4d",
+      "translation": "Transfer Common Event (TransferCommonEvent)"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "地点選択後に実行するコモンイベントです。",
+      "sourceHash": "3a0393368dfbe01519382b509e4824fa2d4c6162cead06e937e9916010f02157",
+      "translation": "The common event to execute after selecting a spot."
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "このイベント内で場所移動を実行してください。",
+      "sourceHash": "8c37145f28011e3f8041d7678fb365b6b9b77313d3180f6598739feffa59c0cb",
+      "translation": "Execute the transfer within this event."
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "マップＩＤ変数（MapIdVariable）",
+      "sourceHash": "6199900950cbdd43d6f0179d0afc9ebcd5bea360ca2f8c41a87cf914132f3751",
+      "translation": "Map ID Variable (MapIdVariable)"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "地点選択後に場所移動先のマップＩＤを格納する変数です。",
+      "sourceHash": "99e9e56c39c49a7f790d6d802d0844a7a59933cca90f35d5cd0fbd7f5578d0ee",
+      "translation": "The variable that stores the Map ID of the transfer destination after selecting a spot."
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "Ｘ座標変数（XVariable）",
+      "sourceHash": "add846f7fcf3dceecd901cca1f24ff19bad16fa2985bbc55296b4d08b19e694a",
+      "translation": "X Coordinate Variable (XVariable)"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "地点選択後に場所移動先のＸ座標を格納する変数です。",
+      "sourceHash": "2978816e90a0f929504c65d7f27258e2e25f00d863cee6eaeedae5a147ad977f",
+      "translation": "The variable that stores the X coordinate of the transfer destination after selecting a spot."
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "Ｙ座標変数（YVariable）",
+      "sourceHash": "3454691d9b8c3a3daafac4c27c762107a28e694628e04dd8529199b7b5d28b3c",
+      "translation": "Y Coordinate Variable (YVariable)"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "地点選択後に場所移動先のＹ座標を格納する変数です。",
+      "sourceHash": "5173bc531367ea6c71e774127c27a5c1cf551d499dc8cd99407f2440a4e62fb0",
+      "translation": "The variable that stores the Y coordinate of the transfer destination after selecting a spot."
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "識別用変数（IdentifierVariable）",
+      "sourceHash": "6af2ab52cd0c40af44a3ca0c26ab5daff60ddd181dcec5ac1b4f198b7ae162f3",
+      "translation": "Identifier Variable (IdentifierVariable)"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "地点選択後に識別値を格納する変数です。",
+      "sourceHash": "4c57b461c35ec95eda27f9e372c372364ea921ead38f9a6bc0c8e1847e3b7a1a",
+      "translation": "The variable that stores the identifier after selecting a spot."
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "地点毎に異なる処理をしたい場合に有用です。",
+      "sourceHash": "b20b21fbcfba6e38cb05ee4b9bcf95c731e1f418d5ba74c1ac33c391065fe732",
+      "translation": "Useful when you want to perform different processing for each spot."
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "自動更新(フィールド脱出)（UpdateWhenExitField）",
+      "sourceHash": "f9359377baa8f9a00001065a929d117d7a2ed2bce7769c84028505b6f1d18d29",
+      "translation": "Auto Update (Exit Field) (UpdateWhenExitField)"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "フィールドから別のマップへ移動する際に地図座標用の変数を自動更新します。",
+      "sourceHash": "a137998daf380c16e872857dbec1508fcb5f078517b7f627753d89fcc604dbf2",
+      "translation": "Automatically updates the variables for map coordinates when transferring from the field to another map."
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "自動更新(地点進入)（UpdateWhenEnterSpot）",
+      "sourceHash": "604c99bdbb24c6fc589a2f2fe82ec307b9fb7e153116006b7bd8ebcfba0f93f6",
+      "translation": "Auto Update (Enter Spot) (UpdateWhenEnterSpot)"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "各地点へ移動した際に地図座標用の変数を自動更新します。",
+      "sourceHash": "c7ca21d06aa9db6d8838c6792e4f13affcf8d138a8cb6a0deba0b92e3baed346",
+      "translation": "Automatically updates the variables for map coordinates when transferring to each spot."
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "『移動先マップＩＤ』および『座標更新用マップＩＤ』が基準。",
+      "sourceHash": "3a8ae8737d933358d313ffb48ed6bd221fda2496c8daf0c416fb67805bf53725",
+      "translation": "Based on “Destination Map ID” and “Map ID for Coordinate Updates.”"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "最寄の地点を初期選択（SelectNearestSpot）",
+      "sourceHash": "846074d9e29d62eb8ba85dbd637c25137b3111036131eae1670d84872d1a0b72",
+      "translation": "Initially Select Nearest Spot (SelectNearestSpot)"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "地点選択時に自動で最もプレイヤーの現在地に近い地点を初期選択します。",
+      "sourceHash": "d835293a01dad41d92a1ba3b18d43deb0ce1e023e9e1222820e5f326c475c84b",
+      "translation": "Automatically initially selects the spot closest to the player\u0027s current location when selecting a spot."
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "各地点のフィールド座標、およびプレイヤーのフィールド座標が適切に取得できることがこの機能を使う前提です。",
+      "sourceHash": "4b2a9f50a299d4a0cf8e4574fb9f9c14dffc4bb48764c513850b2129c38bbe31",
+      "translation": "This feature requires that the field coordinates of each location and the player\u0027s field coordinates can be retrieved correctly."
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "詳しくは『",
+      "sourceHash": "533f7d159a6fcd57f58c21adb70c5acd9029bc8a23abdf13a31d37e1e7635796",
+      "translation": "For details, see “"
+    },
+    {
+      "id": "link-094",
+      "type": "link",
+      "source": "地図上に地点を表示",
+      "sourceHash": "117364067409497e22eecd0be23a9d462d6e63307c0761b684e1c7a04f35debe",
+      "translation": "Displaying Locations on the Map"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "』と『",
+      "sourceHash": "8a7781dad5ba75b18bce2fe5973c51161de268fe5119e5fa9438a8645314b5cf",
+      "translation": "” and “"
+    },
+    {
+      "id": "link-095",
+      "type": "link",
+      "source": "現在地の表示",
+      "sourceHash": "29b188d5a71378adbd5487e7478b781ee59c59d4bf630e21464b4dd579d01432",
+      "translation": "Displaying Current Location"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "』を確認してください。",
+      "sourceHash": "b29ceda133bee302fa32ebf050324835b5f68049cf8e86f0bd9697b06530f561",
+      "translation": "”."
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "また、プラグインコマンド側で",
+      "sourceHash": "7739a4fa3148fba9379da3b5b349d5ac13e1ad5b326920093272b0357899220a",
+      "translation": "Also, on the plugin command side, "
+    },
+    {
+      "id": "link-096",
+      "type": "link",
+      "source": "カーソルの初期識別値",
+      "sourceHash": "787b9dc7afdb4cada29d599aab8c79b2d68cf2d3afd7b2ae284fa9d9993800d0",
+      "translation": "Initial Cursor Identifier"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "が指定されている場合はそちらが優先されます。",
+      "sourceHash": "88715fc67760b99d810a7c5eff0d8382839427938e1e922e73e1ba1993419c14",
+      "translation": " is specified, it takes precedence."
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "現在地のシンボルＩＤ（CurrentSymbolId）",
+      "sourceHash": "910315932ab32886f4a8decd64ab4a5ba94e99bb93dcababde3b7eae0b2f0c74",
+      "translation": "Current Location Symbol ID (CurrentSymbolId)"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "現在地を表示するシンボルのＩＤです。",
+      "sourceHash": "cb988f996bf342dff4f1829598a3707d459bf99b5f4a5f458dca9c6176b920b4",
+      "translation": "The ID of the symbol used to display the current location."
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "選択地点のシンボルＩＤ（SelectedSymbolId）",
+      "sourceHash": "49672c4bc7fdc80d6959b82ac17ce1921e1518c05d4b478ef0c6d5b6a38d54dc",
+      "translation": "Selected Location Symbol ID (SelectedSymbolId)"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "選択地点を表示するシンボルのＩＤです。",
+      "sourceHash": "a8d6a019bc3e7b40cf58501584509e9f5b72fdf7a3466a3ab6813cebcea94c59",
+      "translation": "The ID of the symbol used to display the selected location."
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "地点一覧の横幅（SpotListWidth）",
+      "sourceHash": "be20c23789e4944409955725fc15befebd8f4ddf69f8b5f68f1df8c6c5d052d6",
+      "translation": "Location List Width (SpotListWidth)"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "地点一覧の横幅です。",
+      "sourceHash": "1844a311504a4edf6859c1225912b8e16b5d4d76028d41cb7b9a09c77a897b56",
+      "translation": "The width of the location list."
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "地点一覧の一行の縦幅（SpotListLineHeight）",
+      "sourceHash": "23b65b618c36343852c20fef364847bcc3d78a5c7b9f51e4a8c48eacb590ae3d",
+      "translation": "Location List Line Height (SpotListLineHeight)"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "地点一覧の一行の縦幅です。",
+      "sourceHash": "a932bd6830d46c4e7caeaa8f848951f98fd2711d6dc2f414353c844ef5b405fd",
+      "translation": "The line height of the location list."
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "未指定なら標準値を使用します。",
+      "sourceHash": "338a2634ed40a187dbb940c9e53ae8ac4c92667052bf1dee803510fd0a316055",
+      "translation": "If not specified, the default value is used."
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "地点一覧のフォントサイズ（SpotListFontSize）",
+      "sourceHash": "4abd370273b072f5bbbffed4393aafb447c4b217783724e9b85365bad15b9adb",
+      "translation": "Location List Font Size (SpotListFontSize)"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "地点一覧のフォントサイズです。",
+      "sourceHash": "cdd20ca3400e04c46923267dcefba0ad1ca10581e3533d0f0fed5d275b1ecdcf",
+      "translation": "The font size of the location list."
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "未指定なら標準値を使用します。",
+      "sourceHash": "338a2634ed40a187dbb940c9e53ae8ac4c92667052bf1dee803510fd0a316055",
+      "translation": "If not specified, the default value is used."
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "解説枠の縦幅（HelpHeight）",
+      "sourceHash": "ba10baad1c5a02b42b2ad8a80f51a21e2ac544c6b4196ea395f5337b6f76d06e",
+      "translation": "Help Window Height (HelpHeight)"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "解説枠の縦幅です。初期値（空欄）では二行分を確保します。",
+      "sourceHash": "9f869aa8dc019c2eea621d94abfadb290f9d99057228d15ecbeab41890826359",
+      "translation": "The height of the help window. The initial value (blank) reserves space for two lines."
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "0にすると非表示。",
+      "sourceHash": "ced92a9ac1065ad1280f723d9fec62aa40f602d7f1f4c8fcf5c59cce0813a536",
+      "translation": "Set to 0 to hide it."
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "解説文のＹ座標補正（HelpTextAdjustY）",
+      "sourceHash": "59f68e30aeb3145e42eb788e63afe35e23d443abf28a8eb6fcd4995d245e38cb",
+      "translation": "Help Text Y Coordinate Adjustment (HelpTextAdjustY)"
+    },
+    {
+      "id": "text-099",
+      "type": "text",
+      "source": "解説文の描画Ｙ座標への補正値です。",
+      "sourceHash": "a150e911fbec3fb7f4055291ae0a35ee4788b79c062852d01789837d9b6b131c",
+      "translation": "The adjustment value for the help text\u0027s drawing Y coordinate."
+    },
+    {
+      "id": "text-100",
+      "type": "text",
+      "source": "初期値は0です。",
+      "sourceHash": "94a72b9fad8b753b5f46ab26ef37e76ee2c8ea65d6442453d754c61501e36e9c",
+      "translation": "The initial value is 0."
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "解説文のフォントサイズ（HelpTextFontSize）",
+      "sourceHash": "9a62456335c9226869f048a52dc90fd560ed914348b67b4e7a0536dcf63ba772",
+      "translation": "Help Text Font Size (HelpTextFontSize)"
+    },
+    {
+      "id": "text-101",
+      "type": "text",
+      "source": "解説文のフォントサイズです。",
+      "sourceHash": "5771b87e5851964a43cb7ac8ffad6b64eea855c26f17cc476aea00d64a38f653",
+      "translation": "The font size of the help text."
+    },
+    {
+      "id": "text-102",
+      "type": "text",
+      "source": "未指定なら標準値を使用します。",
+      "sourceHash": "338a2634ed40a187dbb940c9e53ae8ac4c92667052bf1dee803510fd0a316055",
+      "translation": "If not specified, the default value is used."
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "参照専用時は灰色表示（ReadOnlyGray）",
+      "sourceHash": "6ee71ae246208d2f810a7445cd178b9acea7b8f5ffbd5afea15107f13107a8c7",
+      "translation": "Display in Gray in Read-Only Mode (ReadOnlyGray)"
+    },
+    {
+      "id": "text-103",
+      "type": "text",
+      "source": "参照専用時は全ての地点名を灰色表示します。",
+      "sourceHash": "415bb467cef0f7a8c47a066697cc6859a1edb078d6ec5dfe2dc7574d14e94763",
+      "translation": "Displays all location names in gray in read-only mode."
+    },
+    {
+      "id": "text-104",
+      "type": "text",
+      "source": "移動時と参照時の区別をしたい時にどうぞ。",
+      "sourceHash": "6f3cd9c4b842d5f4e1d33096d0f3f1aded599d4090c641e5f3a9b4a8edfe96a1",
+      "translation": "Use this when you want to distinguish between travel mode and read-only mode."
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "メニューコマンドに表示（ShowMenuCommand）",
+      "sourceHash": "4eed4339f37cbc719335d18cab6a52dde015c49b34c55352bf1271d7ff1d0d86",
+      "translation": "Show in Menu Commands (ShowMenuCommand)"
+    },
+    {
+      "id": "text-105",
+      "type": "text",
+      "source": "メニューコマンドに移動機能を追加します。",
+      "sourceHash": "ebd7befbee957f0e98eb3a3ec65876358403069662346a6686bb745c0b93685d",
+      "translation": "Adds the travel function to the menu commands."
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu Command Insertion Position (ShowMenuCommandPosition)"
+    },
+    {
+      "id": "text-106",
+      "type": "text",
+      "source": "メニューコマンドに移動機能を挿入する位置です。",
+      "sourceHash": "1f436512473171aa0a8df2f155863dfab0fd1c11b331de3e07bfa88071e7771c",
+      "translation": "The position at which to insert the travel function into the menu commands."
+    },
+    {
+      "id": "text-107",
+      "type": "text",
+      "source": "0が先頭になります。",
+      "sourceHash": "6579e828acbb15a63d25e6819700e380e51a1123f911dc906cec92706543a301",
+      "translation": "0 places it at the beginning."
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "メニュー表示名（TravelName）",
+      "sourceHash": "5900f912d5b7c07aca34b3bda4d892dc61bd2e76e900c3f89ff8af1caa8c6684",
+      "translation": "Menu Display Name (TravelName)"
+    },
+    {
+      "id": "text-108",
+      "type": "text",
+      "source": "移動機能の表示コマンド名を設定します。",
+      "sourceHash": "093ab7158c0699d66de2bf373869ab8fcfdb91228fe5aeca41462bd443fa3851",
+      "translation": "Sets the display command name for the travel function."
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "表示許可するスイッチ（MenuCommandSwitch）",
+      "sourceHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81",
+      "translation": "Display Permission Switch (MenuCommandSwitch)"
+    },
+    {
+      "id": "text-109",
+      "type": "text",
+      "source": "スイッチがオンの時のみコマンドを表示します。",
+      "sourceHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7",
+      "translation": "The command is displayed only when the switch is ON."
+    },
+    {
+      "id": "text-110",
+      "type": "text",
+      "source": "空白なら常に表示します。",
+      "sourceHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e",
+      "translation": "If blank, it is always displayed."
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "マスク文字列（MaskString）",
+      "sourceHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d",
+      "translation": "Mask String (MaskString)"
+    },
+    {
+      "id": "text-111",
+      "type": "text",
+      "source": "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。",
+      "sourceHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a",
+      "translation": "When the display permission switch is OFF, the command is displayed using the specified string."
+    },
+    {
+      "id": "text-112",
+      "type": "text",
+      "source": "例えば、機能を解放する前のコマンドを「？？？？」というように表示できます。",
+      "sourceHash": "75696b12a6253dd295d1dab97ac71874a2abb1e9b8f30d1a95a552de6558a0dd",
+      "translation": "For example, you can display the command as “????” before the feature is unlocked."
+    },
+    {
+      "id": "text-113",
+      "type": "text",
+      "source": "空欄ならコマンド自体を非表示にします。",
+      "sourceHash": "ee543d903862b4cbd50cad343433c27785dd0c199f3cbf821571e72ec2cc2f94",
+      "translation": "If blank, the command itself is hidden."
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "禁止するスイッチ（DisableSwitch）",
+      "sourceHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b",
+      "translation": "Disable Switch (DisableSwitch)"
+    },
+    {
+      "id": "text-114",
+      "type": "text",
+      "source": "スイッチがオンの時のみコマンドを禁止（灰色表示）します。",
+      "sourceHash": "ddcae8fab7f9935d987563c40b31a457240630b51ebd7119a4d8fa39cfc6619b",
+      "translation": "The command is disabled (displayed in gray) only when the switch is ON."
+    },
+    {
+      "id": "text-115",
+      "type": "text",
+      "source": "空白なら常に許可します。",
+      "sourceHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333",
+      "translation": "If blank, it is always enabled."
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "[上級]記号（TravelSymbol）",
+      "sourceHash": "28f02f360ba296ad1236e2d95e93615161b9d2a1175416383a325a53e74f27b9",
+      "translation": "[Advanced] Symbol (TravelSymbol)"
+    },
+    {
+      "id": "text-116",
+      "type": "text",
+      "source": "移動機能の記号を設定します。",
+      "sourceHash": "5f62102756712d8e8e6ae7bee11bc7085da46c36a0627054f8dbed4e4ea0daf8",
+      "translation": "Sets the symbol for the transfer function."
+    },
+    {
+      "id": "text-117",
+      "type": "text",
+      "source": "この値は他のプラグインと連携する際に使用できます。",
+      "sourceHash": "c3da54dadc711224f6ce7600bf45880f4ed48400f8b9d98c84fbdbe460558efd",
+      "translation": "This value can be used when integrating with other plugins."
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "参照専用（ReadOnlyMenu）",
+      "sourceHash": "e90b83cc0a549bdde02cd40b508ea41b4b97d976e0015a35b8d866372dc319d4",
+      "translation": "Read-Only (ReadOnlyMenu)"
+    },
+    {
+      "id": "text-118",
+      "type": "text",
+      "source": "移動コマンドを参照専用にします。",
+      "sourceHash": "969803c1293fec9e9e486914734b89f4cafb5d4af28a1d36c56d7a14570cfb12",
+      "translation": "Makes the transfer command read-only."
+    },
+    {
+      "id": "text-119",
+      "type": "text",
+      "source": "地図としての利用を想定しています。",
+      "sourceHash": "c96b824d0bc6e619de59658a2bcb7b5650fb2d98a0e81bdbefa027cb4e1b9b22",
+      "translation": "Intended for use as a map."
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "開始時コモンイベント（StartCommonEvent）",
+      "sourceHash": "ae1cac7992784101f88e2eca20f14c1f7a295fccd734e193ac41a3f8288e5ad6",
+      "translation": "Common Event at Start (StartCommonEvent)"
+    },
+    {
+      "id": "text-120",
+      "type": "text",
+      "source": "シーン開始時に実行されるコモンイベントです。",
+      "sourceHash": "5ad7bb42645e43fdd025fded3a6883cad687486c7dfdc9843a481693ec4f9012",
+      "translation": "The common event executed when the scene starts."
+    },
+    {
+      "id": "text-121",
+      "type": "text",
+      "source": "メッセージ表示等が可能ですが、機能は限定的です。",
+      "sourceHash": "4930e2e4fcfedbd8006be17e3d2e10864b1b6555931b7572b3e0b747f5fe3c98",
+      "translation": "Messages and similar functions are available, but functionality is limited."
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "プラグインパラメータ（地点情報）",
+      "sourceHash": "debb1fdc0cf081f70570aa03f902e18612e8d129883df27b6522956335795ca3",
+      "translation": "Plugin Parameters (Spot Information)"
+    },
+    {
+      "id": "text-122",
+      "type": "text",
+      "source": "『地点一覧』内に登録する地点情報のパラメータです。",
+      "sourceHash": "b2f35a5e9cffd70a1532af9dcbb04ddaf0423b70a8709e7f1363896d7dcf4485",
+      "translation": "The parameters for the spot information registered in the “Spot List.”"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "地点名（SpotName）",
+      "sourceHash": "2bae68813b927ba1d660d8e01defc20eec98e881a6db77da3dcaa9734f2d9152",
+      "translation": "Spot Name (SpotName)"
+    },
+    {
+      "id": "text-123",
+      "type": "text",
+      "source": "表示される地点の名前です。",
+      "sourceHash": "bfdb4440132e32c2472ae63625f1e8f9154f602a55eba8c25904e7f820deb1e8",
+      "translation": "The name of the displayed spot."
+    },
+    {
+      "id": "text-124",
+      "type": "text",
+      "source": "\\i[1]などのアイコン表示も有効です。",
+      "sourceHash": "19fca7398f6506e0d7305a66db4ad7482ed9d24ecceeca741104660efe0cebac",
+      "translation": "Icon display using \\i[1] and similar codes is also supported."
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "説明文（Description）",
+      "sourceHash": "ab97080c6234785442e963275410ba879a3e89a1a802b5935d442459baf2b69e",
+      "translation": "Description (Description)"
+    },
+    {
+      "id": "text-125",
+      "type": "text",
+      "source": "地点の説明文です。",
+      "sourceHash": "ba3d355dcd45bfad4774afb2ff00b073a8e8448f0ca8946bafa5097c8421bb7a",
+      "translation": "The description of the spot."
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "移動先マップＩＤ（TransferMapId）",
+      "sourceHash": "dfd9e13ed63b6aef00feb5bb08900b9e009f1a429e30a80c7dcd12275a9eaeed",
+      "translation": "Transfer Map ID (TransferMapId)"
+    },
+    {
+      "id": "text-126",
+      "type": "text",
+      "source": "移動先のマップＩＤです。数式可。",
+      "sourceHash": "c20f09126307337d0b0c50a86487294999f5488401bb52f2576a84811137ecbc",
+      "translation": "The map ID to transfer to. Formulas are supported."
+    },
+    {
+      "id": "text-127",
+      "type": "text",
+      "source": "空欄だと一覧に表示されなくなります。",
+      "sourceHash": "caaa4e9a9a4570f1b43d65fc92094055f542302f1a30a7fa05b14e0734f0c3b9",
+      "translation": "If left blank, it will no longer be displayed in the list."
+    },
+    {
+      "id": "text-128",
+      "type": "text",
+      "source": "地図にシンボルだけを表示したい場合や、『座標更新用マップＩＤ』だけを設定したい場合に有効です。",
+      "sourceHash": "3c19c324fd43e8cb7cc037c5713f49c7dbee2fe0d18da85ded844a7e2d1f2def",
+      "translation": "Useful when you want to display only symbols on the map or set only the “Coordinate Update Map ID.”"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "移動先Ｘ座標（TransferX）",
+      "sourceHash": "4020a33fe4ab62b340e8f1881284805d2c3dbbd4e9e4fd4888601195909b2d79",
+      "translation": "Transfer X Coordinate (TransferX)"
+    },
+    {
+      "id": "text-129",
+      "type": "text",
+      "source": "移動先のＸ座標です。数式可。",
+      "sourceHash": "48a5bff05454b268c11bda1bd3b5335b12a999f0f9cd9f491dd0c6e008bff1a8",
+      "translation": "The X coordinate at the transfer destination. Formulas are supported."
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "移動先Ｙ座標（TransferY）",
+      "sourceHash": "10596e1ad5ecc5f02c3d2c7bbb3d900359fd0aa3c881db68a5a4c72e8b2eda7c",
+      "translation": "Transfer Y Coordinate (TransferY)"
+    },
+    {
+      "id": "text-130",
+      "type": "text",
+      "source": "移動先のＹ座標です。数式可。",
+      "sourceHash": "a626653988d070bcafb6947150733fcfba1056543fde7b21f29414626a15d276",
+      "translation": "The Y coordinate at the transfer destination. Formulas are supported."
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "移動後の向き（TransferDirection）",
+      "sourceHash": "3d969ceb2a71a2ca5526ac25760c962d4df2d9d0cde6731f52faf1a35f985640",
+      "translation": "Direction After Transfer (TransferDirection)"
+    },
+    {
+      "id": "text-131",
+      "type": "text",
+      "source": "移動後の向きです。",
+      "sourceHash": "12aa84ec6be29cbcd17f77bbdf3522f576e61fac68805711331a5833742a403d",
+      "translation": "The direction after the transfer."
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "移動先識別値（TransferIdentifier）",
+      "sourceHash": "8016d6263d2c93886ce03ac9e2c06802e1d19a6973214b7f4b1ecc4233ceff93",
+      "translation": "Transfer Identifier (TransferIdentifier)"
+    },
+    {
+      "id": "text-132",
+      "type": "text",
+      "source": "移動先の地点を識別するための値です。",
+      "sourceHash": "285880b6e07f2634b5c4efd8fc5f7b9fb33d0b83d423bdf83b472b468dee6731",
+      "translation": "The value used to identify the spot at the transfer destination."
+    },
+    {
+      "id": "text-133",
+      "type": "text",
+      "source": "『識別用変数』に値が格納されます。",
+      "sourceHash": "c3d0c38f7df677e5ebd5517f7eca6896e75ca77e472ee7471adb1ffc970b9440",
+      "translation": "The value is stored in the “Identifier Variable.”"
+    },
+    {
+      "id": "text-134",
+      "type": "text",
+      "source": "例えば、場所移動後に乗り物の位置も移動させたい場合、『識別用変数』で分岐させて『乗り物の位置設定』を実行すればＯＫです。",
+      "sourceHash": "70f4e4144697dbbe4e20730f66102a892b4ad9076e2348ad552c8e525d82fb15",
+      "translation": "For example, if you also want to move a vehicle after transferring locations, branch using the “Identifier Variable” and execute “Set Vehicle Position.”"
+    },
+    {
+      "id": "text-135",
+      "type": "text",
+      "source": "ちなみに『移動先マップＩＤ』だけで識別できる場合は、わざわざこの項目を使う必要はありません。",
+      "sourceHash": "2042faa7e30ac116a231a4827c2b1b88f64df9a1f52d900de62290ce860349ad",
+      "translation": "If the destination can be identified using only the “Transfer Map ID,” there is no need to use this parameter."
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "移動用コモンイベント（TransferCommonEvent）",
+      "sourceHash": "57f75746c40b9c77d8c182c588f0023431996db547f4dc4e99d27c92dee36d4d",
+      "translation": "Transfer Common Event (TransferCommonEvent)"
+    },
+    {
+      "id": "text-136",
+      "type": "text",
+      "source": "地点選択後に実行するコモンイベントです。",
+      "sourceHash": "3a0393368dfbe01519382b509e4824fa2d4c6162cead06e937e9916010f02157",
+      "translation": "The common event executed after selecting a spot."
+    },
+    {
+      "id": "text-137",
+      "type": "text",
+      "source": "全体で設定したものより優先されます。",
+      "sourceHash": "8e9fa389c8c556f4746dac5478e02cfa9828e4413dcc5eb1a5aa3589483ba492",
+      "translation": "This takes priority over the one configured globally."
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "移動先（複数）（ChoiceSpots）",
+      "sourceHash": "08e8ff81f35fdc392f3c65e3f42280cb613b428d7708748d085bc983358de05e",
+      "translation": "Transfer Destinations (Multiple) (ChoiceSpots)"
+    },
+    {
+      "id": "text-138",
+      "type": "text",
+      "source": "複数の移動先を設定します。",
+      "sourceHash": "67405e5705195a99f9fa32c11f43a0444aed00afe9b5f0529bee8ddc9155d0c2",
+      "translation": "Sets multiple transfer destinations."
+    },
+    {
+      "id": "text-139",
+      "type": "text",
+      "source": "例えば、画像の例では町名を選んだ後にさらに選択肢で町中に飛ぶかフィールド上に飛ぶかを選択できるようにしています。",
+      "sourceHash": "8253c9194ba933a0a5c191763002346314bcb9caeff640ab83b614083a9eb279",
+      "translation": "For example, in the image, after selecting a town name, you can choose whether to transfer to the town or to a location on the field."
+    },
+    {
+      "id": "text-140",
+      "type": "text",
+      "source": "※ＭＺのみの機能です。ＭＶでは挙動が怪しく、候補先名が表示されません。",
+      "sourceHash": "ab42bb2d5c12d2cb6daa6179c68bf2d5f3a87b9355c56df7127429765651b663",
+      "translation": "* This feature is available only in MZ. In MV, the behavior is unreliable and the destination names are not displayed."
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "アイコン（複数）（Icons）",
+      "sourceHash": "d08baded5cae2518ae77b9dc297d7b22a06558afad83887ea7f00dce8d5afba9",
+      "translation": "Icons (Multiple) (Icons)"
+    },
+    {
+      "id": "text-141",
+      "type": "text",
+      "source": "地点名の横にアイコンを追加します。",
+      "sourceHash": "6d66e21eda5212da7b63d4de525183dd0a2596e807191bfbc435c6558fea6ace",
+      "translation": "Adds icons next to the spot name."
+    },
+    {
+      "id": "text-142",
+      "type": "text",
+      "source": "例えば、イベント発生中の地点を明示するなど。",
+      "sourceHash": "b795dc9af7b5b7629aba3961f5d2042d4a046f0149bcd8e9d4f7f2a1167d4adb",
+      "translation": "For example, to indicate spots where an event is occurring."
+    },
+    {
+      "id": "text-143",
+      "type": "text",
+      "source": "詳細は",
+      "sourceHash": "c0f2b3b3b4ec621a08f0132d10206ede1ec5293797ddd495101342c8dc354d37",
+      "translation": "For details, see "
+    },
+    {
+      "id": "link-097",
+      "type": "link",
+      "source": "プラグインパラメータ（アイコン情報）",
+      "sourceHash": "c4bf492a1a5f279b58d6f035185e55546988047c4440be4bc937e1a2142ccdc4",
+      "translation": "Plugin Parameters (Icon Information)"
+    },
+    {
+      "id": "text-144",
+      "type": "text",
+      "source": "をご覧ください。",
+      "sourceHash": "8e0588be7b5c3355d4d9e1053347705ea739a42f75b5048b8887faf2a7ac96bc",
+      "translation": "."
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "地図用マップＩＤ（FieldMapId）",
+      "sourceHash": "4e2c11c306597de9384268d4ac7a49469219eab79e1fa2a91e5257f641b2fb8a",
+      "translation": "Field Map ID (FieldMapId)"
+    },
+    {
+      "id": "text-145",
+      "type": "text",
+      "source": "地図に対応するフィールドのマップＩＤです。数式可。",
+      "sourceHash": "5fb3c62acf80fb55eb0ab5afb9758ba010828c536e25a17951154f3270227ecc",
+      "translation": "The map ID of the field corresponding to the map. Formulas are supported."
+    },
+    {
+      "id": "text-146",
+      "type": "text",
+      "source": "空欄だと『移動先マップＩＤ』を流用します。",
+      "sourceHash": "9c704108d7d798bdf3c25a093d465a1dd25a6e20125b6dc64634ff188aae6340",
+      "translation": "If left blank, the “Transfer Map ID” will be used."
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "地図用Ｘ座標（FieldX）",
+      "sourceHash": "2f47d0b7c270caa5a9a5f2fe4db5edecea55b6da99a31b5eb8a78d44aea1c722",
+      "translation": "Field X Coordinate (FieldX)"
+    },
+    {
+      "id": "text-147",
+      "type": "text",
+      "source": "地図に対応するフィールド上での地点のＸ座標です。数式可。",
+      "sourceHash": "be8f164d4e6849dfd72fe6f01a489fb1d8314875a640cfc0a59ddad62cb126b5",
+      "translation": "The X coordinate of the spot on the field corresponding to the map. Formulas are supported."
+    },
+    {
+      "id": "text-148",
+      "type": "text",
+      "source": "空欄だと『移動先Ｘ座標』を流用します。",
+      "sourceHash": "df9003c28d3a4bdb50feb283a5b200744fb7321c8c0e5f0161ee1b301cf1c095",
+      "translation": "If left blank, the “Transfer X Coordinate” will be used."
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "地図用Ｙ座標（FieldY）",
+      "sourceHash": "63c1626db9e7291aa73a091ec41fc6bf088720c68a592222800b4a5e36efdeed",
+      "translation": "Map Y Coordinate (FieldY)"
+    },
+    {
+      "id": "text-149",
+      "type": "text",
+      "source": "地図に対応するフィールド上での地点のＹ座標です。数式可。",
+      "sourceHash": "ce5ed15398ef5a3d1c289c5e342a35ddc07449affc85752ac0d99fbe4a14cdd0",
+      "translation": "The Y coordinate of the location on the field corresponding to the map. Formulas can be used."
+    },
+    {
+      "id": "text-150",
+      "type": "text",
+      "source": "空欄だと『移動先Ｙ座標』を流用します。",
+      "sourceHash": "278ead69de8f921d8605e013189cdc27318fd4c4234aa6175e8cfe0c0626cd3d",
+      "translation": "If left blank, the Destination Y Coordinate will be used."
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "座標更新用マップＩＤ（LocationUpdateMapId）",
+      "sourceHash": "8865b84214cf42746283af827d0ce9db4f9904a37c49798674b35d6510e4e0b1",
+      "translation": "Map ID for Coordinate Updates (LocationUpdateMapId)"
+    },
+    {
+      "id": "text-151",
+      "type": "text",
+      "source": "地図座標の更新を行うマップＩＤです。複数指定可",
+      "sourceHash": "d116f9585db585a9d34d928235e6598b807c012d27fcff2d385aaf5f28a8812f",
+      "translation": "The map IDs for which map coordinates will be updated. Multiple IDs can be specified."
+    },
+    {
+      "id": "text-152",
+      "type": "text",
+      "source": "例１：1,2,3",
+      "sourceHash": "3f4e11a7c7903d8cda5fa8545422c02955e28923db40d647bef429148dd4d9a6",
+      "translation": "Example 1: 1,2,3"
+    },
+    {
+      "id": "text-153",
+      "type": "text",
+      "source": "例２：1~3",
+      "sourceHash": "96663ffc47db87e056f7551aaf860ebad68bbffc6d327516000e9667be07daf3",
+      "translation": "Example 2: 1~3"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "シンボルＩＤ（SymbolId）",
+      "sourceHash": "bddd22a67f0a04010b8b311cdf41b1fa30b8ba2c601e99a6dfc04587251f6728",
+      "translation": "Symbol ID (SymbolId)"
+    },
+    {
+      "id": "text-154",
+      "type": "text",
+      "source": "表示するシンボルのＩＤです。",
+      "sourceHash": "1aad97c5b50a120666460935ccb6e48d4a822e2fbdcdb04cf91e9adea8c2f777",
+      "translation": "The ID of the symbol to display."
+    },
+    {
+      "id": "text-155",
+      "type": "text",
+      "source": "空欄にすると非表示になります。",
+      "sourceHash": "515192c6e6a2c249b9017489c3a1e9a8b9aa46653b1ef8914b9ba4d1e309d372",
+      "translation": "If left blank, it will not be displayed."
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "一覧表示スイッチ（ListingSwitch）",
+      "sourceHash": "b729964cbac7373046075233bbe24c61a65786230b71e7fe5cebeaf8007b432a",
+      "translation": "Listing Switch (ListingSwitch)"
+    },
+    {
+      "id": "text-156",
+      "type": "text",
+      "source": "地点がリスト上に表示される条件となるスイッチです。",
+      "sourceHash": "7790ea40e92cbc322d58726cc1690054ba9dfe471799e8160d42a150e7dd2264",
+      "translation": "The switch that determines whether the location is displayed in the list."
+    },
+    {
+      "id": "text-157",
+      "type": "text",
+      "source": "空欄なら常に表示します。",
+      "sourceHash": "fb962a965a2f070e0d454205a987436a2d3f82b744b01d3ac3345f5a3e83dd7e",
+      "translation": "If left blank, it is always displayed."
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "点表示スイッチ（PointSwitch）",
+      "sourceHash": "c9246ed21e501e8d5d99920931aff07397dee2f196ac23a80b563431c557e4e3",
+      "translation": "Point Display Switch (PointSwitch)"
+    },
+    {
+      "id": "text-158",
+      "type": "text",
+      "source": "地点を地図上の点として表示する条件となるスイッチです。",
+      "sourceHash": "091fc087fb1b805053b173b0521c5595bce20207482d730075ef898a4603d4c4",
+      "translation": "The switch that determines whether the location is displayed as a point on the map."
+    },
+    {
+      "id": "text-159",
+      "type": "text",
+      "source": "空欄なら常に表示します。",
+      "sourceHash": "fb962a965a2f070e0d454205a987436a2d3f82b744b01d3ac3345f5a3e83dd7e",
+      "translation": "If left blank, it is always displayed."
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "選択禁止スイッチ（DisableSwitch）",
+      "sourceHash": "e1771fdfc0c49a846dba5786e4a50204b07979146c5305e55c48d2f29e9d85bd",
+      "translation": "Disable Selection Switch (DisableSwitch)"
+    },
+    {
+      "id": "text-160",
+      "type": "text",
+      "source": "選択を禁止するスイッチです。",
+      "sourceHash": "f84808512170dea62ab52458eb4220abc9761be97b0fbe0d418c09bfb39bcdf5",
+      "translation": "The switch that prevents selection."
+    },
+    {
+      "id": "text-161",
+      "type": "text",
+      "source": "リスト上には灰色で表示されるようになります。",
+      "sourceHash": "e7e737d87516d0a48c9d944a6e3ff4538276e06f60907b4907dffbc5c1256ed3",
+      "translation": "It will be displayed in gray in the list."
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "プラグインパラメータ（地図情報）",
+      "sourceHash": "2c76c8640f220b28b12ee99f4b8efad6be10ba450e0108b950a84f12d1c55981",
+      "translation": "Plugin Parameters (Map Information)"
+    },
+    {
+      "id": "text-162",
+      "type": "text",
+      "source": "『地図情報一覧』内に登録する地図情報のパラメータです。",
+      "sourceHash": "9f80ca1afe7848697a39d5794087ccdd7a32727cb2ad83c7c375e50c83035244",
+      "translation": "The parameters for the map information registered in the Map Information List."
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "マップＩＤ（MapId）",
+      "sourceHash": "0cdd9823d046c552ada86874792a7a755cd48c8f0b701def5eb30e0269a003ba",
+      "translation": "Map ID (MapId)"
+    },
+    {
+      "id": "text-163",
+      "type": "text",
+      "source": "地図に対応するマップのＩＤです。",
+      "sourceHash": "c25a11abf91805a8f851380dc056715553f284b20505619bf44258170401ed0b",
+      "translation": "The ID of the map corresponding to the map."
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "マップ画像（MapImage）",
+      "sourceHash": "77292babed3b1855a633de83dbe9ba929c9d485f227d3949a220f05f6236d85f",
+      "translation": "Map Image (MapImage)"
+    },
+    {
+      "id": "text-164",
+      "type": "text",
+      "source": "地図として使用する画像です。",
+      "sourceHash": "25c8cdad52445ea81716043dcda02753233796fc7f7c95188f1a2321ca8812fb",
+      "translation": "The image to use as the map."
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "背景色（BackgroundColor）",
+      "sourceHash": "9d705081a23986f97277c8fbfe609a42f0afb1a8f70970c7f9aa6b0b9960d363",
+      "translation": "Background Color (BackgroundColor)"
+    },
+    {
+      "id": "text-165",
+      "type": "text",
+      "source": "地図の背景色です。",
+      "sourceHash": "906f6ebb91a21d597495866956350c9162947a20606fbab000f85c195d025857",
+      "translation": "The background color of the map."
+    },
+    {
+      "id": "text-166",
+      "type": "text",
+      "source": "例：rgb(255, 255, 255)",
+      "sourceHash": "2f8008ca72780a4ca0ee550a1f493e5bfffeacd0bc40d4f4a0754ebf2b7276de",
+      "translation": "Example: rgb(255, 255, 255)"
+    },
+    {
+      "id": "text-167",
+      "type": "text",
+      "source": "数値は赤、緑、青に対応。空欄なら透明となります。",
+      "sourceHash": "b58b5a85cefde906f888e9b5e27ebbf971a51a9562dea96058e80e974cb36703",
+      "translation": "The numbers correspond to red, green, and blue. If left blank, it will be transparent."
+    },
+    {
+      "id": "heading-075",
+      "type": "heading",
+      "source": "現在地用マップＩＤ変数（CurrentMapIdVariable）",
+      "sourceHash": "27a1075df273b3d778f42f3f000ae7d0d0769509fdff263f2e508a9db7dd260d",
+      "translation": "Current Location Map ID Variable (CurrentMapIdVariable)"
+    },
+    {
+      "id": "text-168",
+      "type": "text",
+      "source": "地図上の現在地となるマップＩＤを格納する変数です。",
+      "sourceHash": "7885e7e2e9adb6a8e6ec428944cc0b25e39034cb90a8d47a84e29490cf8da97d",
+      "translation": "The variable that stores the map ID of the current location on the map."
+    },
+    {
+      "id": "heading-076",
+      "type": "heading",
+      "source": "現在地用Ｘ座標変数（CurrentXVariable）",
+      "sourceHash": "3c53d2c615c7994add8d55603e6ba9b1ca52e7bfde6c24fc2ee99531b2e97159",
+      "translation": "Current Location X Coordinate Variable (CurrentXVariable)"
+    },
+    {
+      "id": "text-169",
+      "type": "text",
+      "source": "地図上の現在地となるＸ座標を格納する変数です。",
+      "sourceHash": "35174ac5f2210e88c1fbfa2204e47988c68ff3a5baf57985d5d71692e785bb09",
+      "translation": "The variable that stores the X coordinate of the current location on the map."
+    },
+    {
+      "id": "heading-077",
+      "type": "heading",
+      "source": "現在地用Ｙ座標変数（CurrentYVariable）",
+      "sourceHash": "acc504c7145f9e8f1ebecaaffc9aad47c3beff2911e74b0ade4123569f7f98da",
+      "translation": "Current Location Y Coordinate Variable (CurrentYVariable)"
+    },
+    {
+      "id": "text-170",
+      "type": "text",
+      "source": "地図上の現在地となるＹ座標を格納する変数です。",
+      "sourceHash": "024ca958c79257aa2d04005618c347e5a384728c676c3c3b0b7d562ac4c222cb",
+      "translation": "The variable that stores the Y coordinate of the current location on the map."
+    },
+    {
+      "id": "heading-078",
+      "type": "heading",
+      "source": "有効とするスイッチ（ValidSwitch）",
+      "sourceHash": "19802799cc87906b949a36b07afd994b626ba5b2643732ef7fb629d0fdb66692",
+      "translation": "Valid Switch (ValidSwitch)"
+    },
+    {
+      "id": "text-171",
+      "type": "text",
+      "source": "地図を有効とするスイッチです。",
+      "sourceHash": "80c1bfaa88df73f59a021961223abe32f47e051a6c7aafe0f0b07c8e8d432264",
+      "translation": "The switch that enables the map."
+    },
+    {
+      "id": "text-172",
+      "type": "text",
+      "source": "空欄なら常に表示します。",
+      "sourceHash": "fb962a965a2f070e0d454205a987436a2d3f82b744b01d3ac3345f5a3e83dd7e",
+      "translation": "If left blank, it is always displayed."
+    },
+    {
+      "id": "text-173",
+      "type": "text",
+      "source": "同じマップＩＤに対して複数の設定が存在していた場合は、リストの上側が優先されます。ゲーム進行に応じて地図を変更したい場合に有効です。",
+      "sourceHash": "0f1dfc55ff05241cba2cf1a066d281b8c4c20316b19364e277b12b34cca68e5d",
+      "translation": "If multiple settings exist for the same map ID, the one higher in the list takes priority. This is useful when changing the map as the game progresses."
+    },
+    {
+      "id": "heading-079",
+      "type": "heading",
+      "source": "プラグインパラメータ（シンボル情報）",
+      "sourceHash": "fc6c3cd6423dd552e5584c6c3a98c1a7ce69ad6c6f3e99f3e6f9c5c5d961a266",
+      "translation": "Plugin Parameters (Symbol Information)"
+    },
+    {
+      "id": "text-174",
+      "type": "text",
+      "source": "『シンボル画像一覧』内に登録するシンボル情報のパラメータです。",
+      "sourceHash": "54fb33c44dfec3f67065fd89f947d7c8b8eb7b89c2b05901f721c40cea585524",
+      "translation": "The parameters for the symbol information registered in the Symbol Image List."
+    },
+    {
+      "id": "heading-080",
+      "type": "heading",
+      "source": "シンボルＩＤ（SymbolId）",
+      "sourceHash": "bddd22a67f0a04010b8b311cdf41b1fa30b8ba2c601e99a6dfc04587251f6728",
+      "translation": "Symbol ID (SymbolId)"
+    },
+    {
+      "id": "text-175",
+      "type": "text",
+      "source": "シンボルに対応するＩＤです。",
+      "sourceHash": "11760d46bfb05af549a953691d1d59f06f09fb704ae06b99256cf53c449599be",
+      "translation": "The ID corresponding to the symbol."
+    },
+    {
+      "id": "text-176",
+      "type": "text",
+      "source": "各地点との紐付けに使います。",
+      "sourceHash": "45ac2595f375ad27e01cf86541f00efd7db831be582f2542d9bf78c43cebdaa1",
+      "translation": "It is used to associate symbols with each location."
+    },
+    {
+      "id": "heading-081",
+      "type": "heading",
+      "source": "メモ（Memo）",
+      "sourceHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8",
+      "translation": "Memo (Memo)"
+    },
+    {
+      "id": "text-177",
+      "type": "text",
+      "source": "ユーザが識別するためのメモです。",
+      "sourceHash": "8f222050e9bbd63a73a77eab7d8a71e8345b16444a92528810221f6907a48f8b",
+      "translation": "A memo for the user to identify it."
+    },
+    {
+      "id": "text-178",
+      "type": "text",
+      "source": "ゲーム中には一切使用しません。",
+      "sourceHash": "92ad445f57c1ca5ed1e4b2ec607df40685efad5bbb274b343922588c395792ef",
+      "translation": "It is not used at all in the game."
+    },
+    {
+      "id": "heading-082",
+      "type": "heading",
+      "source": "シンボル画像（SymbolImage）",
+      "sourceHash": "e896c29c46b93d34ce7ae723f2d89cd1141434dcbbbb2c7ab59937f1b2a503a3",
+      "translation": "Symbol Image (SymbolImage)"
+    },
+    {
+      "id": "text-179",
+      "type": "text",
+      "source": "シンボルとして使用するピクチャー画像です。",
+      "sourceHash": "3264b963c350f894fd5e1036625003417534be78833d2b40df063baba980eaec",
+      "translation": "The picture image to use as the symbol."
+    },
+    {
+      "id": "text-180",
+      "type": "text",
+      "source": "未指定の場合は円形の点が描画されます。",
+      "sourceHash": "7555e261529a13664742f3711d2b11ab2929a93d4655904b366a4df016bff6e5",
+      "translation": "If none is specified, a circular point will be drawn."
+    },
+    {
+      "id": "heading-083",
+      "type": "heading",
+      "source": "点滅周期（BlinkPeriod）",
+      "sourceHash": "e98119a437b3bf2d3256194d7debea67f014d03f1d9063923cbe86e9242de4a0",
+      "translation": "Blink Period (BlinkPeriod)"
+    },
+    {
+      "id": "text-181",
+      "type": "text",
+      "source": "シンボルが点滅する周期です。",
+      "sourceHash": "4db56da6cea3b3312737d4d20c3bec6e22d01312ced4fab4581f5423a5fcdffb",
+      "translation": "The period at which the symbol blinks."
+    },
+    {
+      "id": "text-182",
+      "type": "text",
+      "source": "1/60秒単位で設定してください。0で点滅なし",
+      "sourceHash": "f45974615164bb0f5346723f771ce5c4f4223acd053f2d26da5f4fe11bf085f6",
+      "translation": "Set in units of 1/60 second. 0 disables blinking."
+    },
+    {
+      "id": "heading-084",
+      "type": "heading",
+      "source": "不透明度（Opacity）",
+      "sourceHash": "16e0b19c4c61b542e2d50b47302f2445273363cb1e951a39f613b4c900a41853",
+      "translation": "Opacity (Opacity)"
+    },
+    {
+      "id": "text-183",
+      "type": "text",
+      "source": "シンボルの不透明度（0~255）です。",
+      "sourceHash": "563525b67b0f5ce102582c21d5b0be2e3c38549488b6a18aa57bc0de08d4a0d4",
+      "translation": "The symbol\u0027s opacity (0~255)."
+    },
+    {
+      "id": "text-184",
+      "type": "text",
+      "source": "255を超えると点滅時の表示時間が伸びます。",
+      "sourceHash": "d497ec4fdf97586db8051e697955b631fa8a2ff522444cf4228f06b877e0e9e4",
+      "translation": "Values over 255 increase the display time while blinking."
+    },
+    {
+      "id": "heading-085",
+      "type": "heading",
+      "source": "シンボルの色（SymbolColor）",
+      "sourceHash": "49e852a2bd3a3a935422376e6ca5c3e2ac0a1af60981748060a8a0b70fb195fd",
+      "translation": "Symbol Color (SymbolColor)"
+    },
+    {
+      "id": "text-185",
+      "type": "text",
+      "source": "※シンボル画像が設定されていない場合のみ有効です。",
+      "sourceHash": "819d937ce8535947cad5fc86f8a9cd2f457d5a9e08c1e42b70ff2949837379d0",
+      "translation": "※Only effective when no symbol image is set."
+    },
+    {
+      "id": "text-186",
+      "type": "text",
+      "source": "シンボル色です。",
+      "sourceHash": "3ef7e1f5ab41da4be4a6660e32c25c58fd76a3c15b91e0fa7bcbd9ecb3681231",
+      "translation": "The symbol\u0027s color."
+    },
+    {
+      "id": "text-187",
+      "type": "text",
+      "source": "例：rgb(255, 255, 255)",
+      "sourceHash": "2f8008ca72780a4ca0ee550a1f493e5bfffeacd0bc40d4f4a0754ebf2b7276de",
+      "translation": "Example: rgb(255, 255, 255)"
+    },
+    {
+      "id": "text-188",
+      "type": "text",
+      "source": "数値は赤、緑、青に対応します。",
+      "sourceHash": "2d89322d3f621b65f8418786c0ae74da48a3d623f90c8d9eec798d13532dc1b1",
+      "translation": "The values correspond to red, green, and blue."
+    },
+    {
+      "id": "heading-086",
+      "type": "heading",
+      "source": "シンボルの半径（SymbolRadius）",
+      "sourceHash": "7d1f0c6fa86a5368c153a8618ca1c008ff9de0e30ac47c2bcfc96eb5b096f057",
+      "translation": "Symbol Radius (SymbolRadius)"
+    },
+    {
+      "id": "text-189",
+      "type": "text",
+      "source": "※シンボル画像が設定されていない場合のみ有効です。",
+      "sourceHash": "819d937ce8535947cad5fc86f8a9cd2f457d5a9e08c1e42b70ff2949837379d0",
+      "translation": "※Only effective when no symbol image is set."
+    },
+    {
+      "id": "text-190",
+      "type": "text",
+      "source": "シンボルの半径です。",
+      "sourceHash": "bf5bd97b44b02b46bd6123909b49b6eecbf20c96e5eca799df6d164cd2d125b5",
+      "translation": "The symbol\u0027s radius."
+    },
+    {
+      "id": "heading-087",
+      "type": "heading",
+      "source": "プラグインパラメータ（アイコン情報）",
+      "sourceHash": "c4bf492a1a5f279b58d6f035185e55546988047c4440be4bc937e1a2142ccdc4",
+      "translation": "Plugin Parameters (Icon Information)"
+    },
+    {
+      "id": "text-191",
+      "type": "text",
+      "source": "地点情報の『アイコン（複数）』内に登録するパラメータです。",
+      "sourceHash": "090dfe90699d4d4f6e1a71690d65b06b19fc75315a396b4a4f6f28648cb98412",
+      "translation": "These are the parameters registered under “Icons (Multiple)” in the location information."
+    },
+    {
+      "id": "heading-088",
+      "type": "heading",
+      "source": "アイコン番号（IconIndex）",
+      "sourceHash": "d6328b3f51f9cc8499920377667789ada80959ecfebe37df6f72b539b36dc583",
+      "translation": "Icon Number (IconIndex)"
+    },
+    {
+      "id": "text-192",
+      "type": "text",
+      "source": "地点名の横に表示するアイコンの番号です。",
+      "sourceHash": "35b151f8e880db19d338aa30a683d530bb2a9f95ead6bf26dac13d331864c041",
+      "translation": "The number of the icon displayed next to the location name."
+    },
+    {
+      "id": "text-193",
+      "type": "text",
+      "source": "右クリックで『アイコン番号の挿入』ができます。",
+      "sourceHash": "dc83655702aa692e52aea75bfd1d806d216ea1163f92b96e1bd84c2652c5706b",
+      "translation": "Right-click to insert “Icon Number.”"
+    },
+    {
+      "id": "heading-089",
+      "type": "heading",
+      "source": "文字色（NameColor）",
+      "sourceHash": "5b19b6ebb11c2b92cbe91ac80db889afa31a755a981b0f12dbaf21eb60b31ac3",
+      "translation": "Text Color (NameColor)"
+    },
+    {
+      "id": "text-194",
+      "type": "text",
+      "source": "地点名の文字色を変更します。",
+      "sourceHash": "c4f8d121104108b5486e867fa80060e4548b3bcd98c546a70bc4459f98de1977",
+      "translation": "Changes the text color of the location name."
+    },
+    {
+      "id": "text-195",
+      "type": "text",
+      "source": "システムカラーの番号を指定してください。",
+      "sourceHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf",
+      "translation": "Specify the system color number."
+    },
+    {
+      "id": "heading-090",
+      "type": "heading",
+      "source": "表示スイッチ（DispSwitch）",
+      "sourceHash": "d4e53d9269306a96990a2db8f73c76f1f6a286027c13cb3bff7e41296164cb38",
+      "translation": "Display Switch (DispSwitch)"
+    },
+    {
+      "id": "text-196",
+      "type": "text",
+      "source": "アイコンの表示条件となるスイッチです。",
+      "sourceHash": "884b5300255e7bef7350420917788f2fe87f915349411cf54c8904eb66e8c3fc",
+      "translation": "The switch that determines whether the icon is displayed."
+    },
+    {
+      "id": "text-197",
+      "type": "text",
+      "source": "空欄なら常に表示します。",
+      "sourceHash": "fb962a965a2f070e0d454205a987436a2d3f82b744b01d3ac3345f5a3e83dd7e",
+      "translation": "If left blank, the icon is always displayed."
+    },
+    {
+      "id": "link-098",
+      "type": "link",
+      "source": "＞RPGツクールMZ\u0026MV目次に戻る",
+      "sourceHash": "3bcc60de1127eb069aa22b4e6c377dc301353a44f2f9c80405f4c2370ccf3079",
+      "translation": "＞Return to the RPG Maker MZ \u0026 MV Table of Contents"
+    }
+  ],
+  "texts": {
+    "選択した地点（マップ）に移動するための画面を実装します。": "Implements a screen for transferring to a selected location (map).",
+    "※いわゆるファストトラベルやルーラに相当する機能です。": "* This is a feature equivalent to so-called fast travel or Zoom.",
+    "主な特徴": "Main Features",
+    "フィールドと地図を対応させて各地点を表示": "Displays each location by associating the field with a map",
+    "地図画像はエディタから出力するだけでＯＫ": "Map images only need to be exported from the editor",
+    "コモンイベントによって演出可能": "Can be enhanced using common events",
+    "メニュー画面に追加可能": "Can be added to the menu screen",
+    "地点名の横にスイッチ切替によるアイコン表示が可能": "Can display icons next to location names by switching them with switches",
+    "イベント発生中の地点を知らせるなど。": "Can indicate locations where events are occurring, and so on.",
+    "移動を禁止すれば、単なる地図としても利用可能": "Can also be used as a simple map by prohibiting transfers",
+    "当プラグイン内で指す『フィールド』とは地図に対応するマップを意味します。": "In this plugin, “field” refers to the map corresponding to the map image.",
+    "基本的にはフィールドと地点（町やダンジョン）を対応させる想定ですが、以下のような町と施設を対応させた移動画面を作成しても構いません。": "The basic assumption is to associate a field with locations (towns and dungeons), but you may also create a transfer screen that associates a town with its facilities, as shown below.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "更新履歴（History）": "Update History (History)",
+    "素材（Material）": "Material (Material)",
+    "使用方法（Usage）": "Usage (Usage)",
+    "基本": "Basics",
+    "移動演出を追加": "Add Movement Effects",
+    "地図を表示": "Display the Map",
+    "地図上に地点を表示": "Displaying Locations on the Map",
+    "現在地の表示": "Displaying Current Location",
+    "ＭＺ用プラグインコマンド（Plugin Command MZ）": "MZ Plugin Commands（Plugin Command MZ）",
+    "ＭＶ用プラグインコマンド（Plugin Command MV）": "Plugin Command MV",
+    "プラグインパラメータ": "Plugin Parameters",
+    "地点一覧（SpotList）": "Spot List (SpotList)",
+    "地図設定一覧（FieldMapList）": "Field Map List (FieldMapList)",
+    "シンボル画像一覧（SymbolList）": "Symbol Image List (SymbolList)",
+    "移動用コモンイベント（TransferCommonEvent）": "Transfer Common Event (TransferCommonEvent)",
+    "マップＩＤ変数（MapIdVariable）": "Map ID Variable (MapIdVariable)",
+    "Ｘ座標変数（XVariable）": "X Coordinate Variable (XVariable)",
+    "Ｙ座標変数（YVariable）": "Y Coordinate Variable (YVariable)",
+    "識別用変数（IdentifierVariable）": "Identifier Variable (IdentifierVariable)",
+    "自動更新(フィールド脱出)（UpdateWhenExitField）": "Auto Update (Exit Field) (UpdateWhenExitField)",
+    "自動更新(地点進入)（UpdateWhenEnterSpot）": "Auto Update (Enter Spot) (UpdateWhenEnterSpot)",
+    "最寄の地点を初期選択（SelectNearestSpot）": "Initially Select Nearest Spot (SelectNearestSpot)",
+    "現在地のシンボルＩＤ（CurrentSymbolId）": "Current Location Symbol ID (CurrentSymbolId)",
+    "選択地点のシンボルＩＤ（SelectedSymbolId）": "Selected Location Symbol ID (SelectedSymbolId)",
+    "地点一覧の横幅（SpotListWidth）": "Location List Width (SpotListWidth)",
+    "地点一覧の一行の縦幅（SpotListLineHeight）": "Location List Line Height (SpotListLineHeight)",
+    "地点一覧のフォントサイズ（SpotListFontSize）": "Location List Font Size (SpotListFontSize)",
+    "解説枠の縦幅（HelpHeight）": "Help Window Height (HelpHeight)",
+    "解説文のＹ座標補正（HelpTextAdjustY）": "Help Text Y Coordinate Adjustment (HelpTextAdjustY)",
+    "解説文のフォントサイズ（HelpTextFontSize）": "Help Text Font Size (HelpTextFontSize)",
+    "参照専用時は灰色表示（ReadOnlyGray）": "Display in Gray in Read-Only Mode (ReadOnlyGray)",
+    "メニューコマンドに表示（ShowMenuCommand）": "Show in Menu Commands (ShowMenuCommand)",
+    "メニューコマンド挿入位置（ShowMenuCommandPosition）": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+    "メニュー表示名（TravelName）": "Menu Display Name (TravelName)",
+    "表示許可するスイッチ（MenuCommandSwitch）": "Display Permission Switch (MenuCommandSwitch)",
+    "マスク文字列（MaskString）": "Mask String (MaskString)",
+    "禁止するスイッチ（DisableSwitch）": "Disable Switch (DisableSwitch)",
+    "[上級]記号（TravelSymbol）": "[Advanced] Symbol (TravelSymbol)",
+    "参照専用（ReadOnlyMenu）": "Read-Only (ReadOnlyMenu)",
+    "開始時コモンイベント（StartCommonEvent）": "Common Event at Start (StartCommonEvent)",
+    "プラグインパラメータ（地点情報）": "Plugin Parameters (Spot Information)",
+    "地点名（SpotName）": "Spot Name (SpotName)",
+    "説明文（Description）": "Description (Description)",
+    "移動先マップＩＤ（TransferMapId）": "Transfer Map ID (TransferMapId)",
+    "移動先Ｘ座標（TransferX）": "Transfer X Coordinate (TransferX)",
+    "移動先Ｙ座標（TransferY）": "Transfer Y Coordinate (TransferY)",
+    "移動後の向き（TransferDirection）": "Direction After Transfer (TransferDirection)",
+    "移動先識別値（TransferIdentifier）": "Transfer Identifier (TransferIdentifier)",
+    "移動先（複数）（ChoiceSpots）": "Transfer Destinations (Multiple) (ChoiceSpots)",
+    "アイコン（複数）（Icons）": "Icons (Multiple) (Icons)",
+    "地図用マップＩＤ（FieldMapId）": "Field Map ID (FieldMapId)",
+    "地図用Ｘ座標（FieldX）": "Field X Coordinate (FieldX)",
+    "地図用Ｙ座標（FieldY）": "Map Y Coordinate (FieldY)",
+    "座標更新用マップＩＤ（LocationUpdateMapId）": "Map ID for Coordinate Updates (LocationUpdateMapId)",
+    "シンボルＩＤ（SymbolId）": "Symbol ID (SymbolId)",
+    "一覧表示スイッチ（ListingSwitch）": "Listing Switch (ListingSwitch)",
+    "点表示スイッチ（PointSwitch）": "Point Display Switch (PointSwitch)",
+    "選択禁止スイッチ（DisableSwitch）": "Disable Selection Switch (DisableSwitch)",
+    "プラグインパラメータ（地図情報）": "Plugin Parameters (Map Information)",
+    "マップＩＤ（MapId）": "Map ID (MapId)",
+    "マップ画像（MapImage）": "Map Image (MapImage)",
+    "背景色（BackgroundColor）": "Background Color (BackgroundColor)",
+    "現在地用マップＩＤ変数（CurrentMapIdVariable）": "Current Location Map ID Variable (CurrentMapIdVariable)",
+    "現在地用Ｘ座標変数（CurrentXVariable）": "Current Location X Coordinate Variable (CurrentXVariable)",
+    "現在地用Ｙ座標変数（CurrentYVariable）": "Current Location Y Coordinate Variable (CurrentYVariable)",
+    "有効とするスイッチ（ValidSwitch）": "Valid Switch (ValidSwitch)",
+    "プラグインパラメータ（シンボル情報）": "Plugin Parameters (Symbol Information)",
+    "メモ（Memo）": "Memo (Memo)",
+    "シンボル画像（SymbolImage）": "Symbol Image (SymbolImage)",
+    "点滅周期（BlinkPeriod）": "Blink Period (BlinkPeriod)",
+    "不透明度（Opacity）": "Opacity (Opacity)",
+    "シンボルの色（SymbolColor）": "Symbol Color (SymbolColor)",
+    "シンボルの半径（SymbolRadius）": "Symbol Radius (SymbolRadius)",
+    "プラグインパラメータ（アイコン情報）": "Plugin Parameters (Icon Information)",
+    "アイコン番号（IconIndex）": "Icon Number (IconIndex)",
+    "文字色（NameColor）": "Text Color (NameColor)",
+    "表示スイッチ（DispSwitch）": "Display Switch (DispSwitch)",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the function ON from the Plugin Manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "* This plugin works with both MV and MZ.",
+    "上記のサンプルで使用している現在地用のシンボル画像です。武器画像のロッドを改変したものですが、お好みでご使用ください。": "This is the symbol image for the current location used in the sample above. It is a modified rod weapon image, but feel free to use it as you like.",
+    "ちなみに画像を設定しない初期状態だと、水色の丸で現在地を表示します。": "Incidentally, when no image is set in the initial state, the current location is displayed as a light blue circle.",
+    "地点一覧の一行の縦幅": "One-line height of the location list",
+    "地点一覧のフォントサイズ": "Font size of the location list",
+    "解説文のＹ座標補正": "Y-coordinate adjustment for the description",
+    "解説文のフォントサイズ": "Font size of the description",
+    "をプラグインパラメータに追加した。": " was added to the plugin parameters.",
+    "プラグイン内の英語解説を分かりやすく修正した。": "The English explanation in the plugin was revised for clarity.",
+    "参照専用の場合は地点名を灰色表示": "Display location names in gray when read-only",
+    "できるようにした。": " was made possible.",
+    "最寄りの地点を初期選択": "Initially select the nearest location",
+    "する機能を追加した。": " functionality was added.",
+    "移動先をさらに複数の候補から選択": "Select a destination from multiple candidates",
+    "する機能を実装した。": " functionality was implemented.",
+    "※ＭＺのみの機能です。ＭＶでは挙動が怪しく、候補先名が表示されません。": "* This feature is available only in MZ. In MV, the behavior is unreliable and the destination names are not displayed.",
+    "シーン開始のプラグインコマンドに": "Added the ",
+    "カーソルの初期識別値": "Initial Cursor Identifier",
+    "を追加した。": " to the plugin command for starting the scene.",
+    "ＭＶにて、アイコン表示時にエラーとなる不具合修正。": "Fixed an error that occurred when displaying icons in MV.",
+    "ＭＶにて、アイコンが表示されない不具合修正。（2024/11/01 ver1.042）": "Fixed an issue in MV where icons were not displayed. (2024/11/01 ver1.042)",
+    "コマンドのマスク表示機能": "Command masking feature",
+    "を追加。": " was added.",
+    "AdditionalDescription.jsとの競合対策用に調整。（2024/08/08 ver1.031）": "Adjusted to prevent conflicts with AdditionalDescription.js. (2024/08/08 ver1.031)",
+    "別フィールドのマップを表示している時も、地図に現在地が表示されてしまう不具合修正。": "Fixed an issue where the current location was displayed on the map even when displaying a map from another field.",
+    "地点名の文字色変更機能": "Feature for changing the text color of location names",
+    "ＭＶで動作しない不具合修正。（2022/11/05 ver1.021）": "Fixed an issue where it did not work in MV. (2022/11/05 ver1.021)",
+    "メニューコマンドの挿入位置が想定通りにならないことがある不具合修正。": "Fixed an issue where the insertion position of the menu command was sometimes incorrect.",
+    "コマンド禁止用のスイッチ": "Switch for disabling commands",
+    "公開！": "Released!",
+    "表示する地点がない場合にエラーとなる不具合修正。": "Fixed an issue where an error occurred when there were no locations to display.",
+    "設定内容の多いプラグインなので、段階に分けて説明します。": "Since this plugin has many settings, they will be explained in stages.",
+    "まずは地図を使わない方法から始めます。": "First, we will start with a method that does not use a map.",
+    "まず地点一覧をプラグインパラメータに登録します。": "First, register the location list in the plugin parameters.",
+    "『地点名』": "Location Name",
+    "『移動先マップＩＤ』": "Destination Map ID",
+    "『移動先Ｘ座標』": "Destination X Coordinate",
+    "『移動先Ｙ座標』": "Destination Y Coordinate",
+    "などの情報を指定してください。": "Specify information such as the above.",
+    "また『一覧表示スイッチ』を指定すれば、スイッチがオンになるまで地点は表示されなくなります。": "You can also specify the \u0022List Display Switch\u0022 to hide locations until the switch is turned on.",
+    "これでプラグインコマンドを実行すればＯＫです。": "Now simply execute the plugin command.",
+    "※パラメータは指定不要": "* No parameter needs to be specified",
+    "シンプルなマップ選択＆移動画面が実現できます。": "This provides a simple map selection and movement screen.",
+    "しかしながら、上記だけでは場所移動の演出もなく味気ないです。": "However, the above alone is rather dull, with no effects for moving between locations.",
+    "そこでコモンイベントを呼び出すことで演出を追加します。": "You can add effects by calling a common event.",
+    "『移動用コモンイベント』": "Movement Common Event",
+    "『マップＩＤ変数』": "Map ID Variable",
+    "『Ｘ座標変数』": "『Ｘ座標変数』",
+    "『Ｙ座標変数』": "『Ｙ座標変数』",
+    "の各プラグインパラメータを設定してください。": " plugin parameters.",
+    "※いずれも地点一覧ではなく通常のパラメータです。": "※These are all regular parameters, not location lists.",
+    "この際、指定したコモンイベント内に、自力で場所移動処理を記述する必要があります。パラメータで指定した変数に座標情報が格納されるので、場所移動先をその変数で指定してください。": "In this case, you must write the transfer processing yourself within the specified common event. Coordinate information is stored in the variables specified by the parameters, so specify the transfer destination using those variables.",
+    "後はイベントコマンドで好きなように演出を追加してください。": "After that, add any desired effects using event commands.",
+    "移動に失敗して、別の場所に飛ばされるなんて変わったこともできます。": "You can even do unusual things, such as having the player sent to another location when movement fails.",
+    "フィールドに対応する地図を表示し、各地点を地図上の点（シンボル）として表示することが可能です。": "You can display a map corresponding to the field and show each location as a point (symbol) on the map.",
+    "まずは地図画像を用意してください。": "First, prepare a map image.",
+    "最も簡単なのはマップツリー上で地図を作成したいマップを選択し、右クリックで「画像として保存」を選択して出力する方法です。": "The easiest method is to select the map you want to create on the map tree, right-click it, select “Save as Image,” and export it.",
+    "用意した画像をピクチャーとして『地図設定一覧』に登録し、マップＩＤと紐付けてください。": "Register the prepared image as a picture in 『地図設定一覧』 and associate it with the map ID.",
+    "なお、自力で地図を加工したり完全に自作しても構いません。": "You can also edit the map yourself or create one entirely from scratch.",
+    "比率さえ合っていれば、地図のサイズも自由です。": "The map size is unrestricted as long as the proportions match.",
+    "『移動先マップＩＤ』『移動先Ｘ座標』『移動先Ｙ座標』の各項目にフィールド上の座標を設定しているならば、この時点で地図上に地点がシンボルとして表示されるようになります。": "If you have set the field coordinates for 『移動先マップＩＤ』, 『移動先Ｘ座標』, and 『移動先Ｙ座標』, locations will be displayed as symbols on the map from this point onward.",
+    "問題は、移動先が町の中などフィールド以外だった場合です。": "The problem arises when the destination is somewhere other than the field, such as inside a town.",
+    "その町が世界地図上のどの座標にあるのかを設定しなければなりません。地点毎に対応する座標を入力する必要があります。": "You must set the coordinates of that town on the world map. You need to enter the corresponding coordinates for each location.",
+    "『地図用マップＩＤ』": "『地図用マップＩＤ』",
+    "『地図用Ｘ座標』": "『地図用Ｘ座標』",
+    "『地図用Ｙ座標』": "『地図用Ｙ座標』",
+    "の各項目を設定してください。": "Set each of these items.",
+    "なお、シンボルをゲームの開始時から表示したくないという場合は『点表示スイッチ』を設定して切り替えてください。": "If you do not want the symbol to be displayed from the start of the game, set 『点表示スイッチ』 to toggle its display.",
+    "『一覧表示スイッチ』と同じ番号のスイッチでも構いません。": "You can use a switch with the same number as 『一覧表示スイッチ』.",
+    "地図上にプレイヤーの現在地を表示するのは意外に困難です。": "Displaying the player\u0027s current location on the map is surprisingly difficult.",
+    "フィールド上にプレイヤーがいるなら、現在の座標を参照するだけですが、町やダンジョン内にいる場合は、そうもいきません。": "If the player is on the field, you only need to reference the current coordinates, but that is not possible when the player is in a town or dungeon.",
+    "よって、地点内にいる場合もフィールドの座標情報を保持する必要があります。": "Therefore, you must retain the field\u0027s coordinate information even while inside a location.",
+    "まず、プラグインパラメータの地図情報に以下項目を設定し、保持する変数を決めてください。": "First, set the following items in the map information under the plugin parameters and determine which variables will retain the information.",
+    "『現在地用マップＩＤ変数』": "『現在地用マップＩＤ変数』",
+    "『現在地用Ｘ座標変数』": "『現在地用Ｘ座標変数』",
+    "『現在地用Ｙ座標変数』": "『現在地用Ｙ座標変数』",
+    "このプラグインでは、以下二つの自動化手段を用意しています。": "This plugin provides the following two automation methods.",
+    "１．フィールドから地点へ場所移動した際の座標を保持する。": "1. Retain the coordinates when transferring from the field to a location.",
+    "ただし、イベントなどで地点から地点へ移動した際は当てになりません。": "However, these coordinates cannot be relied upon when moving from one location to another through an event or similar means.",
+    "最初に入った地点の座標が保持されたままになります。": "The coordinates of the first location entered will remain stored.",
+    "また、イベントの演出で一時的にフィールドへ場所移動した場合、この処理の対象になってしまうことも注意してください。": "Also note that temporarily transferring to the field as part of an event\u0027s effects may be processed by this function.",
+    "２．地点へ場所移動した際に、地図用座標を取得する。": "2. Obtain the map coordinates when transferring to a location.",
+    "該当の地点かどうかの判定は、『移動先マップＩＤ』で行います。": "Whether it is the relevant location is determined using 『移動先マップＩＤ』.",
+    "それだけでは不十分な場合は『座標更新用マップＩＤ』に追加できます。": "If that is insufficient, you can add maps to 『座標更新用マップＩＤ』.",
+    "もっとも、地点に属する全てのマップを登録するのは非現実的です。": "However, registering every map belonging to a location is impractical.",
+    "外部から遷移する可能性があるマップだけで十分です。": "It is sufficient to register only maps that may be entered from outside.",
+    "※ダンジョンなど地図上に表示しない地点を登録したい場合は『移動先マップＩＤ』を空欄にした上で、さらに『座標更新用マップＩＤ』だけを設定してください。": "※If you want to register a location, such as a dungeon, that is not displayed on the map, leave 『移動先マップＩＤ』 blank and set only 『座標更新用マップＩＤ』.",
+    "※ＭＺ用プラグインコマンドの『地点一覧（追加）』で追加した地点についてはこの機能は働きません。ご注意ください。": "※This function does not work for locations added using the MZ plugin command 『地点一覧（追加）』. Please be aware of this.",
+    "上記の自動取得機能を停止したい場合は、プラグインパラメータで切替も可能です。": "You can also toggle the above automatic acquisition functions through the plugin parameters.",
+    "自動取得せずに、手動で上記の変数に値を設定しても構いません。": "You can also set values manually in the above variables without using automatic acquisition.",
+    "状況によって柔軟に対応してください。": "Respond flexibly according to the situation.",
+    "例えば、ダンジョンからの脱出座標などと共有する方法もあります。": "For example, you could share them with coordinates used to escape from a dungeon.",
+    "シーン開始": "Scene Start",
+    "マップ選択画面を表示します。": "Displays the map selection screen.",
+    "地点一覧（追加）": "Spot List (Additional)",
+    "表示される地点一覧の追加分です。": "The additional spots in the displayed spot list.",
+    "プラグインパラメータの地点一覧に結合します。": "Merges with the spot list in the plugin parameters.",
+    "表示専用": "Display Only",
+    "場所移動を禁止します。": "Prohibits transfers.",
+    "純粋に地図として使用する場合を想定しています。": "Intended for cases where it is used purely as a map.",
+    "共通一覧を非表示": "Hide Common List",
+    "プラグインパラメータで設定した共通の地点一覧を表示せず、地点一覧（追加）で指定した地点だけを表示します。": "Displays only the spots specified in Spot List (Additional), without displaying the common spot list configured in the plugin parameters.",
+    "画面を開いた時のカーソルの初期選択地点を設定します。": "Sets the cursor\u0027s initially selected spot when the screen is opened.",
+    "値はプラグインパラメータ（地点情報）の": "The value corresponds to the ",
+    "移動先識別値": "Destination Identifier",
+    "に対応します。": ".",
+    "機能はＭＺ版と同じため、説明は割愛します。": "The functionality is the same as in the MZ version, so the explanation is omitted.",
+    "※大文字個別は区別しません。": "Uppercase and lowercase are not distinguished.",
+    "また、以下で表示専用になります。": "The following also makes it display-only.",
+    "表示される地点の一覧です。": "A list of the spots to be displayed.",
+    "表示条件なども含めて登録してください。": "Register them along with display conditions and so on.",
+    "詳細は": "For details, see ",
+    "をご確認ください。": ".",
+    "地図情報一覧（FieldMapList）": "Field Map List (FieldMapList)",
+    "地図として表示されるフィールドマップの一覧です。": "A list of field maps displayed as a map.",
+    "マップＩＤや画像などを登録してください。": "Register the map IDs, images, and so on.",
+    "地図上に表示されるシンボル（各地点、選択地点、現在地）の一覧です。": "A list of the symbols displayed on the map (each spot, the selected spot, and the current location).",
+    "地点選択後に実行するコモンイベントです。": "The common event executed after selecting a spot.",
+    "このイベント内で場所移動を実行してください。": "Execute the transfer within this event.",
+    "地点選択後に場所移動先のマップＩＤを格納する変数です。": "The variable that stores the Map ID of the transfer destination after selecting a spot.",
+    "地点選択後に場所移動先のＸ座標を格納する変数です。": "The variable that stores the X coordinate of the transfer destination after selecting a spot.",
+    "地点選択後に場所移動先のＹ座標を格納する変数です。": "The variable that stores the Y coordinate of the transfer destination after selecting a spot.",
+    "地点選択後に識別値を格納する変数です。": "The variable that stores the identifier after selecting a spot.",
+    "地点毎に異なる処理をしたい場合に有用です。": "Useful when you want to perform different processing for each spot.",
+    "フィールドから別のマップへ移動する際に地図座標用の変数を自動更新します。": "Automatically updates the variables for map coordinates when transferring from the field to another map.",
+    "各地点へ移動した際に地図座標用の変数を自動更新します。": "Automatically updates the variables for map coordinates when transferring to each spot.",
+    "『移動先マップＩＤ』および『座標更新用マップＩＤ』が基準。": "Based on “Destination Map ID” and “Map ID for Coordinate Updates.”",
+    "地点選択時に自動で最もプレイヤーの現在地に近い地点を初期選択します。": "Automatically initially selects the spot closest to the player\u0027s current location when selecting a spot.",
+    "各地点のフィールド座標、およびプレイヤーのフィールド座標が適切に取得できることがこの機能を使う前提です。": "This feature requires that the field coordinates of each location and the player\u0027s field coordinates can be retrieved correctly.",
+    "詳しくは『": "For details, see “",
+    "』と『": "” and “",
+    "』を確認してください。": "”.",
+    "また、プラグインコマンド側で": "Also, on the plugin command side, ",
+    "が指定されている場合はそちらが優先されます。": " is specified, it takes precedence.",
+    "現在地を表示するシンボルのＩＤです。": "The ID of the symbol used to display the current location.",
+    "選択地点を表示するシンボルのＩＤです。": "The ID of the symbol used to display the selected location.",
+    "地点一覧の横幅です。": "The width of the location list.",
+    "地点一覧の一行の縦幅です。": "The line height of the location list.",
+    "未指定なら標準値を使用します。": "If not specified, the default value is used.",
+    "地点一覧のフォントサイズです。": "The font size of the location list.",
+    "解説枠の縦幅です。初期値（空欄）では二行分を確保します。": "The height of the help window. The initial value (blank) reserves space for two lines.",
+    "0にすると非表示。": "Set to 0 to hide it.",
+    "解説文の描画Ｙ座標への補正値です。": "The adjustment value for the help text\u0027s drawing Y coordinate.",
+    "初期値は0です。": "The initial value is 0.",
+    "解説文のフォントサイズです。": "The font size of the help text.",
+    "参照専用時は全ての地点名を灰色表示します。": "Displays all location names in gray in read-only mode.",
+    "移動時と参照時の区別をしたい時にどうぞ。": "Use this when you want to distinguish between travel mode and read-only mode.",
+    "メニューコマンドに移動機能を追加します。": "Adds the travel function to the menu commands.",
+    "メニューコマンドに移動機能を挿入する位置です。": "The position at which to insert the travel function into the menu commands.",
+    "0が先頭になります。": "0 places it at the beginning.",
+    "移動機能の表示コマンド名を設定します。": "Sets the display command name for the travel function.",
+    "スイッチがオンの時のみコマンドを表示します。": "The command is displayed only when the switch is ON.",
+    "空白なら常に表示します。": "If blank, it is always displayed.",
+    "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。": "When the display permission switch is OFF, the command is displayed using the specified string.",
+    "例えば、機能を解放する前のコマンドを「？？？？」というように表示できます。": "For example, you can display the command as “????” before the feature is unlocked.",
+    "空欄ならコマンド自体を非表示にします。": "If blank, the command itself is hidden.",
+    "スイッチがオンの時のみコマンドを禁止（灰色表示）します。": "The command is disabled (displayed in gray) only when the switch is ON.",
+    "空白なら常に許可します。": "If blank, it is always enabled.",
+    "移動機能の記号を設定します。": "Sets the symbol for the transfer function.",
+    "この値は他のプラグインと連携する際に使用できます。": "This value can be used when integrating with other plugins.",
+    "移動コマンドを参照専用にします。": "Makes the transfer command read-only.",
+    "地図としての利用を想定しています。": "Intended for use as a map.",
+    "シーン開始時に実行されるコモンイベントです。": "The common event executed when the scene starts.",
+    "メッセージ表示等が可能ですが、機能は限定的です。": "Messages and similar functions are available, but functionality is limited.",
+    "『地点一覧』内に登録する地点情報のパラメータです。": "The parameters for the spot information registered in the “Spot List.”",
+    "表示される地点の名前です。": "The name of the displayed spot.",
+    "\\i[1]などのアイコン表示も有効です。": "Icon display using \\i[1] and similar codes is also supported.",
+    "地点の説明文です。": "The description of the spot.",
+    "移動先のマップＩＤです。数式可。": "The map ID to transfer to. Formulas are supported.",
+    "空欄だと一覧に表示されなくなります。": "If left blank, it will no longer be displayed in the list.",
+    "地図にシンボルだけを表示したい場合や、『座標更新用マップＩＤ』だけを設定したい場合に有効です。": "Useful when you want to display only symbols on the map or set only the “Coordinate Update Map ID.”",
+    "移動先のＸ座標です。数式可。": "The X coordinate at the transfer destination. Formulas are supported.",
+    "移動先のＹ座標です。数式可。": "The Y coordinate at the transfer destination. Formulas are supported.",
+    "移動後の向きです。": "The direction after the transfer.",
+    "移動先の地点を識別するための値です。": "The value used to identify the spot at the transfer destination.",
+    "『識別用変数』に値が格納されます。": "The value is stored in the “Identifier Variable.”",
+    "例えば、場所移動後に乗り物の位置も移動させたい場合、『識別用変数』で分岐させて『乗り物の位置設定』を実行すればＯＫです。": "For example, if you also want to move a vehicle after transferring locations, branch using the “Identifier Variable” and execute “Set Vehicle Position.”",
+    "ちなみに『移動先マップＩＤ』だけで識別できる場合は、わざわざこの項目を使う必要はありません。": "If the destination can be identified using only the “Transfer Map ID,” there is no need to use this parameter.",
+    "全体で設定したものより優先されます。": "This takes priority over the one configured globally.",
+    "複数の移動先を設定します。": "Sets multiple transfer destinations.",
+    "例えば、画像の例では町名を選んだ後にさらに選択肢で町中に飛ぶかフィールド上に飛ぶかを選択できるようにしています。": "For example, in the image, after selecting a town name, you can choose whether to transfer to the town or to a location on the field.",
+    "地点名の横にアイコンを追加します。": "Adds icons next to the spot name.",
+    "例えば、イベント発生中の地点を明示するなど。": "For example, to indicate spots where an event is occurring.",
+    "をご覧ください。": ".",
+    "地図に対応するフィールドのマップＩＤです。数式可。": "The map ID of the field corresponding to the map. Formulas are supported.",
+    "空欄だと『移動先マップＩＤ』を流用します。": "If left blank, the “Transfer Map ID” will be used.",
+    "地図に対応するフィールド上での地点のＸ座標です。数式可。": "The X coordinate of the spot on the field corresponding to the map. Formulas are supported.",
+    "空欄だと『移動先Ｘ座標』を流用します。": "If left blank, the “Transfer X Coordinate” will be used.",
+    "地図に対応するフィールド上での地点のＹ座標です。数式可。": "The Y coordinate of the location on the field corresponding to the map. Formulas can be used.",
+    "空欄だと『移動先Ｙ座標』を流用します。": "If left blank, the Destination Y Coordinate will be used.",
+    "地図座標の更新を行うマップＩＤです。複数指定可": "The map IDs for which map coordinates will be updated. Multiple IDs can be specified.",
+    "例１：1,2,3": "Example 1: 1,2,3",
+    "例２：1~3": "Example 2: 1~3",
+    "表示するシンボルのＩＤです。": "The ID of the symbol to display.",
+    "空欄にすると非表示になります。": "If left blank, it will not be displayed.",
+    "地点がリスト上に表示される条件となるスイッチです。": "The switch that determines whether the location is displayed in the list.",
+    "空欄なら常に表示します。": "If left blank, the icon is always displayed.",
+    "地点を地図上の点として表示する条件となるスイッチです。": "The switch that determines whether the location is displayed as a point on the map.",
+    "選択を禁止するスイッチです。": "The switch that prevents selection.",
+    "リスト上には灰色で表示されるようになります。": "It will be displayed in gray in the list.",
+    "『地図情報一覧』内に登録する地図情報のパラメータです。": "The parameters for the map information registered in the Map Information List.",
+    "地図に対応するマップのＩＤです。": "The ID of the map corresponding to the map.",
+    "地図として使用する画像です。": "The image to use as the map.",
+    "地図の背景色です。": "The background color of the map.",
+    "例：rgb(255, 255, 255)": "Example: rgb(255, 255, 255)",
+    "数値は赤、緑、青に対応。空欄なら透明となります。": "The numbers correspond to red, green, and blue. If left blank, it will be transparent.",
+    "地図上の現在地となるマップＩＤを格納する変数です。": "The variable that stores the map ID of the current location on the map.",
+    "地図上の現在地となるＸ座標を格納する変数です。": "The variable that stores the X coordinate of the current location on the map.",
+    "地図上の現在地となるＹ座標を格納する変数です。": "The variable that stores the Y coordinate of the current location on the map.",
+    "地図を有効とするスイッチです。": "The switch that enables the map.",
+    "同じマップＩＤに対して複数の設定が存在していた場合は、リストの上側が優先されます。ゲーム進行に応じて地図を変更したい場合に有効です。": "If multiple settings exist for the same map ID, the one higher in the list takes priority. This is useful when changing the map as the game progresses.",
+    "『シンボル画像一覧』内に登録するシンボル情報のパラメータです。": "The parameters for the symbol information registered in the Symbol Image List.",
+    "シンボルに対応するＩＤです。": "The ID corresponding to the symbol.",
+    "各地点との紐付けに使います。": "It is used to associate symbols with each location.",
+    "ユーザが識別するためのメモです。": "A memo for the user to identify it.",
+    "ゲーム中には一切使用しません。": "It is not used at all in the game.",
+    "シンボルとして使用するピクチャー画像です。": "The picture image to use as the symbol.",
+    "未指定の場合は円形の点が描画されます。": "If none is specified, a circular point will be drawn.",
+    "シンボルが点滅する周期です。": "The period at which the symbol blinks.",
+    "1/60秒単位で設定してください。0で点滅なし": "Set in units of 1/60 second. 0 disables blinking.",
+    "シンボルの不透明度（0~255）です。": "The symbol\u0027s opacity (0~255).",
+    "255を超えると点滅時の表示時間が伸びます。": "Values over 255 increase the display time while blinking.",
+    "※シンボル画像が設定されていない場合のみ有効です。": "※Only effective when no symbol image is set.",
+    "シンボル色です。": "The symbol\u0027s color.",
+    "数値は赤、緑、青に対応します。": "The values correspond to red, green, and blue.",
+    "シンボルの半径です。": "The symbol\u0027s radius.",
+    "地点情報の『アイコン（複数）』内に登録するパラメータです。": "These are the parameters registered under “Icons (Multiple)” in the location information.",
+    "地点名の横に表示するアイコンの番号です。": "The number of the icon displayed next to the location name.",
+    "右クリックで『アイコン番号の挿入』ができます。": "Right-click to insert “Icon Number.”",
+    "地点名の文字色を変更します。": "Changes the text color of the location name.",
+    "システムカラーの番号を指定してください。": "Specify the system color number.",
+    "アイコンの表示条件となるスイッチです。": "The switch that determines whether the icon is displayed.",
+    "＞RPGツクールMZ\u0026MV目次に戻る": "＞Return to the RPG Maker MZ \u0026 MV Table of Contents"
+  }
+}
