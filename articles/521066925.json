@@ -1,0 +1,800 @@
+{
+  "articleId": "521066925",
+  "sourceUrl": "https://newrpg.seesaa.net/article/521066925.html",
+  "sourceHash": "2e6da568d2a8e879b51492343af1fb65c2e0b67e2750f52aebabde1d02365801",
+  "translatedAt": "2026-08-26T14:37:00.7048923+09:00",
+  "title": "Database Organization Tool for RPG Maker MZ",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "RPGツクールMZ用データベース整頓ツール",
+      "sourceHash": "7060043b6571ecf9f46d47c781a4dd5d6e8e6928bf1778125447682741b7f1d3",
+      "translation": "Database Organization Tool for RPG Maker MZ"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ＲＰＧツクールＭＺ用のデータベース整頓ツールです。",
+      "sourceHash": "d3236f120d3a1c96cd70c1288be1b9e57d3f0daa1a95606ca1141ed5c0d58f13",
+      "translation": "This is a database organization tool for RPG Maker MZ."
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "Claude Codeで作成しました。",
+      "sourceHash": "dd009524c86da3d772ad2b4a4f4cd5afbb1412886a5b116c1187bc05b502c7af",
+      "translation": "Created with Claude Code."
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "通常、ツクール上でデータを入れ替えた場合、他のＤＢやマップイベントからの参照には反映されません。そちらを入れ替えたい場合は手作業で一つずつ変更していく必要があります。しかしながら、ツクール上の操作だけでは各データがどこで使用されているかを知るのも困難です。",
+      "sourceHash": "30a93b83ceeb26d68f088be1ffb45961f391ef39a157c99279325c7f0a2a284c",
+      "translation": "Normally, when data is rearranged in RPG Maker, references to it from other databases or map events are not updated. If you want to rearrange those references as well, you need to change them manually one by one. However, it is difficult to determine where each piece of data is used using only the operations available in RPG Maker."
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "このツールはそういったデータベースの整頓作業を自動化します。データを入れ替えた場合は、他のＤＢやマップイベント側の変更も自動的に実行できます。",
+      "sourceHash": "05c78657a74210f401a414dc66981fd1dccdcbd733a5b34d3e60f1f4e5676ea0",
+      "translation": "This tool automates this type of database organization. When data is rearranged, changes on the other database and map event sides can also be performed automatically."
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な機能",
+      "sourceHash": "c38e630d348b526e176f6cfd8a4c185e06c0a28dde73c13226a6074d2f726c42",
+      "translation": "Main Features"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ＤＢ項目の並び替え",
+      "sourceHash": "fc8a104575f9f911f68e72b5d5d36b324b9dabc173590bb31f6e18b2323644ce",
+      "translation": "Rearrange database entries"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "使用箇所の検索",
+      "sourceHash": "7c57101440be6657ce6f256354b30c1f92c420b1142a361167c6ece3ebcca726",
+      "translation": "Search for usage locations"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "不要コマンドの一括削除",
+      "sourceHash": "6fdf8f1268c722b19a2be2802366e2c416e112fb78454d3535df840787ec4346",
+      "translation": "Bulk delete unnecessary commands"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "素材ファイル名の置換",
+      "sourceHash": "69508f97e9e4451478d66144fe5ecdc22593ce1e363736485367e2956edd6f68",
+      "translation": "Replace asset file names"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "日本語／英語対応",
+      "sourceHash": "4a9baba4a42b02f3fd42b188c1ca21972fcf2ab315a89500130e20d170acfd5b",
+      "translation": "Japanese/English support"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "プラグインパラメータも検索＆置換の対象となります。",
+      "sourceHash": "f39d2da0e8a395c0c0e5dca5ba550ac3fbf5573f5d326fcfe932bca13b1837fa",
+      "translation": "Plugin parameters are also included in searches and replacements."
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ただし、対象となるのはアノテーション（例：@type actor）が設定されており、紐づくＤＢが明確な場合だけです。特殊な実装をしているプラグインや設定のないプラグインだと検索できないことがあります。",
+      "sourceHash": "57df0b4cc79484090e6c490bcf4eae7c7a5bb3522b4587a814f4ab750531559f",
+      "translation": "However, this applies only when an annotation (for example, @type actor) is set and the associated database is clear. Plugins with special implementations or without settings may not be searchable."
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "検索できないもの",
+      "sourceHash": "f27b4715cdc7d609df9e0e6f16edf49d57a27d95df3f5b9b9f52ead01c170249",
+      "translation": "Items That Cannot Be Searched"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "メモ欄のタグ（\u003CActorID:5\u003Eのような記述）。",
+      "sourceHash": "c5880850572a5fa240dcd68c62a09cdb229aa4faa06d559c684dcf631da3d785",
+      "translation": "Tags in note fields (entries such as \u003CActorID:5\u003E)."
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "文章中の名前、変数参照（例：\\n[1], \\v[1]）。",
+      "sourceHash": "44639b1b9da762b5db713b169c878be4d824114c203d192f53f4c75367391401",
+      "translation": "Names and variable references in text (for example: \\n[1], \\v[1])."
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "※文字列として検索＆置換すること自体は可能です。",
+      "sourceHash": "46a8810020a87e66406bf26205d83b06677739c287ec36c23fcb38921c57b0e4",
+      "translation": "※It is possible to search and replace these as strings."
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "スクリプト。",
+      "sourceHash": "60aae1cce0ddb318273b94b5a8b9325c37ef10308c1599d79c2e06bacbd5ae15",
+      "translation": "Scripts."
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "アノテーション（例：@type actor）指定のないプラグインパラメータ。",
+      "sourceHash": "cc8106758f232d714a20554e9be8d390f057069ddbccc4fe29a593d4654365b9",
+      "translation": "Plugin parameters without an annotation (for example, @type actor) specification."
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "なお、スクリプトでも$gameSwitches.value(), $gameSwitches.setValue(), $gameVariables.value(), $gameVariables.setValue()については例外的に対象としています。",
+      "sourceHash": "8ed8a35bfdeb9716490e9afb18c9fbf40b524c2f655091d4a9f1a988978013a4",
+      "translation": "However, even in scripts, $gameSwitches.value(), $gameSwitches.setValue(), $gameVariables.value(), and $gameVariables.setValue() are exceptionally included as targets."
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "入念なテストをしたわけでもない非公式の怪しい代物なので、開発中のプロジェクトに対する使用は要注意です。上述の通り置換できないデータもあるので、長期間開発した大きなプロジェクトほど問題が起きやすいです。",
+      "sourceHash": "f7d4dc0aed79079c4213a8f83f95f6ecae9839d6ed077f303e0f9a5a33bf9bde",
+      "translation": "This is an unofficial, questionable tool that has not undergone thorough testing, so use with projects under development requires caution. As mentioned above, some data cannot be replaced, so larger projects that have been in development for a long time are more likely to encounter problems."
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "このツールで何らかの問題が起こっても一切の保証はできません。必ず事前にプロジェクトのバックアップを取ってください。",
+      "sourceHash": "b581809e589aaa6b508f6961b8310e18deae8ef61a53c1501357c566e900d955",
+      "translation": "We cannot provide any guarantees if a problem occurs with this tool. Always back up your project beforehand."
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "検索機能については、比較的安全に使用できると思います。",
+      "sourceHash": "b8a56dd0f6efaa1a3f5dc5d9a5511ac7d3918c2601b13b3c80fc48a16e649dfa",
+      "translation": "The search function should be relatively safe to use."
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "保存とバックアップについて",
+      "sourceHash": "0f0f41108e5089f9b9c5873faead42028894909c5c5cba0af8deb7c33c07badf",
+      "translation": "Saving and Backups"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "データベース（アクター～変数）",
+      "sourceHash": "c85689d09f519c166abfedbac14c61bc4c114c3074aadcf141dba37e6ce044c9",
+      "translation": "Databases (Actors to Variables)"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "イベントコマンド",
+      "sourceHash": "1e56a006c569805feed11019e62501ba9e42d9f50161fb2cd4e952408cd800ae",
+      "translation": "Event Commands"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "文章の表示",
+      "sourceHash": "19e0da7416ce072a450b2aab060d31d03147f61b39d7c2ece6a879830161f83d",
+      "translation": "Show Text"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "詳細検索＆置換",
+      "sourceHash": "82c149eb7f2492ad0c545be86537c109e0af4621e8b9534c2744b81c05b2bb47",
+      "translation": "Detailed Search \u0026 Replace"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "本文から名前に変換",
+      "sourceHash": "b2227e393194467d0672822e0b3dd4ee1c0b48a38f2bd8b8489e88bc56f04c04",
+      "translation": "Convert Text to Name"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "素材",
+      "sourceHash": "9af69965f173040b6401b991138911a263874762d6a61d9719cb5ca01c212737",
+      "translation": "Assets"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "以下のファイルをダウンロードして解凍してください。",
+      "sourceHash": "bf4dd551360dae187a061855f7b2d74edc81479273664689d53968f26d029807",
+      "translation": "Download and extract the following file."
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "exeファイルをクリックすると起動します。",
+      "sourceHash": "3685c9fbfa78a8a44fc13bdacf5fdb96a247228475237e0a0258fb909020c8de",
+      "translation": "Click the exe file to launch it."
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "スキルの検索対象にイベントコマンドの『戦闘行動の強制』が含まれていない不具合修正。",
+      "sourceHash": "44d85708a6b0241f3cafe4b1f671f79abbfb84467e1e9706bf3bba9d9bf7305b",
+      "translation": "Fixed a bug where Force Action in event commands was not included in skill searches."
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "@type skill[]など配列型のアノテーションを参照できていなかった不具合を修正。",
+      "sourceHash": "7ba81f17e3f1326644ee75f4ca8d4ab6c7d1732f0bae288b568ab379cb069e68",
+      "translation": "Fixed a bug where array-type annotations such as @type skill[] could not be referenced."
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "タイプにも対応した。",
+      "sourceHash": "198abbd88351c364e4e5dff8bd04da11b0be087bd35293ead27a2ee99c7eacbe",
+      "translation": "Types are now supported."
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "素材のファイル名変更機能を追加した。",
+      "sourceHash": "92d4a1c48b5b70693f68a4641c6813726269586c3b9f8da4d1ad7aaef862fb3f",
+      "translation": "Added a function to rename asset file names."
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "プラグインパラメータタブにプラグイン名での検索を追加した。",
+      "sourceHash": "634d78168053a4dafdcd8d2f8347cd2da806aa54e7ce21d474712e665b6eef9f",
+      "translation": "Added plugin name searches to the Plugin Parameters tab."
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "素材の「ファイルを置換」時にプラグインパラメータに登録されているファイル名を置換できていない不具合修正。",
+      "sourceHash": "36cfc0fcbfcdb1850f54f02137ce9dd21aebd24528bd4359c544978f0f5b9466",
+      "translation": "Fixed a bug where file names registered in plugin parameters were not replaced when using “Replace File” for assets."
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "マウスドラッグで項目を入れ替える場合、一番下への入れ替えができない不具合修正。",
+      "sourceHash": "8d43c200b3374cd3cd30b0010a8da1efa8bd9229d6b02322f0631fb2aff43dee",
+      "translation": "Fixed a bug where items could not be moved to the bottom when rearranging them by mouse drag."
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "別プロジェクトを読み込んだ時にプラグインパラメータタブなどが前のままになっている不具合修正。",
+      "sourceHash": "00ce7227b5dd4c78146cf1a976d01a9e25ba66f336e97553cd3c09e2201e0fc5",
+      "translation": "Fixed a bug where the Plugin Parameters tab and other tabs remained as they were when loading another project."
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "保存とバックアップについて",
+      "sourceHash": "0f0f41108e5089f9b9c5873faead42028894909c5c5cba0af8deb7c33c07badf",
+      "translation": "Saving and Backups"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "当ツールにおいて実際にファイルが更新されるのは保存ボタン（Ctrl\u002BS）を押したタイミングになります。それまではメモリ上を書き換えているだけなので、ファイルには反映されません。",
+      "sourceHash": "859897f47c584b933bfa76cd44c29ecfba8dd5f2b71ca63cde7698951bc8da3b",
+      "translation": "In this tool, files are actually updated when the Save button (Ctrl\u002BS) is pressed. Until then, only the data in memory is changed, so the changes are not reflected in the files."
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "保存時に変更を実行したファイルのバックアップを取る仕様です。初期設定では、当ツールの直下に作成されます。",
+      "sourceHash": "6f46118e34342bd42f161fc04a8271d3133eef546db2aee4f5807b0502bb66a5",
+      "translation": "When saving, the tool backs up files that have been modified. By default, the backups are created directly under this tool."
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "もし、何らかの問題が起きた場合は復旧にご利用ください。",
+      "sourceHash": "5b82a0390d593e1915a6ff47d03d493dab6a521137541e24b85289bd93bc9af4",
+      "translation": "Please use this to recover your data if any problems occur."
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "なお、あまり何度も大きな変更と保存を繰り返すと、バックアップのファイルサイズもどんどん膨れ上がっていきます。ご注意ください。",
+      "sourceHash": "b97e5703b578b2f9683edec58b325756003225fb73e0fb527d863f5179f5e383",
+      "translation": "Note that if you repeatedly make and save major changes, the backup file size will continue to grow. Please be careful."
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "当ツールはツクールＭＺを起動したまま併用することも可能です。ツクールＭＺはファイルの更新を常に検知しているらしく、保存時にはリロードを促すメッセージが表示されます。",
+      "sourceHash": "8284949d363fbe3f8f19081871cfb9a17820bf64ba38a5037426f0ed5495325f",
+      "translation": "This tool can also be used while RPG Maker MZ is running. RPG Maker MZ apparently constantly detects file updates, so a message prompting you to reload will appear when you save."
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "データベース（アクター～変数）",
+      "sourceHash": "c85689d09f519c166abfedbac14c61bc4c114c3074aadcf141dba37e6ce044c9",
+      "translation": "Database (Actors–Variables)"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "データベース項目の検索や並び替えが可能です。",
+      "sourceHash": "38223743ad4459294f91ac460ceed31243c3194672be57ddf3bb77f2a3e219f0",
+      "translation": "You can search and reorder database items."
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "上下矢印のボタンやマウスドラッグで入れ替えができます。Ctrl\u002Bカーソルキー上下でも入れ替えができます。",
+      "sourceHash": "c8e20b11e489831f6cb63c7718457974f433cad2ebe90b330f9de2b0e3de55f2",
+      "translation": "You can reorder them using the up and down arrow buttons or by dragging them with the mouse. You can also reorder them with Ctrl \u002B the Up/Down cursor keys."
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "削除／挿入も可能です。",
+      "sourceHash": "61096c28c63e67d79fc90bfbd4faaf5cbdd3208de864cddf3e2de6798f7aab40",
+      "translation": "You can also delete and insert items."
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "削除については、Shiftキーを押しながらの複数削除にも対応しています。",
+      "sourceHash": "58baaf20f4897acb44b6e90499e8ee269950abe67a3d0805214acd7ced527be6",
+      "translation": "For deletion, multiple items can also be deleted while holding the Shift key."
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ただし、削除や挿入はわりと影響が大きい処理です。対象項目より下の全項目のＩＤがズレるため、さらにその全てを参照しているマップデータに対して更新がかかります。",
+      "sourceHash": "6e761e22027a6382e666787f577ef4bdf9a5fecbd568223a35caa7a899de829c",
+      "translation": "However, deletion and insertion have fairly significant effects. Since the IDs of all items below the target item will shift, all map data that references them will also be updated."
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "各項目をダブルクリックすると、使用箇所を検索表示できるので参考にしてください。入替を実行した場合は、ここに表示されている全てのファイル（＋入替先の使用箇所）が更新対象となります。",
+      "sourceHash": "6a088f47ce10337ae0c1fe156aa12d17f86fcd1f10d2cbf325fbd37dff83ed98",
+      "translation": "Double-click each item to search for and display where it is used. If you reorder an item, all files displayed here (plus usage locations at the destination) will be updated."
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ＤＢに存在しないＩＤへの参照が存在する場合は、赤い警告マークが表示されます。（上の画像だとコモンイベント）",
+      "sourceHash": "e90ff200e7c016bd51624ac2d5ee0a255eb2d7be82ffb41f3aeccaa88df88401",
+      "translation": "If there are references to IDs that do not exist in the database, a red warning mark will be displayed. (In the image above, this is a Common Event.)"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "詳細は右上の「情報欄を表示」ボタンから確認できます。",
+      "sourceHash": "f565c46a09e6336ac52de5f36abe1b3dae973440cd5f55de3404b7c99db861fd",
+      "translation": "You can check the details using the “Show Information” button in the upper right."
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "プラグインパラメータの検索ができます。",
+      "sourceHash": "9e734185b36d66da8070c104b325e5510e134c55d52941164731540381f53276",
+      "translation": "You can search plugin parameters."
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "今のところ検索しかできません。",
+      "sourceHash": "ac957d79e2c36524bcaa08361289d264937ddebbdbabe31ed7eed5401d3b6bf9",
+      "translation": "At present, only searching is supported."
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "ちなみにプラグインコマンドの使用場所を調べたい場合は、以下のイベントコマンドで可能です。プラグインコマンドを選択し、プラグイン名などで検索をかけてください。",
+      "sourceHash": "caf800fa21e9eb3275c6a4dd3d590afcdac9df327774b7739b7e143a6fd44911",
+      "translation": "By the way, if you want to find where a plugin command is used, you can do so with the event command below. Select Plugin Command and search by the plugin name or other terms."
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "イベントコマンド",
+      "sourceHash": "1e56a006c569805feed11019e62501ba9e42d9f50161fb2cd4e952408cd800ae",
+      "translation": "Event Commands"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "イベントコマンドの検索や削除ができます。",
+      "sourceHash": "04f5708bf65eb7fa29d65486144f13d7e567613ebeb658d85d51ee933481c3ac",
+      "translation": "You can search for and delete event commands."
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "例えば、不要になったコモンイベントなどを一括で削除できます。",
+      "sourceHash": "dd0ef0241bb119ac98aaf2048c0cb0038462e80b998bed0c7e51ad7e919a5904",
+      "translation": "For example, you can delete unnecessary Common Events and the like all at once."
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "ただし、以下のイベントコマンドや「全て」については削除の対象外です。これらは入れ子構造を持ち、削除の影響が大きいためです。",
+      "sourceHash": "ccd1c005a37162f3eacc0b651913571acb8d299d2c324619b8c3790706d51618",
+      "translation": "However, the following event commands and “All” are excluded from deletion. They have nested structures, so deleting them would have significant effects."
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "「選択肢の表示」「条件分岐」「ループ」「スキップ」「戦闘の処理」",
+      "sourceHash": "72c1f7272767cfe0e4f4ac6454b570784582a7f3be835238572bd06f61e8dcef",
+      "translation": "“Show Choices,” “Conditional Branch,” “Loop,” “Skip,” and “Battle Processing”"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "検索結果に対してダブルクリックすると、そのパラメータを検索欄にセットして再検索することもできます。",
+      "sourceHash": "91547c623716d75dd387bccb6b256e1b9d401ea6524d2295f737b45663b7e166",
+      "translation": "You can also double-click a search result to set its parameter in the search field and search again."
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "イベントコマンドは件数が非常に多いので、このタブのみ表示件数の制限（1000件ずつ）をかけています。検索条件なども組み合わせてご活用ください。",
+      "sourceHash": "18b358ba4a5a7c7895b06c85929f62d433264a9e8e4a058181a91d616c8e1613",
+      "translation": "There are a very large number of event commands, so only this tab limits the number of displayed results to 1,000 at a time. Use it together with search conditions as needed."
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "文章の表示",
+      "sourceHash": "19e0da7416ce072a450b2aab060d31d03147f61b39d7c2ece6a879830161f83d",
+      "translation": "Show Text"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "文章の表示コマンドの検索＆置換を行います。",
+      "sourceHash": "1f1243726d22db4f433ef5c142f6a8a54c2a917c27fc30275e08f87988969c90",
+      "translation": "This searches and replaces Show Text commands."
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "文章の表示はイベントコマンドでも検索できますが、より詳細な操作が可能です。（削除はイベントコマンド専用の機能です。）",
+      "sourceHash": "0a22c5f7a83d6ec632d203d4f67c799dd91e98d951c4a33579262b8f42b5ea3d",
+      "translation": "Show Text can also be searched for using event commands, but more detailed operations are available here. (Deletion is a function exclusive to event commands.)"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "※現状は文章の表示だけが対象です。「選択肢の表示」や「文章のスクロール表示」は対象外となっております。",
+      "sourceHash": "fdc1c9dbe455a568d5a2eb498787266f169c5fba4560e04de587c3e74e0217b8",
+      "translation": "* At present, only Show Text is supported. “Show Choices” and “Scroll Text” are not supported."
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "検索の選択はマップ単位です。「子マップも対象」のチェックを入れた状態で親マップを選択すると、まとめて検索できます。特に一番上のプロジェクトルートを選択すると、プロジェクト全体を検索することも可能です。",
+      "sourceHash": "6ccc24577b2ad552b2410b09cde56dc2e0c5c3e4fa83faa68855c958db016cfa",
+      "translation": "Search selection is performed by map. If you select a parent map with “Include child maps” checked, you can search them all at once. In particular, selecting the project root at the very top allows you to search the entire project."
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "当画面では、名前と本文を区別して検索できます。",
+      "sourceHash": "1cbf32851247e6ccd6bbc86547261e0152977bb65f7312d9c874ab4de288f7d4",
+      "translation": "On this screen, you can search names and text separately."
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "詳細検索＆置換",
+      "sourceHash": "82c149eb7f2492ad0c545be86537c109e0af4621e8b9534c2744b81c05b2bb47",
+      "translation": "Advanced Search \u0026 Replace"
+    },
+    {
+      "id": "link-011",
+      "type": "link",
+      "source": "正規表現（参考）",
+      "sourceHash": "ba0609fd6a7a228986804c3a3b283ee0946676656fe473fbe3b2d9c328c9df4f",
+      "translation": "Regular Expressions (Reference)"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "によって詳細な検索を行います。さらに検索結果に対して、一括置換を行うことも可能です。",
+      "sourceHash": "00a9e87ad63ab1097fb235f904246b8b1d64a5572557f5526d3962d658102667",
+      "translation": " are used to perform detailed searches. You can also replace all occurrences in the search results at once."
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "※正規表現では\\や[]はエスケープする必要があります。",
+      "sourceHash": "5530e38261a88cbf112fee4a8085bdc263c6000aca2f1ed6c3641ffdb54ffeb0",
+      "translation": "* In regular expressions, \\ and [] must be escaped."
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "（例：『\\n[1]』→『\\\\n\\[1\\]』）",
+      "sourceHash": "1965838773f2a3b1a19f6fd31fc9d08574bff1c734ae09edbe35a0d5b32e5d89",
+      "translation": "(Example: 『\\n[1]』 → 『\\\\n\\[1\\]』)"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "※行の削除や追加には対応していません。削除時は空行になります。",
+      "sourceHash": "4a008d57911e6713f497544070a8bf0082682e481fc767cf0f841b8dd4b819f5",
+      "translation": "* Deleting or adding lines is not supported. Deleted lines become blank lines."
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "※置換後の文字列は正規表現ではなく通常入力してください。",
+      "sourceHash": "09da5bc9e237896fbeb5e38bc028c7642330c29bbc0a9a6b052a362ec40f250d",
+      "translation": "* Enter the replacement string normally, not as a regular expression."
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "サンプルとして『本文が４行の文章』『本文一行が２０字以上』『本文行頭の「を一括削除』『名前\\n[1]を\\n[2]に一括置換』といったものがあります。",
+      "sourceHash": "71211d0501087d819b1413ac0400c1d185281fe8ca2e91d7d503fa8f614fda29",
+      "translation": "Examples include “text with four lines,” “text with a line of 20 or more characters,” “bulk deletion of 「 at the beginning of text lines,” and “bulk replacement of Name\\n[1] with \\n[2].”"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "「現状は４行まで文章を書いていたが、３行以下に統一したい」とか「一行が長すぎる文章は修正したい」とかそういった用途を想定しています。",
+      "sourceHash": "f484fccf2b02fc96182434bd404ed7d5dce1c2d946b4e2a08146046a536bf049",
+      "translation": "The intended uses include cases such as “The text currently has up to four lines, but I want to standardize it to three lines or fewer” and “I want to revise text whose lines are too long.”"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "本文から名前に変換",
+      "sourceHash": "b2227e393194467d0672822e0b3dd4ee1c0b48a38f2bd8b8489e88bc56f04c04",
+      "translation": "Convert Text to Name"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "ツクール２０００やＭＶなど旧ツクールから作品データを移行した際に、本文内に名前が含まれたままになっていることがあります。",
+      "sourceHash": "78a822e445f1ac9007bbcc10c89c5462d6589b0ea52919fc48f07cf5925d7b8e",
+      "translation": "When transferring project data from older versions of RPG Maker, such as RPG Maker 2000 or MV, names may remain included in the text."
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "そういった場合、名前が格納されているルール（正規表現）を指定することで、本文内の名前を一括で名前欄に移行できます。",
+      "sourceHash": "6bddde5e724dad926cb35b7d0f2eca2f307ab457377405458f6de448fa0943ec",
+      "translation": "In such cases, you can specify the rule (regular expression) in which names are stored and move the names in the text to the name field all at once."
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "正規表現に関してはサンプルを参考にしてください。",
+      "sourceHash": "9727b99be73431061914b1d808ed4df839ef9e29d76ba7adfe1d4c0494df1810",
+      "translation": "For regular expressions, refer to the examples."
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "例えば、『【】で囲まれている部分』『２行目が「で始まっている文章の一行目』などがサンプルにあります。",
+      "sourceHash": "9a33a4062f2de6232828d3fc69ba7e237fc593b22fdf8c783f0aa40b5a4cbd7a",
+      "translation": "Examples include “the part enclosed in 【】” and “the first line of text whose second line begins with 「.”"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "あまりないと思いますが、名前と本文に何の区切りもない場合は移行が難しいです。（名前と本文に区切りがなく、一行目から本文が始まるケースがあるなど。）",
+      "sourceHash": "5f33844b18b0ade4ab0455637f6e5ce6f58ad49faea6a595bc74c5d508d526ee",
+      "translation": "This is probably uncommon, but migration is difficult when there is no delimiter between the name and text. (For example, when there is no delimiter and the text begins on the first line.)"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "素材",
+      "sourceHash": "9af69965f173040b6401b991138911a263874762d6a61d9719cb5ca01c212737",
+      "translation": "Assets"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "作中で参照されている素材を検索表示します。",
+      "sourceHash": "5ebdbccf5391050e96829956eafb06328fa6390a06e5d3076ffd0e2b35d5075b",
+      "translation": "This searches for and displays assets referenced in the project."
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "ＤＢやイベントコマンド、プラグインパラメータから参照されているファイルが対象です。ファイルが存在しない場合は赤色で表示されます。",
+      "sourceHash": "69098576ce99a676780551b6c12087f5bc73e5e77c2fd61758f3c605375fef73",
+      "translation": "Files referenced by the database, event commands, or plugin parameters are included. If a file does not exist, it is displayed in red."
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "各ファイル毎に置換やファイル名の変更が可能です。",
+      "sourceHash": "8314a765a18008559686beec944a245c65bef04ada22e9312453a94e341beec4",
+      "translation": "You can replace each file or change its file name."
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "ファイルを差し替えたい場合や、ファイル名を変更したい場合に有効です。",
+      "sourceHash": "ef5a3f3fc1e87787f2f3507306f0cfbdf0c4d1f52769abcb5583509a3f675ad8",
+      "translation": "This is useful when you want to replace a file or change its file name."
+    },
+    {
+      "id": "link-012",
+      "type": "link",
+      "source": "＞RPGツクールMZ\u0026MV目次に戻る",
+      "sourceHash": "3bcc60de1127eb069aa22b4e6c377dc301353a44f2f9c80405f4c2370ccf3079",
+      "translation": "＞Return to the RPG Maker MZ \u0026 MV Table of Contents"
+    }
+  ],
+  "texts": {
+    "ＲＰＧツクールＭＺ用のデータベース整頓ツールです。": "This is a database organization tool for RPG Maker MZ.",
+    "Claude Codeで作成しました。": "Created with Claude Code.",
+    "通常、ツクール上でデータを入れ替えた場合、他のＤＢやマップイベントからの参照には反映されません。そちらを入れ替えたい場合は手作業で一つずつ変更していく必要があります。しかしながら、ツクール上の操作だけでは各データがどこで使用されているかを知るのも困難です。": "Normally, when data is rearranged in RPG Maker, references to it from other databases or map events are not updated. If you want to rearrange those references as well, you need to change them manually one by one. However, it is difficult to determine where each piece of data is used using only the operations available in RPG Maker.",
+    "このツールはそういったデータベースの整頓作業を自動化します。データを入れ替えた場合は、他のＤＢやマップイベント側の変更も自動的に実行できます。": "This tool automates this type of database organization. When data is rearranged, changes on the other database and map event sides can also be performed automatically.",
+    "主な機能": "Main Features",
+    "ＤＢ項目の並び替え": "Rearrange database entries",
+    "使用箇所の検索": "Search for usage locations",
+    "不要コマンドの一括削除": "Bulk delete unnecessary commands",
+    "素材ファイル名の置換": "Replace asset file names",
+    "日本語／英語対応": "Japanese/English support",
+    "プラグインパラメータも検索＆置換の対象となります。": "Plugin parameters are also included in searches and replacements.",
+    "ただし、対象となるのはアノテーション（例：@type actor）が設定されており、紐づくＤＢが明確な場合だけです。特殊な実装をしているプラグインや設定のないプラグインだと検索できないことがあります。": "However, this applies only when an annotation (for example, @type actor) is set and the associated database is clear. Plugins with special implementations or without settings may not be searchable.",
+    "検索できないもの": "Items That Cannot Be Searched",
+    "メモ欄のタグ（\u003CActorID:5\u003Eのような記述）。": "Tags in note fields (entries such as \u003CActorID:5\u003E).",
+    "文章中の名前、変数参照（例：\\n[1], \\v[1]）。": "Names and variable references in text (for example: \\n[1], \\v[1]).",
+    "※文字列として検索＆置換すること自体は可能です。": "※It is possible to search and replace these as strings.",
+    "スクリプト。": "Scripts.",
+    "アノテーション（例：@type actor）指定のないプラグインパラメータ。": "Plugin parameters without an annotation (for example, @type actor) specification.",
+    "なお、スクリプトでも$gameSwitches.value(), $gameSwitches.setValue(), $gameVariables.value(), $gameVariables.setValue()については例外的に対象としています。": "However, even in scripts, $gameSwitches.value(), $gameSwitches.setValue(), $gameVariables.value(), and $gameVariables.setValue() are exceptionally included as targets.",
+    "入念なテストをしたわけでもない非公式の怪しい代物なので、開発中のプロジェクトに対する使用は要注意です。上述の通り置換できないデータもあるので、長期間開発した大きなプロジェクトほど問題が起きやすいです。": "This is an unofficial, questionable tool that has not undergone thorough testing, so use with projects under development requires caution. As mentioned above, some data cannot be replaced, so larger projects that have been in development for a long time are more likely to encounter problems.",
+    "このツールで何らかの問題が起こっても一切の保証はできません。必ず事前にプロジェクトのバックアップを取ってください。": "We cannot provide any guarantees if a problem occurs with this tool. Always back up your project beforehand.",
+    "検索機能については、比較的安全に使用できると思います。": "The search function should be relatively safe to use.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "更新履歴（History）": "Update History (History)",
+    "保存とバックアップについて": "Saving and Backups",
+    "データベース（アクター～変数）": "Database (Actors–Variables)",
+    "プラグインパラメータ": "Plugin Parameters",
+    "イベントコマンド": "Event Commands",
+    "文章の表示": "Show Text",
+    "詳細検索＆置換": "Advanced Search \u0026 Replace",
+    "本文から名前に変換": "Convert Text to Name",
+    "素材": "Assets",
+    "以下のファイルをダウンロードして解凍してください。": "Download and extract the following file.",
+    "exeファイルをクリックすると起動します。": "Click the exe file to launch it.",
+    "スキルの検索対象にイベントコマンドの『戦闘行動の強制』が含まれていない不具合修正。": "Fixed a bug where Force Action in event commands was not included in skill searches.",
+    "@type skill[]など配列型のアノテーションを参照できていなかった不具合を修正。": "Fixed a bug where array-type annotations such as @type skill[] could not be referenced.",
+    "タイプにも対応した。": "Types are now supported.",
+    "素材のファイル名変更機能を追加した。": "Added a function to rename asset file names.",
+    "プラグインパラメータタブにプラグイン名での検索を追加した。": "Added plugin name searches to the Plugin Parameters tab.",
+    "素材の「ファイルを置換」時にプラグインパラメータに登録されているファイル名を置換できていない不具合修正。": "Fixed a bug where file names registered in plugin parameters were not replaced when using “Replace File” for assets.",
+    "マウスドラッグで項目を入れ替える場合、一番下への入れ替えができない不具合修正。": "Fixed a bug where items could not be moved to the bottom when rearranging them by mouse drag.",
+    "別プロジェクトを読み込んだ時にプラグインパラメータタブなどが前のままになっている不具合修正。": "Fixed a bug where the Plugin Parameters tab and other tabs remained as they were when loading another project.",
+    "公開！": "Released!",
+    "当ツールにおいて実際にファイルが更新されるのは保存ボタン（Ctrl\u002BS）を押したタイミングになります。それまではメモリ上を書き換えているだけなので、ファイルには反映されません。": "In this tool, files are actually updated when the Save button (Ctrl\u002BS) is pressed. Until then, only the data in memory is changed, so the changes are not reflected in the files.",
+    "保存時に変更を実行したファイルのバックアップを取る仕様です。初期設定では、当ツールの直下に作成されます。": "When saving, the tool backs up files that have been modified. By default, the backups are created directly under this tool.",
+    "もし、何らかの問題が起きた場合は復旧にご利用ください。": "Please use this to recover your data if any problems occur.",
+    "なお、あまり何度も大きな変更と保存を繰り返すと、バックアップのファイルサイズもどんどん膨れ上がっていきます。ご注意ください。": "Note that if you repeatedly make and save major changes, the backup file size will continue to grow. Please be careful.",
+    "当ツールはツクールＭＺを起動したまま併用することも可能です。ツクールＭＺはファイルの更新を常に検知しているらしく、保存時にはリロードを促すメッセージが表示されます。": "This tool can also be used while RPG Maker MZ is running. RPG Maker MZ apparently constantly detects file updates, so a message prompting you to reload will appear when you save.",
+    "データベース項目の検索や並び替えが可能です。": "You can search and reorder database items.",
+    "上下矢印のボタンやマウスドラッグで入れ替えができます。Ctrl\u002Bカーソルキー上下でも入れ替えができます。": "You can reorder them using the up and down arrow buttons or by dragging them with the mouse. You can also reorder them with Ctrl \u002B the Up/Down cursor keys.",
+    "削除／挿入も可能です。": "You can also delete and insert items.",
+    "削除については、Shiftキーを押しながらの複数削除にも対応しています。": "For deletion, multiple items can also be deleted while holding the Shift key.",
+    "ただし、削除や挿入はわりと影響が大きい処理です。対象項目より下の全項目のＩＤがズレるため、さらにその全てを参照しているマップデータに対して更新がかかります。": "However, deletion and insertion have fairly significant effects. Since the IDs of all items below the target item will shift, all map data that references them will also be updated.",
+    "各項目をダブルクリックすると、使用箇所を検索表示できるので参考にしてください。入替を実行した場合は、ここに表示されている全てのファイル（＋入替先の使用箇所）が更新対象となります。": "Double-click each item to search for and display where it is used. If you reorder an item, all files displayed here (plus usage locations at the destination) will be updated.",
+    "ＤＢに存在しないＩＤへの参照が存在する場合は、赤い警告マークが表示されます。（上の画像だとコモンイベント）": "If there are references to IDs that do not exist in the database, a red warning mark will be displayed. (In the image above, this is a Common Event.)",
+    "詳細は右上の「情報欄を表示」ボタンから確認できます。": "You can check the details using the “Show Information” button in the upper right.",
+    "プラグインパラメータの検索ができます。": "You can search plugin parameters.",
+    "今のところ検索しかできません。": "At present, only searching is supported.",
+    "ちなみにプラグインコマンドの使用場所を調べたい場合は、以下のイベントコマンドで可能です。プラグインコマンドを選択し、プラグイン名などで検索をかけてください。": "By the way, if you want to find where a plugin command is used, you can do so with the event command below. Select Plugin Command and search by the plugin name or other terms.",
+    "イベントコマンドの検索や削除ができます。": "You can search for and delete event commands.",
+    "例えば、不要になったコモンイベントなどを一括で削除できます。": "For example, you can delete unnecessary Common Events and the like all at once.",
+    "ただし、以下のイベントコマンドや「全て」については削除の対象外です。これらは入れ子構造を持ち、削除の影響が大きいためです。": "However, the following event commands and “All” are excluded from deletion. They have nested structures, so deleting them would have significant effects.",
+    "「選択肢の表示」「条件分岐」「ループ」「スキップ」「戦闘の処理」": "“Show Choices,” “Conditional Branch,” “Loop,” “Skip,” and “Battle Processing”",
+    "検索結果に対してダブルクリックすると、そのパラメータを検索欄にセットして再検索することもできます。": "You can also double-click a search result to set its parameter in the search field and search again.",
+    "イベントコマンドは件数が非常に多いので、このタブのみ表示件数の制限（1000件ずつ）をかけています。検索条件なども組み合わせてご活用ください。": "There are a very large number of event commands, so only this tab limits the number of displayed results to 1,000 at a time. Use it together with search conditions as needed.",
+    "文章の表示コマンドの検索＆置換を行います。": "This searches and replaces Show Text commands.",
+    "文章の表示はイベントコマンドでも検索できますが、より詳細な操作が可能です。（削除はイベントコマンド専用の機能です。）": "Show Text can also be searched for using event commands, but more detailed operations are available here. (Deletion is a function exclusive to event commands.)",
+    "※現状は文章の表示だけが対象です。「選択肢の表示」や「文章のスクロール表示」は対象外となっております。": "* At present, only Show Text is supported. “Show Choices” and “Scroll Text” are not supported.",
+    "検索の選択はマップ単位です。「子マップも対象」のチェックを入れた状態で親マップを選択すると、まとめて検索できます。特に一番上のプロジェクトルートを選択すると、プロジェクト全体を検索することも可能です。": "Search selection is performed by map. If you select a parent map with “Include child maps” checked, you can search them all at once. In particular, selecting the project root at the very top allows you to search the entire project.",
+    "当画面では、名前と本文を区別して検索できます。": "On this screen, you can search names and text separately.",
+    "正規表現（参考）": "Regular Expressions (Reference)",
+    "によって詳細な検索を行います。さらに検索結果に対して、一括置換を行うことも可能です。": " are used to perform detailed searches. You can also replace all occurrences in the search results at once.",
+    "※正規表現では\\や[]はエスケープする必要があります。": "* In regular expressions, \\ and [] must be escaped.",
+    "（例：『\\n[1]』→『\\\\n\\[1\\]』）": "(Example: 『\\n[1]』 → 『\\\\n\\[1\\]』)",
+    "※行の削除や追加には対応していません。削除時は空行になります。": "* Deleting or adding lines is not supported. Deleted lines become blank lines.",
+    "※置換後の文字列は正規表現ではなく通常入力してください。": "* Enter the replacement string normally, not as a regular expression.",
+    "サンプルとして『本文が４行の文章』『本文一行が２０字以上』『本文行頭の「を一括削除』『名前\\n[1]を\\n[2]に一括置換』といったものがあります。": "Examples include “text with four lines,” “text with a line of 20 or more characters,” “bulk deletion of 「 at the beginning of text lines,” and “bulk replacement of Name\\n[1] with \\n[2].”",
+    "「現状は４行まで文章を書いていたが、３行以下に統一したい」とか「一行が長すぎる文章は修正したい」とかそういった用途を想定しています。": "The intended uses include cases such as “The text currently has up to four lines, but I want to standardize it to three lines or fewer” and “I want to revise text whose lines are too long.”",
+    "ツクール２０００やＭＶなど旧ツクールから作品データを移行した際に、本文内に名前が含まれたままになっていることがあります。": "When transferring project data from older versions of RPG Maker, such as RPG Maker 2000 or MV, names may remain included in the text.",
+    "そういった場合、名前が格納されているルール（正規表現）を指定することで、本文内の名前を一括で名前欄に移行できます。": "In such cases, you can specify the rule (regular expression) in which names are stored and move the names in the text to the name field all at once.",
+    "正規表現に関してはサンプルを参考にしてください。": "For regular expressions, refer to the examples.",
+    "例えば、『【】で囲まれている部分』『２行目が「で始まっている文章の一行目』などがサンプルにあります。": "Examples include “the part enclosed in 【】” and “the first line of text whose second line begins with 「.”",
+    "あまりないと思いますが、名前と本文に何の区切りもない場合は移行が難しいです。（名前と本文に区切りがなく、一行目から本文が始まるケースがあるなど。）": "This is probably uncommon, but migration is difficult when there is no delimiter between the name and text. (For example, when there is no delimiter and the text begins on the first line.)",
+    "作中で参照されている素材を検索表示します。": "This searches for and displays assets referenced in the project.",
+    "ＤＢやイベントコマンド、プラグインパラメータから参照されているファイルが対象です。ファイルが存在しない場合は赤色で表示されます。": "Files referenced by the database, event commands, or plugin parameters are included. If a file does not exist, it is displayed in red.",
+    "各ファイル毎に置換やファイル名の変更が可能です。": "You can replace each file or change its file name.",
+    "ファイルを差し替えたい場合や、ファイル名を変更したい場合に有効です。": "This is useful when you want to replace a file or change its file name.",
+    "＞RPGツクールMZ\u0026MV目次に戻る": "＞Return to the RPG Maker MZ \u0026 MV Table of Contents"
+  }
+}
