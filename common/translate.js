@@ -2,6 +2,8 @@
 "use strict";
 
 const STORAGE_KEY = "nrp-blog-language";
+const ENGLISH_LOADING_CLASS = "nrp-en-loading";
+const INITIAL_REVEAL_TIMEOUT_MS = 900;
 const TRANSLATION_BASE_URL =
     "https://newrpgproject.github.io/blog-translations/articles/";
 
@@ -18,6 +20,21 @@ let commonTranslationCache = null;
 let cachedTitleElement = null;
 let cachedBodyElement = null;
 let isChangingLanguage = false;
+
+function setInitialEnglishLoading(isLoading) {
+    document.documentElement.classList.toggle(
+        ENGLISH_LOADING_CLASS,
+        isLoading
+    );
+}
+
+function waitForNextPaint() {
+    return new Promise(resolve => {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(resolve);
+        });
+    });
+}
 
 async function loadTranslation(articleId) {
     if (!articleId) {
@@ -622,11 +639,11 @@ function getIndexArticles() {
     );
 }
 
-async function applyIndexLanguage(language) {
+async function applyIndexLanguage(language, options = {}) {
+  const { progressive = false } = options;
   const articles = getIndexArticles();
 
-  const results = await Promise.all(
-    articles.map(async article => {
+  const applyArticle = async article => {
       if (language === "ja") {
         if (originalTitle.has(article.titleElement)) {
           article.titleElement.textContent =
@@ -670,13 +687,30 @@ async function applyIndexLanguage(language) {
         );
         return false;
       }
-    })
-  );
+  };
 
-  return results.some(Boolean);
+  if (language === "ja" || !progressive || articles.length < 2) {
+    const results = await Promise.all(articles.map(applyArticle));
+    return results.some(Boolean);
+  }
+
+  const [firstArticle, ...remainingArticles] = articles;
+  const firstSucceeded = await applyArticle(firstArticle);
+
+  // 初期表示では先頭記事だけを優先する。残りは表示後に置換する。
+  void Promise.all(remainingArticles.map(applyArticle))
+    .catch(error => {
+      console.warn(
+        "[NRP Language] 一覧記事の翻訳に失敗しました。",
+        error
+      );
+    });
+
+  return firstSucceeded;
 }
 
-async function applyLanguage(language) {
+async function applyLanguage(language, options = {}) {
+    const { progressiveIndex = false } = options;
     const articleId = getArticleId();
     applyLanguageStyle(language);
 
@@ -716,7 +750,7 @@ async function applyLanguage(language) {
     // 英訳する場合
     //---------------------------------------------
     // 共通部分は、記事翻訳の有無に関係なく先に適用する
-    const commonSucceeded = await applyCommonLanguage("en");
+    const commonPromise = applyCommonLanguage("en");
 
     let articleSucceeded = false;
 
@@ -772,8 +806,12 @@ async function applyLanguage(language) {
             }
         }
     } else {
-        articleSucceeded = await applyIndexLanguage("en");
+        articleSucceeded = await applyIndexLanguage("en", {
+            progressive: progressiveIndex
+        });
     }
+
+    const commonSucceeded = await commonPromise;
 
     document.documentElement.lang = "en";
     updateButtons("en");
@@ -838,12 +876,24 @@ function getInitialLanguage() {
 }
 
 async function initialize() {
+    let revealTimer = null;
     try {
         const language =
             getInitialLanguage();
 
+        const shouldHideForEnglish = language === "en";
+        if (shouldHideForEnglish) {
+            setInitialEnglishLoading(true);
+            revealTimer = window.setTimeout(() => {
+                // 回線不調時に白画面のまま固定されることを防ぐ。
+                setInitialEnglishLoading(false);
+            }, INITIAL_REVEAL_TIMEOUT_MS);
+        }
+
         const succeeded =
-            await applyLanguage(language);
+            await applyLanguage(language, {
+                progressiveIndex: shouldHideForEnglish
+            });
 
         if (
             !succeeded &&
@@ -856,6 +906,14 @@ async function initialize() {
             "[NRP Language] 初期化に失敗しました。",
             error
         );
+    } finally {
+        if (revealTimer !== null) {
+            window.clearTimeout(revealTimer);
+        }
+
+        // 共通部分と先頭記事のDOM更新をブラウザが描画できる状態で表示する。
+        await waitForNextPaint();
+        setInitialEnglishLoading(false);
     }
 }
 
