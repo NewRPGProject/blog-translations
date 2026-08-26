@@ -584,22 +584,16 @@ async function applyCommonLanguage(language) {
 function updateButtons(language) {
     document
         .querySelectorAll(
-            ".nrp-language-switch button"
+            ".nrp-language-switch button, " +
+            ".header-language-switch button"
         )
         .forEach(button => {
-            const isEnglish =
-                button.textContent.trim() ===
-                "English";
-
-            const selected =
-                language === "en"
-                    ? isEnglish
-                    : !isEnglish;
+            const selected = button.dataset.language === language;
 
             button.disabled = selected;
             button.setAttribute(
-                "aria-pressed",
-                selected ? "true" : "false"
+            "aria-pressed",
+            selected ? "true" : "false"
             );
         });
 }
