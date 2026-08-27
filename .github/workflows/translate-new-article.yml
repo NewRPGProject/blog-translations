@@ -17,6 +17,12 @@ concurrency:
   group: blog-auto-translation
   cancel-in-progress: false
 
+defaults:
+  run:
+    # The Windows runner service may run under an account with script execution
+    # disabled. Limit Bypass to the temporary script generated for this job.
+    shell: powershell -NoProfile -ExecutionPolicy Bypass -File {0}
+
 jobs:
   translate:
     runs-on: [self-hosted, windows, x64]
