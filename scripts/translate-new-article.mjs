@@ -10,14 +10,19 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
-const EXTRACTION_VERSION = 2;
+const EXTRACTION_VERSION = 3;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
-This is a correction retry because the previous result left Japanese characters untranslated.
+This is a correction retry because the previous result was incomplete or included an HTML anchor tag.
 Translate every Japanese word and character in source into natural English, including isolated terms embedded in an otherwise English sentence.
 Do not copy Japanese from source or context into translation. Keep only URLs, file names, code, identifiers, escape characters, and version numbers unchanged.
+Never output HTML tags such as <a> or </a>. Context is for understanding only, never for copying.
 Return only the replacement text for each supplied source item.
+`.trim();
+const LINK_CONTEXT_INSTRUCTION = `
+In context, [[link: ...]] represents the text inside an original HTML link. It is context only: never output the markers, HTML tags, or the linked text unless that text is also in source.
+When source immediately follows a link marker, translate it as a grammatical continuation of that link text. Include an ordinary ASCII space at the boundary when English requires one, and never repeat the link text.
 `.trim();
 const BROWSER_HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
@@ -36,6 +41,7 @@ const LINE_BOUNDARY_TAGS = new Set([
     "li", "p", "td", "th", "figcaption", "center", "table", "ul", "ol"
 ]);
 const STRUCTURAL_PUNCTUATION_TRANSLATIONS = new Map([
+    ["&", "&"],
     ["（", " ("],
     ["）", ") "]
 ]);
@@ -247,17 +253,11 @@ function currentType(stack) {
 }
 
 function renderContext(segments) {
-    let result = "";
-    let inLink = false;
-    for (const segment of segments) {
-        if (segment.link !== inLink) {
-            result += segment.link ? "<a>" : "</a>";
-            inLink = segment.link;
-        }
-        result += segment.raw;
-    }
-    if (inLink) result += "</a>";
-    return result.replace(/\s+/gu, " ").trim();
+    return segments
+        .map(segment => segment.link ? `[[link: ${segment.raw}]]` : segment.raw)
+        .join("")
+        .replace(/\s+/gu, " ")
+        .trim();
 }
 
 function tokenizeHtml(html) {
@@ -468,6 +468,7 @@ function outputSchema() {
 async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     const instructions = [
         rules,
+        LINK_CONTEXT_INSTRUCTION,
         retry ? RETRY_TRANSLATION_INSTRUCTION : null,
         glossary ? `Required glossary:\n${glossary}` : null
     ].filter(Boolean).join("\n\n");
@@ -536,7 +537,7 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
                 retryBlocks.push({ block, initialTranslation: null });
                 continue;
             }
-            if (JAPANESE_CHARACTERS.test(translation)) {
+            if (JAPANESE_CHARACTERS.test(translation) || /<\/?a\b/iu.test(translation)) {
                 retryBlocks.push({ block, initialTranslation: translation });
                 continue;
             }
@@ -564,7 +565,8 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
             for (const { block, initialTranslation } of retryBlocks) {
                 const translation = retryResult.translations.get(block.id);
                 if (typeof translation !== "string" || !translation.trim()
-                    || JAPANESE_CHARACTERS.test(translation)) {
+                    || JAPANESE_CHARACTERS.test(translation)
+                    || /<\/?a\b/iu.test(translation)) {
                     fail(`翻訳漏れまたは未返却を検出しました: ${block.id} (${block.source} → ${initialTranslation || "翻訳なし"} → ${translation || "翻訳なし"})`);
                 }
                 block.translation = translation;
