@@ -530,6 +530,40 @@ function sourceHashFor(blocks) {
     return hash(blocks.map(block => `${block.type}:${block.sourceHash}:${contextHash(block)}`).join("\n"));
 }
 
+function sameContext(left, right) {
+    if (left.context && right.context) return left.context === right.context;
+    return Boolean(left.contextHash && right.contextHash && left.contextHash === right.contextHash);
+}
+
+function repairLinkBoundarySpaces(blocks) {
+    let repaired = false;
+    for (let index = 1; index < blocks.length; index++) {
+        const previous = blocks[index - 1];
+        const current = blocks[index];
+        if (!sameContext(previous, current)
+            || (previous.type !== "link" && current.type !== "link")
+            || !previous.translation || !current.translation
+            || /\s$/u.test(previous.translation)
+            || /^\s/u.test(current.translation)
+            || !/[A-Za-z0-9)\]}]$/u.test(previous.translation)
+            || !/^[A-Za-z0-9([{]/u.test(current.translation)) {
+            continue;
+        }
+        previous.translation += " ";
+        repaired = true;
+    }
+    return repaired;
+}
+
+function synchronizeTextsFromBlocks(article) {
+    article.texts ||= {};
+    for (const block of article.blocks || []) {
+        if (block.type !== "title" && block.source && block.translation) {
+            article.texts[block.source] = block.translation;
+        }
+    }
+}
+
 function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
     const titleBlock = blocks.find(block => block.type === "title");
     const texts = Object.fromEntries(blocks
@@ -614,6 +648,12 @@ async function main() {
         };
         if ((existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash) {
             console.log(`本文に差分はありません: articles/${target.articleId}.json`);
+            if (!dryRun && repairLinkBoundarySpaces(existingArticle?.blocks || [])) {
+                synchronizeTextsFromBlocks(existingArticle);
+                await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
+                translatedArticleCount++;
+                console.log(`リンク境界の空白を修正しました: articles/${target.articleId}.json`);
+            }
             if (!dryRun) rememberArticleState();
             continue;
         }
@@ -639,6 +679,8 @@ async function main() {
             usage.reasoning += articleUsage.reasoning;
             usage.total += articleUsage.total;
         }
+
+        repairLinkBoundarySpaces(blocks);
 
         const output = makeOutput({
             articleId: target.articleId,
