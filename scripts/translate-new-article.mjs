@@ -681,7 +681,10 @@ function normalizeOpenParenthesisBoundaries(blocks) {
     let repaired = false;
     for (const block of blocks) {
         if (!block.source?.endsWith("（") || !block.translation) continue;
-        const corrected = block.translation.replace(/\s*[（(“"]+\s*$/u, " (");
+        // The opening parenthesis belongs to this source block, not to the
+        // following link.  Do not depend on the model having emitted it.
+        const body = block.translation.replace(/\s*[（(“"]+\s*$/u, "").trimEnd();
+        const corrected = `${body} (`;
         if (corrected !== block.translation) {
             block.translation = corrected;
             repaired = true;
