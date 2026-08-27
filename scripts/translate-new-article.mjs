@@ -12,6 +12,12 @@ const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
+const RETRY_TRANSLATION_INSTRUCTION = `
+This is a correction retry because the previous result left Japanese characters untranslated.
+Translate every Japanese word and character in source into natural English, including isolated terms embedded in an otherwise English sentence.
+Do not copy Japanese from source or context into translation. Keep only URLs, file names, code, identifiers, escape characters, and version numbers unchanged.
+Return only the replacement text for each supplied source item.
+`.trim();
 const BROWSER_HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -446,9 +452,10 @@ function outputSchema() {
     };
 }
 
-async function translateChunk(blocks, apiKey, rules, glossary) {
+async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     const instructions = [
         rules,
+        retry ? RETRY_TRANSLATION_INSTRUCTION : null,
         glossary ? `Required glossary:\n${glossary}` : null
     ].filter(Boolean).join("\n\n");
     const input = JSON.stringify(blocks.map(block => ({
@@ -509,13 +516,16 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
     const usage = { input: 0, output: 0, reasoning: 0, total: 0 };
     for (const chunk of createChunks(blocks)) {
         const result = await translateChunk(chunk, apiKey, rules, glossary);
+        const retryBlocks = [];
         for (const block of chunk) {
             const translation = result.translations.get(block.id);
             if (typeof translation !== "string" || !translation.trim()) {
-                fail(`API応答に ${block.id} の翻訳がありません。`);
+                retryBlocks.push({ block, initialTranslation: null });
+                continue;
             }
             if (JAPANESE_CHARACTERS.test(translation)) {
-                fail(`翻訳漏れを検出しました: ${block.id} (${block.source} → ${translation})`);
+                retryBlocks.push({ block, initialTranslation: translation });
+                continue;
             }
             block.translation = translation;
         }
@@ -523,6 +533,30 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
         usage.output += result.usage.output_tokens || 0;
         usage.reasoning += result.usage.output_tokens_details?.reasoning_tokens || 0;
         usage.total += result.usage.total_tokens || 0;
+
+        if (retryBlocks.length > 0) {
+            console.log(`翻訳漏れまたは未返却を検出したため、${retryBlocks.length}ブロックを再翻訳します。`);
+            const retryResult = await translateChunk(
+                retryBlocks.map(item => item.block),
+                apiKey,
+                rules,
+                glossary,
+                true
+            );
+            usage.input += retryResult.usage.input_tokens || 0;
+            usage.output += retryResult.usage.output_tokens || 0;
+            usage.reasoning += retryResult.usage.output_tokens_details?.reasoning_tokens || 0;
+            usage.total += retryResult.usage.total_tokens || 0;
+
+            for (const { block, initialTranslation } of retryBlocks) {
+                const translation = retryResult.translations.get(block.id);
+                if (typeof translation !== "string" || !translation.trim()
+                    || JAPANESE_CHARACTERS.test(translation)) {
+                    fail(`翻訳漏れまたは未返却を検出しました: ${block.id} (${block.source} → ${initialTranslation || "翻訳なし"} → ${translation || "翻訳なし"})`);
+                }
+                block.translation = translation;
+            }
+        }
     }
     return usage;
 }
