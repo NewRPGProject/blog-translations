@@ -43,12 +43,12 @@ jobs:
           }
           $changes = git status --porcelain
           if ($changes) {
-            Write-Host "コミット対象:"
+            Write-Host "Commit candidates:"
             $changes | ForEach-Object { Write-Host $_ }
             git commit -m "Update blog translations"
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
             git push
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           } else {
-            Write-Host "コミット対象の変更はありません。"
+            Write-Host "No changes to commit."
           }
