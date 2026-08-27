@@ -249,6 +249,53 @@ function renderContext(segments) {
     return result.replace(/\s+/gu, " ").trim();
 }
 
+function tokenizeHtml(html) {
+    const tokens = [];
+    let textStart = 0;
+    let index = 0;
+    while (index < html.length) {
+        if (html[index] !== "<") {
+            index++;
+            continue;
+        }
+
+        if (html.startsWith("<!--", index)) {
+            const commentEnd = html.indexOf("-->", index + 4);
+            if (commentEnd < 0) break;
+            if (textStart < index) tokens.push(html.slice(textStart, index));
+            tokens.push(html.slice(index, commentEnd + 3));
+            index = commentEnd + 3;
+            textStart = index;
+            continue;
+        }
+
+        let quote = null;
+        let tagEnd = -1;
+        for (let cursor = index + 1; cursor < html.length; cursor++) {
+            const character = html[cursor];
+            if (quote) {
+                if (character === quote) quote = null;
+            } else if (character === "\"" || character === "'") {
+                quote = character;
+            } else if (character === ">") {
+                tagEnd = cursor;
+                break;
+            }
+        }
+        if (tagEnd < 0) {
+            index++;
+            continue;
+        }
+
+        if (textStart < index) tokens.push(html.slice(textStart, index));
+        tokens.push(html.slice(index, tagEnd + 1));
+        index = tagEnd + 1;
+        textStart = index;
+    }
+    if (textStart < html.length) tokens.push(html.slice(textStart));
+    return tokens;
+}
+
 function parseBlocks(articleHtml, title) {
     const blocks = [{
         id: "title",
@@ -270,7 +317,7 @@ function parseBlocks(articleHtml, title) {
         }
     };
 
-    const tokens = articleHtml.match(/<!--[\s\S]*?-->|<[^>]*>|[^<]+/gu) || [];
+    const tokens = tokenizeHtml(articleHtml);
     for (const token of tokens) {
         if (!token.startsWith("<")) {
             if (ignoredDepth > 0) continue;
