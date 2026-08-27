@@ -10,6 +10,7 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
+const EXTRACTION_VERSION = 2;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
@@ -33,6 +34,10 @@ const HEADING_TAGS = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
 const LINE_BOUNDARY_TAGS = new Set([
     "br", "hr", "h1", "h2", "h3", "h4", "h5", "h6",
     "li", "p", "td", "th", "figcaption", "center", "table", "ul", "ol"
+]);
+const STRUCTURAL_PUNCTUATION_TRANSLATIONS = new Map([
+    ["（", " ("],
+    ["）", ") "]
 ]);
 
 function fail(message) {
@@ -368,9 +373,15 @@ function parseBlocks(articleHtml, title) {
 
     for (const segments of lines) {
         const context = renderContext(segments);
-        for (const segment of segments) {
-            if (!segment.source || !JAPANESE_CHARACTERS.test(segment.source)) continue;
-            if (segment.source.length === 1 && /^[\p{P}\p{S}]$/u.test(segment.source)) continue;
+        for (let index = 0; index < segments.length; index++) {
+            const segment = segments[index];
+            const fixedTranslation = STRUCTURAL_PUNCTUATION_TRANSLATIONS.get(segment.source)
+                || (!JAPANESE_CHARACTERS.test(segment.source) && segment.type === "link"
+                    ? segment.source
+                    : null);
+            if (!segment.source || (!JAPANESE_CHARACTERS.test(segment.source) && !fixedTranslation)) continue;
+            if (segment.source.length === 1 && /^[\p{P}\p{S}]$/u.test(segment.source)
+                && !fixedTranslation) continue;
             const count = (counters.get(segment.type) || 0) + 1;
             counters.set(segment.type, count);
             blocks.push({
@@ -378,7 +389,9 @@ function parseBlocks(articleHtml, title) {
                 type: segment.type,
                 source: segment.source,
                 sourceHash: hash(segment.source),
-                context
+                context,
+                fixedTranslation,
+                linkAdjacent: segment.link || segments[index - 1]?.link || segments[index + 1]?.link
             });
         }
     }
@@ -590,15 +603,20 @@ function buildPreviousTranslations(article) {
     return { exact, bySource };
 }
 
-function splitReusableBlocks(blocks, existingArticle) {
+function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = false) {
     const previous = buildPreviousTranslations(existingArticle);
     const pending = [];
     for (const block of blocks) {
+        if (block.fixedTranslation) {
+            block.translation = block.fixedTranslation;
+            continue;
+        }
         const exactKey = `${block.type}\u0000${block.sourceHash}\u0000${contextHash(block)}`;
         const translation = previous.exact.get(exactKey)
             || (block.type === "title" ? existingArticle?.title : null)
             || previous.bySource.get(block.source);
-        if (translation && !JAPANESE_CHARACTERS.test(translation)) {
+        const refreshThisLinkContext = retranslateLinkContexts && block.linkAdjacent;
+        if (!refreshThisLinkContext && translation && !JAPANESE_CHARACTERS.test(translation)) {
             block.translation = translation;
         } else {
             pending.push(block);
@@ -657,6 +675,19 @@ function preserveFullWidthAngleBrackets(blocks) {
     return repaired;
 }
 
+function normalizeOpenParenthesisBoundaries(blocks) {
+    let repaired = false;
+    for (const block of blocks) {
+        if (!block.source?.endsWith("（") || !block.translation) continue;
+        const corrected = block.translation.replace(/\s*[（(“"]+\s*$/u, " (");
+        if (corrected !== block.translation) {
+            block.translation = corrected;
+            repaired = true;
+        }
+    }
+    return repaired;
+}
+
 function synchronizeTextsFromBlocks(article) {
     article.texts ||= {};
     for (const block of article.blocks || []) {
@@ -674,11 +705,12 @@ function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
     return {
         articleId,
         sourceUrl: articleUrl,
+        extractionVersion: EXTRACTION_VERSION,
         sourceUpdatedAt: lastModified || null,
         sourceHash: sourceHashFor(blocks),
         translatedAt: new Date().toISOString(),
         title: titleBlock.translation,
-        blocks: blocks.map(({ context, ...block }) => ({
+        blocks: blocks.map(({ context, fixedTranslation, linkAdjacent, ...block }) => ({
             ...block,
             contextHash: contextHash({ context })
         })),
@@ -753,7 +785,8 @@ async function main() {
             const existingBlocks = existingArticle?.blocks || [];
             const repairedLinkSpaces = !dryRun && repairLinkBoundarySpaces(existingBlocks);
             const repairedAngleBrackets = !dryRun && preserveFullWidthAngleBrackets(existingBlocks);
-            if (repairedLinkSpaces || repairedAngleBrackets) {
+            const repairedParentheses = !dryRun && normalizeOpenParenthesisBoundaries(existingBlocks);
+            if (repairedLinkSpaces || repairedAngleBrackets || repairedParentheses) {
                 synchronizeTextsFromBlocks(existingArticle);
                 await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
                 translatedArticleCount++;
@@ -763,7 +796,11 @@ async function main() {
             continue;
         }
 
-        const pending = splitReusableBlocks(blocks, existingArticle);
+        const pending = splitReusableBlocks(
+            blocks,
+            existingArticle,
+            existingArticle?.extractionVersion !== EXTRACTION_VERSION
+        );
         console.log(`翻訳対象: ${blocks.length}ブロック（変更・追加: ${pending.length}ブロック）`);
         if (dryRun) continue;
 
@@ -787,6 +824,7 @@ async function main() {
 
         repairLinkBoundarySpaces(blocks);
         preserveFullWidthAngleBrackets(blocks);
+        normalizeOpenParenthesisBoundaries(blocks);
 
         const output = makeOutput({
             articleId: target.articleId,
