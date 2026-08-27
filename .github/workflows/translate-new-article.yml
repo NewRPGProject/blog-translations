@@ -1,10 +1,10 @@
-name: Translate new blog article
+name: Update blog translations
 
 on:
   workflow_dispatch:
     inputs:
       article_url:
-        description: "翻訳する記事URL（空欄ならRSSの最新記事）"
+        description: "翻訳または更新確認する記事URL（空欄ならサイトマップを監視）"
         required: false
         type: string
   schedule:
@@ -37,6 +37,6 @@ jobs:
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles/
-          git diff --cached --quiet || git commit -m "Add translation for new article"
+          git add articles/ .translation-monitor.json
+          git diff --cached --quiet || git commit -m "Update blog translations"
           git push
