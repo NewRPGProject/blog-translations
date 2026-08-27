@@ -1,0 +1,2971 @@
+{
+  "articleId": "499059518",
+  "sourceUrl": "https://newrpg.seesaa.net/article/499059518.html",
+  "extractionVersion": 4,
+  "sourceUpdatedAt": "2026-08-27T22:28:59+09:00",
+  "sourceHash": "f638ceeede527722429b0463f8dc5af57bd7113461d67d68be1de40751b30dd6",
+  "translatedAt": "2026-08-27T15:15:05.947Z",
+  "title": "List-Based Skill Learning System [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "リスト形式のスキル習得システム【RPGツクールMZプラグイン】",
+      "sourceHash": "55c897e98f5a04a4f30e2a53d41a369fa8776801d6d44ff08b444689b5eefb30",
+      "translation": "List-Based Skill Learning System [RPG Maker MZ Plugin]",
+      "contextHash": "55c897e98f5a04a4f30e2a53d41a369fa8776801d6d44ff08b444689b5eefb30"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "リスト形式のスキル習得システムを実装します。",
+      "sourceHash": "1b95ffee1f7a3a4c922f3f776d1aa3d8b53df7083993e3dc2f3e0e6dccc52ad8",
+      "translation": "Implements a list-based skill learning system.",
+      "contextHash": "1b95ffee1f7a3a4c922f3f776d1aa3d8b53df7083993e3dc2f3e0e6dccc52ad8"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "獲得したスキルポイントを消費し、表から覚えたいスキルを選択するシンプルな仕組みです。",
+      "sourceHash": "2eed6e6801a2223c02009f5b1aff2a408a5a4512b5a15cfa4d3f4563f3d69620",
+      "translation": "This is a simple system in which you spend acquired skill points to select the skills you want to learn from a list.",
+      "contextHash": "2eed6e6801a2223c02009f5b1aff2a408a5a4512b5a15cfa4d3f4563f3d69620"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "スキルポイントは敵から入手したり、レベルアップ時に入手したりといった方法を選択できます。",
+      "sourceHash": "81ae7343529d789eacd6cebbdb8684f17ac1c4a232cfb6e0d458541e4586ac73",
+      "translation": "You can choose how to obtain skill points, such as by defeating enemies or leveling up.",
+      "contextHash": "81ae7343529d789eacd6cebbdb8684f17ac1c4a232cfb6e0d458541e4586ac73"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "あまり複雑な機能はありませんが、工夫次第では擬似的な",
+      "sourceHash": "38de198779cbe98de9cc8cc69f6fc888dba3606331f215389d7e87bfaccb95a2",
+      "translation": "It does not have many complex features, but with some ingenuity, you can create a pseudo ",
+      "contextHash": "05e59d50655dc7f83d67951a70036d3da4a5625bb755926b1c47f5efb8ffbca1"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "スキルツリー",
+      "sourceHash": "b58ed38c86a38647bb235a35e589971e2fff6a14428cca6362152356e651035b",
+      "translation": "skill tree ",
+      "contextHash": "05e59d50655dc7f83d67951a70036d3da4a5625bb755926b1c47f5efb8ffbca1"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "なども作成できます。",
+      "sourceHash": "52b963e463f0150bf03474d68be17abbf4d9088473903fc034a121a74ae60393",
+      "translation": "as well.",
+      "contextHash": "05e59d50655dc7f83d67951a70036d3da4a5625bb755926b1c47f5efb8ffbca1"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "予約機能にも対応しました。（2024/07/10）",
+      "sourceHash": "ae3d9ff8232fee3ee7ce872d7481137dd981ac9d9d0baa06b6ca1c381d0a7077",
+      "translation": "Reservation functionality is now supported. (2024/07/10)",
+      "contextHash": "ae3d9ff8232fee3ee7ce872d7481137dd981ac9d9d0baa06b6ca1c381d0a7077"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "付属のプラグインを導入することで、スキルポイントが足りない場合も習得するスキルを予約することができます。",
+      "sourceHash": "5ac0e4e08c5a949173ac3716cc9704418b1c37ca5ff3f8e46028468fd95956dd",
+      "translation": "By installing the included plugin, you can reserve skills to learn even when you do not have enough skill points.",
+      "contextHash": "5ac0e4e08c5a949173ac3716cc9704418b1c37ca5ff3f8e46028468fd95956dd"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "15428d0ed8526e93d5edfc0f9535cdc64ddc3ccdd0e661deec8b8573c3bc8c31"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "fdb9a97b95d29cef1ea718c51e28ea34a499545120134630cd3514c2eb247a73"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "スキルリストの作成",
+      "sourceHash": "4cfa28d160fee341c9beef0cf18a1cce37d3d0c91d612cc6fe4991aea55cefdd",
+      "translation": "Creating a Skill List",
+      "contextHash": "b04e2c2339ed76607e4f4ac2ac2535e49bbde34b200e8e21d3b96a2c46d878a7"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "スキルポイントの設定",
+      "sourceHash": "4baf483c3a3c48a3c3875891937faf4efa49b4761033593e574f74c8f81c6d2a",
+      "translation": "Setting Skill Points",
+      "contextHash": "90e9423290279dab74df2ba4cf793b9f148f3971019cbf4914c85bfca9b40a0e"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "敵キャラのメモ欄",
+      "sourceHash": "ef0dcbada4286d0b2ed9d323713ff3a5d7c7e1a8716fe21ff5289ac389bfda7a",
+      "translation": "Enemy Note Field",
+      "contextHash": "b9926e611c123da0fedc8e3393b7b1ca43b6ee49f3c3ec2ea12091ef566717ed"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "アイテムのメモ欄",
+      "sourceHash": "f20e72732654bf341a0b8e779fc8fde5e5ee93551394457421fdf511f1cd1691",
+      "translation": "Item Note Field",
+      "contextHash": "5f490e000eaace249e9a727b8e767dcf7251e1189eaa9525839392b311be2f68"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "スキルツリー",
+      "sourceHash": "b58ed38c86a38647bb235a35e589971e2fff6a14428cca6362152356e651035b",
+      "translation": "Skill Tree",
+      "contextHash": "4075b6e336a8c1daa1595ea5594ffe09e19997d0c2cab8124e8bf3c3e5675a33"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "おすすめプラグイン",
+      "sourceHash": "7e5e44bcb355ff4c18fcd58c3c900fd09939ee2abffd2c7e9bcf7df4def83783",
+      "translation": "Recommended Plugins",
+      "contextHash": "af6d77ce56ad7ccb6a19a0126f68656e5f0e4dd9319420673ec134a13f40ffa3"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "d389ca0d5a0cb9646932c0ba79e7f64ecd863d72c8b3d4e51f81139fa56580b3"
+    },
+    {
+      "id": "link-011",
+      "type": "link",
+      "source": "シーン開始（SceneStart）",
+      "sourceHash": "4539efe66f5c69ec9e60673c778ec5610f3cd986fb7ddfd64d55d49b7618a332",
+      "translation": "Scene Start (SceneStart)",
+      "contextHash": "fb11a9ca110622c6ccccda3fcdf26db48ce6a79b973823c9f41407a6f04ab254"
+    },
+    {
+      "id": "link-012",
+      "type": "link",
+      "source": "スキルポイントの増減（ChangeSkillPoint）",
+      "sourceHash": "939e79d8f4a3b8602281d0d70fe6a173d227130928b1c98a32c12d22f931e9dd",
+      "translation": "Changing Skill Points (ChangeSkillPoint)",
+      "contextHash": "2ac314dd41f4b0cbb825433794223c0636ae46447b187d12a28dff01b7617fa6"
+    },
+    {
+      "id": "link-013",
+      "type": "link",
+      "source": "スキルリセット（ResetSkill）",
+      "sourceHash": "0bf9f7dbe7b56adcb703cdaa88e4b1c63c1ffc000271ae9aa41f36c3bb71c697",
+      "translation": "Resetting Skills (ResetSkill)",
+      "contextHash": "fa112ecb89098cbc6b15986688750f035c4f80cff088b2845659aa825737516d"
+    },
+    {
+      "id": "link-014",
+      "type": "link",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "d3598bdd7f31e4e66a780a31a6688ad4aa1f3e51ca09887a586fb515d5d33f00"
+    },
+    {
+      "id": "link-015",
+      "type": "link",
+      "source": "スキルセットのリスト（SkillSetList）",
+      "sourceHash": "aa0fb3a0ddd2dc65eca7cf574d38948e67f3e5bfc0f7a020847add3bbb731ba9",
+      "translation": "Skill Set List (SkillSetList)",
+      "contextHash": "1fd088d8bcd23e58b01e64d861d06ba384a10ab91f2121638f73c79b8c0ed82a"
+    },
+    {
+      "id": "link-016",
+      "type": "link",
+      "source": "＜スキルポイント＞（<SkillPoint>）",
+      "sourceHash": "eaf165040731afe3a7d55bf8a97a4654edae3d8b789f7cb94faeb1da2e6163af",
+      "translation": "<Skill Points> (<SkillPoint>)",
+      "contextHash": "f309a1d8e63e8bae93d1d0d09c3829d1ffb42fac1be6efeb9c3b9304a0eb739e"
+    },
+    {
+      "id": "link-017",
+      "type": "link",
+      "source": "スキルポイントの表示名（SkillPointName）",
+      "sourceHash": "2266cb7570a5efc947083c979390920f640b52eb49653b82351ea6854e217c0e",
+      "translation": "Skill Point Display Name (SkillPointName)",
+      "contextHash": "0e8b0ab0229757c4e6c61b1750bd612abd61513066519b8fc4ffda16f1685f03"
+    },
+    {
+      "id": "link-018",
+      "type": "link",
+      "source": "スキルポイントの最大値（MaxSkillPoint）",
+      "sourceHash": "3099604679b96fdb0cde3d0215f5d83ae9c61eef0a8630274115b656760aeb01",
+      "translation": "Maximum Skill Points (MaxSkillPoint)",
+      "contextHash": "6a7525ae3afe0815693c29f61763ec37d969d6bfc1dbec6c1027cd7a0250302d"
+    },
+    {
+      "id": "link-019",
+      "type": "link",
+      "source": "スキルポイントの保有方法（SkillPointType）",
+      "sourceHash": "072a4970584d81b33cf4a05c0b7fcdf9d0bba5e5efa7321f9e18a1b587eee224",
+      "translation": "Skill Point Acquisition Method (SkillPointType)",
+      "contextHash": "5955cbc68f2b431a145fee7e44e5cfe4e73677c2e14801685735d19c202d9636"
+    },
+    {
+      "id": "link-020",
+      "type": "link",
+      "source": "スキルポイントの変数（SkillPointVariable）",
+      "sourceHash": "6231fd30299da620aa61e6d4789496e20936631cdcacc717618c0588332172d8",
+      "translation": "Skill Point Variable (SkillPointVariable)",
+      "contextHash": "c8b0b7fe0f997eb27eb35b81c4f29b59fee7c247235305a7dca59a3c1f56b7dc"
+    },
+    {
+      "id": "link-021",
+      "type": "link",
+      "source": "スキルポイント獲得文（SkillPointMessage）",
+      "sourceHash": "a938b5b80f96d51db95ebe51c62a169a625d424daf317aa5ae35fcc7b366481b",
+      "translation": "Skill Point Acquisition Message (SkillPointMessage)",
+      "contextHash": "4e896d723e3f3dd70ffde7332b785aef52d8297692f1b0fc87f6b76c61d6fd24"
+    },
+    {
+      "id": "link-022",
+      "type": "link",
+      "source": "敵スキルポイントの既定値（DefaultEnemySkillPoint）",
+      "sourceHash": "b9ff1d8780df9d2ca9114963a3049ff00bb734ca05b20564c194fac2db1e6d02",
+      "translation": "Default Enemy Skill Points (DefaultEnemySkillPoint)",
+      "contextHash": "0a3a4aaa59f080d636b18ef907cda999278dc7167c5cead54fcdbdde852ee9da"
+    },
+    {
+      "id": "link-023",
+      "type": "link",
+      "source": "ＳＰ有効化スイッチ（SkillPointSwitch）",
+      "sourceHash": "a96a021ee7567e1767d233ea9556b814b030447a1b8e19f202b7fac5c5c34bff",
+      "translation": "SP Activation Switch (SkillPointSwitch)",
+      "contextHash": "788e1186d9463d8aa99594327f5e4b19ea20f6b74abd5260e9dc465b28edb940"
+    },
+    {
+      "id": "link-024",
+      "type": "link",
+      "source": "控えの獲得率（BenchSkillPointRate）",
+      "sourceHash": "77f2d763f62a2accc0e1d54584f2b6215036ee22ea8f56cda08a6fd6a0647e4f",
+      "translation": "Bench Acquisition Rate (BenchSkillPointRate)",
+      "contextHash": "4db82b00ec34de4d12cd296af28248c41799d9c3cf9555a0a9afd8947e72f5c2"
+    },
+    {
+      "id": "link-025",
+      "type": "link",
+      "source": "レベルアップ時のSP（LevelUpSkillPoint）",
+      "sourceHash": "94089078af4e2a1c2ccdec01e247198a6291caf69d7f948bd7dae41af6486ab0",
+      "translation": "SP on Level Up (LevelUpSkillPoint)",
+      "contextHash": "dcfdb622bea45f70397e82fb831f625d7c53db91c864568c8cd4666ffd94c9bc"
+    },
+    {
+      "id": "link-026",
+      "type": "link",
+      "source": "＜スキルリスト関連＞（<SkillListWindow>）",
+      "sourceHash": "969cb68fdfa356f7c8b9d0bc941ba4e532bc98eb14a7247e578f9942281cf2f7",
+      "translation": "<Skill List Settings> (<SkillListWindow>)",
+      "contextHash": "7358cc486594eafa1de89ec10d406bd412a545af0267460d30e8df96be5cba1c"
+    },
+    {
+      "id": "link-027",
+      "type": "link",
+      "source": "習得済スキルの表示方法（LearnedSkillDisplayStyle）",
+      "sourceHash": "16da7140c7e733d0e8185f64bfadc805b4f066446146fdcce2b5ca5254beaa52",
+      "translation": "Learned Skill Display Style (LearnedSkillDisplayStyle)",
+      "contextHash": "4d25cdb9b32fcc98a04e876e53dbfbe9b594250830d949017215e396b0d7500b"
+    },
+    {
+      "id": "link-028",
+      "type": "link",
+      "source": "アイコンを表示（UseIcon）",
+      "sourceHash": "0a9e00458fc0dcbf74be4acd852d76b5ca9aa0193e0c76223fe98b0c45102c84",
+      "translation": "Display Icons (UseIcon)",
+      "contextHash": "15e0477d8ee8d08884865047af77b27e2ad7ec5d379c6ac5abe65b8a6cb2b16b"
+    },
+    {
+      "id": "link-029",
+      "type": "link",
+      "source": "スキルポイントの色（SkillPointColor）",
+      "sourceHash": "74e920b74e249b90d5cca98da0ee6e98fb613659347571205a816409999a1435",
+      "translation": "Skill Point Color (SkillPointColor)",
+      "contextHash": "2ba3c8e8a743536ea3a3d2ac2ef0b9cfc78ec4febf00a18850e4b342687aca65"
+    },
+    {
+      "id": "link-030",
+      "type": "link",
+      "source": "習得済の表示文（LearnedText）",
+      "sourceHash": "6e9f24b72ba691468b801b9b534ff4075451e87167befee3d252e54a6060d071",
+      "translation": "Learned Text (LearnedText)",
+      "contextHash": "921f553e8cd8d02512c8ca630ba305552aae22f4f2d72eadf79a48dc02709864"
+    },
+    {
+      "id": "link-031",
+      "type": "link",
+      "source": "習得済の色（LearnedTextColor）",
+      "sourceHash": "7a81014563a71ef6a33f2f0eaa08870d0e11bc04df640ec3116491122ef8501a",
+      "translation": "Learned Text Color (LearnedTextColor)",
+      "contextHash": "68e8415ac9954d787e4394bfe460f52c8dd7968e920f494b7cc8b2e9ea3b3929"
+    },
+    {
+      "id": "link-032",
+      "type": "link",
+      "source": "隠しスキルを表示（ShowHiddenSkills）",
+      "sourceHash": "55d5a1f5e7315539a2fb74a56bbb77e2310fa65b33a3f4107e530a82a3c78d26",
+      "translation": "Show Hidden Skills (ShowHiddenSkills)",
+      "contextHash": "e029be2247a272b68b55ea01070968fb7b1a12cdf03bea4b7ce740d188686755"
+    },
+    {
+      "id": "link-033",
+      "type": "link",
+      "source": "隠しスキルの記号（HiddenSymbol）",
+      "sourceHash": "8c0d833e16507abc6d01d7601796fab7fbc41274e0e4fdadf366a598f9ca5e47",
+      "translation": "Hidden Skill Symbol (HiddenSymbol)",
+      "contextHash": "16fe34e2b5918230b5b2739c87152ed91187f6e93de03895940c15b197b95db7"
+    },
+    {
+      "id": "link-034",
+      "type": "link",
+      "source": "ヘルプの行数（HelpLines）",
+      "sourceHash": "f5de51c2bcd68d21e805a75137c51fd7697735fd3228128d9694741573cad287",
+      "translation": "Help Lines (HelpLines)",
+      "contextHash": "2cda587aadee02fbc3f6d9dfd96dc7e4b158fc51dfa60d7d263960717ff323fa"
+    },
+    {
+      "id": "link-035",
+      "type": "link",
+      "source": "隠しスキルのマスク（HiddenSkillMask）",
+      "sourceHash": "f4d695a44b437154f5e63d1f0d709705372a6bd316719b4b0e3eccaf860ac3ce",
+      "translation": "Hidden Skill Mask (HiddenSkillMask)",
+      "contextHash": "852402fda1cc494ed7fe88d56cc2646d49d345ef647c22d039fd3b48a86ab161"
+    },
+    {
+      "id": "link-036",
+      "type": "link",
+      "source": "ヘルプを隠す（HiddenHelp）",
+      "sourceHash": "ecf285c66e4910feb0fa9522755ce67145d534275913bef82de0e3559d72c72e",
+      "translation": "Hide Help (HiddenHelp)",
+      "contextHash": "6319b65d708abf2d0bd4849fc07da22123ef32b5d8f4759babcc24a6257fe7e0"
+    },
+    {
+      "id": "link-037",
+      "type": "link",
+      "source": "＜アクターウィンドウ関連＞（<ActorWindow>）",
+      "sourceHash": "4e79d8055a7b2fa603b8cc2c70849f42b575d14946c640781b3b853a5c199c26",
+      "translation": "<Actor Window Settings> (<ActorWindow>)",
+      "contextHash": "693fa4839dff82d4a3767dc7d6ad3a7f0cb1649464e160b4c0aabd5ee3f7bd2c"
+    },
+    {
+      "id": "link-038",
+      "type": "link",
+      "source": "アクターウィンドウの横幅（ActorWindowWidth）",
+      "sourceHash": "93e9b82911af978f759b9aac93e3b10317ad4a382bddd366082c056bdec22021",
+      "translation": "Actor Window Width (ActorWindowWidth)",
+      "contextHash": "4c93336f7b1e8962d4b64dae5f26c5c8ca3aeae4f97119bff0c076a393f33f3c"
+    },
+    {
+      "id": "link-039",
+      "type": "link",
+      "source": "アクターウィンドウの縦幅（ActorWindowHeight）",
+      "sourceHash": "695b6a71161135cf5522f45e2a495a91cbfbbad421f4290ed95bdcd1d8bbb151",
+      "translation": "Actor Window Height (ActorWindowHeight)",
+      "contextHash": "75d3c05287a6a917145dd48884552f27ee5263074627b7a58084c7a44a23ef8b"
+    },
+    {
+      "id": "link-040",
+      "type": "link",
+      "source": "アクターの変更無効（ActorChangeInvalid）",
+      "sourceHash": "f599f0c28358d745781c9d1319bcf3afcbd627a223d318de62704a2e6f2490a1",
+      "translation": "Disable Actor Changes (ActorChangeInvalid)",
+      "contextHash": "94eec50063e766961223cd5905326cf0d4f14f52594453ffede83705174083c3"
+    },
+    {
+      "id": "link-041",
+      "type": "link",
+      "source": "＜確認ウィンドウ関連＞（<ConfirmWindow>）",
+      "sourceHash": "515399a6b793e3ca4598e542e626189325f61dbfb805f9779f44cd07802a9dde",
+      "translation": "<Confirmation Window Settings> (<ConfirmWindow>)",
+      "contextHash": "6df18a45edac10ea602e2e2c0ead3b476b4b3cc675ae24a98cde4e3a8c164469"
+    },
+    {
+      "id": "link-042",
+      "type": "link",
+      "source": "確認メッセージ（ConfirmMessage）",
+      "sourceHash": "a4d46c71efe715578104487cf92a3ccfef9266a288ac6c2b7489bbb9a0ece1b1",
+      "translation": "Confirmation message (ConfirmMessage)",
+      "contextHash": "bc968c8425ff47111805179eee8a69ca366c03eb65cb416e2156b36c7ec93c30"
+    },
+    {
+      "id": "link-043",
+      "type": "link",
+      "source": "ＯＫの文言（ConfirmButtonOk）",
+      "sourceHash": "f57d4914b84691c2ef3d3169ea165df3def0a2b4335a35078b7d9af34f390109",
+      "translation": "OK button text (ConfirmButtonOk)",
+      "contextHash": "a7be20dfb20055432cf34079e4e037d37009cdfd365d2b6c863f812220467f6c"
+    },
+    {
+      "id": "link-044",
+      "type": "link",
+      "source": "キャンセルの文言（ConfirmButtonCancel）",
+      "sourceHash": "b73bd900a764f622f1e38f25076e700b9e8dc104616f31379f729b5c743a911a",
+      "translation": "Cancel button text (ConfirmButtonCancel)",
+      "contextHash": "575131e8aabe74f9a5943ea9edab69e5796f3e2e4742e865ba4da5a1ea5375ec"
+    },
+    {
+      "id": "link-045",
+      "type": "link",
+      "source": "確定時のＳＥ（ConfirmOkSe）",
+      "sourceHash": "89de14b7f266217a64ef45fba9efdc54a54406a719187f50fadd49f5af5288ad",
+      "translation": "SE played on confirmation (ConfirmOkSe)",
+      "contextHash": "423102e784dd90fa47ae68f3dd5ad9aea83932f7c4ceffcb7e417d4e1b3ed60c"
+    },
+    {
+      "id": "link-046",
+      "type": "link",
+      "source": "ウィンドウの不透明度（ConfirmWindowOpacity）",
+      "sourceHash": "c5bba282a7afc163cfd2281722badfd8be4328844bae6b217ba5eea1e2b6d39f",
+      "translation": "Window opacity (ConfirmWindowOpacity)",
+      "contextHash": "e2c6ef361e012bb142e5918cdc5075ba1ab0640e83fc11a12ca8a2a26509df2b"
+    },
+    {
+      "id": "link-047",
+      "type": "link",
+      "source": "一行の高さ（ConfirmLineHeight）",
+      "sourceHash": "3da9a20a61989b2173c1827155a6afce57782aa32715292402c034c9262882e5",
+      "translation": "Line height (ConfirmLineHeight)",
+      "contextHash": "7f6e40dc761e2b22d818abff520c8786253f18e0c416259e7f3f36bbd8ccf892"
+    },
+    {
+      "id": "link-048",
+      "type": "link",
+      "source": "＜メニューコマンド関連＞（<Menu Command>）",
+      "sourceHash": "166ec616d8b0d12aca5918318128fdedbb2ff46e6239c18ddd1aca5d57fdca77",
+      "translation": "<Menu Command> ( <Menu Command> )",
+      "contextHash": "32127a39b85193a17956cd3179579a73b69d3090b5f13d2e96d62bd616883b54"
+    },
+    {
+      "id": "link-049",
+      "type": "link",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu command insertion position (ShowMenuCommandPosition)",
+      "contextHash": "a62af491242c65e8f88baca99240267b554bde3ab08a5afce89718a67e817734"
+    },
+    {
+      "id": "link-050",
+      "type": "link",
+      "source": "メニュー表示名（CommandName）",
+      "sourceHash": "7b2b23e2036e6a66981b69c7fdaa7f0bcae4e66bbc110cbf1f7399129c291caa",
+      "translation": "Menu display name (CommandName)",
+      "contextHash": "2ec065367b1141b7621592b03ebd6424ec88491b8e5075379f394ae0a5ed2245"
+    },
+    {
+      "id": "link-051",
+      "type": "link",
+      "source": "表示許可するスイッチ（MenuCommandSwitch）",
+      "sourceHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81",
+      "translation": "Display permission switch (MenuCommandSwitch)",
+      "contextHash": "1f03f9ea8478e9fff310fdbf7d51866a9479549bb6e3e4095fe7424febe41a26"
+    },
+    {
+      "id": "link-052",
+      "type": "link",
+      "source": "マスク文字列（MaskString）",
+      "sourceHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d",
+      "translation": "Mask string (MaskString)",
+      "contextHash": "aff51c263fc9085102813ca6b195090dd579c3580d397eba98abc2bc29e13765"
+    },
+    {
+      "id": "link-053",
+      "type": "link",
+      "source": "禁止するスイッチ（DisableSwitch）",
+      "sourceHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b",
+      "translation": "Disable switch (DisableSwitch)",
+      "contextHash": "76e05f2b7884fc42fa4214444c8da530ae65cab611e381f959d55f6a14b04df0"
+    },
+    {
+      "id": "link-054",
+      "type": "link",
+      "source": "スキルセットのパラメータ（Plugin Parameters SkillSet）",
+      "sourceHash": "3795ba4d09c4347f974fb5535e9d7bc5b4716e8a6f5e4e9337a7695fd0093cd1",
+      "translation": "Skill set parameters (Plugin Parameters SkillSet)",
+      "contextHash": "fac2589e4fc040dc59a4e13ff8fff53319a2f64269d5ad70517d46368bc16402"
+    },
+    {
+      "id": "link-055",
+      "type": "link",
+      "source": "メモ（Note）",
+      "sourceHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1",
+      "translation": "Note (Note)",
+      "contextHash": "1742ba3bb7b725b83fdf837d1532ee9f388c5f9f55bedfc2a62fab059594871c"
+    },
+    {
+      "id": "link-056",
+      "type": "link",
+      "source": "スキルリスト（SkillList）",
+      "sourceHash": "f2bc11a11e9d924f2a643ce72c9fcbe5578e475e2657fda89d84842d019c6e90",
+      "translation": "Skill list (SkillList)",
+      "contextHash": "283738692dee023ee415c087c57f8a2b110bc238f0e2b0445c12fd9400e107e9"
+    },
+    {
+      "id": "link-057",
+      "type": "link",
+      "source": "＜条件＞（<Condition>）",
+      "sourceHash": "6d175cc5b1920a311a1a434b5b22b3610fe7e98b1de7c8aa9d4117f2003286d5",
+      "translation": "<Condition> ( <Condition> )",
+      "contextHash": "a179d0a2ba913eb8df4f1b04bb91ede8f2422e0aa11ac74c117ddc2b6130be64"
+    },
+    {
+      "id": "link-058",
+      "type": "link",
+      "source": "アクター（Actor）",
+      "sourceHash": "d1e3e4fa9d9b0c34d66f166c920e68a3c66cedd376e694ab51fa390bb71ac00b",
+      "translation": "Actor (Actor)",
+      "contextHash": "194dec516ebd5fc822f83835215dae560792d9b45920ba87b525fd697dd0f01f"
+    },
+    {
+      "id": "link-059",
+      "type": "link",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "d4148c300e650bf769c1ab389ccc7a5aa4918d765b332cd9e8f7fa493174d718"
+    },
+    {
+      "id": "link-060",
+      "type": "link",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script (Script)",
+      "contextHash": "e114b94ed03073356c79a44c587384ce185119658faa364f083c3db6be48f6d0"
+    },
+    {
+      "id": "link-061",
+      "type": "link",
+      "source": "スキルデータのパラメータ（Plugin Parameters SkillData）",
+      "sourceHash": "88ab345b02dffaac60aa3c00d9b18fa9bfff9545cb0a136d02d894ec74c2f409",
+      "translation": "Skill data parameters (Plugin Parameters SkillData)",
+      "contextHash": "5a69f4f9b0926d74310bc84b5990c2fe5cc902232ed9d679401f50908eeff44c"
+    },
+    {
+      "id": "link-062",
+      "type": "link",
+      "source": "メモ（Note）",
+      "sourceHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1",
+      "translation": "Note (Note)",
+      "contextHash": "1742ba3bb7b725b83fdf837d1532ee9f388c5f9f55bedfc2a62fab059594871c"
+    },
+    {
+      "id": "link-063",
+      "type": "link",
+      "source": "スキル（Skill）",
+      "sourceHash": "7b1288b2a92c04e229a2c8ac5700ee361f290f01d70b616a13b303a40878054f",
+      "translation": "Skill (Skill)",
+      "contextHash": "6637b0d5737e51ec558b8c72ae78eced79c63ceed7249e9eb498d1e90207dfe7"
+    },
+    {
+      "id": "link-064",
+      "type": "link",
+      "source": "スキルポイント（SkillPoint）",
+      "sourceHash": "d7ba7f8a11b8edf76375f1eb391e3e7d1492f85e3c2a916a78a82a7a546859ed",
+      "translation": "Skill points (SkillPoint)",
+      "contextHash": "a73ec2779f992bb7406d75503e64385abde3cf4cfe46cb0ec9551a2b76fea035"
+    },
+    {
+      "id": "link-065",
+      "type": "link",
+      "source": "表示名（DisplayName）",
+      "sourceHash": "45a9747bcdca9755d775d2536b3d30f951f67c9cb41b00eb0e411cdc8e9bf434",
+      "translation": "Display name (DisplayName)",
+      "contextHash": "4908acdf9b48eb7edde9d10a3f6b74f80712337b5f21a47f45d8d427fe2cf3c6"
+    },
+    {
+      "id": "link-066",
+      "type": "link",
+      "source": "ヘルプに追記（HelpPostscript）",
+      "sourceHash": "8c337007b90073459bae85135103221cffa0e8d20090096546654ce814b2a27f",
+      "translation": "Help postscript (HelpPostscript)",
+      "contextHash": "5a9437fd1431d4bb5bcc2a532a45c9737325bb712cec0f252f209cd535150f66"
+    },
+    {
+      "id": "link-067",
+      "type": "link",
+      "source": "習得済スキルの表示方法（LearnedSkillDisplayStyle）",
+      "sourceHash": "16da7140c7e733d0e8185f64bfadc805b4f066446146fdcce2b5ca5254beaa52",
+      "translation": "Learned skill display style (LearnedSkillDisplayStyle)",
+      "contextHash": "4d25cdb9b32fcc98a04e876e53dbfbe9b594250830d949017215e396b0d7500b"
+    },
+    {
+      "id": "link-068",
+      "type": "link",
+      "source": "＜条件＞（<Condition>）",
+      "sourceHash": "6d175cc5b1920a311a1a434b5b22b3610fe7e98b1de7c8aa9d4117f2003286d5",
+      "translation": "<Condition> ( <Condition> )",
+      "contextHash": "a179d0a2ba913eb8df4f1b04bb91ede8f2422e0aa11ac74c117ddc2b6130be64"
+    },
+    {
+      "id": "link-069",
+      "type": "link",
+      "source": "スキル（ConditionSkill）",
+      "sourceHash": "52cd4d6e1e0746cecc851af1fb95adbb4e1641fd5711b2f810e533a77f54c919",
+      "translation": "Skill (ConditionSkill)",
+      "contextHash": "21242284a1df1b8fa50b7327fd62a1b023ec317839cd0a192f6d11b005d61d03"
+    },
+    {
+      "id": "link-070",
+      "type": "link",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "d4148c300e650bf769c1ab389ccc7a5aa4918d765b332cd9e8f7fa493174d718"
+    },
+    {
+      "id": "link-071",
+      "type": "link",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script (Script)",
+      "contextHash": "e114b94ed03073356c79a44c587384ce185119658faa364f083c3db6be48f6d0"
+    },
+    {
+      "id": "link-072",
+      "type": "link",
+      "source": "＜禁止条件＞（<DisabledCondition>）",
+      "sourceHash": "f58807908228c71c82f04f87c66b688513b041a636c9a7f06e44bb8b03694381",
+      "translation": "<Disabled Condition> ( <DisabledCondition> )",
+      "contextHash": "172111671c0746fb3708229a84bf0063a7dd4336558976fba268c3845e1ebec0"
+    },
+    {
+      "id": "link-073",
+      "type": "link",
+      "source": "スクリプト（DisabledScript）",
+      "sourceHash": "42b516a967f4176247ffd0d500bec9dd06965983b97271c31ea177b4baf938d7",
+      "translation": "Script (DisabledScript)",
+      "contextHash": "3c327c6a8440fdd0a7e67501d6c9a9bf5fe21e8199cab65ead1a8ac64fa9fbcb"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-074",
+      "type": "link",
+      "source": "NRP_LearnSkillList.js",
+      "sourceHash": "3bc04d173f42592d3c01a1fd0bb068b4808e4c2ae5ed1f14cf037c9b49947717",
+      "translation": "NRP_LearnSkillList.js",
+      "contextHash": "245671c96c9ec042f6e7bc4b71a4882fc096be11e7a72944740c4f88878a3272"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "予約機能（",
+      "sourceHash": "a418630aa188f8cef75ff4a31a3041f19edf448352974dc772f06035e95693b4",
+      "translation": "Reservation feature (",
+      "contextHash": "80c338396f38a43a17a33436647c94f772c9bc3fdab060680d61fb417b6c2379"
+    },
+    {
+      "id": "link-075",
+      "type": "link",
+      "source": "解説",
+      "sourceHash": "cc0bccbad6264ac573ff97d24ea25bec4cd98a71dd04f9b10f01e4b9fa93c86b",
+      "translation": "Explanation",
+      "contextHash": "80c338396f38a43a17a33436647c94f772c9bc3fdab060680d61fb417b6c2379"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "）",
+      "sourceHash": "f2e44c6c9545f08ba725de2c18e7dcc548cb28425cf6847278b68c3f03f59819",
+      "translation": ") ",
+      "contextHash": "80c338396f38a43a17a33436647c94f772c9bc3fdab060680d61fb417b6c2379"
+    },
+    {
+      "id": "link-076",
+      "type": "link",
+      "source": "NRP_LearnSkillListReserve.js",
+      "sourceHash": "fa8a64d43e21f9ed18bfd2793402493563a8b662dcc29942a71907a77db6c410",
+      "translation": "NRP_LearnSkillListReserve.js",
+      "contextHash": "27d129886cc1bc054e68999990b043edd7202ace4a1a88f7073f25d571872f14"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update history (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "確認メッセージウィンドウの",
+      "sourceHash": "962d5fc03c117591b77547f03973ae8c69ea58c759874bf9ca312166189a2995",
+      "translation": "The confirmation message window's ",
+      "contextHash": "c180bda9ee685092eb35035d732e6ceae87a2d458b6e587fe0a276ddf53adf44"
+    },
+    {
+      "id": "link-077",
+      "type": "link",
+      "source": "不透明度",
+      "sourceHash": "04405e4a9ffd2a3d874c48113c5b761adbd0c0a0544402729c173b523450ad76",
+      "translation": "opacity",
+      "contextHash": "c180bda9ee685092eb35035d732e6ceae87a2d458b6e587fe0a276ddf53adf44"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "と",
+      "sourceHash": "427566260604d16fb4a900e51400dd5dfac2ef749901179434735f0d0008d100",
+      "translation": " and ",
+      "contextHash": "c180bda9ee685092eb35035d732e6ceae87a2d458b6e587fe0a276ddf53adf44"
+    },
+    {
+      "id": "link-078",
+      "type": "link",
+      "source": "行の高さ",
+      "sourceHash": "dbd07173396743d73423f68f71f952d6f1ea21a1e620a6f1a2de11888ce83829",
+      "translation": "line height",
+      "contextHash": "c180bda9ee685092eb35035d732e6ceae87a2d458b6e587fe0a276ddf53adf44"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "を調整できるようにした。",
+      "sourceHash": "05a6a9eb43fda2426cebaa98ffe36a6c4235437972c6ac5ce3216556431d4e61",
+      "translation": " can now be adjusted.",
+      "contextHash": "c180bda9ee685092eb35035d732e6ceae87a2d458b6e587fe0a276ddf53adf44"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "メニューを経由せず直接習得画面を呼び出した場合、顔グラが表示されないことがある不具合を修正。",
+      "sourceHash": "f9bf6cc368766b83f8eb589eb2dc81430aa132d23e61830caf9d0be632004a41",
+      "translation": "Fixed a bug that could prevent the face graphic from being displayed when the skill acquisition screen was called directly without going through the menu.",
+      "contextHash": "f9bf6cc368766b83f8eb589eb2dc81430aa132d23e61830caf9d0be632004a41"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "表示条件を満たしたスキルでも",
+      "sourceHash": "3768fd20e52b9256e1539a99a32a3c0fd9e61cd9c2a5d369124fd9aae13062b7",
+      "translation": "Added a setting to ",
+      "contextHash": "2b10cb8b3abead9be01c9eab008c04148b23144f870413a19853231bbb2279c8"
+    },
+    {
+      "id": "link-079",
+      "type": "link",
+      "source": "習得禁止にする設定",
+      "sourceHash": "b0d9ca4a93f100591d80a049b258a67cccc9db013e1e4e95c1468ec55926cf97",
+      "translation": "prevent acquisition",
+      "contextHash": "2b10cb8b3abead9be01c9eab008c04148b23144f870413a19853231bbb2279c8"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "を追加した。",
+      "sourceHash": "f73a7db2df2b4e92a287218e6bca0a404cb47dcbebbd21db3151249cb49fdaa9",
+      "translation": " even for skills that meet the display conditions.",
+      "contextHash": "2b10cb8b3abead9be01c9eab008c04148b23144f870413a19853231bbb2279c8"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "隠しスキルの記号が空欄の場合、undefinedの文字列が表示されてしまう不具合修正。（ver1.081）",
+      "sourceHash": "3fff0220e7421ed97d9e9a943d967580080e389b302f62b82630028ec90d724e",
+      "translation": "Fixed a bug where the string undefined was displayed when the symbol for hidden skills was blank. (ver1.081)",
+      "contextHash": "3fff0220e7421ed97d9e9a943d967580080e389b302f62b82630028ec90d724e"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "アクター切替時、空欄にカーソルが合わさってしまう不具合修正。（2026/04/25 ver1.082）",
+      "sourceHash": "83abc70fe81dca101718a451257e1f1339ae92a83f40311f6fdd750e2949627a",
+      "translation": "Fixed a bug where the cursor moved to a blank entry when switching actors. (2026/04/25 ver1.082)",
+      "contextHash": "83abc70fe81dca101718a451257e1f1339ae92a83f40311f6fdd750e2949627a"
+    },
+    {
+      "id": "link-080",
+      "type": "link",
+      "source": "NRP_EquipSlot.js",
+      "sourceHash": "9dd56a4077390d64caf2ff65ac684e30366aaf09f2c6f43780c783270315a1c6",
+      "translation": "NRP_EquipSlot.js ",
+      "contextHash": "1340766f1fe89dc08df70cd48d385fd90419c0c9b5ecf834529800aab2c5ca56"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "などのパッシブスキルによって、装備スロットを追加した際に正しく装備状況が更新されない不具合修正。",
+      "sourceHash": "7bc0d994012f3812e7b69c12d2030dcb54234d2d63994640a327f65498684434",
+      "translation": "Fixed a bug where the equipment status was not updated correctly when equipment slots were added by passive skills such as NRP_EquipSlot.js.",
+      "contextHash": "1340766f1fe89dc08df70cd48d385fd90419c0c9b5ecf834529800aab2c5ca56"
+    },
+    {
+      "id": "link-081",
+      "type": "link",
+      "source": "予約機能",
+      "sourceHash": "779c326890d9a724696c67fc561c9fa7363df0c8279b09d4435fef69d5ae7f99",
+      "translation": "reservation feature",
+      "contextHash": "9dcd8f67f4c3dc1fef0948feea47cb8969c2b870cee0f54ceb9c3c06b0b684c1"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "への対応に合わせて更新。",
+      "sourceHash": "f425650af5d464b18f701282a9986847b4ffb1bac9074124dab14bdae7571b75",
+      "translation": " support, updated accordingly.",
+      "contextHash": "9dcd8f67f4c3dc1fef0948feea47cb8969c2b870cee0f54ceb9c3c06b0b684c1"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "プラグインコマンドでアクターを指定した場合に",
+      "sourceHash": "4d03a8711a0fd1a350abfe13d319d0757a2836cb0394c0de0136f40601e0e366",
+      "translation": "When specifying an actor with a plugin command, it is now possible to ",
+      "contextHash": "b7688f6de2e892b967b891a292fc960bf9f65041eedcea7ba7bdd0dd0ebab04b"
+    },
+    {
+      "id": "link-082",
+      "type": "link",
+      "source": "アクターの切り替えを禁止",
+      "sourceHash": "5c478587f1caeed8010cabf742a986cd0c28a722b6e6a67b125fed1ed0dae38a",
+      "translation": "prevent switching actors",
+      "contextHash": "b7688f6de2e892b967b891a292fc960bf9f65041eedcea7ba7bdd0dd0ebab04b"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "できるようにした。",
+      "sourceHash": "17ce85c5025ea7c64b283e7336a2ee70409985cac3b8cb8522d54cd488094d4c",
+      "translation": ".",
+      "contextHash": "b7688f6de2e892b967b891a292fc960bf9f65041eedcea7ba7bdd0dd0ebab04b"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "プラグインコマンドでパーティにいないアクターも指定できるようにした。",
+      "sourceHash": "548577fb71575dea56ffbf1b05998ca81487b15f3af3dadd1675741ff68faf74",
+      "translation": "It is now possible to specify actors who are not in the party with plugin commands.",
+      "contextHash": "548577fb71575dea56ffbf1b05998ca81487b15f3af3dadd1675741ff68faf74"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "プラグインコマンドによる",
+      "sourceHash": "bb3fcc4b22a6a5d24fa52b3c2e2eff1c522fa8f655d9c03c2306c097223590a5",
+      "translation": "Added ",
+      "contextHash": "f6300aba0220902c91fc692f4a23a01f06629c9e124ae40eeb24a3a8bab29f58"
+    },
+    {
+      "id": "link-083",
+      "type": "link",
+      "source": "スキルリセット機能",
+      "sourceHash": "052fbd364159b3950ead164b89c66aaebe762b7397b9c9c5f92cd69fb7b623d6",
+      "translation": "a skill reset function",
+      "contextHash": "f6300aba0220902c91fc692f4a23a01f06629c9e124ae40eeb24a3a8bab29f58"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "を追加。",
+      "sourceHash": "7bcb0eb4714a78cae4994f5780fa62dbc1d261d4894f73ae1675fcfe6464ca06",
+      "translation": " using a plugin command.",
+      "contextHash": "f6300aba0220902c91fc692f4a23a01f06629c9e124ae40eeb24a3a8bab29f58"
+    },
+    {
+      "id": "link-084",
+      "type": "link",
+      "source": "コマンドのマスク表示機能",
+      "sourceHash": "3ca2f3d643438248b89410554b27d7484da4414b6237b30550f5036e0f214d53",
+      "translation": "command masking display feature",
+      "contextHash": "80b109c69bcba1ac31c420b5f5325b36011cc642c6d6aa05b88a84ea1f1e0552"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "を追加。",
+      "sourceHash": "7bcb0eb4714a78cae4994f5780fa62dbc1d261d4894f73ae1675fcfe6464ca06",
+      "translation": " added.",
+      "contextHash": "80b109c69bcba1ac31c420b5f5325b36011cc642c6d6aa05b88a84ea1f1e0552"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "スキルポイントの保有方法がパーティ共有制の場合、エラーになる不具合修正。",
+      "sourceHash": "3b0f1d8513102d75c4a0ba179b627cded923b9823b9d11470fad66409ef06466",
+      "translation": "Fixed a bug that caused an error when skill points were shared by the party.",
+      "contextHash": "3b0f1d8513102d75c4a0ba179b627cded923b9823b9d11470fad66409ef06466"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "スキルポイントを減らした場合、マイナスにならないように修正。（2023/06/25 ver1.021）",
+      "sourceHash": "ed61cef7268fc69b9613257f0c7dda08685b8994cc2da3549ed57550383ba4ee",
+      "translation": "Fixed the issue so that skill points do not become negative when reduced. (2023/06/25 ver1.021)",
+      "contextHash": "ed61cef7268fc69b9613257f0c7dda08685b8994cc2da3549ed57550383ba4ee"
+    },
+    {
+      "id": "link-085",
+      "type": "link",
+      "source": "スキルポイントの最大値",
+      "sourceHash": "271ca4f1eb855bd141267893bcf36fe54c2e1355d8ce37761371c29f57ed772e",
+      "translation": "maximum skill points",
+      "contextHash": "88a9e247aac03bcb655a8f3076f65ba555998bd66d92a12c4192e0930a1b69a7"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "を設定できるようにした。",
+      "sourceHash": "d2bab239d09447dcc384edbecae79b3daef134e581237df5e813e5877534fd50",
+      "translation": " can now be set.",
+      "contextHash": "88a9e247aac03bcb655a8f3076f65ba555998bd66d92a12c4192e0930a1b69a7"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "スキルポイントの保有方法が『パーティ共有』の場合、スキルポイントの増減を行うとエラーになる不具合修正。",
+      "sourceHash": "d392043d785e2929bcfeff82812ffd8b359ea679b6a76245a2ce7eec51f71177",
+      "translation": "Fixed a bug that caused an error when increasing or decreasing skill points while the skill point ownership method was set to “Party Shared.”",
+      "contextHash": "d392043d785e2929bcfeff82812ffd8b359ea679b6a76245a2ce7eec51f71177"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "アクターのスキルポイントを0で初期化するように修正。",
+      "sourceHash": "63efa36340ca636042947e1e242cde7e8b14447f0a62f625b9559b1f8fdb736c",
+      "translation": "Fixed the initialization so that an actor’s skill points are set to 0.",
+      "contextHash": "63efa36340ca636042947e1e242cde7e8b14447f0a62f625b9559b1f8fdb736c"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "『スキルポイントの表示名』が反映されない不具合修正。",
+      "sourceHash": "70b14690e201c42628fe5983cc99a44072303799a9dd103080d05b02be9c75c6",
+      "translation": "Fixed a bug where the “Skill Point Display Name” was not applied.",
+      "contextHash": "70b14690e201c42628fe5983cc99a44072303799a9dd103080d05b02be9c75c6"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "スキルリストの作成",
+      "sourceHash": "4cfa28d160fee341c9beef0cf18a1cce37d3d0c91d612cc6fe4991aea55cefdd",
+      "translation": "Creating a Skill List",
+      "contextHash": "4cfa28d160fee341c9beef0cf18a1cce37d3d0c91d612cc6fe4991aea55cefdd"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "まずプラグインパラメータの『スキルセットのリスト』にスキルセットを登録し、その下へさらにスキル情報を登録してください。",
+      "sourceHash": "29326ccee55f05563389fc31d1c0a5fb7ff13db06dbff3a557fac36c73d01a92",
+      "translation": "First, register skill sets in the “Skill Set List” plugin parameter, then register the skill information below them.",
+      "contextHash": "29326ccee55f05563389fc31d1c0a5fb7ff13db06dbff3a557fac36c73d01a92"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "スキルセットには対象とするアクターなどの条件を指定できます。",
+      "sourceHash": "76bc762d7b6f2024bf006cce7b954a2d1903beabd2df0e59bafef52f1de4cc54",
+      "translation": "Conditions such as the actors affected can be specified for each skill set.",
+      "contextHash": "76bc762d7b6f2024bf006cce7b954a2d1903beabd2df0e59bafef52f1de4cc54"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "条件を指定しなかった場合は全員共通のスキルとなります。",
+      "sourceHash": "062e8df64b72527b982dfa0f98b94bcc653f1866ba7026ea83e185fd4c47b034",
+      "translation": "If no conditions are specified, the skill is shared by everyone.",
+      "contextHash": "062e8df64b72527b982dfa0f98b94bcc653f1866ba7026ea83e185fd4c47b034"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "他にも、スキル毎に前提スキルなどの条件を指定できます。",
+      "sourceHash": "b11abb49e33fc328df69fbf8e6ab61bd1926acddd971a5542d979e569020c3cc",
+      "translation": "You can also specify conditions such as prerequisite skills for each skill.",
+      "contextHash": "b11abb49e33fc328df69fbf8e6ab61bd1926acddd971a5542d979e569020c3cc"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "メニューから『スキル習得』のコマンドを選択すれば、スキル習得システムの画面が表示されるようになります。",
+      "sourceHash": "85fbca48e1590cd26cae0d141851447f8df251934e1f62a0819062bc7595ee34",
+      "translation": "Selecting the “Learn Skill” command from the menu will display the skill learning system screen.",
+      "contextHash": "85fbca48e1590cd26cae0d141851447f8df251934e1f62a0819062bc7595ee34"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "スキルポイントの設定",
+      "sourceHash": "4baf483c3a3c48a3c3875891937faf4efa49b4761033593e574f74c8f81c6d2a",
+      "translation": "Setting Skill Points",
+      "contextHash": "4baf483c3a3c48a3c3875891937faf4efa49b4761033593e574f74c8f81c6d2a"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "スキルポイントの保有方法として『アクター毎』と『パーティ共有』の二種類から選択できます。",
+      "sourceHash": "51dc185fc850721603f894c9b2950531022c4824ed69b0d38a248ca91c520f63",
+      "translation": "You can choose between “Per Actor” and “Party Shared” as the skill point ownership method.",
+      "contextHash": "51dc185fc850721603f894c9b2950531022c4824ed69b0d38a248ca91c520f63"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "パーティ共有の場合は変数内に格納するため、イベントコマンドの『変数の操作』での制御が可能となります。",
+      "sourceHash": "c74fd0c2dd287886dec7fd87cc2302f60a74152119876861870f001132b8c34a",
+      "translation": "When party-shared, the points are stored in a variable, allowing them to be controlled using the event command “Control Variables.”",
+      "contextHash": "c74fd0c2dd287886dec7fd87cc2302f60a74152119876861870f001132b8c34a"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "敵キャラのメモ欄",
+      "sourceHash": "ef0dcbada4286d0b2ed9d323713ff3a5d7c7e1a8716fe21ff5289ac389bfda7a",
+      "translation": "Enemy Note Field",
+      "contextHash": "ef0dcbada4286d0b2ed9d323713ff3a5d7c7e1a8716fe21ff5289ac389bfda7a"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "獲得できるスキルポイントを指定します。",
+      "sourceHash": "f73d0d27a7bf833a77deec07b355d43e26bfa2d8b5bd3f5a6e51a9b53b956052",
+      "translation": "Specifies the number of skill points that can be obtained.",
+      "contextHash": "f73d0d27a7bf833a77deec07b355d43e26bfa2d8b5bd3f5a6e51a9b53b956052"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "また、プラグインパラメータで既定値を指定することもできます。",
+      "sourceHash": "d7f5a190934ba8e191bd4965be7af8096ccd0475419a488038538125fcebd62b",
+      "translation": "You can also specify a default value in the plugin parameters.",
+      "contextHash": "d7f5a190934ba8e191bd4965be7af8096ccd0475419a488038538125fcebd62b"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "細かい指定が面倒なら、経験値やレベルに比例する値にしてしまえば楽です。",
+      "sourceHash": "07b4edb651d3a0ecd8543d3ef0980d302644dd606edc7bd67152ec93f80bc467",
+      "translation": "If specifying individual values is tedious, it is easier to use a value proportional to experience or level.",
+      "contextHash": "07b4edb651d3a0ecd8543d3ef0980d302644dd606edc7bd67152ec93f80bc467"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "※標準では敵キャラにレベルは存在しません。何らかの外部プラグインで設定する必要があります。",
+      "sourceHash": "3d1915f1d8ede5e76fa76eb10e4ffa4011fd2f090f66f81de7dc2869d776a080",
+      "translation": "* By default, enemies do not have levels. You need to set them using an external plugin.",
+      "contextHash": "3d1915f1d8ede5e76fa76eb10e4ffa4011fd2f090f66f81de7dc2869d776a080"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "獲得できるスキルポイントを指定した%に変更します。",
+      "sourceHash": "28ee8ac0bf9e01a5600cc382966fe34b065cb5f4327ecac0ac3aa891413464a2",
+      "translation": "Changes the skill points that can be obtained to the specified percentage.",
+      "contextHash": "28ee8ac0bf9e01a5600cc382966fe34b065cb5f4327ecac0ac3aa891413464a2"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "例えば、200ならば200%（２倍）になります。",
+      "sourceHash": "5f0214d8558e5a88985c55a44dee73ee48371af74286ddc541640c8ea33ba9dd",
+      "translation": "For example, 200 becomes 200% (twice as much).",
+      "contextHash": "5f0214d8558e5a88985c55a44dee73ee48371af74286ddc541640c8ea33ba9dd"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "既定値とのセットで使うことを想定しています。",
+      "sourceHash": "83b6adb98a330488740b93f0d5fc6a460f280b05fb2ee23ec9b09e7855e0ce07",
+      "translation": "This is intended to be used together with the default value.",
+      "contextHash": "83b6adb98a330488740b93f0d5fc6a460f280b05fb2ee23ec9b09e7855e0ce07"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "アイテムのメモ欄",
+      "sourceHash": "f20e72732654bf341a0b8e779fc8fde5e5ee93551394457421fdf511f1cd1691",
+      "translation": "Item Note Field",
+      "contextHash": "f20e72732654bf341a0b8e779fc8fde5e5ee93551394457421fdf511f1cd1691"
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "アクターのスキルポイントを数値分増加させます。",
+      "sourceHash": "68e287e2ffcad198528e993a5e2038be12b0f764658a91f835602a93df653f74",
+      "translation": "Increases the actor’s skill points by the specified amount.",
+      "contextHash": "68e287e2ffcad198528e993a5e2038be12b0f764658a91f835602a93df653f74"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "スキルツリー",
+      "sourceHash": "b58ed38c86a38647bb235a35e589971e2fff6a14428cca6362152356e651035b",
+      "translation": "Skill Tree",
+      "contextHash": "b58ed38c86a38647bb235a35e589971e2fff6a14428cca6362152356e651035b"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "当プラグインにはスキルツリーなどの複雑な構造を作成する機能はありません。",
+      "sourceHash": "1101da623f96c7367ad060c87a25ba5a76bd31bd4e5951a3b0960a4f8419edf8",
+      "translation": "This plugin does not include a function for creating complex structures such as skill trees.",
+      "contextHash": "1101da623f96c7367ad060c87a25ba5a76bd31bd4e5951a3b0960a4f8419edf8"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "……が、擬似的にスキルツリーっぽく見せることはできます。",
+      "sourceHash": "7d88b0650da69fecd70f78ac71a604241be3f2a5d4b7dcf3acfc15c8aff4c23f",
+      "translation": "...However, you can make it look somewhat like a skill tree.",
+      "contextHash": "7d88b0650da69fecd70f78ac71a604241be3f2a5d4b7dcf3acfc15c8aff4c23f"
+    },
+    {
+      "id": "list-041",
+      "type": "list",
+      "source": "やり方は単純で『スキルデータのパラメータ』の",
+      "sourceHash": "3c345bfa0026c2fba006240c6daa70e729382569398da9d244a671f0f49b785d",
+      "translation": "The method is simple: manually enter full-width spaces and symbols in the “Skill Data Parameters’ ",
+      "contextHash": "5de4c144fc5ec9e9d448fa55ebd28854466a94314d23bf05fb1bd1eea4ed339d"
+    },
+    {
+      "id": "link-086",
+      "type": "link",
+      "source": "表示名",
+      "sourceHash": "209c6f1684096f34f946ee6edf803ca3e7e975ddc1a0806233a00aae6ca10384",
+      "translation": "display name",
+      "contextHash": "5de4c144fc5ec9e9d448fa55ebd28854466a94314d23bf05fb1bd1eea4ed339d"
+    },
+    {
+      "id": "list-042",
+      "type": "list",
+      "source": "に手入力で全角スペースと記号を入れているだけです。",
+      "sourceHash": "bf1c99184b311e86e3bff3fb8da533210b960d3f964adb4502e5fb41097e23c9",
+      "translation": ".",
+      "contextHash": "5de4c144fc5ec9e9d448fa55ebd28854466a94314d23bf05fb1bd1eea4ed339d"
+    },
+    {
+      "id": "list-043",
+      "type": "list",
+      "source": "画像の例だと『 └%2%1』というようになります。",
+      "sourceHash": "16b58f33ba4d7c532a8b3f7f011a5a3f68940de36c176aab44930dc75a145739",
+      "translation": "In the example shown in the image, it would be “ └%2%1”.",
+      "contextHash": "16b58f33ba4d7c532a8b3f7f011a5a3f68940de36c176aab44930dc75a145739"
+    },
+    {
+      "id": "list-044",
+      "type": "list",
+      "source": "※%2はアイコン、%1はスキル名です。",
+      "sourceHash": "2a91991058a5b49016d972379ccbfa50f71d958fddbc8bc8377169216f23c4c1",
+      "translation": "* %2 is the icon, and %1 is the skill name.",
+      "contextHash": "2a91991058a5b49016d972379ccbfa50f71d958fddbc8bc8377169216f23c4c1"
+    },
+    {
+      "id": "list-045",
+      "type": "list",
+      "source": "あくまで簡易的なものなので、複数のスキルを条件とする場合など複雑な設定には向きません。",
+      "sourceHash": "a8ded1be71319596b3af9a24588d4d33be22089ddf3fa3bbd94f1d55de0df75b",
+      "translation": "Since this is only a simple solution, it is not suitable for complex setups, such as those requiring multiple skills as conditions.",
+      "contextHash": "a8ded1be71319596b3af9a24588d4d33be22089ddf3fa3bbd94f1d55de0df75b"
+    },
+    {
+      "id": "list-046",
+      "type": "list",
+      "source": "※条件を満たしていないスキルを表示させたい場合は",
+      "sourceHash": "df08a934f208711a00d5e73ba88671424eb8fafbe1a46740786ced88802dd6ed",
+      "translation": "* If you want to display skills that do not meet the conditions, ",
+      "contextHash": "c59e8934b52cf93a0c0c7c6fbd2700325e6b35176a0c8a575676993008ad8c67"
+    },
+    {
+      "id": "link-087",
+      "type": "link",
+      "source": "隠しスキルを表示",
+      "sourceHash": "48ee59b488c77194e4cd5fa5e8f0dc3bb40b863746e011a1bb82a665feb9baca",
+      "translation": "enable the display of hidden skills",
+      "contextHash": "c59e8934b52cf93a0c0c7c6fbd2700325e6b35176a0c8a575676993008ad8c67"
+    },
+    {
+      "id": "list-047",
+      "type": "list",
+      "source": "をオンにしてください。",
+      "sourceHash": "3bf3750e8d2adb42b17a17199381921be9135b9eece80c7fe6e7479a96d9d90e",
+      "translation": ".",
+      "contextHash": "c59e8934b52cf93a0c0c7c6fbd2700325e6b35176a0c8a575676993008ad8c67"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "おすすめプラグイン",
+      "sourceHash": "7e5e44bcb355ff4c18fcd58c3c900fd09939ee2abffd2c7e9bcf7df4def83783",
+      "translation": "Recommended Plugins",
+      "contextHash": "7e5e44bcb355ff4c18fcd58c3c900fd09939ee2abffd2c7e9bcf7df4def83783"
+    },
+    {
+      "id": "link-088",
+      "type": "link",
+      "source": "上位スキル習得時に下位スキルを消去",
+      "sourceHash": "00efc61f3c938ae3fb61b8fba3867db3b426f2b597f45a0646e40783d78be629",
+      "translation": "Erase Lower-Tier Skills When Learning Higher-Tier Skills",
+      "contextHash": "b03e540e199711217e3b678834242c0adeb392a7d9f25213f001a849c5977c60"
+    },
+    {
+      "id": "list-048",
+      "type": "list",
+      "source": "無駄にスキルを増やしたくない場合は便利です。",
+      "sourceHash": "7c200b36a37e67aa057c4b748874c89e395ab4e9fb2d182560e46c61699ef830",
+      "translation": "This is useful if you do not want to add unnecessary skills.",
+      "contextHash": "7c200b36a37e67aa057c4b748874c89e395ab4e9fb2d182560e46c61699ef830"
+    },
+    {
+      "id": "list-049",
+      "type": "list",
+      "source": "ただし、初期スキルの条件の指定には工夫が必要です。",
+      "sourceHash": "33796228c84507f3af68594c4eabb89233814ba9e9252469c055662d1a1239cb",
+      "translation": "However, specifying the conditions for initial skills requires some ingenuity.",
+      "contextHash": "33796228c84507f3af68594c4eabb89233814ba9e9252469c055662d1a1239cb"
+    },
+    {
+      "id": "link-089",
+      "type": "link",
+      "source": "スクリプト",
+      "sourceHash": "66d423690e7f2c82c8218066fa56aa7d708b26bf6744ce0207e9f3d839e27ffc",
+      "translation": "Script",
+      "contextHash": "5c87137c2391103905610120f85f368a9d03363afe2c49b845b198660155416e"
+    },
+    {
+      "id": "list-050",
+      "type": "list",
+      "source": "で『!a.isLearnedSkill(1) && !a.isLearnedSkill(2)』というように「上位スキル全ての未習得」を条件にしないと下位スキルが一覧に復活してしまいます。",
+      "sourceHash": "7c7636934fc7cef5daa769d1cd4addfbf2f03c4ed58c252db394c9bb024138f7",
+      "translation": " using a condition such as “!a.isLearnedSkill(1) && !a.isLearnedSkill(2)” to require that “none of the higher-tier skills have been learned”; otherwise, lower-tier skills will reappear in the list.",
+      "contextHash": "5c87137c2391103905610120f85f368a9d03363afe2c49b845b198660155416e"
+    },
+    {
+      "id": "list-051",
+      "type": "list",
+      "source": "つまり、「ヒールⅡとⅢの両方を習得していない場合のみ、ヒールⅠを習得できる」というようなイメージです。",
+      "sourceHash": "0029d63c181c45dbe080c14f5ece53a77f165e4ceb0a3e1e9602e094dca1ff31",
+      "translation": "In other words, the idea is that Heal I can be learned only when neither Heal II nor Heal III has been learned.",
+      "contextHash": "0029d63c181c45dbe080c14f5ece53a77f165e4ceb0a3e1e9602e094dca1ff31"
+    },
+    {
+      "id": "link-090",
+      "type": "link",
+      "source": "スキルの性能を変化させる",
+      "sourceHash": "7f81673015946dc8d8620eacbc98b82e9e7a443439b639ae22f41e57eba96700",
+      "translation": "Change Skill Performance",
+      "contextHash": "21d1e3b1617423954333073ae7c2a3b434df4f1943f568c77a079d9f9735cff4"
+    },
+    {
+      "id": "list-052",
+      "type": "list",
+      "source": "パッシブスキルの作成などにどうぞ。",
+      "sourceHash": "c2007c40949a5bbb6b6db877d077c7e0488026490115f9e3d4805c9fad2cc045",
+      "translation": "Use this to create passive skills and more.",
+      "contextHash": "c2007c40949a5bbb6b6db877d077c7e0488026490115f9e3d4805c9fad2cc045"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "シーン開始（SceneStart）",
+      "sourceHash": "4539efe66f5c69ec9e60673c778ec5610f3cd986fb7ddfd64d55d49b7618a332",
+      "translation": "Scene Start (SceneStart)",
+      "contextHash": "4539efe66f5c69ec9e60673c778ec5610f3cd986fb7ddfd64d55d49b7618a332"
+    },
+    {
+      "id": "list-053",
+      "type": "list",
+      "source": "スキル習得画面を呼び出します。",
+      "sourceHash": "ac1865dd75e23b277e16d6e03faef6608e422600382f331f7581c19dd6be4cbf",
+      "translation": "Calls up the skill learning screen.",
+      "contextHash": "ac1865dd75e23b277e16d6e03faef6608e422600382f331f7581c19dd6be4cbf"
+    },
+    {
+      "id": "list-054",
+      "type": "list",
+      "source": "アクターを指定しない場合は、アクター選択画面も表示します。",
+      "sourceHash": "c8a2a2db0b5e45418942309cda073837dbf8b3fdf11d2afb6a1c98a381910048",
+      "translation": "If no actor is specified, the actor selection screen is also displayed.",
+      "contextHash": "c8a2a2db0b5e45418942309cda073837dbf8b3fdf11d2afb6a1c98a381910048"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "スキルポイントの増減（ChangeSkillPoint）",
+      "sourceHash": "939e79d8f4a3b8602281d0d70fe6a173d227130928b1c98a32c12d22f931e9dd",
+      "translation": "Change Skill Points (ChangeSkillPoint)",
+      "contextHash": "939e79d8f4a3b8602281d0d70fe6a173d227130928b1c98a32c12d22f931e9dd"
+    },
+    {
+      "id": "list-055",
+      "type": "list",
+      "source": "アクターのスキルポイントを増減させます。",
+      "sourceHash": "0e5489644592148e64bb3b87cd5b4c81e68cc14b6e9d97667b033dfd97ba13b5",
+      "translation": "Increases or decreases an actor's skill points.",
+      "contextHash": "0e5489644592148e64bb3b87cd5b4c81e68cc14b6e9d97667b033dfd97ba13b5"
+    },
+    {
+      "id": "list-056",
+      "type": "list",
+      "source": "なお、0未満にはなりません。",
+      "sourceHash": "1e15d9f85ef41d5a422e93d34b76bd115960f0aa952c9b38a754aa58351a4eb4",
+      "translation": "The value will not fall below 0.",
+      "contextHash": "1e15d9f85ef41d5a422e93d34b76bd115960f0aa952c9b38a754aa58351a4eb4"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "スキルリセット（ResetSkill）",
+      "sourceHash": "0bf9f7dbe7b56adcb703cdaa88e4b1c63c1ffc000271ae9aa41f36c3bb71c697",
+      "translation": "Reset Skills (ResetSkill)",
+      "contextHash": "0bf9f7dbe7b56adcb703cdaa88e4b1c63c1ffc000271ae9aa41f36c3bb71c697"
+    },
+    {
+      "id": "list-057",
+      "type": "list",
+      "source": "習得したスキルを全て忘れて、スキルポイントを元に戻します。",
+      "sourceHash": "9404a211cf29245b720d6748ed77eb066a582c8e5e8c296592c6c1359f416e3c",
+      "translation": "Forgets all learned skills and restores the skill points.",
+      "contextHash": "9404a211cf29245b720d6748ed77eb066a582c8e5e8c296592c6c1359f416e3c"
+    },
+    {
+      "id": "list-058",
+      "type": "list",
+      "source": "あまりないと思いますが、当機能で習得できるスキルと同一のスキルをアクターが他の手段で覚えていた場合、そちらもリセットされてしまいます。",
+      "sourceHash": "f950fb24e2664c8a38cda128a1912d700057f0852c00785059ac4cc901e39b17",
+      "translation": "This situation is unlikely, but if an actor has learned a skill available through this feature by another means, that skill will also be reset.",
+      "contextHash": "f950fb24e2664c8a38cda128a1912d700057f0852c00785059ac4cc901e39b17"
+    },
+    {
+      "id": "link-091",
+      "type": "link",
+      "source": "上位スキル習得時に下位スキルを消去するプラグイン",
+      "sourceHash": "8363e7fea6e363c5b231d44ba5c9fc4496ccba3d6ec0680e984a96eb7c7c24fb",
+      "translation": "plugin that erases lower-tier skills when learning higher-tier skills",
+      "contextHash": "ea8a9e4424cedbf918113221d5cd63ae993688564d8e16b671c55f9a637e1d98"
+    },
+    {
+      "id": "list-059",
+      "type": "list",
+      "source": "の機能とは共存できません。忘れてしまったスキルのポイントが返還されないため不整合が生じてしまいます。",
+      "sourceHash": "6c11a4bcb3a41dde0e3e8b1ff2d093e0924736456fe08712c0aaa109eb1eb02e",
+      "translation": " feature cannot coexist with this one. An inconsistency will occur because the points for forgotten skills will not be returned.",
+      "contextHash": "ea8a9e4424cedbf918113221d5cd63ae993688564d8e16b671c55f9a637e1d98"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "スキルセットのリスト（SkillSetList）",
+      "sourceHash": "aa0fb3a0ddd2dc65eca7cf574d38948e67f3e5bfc0f7a020847add3bbb731ba9",
+      "translation": "Skill Set List (SkillSetList)",
+      "contextHash": "aa0fb3a0ddd2dc65eca7cf574d38948e67f3e5bfc0f7a020847add3bbb731ba9"
+    },
+    {
+      "id": "list-060",
+      "type": "list",
+      "source": "習得するスキルセットを定義します。",
+      "sourceHash": "2ce9d695a4d656e594875f8093ef4b2dc9eafc241ca0fe15893b249f3821fb4b",
+      "translation": "Defines the skill sets to be learned.",
+      "contextHash": "2ce9d695a4d656e594875f8093ef4b2dc9eafc241ca0fe15893b249f3821fb4b"
+    },
+    {
+      "id": "list-061",
+      "type": "list",
+      "source": "詳細は『スキルセットのプラグインパラメータ』をご覧ください。",
+      "sourceHash": "a6fada1389ec37b8f49bc9ce3fa370cb59da1158dbc82a7ec87425533b54fa1b",
+      "translation": "For details, see “Skill Set Plugin Parameters.”",
+      "contextHash": "a6fada1389ec37b8f49bc9ce3fa370cb59da1158dbc82a7ec87425533b54fa1b"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "＜スキルポイント＞（<SkillPoint>）",
+      "sourceHash": "eaf165040731afe3a7d55bf8a97a4654edae3d8b789f7cb94faeb1da2e6163af",
+      "translation": "<Skill Points> (<SkillPoint>)",
+      "contextHash": "eaf165040731afe3a7d55bf8a97a4654edae3d8b789f7cb94faeb1da2e6163af"
+    },
+    {
+      "id": "list-062",
+      "type": "list",
+      "source": "スキルポイントに関する項目です。",
+      "sourceHash": "95eed00837108587372ecee337a92ab7c62bc4013591ce2d3d4a5f790dcb746b",
+      "translation": "This section concerns skill points.",
+      "contextHash": "95eed00837108587372ecee337a92ab7c62bc4013591ce2d3d4a5f790dcb746b"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "スキルポイントの表示名（SkillPointName）",
+      "sourceHash": "2266cb7570a5efc947083c979390920f640b52eb49653b82351ea6854e217c0e",
+      "translation": "Skill Point Display Name (SkillPointName)",
+      "contextHash": "2266cb7570a5efc947083c979390920f640b52eb49653b82351ea6854e217c0e"
+    },
+    {
+      "id": "list-063",
+      "type": "list",
+      "source": "スキルポイントを表す表示名です。",
+      "sourceHash": "316bfa12b68b397d095e32414add967939f3624d01d1e69734483eb531523f62",
+      "translation": "The display name used for skill points.",
+      "contextHash": "316bfa12b68b397d095e32414add967939f3624d01d1e69734483eb531523f62"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "スキルポイントの最大値（MaxSkillPoint）",
+      "sourceHash": "3099604679b96fdb0cde3d0215f5d83ae9c61eef0a8630274115b656760aeb01",
+      "translation": "Maximum Skill Points (MaxSkillPoint)",
+      "contextHash": "3099604679b96fdb0cde3d0215f5d83ae9c61eef0a8630274115b656760aeb01"
+    },
+    {
+      "id": "list-064",
+      "type": "list",
+      "source": "スキルポイントの最大値です。",
+      "sourceHash": "756748b5a4da6f421dc4f9cc003f39d0a1676669a49d765046e73041e2ab1031",
+      "translation": "The maximum number of skill points.",
+      "contextHash": "756748b5a4da6f421dc4f9cc003f39d0a1676669a49d765046e73041e2ab1031"
+    },
+    {
+      "id": "list-065",
+      "type": "list",
+      "source": "これ以上の値にはなりません。",
+      "sourceHash": "8eeea0e1c90c9864098cabd9f8b7312ffe08757eafef74e9785ddf4d19bdc07a",
+      "translation": "The value cannot exceed this amount.",
+      "contextHash": "8eeea0e1c90c9864098cabd9f8b7312ffe08757eafef74e9785ddf4d19bdc07a"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "スキルポイントの保有方法（SkillPointType）",
+      "sourceHash": "072a4970584d81b33cf4a05c0b7fcdf9d0bba5e5efa7321f9e18a1b587eee224",
+      "translation": "Skill Point Storage Method (SkillPointType)",
+      "contextHash": "072a4970584d81b33cf4a05c0b7fcdf9d0bba5e5efa7321f9e18a1b587eee224"
+    },
+    {
+      "id": "list-066",
+      "type": "list",
+      "source": "スキルポイントの保有方法です。",
+      "sourceHash": "9ebc58dacb884ca65a073b0ce2fcefd7aadfa0cd27f9182542abcee4101b5d32",
+      "translation": "The method used to store skill points.",
+      "contextHash": "9ebc58dacb884ca65a073b0ce2fcefd7aadfa0cd27f9182542abcee4101b5d32"
+    },
+    {
+      "id": "list-067",
+      "type": "list",
+      "source": "アクター毎かパーティ共有かを選択できます。",
+      "sourceHash": "2fd0263bd181077d8f6cf6c57b199d49ad12301b1d255c48bf8bf9f65df1338f",
+      "translation": "You can choose whether points are stored per actor or shared by the party.",
+      "contextHash": "2fd0263bd181077d8f6cf6c57b199d49ad12301b1d255c48bf8bf9f65df1338f"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "スキルポイントの変数（SkillPointVariable）",
+      "sourceHash": "6231fd30299da620aa61e6d4789496e20936631cdcacc717618c0588332172d8",
+      "translation": "Skill Point Variable (SkillPointVariable)",
+      "contextHash": "6231fd30299da620aa61e6d4789496e20936631cdcacc717618c0588332172d8"
+    },
+    {
+      "id": "list-068",
+      "type": "list",
+      "source": "スキルポイントを格納する変数です。",
+      "sourceHash": "025c3e2298316c1856179b12b3e582498eadfa428bb6bdc6bf710421120a40f5",
+      "translation": "The variable that stores skill points.",
+      "contextHash": "025c3e2298316c1856179b12b3e582498eadfa428bb6bdc6bf710421120a40f5"
+    },
+    {
+      "id": "list-069",
+      "type": "list",
+      "source": "保有方法にパーティ共有を選んだ場合のみ有効です。",
+      "sourceHash": "a247d12bb3b3eea845a4ff140138b944a848a900404200a8d949e30960043a26",
+      "translation": "This is enabled only when Party Shared is selected as the storage method.",
+      "contextHash": "a247d12bb3b3eea845a4ff140138b944a848a900404200a8d949e30960043a26"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "スキルポイント獲得文（SkillPointMessage）",
+      "sourceHash": "a938b5b80f96d51db95ebe51c62a169a625d424daf317aa5ae35fcc7b366481b",
+      "translation": "Skill Point Gain Message (SkillPointMessage)",
+      "contextHash": "a938b5b80f96d51db95ebe51c62a169a625d424daf317aa5ae35fcc7b366481b"
+    },
+    {
+      "id": "list-070",
+      "type": "list",
+      "source": "スキルポイントの獲得文を表示します。",
+      "sourceHash": "a429978e8ae9123c31f3bee7f1a8b33fcd93209fd3ed03f09eec5923229ce144",
+      "translation": "Displays the message for gaining skill points.",
+      "contextHash": "a429978e8ae9123c31f3bee7f1a8b33fcd93209fd3ed03f09eec5923229ce144"
+    },
+    {
+      "id": "list-071",
+      "type": "list",
+      "source": "%1=数値, %2=スキルポイントの表示名となります。",
+      "sourceHash": "d0b9c947b64b7fdf7be560f2f92776dac8cbb97842f895c3583819e42c2926a6",
+      "translation": "%1 = the number, and %2 = the skill point display name.",
+      "contextHash": "d0b9c947b64b7fdf7be560f2f92776dac8cbb97842f895c3583819e42c2926a6"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "敵スキルポイントの既定値（DefaultEnemySkillPoint）",
+      "sourceHash": "b9ff1d8780df9d2ca9114963a3049ff00bb734ca05b20564c194fac2db1e6d02",
+      "translation": "Default Enemy Skill Points (DefaultEnemySkillPoint)",
+      "contextHash": "b9ff1d8780df9d2ca9114963a3049ff00bb734ca05b20564c194fac2db1e6d02"
+    },
+    {
+      "id": "list-072",
+      "type": "list",
+      "source": "敵が落とすスキルポイントの既定値を設定します。",
+      "sourceHash": "7672fa22b291967108e1bba4c83a01b28e0362f87bc03a9c3e6a50f63ade3c89",
+      "translation": "Sets the default number of skill points dropped by enemies.",
+      "contextHash": "7672fa22b291967108e1bba4c83a01b28e0362f87bc03a9c3e6a50f63ade3c89"
+    },
+    {
+      "id": "list-073",
+      "type": "list",
+      "source": "数式可。",
+      "sourceHash": "b9069009e9875b69887a246eed34b4fddc46f30c9b9cde6646b9f7399c6c1574",
+      "translation": "Formulas are allowed.",
+      "contextHash": "b9069009e9875b69887a246eed34b4fddc46f30c9b9cde6646b9f7399c6c1574"
+    },
+    {
+      "id": "list-074",
+      "type": "list",
+      "source": "例えば、『1 + Math.floor(a.exp() / 100)』ならば、1+経験値&divide;100（切捨）の値をスキルポイントにします。",
+      "sourceHash": "d9df04a9bfd5aa25e955423f320d982485844e6cca7007d684ba406cee95b76a",
+      "translation": "For example, “1 + Math.floor(a.exp() / 100)” sets the skill points to 1 + experience &divide; 100 (rounded down).",
+      "contextHash": "d9df04a9bfd5aa25e955423f320d982485844e6cca7007d684ba406cee95b76a"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "ＳＰ有効化スイッチ（SkillPointSwitch）",
+      "sourceHash": "a96a021ee7567e1767d233ea9556b814b030447a1b8e19f202b7fac5c5c34bff",
+      "translation": "SP Enable Switch (SkillPointSwitch)",
+      "contextHash": "a96a021ee7567e1767d233ea9556b814b030447a1b8e19f202b7fac5c5c34bff"
+    },
+    {
+      "id": "list-075",
+      "type": "list",
+      "source": "指定のスイッチがオンの際、スキルポイントの増減を有効化します。",
+      "sourceHash": "0a78565ba84df7267541a8d6509c6b3cbb95d0b8a8a096497b34e3b17c0d8ac0",
+      "translation": "Enables changes to skill points when the specified switch is on.",
+      "contextHash": "0a78565ba84df7267541a8d6509c6b3cbb95d0b8a8a096497b34e3b17c0d8ac0"
+    },
+    {
+      "id": "list-076",
+      "type": "list",
+      "source": "空白なら常に有効。",
+      "sourceHash": "df742f2f524d7230586069ecabebe5439e5ac4e09ecd9d6c0f2af1cf2c492bd1",
+      "translation": "Always enabled if left blank.",
+      "contextHash": "df742f2f524d7230586069ecabebe5439e5ac4e09ecd9d6c0f2af1cf2c492bd1"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "控えの獲得率（BenchSkillPointRate）",
+      "sourceHash": "77f2d763f62a2accc0e1d54584f2b6215036ee22ea8f56cda08a6fd6a0647e4f",
+      "translation": "Bench Gain Rate (BenchSkillPointRate)",
+      "contextHash": "77f2d763f62a2accc0e1d54584f2b6215036ee22ea8f56cda08a6fd6a0647e4f"
+    },
+    {
+      "id": "list-077",
+      "type": "list",
+      "source": "控えメンバーのスキルポイントの獲得率です。",
+      "sourceHash": "99dbb055351405db702572fc3a4620e286dfdfe2cb7a6414151899624322bbe6",
+      "translation": "The skill point gain rate for bench members.",
+      "contextHash": "99dbb055351405db702572fc3a4620e286dfdfe2cb7a6414151899624322bbe6"
+    },
+    {
+      "id": "list-078",
+      "type": "list",
+      "source": "数式可。",
+      "sourceHash": "b9069009e9875b69887a246eed34b4fddc46f30c9b9cde6646b9f7399c6c1574",
+      "translation": "Formulas are supported.",
+      "contextHash": "b9069009e9875b69887a246eed34b4fddc46f30c9b9cde6646b9f7399c6c1574"
+    },
+    {
+      "id": "list-079",
+      "type": "list",
+      "source": "空白の場合は通常経験値と同率を使用します。",
+      "sourceHash": "bc905b1e14e5d790dce08c6a3d8640dc1bf54a09099e52a511af68f363091a48",
+      "translation": "If left blank, the same rate as normal EXP is used.",
+      "contextHash": "bc905b1e14e5d790dce08c6a3d8640dc1bf54a09099e52a511af68f363091a48"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "レベルアップ時のSP（LevelUpSkillPoint）",
+      "sourceHash": "94089078af4e2a1c2ccdec01e247198a6291caf69d7f948bd7dae41af6486ab0",
+      "translation": "SP Gained Upon Level Up (LevelUpSkillPoint)",
+      "contextHash": "94089078af4e2a1c2ccdec01e247198a6291caf69d7f948bd7dae41af6486ab0"
+    },
+    {
+      "id": "list-080",
+      "type": "list",
+      "source": "レベルアップ時に獲得できるスキルポイントです。",
+      "sourceHash": "7f5898de8521c866f0d7804198af7658180b28a2d9f256714ef868a8b564078d",
+      "translation": "The skill points that can be earned upon leveling up.",
+      "contextHash": "7f5898de8521c866f0d7804198af7658180b28a2d9f256714ef868a8b564078d"
+    },
+    {
+      "id": "list-081",
+      "type": "list",
+      "source": "数式可。",
+      "sourceHash": "b9069009e9875b69887a246eed34b4fddc46f30c9b9cde6646b9f7399c6c1574",
+      "translation": "Formulas are supported.",
+      "contextHash": "b9069009e9875b69887a246eed34b4fddc46f30c9b9cde6646b9f7399c6c1574"
+    },
+    {
+      "id": "list-082",
+      "type": "list",
+      "source": "例えば、『a.level』ならば上昇後のレベルと同値のスキルポイントが手に入ります。",
+      "sourceHash": "4cbc60eff913b762310245e9d0264abbe2a77398f11d20b87565463a3622fbef",
+      "translation": "For example, if you use “a.level,” you will receive skill points equal to your level after leveling up.",
+      "contextHash": "4cbc60eff913b762310245e9d0264abbe2a77398f11d20b87565463a3622fbef"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "＜スキルリスト関連＞（<SkillListWindow>）",
+      "sourceHash": "969cb68fdfa356f7c8b9d0bc941ba4e532bc98eb14a7247e578f9942281cf2f7",
+      "translation": "<Related to the Skill List> (<SkillListWindow>)",
+      "contextHash": "969cb68fdfa356f7c8b9d0bc941ba4e532bc98eb14a7247e578f9942281cf2f7"
+    },
+    {
+      "id": "list-083",
+      "type": "list",
+      "source": "スキルリストウィンドウに関する項目です。",
+      "sourceHash": "f11dd64d298dcae1468a3fde4dd616597f5c04786024953dc6f1c9ebc3f5b6de",
+      "translation": "Settings related to the skill list window.",
+      "contextHash": "f11dd64d298dcae1468a3fde4dd616597f5c04786024953dc6f1c9ebc3f5b6de"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "習得済スキルの表示方法（LearnedSkillDisplayStyle）",
+      "sourceHash": "16da7140c7e733d0e8185f64bfadc805b4f066446146fdcce2b5ca5254beaa52",
+      "translation": "Learned Skill Display Style (LearnedSkillDisplayStyle)",
+      "contextHash": "16da7140c7e733d0e8185f64bfadc805b4f066446146fdcce2b5ca5254beaa52"
+    },
+    {
+      "id": "list-084",
+      "type": "list",
+      "source": "習得したスキルの表示方法です。",
+      "sourceHash": "55e03dfd2dd561425a9b0c17df5df612919d33ad8b3970e56f412d45ecabb00b",
+      "translation": "How learned skills are displayed.",
+      "contextHash": "55e03dfd2dd561425a9b0c17df5df612919d33ad8b3970e56f412d45ecabb00b"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "アイコンを表示（UseIcon）",
+      "sourceHash": "0a9e00458fc0dcbf74be4acd852d76b5ca9aa0193e0c76223fe98b0c45102c84",
+      "translation": "Display Icons (UseIcon)",
+      "contextHash": "0a9e00458fc0dcbf74be4acd852d76b5ca9aa0193e0c76223fe98b0c45102c84"
+    },
+    {
+      "id": "list-085",
+      "type": "list",
+      "source": "アイコンをスキル名の前に表示するかどうか？",
+      "sourceHash": "deec50c8d006cc4e4f0de7cc232074acb607b31447a727eac554fd0126ecc3b0",
+      "translation": "Whether to display icons before skill names.",
+      "contextHash": "deec50c8d006cc4e4f0de7cc232074acb607b31447a727eac554fd0126ecc3b0"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "スキルポイントの色（SkillPointColor）",
+      "sourceHash": "74e920b74e249b90d5cca98da0ee6e98fb613659347571205a816409999a1435",
+      "translation": "Skill Point Color (SkillPointColor)",
+      "contextHash": "74e920b74e249b90d5cca98da0ee6e98fb613659347571205a816409999a1435"
+    },
+    {
+      "id": "list-086",
+      "type": "list",
+      "source": "スキルポイントの文字色です。",
+      "sourceHash": "19b1c1a824a320cbb77b227f98f70e16876b111e3d2bb07d135c13bb98bc1c26",
+      "translation": "The text color for skill points.",
+      "contextHash": "19b1c1a824a320cbb77b227f98f70e16876b111e3d2bb07d135c13bb98bc1c26"
+    },
+    {
+      "id": "list-087",
+      "type": "list",
+      "source": "システムカラーの番号を指定してください。",
+      "sourceHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf",
+      "translation": "Specify the system color number.",
+      "contextHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "習得済の表示文（LearnedText）",
+      "sourceHash": "6e9f24b72ba691468b801b9b534ff4075451e87167befee3d252e54a6060d071",
+      "translation": "Learned Text (LearnedText)",
+      "contextHash": "6e9f24b72ba691468b801b9b534ff4075451e87167befee3d252e54a6060d071"
+    },
+    {
+      "id": "list-088",
+      "type": "list",
+      "source": "習得済スキルに表示する文言です。",
+      "sourceHash": "e8f8176f1a06e912f8648b81248507b27c9f8a5ebb3cf3677c38b458a82b1296",
+      "translation": "The text displayed for learned skills.",
+      "contextHash": "e8f8176f1a06e912f8648b81248507b27c9f8a5ebb3cf3677c38b458a82b1296"
+    },
+    {
+      "id": "list-089",
+      "type": "list",
+      "source": "スキルポイントの場所に表示されます。",
+      "sourceHash": "7659823226dbe0313fe9847be057b1f30e49fa8c3e06c09136f14bc51e84d200",
+      "translation": "It is displayed where the skill points would normally appear.",
+      "contextHash": "7659823226dbe0313fe9847be057b1f30e49fa8c3e06c09136f14bc51e84d200"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "習得済の色（LearnedTextColor）",
+      "sourceHash": "7a81014563a71ef6a33f2f0eaa08870d0e11bc04df640ec3116491122ef8501a",
+      "translation": "Learned Text Color (LearnedTextColor)",
+      "contextHash": "7a81014563a71ef6a33f2f0eaa08870d0e11bc04df640ec3116491122ef8501a"
+    },
+    {
+      "id": "list-090",
+      "type": "list",
+      "source": "習得済スキルに表示する文言の色です。",
+      "sourceHash": "37baa8cb4434139f2e8be16b78757a261ff12cbbd8026ffa138b4645e30f8224",
+      "translation": "The color of the text displayed for learned skills.",
+      "contextHash": "37baa8cb4434139f2e8be16b78757a261ff12cbbd8026ffa138b4645e30f8224"
+    },
+    {
+      "id": "list-091",
+      "type": "list",
+      "source": "システムカラーの番号を指定してください。",
+      "sourceHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf",
+      "translation": "Specify the system color number.",
+      "contextHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "隠しスキルを表示（ShowHiddenSkills）",
+      "sourceHash": "55d5a1f5e7315539a2fb74a56bbb77e2310fa65b33a3f4107e530a82a3c78d26",
+      "translation": "Show Hidden Skills (ShowHiddenSkills)",
+      "contextHash": "55d5a1f5e7315539a2fb74a56bbb77e2310fa65b33a3f4107e530a82a3c78d26"
+    },
+    {
+      "id": "list-092",
+      "type": "list",
+      "source": "条件を満たしていないスキルを表示します。",
+      "sourceHash": "cc489f39519235af81742b2849bda345451c9ba05b10b7a78666e57810e07818",
+      "translation": "Displays skills whose conditions have not been met.",
+      "contextHash": "cc489f39519235af81742b2849bda345451c9ba05b10b7a78666e57810e07818"
+    },
+    {
+      "id": "list-093",
+      "type": "list",
+      "source": "条件表示する場合はヘルプの行数は３以上に。",
+      "sourceHash": "7ae07ac4ed4288f5cf313228271d95e3b5af53a976554dde2aeb9c55a6626d3e",
+      "translation": "When displaying conditions, set the number of help lines to 3 or more.",
+      "contextHash": "7ae07ac4ed4288f5cf313228271d95e3b5af53a976554dde2aeb9c55a6626d3e"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "隠しスキルの記号（HiddenSymbol）",
+      "sourceHash": "8c0d833e16507abc6d01d7601796fab7fbc41274e0e4fdadf366a598f9ca5e47",
+      "translation": "Hidden Skill Symbol (HiddenSymbol)",
+      "contextHash": "8c0d833e16507abc6d01d7601796fab7fbc41274e0e4fdadf366a598f9ca5e47"
+    },
+    {
+      "id": "list-094",
+      "type": "list",
+      "source": "隠しスキルに表示する記号です。",
+      "sourceHash": "36a699b8425b6cef0ebb8c68e94f953c9e467032157493f3a8e3ca1cc8caed0a",
+      "translation": "The symbol displayed for hidden skills.",
+      "contextHash": "36a699b8425b6cef0ebb8c68e94f953c9e467032157493f3a8e3ca1cc8caed0a"
+    },
+    {
+      "id": "list-095",
+      "type": "list",
+      "source": "スキルポイントの左に記号を表示することで「他に条件があるから、ポイントが足りていても習得できないよ！」ということを示します。",
+      "sourceHash": "f34e97b1e944ace4b35429077f352813b7abb6bc6b07fd6829065fcb2b8cb99e",
+      "translation": "Displaying a symbol to the left of the skill points indicates that “there are other conditions, so the skill cannot be learned even if you have enough points!”",
+      "contextHash": "f34e97b1e944ace4b35429077f352813b7abb6bc6b07fd6829065fcb2b8cb99e"
+    },
+    {
+      "id": "list-096",
+      "type": "list",
+      "source": "条件については",
+      "sourceHash": "ca0532d296e7516fb55e6010d166eb7c6ee9ee6dada5be16af5da981b5b82193",
+      "translation": "For the conditions, enter them in the ",
+      "contextHash": "e20bf794ac77979ef3b47ec30bfe7ab92da54295e39a9c0a60a6bab0a9e301eb"
+    },
+    {
+      "id": "link-092",
+      "type": "link",
+      "source": "ヘルプに追記",
+      "sourceHash": "efa34e5a09c51e400398e185890bca16a0b8cc28b8d3ac2f1231c5af34ad89a5",
+      "translation": "Add to Help",
+      "contextHash": "e20bf794ac77979ef3b47ec30bfe7ab92da54295e39a9c0a60a6bab0a9e301eb"
+    },
+    {
+      "id": "list-097",
+      "type": "list",
+      "source": "のところで入力してください。",
+      "sourceHash": "1c19014a4c24d379de7a3faa91ac124222b308f74f3564af2a29aeeecb23168b",
+      "translation": " section.",
+      "contextHash": "e20bf794ac77979ef3b47ec30bfe7ab92da54295e39a9c0a60a6bab0a9e301eb"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "ヘルプの行数（HelpLines）",
+      "sourceHash": "f5de51c2bcd68d21e805a75137c51fd7697735fd3228128d9694741573cad287",
+      "translation": "Number of Help Lines (HelpLines)",
+      "contextHash": "f5de51c2bcd68d21e805a75137c51fd7697735fd3228128d9694741573cad287"
+    },
+    {
+      "id": "list-098",
+      "type": "list",
+      "source": "ヘルプの行数を変更します。",
+      "sourceHash": "95d49f2b856ba907eb7271585153ce53fc1554a7edac274e970f180c832645a7",
+      "translation": "Changes the number of help lines.",
+      "contextHash": "95d49f2b856ba907eb7271585153ce53fc1554a7edac274e970f180c832645a7"
+    },
+    {
+      "id": "list-099",
+      "type": "list",
+      "source": "基本的には、行を３以上に増やすことで隠しスキルの条件表示を行うことを想定しています。",
+      "sourceHash": "1523c9f5f2292d1b1e914284fd0f0566195bb249d0b9e7a99e56ac50881423e3",
+      "translation": "Basically, this is intended to display the conditions for hidden skills by increasing the number of lines to 3 or more.",
+      "contextHash": "1523c9f5f2292d1b1e914284fd0f0566195bb249d0b9e7a99e56ac50881423e3"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "隠しスキルのマスク（HiddenSkillMask）",
+      "sourceHash": "f4d695a44b437154f5e63d1f0d709705372a6bd316719b4b0e3eccaf860ac3ce",
+      "translation": "Hidden Skill Mask (HiddenSkillMask)",
+      "contextHash": "f4d695a44b437154f5e63d1f0d709705372a6bd316719b4b0e3eccaf860ac3ce"
+    },
+    {
+      "id": "list-100",
+      "type": "list",
+      "source": "隠しスキルを指定した文字列（？など）で隠します。",
+      "sourceHash": "1a9c15244fb3a1bc62ea28f9eace3c159bdd2e74750a7986da7e90ed03703130",
+      "translation": "Hides hidden skills using the specified string, such as “?”.",
+      "contextHash": "1a9c15244fb3a1bc62ea28f9eace3c159bdd2e74750a7986da7e90ed03703130"
+    },
+    {
+      "id": "list-101",
+      "type": "list",
+      "source": "条件を満たすと表示されるようになります。",
+      "sourceHash": "83d94bf03c651ddd94892f5e7be759e848ab5fa53fa869805e08bce1c3bf0980",
+      "translation": "They become visible when their conditions are met.",
+      "contextHash": "83d94bf03c651ddd94892f5e7be759e848ab5fa53fa869805e08bce1c3bf0980"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "ヘルプを隠す（HiddenHelp）",
+      "sourceHash": "ecf285c66e4910feb0fa9522755ce67145d534275913bef82de0e3559d72c72e",
+      "translation": "Hide Help (HiddenHelp)",
+      "contextHash": "ecf285c66e4910feb0fa9522755ce67145d534275913bef82de0e3559d72c72e"
+    },
+    {
+      "id": "list-102",
+      "type": "list",
+      "source": "隠しスキルのヘルプ（追記除く）を隠します。",
+      "sourceHash": "e29ee85a7c5251312078ba913ef915bf8b75d7514eb47f4ea3e5fdb845c1cfb5",
+      "translation": "Hides the help text for hidden skills, excluding appended text.",
+      "contextHash": "e29ee85a7c5251312078ba913ef915bf8b75d7514eb47f4ea3e5fdb845c1cfb5"
+    },
+    {
+      "id": "list-103",
+      "type": "list",
+      "source": "条件を満たすと表示されるようになります。",
+      "sourceHash": "83d94bf03c651ddd94892f5e7be759e848ab5fa53fa869805e08bce1c3bf0980",
+      "translation": "It becomes visible when the conditions are met.",
+      "contextHash": "83d94bf03c651ddd94892f5e7be759e848ab5fa53fa869805e08bce1c3bf0980"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "＜アクターウィンドウ関連＞（<ActorWindow>）",
+      "sourceHash": "4e79d8055a7b2fa603b8cc2c70849f42b575d14946c640781b3b853a5c199c26",
+      "translation": "<Related to the Actor Window> (<ActorWindow>)",
+      "contextHash": "4e79d8055a7b2fa603b8cc2c70849f42b575d14946c640781b3b853a5c199c26"
+    },
+    {
+      "id": "list-104",
+      "type": "list",
+      "source": "アクターウィンドウに関する項目です。",
+      "sourceHash": "a881620b766a760f89d183551b2bac4893bc3649ee1bbb6821878383ca1007d8",
+      "translation": "Settings related to the actor window.",
+      "contextHash": "a881620b766a760f89d183551b2bac4893bc3649ee1bbb6821878383ca1007d8"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "アクターウィンドウの横幅（ActorWindowWidth）",
+      "sourceHash": "93e9b82911af978f759b9aac93e3b10317ad4a382bddd366082c056bdec22021",
+      "translation": "Actor Window Width (ActorWindowWidth)",
+      "contextHash": "93e9b82911af978f759b9aac93e3b10317ad4a382bddd366082c056bdec22021"
+    },
+    {
+      "id": "list-105",
+      "type": "list",
+      "source": "アクターウィンドウの横幅です。",
+      "sourceHash": "d647762a9526ac22d2c6f88160fcaef72f39ee21df92e54005069150ec4851ff",
+      "translation": "The width of the actor window.",
+      "contextHash": "d647762a9526ac22d2c6f88160fcaef72f39ee21df92e54005069150ec4851ff"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "アクターウィンドウの縦幅（ActorWindowHeight）",
+      "sourceHash": "695b6a71161135cf5522f45e2a495a91cbfbbad421f4290ed95bdcd1d8bbb151",
+      "translation": "Actor Window Height (ActorWindowHeight)",
+      "contextHash": "695b6a71161135cf5522f45e2a495a91cbfbbad421f4290ed95bdcd1d8bbb151"
+    },
+    {
+      "id": "list-106",
+      "type": "list",
+      "source": "アクターウィンドウの縦幅です。",
+      "sourceHash": "e1fbd55607a666e2d8261faa6a9095de7d9935103c016a099c70702dba2b4ef5",
+      "translation": "The height of the actor window.",
+      "contextHash": "e1fbd55607a666e2d8261faa6a9095de7d9935103c016a099c70702dba2b4ef5"
+    },
+    {
+      "id": "list-107",
+      "type": "list",
+      "source": "空白の場合は最大まで伸ばします。",
+      "sourceHash": "dddc7c6fdd5c344c1c7e5b65455ad427d3b993a0881a569a128823c8a0e16ca4",
+      "translation": "If left blank, it expands to the maximum height.",
+      "contextHash": "dddc7c6fdd5c344c1c7e5b65455ad427d3b993a0881a569a128823c8a0e16ca4"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "アクターの変更無効（ActorChangeInvalid）",
+      "sourceHash": "f599f0c28358d745781c9d1319bcf3afcbd627a223d318de62704a2e6f2490a1",
+      "translation": "Disable Actor Changes (ActorChangeInvalid)",
+      "contextHash": "f599f0c28358d745781c9d1319bcf3afcbd627a223d318de62704a2e6f2490a1"
+    },
+    {
+      "id": "list-108",
+      "type": "list",
+      "source": "プラグインコマンドにて、アクターを指定して呼び出した場合はアクターの変更を禁止します。",
+      "sourceHash": "e42464a820242e5cc9de6806483d15c4327abe12a23fa01162ab0d5565fae669",
+      "translation": "When called via a plugin command with an actor specified, changing the actor is prohibited.",
+      "contextHash": "e42464a820242e5cc9de6806483d15c4327abe12a23fa01162ab0d5565fae669"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "＜確認ウィンドウ関連＞（<ConfirmWindow>）",
+      "sourceHash": "515399a6b793e3ca4598e542e626189325f61dbfb805f9779f44cd07802a9dde",
+      "translation": "<Related to the Confirmation Window> (<ConfirmWindow>)",
+      "contextHash": "515399a6b793e3ca4598e542e626189325f61dbfb805f9779f44cd07802a9dde"
+    },
+    {
+      "id": "list-109",
+      "type": "list",
+      "source": "スキルシステムを習得する際の確認ウィンドウに関する項目です。",
+      "sourceHash": "6be33f1c7dd302c41b6c4e8280807d7c0f0fdc1feced45e0ceb0ccafeb1d7513",
+      "translation": "Settings related to the confirmation window shown when learning a skill.",
+      "contextHash": "6be33f1c7dd302c41b6c4e8280807d7c0f0fdc1feced45e0ceb0ccafeb1d7513"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "確認メッセージ（ConfirmMessage）",
+      "sourceHash": "a4d46c71efe715578104487cf92a3ccfef9266a288ac6c2b7489bbb9a0ece1b1",
+      "translation": "Confirmation Message (ConfirmMessage)",
+      "contextHash": "a4d46c71efe715578104487cf92a3ccfef9266a288ac6c2b7489bbb9a0ece1b1"
+    },
+    {
+      "id": "list-110",
+      "type": "list",
+      "source": "スキルの習得確認メッセージの内容です。",
+      "sourceHash": "69dea7e35c26930ddce784c9adf2637c31a86976320dd3bf187b2cefe5dc3b6b",
+      "translation": "The content of the skill learning confirmation message.",
+      "contextHash": "69dea7e35c26930ddce784c9adf2637c31a86976320dd3bf187b2cefe5dc3b6b"
+    },
+    {
+      "id": "list-111",
+      "type": "list",
+      "source": "%1=スキル名、%2=アイコン、%3=スキルポイントです。",
+      "sourceHash": "3a3cb87ad93c8da83a538ef71214a962b943d85adae3e600677ad1fa3bfff7b9",
+      "translation": "%1 = skill name, %2 = icon, %3 = skill points.",
+      "contextHash": "3a3cb87ad93c8da83a538ef71214a962b943d85adae3e600677ad1fa3bfff7b9"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "ＯＫの文言（ConfirmButtonOk）",
+      "sourceHash": "f57d4914b84691c2ef3d3169ea165df3def0a2b4335a35078b7d9af34f390109",
+      "translation": "OK Text (ConfirmButtonOk)",
+      "contextHash": "f57d4914b84691c2ef3d3169ea165df3def0a2b4335a35078b7d9af34f390109"
+    },
+    {
+      "id": "list-112",
+      "type": "list",
+      "source": "スキルの習得確認メッセージを確定する際のボタンの表示です。",
+      "sourceHash": "491f1941153b0915be65b36d2dc9199eba952b4cb204f378122973516438f996",
+      "translation": "The button text used to confirm the skill learning message.",
+      "contextHash": "491f1941153b0915be65b36d2dc9199eba952b4cb204f378122973516438f996"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "キャンセルの文言（ConfirmButtonCancel）",
+      "sourceHash": "b73bd900a764f622f1e38f25076e700b9e8dc104616f31379f729b5c743a911a",
+      "translation": "Cancel Text (ConfirmButtonCancel)",
+      "contextHash": "b73bd900a764f622f1e38f25076e700b9e8dc104616f31379f729b5c743a911a"
+    },
+    {
+      "id": "list-113",
+      "type": "list",
+      "source": "スキルの習得確認メッセージをキャンセルする際のボタンの表示です。",
+      "sourceHash": "9a1bdb81f97d34d5eb5fefbe92919ae700d6f3239d307db2cb8b5329391a8fcd",
+      "translation": "The button text used to cancel the skill learning message.",
+      "contextHash": "9a1bdb81f97d34d5eb5fefbe92919ae700d6f3239d307db2cb8b5329391a8fcd"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "確定時のＳＥ（ConfirmOkSe）",
+      "sourceHash": "89de14b7f266217a64ef45fba9efdc54a54406a719187f50fadd49f5af5288ad",
+      "translation": "Sound Effect on Confirmation (ConfirmOkSe)",
+      "contextHash": "89de14b7f266217a64ef45fba9efdc54a54406a719187f50fadd49f5af5288ad"
+    },
+    {
+      "id": "list-114",
+      "type": "list",
+      "source": "スキルの習得を確定した際の効果音です。",
+      "sourceHash": "bf30a6281dcb5f061628eae80011b94d40992dc437081438dc0d0f4ffed593fa",
+      "translation": "The sound effect played when skill learning is confirmed.",
+      "contextHash": "bf30a6281dcb5f061628eae80011b94d40992dc437081438dc0d0f4ffed593fa"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "ウィンドウの不透明度（ConfirmWindowOpacity）",
+      "sourceHash": "c5bba282a7afc163cfd2281722badfd8be4328844bae6b217ba5eea1e2b6d39f",
+      "translation": "Window Opacity (ConfirmWindowOpacity)",
+      "contextHash": "c5bba282a7afc163cfd2281722badfd8be4328844bae6b217ba5eea1e2b6d39f"
+    },
+    {
+      "id": "list-115",
+      "type": "list",
+      "source": "確認ウィンドウの背景不透明度です。",
+      "sourceHash": "e56f72fbd75e8911ae91f3e6d316733194251e45fccbf35ac4ac9510ea13328a",
+      "translation": "The background opacity of the confirmation window.",
+      "contextHash": "e56f72fbd75e8911ae91f3e6d316733194251e45fccbf35ac4ac9510ea13328a"
+    },
+    {
+      "id": "list-116",
+      "type": "list",
+      "source": "空欄ならシステムの既定値を維持します。",
+      "sourceHash": "2fbc4b698183401bbe228e355ab3c9ffded2c09dc64bf155f241ddc8c66cc535",
+      "translation": "If left blank, the system default value is retained.",
+      "contextHash": "2fbc4b698183401bbe228e355ab3c9ffded2c09dc64bf155f241ddc8c66cc535"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "一行の高さ（ConfirmLineHeight）",
+      "sourceHash": "3da9a20a61989b2173c1827155a6afce57782aa32715292402c034c9262882e5",
+      "translation": "Line Height (ConfirmLineHeight)",
+      "contextHash": "3da9a20a61989b2173c1827155a6afce57782aa32715292402c034c9262882e5"
+    },
+    {
+      "id": "list-117",
+      "type": "list",
+      "source": "確認ウィンドウの一行の高さです。",
+      "sourceHash": "2ebf94013b3d22e23f3b5cf35b8ff2bf6d70e7920910b7b65a840123bea0ae19",
+      "translation": "The height of each line in the confirmation window.",
+      "contextHash": "2ebf94013b3d22e23f3b5cf35b8ff2bf6d70e7920910b7b65a840123bea0ae19"
+    },
+    {
+      "id": "list-118",
+      "type": "list",
+      "source": "空欄なら標準の高さを使用します。",
+      "sourceHash": "ef672780b121b25f8167a9d9011079351e17a6715c0e1c798b370ceb255b4ee5",
+      "translation": "If left blank, the standard height is used.",
+      "contextHash": "ef672780b121b25f8167a9d9011079351e17a6715c0e1c798b370ceb255b4ee5"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+      "contextHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956"
+    },
+    {
+      "id": "list-119",
+      "type": "list",
+      "source": "メニューコマンドにスキル習得を挿入する位置です。",
+      "sourceHash": "317896add511130d8bfa2ca7414542102097d83b03afb083fb1c5407191db344",
+      "translation": "The position at which to insert the skill learning command into the menu commands.",
+      "contextHash": "317896add511130d8bfa2ca7414542102097d83b03afb083fb1c5407191db344"
+    },
+    {
+      "id": "list-120",
+      "type": "list",
+      "source": "0が先頭。",
+      "sourceHash": "c8362cfaa57627d0a0b8e4c6418f4794865798ee731403ca3e760608cb500ba9",
+      "translation": "0 is the first position.",
+      "contextHash": "c8362cfaa57627d0a0b8e4c6418f4794865798ee731403ca3e760608cb500ba9"
+    },
+    {
+      "id": "list-121",
+      "type": "list",
+      "source": "不要ならパラメータの一覧からＤＥＬキーで消去してください。",
+      "sourceHash": "ca5f767dacf7a54c6b2ddfb14d6dc4a25fddd28fc36cd01d432ebbcbc5a71978",
+      "translation": "If unnecessary, delete it from the parameter list using the DEL key.",
+      "contextHash": "ca5f767dacf7a54c6b2ddfb14d6dc4a25fddd28fc36cd01d432ebbcbc5a71978"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "メニュー表示名（CommandName）",
+      "sourceHash": "7b2b23e2036e6a66981b69c7fdaa7f0bcae4e66bbc110cbf1f7399129c291caa",
+      "translation": "Menu Display Name (CommandName)",
+      "contextHash": "7b2b23e2036e6a66981b69c7fdaa7f0bcae4e66bbc110cbf1f7399129c291caa"
+    },
+    {
+      "id": "list-122",
+      "type": "list",
+      "source": "スキルシステムの表示コマンド名を設定します。",
+      "sourceHash": "27d63d6fa44ae7fe899f16a7ea1ffe7d2747e0068476f3ef77a206ce30bc767c",
+      "translation": "Sets the display command name for the skill system.",
+      "contextHash": "27d63d6fa44ae7fe899f16a7ea1ffe7d2747e0068476f3ef77a206ce30bc767c"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "表示許可するスイッチ（MenuCommandSwitch）",
+      "sourceHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81",
+      "translation": "Switch Allowing Display (MenuCommandSwitch)",
+      "contextHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81"
+    },
+    {
+      "id": "list-123",
+      "type": "list",
+      "source": "スイッチがオンの時のみコマンドを表示します。",
+      "sourceHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7",
+      "translation": "The command is displayed only when the switch is ON.",
+      "contextHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7"
+    },
+    {
+      "id": "list-124",
+      "type": "list",
+      "source": "空白なら常に表示します。",
+      "sourceHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e",
+      "translation": "If left blank, it is always displayed.",
+      "contextHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "マスク文字列（MaskString）",
+      "sourceHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d",
+      "translation": "Mask String (MaskString)",
+      "contextHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d"
+    },
+    {
+      "id": "list-125",
+      "type": "list",
+      "source": "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。",
+      "sourceHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a",
+      "translation": "When the switch allowing display is OFF, the command is displayed using the specified string.",
+      "contextHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a"
+    },
+    {
+      "id": "list-126",
+      "type": "list",
+      "source": "例えば、機能を解放する前のコマンドを「？？？？」というように表示できます。",
+      "sourceHash": "75696b12a6253dd295d1dab97ac71874a2abb1e9b8f30d1a95a552de6558a0dd",
+      "translation": "For example, you can display a command as \"????\" before the feature is unlocked.",
+      "contextHash": "75696b12a6253dd295d1dab97ac71874a2abb1e9b8f30d1a95a552de6558a0dd"
+    },
+    {
+      "id": "list-127",
+      "type": "list",
+      "source": "空欄ならコマンド自体を非表示にします。",
+      "sourceHash": "ee543d903862b4cbd50cad343433c27785dd0c199f3cbf821571e72ec2cc2f94",
+      "translation": "If left blank, the command itself is hidden.",
+      "contextHash": "ee543d903862b4cbd50cad343433c27785dd0c199f3cbf821571e72ec2cc2f94"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "禁止するスイッチ（DisableSwitch）",
+      "sourceHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b",
+      "translation": "Disable Switch (DisableSwitch)",
+      "contextHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b"
+    },
+    {
+      "id": "list-128",
+      "type": "list",
+      "source": "スイッチがオンの時のみコマンドを禁止（灰色）します。",
+      "sourceHash": "222a12005dd77b43d982d7401dfca08e54a186b66a285aeb7bf82353668dfce1",
+      "translation": "The command is disabled (grayed out) only when the switch is ON.",
+      "contextHash": "222a12005dd77b43d982d7401dfca08e54a186b66a285aeb7bf82353668dfce1"
+    },
+    {
+      "id": "list-129",
+      "type": "list",
+      "source": "空白なら常に許可します。",
+      "sourceHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333",
+      "translation": "If left blank, it is always enabled.",
+      "contextHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "スキルセットのパラメータ（Plugin Parameters SkillSet）",
+      "sourceHash": "3795ba4d09c4347f974fb5535e9d7bc5b4716e8a6f5e4e9337a7695fd0093cd1",
+      "translation": "Skill Set Parameters (Plugin Parameters SkillSet)",
+      "contextHash": "3795ba4d09c4347f974fb5535e9d7bc5b4716e8a6f5e4e9337a7695fd0093cd1"
+    },
+    {
+      "id": "list-130",
+      "type": "list",
+      "source": "スキルセットのプラグインパラメータです。",
+      "sourceHash": "8a58e0402569858dcd30f4f2f367e075b18e31daa78a29a7a1cbe3024d9e0926",
+      "translation": "The plugin parameters for the skill set.",
+      "contextHash": "8a58e0402569858dcd30f4f2f367e075b18e31daa78a29a7a1cbe3024d9e0926"
+    },
+    {
+      "id": "list-131",
+      "type": "list",
+      "source": "スキルセットとはスキルのまとまりです。主にアクター単位でスキルを管理することを想定しています。",
+      "sourceHash": "39f24003d413796eb5528cbf4aef7a30c07dfb941cfe05b58d2fa3ceaf0453e9",
+      "translation": "A skill set is a collection of skills. It is primarily intended for managing skills on an actor-by-actor basis.",
+      "contextHash": "39f24003d413796eb5528cbf4aef7a30c07dfb941cfe05b58d2fa3ceaf0453e9"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "メモ（Note）",
+      "sourceHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1",
+      "translation": "Note (Note)",
+      "contextHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1"
+    },
+    {
+      "id": "list-132",
+      "type": "list",
+      "source": "識別用のメモです。",
+      "sourceHash": "011e3eb991d02e745971260c93de0d3ba0c8d4a757ef4ccb2162ce3e6b5334c3",
+      "translation": "A note for identification.",
+      "contextHash": "011e3eb991d02e745971260c93de0d3ba0c8d4a757ef4ccb2162ce3e6b5334c3"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "スキルリスト（SkillList）",
+      "sourceHash": "f2bc11a11e9d924f2a643ce72c9fcbe5578e475e2657fda89d84842d019c6e90",
+      "translation": "Skill List (SkillList)",
+      "contextHash": "f2bc11a11e9d924f2a643ce72c9fcbe5578e475e2657fda89d84842d019c6e90"
+    },
+    {
+      "id": "list-133",
+      "type": "list",
+      "source": "スキルリストを定義します。",
+      "sourceHash": "24a010f7ef9e28db6d369c8758b1c6e3ff8dca33d90ceb58abdd763a90f4f60d",
+      "translation": "Defines the skill list.",
+      "contextHash": "24a010f7ef9e28db6d369c8758b1c6e3ff8dca33d90ceb58abdd763a90f4f60d"
+    },
+    {
+      "id": "list-134",
+      "type": "list",
+      "source": "詳細は『スキルデータのプラグインパラメータ』をご覧ください。",
+      "sourceHash": "ef02558e84818a2cd2e0098b878f0e9a5221abf60a49e6201218cf043b7e3a6d",
+      "translation": "For details, see “Skill Data Plugin Parameters.”",
+      "contextHash": "ef02558e84818a2cd2e0098b878f0e9a5221abf60a49e6201218cf043b7e3a6d"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "＜条件＞（<Condition>）",
+      "sourceHash": "6d175cc5b1920a311a1a434b5b22b3610fe7e98b1de7c8aa9d4117f2003286d5",
+      "translation": "<Conditions> (<Condition>)",
+      "contextHash": "6d175cc5b1920a311a1a434b5b22b3610fe7e98b1de7c8aa9d4117f2003286d5"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "アクター（Actor）",
+      "sourceHash": "d1e3e4fa9d9b0c34d66f166c920e68a3c66cedd376e694ab51fa390bb71ac00b",
+      "translation": "Actor (Actor)",
+      "contextHash": "d1e3e4fa9d9b0c34d66f166c920e68a3c66cedd376e694ab51fa390bb71ac00b"
+    },
+    {
+      "id": "list-135",
+      "type": "list",
+      "source": "スキルセットを表示するアクターです。",
+      "sourceHash": "b2e491c974fb62c8155d0daf67126844ce0eac0ffabd7b8ecbcd4b451ac4ed8c",
+      "translation": "The actor for whom the skill set is displayed.",
+      "contextHash": "b2e491c974fb62c8155d0daf67126844ce0eac0ffabd7b8ecbcd4b451ac4ed8c"
+    },
+    {
+      "id": "list-136",
+      "type": "list",
+      "source": "空欄なら全員共通になります。",
+      "sourceHash": "9b923c0e4b652dcc04049b543726bcfb75feda1bb3408a89b7696d15fd9cd3d2",
+      "translation": "If left blank, it applies to everyone.",
+      "contextHash": "9b923c0e4b652dcc04049b543726bcfb75feda1bb3408a89b7696d15fd9cd3d2"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "list-137",
+      "type": "list",
+      "source": "スキルセットを表示する条件となるスイッチです。",
+      "sourceHash": "0266668542bf339cb36e0abb227af967577fae9d9e6f2203aeb5910f1f7856c9",
+      "translation": "The switch that determines whether the skill set is displayed.",
+      "contextHash": "0266668542bf339cb36e0abb227af967577fae9d9e6f2203aeb5910f1f7856c9"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script (Script)",
+      "contextHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac"
+    },
+    {
+      "id": "list-138",
+      "type": "list",
+      "source": "スキルセットを表示する条件となるスクリプトです。",
+      "sourceHash": "b16287c42232e91ad112c303c6f06922e8dbb57b4d5fcdab72bdecd50d9846a2",
+      "translation": "The script that determines whether the skill set is displayed.",
+      "contextHash": "b16287c42232e91ad112c303c6f06922e8dbb57b4d5fcdab72bdecd50d9846a2"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "スキルデータのパラメータ（Plugin Parameters SkillData）",
+      "sourceHash": "88ab345b02dffaac60aa3c00d9b18fa9bfff9545cb0a136d02d894ec74c2f409",
+      "translation": "Skill Data Parameters (Plugin Parameters SkillData)",
+      "contextHash": "88ab345b02dffaac60aa3c00d9b18fa9bfff9545cb0a136d02d894ec74c2f409"
+    },
+    {
+      "id": "list-139",
+      "type": "list",
+      "source": "スキルデータのプラグインパラメータです。",
+      "sourceHash": "9ff1d9b99a2648e735142c7301166d4fb4e43eade428a2ed7a8d7aa5288af12f",
+      "translation": "The plugin parameters for skill data.",
+      "contextHash": "9ff1d9b99a2648e735142c7301166d4fb4e43eade428a2ed7a8d7aa5288af12f"
+    },
+    {
+      "id": "list-140",
+      "type": "list",
+      "source": "ここに習得できるスキルの情報を設定してください。",
+      "sourceHash": "d9b85d53a32bad2575a9073bf487fc7f89aec9ee9a12ae9c0b50a42d1dc72dcc",
+      "translation": "Set the information for the skills that can be learned here.",
+      "contextHash": "d9b85d53a32bad2575a9073bf487fc7f89aec9ee9a12ae9c0b50a42d1dc72dcc"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "メモ（Note）",
+      "sourceHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1",
+      "translation": "Note",
+      "contextHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1"
+    },
+    {
+      "id": "list-141",
+      "type": "list",
+      "source": "識別用のメモです。",
+      "sourceHash": "011e3eb991d02e745971260c93de0d3ba0c8d4a757ef4ccb2162ce3e6b5334c3",
+      "translation": "This is a note for identification.",
+      "contextHash": "011e3eb991d02e745971260c93de0d3ba0c8d4a757ef4ccb2162ce3e6b5334c3"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "スキル（Skill）",
+      "sourceHash": "7b1288b2a92c04e229a2c8ac5700ee361f290f01d70b616a13b303a40878054f",
+      "translation": "Skill",
+      "contextHash": "7b1288b2a92c04e229a2c8ac5700ee361f290f01d70b616a13b303a40878054f"
+    },
+    {
+      "id": "list-142",
+      "type": "list",
+      "source": "習得するスキルです。",
+      "sourceHash": "fb717db7e70d7e0a527101610cef5a6499841a3e9b6f7a5c397e3545b0148774",
+      "translation": "This is the skill to learn.",
+      "contextHash": "fb717db7e70d7e0a527101610cef5a6499841a3e9b6f7a5c397e3545b0148774"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "スキルポイント（SkillPoint）",
+      "sourceHash": "d7ba7f8a11b8edf76375f1eb391e3e7d1492f85e3c2a916a78a82a7a546859ed",
+      "translation": "SkillPoint",
+      "contextHash": "d7ba7f8a11b8edf76375f1eb391e3e7d1492f85e3c2a916a78a82a7a546859ed"
+    },
+    {
+      "id": "list-143",
+      "type": "list",
+      "source": "習得に必要なスキルポイントです。",
+      "sourceHash": "1842156982d14d88a4093ed9cf86f27ca0dd6e0bdeb85a7d03b4e6735a546e91",
+      "translation": "This is the number of skill points required to learn it.",
+      "contextHash": "1842156982d14d88a4093ed9cf86f27ca0dd6e0bdeb85a7d03b4e6735a546e91"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "表示名（DisplayName）",
+      "sourceHash": "45a9747bcdca9755d775d2536b3d30f951f67c9cb41b00eb0e411cdc8e9bf434",
+      "translation": "DisplayName",
+      "contextHash": "45a9747bcdca9755d775d2536b3d30f951f67c9cb41b00eb0e411cdc8e9bf434"
+    },
+    {
+      "id": "list-144",
+      "type": "list",
+      "source": "習得画面での表示名です。",
+      "sourceHash": "bd1d2b8811e2ecfca6f13b85d23b5a54d5eb35e1a5248e059157f091ba083acc",
+      "translation": "This is the name displayed on the learning screen.",
+      "contextHash": "bd1d2b8811e2ecfca6f13b85d23b5a54d5eb35e1a5248e059157f091ba083acc"
+    },
+    {
+      "id": "list-145",
+      "type": "list",
+      "source": "%1:スキル名,%2:アイコン。",
+      "sourceHash": "7f84329e203e636898389573a88f1ca34b683b8bd254b5a960fb8443c3c25dd3",
+      "translation": "%1: Skill name, %2: icon.",
+      "contextHash": "7f84329e203e636898389573a88f1ca34b683b8bd254b5a960fb8443c3c25dd3"
+    },
+    {
+      "id": "list-146",
+      "type": "list",
+      "source": "空白ならスキル名をそのまま使用します。",
+      "sourceHash": "4a469b5db022f259f0167e15ce83ff6e8a00c11990598146c1e3db78fbb37b41",
+      "translation": "If left blank, the skill name is used as is.",
+      "contextHash": "4a469b5db022f259f0167e15ce83ff6e8a00c11990598146c1e3db78fbb37b41"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "ヘルプに追記（HelpPostscript）",
+      "sourceHash": "8c337007b90073459bae85135103221cffa0e8d20090096546654ce814b2a27f",
+      "translation": "HelpPostscript",
+      "contextHash": "8c337007b90073459bae85135103221cffa0e8d20090096546654ce814b2a27f"
+    },
+    {
+      "id": "list-147",
+      "type": "list",
+      "source": "ヘルプに追記する文章です。",
+      "sourceHash": "e133c6d13c66fa736b8a0f32ac5c334898d54d910ec573fb96f152c9028706dc",
+      "translation": "This is the text to append to the help description.",
+      "contextHash": "e133c6d13c66fa736b8a0f32ac5c334898d54d910ec573fb96f152c9028706dc"
+    },
+    {
+      "id": "list-148",
+      "type": "list",
+      "source": "主に習得条件の記述を想定しています。",
+      "sourceHash": "adbfee0b97573bbf514609a755bd0a30b20245f9bedde0ad042f957e62cf9202",
+      "translation": "It is primarily intended for describing learning requirements.",
+      "contextHash": "adbfee0b97573bbf514609a755bd0a30b20245f9bedde0ad042f957e62cf9202"
+    },
+    {
+      "id": "list-149",
+      "type": "list",
+      "source": "必要に応じて『ヘルプの行数』を設定してください。",
+      "sourceHash": "609455748d09e0a77a22a6df0988025de2afa08e79302a82f235eac9e91869f7",
+      "translation": "Set the “Number of Help Lines” as necessary.",
+      "contextHash": "609455748d09e0a77a22a6df0988025de2afa08e79302a82f235eac9e91869f7"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "習得済スキルの表示方法（LearnedSkillDisplayStyle）",
+      "sourceHash": "16da7140c7e733d0e8185f64bfadc805b4f066446146fdcce2b5ca5254beaa52",
+      "translation": "LearnedSkillDisplayStyle",
+      "contextHash": "16da7140c7e733d0e8185f64bfadc805b4f066446146fdcce2b5ca5254beaa52"
+    },
+    {
+      "id": "list-150",
+      "type": "list",
+      "source": "習得したスキルの表示方法です。",
+      "sourceHash": "55e03dfd2dd561425a9b0c17df5df612919d33ad8b3970e56f412d45ecabb00b",
+      "translation": "This is how learned skills are displayed.",
+      "contextHash": "55e03dfd2dd561425a9b0c17df5df612919d33ad8b3970e56f412d45ecabb00b"
+    },
+    {
+      "id": "list-151",
+      "type": "list",
+      "source": "こちらはスキル個別の設定です。",
+      "sourceHash": "b1623878e09c4a21334fa8eaa9b3f15b4192eca8cf47b6e34ca876a130d20aed",
+      "translation": "This is an individual setting for each skill.",
+      "contextHash": "b1623878e09c4a21334fa8eaa9b3f15b4192eca8cf47b6e34ca876a130d20aed"
+    },
+    {
+      "id": "list-152",
+      "type": "list",
+      "source": "空欄だと全体設定を適用します。",
+      "sourceHash": "9bd94dc9f965e991763873607fcc01c1b6d04b439cd1b5a1325dc591c7666911",
+      "translation": "If left blank, the global setting is applied.",
+      "contextHash": "9bd94dc9f965e991763873607fcc01c1b6d04b439cd1b5a1325dc591c7666911"
+    },
+    {
+      "id": "list-153",
+      "type": "list",
+      "source": "普段は『力強化Ⅰ→力強化Ⅱ』というように習得したスキルは非表示にして上位スキルを表示。ただし、最高ランクのスキルだけ習得時にCompleteの表示を残すーーというような運用を想定しています。",
+      "sourceHash": "d5a8411eec9828b178ee603b4e017781e19e04f32fe14d3c318864ebcfa953f3",
+      "translation": "Normally, learned skills are hidden and higher-level skills are displayed, such as “Strength Up I → Strength Up II.” However, this is intended for a setup where only the highest-rank skill retains the “Complete” display when learned.",
+      "contextHash": "d5a8411eec9828b178ee603b4e017781e19e04f32fe14d3c318864ebcfa953f3"
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "＜条件＞（<Condition>）",
+      "sourceHash": "6d175cc5b1920a311a1a434b5b22b3610fe7e98b1de7c8aa9d4117f2003286d5",
+      "translation": "<Conditions> (<Condition>)",
+      "contextHash": "6d175cc5b1920a311a1a434b5b22b3610fe7e98b1de7c8aa9d4117f2003286d5"
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "スキル（ConditionSkill）",
+      "sourceHash": "52cd4d6e1e0746cecc851af1fb95adbb4e1641fd5711b2f810e533a77f54c919",
+      "translation": "Skill (ConditionSkill)",
+      "contextHash": "52cd4d6e1e0746cecc851af1fb95adbb4e1641fd5711b2f810e533a77f54c919"
+    },
+    {
+      "id": "list-154",
+      "type": "list",
+      "source": "指定のスキルを習得している場合のみスキルを表示します。",
+      "sourceHash": "db142ba9ab2fb5dcaf114ea7562b7a979470025f3ec77cd5cff75bc333766a0d",
+      "translation": "The skill is displayed only if the specified skill has been learned.",
+      "contextHash": "db142ba9ab2fb5dcaf114ea7562b7a979470025f3ec77cd5cff75bc333766a0d"
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "list-155",
+      "type": "list",
+      "source": "スキルを表示する条件となるスイッチです。",
+      "sourceHash": "2925e18b34378ef2e860855ebe79e3c68cbb212389cfbfc38bc0c87a3fbd48e3",
+      "translation": "This is the switch that determines whether the skill is displayed.",
+      "contextHash": "2925e18b34378ef2e860855ebe79e3c68cbb212389cfbfc38bc0c87a3fbd48e3"
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script",
+      "contextHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac"
+    },
+    {
+      "id": "list-156",
+      "type": "list",
+      "source": "スキルを表示する条件となるスクリプトです。",
+      "sourceHash": "6aec8773b2c6886664f0ddd6613453acc82ced3bdb4e17a77be5c83938416037",
+      "translation": "This is the script that determines whether the skill is displayed.",
+      "contextHash": "6aec8773b2c6886664f0ddd6613453acc82ced3bdb4e17a77be5c83938416037"
+    },
+    {
+      "id": "list-157",
+      "type": "list",
+      "source": "例えば、スキル１とスキル２の両方を覚えている必要がある場合は『a.isLearnedSkill(1) && a.isLearnedSkill(2)』となります。",
+      "sourceHash": "b734881ad7ad431a7f5beea624028be4d0d24ce332156eaa6666c8f78f1f81f2",
+      "translation": "For example, if both Skill 1 and Skill 2 must be learned, use “a.isLearnedSkill(1) && a.isLearnedSkill(2)”.",
+      "contextHash": "b734881ad7ad431a7f5beea624028be4d0d24ce332156eaa6666c8f78f1f81f2"
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "＜禁止条件＞（<DisabledCondition>）",
+      "sourceHash": "f58807908228c71c82f04f87c66b688513b041a636c9a7f06e44bb8b03694381",
+      "translation": "<Prohibited Conditions> (<DisabledCondition>)",
+      "contextHash": "f58807908228c71c82f04f87c66b688513b041a636c9a7f06e44bb8b03694381"
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "スクリプト（DisabledScript）",
+      "sourceHash": "42b516a967f4176247ffd0d500bec9dd06965983b97271c31ea177b4baf938d7",
+      "translation": "Script (DisabledScript)",
+      "contextHash": "42b516a967f4176247ffd0d500bec9dd06965983b97271c31ea177b4baf938d7"
+    },
+    {
+      "id": "list-158",
+      "type": "list",
+      "source": "スキルの習得を禁止する条件となるスクリプトです。",
+      "sourceHash": "5cb391ac69109b918305f9f6463e6b30ad3156e35e5b1f50eb358d74c1062fbe",
+      "translation": "This is the script that determines the conditions under which learning the skill is prohibited.",
+      "contextHash": "5cb391ac69109b918305f9f6463e6b30ad3156e35e5b1f50eb358d74c1062fbe"
+    },
+    {
+      "id": "list-159",
+      "type": "list",
+      "source": "例えば、スキル１とスキル２の両方を覚えていないと禁止する場合は『!a.isLearnedSkill(1) || !a.isLearnedSkill(2)』となります。",
+      "sourceHash": "4c7d55f354111ddb5ac8b5ea09d9ef57ece0f858f80c4c5059a01b89c760d035",
+      "translation": "For example, if learning is prohibited unless both Skill 1 and Skill 2 have been learned, use “!a.isLearnedSkill(1) || !a.isLearnedSkill(2)”.",
+      "contextHash": "4c7d55f354111ddb5ac8b5ea09d9ef57ece0f858f80c4c5059a01b89c760d035"
+    },
+    {
+      "id": "list-160",
+      "type": "list",
+      "source": "これを設定することで「表示はされるが、習得はできないスキル」を作成できます。",
+      "sourceHash": "1a5e5fd08b22e066223582d9eff23055333dbc0f2fb0ed405e40c4644383e4e0",
+      "translation": "By setting this, you can create a skill that is displayed but cannot be learned.",
+      "contextHash": "1a5e5fd08b22e066223582d9eff23055333dbc0f2fb0ed405e40c4644383e4e0"
+    },
+    {
+      "id": "list-161",
+      "type": "list",
+      "source": "なお、禁止時の挙動は『隠しスキルを表示』をオンにした場合と同じなので、『隠しスキルのマスク』などの設定も反映されます。",
+      "sourceHash": "54fbb4fad449f6176a9ada2a95fddd1b3fbc6016d6b381854077e926fe4c3be6",
+      "translation": "When prohibited, it behaves the same as when “Show Hidden Skills” is enabled, so settings such as “Hidden Skill Mask” are also applied.",
+      "contextHash": "54fbb4fad449f6176a9ada2a95fddd1b3fbc6016d6b381854077e926fe4c3be6"
+    },
+    {
+      "id": "link-093",
+      "type": "link",
+      "source": "＞RPGツクールMZ&MV目次に戻る",
+      "sourceHash": "3bcc60de1127eb069aa22b4e6c377dc301353a44f2f9c80405f4c2370ccf3079",
+      "translation": "＞Return to the RPG Maker MZ & MV table of contents",
+      "contextHash": "2427ab55b65b72d70574a08f7bc91c72e48e8c7c24a8cb64577b61658e37c6c3"
+    }
+  ],
+  "texts": {
+    "リスト形式のスキル習得システムを実装します。": "Implements a list-based skill learning system.",
+    "獲得したスキルポイントを消費し、表から覚えたいスキルを選択するシンプルな仕組みです。": "This is a simple system in which you spend acquired skill points to select the skills you want to learn from a list.",
+    "スキルポイントは敵から入手したり、レベルアップ時に入手したりといった方法を選択できます。": "You can choose how to obtain skill points, such as by defeating enemies or leveling up.",
+    "あまり複雑な機能はありませんが、工夫次第では擬似的な": "It does not have many complex features, but with some ingenuity, you can create a pseudo ",
+    "スキルツリー": "Skill Tree",
+    "なども作成できます。": "as well.",
+    "予約機能にも対応しました。（2024/07/10）": "Reservation functionality is now supported. (2024/07/10)",
+    "付属のプラグインを導入することで、スキルポイントが足りない場合も習得するスキルを予約することができます。": "By installing the included plugin, you can reserve skills to learn even when you do not have enough skill points.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "更新履歴（History）": "Update history (History)",
+    "スキルリストの作成": "Creating a Skill List",
+    "スキルポイントの設定": "Setting Skill Points",
+    "敵キャラのメモ欄": "Enemy Note Field",
+    "アイテムのメモ欄": "Item Note Field",
+    "おすすめプラグイン": "Recommended Plugins",
+    "プラグインコマンド（Plugin Commands）": "Plugin Commands (Plugin Commands)",
+    "シーン開始（SceneStart）": "Scene Start (SceneStart)",
+    "スキルポイントの増減（ChangeSkillPoint）": "Change Skill Points (ChangeSkillPoint)",
+    "スキルリセット（ResetSkill）": "Reset Skills (ResetSkill)",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "スキルセットのリスト（SkillSetList）": "Skill Set List (SkillSetList)",
+    "＜スキルポイント＞（<SkillPoint>）": "<Skill Points> (<SkillPoint>)",
+    "スキルポイントの表示名（SkillPointName）": "Skill Point Display Name (SkillPointName)",
+    "スキルポイントの最大値（MaxSkillPoint）": "Maximum Skill Points (MaxSkillPoint)",
+    "スキルポイントの保有方法（SkillPointType）": "Skill Point Storage Method (SkillPointType)",
+    "スキルポイントの変数（SkillPointVariable）": "Skill Point Variable (SkillPointVariable)",
+    "スキルポイント獲得文（SkillPointMessage）": "Skill Point Gain Message (SkillPointMessage)",
+    "敵スキルポイントの既定値（DefaultEnemySkillPoint）": "Default Enemy Skill Points (DefaultEnemySkillPoint)",
+    "ＳＰ有効化スイッチ（SkillPointSwitch）": "SP Enable Switch (SkillPointSwitch)",
+    "控えの獲得率（BenchSkillPointRate）": "Bench Gain Rate (BenchSkillPointRate)",
+    "レベルアップ時のSP（LevelUpSkillPoint）": "SP Gained Upon Level Up (LevelUpSkillPoint)",
+    "＜スキルリスト関連＞（<SkillListWindow>）": "<Related to the Skill List> (<SkillListWindow>)",
+    "習得済スキルの表示方法（LearnedSkillDisplayStyle）": "LearnedSkillDisplayStyle",
+    "アイコンを表示（UseIcon）": "Display Icons (UseIcon)",
+    "スキルポイントの色（SkillPointColor）": "Skill Point Color (SkillPointColor)",
+    "習得済の表示文（LearnedText）": "Learned Text (LearnedText)",
+    "習得済の色（LearnedTextColor）": "Learned Text Color (LearnedTextColor)",
+    "隠しスキルを表示（ShowHiddenSkills）": "Show Hidden Skills (ShowHiddenSkills)",
+    "隠しスキルの記号（HiddenSymbol）": "Hidden Skill Symbol (HiddenSymbol)",
+    "ヘルプの行数（HelpLines）": "Number of Help Lines (HelpLines)",
+    "隠しスキルのマスク（HiddenSkillMask）": "Hidden Skill Mask (HiddenSkillMask)",
+    "ヘルプを隠す（HiddenHelp）": "Hide Help (HiddenHelp)",
+    "＜アクターウィンドウ関連＞（<ActorWindow>）": "<Related to the Actor Window> (<ActorWindow>)",
+    "アクターウィンドウの横幅（ActorWindowWidth）": "Actor Window Width (ActorWindowWidth)",
+    "アクターウィンドウの縦幅（ActorWindowHeight）": "Actor Window Height (ActorWindowHeight)",
+    "アクターの変更無効（ActorChangeInvalid）": "Disable Actor Changes (ActorChangeInvalid)",
+    "＜確認ウィンドウ関連＞（<ConfirmWindow>）": "<Related to the Confirmation Window> (<ConfirmWindow>)",
+    "確認メッセージ（ConfirmMessage）": "Confirmation Message (ConfirmMessage)",
+    "ＯＫの文言（ConfirmButtonOk）": "OK Text (ConfirmButtonOk)",
+    "キャンセルの文言（ConfirmButtonCancel）": "Cancel Text (ConfirmButtonCancel)",
+    "確定時のＳＥ（ConfirmOkSe）": "Sound Effect on Confirmation (ConfirmOkSe)",
+    "ウィンドウの不透明度（ConfirmWindowOpacity）": "Window Opacity (ConfirmWindowOpacity)",
+    "一行の高さ（ConfirmLineHeight）": "Line Height (ConfirmLineHeight)",
+    "＜メニューコマンド関連＞（<Menu Command>）": "<Menu Command> ( <Menu Command> )",
+    "メニューコマンド挿入位置（ShowMenuCommandPosition）": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+    "メニュー表示名（CommandName）": "Menu Display Name (CommandName)",
+    "表示許可するスイッチ（MenuCommandSwitch）": "Switch Allowing Display (MenuCommandSwitch)",
+    "マスク文字列（MaskString）": "Mask String (MaskString)",
+    "禁止するスイッチ（DisableSwitch）": "Disable Switch (DisableSwitch)",
+    "スキルセットのパラメータ（Plugin Parameters SkillSet）": "Skill Set Parameters (Plugin Parameters SkillSet)",
+    "メモ（Note）": "Note",
+    "スキルリスト（SkillList）": "Skill List (SkillList)",
+    "＜条件＞（<Condition>）": "<Conditions> (<Condition>)",
+    "アクター（Actor）": "Actor (Actor)",
+    "スイッチ（Switch）": "Switch",
+    "スクリプト（Script）": "Script",
+    "スキルデータのパラメータ（Plugin Parameters SkillData）": "Skill Data Parameters (Plugin Parameters SkillData)",
+    "スキル（Skill）": "Skill",
+    "スキルポイント（SkillPoint）": "SkillPoint",
+    "表示名（DisplayName）": "DisplayName",
+    "ヘルプに追記（HelpPostscript）": "HelpPostscript",
+    "スキル（ConditionSkill）": "Skill (ConditionSkill)",
+    "＜禁止条件＞（<DisabledCondition>）": "<Prohibited Conditions> (<DisabledCondition>)",
+    "スクリプト（DisabledScript）": "Script (DisabledScript)",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_LearnSkillList.js": "NRP_LearnSkillList.js",
+    "予約機能（": "Reservation feature (",
+    "解説": "Explanation",
+    "）": ") ",
+    "NRP_LearnSkillListReserve.js": "NRP_LearnSkillListReserve.js",
+    "確認メッセージウィンドウの": "The confirmation message window's ",
+    "不透明度": "opacity",
+    "と": " and ",
+    "行の高さ": "line height",
+    "を調整できるようにした。": " can now be adjusted.",
+    "メニューを経由せず直接習得画面を呼び出した場合、顔グラが表示されないことがある不具合を修正。": "Fixed a bug that could prevent the face graphic from being displayed when the skill acquisition screen was called directly without going through the menu.",
+    "表示条件を満たしたスキルでも": "Added a setting to ",
+    "習得禁止にする設定": "prevent acquisition",
+    "を追加した。": " even for skills that meet the display conditions.",
+    "隠しスキルの記号が空欄の場合、undefinedの文字列が表示されてしまう不具合修正。（ver1.081）": "Fixed a bug where the string undefined was displayed when the symbol for hidden skills was blank. (ver1.081)",
+    "アクター切替時、空欄にカーソルが合わさってしまう不具合修正。（2026/04/25 ver1.082）": "Fixed a bug where the cursor moved to a blank entry when switching actors. (2026/04/25 ver1.082)",
+    "NRP_EquipSlot.js": "NRP_EquipSlot.js ",
+    "などのパッシブスキルによって、装備スロットを追加した際に正しく装備状況が更新されない不具合修正。": "Fixed a bug where the equipment status was not updated correctly when equipment slots were added by passive skills such as NRP_EquipSlot.js.",
+    "予約機能": "reservation feature",
+    "への対応に合わせて更新。": " support, updated accordingly.",
+    "プラグインコマンドでアクターを指定した場合に": "When specifying an actor with a plugin command, it is now possible to ",
+    "アクターの切り替えを禁止": "prevent switching actors",
+    "できるようにした。": ".",
+    "プラグインコマンドでパーティにいないアクターも指定できるようにした。": "It is now possible to specify actors who are not in the party with plugin commands.",
+    "プラグインコマンドによる": "Added ",
+    "スキルリセット機能": "a skill reset function",
+    "を追加。": " added.",
+    "コマンドのマスク表示機能": "command masking display feature",
+    "スキルポイントの保有方法がパーティ共有制の場合、エラーになる不具合修正。": "Fixed a bug that caused an error when skill points were shared by the party.",
+    "スキルポイントを減らした場合、マイナスにならないように修正。（2023/06/25 ver1.021）": "Fixed the issue so that skill points do not become negative when reduced. (2023/06/25 ver1.021)",
+    "スキルポイントの最大値": "maximum skill points",
+    "を設定できるようにした。": " can now be set.",
+    "スキルポイントの保有方法が『パーティ共有』の場合、スキルポイントの増減を行うとエラーになる不具合修正。": "Fixed a bug that caused an error when increasing or decreasing skill points while the skill point ownership method was set to “Party Shared.”",
+    "アクターのスキルポイントを0で初期化するように修正。": "Fixed the initialization so that an actor’s skill points are set to 0.",
+    "公開！": "Released!",
+    "『スキルポイントの表示名』が反映されない不具合修正。": "Fixed a bug where the “Skill Point Display Name” was not applied.",
+    "まずプラグインパラメータの『スキルセットのリスト』にスキルセットを登録し、その下へさらにスキル情報を登録してください。": "First, register skill sets in the “Skill Set List” plugin parameter, then register the skill information below them.",
+    "スキルセットには対象とするアクターなどの条件を指定できます。": "Conditions such as the actors affected can be specified for each skill set.",
+    "条件を指定しなかった場合は全員共通のスキルとなります。": "If no conditions are specified, the skill is shared by everyone.",
+    "他にも、スキル毎に前提スキルなどの条件を指定できます。": "You can also specify conditions such as prerequisite skills for each skill.",
+    "メニューから『スキル習得』のコマンドを選択すれば、スキル習得システムの画面が表示されるようになります。": "Selecting the “Learn Skill” command from the menu will display the skill learning system screen.",
+    "スキルポイントの保有方法として『アクター毎』と『パーティ共有』の二種類から選択できます。": "You can choose between “Per Actor” and “Party Shared” as the skill point ownership method.",
+    "パーティ共有の場合は変数内に格納するため、イベントコマンドの『変数の操作』での制御が可能となります。": "When party-shared, the points are stored in a variable, allowing them to be controlled using the event command “Control Variables.”",
+    "獲得できるスキルポイントを指定します。": "Specifies the number of skill points that can be obtained.",
+    "また、プラグインパラメータで既定値を指定することもできます。": "You can also specify a default value in the plugin parameters.",
+    "細かい指定が面倒なら、経験値やレベルに比例する値にしてしまえば楽です。": "If specifying individual values is tedious, it is easier to use a value proportional to experience or level.",
+    "※標準では敵キャラにレベルは存在しません。何らかの外部プラグインで設定する必要があります。": "* By default, enemies do not have levels. You need to set them using an external plugin.",
+    "獲得できるスキルポイントを指定した%に変更します。": "Changes the skill points that can be obtained to the specified percentage.",
+    "例えば、200ならば200%（２倍）になります。": "For example, 200 becomes 200% (twice as much).",
+    "既定値とのセットで使うことを想定しています。": "This is intended to be used together with the default value.",
+    "アクターのスキルポイントを数値分増加させます。": "Increases the actor’s skill points by the specified amount.",
+    "当プラグインにはスキルツリーなどの複雑な構造を作成する機能はありません。": "This plugin does not include a function for creating complex structures such as skill trees.",
+    "……が、擬似的にスキルツリーっぽく見せることはできます。": "...However, you can make it look somewhat like a skill tree.",
+    "やり方は単純で『スキルデータのパラメータ』の": "The method is simple: manually enter full-width spaces and symbols in the “Skill Data Parameters’ ",
+    "表示名": "display name",
+    "に手入力で全角スペースと記号を入れているだけです。": ".",
+    "画像の例だと『 └%2%1』というようになります。": "In the example shown in the image, it would be “ └%2%1”.",
+    "※%2はアイコン、%1はスキル名です。": "* %2 is the icon, and %1 is the skill name.",
+    "あくまで簡易的なものなので、複数のスキルを条件とする場合など複雑な設定には向きません。": "Since this is only a simple solution, it is not suitable for complex setups, such as those requiring multiple skills as conditions.",
+    "※条件を満たしていないスキルを表示させたい場合は": "* If you want to display skills that do not meet the conditions, ",
+    "隠しスキルを表示": "enable the display of hidden skills",
+    "をオンにしてください。": ".",
+    "上位スキル習得時に下位スキルを消去": "Erase Lower-Tier Skills When Learning Higher-Tier Skills",
+    "無駄にスキルを増やしたくない場合は便利です。": "This is useful if you do not want to add unnecessary skills.",
+    "ただし、初期スキルの条件の指定には工夫が必要です。": "However, specifying the conditions for initial skills requires some ingenuity.",
+    "スクリプト": "Script",
+    "で『!a.isLearnedSkill(1) && !a.isLearnedSkill(2)』というように「上位スキル全ての未習得」を条件にしないと下位スキルが一覧に復活してしまいます。": " using a condition such as “!a.isLearnedSkill(1) && !a.isLearnedSkill(2)” to require that “none of the higher-tier skills have been learned”; otherwise, lower-tier skills will reappear in the list.",
+    "つまり、「ヒールⅡとⅢの両方を習得していない場合のみ、ヒールⅠを習得できる」というようなイメージです。": "In other words, the idea is that Heal I can be learned only when neither Heal II nor Heal III has been learned.",
+    "スキルの性能を変化させる": "Change Skill Performance",
+    "パッシブスキルの作成などにどうぞ。": "Use this to create passive skills and more.",
+    "スキル習得画面を呼び出します。": "Calls up the skill learning screen.",
+    "アクターを指定しない場合は、アクター選択画面も表示します。": "If no actor is specified, the actor selection screen is also displayed.",
+    "アクターのスキルポイントを増減させます。": "Increases or decreases an actor's skill points.",
+    "なお、0未満にはなりません。": "The value will not fall below 0.",
+    "習得したスキルを全て忘れて、スキルポイントを元に戻します。": "Forgets all learned skills and restores the skill points.",
+    "あまりないと思いますが、当機能で習得できるスキルと同一のスキルをアクターが他の手段で覚えていた場合、そちらもリセットされてしまいます。": "This situation is unlikely, but if an actor has learned a skill available through this feature by another means, that skill will also be reset.",
+    "上位スキル習得時に下位スキルを消去するプラグイン": "plugin that erases lower-tier skills when learning higher-tier skills",
+    "の機能とは共存できません。忘れてしまったスキルのポイントが返還されないため不整合が生じてしまいます。": " feature cannot coexist with this one. An inconsistency will occur because the points for forgotten skills will not be returned.",
+    "習得するスキルセットを定義します。": "Defines the skill sets to be learned.",
+    "詳細は『スキルセットのプラグインパラメータ』をご覧ください。": "For details, see “Skill Set Plugin Parameters.”",
+    "スキルポイントに関する項目です。": "This section concerns skill points.",
+    "スキルポイントを表す表示名です。": "The display name used for skill points.",
+    "スキルポイントの最大値です。": "The maximum number of skill points.",
+    "これ以上の値にはなりません。": "The value cannot exceed this amount.",
+    "スキルポイントの保有方法です。": "The method used to store skill points.",
+    "アクター毎かパーティ共有かを選択できます。": "You can choose whether points are stored per actor or shared by the party.",
+    "スキルポイントを格納する変数です。": "The variable that stores skill points.",
+    "保有方法にパーティ共有を選んだ場合のみ有効です。": "This is enabled only when Party Shared is selected as the storage method.",
+    "スキルポイントの獲得文を表示します。": "Displays the message for gaining skill points.",
+    "%1=数値, %2=スキルポイントの表示名となります。": "%1 = the number, and %2 = the skill point display name.",
+    "敵が落とすスキルポイントの既定値を設定します。": "Sets the default number of skill points dropped by enemies.",
+    "数式可。": "Formulas are supported.",
+    "例えば、『1 + Math.floor(a.exp() / 100)』ならば、1+経験値&divide;100（切捨）の値をスキルポイントにします。": "For example, “1 + Math.floor(a.exp() / 100)” sets the skill points to 1 + experience &divide; 100 (rounded down).",
+    "指定のスイッチがオンの際、スキルポイントの増減を有効化します。": "Enables changes to skill points when the specified switch is on.",
+    "空白なら常に有効。": "Always enabled if left blank.",
+    "控えメンバーのスキルポイントの獲得率です。": "The skill point gain rate for bench members.",
+    "空白の場合は通常経験値と同率を使用します。": "If left blank, the same rate as normal EXP is used.",
+    "レベルアップ時に獲得できるスキルポイントです。": "The skill points that can be earned upon leveling up.",
+    "例えば、『a.level』ならば上昇後のレベルと同値のスキルポイントが手に入ります。": "For example, if you use “a.level,” you will receive skill points equal to your level after leveling up.",
+    "スキルリストウィンドウに関する項目です。": "Settings related to the skill list window.",
+    "習得したスキルの表示方法です。": "This is how learned skills are displayed.",
+    "アイコンをスキル名の前に表示するかどうか？": "Whether to display icons before skill names.",
+    "スキルポイントの文字色です。": "The text color for skill points.",
+    "システムカラーの番号を指定してください。": "Specify the system color number.",
+    "習得済スキルに表示する文言です。": "The text displayed for learned skills.",
+    "スキルポイントの場所に表示されます。": "It is displayed where the skill points would normally appear.",
+    "習得済スキルに表示する文言の色です。": "The color of the text displayed for learned skills.",
+    "条件を満たしていないスキルを表示します。": "Displays skills whose conditions have not been met.",
+    "条件表示する場合はヘルプの行数は３以上に。": "When displaying conditions, set the number of help lines to 3 or more.",
+    "隠しスキルに表示する記号です。": "The symbol displayed for hidden skills.",
+    "スキルポイントの左に記号を表示することで「他に条件があるから、ポイントが足りていても習得できないよ！」ということを示します。": "Displaying a symbol to the left of the skill points indicates that “there are other conditions, so the skill cannot be learned even if you have enough points!”",
+    "条件については": "For the conditions, enter them in the ",
+    "ヘルプに追記": "Add to Help",
+    "のところで入力してください。": " section.",
+    "ヘルプの行数を変更します。": "Changes the number of help lines.",
+    "基本的には、行を３以上に増やすことで隠しスキルの条件表示を行うことを想定しています。": "Basically, this is intended to display the conditions for hidden skills by increasing the number of lines to 3 or more.",
+    "隠しスキルを指定した文字列（？など）で隠します。": "Hides hidden skills using the specified string, such as “?”.",
+    "条件を満たすと表示されるようになります。": "It becomes visible when the conditions are met.",
+    "隠しスキルのヘルプ（追記除く）を隠します。": "Hides the help text for hidden skills, excluding appended text.",
+    "アクターウィンドウに関する項目です。": "Settings related to the actor window.",
+    "アクターウィンドウの横幅です。": "The width of the actor window.",
+    "アクターウィンドウの縦幅です。": "The height of the actor window.",
+    "空白の場合は最大まで伸ばします。": "If left blank, it expands to the maximum height.",
+    "プラグインコマンドにて、アクターを指定して呼び出した場合はアクターの変更を禁止します。": "When called via a plugin command with an actor specified, changing the actor is prohibited.",
+    "スキルシステムを習得する際の確認ウィンドウに関する項目です。": "Settings related to the confirmation window shown when learning a skill.",
+    "スキルの習得確認メッセージの内容です。": "The content of the skill learning confirmation message.",
+    "%1=スキル名、%2=アイコン、%3=スキルポイントです。": "%1 = skill name, %2 = icon, %3 = skill points.",
+    "スキルの習得確認メッセージを確定する際のボタンの表示です。": "The button text used to confirm the skill learning message.",
+    "スキルの習得確認メッセージをキャンセルする際のボタンの表示です。": "The button text used to cancel the skill learning message.",
+    "スキルの習得を確定した際の効果音です。": "The sound effect played when skill learning is confirmed.",
+    "確認ウィンドウの背景不透明度です。": "The background opacity of the confirmation window.",
+    "空欄ならシステムの既定値を維持します。": "If left blank, the system default value is retained.",
+    "確認ウィンドウの一行の高さです。": "The height of each line in the confirmation window.",
+    "空欄なら標準の高さを使用します。": "If left blank, the standard height is used.",
+    "メニューコマンドにスキル習得を挿入する位置です。": "The position at which to insert the skill learning command into the menu commands.",
+    "0が先頭。": "0 is the first position.",
+    "不要ならパラメータの一覧からＤＥＬキーで消去してください。": "If unnecessary, delete it from the parameter list using the DEL key.",
+    "スキルシステムの表示コマンド名を設定します。": "Sets the display command name for the skill system.",
+    "スイッチがオンの時のみコマンドを表示します。": "The command is displayed only when the switch is ON.",
+    "空白なら常に表示します。": "If left blank, it is always displayed.",
+    "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。": "When the switch allowing display is OFF, the command is displayed using the specified string.",
+    "例えば、機能を解放する前のコマンドを「？？？？」というように表示できます。": "For example, you can display a command as \"????\" before the feature is unlocked.",
+    "空欄ならコマンド自体を非表示にします。": "If left blank, the command itself is hidden.",
+    "スイッチがオンの時のみコマンドを禁止（灰色）します。": "The command is disabled (grayed out) only when the switch is ON.",
+    "空白なら常に許可します。": "If left blank, it is always enabled.",
+    "スキルセットのプラグインパラメータです。": "The plugin parameters for the skill set.",
+    "スキルセットとはスキルのまとまりです。主にアクター単位でスキルを管理することを想定しています。": "A skill set is a collection of skills. It is primarily intended for managing skills on an actor-by-actor basis.",
+    "識別用のメモです。": "This is a note for identification.",
+    "スキルリストを定義します。": "Defines the skill list.",
+    "詳細は『スキルデータのプラグインパラメータ』をご覧ください。": "For details, see “Skill Data Plugin Parameters.”",
+    "スキルセットを表示するアクターです。": "The actor for whom the skill set is displayed.",
+    "空欄なら全員共通になります。": "If left blank, it applies to everyone.",
+    "スキルセットを表示する条件となるスイッチです。": "The switch that determines whether the skill set is displayed.",
+    "スキルセットを表示する条件となるスクリプトです。": "The script that determines whether the skill set is displayed.",
+    "スキルデータのプラグインパラメータです。": "The plugin parameters for skill data.",
+    "ここに習得できるスキルの情報を設定してください。": "Set the information for the skills that can be learned here.",
+    "習得するスキルです。": "This is the skill to learn.",
+    "習得に必要なスキルポイントです。": "This is the number of skill points required to learn it.",
+    "習得画面での表示名です。": "This is the name displayed on the learning screen.",
+    "%1:スキル名,%2:アイコン。": "%1: Skill name, %2: icon.",
+    "空白ならスキル名をそのまま使用します。": "If left blank, the skill name is used as is.",
+    "ヘルプに追記する文章です。": "This is the text to append to the help description.",
+    "主に習得条件の記述を想定しています。": "It is primarily intended for describing learning requirements.",
+    "必要に応じて『ヘルプの行数』を設定してください。": "Set the “Number of Help Lines” as necessary.",
+    "こちらはスキル個別の設定です。": "This is an individual setting for each skill.",
+    "空欄だと全体設定を適用します。": "If left blank, the global setting is applied.",
+    "普段は『力強化Ⅰ→力強化Ⅱ』というように習得したスキルは非表示にして上位スキルを表示。ただし、最高ランクのスキルだけ習得時にCompleteの表示を残すーーというような運用を想定しています。": "Normally, learned skills are hidden and higher-level skills are displayed, such as “Strength Up I → Strength Up II.” However, this is intended for a setup where only the highest-rank skill retains the “Complete” display when learned.",
+    "指定のスキルを習得している場合のみスキルを表示します。": "The skill is displayed only if the specified skill has been learned.",
+    "スキルを表示する条件となるスイッチです。": "This is the switch that determines whether the skill is displayed.",
+    "スキルを表示する条件となるスクリプトです。": "This is the script that determines whether the skill is displayed.",
+    "例えば、スキル１とスキル２の両方を覚えている必要がある場合は『a.isLearnedSkill(1) && a.isLearnedSkill(2)』となります。": "For example, if both Skill 1 and Skill 2 must be learned, use “a.isLearnedSkill(1) && a.isLearnedSkill(2)”.",
+    "スキルの習得を禁止する条件となるスクリプトです。": "This is the script that determines the conditions under which learning the skill is prohibited.",
+    "例えば、スキル１とスキル２の両方を覚えていないと禁止する場合は『!a.isLearnedSkill(1) || !a.isLearnedSkill(2)』となります。": "For example, if learning is prohibited unless both Skill 1 and Skill 2 have been learned, use “!a.isLearnedSkill(1) || !a.isLearnedSkill(2)”.",
+    "これを設定することで「表示はされるが、習得はできないスキル」を作成できます。": "By setting this, you can create a skill that is displayed but cannot be learned.",
+    "なお、禁止時の挙動は『隠しスキルを表示』をオンにした場合と同じなので、『隠しスキルのマスク』などの設定も反映されます。": "When prohibited, it behaves the same as when “Show Hidden Skills” is enabled, so settings such as “Hidden Skill Mask” are also applied.",
+    "＞RPGツクールMZ&MV目次に戻る": "＞Return to the RPG Maker MZ & MV table of contents"
+  }
+}
