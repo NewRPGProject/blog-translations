@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const SCRIPT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 const REPOSITORY_DIRECTORY = dirname(SCRIPT_DIRECTORY);
 const ARTICLES_DIRECTORY = join(REPOSITORY_DIRECTORY, "articles");
+const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
@@ -20,22 +21,6 @@ const LINE_BOUNDARY_TAGS = new Set([
     "br", "hr", "h1", "h2", "h3", "h4", "h5", "h6",
     "li", "p", "td", "th", "figcaption", "center", "table", "ul", "ol"
 ]);
-
-const DEFAULT_RULES = `
-You translate articles from a Japanese game-development blog into natural English.
-Use terminology consistent with the English version of RPG Maker MZ.
-Preserve URLs, file names, code, parameter names, plugin commands, escape characters, and identifiers.
-Do not add explanations or information absent from the source.
-Preserve the author's restrained, matter-of-fact tone.
-Each item replaces one text node in the original HTML. Its context is the complete source line and can include <a>link display text</a>; use it to understand the full sentence.
-Translate only source, never return HTML tags or the context itself. A source whose type is link is the visible text of a link and must be translated when it is Japanese.
-Links, English product names, URLs, file names, code, parameter names, escape characters, and identifiers shown only in context are fixed context, not text to return.
-The page will concatenate adjacent translated text nodes without adding whitespace.
-When adjacent items are part of one English sentence, include the necessary leading or trailing ASCII spaces in translations so the concatenated result is natural English.
-Do not add boundary spaces to a standalone sentence or paragraph.
-Translate all Japanese text completely, including text inside links. Do not leave Japanese characters in a translation.
-Return a translation for every supplied id.
-`.trim();
 
 function fail(message) {
     throw new Error(message);
@@ -347,7 +332,7 @@ function createChunks(blocks) {
 }
 
 async function readOptionalConfiguration(fileName) {
-    const path = join(REPOSITORY_DIRECTORY, fileName);
+    const path = join(GLOSSARY_DIRECTORY, fileName);
     try {
         return await readFile(path, "utf8");
     } catch (error) {
@@ -394,8 +379,7 @@ function outputSchema() {
 
 async function translateChunk(blocks, apiKey, rules, glossary) {
     const instructions = [
-        DEFAULT_RULES,
-        rules ? `Additional translation rules:\n${rules}` : null,
+        rules,
         glossary ? `Required glossary:\n${glossary}` : null
     ].filter(Boolean).join("\n\n");
     const input = JSON.stringify(blocks.map(block => ({
@@ -552,6 +536,9 @@ async function main() {
     }
 
     const rules = await readOptionalConfiguration("translation_rules.md");
+    if (!rules?.trim()) {
+        fail("glossary/translation_rules.md が見つからないか、内容が空です。");
+    }
     await mkdir(ARTICLES_DIRECTORY, { recursive: true });
     const requestedArticle = await getRequestedArticle();
     const sitemapEntries = requestedArticle ? null : await getSitemapEntries();
