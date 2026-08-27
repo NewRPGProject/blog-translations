@@ -151,7 +151,11 @@ async function readJson(path) {
 }
 
 async function readMonitorState() {
-    return await readJson(MONITOR_STATE_PATH) || { lastCheckedAt: null };
+    const state = await readJson(MONITOR_STATE_PATH) || {};
+    return {
+        lastCheckedAt: state.lastCheckedAt || null,
+        articles: state.articles && typeof state.articles === "object" ? state.articles : {}
+    };
 }
 
 function findElementInnerHtml(html, tagName, className, startAt = 0) {
@@ -587,8 +591,10 @@ async function main() {
     for (const target of targets) {
         const outputPath = join(ARTICLES_DIRECTORY, `${target.articleId}.json`);
         const existingArticle = await readJson(outputPath);
-        if (existingArticle?.sourceUpdatedAt && target.lastModified
-            && !isMoreRecent(target.lastModified, existingArticle.sourceUpdatedAt)) {
+        const trackedArticle = state.articles[target.articleId];
+        const knownUpdatedAt = trackedArticle?.sourceUpdatedAt || existingArticle?.sourceUpdatedAt;
+        if (knownUpdatedAt && target.lastModified
+            && !isMoreRecent(target.lastModified, knownUpdatedAt)) {
             continue;
         }
 
@@ -598,18 +604,29 @@ async function main() {
         const title = extractTitle(html);
         const blocks = parseBlocks(extractArticleHtml(html), title);
         const newSourceHash = sourceHashFor(blocks);
-        if (existingArticle?.sourceHash === newSourceHash) {
-            console.log(`本文に差分はありません: articles/${target.articleId}.json`);
-            if (!dryRun && target.lastModified && existingArticle.sourceUpdatedAt !== target.lastModified) {
-                existingArticle.sourceUpdatedAt = target.lastModified;
-                await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
+        const rememberArticleState = () => {
+            if (target.lastModified) {
+                state.articles[target.articleId] = {
+                    sourceHash: newSourceHash,
+                    sourceUpdatedAt: target.lastModified
+                };
             }
+        };
+        if ((existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash) {
+            console.log(`本文に差分はありません: articles/${target.articleId}.json`);
+            if (!dryRun) rememberArticleState();
             continue;
         }
 
         const pending = splitReusableBlocks(blocks, existingArticle);
         console.log(`翻訳対象: ${blocks.length}ブロック（変更・追加: ${pending.length}ブロック）`);
         if (dryRun) continue;
+
+        if (existingArticle && pending.length === 0) {
+            rememberArticleState();
+            console.log(`翻訳内容に差分はありません: articles/${target.articleId}.json`);
+            continue;
+        }
 
         if (pending.length > 0) {
             const glossary = selectRelevantGlossary(
@@ -630,13 +647,15 @@ async function main() {
             blocks
         });
         await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+        rememberArticleState();
         translatedArticleCount++;
         console.log(`JSONを更新しました: articles/${target.articleId}.json`);
     }
 
     if (!requestedArticle && !dryRun) {
         await writeFile(MONITOR_STATE_PATH, `${JSON.stringify({
-            lastCheckedAt: new Date().toISOString()
+            lastCheckedAt: new Date().toISOString(),
+            articles: state.articles
         }, null, 2)}\n`, "utf8");
     }
     console.log(`確認記事数: ${checkedArticleCount} / JSON更新数: ${translatedArticleCount}`);
