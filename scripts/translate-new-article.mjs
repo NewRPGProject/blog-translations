@@ -54,6 +54,10 @@ function decodeHtml(value) {
             String.fromCodePoint(Number.parseInt(decimal, 10)));
 }
 
+function stripBom(value) {
+    return value.replace(/^\uFEFF/u, "");
+}
+
 function hash(value) {
     return createHash("sha256").update(value, "utf8").digest("hex");
 }
@@ -139,7 +143,7 @@ function isWithinInitialMonitorWindow(lastModified) {
 
 async function readJson(path) {
     try {
-        return JSON.parse(await readFile(path, "utf8"));
+        return JSON.parse(stripBom(await readFile(path, "utf8")));
     } catch (error) {
         if (error?.code === "ENOENT") return null;
         throw error;
@@ -348,7 +352,7 @@ function createChunks(blocks) {
 async function readOptionalConfiguration(fileName) {
     const path = join(GLOSSARY_DIRECTORY, fileName);
     try {
-        return await readFile(path, "utf8");
+        return stripBom(await readFile(path, "utf8"));
     } catch (error) {
         if (error?.code === "ENOENT") return null;
         throw error;
