@@ -602,6 +602,27 @@ function repairLinkBoundarySpaces(blocks) {
     return repaired;
 }
 
+function preserveFullWidthAngleBrackets(blocks) {
+    let repaired = false;
+    for (const block of blocks) {
+        const source = block.source?.trim() || "";
+        if (!/^＜.+＞$/u.test(source) || !block.translation?.trim()) continue;
+
+        const leadingWhitespace = /^\s*/u.exec(block.translation)?.[0] || "";
+        const trailingWhitespace = /\s*$/u.exec(block.translation)?.[0] || "";
+        let content = block.translation.trim();
+        content = content.replace(/^＜/u, "<").replace(/＞$/u, ">");
+        if (!content.startsWith("<")) content = `<${content}`;
+        if (!content.endsWith(">")) content = `${content}>`;
+        const corrected = `${leadingWhitespace}${content}${trailingWhitespace}`;
+        if (corrected !== block.translation) {
+            block.translation = corrected;
+            repaired = true;
+        }
+    }
+    return repaired;
+}
+
 function synchronizeTextsFromBlocks(article) {
     article.texts ||= {};
     for (const block of article.blocks || []) {
@@ -695,7 +716,10 @@ async function main() {
         };
         if ((existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash) {
             console.log(`本文に差分はありません: articles/${target.articleId}.json`);
-            if (!dryRun && repairLinkBoundarySpaces(existingArticle?.blocks || [])) {
+            const existingBlocks = existingArticle?.blocks || [];
+            const repairedLinkSpaces = !dryRun && repairLinkBoundarySpaces(existingBlocks);
+            const repairedAngleBrackets = !dryRun && preserveFullWidthAngleBrackets(existingBlocks);
+            if (repairedLinkSpaces || repairedAngleBrackets) {
                 synchronizeTextsFromBlocks(existingArticle);
                 await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
                 translatedArticleCount++;
@@ -728,6 +752,7 @@ async function main() {
         }
 
         repairLinkBoundarySpaces(blocks);
+        preserveFullWidthAngleBrackets(blocks);
 
         const output = makeOutput({
             articleId: target.articleId,
