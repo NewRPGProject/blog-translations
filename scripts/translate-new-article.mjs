@@ -10,7 +10,7 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
-const EXTRACTION_VERSION = 4;
+const EXTRACTION_VERSION = 5;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
@@ -28,6 +28,7 @@ const CODE_FRAGMENT_INSTRUCTION = `
 Items whose type starts with "code-" are natural-language fragments extracted from a code example. Translate only that fragment.
 Always translate Japanese in these fragments; any rule about preserving source code applies to the surrounding syntax, which has already been removed from source.
 Do not add quotation marks, comment markers, Markdown, or code syntax. Preserve identifiers, escape sequences, and version numbers embedded in the fragment.
+For "code-label" items enclosed in square brackets, use a concise Title Case label.
 `.trim();
 const BROWSER_HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
@@ -366,6 +367,18 @@ function extractCodeTranslationSegments(source) {
             add(index + 2, end < 0 ? source.length : end, "comment");
             index = end < 0 ? source.length : end + 2;
             continue;
+        }
+
+        if (source[index] === "[") {
+            const end = source.indexOf("]", index + 1);
+            if (end >= 0) {
+                // Plugin examples often use [装備タイプ] as a label for a
+                // human-entered value. Keep brackets and tag syntax intact,
+                // while translating only the explanatory label.
+                add(index + 1, end, "label");
+                index = end + 1;
+                continue;
+            }
         }
 
         const quote = source[index];
@@ -798,7 +811,14 @@ function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = 
 }
 
 function sourceHashFor(blocks) {
-    return hash(blocks.map(block => `${block.type}:${block.sourceHash}:${contextHash(block)}`).join("\n"));
+    return hash(blocks.map(block => {
+        const codeSignature = block.type === "code"
+            ? hash((block.codeSegments || [])
+                .map(segment => `${segment.type}:${segment.start}:${segment.end}:${segment.source}`)
+                .join("\n"))
+            : "";
+        return `${block.type}:${block.sourceHash}:${contextHash(block)}:${codeSignature}`;
+    }).join("\n"));
 }
 
 function sameContext(left, right) {
