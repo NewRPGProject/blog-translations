@@ -10,19 +10,24 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
-const EXTRACTION_VERSION = 3;
+const EXTRACTION_VERSION = 4;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
 This is a correction retry because the previous result was incomplete or included an HTML anchor tag.
 Translate every Japanese word and character in source into natural English, including isolated terms embedded in an otherwise English sentence.
-Do not copy Japanese from source or context into translation. Keep only URLs, file names, code, identifiers, escape characters, and version numbers unchanged.
+Do not copy Japanese from source or context into translation. Keep only URLs, file names, code, identifiers, escape characters, version numbers, and Japanese string literals inside code unchanged.
 Never output HTML tags such as <a> or </a>. Context is for understanding only, never for copying.
 Return only the replacement text for each supplied source item.
 `.trim();
 const LINK_CONTEXT_INSTRUCTION = `
 In context, [[link: ...]] represents the text inside an original HTML link. It is context only: never output the markers, HTML tags, or the linked text unless that text is also in source.
 When source immediately follows a link marker, translate it as a grammatical continuation of that link text. Include an ordinary ASCII space at the boundary when English requires one, and never repeat the link text.
+`.trim();
+const CODE_FRAGMENT_INSTRUCTION = `
+Items whose type starts with "code-" are natural-language fragments extracted from a code example. Translate only that fragment.
+Always translate Japanese in these fragments; any rule about preserving source code applies to the surrounding syntax, which has already been removed from source.
+Do not add quotation marks, comment markers, Markdown, or code syntax. Preserve identifiers, escape sequences, and version numbers embedded in the fragment.
 `.trim();
 const BROWSER_HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
@@ -33,12 +38,13 @@ const BROWSER_HEADERS = {
 const JAPANESE_CHARACTERS = /[ぁ-んァ-ヶ一-龠々〆〤ー]/u;
 const WHITESPACE = /\s+/gu;
 const IGNORED_TAGS = new Set([
-    "script", "style", "noscript", "pre", "code", "textarea", "select", "option"
+    "script", "style", "noscript", "textarea", "select", "option"
 ]);
 const HEADING_TAGS = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
+const CODE_CONTAINER_TAGS = new Set(["blockquote", "pre", "code"]);
 const LINE_BOUNDARY_TAGS = new Set([
     "br", "hr", "h1", "h2", "h3", "h4", "h5", "h6",
-    "li", "p", "td", "th", "figcaption", "center", "table", "ul", "ol"
+    "li", "p", "td", "th", "figcaption", "center", "table", "ul", "ol", "blockquote", "pre"
 ]);
 const STRUCTURAL_PUNCTUATION_TRANSLATIONS = new Map([
     ["&", "&"],
@@ -73,6 +79,10 @@ function decodeHtml(value) {
 
 function stripBom(value) {
     return value.replace(/^\uFEFF/u, "");
+}
+
+function hasUntranslatedJapanese(value) {
+    return JAPANESE_CHARACTERS.test(String(value));
 }
 
 function hash(value) {
@@ -242,6 +252,7 @@ function parseTag(token) {
 function currentType(stack) {
     for (let index = stack.length - 1; index >= 0; index--) {
         const name = stack[index];
+        if (CODE_CONTAINER_TAGS.has(name)) return "code";
         if (name === "a") return "link";
         if (HEADING_TAGS.has(name)) return "heading";
         if (name === "li") return "list";
@@ -305,6 +316,89 @@ function tokenizeHtml(html) {
     }
     if (textStart < html.length) tokens.push(html.slice(textStart));
     return tokens;
+}
+
+function trimCodeSpan(source, start, end, type) {
+    while (start < end && /\s/u.test(source[start])) start++;
+    while (end > start && /\s/u.test(source[end - 1])) end--;
+    if (start >= end || !JAPANESE_CHARACTERS.test(source.slice(start, end))) return null;
+    return { start, end, type, source: source.slice(start, end) };
+}
+
+function findClosingQuote(source, start, quote) {
+    for (let index = start; index < source.length; index++) {
+        if (source[index] === "\\") {
+            index++;
+            continue;
+        }
+        if (source[index] === quote) return index;
+    }
+    return source.length;
+}
+
+function findMatchingTemplateExpression(source, start) {
+    let depth = 1;
+    for (let index = start; index < source.length; index++) {
+        if (source[index] === "\\") {
+            index++;
+            continue;
+        }
+        if (source[index] === "{") depth++;
+        if (source[index] === "}" && --depth === 0) return index;
+    }
+    return source.length;
+}
+
+function extractCodeTranslationSegments(source) {
+    const segments = [];
+    const add = (start, end, type) => {
+        const segment = trimCodeSpan(source, start, end, type);
+        if (segment) segments.push(segment);
+    };
+
+    for (let index = 0; index < source.length;) {
+        if (source.startsWith("//", index)) {
+            add(index + 2, source.length, "comment");
+            break;
+        }
+        if (source.startsWith("/*", index)) {
+            const end = source.indexOf("*/", index + 2);
+            add(index + 2, end < 0 ? source.length : end, "comment");
+            index = end < 0 ? source.length : end + 2;
+            continue;
+        }
+
+        const quote = source[index];
+        if (quote === "\"" || quote === "'") {
+            const end = findClosingQuote(source, index + 1, quote);
+            add(index + 1, end, "string");
+            index = end + 1;
+            continue;
+        }
+        if (quote === "`") {
+            let segmentStart = index + 1;
+            index++;
+            while (index < source.length && source[index] !== "`") {
+                if (source[index] === "\\") {
+                    index += 2;
+                    continue;
+                }
+                if (source.startsWith("${", index)) {
+                    add(segmentStart, index, "template");
+                    const expressionEnd = findMatchingTemplateExpression(source, index + 2);
+                    index = expressionEnd + 1;
+                    segmentStart = index;
+                    continue;
+                }
+                index++;
+            }
+            add(segmentStart, index, "template");
+            index++;
+            continue;
+        }
+        index++;
+    }
+    return segments;
 }
 
 function parseBlocks(articleHtml, title) {
@@ -379,7 +473,11 @@ function parseBlocks(articleHtml, title) {
                 || (!JAPANESE_CHARACTERS.test(segment.source) && segment.type === "link"
                     ? segment.source
                     : null);
+            const codeSegments = segment.type === "code"
+                ? extractCodeTranslationSegments(segment.source)
+                : null;
             if (!segment.source || (!JAPANESE_CHARACTERS.test(segment.source) && !fixedTranslation)) continue;
+            if (segment.type === "code" && codeSegments.length === 0) continue;
             if (segment.source.length === 1 && /^[\p{P}\p{S}]$/u.test(segment.source)
                 && !fixedTranslation) continue;
             const count = (counters.get(segment.type) || 0) + 1;
@@ -391,6 +489,7 @@ function parseBlocks(articleHtml, title) {
                 sourceHash: hash(segment.source),
                 context,
                 fixedTranslation,
+                codeSegments,
                 linkAdjacent: segment.link || segments[index - 1]?.link || segments[index + 1]?.link
             });
         }
@@ -469,6 +568,7 @@ async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     const instructions = [
         rules,
         LINK_CONTEXT_INSTRUCTION,
+        blocks.some(block => block.type.startsWith("code-")) ? CODE_FRAGMENT_INSTRUCTION : null,
         retry ? RETRY_TRANSLATION_INSTRUCTION : null,
         glossary ? `Required glossary:\n${glossary}` : null
     ].filter(Boolean).join("\n\n");
@@ -526,7 +626,14 @@ async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     };
 }
 
-async function translateBlocks(blocks, apiKey, rules, glossary) {
+function addUsage(total, addition) {
+    total.input += addition.input_tokens || 0;
+    total.output += addition.output_tokens || 0;
+    total.reasoning += addition.output_tokens_details?.reasoning_tokens || 0;
+    total.total += addition.total_tokens || 0;
+}
+
+async function translateSimpleBlocks(blocks, apiKey, rules, glossary) {
     const usage = { input: 0, output: 0, reasoning: 0, total: 0 };
     for (const chunk of createChunks(blocks)) {
         const result = await translateChunk(chunk, apiKey, rules, glossary);
@@ -537,16 +644,13 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
                 retryBlocks.push({ block, initialTranslation: null });
                 continue;
             }
-            if (JAPANESE_CHARACTERS.test(translation) || /<\/?a\b/iu.test(translation)) {
+            if (hasUntranslatedJapanese(translation) || /<\/?a\b/iu.test(translation)) {
                 retryBlocks.push({ block, initialTranslation: translation });
                 continue;
             }
             block.translation = translation;
         }
-        usage.input += result.usage.input_tokens || 0;
-        usage.output += result.usage.output_tokens || 0;
-        usage.reasoning += result.usage.output_tokens_details?.reasoning_tokens || 0;
-        usage.total += result.usage.total_tokens || 0;
+        addUsage(usage, result.usage);
 
         if (retryBlocks.length > 0) {
             console.log(`翻訳漏れまたは未返却を検出したため、${retryBlocks.length}ブロックを再翻訳します。`);
@@ -557,15 +661,12 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
                 glossary,
                 true
             );
-            usage.input += retryResult.usage.input_tokens || 0;
-            usage.output += retryResult.usage.output_tokens || 0;
-            usage.reasoning += retryResult.usage.output_tokens_details?.reasoning_tokens || 0;
-            usage.total += retryResult.usage.total_tokens || 0;
+            addUsage(usage, retryResult.usage);
 
             for (const { block, initialTranslation } of retryBlocks) {
                 const translation = retryResult.translations.get(block.id);
                 if (typeof translation !== "string" || !translation.trim()
-                    || JAPANESE_CHARACTERS.test(translation)
+                    || hasUntranslatedJapanese(translation)
                     || /<\/?a\b/iu.test(translation)) {
                     fail(`翻訳漏れまたは未返却を検出しました: ${block.id} (${block.source} → ${initialTranslation || "翻訳なし"} → ${translation || "翻訳なし"})`);
                 }
@@ -573,6 +674,74 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
             }
         }
     }
+    return usage;
+}
+
+function restoreCodeTranslation(block, fragments) {
+    let sourceCursor = 0;
+    let restored = "";
+    for (const fragment of fragments) {
+        const translation = fragment.translation;
+        if (typeof translation !== "string" || !translation.trim()) {
+            fail(`コード断片の翻訳がありません: ${block.id}`);
+        }
+        restored += block.source.slice(sourceCursor, fragment.start);
+        restored += translation;
+        sourceCursor = fragment.end;
+    }
+    restored += block.source.slice(sourceCursor);
+
+    // All non-translatable portions are copied from source. Verify that this
+    // invariant was retained before writing the reconstructed code line.
+    let restoredCursor = 0;
+    sourceCursor = 0;
+    for (const fragment of fragments) {
+        const fixed = block.source.slice(sourceCursor, fragment.start);
+        if (restored.slice(restoredCursor, restoredCursor + fixed.length) !== fixed) {
+            fail(`コード構文の保全チェックに失敗しました: ${block.id}`);
+        }
+        restoredCursor += fixed.length + fragment.translation.length;
+        sourceCursor = fragment.end;
+    }
+    const tail = block.source.slice(sourceCursor);
+    if (restored.slice(restoredCursor) !== tail) {
+        fail(`コード構文の保全チェックに失敗しました: ${block.id}`);
+    }
+    return restored;
+}
+
+async function translateCodeBlocks(blocks, apiKey, rules, glossary) {
+    const fragments = [];
+    for (const block of blocks) {
+        for (const [index, segment] of (block.codeSegments || []).entries()) {
+            fragments.push({
+                id: `${block.id}::${index + 1}`,
+                type: `code-${segment.type}`,
+                source: segment.source,
+                sourceHash: hash(segment.source),
+                context: block.source,
+                parent: block,
+                start: segment.start,
+                end: segment.end
+            });
+        }
+    }
+    const usage = await translateSimpleBlocks(fragments, apiKey, rules, glossary);
+    for (const block of blocks) {
+        const blockFragments = fragments
+            .filter(fragment => fragment.parent === block)
+            .sort((left, right) => left.start - right.start);
+        block.translation = restoreCodeTranslation(block, blockFragments);
+    }
+    return usage;
+}
+
+async function translateBlocks(blocks, apiKey, rules, glossary) {
+    const usage = { input: 0, output: 0, reasoning: 0, total: 0 };
+    const ordinaryBlocks = blocks.filter(block => block.type !== "code");
+    const codeBlocks = blocks.filter(block => block.type === "code");
+    if (ordinaryBlocks.length > 0) addUsage(usage, await translateSimpleBlocks(ordinaryBlocks, apiKey, rules, glossary));
+    if (codeBlocks.length > 0) addUsage(usage, await translateCodeBlocks(codeBlocks, apiKey, rules, glossary));
     return usage;
 }
 
@@ -605,7 +774,7 @@ function buildPreviousTranslations(article) {
     return { exact, bySource };
 }
 
-function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = false) {
+function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = false, retranslateCodeBlocks = false) {
     const previous = buildPreviousTranslations(existingArticle);
     const pending = [];
     for (const block of blocks) {
@@ -618,7 +787,8 @@ function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = 
             || (block.type === "title" ? existingArticle?.title : null)
             || previous.bySource.get(block.source);
         const refreshThisLinkContext = retranslateLinkContexts && block.linkAdjacent;
-        if (!refreshThisLinkContext && translation && !JAPANESE_CHARACTERS.test(translation)) {
+        const refreshThisCodeBlock = retranslateCodeBlocks && block.type === "code";
+        if (!refreshThisLinkContext && !refreshThisCodeBlock && translation && !hasUntranslatedJapanese(translation)) {
             block.translation = translation;
         } else {
             pending.push(block);
@@ -715,7 +885,7 @@ function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
         sourceHash: sourceHashFor(blocks),
         translatedAt: new Date().toISOString(),
         title: titleBlock.translation,
-        blocks: blocks.map(({ context, fixedTranslation, linkAdjacent, ...block }) => ({
+        blocks: blocks.map(({ context, fixedTranslation, codeSegments, linkAdjacent, ...block }) => ({
             ...block,
             contextHash: contextHash({ context })
         })),
@@ -804,6 +974,11 @@ async function main() {
         const pending = splitReusableBlocks(
             blocks,
             existingArticle,
+            // Legacy JSON has no context hash. It is still safe to reuse by
+            // source text; forcing all of its link-adjacent blocks would
+            // needlessly retranslate already-reviewed articles.
+            Number.isInteger(existingArticle?.extractionVersion)
+                && existingArticle.extractionVersion < 3,
             existingArticle?.extractionVersion !== EXTRACTION_VERSION
         );
         console.log(`翻訳対象: ${blocks.length}ブロック（変更・追加: ${pending.length}ブロック）`);
