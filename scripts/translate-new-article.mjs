@@ -9,6 +9,7 @@ const ARTICLES_DIRECTORY = join(REPOSITORY_DIRECTORY, "articles");
 const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
+const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const BROWSER_HEADERS = {
@@ -128,6 +129,12 @@ async function getRequestedArticle() {
 function isMoreRecent(first, second) {
     return !second || Number.isNaN(new Date(second).valueOf())
         || new Date(first) > new Date(second);
+}
+
+function isWithinInitialMonitorWindow(lastModified) {
+    const modifiedAt = new Date(lastModified);
+    const earliestTarget = Date.now() - INITIAL_MONITOR_LOOKBACK_HOURS * 60 * 60 * 1000;
+    return !Number.isNaN(modifiedAt.valueOf()) && modifiedAt.valueOf() >= earliestTarget;
 }
 
 async function readJson(path) {
@@ -561,10 +568,12 @@ async function main() {
     } else {
         targets = [...sitemapEntries.values()].filter(entry => {
             if (existingIds.has(entry.articleId)) return true;
-            return state.lastCheckedAt && isMoreRecent(entry.lastModified, state.lastCheckedAt);
+            return state.lastCheckedAt
+                ? isMoreRecent(entry.lastModified, state.lastCheckedAt)
+                : isWithinInitialMonitorWindow(entry.lastModified);
         });
         if (!state.lastCheckedAt) {
-            console.log("初回監視: 既存JSONの記事だけを更新確認します。未翻訳の旧記事は対象にしません。");
+            console.log(`初回監視: 既存JSONと直近${INITIAL_MONITOR_LOOKBACK_HOURS}時間の更新記事を確認します。`);
         }
     }
 
