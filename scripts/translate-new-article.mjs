@@ -1,13 +1,13 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile, access } from "node:fs/promises";
-import { constants as fsConstants } from "node:fs";
+import { mkdir, readFile, writeFile, readdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SCRIPT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 const REPOSITORY_DIRECTORY = dirname(SCRIPT_DIRECTORY);
 const ARTICLES_DIRECTORY = join(REPOSITORY_DIRECTORY, "articles");
-const RSS_URL = "https://newrpg.seesaa.net/index.rdf";
+const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
+const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const JAPANESE_CHARACTERS = /[ぁ-んァ-ヶ一-龠々〆〤ー]/u;
@@ -91,22 +91,64 @@ async function fetchText(url) {
     return decoder.decode(bytes);
 }
 
-async function getTargetUrl() {
-    const requestedUrl = process.env.ARTICLE_URL?.trim();
-    if (requestedUrl) {
-        if (!extractArticleId(requestedUrl)) {
-            fail("ARTICLE_URL は /article/記事ID.html の形式にしてください。");
-        }
-        return requestedUrl;
+async function getSitemapEntries() {
+    const sitemapIndex = await fetchText(SITEMAP_INDEX_URL);
+    const sitemapUrls = [...sitemapIndex.matchAll(/<loc>\s*(https?:\/\/[^<]+)\s*<\/loc>/giu)]
+        .map(match => decodeHtml(match[1].trim()))
+        .filter(url => url.startsWith("https://newrpg.seesaa.net/sitemap.xml"));
+    if (sitemapUrls.length === 0) {
+        fail("サイトマップ一覧を取得できませんでした。");
     }
 
-    const rss = await fetchText(RSS_URL);
-    const articleUrl = /rdf:about=["'](https?:\/\/[^"']+\/article\/\d+\.html)["']/iu.exec(rss)?.[1]
-        || /https?:\/\/[^<\s"']+\/article\/\d+\.html/iu.exec(rss)?.[0];
-    if (!articleUrl) {
-        fail("RSSから最新記事のURLを取得できませんでした。");
+    const entries = new Map();
+    for (const sitemapUrl of sitemapUrls) {
+        const sitemap = await fetchText(sitemapUrl);
+        for (const match of sitemap.matchAll(
+            /<url>\s*<loc>\s*(https?:\/\/[^<]+\/article\/(\d+)\.html)\s*<\/loc>\s*<lastmod>\s*([^<]+)\s*<\/lastmod>\s*<\/url>/giu
+        )) {
+            const entry = {
+                url: decodeHtml(match[1].trim()),
+                articleId: match[2],
+                lastModified: match[3].trim()
+            };
+            const previous = entries.get(entry.articleId);
+            if (!previous || new Date(entry.lastModified) > new Date(previous.lastModified)) {
+                entries.set(entry.articleId, entry);
+            }
+        }
     }
-    return articleUrl.replace(/&amp;/gu, "&");
+    if (entries.size === 0) {
+        fail("サイトマップから記事一覧を取得できませんでした。");
+    }
+    return entries;
+}
+
+async function getRequestedArticle() {
+    const requestedUrl = process.env.ARTICLE_URL?.trim();
+    if (!requestedUrl) return null;
+    const articleId = extractArticleId(requestedUrl);
+    if (!articleId) {
+        fail("ARTICLE_URL は /article/記事ID.html の形式にしてください。");
+    }
+    return { url: requestedUrl, articleId, lastModified: null };
+}
+
+function isMoreRecent(first, second) {
+    return !second || Number.isNaN(new Date(second).valueOf())
+        || new Date(first) > new Date(second);
+}
+
+async function readJson(path) {
+    try {
+        return JSON.parse(await readFile(path, "utf8"));
+    } catch (error) {
+        if (error?.code === "ENOENT") return null;
+        throw error;
+    }
+}
+
+async function readMonitorState() {
+    return await readJson(MONITOR_STATE_PATH) || { lastCheckedAt: null };
 }
 
 function findElementInnerHtml(html, tagName, className, startAt = 0) {
@@ -432,13 +474,74 @@ async function translateBlocks(blocks, apiKey, rules, glossary) {
     return usage;
 }
 
-async function exists(path) {
-    try {
-        await access(path, fsConstants.F_OK);
-        return true;
-    } catch {
-        return false;
+function contextHash(block) {
+    return hash(block.context || "");
+}
+
+function buildPreviousTranslations(article) {
+    const exact = new Map();
+    const bySource = new Map();
+    if (!article) return { exact, bySource };
+
+    for (const block of article.blocks || []) {
+        if (typeof block?.translation !== "string" || !block.translation.trim()) continue;
+        if (block.contextHash) {
+            exact.set(`${block.type}\u0000${block.sourceHash}\u0000${block.contextHash}`, block.translation);
+        }
+        if (block.source && !bySource.has(block.source)) {
+            bySource.set(block.source, block.translation);
+        }
     }
+    for (const [source, translation] of Object.entries(article.texts || {})) {
+        if (typeof translation === "string" && translation.trim() && !bySource.has(source)) {
+            bySource.set(source, translation);
+        }
+    }
+    if (article.title && article.blocks?.find(block => block.type === "title")?.source) {
+        bySource.set(article.blocks.find(block => block.type === "title").source, article.title);
+    }
+    return { exact, bySource };
+}
+
+function splitReusableBlocks(blocks, existingArticle) {
+    const previous = buildPreviousTranslations(existingArticle);
+    const pending = [];
+    for (const block of blocks) {
+        const exactKey = `${block.type}\u0000${block.sourceHash}\u0000${contextHash(block)}`;
+        const translation = previous.exact.get(exactKey)
+            || (block.type === "title" ? existingArticle?.title : null)
+            || previous.bySource.get(block.source);
+        if (translation && !JAPANESE_CHARACTERS.test(translation)) {
+            block.translation = translation;
+        } else {
+            pending.push(block);
+        }
+    }
+    return pending;
+}
+
+function sourceHashFor(blocks) {
+    return hash(blocks.map(block => `${block.type}:${block.sourceHash}:${contextHash(block)}`).join("\n"));
+}
+
+function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
+    const titleBlock = blocks.find(block => block.type === "title");
+    const texts = Object.fromEntries(blocks
+        .filter(block => block.type !== "title")
+        .map(block => [block.source, block.translation]));
+    return {
+        articleId,
+        sourceUrl: articleUrl,
+        sourceUpdatedAt: lastModified || null,
+        sourceHash: sourceHashFor(blocks),
+        translatedAt: new Date().toISOString(),
+        title: titleBlock.translation,
+        blocks: blocks.map(({ context, ...block }) => ({
+            ...block,
+            contextHash: contextHash({ context })
+        })),
+        texts
+    };
 }
 
 async function main() {
@@ -448,51 +551,93 @@ async function main() {
         fail("OPENAI_API_KEY が設定されていません。");
     }
 
-    const articleUrl = await getTargetUrl();
-    const articleId = extractArticleId(articleUrl);
-    if (!articleId) fail("記事IDを取得できませんでした。");
-    const outputPath = join(ARTICLES_DIRECTORY, `${articleId}.json`);
-    if (!dryRun && await exists(outputPath)) {
-        console.log(`既存JSONがあるためスキップします: articles/${articleId}.json`);
-        return;
-    }
-
-    console.log(`記事を取得します: ${articleUrl}`);
-    const html = await fetchText(articleUrl);
-    const title = extractTitle(html);
-    const blocks = parseBlocks(extractArticleHtml(html), title);
-    console.log(`翻訳対象: ${blocks.length}ブロック`);
-    if (dryRun) {
-        console.log(`検証のみ: ${title}`);
-        console.log("API呼び出し・JSON書き込みは行いません。");
-        return;
-    }
-
     const rules = await readOptionalConfiguration("translation_rules.md");
-    const glossary = selectRelevantGlossary(
-        await readOptionalConfiguration("glossary.json"),
-        blocks
-    );
-    const usage = await translateBlocks(blocks, apiKey, rules, glossary);
-
-    const titleBlock = blocks.find(block => block.type === "title");
-    const texts = Object.fromEntries(blocks
-        .filter(block => block.type !== "title")
-        .map(block => [block.source, block.translation]));
-    const output = {
-        articleId,
-        sourceUrl: articleUrl,
-        sourceHash: hash(blocks.map(block => `${block.id}:${block.sourceHash}`).join("\n")),
-        translatedAt: new Date().toISOString(),
-        title: titleBlock.translation,
-        blocks: blocks.map(({ context, ...block }) => block),
-        texts
-    };
-
     await mkdir(ARTICLES_DIRECTORY, { recursive: true });
-    await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
-    console.log(`JSONを作成しました: articles/${articleId}.json`);
-    console.log(`API使用量: 入力 ${usage.input} / 出力 ${usage.output} / 推論 ${usage.reasoning} / 合計 ${usage.total}`);
+    const requestedArticle = await getRequestedArticle();
+    const sitemapEntries = requestedArticle ? null : await getSitemapEntries();
+    const state = await readMonitorState();
+    const outputFiles = await readdir(ARTICLES_DIRECTORY, { withFileTypes: true });
+    const existingIds = new Set(outputFiles
+        .filter(entry => entry.isFile() && /^\d+\.json$/u.test(entry.name))
+        .map(entry => entry.name.slice(0, -5)));
+
+    let targets;
+    if (requestedArticle) {
+        targets = [requestedArticle];
+    } else {
+        targets = [...sitemapEntries.values()].filter(entry => {
+            if (existingIds.has(entry.articleId)) return true;
+            return state.lastCheckedAt && isMoreRecent(entry.lastModified, state.lastCheckedAt);
+        });
+        if (!state.lastCheckedAt) {
+            console.log("初回監視: 既存JSONの記事だけを更新確認します。未翻訳の旧記事は対象にしません。");
+        }
+    }
+
+    let translatedArticleCount = 0;
+    let checkedArticleCount = 0;
+    let usage = { input: 0, output: 0, reasoning: 0, total: 0 };
+    for (const target of targets) {
+        const outputPath = join(ARTICLES_DIRECTORY, `${target.articleId}.json`);
+        const existingArticle = await readJson(outputPath);
+        if (existingArticle?.sourceUpdatedAt && target.lastModified
+            && !isMoreRecent(target.lastModified, existingArticle.sourceUpdatedAt)) {
+            continue;
+        }
+
+        checkedArticleCount++;
+        console.log(`記事を確認します: ${target.url}`);
+        const html = await fetchText(target.url);
+        const title = extractTitle(html);
+        const blocks = parseBlocks(extractArticleHtml(html), title);
+        const newSourceHash = sourceHashFor(blocks);
+        if (existingArticle?.sourceHash === newSourceHash) {
+            console.log(`本文に差分はありません: articles/${target.articleId}.json`);
+            if (!dryRun && target.lastModified && existingArticle.sourceUpdatedAt !== target.lastModified) {
+                existingArticle.sourceUpdatedAt = target.lastModified;
+                await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
+            }
+            continue;
+        }
+
+        const pending = splitReusableBlocks(blocks, existingArticle);
+        console.log(`翻訳対象: ${blocks.length}ブロック（変更・追加: ${pending.length}ブロック）`);
+        if (dryRun) continue;
+
+        if (pending.length > 0) {
+            const glossary = selectRelevantGlossary(
+                await readOptionalConfiguration("glossary.json"),
+                pending
+            );
+            const articleUsage = await translateBlocks(pending, apiKey, rules, glossary);
+            usage.input += articleUsage.input;
+            usage.output += articleUsage.output;
+            usage.reasoning += articleUsage.reasoning;
+            usage.total += articleUsage.total;
+        }
+
+        const output = makeOutput({
+            articleId: target.articleId,
+            articleUrl: target.url,
+            lastModified: target.lastModified,
+            blocks
+        });
+        await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+        translatedArticleCount++;
+        console.log(`JSONを更新しました: articles/${target.articleId}.json`);
+    }
+
+    if (!requestedArticle && !dryRun) {
+        await writeFile(MONITOR_STATE_PATH, `${JSON.stringify({
+            lastCheckedAt: new Date().toISOString()
+        }, null, 2)}\n`, "utf8");
+    }
+    console.log(`確認記事数: ${checkedArticleCount} / JSON更新数: ${translatedArticleCount}`);
+    if (dryRun) {
+        console.log("検証のみ: API呼び出し・JSON書き込みは行いません。");
+    } else {
+        console.log(`API使用量: 入力 ${usage.input} / 出力 ${usage.output} / 推論 ${usage.reasoning} / 合計 ${usage.total}`);
+    }
 }
 
 main().catch(error => {
