@@ -11,6 +11,12 @@ const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
+const BROWSER_HEADERS = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "accept-language": "ja,en-US;q=0.9,en;q=0.8",
+    "referer": "https://newrpg.seesaa.net/"
+};
 const JAPANESE_CHARACTERS = /[ぁ-んァ-ヶ一-龠々〆〤ー]/u;
 const WHITESPACE = /\s+/gu;
 const IGNORED_TAGS = new Set([
@@ -57,12 +63,13 @@ function extractArticleId(url) {
 
 async function fetchText(url) {
     const response = await fetch(url, {
-        headers: {
-            "user-agent": "NRPBlogTranslationBot/1.0"
-        }
+        headers: BROWSER_HEADERS
     });
     if (!response.ok) {
-        fail(`取得に失敗しました (${response.status}): ${url}`);
+        const detail = (await response.text())
+            .replace(/\s+/gu, " ")
+            .slice(0, 200);
+        fail(`取得に失敗しました (${response.status}): ${url}${detail ? ` / ${detail}` : ""}`);
     }
 
     const bytes = await response.arrayBuffer();
