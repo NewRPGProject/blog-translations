@@ -1,0 +1,374 @@
+{
+  "articleId": "520814411",
+  "sourceUrl": "https://newrpg.seesaa.net/article/520814411.html",
+  "sourceUpdatedAt": "2026-08-27T13:40:20+09:00",
+  "sourceHash": "811916e71bfa654cb10e67b6013e3368721a0fb2bc94ca58897f3a8c08dc8528",
+  "translatedAt": "2026-08-27T07:08:44.002Z",
+  "title": "Encrypted Image Caching Support [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "暗号化画像のキャッシュ対応【RPGツクールMZプラグイン】",
+      "sourceHash": "f4fe9b1c717f6c9a49b5664e78f385ab07cd40e66b19112dc0b074380f874254",
+      "translation": "Encrypted Image Caching Support [RPG Maker MZ Plugin]",
+      "contextHash": "f4fe9b1c717f6c9a49b5664e78f385ab07cd40e66b19112dc0b074380f874254"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "暗号化した画像のロードをキャッシュ処理で高速化します。",
+      "sourceHash": "06ac661977decc0d2f3049736ac1517033741c48c8bb9105e4e6f98c521e4b84",
+      "translation": "Speeds up the loading of encrypted images through caching.",
+      "contextHash": "06ac661977decc0d2f3049736ac1517033741c48c8bb9105e4e6f98c521e4b84"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ＲＰＧツクールＭＺはChromeと同じエンジンを使用しており、一度読み込んだ画像はブラウザと同様の仕組みでキャッシュされます。",
+      "sourceHash": "44da11babdb8169f5b9d65b333531bcb1881cf8c3f6142f4316518169539579d",
+      "translation": "RPG Maker MZ uses the same engine as Chrome, and images that have been loaded once are cached using the same mechanism as a browser.",
+      "contextHash": "44da11babdb8169f5b9d65b333531bcb1881cf8c3f6142f4316518169539579d"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "しかしながら、デプロイ時に暗号化された画像は画像と認識されなくなるため、キャッシュも働かなくなってしまいます。",
+      "sourceHash": "f95e1353893291d50d3efd44adfc3511f6347761062227ebd87fe805dcb0f855",
+      "translation": "However, images encrypted during deployment are no longer recognized as images, so caching no longer works.",
+      "contextHash": "f95e1353893291d50d3efd44adfc3511f6347761062227ebd87fe805dcb0f855"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "そのため、場所移動を行う度にほぼ全ての画像をリクエストして復号（暗号解除）し直すということをしています。",
+      "sourceHash": "d944c0ee0a36bf2d4a486ab2a0088e8eab09e18ee6d6a71f7d7f7388a2e326ac",
+      "translation": "As a result, nearly all images are requested and decrypted each time the player transfers to another location.",
+      "contextHash": "d944c0ee0a36bf2d4a486ab2a0088e8eab09e18ee6d6a71f7d7f7388a2e326ac"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "（タイルセット、キャラクター、ＳＶアクター、ピクチャなど）",
+      "sourceHash": "004c6a3edba6a34789cb2ef523c6d52ee3c76391f77702bafcc303deee00e1a3",
+      "translation": "(Tilesets, characters, SV actors, pictures, etc.)",
+      "contextHash": "004c6a3edba6a34789cb2ef523c6d52ee3c76391f77702bafcc303deee00e1a3"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "このプラグインは復号済みの画像をキャッシュとして保持します。",
+      "sourceHash": "68f7b8be1003b7fad926d0e2ae04b97832e31e172a59b74fa1ba9cadc985e736",
+      "translation": "This plugin stores decrypted images in a cache.",
+      "contextHash": "68f7b8be1003b7fad926d0e2ae04b97832e31e172a59b74fa1ba9cadc985e736"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "２回目以降のアクセスでは各処理をスキップするため、場所移動時を始めとした画像読込を高速化できます。",
+      "sourceHash": "e57e23245be2a9123b34df83cd6c55690d326bfb9da486e857554c9c0038b6ab",
+      "translation": "Because each process is skipped on the second and subsequent accesses, image loading—including during location transfers—is accelerated.",
+      "contextHash": "e57e23245be2a9123b34df83cd6c55690d326bfb9da486e857554c9c0038b6ab"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "基本的には、暗号化しない場合とほぼ同じロード時間になるはずです。",
+      "sourceHash": "27cbdd5b0a4e09e44c6e1a61b33f43e9deca5198a555c3c223dfc3fd318f5e1b",
+      "translation": "Basically, loading times should be nearly the same as when encryption is not used.",
+      "contextHash": "27cbdd5b0a4e09e44c6e1a61b33f43e9deca5198a555c3c223dfc3fd318f5e1b"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "当然ながら、画像の暗号化を使用しないプロジェクトには意味がありません。",
+      "sourceHash": "05f05c7385f17f93add0ffc69a495cf9b893108183c1fda3a6d837d54e548cc4",
+      "translation": "Naturally, this plugin has no purpose in projects that do not use image encryption.",
+      "contextHash": "05f05c7385f17f93add0ffc69a495cf9b893108183c1fda3a6d837d54e548cc4"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "620dabfaa3700fbaa8d02183d897c97ae0b78412b2ccdfc10694db95f08b6c72"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Change History (History)",
+      "contextHash": "311d977e5b9ff3e16a7781c7a18bfee997e207912e9afd0515af9a0522785bc8"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "仕組み",
+      "sourceHash": "04f89470260c7714ef32fe9a40bd75d7de32e9c428a2a999496bfea205492ce6",
+      "translation": "Mechanism",
+      "contextHash": "36d9986a13283f389223a7d10cd6a32d973eb276087345ec75d311dec6aaa956"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "注意事項",
+      "sourceHash": "57094d03c6e62f4ebbde46a6aecbc7ab82463f11d20b46a63f157d9e428dd5af",
+      "translation": "Notes",
+      "contextHash": "2565644e0aa4cd1036183ed62305c89ab74aee27cb541a5a3f3639fc16488563"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "f6cd1a3059d666756fb649682492bed5ff1451bc3685971914b4ed7c78365963"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "最大キャッシュ数（MaxCacheCount）",
+      "sourceHash": "4822ccad3fea3dfc02f311bafc22233f0fc5fc3b6e1ce8d271653ba8bc5ffe93",
+      "translation": "Maximum Cache Count (MaxCacheCount)",
+      "contextHash": "0c4f73ba178c4022d054c760767c184a4630163868308ddc374205a00035b8b0"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "ロード時にクリア（ClearOnLoad）",
+      "sourceHash": "b72ed909cafadcfbd16f2b063317625584d515f5cc25d67c6d0d7b840a5bd57b",
+      "translation": "Clear on Load (ClearOnLoad)",
+      "contextHash": "0a5642b5e1ec678ab6f70e673d2c72c90567fc252b991f2bdef5ba7e9fce32b3"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "fee9a112cf31d48dd12b4ea0aa581800cedfceef38aeec145dde0db30419d71c",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Enable the feature through the Plugin Manager in RPG Maker.",
+      "contextHash": "fee9a112cf31d48dd12b4ea0aa581800cedfceef38aeec145dde0db30419d71c"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "* This plugin is exclusively for MZ.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Change History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "仕組み",
+      "sourceHash": "04f89470260c7714ef32fe9a40bd75d7de32e9c428a2a999496bfea205492ce6",
+      "translation": "Mechanism",
+      "contextHash": "04f89470260c7714ef32fe9a40bd75d7de32e9c428a2a999496bfea205492ce6"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ＲＰＧツクールＭＺは場所移動時に ImageManager.clear() を呼び出して画像キャッシュを全消去します。そのため、暗号化画像には毎回「リクエスト取得 → 復号 → Blob → ObjectURL」という取得処理が走ります。",
+      "sourceHash": "ddd3cd9929cf83976667f86ec80f29d9e9ebbf061154c8349779e06cc0d5601f",
+      "translation": "RPG Maker MZ calls ImageManager.clear() when the player transfers to another location, completely clearing the image cache. As a result, encrypted images undergo the following process every time: \"request → decryption → Blob → ObjectURL\".",
+      "contextHash": "ddd3cd9929cf83976667f86ec80f29d9e9ebbf061154c8349779e06cc0d5601f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "このプラグインはObjectURLをImageManagerのキャッシュとは別の領域に保持することで、ImageManager.clear()の影響を受けずに再利用します。",
+      "sourceHash": "0c21403e1b2ca5d05075a4efa063cf807f48e386122190ea726320eb01b43df8",
+      "translation": "This plugin stores ObjectURLs in a separate area from ImageManager's cache, allowing them to be reused without being affected by ImageManager.clear().",
+      "contextHash": "0c21403e1b2ca5d05075a4efa063cf807f48e386122190ea726320eb01b43df8"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "２回目以降のアクセスではXHRと復号処理を完全にスキップできるため、暗号化しない場合とほぼ同等のロード速度を実現します。",
+      "sourceHash": "2eac95d456893a026e505156270d5a63b0800bd1a909f2083651a3564de14f66",
+      "translation": "Because XHR and the decryption process can be skipped completely on the second and subsequent accesses, loading speeds nearly equivalent to those without encryption can be achieved.",
+      "contextHash": "2eac95d456893a026e505156270d5a63b0800bd1a909f2083651a3564de14f66"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "最大キャッシュ数（MaxCacheCount）",
+      "sourceHash": "4822ccad3fea3dfc02f311bafc22233f0fc5fc3b6e1ce8d271653ba8bc5ffe93",
+      "translation": "Maximum Cache Count (MaxCacheCount)",
+      "contextHash": "4822ccad3fea3dfc02f311bafc22233f0fc5fc3b6e1ce8d271653ba8bc5ffe93"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "キャッシュする画像の最大数です。",
+      "sourceHash": "fe54976efe53809d80cc4041839df3f2dc6ccabbc6296db6c66c6e0c5cade936",
+      "translation": "The maximum number of images to cache.",
+      "contextHash": "fe54976efe53809d80cc4041839df3f2dc6ccabbc6296db6c66c6e0c5cade936"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "この数を超えると古いものから順に破棄されます。",
+      "sourceHash": "f7bf4f1cb92fdc079b4a2fd67a9022b8780cf3ab31866a6caa597be1df22e102",
+      "translation": "Once this number is exceeded, the oldest items are discarded first.",
+      "contextHash": "f7bf4f1cb92fdc079b4a2fd67a9022b8780cf3ab31866a6caa597be1df22e102"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "デフォルト値は300です。",
+      "sourceHash": "957f36ed716aff774f6b7bbe4ba50e9229c3df195dc0ddd23be838a3893ece9f",
+      "translation": "The default value is 300.",
+      "contextHash": "957f36ed716aff774f6b7bbe4ba50e9229c3df195dc0ddd23be838a3893ece9f"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "値を増やすほどメモリを消費します。imgフォルダ以下のファイル数とサイズを参考に設定してください。",
+      "sourceHash": "b0f8a0fb9f593992cfa2adab3d2c2e278eb4f72b0211fdabd210875d1a6966c7",
+      "translation": "Increasing this value consumes more memory. Configure it with reference to the number and sizes of files under the img folder.",
+      "contextHash": "b0f8a0fb9f593992cfa2adab3d2c2e278eb4f72b0211fdabd210875d1a6966c7"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "※ＭＺの動作環境はメモリ８ＧＢなので、１００ＭＢ程度で問題になることはまずないはずです。余裕があるなら全ファイル数より多く設定してもよいかと思います。",
+      "sourceHash": "6cf4ed2b109db50a32f67c62ccccda7ffcb28638a6f506a0aac8e4b3377358d0",
+      "translation": "* MZ's operating environment requires 8 GB of memory, so approximately 100 MB should generally not cause any issues. If you have sufficient memory, you may set this higher than the total number of files.",
+      "contextHash": "6cf4ed2b109db50a32f67c62ccccda7ffcb28638a6f506a0aac8e4b3377358d0"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "※正確にはsystemフォルダ以下の画像は対象外（別でキャッシュ済）です。",
+      "sourceHash": "3f55287af497befa2ccdf925b339bb7cc82f136700226f29ada527e42588e238",
+      "translation": "* Strictly speaking, images under the system folder are excluded (they are cached separately).",
+      "contextHash": "3f55287af497befa2ccdf925b339bb7cc82f136700226f29ada527e42588e238"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ロード時にクリア（ClearOnLoad）",
+      "sourceHash": "b72ed909cafadcfbd16f2b063317625584d515f5cc25d67c6d0d7b840a5bd57b",
+      "translation": "Clear on Load (ClearOnLoad)",
+      "contextHash": "b72ed909cafadcfbd16f2b063317625584d515f5cc25d67c6d0d7b840a5bd57b"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "セーブデータのロード時にキャッシュをリセットするかどうかです。",
+      "sourceHash": "db91162839a7f4a6234fe6149e4eb12fc78b3dfd2c827541536400043789af6e",
+      "translation": "Determines whether to reset the cache when loading save data.",
+      "contextHash": "db91162839a7f4a6234fe6149e4eb12fc78b3dfd2c827541536400043789af6e"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "デフォルトはオン（true）です。",
+      "sourceHash": "5fcb798889c9e3a4f4e4d39cb224f6ad6e95643cb7fcc4d80216e94fece47b0b",
+      "translation": "The default is on (true).",
+      "contextHash": "5fcb798889c9e3a4f4e4d39cb224f6ad6e95643cb7fcc4d80216e94fece47b0b"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "オンにすると、ロード時に古いObjectURLを破棄してメモリリークを防ぎます。",
+      "sourceHash": "7ed87c84d5efdffc516011285b69a41207cd8783906c8000a9c3a09ddf4ca4f1",
+      "translation": "When enabled, old ObjectURLs are discarded upon loading to prevent memory leaks.",
+      "contextHash": "7ed87c84d5efdffc516011285b69a41207cd8783906c8000a9c3a09ddf4ca4f1"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "オフにするとロード後もキャッシュを継続して使用します。",
+      "sourceHash": "9436c8a59de96452da9d78ba0f943dd575d4b1d62214eaba6516592c367a8984",
+      "translation": "When disabled, the cache continues to be used after loading.",
+      "contextHash": "9436c8a59de96452da9d78ba0f943dd575d4b1d62214eaba6516592c367a8984"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "＞RPGツクールMZ&MV目次に戻る",
+      "sourceHash": "3bcc60de1127eb069aa22b4e6c377dc301353a44f2f9c80405f4c2370ccf3079",
+      "translation": "＞Return to the RPG Maker MZ & MV Table of Contents",
+      "contextHash": "7b9cac9cd27239f909cd4f6fc7a53314f371335e6ab030980cdfc8441dcb443c"
+    }
+  ],
+  "texts": {
+    "暗号化した画像のロードをキャッシュ処理で高速化します。": "Speeds up the loading of encrypted images through caching.",
+    "ＲＰＧツクールＭＺはChromeと同じエンジンを使用しており、一度読み込んだ画像はブラウザと同様の仕組みでキャッシュされます。": "RPG Maker MZ uses the same engine as Chrome, and images that have been loaded once are cached using the same mechanism as a browser.",
+    "しかしながら、デプロイ時に暗号化された画像は画像と認識されなくなるため、キャッシュも働かなくなってしまいます。": "However, images encrypted during deployment are no longer recognized as images, so caching no longer works.",
+    "そのため、場所移動を行う度にほぼ全ての画像をリクエストして復号（暗号解除）し直すということをしています。": "As a result, nearly all images are requested and decrypted each time the player transfers to another location.",
+    "（タイルセット、キャラクター、ＳＶアクター、ピクチャなど）": "(Tilesets, characters, SV actors, pictures, etc.)",
+    "このプラグインは復号済みの画像をキャッシュとして保持します。": "This plugin stores decrypted images in a cache.",
+    "２回目以降のアクセスでは各処理をスキップするため、場所移動時を始めとした画像読込を高速化できます。": "Because each process is skipped on the second and subsequent accesses, image loading—including during location transfers—is accelerated.",
+    "基本的には、暗号化しない場合とほぼ同じロード時間になるはずです。": "Basically, loading times should be nearly the same as when encryption is not used.",
+    "当然ながら、画像の暗号化を使用しないプロジェクトには意味がありません。": "Naturally, this plugin has no purpose in projects that do not use image encryption.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "更新履歴（History）": "Change History (History)",
+    "仕組み": "Mechanism",
+    "注意事項": "Notes",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "最大キャッシュ数（MaxCacheCount）": "Maximum Cache Count (MaxCacheCount)",
+    "ロード時にクリア（ClearOnLoad）": "Clear on Load (ClearOnLoad)",
+    "以下のファイルをダウンロードし、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Enable the feature through the Plugin Manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "* This plugin is exclusively for MZ.",
+    "公開！": "Released!",
+    "ＲＰＧツクールＭＺは場所移動時に ImageManager.clear() を呼び出して画像キャッシュを全消去します。そのため、暗号化画像には毎回「リクエスト取得 → 復号 → Blob → ObjectURL」という取得処理が走ります。": "RPG Maker MZ calls ImageManager.clear() when the player transfers to another location, completely clearing the image cache. As a result, encrypted images undergo the following process every time: \"request → decryption → Blob → ObjectURL\".",
+    "このプラグインはObjectURLをImageManagerのキャッシュとは別の領域に保持することで、ImageManager.clear()の影響を受けずに再利用します。": "This plugin stores ObjectURLs in a separate area from ImageManager's cache, allowing them to be reused without being affected by ImageManager.clear().",
+    "２回目以降のアクセスではXHRと復号処理を完全にスキップできるため、暗号化しない場合とほぼ同等のロード速度を実現します。": "Because XHR and the decryption process can be skipped completely on the second and subsequent accesses, loading speeds nearly equivalent to those without encryption can be achieved.",
+    "キャッシュする画像の最大数です。": "The maximum number of images to cache.",
+    "この数を超えると古いものから順に破棄されます。": "Once this number is exceeded, the oldest items are discarded first.",
+    "デフォルト値は300です。": "The default value is 300.",
+    "値を増やすほどメモリを消費します。imgフォルダ以下のファイル数とサイズを参考に設定してください。": "Increasing this value consumes more memory. Configure it with reference to the number and sizes of files under the img folder.",
+    "※ＭＺの動作環境はメモリ８ＧＢなので、１００ＭＢ程度で問題になることはまずないはずです。余裕があるなら全ファイル数より多く設定してもよいかと思います。": "* MZ's operating environment requires 8 GB of memory, so approximately 100 MB should generally not cause any issues. If you have sufficient memory, you may set this higher than the total number of files.",
+    "※正確にはsystemフォルダ以下の画像は対象外（別でキャッシュ済）です。": "* Strictly speaking, images under the system folder are excluded (they are cached separately).",
+    "セーブデータのロード時にキャッシュをリセットするかどうかです。": "Determines whether to reset the cache when loading save data.",
+    "デフォルトはオン（true）です。": "The default is on (true).",
+    "オンにすると、ロード時に古いObjectURLを破棄してメモリリークを防ぎます。": "When enabled, old ObjectURLs are discarded upon loading to prevent memory leaks.",
+    "オフにするとロード後もキャッシュを継続して使用します。": "When disabled, the cache continues to be used after loading.",
+    "＞RPGツクールMZ&MV目次に戻る": "＞Return to the RPG Maker MZ & MV Table of Contents"
+  }
+}

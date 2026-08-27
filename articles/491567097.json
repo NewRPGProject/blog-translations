@@ -1,9 +1,228 @@
-﻿{
+{
   "articleId": "491567097",
-  "sourceHash": "",
-  "translatedAt": "2026-08-02T21:30:00+09:00",
-  "model": "gpt-5.5",
+  "sourceUrl": "https://newrpg.seesaa.net/article/491567097.html",
+  "sourceUpdatedAt": "2026-07-31T14:10:18+09:00",
+  "sourceHash": "6cdfcd8cc9817d9316d91be7b4b90594e707d70a0c0103a1b74a4887ce827397",
+  "translatedAt": "2026-08-27T07:08:56.891Z",
   "title": "Lock Scrolling When the Screen Dimensions Use an Even Number of Tiles [RPG Maker MZ/MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "画面の描画幅が半端な場合にスクロールを固定【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "dd5c37d9c2b8f415329cd8f7f795b65bc15962590490bd639c96ed3eeb18162f",
+      "translation": "Lock Scrolling When the Screen Dimensions Use an Even Number of Tiles [RPG Maker MZ/MV Plugin]",
+      "contextHash": "dd5c37d9c2b8f415329cd8f7f795b65bc15962590490bd639c96ed3eeb18162f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "画面の描画サイズが半端な場合にスクロールを固定します。",
+      "sourceHash": "380c87342c7e381ed46fa711d5202e3e1da0c1ca590e8d6100fdc762d4225a37",
+      "translation": "This plugin locks scrolling when the screen dimensions result in a half-tile offset.",
+      "contextHash": "380c87342c7e381ed46fa711d5202e3e1da0c1ca590e8d6100fdc762d4225a37"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "具体的には画面幅に対応するタイル数が偶数の場合を想定しています。",
+      "sourceHash": "f197c0fcea30a5f411676335ea8d743bce6cde9035e130628663492052f712a6",
+      "translation": "More specifically, it is intended for cases where the screen width corresponds to an even number of tiles.",
+      "contextHash": "f197c0fcea30a5f411676335ea8d743bce6cde9035e130628663492052f712a6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "例えば、画面の横幅を９６０ピクセルとした場合、デフォルトの４８ピクセルのタイルでは２０個分に相当します。",
+      "sourceHash": "7c7a6ee2d2a6153c6cb323d82b66528180a932273a9a964211e0882324b420e8",
+      "translation": "For example, a screen width of 960 pixels corresponds to 20 tiles when using the default tile size of 48 pixels.",
+      "contextHash": "7c7a6ee2d2a6153c6cb323d82b66528180a932273a9a964211e0882324b420e8"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "この際、スクロールタイプがループしない状態で、プレイヤーキャラクターを画面中央に配置すると、左端と右端のタイルが半分だけ見えている状況になります。",
+      "sourceHash": "e4df642d97900b1c25a1b7a1c524a1e16e1beb858d46ac800323a05d411da0c7",
+      "translation": "When the map does not loop and the player character is positioned at the center of the screen, only half of the tiles at the left and right edges will be visible.",
+      "contextHash": "e4df642d97900b1c25a1b7a1c524a1e16e1beb858d46ac800323a05d411da0c7"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "この状況で、１画面に収まるマップを作りたい場合はマップの横方向のタイル数を２１にすればよいのですが、プレイヤーが左右に移動すると、中途半端なスクロールが発生してしまいます。",
+      "sourceHash": "58b1eb63f771148528a12bca5ff912f024b98607722d8f9557451828735375a3",
+      "translation": "To create a map that fits within a single screen in this situation, the map width can be set to 21 tiles. However, moving the player left or right will cause unwanted partial scrolling.",
+      "contextHash": "58b1eb63f771148528a12bca5ff912f024b98607722d8f9557451828735375a3"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "そこで、このプラグインでは自動でスクロールを固定します。",
+      "sourceHash": "ac577c799feda29e4986302903f531d036f06dd04aca5eeb2a45f2b56e3dde80",
+      "translation": "This plugin therefore locks the scrolling automatically.",
+      "contextHash": "ac577c799feda29e4986302903f531d036f06dd04aca5eeb2a45f2b56e3dde80"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "その際、スクロール位置も画面中央に固定します。",
+      "sourceHash": "065b6bb90089e6d69d116892695f75ca64a67e8ebe6d0832d5ad45e10a0ae11c",
+      "translation": "The scroll position is also fixed at the center of the map.",
+      "contextHash": "065b6bb90089e6d69d116892695f75ca64a67e8ebe6d0832d5ad45e10a0ae11c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation",
+      "contextHash": "620dabfaa3700fbaa8d02183d897c97ae0b78412b2ccdfc10694db95f08b6c72"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Version History",
+      "contextHash": "311d977e5b9ff3e16a7781c7a18bfee997e207912e9afd0515af9a0522785bc8"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "8ae0689e6ce4cf57a8c4f1c7e03afa6e9fa3ce8a869f4ced852a44b89797c31c"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "横スクロールを固定（HorizontalScrollLock）",
+      "sourceHash": "b7e799a9f1a930753e3c4444a0080fbb9b9a59ebc4a3151bbcca30ef7b8aa999",
+      "translation": "Lock Horizontal Scrolling (HorizontalScrollLock)",
+      "contextHash": "35c34fafae6cb1b106905584d7d95a65f04584fe38d5b2d9fb73f4cd82766a39"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "縦スクロールを固定（VerticalScrollLock）",
+      "sourceHash": "51e720bdaea8f75db59d2d83faa9bcdb1b3334b4fc0c04e79065a1b18f00412f",
+      "translation": "Lock Vertical Scrolling (VerticalScrollLock)",
+      "contextHash": "29e7559db3144fe80644e07b1db024ab61dcddd783fffdb9207afdb8306aae61"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Then enable the plugin from the RPG Maker Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "Note: This plugin supports both RPG Maker MV and RPG Maker MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Version History",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Initial release.",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "横スクロールを固定（HorizontalScrollLock）",
+      "sourceHash": "b7e799a9f1a930753e3c4444a0080fbb9b9a59ebc4a3151bbcca30ef7b8aa999",
+      "translation": "Lock Horizontal Scrolling (HorizontalScrollLock)",
+      "contextHash": "b7e799a9f1a930753e3c4444a0080fbb9b9a59ebc4a3151bbcca30ef7b8aa999"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "条件を満たし際に横スクロールを固定します。",
+      "sourceHash": "403cf948544ec31bf6543e5b20b8b51ee172d612d9d8798087b83f8e067d9be9",
+      "translation": "Locks horizontal scrolling when the specified conditions are met.",
+      "contextHash": "403cf948544ec31bf6543e5b20b8b51ee172d612d9d8798087b83f8e067d9be9"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "縦スクロールを固定（VerticalScrollLock）",
+      "sourceHash": "51e720bdaea8f75db59d2d83faa9bcdb1b3334b4fc0c04e79065a1b18f00412f",
+      "translation": "Lock Vertical Scrolling (VerticalScrollLock)",
+      "contextHash": "51e720bdaea8f75db59d2d83faa9bcdb1b3334b4fc0c04e79065a1b18f00412f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "条件を満たし際に縦スクロールを固定します。",
+      "sourceHash": "384f2e40f4e07533a2628b62f9b2a91ae93b3cc6fb44c7d57ae7fff40b8c9b8d",
+      "translation": "Locks vertical scrolling when the specified conditions are met.",
+      "contextHash": "384f2e40f4e07533a2628b62f9b2a91ae93b3cc6fb44c7d57ae7fff40b8c9b8d"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "＞RPGツクールMZ&MV目次に戻る",
+      "sourceHash": "3bcc60de1127eb069aa22b4e6c377dc301353a44f2f9c80405f4c2370ccf3079",
+      "translation": "Return to the RPG Maker MZ/MV Plugin Index",
+      "contextHash": "7b9cac9cd27239f909cd4f6fc7a53314f371335e6ab030980cdfc8441dcb443c"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "テスト（英語対応）",
+      "sourceHash": "6cf1a9bb524fa7d03798534ea76a08018c496691c044b8a1b75d34a8f10db0e5",
+      "translation": "Test (English Support)",
+      "contextHash": "6cf1a9bb524fa7d03798534ea76a08018c496691c044b8a1b75d34a8f10db0e5"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "日本語",
+      "sourceHash": "77710aedc74ecfa33685e33a6c7df5cc83004da1bdcef7fb280f5c2b2e97e0a5",
+      "translation": "Japanese",
+      "contextHash": "77710aedc74ecfa33685e33a6c7df5cc83004da1bdcef7fb280f5c2b2e97e0a5"
+    }
+  ],
   "texts": {
     "画面の描画サイズが半端な場合にスクロールを固定します。": "This plugin locks scrolling when the screen dimensions result in a half-tile offset.",
     "具体的には画面幅に対応するタイル数が偶数の場合を想定しています。": "More specifically, it is intended for cases where the screen width corresponds to an even number of tiles.",
@@ -21,10 +240,11 @@
     "導入方法（install）": "Installation",
     "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Then enable the plugin from the RPG Maker Plugin Manager.",
     "※このプラグインはＭＶ、ＭＺの両方で有効です。": "Note: This plugin supports both RPG Maker MV and RPG Maker MZ.",
-    "2022/09/18（ver1.00）": "2022/09/18 (ver. 1.00)",
     "公開！": "Initial release.",
     "条件を満たし際に横スクロールを固定します。": "Locks horizontal scrolling when the specified conditions are met.",
     "条件を満たし際に縦スクロールを固定します。": "Locks vertical scrolling when the specified conditions are met.",
-    "＞RPGツクールMZ&MV目次に戻る": "Return to the RPG Maker MZ/MV Plugin Index"
+    "＞RPGツクールMZ&MV目次に戻る": "Return to the RPG Maker MZ/MV Plugin Index",
+    "テスト（英語対応）": "Test (English Support)",
+    "日本語": "Japanese"
   }
 }
