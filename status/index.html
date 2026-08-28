@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog Translation Status</title>
+  <style>
+    :root { color-scheme: light; font-family: Arial, "Meiryo", sans-serif; }
+    body { margin: 24px; color: #222; background: #f6f8fa; }
+    main { max-width: 1100px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 24px; }
+    .summary { margin: 0 0 16px; color: #57606a; }
+    .toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+    input { width: min(360px, 100%); padding: 7px 9px; border: 1px solid #d0d7de; border-radius: 6px; font: inherit; }
+    .status { margin-left: auto; color: #57606a; font-size: 13px; }
+    .table-wrap { overflow-x: auto; background: #fff; border: 1px solid #d0d7de; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+    th, td { padding: 9px 10px; border-bottom: 1px solid #d8dee4; text-align: left; vertical-align: middle; }
+    th { position: sticky; top: 0; background: #f6f8fa; font-size: 13px; white-space: nowrap; }
+    td.done { width: 36px; color: #1a7f37; font-weight: bold; text-align: center; }
+    td.title { min-width: 280px; }
+    td.id, td.updated { white-space: nowrap; }
+    tr.untranslated { background: #fffdf2; }
+    tr:last-child td { border-bottom: 0; }
+    a { color: #0969da; }
+    .error { color: #cf222e; font-weight: bold; }
+    @media (max-width: 600px) { body { margin: 12px; } .toolbar { align-items: stretch; flex-direction: column; } .status { margin-left: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Blog Translation Status</h1>
+    <p class="summary" id="summary">一覧を読み込んでいます。</p>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="記事名またはIDで絞り込み" autocomplete="off">
+      <label><input id="only-untranslated" type="checkbox"> 未翻訳のみ</label>
+      <span class="status" id="status"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>翻訳</th><th>記事名</th><th>記事</th><th>更新日</th><th>編集</th></tr></thead>
+        <tbody id="articles"></tbody>
+      </table>
+    </div>
+  </main>
+  <script>
+    "use strict";
+
+    const state = { articles: [], generatedAt: null };
+    const table = document.getElementById("articles");
+    const summary = document.getElementById("summary");
+    const status = document.getElementById("status");
+    const search = document.getElementById("search");
+    const onlyUntranslated = document.getElementById("only-untranslated");
+
+    function formatDate(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.valueOf())) return value || "—";
+      const parts = new Intl.DateTimeFormat("ja-JP", {
+        timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+      }).formatToParts(date).reduce((result, part) => {
+        result[part.type] = part.value;
+        return result;
+      }, {});
+      return `${parts.year}/${parts.month}/${parts.day} ${parts.hour}:${parts.minute}:${parts.second}`;
+    }
+
+    function addLink(cell, href, label) {
+      const link = document.createElement("a");
+      link.href = href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = label;
+      cell.append(link);
+    }
+
+    function render() {
+      const keyword = search.value.trim().toLocaleLowerCase("ja-JP");
+      const articles = state.articles.filter(article => {
+        if (onlyUntranslated.checked && article.translated) return false;
+        return !keyword || `${article.title} ${article.id}`.toLocaleLowerCase("ja-JP").includes(keyword);
+      });
+      table.replaceChildren();
+      for (const article of articles) {
+        const row = document.createElement("tr");
+        if (!article.translated) row.className = "untranslated";
+
+        const translated = document.createElement("td");
+        translated.className = "done";
+        translated.textContent = article.translated ? "○" : "";
+        row.append(translated);
+
+        const title = document.createElement("td");
+        title.className = "title";
+        title.textContent = article.title || "—";
+        row.append(title);
+
+        const articleLink = document.createElement("td");
+        articleLink.className = "id";
+        addLink(articleLink, article.url, `${article.id}.html`);
+        row.append(articleLink);
+
+        const updated = document.createElement("td");
+        updated.className = "updated";
+        updated.textContent = formatDate(article.updatedAt);
+        row.append(updated);
+
+        const edit = document.createElement("td");
+        addLink(edit, `https://blog.seesaa.jp/cms/article/edit/input?id=${encodeURIComponent(article.id)}`, "編集");
+        row.append(edit);
+        table.append(row);
+      }
+      status.textContent = `${articles.length} / ${state.articles.length} 件`;
+    }
+
+    async function initialize() {
+      try {
+        const response = await fetch("./articles.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        state.articles = Array.isArray(data.articles) ? data.articles : [];
+        state.generatedAt = data.generatedAt || null;
+        const translated = state.articles.filter(article => article.translated).length;
+        summary.textContent = `全 ${state.articles.length} 件 / 翻訳済み ${translated} 件 / 一覧生成: ${formatDate(state.generatedAt)}`;
+        render();
+      } catch (error) {
+        summary.innerHTML = '<span class="error">一覧データを読み込めませんでした。</span>';
+        status.textContent = String(error.message || error);
+      }
+    }
+
+    search.addEventListener("input", render);
+    onlyUntranslated.addEventListener("change", render);
+    initialize();
+  </script>
+</body>
+</html>
