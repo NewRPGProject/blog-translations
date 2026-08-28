@@ -338,12 +338,58 @@ function textLookupKeys(text) {
 }
 
 function lookupTranslation(dictionary, normalized) {
-    if (typeof dictionary[normalized] === "string") {
-        return dictionary[normalized];
+    const texts = dictionary.texts || dictionary;
+    if (typeof texts[normalized] === "string") {
+        return texts[normalized];
     }
     // Compatibility with JSON created before &divide; was decoded to the
     // Unicode division sign during extraction.
-    return dictionary[normalized.replace(/÷/g, "&divide;")];
+    return texts[normalized.replace(/÷/g, "&divide;")];
+}
+
+function createArticleDictionary(translation) {
+    const allOccurrences = new Map();
+    for (const block of translation.blocks || []) {
+        if (
+            block.type === "title" ||
+            typeof block.source !== "string" ||
+            typeof block.translation !== "string"
+        ) {
+            continue;
+        }
+        const key = normalizeText(block.source);
+        if (!key) continue;
+        const occurrences = allOccurrences.get(key) || [];
+        occurrences.push(block.translation);
+        allOccurrences.set(key, occurrences);
+    }
+
+    // The legacy texts map uses source text as its key. When the same Japanese
+    // fragment occurs in different sentences, that key can overwrite a
+    // context-specific translation. Keep ordered alternatives only for such
+    // conflicts and consume them in DOM order.
+    const conflicts = new Map(
+        [...allOccurrences].filter(([, translations]) =>
+            new Set(translations).size > 1
+        )
+    );
+    return {
+        texts: translation.texts || {},
+        conflicts,
+        positions: new Map()
+    };
+}
+
+function takeTranslation(dictionary, normalized) {
+    const alternatives = dictionary.conflicts?.get(normalized);
+    if (alternatives) {
+        const position = dictionary.positions.get(normalized) || 0;
+        dictionary.positions.set(normalized, position + 1);
+        if (position < alternatives.length) {
+            return alternatives[position];
+        }
+    }
+    return lookupTranslation(dictionary, normalized);
 }
 
 function translateTextNodes(
@@ -404,7 +450,7 @@ function translateTextNodes(
             normalizeText(original);
 
         const translated =
-            lookupTranslation(dictionary, normalized);
+            takeTranslation(dictionary, normalized);
 
         if (typeof translated !== "string") {
             continue;
@@ -698,7 +744,7 @@ async function applyIndexLanguage(language, options = {}) {
 
         translateTextNodes(
           article.bodyElement,
-          translation.texts,
+          createArticleDictionary(translation),
           "en"
         );
 
@@ -822,7 +868,7 @@ async function applyLanguage(language, options = {}) {
 
                 translateTextNodes(
                     bodyElement,
-                    translation.texts,
+                    createArticleDictionary(translation),
                     "en"
                 );
 
