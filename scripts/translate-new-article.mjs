@@ -916,6 +916,7 @@ function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
 async function main() {
     const apiKey = process.env.OPENAI_API_KEY?.trim();
     const dryRun = process.env.DRY_RUN === "1";
+    const forceRetranslate = process.env.FORCE_RETRANSLATE === "true";
     if (!apiKey && !dryRun) {
         fail("OPENAI_API_KEY が設定されていません。");
     }
@@ -951,12 +952,15 @@ async function main() {
     let translatedArticleCount = 0;
     let checkedArticleCount = 0;
     let usage = { input: 0, output: 0, reasoning: 0, total: 0 };
+    if (forceRetranslate) {
+        console.log("強制再翻訳: 既存JSONの差分判定を使用しません。");
+    }
     for (const target of targets) {
         const outputPath = join(ARTICLES_DIRECTORY, `${target.articleId}.json`);
         const existingArticle = await readJson(outputPath);
         const trackedArticle = state.articles[target.articleId];
         const knownUpdatedAt = trackedArticle?.sourceUpdatedAt || existingArticle?.sourceUpdatedAt;
-        if (knownUpdatedAt && target.lastModified
+        if (!forceRetranslate && knownUpdatedAt && target.lastModified
             && !isMoreRecent(target.lastModified, knownUpdatedAt)) {
             continue;
         }
@@ -975,7 +979,8 @@ async function main() {
                 };
             }
         };
-        if ((existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash) {
+        if (!forceRetranslate
+            && (existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash) {
             console.log(`本文に差分はありません: articles/${target.articleId}.json`);
             const existingBlocks = existingArticle?.blocks || [];
             const repairedLinkSpaces = !dryRun && repairLinkBoundarySpaces(existingBlocks);
@@ -993,7 +998,7 @@ async function main() {
 
         const pending = splitReusableBlocks(
             blocks,
-            existingArticle,
+            forceRetranslate ? null : existingArticle,
             // Legacy JSON has no context hash. It is still safe to reuse by
             // source text; forcing all of its link-adjacent blocks would
             // needlessly retranslate already-reviewed articles.
@@ -1004,7 +1009,7 @@ async function main() {
         console.log(`翻訳対象: ${blocks.length}ブロック（変更・追加: ${pending.length}ブロック）`);
         if (dryRun) continue;
 
-        if (existingArticle && pending.length === 0) {
+        if (!forceRetranslate && existingArticle && pending.length === 0) {
             rememberArticleState();
             console.log(`翻訳内容に差分はありません: articles/${target.articleId}.json`);
             continue;
