@@ -1,0 +1,746 @@
+{
+  "articleId": "485466832",
+  "sourceUrl": "https://newrpg.seesaa.net/article/485466832.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": "2026-08-28T18:29:25+09:00",
+  "sourceHash": "dcf23822419ad308b44840918597ca55e52d6bfc853d258433517608fe0bf5d1",
+  "translatedAt": "2026-08-28T09:38:36.603Z",
+  "title": "Use a Map as the Title Screen [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "マップをタイトル画面として使用する【RPGツクールMZプラグイン】",
+      "sourceHash": "69d34513d90edbd82cf8dc3c84e438dd4c86ba620f2af0aec4287bd9b39119af",
+      "translation": "Use a Map as the Title Screen [RPG Maker MZ Plugin]",
+      "contextHash": "69d34513d90edbd82cf8dc3c84e438dd4c86ba620f2af0aec4287bd9b39119af"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "マップをタイトル画面として使用することで、様々な演出を実現可能とします。",
+      "sourceHash": "0f3be970c0870f3def22b6c4c5325eecdc1ef514fed4d9c35163e321127b8f00",
+      "translation": "Using a map as the title screen makes it possible to create various effects.",
+      "contextHash": "0f3be970c0870f3def22b6c4c5325eecdc1ef514fed4d9c35163e321127b8f00"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "また、セーブファイルの内容を参照する機能を追加しています。",
+      "sourceHash": "3bce98bde711f47fc7fc6b52c1b4de37e23887a935c0f4a319833295b5f1b9f6",
+      "translation": "A feature has also been added to reference the contents of save files.",
+      "contextHash": "3bce98bde711f47fc7fc6b52c1b4de37e23887a935c0f4a319833295b5f1b9f6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "（初期状態ではオートセーブを参照します。）",
+      "sourceHash": "5ed725abded88ccea4f5a09e26fefc3ae9170f3fe3f2a3bf18917ab509690399",
+      "translation": "(The auto-save is referenced by default.)",
+      "contextHash": "5ed725abded88ccea4f5a09e26fefc3ae9170f3fe3f2a3bf18917ab509690399"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "スイッチや変数、仲間、アイテムなどが参照できるので、進行状況によって、背景やＢＧＭを変更するような演出が可能となります。",
+      "sourceHash": "70f79332bdc8d906c8737761e9c46c08317946802121da909a63fed0345431e7",
+      "translation": "Since switches, variables, party members, items, and more can be referenced, you can create effects such as changing the background or BGM according to the game’s progress.",
+      "contextHash": "70f79332bdc8d906c8737761e9c46c08317946802121da909a63fed0345431e7"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＺ用です。ＭＶでは動作未確認です。",
+      "sourceHash": "929188412bee8a4bd834657d1a3442e9b64e54be2cc0a8a62b8a28f34a8a2db3",
+      "translation": "* This plugin is for MZ. Its operation in MV has not been tested.",
+      "contextHash": "929188412bee8a4bd834657d1a3442e9b64e54be2cc0a8a62b8a28f34a8a2db3"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※改変元に従い、規約はＭＩＴライセンスとなります。",
+      "sourceHash": "1d3a3a1650dc039e9fc3c86097b02ee416127488f8db8f14ba9d0012d31259fa",
+      "translation": "* In accordance with the original plugin, this is distributed under the MIT License.",
+      "contextHash": "1d3a3a1650dc039e9fc3c86097b02ee416127488f8db8f14ba9d0012d31259fa"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_N_TitleMap.js",
+      "sourceHash": "7b8ad4f607db8a8d20d860c52625fe626caf989ec4af22a889a583329d512114",
+      "translation": "NRP_N_TitleMap.js",
+      "contextHash": "3bda079e11a705a7d4fc64224623c28beb967515b11392714be7b4e3fd6127d6"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ver1.06～1.061の対応が不完全だったので、処理を見直して安定化した。",
+      "sourceHash": "e07dacf79bc4ebbd7ec06e5cbcdd3cb8ac954ad3ef994f41c9f0b7238f4469f3",
+      "translation": "The support for versions 1.06–1.061 was incomplete, so the processing was reviewed and stabilized.",
+      "contextHash": "e07dacf79bc4ebbd7ec06e5cbcdd3cb8ac954ad3ef994f41c9f0b7238f4469f3"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ブラウザ環境においてセーブファイルの参照に失敗する不具合を修正。",
+      "sourceHash": "4efab69f4b951fa329576c3815c130a0706f25a069ddda181f39e405f811f011",
+      "translation": "Fixed a bug that caused save file references to fail in browser environments.",
+      "contextHash": "4efab69f4b951fa329576c3815c130a0706f25a069ddda181f39e405f811f011"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "Electron環境で起動時に低確率でエラーになる問題に対応。",
+      "sourceHash": "f09bf8aa69fd5347c787ddf4644c200c1402bb1046abad03ff668a1d77110d9c",
+      "translation": "Addressed an issue that could rarely cause an error on startup in Electron environments.",
+      "contextHash": "f09bf8aa69fd5347c787ddf4644c200c1402bb1046abad03ff668a1d77110d9c"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "コンティニューやオプションから戻った際にマップ状態をリセットしないように変更した。",
+      "sourceHash": "094e2e5196c4cec18b00f3ea6e9e67a22108278727e9d89c8082f859197a21d9",
+      "translation": "Changed the behavior so that the map state is not reset when returning from Continue or Options.",
+      "contextHash": "094e2e5196c4cec18b00f3ea6e9e67a22108278727e9d89c8082f859197a21d9"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "ゲームの進行に応じてタイトル画面の内容を変化させることができます。",
+      "sourceHash": "b873eaf487a9ee30f7dee3cfec3c6cc3d92a5923b744f4f2f26178ae1fdae417",
+      "translation": "The title screen’s content can change according to the game’s progress.",
+      "contextHash": "b873eaf487a9ee30f7dee3cfec3c6cc3d92a5923b744f4f2f26178ae1fdae417"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ExtraGauge.jsと併用時にエラーとなる競合に対処。",
+      "sourceHash": "d4e5f0713108531aac6bd9e1dc09eab56e8b531b655926a286126f41b7b31d7e",
+      "translation": "Addressed a conflict that caused errors when used together with ExtraGauge.js.",
+      "contextHash": "d4e5f0713108531aac6bd9e1dc09eab56e8b531b655926a286126f41b7b31d7e"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "※上にExtraGauge.jsを配置してください。",
+      "sourceHash": "98dcf2bb6773ccb5348cda11a41213e9cf43da7763ad14a39d4c229714b2ad2c",
+      "translation": "* Place ExtraGauge.js above this plugin.",
+      "contextHash": "98dcf2bb6773ccb5348cda11a41213e9cf43da7763ad14a39d4c229714b2ad2c"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "ニューゲーム時に瞬間暗転する仕様になっていたので、通常のフェードアウト処理を行うよう修正。",
+      "sourceHash": "5705fec44c788fbe19186b507a0edc79dda69fc73bc4fbb581e34a21261244db",
+      "translation": "The game briefly faded to black when starting a new game, so this was changed to use the normal fade-out process.",
+      "contextHash": "5705fec44c788fbe19186b507a0edc79dda69fc73bc4fbb581e34a21261244db"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "コンティニューやオプションを選択した際、ウィンドウ跡が白く表示されてしまう問題に対応。",
+      "sourceHash": "849ca9b676d45b9f5868eb72f0192349e514c3d758a390b53d109629b0b980e7",
+      "translation": "Addressed an issue where white window trails appeared when selecting Continue or Options.",
+      "contextHash": "849ca9b676d45b9f5868eb72f0192349e514c3d758a390b53d109629b0b980e7"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "タイトルとして使用するマップ画面を自由に作成してください。その後、プラグインパラメータで、タイトル画面として使用したいマップＩＤを指定すればＯＫです。",
+      "sourceHash": "1f1783d86ff4eba4c6e39c8d8f2097f4ed1c5a0521d257734031fcb19ecac004",
+      "translation": "Freely create the map screen to use as the title screen. Then, simply specify the map ID you want to use as the title screen in the plugin parameter.",
+      "contextHash": "1f1783d86ff4eba4c6e39c8d8f2097f4ed1c5a0521d257734031fcb19ecac004"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "なお、プレイヤーは表示されませんが、プラグインパラメータで画面の中央となる座標を変更できます。",
+      "sourceHash": "3da86a4d4c6ca97990bba239dcf0a7601571effceb9f94f6a84604951d528ba5",
+      "translation": "Although the player is not displayed, you can change the coordinates at the center of the screen using the plugin parameters.",
+      "contextHash": "3da86a4d4c6ca97990bba239dcf0a7601571effceb9f94f6a84604951d528ba5"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "画面スクロールをさせたい場合は、プレイヤーを移動させるのではなく『マップのスクロール』を実行してください。",
+      "sourceHash": "bab5dbfd204313a8cd3bd45d2b18367adc8b26019ac803699bb235dcda629b5e",
+      "translation": "If you want to scroll the screen, execute “Scroll Map” instead of moving the player.",
+      "contextHash": "bab5dbfd204313a8cd3bd45d2b18367adc8b26019ac803699bb235dcda629b5e"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "マップＩＤ（mapId）",
+      "sourceHash": "3fbf1da489d66a77c950aeac817a5a609306b863b80a7e3febb265f9ada90388",
+      "translation": "Map ID (mapId)",
+      "contextHash": "3fbf1da489d66a77c950aeac817a5a609306b863b80a7e3febb265f9ada90388"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "タイトル画面として使用するマップのＩＤです。",
+      "sourceHash": "4d3c8b7e69d8c82b479db8c1da6058bb9d854f1acf30de5f777f6f1f21156e0b",
+      "translation": "The ID of the map to use as the title screen.",
+      "contextHash": "4d3c8b7e69d8c82b479db8c1da6058bb9d854f1acf30de5f777f6f1f21156e0b"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "開始Ｘ座標（startX）",
+      "sourceHash": "166227e247d14e49b8c6a9091ee443b278ab58747d59db802fc6b738f3dada22",
+      "translation": "Starting X Coordinate (startX)",
+      "contextHash": "166227e247d14e49b8c6a9091ee443b278ab58747d59db802fc6b738f3dada22"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "開始時のＸ座標です。",
+      "sourceHash": "4bb80d16c694a5adf1ad6f3d67730418b77058da5a1f1961754f904f30929fbf",
+      "translation": "The X coordinate at startup.",
+      "contextHash": "4bb80d16c694a5adf1ad6f3d67730418b77058da5a1f1961754f904f30929fbf"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "空欄なら自動でマップ中央に配置されます。",
+      "sourceHash": "01547bae0fecf284516a17c1ea0ae19e64a402ed54a06da31dcc196e61c39d81",
+      "translation": "If left blank, it will be automatically placed at the center of the map.",
+      "contextHash": "01547bae0fecf284516a17c1ea0ae19e64a402ed54a06da31dcc196e61c39d81"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "開始Ｙ座標（startY）",
+      "sourceHash": "a14ef8141837ced63f957eb95471f58101e1ed8d3e513261e906ce00ba9ee55a",
+      "translation": "Starting Y Coordinate (startY)",
+      "contextHash": "a14ef8141837ced63f957eb95471f58101e1ed8d3e513261e906ce00ba9ee55a"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "開始時のＹ座標です。",
+      "sourceHash": "858c7e0b3ace8273b10c5aff23a6ea1628745fc4c24144cf0792007a7d623ded",
+      "translation": "The Y coordinate at startup.",
+      "contextHash": "858c7e0b3ace8273b10c5aff23a6ea1628745fc4c24144cf0792007a7d623ded"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "空欄なら自動でマップ中央に配置されます。",
+      "sourceHash": "01547bae0fecf284516a17c1ea0ae19e64a402ed54a06da31dcc196e61c39d81",
+      "translation": "If left blank, it will be automatically placed at the center of the map.",
+      "contextHash": "01547bae0fecf284516a17c1ea0ae19e64a402ed54a06da31dcc196e61c39d81"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "マップをリセットする（mapReset）ver1.05",
+      "sourceHash": "8b2ad740ddd527e30f2c35a75fa0ac3faa8743bfac74f65873fc6e9fa6c35ecd",
+      "translation": "Reset Map (mapReset) ver1.05",
+      "contextHash": "8b2ad740ddd527e30f2c35a75fa0ac3faa8743bfac74f65873fc6e9fa6c35ecd"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "コンティニューやオプションから戻った際、タイトルマップの状態をリセットします。",
+      "sourceHash": "4a33efe3f304f8f7980cd04693f953679aec7c6026cd8b1ec4d373e05b83c2fe",
+      "translation": "Resets the state of the title map when returning from Continue or Options.",
+      "contextHash": "4a33efe3f304f8f7980cd04693f953679aec7c6026cd8b1ec4d373e05b83c2fe"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "セーブファイルを参照（readSaveFile）ver1.04",
+      "sourceHash": "1bfacd67a07ad0cd6cc1e38ad679baf1e543d10810497f7c6dfab1e832c032c6",
+      "translation": "Reference Save File (readSaveFile) ver1.04",
+      "contextHash": "1bfacd67a07ad0cd6cc1e38ad679baf1e543d10810497f7c6dfab1e832c032c6"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "セーブファイルを参照し、内容を反映できるようにします。",
+      "sourceHash": "05cbc2ac0aa6d0b65c23e6c31e2a47e52583b1684a046e46656dfe925753bd80",
+      "translation": "References a save file and allows its contents to be applied.",
+      "contextHash": "05cbc2ac0aa6d0b65c23e6c31e2a47e52583b1684a046e46656dfe925753bd80"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "スイッチや変数、仲間、アイテムなどが参照できるので、進行状況によって、背景やＢＧＭを変更するような演出が可能となります。",
+      "sourceHash": "70f79332bdc8d906c8737761e9c46c08317946802121da909a63fed0345431e7",
+      "translation": "Since switches, variables, party members, items, and more can be referenced, you can create effects such as changing the background or BGM according to the game’s progress.",
+      "contextHash": "70f79332bdc8d906c8737761e9c46c08317946802121da909a63fed0345431e7"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "セーブファイル番号（saveFileId）ver1.04",
+      "sourceHash": "e3f3f7c52d8c71886a20fdae1a08a941f4a31996e5d01d6f4693b7bd2d3d7106",
+      "translation": "Save File Number (saveFileId) ver1.04",
+      "contextHash": "e3f3f7c52d8c71886a20fdae1a08a941f4a31996e5d01d6f4693b7bd2d3d7106"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "参照するセーブファイルの番号です。",
+      "sourceHash": "3e2ac32ee86095d7039e59cf09f45f411c37796423f2924006e06d6e86e07b05",
+      "translation": "The number of the save file to reference.",
+      "contextHash": "3e2ac32ee86095d7039e59cf09f45f411c37796423f2924006e06d6e86e07b05"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "0:オートセーブ, 1:一番目のファイル",
+      "sourceHash": "f2bf880083dbd35dffa477f828032ba8e4c367b5cedf12b0dfdb56900eccbacc",
+      "translation": "0: Auto-save, 1: First file",
+      "contextHash": "f2bf880083dbd35dffa477f828032ba8e4c367b5cedf12b0dfdb56900eccbacc"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※初期状態ではオートセーブを参照します。",
+      "sourceHash": "70616fbf56b4e255a98690310e853bcba2b04c46ab6cdb5f2fb3d728df7ae923",
+      "translation": "* The auto-save is referenced by default.",
+      "contextHash": "70616fbf56b4e255a98690310e853bcba2b04c46ab6cdb5f2fb3d728df7ae923"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ちなみにツクールＭＺでは、以下のスクリプトでセーブを強制実行することができます。",
+      "sourceHash": "bb81b56c81c633d831cd02ea486dc0b2ab3b3f0c9f79c019bc806709d8d42e26",
+      "translation": "In RPG Maker MZ, you can force a save using the following script.",
+      "contextHash": "bb81b56c81c633d831cd02ea486dc0b2ab3b3f0c9f79c019bc806709d8d42e26"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "DataManager.saveGame(ファイル番号);",
+      "sourceHash": "b6ad53e7d6279486be05bc89b9536c75943696c1db55625fba0977cb31182417",
+      "translation": "DataManager.saveGame(file number);",
+      "contextHash": "b6ad53e7d6279486be05bc89b9536c75943696c1db55625fba0977cb31182417"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "以下のように通常はありえない番号を指定してしまえば、タイトル画面専用のファイルを作成することもできます。",
+      "sourceHash": "237fb3237145f66029a7d7d9ae81e5f8d9380c9ca0b02b8615e213259472cf16",
+      "translation": "By specifying a normally invalid number as shown below, you can also create a file exclusively for the title screen.",
+      "contextHash": "237fb3237145f66029a7d7d9ae81e5f8d9380c9ca0b02b8615e213259472cf16"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "並列コモンの無効化（disabledParallelCommon）ver1.04",
+      "sourceHash": "f73d5ee423b734ebf012e7a9f0a5333ac0d949004f1eba448e1ed8c924e2cab0",
+      "translation": "Disable Parallel Common Events (disabledParallelCommon) ver1.04",
+      "contextHash": "f73d5ee423b734ebf012e7a9f0a5333ac0d949004f1eba448e1ed8c924e2cab0"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "トリガーが『自動実行』や『並列処理』に該当するコモンイベントを無効化します。",
+      "sourceHash": "d5c5b5f7e95cc62481dc6633639aa75319046a81c5c73f3a2ee81a3515465b1b",
+      "translation": "Disables common events whose triggers are “Autorun” or “Parallel.”",
+      "contextHash": "d5c5b5f7e95cc62481dc6633639aa75319046a81c5c73f3a2ee81a3515465b1b"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "セーブファイルを参照する設定にした場合、意図せずコモンイベントが実行されてしまうことがあるため、それを無効化するための措置です。オフにする場合はご注意ください。",
+      "sourceHash": "a5628d0b5f1933d250e74404a9a02d04174de664d1317ad043eff18a0d8e46b6",
+      "translation": "When configured to reference a save file, common events may be executed unintentionally. This setting disables them to prevent that. Be careful when turning it off.",
+      "contextHash": "a5628d0b5f1933d250e74404a9a02d04174de664d1317ad043eff18a0d8e46b6"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "特に[[LINK_1]]マップ版DynamicAnimation[[/LINK_1]]との組み合わせにより、自由度の高いタイトル画面の作成が可能となります。",
+      "sourceHash": "1c3859538adf92a6ff58158e1703031178bf2fe1f64ae2a5e0904584e4af49af",
+      "parts": [
+        {
+          "source": "特に",
+          "link": false
+        },
+        {
+          "source": "マップ版DynamicAnimation",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との組み合わせにより、自由度の高いタイトル画面の作成が可能となります。",
+          "link": false
+        }
+      ],
+      "translation": "In particular, combining it with the [[LINK_1]]map version of DynamicAnimation[[/LINK_1]] makes it possible to create a highly customizable title screen.",
+      "contextHash": "1c3859538adf92a6ff58158e1703031178bf2fe1f64ae2a5e0904584e4af49af"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "当プラグインは[[LINK_1]]N_TitleMap.js Version 1.0.3（Nolonar様）[[/LINK_1]]を元に、砂川赳が競合対策などの改造を施したものです。",
+      "sourceHash": "703429a490fcbae4d46bced8b51610a6f8ab1a4db7701b430487601fc25a4c6a",
+      "parts": [
+        {
+          "source": "当プラグインは",
+          "link": false
+        },
+        {
+          "source": "N_TitleMap.js Version 1.0.3（Nolonar様）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を元に、砂川赳が競合対策などの改造を施したものです。",
+          "link": false
+        }
+      ],
+      "translation": "This plugin is based on [[LINK_1]]N_TitleMap.js Version 1.0.3 (by Nolonar)[[/LINK_1]] and has been modified by Takeshi Sunagawa to prevent conflicts and make other improvements.",
+      "contextHash": "703429a490fcbae4d46bced8b51610a6f8ab1a4db7701b430487601fc25a4c6a"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changelog (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]マップＩＤ（mapId）[[/LINK_1]]",
+      "sourceHash": "f2b979911dd3651fcdf210498df566852f2958558b48574028d0f15cdffb6b90",
+      "parts": [
+        {
+          "source": "マップＩＤ（mapId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Map ID (mapId)[[/LINK_1]]",
+      "contextHash": "f2b979911dd3651fcdf210498df566852f2958558b48574028d0f15cdffb6b90"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｘ座標（startX）[[/LINK_1]]",
+      "sourceHash": "eba0aa428bc9628acd41e06a28157d159aee647e0ae632e8da3e6df53d047bd6",
+      "parts": [
+        {
+          "source": "開始Ｘ座標（startX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting X Coordinate (startX)[[/LINK_1]]",
+      "contextHash": "eba0aa428bc9628acd41e06a28157d159aee647e0ae632e8da3e6df53d047bd6"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｙ座標（startY）[[/LINK_1]]",
+      "sourceHash": "7be7a377f66981d60984d1855a0e4b8ba4b9a00ff19cbef297a3b96485b0d9e9",
+      "parts": [
+        {
+          "source": "開始Ｙ座標（startY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting Y Coordinate (startY)[[/LINK_1]]",
+      "contextHash": "7be7a377f66981d60984d1855a0e4b8ba4b9a00ff19cbef297a3b96485b0d9e9"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]マップをリセットする（mapReset）[[/LINK_1]]ver1.05",
+      "sourceHash": "f6421e3aa22b37a53034b282498913244673c3a3f68c7a6855ca3fa5b2674783",
+      "parts": [
+        {
+          "source": "マップをリセットする（mapReset）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.05",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Reset the Map (mapReset)[[/LINK_1]]ver1.05",
+      "contextHash": "f6421e3aa22b37a53034b282498913244673c3a3f68c7a6855ca3fa5b2674783"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]セーブファイルを参照（readSaveFile）[[/LINK_1]]ver1.04",
+      "sourceHash": "59076293b07ca862b9560304f1f71eb399d369b65e4316ebfc86534daf776068",
+      "parts": [
+        {
+          "source": "セーブファイルを参照（readSaveFile）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Reference the Save File (readSaveFile)[[/LINK_1]]ver1.04",
+      "contextHash": "59076293b07ca862b9560304f1f71eb399d369b65e4316ebfc86534daf776068"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]セーブファイル番号（saveFileId）[[/LINK_1]]ver1.04",
+      "sourceHash": "922f99f3c91643894436d36bbb723f4948001af8220acab2d235b227d4d557bf",
+      "parts": [
+        {
+          "source": "セーブファイル番号（saveFileId）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Save File Number (saveFileId)[[/LINK_1]]ver1.04",
+      "contextHash": "922f99f3c91643894436d36bbb723f4948001af8220acab2d235b227d4d557bf"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]並列コモンの無効化（disabledParallelCommon）[[/LINK_1]]ver1.04",
+      "sourceHash": "96fa79501eb0fd41878f2d0a8465c714d284ea7e44b808c719300275dd4dc869",
+      "parts": [
+        {
+          "source": "並列コモンの無効化（disabledParallelCommon）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Parallel Common Events (disabledParallelCommon)[[/LINK_1]]ver1.04",
+      "contextHash": "96fa79501eb0fd41878f2d0a8465c714d284ea7e44b808c719300275dd4dc869"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "それに伴い、プラグインパラメータに[[LINK_1]]マップをリセット[[/LINK_1]]するを追加した。",
+      "sourceHash": "7565bece684f99180925cdbc16db1852f2cf1b763f06c88676e8a36214ca3433",
+      "parts": [
+        {
+          "source": "それに伴い、プラグインパラメータに",
+          "link": false
+        },
+        {
+          "source": "マップをリセット",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "するを追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Accordingly, I added the plugin parameter to [[LINK_1]]reset the map[[/LINK_1]].",
+      "contextHash": "7565bece684f99180925cdbc16db1852f2cf1b763f06c88676e8a36214ca3433"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]セーブデータの参照[[/LINK_1]]機能を追加。",
+      "sourceHash": "2902ec0da154de5f49c9b6f90185559851213c0204cada9c1e10867b8a1ae9b9",
+      "parts": [
+        {
+          "source": "セーブデータの参照",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "機能を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]save data reference[[/LINK_1]] feature.",
+      "contextHash": "2902ec0da154de5f49c9b6f90185559851213c0204cada9c1e10867b8a1ae9b9"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Index[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "マップをタイトル画面として使用することで、様々な演出を実現可能とします。": "Using a map as the title screen makes it possible to create various effects.",
+    "また、セーブファイルの内容を参照する機能を追加しています。": "A feature has also been added to reference the contents of save files.",
+    "（初期状態ではオートセーブを参照します。）": "(The auto-save is referenced by default.)",
+    "スイッチや変数、仲間、アイテムなどが参照できるので、進行状況によって、背景やＢＧＭを変更するような演出が可能となります。": "Since switches, variables, party members, items, and more can be referenced, you can create effects such as changing the background or BGM according to the game’s progress.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ用です。ＭＶでは動作未確認です。": "* This plugin is for MZ. Its operation in MV has not been tested.",
+    "※改変元に従い、規約はＭＩＴライセンスとなります。": "* In accordance with the original plugin, this is distributed under the MIT License.",
+    "NRP_N_TitleMap.js": "NRP_N_TitleMap.js",
+    "更新履歴（History）": "Update History (History)",
+    "ver1.06～1.061の対応が不完全だったので、処理を見直して安定化した。": "The support for versions 1.06–1.061 was incomplete, so the processing was reviewed and stabilized.",
+    "ブラウザ環境においてセーブファイルの参照に失敗する不具合を修正。": "Fixed a bug that caused save file references to fail in browser environments.",
+    "Electron環境で起動時に低確率でエラーになる問題に対応。": "Addressed an issue that could rarely cause an error on startup in Electron environments.",
+    "コンティニューやオプションから戻った際にマップ状態をリセットしないように変更した。": "Changed the behavior so that the map state is not reset when returning from Continue or Options.",
+    "ゲームの進行に応じてタイトル画面の内容を変化させることができます。": "The title screen’s content can change according to the game’s progress.",
+    "ExtraGauge.jsと併用時にエラーとなる競合に対処。": "Addressed a conflict that caused errors when used together with ExtraGauge.js.",
+    "※上にExtraGauge.jsを配置してください。": "* Place ExtraGauge.js above this plugin.",
+    "ニューゲーム時に瞬間暗転する仕様になっていたので、通常のフェードアウト処理を行うよう修正。": "The game briefly faded to black when starting a new game, so this was changed to use the normal fade-out process.",
+    "コンティニューやオプションを選択した際、ウィンドウ跡が白く表示されてしまう問題に対応。": "Addressed an issue where white window trails appeared when selecting Continue or Options.",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "タイトルとして使用するマップ画面を自由に作成してください。その後、プラグインパラメータで、タイトル画面として使用したいマップＩＤを指定すればＯＫです。": "Freely create the map screen to use as the title screen. Then, simply specify the map ID you want to use as the title screen in the plugin parameter.",
+    "なお、プレイヤーは表示されませんが、プラグインパラメータで画面の中央となる座標を変更できます。": "Although the player is not displayed, you can change the coordinates at the center of the screen using the plugin parameters.",
+    "画面スクロールをさせたい場合は、プレイヤーを移動させるのではなく『マップのスクロール』を実行してください。": "If you want to scroll the screen, execute “Scroll Map” instead of moving the player.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "マップＩＤ（mapId）": "Map ID (mapId)",
+    "タイトル画面として使用するマップのＩＤです。": "The ID of the map to use as the title screen.",
+    "開始Ｘ座標（startX）": "Starting X Coordinate (startX)",
+    "開始時のＸ座標です。": "The X coordinate at startup.",
+    "空欄なら自動でマップ中央に配置されます。": "If left blank, it will be automatically placed at the center of the map.",
+    "開始Ｙ座標（startY）": "Starting Y Coordinate (startY)",
+    "開始時のＹ座標です。": "The Y coordinate at startup.",
+    "マップをリセットする（mapReset）ver1.05": "Reset Map (mapReset) ver1.05",
+    "コンティニューやオプションから戻った際、タイトルマップの状態をリセットします。": "Resets the state of the title map when returning from Continue or Options.",
+    "セーブファイルを参照（readSaveFile）ver1.04": "Reference Save File (readSaveFile) ver1.04",
+    "セーブファイルを参照し、内容を反映できるようにします。": "References a save file and allows its contents to be applied.",
+    "セーブファイル番号（saveFileId）ver1.04": "Save File Number (saveFileId) ver1.04",
+    "参照するセーブファイルの番号です。": "The number of the save file to reference.",
+    "0:オートセーブ, 1:一番目のファイル": "0: Auto-save, 1: First file",
+    "※初期状態ではオートセーブを参照します。": "* The auto-save is referenced by default.",
+    "ちなみにツクールＭＺでは、以下のスクリプトでセーブを強制実行することができます。": "In RPG Maker MZ, you can force a save using the following script.",
+    "DataManager.saveGame(ファイル番号);": "DataManager.saveGame(file number);",
+    "以下のように通常はありえない番号を指定してしまえば、タイトル画面専用のファイルを作成することもできます。": "By specifying a normally invalid number as shown below, you can also create a file exclusively for the title screen.",
+    "並列コモンの無効化（disabledParallelCommon）ver1.04": "Disable Parallel Common Events (disabledParallelCommon) ver1.04",
+    "トリガーが『自動実行』や『並列処理』に該当するコモンイベントを無効化します。": "Disables common events whose triggers are “Autorun” or “Parallel.”",
+    "セーブファイルを参照する設定にした場合、意図せずコモンイベントが実行されてしまうことがあるため、それを無効化するための措置です。オフにする場合はご注意ください。": "When configured to reference a save file, common events may be executed unintentionally. This setting disables them to prevent that. Be careful when turning it off."
+  }
+}

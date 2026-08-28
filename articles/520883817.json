@@ -1,0 +1,1350 @@
+{
+  "articleId": "520883817",
+  "sourceUrl": "https://newrpg.seesaa.net/article/520883817.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": "2026-08-28T18:29:56+09:00",
+  "sourceHash": "a3c71e9165ae9e829da0872fa6b6a82087750a77d1471b3b82e82f50b145d0e4",
+  "translatedAt": "2026-08-28T09:38:04.829Z",
+  "title": "Steam Achievements & Cloud Saves Support (Greenworks Version) [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "Steam実績＆クラウドセーブに対応（Greenworks版）【RPGツクールMZプラグイン】",
+      "sourceHash": "e9b3ea72f73abdeef859f37c11c897f41b8789d15f44c947f4e8644c75bf5d79",
+      "translation": "Steam Achievements & Cloud Saves Support (Greenworks Version) [RPG Maker MZ Plugin]",
+      "contextHash": "e9b3ea72f73abdeef859f37c11c897f41b8789d15f44c947f4e8644c75bf5d79"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "Greenworksを利用して、Steamの以下機能を利用します。",
+      "sourceHash": "dae0000c00c624d5a19a86453774f394ecab19cd8d6645bb1da3f7b1e142541c",
+      "translation": "Greenworks is used to provide the following Steam features.",
+      "contextHash": "dae0000c00c624d5a19a86453774f394ecab19cd8d6645bb1da3f7b1e142541c"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "Steam実績の達成",
+      "sourceHash": "6b93d52673fb43f9a9dca02e1563fb6b366391a65fc6fa9fdecdf751dbe2b491",
+      "translation": "Unlocking Steam Achievements",
+      "contextHash": "6b93d52673fb43f9a9dca02e1563fb6b366391a65fc6fa9fdecdf751dbe2b491"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "セーブデータのSteamクラウド保存と読み込み",
+      "sourceHash": "f1060b2c8b42dcc99135a5b2ff7babf04accba69356927c3a7f0191bb57d794d",
+      "translation": "Saving and loading save data via the Steam Cloud",
+      "contextHash": "f1060b2c8b42dcc99135a5b2ff7babf04accba69356927c3a7f0191bb57d794d"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "経緯",
+      "sourceHash": "2f9530111e1cd6d5c94910fd3d5c33b64d680ac265d1cc837d47aca6c4b858a4",
+      "translation": "Background",
+      "contextHash": "2f9530111e1cd6d5c94910fd3d5c33b64d680ac265d1cc837d47aca6c4b858a4"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "雲海のフロンティアのSteam版を販売するに当たり、Steamの実績機能を実装することにしました。しかしながら、ツクールＭＺ作品に関する情報が少なく、実装は困難を極めました。",
+      "sourceHash": "34a90ca89dd647d102be284ba70cea2cacad448dca2aeed3f5eecbb9a7d7a992",
+      "translation": "When preparing to release the Steam version of Cloudsea Frontier, I decided to implement Steam Achievements. However, there was little information available about RPG Maker MZ games, making implementation extremely difficult.",
+      "contextHash": "34a90ca89dd647d102be284ba70cea2cacad448dca2aeed3f5eecbb9a7d7a992"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "当初はElectronを経由して実績機能を呼び出していたのですが、Electronでパッケージ化した状態でテストしていると動作が謎に重くなることがあるという現象に見舞われてしまいました。",
+      "sourceHash": "8a09522cca09a67fee4c77923db1cf5f69fca476335390e2a23ac55ab53d53e7",
+      "translation": "At first, I called the achievement features through Electron, but when testing the game packaged with Electron, I encountered an issue where it would mysteriously become extremely slow.",
+      "contextHash": "8a09522cca09a67fee4c77923db1cf5f69fca476335390e2a23ac55ab53d53e7"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※普段は軽快に動作するのですが、なぜか時々重くなります。一度、重くなるとアプリを再起動しても直らず、しばらくそのままになります。挙動からＧＰＵ関連っぽい気がするのですが、詳細は不明です。",
+      "sourceHash": "032c086db185ead16e8e95dac1d5c3ce2533b4cf581cb7f992436964ecbd6240",
+      "translation": "* It usually runs smoothly, but for some reason it occasionally becomes slow. Once it slows down, restarting the application does not fix it, and it remains that way for a while. The behavior seems to be related to the GPU, but the details are unknown.",
+      "contextHash": "032c086db185ead16e8e95dac1d5c3ce2533b4cf581cb7f992436964ecbd6240"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "結局、問題を解決できずに他の方法を模索したのですが、結果的に落ち着いたのがGreenworksを使う方法です。",
+      "sourceHash": "fdedcedf9c53f85e7a21566667aebd339f520f786212ab676353a48a5b6a26df",
+      "translation": "In the end, I was unable to resolve the problem and explored other methods. Ultimately, I settled on using Greenworks.",
+      "contextHash": "fdedcedf9c53f85e7a21566667aebd339f520f786212ab676353a48a5b6a26df"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "そんなわけで、当プラグインの目的はSteamの機能を使うに当たって、Electron以外の選択肢を掲示することです。Greenworksを利用して、Steam実績の達成やクラウドセーブを実装します。",
+      "sourceHash": "82678293876e1339dda7ce179408297c2a906d24b1d41519d50f7e1efc87181f",
+      "translation": "For this reason, the purpose of this plugin is to present an alternative to Electron for using Steam features. It uses Greenworks to implement Steam Achievements and cloud saves.",
+      "contextHash": "82678293876e1339dda7ce179408297c2a906d24b1d41519d50f7e1efc87181f"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※この方法に限らず、各自で相性の良い方法を選択してくだされば幸いです。例えば、Electronにはパッケージ化できるメリットがあります。つまり、jsonなどファイルの中身がユーザに見られません。",
+      "sourceHash": "e683cbf6ae7a1555802466be9ba3c81fb0d5e56928294057d671cc78911f337e",
+      "translation": "* You do not have to use this method; I hope you will choose whichever method works best for you. For example, Electron has the advantage of allowing you to package your game. In other words, users cannot see the contents of files such as JSON files.",
+      "contextHash": "e683cbf6ae7a1555802466be9ba3c81fb0d5e56928294057d671cc78911f337e"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "Greenworksの場合は元のツクールＭＺの仕組み（NW.js）をそのまま利用するため、挙動の変化が少ないというメリットもあります。",
+      "sourceHash": "3ba8e6c57a92dc719bf59c1382b5371c48dd21c1d9009eb6c2627039b8cdfc53",
+      "translation": "With Greenworks, the original RPG Maker MZ framework (NW.js) is used as is, which also has the advantage of causing fewer changes in behavior.",
+      "contextHash": "3ba8e6c57a92dc719bf59c1382b5371c48dd21c1d9009eb6c2627039b8cdfc53"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "利用にはGreenworksのセットアップが必要です。この記事では導入の手順を細かく解説していきます。",
+      "sourceHash": "4379d0ab03e7513281250be9ae98d9ff76ee0ae054d43dfed0687519309f021f",
+      "translation": "Greenworks must be set up before use. This article provides a detailed explanation of the installation process.",
+      "contextHash": "4379d0ab03e7513281250be9ae98d9ff76ee0ae054d43dfed0687519309f021f"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "なお、Steam以外の環境では、これらの機能は無効化されます。",
+      "sourceHash": "971984dbc9224835e2d8c52efb18945ced7602f894ffb79be9c1dd27a658e415",
+      "translation": "These features are disabled in environments other than Steam.",
+      "contextHash": "971984dbc9224835e2d8c52efb18945ced7602f894ffb79be9c1dd27a658e415"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "当然ながら、Steamworksに登録していることが前提になります。",
+      "sourceHash": "8cb1e480b1d6bb2d1557c10cdaebf040fe1273b009f07d95c49cc3e5c0ba8915",
+      "translation": "Naturally, you must first register your game with Steamworks.",
+      "contextHash": "8cb1e480b1d6bb2d1557c10cdaebf040fe1273b009f07d95c49cc3e5c0ba8915"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "Steamに作品を登録して、App IDを取得してください。",
+      "sourceHash": "26ddad2a0979184b0634487e5086447e316604d2c2f80dd517f79fd501444508",
+      "translation": "Register your game on Steam and obtain its App ID.",
+      "contextHash": "26ddad2a0979184b0634487e5086447e316604d2c2f80dd517f79fd501444508"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Then, enable the feature in the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "* This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_Steamworks.js",
+      "sourceHash": "dab878e53ac86282751f65d71b6af28f853c2c8394065a9cff832f2b05687e47",
+      "translation": "NRP_Steamworks.js",
+      "contextHash": "e78543ad3c58e209323b84a6066930dfeb419e302bf423b7d47f53945fea7316"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "また、当プラグインを利用するには別途Greenworksの導入が必要です。",
+      "sourceHash": "57fc5ee9ef0f905898ce5f45571500ed91c80340aec50effd49936cfe5023d12",
+      "translation": "Greenworks must also be installed separately to use this plugin.",
+      "contextHash": "57fc5ee9ef0f905898ce5f45571500ed91c80340aec50effd49936cfe5023d12"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "Greenworksの導入・NW.jsの更新",
+      "sourceHash": "e962a8aff9660746336a60f864fe7d395477165cf5f63d53c20b11cf53ffeb0e",
+      "translation": "Installing Greenworks and Updating NW.js",
+      "contextHash": "e962a8aff9660746336a60f864fe7d395477165cf5f63d53c20b11cf53ffeb0e"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "まず、Greenworksを導入し、それに合わせてNW.jsを更新します。",
+      "sourceHash": "f4e40adabc0c71a189ed25dfe7b0315c5bdf7043ed6441a2a1477509bda8f8d5",
+      "translation": "First, install Greenworks and update NW.js accordingly.",
+      "contextHash": "f4e40adabc0c71a189ed25dfe7b0315c5bdf7043ed6441a2a1477509bda8f8d5"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "Greenworksの導入",
+      "sourceHash": "4a695fa19488b3c6518726d95c953318a028be9e23641e358d19e329bedbd859",
+      "translation": "Installing Greenworks",
+      "contextHash": "4a695fa19488b3c6518726d95c953318a028be9e23641e358d19e329bedbd859"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "以下のリリースページからGreenworksをダウンロードします。",
+      "sourceHash": "354b208c879211fb40b61e5b47fe87f8e97c093faa4716fb91f3ab5cdfeecbd0",
+      "translation": "Download Greenworks from the following release page.",
+      "contextHash": "354b208c879211fb40b61e5b47fe87f8e97c093faa4716fb91f3ab5cdfeecbd0"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://github.com/greenheartgames/greenworks/releases",
+      "sourceHash": "e9402cda94a3db3afe262685106fc216ae43a0d9ba43c35708a19aaa861b5d00",
+      "translation": "https://github.com/greenheartgames/greenworks/releases",
+      "contextHash": "09fc157636a8b7397ff94ff5cfc4d621de9439711185f44177bc671d07733991"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※Windowsの場合は、greenworks-vX.XX.X-nw-vX.XX.X-win-64.zip というファイル名になります。",
+      "sourceHash": "8dd1baaef8a54356091e36d1cf816f4e6a49e05b44384f4faf23df0e16e340ec",
+      "translation": "* On Windows, the file name will be greenworks-vX.XX.X-nw-vX.XX.X-win-64.zip.",
+      "contextHash": "8dd1baaef8a54356091e36d1cf816f4e6a49e05b44384f4faf23df0e16e340ec"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "NW.jsの更新",
+      "sourceHash": "9bc2548ceba4b9c59bc0dbc278373215e8cc2b63e2a6717047e58416246a86cf",
+      "translation": "Updating NW.js",
+      "contextHash": "9bc2548ceba4b9c59bc0dbc278373215e8cc2b63e2a6717047e58416246a86cf"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "GreenworksとNW.jsのバージョンを合わせる必要があります。",
+      "sourceHash": "e7cef859259428dbb5172edf535ddbf9a441b3d601e68a5a69d74ca8bac27aea",
+      "translation": "The Greenworks and NW.js versions must match.",
+      "contextHash": "e7cef859259428dbb5172edf535ddbf9a441b3d601e68a5a69d74ca8bac27aea"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "NW.jsの公式サイトからＤＬしてください。",
+      "sourceHash": "f0a86a820bea11cf45d2adc186da7a8e3692c1f0d6fa646a19de23e2070f49c7",
+      "translation": "Download it from the official NW.js website.",
+      "contextHash": "f0a86a820bea11cf45d2adc186da7a8e3692c1f0d6fa646a19de23e2070f49c7"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※過去バージョンは『Previous releases』からＤＬできます。",
+      "sourceHash": "d59d9df8388c136dd6d4cdcb88a2df0b89d13cb58f8e64ac8c038c2022631f0c",
+      "translation": "* Older versions can be downloaded from “Previous releases.”",
+      "contextHash": "d59d9df8388c136dd6d4cdcb88a2df0b89d13cb58f8e64ac8c038c2022631f0c"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "https://nwjs.io/downloads/",
+      "sourceHash": "f627579867b43651855cad800ff38b2b27e6c895ee30e7afb7978e1d201d1789",
+      "translation": "https://nwjs.io/downloads/",
+      "contextHash": "82e374200901e49e5b726bba978778d2a982db3d258fecfefe8590330a2a8689"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "NW.jsの差し替え手順は以下の記事（Mac向けですがWindowsも大体同じ）が参考になります。",
+      "sourceHash": "ccc4e39abfc10dfa5a86faa557ea7f2f3de3d31872eff9ab3ce476c6b1f2ae7e",
+      "translation": "The following article explains how to replace NW.js (although it is for Mac, the process is mostly the same on Windows).",
+      "contextHash": "ccc4e39abfc10dfa5a86faa557ea7f2f3de3d31872eff9ab3ce476c6b1f2ae7e"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "https://rpgtkool.hatenablog.com/entry/2024/10/23/140944",
+      "sourceHash": "7898c09794a813a197d8f0389705968018f0bcd143acd9bf61fda75fa8f366ba",
+      "translation": "https://rpgtkool.hatenablog.com/entry/2024/10/23/140944",
+      "contextHash": "e574eb8b5bf5f1c6c3389bfdc13911acfe0b7998dc9a442afb930ce79c88c1c5"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※nwjs-winのバックアップは必ず取ってください。テストプレイが起動しなくなった場合は元に戻してください。",
+      "sourceHash": "83fb9ddbfc1e6ece1c6a5f0ad7f96146410bd45038748ba6e69813c90155ded9",
+      "translation": "* Be sure to back up nwjs-win. If test play no longer starts, restore the backup.",
+      "contextHash": "83fb9ddbfc1e6ece1c6a5f0ad7f96146410bd45038748ba6e69813c90155ded9"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "色々試した結果、作者環境では以下の組み合わせで動作を確認しました。",
+      "sourceHash": "64838524570c44f9a6068e765255917cc20cf9055781ae8c038cc548c5352c7e",
+      "translation": "After trying various combinations, I confirmed that the following combination worked in my environment.",
+      "contextHash": "64838524570c44f9a6068e765255917cc20cf9055781ae8c038cc548c5352c7e"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "https://github.com/greenheartgames/greenworks/releases/tag/v0.17.0",
+      "sourceHash": "9888924cdb46d411ba59b954adec38ef44eb43dfa249c6584501a453472df28f",
+      "translation": "https://github.com/greenheartgames/greenworks/releases/tag/v0.17.0",
+      "contextHash": "24693fadde9df8ecc469bc5ef9fc21a157beeb97136802051d3e04ec7932ea42"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "https://dl.nwjs.io/v0.89.0/",
+      "sourceHash": "15422a0356c5c2f46bff1c8db1a33cbf54d56587d2bd756b3dac0ffea7606906",
+      "translation": "https://dl.nwjs.io/v0.89.0/",
+      "contextHash": "2f15536bfbe311ba242cb143f6ae7f00144ec5e875287699be419b4e0d817c3c"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "※Windowsの場合は以下の２ファイルが必要です。",
+      "sourceHash": "21aa370637c70212a82a09447930c989f456b82f931f6f69e8a43af342428f57",
+      "translation": "* On Windows, the following two files are required.",
+      "contextHash": "21aa370637c70212a82a09447930c989f456b82f931f6f69e8a43af342428f57"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "Steamworks SDKの導入",
+      "sourceHash": "b3d08ed0cc41eca78622193ddb554749a64b98adbdbb882de475942d370ab5be",
+      "translation": "Installing the Steamworks SDK",
+      "contextHash": "b3d08ed0cc41eca78622193ddb554749a64b98adbdbb882de475942d370ab5be"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "SteamworksのパートナーサイトからSteamworks SDKをダウンロードしてください。",
+      "sourceHash": "d52f1dbf73dc78fa5f11d8dc9f8bddb3215d302bbcd823b076b6e3222249a093",
+      "translation": "Download the Steamworks SDK from the Steamworks partner site.",
+      "contextHash": "d52f1dbf73dc78fa5f11d8dc9f8bddb3215d302bbcd823b076b6e3222249a093"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "※作者環境ではsteamworks_sdk_v1.64で確認しています。バージョンによってはGreenworksとの相性がある場合があります。",
+      "sourceHash": "c3c20af4b1ebec61b9d07448fb2a1f48855054a1b64df2cb8d150e59c4be87fe",
+      "translation": "* I tested this with steamworks_sdk_v1.64 in my environment. Depending on the version, compatibility issues with Greenworks may occur.",
+      "contextHash": "c3c20af4b1ebec61b9d07448fb2a1f48855054a1b64df2cb8d150e59c4be87fe"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "プロジェクトのデプロイとファイルの配置",
+      "sourceHash": "d05a10c355b3eabf27d27156218be4c8a3fff221e07248282e2daa304736a9fb",
+      "translation": "Deploying the Project and Placing the Files",
+      "contextHash": "d05a10c355b3eabf27d27156218be4c8a3fff221e07248282e2daa304736a9fb"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "デプロイ",
+      "sourceHash": "52b617d5f4648be2abc61e3ffe6c31e28c77ac59f2e0b8e71d6371785c6c5269",
+      "translation": "Deployment",
+      "contextHash": "52b617d5f4648be2abc61e3ffe6c31e28c77ac59f2e0b8e71d6371785c6c5269"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "当プラグインを導入し、通常通りプロジェクトをデプロイします。",
+      "sourceHash": "ea142e98e5e989889102bd5ca885ff084186b2df3e027216684907b8d51ef52b",
+      "translation": "Install this plugin and deploy the project as usual.",
+      "contextHash": "ea142e98e5e989889102bd5ca885ff084186b2df3e027216684907b8d51ef52b"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※プラットフォームはWindows（またはmacOS）を選択してください。",
+      "sourceHash": "0c7c1a9ae92e8e1822a34d1daf25f134b1c289ea2592a9343ff15e3b888faaf9",
+      "translation": "* Select Windows (or macOS) as the platform.",
+      "contextHash": "0c7c1a9ae92e8e1822a34d1daf25f134b1c289ea2592a9343ff15e3b888faaf9"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "※事前に上記のNW.jsの更新をする必要があります。",
+      "sourceHash": "4516d570f17105f9bf891000cb7c3d80469b2ede9ec8637df625cb8a330aa207",
+      "translation": "* You must update NW.js as described above beforehand.",
+      "contextHash": "4516d570f17105f9bf891000cb7c3d80469b2ede9ec8637df625cb8a330aa207"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "ファイルの配置",
+      "sourceHash": "d3edf2e0d11538c17bdc21a171a604f09596c67191f1900d338f2f75f52724f7",
+      "translation": "Placing the Files",
+      "contextHash": "d3edf2e0d11538c17bdc21a171a604f09596c67191f1900d338f2f75f52724f7"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "１．Greenworksのzipを解凍し、デプロイ済みのプロジェクトフォルダに配置します。",
+      "sourceHash": "63997a75049a371d1961d4bfffec2b11671e9ba73818c6113ad24a90f2fa2ac0",
+      "translation": "1. Extract the Greenworks zip file and place its contents in the deployed project folder.",
+      "contextHash": "63997a75049a371d1961d4bfffec2b11671e9ba73818c6113ad24a90f2fa2ac0"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "２．Steamworks SDKのzipを解凍し、以下の２ファイルを『greenworks/lib』フォルダ内に配置します。",
+      "sourceHash": "8ad4c39c287fad2bdb59133f2407edb0bc8733a493f30d6b64d1e65ce2fff832",
+      "translation": "2. Extract the Steamworks SDK zip file and place the following two files in the “greenworks/lib” folder.",
+      "contextHash": "8ad4c39c287fad2bdb59133f2407edb0bc8733a493f30d6b64d1e65ce2fff832"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "３．テキストファイル「steam_appid.txt」を新規作成し、プロジェクトフォルダに配置します。中身にはSteam App IDのみ記載してください。",
+      "sourceHash": "baaa570790a8ae9f3b1d2e9d6e85462b543e5f64d3e0007aa54cca5cff1a27ff",
+      "translation": "3. Create a new text file named “steam_appid.txt” and place it in the project folder. The file should contain only the Steam App ID.",
+      "contextHash": "baaa570790a8ae9f3b1d2e9d6e85462b543e5f64d3e0007aa54cca5cff1a27ff"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "フォルダ構成",
+      "sourceHash": "14e9180b484a335c783dc87372195ba66ec40ac7083e63caca5579a8102be071",
+      "translation": "Folder Structure",
+      "contextHash": "14e9180b484a335c783dc87372195ba66ec40ac7083e63caca5579a8102be071"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "ゲームフォルダ/",
+      "sourceHash": "b8d99e4ff42721190de3ea907753cbafd6cf6377ad9b133f050a3d1f2a57c4df",
+      "translation": "Game folder/",
+      "contextHash": "b8d99e4ff42721190de3ea907753cbafd6cf6377ad9b133f050a3d1f2a57c4df"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "← Steamworks SDKから",
+      "sourceHash": "1758346824d5d83d009e9cbfcd48252934fc39d127dc3feb4ba8c2db53217f64",
+      "translation": "← Steamworks SDKfrom",
+      "contextHash": "e12cd65b3232aca1f3b485dee4642f137bb56af9a4e6e7906160c3d6682843bc"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "← Steamworks SDKから",
+      "sourceHash": "1758346824d5d83d009e9cbfcd48252934fc39d127dc3feb4ba8c2db53217f64",
+      "translation": "← Steamworks SDKfrom",
+      "contextHash": "620c8edae5d960a377a9e32bcd54beec51e706ff5827dd88b38acccc48fc9974"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "← Steam App IDを記載（例: 1234567）",
+      "sourceHash": "c28e37faee02d3ef0ff5fe05256fcc5db8276bc9df9535d9bc65e031909a4904",
+      "translation": "← Steam App ID (e.g., 1234567)",
+      "contextHash": "267165426b0e97322053ddd91f7ab397fb4f78a237c3f5b2d1b2b11680f75c02"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "ここまでの設定が完了していれば、SteamのAPIが有効になります。",
+      "sourceHash": "04f59a0c93029a68f00144b0e0a34dc5d359ebc647f7107ffb76968d2586e288",
+      "translation": "Once the setup is complete, the Steam API will be enabled.",
+      "contextHash": "04f59a0c93029a68f00144b0e0a34dc5d359ebc647f7107ffb76968d2586e288"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "Steamクライアントを起動した状態でGame.exeを実行することで、実績の達成が有効になります。",
+      "sourceHash": "ba8fea270e3f99bc8dbe0f1f64e9255b12ffb7b2758e5fb10ecc373bba85ca5d",
+      "translation": "Achievements will be enabled by running Game.exe while the Steam client is running.",
+      "contextHash": "ba8fea270e3f99bc8dbe0f1f64e9255b12ffb7b2758e5fb10ecc373bba85ca5d"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "Steamオーバーレイの設定",
+      "sourceHash": "86b63104d9ec17ace715f7c4fadc21cbede14d1352be292143ec8e00e028c863",
+      "translation": "Configuring the Steam Overlay",
+      "contextHash": "86b63104d9ec17ace715f7c4fadc21cbede14d1352be292143ec8e00e028c863"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "上記の状態では、まだSteamオーバーレイ（F12によるスクリーンショットなどSteamの各種機能）は有効になりません。",
+      "sourceHash": "839d336dea6790f0eaedeb9ebe63c7930cc34f47a265a135c48e4b7c4d82ff37",
+      "translation": "In this state, the Steam Overlay (various Steam features such as screenshots using F12) is not yet enabled.",
+      "contextHash": "839d336dea6790f0eaedeb9ebe63c7930cc34f47a265a135c48e4b7c4d82ff37"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "package.jsonの編集",
+      "sourceHash": "8be52499e3dd3e7748f825c1f6c467ef5f8e4472e891eba735eed48767e000ae",
+      "translation": "Editing package.json",
+      "contextHash": "8be52499e3dd3e7748f825c1f6c467ef5f8e4472e891eba735eed48767e000ae"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "package.jsonをテキストエディタで開き、「chromium-args」の行に以下の２点を加えてください。",
+      "sourceHash": "bdffd3773dbb1f95aef4049d4c80d5c41411295f04f14d600ac4dfd7ab5a025f",
+      "translation": "Open package.json in a text editor and add the following two items to the \"chromium-args\" line.",
+      "contextHash": "bdffd3773dbb1f95aef4049d4c80d5c41411295f04f14d600ac4dfd7ab5a025f"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "実際には元ある記述と合わせて、以下のようになるはずです。",
+      "sourceHash": "f37e5a42930be799fa82becacfb5cf2ddeb9d638b0a64a2d8c7a822e92956993",
+      "translation": "In practice, together with the existing entries, it should look like this.",
+      "contextHash": "f37e5a42930be799fa82becacfb5cf2ddeb9d638b0a64a2d8c7a822e92956993"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "Steamクライアントからの起動",
+      "sourceHash": "1827c054e8f9f2f68c1908066acc9dff83c8f80992bfbf090e264bd080f49b39",
+      "translation": "Launching from the Steam Client",
+      "contextHash": "1827c054e8f9f2f68c1908066acc9dff83c8f80992bfbf090e264bd080f49b39"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "この状態でSteamクライアント上からゲームを起動すると、Steamオーバーレイが有効になります。",
+      "sourceHash": "b9d9ab9cdedf04f74ff9dda6a4cd0a0d75597f80ea4f3455e9addf806a75b452",
+      "translation": "Launching the game from the Steam client in this state will enable the Steam Overlay.",
+      "contextHash": "b9d9ab9cdedf04f74ff9dda6a4cd0a0d75597f80ea4f3455e9addf806a75b452"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "※ゲーム開始時にSteamオーバーレイの通知が表示されれば成功です。",
+      "sourceHash": "9e16c4ee0ebc86fdb85c2fe2bee96efd21459699d2bd9029273e76a212d93df9",
+      "translation": "※It was successful if the Steam Overlay notification appears when the game starts.",
+      "contextHash": "9e16c4ee0ebc86fdb85c2fe2bee96efd21459699d2bd9029273e76a212d93df9"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "ゲームのアップロード",
+      "sourceHash": "2c0f079fb522d5c90dd240cfe5647345a5ab7f7963a9afefee910cfdeaa78a33",
+      "translation": "Uploading the Game",
+      "contextHash": "2c0f079fb522d5c90dd240cfe5647345a5ab7f7963a9afefee910cfdeaa78a33"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "なお、Steamクライアント上でゲームを起動するには、Steamworksにゲームをアップロードする必要があります。",
+      "sourceHash": "18cf0945d5e07e09eba3d5512e8c0d0fc13ffeb857b58820bfb1bf7b5a0f8482",
+      "translation": "To launch the game from the Steam client, you must upload it to Steamworks.",
+      "contextHash": "18cf0945d5e07e09eba3d5512e8c0d0fc13ffeb857b58820bfb1bf7b5a0f8482"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "アップロードにはSteamworks SDK付属の「SteamPipeGUI」が便利です。",
+      "sourceHash": "3614808f50bb2cb8ede560e75bd3f8e322ae0bb24ebdf00f84e7f47cc51805e5",
+      "translation": "The \"SteamPipeGUI\" included with the Steamworks SDK is useful for uploading.",
+      "contextHash": "3614808f50bb2cb8ede560e75bd3f8e322ae0bb24ebdf00f84e7f47cc51805e5"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "使い方は以下の記事が参考になります。",
+      "sourceHash": "3b52c40abcba7904c3ea25d26382553eb4e52b5e033c3d748c572ddf9c429734",
+      "translation": "The following article provides a useful reference for how to use it.",
+      "contextHash": "3b52c40abcba7904c3ea25d26382553eb4e52b5e033c3d748c572ddf9c429734"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "https://kan-kikuchi.hatenablog.com/entry/Steam_Upload_Windows",
+      "sourceHash": "ab6358fbcdfc3a2234e9fd22e891054bc99d03c84ffc55646e9310e3fafd1e3b",
+      "translation": "https://kan-kikuchi.hatenablog.com/entry/Steam_Upload_Windows",
+      "contextHash": "82fcc1dc397dd1de8a064a6e4c574c1269caf367dfc01b524921cb727061ddd8"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "※Steamworksから直接Webアップロードもできますが、失敗することが多くて面倒でした……。",
+      "sourceHash": "0c31129318d346f70e6f1c9b569862bec512054389d4155e295e4bb2d2574224",
+      "translation": "※You can also upload directly via the Steamworks website, but it failed often and was troublesome…….",
+      "contextHash": "0c31129318d346f70e6f1c9b569862bec512054389d4155e295e4bb2d2574224"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "あるいは「ゲーム＞非Steamゲームをマイライブラリに追加」でSteamクライアントにプロジェクトを取り込む方法もあります。",
+      "sourceHash": "419890c0ba555933fae4628d24b696170e064c5eeef82797c508d52d9e2994b9",
+      "translation": "Alternatively, you can add the project to the Steam client by selecting \"Games > Add a Non-Steam Game to My Library\".",
+      "contextHash": "419890c0ba555933fae4628d24b696170e064c5eeef82797c508d52d9e2994b9"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "ポイント",
+      "sourceHash": "80ebe4f118802a72d8ed2b0076434895eadf99658f50d6e162c6733fe2809485",
+      "translation": "Tips",
+      "contextHash": "80ebe4f118802a72d8ed2b0076434895eadf99658f50d6e162c6733fe2809485"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "これまでに作成したpackage.jsonやsteam_appid.txt、greenworksフォルダは別途保管しておくことをオススメします。デプロイする度にコピペするだけで済みます。",
+      "sourceHash": "5efdbf5daa5308f4e708e22ce182206e33ecb6d7102055c0b61afedad12a22e9",
+      "translation": "I recommend storing the package.json, steam_appid.txt, and greenworks folder you have created separately. Then, you only need to copy and paste them each time you deploy.",
+      "contextHash": "5efdbf5daa5308f4e708e22ce182206e33ecb6d7102055c0b61afedad12a22e9"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "※ただし、package.jsonにはゲームタイトルも含まれるので注意です。バージョン名などを含む場合はきちんと更新する必要があります。",
+      "sourceHash": "a0b0001c22f39e17f62a28db831e3c490d62bdc58d8c3273ba8444b135c46e4b",
+      "translation": "※However, note that package.json also contains the game title. If it includes a version name or similar information, be sure to update it properly.",
+      "contextHash": "a0b0001c22f39e17f62a28db831e3c490d62bdc58d8c3273ba8444b135c46e4b"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "また、SteamPipeGUIはexeファイルのパス毎に設定を記憶しているようです。体験版と製品版など複数プロジェクトを管理する場合は、SteamPipeGUI.exeを別にコピー＆リネームしておくと便利＆安全です。",
+      "sourceHash": "06adb98fb591c3f9fce159397eaf5aac1ddded73348a05924ae4a6eb54950fc6",
+      "translation": "Also, SteamPipeGUI appears to remember its settings for each exe file path. If you manage multiple projects, such as a demo and a full version, it is convenient and safer to copy and rename SteamPipeGUI.exe separately.",
+      "contextHash": "06adb98fb591c3f9fce159397eaf5aac1ddded73348a05924ae4a6eb54950fc6"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "クラウドセーブの設定",
+      "sourceHash": "34a9caed7235d0285c3114833d6516dc6a859049c140673a113fcec1d2b680cf",
+      "translation": "Configuring Cloud Saves",
+      "contextHash": "34a9caed7235d0285c3114833d6516dc6a859049c140673a113fcec1d2b680cf"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "Steamクラウドセーブを利用するには、Steamworksの管理画面で設定が必要です。",
+      "sourceHash": "7f7c933e30d0d35ebd65e625d6d0da08a5ab65ca454ef16cfe159ab22134fc0b",
+      "translation": "To use Steam Cloud Saves, you need to configure them in the Steamworks administration panel.",
+      "contextHash": "7f7c933e30d0d35ebd65e625d6d0da08a5ab65ca454ef16cfe159ab22134fc0b"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "１．Steamworksの管理画面で「アプリデータ管理 ＞ Steam クラウド」を選択。",
+      "sourceHash": "b435c1a404374ede02c1ede5c39da146816bec1e18386b3ad8fbff716a29666c",
+      "translation": "1. In the Steamworks administration panel, select \"App Data Management > Steam Cloud\".",
+      "contextHash": "b435c1a404374ede02c1ede5c39da146816bec1e18386b3ad8fbff716a29666c"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "２．Steam 自動クラウド設定のルートパスを設定。",
+      "sourceHash": "1edf074725978c5c234d2327a9ac70efc2c90e19f534b826e8537bc60805150c",
+      "translation": "2. Configure the root path under Steam Auto-Cloud Settings.",
+      "contextHash": "1edf074725978c5c234d2327a9ac70efc2c90e19f534b826e8537bc60805150c"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "・ルートを「アプリのインストールディレクトリ」に設定",
+      "sourceHash": "085976264222d90c18044ff8673b19f256ab0f66b2f24dc388cb9154744b7538",
+      "translation": "・Set the root to \"The Application Install Directory\"",
+      "contextHash": "085976264222d90c18044ff8673b19f256ab0f66b2f24dc388cb9154744b7538"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "・サブディレクトリを「save/{64BitSteamID}」に設定",
+      "sourceHash": "6188f11473c5f9be0bf2c6326d71c25cd258447db52fca2dc43a84e93fea0665",
+      "translation": "・Set the subdirectory to \"save/{64BitSteamID}\"",
+      "contextHash": "6188f11473c5f9be0bf2c6326d71c25cd258447db52fca2dc43a84e93fea0665"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "・パターンを「.rmmzsave」に設定",
+      "sourceHash": "e8e62e5fa8b1f62c2c8981a166a0039b4621e770c7ac34d21771d12f8ffc6911",
+      "translation": "・Set the pattern to \".rmmzsave\"",
+      "contextHash": "e8e62e5fa8b1f62c2c8981a166a0039b4621e770c7ac34d21771d12f8ffc6911"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "※{64BitSteamID} はSteamのユーザＩＤに自動変換されます。",
+      "sourceHash": "2df2f761b84611629b8ffbc6a6f5ff75df55e712efe2e2aa3b07c78a5f05041d",
+      "translation": "※{64BitSteamID} is automatically converted to the user's Steam ID.",
+      "contextHash": "2df2f761b84611629b8ffbc6a6f5ff75df55e712efe2e2aa3b07c78a5f05041d"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "Steamworksの「共有クラウドストレージ」を設定することで、体験版から製品版へ自動でセーブを引き継ぐこともできます。",
+      "sourceHash": "7012220c0c2ea86e107d1efc22a4db8a64d1ffee233893afff342340d3e210d7",
+      "translation": "By configuring Steamworks' \"Shared Cloud Storage,\" you can also automatically carry save data over from the demo to the full version.",
+      "contextHash": "7012220c0c2ea86e107d1efc22a4db8a64d1ffee233893afff342340d3e210d7"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "※共有クラウドストレージは体験版側に設定するのが基本っぽいです。",
+      "sourceHash": "aeac2dac087a1af2ca97a96bc295284c173bb9a06067baee52e2d8cfd3e29e32",
+      "translation": "※It seems that Shared Cloud Storage is generally configured on the demo side.",
+      "contextHash": "aeac2dac087a1af2ca97a96bc295284c173bb9a06067baee52e2d8cfd3e29e32"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "なお、製品版と体験版のセーブデータは双方向で反映される仕様のようです。わざわざやるプレイヤーはあまりいないと思いますが、製品版でセーブしたデータを体験版でロードするとエラーになったりします。",
+      "sourceHash": "c3f27f754defe636a6e6aee73c5d9c9b13b90e4da9f576418bfdece0b47ac75f",
+      "translation": "Also, save data from the full version and the demo appears to be synchronized in both directions. Few players would go out of their way to do this, but loading data saved in the full version in the demo may result in an error.",
+      "contextHash": "c3f27f754defe636a6e6aee73c5d9c9b13b90e4da9f576418bfdece0b47ac75f"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "特にアクターの画像ファイルがないとロード画面の時点で落ちます。",
+      "sourceHash": "a14b9d8bec7b32f939616cb5bde4f408ae6bbbde45a1c979ba5efa247d998ce9",
+      "translation": "In particular, the game will crash on the loading screen if an actor's image file is missing.",
+      "contextHash": "a14b9d8bec7b32f939616cb5bde4f408ae6bbbde45a1c979ba5efa247d998ce9"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "気になる方は製品版のセーブデータは体験版で、ロード禁止にするなどの制御をしてください。",
+      "sourceHash": "168cf56c43f57130b7620aa1618de9a6ed8887ecbb4891c8575c370f7c1042a4",
+      "translation": "If this concerns you, configure the demo to prohibit loading save data from the full version, or implement some other restriction.",
+      "contextHash": "168cf56c43f57130b7620aa1618de9a6ed8887ecbb4891c8575c370f7c1042a4"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "Steam実績の達成",
+      "sourceHash": "6b93d52673fb43f9a9dca02e1563fb6b366391a65fc6fa9fdecdf751dbe2b491",
+      "translation": "Unlocking Steam Achievements",
+      "contextHash": "6b93d52673fb43f9a9dca02e1563fb6b366391a65fc6fa9fdecdf751dbe2b491"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "Steam実績の削除（テスト用）",
+      "sourceHash": "9e12beefe1ea618777da5ba91929fd974d6cbe787a722831cf33ea5bb5553f58",
+      "translation": "Deleting Steam Achievements (For Testing)",
+      "contextHash": "9e12beefe1ea618777da5ba91929fd974d6cbe787a722831cf33ea5bb5553f58"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "テスト時に達成した実績を消去したい場合は、以下の手順で行います。",
+      "sourceHash": "1ef509950fb5e5bd1db5e95837bab83769db58e78ff97902257a5246a13f90b2",
+      "translation": "If you want to delete achievements unlocked during testing, follow the procedure below.",
+      "contextHash": "1ef509950fb5e5bd1db5e95837bab83769db58e78ff97902257a5246a13f90b2"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "１．ブラウザのＵＲＬ欄に「steam://open/console」と入力し、Steamクライアントのコンソールを開きます。",
+      "sourceHash": "4a18556270f70f62e12eb3aa27c374f39e207eab8f7c9bdd3d8ffc29e25d731f",
+      "translation": "1. Enter \"steam://open/console\" in your browser's URL field to open the Steam client's console.",
+      "contextHash": "4a18556270f70f62e12eb3aa27c374f39e207eab8f7c9bdd3d8ffc29e25d731f"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "２．コンソールに以下のコマンドを入力します。",
+      "sourceHash": "4fded201b3e4ac4daa080ea4fb2b8e06d639625c6c3a502a28c3867fc988eb1f",
+      "translation": "2. Enter the following command in the console.",
+      "contextHash": "4fded201b3e4ac4daa080ea4fb2b8e06d639625c6c3a502a28c3867fc988eb1f"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "個別の実績を消去する場合：",
+      "sourceHash": "a42a37bb398eb01a401d52c25bcbb42a2792da4b1d673cd94e66a52ea6b08db4",
+      "translation": "To delete an individual achievement:",
+      "contextHash": "a42a37bb398eb01a401d52c25bcbb42a2792da4b1d673cd94e66a52ea6b08db4"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "achievement_clear [Steam App ID] [実績のAPI名]",
+      "sourceHash": "d65cf4253c40ee96d3fd434e494f2d3f4dabfed69c6c4920cee073dfcf041847",
+      "translation": "achievement_clear [Steam App ID] [Achievement API Name]",
+      "contextHash": "d65cf4253c40ee96d3fd434e494f2d3f4dabfed69c6c4920cee073dfcf041847"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "（例：achievement_clear 9999999 STAGE_1_CLEAR）",
+      "sourceHash": "af9de359f48a4f1c1b2740b9f2f1669b4698c75817e0209a010df9b471ac80c6",
+      "translation": "(Example: achievement_clear 9999999 STAGE_1_CLEAR)",
+      "contextHash": "af9de359f48a4f1c1b2740b9f2f1669b4698c75817e0209a010df9b471ac80c6"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "全実績をリセットする場合：",
+      "sourceHash": "a40d28cfb8d6faf6e20ef5742217b9ff62a82ae4810fd6ba8048ea3fc81b9cb1",
+      "translation": "To reset all achievements:",
+      "contextHash": "a40d28cfb8d6faf6e20ef5742217b9ff62a82ae4810fd6ba8048ea3fc81b9cb1"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "※実行した直後は表示が反映されていないように見えますが、実際には反映されています。",
+      "sourceHash": "b076915057242aa66536ccddbf5a223350766283438ec51751df65fdb663f204",
+      "translation": "※Immediately after execution, it may appear that the display has not been updated, but it has actually been updated.",
+      "contextHash": "b076915057242aa66536ccddbf5a223350766283438ec51751df65fdb663f204"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "※ちなみに、steam.exeのリンク先の末尾に「 -console」を付けておけば、コンソールが最初から表示された状態になるので便利です。",
+      "sourceHash": "6feb8b5365fa615513ef752f0f0d1aa60b1e5c2316fdc8245f0daae4eca4c419",
+      "translation": "※Incidentally, if you append \" -console\" to the end of the steam.exe shortcut target, the console will be displayed from the start, which is convenient.",
+      "contextHash": "6feb8b5365fa615513ef752f0f0d1aa60b1e5c2316fdc8245f0daae4eca4c419"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "Steam実績を達成（ActivateAchievement）",
+      "sourceHash": "bf7b981b76bbc81d456a7a405836dde73aac707510a59f8fd5b919ebda0ab7e5",
+      "translation": "Unlock a Steam Achievement (ActivateAchievement)",
+      "contextHash": "bf7b981b76bbc81d456a7a405836dde73aac707510a59f8fd5b919ebda0ab7e5"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "指定したSteam実績を達成します。",
+      "sourceHash": "3545bd15b6943a31f4b04cb260018eff251a3409337c97e3ab7c9dde41003a82",
+      "translation": "Unlocks the specified Steam achievement.",
+      "contextHash": "3545bd15b6943a31f4b04cb260018eff251a3409337c97e3ab7c9dde41003a82"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "Steam以外の環境では何もしません。",
+      "sourceHash": "9b8b2fdf4b45c741f32317756481194cc3e16b0d93677f90b9d523f84172b1bc",
+      "translation": "Does nothing in environments other than Steam.",
+      "contextHash": "9b8b2fdf4b45c741f32317756481194cc3e16b0d93677f90b9d523f84172b1bc"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "実績名（AchievementName）",
+      "sourceHash": "aa59f156af3adc6d21e64fc6fcaf84e87ba57ded32164909e31e0df32583e0e8",
+      "translation": "Achievement Name (AchievementName)",
+      "contextHash": "aa59f156af3adc6d21e64fc6fcaf84e87ba57ded32164909e31e0df32583e0e8"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "達成する実績のAPI名を文字列で指定します。",
+      "sourceHash": "3dc5953084db143e6b2d441d64b6925e6fe6858ec58a1743793feee1dc085642",
+      "translation": "Specify the API name of the achievement to unlock as a string.",
+      "contextHash": "3dc5953084db143e6b2d441d64b6925e6fe6858ec58a1743793feee1dc085642"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "SteamworksのダッシュボードでAPI名として登録した文字列と一致させてください。",
+      "sourceHash": "a8c611575b69622e061377017e1d53028867b91aeda1003ca225da1ec3dcc583",
+      "translation": "Make sure it matches the string registered as the API name in the Steamworks dashboard.",
+      "contextHash": "a8c611575b69622e061377017e1d53028867b91aeda1003ca225da1ec3dcc583"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "Steam判定スイッチ（SetSwitchIsSteam）",
+      "sourceHash": "f5ae62f414861272516c3a98c565d4d3d36da9a1fc2c49eb9404b6f1bd468b73",
+      "translation": "Steam Detection Switch (SetSwitchIsSteam)",
+      "contextHash": "f5ae62f414861272516c3a98c565d4d3d36da9a1fc2c49eb9404b6f1bd468b73"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "現在Steamビルドで動作しているかを指定のスイッチに反映します。",
+      "sourceHash": "1547796df6f4efd068d8b001252f59c39ded26eab330998124cec6951120371d",
+      "translation": "Reflects whether the game is currently running in the Steam build in the specified switch.",
+      "contextHash": "1547796df6f4efd068d8b001252f59c39ded26eab330998124cec6951120371d"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "SteamビルドであればスイッチをＯＮ、そうでなければＯＦＦにします。",
+      "sourceHash": "d100a23e351ce5b8621aaeeb92c72e59557db7d35a64a8e1c9a5f954c8d09057",
+      "translation": "Turns the switch ON for the Steam build and OFF otherwise.",
+      "contextHash": "d100a23e351ce5b8621aaeeb92c72e59557db7d35a64a8e1c9a5f954c8d09057"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "スイッチ（SwitchId）",
+      "sourceHash": "fc75274acce014f8618f2f55970590b958c845f3cc8982a25d833b1f23e9d1f8",
+      "translation": "Switch (SwitchId)",
+      "contextHash": "fc75274acce014f8618f2f55970590b958c845f3cc8982a25d833b1f23e9d1f8"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "Steam判定を反映するスイッチのIDを指定します。",
+      "sourceHash": "e893545a72d0e5f606552d2a0450c634e624c3802700a7114dea4154ba6495c2",
+      "translation": "Specifies the ID of the switch that reflects the Steam build check.",
+      "contextHash": "e893545a72d0e5f606552d2a0450c634e624c3802700a7114dea4154ba6495c2"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]Greenworksの導入・NW.jsの更新[[/LINK_1]]",
+      "sourceHash": "3de4000386373ec185b12bed7ef6f647864d84d2171f5bd68b6765472927a76a",
+      "parts": [
+        {
+          "source": "Greenworksの導入・NW.jsの更新",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installing Greenworks and Updating NW.js[[/LINK_1]]",
+      "contextHash": "3de4000386373ec185b12bed7ef6f647864d84d2171f5bd68b6765472927a76a"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]Steamworks SDKの導入[[/LINK_1]]",
+      "sourceHash": "66dc7e4f0f9066b2f7e0dc746458f6ec44f6b07886a1eef038f7eb71befc83b5",
+      "parts": [
+        {
+          "source": "Steamworks SDKの導入",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installing the Steamworks SDK[[/LINK_1]]",
+      "contextHash": "66dc7e4f0f9066b2f7e0dc746458f6ec44f6b07886a1eef038f7eb71befc83b5"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プロジェクトのデプロイとファイルの配置[[/LINK_1]]",
+      "sourceHash": "a032c386ecbe6d3b312a2d555d50d67bf63b776ce5ed5592ee9083fa405e7f49",
+      "parts": [
+        {
+          "source": "プロジェクトのデプロイとファイルの配置",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Deploying the Project and Placing Files[[/LINK_1]]",
+      "contextHash": "a032c386ecbe6d3b312a2d555d50d67bf63b776ce5ed5592ee9083fa405e7f49"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]Steamオーバーレイの設定[[/LINK_1]]",
+      "sourceHash": "4bfea20c43ea08fa9d12b64c34ace1ccfce40ce06095b75aa4463221f417177c",
+      "parts": [
+        {
+          "source": "Steamオーバーレイの設定",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Configuring the Steam Overlay[[/LINK_1]]",
+      "contextHash": "4bfea20c43ea08fa9d12b64c34ace1ccfce40ce06095b75aa4463221f417177c"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]ゲームのアップロード[[/LINK_1]]",
+      "sourceHash": "c4b80de370a36e6b57a9fa0c6ca52242a282b5593a79481190bd95865466c560",
+      "parts": [
+        {
+          "source": "ゲームのアップロード",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Uploading the Game[[/LINK_1]]",
+      "contextHash": "c4b80de370a36e6b57a9fa0c6ca52242a282b5593a79481190bd95865466c560"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]ポイント[[/LINK_1]]",
+      "sourceHash": "d2bc557b838f4c19485c118eb8eafe6afd52dadaf1d1558b6c36449658eae4e0",
+      "parts": [
+        {
+          "source": "ポイント",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Points[[/LINK_1]]",
+      "contextHash": "d2bc557b838f4c19485c118eb8eafe6afd52dadaf1d1558b6c36449658eae4e0"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]クラウドセーブの設定[[/LINK_1]]",
+      "sourceHash": "7a2d2f4278ddc895b75dcad10d220f0aca498ac01a7e62f5c37f8852c1f29f27",
+      "parts": [
+        {
+          "source": "クラウドセーブの設定",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Configuring Cloud Saves[[/LINK_1]]",
+      "contextHash": "7a2d2f4278ddc895b75dcad10d220f0aca498ac01a7e62f5c37f8852c1f29f27"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]Steam実績の達成[[/LINK_1]]",
+      "sourceHash": "5fe72b5aea48200c4aaab69119fcbd45f15a44f7bf7027743caa88cc5d57d190",
+      "parts": [
+        {
+          "source": "Steam実績の達成",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Unlocking Steam Achievements[[/LINK_1]]",
+      "contextHash": "5fe72b5aea48200c4aaab69119fcbd45f15a44f7bf7027743caa88cc5d57d190"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]Steam実績の削除（テスト用）[[/LINK_1]]",
+      "sourceHash": "94118aa8c927459071a7a40d3e9bd4501cb69d06da93363f47817a2887882370",
+      "parts": [
+        {
+          "source": "Steam実績の削除（テスト用）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Deleting Steam Achievements (For Testing)[[/LINK_1]]",
+      "contextHash": "94118aa8c927459071a7a40d3e9bd4501cb69d06da93363f47817a2887882370"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド（Plugin Commands）[[/LINK_1]]",
+      "sourceHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174",
+      "parts": [
+        {
+          "source": "プラグインコマンド（Plugin Commands）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands (Plugin Commands)[[/LINK_1]]",
+      "contextHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]Steam実績を達成（ActivateAchievement）[[/LINK_1]]",
+      "sourceHash": "e28cd31847d91919b09303b08039bd8536a6f2784f97763a7d7f1688e18036ae",
+      "parts": [
+        {
+          "source": "Steam実績を達成（ActivateAchievement）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Unlocking a Steam Achievement (ActivateAchievement)[[/LINK_1]]",
+      "contextHash": "e28cd31847d91919b09303b08039bd8536a6f2784f97763a7d7f1688e18036ae"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]Steam判定スイッチ（SetSwitchIsSteam）[[/LINK_1]]",
+      "sourceHash": "050bb74236927e29224e2811048fd42f9254bfb764fcaeb31ffba26f32184451",
+      "parts": [
+        {
+          "source": "Steam判定スイッチ（SetSwitchIsSteam）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Steam Detection Switch (SetSwitchIsSteam)[[/LINK_1]]",
+      "contextHash": "050bb74236927e29224e2811048fd42f9254bfb764fcaeb31ffba26f32184451"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "詳細は[[LINK_1]]Greenworksの導入・NW.jsの更新[[/LINK_1]]をご覧ください。",
+      "sourceHash": "2c6d212355f81d15d3b6741655601c318828931fe38f2f2532531426724fef92",
+      "parts": [
+        {
+          "source": "詳細は",
+          "link": false
+        },
+        {
+          "source": "Greenworksの導入・NW.jsの更新",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "For details, please see [[LINK_1]]Installing Greenworks and Updating NW.js[[/LINK_1]].",
+      "contextHash": "2c6d212355f81d15d3b6741655601c318828931fe38f2f2532531426724fef92"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "プラグインコマンドの[[LINK_1]]「Steam実績を達成」[[/LINK_1]]を呼び出し、Steamworksの管理画面で事前に登録した実績のAPI名を指定してください。",
+      "sourceHash": "277190313e41a389ff3c838363915aa0ff29962be2e1b35a0ba0efbf401b25e2",
+      "parts": [
+        {
+          "source": "プラグインコマンドの",
+          "link": false
+        },
+        {
+          "source": "「Steam実績を達成」",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を呼び出し、Steamworksの管理画面で事前に登録した実績のAPI名を指定してください。",
+          "link": false
+        }
+      ],
+      "translation": "Call the [[LINK_1]]“Unlock Steam Achievement”[[/LINK_1]] plugin command and specify the API name of the achievement registered in advance in the Steamworks management interface.",
+      "contextHash": "277190313e41a389ff3c838363915aa0ff29962be2e1b35a0ba0efbf401b25e2"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "上述の[[LINK_1]]「プロジェクトのデプロイとファイルの配置」[[/LINK_1]]まで設定が終わっていれば、実績が達成されるはずです。",
+      "sourceHash": "d2d6c2a394ed95f2aec6be4c1a4367ac9f1f7bc38469c394778fd5a37c211506",
+      "parts": [
+        {
+          "source": "上述の",
+          "link": false
+        },
+        {
+          "source": "「プロジェクトのデプロイとファイルの配置」",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "まで設定が終わっていれば、実績が達成されるはずです。",
+          "link": false
+        }
+      ],
+      "translation": "If you have completed the setup through [[LINK_1]]“Deploying the Project and Placing Files”[[/LINK_1]] mentioned above, the achievement should unlock.",
+      "contextHash": "d2d6c2a394ed95f2aec6be4c1a4367ac9f1f7bc38469c394778fd5a37c211506"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Back to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "Greenworksを利用して、Steamの以下機能を利用します。": "Greenworks is used to provide the following Steam features.",
+    "Steam実績の達成": "Unlocking Steam Achievements",
+    "セーブデータのSteamクラウド保存と読み込み": "Saving and loading save data via the Steam Cloud",
+    "経緯": "Background",
+    "雲海のフロンティアのSteam版を販売するに当たり、Steamの実績機能を実装することにしました。しかしながら、ツクールＭＺ作品に関する情報が少なく、実装は困難を極めました。": "When preparing to release the Steam version of Cloudsea Frontier, I decided to implement Steam Achievements. However, there was little information available about RPG Maker MZ games, making implementation extremely difficult.",
+    "当初はElectronを経由して実績機能を呼び出していたのですが、Electronでパッケージ化した状態でテストしていると動作が謎に重くなることがあるという現象に見舞われてしまいました。": "At first, I called the achievement features through Electron, but when testing the game packaged with Electron, I encountered an issue where it would mysteriously become extremely slow.",
+    "※普段は軽快に動作するのですが、なぜか時々重くなります。一度、重くなるとアプリを再起動しても直らず、しばらくそのままになります。挙動からＧＰＵ関連っぽい気がするのですが、詳細は不明です。": "* It usually runs smoothly, but for some reason it occasionally becomes slow. Once it slows down, restarting the application does not fix it, and it remains that way for a while. The behavior seems to be related to the GPU, but the details are unknown.",
+    "結局、問題を解決できずに他の方法を模索したのですが、結果的に落ち着いたのがGreenworksを使う方法です。": "In the end, I was unable to resolve the problem and explored other methods. Ultimately, I settled on using Greenworks.",
+    "そんなわけで、当プラグインの目的はSteamの機能を使うに当たって、Electron以外の選択肢を掲示することです。Greenworksを利用して、Steam実績の達成やクラウドセーブを実装します。": "For this reason, the purpose of this plugin is to present an alternative to Electron for using Steam features. It uses Greenworks to implement Steam Achievements and cloud saves.",
+    "※この方法に限らず、各自で相性の良い方法を選択してくだされば幸いです。例えば、Electronにはパッケージ化できるメリットがあります。つまり、jsonなどファイルの中身がユーザに見られません。": "* You do not have to use this method; I hope you will choose whichever method works best for you. For example, Electron has the advantage of allowing you to package your game. In other words, users cannot see the contents of files such as JSON files.",
+    "Greenworksの場合は元のツクールＭＺの仕組み（NW.js）をそのまま利用するため、挙動の変化が少ないというメリットもあります。": "With Greenworks, the original RPG Maker MZ framework (NW.js) is used as is, which also has the advantage of causing fewer changes in behavior.",
+    "利用にはGreenworksのセットアップが必要です。この記事では導入の手順を細かく解説していきます。": "Greenworks must be set up before use. This article provides a detailed explanation of the installation process.",
+    "なお、Steam以外の環境では、これらの機能は無効化されます。": "These features are disabled in environments other than Steam.",
+    "当然ながら、Steamworksに登録していることが前提になります。": "Naturally, you must first register your game with Steamworks.",
+    "Steamに作品を登録して、App IDを取得してください。": "Register your game on Steam and obtain its App ID.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Then, enable the feature in the RPG Maker plugin manager.",
+    "※このプラグインはＭＺ専用です。": "* This plugin is for MZ only.",
+    "NRP_Steamworks.js": "NRP_Steamworks.js",
+    "また、当プラグインを利用するには別途Greenworksの導入が必要です。": "Greenworks must also be installed separately to use this plugin.",
+    "更新履歴（History）": "Update History (History)",
+    "公開！": "Released!",
+    "Greenworksの導入・NW.jsの更新": "Installing Greenworks and Updating NW.js",
+    "まず、Greenworksを導入し、それに合わせてNW.jsを更新します。": "First, install Greenworks and update NW.js accordingly.",
+    "Greenworksの導入": "Installing Greenworks",
+    "以下のリリースページからGreenworksをダウンロードします。": "Download Greenworks from the following release page.",
+    "https://github.com/greenheartgames/greenworks/releases": "https://github.com/greenheartgames/greenworks/releases",
+    "※Windowsの場合は、greenworks-vX.XX.X-nw-vX.XX.X-win-64.zip というファイル名になります。": "* On Windows, the file name will be greenworks-vX.XX.X-nw-vX.XX.X-win-64.zip.",
+    "NW.jsの更新": "Updating NW.js",
+    "GreenworksとNW.jsのバージョンを合わせる必要があります。": "The Greenworks and NW.js versions must match.",
+    "NW.jsの公式サイトからＤＬしてください。": "Download it from the official NW.js website.",
+    "※過去バージョンは『Previous releases』からＤＬできます。": "* Older versions can be downloaded from “Previous releases.”",
+    "https://nwjs.io/downloads/": "https://nwjs.io/downloads/",
+    "NW.jsの差し替え手順は以下の記事（Mac向けですがWindowsも大体同じ）が参考になります。": "The following article explains how to replace NW.js (although it is for Mac, the process is mostly the same on Windows).",
+    "https://rpgtkool.hatenablog.com/entry/2024/10/23/140944": "https://rpgtkool.hatenablog.com/entry/2024/10/23/140944",
+    "※nwjs-winのバックアップは必ず取ってください。テストプレイが起動しなくなった場合は元に戻してください。": "* Be sure to back up nwjs-win. If test play no longer starts, restore the backup.",
+    "色々試した結果、作者環境では以下の組み合わせで動作を確認しました。": "After trying various combinations, I confirmed that the following combination worked in my environment.",
+    "https://github.com/greenheartgames/greenworks/releases/tag/v0.17.0": "https://github.com/greenheartgames/greenworks/releases/tag/v0.17.0",
+    "https://dl.nwjs.io/v0.89.0/": "https://dl.nwjs.io/v0.89.0/",
+    "※Windowsの場合は以下の２ファイルが必要です。": "* On Windows, the following two files are required.",
+    "Steamworks SDKの導入": "Installing the Steamworks SDK",
+    "SteamworksのパートナーサイトからSteamworks SDKをダウンロードしてください。": "Download the Steamworks SDK from the Steamworks partner site.",
+    "※作者環境ではsteamworks_sdk_v1.64で確認しています。バージョンによってはGreenworksとの相性がある場合があります。": "* I tested this with steamworks_sdk_v1.64 in my environment. Depending on the version, compatibility issues with Greenworks may occur.",
+    "プロジェクトのデプロイとファイルの配置": "Deploying the Project and Placing the Files",
+    "デプロイ": "Deployment",
+    "当プラグインを導入し、通常通りプロジェクトをデプロイします。": "Install this plugin and deploy the project as usual.",
+    "※プラットフォームはWindows（またはmacOS）を選択してください。": "* Select Windows (or macOS) as the platform.",
+    "※事前に上記のNW.jsの更新をする必要があります。": "* You must update NW.js as described above beforehand.",
+    "ファイルの配置": "Placing the Files",
+    "１．Greenworksのzipを解凍し、デプロイ済みのプロジェクトフォルダに配置します。": "1. Extract the Greenworks zip file and place its contents in the deployed project folder.",
+    "２．Steamworks SDKのzipを解凍し、以下の２ファイルを『greenworks/lib』フォルダ内に配置します。": "2. Extract the Steamworks SDK zip file and place the following two files in the “greenworks/lib” folder.",
+    "３．テキストファイル「steam_appid.txt」を新規作成し、プロジェクトフォルダに配置します。中身にはSteam App IDのみ記載してください。": "3. Create a new text file named “steam_appid.txt” and place it in the project folder. The file should contain only the Steam App ID.",
+    "フォルダ構成": "Folder Structure",
+    "ゲームフォルダ/": "Game folder/",
+    "← Steamworks SDKから": "← Steamworks SDKfrom",
+    "← Steam App IDを記載（例: 1234567）": "← Steam App ID (e.g., 1234567)",
+    "ここまでの設定が完了していれば、SteamのAPIが有効になります。": "Once the setup is complete, the Steam API will be enabled.",
+    "Steamクライアントを起動した状態でGame.exeを実行することで、実績の達成が有効になります。": "Achievements will be enabled by running Game.exe while the Steam client is running.",
+    "Steamオーバーレイの設定": "Configuring the Steam Overlay",
+    "上記の状態では、まだSteamオーバーレイ（F12によるスクリーンショットなどSteamの各種機能）は有効になりません。": "In this state, the Steam Overlay (various Steam features such as screenshots using F12) is not yet enabled.",
+    "package.jsonの編集": "Editing package.json",
+    "package.jsonをテキストエディタで開き、「chromium-args」の行に以下の２点を加えてください。": "Open package.json in a text editor and add the following two items to the \"chromium-args\" line.",
+    "実際には元ある記述と合わせて、以下のようになるはずです。": "In practice, together with the existing entries, it should look like this.",
+    "Steamクライアントからの起動": "Launching from the Steam Client",
+    "この状態でSteamクライアント上からゲームを起動すると、Steamオーバーレイが有効になります。": "Launching the game from the Steam client in this state will enable the Steam Overlay.",
+    "※ゲーム開始時にSteamオーバーレイの通知が表示されれば成功です。": "※It was successful if the Steam Overlay notification appears when the game starts.",
+    "ゲームのアップロード": "Uploading the Game",
+    "なお、Steamクライアント上でゲームを起動するには、Steamworksにゲームをアップロードする必要があります。": "To launch the game from the Steam client, you must upload it to Steamworks.",
+    "アップロードにはSteamworks SDK付属の「SteamPipeGUI」が便利です。": "The \"SteamPipeGUI\" included with the Steamworks SDK is useful for uploading.",
+    "使い方は以下の記事が参考になります。": "The following article provides a useful reference for how to use it.",
+    "https://kan-kikuchi.hatenablog.com/entry/Steam_Upload_Windows": "https://kan-kikuchi.hatenablog.com/entry/Steam_Upload_Windows",
+    "※Steamworksから直接Webアップロードもできますが、失敗することが多くて面倒でした……。": "※You can also upload directly via the Steamworks website, but it failed often and was troublesome…….",
+    "あるいは「ゲーム＞非Steamゲームをマイライブラリに追加」でSteamクライアントにプロジェクトを取り込む方法もあります。": "Alternatively, you can add the project to the Steam client by selecting \"Games > Add a Non-Steam Game to My Library\".",
+    "ポイント": "Tips",
+    "これまでに作成したpackage.jsonやsteam_appid.txt、greenworksフォルダは別途保管しておくことをオススメします。デプロイする度にコピペするだけで済みます。": "I recommend storing the package.json, steam_appid.txt, and greenworks folder you have created separately. Then, you only need to copy and paste them each time you deploy.",
+    "※ただし、package.jsonにはゲームタイトルも含まれるので注意です。バージョン名などを含む場合はきちんと更新する必要があります。": "※However, note that package.json also contains the game title. If it includes a version name or similar information, be sure to update it properly.",
+    "また、SteamPipeGUIはexeファイルのパス毎に設定を記憶しているようです。体験版と製品版など複数プロジェクトを管理する場合は、SteamPipeGUI.exeを別にコピー＆リネームしておくと便利＆安全です。": "Also, SteamPipeGUI appears to remember its settings for each exe file path. If you manage multiple projects, such as a demo and a full version, it is convenient and safer to copy and rename SteamPipeGUI.exe separately.",
+    "クラウドセーブの設定": "Configuring Cloud Saves",
+    "Steamクラウドセーブを利用するには、Steamworksの管理画面で設定が必要です。": "To use Steam Cloud Saves, you need to configure them in the Steamworks administration panel.",
+    "１．Steamworksの管理画面で「アプリデータ管理 ＞ Steam クラウド」を選択。": "1. In the Steamworks administration panel, select \"App Data Management > Steam Cloud\".",
+    "２．Steam 自動クラウド設定のルートパスを設定。": "2. Configure the root path under Steam Auto-Cloud Settings.",
+    "・ルートを「アプリのインストールディレクトリ」に設定": "・Set the root to \"The Application Install Directory\"",
+    "・サブディレクトリを「save/{64BitSteamID}」に設定": "・Set the subdirectory to \"save/{64BitSteamID}\"",
+    "・パターンを「.rmmzsave」に設定": "・Set the pattern to \".rmmzsave\"",
+    "※{64BitSteamID} はSteamのユーザＩＤに自動変換されます。": "※{64BitSteamID} is automatically converted to the user's Steam ID.",
+    "Steamworksの「共有クラウドストレージ」を設定することで、体験版から製品版へ自動でセーブを引き継ぐこともできます。": "By configuring Steamworks' \"Shared Cloud Storage,\" you can also automatically carry save data over from the demo to the full version.",
+    "※共有クラウドストレージは体験版側に設定するのが基本っぽいです。": "※It seems that Shared Cloud Storage is generally configured on the demo side.",
+    "なお、製品版と体験版のセーブデータは双方向で反映される仕様のようです。わざわざやるプレイヤーはあまりいないと思いますが、製品版でセーブしたデータを体験版でロードするとエラーになったりします。": "Also, save data from the full version and the demo appears to be synchronized in both directions. Few players would go out of their way to do this, but loading data saved in the full version in the demo may result in an error.",
+    "特にアクターの画像ファイルがないとロード画面の時点で落ちます。": "In particular, the game will crash on the loading screen if an actor's image file is missing.",
+    "気になる方は製品版のセーブデータは体験版で、ロード禁止にするなどの制御をしてください。": "If this concerns you, configure the demo to prohibit loading save data from the full version, or implement some other restriction.",
+    "Steam実績の削除（テスト用）": "Deleting Steam Achievements (For Testing)",
+    "テスト時に達成した実績を消去したい場合は、以下の手順で行います。": "If you want to delete achievements unlocked during testing, follow the procedure below.",
+    "１．ブラウザのＵＲＬ欄に「steam://open/console」と入力し、Steamクライアントのコンソールを開きます。": "1. Enter \"steam://open/console\" in your browser's URL field to open the Steam client's console.",
+    "２．コンソールに以下のコマンドを入力します。": "2. Enter the following command in the console.",
+    "個別の実績を消去する場合：": "To delete an individual achievement:",
+    "achievement_clear [Steam App ID] [実績のAPI名]": "achievement_clear [Steam App ID] [Achievement API Name]",
+    "（例：achievement_clear 9999999 STAGE_1_CLEAR）": "(Example: achievement_clear 9999999 STAGE_1_CLEAR)",
+    "全実績をリセットする場合：": "To reset all achievements:",
+    "※実行した直後は表示が反映されていないように見えますが、実際には反映されています。": "※Immediately after execution, it may appear that the display has not been updated, but it has actually been updated.",
+    "※ちなみに、steam.exeのリンク先の末尾に「 -console」を付けておけば、コンソールが最初から表示された状態になるので便利です。": "※Incidentally, if you append \" -console\" to the end of the steam.exe shortcut target, the console will be displayed from the start, which is convenient.",
+    "プラグインコマンド（Plugin Commands）": "Plugin Commands (Plugin Commands)",
+    "Steam実績を達成（ActivateAchievement）": "Unlock a Steam Achievement (ActivateAchievement)",
+    "指定したSteam実績を達成します。": "Unlocks the specified Steam achievement.",
+    "Steam以外の環境では何もしません。": "Does nothing in environments other than Steam.",
+    "実績名（AchievementName）": "Achievement Name (AchievementName)",
+    "達成する実績のAPI名を文字列で指定します。": "Specify the API name of the achievement to unlock as a string.",
+    "SteamworksのダッシュボードでAPI名として登録した文字列と一致させてください。": "Make sure it matches the string registered as the API name in the Steamworks dashboard.",
+    "Steam判定スイッチ（SetSwitchIsSteam）": "Steam Detection Switch (SetSwitchIsSteam)",
+    "現在Steamビルドで動作しているかを指定のスイッチに反映します。": "Reflects whether the game is currently running in the Steam build in the specified switch.",
+    "SteamビルドであればスイッチをＯＮ、そうでなければＯＦＦにします。": "Turns the switch ON for the Steam build and OFF otherwise.",
+    "スイッチ（SwitchId）": "Switch (SwitchId)",
+    "Steam判定を反映するスイッチのIDを指定します。": "Specifies the ID of the switch that reflects the Steam build check."
+  }
+}
