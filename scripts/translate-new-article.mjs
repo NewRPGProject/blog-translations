@@ -10,7 +10,7 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
-const EXTRACTION_VERSION = 7;
+const EXTRACTION_VERSION = 9;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
@@ -72,13 +72,17 @@ function normalizeText(value) {
 
 function decodeHtml(value) {
     return value
-        .replace(/&nbsp;/giu, " ")
-        .replace(/&quot;/giu, "\"")
-        .replace(/&#39;|&apos;/giu, "'")
-        .replace(/&lt;/giu, "<")
-        .replace(/&gt;/giu, ">")
-        .replace(/&amp;/giu, "&")
-        .replace(/&divide;/giu, "÷")
+        // Some older Seesaa entries omit the optional semicolon in named
+        // character references (for example, "&gtの"). Browsers still
+        // decode these in text, so match that behavior for source hashes and
+        // DOM text matching.
+        .replace(/&nbsp;?/giu, " ")
+        .replace(/&quot;?/giu, "\"")
+        .replace(/&#39;?|&apos;?/giu, "'")
+        .replace(/&lt;?/giu, "<")
+        .replace(/&gt;?/giu, ">")
+        .replace(/&amp;?/giu, "&")
+        .replace(/&divide;?/giu, "÷")
         .replace(/&#x([0-9a-f]+);/giu, (_, hexadecimal) =>
             String.fromCodePoint(Number.parseInt(hexadecimal, 16)))
         .replace(/&#([0-9]+);/gu, (_, decimal) =>
@@ -540,8 +544,19 @@ function parseBlocks(articleHtml, title) {
         if (tag.closing) {
             if (LINE_BOUNDARY_TAGS.has(tag.name)) finishLine();
             const index = stack.lastIndexOf(tag.name);
-            if (index >= 0) stack.splice(index, 1);
-            if (IGNORED_TAGS.has(tag.name) && ignoredDepth > 0) ignoredDepth--;
+            if (index >= 0) {
+                // Seesaa's older articles occasionally omit an inline closing
+                // tag (notably </a>) before closing a heading. Browsers close
+                // those descendant elements implicitly; do the same here so
+                // a malformed link cannot incorrectly cover the rest of the
+                // article during extraction.
+                const closedTags = stack.splice(index);
+                for (const closedTag of closedTags) {
+                    if (IGNORED_TAGS.has(closedTag) && ignoredDepth > 0) {
+                        ignoredDepth--;
+                    }
+                }
+            }
             continue;
         }
 
