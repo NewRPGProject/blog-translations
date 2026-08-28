@@ -332,14 +332,19 @@ function normalizeText(text) {
         .replace(/\s+/g, " ");
 }
 
-function decodeLegacyEntities(text) {
-    return String(text)
-        .replace(/&divide;/gi, "÷");
+function decodeHtmlEntities(text) {
+    // The browser has the complete HTML named-entity table. Decode here rather
+    // than maintaining a growing list such as &divide;, &times;, and so on.
+    // A textarea uses RCDATA parsing, so text that resembles an HTML tag is
+    // retained as text while character references are decoded.
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = String(text);
+    return textarea.value;
 }
 
 function textLookupKeys(text) {
     const normalized = normalizeText(text);
-    const decoded = normalizeText(decodeLegacyEntities(text));
+    const decoded = normalizeText(decodeHtmlEntities(text));
     return decoded === normalized ? [normalized] : [normalized, decoded];
 }
 
@@ -348,9 +353,7 @@ function lookupTranslation(dictionary, normalized) {
     if (typeof texts[normalized] === "string") {
         return texts[normalized];
     }
-    // Compatibility with JSON created before &divide; was decoded to the
-    // Unicode division sign during extraction.
-    return texts[normalized.replace(/÷/g, "&divide;")];
+    return texts[normalizeText(decodeHtmlEntities(normalized))];
 }
 
 function createArticleDictionary(translation) {
@@ -363,11 +366,12 @@ function createArticleDictionary(translation) {
         ) {
             continue;
         }
-        const key = normalizeText(block.source);
-        if (!key) continue;
-        const occurrences = allOccurrences.get(key) || [];
-        occurrences.push(block.translation);
-        allOccurrences.set(key, occurrences);
+        for (const key of textLookupKeys(block.source)) {
+            if (!key) continue;
+            const occurrences = allOccurrences.get(key) || [];
+            occurrences.push(block.translation);
+            allOccurrences.set(key, occurrences);
+        }
     }
 
     // The legacy texts map uses source text as its key. When the same Japanese
@@ -379,8 +383,16 @@ function createArticleDictionary(translation) {
             new Set(translations).size > 1
         )
     );
+    const texts = { ...(translation.texts || {}) };
+    for (const [source, translated] of Object.entries(texts)) {
+        for (const key of textLookupKeys(source)) {
+            if (typeof texts[key] !== "string") {
+                texts[key] = translated;
+            }
+        }
+    }
     return {
-        texts: translation.texts || {},
+        texts,
         conflicts,
         positions: new Map()
     };
@@ -473,7 +485,7 @@ function translateTextNodes(
             )?.[0] || "";
 
         node.nodeValue =
-            leading + decodeLegacyEntities(translated) + trailing;
+            leading + decodeHtmlEntities(translated) + trailing;
     }
 }
 
@@ -508,7 +520,8 @@ function findLineNodeMatch(nodes, startAt, line) {
         for (let index = 0; index < parts.length; index++) {
             const node = nodes[start + index];
             const part = parts[index];
-            if (normalizeText(node.nodeValue) !== normalizeText(part.source)) {
+            if (normalizeText(decodeHtmlEntities(node.nodeValue)) !==
+                normalizeText(decodeHtmlEntities(part.source))) {
                 matches = false;
                 break;
             }
@@ -541,7 +554,7 @@ function makeLineFragment(line, matchedNodes) {
     while ((match = marker.exec(line.translation))) {
         fragment.append(
             document.createTextNode(
-                decodeLegacyEntities(line.translation.slice(cursor, match.index))
+                decodeHtmlEntities(line.translation.slice(cursor, match.index))
             )
         );
         const originalLink = linkNodes.get(Number(match[1]));
@@ -549,12 +562,12 @@ function makeLineFragment(line, matchedNodes) {
             throw new Error("リンク行の元リンクが見つかりません: " + line.id);
         }
         const link = originalLink.cloneNode(false);
-        link.textContent = decodeLegacyEntities(match[2]);
+        link.textContent = decodeHtmlEntities(match[2]);
         fragment.append(link);
         cursor = marker.lastIndex;
     }
     fragment.append(
-        document.createTextNode(decodeLegacyEntities(line.translation.slice(cursor)))
+        document.createTextNode(decodeHtmlEntities(line.translation.slice(cursor)))
     );
     return fragment;
 }
@@ -787,7 +800,7 @@ function translateCommonTextNodes(
             )?.[0] || "";
 
         node.nodeValue =
-            leading + decodeLegacyEntities(translated) + trailing;
+            leading + decodeHtmlEntities(translated) + trailing;
     }
 }
 
