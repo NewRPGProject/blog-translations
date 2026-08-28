@@ -1,0 +1,1986 @@
+{
+  "articleId": "477791458",
+  "sourceUrl": "https://newrpg.seesaa.net/article/477791458.html",
+  "extractionVersion": 7,
+  "sourceUpdatedAt": "2026-08-28T17:20:53+09:00",
+  "sourceHash": "1b351fc5555a1876c0b21efc1df559df78e6d94506698fe66d988594d0538201",
+  "translatedAt": "2026-08-28T08:29:02.809Z",
+  "title": "Load DynamicAnimation&Motion Definitions from TXT Files [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motionの定義をtxtから読み込む【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "4232e421dcbf9faf18b042bdf1525f08052e6cc31b0bfc064370a98d182f2e7c",
+      "translation": "Load DynamicAnimation&Motion Definitions from TXT Files [RPG Maker MZ & MV Plugin]",
+      "contextHash": "4232e421dcbf9faf18b042bdf1525f08052e6cc31b0bfc064370a98d182f2e7c"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "DynamicAnimation&Motionの定義をtxtファイルから読み込みます。",
+      "sourceHash": "b65793bfb9d6deaa826565d0e7c82faef12f228c477604c15b3ed673545ccc00",
+      "translation": "Loads DynamicAnimation&Motion definitions from TXT files.",
+      "contextHash": "b65793bfb9d6deaa826565d0e7c82faef12f228c477604c15b3ed673545ccc00"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "スキルのメモ欄に以下を記載すれば、指定のフォルダにあるtxtファイルから定義を読み込みます。",
+      "sourceHash": "b6efe946830a511c4efbf9dc4917e00f0d13b2dce1d6ad06fb60f85a246203b1",
+      "translation": "Add the following to a skill's note field to load the definition from a TXT file in the specified folder.",
+      "contextHash": "b6efe946830a511c4efbf9dc4917e00f0d13b2dce1d6ad06fb60f85a246203b1"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<D-Txt:[ファイル名]>",
+      "sourceHash": "5870085435a681e10c54ba4be44a46407028d4bc9920609aedb808c158907f6a",
+      "translation": "<D-Txt:[File Name]>",
+      "contextHash": "5870085435a681e10c54ba4be44a46407028d4bc9920609aedb808c158907f6a"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※ファイル名に拡張子は不要です。",
+      "sourceHash": "efbc5946d472de4336c7834ed7dcd620701bf117ce085c3c7cb6acfc9711b1c0",
+      "translation": "* The file extension is not required in the file name.",
+      "contextHash": "efbc5946d472de4336c7834ed7dcd620701bf117ce085c3c7cb6acfc9711b1c0"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※初期値では『[プロジェクト]/data/D-Txt/』がフォルダになります。フォルダを作成してtxtを配置してください。プラグインパラメータから変更可能です。",
+      "sourceHash": "e96a7977f3568b02480066c8193759c7f1ad6fe3c8257268469a87089d52f374",
+      "translation": "* By default, the folder is [Project]/data/D-Txt/. Create the folder and place the TXT files in it. This can be changed via the plugin parameter.",
+      "contextHash": "e96a7977f3568b02480066c8193759c7f1ad6fe3c8257268469a87089d52f374"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "例えば、<D-Txt:abc>ならば、abc.txtを参照します。",
+      "sourceHash": "a4b15ba1e300c698b774c8bd4db6eece39c45a43e3c3be384577c9a62e0e0dcd",
+      "translation": "For example, <D-Txt:abc> references abc.txt.",
+      "contextHash": "a4b15ba1e300c698b774c8bd4db6eece39c45a43e3c3be384577c9a62e0e0dcd"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "また、ファイル名を省略するとスキルIDを自動でファイル名に使用します。",
+      "sourceHash": "a3a9a01a134229478c1f95252817c65ae4e058cb7546f05675f643dbd0adf747",
+      "translation": "If the file name is omitted, the skill ID is automatically used as the file name.",
+      "contextHash": "a3a9a01a134229478c1f95252817c65ae4e058cb7546f05675f643dbd0adf747"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "例えば、スキルID=100ならば、100.txtを参照します。",
+      "sourceHash": "b55779d9f11c5955306c0b47dc3e995dd7c29a16cf24cb3d20615b5464cbb013",
+      "translation": "For example, if the skill ID is 100, 100.txt is referenced.",
+      "contextHash": "b55779d9f11c5955306c0b47dc3e995dd7c29a16cf24cb3d20615b5464cbb013"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "テストモード時はスキルを使用する度に毎回ファイルを読み込みます。これにより、ゲームを停止することなく動作を繰り返し確認できます。",
+      "sourceHash": "d5e57eed6510938b82698b25022d42684b112a71f3af5b4659905e3b98e34921",
+      "translation": "In test mode, the file is loaded every time the skill is used. This allows you to repeatedly check the results without stopping the game.",
+      "contextHash": "d5e57eed6510938b82698b25022d42684b112a71f3af5b4659905e3b98e34921"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※本番モード時は起動時に全ての定義を読み込みます。",
+      "sourceHash": "fda0a2bd7b5141f45822f55ba595c3095f551db0219123a51318480039cef72a",
+      "translation": "* In production mode, all definitions are loaded at startup.",
+      "contextHash": "fda0a2bd7b5141f45822f55ba595c3095f551db0219123a51318480039cef72a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "上記のようにウィンドウを並べながら編集すれば超便利です。",
+      "sourceHash": "8ea4e5cf19201ab6e5df208b638dbe21b02445c47bfe1fb44a85d6a687cf5166",
+      "translation": "Editing while arranging the windows as shown above is incredibly convenient.",
+      "contextHash": "8ea4e5cf19201ab6e5df208b638dbe21b02445c47bfe1fb44a85d6a687cf5166"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ver1.03より、動作を単純な置換方式に変更しました。これにより一つのスキルを複数のテキストで構成したり、詠唱やカットインなどの共通処理だけを置き換えることが可能になりました。",
+      "sourceHash": "e7d79f40c25569dc1c5707677485d91a93bba41c753e9c522fe4a63a96eaa521",
+      "translation": "Starting with ver1.03, the operation has been changed to a simple replacement method. This makes it possible to compose a single skill from multiple text files or replace only common processes such as chanting and cut-ins.",
+      "contextHash": "e7d79f40c25569dc1c5707677485d91a93bba41c753e9c522fe4a63a96eaa521"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "[記述例]",
+      "sourceHash": "ca2b0357069f79aeeb5192a536b804a619e4010fb2e15eb924cade3beab67b59",
+      "translation": "[Example]",
+      "contextHash": "ca2b0357069f79aeeb5192a536b804a619e4010fb2e15eb924cade3beab67b59"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_DynamicReadTxt.js",
+      "sourceHash": "2457fd0bc204cdf2e8875e9fc4608cf3bcb2ca58d6bcd5dc5d28322bba10b00f",
+      "translation": "NRP_DynamicReadTxt.js ",
+      "contextHash": "49873491e7c1efe5282499b63c6be3d714baef4cb9d0677596c3c2531b1f257e"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "ver2.02（2026/04/13）",
+      "sourceHash": "440f76b2f94db633e6e78a7da47589d50dde9fc68ef40041a50308708ada8453",
+      "translation": "ver2.02（2026/04/13）",
+      "contextHash": "49873491e7c1efe5282499b63c6be3d714baef4cb9d0677596c3c2531b1f257e"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMZ.js",
+      "sourceHash": "fa0e68b187fc9e909dcdfd5b9e1eb27abf2d72d3865a7bd24988dc71d6430eca",
+      "translation": "NRP_DynamicAnimationMZ.js ",
+      "contextHash": "8fe40a707ce48100d353bdcddd885e751e21536203761412ebd3bef527174753"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "ver1.081（2020/10/20）",
+      "sourceHash": "8683cefd39aa552d24339989d521e659c1f1dbf7acb93a6535476ee416e050d1",
+      "translation": "ver1.081（2020/10/20）",
+      "contextHash": "8fe40a707ce48100d353bdcddd885e751e21536203761412ebd3bef527174753"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMapMZ.js",
+      "sourceHash": "a06f4b3b767bc48d351a5a9c5aff3e8c66fd9f68d4b43c6523495a77267de2e4",
+      "translation": "NRP_DynamicAnimationMapMZ.js ",
+      "contextHash": "93c76b08976dd7a904ed18b9d697d5ffd03a270410a5a44d0da6b640bd3f69db"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "ver1.071（2020/10/19）",
+      "sourceHash": "c9d79844c3be6e7b004e683b112ff8a1171501877d09344453e4f2434faaa040",
+      "translation": "ver1.071（2020/10/19）",
+      "contextHash": "93c76b08976dd7a904ed18b9d697d5ffd03a270410a5a44d0da6b640bd3f69db"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "NRP_DynamicMotionMZ.js",
+      "sourceHash": "878e7fdf99848828874c485887618ca3318d57cecf5fabb10299d2c76a168c6e",
+      "translation": "NRP_DynamicMotionMZ.js ",
+      "contextHash": "d5d600133575e6d06e4d571b9935a54024cc04520d375619140defa39f819cb3"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "ver1.06（2020/10/17）",
+      "sourceHash": "a98a20c3b6fffd590927522d415c31b642950a3d3883dfa9825ee46051dc5c67",
+      "translation": "ver1.06（2020/10/17）",
+      "contextHash": "d5d600133575e6d06e4d571b9935a54024cc04520d375619140defa39f819cb3"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "NRP_DynamicAnimation.js",
+      "sourceHash": "facb36459ea7d9229eac2351d47da4b7f4ca2dcb31cdfa61ce1fa606d456e521",
+      "translation": "NRP_DynamicAnimation.js ",
+      "contextHash": "7c474e7d02981b3a8707ef94ac8e36d2b28e7a7cdaae59a6d8bac8d13bbfa199"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "ver1.181（2020/10/20）",
+      "sourceHash": "9f96557588868b1e58b8bde2f50fffe193c5258b5e048276289425ac6feec5f0",
+      "translation": "ver1.181（2020/10/20）",
+      "contextHash": "7c474e7d02981b3a8707ef94ac8e36d2b28e7a7cdaae59a6d8bac8d13bbfa199"
+    },
+    {
+      "id": "link-011",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMap.js",
+      "sourceHash": "0a63dfce0483510ae0f0838e52fba42bbf85e5f0f587f244aedbeaab0aba03d2",
+      "translation": "NRP_DynamicAnimationMap.js ",
+      "contextHash": "acf76a4be7eeb18a4e4dbd2059d1c55220172cb1b7d7dd4f697e9df3070c2b9e"
+    },
+    {
+      "id": "link-012",
+      "type": "link",
+      "source": "ver1.072（2020/10/20）",
+      "sourceHash": "3e46578bb0a42f7b2d12183a0888e6458497231acaeb6c59b4bd12ce3586c97f",
+      "translation": "ver1.072（2020/10/20）",
+      "contextHash": "acf76a4be7eeb18a4e4dbd2059d1c55220172cb1b7d7dd4f697e9df3070c2b9e"
+    },
+    {
+      "id": "link-013",
+      "type": "link",
+      "source": "NRP_DynamicMotion.js",
+      "sourceHash": "b55b0a1bef44ce850120d7297069697eff666e971716b55b4e0f49c34854800a",
+      "translation": "NRP_DynamicMotion.js ",
+      "contextHash": "3f710a8e86aaeefb6d5d17fd18660b03a5b306e2b95c1c761a928fae7ed26649"
+    },
+    {
+      "id": "link-014",
+      "type": "link",
+      "source": "ver1.13（2020/10/17）",
+      "sourceHash": "b0eb9bdee79ee20145ba039df7498e78cff4f300a137b1bc242f67f8cd6cfb5b",
+      "translation": "ver1.13（2020/10/17）",
+      "contextHash": "3f710a8e86aaeefb6d5d17fd18660b03a5b306e2b95c1c761a928fae7ed26649"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "例：C:/D-Txt/",
+      "sourceHash": "41ee6e99be75254f2053312cf7097c301871ab02ac1df67e773e9ef55b5aa348",
+      "translation": "Example: C:/D-Txt/",
+      "contextHash": "74d5b11271ac1a79f6425d03e6e29dd3c7fa64c4eae60f5c7769f15cfa7e3d86"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "例：C:/D-Txt/",
+      "sourceHash": "41ee6e99be75254f2053312cf7097c301871ab02ac1df67e773e9ef55b5aa348",
+      "translation": "Example: C:/D-Txt/",
+      "contextHash": "74d5b11271ac1a79f6425d03e6e29dd3c7fa64c4eae60f5c7769f15cfa7e3d86"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changelog (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化について（About Encryption）[[/LINK_1]]ver2.00",
+      "sourceHash": "3adffcae49106e5bf5d32174ccd45f054d217bd4fc584625985a3528db88c496",
+      "parts": [
+        {
+          "source": "暗号化について（About Encryption）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver2.00",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]About Encryption (About Encryption)[[/LINK_1]]ver2.00",
+      "contextHash": "3adffcae49106e5bf5d32174ccd45f054d217bd4fc584625985a3528db88c496"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]注意点（Caution）[[/LINK_1]]",
+      "sourceHash": "cae386079d02c7d654e0b45ddbf699954b6912c2eecdaf2cbc1753e725acc84a",
+      "parts": [
+        {
+          "source": "注意点（Caution）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Caution (Caution)[[/LINK_1]]",
+      "contextHash": "cae386079d02c7d654e0b45ddbf699954b6912c2eecdaf2cbc1753e725acc84a"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]日本語読込について[[/LINK_1]]",
+      "sourceHash": "c4c1e1659d25dd04072e0dd31387074f2ff44670587a33e6f512aed322d2a8bb",
+      "parts": [
+        {
+          "source": "日本語読込について",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reading Japanese Text[[/LINK_1]]",
+      "contextHash": "c4c1e1659d25dd04072e0dd31387074f2ff44670587a33e6f512aed322d2a8bb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]他プラグインとの連携[[/LINK_1]]",
+      "sourceHash": "020d24eb45c29f2179c1a7fdbc85131b2e08abdbcce1b78a140007971ce7ecde",
+      "parts": [
+        {
+          "source": "他プラグインとの連携",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Integration with Other Plugins[[/LINK_1]]",
+      "contextHash": "020d24eb45c29f2179c1a7fdbc85131b2e08abdbcce1b78a140007971ce7ecde"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]ブラウザ実行時[[/LINK_1]]",
+      "sourceHash": "2f3b1ee6dd5a241964b2985ac444eb15b167a667f2d9cc4f17df528b17788d8b",
+      "parts": [
+        {
+          "source": "ブラウザ実行時",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]When Running in a Browser[[/LINK_1]]",
+      "contextHash": "2f3b1ee6dd5a241964b2985ac444eb15b167a667f2d9cc4f17df528b17788d8b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（PluginParameter）[[/LINK_1]]",
+      "sourceHash": "315ecb0e35038374cf4aa4d62122dbf2d4b2ea7c07071db166aa0d23bc26a4d5",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（PluginParameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (PluginParameter)[[/LINK_1]]",
+      "contextHash": "315ecb0e35038374cf4aa4d62122dbf2d4b2ea7c07071db166aa0d23bc26a4d5"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]txt配置フォルダ（ReadTxtFolder）[[/LINK_1]]",
+      "sourceHash": "33696dc66f0b543671eb612e9944883df805e43b23c6a9f31f6de15bc1dea2bc",
+      "parts": [
+        {
+          "source": "txt配置フォルダ（ReadTxtFolder）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]txt Folder (ReadTxtFolder)[[/LINK_1]]",
+      "contextHash": "33696dc66f0b543671eb612e9944883df805e43b23c6a9f31f6de15bc1dea2bc"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化を使用（UseEncrypt）[[/LINK_1]][[LINK_2]]ver2.00[[/LINK_2]]",
+      "sourceHash": "0a4efa3f0158f23505f59d45bb2b980763ba3ec3ac04d493531ad987579bdc61",
+      "parts": [
+        {
+          "source": "暗号化を使用（UseEncrypt）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver2.00",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Use Encryption (UseEncrypt)[[/LINK_1]][[LINK_2]]ver2.00[[/LINK_2]]",
+      "contextHash": "0a4efa3f0158f23505f59d45bb2b980763ba3ec3ac04d493531ad987579bdc61"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化出力フォルダ（EncryptFolder）[[/LINK_1]][[LINK_2]]ver2.00[[/LINK_2]]",
+      "sourceHash": "c1461ce6c3a4b935027782c0d1fef30f096876bf6d097d315fd23d2414f4b0bd",
+      "parts": [
+        {
+          "source": "暗号化出力フォルダ（EncryptFolder）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver2.00",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Encrypted Output Folder (EncryptFolder)[[/LINK_1]][[LINK_2]]ver2.00[[/LINK_2]]",
+      "contextHash": "c1461ce6c3a4b935027782c0d1fef30f096876bf6d097d315fd23d2414f4b0bd"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]本番では強制暗号化（ForceEncryptProduct）[[/LINK_1]][[LINK_2]]ver2.011[[/LINK_2]]",
+      "sourceHash": "42f379244931798c34cb1d06937e880418843cceb45470e4a6b6c83f0cb27e8b",
+      "parts": [
+        {
+          "source": "本番では強制暗号化（ForceEncryptProduct）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver2.011",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Force Encryption in Production (ForceEncryptProduct)[[/LINK_1]][[LINK_2]]ver2.011[[/LINK_2]]",
+      "contextHash": "42f379244931798c34cb1d06937e880418843cceb45470e4a6b6c83f0cb27e8b"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]テスト時は毎回読込（DynamicReadOnTest）[[/LINK_1]]",
+      "sourceHash": "f11d7d664e64cd1b809f9acb1f7d47fc17239e227896a3b937bd546a8f4ad97d",
+      "parts": [
+        {
+          "source": "テスト時は毎回読込（DynamicReadOnTest）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reload Every Time During Testing (DynamicReadOnTest)[[/LINK_1]]",
+      "contextHash": "f11d7d664e64cd1b809f9acb1f7d47fc17239e227896a3b937bd546a8f4ad97d"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]本番モードで実行（ProductionMode）[[/LINK_1]][[LINK_2]]ver2.00[[/LINK_2]]",
+      "sourceHash": "38443ef5f94a264f631b6b801dc69d685acbdb21f4af58a1b5672aea5c9ee733",
+      "parts": [
+        {
+          "source": "本番モードで実行（ProductionMode）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver2.00",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Run in Production Mode (ProductionMode)[[/LINK_1]][[LINK_2]]ver2.00[[/LINK_2]]",
+      "contextHash": "38443ef5f94a264f631b6b801dc69d685acbdb21f4af58a1b5672aea5c9ee733"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ブラウザモードで実行（BrowserMode）[[/LINK_1]][[LINK_2]]ver1.04[[/LINK_2]]",
+      "sourceHash": "30386624b132cd60b75d1db53d5d86c6b1eca297a3b5ec60c568a53a072f7edf",
+      "parts": [
+        {
+          "source": "ブラウザモードで実行（BrowserMode）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Run in Browser Mode (BrowserMode)[[/LINK_1]][[LINK_2]]ver1.04[[/LINK_2]]",
+      "contextHash": "30386624b132cd60b75d1db53d5d86c6b1eca297a3b5ec60c568a53a072f7edf"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。[[/LINK_1]]",
+      "sourceHash": "4969d1b5eea30bd6e668a3c875867abbd6fcc973326ea4ae7e26710599fe6523",
+      "parts": [
+        {
+          "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Download the following file and place it in [Project]\\js\\plugins. Turn this feature ON in the plugin manager.[[/LINK_1]]",
+      "contextHash": "4969d1b5eea30bd6e668a3c875867abbd6fcc973326ea4ae7e26710599fe6523"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]※このプラグインはＭＶ、ＭＺの両方で有効です。[[/LINK_1]]",
+      "sourceHash": "e7a9a597228b4cbfdf819004e331719cfbda77f071e0bf69932962ad9e07c29e",
+      "parts": [
+        {
+          "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※This plugin works with both RPG Maker MV and MZ.[[/LINK_1]]",
+      "contextHash": "e7a9a597228b4cbfdf819004e331719cfbda77f071e0bf69932962ad9e07c29e"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]さらに以下のプラグインを最新に更新してください。[[/LINK_1]]",
+      "sourceHash": "daef93e37505463c515c242e0b984c4f50cb44dec291ecf4699beeaff7b6b107",
+      "parts": [
+        {
+          "source": "さらに以下のプラグインを最新に更新してください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Also update the following plugins to the latest versions.[[/LINK_1]]",
+      "contextHash": "daef93e37505463c515c242e0b984c4f50cb44dec291ecf4699beeaff7b6b107"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]※バージョンに食い違いがあると動作しない可能性があります。[[/LINK_1]]",
+      "sourceHash": "7110b5bb2a203092fc35650f9a09cb48f645aeb3d6af39d3dca1d45d26e902c0",
+      "parts": [
+        {
+          "source": "※バージョンに食い違いがあると動作しない可能性があります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※It may not work if the versions do not match.[[/LINK_1]]",
+      "contextHash": "7110b5bb2a203092fc35650f9a09cb48f645aeb3d6af39d3dca1d45d26e902c0"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用[[/LINK_1]]",
+      "sourceHash": "116b3e940db07bb7c479e47f42db12eb061ecb06c05af7dac0ed88332cde032a",
+      "parts": [
+        {
+          "source": "ＭＺ用",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]For MZ[[/LINK_1]]",
+      "contextHash": "116b3e940db07bb7c479e47f42db12eb061ecb06c05af7dac0ed88332cde032a"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用[[/LINK_1]]",
+      "sourceHash": "5506aee841890e1442d5cce433c0935d7aa92aac95fcd7adf94deba2288cb98b",
+      "parts": [
+        {
+          "source": "ＭＶ用",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]For MV[[/LINK_1]]",
+      "contextHash": "5506aee841890e1442d5cce433c0935d7aa92aac95fcd7adf94deba2288cb98b"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]※上記プラグインよりも、当プラグインは下に配置してください。[[/LINK_1]]",
+      "sourceHash": "2c965f65c895735cfd69b78d3ca1fd28fff175436af7e1234ff5f0709838f136",
+      "parts": [
+        {
+          "source": "※上記プラグインよりも、当プラグインは下に配置してください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※Place this plugin below the plugins listed above.[[/LINK_1]]",
+      "contextHash": "2c965f65c895735cfd69b78d3ca1fd28fff175436af7e1234ff5f0709838f136"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changelog (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]ブラウザモードでエラーになる不具合修正。[[/LINK_1]]",
+      "sourceHash": "4e215bd647a7c1d7256098075fcdc095236a011592ee8834819ef6342a84deb8",
+      "parts": [
+        {
+          "source": "ブラウザモードでエラーになる不具合修正。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue that caused errors in browser mode.[[/LINK_1]]",
+      "contextHash": "4e215bd647a7c1d7256098075fcdc095236a011592ee8834819ef6342a84deb8"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]※なお、ブラウザモードでは暗号化処理は使用できません。[[/LINK_1]]",
+      "sourceHash": "a2fd2851dcfeaa8e6312b59ca025c0477a75e76e990b6ef7f75edfdcf2b780ae",
+      "parts": [
+        {
+          "source": "※なお、ブラウザモードでは暗号化処理は使用できません。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※Encryption cannot be used in browser mode.[[/LINK_1]]",
+      "contextHash": "a2fd2851dcfeaa8e6312b59ca025c0477a75e76e990b6ef7f75edfdcf2b780ae"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化かつ本番モードでもtxt配置フォルダを参照してエラーになってしまう不具合修正。[[/LINK_1]]",
+      "sourceHash": "925f72fe439cabdcbdac9fbcb2c02503dc9a7be0f22f2ee6c0b72d41c59fbc56",
+      "parts": [
+        {
+          "source": "暗号化かつ本番モードでもtxt配置フォルダを参照してエラーになってしまう不具合修正。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue that caused an error by referencing the txt folder even when encryption and production mode were enabled.[[/LINK_1]]",
+      "contextHash": "925f72fe439cabdcbdac9fbcb2c02503dc9a7be0f22f2ee6c0b72d41c59fbc56"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]本番では強制暗号化[[/LINK_1]][[LINK_2]]のパラメータを追加した。[[/LINK_2]]",
+      "sourceHash": "ddd92d92d6eb430db5c699dea4f26c10b58df3d8fd94c36588107e35bbce4067",
+      "parts": [
+        {
+          "source": "本番では強制暗号化",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のパラメータを追加した。",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Force encryption in production[[/LINK_1]][[LINK_2]]The parameter was added.[[/LINK_2]]",
+      "contextHash": "ddd92d92d6eb430db5c699dea4f26c10b58df3d8fd94c36588107e35bbce4067"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化機能[[/LINK_1]][[LINK_2]]に対応した。[[/LINK_2]]",
+      "sourceHash": "45a3335c35f4036e104960914c60e520c10c5371bb7d0eca8e6fbf49f8c4aed5",
+      "parts": [
+        {
+          "source": "暗号化機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応した。",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]Encryption[[/LINK_1]][[LINK_2]]is now supported.[[/LINK_2]]",
+      "contextHash": "45a3335c35f4036e104960914c60e520c10c5371bb7d0eca8e6fbf49f8c4aed5"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]※気休めレベルなので過度な期待は厳禁です。[[/LINK_1]]",
+      "sourceHash": "495c24c91daf0eb9c6b562aabb44857828d500f20e9e56c6c1be6f6533a2400e",
+      "parts": [
+        {
+          "source": "※気休めレベルなので過度な期待は厳禁です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※This is only a modest deterrent, so please do not expect too much.[[/LINK_1]]",
+      "contextHash": "495c24c91daf0eb9c6b562aabb44857828d500f20e9e56c6c1be6f6533a2400e"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化を使用[[/LINK_1]][[LINK_2]]、[[/LINK_2]][[LINK_3]]暗号化出力フォルダ[[/LINK_3]][[LINK_4]]、[[/LINK_4]][[LINK_5]]本番モードで実行[[/LINK_5]][[LINK_6]]のプラグインパラメータを追加した。[[/LINK_6]]",
+      "sourceHash": "2dc17e8e1980fce80ff2fe8d7f0e49751653dd7eb0e2b0fd80fc9f231e803f02",
+      "parts": [
+        {
+          "source": "暗号化を使用",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "暗号化出力フォルダ",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "、",
+          "link": true,
+          "linkIndex": 4
+        },
+        {
+          "source": "本番モードで実行",
+          "link": true,
+          "linkIndex": 5
+        },
+        {
+          "source": "のプラグインパラメータを追加した。",
+          "link": true,
+          "linkIndex": 6
+        }
+      ],
+      "translation": "[[LINK_1]]Use encryption[[/LINK_1]][[LINK_2]], [[/LINK_2]][[LINK_3]]Encrypted output folder[[/LINK_3]][[LINK_4]], and [[/LINK_4]][[LINK_5]]Run in production mode[[/LINK_5]][[LINK_6]] plugin parameters.[[/LINK_6]]",
+      "contextHash": "2dc17e8e1980fce80ff2fe8d7f0e49751653dd7eb0e2b0fd80fc9f231e803f02"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]マップ版DynamicAnimationと併用時、画面開始時に素のアニメーションが表示されてしまう不具合修正。（2024/12/25 ver2.001）[[/LINK_1]]",
+      "sourceHash": "63e2f8c99f0fd89ceafd3c70a60f763c973d278cae4aa148bde3a408df39d0d8",
+      "parts": [
+        {
+          "source": "マップ版DynamicAnimationと併用時、画面開始時に素のアニメーションが表示されてしまう不具合修正。（2024/12/25 ver2.001）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue where the default animation was displayed when the screen started while using the map version of DynamicAnimation.[[/LINK_1]] (2024/12/25 ver2.001)",
+      "contextHash": "63e2f8c99f0fd89ceafd3c70a60f763c973d278cae4aa148bde3a408df39d0d8"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ ver1.2.0にて、起動時に強制終了する問題に対応。[[/LINK_1]]",
+      "sourceHash": "196f3f73e996de18d5ad7d785bfe794952f12a68ed5b9f89a5725d5282f40aa6",
+      "parts": [
+        {
+          "source": "ＭＺ ver1.2.0にて、起動時に強制終了する問題に対応。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Addressed an issue causing a forced shutdown on startup in MZ ver1.2.0.[[/LINK_1]]",
+      "contextHash": "196f3f73e996de18d5ad7d785bfe794952f12a68ed5b9f89a5725d5282f40aa6"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶの本番実行時、フォルダ参照エラーとなる不具合修正。[[/LINK_1]]",
+      "sourceHash": "cca3856e524e8cfdf489c49d0ec9188d2d0fe5f620b555d461f63732a461211f",
+      "parts": [
+        {
+          "source": "ＭＶの本番実行時、フォルダ参照エラーとなる不具合修正。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue causing a folder reference error when running MV in production.[[/LINK_1]]",
+      "contextHash": "cca3856e524e8cfdf489c49d0ec9188d2d0fe5f620b555d461f63732a461211f"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]アツマールなどのブラウザ実行でエラーになる不具合に対応。[[/LINK_1]]",
+      "sourceHash": "5de7568d4206bc8a400b4c633d026a50918d5592b16486eb6d7e6a2f1c6b74e4",
+      "parts": [
+        {
+          "source": "アツマールなどのブラウザ実行でエラーになる不具合に対応。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Addressed an issue causing errors when running in a browser, such as on Atsumaru.[[/LINK_1]]",
+      "contextHash": "5de7568d4206bc8a400b4c633d026a50918d5592b16486eb6d7e6a2f1c6b74e4"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]※テスト実行時にブラウザ実行用の必要ファイルを生成します。更新を適用後、一度テスト実行してください。[[/LINK_1]]",
+      "sourceHash": "b85f41cba92f023c9c6f356b6465605f1c5e01ff485c9e29ba78ce6330e74609",
+      "parts": [
+        {
+          "source": "※テスト実行時にブラウザ実行用の必要ファイルを生成します。更新を適用後、一度テスト実行してください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※The files required for browser execution are generated during test runs. Run a test once after applying the update.[[/LINK_1]]",
+      "contextHash": "b85f41cba92f023c9c6f356b6465605f1c5e01ff485c9e29ba78ce6330e74609"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]不要なログ出力を削除。（ver1.041）[[/LINK_1]]",
+      "sourceHash": "aa13013c78c27517f30ae4640e3f18deade632b37df2dcab014ef6976004fbb4",
+      "parts": [
+        {
+          "source": "不要なログ出力を削除。（ver1.041）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Removed unnecessary log output. (ver1.041)[[/LINK_1]]",
+      "contextHash": "aa13013c78c27517f30ae4640e3f18deade632b37df2dcab014ef6976004fbb4"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]<D-Txt&gtの動作を単純な置換方式に変更。[[/LINK_1]]",
+      "sourceHash": "936c95ed2f1b0438cba37f16d46602f22671129c3dc30e3908984981dd18c9af",
+      "parts": [
+        {
+          "source": "<D-Txt&gtの動作を単純な置換方式に変更。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changed the operation of <D-Txt&gt to use a simple replacement method.[[/LINK_1]]",
+      "contextHash": "936c95ed2f1b0438cba37f16d46602f22671129c3dc30e3908984981dd18c9af"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]一つのスキルを複数のテキストで構成したり、詠唱やカットインなどの共通処理だけを置き換えることが可能になりました。[[/LINK_1]]",
+      "sourceHash": "ca634fd3a1d0bfe06d4a38c9a7e0605bed7650ab5062cd2838cc5b7e17a747ba",
+      "parts": [
+        {
+          "source": "一つのスキルを複数のテキストで構成したり、詠唱やカットインなどの共通処理だけを置き換えることが可能になりました。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]It is now possible to compose a single skill from multiple texts or replace only shared processes such as chanting and cut-ins.[[/LINK_1]]",
+      "contextHash": "ca634fd3a1d0bfe06d4a38c9a7e0605bed7650ab5062cd2838cc5b7e17a747ba"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]ウェイトなしのアニメをテスト読み込みできない不具合修正。（10/21 ver1.032）[[/LINK_1]]",
+      "sourceHash": "085df38605da822adc66d9e9eeb623d88397ff13ab5153df14bae77d73e92ef9",
+      "parts": [
+        {
+          "source": "ウェイトなしのアニメをテスト読み込みできない不具合修正。（10/21 ver1.032）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue preventing animations without wait times from being loaded for testing. (10/21 ver1.032)[[/LINK_1]]",
+      "contextHash": "085df38605da822adc66d9e9eeb623d88397ff13ab5153df14bae77d73e92ef9"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]マップ版DynamicAnimationのステートからの起動（<D-Skill>）にも対応。[[/LINK_1]]",
+      "sourceHash": "4e4f44d4ef24468073174cda26fb820f3a16020fe9bd697c191bb0134fc9e415",
+      "parts": [
+        {
+          "source": "マップ版DynamicAnimationのステートからの起動（<D-Skill>）にも対応。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Support was added for activation from states (<D-Skill>) in the map version of DynamicAnimation.[[/LINK_1]]",
+      "contextHash": "4e4f44d4ef24468073174cda26fb820f3a16020fe9bd697c191bb0134fc9e415"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]途中セーブからの開始時、エラーになってしまう不具合修正。[[/LINK_1]]",
+      "sourceHash": "9b0e46a5397eef82a1343e7d06e103fb9e03a2944d2e52bbea2366f38093b206",
+      "parts": [
+        {
+          "source": "途中セーブからの開始時、エラーになってしまう不具合修正。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue causing an error when starting from an intermediate save.[[/LINK_1]]",
+      "contextHash": "9b0e46a5397eef82a1343e7d06e103fb9e03a2944d2e52bbea2366f38093b206"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "[[LINK_1]]マップ版DynamicAnimationの自動起動（<D-Skill>）で毎回読込が有効にならない不具合修正。[[/LINK_1]]",
+      "sourceHash": "45089a4e954c8a0a01d6bdb45ddfbbc43391e2e618431ddcce765d8802e2dd59",
+      "parts": [
+        {
+          "source": "マップ版DynamicAnimationの自動起動（<D-Skill>）で毎回読込が有効にならない不具合修正。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fixed an issue where reload every time was not enabled for automatic activation (<D-Skill>) of the map version of DynamicAnimation.[[/LINK_1]]",
+      "contextHash": "45089a4e954c8a0a01d6bdb45ddfbbc43391e2e618431ddcce765d8802e2dd59"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "[[LINK_1]]公開！[[/LINK_1]]",
+      "sourceHash": "35c798f0546c2fade894b6caa83fa8def5f411dfc4be19832237f63e6fe092cc",
+      "parts": [
+        {
+          "source": "公開！",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Released![[/LINK_1]]",
+      "contextHash": "35c798f0546c2fade894b6caa83fa8def5f411dfc4be19832237f63e6fe092cc"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化について（About Encryption）[[/LINK_1]]",
+      "sourceHash": "1e7487d5c9a0d11c51bb51cf1da3b56f211b463bf862d99b3d8fbc047fe3e6d1",
+      "parts": [
+        {
+          "source": "暗号化について（About Encryption）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About Encryption (About Encryption)[[/LINK_1]]",
+      "contextHash": "1e7487d5c9a0d11c51bb51cf1da3b56f211b463bf862d99b3d8fbc047fe3e6d1"
+    },
+    {
+      "id": "line-046",
+      "type": "line",
+      "source": "[[LINK_1]]本プラグインは暗号化に対応しています。[[/LINK_1]]",
+      "sourceHash": "f74d12acc1a9fc6340b37d255fe007e1be41e57dbc2b1e269fe897fd391d4604",
+      "parts": [
+        {
+          "source": "本プラグインは暗号化に対応しています。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This plugin supports encryption.[[/LINK_1]]",
+      "contextHash": "f74d12acc1a9fc6340b37d255fe007e1be41e57dbc2b1e269fe897fd391d4604"
+    },
+    {
+      "id": "line-047",
+      "type": "line",
+      "source": "[[LINK_1]]txtファイルを暗号化し、本番用にデプロイメントした際には中身を読めないようにすることができます。[[/LINK_1]]",
+      "sourceHash": "4bf83143a8a9c15b77ea92eeb5ffdfd324cc579143949171af2130dd92676d72",
+      "parts": [
+        {
+          "source": "txtファイルを暗号化し、本番用にデプロイメントした際には中身を読めないようにすることができます。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]You can encrypt txt files so their contents cannot be read when deployed for production.[[/LINK_1]]",
+      "contextHash": "4bf83143a8a9c15b77ea92eeb5ffdfd324cc579143949171af2130dd92676d72"
+    },
+    {
+      "id": "line-048",
+      "type": "line",
+      "source": "[[LINK_1]]ただし、暗号化の強度は気休め程度なのでご了承ください。[[/LINK_1]]",
+      "sourceHash": "d130c02295971f80d574b2e31adb044f63000bfb10d87207f32f983ab5e3ed73",
+      "parts": [
+        {
+          "source": "ただし、暗号化の強度は気休め程度なのでご了承ください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]However, please note that the encryption is only a modest deterrent.[[/LINK_1]]",
+      "contextHash": "d130c02295971f80d574b2e31adb044f63000bfb10d87207f32f983ab5e3ed73"
+    },
+    {
+      "id": "line-049",
+      "type": "line",
+      "source": "[[LINK_1]]txtを開くだけで中身が分かるという状況は避けられます。[[/LINK_1]]",
+      "sourceHash": "c21f622717242c2790d51d3ce79537c26465984cc57391a1b05bb863968772bb",
+      "parts": [
+        {
+          "source": "txtを開くだけで中身が分かるという状況は避けられます。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This prevents the contents from being immediately readable simply by opening the txt file.[[/LINK_1]]",
+      "contextHash": "c21f622717242c2790d51d3ce79537c26465984cc57391a1b05bb863968772bb"
+    },
+    {
+      "id": "line-050",
+      "type": "line",
+      "source": "[[LINK_1]]また、ブラウザモードだとこの機能はエラーになります。[[/LINK_1]]",
+      "sourceHash": "b51407a86d8c1f09bf71eaed21156255495dbc54452ee05f48559c6ac8074986",
+      "parts": [
+        {
+          "source": "また、ブラウザモードだとこの機能はエラーになります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This feature will cause an error in browser mode.[[/LINK_1]]",
+      "contextHash": "b51407a86d8c1f09bf71eaed21156255495dbc54452ee05f48559c6ac8074986"
+    },
+    {
+      "id": "line-051",
+      "type": "line",
+      "source": "[[LINK_1]]手順[[/LINK_1]]",
+      "sourceHash": "d50c3773ae581e9677ed34ac55f3121c346efb340ff76901f2902df1b71a5d32",
+      "parts": [
+        {
+          "source": "手順",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Procedure[[/LINK_1]]",
+      "contextHash": "d50c3773ae581e9677ed34ac55f3121c346efb340ff76901f2902df1b71a5d32"
+    },
+    {
+      "id": "line-052",
+      "type": "line",
+      "source": "[[LINK_1]]１．『txt配置フォルダ』にプロジェクト外のフォルダを指定する。[[/LINK_1]]",
+      "sourceHash": "a1aa0fd57c8c7fc73f05550529b8fb04add3b3efa94527463ce2b186d1f4e242",
+      "parts": [
+        {
+          "source": "１．『txt配置フォルダ』にプロジェクト外のフォルダを指定する。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]1. Specify a folder outside the project for “txt Placement Folder.”[[/LINK_1]]",
+      "contextHash": "a1aa0fd57c8c7fc73f05550529b8fb04add3b3efa94527463ce2b186d1f4e242"
+    },
+    {
+      "id": "line-053",
+      "type": "line",
+      "source": "[[LINK_1]]※必ず『\\』ではなく『/』にしてください。[[/LINK_1]]",
+      "sourceHash": "9023907fc86b4089bd9ae5b74265293996d363b6804865678f009153f1edaac2",
+      "parts": [
+        {
+          "source": "※必ず『\\』ではなく『/』にしてください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※ Be sure to use “/” rather than “\\”.[[/LINK_1]]",
+      "contextHash": "9023907fc86b4089bd9ae5b74265293996d363b6804865678f009153f1edaac2"
+    },
+    {
+      "id": "line-054",
+      "type": "line",
+      "source": "[[LINK_1]]※末尾にも『/』は必須です。[[/LINK_1]]",
+      "sourceHash": "a988bf6534d4266e6bed9dc518aa7151ba77541b3e5dc9d6ffb353bb43ac6fe5",
+      "parts": [
+        {
+          "source": "※末尾にも『/』は必須です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※ The trailing “/” is also required.[[/LINK_1]]",
+      "contextHash": "a988bf6534d4266e6bed9dc518aa7151ba77541b3e5dc9d6ffb353bb43ac6fe5"
+    },
+    {
+      "id": "line-055",
+      "type": "line",
+      "source": "[[LINK_1]]※配置はどこでもよいですが、プラグインの設定は本番にも残ります。パス名に個人情報を含まないように注意してください。[[/LINK_1]]",
+      "sourceHash": "30fbbc57364640d815635f3e8b28117dd486acf067ae41162eb0cef4868e106c",
+      "parts": [
+        {
+          "source": "※配置はどこでもよいですが、プラグインの設定は本番にも残ります。パス名に個人情報を含まないように注意してください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※ You may place it anywhere, but the plugin settings will remain in the deployed game. Be careful not to include personal information in the path name.[[/LINK_1]]",
+      "contextHash": "30fbbc57364640d815635f3e8b28117dd486acf067ae41162eb0cef4868e106c"
+    },
+    {
+      "id": "line-056",
+      "type": "line",
+      "source": "[[LINK_1]]２．『暗号化を使用』をオンにして、テストプレイを実行する。[[/LINK_1]]",
+      "sourceHash": "3631dce0e1ac8a9c8a00d12303de3e4f0f1556d73004326e80f27ea1fda54c07",
+      "parts": [
+        {
+          "source": "２．『暗号化を使用』をオンにして、テストプレイを実行する。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]2. Turn on “Use Encryption” and run a playtest.[[/LINK_1]]",
+      "contextHash": "3631dce0e1ac8a9c8a00d12303de3e4f0f1556d73004326e80f27ea1fda54c07"
+    },
+    {
+      "id": "line-057",
+      "type": "line",
+      "source": "[[LINK_1]]※『暗号化出力フォルダ』は初期設定でも問題ありません。[[/LINK_1]]",
+      "sourceHash": "404254ae1476250ad793c3a5b3dddcb9d049cd9c60452ca44d3145823b91571e",
+      "parts": [
+        {
+          "source": "※『暗号化出力フォルダ』は初期設定でも問題ありません。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※ The default setting is fine for “Encrypted Output Folder.”[[/LINK_1]]",
+      "contextHash": "404254ae1476250ad793c3a5b3dddcb9d049cd9c60452ca44d3145823b91571e"
+    },
+    {
+      "id": "line-058",
+      "type": "line",
+      "source": "[[LINK_1]]テストプレイ開始時に『暗号化出力フォルダ』へと暗号化されたファイルが作成されるようになります。[[/LINK_1]]",
+      "sourceHash": "d5633dffb9c5f24eae6a04f5080838754923ac8d711c2f8382dbe84e102b3b7f",
+      "parts": [
+        {
+          "source": "テストプレイ開始時に『暗号化出力フォルダ』へと暗号化されたファイルが作成されるようになります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Encrypted files will be created in “Encrypted Output Folder” when a playtest starts.[[/LINK_1]]",
+      "contextHash": "d5633dffb9c5f24eae6a04f5080838754923ac8d711c2f8382dbe84e102b3b7f"
+    },
+    {
+      "id": "line-059",
+      "type": "line",
+      "source": "[[LINK_1]]後はそのままデプロイメントすればＯＫです。[[/LINK_1]]",
+      "sourceHash": "df851e8eb8061f216a60e7b651184e72c1757b08ca5962fe9e878d113e16a8d6",
+      "parts": [
+        {
+          "source": "後はそのままデプロイメントすればＯＫです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]After that, you can deploy the game as usual.[[/LINK_1]]",
+      "contextHash": "df851e8eb8061f216a60e7b651184e72c1757b08ca5962fe9e878d113e16a8d6"
+    },
+    {
+      "id": "line-060",
+      "type": "line",
+      "source": "[[LINK_1]]ファイルの数が多かったり、ＰＣのスペックが低かったりすると、暗号化に時間がかかってしまいます。[[/LINK_1]]",
+      "sourceHash": "eea367ee64725991125dfbba95e25e0749298ac3c5a305714656016c2fb34c55",
+      "parts": [
+        {
+          "source": "ファイルの数が多かったり、ＰＣのスペックが低かったりすると、暗号化に時間がかかってしまいます。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Encryption may take some time if there are many files or your PC has low specifications.[[/LINK_1]]",
+      "contextHash": "eea367ee64725991125dfbba95e25e0749298ac3c5a305714656016c2fb34c55"
+    },
+    {
+      "id": "line-061",
+      "type": "line",
+      "source": "[[LINK_1]]『暗号化を使用』は普段の開発時はオフにしても問題ありません。[[/LINK_1]]",
+      "sourceHash": "d7db198da171908d9c3fb387411bc20e1e582d12051243caf44968e2866556f0",
+      "parts": [
+        {
+          "source": "『暗号化を使用』は普段の開発時はオフにしても問題ありません。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]It is fine to turn off “Use Encryption” during regular development.[[/LINK_1]]",
+      "contextHash": "d7db198da171908d9c3fb387411bc20e1e582d12051243caf44968e2866556f0"
+    },
+    {
+      "id": "line-062",
+      "type": "line",
+      "source": "[[LINK_1]]注意点（Caution）[[/LINK_1]]",
+      "sourceHash": "cae386079d02c7d654e0b45ddbf699954b6912c2eecdaf2cbc1753e725acc84a",
+      "parts": [
+        {
+          "source": "注意点（Caution）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Caution[[/LINK_1]]",
+      "contextHash": "cae386079d02c7d654e0b45ddbf699954b6912c2eecdaf2cbc1753e725acc84a"
+    },
+    {
+      "id": "line-063",
+      "type": "line",
+      "source": "[[LINK_1]]日本語読込について[[/LINK_1]]",
+      "sourceHash": "c4c1e1659d25dd04072e0dd31387074f2ff44670587a33e6f512aed322d2a8bb",
+      "parts": [
+        {
+          "source": "日本語読込について",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reading Japanese Text[[/LINK_1]]",
+      "contextHash": "c4c1e1659d25dd04072e0dd31387074f2ff44670587a33e6f512aed322d2a8bb"
+    },
+    {
+      "id": "line-064",
+      "type": "line",
+      "source": "[[LINK_1]]当プラグインで扱うテキストファイルの文字コードはUTF-8を推奨します。Shift_JISなどになっていると、日本語が読み込めないようです。[[/LINK_1]]",
+      "sourceHash": "dbd4f5b4db25747a100252e43d61af9e484f49fc5b6b820fc3253b9492a8bdc0",
+      "parts": [
+        {
+          "source": "当プラグインで扱うテキストファイルの文字コードはUTF-8を推奨します。Shift_JISなどになっていると、日本語が読み込めないようです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]UTF-8 is recommended as the character encoding for text files handled by this plugin. Japanese text may not load if the encoding is Shift_JIS or another format.[[/LINK_1]]",
+      "contextHash": "dbd4f5b4db25747a100252e43d61af9e484f49fc5b6b820fc3253b9492a8bdc0"
+    },
+    {
+      "id": "line-065",
+      "type": "line",
+      "source": "[[LINK_1]]例えば、playSe（効果音）で日本語ファイル名を指定した場合にエラーとなってしまいます。[[/LINK_1]]",
+      "sourceHash": "17e104d109bb795afdada540f4052be97b7b8601477f547ae39922ff1c3fa15e",
+      "parts": [
+        {
+          "source": "例えば、playSe（効果音）で日本語ファイル名を指定した場合にエラーとなってしまいます。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]For example, an error occurs when a Japanese file name is specified with playSe (sound effect).[[/LINK_1]]",
+      "contextHash": "17e104d109bb795afdada540f4052be97b7b8601477f547ae39922ff1c3fa15e"
+    },
+    {
+      "id": "line-066",
+      "type": "line",
+      "source": "[[LINK_1]]大抵のテキストエディタならば、名前を付けて保存時に文字コード（エンコード）が指定できます。[[/LINK_1]]",
+      "sourceHash": "5615d02ae52e2b061215a70c25b4b6700175bcb2ec5c3e2f4fad6769fcdc4c0c",
+      "parts": [
+        {
+          "source": "大抵のテキストエディタならば、名前を付けて保存時に文字コード（エンコード）が指定できます。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Most text editors allow you to specify the character encoding when using Save As.[[/LINK_1]]",
+      "contextHash": "5615d02ae52e2b061215a70c25b4b6700175bcb2ec5c3e2f4fad6769fcdc4c0c"
+    },
+    {
+      "id": "line-067",
+      "type": "line",
+      "source": "[[LINK_1]]他プラグインとの連携[[/LINK_1]]",
+      "sourceHash": "020d24eb45c29f2179c1a7fdbc85131b2e08abdbcce1b78a140007971ce7ecde",
+      "parts": [
+        {
+          "source": "他プラグインとの連携",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Integration with Other Plugins[[/LINK_1]]",
+      "contextHash": "020d24eb45c29f2179c1a7fdbc85131b2e08abdbcce1b78a140007971ce7ecde"
+    },
+    {
+      "id": "line-068",
+      "type": "line",
+      "source": "[[LINK_1]]当プラグインはあくまで『DynamicAnimation&Motionの定義をtxtファイルから読み込む』プラグインです。[[/LINK_1]]",
+      "sourceHash": "c3f447ef1d979f83a86026a266fa33a83dc1a8bc2ab726a64742ecda096a7d2b",
+      "parts": [
+        {
+          "source": "当プラグインはあくまで『DynamicAnimation&Motionの定義をtxtファイルから読み込む』プラグインです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This plugin is solely intended to “load DynamicAnimation&Motion definitions from txt files.”[[/LINK_1]]",
+      "contextHash": "c3f447ef1d979f83a86026a266fa33a83dc1a8bc2ab726a64742ecda096a7d2b"
+    },
+    {
+      "id": "line-069",
+      "type": "line",
+      "source": "[[LINK_1]]そのため、Dynamic系プラグイン以外のメモ欄の記述をテキスト内に書き出しても機能しません。勢い余って全てを書き出さないように注意してください。要するに『D-』から始まる以外の記述が含まれていたら、大体アウトです。[[/LINK_1]]",
+      "sourceHash": "715ab212eb73b73ccfc543f5e08e25ea601bfc80bfc991bbd5898bc2fb49b95b",
+      "parts": [
+        {
+          "source": "そのため、Dynamic系プラグイン以外のメモ欄の記述をテキスト内に書き出しても機能しません。勢い余って全てを書き出さないように注意してください。要するに『D-』から始まる以外の記述が含まれていたら、大体アウトです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Therefore, writing note field entries for plugins other than Dynamic plugins in the text files will not work. Be careful not to get carried away and write everything out. In short, if anything other than entries beginning with “D-” is included, it will generally fail.[[/LINK_1]]",
+      "contextHash": "715ab212eb73b73ccfc543f5e08e25ea601bfc80bfc991bbd5898bc2fb49b95b"
+    },
+    {
+      "id": "line-070",
+      "type": "line",
+      "source": "[[LINK_1]]特に[[/LINK_1]][[LINK_2]]合体技プラグイン[[/LINK_2]][[LINK_3]]の事故率が高いです。[[/LINK_3]]",
+      "sourceHash": "8ef9a9330a0a845da16811c0a3eaaeab1602ea0dcf379c47b736ff9ac15df81b",
+      "parts": [
+        {
+          "source": "特に",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "合体技プラグイン",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "の事故率が高いです。",
+          "link": true,
+          "linkIndex": 3
+        }
+      ],
+      "translation": "[[LINK_1]]In particular, [[/LINK_1]]the [[LINK_2]]Combination Tech Plugin[[/LINK_2]][[LINK_3]]has a high incident rate.[[/LINK_3]]",
+      "contextHash": "8ef9a9330a0a845da16811c0a3eaaeab1602ea0dcf379c47b736ff9ac15df81b"
+    },
+    {
+      "id": "line-071",
+      "type": "line",
+      "source": "[[LINK_1]]ちなみに、他プラグインの定義と組み合わせる場合は以下のように記述します。[[/LINK_1]]",
+      "sourceHash": "e215cb5ff4a478b00e0d71ef4b157e7ae1dbf552c2fc076e79939919c4fa5184",
+      "parts": [
+        {
+          "source": "ちなみに、他プラグインの定義と組み合わせる場合は以下のように記述します。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Incidentally, when combining definitions from other plugins, write them as follows.[[/LINK_1]]",
+      "contextHash": "e215cb5ff4a478b00e0d71ef4b157e7ae1dbf552c2fc076e79939919c4fa5184"
+    },
+    {
+      "id": "line-072",
+      "type": "line",
+      "source": "[[LINK_1]]ブラウザ実行時[[/LINK_1]]",
+      "sourceHash": "2f3b1ee6dd5a241964b2985ac444eb15b167a667f2d9cc4f17df528b17788d8b",
+      "parts": [
+        {
+          "source": "ブラウザ実行時",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]When Running in a Browser[[/LINK_1]]",
+      "contextHash": "2f3b1ee6dd5a241964b2985ac444eb15b167a667f2d9cc4f17df528b17788d8b"
+    },
+    {
+      "id": "line-073",
+      "type": "line",
+      "source": "[[LINK_1]]ゲーム起動時に全てのtxtファイルを読み込む仕様のため、大量＆大容量のtxtファイルがあると起動速度に影響を与える可能性があります。[[/LINK_1]]",
+      "sourceHash": "d5b5da46727b43ec261c206f61bff6f63c7e92f651c80a95de0fe85573904bb8",
+      "parts": [
+        {
+          "source": "ゲーム起動時に全てのtxtファイルを読み込む仕様のため、大量＆大容量のtxtファイルがあると起動速度に影響を与える可能性があります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Because all txt files are loaded when the game starts, having many large txt files may affect startup speed.[[/LINK_1]]",
+      "contextHash": "d5b5da46727b43ec261c206f61bff6f63c7e92f651c80a95de0fe85573904bb8"
+    },
+    {
+      "id": "line-074",
+      "type": "line",
+      "source": "[[LINK_1]]単なるテキストファイルなので、そうそう大したことにはならないと思いますが一応……。[[/LINK_1]]",
+      "sourceHash": "209c5f116f08d31e286e29946395aae79cb3c9ac8b6213ad7655a86ba8a38d3e",
+      "parts": [
+        {
+          "source": "単なるテキストファイルなので、そうそう大したことにはならないと思いますが一応……。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Since they are just text files, I don't think it will usually be a serious issue, but just in case…[[/LINK_1]]",
+      "contextHash": "209c5f116f08d31e286e29946395aae79cb3c9ac8b6213ad7655a86ba8a38d3e"
+    },
+    {
+      "id": "line-075",
+      "type": "line",
+      "source": "[[LINK_1]]ver1.04より、テスト起動時に『FILE_LIST.txt』というファイルを『txt配置フォルダ』に作成するようになりました。[[/LINK_1]]",
+      "sourceHash": "57401b19d2bf5e9bf8661a74f89f722cf4351364c207be8a027790ca3e7b7fee",
+      "parts": [
+        {
+          "source": "ver1.04より、テスト起動時に『FILE_LIST.txt』というファイルを『txt配置フォルダ』に作成するようになりました。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting with ver1.04, a file named “FILE_LIST.txt” is created in “txt Placement Folder” when a test run is started.[[/LINK_1]]",
+      "contextHash": "57401b19d2bf5e9bf8661a74f89f722cf4351364c207be8a027790ca3e7b7fee"
+    },
+    {
+      "id": "line-076",
+      "type": "line",
+      "source": "[[LINK_1]]これはRPGアツマールなどのブラウザ起動時に、読込対象となるファイル一覧を取得するためのファイルです。[[/LINK_1]]",
+      "sourceHash": "826d7c96a919798828205c1f4abd9e44ba0570b3bdad02027e07533362f51bd4",
+      "parts": [
+        {
+          "source": "これはRPGアツマールなどのブラウザ起動時に、読込対象となるファイル一覧を取得するためのファイルです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This file is used to obtain a list of files to be loaded when running in a browser, such as on RPG Atsumaru.[[/LINK_1]]",
+      "contextHash": "826d7c96a919798828205c1f4abd9e44ba0570b3bdad02027e07533362f51bd4"
+    },
+    {
+      "id": "line-077",
+      "type": "line",
+      "source": "[[LINK_1]]そのため、各txtのファイル名変更後、一度もテスト起動せず、本番ファイルをアップロードした場合、正常に動作しません。[[/LINK_1]]",
+      "sourceHash": "63b027f28ca2c85b2056a682ff793bc7f06a92bf011ef0aee4f96b68e688dfaf",
+      "parts": [
+        {
+          "source": "そのため、各txtのファイル名変更後、一度もテスト起動せず、本番ファイルをアップロードした場合、正常に動作しません。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Therefore, if you rename the individual txt files and upload the production files without starting a test run even once, the game will not work correctly.[[/LINK_1]]",
+      "contextHash": "63b027f28ca2c85b2056a682ff793bc7f06a92bf011ef0aee4f96b68e688dfaf"
+    },
+    {
+      "id": "line-078",
+      "type": "line",
+      "source": "[[LINK_1]]まずありえないと思いますが、一応ご注意ください。[[/LINK_1]]",
+      "sourceHash": "2cf5be921c6704f11cb61969bc850a50cf6a5baa30e64065fa2965c7d5684ee2",
+      "parts": [
+        {
+          "source": "まずありえないと思いますが、一応ご注意ください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This is highly unlikely, but please keep it in mind.[[/LINK_1]]",
+      "contextHash": "2cf5be921c6704f11cb61969bc850a50cf6a5baa30e64065fa2965c7d5684ee2"
+    },
+    {
+      "id": "line-079",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（PluginParameter）[[/LINK_1]]",
+      "sourceHash": "315ecb0e35038374cf4aa4d62122dbf2d4b2ea7c07071db166aa0d23bc26a4d5",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（PluginParameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (PluginParameter)[[/LINK_1]]",
+      "contextHash": "315ecb0e35038374cf4aa4d62122dbf2d4b2ea7c07071db166aa0d23bc26a4d5"
+    },
+    {
+      "id": "line-080",
+      "type": "line",
+      "source": "[[LINK_1]]txt配置フォルダ（ReadTxtFolder）[[/LINK_1]]",
+      "sourceHash": "33696dc66f0b543671eb612e9944883df805e43b23c6a9f31f6de15bc1dea2bc",
+      "parts": [
+        {
+          "source": "txt配置フォルダ（ReadTxtFolder）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]txt Placement Folder (ReadTxtFolder)[[/LINK_1]]",
+      "contextHash": "33696dc66f0b543671eb612e9944883df805e43b23c6a9f31f6de15bc1dea2bc"
+    },
+    {
+      "id": "line-081",
+      "type": "line",
+      "source": "[[LINK_1]]読み込む.txtファイルを配置するフォルダです。[[/LINK_1]]",
+      "sourceHash": "6757240f51891216c6dbd21a285046e9c433e83ccf825c2ccb1ac2cab8975863",
+      "parts": [
+        {
+          "source": "読み込む.txtファイルを配置するフォルダです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The folder where the .txt files to be loaded are placed.[[/LINK_1]]",
+      "contextHash": "6757240f51891216c6dbd21a285046e9c433e83ccf825c2ccb1ac2cab8975863"
+    },
+    {
+      "id": "line-082",
+      "type": "line",
+      "source": "[[LINK_1]]初期設定は\"data/D-Txt/\"です。[[/LINK_1]]",
+      "sourceHash": "f5bb12269cd46e82fd0cb6178f4643f9eb8b6ee3937a5837098f8033bc478741",
+      "parts": [
+        {
+          "source": "初期設定は\"data/D-Txt/\"です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The default setting is \"data/D-Txt/\".[[/LINK_1]]",
+      "contextHash": "f5bb12269cd46e82fd0cb6178f4643f9eb8b6ee3937a5837098f8033bc478741"
+    },
+    {
+      "id": "line-083",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化を使用する場合は、プロジェクト外を指定してください。[[/LINK_1]]",
+      "sourceHash": "e593c1329c8417efc914f52e510507f7785d3c8368f164ff931e1e75a52f7ca8",
+      "parts": [
+        {
+          "source": "暗号化を使用する場合は、プロジェクト外を指定してください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]When using encryption, specify a location outside the project.[[/LINK_1]]",
+      "contextHash": "e593c1329c8417efc914f52e510507f7785d3c8368f164ff931e1e75a52f7ca8"
+    },
+    {
+      "id": "line-084",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化を使用（UseEncrypt）ver2.00[[/LINK_1]]",
+      "sourceHash": "acf946ce8de70823b7e37ca31a058e84a3c613f77621b041880b9e06c29e74eb",
+      "parts": [
+        {
+          "source": "暗号化を使用（UseEncrypt）ver2.00",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Use Encryption (UseEncrypt) ver2.00[[/LINK_1]]",
+      "contextHash": "acf946ce8de70823b7e37ca31a058e84a3c613f77621b041880b9e06c29e74eb"
+    },
+    {
+      "id": "line-085",
+      "type": "line",
+      "source": "[[LINK_1]]txtファイルを暗号化し、暗号化出力フォルダへと出力します。[[/LINK_1]]",
+      "sourceHash": "da208837f4c598f1f0b54e9fbce9814d46586915f79d0c95aa2d556dfd8810ff",
+      "parts": [
+        {
+          "source": "txtファイルを暗号化し、暗号化出力フォルダへと出力します。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Encrypts the txt files and outputs them to the encrypted output folder.[[/LINK_1]]",
+      "contextHash": "da208837f4c598f1f0b54e9fbce9814d46586915f79d0c95aa2d556dfd8810ff"
+    },
+    {
+      "id": "line-086",
+      "type": "line",
+      "source": "[[LINK_1]]出力はゲーム起動時に実行されます。[[/LINK_1]]",
+      "sourceHash": "0673552f6e9b16dc1964cbb8e4356f8ad02ccf00475b40deb6c3f919a7d5ed4a",
+      "parts": [
+        {
+          "source": "出力はゲーム起動時に実行されます。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The output is performed when the game starts.[[/LINK_1]]",
+      "contextHash": "0673552f6e9b16dc1964cbb8e4356f8ad02ccf00475b40deb6c3f919a7d5ed4a"
+    },
+    {
+      "id": "line-087",
+      "type": "line",
+      "source": "[[LINK_1]]ファイルの数が多かったりＰＣのスペックが低かったりすると、暗号化に時間がかかってしまうため、普段の開発時はオフにしても問題ありません。[[/LINK_1]]",
+      "sourceHash": "4b38f52973399496589378016a5f12bf3b5daccbea87eb9cc5e7e9cb3790fc73",
+      "parts": [
+        {
+          "source": "ファイルの数が多かったりＰＣのスペックが低かったりすると、暗号化に時間がかかってしまうため、普段の開発時はオフにしても問題ありません。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Because encryption takes time when there are many files or your PC has low specifications, it is fine to turn this off during regular development.[[/LINK_1]]",
+      "contextHash": "4b38f52973399496589378016a5f12bf3b5daccbea87eb9cc5e7e9cb3790fc73"
+    },
+    {
+      "id": "line-088",
+      "type": "line",
+      "source": "[[LINK_1]]ただし、本番ファイル作成時に設定を忘れないように注意してください。また、出力はゲーム起動時に実行されるため、本番ファイル作成前に一度ゲームを起動することを忘れないでください。[[/LINK_1]]",
+      "sourceHash": "bcce45353219949d24a03beb08c40b18fc5e06871c67fd3e63885b65d6666950",
+      "parts": [
+        {
+          "source": "ただし、本番ファイル作成時に設定を忘れないように注意してください。また、出力はゲーム起動時に実行されるため、本番ファイル作成前に一度ゲームを起動することを忘れないでください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]However, be careful not to forget to enable it when creating the production files. Also, because the output is performed when the game starts, do not forget to start the game once before creating the production files.[[/LINK_1]]",
+      "contextHash": "bcce45353219949d24a03beb08c40b18fc5e06871c67fd3e63885b65d6666950"
+    },
+    {
+      "id": "line-089",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化出力フォルダ（EncryptFolder）ver2.00[[/LINK_1]]",
+      "sourceHash": "8458f536080c1dd3777398c721ff31377b1b1d74afce1349750598eb99a7de71",
+      "parts": [
+        {
+          "source": "暗号化出力フォルダ（EncryptFolder）ver2.00",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Encrypted Output Folder (EncryptFolder) ver2.00[[/LINK_1]]",
+      "contextHash": "8458f536080c1dd3777398c721ff31377b1b1d74afce1349750598eb99a7de71"
+    },
+    {
+      "id": "line-090",
+      "type": "line",
+      "source": "[[LINK_1]]暗号化したtxtファイルを配置するフォルダです。[[/LINK_1]]",
+      "sourceHash": "7a9666a2ed70247cb4c92a2c672dd2d1c8d574043e2911b48772233a99d2bc8c",
+      "parts": [
+        {
+          "source": "暗号化したtxtファイルを配置するフォルダです。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The folder where the encrypted txt files are placed.[[/LINK_1]]",
+      "contextHash": "7a9666a2ed70247cb4c92a2c672dd2d1c8d574043e2911b48772233a99d2bc8c"
+    },
+    {
+      "id": "line-091",
+      "type": "line",
+      "source": "[[LINK_1]]初期設定は\"data/D-Txt-Encrypt/\"です。[[/LINK_1]]",
+      "sourceHash": "5958f14ffbce6d8b42496f3aed15b6f65597ab50d80c024d7856b55d4029f99f",
+      "parts": [
+        {
+          "source": "初期設定は\"data/D-Txt-Encrypt/\"です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The default setting is \"data/D-Txt-Encrypt/\".[[/LINK_1]]",
+      "contextHash": "5958f14ffbce6d8b42496f3aed15b6f65597ab50d80c024d7856b55d4029f99f"
+    },
+    {
+      "id": "line-092",
+      "type": "line",
+      "source": "[[LINK_1]]本番では強制暗号化（ForceEncryptProduct）ver2.011[[/LINK_1]]",
+      "sourceHash": "4777fc36037c659e3fbc1921b216561aab8d12ec4fc18bea7058ed1c651e2f44",
+      "parts": [
+        {
+          "source": "本番では強制暗号化（ForceEncryptProduct）ver2.011",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Force Encryption in Production (ForceEncryptProduct) ver2.011[[/LINK_1]]",
+      "contextHash": "4777fc36037c659e3fbc1921b216561aab8d12ec4fc18bea7058ed1c651e2f44"
+    },
+    {
+      "id": "line-093",
+      "type": "line",
+      "source": "[[LINK_1]]『暗号化を使用』がオフの場合でも、本番では強制的に暗号化したファイルを参照します。[[/LINK_1]]",
+      "sourceHash": "e64c0f105ea74a28f7c41bc6b458e76f66f257401c5d613018917178cab6aeef",
+      "parts": [
+        {
+          "source": "『暗号化を使用』がオフの場合でも、本番では強制的に暗号化したファイルを参照します。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Even when “Use Encryption” is off, the production game will forcibly reference the encrypted files.[[/LINK_1]]",
+      "contextHash": "e64c0f105ea74a28f7c41bc6b458e76f66f257401c5d613018917178cab6aeef"
+    },
+    {
+      "id": "line-094",
+      "type": "line",
+      "source": "[[LINK_1]]設定忘れ防止のための機能です。[[/LINK_1]]",
+      "sourceHash": "679d07d4dfdb71ac80db32a77f39afd2b63aa430bdc08037897c210cbfe9af39",
+      "parts": [
+        {
+          "source": "設定忘れ防止のための機能です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This feature helps prevent forgetting to change the setting.[[/LINK_1]]",
+      "contextHash": "679d07d4dfdb71ac80db32a77f39afd2b63aa430bdc08037897c210cbfe9af39"
+    },
+    {
+      "id": "line-095",
+      "type": "line",
+      "source": "[[LINK_1]]テスト時は毎回読込（DynamicReadOnTest）[[/LINK_1]]",
+      "sourceHash": "f11d7d664e64cd1b809f9acb1f7d47fc17239e227896a3b937bd546a8f4ad97d",
+      "parts": [
+        {
+          "source": "テスト時は毎回読込（DynamicReadOnTest）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Read Every Time During Testing (DynamicReadOnTest)[[/LINK_1]]",
+      "contextHash": "f11d7d664e64cd1b809f9acb1f7d47fc17239e227896a3b937bd546a8f4ad97d"
+    },
+    {
+      "id": "line-096",
+      "type": "line",
+      "source": "[[LINK_1]]テスト時はスキルを使用する度に読込を行います。[[/LINK_1]]",
+      "sourceHash": "4137e86c9ffb07580670f36af47706cd15dcca184f00c2b7bb0929fb9534e4cc",
+      "parts": [
+        {
+          "source": "テスト時はスキルを使用する度に読込を行います。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]During testing, the files are loaded each time a skill is used.[[/LINK_1]]",
+      "contextHash": "4137e86c9ffb07580670f36af47706cd15dcca184f00c2b7bb0929fb9534e4cc"
+    },
+    {
+      "id": "line-097",
+      "type": "line",
+      "source": "[[LINK_1]]これによりゲームを停止せずに動作変更が可能となります。[[/LINK_1]]",
+      "sourceHash": "83cc243c87f6b0b50af5acdc3d93e386e7285e09be907d08eea1a471fc267491",
+      "parts": [
+        {
+          "source": "これによりゲームを停止せずに動作変更が可能となります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]This allows you to change behavior without stopping the game.[[/LINK_1]]",
+      "contextHash": "83cc243c87f6b0b50af5acdc3d93e386e7285e09be907d08eea1a471fc267491"
+    },
+    {
+      "id": "line-098",
+      "type": "line",
+      "source": "[[LINK_1]]※この機能は本番だと自動的に無効となります。[[/LINK_1]]",
+      "sourceHash": "4c93139b4a3a8b340b4b687288af0269ac7dfaf557b66699d9882f2b0dc31b3b",
+      "parts": [
+        {
+          "source": "※この機能は本番だと自動的に無効となります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※ This feature is automatically disabled in production.[[/LINK_1]]",
+      "contextHash": "4c93139b4a3a8b340b4b687288af0269ac7dfaf557b66699d9882f2b0dc31b3b"
+    },
+    {
+      "id": "line-099",
+      "type": "line",
+      "source": "[[LINK_1]]本番モードで実行（ProductionMode）ver2.00[[/LINK_1]]",
+      "sourceHash": "ceee1256fbc99a09369edf7726aec86cabb185c9ed28a430df15a1c2d1d1f334",
+      "parts": [
+        {
+          "source": "本番モードで実行（ProductionMode）ver2.00",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Run in Production Mode (ProductionMode) ver2.00[[/LINK_1]]",
+      "contextHash": "ceee1256fbc99a09369edf7726aec86cabb185c9ed28a430df15a1c2d1d1f334"
+    },
+    {
+      "id": "line-100",
+      "type": "line",
+      "source": "[[LINK_1]]強制的に本番モードの挙動で実行します。[[/LINK_1]]",
+      "sourceHash": "4fb5a6a8878971d0768ccb83fe4e3315925ac4410affc222aca8b85a8c1656e4",
+      "parts": [
+        {
+          "source": "強制的に本番モードの挙動で実行します。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Forces the game to run with production-mode behavior.[[/LINK_1]]",
+      "contextHash": "4fb5a6a8878971d0768ccb83fe4e3315925ac4410affc222aca8b85a8c1656e4"
+    },
+    {
+      "id": "line-101",
+      "type": "line",
+      "source": "[[LINK_1]]※デバッグ用の項目なので普段はオフ推奨です。[[/LINK_1]]",
+      "sourceHash": "5d445dfac9583a285a04869f06a803f83d1f6cd2f14f8805a9bd2f72cb54f5d4",
+      "parts": [
+        {
+          "source": "※デバッグ用の項目なので普段はオフ推奨です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※This is a debugging option, so it is recommended that you normally leave it off.[[/LINK_1]]",
+      "contextHash": "5d445dfac9583a285a04869f06a803f83d1f6cd2f14f8805a9bd2f72cb54f5d4"
+    },
+    {
+      "id": "line-102",
+      "type": "line",
+      "source": "[[LINK_1]]本番モードではファイルを起動時に全て読み込むようになります。[[/LINK_1]]",
+      "sourceHash": "353c55142994108f3432939675e4a0ccbd1c23b70acd49b3822263987969119b",
+      "parts": [
+        {
+          "source": "本番モードではファイルを起動時に全て読み込むようになります。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]In Production Mode, all files will be loaded at startup.[[/LINK_1]]",
+      "contextHash": "353c55142994108f3432939675e4a0ccbd1c23b70acd49b3822263987969119b"
+    },
+    {
+      "id": "line-103",
+      "type": "line",
+      "source": "[[LINK_1]]また『暗号化を使用』とセットでオンにすると、暗号化されたファイルを読み込むようになります。動作速度の検証などにご利用ください。[[/LINK_1]]",
+      "sourceHash": "cb5605563cc813fcc2ec72d925f3f800950fbfc73d1e374f6088ac68d65ef608",
+      "parts": [
+        {
+          "source": "また『暗号化を使用』とセットでオンにすると、暗号化されたファイルを読み込むようになります。動作速度の検証などにご利用ください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additionally, enabling this together with “Use Encryption” will cause encrypted files to be loaded. Please use this to verify operating speed and other aspects.[[/LINK_1]]",
+      "contextHash": "cb5605563cc813fcc2ec72d925f3f800950fbfc73d1e374f6088ac68d65ef608"
+    },
+    {
+      "id": "line-104",
+      "type": "line",
+      "source": "[[LINK_1]]ブラウザモードで実行（BrowserMode）ver1.04[[/LINK_1]]",
+      "sourceHash": "85e159c2902c16bf225e8f7be432ba9b976bd5880213b5969a2fb71ed9a38e30",
+      "parts": [
+        {
+          "source": "ブラウザモードで実行（BrowserMode）ver1.04",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Run in Browser Mode (BrowserMode) ver1.04[[/LINK_1]]",
+      "contextHash": "85e159c2902c16bf225e8f7be432ba9b976bd5880213b5969a2fb71ed9a38e30"
+    },
+    {
+      "id": "line-105",
+      "type": "line",
+      "source": "[[LINK_1]]強制的にブラウザモードの挙動で実行します。[[/LINK_1]]",
+      "sourceHash": "8c1d1d5a08b972818146aa9b3abe6ecafa27cfc2b8e8121b381e1d89035aa584",
+      "parts": [
+        {
+          "source": "強制的にブラウザモードの挙動で実行します。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Forces the game to run using Browser Mode behavior.[[/LINK_1]]",
+      "contextHash": "8c1d1d5a08b972818146aa9b3abe6ecafa27cfc2b8e8121b381e1d89035aa584"
+    },
+    {
+      "id": "line-106",
+      "type": "line",
+      "source": "[[LINK_1]]※デバッグ用の項目なので普段はオフ推奨です。[[/LINK_1]]",
+      "sourceHash": "5d445dfac9583a285a04869f06a803f83d1f6cd2f14f8805a9bd2f72cb54f5d4",
+      "parts": [
+        {
+          "source": "※デバッグ用の項目なので普段はオフ推奨です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※This is a debugging option, so it is recommended that you normally leave it off.[[/LINK_1]]",
+      "contextHash": "5d445dfac9583a285a04869f06a803f83d1f6cd2f14f8805a9bd2f72cb54f5d4"
+    },
+    {
+      "id": "line-107",
+      "type": "line",
+      "source": "[[LINK_1]]※ブラウザモードと暗号化を併用した際の挙動は未検証です。[[/LINK_1]]",
+      "sourceHash": "d9f739f66f823fd2edb4c64566fe71374dfd6afcf105c5be3e3d14441d9361f3",
+      "parts": [
+        {
+          "source": "※ブラウザモードと暗号化を併用した際の挙動は未検証です。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※The behavior when Browser Mode is used together with encryption has not been verified.[[/LINK_1]]",
+      "contextHash": "d9f739f66f823fd2edb4c64566fe71374dfd6afcf105c5be3e3d14441d9361f3"
+    },
+    {
+      "id": "line-108",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]＞Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "DynamicAnimation&Motionの定義をtxtファイルから読み込みます。": "Loads DynamicAnimation&Motion definitions from TXT files.",
+    "スキルのメモ欄に以下を記載すれば、指定のフォルダにあるtxtファイルから定義を読み込みます。": "Add the following to a skill's note field to load the definition from a TXT file in the specified folder.",
+    "<D-Txt:[ファイル名]>": "<D-Txt:[File Name]>",
+    "※ファイル名に拡張子は不要です。": "* The file extension is not required in the file name.",
+    "※初期値では『[プロジェクト]/data/D-Txt/』がフォルダになります。フォルダを作成してtxtを配置してください。プラグインパラメータから変更可能です。": "* By default, the folder is [Project]/data/D-Txt/. Create the folder and place the TXT files in it. This can be changed via the plugin parameter.",
+    "例えば、<D-Txt:abc>ならば、abc.txtを参照します。": "For example, <D-Txt:abc> references abc.txt.",
+    "また、ファイル名を省略するとスキルIDを自動でファイル名に使用します。": "If the file name is omitted, the skill ID is automatically used as the file name.",
+    "例えば、スキルID=100ならば、100.txtを参照します。": "For example, if the skill ID is 100, 100.txt is referenced.",
+    "テストモード時はスキルを使用する度に毎回ファイルを読み込みます。これにより、ゲームを停止することなく動作を繰り返し確認できます。": "In test mode, the file is loaded every time the skill is used. This allows you to repeatedly check the results without stopping the game.",
+    "※本番モード時は起動時に全ての定義を読み込みます。": "* In production mode, all definitions are loaded at startup.",
+    "上記のようにウィンドウを並べながら編集すれば超便利です。": "Editing while arranging the windows as shown above is incredibly convenient.",
+    "ver1.03より、動作を単純な置換方式に変更しました。これにより一つのスキルを複数のテキストで構成したり、詠唱やカットインなどの共通処理だけを置き換えることが可能になりました。": "Starting with ver1.03, the operation has been changed to a simple replacement method. This makes it possible to compose a single skill from multiple text files or replace only common processes such as chanting and cut-ins.",
+    "[記述例]": "[Example]",
+    "目次": "Table of Contents",
+    "NRP_DynamicReadTxt.js": "NRP_DynamicReadTxt.js ",
+    "ver2.02（2026/04/13）": "ver2.02（2026/04/13）",
+    "NRP_DynamicAnimationMZ.js": "NRP_DynamicAnimationMZ.js ",
+    "ver1.081（2020/10/20）": "ver1.081（2020/10/20）",
+    "NRP_DynamicAnimationMapMZ.js": "NRP_DynamicAnimationMapMZ.js ",
+    "ver1.071（2020/10/19）": "ver1.071（2020/10/19）",
+    "NRP_DynamicMotionMZ.js": "NRP_DynamicMotionMZ.js ",
+    "ver1.06（2020/10/17）": "ver1.06（2020/10/17）",
+    "NRP_DynamicAnimation.js": "NRP_DynamicAnimation.js ",
+    "ver1.181（2020/10/20）": "ver1.181（2020/10/20）",
+    "NRP_DynamicAnimationMap.js": "NRP_DynamicAnimationMap.js ",
+    "ver1.072（2020/10/20）": "ver1.072（2020/10/20）",
+    "NRP_DynamicMotion.js": "NRP_DynamicMotion.js ",
+    "ver1.13（2020/10/17）": "ver1.13（2020/10/17）",
+    "例：C:/D-Txt/": "Example: C:/D-Txt/"
+  }
+}
