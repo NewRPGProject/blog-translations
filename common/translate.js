@@ -342,6 +342,32 @@ function decodeHtmlEntities(text) {
     return textarea.value;
 }
 
+function getOriginalLineFormat(text) {
+    const original = String(text);
+    const indentation = original.match(/^[\s\u3000]*/u)?.[0] || "";
+    const afterIndentation = original.slice(indentation.length);
+    const noteMarker = afterIndentation.match(/^※[\s\u3000]*/u)?.[0] || "";
+    const trailing = original.match(/[\s\u3000]*$/u)?.[0] || "";
+    return { indentation, noteMarker, trailing };
+}
+
+function restoreOriginalLineFormat(original, translated) {
+    const { indentation, noteMarker, trailing } =
+        getOriginalLineFormat(original);
+    let content = decodeHtmlEntities(translated)
+        .replace(/^[\s\u3000]*/u, "")
+        .replace(/[\s\u3000]*$/u, "");
+
+    if (noteMarker) {
+        // The model may turn ※ into an asterisk or emit it again. The source
+        // marker is the authoritative display format.
+        content = content.replace(/^(?:※|\*)[\s\u3000]*/u, "");
+        content = noteMarker + content;
+    }
+
+    return indentation + content + trailing;
+}
+
 function textLookupKeys(text) {
     const normalized = normalizeText(text);
     const decoded = normalizeText(decodeHtmlEntities(text));
@@ -474,18 +500,7 @@ function translateTextNodes(
             continue;
         }
 
-        const leading =
-            original.match(
-                /^[\s\u3000]*/
-            )?.[0] || "";
-
-        const trailing =
-            original.match(
-                /[\s\u3000]*$/
-            )?.[0] || "";
-
-        node.nodeValue =
-            leading + decodeHtmlEntities(translated) + trailing;
+        node.nodeValue = restoreOriginalLineFormat(original, translated);
     }
 }
 
@@ -537,6 +552,28 @@ function findLineNodeMatch(nodes, startAt, line) {
 
 function makeLineFragment(line, matchedNodes) {
     const fragment = document.createDocumentFragment();
+    const firstNode = matchedNodes[0];
+    const lastNode = matchedNodes[matchedNodes.length - 1];
+    const { indentation, noteMarker, trailing } =
+        getOriginalLineFormat(firstNode.nodeValue);
+    let translation = String(line.translation)
+        .replace(/^[\s\u3000]*/u, "")
+        .replace(/[\s\u3000]*$/u, "");
+
+    if (noteMarker) {
+        // A logical line can begin with a link. Keep the original note marker
+        // outside the reconstructed link so it is never lost or duplicated.
+        translation = translation
+            .replace(/^(?:※|\*)[\s\u3000]*/u, "")
+            .replace(/^(\[\[LINK_1\]\])(?:※|\*)[\s\u3000]*/u, "$1");
+    }
+    const suffix = lastNode === firstNode
+        ? trailing
+        : getOriginalLineFormat(lastNode.nodeValue).trailing;
+
+    if (indentation || noteMarker) {
+        fragment.append(document.createTextNode(indentation + noteMarker));
+    }
     const linkNodes = new Map();
     for (let index = 0; index < line.parts.length; index++) {
         const part = line.parts[index];
@@ -551,10 +588,10 @@ function makeLineFragment(line, matchedNodes) {
     const marker = /\[\[LINK_(\d+)\]\]([\s\S]*?)\[\[\/LINK_\1\]\]/g;
     let cursor = 0;
     let match;
-    while ((match = marker.exec(line.translation))) {
+    while ((match = marker.exec(translation))) {
         fragment.append(
             document.createTextNode(
-                decodeHtmlEntities(line.translation.slice(cursor, match.index))
+                decodeHtmlEntities(translation.slice(cursor, match.index))
             )
         );
         const originalLink = linkNodes.get(Number(match[1]));
@@ -567,8 +604,9 @@ function makeLineFragment(line, matchedNodes) {
         cursor = marker.lastIndex;
     }
     fragment.append(
-        document.createTextNode(decodeHtmlEntities(line.translation.slice(cursor)))
+        document.createTextNode(decodeHtmlEntities(translation.slice(cursor)))
     );
+    if (suffix) fragment.append(document.createTextNode(suffix));
     return fragment;
 }
 
@@ -789,18 +827,7 @@ function translateCommonTextNodes(
             continue;
         }
 
-        const leading =
-            original.match(
-                /^[\s\u3000]*/
-            )?.[0] || "";
-
-        const trailing =
-            original.match(
-                /[\s\u3000]*$/
-            )?.[0] || "";
-
-        node.nodeValue =
-            leading + decodeHtmlEntities(translated) + trailing;
+        node.nodeValue = restoreOriginalLineFormat(original, translated);
     }
 }
 
