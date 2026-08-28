@@ -7,6 +7,11 @@ on:
         description: "翻訳または更新確認する記事URL（空欄ならサイトマップを監視）"
         required: false
         type: string
+      force_retranslate:
+        description: "差分を無視して全文を再翻訳する（URLが空欄の場合は全記事）"
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: "*/15 * * * *"
 
@@ -42,6 +47,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-luna
           ARTICLE_URL: ${{ inputs.article_url }}
+          FORCE_RETRANSLATE: ${{ inputs.force_retranslate }}
 
       - run: |
           git config user.name "github-actions[bot]"
