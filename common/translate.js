@@ -15,6 +15,7 @@ const originalText = new Map();
 const originalTitle = new Map();
 const originalCommonText = new Map();
 const translationCache = new Map();
+const originalLineContent = new WeakMap();
 
 let commonTranslationCache = null;
 
@@ -195,7 +196,12 @@ function findArticleBody(translation = null) {
     }
 
     const sourceTexts = new Set(
-        Object.keys(translation.texts)
+        [
+            ...Object.keys(translation.texts),
+            ...(translation.lines || []).flatMap(line =>
+                (line.parts || []).map(part => part.source)
+            )
+        ]
             .flatMap(source => textLookupKeys(source))
             .filter(Boolean)
     );
@@ -471,6 +477,154 @@ function translateTextNodes(
     }
 }
 
+function getLineTextNodes(root) {
+    const walker = document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT,
+        {
+            acceptNode(node) {
+                const parent = node.parentElement;
+                if (!parent || parent.closest(
+                    "script, style, pre, code, textarea, .nrp-language-switch"
+                )) {
+                    return NodeFilter.FILTER_REJECT;
+                }
+                return normalizeText(node.nodeValue)
+                    ? NodeFilter.FILTER_ACCEPT
+                    : NodeFilter.FILTER_REJECT;
+            }
+        }
+    );
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    return nodes;
+}
+
+function findLineNodeMatch(nodes, startAt, line) {
+    const parts = line.parts || [];
+    if (parts.length === 0) return null;
+    for (let start = startAt; start + parts.length <= nodes.length; start++) {
+        let matches = true;
+        for (let index = 0; index < parts.length; index++) {
+            const node = nodes[start + index];
+            const part = parts[index];
+            if (normalizeText(node.nodeValue) !== normalizeText(part.source)) {
+                matches = false;
+                break;
+            }
+            if (part.link && !node.parentElement?.closest("a")) {
+                matches = false;
+                break;
+            }
+        }
+        if (matches) return { start, nodes: nodes.slice(start, start + parts.length) };
+    }
+    return null;
+}
+
+function makeLineFragment(line, matchedNodes) {
+    const fragment = document.createDocumentFragment();
+    const linkNodes = new Map();
+    for (let index = 0; index < line.parts.length; index++) {
+        const part = line.parts[index];
+        if (part.linkIndex) {
+            linkNodes.set(
+                part.linkIndex,
+                matchedNodes[index].parentElement.closest("a")
+            );
+        }
+    }
+
+    const marker = /\[\[LINK_(\d+)\]\]([\s\S]*?)\[\[\/LINK_\1\]\]/g;
+    let cursor = 0;
+    let match;
+    while ((match = marker.exec(line.translation))) {
+        fragment.append(
+            document.createTextNode(
+                decodeLegacyEntities(line.translation.slice(cursor, match.index))
+            )
+        );
+        const originalLink = linkNodes.get(Number(match[1]));
+        if (!originalLink) {
+            throw new Error("リンク行の元リンクが見つかりません: " + line.id);
+        }
+        const link = originalLink.cloneNode(false);
+        link.textContent = decodeLegacyEntities(match[2]);
+        fragment.append(link);
+        cursor = marker.lastIndex;
+    }
+    fragment.append(
+        document.createTextNode(decodeLegacyEntities(line.translation.slice(cursor)))
+    );
+    return fragment;
+}
+
+function restoreLineTranslations(root) {
+    const records = originalLineContent.get(root);
+    if (!records) return;
+    for (const record of records.values()) {
+        if (!record.start.parentNode || !record.end.parentNode) continue;
+        const range = document.createRange();
+        range.setStartAfter(record.start);
+        range.setEndBefore(record.end);
+        range.deleteContents();
+        range.insertNode(record.original.cloneNode(true));
+        record.start.remove();
+        record.end.remove();
+    }
+    records.clear();
+}
+
+function translateLinkedLines(root, translation, language) {
+    if (language === "ja") {
+        restoreLineTranslations(root);
+        return;
+    }
+    const lines = translation.lines || [];
+    if (lines.length === 0 || originalLineContent.get(root)?.size) return;
+
+    const nodes = getLineTextNodes(root);
+    const replacements = [];
+    let cursor = 0;
+    for (const line of lines) {
+        const matched = findLineNodeMatch(nodes, cursor, line);
+        if (!matched) continue;
+        replacements.push({ line, ...matched });
+        cursor = matched.start + matched.nodes.length;
+    }
+
+    const records = new Map();
+    for (const replacement of replacements.reverse()) {
+        const firstPart = replacement.line.parts[0];
+        const lastPart = replacement.line.parts[
+            replacement.line.parts.length - 1
+        ];
+        const firstNode = replacement.nodes[0];
+        const lastNode = replacement.nodes[replacement.nodes.length - 1];
+        const firstUnit = firstPart.link
+            ? firstNode.parentElement.closest("a")
+            : firstNode;
+        const lastUnit = lastPart.link
+            ? lastNode.parentElement.closest("a")
+            : lastNode;
+        const range = document.createRange();
+        range.setStartBefore(firstUnit);
+        range.setEndAfter(lastUnit);
+        const original = range.cloneContents();
+        range.deleteContents();
+
+        const start = document.createComment("nrp-line-start:" + replacement.line.id);
+        const end = document.createComment("nrp-line-end:" + replacement.line.id);
+        const replacementFragment = document.createDocumentFragment();
+        replacementFragment.append(start);
+        replacementFragment.append(makeLineFragment(replacement.line, replacement.nodes));
+        replacementFragment.append(end);
+        range.insertNode(replacementFragment);
+        records.set(replacement.line.id, { start, end, original });
+    }
+    if (records.size > 0) originalLineContent.set(root, records);
+}
+
 function isAfterOrInside(node, startElement) {
     if (!startElement) {
         return false;
@@ -720,6 +874,7 @@ async function applyIndexLanguage(language, options = {}) {
             originalTitle.get(article.titleElement);
         }
 
+        translateLinkedLines(article.bodyElement, null, "ja");
         translateTextNodes(article.bodyElement, {}, "ja");
         return true;
       }
@@ -742,10 +897,11 @@ async function applyIndexLanguage(language, options = {}) {
 
         article.titleElement.textContent = translation.title;
 
+        translateLinkedLines(article.bodyElement, translation, "en");
         translateTextNodes(
-          article.bodyElement,
-          createArticleDictionary(translation),
-          "en"
+            article.bodyElement,
+            createArticleDictionary(translation),
+            "en"
         );
 
         return true;
@@ -799,6 +955,7 @@ async function applyLanguage(language, options = {}) {
             }
 
             if (bodyElement) {
+                translateLinkedLines(bodyElement, null, "ja");
                 translateTextNodes(
                     bodyElement,
                     {},
@@ -866,6 +1023,7 @@ async function applyLanguage(language, options = {}) {
                         translation.title;
                 }
 
+                translateLinkedLines(bodyElement, translation, "en");
                 translateTextNodes(
                     bodyElement,
                     createArticleDictionary(translation),
