@@ -47,10 +47,13 @@ jobs:
           ARTICLE_URL: ${{ inputs.article_url }}
           FORCE_RETRANSLATE: ${{ inputs.force_retranslate }}
 
+      - run: node status/generate-article-status.mjs
+
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add articles/
+          git add status/articles.json
           if (Test-Path ".translation-monitor.json") {
             git add .translation-monitor.json
           }
