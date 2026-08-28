@@ -21,6 +21,9 @@
     th { position: sticky; top: 0; background: #f6f8fa; font-size: 13px; white-space: nowrap; }
     td.done { color: #1a7f37; font-family: "Arial Unicode MS", Arial, sans-serif; font-size: 22px; font-weight: bold; line-height: 1; text-align: center; }
     td.edit { white-space: nowrap; }
+    td.translate { white-space: nowrap; }
+    .translate-button { padding: 4px 8px; border: 1px solid #1f883d; border-radius: 5px; color: #fff; background: #1f883d; font: inherit; font-size: 13px; cursor: pointer; }
+    .translate-button:hover { background: #1a7f37; }
     td.id { white-space: nowrap; }
     td.title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     td.updated { white-space: nowrap; }
@@ -44,12 +47,13 @@
       <table>
         <colgroup>
           <col style="width: 48px">
+          <col style="width: 66px">
           <col style="width: 58px">
           <col style="width: 160px">
           <col>
           <col style="width: 190px">
         </colgroup>
-        <thead><tr><th>翻訳</th><th>編集</th><th>記事</th><th>記事名</th><th>更新日</th></tr></thead>
+        <thead><tr><th>翻訳</th><th>英訳</th><th>編集</th><th>記事</th><th>記事名</th><th>更新日</th></tr></thead>
         <tbody id="articles"></tbody>
       </table>
     </div>
@@ -63,6 +67,7 @@
     const status = document.getElementById("status");
     const search = document.getElementById("search");
     const onlyUntranslated = document.getElementById("only-untranslated");
+    const workflowUrl = "https://github.com/NewRPGProject/blog-translations/actions/workflows/translate-new-article.yml";
 
     function formatDate(value) {
       const date = new Date(value);
@@ -86,6 +91,17 @@
       cell.append(link);
     }
 
+    function openTranslationWorkflow(article) {
+      window.open(workflowUrl, "_blank", "noopener");
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(article.url)
+          .then(() => { status.textContent = `${article.id}.html のURLをコピーしました。Actions画面で貼り付けて実行してください。`; })
+          .catch(() => { status.textContent = `Actions画面を開きました。記事URL: ${article.url}`; });
+      } else {
+        status.textContent = `Actions画面を開きました。記事URL: ${article.url}`;
+      }
+    }
+
     function render() {
       const keyword = search.value.trim().toLocaleLowerCase("ja-JP");
       const articles = state.articles.filter(article => {
@@ -101,6 +117,17 @@
         translated.className = "done";
         translated.textContent = article.translated ? "○" : "";
         row.append(translated);
+
+        const translate = document.createElement("td");
+        translate.className = "translate";
+        const translateButton = document.createElement("button");
+        translateButton.type = "button";
+        translateButton.className = "translate-button";
+        translateButton.textContent = "英訳";
+        translateButton.title = "記事URLをコピーしてGitHub Actionsの実行画面を開きます";
+        translateButton.addEventListener("click", () => openTranslationWorkflow(article));
+        translate.append(translateButton);
+        row.append(translate);
 
         const edit = document.createElement("td");
         edit.className = "edit";
