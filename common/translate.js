@@ -196,7 +196,7 @@ function findArticleBody(translation = null) {
 
     const sourceTexts = new Set(
         Object.keys(translation.texts)
-            .map(normalizeText)
+            .flatMap(source => textLookupKeys(source))
             .filter(Boolean)
     );
 
@@ -326,6 +326,26 @@ function normalizeText(text) {
         .replace(/\s+/g, " ");
 }
 
+function decodeLegacyEntities(text) {
+    return String(text)
+        .replace(/&divide;/gi, "÷");
+}
+
+function textLookupKeys(text) {
+    const normalized = normalizeText(text);
+    const decoded = normalizeText(decodeLegacyEntities(text));
+    return decoded === normalized ? [normalized] : [normalized, decoded];
+}
+
+function lookupTranslation(dictionary, normalized) {
+    if (typeof dictionary[normalized] === "string") {
+        return dictionary[normalized];
+    }
+    // Compatibility with JSON created before &divide; was decoded to the
+    // Unicode division sign during extraction.
+    return dictionary[normalized.replace(/÷/g, "&divide;")];
+}
+
 function translateTextNodes(
     root,
     dictionary,
@@ -384,7 +404,7 @@ function translateTextNodes(
             normalizeText(original);
 
         const translated =
-            dictionary[normalized];
+            lookupTranslation(dictionary, normalized);
 
         if (typeof translated !== "string") {
             continue;
@@ -401,7 +421,7 @@ function translateTextNodes(
             )?.[0] || "";
 
         node.nodeValue =
-            leading + translated + trailing;
+            leading + decodeLegacyEntities(translated) + trailing;
     }
 }
 
@@ -514,7 +534,7 @@ function translateCommonTextNodes(
 
                 if (
                     language === "en" &&
-                    typeof dictionary[normalized] !== "string"
+                    typeof lookupTranslation(dictionary, normalized) !== "string"
                 ) {
                     return NodeFilter.FILTER_REJECT;
                 }
@@ -550,7 +570,7 @@ function translateCommonTextNodes(
             normalizeText(original);
 
         const translated =
-            dictionary[normalized];
+            lookupTranslation(dictionary, normalized);
 
         if (typeof translated !== "string") {
             continue;
@@ -567,7 +587,7 @@ function translateCommonTextNodes(
             )?.[0] || "";
 
         node.nodeValue =
-            leading + translated + trailing;
+            leading + decodeLegacyEntities(translated) + trailing;
     }
 }
 
