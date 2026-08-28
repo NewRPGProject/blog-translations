@@ -37,6 +37,30 @@ async function fetchText(url) {
     return response.text();
 }
 
+async function fetchArticleHtml(url) {
+    const response = await fetch(url, {
+        headers: {
+            ...BROWSER_HEADERS,
+            accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        }
+    });
+    if (!response.ok) {
+        throw new Error(`取得に失敗しました (${response.status}): ${url}`);
+    }
+
+    const bytes = await response.arrayBuffer();
+    const tentative = new TextDecoder("utf-8").decode(bytes);
+    const declaredCharset = /(?:charset\s*=\s*["']?|encoding\s*=\s*["']?)([\w-]+)/iu
+        .exec(tentative)?.[1].toLowerCase();
+    const headerCharset = /charset=([^;\s]+)/iu.exec(
+        response.headers.get("content-type") || ""
+    )?.[1].toLowerCase();
+    const charset = declaredCharset || headerCharset;
+    return new TextDecoder(charset === "shift_jis" || charset === "shift-jis"
+        ? "shift_jis"
+        : "utf-8").decode(bytes);
+}
+
 async function getSitemapEntries() {
     const sitemapIndex = await fetchText(SITEMAP_INDEX_URL);
     const sitemapUrls = [...sitemapIndex.matchAll(
@@ -99,16 +123,74 @@ async function getTranslatedArticles() {
     return translated;
 }
 
+function textFromHtml(value) {
+    return decodeHtml(String(value)
+        .replace(/<[^>]*>/gu, " ")
+        .replace(/\s+/gu, " ")
+        .trim());
+}
+
+function getPageTitle(html) {
+    const heading = html.match(
+        /<h[1-3][^>]*class=["'][^"']*article[-_]title[^"']*["'][^>]*>([\s\S]*?)<\/h[1-3]>/iu
+    );
+    if (heading) return textFromHtml(heading[1]);
+
+    const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/iu);
+    if (!title) return "";
+    return textFromHtml(title[1])
+        .replace(/\s*(?:[|｜]|-)\s*(?:New RPG Project|新RPGプロジェクト).*$/iu, "");
+}
+
+function isUsableTitle(title) {
+    return Boolean(title) && !title.includes("\uFFFD");
+}
+
+async function getPreviousTitles() {
+    try {
+        const previous = JSON.parse(stripBom(await readFile(OUTPUT_PATH, "utf8")));
+        return new Map((previous.articles || [])
+            .filter(article => article?.id && isUsableTitle(article.title))
+            .map(article => [article.id, article.title]));
+    } catch {
+        return new Map();
+    }
+}
+
+async function fillMissingTitles(entries, translated, previousTitles) {
+    const missing = entries.filter(entry =>
+        !translated.get(entry.id) && !previousTitles.has(entry.id)
+    );
+    const titles = new Map(previousTitles);
+    const concurrency = 4;
+
+    for (let offset = 0; offset < missing.length; offset += concurrency) {
+        const batch = missing.slice(offset, offset + concurrency);
+        await Promise.all(batch.map(async entry => {
+            try {
+                const html = await fetchArticleHtml(entry.url);
+                const title = getPageTitle(html);
+                if (title) titles.set(entry.id, title);
+            } catch (error) {
+                console.warn(`記事名を取得できませんでした: ${entry.url}`);
+            }
+        }));
+    }
+    return titles;
+}
+
 async function main() {
-    const [entries, translated] = await Promise.all([
+    const [entries, translated, previousTitles] = await Promise.all([
         getSitemapEntries(),
-        getTranslatedArticles()
+        getTranslatedArticles(),
+        getPreviousTitles()
     ]);
+    const titles = await fillMissingTitles(entries, translated, previousTitles);
     const articles = entries
         .map(entry => ({
             ...entry,
             translated: translated.has(entry.id),
-            title: translated.get(entry.id) || ""
+            title: translated.get(entry.id) || titles.get(entry.id) || ""
         }))
         .sort((left, right) =>
             new Date(right.updatedAt).valueOf() - new Date(left.updatedAt).valueOf()

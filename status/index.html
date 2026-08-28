@@ -38,7 +38,7 @@
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>翻訳</th><th>編集</th><th>記事名</th><th>記事</th><th>更新日</th></tr></thead>
+        <thead><tr><th>翻訳</th><th>編集</th><th>記事</th><th>記事名</th><th>更新日</th></tr></thead>
         <tbody id="articles"></tbody>
       </table>
     </div>
@@ -95,15 +95,15 @@
         addLink(edit, `https://blog.seesaa.jp/cms/article/edit/input?id=${encodeURIComponent(article.id)}`, "編集");
         row.append(edit);
 
-        const title = document.createElement("td");
-        title.className = "title";
-        title.textContent = article.title || "—";
-        row.append(title);
-
         const articleLink = document.createElement("td");
         articleLink.className = "id";
         addLink(articleLink, article.url, `${article.id}.html`);
         row.append(articleLink);
+
+        const title = document.createElement("td");
+        title.className = "title";
+        title.textContent = article.title || "—";
+        row.append(title);
 
         const updated = document.createElement("td");
         updated.className = "updated";
