@@ -73,6 +73,7 @@ function decodeHtml(value) {
         .replace(/&lt;/giu, "<")
         .replace(/&gt;/giu, ">")
         .replace(/&amp;/giu, "&")
+        .replace(/&divide;/giu, "÷")
         .replace(/&#x([0-9a-f]+);/giu, (_, hexadecimal) =>
             String.fromCodePoint(Number.parseInt(hexadecimal, 16)))
         .replace(/&#([0-9]+);/gu, (_, decimal) =>
