@@ -10,7 +10,7 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
-const EXTRACTION_VERSION = 5;
+const EXTRACTION_VERSION = 6;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
@@ -29,6 +29,7 @@ Items whose type starts with "code-" are natural-language fragments extracted fr
 Always translate Japanese in these fragments; any rule about preserving source code applies to the surrounding syntax, which has already been removed from source.
 Do not add quotation marks, comment markers, Markdown, or code syntax. Preserve identifiers, escape sequences, and version numbers embedded in the fragment.
 For "code-label" items enclosed in square brackets, use a concise Title Case label.
+For "code-text" items, context can contain preserved tags or escape placeholders immediately before or after source. Translate the visible Japanese message naturally, but never repeat or alter those surrounding code tokens.
 `.trim();
 const BROWSER_HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
@@ -354,7 +355,9 @@ function extractCodeTranslationSegments(source) {
     const segments = [];
     const add = (start, end, type) => {
         const segment = trimCodeSpan(source, start, end, type);
-        if (segment) segments.push(segment);
+        if (segment && !segments.some(existing => segment.start < existing.end && segment.end > existing.start)) {
+            segments.push(segment);
+        }
     };
 
     for (let index = 0; index < source.length;) {
@@ -379,6 +382,47 @@ function extractCodeTranslationSegments(source) {
                 index = end + 1;
                 continue;
             }
+        }
+
+        if (source[index] === "<") {
+            const end = source.indexOf(">", index + 1);
+            if (end >= 0) {
+                const tagText = source.slice(index, end + 1);
+                for (const match of tagText.matchAll(/\[([^\]]+)\]/gu)) {
+                    const start = index + match.index + 1;
+                    add(start, start + match[1].length, "label");
+                }
+                for (let tagIndex = index; tagIndex < end; tagIndex++) {
+                    if (!JAPANESE_CHARACTERS.test(source[tagIndex])) continue;
+                    let labelEnd = tagIndex + 1;
+                    while (labelEnd < end && JAPANESE_CHARACTERS.test(source[labelEnd])) labelEnd++;
+                    add(tagIndex, labelEnd, "label");
+                    tagIndex = labelEnd - 1;
+                }
+                index = end + 1;
+                continue;
+            }
+        }
+        if (source[index] === "\\") {
+            const escapeEnd = /^\\[A-Za-z]+(?:\[[^\]]*\])?/u.exec(source.slice(index))?.[0].length || 1;
+            index += escapeEnd;
+            continue;
+        }
+        if (source[index] === "%" && /\d/u.test(source[index + 1] || "")) {
+            index += 2;
+            continue;
+        }
+        if (JAPANESE_CHARACTERS.test(source[index])) {
+            let end = index + 1;
+            while (end < source.length
+                && !source.startsWith("//", end)
+                && !source.startsWith("/*", end)
+                && !/[<\\%\["'`]/u.test(source[end])) {
+                end++;
+            }
+            add(index, end, "text");
+            index = end;
+            continue;
         }
 
         const quote = source[index];
