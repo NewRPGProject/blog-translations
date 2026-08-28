@@ -17,7 +17,7 @@
     table { width: 100%; border-collapse: collapse; min-width: 720px; }
     th, td { padding: 9px 10px; border-bottom: 1px solid #d8dee4; text-align: left; vertical-align: middle; }
     th { position: sticky; top: 0; background: #f6f8fa; font-size: 13px; white-space: nowrap; }
-    td.done { width: 36px; color: #1a7f37; font-weight: bold; text-align: center; }
+    td.done { width: 36px; color: #1a7f37; font-family: "Arial Unicode MS", Arial, sans-serif; font-size: 22px; font-weight: bold; line-height: 1; text-align: center; }
     td.title { min-width: 280px; }
     td.id, td.updated { white-space: nowrap; }
     tr.untranslated { background: #fffdf2; }
@@ -38,7 +38,7 @@
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>翻訳</th><th>記事名</th><th>記事</th><th>更新日</th><th>編集</th></tr></thead>
+        <thead><tr><th>翻訳</th><th>編集</th><th>記事名</th><th>記事</th><th>更新日</th></tr></thead>
         <tbody id="articles"></tbody>
       </table>
     </div>
@@ -91,6 +91,10 @@
         translated.textContent = article.translated ? "○" : "";
         row.append(translated);
 
+        const edit = document.createElement("td");
+        addLink(edit, `https://blog.seesaa.jp/cms/article/edit/input?id=${encodeURIComponent(article.id)}`, "編集");
+        row.append(edit);
+
         const title = document.createElement("td");
         title.className = "title";
         title.textContent = article.title || "—";
@@ -105,10 +109,6 @@
         updated.className = "updated";
         updated.textContent = formatDate(article.updatedAt);
         row.append(updated);
-
-        const edit = document.createElement("td");
-        addLink(edit, `https://blog.seesaa.jp/cms/article/edit/input?id=${encodeURIComponent(article.id)}`, "編集");
-        row.append(edit);
         table.append(row);
       }
       status.textContent = `${articles.length} / ${state.articles.length} 件`;
