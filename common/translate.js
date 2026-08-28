@@ -3,7 +3,8 @@
 
 const STORAGE_KEY = "nrp-blog-language";
 const ENGLISH_LOADING_CLASS = "nrp-en-loading";
-const INITIAL_REVEAL_TIMEOUT_MS = 900;
+// Github障害時や通信が遅い環境でもこの時間（ms）で解除
+const INITIAL_REVEAL_TIMEOUT_MS = 500;
 const TRANSLATION_BASE_URL =
     "https://newrpgproject.github.io/blog-translations/articles/";
 
@@ -319,7 +320,10 @@ function normalizeText(text) {
         .replace(
             /^[\s\u3000]+|[\s\u3000]+$/g,
             ""
-        );
+        )
+        // Match the normalization used when generating JSON. In particular,
+        // Seesaa may emit an ideographic space (U+3000) inside a sentence.
+        .replace(/\s+/g, " ");
 }
 
 function translateTextNodes(
