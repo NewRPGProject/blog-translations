@@ -10,19 +10,24 @@ const GLOSSARY_DIRECTORY = join(REPOSITORY_DIRECTORY, "glossary");
 const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
-const EXTRACTION_VERSION = 6;
+const EXTRACTION_VERSION = 7;
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
 This is a correction retry because the previous result was incomplete or included an HTML anchor tag.
 Translate every Japanese word and character in source into natural English, including isolated terms embedded in an otherwise English sentence.
-Do not copy Japanese from source or context into translation. Keep only URLs, file names, code, identifiers, escape characters, version numbers, and Japanese string literals inside code unchanged.
+Do not copy Japanese from source or context into translation. Keep only URLs, file names, code identifiers, escape characters, and version numbers unchanged.
 Never output HTML tags such as <a> or </a>. Context is for understanding only, never for copying.
 Return only the replacement text for each supplied source item.
 `.trim();
 const LINK_CONTEXT_INSTRUCTION = `
 In context, [[link: ...]] represents the text inside an original HTML link. It is context only: never output the markers, HTML tags, or the linked text unless that text is also in source.
 When source immediately follows a link marker, translate it as a grammatical continuation of that link text. Include an ordinary ASCII space at the boundary when English requires one, and never repeat the link text.
+`.trim();
+const LINK_LINE_INSTRUCTION = `
+Items whose type is "line" are complete logical lines containing one or more links. [[LINK_n]] and [[/LINK_n]] are immutable link placeholders, not literal text.
+Translate the entire line naturally. Keep every placeholder exactly once, paired, and in its original numerical order. You may move a placeholder anywhere needed for natural English word order.
+Never output HTML tags, URLs, or any text outside the translation template.
 `.trim();
 const CODE_FRAGMENT_INSTRUCTION = `
 Items whose type starts with "code-" are natural-language fragments extracted from a code example. Translate only that fragment.
@@ -459,6 +464,32 @@ function extractCodeTranslationSegments(source) {
     return segments;
 }
 
+function createLinkedLine(segments, id) {
+    if (segments.some(segment => segment.type === "code")) return null;
+    const parts = segments
+        .filter(segment => segment.source)
+        .map(segment => ({ source: segment.source, link: segment.link }));
+    if (!parts.some(part => part.link) || !parts.some(part => JAPANESE_CHARACTERS.test(part.source))) {
+        return null;
+    }
+
+    let linkIndex = 0;
+    const source = parts.map(part => {
+        if (!part.link) return part.source;
+        linkIndex++;
+        part.linkIndex = linkIndex;
+        return `[[LINK_${linkIndex}]]${part.source}[[/LINK_${linkIndex}]]`;
+    }).join("");
+    return {
+        id,
+        type: "line",
+        source,
+        sourceHash: hash(source),
+        context: source,
+        parts
+    };
+}
+
 function parseBlocks(articleHtml, title) {
     const blocks = [{
         id: "title",
@@ -468,6 +499,7 @@ function parseBlocks(articleHtml, title) {
         context: title
     }];
     const counters = new Map();
+    const linkedLines = [];
     const stack = [];
     const lines = [];
     let line = [];
@@ -524,6 +556,14 @@ function parseBlocks(articleHtml, title) {
     finishLine();
 
     for (const segments of lines) {
+        const linkedLine = createLinkedLine(
+            segments,
+            `line-${String(linkedLines.length + 1).padStart(3, "0")}`
+        );
+        if (linkedLine) {
+            linkedLines.push(linkedLine);
+            continue;
+        }
         const context = renderContext(segments);
         for (let index = 0; index < segments.length; index++) {
             const segment = segments[index];
@@ -553,10 +593,10 @@ function parseBlocks(articleHtml, title) {
         }
     }
 
-    if (blocks.length === 1) {
+    if (blocks.length === 1 && linkedLines.length === 0) {
         fail("記事本文から翻訳対象の日本語を取得できませんでした。");
     }
-    return blocks;
+    return { blocks, linkedLines };
 }
 
 function createChunks(blocks) {
@@ -626,6 +666,7 @@ async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     const instructions = [
         rules,
         LINK_CONTEXT_INSTRUCTION,
+        blocks.some(block => block.type === "line") ? LINK_LINE_INSTRUCTION : null,
         blocks.some(block => block.type.startsWith("code-")) ? CODE_FRAGMENT_INSTRUCTION : null,
         retry ? RETRY_TRANSLATION_INSTRUCTION : null,
         glossary ? `Required glossary:\n${glossary}` : null
@@ -684,6 +725,17 @@ async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     };
 }
 
+function hasValidLinkTemplate(block, translation) {
+    if (block.type !== "line") return true;
+    const tokens = value => [...String(value).matchAll(/\[\[(\/?LINK_\d+)\]\]/gu)]
+        .map(match => match[1]);
+    const sourceTokens = tokens(block.source);
+    const translationTokens = tokens(translation);
+    return sourceTokens.length > 0
+        && sourceTokens.length === translationTokens.length
+        && sourceTokens.every((token, index) => token === translationTokens[index]);
+}
+
 function addUsage(total, addition) {
     total.input += addition.input_tokens || 0;
     total.output += addition.output_tokens || 0;
@@ -702,7 +754,9 @@ async function translateSimpleBlocks(blocks, apiKey, rules, glossary) {
                 retryBlocks.push({ block, initialTranslation: null });
                 continue;
             }
-            if (hasUntranslatedJapanese(translation) || /<\/?a\b/iu.test(translation)) {
+            if (hasUntranslatedJapanese(translation)
+                || /<\/?a\b/iu.test(translation)
+                || !hasValidLinkTemplate(block, translation)) {
                 retryBlocks.push({ block, initialTranslation: translation });
                 continue;
             }
@@ -725,7 +779,8 @@ async function translateSimpleBlocks(blocks, apiKey, rules, glossary) {
                 const translation = retryResult.translations.get(block.id);
                 if (typeof translation !== "string" || !translation.trim()
                     || hasUntranslatedJapanese(translation)
-                    || /<\/?a\b/iu.test(translation)) {
+                    || /<\/?a\b/iu.test(translation)
+                    || !hasValidLinkTemplate(block, translation)) {
                     fail(`翻訳漏れまたは未返却を検出しました: ${block.id} (${block.source} → ${initialTranslation || "翻訳なし"} → ${translation || "翻訳なし"})`);
                 }
                 block.translation = translation;
@@ -855,15 +910,34 @@ function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = 
     return pending;
 }
 
-function sourceHashFor(blocks) {
-    return hash(blocks.map(block => {
+function splitReusableLines(lines, existingArticle, forceRetranslate = false) {
+    const previous = new Map((existingArticle?.lines || [])
+        .filter(line => typeof line?.translation === "string" && line.translation.trim())
+        .map(line => [line.sourceHash || hash(line.source), line.translation]));
+    const pending = [];
+    for (const line of lines) {
+        const translation = previous.get(line.sourceHash);
+        if (!forceRetranslate && translation && !hasUntranslatedJapanese(translation)
+            && hasValidLinkTemplate(line, translation)) {
+            line.translation = translation;
+        } else {
+            pending.push(line);
+        }
+    }
+    return pending;
+}
+
+function sourceHashFor(blocks, linkedLines = []) {
+    const blockHash = blocks.map(block => {
         const codeSignature = block.type === "code"
             ? hash((block.codeSegments || [])
                 .map(segment => `${segment.type}:${segment.start}:${segment.end}:${segment.source}`)
                 .join("\n"))
             : "";
         return `${block.type}:${block.sourceHash}:${contextHash(block)}:${codeSignature}`;
-    }).join("\n"));
+    });
+    const lineHash = linkedLines.map(line => `line:${line.sourceHash}`);
+    return hash([...blockHash, ...lineHash].join("\n"));
 }
 
 function sameContext(left, right) {
@@ -937,7 +1011,7 @@ function synchronizeTextsFromBlocks(article) {
     }
 }
 
-function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
+function makeOutput({ articleId, articleUrl, lastModified, blocks, linkedLines }) {
     const titleBlock = blocks.find(block => block.type === "title");
     const texts = Object.fromEntries(blocks
         .filter(block => block.type !== "title")
@@ -947,11 +1021,15 @@ function makeOutput({ articleId, articleUrl, lastModified, blocks }) {
         sourceUrl: articleUrl,
         extractionVersion: EXTRACTION_VERSION,
         sourceUpdatedAt: lastModified || null,
-        sourceHash: sourceHashFor(blocks),
+        sourceHash: sourceHashFor(blocks, linkedLines),
         translatedAt: new Date().toISOString(),
         title: titleBlock.translation,
         blocks: blocks.map(({ context, fixedTranslation, codeSegments, linkAdjacent, ...block }) => ({
             ...block,
+            contextHash: contextHash({ context })
+        })),
+        lines: linkedLines.map(({ context, ...line }) => ({
+            ...line,
             contextHash: contextHash({ context })
         })),
         texts
@@ -1014,8 +1092,8 @@ async function main() {
         console.log(`記事を確認します: ${target.url}`);
         const html = await fetchText(target.url);
         const title = extractTitle(html);
-        const blocks = parseBlocks(extractArticleHtml(html), title);
-        const newSourceHash = sourceHashFor(blocks);
+        const { blocks, linkedLines } = parseBlocks(extractArticleHtml(html), title);
+        const newSourceHash = sourceHashFor(blocks, linkedLines);
         const rememberArticleState = () => {
             if (target.lastModified) {
                 state.articles[target.articleId] = {
@@ -1049,27 +1127,41 @@ async function main() {
             // needlessly retranslate already-reviewed articles.
             Number.isInteger(existingArticle?.extractionVersion)
                 && existingArticle.extractionVersion < 3,
-            existingArticle?.extractionVersion !== EXTRACTION_VERSION
+            // Code extraction was introduced in version 6. Version 7 only
+            // adds logical link lines, so do not spend API usage redoing
+            // already translated code blocks during this migration.
+            Number.isInteger(existingArticle?.extractionVersion)
+                && existingArticle.extractionVersion < 6
         );
-        console.log(`翻訳対象: ${blocks.length}ブロック（変更・追加: ${pending.length}ブロック）`);
+        const pendingLines = splitReusableLines(
+            linkedLines,
+            forceRetranslate ? null : existingArticle,
+            forceRetranslate
+        );
+        console.log(`翻訳対象: ${blocks.length}ブロック + ${linkedLines.length}リンク行（変更・追加: ${pending.length}ブロック + ${pendingLines.length}リンク行）`);
         if (dryRun) continue;
 
-        if (!forceRetranslate && existingArticle && pending.length === 0) {
+        if (!forceRetranslate && existingArticle && pending.length === 0 && pendingLines.length === 0) {
             rememberArticleState();
             console.log(`翻訳内容に差分はありません: articles/${target.articleId}.json`);
             continue;
         }
 
-        if (pending.length > 0) {
+        if (pending.length > 0 || pendingLines.length > 0) {
             const glossary = selectRelevantGlossary(
                 await readOptionalConfiguration("glossary.json"),
-                pending
+                [...pending, ...pendingLines]
             );
             const articleUsage = await translateBlocks(pending, apiKey, rules, glossary);
             usage.input += articleUsage.input;
             usage.output += articleUsage.output;
             usage.reasoning += articleUsage.reasoning;
             usage.total += articleUsage.total;
+            const lineUsage = await translateSimpleBlocks(pendingLines, apiKey, rules, glossary);
+            usage.input += lineUsage.input;
+            usage.output += lineUsage.output;
+            usage.reasoning += lineUsage.reasoning;
+            usage.total += lineUsage.total;
         }
 
         repairLinkBoundarySpaces(blocks);
@@ -1080,7 +1172,8 @@ async function main() {
             articleId: target.articleId,
             articleUrl: target.url,
             lastModified: target.lastModified,
-            blocks
+            blocks,
+            linkedLines
         });
         await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
         rememberArticleState();
