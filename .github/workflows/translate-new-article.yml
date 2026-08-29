@@ -44,6 +44,17 @@ jobs:
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
 
+      - name: Synchronize runner workspace with remote main
+        run: |
+          # A self-hosted runner reuses its working directory. Do not carry
+          # commits or conflict state from a previous failed run into this one.
+          git fetch origin main
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git checkout --force -B main origin/main
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git clean -ffdx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -79,8 +90,6 @@ jobs:
             Write-Host "Commit candidates:"
             $changes | ForEach-Object { Write-Host $_ }
             git commit -m "Update blog translations"
-            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-            git pull --rebase origin main
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
             git push
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
