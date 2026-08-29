@@ -1,0 +1,738 @@
+{
+  "articleId": "521244368",
+  "sourceUrl": "https://newrpg.seesaa.net/article/521244368.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": "2026-08-29T18:53:55+09:00",
+  "sourceHash": "7ad99e98aed82f5aa4b2673b42ec327f38fdc8539ab99314683d74aa24996cff",
+  "translatedAt": "2026-08-29T09:57:39.266Z",
+  "title": "Automatically Wrap Text at Word Boundaries [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "文章を単語単位で自動改行する【RPGツクールMZプラグイン】",
+      "sourceHash": "61b8cc92fa96ace96b54d010bb29a4eedbe54afceae0f7987e0806fba1672dcc",
+      "translation": "Automatically Wrap Text at Word Boundaries [RPG Maker MZ Plugin]",
+      "contextHash": "61b8cc92fa96ace96b54d010bb29a4eedbe54afceae0f7987e0806fba1672dcc"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "半角スペースで単語の区切りを判定し、文章をウィンドウの幅に合わせて適切に改行します。",
+      "sourceHash": "93768b34050ad8e7618ce76d0003bd55bffc19fab5da14112317e1c66ab6ada7",
+      "translation": "Word boundaries are determined by half-width spaces, and the text is wrapped appropriately to fit the window width.",
+      "contextHash": "93768b34050ad8e7618ce76d0003bd55bffc19fab5da14112317e1c66ab6ada7"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "主に英語などのアルファベットを使用した言語を想定しています。",
+      "sourceHash": "b322b794cdb91d3dde3fbb5b111934f3472983e82e07bfac06e77be12a2803e6",
+      "translation": "It is primarily intended for languages that use the alphabet, such as English.",
+      "contextHash": "b322b794cdb91d3dde3fbb5b111934f3472983e82e07bfac06e77be12a2803e6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "日本語などの全角文字についても、ウィンドウ幅を越えた文字については自動で改行を行います",
+      "sourceHash": "d7056140d75d4ce6e0e2b7404ba75c796ec20bc824481d28c6c1dfe5bd4bd881",
+      "translation": "For full-width characters, such as Japanese, characters that exceed the window width are also wrapped automatically.",
+      "contextHash": "d7056140d75d4ce6e0e2b7404ba75c796ec20bc824481d28c6c1dfe5bd4bd881"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "適用後",
+      "sourceHash": "6400f882a0668e4c4d368e208478357e39b638c4a7cb71b95d83a607e4faf137",
+      "translation": "After Applying",
+      "contextHash": "6400f882a0668e4c4d368e208478357e39b638c4a7cb71b95d83a607e4faf137"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "適用前",
+      "sourceHash": "9d9a7f78baadad4766070cbbfb04b23bb0f4eea641d4797a80444854ed5b3b81",
+      "translation": "Before Applying",
+      "contextHash": "9d9a7f78baadad4766070cbbfb04b23bb0f4eea641d4797a80444854ed5b3b81"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "その他にも、通常のメッセージウィンドウやスキルなどの説明（ヘルプウィンドウ）にも適用できます。",
+      "sourceHash": "3e4c80f1697c938289764eed5c8f3ae0b3b16b39f65bd767729de76f3161d5c8",
+      "translation": "It can also be applied to regular message windows and descriptions for skills and other items (help windows).",
+      "contextHash": "3e4c80f1697c938289764eed5c8f3ae0b3b16b39f65bd767729de76f3161d5c8"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ただし、ＭＺのエディタは折り返しに対応していないので入力や確認が難しく、あまり実用的ではないかもしれません。",
+      "sourceHash": "b5dac663de6950e6e4d5c81f5057ae2d709d24136a4f2f870d5cbf3e6252ac11",
+      "translation": "However, since the MZ editor does not support text wrapping, entering and checking text can be difficult, so this may not be very practical.",
+      "contextHash": "b5dac663de6950e6e4d5c81f5057ae2d709d24136a4f2f870d5cbf3e6252ac11"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the plugin on in the plugin manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is exclusively for MZ.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_WordWrap.js",
+      "sourceHash": "7a39ac20279bb5628db0faf1495d01b57fb9b8b2a63ecd9fa4cceb133480c730",
+      "translation": "NRP_WordWrap.js",
+      "contextHash": "1f74f961d1e75c29ea1f1f741c2b7e7968bf0b4aab647b0423636179130fc57e"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "外部プラグイン対応について",
+      "sourceHash": "10c82a39faf019be698d41fbde85e778993c8002f490202df1f36f0b26431b24",
+      "translation": "Compatibility with External Plugins",
+      "contextHash": "10c82a39faf019be698d41fbde85e778993c8002f490202df1f36f0b26431b24"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "プラグインパラメータの『追加ウィンドウ』にウィンドウ名を登録すれば、外部プラグインで追加されたウィンドウへも対応できます。",
+      "sourceHash": "52625d0d1df199338d55c799cddff3786a5cf99d247a284ee29d64b534737be9",
+      "translation": "To support windows added by external plugins, register their window names in the plugin parameter “Additional Windows.”",
+      "contextHash": "52625d0d1df199338d55c799cddff3786a5cf99d247a284ee29d64b534737be9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ウィンドウ名を調べたい場合は対象プラグイン内を「Window_」で検索して、それっぽい名称を見つけてください。",
+      "sourceHash": "f5992f939887f537a734163b719c5d3a86f82b6cc30872f00eebb3b00dd78b24",
+      "translation": "To find a window name, search the target plugin for “Window_” and look for a likely name.",
+      "contextHash": "f5992f939887f537a734163b719c5d3a86f82b6cc30872f00eebb3b00dd78b24"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "注意点として、対象プラグインが文字列の描画について独自の実装をしている場合は、処理を上書きしてしまう可能性があります。",
+      "sourceHash": "7114458e3f9f508811d6966aef602f7b0f45995722940099a44e552bb7f4ac24",
+      "translation": "Please note that if the target plugin has its own implementation for drawing text, this plugin may overwrite it.",
+      "contextHash": "7114458e3f9f508811d6966aef602f7b0f45995722940099a44e552bb7f4ac24"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "また、外部プラグインの実装内容によっては、このプラグインでは対応できないこともあります。その場合は、ＡＩに該当プラグイン向けの処理を書いてもらうなり、個別に対応するしかありません。",
+      "sourceHash": "8677b8168461c9fdcf446b3aa8a32c3381b6e4f2f3b08997095ae8187f7b4058",
+      "translation": "Depending on how the external plugin is implemented, this plugin may not be able to support it. In that case, you will have to have an AI write processing for the relevant plugin or handle it individually.",
+      "contextHash": "8677b8168461c9fdcf446b3aa8a32c3381b6e4f2f3b08997095ae8187f7b4058"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "行頭禁則文字について（ver1.02）",
+      "sourceHash": "d1813d574710abb6d2b7ee8b41d11e9748955c02824f0e8d4a1475dc7c7be57d",
+      "translation": "About Characters Prohibited at the Beginning of a Line (ver1.02)",
+      "contextHash": "d1813d574710abb6d2b7ee8b41d11e9748955c02824f0e8d4a1475dc7c7be57d"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "日本語の文章ルールとして句読点（。、）を始めとした一部の文字は、行頭に来ないように調整するというものがあります。",
+      "sourceHash": "b850fb9fb1d04ccf87515f414ce11c6968f8611594c5d73f920c6497991b50b2",
+      "translation": "As a rule of Japanese writing, certain characters, including punctuation marks (。、), are adjusted so that they do not appear at the beginning of a line.",
+      "contextHash": "b850fb9fb1d04ccf87515f414ce11c6968f8611594c5d73f920c6497991b50b2"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "参考：禁則文字・追い込み・追い出しを解説",
+      "sourceHash": "58c61c6d400bae7c60852e8c381382a4d660b1c750bb0c7b814f0f96f3ab0de2",
+      "translation": "Reference: An Explanation of Prohibited Characters, Pulling In, and Pushing Out",
+      "contextHash": "58c61c6d400bae7c60852e8c381382a4d660b1c750bb0c7b814f0f96f3ab0de2"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://note.morisawa.co.jp/n/nc9e6aac69336",
+      "sourceHash": "7d298f15d996d788c59b8253ddbf65aeb340424d5da498ba02ecf523b599a2f0",
+      "translation": "https://note.morisawa.co.jp/n/nc9e6aac69336",
+      "contextHash": "67603cdb9092d1883bf6ea54fae870febd8119e8f3ef38a0b88903a4ca146410"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "適用後 ← 適用後",
+      "sourceHash": "9cc9e29b3000e55a1794c4664352a8b01cfb28e2972e52c06e9af36950dcbe8f",
+      "translation": "After Applying ← After Applying",
+      "contextHash": "9cc9e29b3000e55a1794c4664352a8b01cfb28e2972e52c06e9af36950dcbe8f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "行頭禁則文字に設定した文字を「追い出し」または「追い込み」の対象にすることができます。ただし「追い込み」を使用する場合は、行末にある程度のスペースがないと不自然になります。",
+      "sourceHash": "ee7a0fb5a81ba9e03fc5fe596389bde4e304aa2ead37e660f74b100b575af69d",
+      "translation": "Characters set as prohibited at the beginning of a line can be made subject to “pushing out” or “pulling in.” However, when using “pulling in,” it will look unnatural unless there is a certain amount of space at the end of the line.",
+      "contextHash": "ee7a0fb5a81ba9e03fc5fe596389bde4e304aa2ead37e660f74b100b575af69d"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※初期設定では「。、」のみ対象にしています。",
+      "sourceHash": "26b0a59947da584905e01301a7344d904b9b5931454fd71f9bc5db8f3b5602e4",
+      "translation": "※By default, only “。、” is included.",
+      "contextHash": "26b0a59947da584905e01301a7344d904b9b5931454fd71f9bc5db8f3b5602e4"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "全てのウィンドウ（AllWindows）",
+      "sourceHash": "36804c9d11f80d6fd7df51ca9a4f8bf3c00777075b9076c018f93f7b542a0d40",
+      "translation": "All Windows (AllWindows)",
+      "contextHash": "36804c9d11f80d6fd7df51ca9a4f8bf3c00777075b9076c018f93f7b542a0d40"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "全てのウィンドウを対象にします。",
+      "sourceHash": "13a0d45aa122c041e6a34c7ac58004334da85276d39244ace84e9744bf2a28bc",
+      "translation": "Applies to all windows.",
+      "contextHash": "13a0d45aa122c041e6a34c7ac58004334da85276d39244ace84e9744bf2a28bc"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "オンにすると以降のパラメータは無視されます。",
+      "sourceHash": "ae80fb4e60dcc76af5dcd316a436c00034a68d260a3f98fba803adbecb3dfa32",
+      "translation": "When turned on, all subsequent parameters are ignored.",
+      "contextHash": "ae80fb4e60dcc76af5dcd316a436c00034a68d260a3f98fba803adbecb3dfa32"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※影響が大きいので使わないほうが無難です。",
+      "sourceHash": "76d0d3b4021cb0d3e5a38f71472ae95b0c27752c667b32542541d32cf55bb9d2",
+      "translation": "※Since this has a significant impact, it is safer not to use it.",
+      "contextHash": "76d0d3b4021cb0d3e5a38f71472ae95b0c27752c667b32542541d32cf55bb9d2"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "メッセージウィンドウ（Window_Message）",
+      "sourceHash": "61bc938da5a292173574cf14fe50f7c37f07cfdb5eb4316886f056451039646e",
+      "translation": "Message Window (Window_Message)",
+      "contextHash": "61bc938da5a292173574cf14fe50f7c37f07cfdb5eb4316886f056451039646e"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "メッセージウィンドウを対象にします。",
+      "sourceHash": "28e670feb331ef0690e7866111c117aaad8debb5bbf018eb78709674077c951c",
+      "translation": "Applies to the message window.",
+      "contextHash": "28e670feb331ef0690e7866111c117aaad8debb5bbf018eb78709674077c951c"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "ヘルプウィンドウ（Window_Help）",
+      "sourceHash": "1a05b1aa72875b72b6e3d48243b1b1d95fab5503774394f43091bd4dca140b98",
+      "translation": "Help Window (Window_Help)",
+      "contextHash": "1a05b1aa72875b72b6e3d48243b1b1d95fab5503774394f43091bd4dca140b98"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "ヘルプウィンドウを対象にします。",
+      "sourceHash": "06fbb482d95e00b70c47865e23d0a153059929c9fbe8349fa3c917a912dc4593",
+      "translation": "Applies to the help window.",
+      "contextHash": "06fbb482d95e00b70c47865e23d0a153059929c9fbe8349fa3c917a912dc4593"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "スクロール文章（Window_ScrollText）",
+      "sourceHash": "4b3facd915d1a141af2bdd0bfe3dc83d1b3f3bd356e7cba18d88c1bc86069383",
+      "translation": "Scrolling Text (Window_ScrollText)",
+      "contextHash": "4b3facd915d1a141af2bdd0bfe3dc83d1b3f3bd356e7cba18d88c1bc86069383"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "スクロール文章を対象にします。",
+      "sourceHash": "ef2f0a35a4871a4f3ed601f9bf278fba41626e2c6bbe74cf92d73363e6526008",
+      "translation": "Applies to scrolling text.",
+      "contextHash": "ef2f0a35a4871a4f3ed601f9bf278fba41626e2c6bbe74cf92d73363e6526008"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "追加ウィンドウ（AddWindowList）",
+      "sourceHash": "64ebc9fa3c0005357255084d68b28da1741159206027c59501424cae17fdc993",
+      "translation": "Additional Windows (AddWindowList)",
+      "contextHash": "64ebc9fa3c0005357255084d68b28da1741159206027c59501424cae17fdc993"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "対象となるウィンドウ名を追加します。",
+      "sourceHash": "bb9ba6ab824e298a5504d0a74b574b4821b6cab38242e7c3c29cc295fb5a47ee",
+      "translation": "Adds the names of windows to target.",
+      "contextHash": "bb9ba6ab824e298a5504d0a74b574b4821b6cab38242e7c3c29cc295fb5a47ee"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "例：Window_Glossary",
+      "sourceHash": "052c6548068eaeff1e6aa2e454c081a66778ed12ea268890f6d4dec3bfce85ac",
+      "translation": "Example: Window_Glossary",
+      "contextHash": "052c6548068eaeff1e6aa2e454c081a66778ed12ea268890f6d4dec3bfce85ac"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "行頭禁則の方法（BeginingProhibitedType）",
+      "sourceHash": "58adfd02aa6302dcba62e39cbd042e0387d6d98e97a8552c1ccec2ff71ca230f",
+      "translation": "Beginning Prohibition Method (BeginingProhibitedType)",
+      "contextHash": "58adfd02aa6302dcba62e39cbd042e0387d6d98e97a8552c1ccec2ff71ca230f"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "行頭文字の対処方法です。",
+      "sourceHash": "61e8a301418ee1cfa378291b1e429f53c04d455038ce4a73431a7a1ce5a90596",
+      "translation": "Specifies how to handle characters at the beginning of a line.",
+      "contextHash": "61e8a301418ee1cfa378291b1e429f53c04d455038ce4a73431a7a1ce5a90596"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "追い込みの場合はウィンドウ右端に余白が必要です。",
+      "sourceHash": "02f9e1824f1848430772b516a9a6a5345dd4b63586da33182e2adb44e1d56e09",
+      "translation": "When using pulling in, space is required at the right edge of the window.",
+      "contextHash": "02f9e1824f1848430772b516a9a6a5345dd4b63586da33182e2adb44e1d56e09"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "行頭禁則文字（BeginingProhibitedCharacters）",
+      "sourceHash": "fea13c3860e8b1259a36d56ca5726641ad3817167a805c4940990cc87be71b1b",
+      "translation": "Characters Prohibited at the Beginning of a Line (BeginingProhibitedCharacters)",
+      "contextHash": "fea13c3860e8b1259a36d56ca5726641ad3817167a805c4940990cc87be71b1b"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "行頭への使用を禁止する文字です。",
+      "sourceHash": "61e875ff9e9a7de229871ad1f90b2bd7fd1c3ab2d51a72fdec60b93d353d3060",
+      "translation": "Characters prohibited from being used at the beginning of a line.",
+      "contextHash": "61e875ff9e9a7de229871ad1f90b2bd7fd1c3ab2d51a72fdec60b93d353d3060"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "※初期設定では「。、」のみ対象にしています。",
+      "sourceHash": "26b0a59947da584905e01301a7344d904b9b5931454fd71f9bc5db8f3b5602e4",
+      "translation": "※By default, only “。、” is included.",
+      "contextHash": "26b0a59947da584905e01301a7344d904b9b5931454fd71f9bc5db8f3b5602e4"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "上記は[[LINK_1]]ゲーム内用語辞典プラグイン（SceneGlossary.js）[[/LINK_1]]に対して単語単位での改行を適用した例です。",
+      "sourceHash": "919bf22904caf7252047c7c972ffd0b471b782d2b7840f8c57cbe8b0e18e3e88",
+      "parts": [
+        {
+          "source": "上記は",
+          "link": false
+        },
+        {
+          "source": "ゲーム内用語辞典プラグイン（SceneGlossary.js）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対して単語単位での改行を適用した例です。",
+          "link": false
+        }
+      ],
+      "translation": "The above is an example of applying word-based line breaks to the [[LINK_1]]in-game glossary plugin (SceneGlossary.js)[[/LINK_1]].",
+      "contextHash": "919bf22904caf7252047c7c972ffd0b471b782d2b7840f8c57cbe8b0e18e3e88"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "もしやりたい場合は、[[LINK_1]]MZ用テキスト特化エディタ[[/LINK_1]]と併用することである程度は解決できるかもしれません。",
+      "sourceHash": "c81431acee564188d4f0476c01afea4179c48afa26f5a74b5b5d8bdd7e10ac18",
+      "parts": [
+        {
+          "source": "もしやりたい場合は、",
+          "link": false
+        },
+        {
+          "source": "MZ用テキスト特化エディタ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用することである程度は解決できるかもしれません。",
+          "link": false
+        }
+      ],
+      "translation": "If you want to do this, using it together with the [[LINK_1]]text-focused editor for MZ[[/LINK_1]] may provide a partial solution.",
+      "contextHash": "c81431acee564188d4f0476c01afea4179c48afa26f5a74b5b5d8bdd7e10ac18"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]外部プラグイン対応について[[/LINK_1]]",
+      "sourceHash": "fc27343aea0934f0355a442e177aa7c8fdf9a897c06df2f953527e5d51670094",
+      "parts": [
+        {
+          "source": "外部プラグイン対応について",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Support for External Plugins[[/LINK_1]]",
+      "contextHash": "fc27343aea0934f0355a442e177aa7c8fdf9a897c06df2f953527e5d51670094"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]行頭禁則文字について（ver1.02）[[/LINK_1]]",
+      "sourceHash": "72e043bce5ac4e33679c60727786277e24a71a93141f3f72d1079822463ea528",
+      "parts": [
+        {
+          "source": "行頭禁則文字について（ver1.02）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About Line-Initial Prohibited Characters (ver1.02)[[/LINK_1]]",
+      "contextHash": "72e043bce5ac4e33679c60727786277e24a71a93141f3f72d1079822463ea528"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]全てのウィンドウ（AllWindows）[[/LINK_1]]",
+      "sourceHash": "28b5e9534f6a73428a6d2dbee7253b1611ea018ccb4510a8dc826005d1115c2a",
+      "parts": [
+        {
+          "source": "全てのウィンドウ（AllWindows）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]All Windows (AllWindows)[[/LINK_1]]",
+      "contextHash": "28b5e9534f6a73428a6d2dbee7253b1611ea018ccb4510a8dc826005d1115c2a"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージウィンドウ（Window_Message）[[/LINK_1]]",
+      "sourceHash": "a2d8229d245ca65e4feb7a6759d3e436ec869eb2f638465e43916de0ec812d4c",
+      "parts": [
+        {
+          "source": "メッセージウィンドウ（Window_Message）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Message Window (Window_Message)[[/LINK_1]]",
+      "contextHash": "a2d8229d245ca65e4feb7a6759d3e436ec869eb2f638465e43916de0ec812d4c"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ヘルプウィンドウ（Window_Help）[[/LINK_1]]",
+      "sourceHash": "ed47bc7e752948a6ed5088a8e702fe9d2cd7a06335f0d5626ec104f92514e546",
+      "parts": [
+        {
+          "source": "ヘルプウィンドウ（Window_Help）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Help Window (Window_Help)[[/LINK_1]]",
+      "contextHash": "ed47bc7e752948a6ed5088a8e702fe9d2cd7a06335f0d5626ec104f92514e546"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]スクロール文章（Window_ScrollText）[[/LINK_1]]",
+      "sourceHash": "b63a2ab124385c70639b43a824b4edefb41173cc0bb771ff2aa8d56b72426052",
+      "parts": [
+        {
+          "source": "スクロール文章（Window_ScrollText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Scrolling Text (Window_ScrollText)[[/LINK_1]]",
+      "contextHash": "b63a2ab124385c70639b43a824b4edefb41173cc0bb771ff2aa8d56b72426052"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]追加ウィンドウ（AddWindowList）[[/LINK_1]]",
+      "sourceHash": "b4bf4fde75b88b9b5b4443be9a709068b3f2d78838b58a2b235c7844fe91a815",
+      "parts": [
+        {
+          "source": "追加ウィンドウ（AddWindowList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additional Windows (AddWindowList)[[/LINK_1]]",
+      "contextHash": "b4bf4fde75b88b9b5b4443be9a709068b3f2d78838b58a2b235c7844fe91a815"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]行頭禁則の方法（BeginingProhibitedType）[[/LINK_1]]",
+      "sourceHash": "a302d6c09867dbab3fc583f1062c3aea1735e344efb6f0ebf209513988b9a873",
+      "parts": [
+        {
+          "source": "行頭禁則の方法（BeginingProhibitedType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Line-Initial Prohibition Method (BeginingProhibitedType)[[/LINK_1]]",
+      "contextHash": "a302d6c09867dbab3fc583f1062c3aea1735e344efb6f0ebf209513988b9a873"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]行頭禁則文字（BeginingProhibitedCharacters）[[/LINK_1]]",
+      "sourceHash": "ea2f21c8b7a679858d5f28d0224488f312b10361ac19efdbcd877079d5d08ae3",
+      "parts": [
+        {
+          "source": "行頭禁則文字（BeginingProhibitedCharacters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Line-Initial Prohibited Characters (BeginingProhibitedCharacters)[[/LINK_1]]",
+      "contextHash": "ea2f21c8b7a679858d5f28d0224488f312b10361ac19efdbcd877079d5d08ae3"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]行頭禁則文字[[/LINK_1]]の機能を実装した。",
+      "sourceHash": "642841dcf5f0952055cc139b752eb7799b39044ea8abffe7fb39a634cd5250e1",
+      "parts": [
+        {
+          "source": "行頭禁則文字",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の機能を実装した。",
+          "link": false
+        }
+      ],
+      "translation": "Implemented the functionality for [[LINK_1]]line-initial prohibited characters[[/LINK_1]].",
+      "contextHash": "642841dcf5f0952055cc139b752eb7799b39044ea8abffe7fb39a634cd5250e1"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_AdditionalCCScene.js[[/LINK_1]]などdrawTextExを独自実装しているプラグインにも対応できるようにした。",
+      "sourceHash": "652e14e7fb3e5ca6fad65459803c596e95de6c759c976641cccebd86983734dc",
+      "parts": [
+        {
+          "source": "NRP_AdditionalCCScene.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などdrawTextExを独自実装しているプラグインにも対応できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Made it compatible with plugins such as [[LINK_1]]NRP_AdditionalCCScene.js[[/LINK_1]] that implement drawTextEx independently.",
+      "contextHash": "652e14e7fb3e5ca6fad65459803c596e95de6c759c976641cccebd86983734dc"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "例えば、この記事のトップ画像で使用している[[LINK_1]]SceneGlossary.js[[/LINK_1]]ならば、『Window_Glossary』となります。",
+      "sourceHash": "f013cf328ab26c275923f23a35c845210505020d74d5fe596de01011655d8a5d",
+      "parts": [
+        {
+          "source": "例えば、この記事のトップ画像で使用している",
+          "link": false
+        },
+        {
+          "source": "SceneGlossary.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ならば、『Window_Glossary』となります。",
+          "link": false
+        }
+      ],
+      "translation": "For example, with [[LINK_1]]SceneGlossary.js[[/LINK_1]], which is used in this article's top image, it becomes \"Window_Glossary\".",
+      "contextHash": "f013cf328ab26c275923f23a35c845210505020d74d5fe596de01011655d8a5d"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Index[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "半角スペースで単語の区切りを判定し、文章をウィンドウの幅に合わせて適切に改行します。": "Word boundaries are determined by half-width spaces, and the text is wrapped appropriately to fit the window width.",
+    "主に英語などのアルファベットを使用した言語を想定しています。": "It is primarily intended for languages that use the alphabet, such as English.",
+    "日本語などの全角文字についても、ウィンドウ幅を越えた文字については自動で改行を行います": "For full-width characters, such as Japanese, characters that exceed the window width are also wrapped automatically.",
+    "適用後": "After Applying",
+    "適用前": "Before Applying",
+    "その他にも、通常のメッセージウィンドウやスキルなどの説明（ヘルプウィンドウ）にも適用できます。": "It can also be applied to regular message windows and descriptions for skills and other items (help windows).",
+    "ただし、ＭＺのエディタは折り返しに対応していないので入力や確認が難しく、あまり実用的ではないかもしれません。": "However, since the MZ editor does not support text wrapping, entering and checking text can be difficult, so this may not be very practical.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the plugin on in the plugin manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is exclusively for MZ.",
+    "NRP_WordWrap.js": "NRP_WordWrap.js",
+    "更新履歴（History）": "Update History (History)",
+    "公開！": "Released!",
+    "外部プラグイン対応について": "Compatibility with External Plugins",
+    "プラグインパラメータの『追加ウィンドウ』にウィンドウ名を登録すれば、外部プラグインで追加されたウィンドウへも対応できます。": "To support windows added by external plugins, register their window names in the plugin parameter “Additional Windows.”",
+    "ウィンドウ名を調べたい場合は対象プラグイン内を「Window_」で検索して、それっぽい名称を見つけてください。": "To find a window name, search the target plugin for “Window_” and look for a likely name.",
+    "注意点として、対象プラグインが文字列の描画について独自の実装をしている場合は、処理を上書きしてしまう可能性があります。": "Please note that if the target plugin has its own implementation for drawing text, this plugin may overwrite it.",
+    "また、外部プラグインの実装内容によっては、このプラグインでは対応できないこともあります。その場合は、ＡＩに該当プラグイン向けの処理を書いてもらうなり、個別に対応するしかありません。": "Depending on how the external plugin is implemented, this plugin may not be able to support it. In that case, you will have to have an AI write processing for the relevant plugin or handle it individually.",
+    "行頭禁則文字について（ver1.02）": "About Characters Prohibited at the Beginning of a Line (ver1.02)",
+    "日本語の文章ルールとして句読点（。、）を始めとした一部の文字は、行頭に来ないように調整するというものがあります。": "As a rule of Japanese writing, certain characters, including punctuation marks (。、), are adjusted so that they do not appear at the beginning of a line.",
+    "参考：禁則文字・追い込み・追い出しを解説": "Reference: An Explanation of Prohibited Characters, Pulling In, and Pushing Out",
+    "https://note.morisawa.co.jp/n/nc9e6aac69336": "https://note.morisawa.co.jp/n/nc9e6aac69336",
+    "適用後 ← 適用後": "After Applying ← After Applying",
+    "行頭禁則文字に設定した文字を「追い出し」または「追い込み」の対象にすることができます。ただし「追い込み」を使用する場合は、行末にある程度のスペースがないと不自然になります。": "Characters set as prohibited at the beginning of a line can be made subject to “pushing out” or “pulling in.” However, when using “pulling in,” it will look unnatural unless there is a certain amount of space at the end of the line.",
+    "※初期設定では「。、」のみ対象にしています。": "※By default, only “。、” is included.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "全てのウィンドウ（AllWindows）": "All Windows (AllWindows)",
+    "全てのウィンドウを対象にします。": "Applies to all windows.",
+    "オンにすると以降のパラメータは無視されます。": "When turned on, all subsequent parameters are ignored.",
+    "※影響が大きいので使わないほうが無難です。": "※Since this has a significant impact, it is safer not to use it.",
+    "メッセージウィンドウ（Window_Message）": "Message Window (Window_Message)",
+    "メッセージウィンドウを対象にします。": "Applies to the message window.",
+    "ヘルプウィンドウ（Window_Help）": "Help Window (Window_Help)",
+    "ヘルプウィンドウを対象にします。": "Applies to the help window.",
+    "スクロール文章（Window_ScrollText）": "Scrolling Text (Window_ScrollText)",
+    "スクロール文章を対象にします。": "Applies to scrolling text.",
+    "追加ウィンドウ（AddWindowList）": "Additional Windows (AddWindowList)",
+    "対象となるウィンドウ名を追加します。": "Adds the names of windows to target.",
+    "例：Window_Glossary": "Example: Window_Glossary",
+    "行頭禁則の方法（BeginingProhibitedType）": "Beginning Prohibition Method (BeginingProhibitedType)",
+    "行頭文字の対処方法です。": "Specifies how to handle characters at the beginning of a line.",
+    "追い込みの場合はウィンドウ右端に余白が必要です。": "When using pulling in, space is required at the right edge of the window.",
+    "行頭禁則文字（BeginingProhibitedCharacters）": "Characters Prohibited at the Beginning of a Line (BeginingProhibitedCharacters)",
+    "行頭への使用を禁止する文字です。": "Characters prohibited from being used at the beginning of a line."
+  }
+}
