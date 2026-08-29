@@ -1,0 +1,2129 @@
+{
+  "articleId": "501099730",
+  "sourceUrl": "https://newrpg.seesaa.net/article/501099730.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "91bccee777e8ab00399c856441ae44b5daa5ba58143f62c6e35b00798da246d4",
+  "translatedAt": "2026-08-29T15:13:01.850Z",
+  "title": "[RPG Creation Tutorial] An Examination of Item Crafting Systems",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】アイテム合成システムの考察",
+      "sourceHash": "44dd331295730fa868fdd0aef82068c141d8dd9f4eadafe8c3986e11f8b3e92f",
+      "translation": "[RPG Creation Tutorial] An Examination of Item Crafting Systems",
+      "contextHash": "44dd331295730fa868fdd0aef82068c141d8dd9f4eadafe8c3986e11f8b3e92f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "アイテム合成システムとは、複数のアイテムを組み合わせることで新たなアイテムを生み出すシステムである。",
+      "sourceHash": "81407bae09666707552046715a0bad8f2a3e587ead966e2ff82c353292a8fbfc",
+      "translation": "An item crafting system is a system that creates new items by combining multiple items.",
+      "contextHash": "81407bae09666707552046715a0bad8f2a3e587ead966e2ff82c353292a8fbfc"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ドラクエシリーズやアトリエシリーズなどが有名。",
+      "sourceHash": "5176d3d8c50d1e6b48fa84e910e6617040427b36a4fe85e16b6a630b90761bb7",
+      "translation": "The Dragon Quest and Atelier series are famous examples.",
+      "contextHash": "5176d3d8c50d1e6b48fa84e910e6617040427b36a4fe85e16b6a630b90761bb7"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "『錬金』『鍛冶』『調合』『料理』『交換』など作品によって呼称が変わるが、基本的には似たようなものとなっている。",
+      "sourceHash": "f2e74fe373fe677a6bf4eddf7fb00db448ae2b175ce3b4656d2d38e7e897c48b",
+      "translation": "Although the name varies by game—such as “Alchemy,” “Blacksmithing,” “Synthesis,” “Cooking,” or “Trading”—the basic concept is similar.",
+      "contextHash": "f2e74fe373fe677a6bf4eddf7fb00db448ae2b175ce3b4656d2d38e7e897c48b"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※参考：ドラゴンクエストヒーローズの錬金釜",
+      "sourceHash": "98ae08fbb28016906b7966845742af27d51b1426da9ad1d0183cb345aa7e9a0c",
+      "translation": "※Reference: the alchemy pot from Dragon Quest Heroes",
+      "contextHash": "98ae08fbb28016906b7966845742af27d51b1426da9ad1d0183cb345aa7e9a0c"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "合成は多くの作品で採用されているが、なかなか難しいシステムだ。",
+      "sourceHash": "a967e5e97ff83125169d35cc8773069059206e2217040f8088414a9b15079e8f",
+      "translation": "Crafting is used in many games, but it is a fairly difficult system to implement.",
+      "contextHash": "a967e5e97ff83125169d35cc8773069059206e2217040f8088414a9b15079e8f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "プレイヤーに要求する手順も多い上に、開発者側に要求される作業量もそれなりに多い。",
+      "sourceHash": "c05d120533e27950fcb29628656125a8a20d386303bc7e60c3532f8f48366343",
+      "translation": "It requires players to follow many steps, while also demanding a considerable amount of work from the developers.",
+      "contextHash": "c05d120533e27950fcb29628656125a8a20d386303bc7e60c3532f8f48366343"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そんな合成システムについて、考察してみたい。",
+      "sourceHash": "72d22d1bd84444b67a623f42138584418d1479ee14bb580d5e6e97dd11f4a54c",
+      "translation": "I would like to examine such crafting systems.",
+      "contextHash": "72d22d1bd84444b67a623f42138584418d1479ee14bb580d5e6e97dd11f4a54c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "合成システムの特徴",
+      "sourceHash": "8279de4cc25004dbe1453d7e9ba55ba854d24a049391d9c621153f0d70c37b6e",
+      "translation": "Features of Crafting Systems",
+      "contextHash": "8279de4cc25004dbe1453d7e9ba55ba854d24a049391d9c621153f0d70c37b6e"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "一口に合成システムといっても、作品によって細部は異なっている。",
+      "sourceHash": "4887c46a7ff163e43783e382fec337b1a8ddf18fa3b9857b03cce520c453568a",
+      "translation": "Although they may all be called crafting systems, the details differ from game to game.",
+      "contextHash": "4887c46a7ff163e43783e382fec337b1a8ddf18fa3b9857b03cce520c453568a"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "実際には以下のような要素によって、差別化される。",
+      "sourceHash": "4371a6c4a6505a157ef92a94586e2c8ea7df35cba350fb72d8b3ea53ac39b506",
+      "translation": "In practice, they are differentiated by elements such as the following.",
+      "contextHash": "4371a6c4a6505a157ef92a94586e2c8ea7df35cba350fb72d8b3ea53ac39b506"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "合成物",
+      "sourceHash": "2941c2da2a26683063535547a8d8db2ab7a6317e158109328827fced819647ab",
+      "translation": "Crafted Items",
+      "contextHash": "2941c2da2a26683063535547a8d8db2ab7a6317e158109328827fced819647ab"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "何を素材として、何を合成するか。",
+      "sourceHash": "94b8ec57d63861d5657902e1a0ff1c1815927fb543f8e31866fe55f2a3fa87f3",
+      "translation": "What materials are used, and what is crafted?",
+      "contextHash": "94b8ec57d63861d5657902e1a0ff1c1815927fb543f8e31866fe55f2a3fa87f3"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "主に装備を中心としたアイテムが合成の生成物になることが多いが、料理なども仕組みはほぼ同じである。",
+      "sourceHash": "b02eec7500050dfa9c8ad4954ab4e34d6c247a999a194b1647e5399babf7bf46",
+      "translation": "Items, primarily equipment, are often the products of crafting, but cooking and similar systems work in much the same way.",
+      "contextHash": "b02eec7500050dfa9c8ad4954ab4e34d6c247a999a194b1647e5399babf7bf46"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "また、アイテムという枠にはこだわらず、それ以外にも応用可能である。",
+      "sourceHash": "f6029e3b050aba648643503cf156ff75a43052fb4db37b4b5d0bf0d211e4a3b1",
+      "translation": "Furthermore, crafting is not limited to items and can be applied to other things as well.",
+      "contextHash": "f6029e3b050aba648643503cf156ff75a43052fb4db37b4b5d0bf0d211e4a3b1"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "例えば、スキルの合成のようなシステムを作成してもよいし、動物やモンスターの配合なども一種の合成といってよいだろう。",
+      "sourceHash": "cae379ea3db0d3c71f96cc7ffc9145cab84cc35cd79e400097c7ea562d9cb503",
+      "translation": "For example, you could create a system for combining skills, while breeding animals or monsters could also be considered a type of crafting.",
+      "contextHash": "cae379ea3db0d3c71f96cc7ffc9145cab84cc35cd79e400097c7ea562d9cb503"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "レシピ",
+      "sourceHash": "5de53eded6f92b4484f20baf7cd2493e4729f5a774d424628d489a2985dff1b9",
+      "translation": "Recipes",
+      "contextHash": "5de53eded6f92b4484f20baf7cd2493e4729f5a774d424628d489a2985dff1b9"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "レシピ――つまり、合成するアイテムの組み合わせである。例えば、以下のようなパターンに分類される。",
+      "sourceHash": "f11769ba8323b20d9ed691414dfa470a99a452f3143a91141af53c57d67e843d",
+      "translation": "Recipes—in other words, combinations of items to craft. For example, they can be categorized into the following patterns.",
+      "contextHash": "f11769ba8323b20d9ed691414dfa470a99a452f3143a91141af53c57d67e843d"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "店や宝箱、本棚などからレシピを入手するパターン。",
+      "sourceHash": "7d5d73dff1069ca9c82d3110a5b5f07dfa41baef56f8ca9d190d3afd3671616b",
+      "translation": "A pattern in which recipes are obtained from shops, treasure chests, bookshelves, and so on.",
+      "contextHash": "7d5d73dff1069ca9c82d3110a5b5f07dfa41baef56f8ca9d190d3afd3671616b"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "比較的オーソドックスなパターン。仕様上、取り逃しが発生しやすい。",
+      "sourceHash": "b1bc4fa459418c3ff2fdf902e7e8befff63216f912c31ae12fee5dc96f34c0a0",
+      "translation": "A relatively conventional pattern. By design, it is easy for players to miss some recipes.",
+      "contextHash": "b1bc4fa459418c3ff2fdf902e7e8befff63216f912c31ae12fee5dc96f34c0a0"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "店毎に定められた選択肢で合成できるパターン。",
+      "sourceHash": "f1eec74793a16195db749050404562a2f40f7e65a460f9ef2eb9e1f367c7de04",
+      "translation": "A pattern in which crafting is possible using choices predetermined for each shop.",
+      "contextHash": "f1eec74793a16195db749050404562a2f40f7e65a460f9ef2eb9e1f367c7de04"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "自由度は下がるが、取り逃しは発生しづらい。",
+      "sourceHash": "f28cd423e69fb5dd175a8d82a6082a32cdfb8e18d41c59d78b39d0d3bcdc0f62",
+      "translation": "Although this reduces freedom, players are less likely to miss anything.",
+      "contextHash": "f28cd423e69fb5dd175a8d82a6082a32cdfb8e18d41c59d78b39d0d3bcdc0f62"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "元になる素材があれば、進化先の候補が表示されるパターン。",
+      "sourceHash": "41ea20c4de1b7575201f14e04c87f5fd7558c772c611e7adbd2fcefa3bd3d81f",
+      "translation": "A pattern in which possible evolutions are displayed when the base material is available.",
+      "contextHash": "41ea20c4de1b7575201f14e04c87f5fd7558c772c611e7adbd2fcefa3bd3d81f"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "例えば、銅の剣を所持していた場合、「銅の剣と鉄鉱石を組み合わせると鉄の剣を合成できる」ようになる。",
+      "sourceHash": "26d79852d6025a340db65f4d948c53b2212992c417f5a190b5cf6d8d20bc71c1",
+      "translation": "For example, if you possess a Copper Sword, you can combine it with Iron Ore to craft an Iron Sword.",
+      "contextHash": "26d79852d6025a340db65f4d948c53b2212992c417f5a190b5cf6d8d20bc71c1"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "レシピは存在せず、何でも合成できるパターン。",
+      "sourceHash": "a0497a815b888461b29dcd52c656995dff2c43fc0fe720a7ef6fbf0001aef66a",
+      "translation": "A pattern with no recipes, in which anything can be crafted.",
+      "contextHash": "a0497a815b888461b29dcd52c656995dff2c43fc0fe720a7ef6fbf0001aef66a"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "自由度は非常に高いが、ハズレアイテムも発生しやすい。また、制作者の想定以上に序盤から強力なアイテムが作成できてしまうこともある。",
+      "sourceHash": "e99525fc0284d228ea09dc494864a25218b55eaa5df5f1ccee9c1eff66aa9da9",
+      "translation": "This offers a great deal of freedom, but it also makes unwanted items more likely to result. It may also allow players to create powerful items early on, beyond what the developer intended.",
+      "contextHash": "e99525fc0284d228ea09dc494864a25218b55eaa5df5f1ccee9c1eff66aa9da9"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "以降では、どちらかというとレシピが存在するタイプを念頭に置いている。",
+      "sourceHash": "df42508d1be5583d2d434f3b608ad7ec88c99f8319893f42de089cc6d6dcf519",
+      "translation": "From this point onward, I will focus mainly on the type in which recipes exist.",
+      "contextHash": "df42508d1be5583d2d434f3b608ad7ec88c99f8319893f42de089cc6d6dcf519"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "性能の変化",
+      "sourceHash": "a7eb239cd3def29b57b23a90a77a849805a2509789219ad142ab0c1403bf7359",
+      "translation": "Changes in Performance",
+      "contextHash": "a7eb239cd3def29b57b23a90a77a849805a2509789219ad142ab0c1403bf7359"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "同じ生成物であっても、素材や合成する方法によって性能に変化がつく。",
+      "sourceHash": "ded9f9b7faf6232a686149f39571cfdc79f6643214b10164a84f1f9b6ee72e4b",
+      "translation": "Even when the crafted item is the same, its performance can vary depending on the materials and crafting method used.",
+      "contextHash": "ded9f9b7faf6232a686149f39571cfdc79f6643214b10164a84f1f9b6ee72e4b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "例えば、ドラクエ１１の鍛冶ならば『銅のつるぎ＋２』というように強化される。",
+      "sourceHash": "e45174f239bb83171c46f88f593fad6d1a8f368cd0beb95c35a82756a0250717",
+      "translation": "For example, in Dragon Quest XI’s blacksmithing system, an item can be upgraded into something like a “Copper Sword +2.”",
+      "contextHash": "e45174f239bb83171c46f88f593fad6d1a8f368cd0beb95c35a82756a0250717"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "アトリエシリーズはさらに複雑で、同じアイテムであってもほとんど別物のような性能に変化してしまうことすらある。",
+      "sourceHash": "465aa8c1cd00d333954ae5383c6fe9d4b9764e601f380509eee39cb1788d0dfd",
+      "translation": "The Atelier series is even more complex; sometimes the performance of the same item changes so drastically that it is almost an entirely different item.",
+      "contextHash": "465aa8c1cd00d333954ae5383c6fe9d4b9764e601f380509eee39cb1788d0dfd"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "同じアイテムを＋１、＋２……というように重ねて強化できる場合もある。",
+      "sourceHash": "26bc84d1e28ec4ed14888a8f045752743525522f48e28795bcdfed60611bffe8",
+      "translation": "In some cases, the same item can be repeatedly upgraded, becoming +1, +2, and so on.",
+      "contextHash": "26bc84d1e28ec4ed14888a8f045752743525522f48e28795bcdfed60611bffe8"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "合成システムのメリット",
+      "sourceHash": "72517e651f656a9779d52ec810e31e00ebd6bafe428b63ead1a311da6a016171",
+      "translation": "Benefits of Crafting Systems",
+      "contextHash": "72517e651f656a9779d52ec810e31e00ebd6bafe428b63ead1a311da6a016171"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "では、どういった狙いがあってゲーム制作者は合成システムを採用するのだろうか？",
+      "sourceHash": "b72f51529dbc27a3c95d590b3de3eba04e6a278a69bb3509ad69e338df41ba80",
+      "translation": "So, what goals lead game developers to adopt crafting systems?",
+      "contextHash": "b72f51529dbc27a3c95d590b3de3eba04e6a278a69bb3509ad69e338df41ba80"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "そのメリットをまとめてみたい。",
+      "sourceHash": "370e6575efa0a57fb95e327def2fc04bcafc812562293db7725c4f3d8965e1fb",
+      "translation": "I would like to summarize their benefits.",
+      "contextHash": "370e6575efa0a57fb95e327def2fc04bcafc812562293db7725c4f3d8965e1fb"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ゲーム性の強化",
+      "sourceHash": "acb6084c4b6f657561dd60490f90f593eea558b9635e304cbb0d68ff7c041655",
+      "translation": "Enhancing Gameplay",
+      "contextHash": "acb6084c4b6f657561dd60490f90f593eea558b9635e304cbb0d68ff7c041655"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "いかにして強力なアイテムの合成を行うかをプレイヤーに考えさせることによって、ゲーム性を高める。",
+      "sourceHash": "582d02da2e8a9ee02133b54d875c2f91871e1afc0dd56e01f741a5343115357c",
+      "translation": "Crafting systems enhance gameplay by making players think about how to craft powerful items.",
+      "contextHash": "582d02da2e8a9ee02133b54d875c2f91871e1afc0dd56e01f741a5343115357c"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "目当ての素材が手に入るエリアを探索したり、素材を落とす敵を優先的に狩るといった戦略性が発生する。",
+      "sourceHash": "232ad391fe5a2c5cfa84b6aac4ef79ca3f36fe8f2e30646dd1180af0301d4954",
+      "translation": "This creates strategic elements, such as exploring areas where desired materials can be obtained or prioritizing enemies that drop those materials.",
+      "contextHash": "232ad391fe5a2c5cfa84b6aac4ef79ca3f36fe8f2e30646dd1180af0301d4954"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "作品によっては、合成したアイテムをさらに新たな合成の素材にすることで、より強力なアイテムを作り出すなんてこともできたりする。",
+      "sourceHash": "c85af884ee0973bdaeeb73a84d40d279fed62e96c188336ae6d44e088e66c7c2",
+      "translation": "Depending on the game, crafted items can sometimes be used as materials for further crafting, allowing players to create even more powerful items.",
+      "contextHash": "c85af884ee0973bdaeeb73a84d40d279fed62e96c188336ae6d44e088e66c7c2"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "場合によっては、序盤から強力な装備を作成できるなど自由度の高いゲームプレイが可能になる。",
+      "sourceHash": "7c1f8ce62936876a64fc79904e043ef679bdfd34433251ea78d1aad5baedca29",
+      "translation": "In some cases, this enables highly flexible gameplay, such as creating powerful equipment early in the game.",
+      "contextHash": "7c1f8ce62936876a64fc79904e043ef679bdfd34433251ea78d1aad5baedca29"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "アイテムに意味を持たせられる",
+      "sourceHash": "c0d25f3e6b0fc049d483e3ea09af63805175f4272ab137b13e7b4486d0ac0fc8",
+      "translation": "Giving Items Meaning",
+      "contextHash": "c0d25f3e6b0fc049d483e3ea09af63805175f4272ab137b13e7b4486d0ac0fc8"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "一見して不要なアイテムが重要な素材になったりと、幅を持たせられる。",
+      "sourceHash": "ac666a3bf6eaa5b6b8ca5af964eac35874d002766e4b374d7877161c7655d3fe",
+      "translation": "It adds variety by turning seemingly useless items into important materials.",
+      "contextHash": "ac666a3bf6eaa5b6b8ca5af964eac35874d002766e4b374d7877161c7655d3fe"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "これにより、アイテム収集を楽しくする効果がある。",
+      "sourceHash": "4de39543674345c0224b3031b7ae4b043234561537b8ba3a44a3e91011f766e7",
+      "translation": "This makes collecting items more enjoyable.",
+      "contextHash": "4de39543674345c0224b3031b7ae4b043234561537b8ba3a44a3e91011f766e7"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "アイテムの入手を細分化できる",
+      "sourceHash": "7cd74d8434b2b3137a94c9875b8fdaef06e5650e5c154e1ecc5ab5b2e57a68a1",
+      "translation": "Breaking Item Acquisition into Smaller Steps",
+      "contextHash": "7cd74d8434b2b3137a94c9875b8fdaef06e5650e5c154e1ecc5ab5b2e57a68a1"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "ダンジョンやフィールドの広い空間に何も置かないのは寂しい。あるいは大量に用意したクエストに報酬を用意したい。",
+      "sourceHash": "2d2c124a3dbdd730ec91acfc56b0f4f55496469cf2737b7b56ab6a5932d2285f",
+      "translation": "Leaving large dungeon or field areas empty feels lonely. Alternatively, you may want to provide rewards for the many quests you have prepared.",
+      "contextHash": "2d2c124a3dbdd730ec91acfc56b0f4f55496469cf2737b7b56ab6a5932d2285f"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "とはいえ、安易に強力なアイテムを放出してしまうと、すぐにインフレしてバランスが崩れてしまう。",
+      "sourceHash": "33ad38f93f8ed0d117a7b4ec0a10a4e2e06c929db8b2c60b3d16b7803d57e921",
+      "translation": "However, if you hand out powerful items too readily, inflation will quickly set in and the game balance will collapse.",
+      "contextHash": "33ad38f93f8ed0d117a7b4ec0a10a4e2e06c929db8b2c60b3d16b7803d57e921"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "というわけで、アイテムを素材に分割して配置することで、プレイヤーに対する報酬をほどほどにコントロールできる。",
+      "sourceHash": "16c24535ac1d315142e728a84b296ef0a99fa51fbf3f34dae0b940cdbe68c2ad",
+      "translation": "Therefore, by distributing items in the form of separate materials, you can moderately control the rewards given to players.",
+      "contextHash": "16c24535ac1d315142e728a84b296ef0a99fa51fbf3f34dae0b940cdbe68c2ad"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "オープンワールドやダンジョンＲＰＧなどの探索を重視する作品、あるいはネトゲやソシャゲなどプレイヤーを長く引き留めたい作品において、相性が良い方法だ。",
+      "sourceHash": "d47d062ce2f94d864836b4710169044ef0689856cf465addc141a9949a2b74a6",
+      "translation": "This is a suitable method for games that emphasize exploration, such as open-world games and dungeon RPGs, or for games that want to keep players engaged for a long time, such as online and mobile social games.",
+      "contextHash": "d47d062ce2f94d864836b4710169044ef0689856cf465addc141a9949a2b74a6"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "近年の作品では頻繁に採用されるので、プレイヤーとして経験があるという人も多いのではないだろうか？",
+      "sourceHash": "6b47635e8d7b5c5cf9d09ba5d20158c2a5eb406b10cfda5f02c71b655af694e6",
+      "translation": "Since this is frequently used in recent games, many of you may have experienced it as a player.",
+      "contextHash": "6b47635e8d7b5c5cf9d09ba5d20158c2a5eb406b10cfda5f02c71b655af694e6"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "ぶっちゃけ水増しと言えば水増しである。",
+      "sourceHash": "4d5cd9ac4fe022ba123183422045a91f8d960d0358873fe0bc90b5ccabfb2a9d",
+      "translation": "To be blunt, it is padding, if you want to call it that.",
+      "contextHash": "4d5cd9ac4fe022ba123183422045a91f8d960d0358873fe0bc90b5ccabfb2a9d"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "世界設定の補強",
+      "sourceHash": "ba922ab4bdd4847dd08e17a5ced58b5e27444977cb5a4ed3f9a2844d3cdea2f1",
+      "translation": "Strengthening the Worldbuilding",
+      "contextHash": "ba922ab4bdd4847dd08e17a5ced58b5e27444977cb5a4ed3f9a2844d3cdea2f1"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "作品の世界設定によっては「商人が強力なアイテムを販売する」という状況自体が不自然に感じられる場合もある。",
+      "sourceHash": "ecbd4f271b0df5b6bb4274ca082b79c1f1c5ac7b58152b94d94e7accb913bde4",
+      "translation": "Depending on the setting of a work, the situation itself of “a merchant selling powerful items” may feel unnatural.",
+      "contextHash": "ecbd4f271b0df5b6bb4274ca082b79c1f1c5ac7b58152b94d94e7accb913bde4"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "現代日本を舞台にした作品において、普通の店で魔法の剣を購入できたら違和感があるというわけだ。",
+      "sourceHash": "28e3dd854a5248d3c596a61a595e4d28fecedcdb8212bb2cfdf9066e340779f4",
+      "translation": "In a work set in modern-day Japan, for example, it would feel out of place to be able to buy a magic sword at an ordinary shop.",
+      "contextHash": "28e3dd854a5248d3c596a61a595e4d28fecedcdb8212bb2cfdf9066e340779f4"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "例えば、ペルソナシリーズでは異世界の敵から獲得したアイテムを素材とすることで、現実ではあり得ないような装備を作成しているという設定がある。",
+      "sourceHash": "098123e80e055488eb8b68e653e88a2faf5764b54d38d5661e72aee59c968a1c",
+      "translation": "For example, the Persona series establishes that equipment unlike anything possible in reality can be created using items obtained from enemies in another world as materials.",
+      "contextHash": "098123e80e055488eb8b68e653e88a2faf5764b54d38d5661e72aee59c968a1c"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "合成システムのデメリット",
+      "sourceHash": "3bb226b2a84a79f892e7a850c4c5b6ec4f799505a19639dec4cb0e26cd6b307b",
+      "translation": "Disadvantages of a Synthesis System",
+      "contextHash": "3bb226b2a84a79f892e7a850c4c5b6ec4f799505a19639dec4cb0e26cd6b307b"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "冒頭で『なかなか難しいシステム』と表現したように、合成システムは扱いの難しいシステムである。",
+      "sourceHash": "41f7b7a95432d094483c159cac84e4a363cdf3ff86078f502cb950c802f533c0",
+      "translation": "As I described it at the beginning as “a rather difficult system,” a synthesis system can be difficult to handle.",
+      "contextHash": "41f7b7a95432d094483c159cac84e4a363cdf3ff86078f502cb950c802f533c0"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "実際のところ、個人的にはかなりデメリットも多いシステムだと感じているので、その点をまとめてみた。",
+      "sourceHash": "198837b73fa0e718f8bc5f7a7eb55b4ff850673cadc1564cecb8a10a8ab778a9",
+      "translation": "In fact, I personally feel that it has quite a lot of disadvantages, so I have summarized them here.",
+      "contextHash": "198837b73fa0e718f8bc5f7a7eb55b4ff850673cadc1564cecb8a10a8ab778a9"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "手順が増える",
+      "sourceHash": "139afdd8152236f988b731274fdb25bb2da7fcd31eeea2f1ed471258fba9c090",
+      "translation": "More Steps",
+      "contextHash": "139afdd8152236f988b731274fdb25bb2da7fcd31eeea2f1ed471258fba9c090"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "合成というシステムは必要な手順が多い。",
+      "sourceHash": "e29278cb6824233b2b29242561e294557197f21af2d9e6178bdeaff927796835",
+      "translation": "A synthesis system requires many steps.",
+      "contextHash": "e29278cb6824233b2b29242561e294557197f21af2d9e6178bdeaff927796835"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "例えば、一例を挙げてみよう。",
+      "sourceHash": "320ef5a1229e6ed4163f2a700801c2ffcfcc01fee1ff52f5847a335c2b661613",
+      "translation": "For example, let’s consider one case.",
+      "contextHash": "320ef5a1229e6ed4163f2a700801c2ffcfcc01fee1ff52f5847a335c2b661613"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "宝箱や店からレシピを入手＆購入。",
+      "sourceHash": "33e8e928e47cd3a927808eea2a8fd359dcd77121f3cc845d3f91e9f7b3542c58",
+      "translation": "Obtain and purchase recipes from treasure chests and shops.",
+      "contextHash": "33e8e928e47cd3a927808eea2a8fd359dcd77121f3cc845d3f91e9f7b3542c58"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "レシピを参照し、必要な素材とその所在を確認。",
+      "sourceHash": "5140a6ca919f2ec997cfaf0bc4cb168831fe124c28d6f20f07b71586eabe0735",
+      "translation": "Check the recipe to find the required materials and where to obtain them.",
+      "contextHash": "5140a6ca919f2ec997cfaf0bc4cb168831fe124c28d6f20f07b71586eabe0735"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "素材を捜索＆入手。",
+      "sourceHash": "355670991280a52e0cf548403e32bd9c40e40051ba7a397242f4fc17ded210e3",
+      "translation": "Search for and obtain the materials.",
+      "contextHash": "355670991280a52e0cf548403e32bd9c40e40051ba7a397242f4fc17ded210e3"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "合成屋に戻って合成開始。",
+      "sourceHash": "41b0ee082ec6ffa46d6f322c202a27a3d589db0afeeebb009dfa16b5744298f9",
+      "translation": "Return to the synthesis shop and begin synthesis.",
+      "contextHash": "41b0ee082ec6ffa46d6f322c202a27a3d589db0afeeebb009dfa16b5744298f9"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "合成時のミニゲームによって完成度が変化。",
+      "sourceHash": "bd2d05403316bdf8d7473e0b9a9e3c072100ac6d96c74429fa2399b66dce99ef",
+      "translation": "The quality of the result changes depending on the minigame played during synthesis.",
+      "contextHash": "bd2d05403316bdf8d7473e0b9a9e3c072100ac6d96c74429fa2399b66dce99ef"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "……というように、なかなか大変である。",
+      "sourceHash": "1ba05e63cbd9cf676fce87224fbe8d16b635a8072028760b53777a4a0645f54f",
+      "translation": "…So, it is quite a lot of work.",
+      "contextHash": "1ba05e63cbd9cf676fce87224fbe8d16b635a8072028760b53777a4a0645f54f"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "これは比較的、手間のかかる仕組みを想定した場合だ。例えば、どこでも合成を実行できる作品ならば、もう少し手順は緩和される。",
+      "sourceHash": "4d746b01b45b3abbd55ec80d15bb2473d166f4ee428bbe0aa9ccf4a8123f784f",
+      "translation": "This assumes a relatively time-consuming system. For example, if synthesis can be performed anywhere, the number of steps can be reduced somewhat.",
+      "contextHash": "4d746b01b45b3abbd55ec80d15bb2473d166f4ee428bbe0aa9ccf4a8123f784f"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "いずれにせよ、お金を貯めて買うだけの古典的な店よりも手間がかかるのは間違いない。",
+      "sourceHash": "a3023c6e7d8c3acbbbe0af2c1b5415b1216bc70fc94499ed5ddad7492e300145",
+      "translation": "In any case, there is no doubt that it requires more effort than a traditional shop where you simply save money and buy what you want.",
+      "contextHash": "a3023c6e7d8c3acbbbe0af2c1b5415b1216bc70fc94499ed5ddad7492e300145"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "不親切",
+      "sourceHash": "69e363d823fabcc5eb4724cf391485a60dd6b079f6850adfdee6499875b59ef9",
+      "translation": "Unintuitive",
+      "contextHash": "69e363d823fabcc5eb4724cf391485a60dd6b079f6850adfdee6499875b59ef9"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "合成をしようにも素材の入手先が分からないと「どこで手に入るのかも分からないアイテムを探す作業」になってしまいがち。",
+      "sourceHash": "18d386e93770c31697406872f848abe259b9d9822feae9d5daac48af1da3ed60",
+      "translation": "Even if you want to synthesize something, not knowing where to obtain the materials can turn it into “the task of searching for items without even knowing where to find them.”",
+      "contextHash": "18d386e93770c31697406872f848abe259b9d9822feae9d5daac48af1da3ed60"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "勘や総当たりで探し回るか、攻略を見るか、あるいは成り行きに任せて見つからないなら諦めるしかない。",
+      "sourceHash": "02ad3c6e2dcbb546852c7e8edf8ab36985d80dde9ddc8ff563d9500a7d94be3a",
+      "translation": "You have no choice but to search by intuition or through trial and error, look up a walkthrough, or give up if you cannot find them and leave it to chance.",
+      "contextHash": "02ad3c6e2dcbb546852c7e8edf8ab36985d80dde9ddc8ff563d9500a7d94be3a"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "このままでは、プレイヤーがシステムを活かすことは難しく、あまりゲーム性も高いとは言えなさそうだ。",
+      "sourceHash": "90be099280f075b14146cd1e38fafc7283cc12b895256ef23a02ec48ca7858fa",
+      "translation": "As things stand, it is difficult for players to make use of the system, and it does not seem likely to add much gameplay value.",
+      "contextHash": "90be099280f075b14146cd1e38fafc7283cc12b895256ef23a02ec48ca7858fa"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "もし、そうならないようにしたいなら、ヒントを出す必要があるが、プレイヤーにとってはそういった情報を確認する手順がさらに増える。",
+      "sourceHash": "d09f2ab22edbf5aa77b5c474c762a93e112075ceece0ea158a1166d103c0ddb0",
+      "translation": "If you want to prevent that, you need to provide hints, but this gives players yet another step for checking that information.",
+      "contextHash": "d09f2ab22edbf5aa77b5c474c762a93e112075ceece0ea158a1166d103c0ddb0"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "あるいは、ゲーム進行に応じて、自然と素材が集まるようにすれば手間は削減できる。",
+      "sourceHash": "e5eb0fb95d569eda40736c42affe0d8d284bb387b84ec911b0060d78b2ee369c",
+      "translation": "Alternatively, you can reduce the effort by having materials accumulate naturally as the game progresses.",
+      "contextHash": "e5eb0fb95d569eda40736c42affe0d8d284bb387b84ec911b0060d78b2ee369c"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "……が、根本的なことを言うと、それならばこんな手間のかかるシステムを採用する必要性は低い。普通の店――つまり「お金を貯めれば、良いアイテムを買えるシステム」を採用したほうが、手っ取り早い。",
+      "sourceHash": "991fc2301a9c2e6e07c541c360ea357c72dfd522cfc3a5e9c66aade75b610b06",
+      "translation": "…But fundamentally, if that is the case, there is little need to adopt such a time-consuming system. It would be quicker to use an ordinary shop—in other words, “a system where saving money lets you buy better items.”",
+      "contextHash": "991fc2301a9c2e6e07c541c360ea357c72dfd522cfc3a5e9c66aade75b610b06"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "……と、なってしまうので、やはりプレイヤーに対して、多少の不便や面倒は許容してもらうしかない。その上で、ゲーム性を高める目的で合成システムを採用すべきだとは思う。",
+      "sourceHash": "15ebc4534aa9b3ecfc79dd2cf3232516f35575e6bdc181361176052e60761a20",
+      "translation": "…That is where things end up, so players will ultimately have to accept some inconvenience and hassle. Even so, I think a synthesis system should be adopted with the goal of increasing gameplay value.",
+      "contextHash": "15ebc4534aa9b3ecfc79dd2cf3232516f35575e6bdc181361176052e60761a20"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "アイテム数が増加する",
+      "sourceHash": "5ebc63eae362dcdc43b1fbaf6f3392f914a7a11783f56f8d6133953320e42506",
+      "translation": "More Items",
+      "contextHash": "5ebc63eae362dcdc43b1fbaf6f3392f914a7a11783f56f8d6133953320e42506"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "合成には素材となるアイテムが必要となる。",
+      "sourceHash": "2187a54dcbb45a84486fbb9e7a5dd8781a18a5cdd492cfdd11a79d349256c8b1",
+      "translation": "Synthesis requires items to use as materials.",
+      "contextHash": "2187a54dcbb45a84486fbb9e7a5dd8781a18a5cdd492cfdd11a79d349256c8b1"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "必然的にアイテム数が増加し、アイテム一覧が複雑化する。",
+      "sourceHash": "730a2e9866f25a9ad7320198b82ef39e98da8efd33b70a5ad5c9352f25d5514a",
+      "translation": "Inevitably, the number of items increases, making the item list more complicated.",
+      "contextHash": "730a2e9866f25a9ad7320198b82ef39e98da8efd33b70a5ad5c9352f25d5514a"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "プレイヤー視点ではアイテムの管理が大変になり、作品の快適性を落とすことになる。",
+      "sourceHash": "4a70bba53e8d4f20ccc5dcc6fbbe95bf9d8ecd81612f37c31d0347ad7a8f797b",
+      "translation": "From the player’s perspective, managing items becomes more difficult, reducing the game’s convenience.",
+      "contextHash": "4a70bba53e8d4f20ccc5dcc6fbbe95bf9d8ecd81612f37c31d0347ad7a8f797b"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "制作者視点でも、もちろんデータ設定の手間が増える。",
+      "sourceHash": "cc088ba76187c6a230012afc285c0c3823af32d680eb7f4982f377c2dacff033",
+      "translation": "From the creator’s perspective, of course, the effort required to configure the data also increases.",
+      "contextHash": "cc088ba76187c6a230012afc285c0c3823af32d680eb7f4982f377c2dacff033"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "売却が困難となる",
+      "sourceHash": "071d9b91c08b2a966bb3bf8e119ebb5786283f7cda6731b96ee0197b85c21d49",
+      "translation": "Selling Items Becomes Difficult",
+      "contextHash": "071d9b91c08b2a966bb3bf8e119ebb5786283f7cda6731b96ee0197b85c21d49"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "合成システムの存在するゲームにおいては、一見して役に立たないアイテムが思わぬ合成の材料となることがある。",
+      "sourceHash": "de1db5dd3498af28a1f9bc4682b1eeac02b71759313d124e43c09a125dcf9ced",
+      "translation": "In games with a synthesis system, items that appear useless at first glance may unexpectedly be needed as synthesis materials.",
+      "contextHash": "de1db5dd3498af28a1f9bc4682b1eeac02b71759313d124e43c09a125dcf9ced"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "システムの奥深さを高める効果があるが、一方で不用品の判別が困難になるということでもある。",
+      "sourceHash": "a6aadf89c982874e93b1a3ed2d762cf1b87dc528f1d48494e65994f2f7a4f4fe",
+      "translation": "This deepens the system, but it also makes it difficult to determine which items are unnecessary.",
+      "contextHash": "a6aadf89c982874e93b1a3ed2d762cf1b87dc528f1d48494e65994f2f7a4f4fe"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "つまり、迂闊に不用品を売却できなくなるということだ。",
+      "sourceHash": "ca79bdba5139dc99636ec603c70d23c3d70d02e152fea3eb6aacc2e375881643",
+      "translation": "In other words, you can no longer carelessly sell items you do not need.",
+      "contextHash": "ca79bdba5139dc99636ec603c70d23c3d70d02e152fea3eb6aacc2e375881643"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "昔、初期装備の木刀を売り払うと最強武器が手に入らなくなるマイナーＲＰＧがあったが、こういった問題が起こりやすくなる。",
+      "sourceHash": "e95bb82106adfe95af324afbf93ffaf96204544ae2d8f447feffce9c32c7f647",
+      "translation": "There was once an obscure RPG where selling the wooden sword from your starting equipment made it impossible to obtain the strongest weapon, and problems like this become more likely.",
+      "contextHash": "e95bb82106adfe95af324afbf93ffaf96204544ae2d8f447feffce9c32c7f647"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "上記の「アイテム数が増加する」と合わさって、さらにアイテム一覧が複雑化してしまう。",
+      "sourceHash": "f0f8d3ad7bbe152b77528950818c3581eeec6d8b6a9a18b2dc9c1f47629c20d9",
+      "translation": "Combined with the aforementioned increase in the number of items, this makes the item list even more complicated.",
+      "contextHash": "f0f8d3ad7bbe152b77528950818c3581eeec6d8b6a9a18b2dc9c1f47629c20d9"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "素材アイテムのご褒美としての弱さ",
+      "sourceHash": "a075e04bed3aaa3762a3f2268bbd0fdf1e80c8e29b6c5f623e1484b661211ad5",
+      "translation": "Materials Are Weak as Rewards",
+      "contextHash": "a075e04bed3aaa3762a3f2268bbd0fdf1e80c8e29b6c5f623e1484b661211ad5"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "素材アイテムはご褒美としての機能が弱い。",
+      "sourceHash": "bfbfe6ffa4e87679b712be275ae7a8805998088bd8f013f489151c153dbdec4b",
+      "translation": "Material items are not very effective as rewards.",
+      "contextHash": "bfbfe6ffa4e87679b712be275ae7a8805998088bd8f013f489151c153dbdec4b"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "なぜなら、素材アイテムは単体では機能しないため、入手直後のプレイヤーにとっては「何かよく分からないアイテム」であるためだ。",
+      "sourceHash": "54a305c2875570411b1656089dcd6bcf27b3469bea8cb983d7db45ce1a4553fc",
+      "translation": "That is because material items have no function on their own, so to players immediately after obtaining them, they are simply “some kind of item whose purpose is unclear.”",
+      "contextHash": "54a305c2875570411b1656089dcd6bcf27b3469bea8cb983d7db45ce1a4553fc"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "そのため、プレイヤーの印象には残りにくい。",
+      "sourceHash": "cf4fb1a760c96e8555737656005fe8157112a12a167e4d12659120b9fcf28565",
+      "translation": "As a result, they are less likely to leave an impression on players.",
+      "contextHash": "cf4fb1a760c96e8555737656005fe8157112a12a167e4d12659120b9fcf28565"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "古典的な宝箱から直接装備を手に入れる方式なら、手に入れた瞬間に有用であることが分かる。ご褒美としては非常に分かりやすい。",
+      "sourceHash": "022eda51bbadb5613f55cf079dd7f43fa12fdb171a166a522fc54ed39a3d0833",
+      "translation": "With the traditional approach of obtaining equipment directly from a treasure chest, you immediately know that it is useful. It is a very straightforward reward.",
+      "contextHash": "022eda51bbadb5613f55cf079dd7f43fa12fdb171a166a522fc54ed39a3d0833"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "お金を貯めて装備を買う方式なら、努力の蓄積が明確に反映されるのが利点だ。ドラクエでコツコツお金を貯めて鋼の剣を買った時は嬉しいもの。",
+      "sourceHash": "3b4da1729b74510ce05b58c0ce45327d4b609fe616f3479f4177d9ce46254fa1",
+      "translation": "With the approach of saving money to buy equipment, the advantage is that your accumulated efforts are clearly reflected. It feels great to steadily save money in Dragon Quest and finally buy a Steel Sword.",
+      "contextHash": "3b4da1729b74510ce05b58c0ce45327d4b609fe616f3479f4177d9ce46254fa1"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "計画を立てて、それを達成するというのはそれ自体、ゲーム性の高い仕組みなのだ。プレイヤーにとって印象に残りやすい。",
+      "sourceHash": "c38e0593753e20224e247ef3ba378d9c1550682113f22c2e84345ba049390d8a",
+      "translation": "Making a plan and accomplishing it is itself a system with strong gameplay value. It is likely to leave a lasting impression on players.",
+      "contextHash": "c38e0593753e20224e247ef3ba378d9c1550682113f22c2e84345ba049390d8a"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "対して、合成システムでは「いつの間にか溜まっていた素材でいつの間にか合成できるようになっていた」みたいなケースはとてもありがち。",
+      "sourceHash": "ff0174173ac55bdae1603310ab938766c0eac2512218d29493b3ee4d48a66fc7",
+      "translation": "By contrast, with a synthesis system, it is very common to find that “before you know it, you have accumulated enough materials to synthesize something before you know it.”",
+      "contextHash": "ff0174173ac55bdae1603310ab938766c0eac2512218d29493b3ee4d48a66fc7"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "合成システムの存在する作品では、アイテムの入手量自体も増大する傾向にあるので、一つ一つのアイテムの印象も薄くなりやすい。",
+      "sourceHash": "555766f35193cc2f6a5d5e4618c1be13911dc3701cadfeda37d8d54daf65c73b",
+      "translation": "In works with a synthesis system, the amount of items obtained also tends to increase, so each individual item is more likely to make less of an impression.",
+      "contextHash": "555766f35193cc2f6a5d5e4618c1be13911dc3701cadfeda37d8d54daf65c73b"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "わざわざ手間をかけたのに、古典的システムより印象で劣ってしまう――なんてことにもなりかねない。",
+      "sourceHash": "31cfc168ae4fdfb1cd8d3372ccdbce4363975614d2cefab81b4579e0c7ca14b5",
+      "translation": "Despite going to all that trouble, the system may end up making less of an impression than a traditional one.",
+      "contextHash": "31cfc168ae4fdfb1cd8d3372ccdbce4363975614d2cefab81b4579e0c7ca14b5"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "なお、他のご褒美の手段としては宝箱にレシピを入れる方法もある。",
+      "sourceHash": "f522d52a21276ea6736414125bacc3e1a6c290cee4aa9c687a3c8c0f64baeb03",
+      "translation": "Another way to use rewards is to place recipes in treasure chests.",
+      "contextHash": "f522d52a21276ea6736414125bacc3e1a6c290cee4aa9c687a3c8c0f64baeb03"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "レシピなら合成先のアイテムが想像しやすいという利点もある。",
+      "sourceHash": "06124087165fcda03610ba92701c26888405d7e90ef16b89c13c1ed3460bb8f4",
+      "translation": "Recipes also have the advantage of making it easier to imagine the item they can be used to synthesize.",
+      "contextHash": "06124087165fcda03610ba92701c26888405d7e90ef16b89c13c1ed3460bb8f4"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "ただし、この場合も即座にアイテムが手に入るわけではないので、やはり古典的方式よりもご褒美としては弱い。",
+      "sourceHash": "5186e858411314efb89df1e93741046b902cf3ecf7f959ed3b798c33b6eef98a",
+      "translation": "However, even in this case, the item is not obtained immediately, so it is still a weaker reward than the classic approach.",
+      "contextHash": "5186e858411314efb89df1e93741046b902cf3ecf7f959ed3b798c33b6eef98a"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "バランス調整が困難",
+      "sourceHash": "a1d79d51557d6d14ef51e461621821714e71bf4742c869fbcd5210dc9ef66282",
+      "translation": "Difficult Balance Adjustments",
+      "contextHash": "a1d79d51557d6d14ef51e461621821714e71bf4742c869fbcd5210dc9ef66282"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "プレイスタイルによる装備の差は古典的なＲＰＧより大きくなるため、バランス調整の難易度も上昇する。",
+      "sourceHash": "6f6be3ee3c8124ce940ccf44071f4d5f5882c7af4f6cdcda9cf19d93044fe8f9",
+      "translation": "Because equipment differences based on playstyle are greater than in classic RPGs, balancing also becomes more difficult.",
+      "contextHash": "6f6be3ee3c8124ce940ccf44071f4d5f5882c7af4f6cdcda9cf19d93044fe8f9"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "序盤から強力な武器を作られてしまった結果、制作者の想定よりもずっと難易度が下がってしまうなんてこともあり得る。",
+      "sourceHash": "25bfe6d03112d4e791c06a98cb45a2e12f63af04542ba5cb04d5bab83ab89ee9",
+      "translation": "If players manage to create powerful weapons early on, the game may end up being far easier than the creator intended.",
+      "contextHash": "25bfe6d03112d4e791c06a98cb45a2e12f63af04542ba5cb04d5bab83ab89ee9"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "レシピなどの要素で縛ることで一定の対処はできるが、今度は逆に自由度は下がってしまう。",
+      "sourceHash": "c1eb5452178a6f318badc22ccbf6691da8e90df3fdd2c23f44e766667d09ce6c",
+      "translation": "This can be addressed to some extent by imposing restrictions such as recipes, but that reduces the player's freedom instead.",
+      "contextHash": "c1eb5452178a6f318badc22ccbf6691da8e90df3fdd2c23f44e766667d09ce6c"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "一方でプレイヤーがレシピや素材を見つけ出せなかった結果、想定よりも難易度が上がってしまう場合もある。",
+      "sourceHash": "3f2992850986cad671f9246dc1a2c9ca9cda770afd1454661ec3dfdb5d87c5fe",
+      "translation": "Conversely, the game may end up being more difficult than intended if players fail to find the recipes or materials.",
+      "contextHash": "3f2992850986cad671f9246dc1a2c9ca9cda770afd1454661ec3dfdb5d87c5fe"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "ＤＱ１０オフラインでは装備のレシピの場所が非常に分かりづらく、中盤の装備のままラスボスと戦うプレイヤーが続出した。",
+      "sourceHash": "a1a83bf7a819585a6767ce15863492e84eddd13f9b062a8a9d9ac2cf2c3b51da",
+      "translation": "In DQ10 Offline, the locations of equipment recipes were extremely difficult to figure out, resulting in many players fighting the final boss with mid-game equipment.",
+      "contextHash": "a1a83bf7a819585a6767ce15863492e84eddd13f9b062a8a9d9ac2cf2c3b51da"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "……というように、合成とはとにかく手順が多いシステムなので、プレイヤーが『何か』を見落とす可能性は高い。",
+      "sourceHash": "ec6d3876a4c20ae1f7b557af773807e9d28bb16fce0395d77c7c9cb99db0808c",
+      "translation": "As this illustrates, synthesis systems involve a great many steps, so there is a high chance that players will overlook “something.”",
+      "contextHash": "ec6d3876a4c20ae1f7b557af773807e9d28bb16fce0395d77c7c9cb99db0808c"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "アトリエシリーズなんかは典型だけど、複雑な合成システムを使いこなせるかで、体感の難易度が大きく変わる。そのため、同じ作品に対して『簡単』というプレイヤーと『難しい』というプレイヤーが入り混じっていたりする。",
+      "sourceHash": "73e08d3459c983fd565208f9ab733101926050889c6cdf2a2be5cfed0382044e",
+      "translation": "The Atelier series is a typical example: the perceived difficulty changes significantly depending on whether players can master its complex synthesis system. As a result, players who consider the same game “easy” and those who consider it “difficult” tend to coexist.",
+      "contextHash": "73e08d3459c983fd565208f9ab733101926050889c6cdf2a2be5cfed0382044e"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "全体的な傾向として、合成システムは『二周目以降のプレイヤー』や『攻略情報を見ながらプレイするプレイヤー』『丹念に探索やシステムの活用を行うプレイヤー』にとって有利なシステムと言えそうだ。",
+      "sourceHash": "3d1c108523c33563397a78efe60dcda41588efb5308460cae838cbf2117c093f",
+      "translation": "As a general trend, synthesis systems seem to favor “players on their second or subsequent playthrough,” “players who play while referring to strategy information,” and “players who thoroughly explore and make use of the systems.”",
+      "contextHash": "3d1c108523c33563397a78efe60dcda41588efb5308460cae838cbf2117c093f"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "逆に言うと、攻略を見ずにさっさと進めたいというプレイヤーとはあまり相性がよくない。",
+      "sourceHash": "7f53b6e1bcb657617c961981708aa86c25de8afb38de49816106c58ab4d0fcdb",
+      "translation": "Conversely, they are not very well suited to players who want to progress quickly without consulting a guide.",
+      "contextHash": "7f53b6e1bcb657617c961981708aa86c25de8afb38de49816106c58ab4d0fcdb"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "古典的システムとの競合",
+      "sourceHash": "10ef12dc4092733ce70c6dd64580e91354aba01173fd4a199787af2b1e2cd3e7",
+      "translation": "Conflict with Classic Systems",
+      "contextHash": "10ef12dc4092733ce70c6dd64580e91354aba01173fd4a199787af2b1e2cd3e7"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "既に何度か触れたが「お金を払えば装備を買える店」や「装備が手に入る宝箱」といった古典的システムとの併用はどうするか？",
+      "sourceHash": "296087e77e5053b21125e64ff5567a2f2180b4d9f8540bc705a58f0876e05441",
+      "translation": "As I have already touched on several times, how should synthesis be combined with classic systems such as “shops where you can buy equipment with money” and “chests containing equipment”?",
+      "contextHash": "296087e77e5053b21125e64ff5567a2f2180b4d9f8540bc705a58f0876e05441"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "店や宝箱から十分なアイテムが手に入るなら、合成システムはそもそも不要である。",
+      "sourceHash": "b793c194c1172bd729853655e889f85daf8326d792db3b227c401a43eec977e6",
+      "translation": "If players can obtain enough items from shops and chests, there is no need for a synthesis system in the first place.",
+      "contextHash": "b793c194c1172bd729853655e889f85daf8326d792db3b227c401a43eec977e6"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "せっかく手間をかけて装備を合成しても、すぐ次の町やダンジョンでより強力な装備が簡単に手に入るならガッカリしてしまうだろう。",
+      "sourceHash": "abd9fab6df606383f2af4066375f0bd07d56aef5bfca754ae4a1b3966325b0dc",
+      "translation": "Even if players go to the trouble of synthesizing equipment, they will be disappointed if they can easily obtain more powerful equipment in the next town or dungeon.",
+      "contextHash": "abd9fab6df606383f2af4066375f0bd07d56aef5bfca754ae4a1b3966325b0dc"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "店や宝箱の品質を落とすのが無難なところだが、それらの喜びは必然的に弱くなる。",
+      "sourceHash": "5a6f9df81c973bfc222a1f962a84c7bbe7e21cb0df7531b79add85c22106f520",
+      "translation": "The safest approach is probably to lower the quality of items found in shops and chests, but that inevitably diminishes the joy of obtaining them.",
+      "contextHash": "5a6f9df81c973bfc222a1f962a84c7bbe7e21cb0df7531b79add85c22106f520"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "デメリットへの対策",
+      "sourceHash": "289b874e426989141d9737df0dde2d98305abad43d87e53e5e61d5705add60e7",
+      "translation": "Measures to Address the Drawbacks",
+      "contextHash": "289b874e426989141d9737df0dde2d98305abad43d87e53e5e61d5705add60e7"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "以上、合成システムのデメリットを多数紹介した。",
+      "sourceHash": "bf2fb943a0dff163febf85baa3e21d984d0d9c742da949c049aa49682cfcdc01",
+      "translation": "So far, I have introduced many of the drawbacks of synthesis systems.",
+      "contextHash": "bf2fb943a0dff163febf85baa3e21d984d0d9c742da949c049aa49682cfcdc01"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "そこで次は、どうにかデメリットを軽減して、合成システムを活かすための対策案を考えてみたい。",
+      "sourceHash": "be219185f4e81067e648d22cb6fa9c1c99500bba0f75c184164416e6f5d032fc",
+      "translation": "Next, I would like to consider measures for somehow reducing these drawbacks and making the most of a synthesis system.",
+      "contextHash": "be219185f4e81067e648d22cb6fa9c1c99500bba0f75c184164416e6f5d032fc"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "※同時にメリットを削ぐようなものも多いので、取捨判断はお任せします。全てを取り入れればよいというものではないです。",
+      "sourceHash": "80327bfedb70a9204cc33c003df1427fd1a58e992b7147311385501a31b72bf8",
+      "translation": "※Many of these measures also reduce the benefits, so I leave it to you to decide which to adopt. You do not need to implement all of them.",
+      "contextHash": "80327bfedb70a9204cc33c003df1427fd1a58e992b7147311385501a31b72bf8"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "素材アイテムを限定する",
+      "sourceHash": "1292742a60f6feaaf66c973745e688ee07dfeee11d3801196b285f6573ffb3b7",
+      "translation": "Limit Material Items",
+      "contextHash": "1292742a60f6feaaf66c973745e688ee07dfeee11d3801196b285f6573ffb3b7"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "「装備品は合成には使えない。あくまで合成は素材専用アイテムでのみ行う」「素材専用アイテムは別のカテゴリに表示される」といったルールを付ける。",
+      "sourceHash": "56838fd86bc07985d4911a1adb29ae06a915278905fbd758f83a0a160fb590a1",
+      "translation": "Establish rules such as “Equipment cannot be used in synthesis. Synthesis can only be performed using items intended specifically as materials” and “Items intended specifically as materials are displayed in a separate category.”",
+      "contextHash": "56838fd86bc07985d4911a1adb29ae06a915278905fbd758f83a0a160fb590a1"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "これによって、アイテム一覧が複雑化することを防ぐ。これなら、不用品の売却もやりやすくなる。",
+      "sourceHash": "4578e3edf216f612053c5453d13230b895350856df445c04ac2a4e4d7550ceac",
+      "translation": "This prevents the item list from becoming overly complicated. It also makes it easier to sell unwanted items.",
+      "contextHash": "4578e3edf216f612053c5453d13230b895350856df445c04ac2a4e4d7550ceac"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "一方で「一見、役に立たない弱い武器が強力な武器の材料に！」というような意外性はなくなるため、システムとしての幅は狭まってしまう。",
+      "sourceHash": "380a6badcd8dd62332434dac502c0c93285bb8ad626729eca01e2356a9e46c68",
+      "translation": "On the other hand, this eliminates surprises such as “A seemingly useless, weak weapon becomes a material for a powerful weapon!” narrowing the range of possibilities for the system.",
+      "contextHash": "380a6badcd8dd62332434dac502c0c93285bb8ad626729eca01e2356a9e46c68"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "合成のルールを単純化する",
+      "sourceHash": "be86a5ff282f8e03f48b8d39dd736b5168d7cb1d2fb5df0426c1a8d4d6bc9e4a",
+      "translation": "Simplify the Synthesis Rules",
+      "contextHash": "be86a5ff282f8e03f48b8d39dd736b5168d7cb1d2fb5df0426c1a8d4d6bc9e4a"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "例えば「ミスリルがあればミスリルソードやミスリルスピア、ミスリルメイルを作れる」というようにルールを単純化する。",
+      "sourceHash": "93a30a5712b2bafba2893e6d8fb9fbba2554da4d0c9f338255dfe74ca2825313",
+      "translation": "For example, simplify the rules so that “If you have mithril, you can craft a Mithril Sword, Mithril Spear, or Mithril Mail.”",
+      "contextHash": "93a30a5712b2bafba2893e6d8fb9fbba2554da4d0c9f338255dfe74ca2825313"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "これなら非常に分かりやすい。プレイヤーにとっても「素材の入手は装備の入手に等しい」ということが直感的に伝わるはずだ。",
+      "sourceHash": "932027f1deda80f2b3cbfcb0b076fb4821b77a3872478a2baac4d6d586d704c8",
+      "translation": "This is very easy to understand. Players should also intuitively grasp that “obtaining materials is equivalent to obtaining equipment.”",
+      "contextHash": "932027f1deda80f2b3cbfcb0b076fb4821b77a3872478a2baac4d6d586d704c8"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "※素材が単一のものを合成といってよいかは置いておきます。",
+      "sourceHash": "10005ebc854c87298f3ffe479e89f2ff0aea32a5425f0b14a3280a90c3222fc6",
+      "translation": "※Leaving aside whether synthesis using a single material can really be called synthesis.",
+      "contextHash": "10005ebc854c87298f3ffe479e89f2ff0aea32a5425f0b14a3280a90c3222fc6"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "この手法はプレイヤーが使用している武器の種類が不明な場合にも有効だ。「斧を手に入れたけど、斧使いが誰もいない」なんて悲劇を防げる。",
+      "sourceHash": "ad9df839b13d60690a98e630387771a2f077c04aa87c13b379ee7fe22a6953c9",
+      "translation": "This approach is also effective when it is unclear which types of weapons the players are using. It prevents tragedies such as “I got an axe, but nobody uses axes.”",
+      "contextHash": "ad9df839b13d60690a98e630387771a2f077c04aa87c13b379ee7fe22a6953c9"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "素材の種類を絞る",
+      "sourceHash": "3e9dfd27a3d54344cf13dd2258dd00fd240733d1afa6f1e3ee7a57d571c45d35",
+      "translation": "Narrow Down the Types of Materials",
+      "contextHash": "3e9dfd27a3d54344cf13dd2258dd00fd240733d1afa6f1e3ee7a57d571c45d35"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "上の延長線上の発想だが、思い切って素材の種類を厳選してしまおう。",
+      "sourceHash": "0e34e2fa3cc3bd6c35cefe5b692e1d3d78845f008c9419f0215bc5dae8c69b5e",
+      "translation": "This is an extension of the idea above, but let us boldly limit the types of materials to a select few.",
+      "contextHash": "0e34e2fa3cc3bd6c35cefe5b692e1d3d78845f008c9419f0215bc5dae8c69b5e"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "鉄鉱石５個で鉄の剣を合成",
+      "sourceHash": "19ba72877580dbc3d293f96d378a8267f83f3caeafeb201e80b5d3dbdacac69f",
+      "translation": "Synthesize an Iron Sword using 5 Iron Ore",
+      "contextHash": "19ba72877580dbc3d293f96d378a8267f83f3caeafeb201e80b5d3dbdacac69f"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "鉄鉱石１０個で鉄の鎧を合成",
+      "sourceHash": "c5a1f8a7d4d11c3b92ed35580ae5f70f1c452da2bd45b51f993c371faa01d73a",
+      "translation": "Synthesize Iron Armor using 10 Iron Ore",
+      "contextHash": "c5a1f8a7d4d11c3b92ed35580ae5f70f1c452da2bd45b51f993c371faa01d73a"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "炎の魔石１０個で火炎の魔導書を合成",
+      "sourceHash": "8af5d77809bd9c4c58b763c8e1dc756cdde1e33881dd32f251285d5e4d8d10c4",
+      "translation": "Synthesize a Fire Grimoire using 10 Flame Magic Stones",
+      "contextHash": "8af5d77809bd9c4c58b763c8e1dc756cdde1e33881dd32f251285d5e4d8d10c4"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "炎の魔石５０個で灼熱の魔導書を合成",
+      "sourceHash": "28bb6185c9b3f2192eb7b5a2ba7717188b902eea03241bf27171dc26cb02adfa",
+      "translation": "Synthesize a Scorching Grimoire using 50 Flame Magic Stones",
+      "contextHash": "28bb6185c9b3f2192eb7b5a2ba7717188b902eea03241bf27171dc26cb02adfa"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "鉄鉱石５個と炎の魔石５個で炎の剣を合成",
+      "sourceHash": "02dc052a8fdabea7124a7b6198e86d1876110ac303ba57f6890484540eab8856",
+      "translation": "Synthesize a Flame Sword using 5 Iron Ore and 5 Flame Magic Stones",
+      "contextHash": "02dc052a8fdabea7124a7b6198e86d1876110ac303ba57f6890484540eab8856"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "というように、素材を厳選すればプレイヤーも素材の種類を覚えやすい。",
+      "sourceHash": "72eac0751a3110bb4feab00bae87e112e016b0825df293854725c4de34bff625",
+      "translation": "In this way, carefully limiting the materials makes it easier for players to remember the different types.",
+      "contextHash": "72eac0751a3110bb4feab00bae87e112e016b0825df293854725c4de34bff625"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "このような調整にすると、素材は一種の通貨のように機能する。",
+      "sourceHash": "f4dba85b08e622a852d93868ef6dfda4cf5d22616e61c28abd2dfc37c88a08da",
+      "translation": "With this kind of adjustment, materials function as a type of currency.",
+      "contextHash": "f4dba85b08e622a852d93868ef6dfda4cf5d22616e61c28abd2dfc37c88a08da"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "アイテム入手時に説明を表示",
+      "sourceHash": "35b99e50e5ec04efb966cae4fecfbe2ee7a652a504ad2477a7e571b08c68ff01",
+      "translation": "Display Descriptions When Obtaining Items",
+      "contextHash": "35b99e50e5ec04efb966cae4fecfbe2ee7a652a504ad2477a7e571b08c68ff01"
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "アイテム入手時にその名称だけを表示されても、プレイヤーには何か分からないことが多い。特に素材アイテムの数が多くなってくると、アイテム一つ辺りの入手が軽くなりがち。",
+      "sourceHash": "30c99943c9df44019618602cc777b584181ffcdf19a30391f66b7c0fcff23c32",
+      "translation": "If only the item's name is displayed when it is obtained, players often will not know what it is. This is especially true as the number of material items increases, since obtaining each individual item tends to feel less significant.",
+      "contextHash": "30c99943c9df44019618602cc777b584181ffcdf19a30391f66b7c0fcff23c32"
+    },
+    {
+      "id": "text-099",
+      "type": "text",
+      "source": "そこで、アイテム入手時に同時に説明を表示することで「いつの間にか貴重な素材を入手していた」という状況をなくす。",
+      "sourceHash": "2a8d04ed4e51cf3b9a1118c85a5903f48d577d6bc8c2b8380d748a22b03284f8",
+      "translation": "Therefore, displaying a description at the same time as the item is obtained prevents situations where players “somehow ended up obtaining a valuable material without realizing it.”",
+      "contextHash": "2a8d04ed4e51cf3b9a1118c85a5903f48d577d6bc8c2b8380d748a22b03284f8"
+    },
+    {
+      "id": "text-100",
+      "type": "text",
+      "source": "その際、レアリティなどを表示すると分かりやすいかもしれない。",
+      "sourceHash": "737bdd9b5ed8c1a3177847f1446e2a4e9e7b10fd86caec6f514b1819b055cb4a",
+      "translation": "Displaying information such as rarity may also make things easier to understand.",
+      "contextHash": "737bdd9b5ed8c1a3177847f1446e2a4e9e7b10fd86caec6f514b1819b055cb4a"
+    },
+    {
+      "id": "text-101",
+      "type": "text",
+      "source": "ちなみに、ブレスオブザワイルドでは初出のアイテムのみ、説明を表示するような仕組みになっている。",
+      "sourceHash": "5ca53c95bf5c36a6f29a05ac2b96d92e7add17d5a9bd0cfa623414662c0099fe",
+      "translation": "Incidentally, Breath of the Wild has a system that displays descriptions only for items obtained for the first time.",
+      "contextHash": "5ca53c95bf5c36a6f29a05ac2b96d92e7add17d5a9bd0cfa623414662c0099fe"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "図鑑でフォロー",
+      "sourceHash": "f43d97ad7d589478483a2b79e590eaf6477eb40bed61d824fc581c239597be17",
+      "translation": "Provide Support Through Encyclopedias",
+      "contextHash": "f43d97ad7d589478483a2b79e590eaf6477eb40bed61d824fc581c239597be17"
+    },
+    {
+      "id": "text-102",
+      "type": "text",
+      "source": "アイテム図鑑でアイテムの入手場所を表示したり、魔物図鑑で敵のドロップアイテムを表示する。これによって、プレイヤーが戦略的にアイテム収集＆合成をできるようにする。",
+      "sourceHash": "f4566123e0d07e98868f07ba66a83a890287037a59a9dc77cdd5724ea12a595a",
+      "translation": "Display where items can be obtained in an item encyclopedia, and display enemies' dropped items in a monster encyclopedia. This allows players to collect and synthesize items strategically.",
+      "contextHash": "f4566123e0d07e98868f07ba66a83a890287037a59a9dc77cdd5724ea12a595a"
+    },
+    {
+      "id": "text-103",
+      "type": "text",
+      "source": "当然ながら、実装の手間もそれなりに大きいし、プレイヤーにとっても確認する手間が発生する。",
+      "sourceHash": "cdd6fd2483bc204b3715798be0cbc28a4413ea3f9201d8294fcc53827714a471",
+      "translation": "Naturally, this requires a considerable amount of implementation work, and players also have to spend time checking the information.",
+      "contextHash": "cdd6fd2483bc204b3715798be0cbc28a4413ea3f9201d8294fcc53827714a471"
+    },
+    {
+      "id": "text-104",
+      "type": "text",
+      "source": "例えば、魔物図鑑を開き、百種類を超える敵のドロップアイテムを一つ一つ確認していくような作業は、かなりの手間を伴うはずだ。",
+      "sourceHash": "9bbc4ffaca6e0ffec2e204ec8a6dbcb4ee5696fb33258a70dc8cc55836a40430",
+      "translation": "For example, opening the monster encyclopedia and checking the dropped items of more than a hundred types of enemies one by one would surely be quite a chore.",
+      "contextHash": "9bbc4ffaca6e0ffec2e204ec8a6dbcb4ee5696fb33258a70dc8cc55836a40430"
+    },
+    {
+      "id": "text-105",
+      "type": "text",
+      "source": "ならば――と、アイテム図鑑にドロップする敵を記載したり、検索機能を設ける方法もあるが、実装工数はさらに増えていく。",
+      "sourceHash": "6abf06293b5e23604832acdfe0fddfaddc55ccec49e7e09ac193df3d9c073eef",
+      "translation": "Alternatively, you could list the enemies that drop each item in the item encyclopedia or add a search function, but that would require even more implementation work.",
+      "contextHash": "6abf06293b5e23604832acdfe0fddfaddc55ccec49e7e09ac193df3d9c073eef"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "素材毎に合成できるアイテムを明示する",
+      "sourceHash": "e06a1f30aa596e9f030677875812240bd98813b6191eac3e9c09972d4d841716",
+      "translation": "Show Which Items Can Be Synthesized from Each Material",
+      "contextHash": "e06a1f30aa596e9f030677875812240bd98813b6191eac3e9c09972d4d841716"
+    },
+    {
+      "id": "text-106",
+      "type": "text",
+      "source": "素材アイテムにカーソルを合わせた際などに、そこから合成できるアイテムを表示する。作成したことのないアイテムは？？？？表示にしてもよいだろう。",
+      "sourceHash": "7285f8c05952d675f094c4aaaad012c231964840014e1a9dcce0b576ab74c701",
+      "translation": "Display the items that can be synthesized from a material when the cursor is placed over it, for example. Items that have never been crafted could be displayed as ????.",
+      "contextHash": "7285f8c05952d675f094c4aaaad012c231964840014e1a9dcce0b576ab74c701"
+    },
+    {
+      "id": "text-107",
+      "type": "text",
+      "source": "これならば、不用品かそうでないかも区別できるので売却もしやすい。",
+      "sourceHash": "2efc4b3243cbc29d87471d87328ea97e9616a469af91adff661ca5a7187144a2",
+      "translation": "This also makes it easier to sell items, since you can distinguish between things you need and things you do not.",
+      "contextHash": "2efc4b3243cbc29d87471d87328ea97e9616a469af91adff661ca5a7187144a2"
+    },
+    {
+      "id": "text-108",
+      "type": "text",
+      "source": "例によって、実装工数は増える。",
+      "sourceHash": "eeca5ca9374f5016210bab467b8aa782692a2a8a3671814521d881bedd21d501",
+      "translation": "As usual, this increases the implementation workload.",
+      "contextHash": "eeca5ca9374f5016210bab467b8aa782692a2a8a3671814521d881bedd21d501"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "素材の売却で合成",
+      "sourceHash": "e5f911c42c3f3beda138266833403daa12272a27fe19a3c2a957f1af3ac425ad",
+      "translation": "Synthesis Through Selling Materials",
+      "contextHash": "e5f911c42c3f3beda138266833403daa12272a27fe19a3c2a957f1af3ac425ad"
+    },
+    {
+      "id": "text-109",
+      "type": "text",
+      "source": "ペルソナシリーズでは「素材を店に売却することで、それを材料とした装備が店頭に並ぶ」というシステムを採用している。",
+      "sourceHash": "df34ba3d2ee2b48838b3d4879375e2b16b31eda4c1ff4d97523b6b9a26e38227",
+      "translation": "The Persona series uses a system in which equipment made from materials becomes available in shops when you sell those materials to them.",
+      "contextHash": "df34ba3d2ee2b48838b3d4879375e2b16b31eda4c1ff4d97523b6b9a26e38227"
+    },
+    {
+      "id": "text-110",
+      "type": "text",
+      "source": "※正確には覚えてませんが、ペルソナ４だけのシステムかも……。",
+      "sourceHash": "eb025fd30ed4970f65e90ad1d08c667e21887ae48e3264aed0aef202af682000",
+      "translation": "※I do not remember exactly, but this may be a system exclusive to Persona 4...",
+      "contextHash": "eb025fd30ed4970f65e90ad1d08c667e21887ae48e3264aed0aef202af682000"
+    },
+    {
+      "id": "text-111",
+      "type": "text",
+      "source": "このシステムでは素材アイテムを手元に残すメリットは全くない。従って、売却も一括でできるようになっている。",
+      "sourceHash": "19818ca8b44e49e972d3c79989e948b309340995ab23a722dbfa28458a26d903",
+      "translation": "With this system, there is no benefit to keeping material items on hand. Therefore, you can also sell them all at once.",
+      "contextHash": "19818ca8b44e49e972d3c79989e948b309340995ab23a722dbfa28458a26d903"
+    },
+    {
+      "id": "text-112",
+      "type": "text",
+      "source": "この方法なら素材アイテムを管理する手間が大幅に削減できる上に、アイテムを組み合わせるという合成システムの味も残せている。",
+      "sourceHash": "3082be6251f5f5ab421c07f26b7576b3c926dab05812794b1065b8efa080ac02",
+      "translation": "This method greatly reduces the effort required to manage material items while preserving the appeal of a synthesis system based on combining items.",
+      "contextHash": "3082be6251f5f5ab421c07f26b7576b3c926dab05812794b1065b8efa080ac02"
+    },
+    {
+      "id": "text-113",
+      "type": "text",
+      "source": "筆者自身、この記事を書くまではあまり意識してなかったけれど、上述した『世界設定の補強』と合わせてなかなか秀逸なシステムだと思う。",
+      "sourceHash": "f5b4887b03c69a079a5b9634db012646e8147a37b71b0abecab5520b5e5c9929",
+      "translation": "I was not particularly conscious of it myself until writing this article, but together with the aforementioned “reinforcement of the worldbuilding,” I think it is quite an ingenious system.",
+      "contextHash": "f5b4887b03c69a079a5b9634db012646e8147a37b71b0abecab5520b5e5c9929"
+    },
+    {
+      "id": "text-114",
+      "type": "text",
+      "source": "ただし、素材を売却できる店を制限するなどしないと不自然になるかも。例えば、ペルソナ４では武器屋でのみ素材を売却できるようになっている。",
+      "sourceHash": "d19de40811df93a04266bf64c32222c207430552e075176f04705b15c8988f7e",
+      "translation": "However, it may seem unnatural unless you limit which shops can buy materials. For example, in Persona 4, materials can only be sold at weapon shops.",
+      "contextHash": "d19de40811df93a04266bf64c32222c207430552e075176f04705b15c8988f7e"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "金欠にする",
+      "sourceHash": "3b971b9ebb29e60873005329b7ce2c30ac7ca901cb39d88e2c3337ad66f449f7",
+      "translation": "Keep Players Short on Money",
+      "contextHash": "3b971b9ebb29e60873005329b7ce2c30ac7ca901cb39d88e2c3337ad66f449f7"
+    },
+    {
+      "id": "text-115",
+      "type": "text",
+      "source": "ゲームバランスを調整し、金欠気味にしておく。",
+      "sourceHash": "18f888966db175d303f3d5e67817057a1d5db62e3ebd1f6a1f157f1644d27797",
+      "translation": "Adjust the game balance so that the player is usually short on money.",
+      "contextHash": "18f888966db175d303f3d5e67817057a1d5db62e3ebd1f6a1f157f1644d27797"
+    },
+    {
+      "id": "text-116",
+      "type": "text",
+      "source": "合成をした場合は、少ない価格でアイテムが手に入るようにする。これにより、店よりもコスパが良いというメリットを与える。",
+      "sourceHash": "ce804dc2cb58dd65ab7d37d4dcaf4d162dae4e771e0810bfb1f82a2b910638e1",
+      "translation": "When using synthesis, make it possible to obtain items at a low price. This gives them the advantage of being more cost-effective than items bought in shops.",
+      "contextHash": "ce804dc2cb58dd65ab7d37d4dcaf4d162dae4e771e0810bfb1f82a2b910638e1"
+    },
+    {
+      "id": "text-117",
+      "type": "text",
+      "source": "ドラクエシリーズがよくやっている調整である。",
+      "sourceHash": "7805effc73c0b63d81da2b77191484b6e5851c6406c001eb808d3716a0c5dab6",
+      "translation": "This is an adjustment the Dragon Quest series often makes.",
+      "contextHash": "7805effc73c0b63d81da2b77191484b6e5851c6406c001eb808d3716a0c5dab6"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "合成に特化",
+      "sourceHash": "648936ad6430f88bee2f125aad161a37c434f14d2b601050d629cd48c40fe804",
+      "translation": "Make Synthesis the Focus",
+      "contextHash": "648936ad6430f88bee2f125aad161a37c434f14d2b601050d629cd48c40fe804"
+    },
+    {
+      "id": "text-118",
+      "type": "text",
+      "source": "装備品など多くのアイテムは基本的に店や宝箱では扱わない。あるいは露骨に性能の低いアイテムのみを販売し、あくまで合成で作るように誘導する。",
+      "sourceHash": "8d5ba8b4f65de2afdb0a75705c8753915f770a61109349f897883a68c84644e4",
+      "translation": "Most items, such as equipment, are generally not available in shops or treasure chests. Alternatively, you can sell only items with conspicuously low performance and guide players toward making items through synthesis instead.",
+      "contextHash": "8d5ba8b4f65de2afdb0a75705c8753915f770a61109349f897883a68c84644e4"
+    },
+    {
+      "id": "text-119",
+      "type": "text",
+      "source": "これによって、既存システムとの差別化を図る。",
+      "sourceHash": "e71527532a0a7882c159a91328c15b858d88b5ff1df4fae2a7726424964b4407",
+      "translation": "This differentiates the system from existing systems.",
+      "contextHash": "e71527532a0a7882c159a91328c15b858d88b5ff1df4fae2a7726424964b4407"
+    },
+    {
+      "id": "text-120",
+      "type": "text",
+      "source": "アトリエシリーズがこの調整に近いだろうか。",
+      "sourceHash": "b2eee4ee17cbe64092f63b8e0dfb55fa36138675d9cefed57cb38d9b640187b0",
+      "translation": "The Atelier series may be the closest example of this approach.",
+      "contextHash": "b2eee4ee17cbe64092f63b8e0dfb55fa36138675d9cefed57cb38d9b640187b0"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "合成できる種別を限定する",
+      "sourceHash": "6cae16c71228b88162725becb0daea7e4fa5f61b05fc4d60906ad97670b4acce",
+      "translation": "Limit the Types of Items That Can Be Synthesized",
+      "contextHash": "6cae16c71228b88162725becb0daea7e4fa5f61b05fc4d60906ad97670b4acce"
+    },
+    {
+      "id": "text-121",
+      "type": "text",
+      "source": "例えば、武器や防具は店や宝箱から普通に手に入るが、装飾品は合成でしか作れないようにしてしまう。",
+      "sourceHash": "981b7f3a95f1aede240ed14192c7118738c26bc2f6ea977bb6c5483fdcb75463",
+      "translation": "For example, weapons and armor can be obtained normally from shops and treasure chests, while accessories can only be made through synthesis.",
+      "contextHash": "981b7f3a95f1aede240ed14192c7118738c26bc2f6ea977bb6c5483fdcb75463"
+    },
+    {
+      "id": "text-122",
+      "type": "text",
+      "source": "この方法ならば、既存システムとの差別化も自然とできる。",
+      "sourceHash": "ee1e57d4fdf700087f767da3594caf0853c74a4caee2dfcea1f163c67d898a77",
+      "translation": "This method naturally differentiates the system from existing systems as well.",
+      "contextHash": "ee1e57d4fdf700087f767da3594caf0853c74a4caee2dfcea1f163c67d898a77"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "まとめ",
+      "sourceHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72",
+      "translation": "Conclusion",
+      "contextHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72"
+    },
+    {
+      "id": "text-123",
+      "type": "text",
+      "source": "重ねて述べたように合成システムは扱いの難しいシステムである。",
+      "sourceHash": "26b3f2c8c9c35b408de2a7c3d7810894d72568ec01832f3fca719aced2db0d4c",
+      "translation": "As I have repeatedly mentioned, a synthesis system is difficult to handle.",
+      "contextHash": "26b3f2c8c9c35b408de2a7c3d7810894d72568ec01832f3fca719aced2db0d4c"
+    },
+    {
+      "id": "text-124",
+      "type": "text",
+      "source": "……にも関わらず、ここ１０～２０年ではかなりの流行をしており、今や大手メーカーのＲＰＧでは採用していないほうが珍しいぐらいだと感じている。",
+      "sourceHash": "ab503c6a2b526b26807936ea77d8e1d54cfa3b023018426182fffef4723885a7",
+      "translation": "...Nevertheless, it has become very popular over the past 10 to 20 years, and these days, I feel that it is almost unusual for an RPG from a major manufacturer not to include one.",
+      "contextHash": "ab503c6a2b526b26807936ea77d8e1d54cfa3b023018426182fffef4723885a7"
+    },
+    {
+      "id": "text-125",
+      "type": "text",
+      "source": "しかしながら、個人的な意見を言うと、無闇に採用され過ぎではないかとすら思っている。",
+      "sourceHash": "690c17cd18be3b31452054cde7fdb404d31d2915425dc65c16e7970370a07f40",
+      "translation": "However, speaking personally, I sometimes even wonder whether it has been adopted too indiscriminately.",
+      "contextHash": "690c17cd18be3b31452054cde7fdb404d31d2915425dc65c16e7970370a07f40"
+    },
+    {
+      "id": "text-126",
+      "type": "text",
+      "source": "例えば、最近プレイしたＲＰＧで「クリアに数十分かかるクエストの報酬が用途のよく分からない素材アイテムだけだった」なんて経験があった。",
+      "sourceHash": "5bcf753499d96f6cbe8a41709f516549f356d97d57c460858ba262b00d434d96",
+      "translation": "For example, in a recently played RPG, I had the experience of completing a quest that took several dozen minutes only to receive material items whose purpose was unclear.",
+      "contextHash": "5bcf753499d96f6cbe8a41709f516549f356d97d57c460858ba262b00d434d96"
+    },
+    {
+      "id": "text-127",
+      "type": "text",
+      "source": "これが昔のＲＰＧだったなら、ごく単純に装備品がそのまま報酬になっていたと思う。",
+      "sourceHash": "5ff54e8b29772c6736d19d9c360123c98a5c1fe9012ce2a2a58cd32821f57ecc",
+      "translation": "If this had been an old-school RPG, I think the reward would simply have been a piece of equipment.",
+      "contextHash": "5ff54e8b29772c6736d19d9c360123c98a5c1fe9012ce2a2a58cd32821f57ecc"
+    },
+    {
+      "id": "text-128",
+      "type": "text",
+      "source": "上の例は普通のオフラインＲＰＧなので、そのような仕組みにする意味もあまりないように感じた。システムの複雑化と水増しによって、かえって面白みを失っていないだろうか。",
+      "sourceHash": "c2104e257b6eabf78c7ba041ad5e4aacf20e8195dd0b2fea193833bfae03c06a",
+      "translation": "The example above was from a standard offline RPG, so I did not feel there was much point in using such a system. Could the increased complexity and padding of the system actually be making the game less enjoyable?",
+      "contextHash": "c2104e257b6eabf78c7ba041ad5e4aacf20e8195dd0b2fea193833bfae03c06a"
+    },
+    {
+      "id": "text-129",
+      "type": "text",
+      "source": "……そんなわけで、近年のＲＰＧが必要以上に複雑化＆薄味化している要因になっているとも感じるので、採用するにしてもよく考えておきたい。",
+      "sourceHash": "50724a07b2be6e55f84b9ca137c293c1c2b7d9545674c5b4a4de55cce2cfb4b4",
+      "translation": "...That is why I feel it can contribute to the unnecessary complexity and blandness of modern RPGs, so even if you decide to use it, you should think it through carefully.",
+      "contextHash": "50724a07b2be6e55f84b9ca137c293c1c2b7d9545674c5b4a4de55cce2cfb4b4"
+    },
+    {
+      "id": "text-130",
+      "type": "text",
+      "source": "例えば、ストーリー重視でサクサク進めて欲しいという作品に、やたら凝りまくった合成システムを採用するのは考えものだろう。",
+      "sourceHash": "c2aaf88b1da41b2b6ce21120f34626baa4203280f06d0c59bfaf9bd248c9d6dd",
+      "translation": "For example, adding an excessively elaborate synthesis system to a game that emphasizes its story and is meant to progress at a brisk pace would be questionable.",
+      "contextHash": "c2aaf88b1da41b2b6ce21120f34626baa4203280f06d0c59bfaf9bd248c9d6dd"
+    },
+    {
+      "id": "text-131",
+      "type": "text",
+      "source": "どちらかというと、システム重視の作品に向いていると思う。",
+      "sourceHash": "a5c49f892c518ff8e63cf23ac0ca594a9d8017162d8886ea0796e1032c8b21cf",
+      "translation": "If anything, I think it is better suited to games that emphasize their systems.",
+      "contextHash": "a5c49f892c518ff8e63cf23ac0ca594a9d8017162d8886ea0796e1032c8b21cf"
+    },
+    {
+      "id": "text-132",
+      "type": "text",
+      "source": "プレイヤーへの負担を考えても、他のシステムとのバランスも考慮したい。",
+      "sourceHash": "fbb39c16d1f05ccf9b8eca26d8f7dfa1fe2ec0f1230e73396940fa13662b53f6",
+      "translation": "Even when considering the burden on players, you should take the balance with other systems into account.",
+      "contextHash": "fbb39c16d1f05ccf9b8eca26d8f7dfa1fe2ec0f1230e73396940fa13662b53f6"
+    },
+    {
+      "id": "text-133",
+      "type": "text",
+      "source": "例えば、複雑なスキル習得システムを備えた作品に対して、同じく複雑な合成システムを加えると、一層プレイヤーの手間が増えてしまう。",
+      "sourceHash": "76d2650a3eec11a28c1e0eccd077f90cce0986776b1186a2535c81a29f106aaa",
+      "translation": "For example, adding an equally complex synthesis system to a game with a complicated skill acquisition system only increases the amount of work required from the player.",
+      "contextHash": "76d2650a3eec11a28c1e0eccd077f90cce0986776b1186a2535c81a29f106aaa"
+    },
+    {
+      "id": "text-134",
+      "type": "text",
+      "source": "面倒なシステムになっていると感じたならば、削るべき部分を削ってプレイヤーの負担を抑えるのも一つの選択だ。",
+      "sourceHash": "6c07ad072f6e34f308657d56801ceec12b9f5f074061dbebdbbcd0f0eac9b09a",
+      "translation": "If the system feels cumbersome, one option is to remove unnecessary parts and reduce the burden on the player.",
+      "contextHash": "6c07ad072f6e34f308657d56801ceec12b9f5f074061dbebdbbcd0f0eac9b09a"
+    },
+    {
+      "id": "text-135",
+      "type": "text",
+      "source": "開発効率の面でも、システム実装やバランス調整の工数が大きく増加するので、なかなか大変である。",
+      "sourceHash": "aa1829d28ccf88a77449471d15dfc19f7d30e249b83a812a667625fa79fc508a",
+      "translation": "It is also quite demanding from a development-efficiency standpoint, since the workload for implementing the system and adjusting the balance increases substantially.",
+      "contextHash": "aa1829d28ccf88a77449471d15dfc19f7d30e249b83a812a667625fa79fc508a"
+    },
+    {
+      "id": "text-136",
+      "type": "text",
+      "source": "メインのシステムとしてガッツリ作るか、あくまでサブのシステムとして簡略化して作るか、方針はしっかり決めておいたほうがよいと思う。",
+      "sourceHash": "4e7fa199249128b1a4c03bcf7e9d3a13ba079a7991f17ea0c4bfea9c9e615234",
+      "translation": "I think it is best to firmly decide on your direction in advance: whether to build it out fully as a main system or simplify it as a secondary system.",
+      "contextHash": "4e7fa199249128b1a4c03bcf7e9d3a13ba079a7991f17ea0c4bfea9c9e615234"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]合成システムの特徴[[/LINK_1]]",
+      "sourceHash": "ba8a9f453d8857f2db40d5a2664bfcd00847cdc5b6b9d94d6eeba7bf8ad2c2f6",
+      "parts": [
+        {
+          "source": "合成システムの特徴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Features of the Crafting System[[/LINK_1]]",
+      "contextHash": "ba8a9f453d8857f2db40d5a2664bfcd00847cdc5b6b9d94d6eeba7bf8ad2c2f6"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]合成物[[/LINK_1]]",
+      "sourceHash": "a7c5faeff0e373126a1811993987efb8fa27e50dd73516d527f6ec78024c3903",
+      "parts": [
+        {
+          "source": "合成物",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Crafted Items[[/LINK_1]]",
+      "contextHash": "a7c5faeff0e373126a1811993987efb8fa27e50dd73516d527f6ec78024c3903"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]レシピ[[/LINK_1]]",
+      "sourceHash": "1f56ffa5797f5fd091576205c6639eea48b92c59c213acd19a3e09cbcbd9f1e6",
+      "parts": [
+        {
+          "source": "レシピ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recipes[[/LINK_1]]",
+      "contextHash": "1f56ffa5797f5fd091576205c6639eea48b92c59c213acd19a3e09cbcbd9f1e6"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]性能の変化[[/LINK_1]]",
+      "sourceHash": "f10e8fb4642c916608929aa9b16d0d370bf7a701ba0423965d7b937a90421583",
+      "parts": [
+        {
+          "source": "性能の変化",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changes in Performance[[/LINK_1]]",
+      "contextHash": "f10e8fb4642c916608929aa9b16d0d370bf7a701ba0423965d7b937a90421583"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]合成システムのメリット[[/LINK_1]]",
+      "sourceHash": "fdd6006a3f7ec37df6afd09a79336962b90abef71d56eabcf9aabd8cb1d2cea4",
+      "parts": [
+        {
+          "source": "合成システムのメリット",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Benefits of the Crafting System[[/LINK_1]]",
+      "contextHash": "fdd6006a3f7ec37df6afd09a79336962b90abef71d56eabcf9aabd8cb1d2cea4"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ゲーム性の強化[[/LINK_1]]",
+      "sourceHash": "46284b00fbde04dcda35761a724a5178fea24420f7bcbf13580f842bb7c3cfb4",
+      "parts": [
+        {
+          "source": "ゲーム性の強化",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enhancing Gameplay[[/LINK_1]]",
+      "contextHash": "46284b00fbde04dcda35761a724a5178fea24420f7bcbf13580f842bb7c3cfb4"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムに意味を持たせる[[/LINK_1]]",
+      "sourceHash": "483e53616ccfe71bbe73c95abbc39f4dbb9467b5e03100ce0bb9e3d995f92735",
+      "parts": [
+        {
+          "source": "アイテムに意味を持たせる",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Giving Items Meaning[[/LINK_1]]",
+      "contextHash": "483e53616ccfe71bbe73c95abbc39f4dbb9467b5e03100ce0bb9e3d995f92735"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムの入手を細分化[[/LINK_1]]",
+      "sourceHash": "0899ac189ed9684fb84bb9a995b47d82ce80116bb1891c4f920e9f7cf4403d49",
+      "parts": [
+        {
+          "source": "アイテムの入手を細分化",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Diversifying Item Acquisition[[/LINK_1]]",
+      "contextHash": "0899ac189ed9684fb84bb9a995b47d82ce80116bb1891c4f920e9f7cf4403d49"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]世界設定の補強[[/LINK_1]]",
+      "sourceHash": "315f6963e92d637602312f2c883060e1901f33d4c64762557a1a880fba34815c",
+      "parts": [
+        {
+          "source": "世界設定の補強",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Strengthening the Worldbuilding[[/LINK_1]]",
+      "contextHash": "315f6963e92d637602312f2c883060e1901f33d4c64762557a1a880fba34815c"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]合成システムのデメリット[[/LINK_1]]",
+      "sourceHash": "475bca9ff527008221e386633c57a4a132082762af7f6f5d5f4f3b4404857a6b",
+      "parts": [
+        {
+          "source": "合成システムのデメリット",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Drawbacks of the Crafting System[[/LINK_1]]",
+      "contextHash": "475bca9ff527008221e386633c57a4a132082762af7f6f5d5f4f3b4404857a6b"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]手順が増える[[/LINK_1]]",
+      "sourceHash": "a89fb245a76f390036258e3e14f2954b42e81ea3b9ebc3d44025d89bc7395d39",
+      "parts": [
+        {
+          "source": "手順が増える",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Adding More Steps[[/LINK_1]]",
+      "contextHash": "a89fb245a76f390036258e3e14f2954b42e81ea3b9ebc3d44025d89bc7395d39"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]不親切[[/LINK_1]]",
+      "sourceHash": "244ab551d0d5b60d88d67cf6007a6a5c1f1460d73ec0eb906dc0676559bbc2f7",
+      "parts": [
+        {
+          "source": "不親切",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Unintuitive[[/LINK_1]]",
+      "contextHash": "244ab551d0d5b60d88d67cf6007a6a5c1f1460d73ec0eb906dc0676559bbc2f7"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム数が増加する[[/LINK_1]]",
+      "sourceHash": "1cb0eb69793636e74f6dabbcc6c2ed0b5462151ba0874b8d2f149f3c79382d7f",
+      "parts": [
+        {
+          "source": "アイテム数が増加する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increasing the Number of Items[[/LINK_1]]",
+      "contextHash": "1cb0eb69793636e74f6dabbcc6c2ed0b5462151ba0874b8d2f149f3c79382d7f"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]売却が困難となる[[/LINK_1]]",
+      "sourceHash": "d02dbdb8260d4242adec48ad47d3f44372319f57ef9b64e1a5cf9635d50bf134",
+      "parts": [
+        {
+          "source": "売却が困難となる",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Making Items Difficult to Sell[[/LINK_1]]",
+      "contextHash": "d02dbdb8260d4242adec48ad47d3f44372319f57ef9b64e1a5cf9635d50bf134"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]素材アイテムのご褒美としての弱さ[[/LINK_1]]",
+      "sourceHash": "0069684eb4754568accd8f759a1952f24a485767a36c538c865da9dc41f37c9e",
+      "parts": [
+        {
+          "source": "素材アイテムのご褒美としての弱さ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The Weak Reward Value of Material Items[[/LINK_1]]",
+      "contextHash": "0069684eb4754568accd8f759a1952f24a485767a36c538c865da9dc41f37c9e"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]バランス調整が困難[[/LINK_1]]",
+      "sourceHash": "9a431d05c62ef7fb8809b7f7a03bdc5262deba443e4b7f3e2d12aef3530f546b",
+      "parts": [
+        {
+          "source": "バランス調整が困難",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Difficulty Adjusting the Balance[[/LINK_1]]",
+      "contextHash": "9a431d05c62ef7fb8809b7f7a03bdc5262deba443e4b7f3e2d12aef3530f546b"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]古典的システムとの競合[[/LINK_1]]",
+      "sourceHash": "06ffc1313d8734beb40203c6516a421f0d646ad24b671464db29564ad2eaf47e",
+      "parts": [
+        {
+          "source": "古典的システムとの競合",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Competition with Classic Systems[[/LINK_1]]",
+      "contextHash": "06ffc1313d8734beb40203c6516a421f0d646ad24b671464db29564ad2eaf47e"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]デメリットへの対策[[/LINK_1]]",
+      "sourceHash": "423baa27fb678b86674124b38c6d82c653b9d007a7495af085acefcdd7c66e3d",
+      "parts": [
+        {
+          "source": "デメリットへの対策",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Addressing the Drawbacks[[/LINK_1]]",
+      "contextHash": "423baa27fb678b86674124b38c6d82c653b9d007a7495af085acefcdd7c66e3d"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]素材アイテムを限定する[[/LINK_1]]",
+      "sourceHash": "32036024353f0a65c4c3c98843ef64775a316835f21cd54ef677aec271f24338",
+      "parts": [
+        {
+          "source": "素材アイテムを限定する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Limiting Material Items[[/LINK_1]]",
+      "contextHash": "32036024353f0a65c4c3c98843ef64775a316835f21cd54ef677aec271f24338"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]合成のルールを単純化する[[/LINK_1]]",
+      "sourceHash": "7cb491c2208b766f2c9bb84379853426a637114a58c4cec3722c33af5588adfb",
+      "parts": [
+        {
+          "source": "合成のルールを単純化する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Simplifying the Crafting Rules[[/LINK_1]]",
+      "contextHash": "7cb491c2208b766f2c9bb84379853426a637114a58c4cec3722c33af5588adfb"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]素材の種類を絞る[[/LINK_1]]",
+      "sourceHash": "0fbbee7d984a544ad7bdf154ea652ffe190bc7dd6b20514ca64c1582961f5ce5",
+      "parts": [
+        {
+          "source": "素材の種類を絞る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Narrowing Down the Material Types[[/LINK_1]]",
+      "contextHash": "0fbbee7d984a544ad7bdf154ea652ffe190bc7dd6b20514ca64c1582961f5ce5"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム入手時に説明を表示[[/LINK_1]]",
+      "sourceHash": "c3a5f10c2cfa5742d6a69a160176af858d0d5a54470994cdde2505291178a33f",
+      "parts": [
+        {
+          "source": "アイテム入手時に説明を表示",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Displaying an Explanation When Obtaining an Item[[/LINK_1]]",
+      "contextHash": "c3a5f10c2cfa5742d6a69a160176af858d0d5a54470994cdde2505291178a33f"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]図鑑でフォロー[[/LINK_1]]",
+      "sourceHash": "03ca52a148ad458fa92f6b43ba964bc4476425cd5fed1aadb1b942f693ba24cb",
+      "parts": [
+        {
+          "source": "図鑑でフォロー",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Following Up in the Encyclopedia[[/LINK_1]]",
+      "contextHash": "03ca52a148ad458fa92f6b43ba964bc4476425cd5fed1aadb1b942f693ba24cb"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]素材毎に合成できるアイテムを明示[[/LINK_1]]",
+      "sourceHash": "10eef69f5b51067d90de57c5a486a64cac6a3a101756b136bc787106d308fa5e",
+      "parts": [
+        {
+          "source": "素材毎に合成できるアイテムを明示",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Clearly Indicating Which Items Can Be Crafted from Each Material[[/LINK_1]]",
+      "contextHash": "10eef69f5b51067d90de57c5a486a64cac6a3a101756b136bc787106d308fa5e"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]素材の売却で合成[[/LINK_1]]",
+      "sourceHash": "1b57da5f62771e667e4900cd7460c799ce84ac1ab28c04b7fc025ee4ee0b9b70",
+      "parts": [
+        {
+          "source": "素材の売却で合成",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Crafting by Selling Materials[[/LINK_1]]",
+      "contextHash": "1b57da5f62771e667e4900cd7460c799ce84ac1ab28c04b7fc025ee4ee0b9b70"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]金欠にする[[/LINK_1]]",
+      "sourceHash": "3d93cb37f73232b126bbf368ee04f5f598b67d86d66efbf278429a582446dc7e",
+      "parts": [
+        {
+          "source": "金欠にする",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Making Players Short on Money[[/LINK_1]]",
+      "contextHash": "3d93cb37f73232b126bbf368ee04f5f598b67d86d66efbf278429a582446dc7e"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]合成に特化[[/LINK_1]]",
+      "sourceHash": "fcd734d3748ea18df5a255ff455c216004611415d4ebfee16039b1ffd58bb89b",
+      "parts": [
+        {
+          "source": "合成に特化",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Specializing in Crafting[[/LINK_1]]",
+      "contextHash": "fcd734d3748ea18df5a255ff455c216004611415d4ebfee16039b1ffd58bb89b"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]合成できる種別を限定する[[/LINK_1]]",
+      "sourceHash": "2369d21516db57c08e2787006a0c67216898b483ea032546cb5d0cef3559ff97",
+      "parts": [
+        {
+          "source": "合成できる種別を限定する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Limiting the Categories of Craftable Items[[/LINK_1]]",
+      "contextHash": "2369d21516db57c08e2787006a0c67216898b483ea032546cb5d0cef3559ff97"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]まとめ[[/LINK_1]]",
+      "sourceHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de",
+      "parts": [
+        {
+          "source": "まとめ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Summary[[/LINK_1]]",
+      "contextHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Creation Tutorial Table of Contents[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "アイテム合成システムとは、複数のアイテムを組み合わせることで新たなアイテムを生み出すシステムである。": "An item crafting system is a system that creates new items by combining multiple items.",
+    "ドラクエシリーズやアトリエシリーズなどが有名。": "The Dragon Quest and Atelier series are famous examples.",
+    "『錬金』『鍛冶』『調合』『料理』『交換』など作品によって呼称が変わるが、基本的には似たようなものとなっている。": "Although the name varies by game—such as “Alchemy,” “Blacksmithing,” “Synthesis,” “Cooking,” or “Trading”—the basic concept is similar.",
+    "※参考：ドラゴンクエストヒーローズの錬金釜": "※Reference: the alchemy pot from Dragon Quest Heroes",
+    "合成は多くの作品で採用されているが、なかなか難しいシステムだ。": "Crafting is used in many games, but it is a fairly difficult system to implement.",
+    "プレイヤーに要求する手順も多い上に、開発者側に要求される作業量もそれなりに多い。": "It requires players to follow many steps, while also demanding a considerable amount of work from the developers.",
+    "そんな合成システムについて、考察してみたい。": "I would like to examine such crafting systems.",
+    "目次": "Table of Contents",
+    "合成システムの特徴": "Features of Crafting Systems",
+    "一口に合成システムといっても、作品によって細部は異なっている。": "Although they may all be called crafting systems, the details differ from game to game.",
+    "実際には以下のような要素によって、差別化される。": "In practice, they are differentiated by elements such as the following.",
+    "合成物": "Crafted Items",
+    "何を素材として、何を合成するか。": "What materials are used, and what is crafted?",
+    "主に装備を中心としたアイテムが合成の生成物になることが多いが、料理なども仕組みはほぼ同じである。": "Items, primarily equipment, are often the products of crafting, but cooking and similar systems work in much the same way.",
+    "また、アイテムという枠にはこだわらず、それ以外にも応用可能である。": "Furthermore, crafting is not limited to items and can be applied to other things as well.",
+    "例えば、スキルの合成のようなシステムを作成してもよいし、動物やモンスターの配合なども一種の合成といってよいだろう。": "For example, you could create a system for combining skills, while breeding animals or monsters could also be considered a type of crafting.",
+    "レシピ": "Recipes",
+    "レシピ――つまり、合成するアイテムの組み合わせである。例えば、以下のようなパターンに分類される。": "Recipes—in other words, combinations of items to craft. For example, they can be categorized into the following patterns.",
+    "店や宝箱、本棚などからレシピを入手するパターン。": "A pattern in which recipes are obtained from shops, treasure chests, bookshelves, and so on.",
+    "比較的オーソドックスなパターン。仕様上、取り逃しが発生しやすい。": "A relatively conventional pattern. By design, it is easy for players to miss some recipes.",
+    "店毎に定められた選択肢で合成できるパターン。": "A pattern in which crafting is possible using choices predetermined for each shop.",
+    "自由度は下がるが、取り逃しは発生しづらい。": "Although this reduces freedom, players are less likely to miss anything.",
+    "元になる素材があれば、進化先の候補が表示されるパターン。": "A pattern in which possible evolutions are displayed when the base material is available.",
+    "例えば、銅の剣を所持していた場合、「銅の剣と鉄鉱石を組み合わせると鉄の剣を合成できる」ようになる。": "For example, if you possess a Copper Sword, you can combine it with Iron Ore to craft an Iron Sword.",
+    "レシピは存在せず、何でも合成できるパターン。": "A pattern with no recipes, in which anything can be crafted.",
+    "自由度は非常に高いが、ハズレアイテムも発生しやすい。また、制作者の想定以上に序盤から強力なアイテムが作成できてしまうこともある。": "This offers a great deal of freedom, but it also makes unwanted items more likely to result. It may also allow players to create powerful items early on, beyond what the developer intended.",
+    "以降では、どちらかというとレシピが存在するタイプを念頭に置いている。": "From this point onward, I will focus mainly on the type in which recipes exist.",
+    "性能の変化": "Changes in Performance",
+    "同じ生成物であっても、素材や合成する方法によって性能に変化がつく。": "Even when the crafted item is the same, its performance can vary depending on the materials and crafting method used.",
+    "例えば、ドラクエ１１の鍛冶ならば『銅のつるぎ＋２』というように強化される。": "For example, in Dragon Quest XI’s blacksmithing system, an item can be upgraded into something like a “Copper Sword +2.”",
+    "アトリエシリーズはさらに複雑で、同じアイテムであってもほとんど別物のような性能に変化してしまうことすらある。": "The Atelier series is even more complex; sometimes the performance of the same item changes so drastically that it is almost an entirely different item.",
+    "同じアイテムを＋１、＋２……というように重ねて強化できる場合もある。": "In some cases, the same item can be repeatedly upgraded, becoming +1, +2, and so on.",
+    "合成システムのメリット": "Benefits of Crafting Systems",
+    "では、どういった狙いがあってゲーム制作者は合成システムを採用するのだろうか？": "So, what goals lead game developers to adopt crafting systems?",
+    "そのメリットをまとめてみたい。": "I would like to summarize their benefits.",
+    "ゲーム性の強化": "Enhancing Gameplay",
+    "いかにして強力なアイテムの合成を行うかをプレイヤーに考えさせることによって、ゲーム性を高める。": "Crafting systems enhance gameplay by making players think about how to craft powerful items.",
+    "目当ての素材が手に入るエリアを探索したり、素材を落とす敵を優先的に狩るといった戦略性が発生する。": "This creates strategic elements, such as exploring areas where desired materials can be obtained or prioritizing enemies that drop those materials.",
+    "作品によっては、合成したアイテムをさらに新たな合成の素材にすることで、より強力なアイテムを作り出すなんてこともできたりする。": "Depending on the game, crafted items can sometimes be used as materials for further crafting, allowing players to create even more powerful items.",
+    "場合によっては、序盤から強力な装備を作成できるなど自由度の高いゲームプレイが可能になる。": "In some cases, this enables highly flexible gameplay, such as creating powerful equipment early in the game.",
+    "アイテムに意味を持たせられる": "Giving Items Meaning",
+    "一見して不要なアイテムが重要な素材になったりと、幅を持たせられる。": "It adds variety by turning seemingly useless items into important materials.",
+    "これにより、アイテム収集を楽しくする効果がある。": "This makes collecting items more enjoyable.",
+    "アイテムの入手を細分化できる": "Breaking Item Acquisition into Smaller Steps",
+    "ダンジョンやフィールドの広い空間に何も置かないのは寂しい。あるいは大量に用意したクエストに報酬を用意したい。": "Leaving large dungeon or field areas empty feels lonely. Alternatively, you may want to provide rewards for the many quests you have prepared.",
+    "とはいえ、安易に強力なアイテムを放出してしまうと、すぐにインフレしてバランスが崩れてしまう。": "However, if you hand out powerful items too readily, inflation will quickly set in and the game balance will collapse.",
+    "というわけで、アイテムを素材に分割して配置することで、プレイヤーに対する報酬をほどほどにコントロールできる。": "Therefore, by distributing items in the form of separate materials, you can moderately control the rewards given to players.",
+    "オープンワールドやダンジョンＲＰＧなどの探索を重視する作品、あるいはネトゲやソシャゲなどプレイヤーを長く引き留めたい作品において、相性が良い方法だ。": "This is a suitable method for games that emphasize exploration, such as open-world games and dungeon RPGs, or for games that want to keep players engaged for a long time, such as online and mobile social games.",
+    "近年の作品では頻繁に採用されるので、プレイヤーとして経験があるという人も多いのではないだろうか？": "Since this is frequently used in recent games, many of you may have experienced it as a player.",
+    "ぶっちゃけ水増しと言えば水増しである。": "To be blunt, it is padding, if you want to call it that.",
+    "世界設定の補強": "Strengthening the Worldbuilding",
+    "作品の世界設定によっては「商人が強力なアイテムを販売する」という状況自体が不自然に感じられる場合もある。": "Depending on the setting of a work, the situation itself of “a merchant selling powerful items” may feel unnatural.",
+    "現代日本を舞台にした作品において、普通の店で魔法の剣を購入できたら違和感があるというわけだ。": "In a work set in modern-day Japan, for example, it would feel out of place to be able to buy a magic sword at an ordinary shop.",
+    "例えば、ペルソナシリーズでは異世界の敵から獲得したアイテムを素材とすることで、現実ではあり得ないような装備を作成しているという設定がある。": "For example, the Persona series establishes that equipment unlike anything possible in reality can be created using items obtained from enemies in another world as materials.",
+    "合成システムのデメリット": "Disadvantages of a Synthesis System",
+    "冒頭で『なかなか難しいシステム』と表現したように、合成システムは扱いの難しいシステムである。": "As I described it at the beginning as “a rather difficult system,” a synthesis system can be difficult to handle.",
+    "実際のところ、個人的にはかなりデメリットも多いシステムだと感じているので、その点をまとめてみた。": "In fact, I personally feel that it has quite a lot of disadvantages, so I have summarized them here.",
+    "手順が増える": "More Steps",
+    "合成というシステムは必要な手順が多い。": "A synthesis system requires many steps.",
+    "例えば、一例を挙げてみよう。": "For example, let’s consider one case.",
+    "宝箱や店からレシピを入手＆購入。": "Obtain and purchase recipes from treasure chests and shops.",
+    "レシピを参照し、必要な素材とその所在を確認。": "Check the recipe to find the required materials and where to obtain them.",
+    "素材を捜索＆入手。": "Search for and obtain the materials.",
+    "合成屋に戻って合成開始。": "Return to the synthesis shop and begin synthesis.",
+    "合成時のミニゲームによって完成度が変化。": "The quality of the result changes depending on the minigame played during synthesis.",
+    "……というように、なかなか大変である。": "…So, it is quite a lot of work.",
+    "これは比較的、手間のかかる仕組みを想定した場合だ。例えば、どこでも合成を実行できる作品ならば、もう少し手順は緩和される。": "This assumes a relatively time-consuming system. For example, if synthesis can be performed anywhere, the number of steps can be reduced somewhat.",
+    "いずれにせよ、お金を貯めて買うだけの古典的な店よりも手間がかかるのは間違いない。": "In any case, there is no doubt that it requires more effort than a traditional shop where you simply save money and buy what you want.",
+    "不親切": "Unintuitive",
+    "合成をしようにも素材の入手先が分からないと「どこで手に入るのかも分からないアイテムを探す作業」になってしまいがち。": "Even if you want to synthesize something, not knowing where to obtain the materials can turn it into “the task of searching for items without even knowing where to find them.”",
+    "勘や総当たりで探し回るか、攻略を見るか、あるいは成り行きに任せて見つからないなら諦めるしかない。": "You have no choice but to search by intuition or through trial and error, look up a walkthrough, or give up if you cannot find them and leave it to chance.",
+    "このままでは、プレイヤーがシステムを活かすことは難しく、あまりゲーム性も高いとは言えなさそうだ。": "As things stand, it is difficult for players to make use of the system, and it does not seem likely to add much gameplay value.",
+    "もし、そうならないようにしたいなら、ヒントを出す必要があるが、プレイヤーにとってはそういった情報を確認する手順がさらに増える。": "If you want to prevent that, you need to provide hints, but this gives players yet another step for checking that information.",
+    "あるいは、ゲーム進行に応じて、自然と素材が集まるようにすれば手間は削減できる。": "Alternatively, you can reduce the effort by having materials accumulate naturally as the game progresses.",
+    "……が、根本的なことを言うと、それならばこんな手間のかかるシステムを採用する必要性は低い。普通の店――つまり「お金を貯めれば、良いアイテムを買えるシステム」を採用したほうが、手っ取り早い。": "…But fundamentally, if that is the case, there is little need to adopt such a time-consuming system. It would be quicker to use an ordinary shop—in other words, “a system where saving money lets you buy better items.”",
+    "……と、なってしまうので、やはりプレイヤーに対して、多少の不便や面倒は許容してもらうしかない。その上で、ゲーム性を高める目的で合成システムを採用すべきだとは思う。": "…That is where things end up, so players will ultimately have to accept some inconvenience and hassle. Even so, I think a synthesis system should be adopted with the goal of increasing gameplay value.",
+    "アイテム数が増加する": "More Items",
+    "合成には素材となるアイテムが必要となる。": "Synthesis requires items to use as materials.",
+    "必然的にアイテム数が増加し、アイテム一覧が複雑化する。": "Inevitably, the number of items increases, making the item list more complicated.",
+    "プレイヤー視点ではアイテムの管理が大変になり、作品の快適性を落とすことになる。": "From the player’s perspective, managing items becomes more difficult, reducing the game’s convenience.",
+    "制作者視点でも、もちろんデータ設定の手間が増える。": "From the creator’s perspective, of course, the effort required to configure the data also increases.",
+    "売却が困難となる": "Selling Items Becomes Difficult",
+    "合成システムの存在するゲームにおいては、一見して役に立たないアイテムが思わぬ合成の材料となることがある。": "In games with a synthesis system, items that appear useless at first glance may unexpectedly be needed as synthesis materials.",
+    "システムの奥深さを高める効果があるが、一方で不用品の判別が困難になるということでもある。": "This deepens the system, but it also makes it difficult to determine which items are unnecessary.",
+    "つまり、迂闊に不用品を売却できなくなるということだ。": "In other words, you can no longer carelessly sell items you do not need.",
+    "昔、初期装備の木刀を売り払うと最強武器が手に入らなくなるマイナーＲＰＧがあったが、こういった問題が起こりやすくなる。": "There was once an obscure RPG where selling the wooden sword from your starting equipment made it impossible to obtain the strongest weapon, and problems like this become more likely.",
+    "上記の「アイテム数が増加する」と合わさって、さらにアイテム一覧が複雑化してしまう。": "Combined with the aforementioned increase in the number of items, this makes the item list even more complicated.",
+    "素材アイテムのご褒美としての弱さ": "Materials Are Weak as Rewards",
+    "素材アイテムはご褒美としての機能が弱い。": "Material items are not very effective as rewards.",
+    "なぜなら、素材アイテムは単体では機能しないため、入手直後のプレイヤーにとっては「何かよく分からないアイテム」であるためだ。": "That is because material items have no function on their own, so to players immediately after obtaining them, they are simply “some kind of item whose purpose is unclear.”",
+    "そのため、プレイヤーの印象には残りにくい。": "As a result, they are less likely to leave an impression on players.",
+    "古典的な宝箱から直接装備を手に入れる方式なら、手に入れた瞬間に有用であることが分かる。ご褒美としては非常に分かりやすい。": "With the traditional approach of obtaining equipment directly from a treasure chest, you immediately know that it is useful. It is a very straightforward reward.",
+    "お金を貯めて装備を買う方式なら、努力の蓄積が明確に反映されるのが利点だ。ドラクエでコツコツお金を貯めて鋼の剣を買った時は嬉しいもの。": "With the approach of saving money to buy equipment, the advantage is that your accumulated efforts are clearly reflected. It feels great to steadily save money in Dragon Quest and finally buy a Steel Sword.",
+    "計画を立てて、それを達成するというのはそれ自体、ゲーム性の高い仕組みなのだ。プレイヤーにとって印象に残りやすい。": "Making a plan and accomplishing it is itself a system with strong gameplay value. It is likely to leave a lasting impression on players.",
+    "対して、合成システムでは「いつの間にか溜まっていた素材でいつの間にか合成できるようになっていた」みたいなケースはとてもありがち。": "By contrast, with a synthesis system, it is very common to find that “before you know it, you have accumulated enough materials to synthesize something before you know it.”",
+    "合成システムの存在する作品では、アイテムの入手量自体も増大する傾向にあるので、一つ一つのアイテムの印象も薄くなりやすい。": "In works with a synthesis system, the amount of items obtained also tends to increase, so each individual item is more likely to make less of an impression.",
+    "わざわざ手間をかけたのに、古典的システムより印象で劣ってしまう――なんてことにもなりかねない。": "Despite going to all that trouble, the system may end up making less of an impression than a traditional one.",
+    "なお、他のご褒美の手段としては宝箱にレシピを入れる方法もある。": "Another way to use rewards is to place recipes in treasure chests.",
+    "レシピなら合成先のアイテムが想像しやすいという利点もある。": "Recipes also have the advantage of making it easier to imagine the item they can be used to synthesize.",
+    "ただし、この場合も即座にアイテムが手に入るわけではないので、やはり古典的方式よりもご褒美としては弱い。": "However, even in this case, the item is not obtained immediately, so it is still a weaker reward than the classic approach.",
+    "バランス調整が困難": "Difficult Balance Adjustments",
+    "プレイスタイルによる装備の差は古典的なＲＰＧより大きくなるため、バランス調整の難易度も上昇する。": "Because equipment differences based on playstyle are greater than in classic RPGs, balancing also becomes more difficult.",
+    "序盤から強力な武器を作られてしまった結果、制作者の想定よりもずっと難易度が下がってしまうなんてこともあり得る。": "If players manage to create powerful weapons early on, the game may end up being far easier than the creator intended.",
+    "レシピなどの要素で縛ることで一定の対処はできるが、今度は逆に自由度は下がってしまう。": "This can be addressed to some extent by imposing restrictions such as recipes, but that reduces the player's freedom instead.",
+    "一方でプレイヤーがレシピや素材を見つけ出せなかった結果、想定よりも難易度が上がってしまう場合もある。": "Conversely, the game may end up being more difficult than intended if players fail to find the recipes or materials.",
+    "ＤＱ１０オフラインでは装備のレシピの場所が非常に分かりづらく、中盤の装備のままラスボスと戦うプレイヤーが続出した。": "In DQ10 Offline, the locations of equipment recipes were extremely difficult to figure out, resulting in many players fighting the final boss with mid-game equipment.",
+    "……というように、合成とはとにかく手順が多いシステムなので、プレイヤーが『何か』を見落とす可能性は高い。": "As this illustrates, synthesis systems involve a great many steps, so there is a high chance that players will overlook “something.”",
+    "アトリエシリーズなんかは典型だけど、複雑な合成システムを使いこなせるかで、体感の難易度が大きく変わる。そのため、同じ作品に対して『簡単』というプレイヤーと『難しい』というプレイヤーが入り混じっていたりする。": "The Atelier series is a typical example: the perceived difficulty changes significantly depending on whether players can master its complex synthesis system. As a result, players who consider the same game “easy” and those who consider it “difficult” tend to coexist.",
+    "全体的な傾向として、合成システムは『二周目以降のプレイヤー』や『攻略情報を見ながらプレイするプレイヤー』『丹念に探索やシステムの活用を行うプレイヤー』にとって有利なシステムと言えそうだ。": "As a general trend, synthesis systems seem to favor “players on their second or subsequent playthrough,” “players who play while referring to strategy information,” and “players who thoroughly explore and make use of the systems.”",
+    "逆に言うと、攻略を見ずにさっさと進めたいというプレイヤーとはあまり相性がよくない。": "Conversely, they are not very well suited to players who want to progress quickly without consulting a guide.",
+    "古典的システムとの競合": "Conflict with Classic Systems",
+    "既に何度か触れたが「お金を払えば装備を買える店」や「装備が手に入る宝箱」といった古典的システムとの併用はどうするか？": "As I have already touched on several times, how should synthesis be combined with classic systems such as “shops where you can buy equipment with money” and “chests containing equipment”?",
+    "店や宝箱から十分なアイテムが手に入るなら、合成システムはそもそも不要である。": "If players can obtain enough items from shops and chests, there is no need for a synthesis system in the first place.",
+    "せっかく手間をかけて装備を合成しても、すぐ次の町やダンジョンでより強力な装備が簡単に手に入るならガッカリしてしまうだろう。": "Even if players go to the trouble of synthesizing equipment, they will be disappointed if they can easily obtain more powerful equipment in the next town or dungeon.",
+    "店や宝箱の品質を落とすのが無難なところだが、それらの喜びは必然的に弱くなる。": "The safest approach is probably to lower the quality of items found in shops and chests, but that inevitably diminishes the joy of obtaining them.",
+    "デメリットへの対策": "Measures to Address the Drawbacks",
+    "以上、合成システムのデメリットを多数紹介した。": "So far, I have introduced many of the drawbacks of synthesis systems.",
+    "そこで次は、どうにかデメリットを軽減して、合成システムを活かすための対策案を考えてみたい。": "Next, I would like to consider measures for somehow reducing these drawbacks and making the most of a synthesis system.",
+    "※同時にメリットを削ぐようなものも多いので、取捨判断はお任せします。全てを取り入れればよいというものではないです。": "※Many of these measures also reduce the benefits, so I leave it to you to decide which to adopt. You do not need to implement all of them.",
+    "素材アイテムを限定する": "Limit Material Items",
+    "「装備品は合成には使えない。あくまで合成は素材専用アイテムでのみ行う」「素材専用アイテムは別のカテゴリに表示される」といったルールを付ける。": "Establish rules such as “Equipment cannot be used in synthesis. Synthesis can only be performed using items intended specifically as materials” and “Items intended specifically as materials are displayed in a separate category.”",
+    "これによって、アイテム一覧が複雑化することを防ぐ。これなら、不用品の売却もやりやすくなる。": "This prevents the item list from becoming overly complicated. It also makes it easier to sell unwanted items.",
+    "一方で「一見、役に立たない弱い武器が強力な武器の材料に！」というような意外性はなくなるため、システムとしての幅は狭まってしまう。": "On the other hand, this eliminates surprises such as “A seemingly useless, weak weapon becomes a material for a powerful weapon!” narrowing the range of possibilities for the system.",
+    "合成のルールを単純化する": "Simplify the Synthesis Rules",
+    "例えば「ミスリルがあればミスリルソードやミスリルスピア、ミスリルメイルを作れる」というようにルールを単純化する。": "For example, simplify the rules so that “If you have mithril, you can craft a Mithril Sword, Mithril Spear, or Mithril Mail.”",
+    "これなら非常に分かりやすい。プレイヤーにとっても「素材の入手は装備の入手に等しい」ということが直感的に伝わるはずだ。": "This is very easy to understand. Players should also intuitively grasp that “obtaining materials is equivalent to obtaining equipment.”",
+    "※素材が単一のものを合成といってよいかは置いておきます。": "※Leaving aside whether synthesis using a single material can really be called synthesis.",
+    "この手法はプレイヤーが使用している武器の種類が不明な場合にも有効だ。「斧を手に入れたけど、斧使いが誰もいない」なんて悲劇を防げる。": "This approach is also effective when it is unclear which types of weapons the players are using. It prevents tragedies such as “I got an axe, but nobody uses axes.”",
+    "素材の種類を絞る": "Narrow Down the Types of Materials",
+    "上の延長線上の発想だが、思い切って素材の種類を厳選してしまおう。": "This is an extension of the idea above, but let us boldly limit the types of materials to a select few.",
+    "鉄鉱石５個で鉄の剣を合成": "Synthesize an Iron Sword using 5 Iron Ore",
+    "鉄鉱石１０個で鉄の鎧を合成": "Synthesize Iron Armor using 10 Iron Ore",
+    "炎の魔石１０個で火炎の魔導書を合成": "Synthesize a Fire Grimoire using 10 Flame Magic Stones",
+    "炎の魔石５０個で灼熱の魔導書を合成": "Synthesize a Scorching Grimoire using 50 Flame Magic Stones",
+    "鉄鉱石５個と炎の魔石５個で炎の剣を合成": "Synthesize a Flame Sword using 5 Iron Ore and 5 Flame Magic Stones",
+    "というように、素材を厳選すればプレイヤーも素材の種類を覚えやすい。": "In this way, carefully limiting the materials makes it easier for players to remember the different types.",
+    "このような調整にすると、素材は一種の通貨のように機能する。": "With this kind of adjustment, materials function as a type of currency.",
+    "アイテム入手時に説明を表示": "Display Descriptions When Obtaining Items",
+    "アイテム入手時にその名称だけを表示されても、プレイヤーには何か分からないことが多い。特に素材アイテムの数が多くなってくると、アイテム一つ辺りの入手が軽くなりがち。": "If only the item's name is displayed when it is obtained, players often will not know what it is. This is especially true as the number of material items increases, since obtaining each individual item tends to feel less significant.",
+    "そこで、アイテム入手時に同時に説明を表示することで「いつの間にか貴重な素材を入手していた」という状況をなくす。": "Therefore, displaying a description at the same time as the item is obtained prevents situations where players “somehow ended up obtaining a valuable material without realizing it.”",
+    "その際、レアリティなどを表示すると分かりやすいかもしれない。": "Displaying information such as rarity may also make things easier to understand.",
+    "ちなみに、ブレスオブザワイルドでは初出のアイテムのみ、説明を表示するような仕組みになっている。": "Incidentally, Breath of the Wild has a system that displays descriptions only for items obtained for the first time.",
+    "図鑑でフォロー": "Provide Support Through Encyclopedias",
+    "アイテム図鑑でアイテムの入手場所を表示したり、魔物図鑑で敵のドロップアイテムを表示する。これによって、プレイヤーが戦略的にアイテム収集＆合成をできるようにする。": "Display where items can be obtained in an item encyclopedia, and display enemies' dropped items in a monster encyclopedia. This allows players to collect and synthesize items strategically.",
+    "当然ながら、実装の手間もそれなりに大きいし、プレイヤーにとっても確認する手間が発生する。": "Naturally, this requires a considerable amount of implementation work, and players also have to spend time checking the information.",
+    "例えば、魔物図鑑を開き、百種類を超える敵のドロップアイテムを一つ一つ確認していくような作業は、かなりの手間を伴うはずだ。": "For example, opening the monster encyclopedia and checking the dropped items of more than a hundred types of enemies one by one would surely be quite a chore.",
+    "ならば――と、アイテム図鑑にドロップする敵を記載したり、検索機能を設ける方法もあるが、実装工数はさらに増えていく。": "Alternatively, you could list the enemies that drop each item in the item encyclopedia or add a search function, but that would require even more implementation work.",
+    "素材毎に合成できるアイテムを明示する": "Show Which Items Can Be Synthesized from Each Material",
+    "素材アイテムにカーソルを合わせた際などに、そこから合成できるアイテムを表示する。作成したことのないアイテムは？？？？表示にしてもよいだろう。": "Display the items that can be synthesized from a material when the cursor is placed over it, for example. Items that have never been crafted could be displayed as ????.",
+    "これならば、不用品かそうでないかも区別できるので売却もしやすい。": "This also makes it easier to sell items, since you can distinguish between things you need and things you do not.",
+    "例によって、実装工数は増える。": "As usual, this increases the implementation workload.",
+    "素材の売却で合成": "Synthesis Through Selling Materials",
+    "ペルソナシリーズでは「素材を店に売却することで、それを材料とした装備が店頭に並ぶ」というシステムを採用している。": "The Persona series uses a system in which equipment made from materials becomes available in shops when you sell those materials to them.",
+    "※正確には覚えてませんが、ペルソナ４だけのシステムかも……。": "※I do not remember exactly, but this may be a system exclusive to Persona 4...",
+    "このシステムでは素材アイテムを手元に残すメリットは全くない。従って、売却も一括でできるようになっている。": "With this system, there is no benefit to keeping material items on hand. Therefore, you can also sell them all at once.",
+    "この方法なら素材アイテムを管理する手間が大幅に削減できる上に、アイテムを組み合わせるという合成システムの味も残せている。": "This method greatly reduces the effort required to manage material items while preserving the appeal of a synthesis system based on combining items.",
+    "筆者自身、この記事を書くまではあまり意識してなかったけれど、上述した『世界設定の補強』と合わせてなかなか秀逸なシステムだと思う。": "I was not particularly conscious of it myself until writing this article, but together with the aforementioned “reinforcement of the worldbuilding,” I think it is quite an ingenious system.",
+    "ただし、素材を売却できる店を制限するなどしないと不自然になるかも。例えば、ペルソナ４では武器屋でのみ素材を売却できるようになっている。": "However, it may seem unnatural unless you limit which shops can buy materials. For example, in Persona 4, materials can only be sold at weapon shops.",
+    "金欠にする": "Keep Players Short on Money",
+    "ゲームバランスを調整し、金欠気味にしておく。": "Adjust the game balance so that the player is usually short on money.",
+    "合成をした場合は、少ない価格でアイテムが手に入るようにする。これにより、店よりもコスパが良いというメリットを与える。": "When using synthesis, make it possible to obtain items at a low price. This gives them the advantage of being more cost-effective than items bought in shops.",
+    "ドラクエシリーズがよくやっている調整である。": "This is an adjustment the Dragon Quest series often makes.",
+    "合成に特化": "Make Synthesis the Focus",
+    "装備品など多くのアイテムは基本的に店や宝箱では扱わない。あるいは露骨に性能の低いアイテムのみを販売し、あくまで合成で作るように誘導する。": "Most items, such as equipment, are generally not available in shops or treasure chests. Alternatively, you can sell only items with conspicuously low performance and guide players toward making items through synthesis instead.",
+    "これによって、既存システムとの差別化を図る。": "This differentiates the system from existing systems.",
+    "アトリエシリーズがこの調整に近いだろうか。": "The Atelier series may be the closest example of this approach.",
+    "合成できる種別を限定する": "Limit the Types of Items That Can Be Synthesized",
+    "例えば、武器や防具は店や宝箱から普通に手に入るが、装飾品は合成でしか作れないようにしてしまう。": "For example, weapons and armor can be obtained normally from shops and treasure chests, while accessories can only be made through synthesis.",
+    "この方法ならば、既存システムとの差別化も自然とできる。": "This method naturally differentiates the system from existing systems as well.",
+    "まとめ": "Conclusion",
+    "重ねて述べたように合成システムは扱いの難しいシステムである。": "As I have repeatedly mentioned, a synthesis system is difficult to handle.",
+    "……にも関わらず、ここ１０～２０年ではかなりの流行をしており、今や大手メーカーのＲＰＧでは採用していないほうが珍しいぐらいだと感じている。": "...Nevertheless, it has become very popular over the past 10 to 20 years, and these days, I feel that it is almost unusual for an RPG from a major manufacturer not to include one.",
+    "しかしながら、個人的な意見を言うと、無闇に採用され過ぎではないかとすら思っている。": "However, speaking personally, I sometimes even wonder whether it has been adopted too indiscriminately.",
+    "例えば、最近プレイしたＲＰＧで「クリアに数十分かかるクエストの報酬が用途のよく分からない素材アイテムだけだった」なんて経験があった。": "For example, in a recently played RPG, I had the experience of completing a quest that took several dozen minutes only to receive material items whose purpose was unclear.",
+    "これが昔のＲＰＧだったなら、ごく単純に装備品がそのまま報酬になっていたと思う。": "If this had been an old-school RPG, I think the reward would simply have been a piece of equipment.",
+    "上の例は普通のオフラインＲＰＧなので、そのような仕組みにする意味もあまりないように感じた。システムの複雑化と水増しによって、かえって面白みを失っていないだろうか。": "The example above was from a standard offline RPG, so I did not feel there was much point in using such a system. Could the increased complexity and padding of the system actually be making the game less enjoyable?",
+    "……そんなわけで、近年のＲＰＧが必要以上に複雑化＆薄味化している要因になっているとも感じるので、採用するにしてもよく考えておきたい。": "...That is why I feel it can contribute to the unnecessary complexity and blandness of modern RPGs, so even if you decide to use it, you should think it through carefully.",
+    "例えば、ストーリー重視でサクサク進めて欲しいという作品に、やたら凝りまくった合成システムを採用するのは考えものだろう。": "For example, adding an excessively elaborate synthesis system to a game that emphasizes its story and is meant to progress at a brisk pace would be questionable.",
+    "どちらかというと、システム重視の作品に向いていると思う。": "If anything, I think it is better suited to games that emphasize their systems.",
+    "プレイヤーへの負担を考えても、他のシステムとのバランスも考慮したい。": "Even when considering the burden on players, you should take the balance with other systems into account.",
+    "例えば、複雑なスキル習得システムを備えた作品に対して、同じく複雑な合成システムを加えると、一層プレイヤーの手間が増えてしまう。": "For example, adding an equally complex synthesis system to a game with a complicated skill acquisition system only increases the amount of work required from the player.",
+    "面倒なシステムになっていると感じたならば、削るべき部分を削ってプレイヤーの負担を抑えるのも一つの選択だ。": "If the system feels cumbersome, one option is to remove unnecessary parts and reduce the burden on the player.",
+    "開発効率の面でも、システム実装やバランス調整の工数が大きく増加するので、なかなか大変である。": "It is also quite demanding from a development-efficiency standpoint, since the workload for implementing the system and adjusting the balance increases substantially.",
+    "メインのシステムとしてガッツリ作るか、あくまでサブのシステムとして簡略化して作るか、方針はしっかり決めておいたほうがよいと思う。": "I think it is best to firmly decide on your direction in advance: whether to build it out fully as a main system or simplify it as a secondary system."
+  }
+}
