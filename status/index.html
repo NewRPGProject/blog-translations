@@ -67,7 +67,7 @@
     const status = document.getElementById("status");
     const search = document.getElementById("search");
     const onlyUntranslated = document.getElementById("only-untranslated");
-    const workflowUrl = "https://github.com/NewRPGProject/blog-translations/actions/workflows/translate-new-article.yml";
+    const translationLauncherOrigin = "https://blog-translation-launcher.newrpg2012.workers.dev";
 
     function formatDate(value) {
       const date = new Date(value);
@@ -91,16 +91,25 @@
       cell.append(link);
     }
 
-    function openTranslationWorkflow(article) {
-      window.open(workflowUrl, "_blank", "noopener");
-      if (navigator.clipboard?.writeText) {
-        navigator.clipboard.writeText(article.url)
-          .then(() => { status.textContent = `${article.id}.html のURLをコピーしました。Actions画面で貼り付けて実行してください。`; })
-          .catch(() => { status.textContent = `Actions画面を開きました。記事URL: ${article.url}`; });
-      } else {
-        status.textContent = `Actions画面を開きました。記事URL: ${article.url}`;
-      }
+    function startTranslation(article) {
+      const url = new URL("/start", translationLauncherOrigin);
+      url.searchParams.set("article_url", article.url);
+      const popup = window.open(
+        url.href,
+        "nrp-translation-launcher",
+        "popup=yes,width=520,height=260"
+      );
+      status.textContent = popup
+        ? `${article.id}.html の英訳を開始しています。GitHub認証が必要な場合は、開いた画面で完了してください。`
+        : "ポップアップがブロックされました。ブラウザの許可後にもう一度押してください。";
     }
+
+    window.addEventListener("message", event => {
+      if (event.origin !== translationLauncherOrigin) return;
+      if (event.data?.type !== "nrp-translation-dispatched") return;
+      const id = event.data.articleUrl?.match(/\/(\d+)\.html$/u)?.[1] || "対象記事";
+      status.textContent = `${id}.html の英訳を開始しました。GitHub Actionsの完了後に一覧を再読み込みしてください。`;
+    });
 
     function render() {
       const keyword = search.value.trim().toLocaleLowerCase("ja-JP");
@@ -124,8 +133,8 @@
         translateButton.type = "button";
         translateButton.className = "translate-button";
         translateButton.textContent = "英訳";
-        translateButton.title = "記事URLをコピーしてGitHub Actionsの実行画面を開きます";
-        translateButton.addEventListener("click", () => openTranslationWorkflow(article));
+        translateButton.title = "GitHub認証後、強制再翻訳を開始します";
+        translateButton.addEventListener("click", () => startTranslation(article));
         translate.append(translateButton);
         row.append(translate);
 
