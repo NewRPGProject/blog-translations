@@ -1,0 +1,535 @@
+{
+  "articleId": "484920665",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484920665.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": "2026-08-29T19:11:21+09:00",
+  "sourceHash": "2f8970ac372c2cb972ee9afe9ace65dc41b9a3a7204914ae83c9b8d41a11d608",
+  "translatedAt": "2026-08-29T10:29:02.040Z",
+  "title": "Execute Move Route Commands Immediately (Such as Changing Images)【RPG Maker MZ & MV Plugin】",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "移動ルートの設定用コマンド（画像の変更など）を即時実行【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "8f6e4a54f39331c923c804d545862ff4ce4dea421baa2ebc6095366c7fb46abd",
+      "translation": "Execute Move Route Commands Immediately (Such as Changing Images)【RPG Maker MZ & MV Plugin】",
+      "contextHash": "8f6e4a54f39331c923c804d545862ff4ce4dea421baa2ebc6095366c7fb46abd"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "移動ルートの設定用コマンドを即時実行し、タイムラグをなくします。",
+      "sourceHash": "fb1e3bbd3359c4e8fe619a28d472f48a3a5b7794318c9f872ea4ac2f5793c321",
+      "translation": "Executes Move Route commands immediately, eliminating the delay.",
+      "contextHash": "fb1e3bbd3359c4e8fe619a28d472f48a3a5b7794318c9f872ea4ac2f5793c321"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "特に画像の変更と向きの変更を組み合わせたアニメを行う際、別の画像が見えてしまう問題（下記動画）に対処できます。",
+      "sourceHash": "c2185b503b4bbc732b17a9184d257f157ea004b8aa2863fe5f13f7022e9c3fb5",
+      "translation": "This addresses the issue where another image becomes visible when performing an animation that combines changing the image and changing the direction (see the video below).",
+      "contextHash": "c2185b503b4bbc732b17a9184d257f157ea004b8aa2863fe5f13f7022e9c3fb5"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "イベントコマンドで『移動ルートの設定』を呼び出した場合、各コマンドは1/60秒毎に実行される仕様になっています。",
+      "sourceHash": "673db47933a1874a8b1d058ef6e5a53fa784609b74f30e67742bee5a85ec6cf0",
+      "translation": "When “Set Movement Route” is called with an event command, each command is executed once every 1/60th of a second.",
+      "contextHash": "673db47933a1874a8b1d058ef6e5a53fa784609b74f30e67742bee5a85ec6cf0"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "この仕様によって困るのは、キャラクター画像の変更によってアクションをさせたい場合です。",
+      "sourceHash": "0e46517e1c455679ac03e78edca3513a20758bbe285976137af30f8aeec5386d",
+      "translation": "This specification causes problems when you want to make a character perform an action by changing their image.",
+      "contextHash": "0e46517e1c455679ac03e78edca3513a20758bbe285976137af30f8aeec5386d"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "例えば、ＭＺのデフォルトヒロインであるプリシアに対して、しゃがむアクションをさせたいとします。",
+      "sourceHash": "08f3dfb78517ed74391133c9023cc46403584b17c838a7dde38225d75b277602",
+      "translation": "For example, suppose you want MZ’s default heroine, Pricia, to perform a crouching action.",
+      "contextHash": "08f3dfb78517ed74391133c9023cc46403584b17c838a7dde38225d75b277602"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "プリシアの画像はActor1.pngの左上から二番目です。対して、しゃがんだ画像はというと、",
+      "sourceHash": "eeb74a38a6bba75cd68c46eaf95f34a1aca15cde9f77da1eebbdd624c3ce2c9f",
+      "translation": "Pricia’s image is the second one from the upper left of Actor1.png. The crouching image, on the other hand, is",
+      "contextHash": "eeb74a38a6bba75cd68c46eaf95f34a1aca15cde9f77da1eebbdd624c3ce2c9f"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "Damage1.pngの左上から一番目の左向き画像となっています。",
+      "sourceHash": "ea293fc2d2f42da32b6a52911eb91538553b03025389838117e310804585b536",
+      "translation": "the left-facing image in the upper-left position of Damage1.png.",
+      "contextHash": "ea293fc2d2f42da32b6a52911eb91538553b03025389838117e310804585b536"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "プリシアが下向きだったとすると、『移動ルートの設定』によって変更する手順は以下の通りになります。",
+      "sourceHash": "1cb037b376758d6d2326667742b02a937ee619e9e86d3a90fadd3998f21ba379",
+      "translation": "If Pricia is facing down, the steps for changing her image using “Set Movement Route” are as follows.",
+      "contextHash": "1cb037b376758d6d2326667742b02a937ee619e9e86d3a90fadd3998f21ba379"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "画像の変更：Damage1.pngの左上を指定",
+      "sourceHash": "2c1f583910eb4cbc578eb93697af4aa3a2ec8fc41141cd957c722b7870082a67",
+      "translation": "Change Image: Select the upper-left image of Damage1.png",
+      "contextHash": "2c1f583910eb4cbc578eb93697af4aa3a2ec8fc41141cd957c722b7870082a67"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "左を向く",
+      "sourceHash": "bf73eb9e5b3ba65074eb7be826545c70c6f5c5366d461aae5d6819f50758f7a5",
+      "translation": "Turn Left",
+      "contextHash": "bf73eb9e5b3ba65074eb7be826545c70c6f5c5366d461aae5d6819f50758f7a5"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ところが、仕様により二つの動作の間には1/60秒の隙間が生じます。そうして起こってしまうのが、以下の現象というわけです。",
+      "sourceHash": "c0b82b8ddde93c182486637bf735d8d2ec61728a60940c108e4a2477744fd714",
+      "translation": "However, due to this specification, a 1/60th-of-a-second gap occurs between the two actions. This results in the following phenomenon.",
+      "contextHash": "c0b82b8ddde93c182486637bf735d8d2ec61728a60940c108e4a2477744fd714"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※実際はもっと一瞬ですが、強調のため編集しています。",
+      "sourceHash": "3a53a53dd5d75537bd10cd702660a390009479ada902e39cc252c403840f29d2",
+      "translation": "※It is actually much briefer, but it has been edited for emphasis.",
+      "contextHash": "3a53a53dd5d75537bd10cd702660a390009479ada902e39cc252c403840f29d2"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "画像を変更した直後はまだ下向きなので、Damage1.pngでは下向きの画像（＝リード）が表示されてしまいます。",
+      "sourceHash": "71df64fa7fe72d5fa15b907a7b4e7d733237371f070064a3c42bdb5c9e7a7184",
+      "translation": "Immediately after changing the image, the character is still facing down, so the downward-facing image (Reid) from Damage1.png is displayed.",
+      "contextHash": "71df64fa7fe72d5fa15b907a7b4e7d733237371f070064a3c42bdb5c9e7a7184"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "直後に一瞬でプリシアに変化するとはいえ、プレイヤーが違和感を持つには十分な時間です。",
+      "sourceHash": "1e799eb01a82116e48014e71a5ac552a3200432931fdb9d2b4301fa844912b09",
+      "translation": "Although it changes to Pricia almost instantly afterward, this is still long enough for the player to notice something feels wrong.",
+      "contextHash": "1e799eb01a82116e48014e71a5ac552a3200432931fdb9d2b4301fa844912b09"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "そんなわけで、移動ルートの設定時にコマンド間の隙間をなくすのがこのプラグインです。画像の変更や向きの変更以外にも、透明化やスイッチのON/OFFなど全般に効果があります。",
+      "sourceHash": "3f2d01893571405388d2c98d13cc7c8a29f5eb648a91f1c7031089d5d16946fa",
+      "translation": "That is why this plugin eliminates the gaps between commands when setting a Move Route. In addition to changing images and directions, it also applies to operations in general, such as making a character transparent and turning switches on or off.",
+      "contextHash": "3f2d01893571405388d2c98d13cc7c8a29f5eb648a91f1c7031089d5d16946fa"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※ちなみに、ＲＰＧツクール２０００～２００３では元から一瞬で実行される仕様でした。ＸＰ～ＶＸＡは知りませんが、旧来のツクールから移籍してきたユーザは注意が必要です。",
+      "sourceHash": "712ad44c9e9a68c080b085cf996c2ffa1bf70b9412f36b1c17740b92d04a754c",
+      "translation": "※Incidentally, in RPG Maker 2000–2003, commands were originally executed instantly. I do not know about XP–VX Ace, but users migrating from older RPG Maker versions should take note.",
+      "contextHash": "712ad44c9e9a68c080b085cf996c2ffa1bf70b9412f36b1c17740b92d04a754c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_QuickMovementRoute.js",
+      "sourceHash": "83cd19f4a6dfb27eb29438ed0f91e5650fce8615d19e651ae651c654a543aa93",
+      "translation": "NRP_QuickMovementRoute.js",
+      "contextHash": "b6e35f382efcedb842abf2a5ab40545e486682e1db2387ffa55a3fdc7f605315"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "スクリプトを即時実行の対象にした。",
+      "sourceHash": "2e41eb05c2b5905c955356d7129d4d394ffe9ce87b6a6ec49c7313eea461dfd3",
+      "translation": "Scripts are now subject to immediate execution.",
+      "contextHash": "2e41eb05c2b5905c955356d7129d4d394ffe9ce87b6a6ec49c7313eea461dfd3"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "最大同時処理数の既定値を10にした。",
+      "sourceHash": "70eb3c21048ad37d7e922a6eb35a1da146584e4648cde55208d47c64896fad9e",
+      "translation": "The default value for the maximum number of simultaneous processes has been set to 10.",
+      "contextHash": "70eb3c21048ad37d7e922a6eb35a1da146584e4648cde55208d47c64896fad9e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "適用するだけでＯＫです。",
+      "sourceHash": "bba3ea506f92d2040ff9252a9835ffb9134ffa62ec8fa227591170183b84c114",
+      "translation": "Simply apply the plugin.",
+      "contextHash": "bba3ea506f92d2040ff9252a9835ffb9134ffa62ec8fa227591170183b84c114"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "なお、初期状態では自律移動タイプが『カスタム』の場合のルートには適用されません。",
+      "sourceHash": "86e1d7ccc3a29bf13ad838684dada79355a55d1d489d6d2eea190782fa4def2c",
+      "translation": "By default, it does not apply to routes when the autonomous movement type is “Custom.”",
+      "contextHash": "86e1d7ccc3a29bf13ad838684dada79355a55d1d489d6d2eea190782fa4def2c"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※プラグインパラメータで変更可能です。",
+      "sourceHash": "d5f7ce883eaf6aa76a996fed88a224451faae2d1508a6835cf89a256983bbc5a",
+      "translation": "※This can be changed using a plugin parameter.",
+      "contextHash": "d5f7ce883eaf6aa76a996fed88a224451faae2d1508a6835cf89a256983bbc5a"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "最大同時処理数（MaxImmediate）",
+      "sourceHash": "cf63c1a1d3c74ada8a7513621880370ea9c02d3ce028d7ef34be10416488dac0",
+      "translation": "Maximum Simultaneous Processes (MaxImmediate)",
+      "contextHash": "cf63c1a1d3c74ada8a7513621880370ea9c02d3ce028d7ef34be10416488dac0"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "即時処理を同時に行う最大数です。",
+      "sourceHash": "0c36110850e45a46cbfb9d791eedeb95a7a2de562d54158398bbfbd701b59c18",
+      "translation": "The maximum number of immediate processes that can be performed simultaneously.",
+      "contextHash": "0c36110850e45a46cbfb9d791eedeb95a7a2de562d54158398bbfbd701b59c18"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "自律移動カスタムに適用（ApplyMoveTypeCustom）",
+      "sourceHash": "6370c36f010d0ca1cf2c55897c207e03c28e80625484d4aa24d35c572c56f055",
+      "translation": "Apply to Autonomous Movement: Custom (ApplyMoveTypeCustom)",
+      "contextHash": "6370c36f010d0ca1cf2c55897c207e03c28e80625484d4aa24d35c572c56f055"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "自律移動タイプがカスタムの場合にも処理を適用します。",
+      "sourceHash": "9826e60f9b0ce1d269275f52c7cd829a2c7843591a319775e7fb087d238eda24",
+      "translation": "Applies the processing even when the autonomous movement type is Custom.",
+      "contextHash": "9826e60f9b0ce1d269275f52c7cd829a2c7843591a319775e7fb087d238eda24"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ただし、移動頻度が最大の場合が条件です。",
+      "sourceHash": "210707ef241644a11af51cb2e28869d51927dbbb21f320a2d2a3021aa79203b9",
+      "translation": "However, this requires the movement frequency to be set to the highest value.",
+      "contextHash": "210707ef241644a11af51cb2e28869d51927dbbb21f320a2d2a3021aa79203b9"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "画像変更でパターン初期化（ChangeImageResetPattern）ver1.01",
+      "sourceHash": "2c02493ed39e0df799b7992485e5722d9624597990dd76e0bb7c1cca493fa172",
+      "translation": "Reset Pattern on Image Change (ChangeImageResetPattern) ver1.01",
+      "contextHash": "2c02493ed39e0df799b7992485e5722d9624597990dd76e0bb7c1cca493fa172"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "画像の変更時にパターンを初期化するようにします。",
+      "sourceHash": "0ed06cbf00189da0648ca3fc3109a7a533132330e1e327284d068f901358ef76",
+      "translation": "Resets the pattern when the image is changed.",
+      "contextHash": "0ed06cbf00189da0648ca3fc3109a7a533132330e1e327284d068f901358ef76"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ツクールＭＶ～ＭＺでは移動後に画像の変更を行っても、移動中の歩行パターンが残って表示されてしまう問題があります。",
+      "sourceHash": "b42254a98e89eb050a9b711d63bda866bcbefc4b0884cb85d064bad4befb71d2",
+      "translation": "In RPG Maker MV–MZ, even if the image is changed after movement, the walking pattern from during movement remains and is displayed.",
+      "contextHash": "b42254a98e89eb050a9b711d63bda866bcbefc4b0884cb85d064bad4befb71d2"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "上の動画を見れば、移動が完了してから歩行パターンが中央に戻るまでにはそれなりのタイムラグがあることが分かると思います。",
+      "sourceHash": "fe5a6a5da8254f57b28ec057072d73c4927ad3b94d6698b8beac23fb50ad7384",
+      "translation": "If you watch the video above, you can see that there is a noticeable delay between the completion of movement and the walking pattern returning to the center.",
+      "contextHash": "fe5a6a5da8254f57b28ec057072d73c4927ad3b94d6698b8beac23fb50ad7384"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "これはキャラグラを使ったアニメーションを表示する際、厄介な問題になることがあります。例えば、一歩歩いてから倒れるような演出を行う際、想定と異なるパターンが表示されてしまったりします。",
+      "sourceHash": "731d0dd5fa969fb930f882438f47a890e8776695375c808bc9adfaaf14f32259",
+      "translation": "This can cause troublesome problems when displaying animations using character graphics. For example, when staging a character taking one step and then collapsing, a pattern different from the intended one may be displayed.",
+      "contextHash": "731d0dd5fa969fb930f882438f47a890e8776695375c808bc9adfaaf14f32259"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "この項目をオンにすると、画像の変更時にパターンがリセットされるため、こういった問題が起こらないようになります。",
+      "sourceHash": "f5737cce85c9c12d97e3f1676f09c981c497660d7346c54f0430f5a16eed355a",
+      "translation": "Turning this option on resets the pattern when the image is changed, preventing these problems from occurring.",
+      "contextHash": "f5737cce85c9c12d97e3f1676f09c981c497660d7346c54f0430f5a16eed355a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]plugin parameter[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]最大同時処理数（MaxImmediate）[[/LINK_1]]",
+      "sourceHash": "3455b60d48962dae8574e1b498314f586f86923db3a0c5095cf60dc66c90f7ed",
+      "parts": [
+        {
+          "source": "最大同時処理数（MaxImmediate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Maximum Simultaneous Processes (MaxImmediate)[[/LINK_1]]",
+      "contextHash": "3455b60d48962dae8574e1b498314f586f86923db3a0c5095cf60dc66c90f7ed"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]自律移動カスタムに適用（ApplyMoveTypeCustom）[[/LINK_1]]",
+      "sourceHash": "ebfc45ae4d5dd3460f2bd2f1ef2c78832a4ab2927068d7b6f167b11d744b8aff",
+      "parts": [
+        {
+          "source": "自律移動カスタムに適用（ApplyMoveTypeCustom）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Custom Autonomous Movement (ApplyMoveTypeCustom)[[/LINK_1]]",
+      "contextHash": "ebfc45ae4d5dd3460f2bd2f1ef2c78832a4ab2927068d7b6f167b11d744b8aff"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]画像変更でパターン初期化（ChangeImageResetPattern）[[/LINK_1]]ver1.01",
+      "sourceHash": "31e2abc6d27cd9f6a7c4b5e5be475d582765c19f9ad10b3bcedaf2fbddfb69d7",
+      "parts": [
+        {
+          "source": "画像変更でパターン初期化（ChangeImageResetPattern）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Reset Pattern When Changing Image (ChangeImageResetPattern)[[/LINK_1]]ver1.01",
+      "contextHash": "31e2abc6d27cd9f6a7c4b5e5be475d582765c19f9ad10b3bcedaf2fbddfb69d7"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]画像の変更時にパターンを初期化[[/LINK_1]]する機能を実装。",
+      "sourceHash": "9e998b5cd8902242f3cc10d6b4ee779824aa64e52eda61781930922d80c3ce95",
+      "parts": [
+        {
+          "source": "画像の変更時にパターンを初期化",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "する機能を実装。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]A function has been implemented to reset the pattern when changing the image.[[/LINK_1]]",
+      "contextHash": "9e998b5cd8902242f3cc10d6b4ee779824aa64e52eda61781930922d80c3ce95"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "移動ルートの設定用コマンドを即時実行し、タイムラグをなくします。": "Executes Move Route commands immediately, eliminating the delay.",
+    "特に画像の変更と向きの変更を組み合わせたアニメを行う際、別の画像が見えてしまう問題（下記動画）に対処できます。": "This addresses the issue where another image becomes visible when performing an animation that combines changing the image and changing the direction (see the video below).",
+    "イベントコマンドで『移動ルートの設定』を呼び出した場合、各コマンドは1/60秒毎に実行される仕様になっています。": "When “Set Movement Route” is called with an event command, each command is executed once every 1/60th of a second.",
+    "この仕様によって困るのは、キャラクター画像の変更によってアクションをさせたい場合です。": "This specification causes problems when you want to make a character perform an action by changing their image.",
+    "例えば、ＭＺのデフォルトヒロインであるプリシアに対して、しゃがむアクションをさせたいとします。": "For example, suppose you want MZ’s default heroine, Pricia, to perform a crouching action.",
+    "プリシアの画像はActor1.pngの左上から二番目です。対して、しゃがんだ画像はというと、": "Pricia’s image is the second one from the upper left of Actor1.png. The crouching image, on the other hand, is",
+    "Damage1.pngの左上から一番目の左向き画像となっています。": "the left-facing image in the upper-left position of Damage1.png.",
+    "プリシアが下向きだったとすると、『移動ルートの設定』によって変更する手順は以下の通りになります。": "If Pricia is facing down, the steps for changing her image using “Set Movement Route” are as follows.",
+    "画像の変更：Damage1.pngの左上を指定": "Change Image: Select the upper-left image of Damage1.png",
+    "左を向く": "Turn Left",
+    "ところが、仕様により二つの動作の間には1/60秒の隙間が生じます。そうして起こってしまうのが、以下の現象というわけです。": "However, due to this specification, a 1/60th-of-a-second gap occurs between the two actions. This results in the following phenomenon.",
+    "※実際はもっと一瞬ですが、強調のため編集しています。": "※It is actually much briefer, but it has been edited for emphasis.",
+    "画像を変更した直後はまだ下向きなので、Damage1.pngでは下向きの画像（＝リード）が表示されてしまいます。": "Immediately after changing the image, the character is still facing down, so the downward-facing image (Reid) from Damage1.png is displayed.",
+    "直後に一瞬でプリシアに変化するとはいえ、プレイヤーが違和感を持つには十分な時間です。": "Although it changes to Pricia almost instantly afterward, this is still long enough for the player to notice something feels wrong.",
+    "そんなわけで、移動ルートの設定時にコマンド間の隙間をなくすのがこのプラグインです。画像の変更や向きの変更以外にも、透明化やスイッチのON/OFFなど全般に効果があります。": "That is why this plugin eliminates the gaps between commands when setting a Move Route. In addition to changing images and directions, it also applies to operations in general, such as making a character transparent and turning switches on or off.",
+    "※ちなみに、ＲＰＧツクール２０００～２００３では元から一瞬で実行される仕様でした。ＸＰ～ＶＸＡは知りませんが、旧来のツクールから移籍してきたユーザは注意が必要です。": "※Incidentally, in RPG Maker 2000–2003, commands were originally executed instantly. I do not know about XP–VX Ace, but users migrating from older RPG Maker versions should take note.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_QuickMovementRoute.js": "NRP_QuickMovementRoute.js",
+    "更新履歴（History）": "Update History (History)",
+    "スクリプトを即時実行の対象にした。": "Scripts are now subject to immediate execution.",
+    "最大同時処理数の既定値を10にした。": "The default value for the maximum number of simultaneous processes has been set to 10.",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "適用するだけでＯＫです。": "Simply apply the plugin.",
+    "なお、初期状態では自律移動タイプが『カスタム』の場合のルートには適用されません。": "By default, it does not apply to routes when the autonomous movement type is “Custom.”",
+    "※プラグインパラメータで変更可能です。": "※This can be changed using a plugin parameter.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "最大同時処理数（MaxImmediate）": "Maximum Simultaneous Processes (MaxImmediate)",
+    "即時処理を同時に行う最大数です。": "The maximum number of immediate processes that can be performed simultaneously.",
+    "自律移動カスタムに適用（ApplyMoveTypeCustom）": "Apply to Autonomous Movement: Custom (ApplyMoveTypeCustom)",
+    "自律移動タイプがカスタムの場合にも処理を適用します。": "Applies the processing even when the autonomous movement type is Custom.",
+    "ただし、移動頻度が最大の場合が条件です。": "However, this requires the movement frequency to be set to the highest value.",
+    "画像変更でパターン初期化（ChangeImageResetPattern）ver1.01": "Reset Pattern on Image Change (ChangeImageResetPattern) ver1.01",
+    "画像の変更時にパターンを初期化するようにします。": "Resets the pattern when the image is changed.",
+    "ツクールＭＶ～ＭＺでは移動後に画像の変更を行っても、移動中の歩行パターンが残って表示されてしまう問題があります。": "In RPG Maker MV–MZ, even if the image is changed after movement, the walking pattern from during movement remains and is displayed.",
+    "上の動画を見れば、移動が完了してから歩行パターンが中央に戻るまでにはそれなりのタイムラグがあることが分かると思います。": "If you watch the video above, you can see that there is a noticeable delay between the completion of movement and the walking pattern returning to the center.",
+    "これはキャラグラを使ったアニメーションを表示する際、厄介な問題になることがあります。例えば、一歩歩いてから倒れるような演出を行う際、想定と異なるパターンが表示されてしまったりします。": "This can cause troublesome problems when displaying animations using character graphics. For example, when staging a character taking one step and then collapsing, a pattern different from the intended one may be displayed.",
+    "この項目をオンにすると、画像の変更時にパターンがリセットされるため、こういった問題が起こらないようになります。": "Turning this option on resets the pattern when the image is changed, preventing these problems from occurring."
+  }
+}
