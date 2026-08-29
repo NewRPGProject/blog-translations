@@ -16,6 +16,10 @@ const originalTitle = new Map();
 const originalCommonText = new Map();
 const translationCache = new Map();
 const originalLineContent = new WeakMap();
+const PRESERVED_INLINE_WRAPPER_TAGS = new Set([
+    "b", "del", "em", "i", "mark", "s", "small", "span", "strong",
+    "sub", "sup", "u"
+]);
 
 let commonTranslationCache = null;
 
@@ -550,6 +554,45 @@ function findLineNodeMatch(nodes, startAt, line) {
     return null;
 }
 
+function getOuterInlineUnit(element) {
+    let unit = element;
+    while (PRESERVED_INLINE_WRAPPER_TAGS.has(unit.parentElement?.tagName.toLowerCase())) {
+        unit = unit.parentElement;
+    }
+    return unit;
+}
+
+function cloneTranslatedLink(originalLink, sourceNode, translatedText) {
+    // Rebuild the path from the matched text node up to its anchor. This keeps
+    // decorations inside a link, e.g. <a><del>old text</del></a>.
+    let child = document.createTextNode(decodeHtmlEntities(translatedText));
+    let element = sourceNode.parentElement;
+    while (element && element !== originalLink.parentElement) {
+        const copy = element.cloneNode(false);
+        copy.append(child);
+        child = copy;
+        if (element === originalLink) break;
+        element = element.parentElement;
+    }
+
+    if (element !== originalLink) {
+        const fallback = originalLink.cloneNode(false);
+        fallback.textContent = decodeHtmlEntities(translatedText);
+        child = fallback;
+    }
+
+    // Also retain decorations surrounding a link, e.g.
+    // <del><a>obsolete article</a></del>.
+    element = originalLink.parentElement;
+    while (element && PRESERVED_INLINE_WRAPPER_TAGS.has(element.tagName.toLowerCase())) {
+        const copy = element.cloneNode(false);
+        copy.append(child);
+        child = copy;
+        element = element.parentElement;
+    }
+    return child;
+}
+
 function makeLineFragment(line, matchedNodes) {
     const fragment = document.createDocumentFragment();
     const firstNode = matchedNodes[0];
@@ -580,7 +623,10 @@ function makeLineFragment(line, matchedNodes) {
         if (part.linkIndex) {
             linkNodes.set(
                 part.linkIndex,
-                matchedNodes[index].parentElement.closest("a")
+                {
+                    link: matchedNodes[index].parentElement.closest("a"),
+                    sourceNode: matchedNodes[index]
+                }
             );
         }
     }
@@ -594,13 +640,15 @@ function makeLineFragment(line, matchedNodes) {
                 decodeHtmlEntities(translation.slice(cursor, match.index))
             )
         );
-        const originalLink = linkNodes.get(Number(match[1]));
-        if (!originalLink) {
+        const linkInfo = linkNodes.get(Number(match[1]));
+        if (!linkInfo?.link) {
             throw new Error("リンク行の元リンクが見つかりません: " + line.id);
         }
-        const link = originalLink.cloneNode(false);
-        link.textContent = decodeHtmlEntities(match[2]);
-        fragment.append(link);
+        fragment.append(cloneTranslatedLink(
+            linkInfo.link,
+            linkInfo.sourceNode,
+            match[2]
+        ));
         cursor = marker.lastIndex;
     }
     fragment.append(
@@ -653,10 +701,10 @@ function translateLinkedLines(root, translation, language) {
         const firstNode = replacement.nodes[0];
         const lastNode = replacement.nodes[replacement.nodes.length - 1];
         const firstUnit = firstPart.link
-            ? firstNode.parentElement.closest("a")
+            ? getOuterInlineUnit(firstNode.parentElement.closest("a"))
             : firstNode;
         const lastUnit = lastPart.link
-            ? lastNode.parentElement.closest("a")
+            ? getOuterInlineUnit(lastNode.parentElement.closest("a"))
             : lastNode;
         const range = document.createRange();
         range.setStartBefore(firstUnit);
