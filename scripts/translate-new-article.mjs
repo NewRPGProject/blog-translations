@@ -27,6 +27,7 @@ When source immediately follows a link marker, translate it as a grammatical con
 const LINK_LINE_INSTRUCTION = `
 Items whose type is "line" are complete logical lines containing one or more links. [[LINK_n]] and [[/LINK_n]] are immutable link placeholders, not literal text.
 Translate the entire line naturally. Keep every placeholder exactly once, paired, and in its original numerical order. You may move a placeholder anywhere needed for natural English word order.
+The text between each matched [[LINK_n]] and [[/LINK_n]] is the visible label of that link. It is required content: translate it and keep the resulting non-empty label inside that same placeholder pair. Never delete a link label or leave a matched placeholder pair empty.
 Never output HTML tags, URLs, or any text outside the translation template.
 `.trim();
 const CODE_FRAGMENT_INSTRUCTION = `
@@ -744,11 +745,24 @@ function hasValidLinkTemplate(block, translation) {
     if (block.type !== "line") return true;
     const tokens = value => [...String(value).matchAll(/\[\[(\/?LINK_\d+)\]\]/gu)]
         .map(match => match[1]);
+    const linkContents = value => new Map([...String(value).matchAll(
+        /\[\[LINK_(\d+)\]\]([\s\S]*?)\[\[\/LINK_\1\]\]/gu
+    )].map(match => [match[1], match[2]]));
     const sourceTokens = tokens(block.source);
     const translationTokens = tokens(translation);
-    return sourceTokens.length > 0
+    if (!(sourceTokens.length > 0
         && sourceTokens.length === translationTokens.length
-        && sourceTokens.every((token, index) => token === translationTokens[index]);
+        && sourceTokens.every((token, index) => token === translationTokens[index]))) {
+        return false;
+    }
+
+    // A line can contain only a Japanese link label. In that case an empty
+    // placeholder pair passes the marker check but makes the table of
+    // contents (and the link itself) disappear in the browser.
+    const sourceContents = linkContents(block.source);
+    const translationContents = linkContents(translation);
+    return [...sourceContents].every(([index, sourceContent]) =>
+        !sourceContent.trim() || translationContents.get(index)?.trim());
 }
 
 function addUsage(total, addition) {
@@ -942,6 +956,18 @@ function splitReusableLines(lines, existingArticle, forceRetranslate = false) {
     return pending;
 }
 
+function findInvalidStoredLines(lines, existingArticle) {
+    const previous = new Map((existingArticle?.lines || [])
+        .filter(line => typeof line?.translation === "string" && line.translation.trim())
+        .map(line => [line.sourceHash || hash(line.source), line.translation]));
+    return lines.filter(line => {
+        const translation = previous.get(line.sourceHash);
+        return !translation
+            || hasUntranslatedJapanese(translation)
+            || !hasValidLinkTemplate(line, translation);
+    });
+}
+
 function sourceHashFor(blocks, linkedLines = []) {
     const blockHash = blocks.map(block => {
         const codeSignature = block.type === "code"
@@ -1117,8 +1143,12 @@ async function main() {
                 };
             }
         };
+        const invalidStoredLines = !forceRetranslate
+            ? findInvalidStoredLines(linkedLines, existingArticle)
+            : [];
         if (!forceRetranslate
-            && (existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash) {
+            && (existingArticle?.sourceHash || trackedArticle?.sourceHash) === newSourceHash
+            && invalidStoredLines.length === 0) {
             console.log(`本文に差分はありません: articles/${target.articleId}.json`);
             const existingBlocks = existingArticle?.blocks || [];
             const repairedLinkSpaces = !dryRun && repairLinkBoundarySpaces(existingBlocks);
@@ -1132,6 +1162,9 @@ async function main() {
             }
             if (!dryRun) rememberArticleState();
             continue;
+        }
+        if (invalidStoredLines.length > 0) {
+            console.log(`リンク行の欠落を検出したため、${invalidStoredLines.length}行を再翻訳します。`);
         }
 
         const pending = splitReusableBlocks(
