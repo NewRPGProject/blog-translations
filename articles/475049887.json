@@ -1,0 +1,2110 @@
+{
+  "articleId": "475049887",
+  "sourceUrl": "https://newrpg.seesaa.net/article/475049887.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "f75731046b70cd863efc8c110a57e3429a9769875f39500a46de8560ec29c660",
+  "translatedAt": "2026-08-29T14:49:43.283Z",
+  "title": "Automate & Randomize Enemy Troop Formation [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵グループの配置を自動化＆ランダム化【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "756c01c0c77093010056b1e50ea96f6a6b378366b5df2b5ea17e177db4020669",
+      "translation": "Automate & Randomize Enemy Troop Formation [RPG Maker MZ & MV Plugin]",
+      "contextHash": "756c01c0c77093010056b1e50ea96f6a6b378366b5df2b5ea17e177db4020669"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "敵グループの配置を自動化＆ランダム化するプラグインです。",
+      "sourceHash": "e14bab4ff3355743c07034d0bd92697095bd7b4b6a94d2ce4dbfc80f1b016ebc",
+      "translation": "This plugin automates and randomizes enemy troop formation.",
+      "contextHash": "e14bab4ff3355743c07034d0bd92697095bd7b4b6a94d2ce4dbfc80f1b016ebc"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＶ～ＭＺでは敵グループの設定画面に整列機能がありますが、これは基本的にフロントビュー用です。敵を左からまっすぐ並べるだけなので、サイドビューでは全く不自然になります。",
+      "sourceHash": "0ca37cbec7090dd3f229c87910d0c0522f8d6e3c29a669e03324e859d0050a1a",
+      "translation": "RPG Maker MV–MZ has an alignment feature in the enemy troop setup screen, but it is basically intended for front-view battles. Since it only lines enemies up from left to right, it looks completely unnatural in side-view battles.",
+      "contextHash": "0ca37cbec7090dd3f229c87910d0c0522f8d6e3c29a669e03324e859d0050a1a"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "そこでサイドビューでの敵の配置を自動化するプラグインを作成しました。",
+      "sourceHash": "aa092860b8de902f6a6e2a0661be85efbf7e6d415c3f4b2b80ccf633f18b368a",
+      "translation": "I therefore created a plugin that automates enemy formation in side-view battles.",
+      "contextHash": "aa092860b8de902f6a6e2a0661be85efbf7e6d415c3f4b2b80ccf633f18b368a"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "自動配置の仕様",
+      "sourceHash": "ae7a2d90c4e02d37312447ed2f2b4016e91796f00b5253b364287016f7e56ed4",
+      "translation": "Automatic Formation Specifications",
+      "contextHash": "ae7a2d90c4e02d37312447ed2f2b4016e91796f00b5253b364287016f7e56ed4"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "指定した範囲内に対して、ランダムで敵を配置。",
+      "sourceHash": "7e734ee4ff51984f295ea6b186c4adf187e53999f61fd0327827ada36b24b288",
+      "translation": "Places enemies randomly within the specified area.",
+      "contextHash": "7e734ee4ff51984f295ea6b186c4adf187e53999f61fd0327827ada36b24b288"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "グリッド単位で座標を検査し、適切な間隔を確保できれば配置確定。",
+      "sourceHash": "3275a38a72ae004ce391347b115640d12322ecf55b76154fef529154a9b6917f",
+      "translation": "Checks coordinates by grid unit and confirms the formation if appropriate spacing can be maintained.",
+      "contextHash": "3275a38a72ae004ce391347b115640d12322ecf55b76154fef529154a9b6917f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "確保できなければ何度も繰り返して、最もマシな配置を選び出す。",
+      "sourceHash": "682909d66153bb961eb9851d9288ca91d430aefe485d98f591f94779b72afefd",
+      "translation": "If sufficient spacing cannot be maintained, it repeats the process multiple times and selects the best formation found.",
+      "contextHash": "682909d66153bb961eb9851d9288ca91d430aefe485d98f591f94779b72afefd"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "敵が一体の場合は中央に配置。",
+      "sourceHash": "598f9d4574301163906e3f3450dc2341c750b6724e021d0270112dd802f2d131",
+      "translation": "Places a single enemy in the center.",
+      "contextHash": "598f9d4574301163906e3f3450dc2341c750b6724e021d0270112dd802f2d131"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "仕様上、同じ敵グループでもエンカウントする度に配置が変わります。",
+      "sourceHash": "c3dfcf03545e35a444e2f9896c94dd8184ec47050039b52fda3c4675675a1c47",
+      "translation": "By design, the formation changes each time you encounter the same enemy troop.",
+      "contextHash": "c3dfcf03545e35a444e2f9896c94dd8184ec47050039b52fda3c4675675a1c47"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "前述の通り基本的にはサイドビュー用ですが、フロントビューにも一応は対応しています。",
+      "sourceHash": "8f771e14d79cd84e59d8456d9533a7c246a5c27ddc86510c10a257e655692fc4",
+      "translation": "As mentioned above, this is basically intended for side-view battles, but it also supports front-view battles to some extent.",
+      "contextHash": "8f771e14d79cd84e59d8456d9533a7c246a5c27ddc86510c10a257e655692fc4"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法",
+      "sourceHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4",
+      "translation": "Installation",
+      "contextHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TroopRandomFormation.js",
+      "sourceHash": "ec3de8f9715f3267c188fb0a004923464b2e078ffa02708a3008fa67fbdd9225",
+      "translation": "NRP_TroopRandomFormation.js",
+      "contextHash": "ece2d25b535f2eefbff1569b11f1cb1b7fd0656cd1b4e9188473070779df82e5"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "競合対策用プラグイン",
+      "sourceHash": "e87d90fd1f35a1a9773001d974bb3528cf75543e94d7235c622cc0b63b1c1122",
+      "translation": "Plugins for Conflict Prevention",
+      "contextHash": "e87d90fd1f35a1a9773001d974bb3528cf75543e94d7235c622cc0b63b1c1122"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_TroopRandomFormation+.js",
+      "sourceHash": "61d4d8cbdabd5e2c57bfd78f219c695dd782c17783db8068bd8510e0991b516f",
+      "translation": "NRP_TroopRandomFormation+.js",
+      "contextHash": "046c7e3f0e88d658b52ccd0c4874dff198d99c59e911a26e7e038256c2c65c39"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下プラグインに対応しています。",
+      "sourceHash": "1992c1b02ce0afa0ce6da4ab236f89224632f4db4f51da279714d386854adfa9",
+      "translation": "The following plugins are supported.",
+      "contextHash": "1992c1b02ce0afa0ce6da4ab236f89224632f4db4f51da279714d386854adfa9"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴",
+      "sourceHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d",
+      "translation": "Update History",
+      "contextHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "Ｘ座標に小数点が入ってしまう問題を修正。（2025/02/09 ver1.091）",
+      "sourceHash": "bf8dc0baa49196945593d832d39bbeea6c5ebb535d1c59b0b008fd70fb10d8ab",
+      "translation": "Fixed an issue where X coordinates could contain decimal values. (2025/02/09 ver1.091)",
+      "contextHash": "bf8dc0baa49196945593d832d39bbeea6c5ebb535d1c59b0b008fd70fb10d8ab"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "VanguardAndRearguard.jsとの対策用プラグインを追加。（2022/06/10）",
+      "sourceHash": "de958a71b0c0637ef74bf6cb058c2aebdaf96ef52be753d150c0655cb079e0d8",
+      "translation": "Added a plugin for compatibility with VanguardAndRearguard.js. (2022/06/10)",
+      "contextHash": "de958a71b0c0637ef74bf6cb058c2aebdaf96ef52be753d150c0655cb079e0d8"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "仲間を呼ぶプラグインに対応するため改修。（2024/05/04 ver.1081）",
+      "sourceHash": "4c5154dd69f3ff1147e1969987927551db001fdd7defcb93c50ec09d60a72987",
+      "translation": "Modified to support plugins that call for reinforcements. (2024/05/04 ver.1081)",
+      "contextHash": "4c5154dd69f3ff1147e1969987927551db001fdd7defcb93c50ec09d60a72987"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "配置座標が小数点になってしまうことがある不具合修正。",
+      "sourceHash": "dd6af5053be73a6589db3196f7cfe20f298c0d7aabe64babd9fa8b32c7ea9414",
+      "translation": "Fixed a bug that could cause formation coordinates to contain decimal values.",
+      "contextHash": "dd6af5053be73a6589db3196f7cfe20f298c0d7aabe64babd9fa8b32c7ea9414"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "密になった際、敵画像が横に重なってしまうパターンが頻出する不具合を修正。",
+      "sourceHash": "4f9eb0d9813098cb21816d2b7d8d35191dd0a846352390e45407b19698227b63",
+      "translation": "Fixed a bug that frequently caused enemy images to overlap horizontally when formations were crowded.",
+      "contextHash": "4f9eb0d9813098cb21816d2b7d8d35191dd0a846352390e45407b19698227b63"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "仲間を呼ぶプラグインに対応するため改修。",
+      "sourceHash": "7e5c838c91a0c7dcb0abb6c13c5b395c3e9acf24b2800e27f4f78a012801d9e3",
+      "translation": "Modified to support plugins that call for reinforcements.",
+      "contextHash": "7e5c838c91a0c7dcb0abb6c13c5b395c3e9acf24b2800e27f4f78a012801d9e3"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "プラグインパラメータの初期値をＭＺ用に調整。（ver1.051）",
+      "sourceHash": "7a5806ee6b8ffb777ef1a2fb886f98f08be211aafde7368146b30c53115578b9",
+      "translation": "Adjusted the default plugin parameter values for MZ. (ver1.051)",
+      "contextHash": "7a5806ee6b8ffb777ef1a2fb886f98f08be211aafde7368146b30c53115578b9"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "※ＭＶでの初期値が少しズレますが、パラメータで簡単に調整できます。",
+      "sourceHash": "e00ab6d770cb4e1f738ecee639d6cfcb9d00e5f53e60635328f94e2f24268437",
+      "translation": "※The default values are slightly offset in MV, but they can be easily adjusted using the parameters.",
+      "contextHash": "e00ab6d770cb4e1f738ecee639d6cfcb9d00e5f53e60635328f94e2f24268437"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "自動配置後、敵のＩＤ（A,B,C…）を正しく振るように修正。",
+      "sourceHash": "01ccb3bec93bd231bcddfd63c19f331f1960f341a0be9240fef92cac607b233d",
+      "translation": "Modified the plugin to assign enemy IDs (A, B, C…) correctly after automatic formation.",
+      "contextHash": "01ccb3bec93bd231bcddfd63c19f331f1960f341a0be9240fef92cac607b233d"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "『開始頭上Ｙ座標（上）』の初期値をＭＺ用に調整。（ver1.041）",
+      "sourceHash": "b0a5b632e033cd2c9b6029b69af005286e5e9b5a2d64c6965048393d84a83e99",
+      "translation": "Adjusted the default value of “Starting Overhead Y Coordinate (Top)” for MZ. (ver1.041)",
+      "contextHash": "b0a5b632e033cd2c9b6029b69af005286e5e9b5a2d64c6965048393d84a83e99"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "ツクールＭＺ版（NRP_TroopRandomFormationMZ）を作成。",
+      "sourceHash": "7e9a391a3beca8d43062b490ece9ca82ab6ab29fb142baddaa278d135f3fac67",
+      "translation": "Created the RPG Maker MZ version (NRP_TroopRandomFormationMZ).",
+      "contextHash": "7e9a391a3beca8d43062b490ece9ca82ab6ab29fb142baddaa278d135f3fac67"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "→やっぱり同じJSファイルに統合。",
+      "sourceHash": "71dd1e2578cbce5ed595cfba13a1265cdc8d9b188149abcbf5551ed566d8e3bf",
+      "translation": "→ Ultimately integrated it into the same JS file.",
+      "contextHash": "71dd1e2578cbce5ed595cfba13a1265cdc8d9b188149abcbf5551ed566d8e3bf"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "YEP_BattleEngineCoreとの競合対策。(ver1.021)",
+      "sourceHash": "02943bd1b5b46fb30e9550314b0266232b6d8c8c41c9588b8b9e2841f228d471",
+      "translation": "Added compatibility with YEP_BattleEngineCore. (ver1.021)",
+      "contextHash": "02943bd1b5b46fb30e9550314b0266232b6d8c8c41c9588b8b9e2841f228d471"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "処理を『座標総当り方式』へと一新して配置を安定化。",
+      "sourceHash": "a20e9523a9d6baadcca67d8be01e6657d9a0d65bb1ec3c201494bd502fa61332",
+      "translation": "Completely revamped the process using an “exhaustive coordinate search” method to stabilize formations.",
+      "contextHash": "a20e9523a9d6baadcca67d8be01e6657d9a0d65bb1ec3c201494bd502fa61332"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "※旧処理（ランダム繰り返し方式）も選択できますが非推奨です。",
+      "sourceHash": "7c07e05c2c95f9b6102e5b19a6d7b98a3c30b9b205746a5ef4b0c9ce63c19f1d",
+      "translation": "※The old process (repeated randomization method) can still be selected, but it is not recommended.",
+      "contextHash": "7c07e05c2c95f9b6102e5b19a6d7b98a3c30b9b205746a5ef4b0c9ce63c19f1d"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "グリッドの基準位置を右下に変更。",
+      "sourceHash": "582d09f46309021e228b0ee35632c7b99915080017d4cf5d33670b4d500d0ac1",
+      "translation": "Changed the grid reference position to the bottom right.",
+      "contextHash": "582d09f46309021e228b0ee35632c7b99915080017d4cf5d33670b4d500d0ac1"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法",
+      "sourceHash": "a6d0fc6c0ba3cdc4284359a6db437b609db0f8764bd70afc120896beef7520c5",
+      "translation": "How to Use",
+      "contextHash": "a6d0fc6c0ba3cdc4284359a6db437b609db0f8764bd70afc120896beef7520c5"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "初期状態では、名前が『#』で始まるグループを自動配置の対象としています。この条件はプラグインパラメータの『実行条件』で変更可能です。パラメータとグループ名を設定し、対象とするグループを決定してください。",
+      "sourceHash": "5744210ec889a0037acc9592fe98be164c440ae3064409c7824083c667888040",
+      "translation": "By default, groups whose names begin with “#” are targeted for automatic formation. This condition can be changed using the “Execution Condition” plugin parameter. Configure the parameter and group names to determine which groups are targeted.",
+      "contextHash": "5744210ec889a0037acc9592fe98be164c440ae3064409c7824083c667888040"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "他にも詳細な設定が可能ですが、基本的にはこれだけで即実用可です。最初からサイドビュー用にそれっぽい設定をしてあります。",
+      "sourceHash": "89487e91f90a0c6574a7c75c69437efb77d4400a0d4e74781a5a43df27390bb4",
+      "translation": "More detailed settings are also available, but basically, this is all you need to make it immediately usable. It comes preconfigured with settings suitable for side-view battles.",
+      "contextHash": "89487e91f90a0c6574a7c75c69437efb77d4400a0d4e74781a5a43df27390bb4"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "このプラグインで自動配置を実施すると、敵グループ内のデータ上の並び順も変更されてしまいます。",
+      "sourceHash": "b26637b86e1562fd4779ecd5068d8c8376e05138d49789d6365c52edbfa15199",
+      "translation": "When automatic formation is performed by this plugin, the data order of the enemies within the troop is also changed.",
+      "contextHash": "b26637b86e1562fd4779ecd5068d8c8376e05138d49789d6365c52edbfa15199"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "バトルイベントで対象を固定した実装をしている場合は、ズレが生じる可能性があります。ご注意ください。",
+      "sourceHash": "4ca6eaad64bbbed6256b493d8c939b410f756c7533776360ea4960a43139e6d6",
+      "translation": "If your battle events use a fixed target, this may cause discrepancies. Please be careful.",
+      "contextHash": "4ca6eaad64bbbed6256b493d8c939b410f756c7533776360ea4960a43139e6d6"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "もし必要な場合は以下のようなスクリプトを使ってください。",
+      "sourceHash": "cdf5cc0067fbb5ba101eb5c406c9da6adf074cacca5bc1322727b74ea6b60b7d",
+      "translation": "If necessary, use a script like the following.",
+      "contextHash": "cdf5cc0067fbb5ba101eb5c406c9da6adf074cacca5bc1322727b74ea6b60b7d"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "// ID=3の敵をステート4:毒にする。",
+      "sourceHash": "11e14cf4a16e1b522cda7f7e427c17f713c2d7d1119689ee82c768135babfab0",
+      "translation": "// Make the enemy with ID=3 have state 4: Poison.",
+      "contextHash": "11e14cf4a16e1b522cda7f7e427c17f713c2d7d1119689ee82c768135babfab0"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "競合情報（2021/06/27）",
+      "sourceHash": "5aa7465bdd33b22b8424cc141eb96a1e22a378ad84578e4eee55946f9e228512",
+      "translation": "Compatibility Information (2021/06/27)",
+      "contextHash": "5aa7465bdd33b22b8424cc141eb96a1e22a378ad84578e4eee55946f9e228512"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "当プラグインとGALV_LayerGraphicsMZ、NRP_DynamicMotionMZの二つを併用すると、正しく敵が重なって表示されない模様です。競合を解消するプラグインを作成しましたのでご利用ください。",
+      "sourceHash": "58de95e9cd993d3d3c9aa8189c9ecb2d373d8e455579bfe22dcd69457161f68b",
+      "translation": "When this plugin is used together with GALV_LayerGraphicsMZ and NRP_DynamicMotionMZ, enemy images apparently do not overlap correctly. I created a plugin to resolve the conflict, so please use it.",
+      "contextHash": "58de95e9cd993d3d3c9aa8189c9ecb2d373d8e455579bfe22dcd69457161f68b"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/482187330.html",
+      "sourceHash": "f0728aca30d3dff2c8560d481b83a8f23f396948208501011e330287ad03fd83",
+      "translation": "http://newrpg.seesaa.net/article/482187330.html",
+      "contextHash": "cf1616daaade35f0c00627e3cae2be85c7cc566dffb35b29d1c003a8d320e002"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "外部連携",
+      "sourceHash": "f3fd7660217fe2dc01d3d200c79b8f6c3626f9881c74023f88de5edc97fe527f",
+      "translation": "External Integration",
+      "contextHash": "f3fd7660217fe2dc01d3d200c79b8f6c3626f9881c74023f88de5edc97fe527f"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "ver1.02で、外部の敵グループランダム生成プラグインとの併用に対応しました。",
+      "sourceHash": "9ce2b66a17e3c35b5af373ed0a18af1aab8c718e2767ffab23df964c21f1d6d9",
+      "translation": "As of ver1.02, this plugin supports use alongside external plugins that randomly generate enemy troops.",
+      "contextHash": "9ce2b66a17e3c35b5af373ed0a18af1aab8c718e2767ffab23df964c21f1d6d9"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "その際、必ずNRP_TroopRandomFormation.jsを下に配置してください。敵グループを生成→ランダム配置という順序で処理するためです。",
+      "sourceHash": "d367dddb5e178f75feac997b03e20b351cf240f0568bf7015e20debf2592d9a4",
+      "translation": "In that case, be sure to place NRP_TroopRandomFormation.js below it. This is because the processes run in the order of generating the enemy troop, then randomizing its formation.",
+      "contextHash": "d367dddb5e178f75feac997b03e20b351cf240f0568bf7015e20debf2592d9a4"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "※確定出現枠を指定する機能などが追加されています。",
+      "sourceHash": "6663756e90cb222dad7b16479788d8576151df8e393b865265858b781d1d654b",
+      "translation": "※Features such as specifying guaranteed encounter slots have been added.",
+      "contextHash": "6663756e90cb222dad7b16479788d8576151df8e393b865265858b781d1d654b"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "※プラグイン本体は『Raw』からダウンロードできます。",
+      "sourceHash": "c8b4161e9fce3d35f73d0c7fbda68d3ccf0aa17c1431531267f86e9fd211366f",
+      "translation": "※The plugin itself can be downloaded from “Raw”.",
+      "contextHash": "c8b4161e9fce3d35f73d0c7fbda68d3ccf0aa17c1431531267f86e9fd211366f"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "AB_EnemyBookについては、DarkPlasma_SupponREEより下に配置すればエラーが起きなくなるのを確認しています。",
+      "sourceHash": "f4a0ad8e668209b4eda69ea15eb5af1466178bf010b70c64e5ddfc39e6caf465",
+      "translation": "For AB_EnemyBook, I have confirmed that placing it below DarkPlasma_SupponREE prevents the error from occurring.",
+      "contextHash": "f4a0ad8e668209b4eda69ea15eb5af1466178bf010b70c64e5ddfc39e6caf465"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（適用条件）",
+      "sourceHash": "5898d487e693f007dea7c6c6962a9b5e20060355e0c01e5cdfa7be9c0d9dc7ac",
+      "translation": "Plugin Parameters (Application Conditions)",
+      "contextHash": "5898d487e693f007dea7c6c6962a9b5e20060355e0c01e5cdfa7be9c0d9dc7ac"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "自動配置の対象とするグループを決めるための条件を設定します。",
+      "sourceHash": "ec0106f471b47c5f2d6608431342b39250fa92c5ef3d41c546f6e1a49747e36d",
+      "translation": "Sets the conditions for determining which groups are subject to automatic placement.",
+      "contextHash": "ec0106f471b47c5f2d6608431342b39250fa92c5ef3d41c546f6e1a49747e36d"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "実行条件（condition）",
+      "sourceHash": "3ae3dc73ffe42d36c8e387d71284ffab77167ccd669fe25606bbeebcf3cea841",
+      "translation": "Execution Condition (condition)",
+      "contextHash": "3ae3dc73ffe42d36c8e387d71284ffab77167ccd669fe25606bbeebcf3cea841"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "自動配置を実行する条件（JavaScript計算式）です。",
+      "sourceHash": "842a713d7140070e2fcb0191b13aa28e2136512463a926a829d5dbdc836594a1",
+      "translation": "The condition for executing automatic placement (JavaScript formula).",
+      "contextHash": "842a713d7140070e2fcb0191b13aa28e2136512463a926a829d5dbdc836594a1"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "初期値の『name.startsWith(\"#\")』は「グループ名が#で始まる」という意味です。#の部分を好きな文字に変えて使ってください。",
+      "sourceHash": "455cefad333e3fc8dfb7afff66e9edb74a55035fb7c78abccae70a7dc565b3fe",
+      "translation": "The default value, 『name.startsWith(\"#\")』, means “the group name starts with #.” Change the # to any character you like.",
+      "contextHash": "455cefad333e3fc8dfb7afff66e9edb74a55035fb7c78abccae70a7dc565b3fe"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "空欄にすると全てのグループが自動配置の対象となります。",
+      "sourceHash": "403b5391a054df2400d474ba89016a771caf87f1ad5607282179840d8948f252",
+      "translation": "If left blank, all groups will be subject to automatic placement.",
+      "contextHash": "403b5391a054df2400d474ba89016a771caf87f1ad5607282179840d8948f252"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "他にも……",
+      "sourceHash": "be9fbb93c07ff775268848e798dcaf051f023b28e6e8d74647804b8fefb6e8c1",
+      "translation": "Other options...",
+      "contextHash": "be9fbb93c07ff775268848e798dcaf051f023b28e6e8d74647804b8fefb6e8c1"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "name.includes(\"#\")：グループ名に#を含む。",
+      "sourceHash": "96d9bfc427c0e9beb37224c493b4bde7ba8e983ea027b05fc61e950fd52157f9",
+      "translation": "name.includes(\"#\"): The group name contains #.",
+      "contextHash": "96d9bfc427c0e9beb37224c493b4bde7ba8e983ea027b05fc61e950fd52157f9"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "name.endswith(\"#\")：グループ名が#で終了する。",
+      "sourceHash": "cdf2d0a4500795ccb19b1822451af1cca2afe67988b4e9a2c0189bc241f8ecd3",
+      "translation": "name.endswith(\"#\"): The group name ends with #.",
+      "contextHash": "cdf2d0a4500795ccb19b1822451af1cca2afe67988b4e9a2c0189bc241f8ecd3"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "などが使えます。",
+      "sourceHash": "e0d24e25eb7f3c8f09764930a5daab6fd108d0feaf4f56bfdbac771c37d24a58",
+      "translation": "and so on.",
+      "contextHash": "e0d24e25eb7f3c8f09764930a5daab6fd108d0feaf4f56bfdbac771c37d24a58"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "グループ名の先頭を使うプラグインは他にもあったりするので、競合する場合はこれらを使ってください。ちなみに２文字以上でもＯＫです。",
+      "sourceHash": "c806094f7f456500bcf5f13133cc8f578fe13ef00a020994ff792533d77acbf5",
+      "translation": "There are other plugins that use the beginning of the group name, so use these if conflicts occur. Two or more characters work as well.",
+      "contextHash": "c806094f7f456500bcf5f13133cc8f578fe13ef00a020994ff792533d77acbf5"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "除外条件（exclusionCondition）",
+      "sourceHash": "210d2d8ea7e846603419d79791e8c677ca4ae6dafee5ff09f16d7da903331424",
+      "translation": "Exclusion Condition (exclusionCondition)",
+      "contextHash": "210d2d8ea7e846603419d79791e8c677ca4ae6dafee5ff09f16d7da903331424"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "自動配置を実行しない条件です。実行条件よりも優先されます。",
+      "sourceHash": "ecc9c450ad3028e709f67f7c13c89b82f63eb8f7440bde50fea206a38e26da20",
+      "translation": "The condition for not executing automatic placement. This takes priority over the execution condition.",
+      "contextHash": "ecc9c450ad3028e709f67f7c13c89b82f63eb8f7440bde50fea206a38e26da20"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "実行条件を全件有効にした場合でも、これを設定すれば除外するグループを設定できます。あまりこだわらない場合は、全件有効にしたほうが楽なのでオススメです。",
+      "sourceHash": "374b11eeb08ef4d22769d423bd6fd42f5b6ac2cda75b3f62c6ab3e21a90b1b09",
+      "translation": "Even if all execution conditions are enabled, you can use this to specify groups to exclude. If you are not particular about the conditions, enabling all of them is easier and recommended.",
+      "contextHash": "374b11eeb08ef4d22769d423bd6fd42f5b6ac2cda75b3f62c6ab3e21a90b1b09"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "プラグインパラメータ（配置範囲）",
+      "sourceHash": "baf0eaa8c3b0d6008460fe850e5fb3a2e48dd7a5ed0ca4f628c1c5d9f2dd9d4a",
+      "translation": "Plugin Parameters (Placement Area)",
+      "contextHash": "baf0eaa8c3b0d6008460fe850e5fb3a2e48dd7a5ed0ca4f628c1c5d9f2dd9d4a"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "自動配置を行う範囲です。この範囲内に敵の画像が収まるようランダム配置を実行します。",
+      "sourceHash": "78429347a9654273b925fe7603eb5889a9ec42a5b485d29eed06ee6d32746e28",
+      "translation": "The area in which automatic placement is performed. Enemies are placed randomly so that their images fit within this area.",
+      "contextHash": "78429347a9654273b925fe7603eb5889a9ec42a5b485d29eed06ee6d32746e28"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "初期値ではサイドビュー用の値が設定されています。",
+      "sourceHash": "06d49aa907dc25d01af22ee3251dbe2b6c2bb75490d41a9b160d622cad06c6c2",
+      "translation": "The default values are set for side-view battles.",
+      "contextHash": "06d49aa907dc25d01af22ee3251dbe2b6c2bb75490d41a9b160d622cad06c6c2"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "開始Ｘ座標（左）（startX）",
+      "sourceHash": "6299dc7668f62b3c2eaa3049e089d90b4124f2134831a7e9070e7c28367e97e4",
+      "translation": "Starting X Coordinate (Left) (startX)",
+      "contextHash": "6299dc7668f62b3c2eaa3049e089d90b4124f2134831a7e9070e7c28367e97e4"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "終了Ｘ座標（右）（endX）",
+      "sourceHash": "355ce753a09117833bbd08f27ad3074a16bb0475fd6c0eb53bc35a0623e35265",
+      "translation": "Ending X Coordinate (Right) (endX)",
+      "contextHash": "355ce753a09117833bbd08f27ad3074a16bb0475fd6c0eb53bc35a0623e35265"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "自動配置を行う開始Ｘ座標（左端）と終了Ｘ座標（右端）です。",
+      "sourceHash": "0e9dd69a18fe1071e79e78b6e616ee9a65a8f755b8f2aeeb8e877d5f481717d5",
+      "translation": "The starting X coordinate (left edge) and ending X coordinate (right edge) for automatic placement.",
+      "contextHash": "0e9dd69a18fe1071e79e78b6e616ee9a65a8f755b8f2aeeb8e877d5f481717d5"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "開始頭上Ｙ座標（上）（startHeadY）",
+      "sourceHash": "dc0acbb09b6cbaead05f11691f1e4b37b4e84a8b51da095790d6d5ce55259349",
+      "translation": "Starting Head-Top Y Coordinate (Top) (startHeadY)",
+      "contextHash": "dc0acbb09b6cbaead05f11691f1e4b37b4e84a8b51da095790d6d5ce55259349"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "自動配置を開始する敵の頭上に相当するＹ座標です。",
+      "sourceHash": "8f563a13b07e69cce761837bca5ffaff647e04532107734234cfcc872028e9a7",
+      "translation": "The Y coordinate corresponding to above the head of the enemy where automatic placement begins.",
+      "contextHash": "8f563a13b07e69cce761837bca5ffaff647e04532107734234cfcc872028e9a7"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "いくら背の高い敵でも、この座標の上に頭が出ることはありません。",
+      "sourceHash": "62466bc6af64bd4f64919ee97d4722ec0c45da2b91e580bc0b62cadfef4e408f",
+      "translation": "No matter how tall an enemy is, its head will not extend above this coordinate.",
+      "contextHash": "62466bc6af64bd4f64919ee97d4722ec0c45da2b91e580bc0b62cadfef4e408f"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "初期値はＭＺだと20、ＭＶだと0になっています。ＭＺの場合はなぜか20ピクセルほどズレるようなので調整しました。（ver1.041）",
+      "sourceHash": "1b1d66a8e654e8d2c9015743a62890e4160a289242b00901ed5ddc1285d00a0e",
+      "translation": "The default is 20 for MZ and 0 for MV. In MZ, the position seemed to be offset by about 20 pixels for some reason, so I adjusted it. (ver1.041)",
+      "contextHash": "1b1d66a8e654e8d2c9015743a62890e4160a289242b00901ed5ddc1285d00a0e"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "開始足元Ｙ座標（上）（startFootY）",
+      "sourceHash": "e796eed011778add5f8c09ec0d731e70e934fae21950984636454b458b49eabc",
+      "translation": "Starting Foot Y Coordinate (Top) (startFootY)",
+      "contextHash": "e796eed011778add5f8c09ec0d731e70e934fae21950984636454b458b49eabc"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "自動配置を開始する敵の足元に相当するＹ座標です。",
+      "sourceHash": "9a7a3910fd0f53f07d75792b2dae2f6ceee505f334a936143f253b98137e1764",
+      "translation": "The Y coordinate corresponding to the feet of the enemy where automatic placement begins.",
+      "contextHash": "9a7a3910fd0f53f07d75792b2dae2f6ceee505f334a936143f253b98137e1764"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "敵の足元の座標がこれより下となるように配置されます。",
+      "sourceHash": "f8989da28e67dfc89cd5db9b37d88fb09ab23d078bf2c0e83bed2be53becae39",
+      "translation": "Enemies are placed so that the coordinates of their feet are below this point.",
+      "contextHash": "f8989da28e67dfc89cd5db9b37d88fb09ab23d078bf2c0e83bed2be53becae39"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "終了Ｙ座標（下）（endY）",
+      "sourceHash": "4f1309b4cf72b40da126401fdbf331a29ad21c76c2683cea0ddec6c3d13af804",
+      "translation": "Ending Y Coordinate (Bottom) (endY)",
+      "contextHash": "4f1309b4cf72b40da126401fdbf331a29ad21c76c2683cea0ddec6c3d13af804"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "自動配置を行う終了Ｙ座標（下端）です。",
+      "sourceHash": "f6ef1e7814cba4625e641d6629327396c65bf9b1d15b7b3e4cca0e7b90d3deaa",
+      "translation": "The ending Y coordinate (bottom edge) for automatic placement.",
+      "contextHash": "f6ef1e7814cba4625e641d6629327396c65bf9b1d15b7b3e4cca0e7b90d3deaa"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "グリッドサイズ（gridSize）",
+      "sourceHash": "9ca0c524d35ac7013bbe9d66989c95458ea9b9aa5899d134306fbd115226492a",
+      "translation": "Grid Size (gridSize)",
+      "contextHash": "9ca0c524d35ac7013bbe9d66989c95458ea9b9aa5899d134306fbd115226492a"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "自動配置する座標の単位です。",
+      "sourceHash": "1c1509e42dbc16afba9bf3eb29d0c36c792e923252ba7b692d186b6b0be021b8",
+      "translation": "The unit used for the coordinates of automatically placed enemies.",
+      "contextHash": "1c1509e42dbc16afba9bf3eb29d0c36c792e923252ba7b692d186b6b0be021b8"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "『終了Ｘ座標』と『終了Ｙ座標』ーーつまり右下を基準として、指定値の倍数の地点に配置されます。",
+      "sourceHash": "86a4bc098c86f41ab7cbf352547903cec95bccb61df2a9c7c24382e715649947",
+      "translation": "Using 『Ending X Coordinate』 and 『Ending Y Coordinate』—that is, the bottom-right corner—as the reference, enemies are placed at points that are multiples of the specified value.",
+      "contextHash": "86a4bc098c86f41ab7cbf352547903cec95bccb61df2a9c7c24382e715649947"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "初期値は32です。",
+      "sourceHash": "353381d5118c98e04bae5b1beb3162714f168f77ae929da2f68f2a0e7202dbb6",
+      "translation": "The default value is 32.",
+      "contextHash": "353381d5118c98e04bae5b1beb3162714f168f77ae929da2f68f2a0e7202dbb6"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "※グリッドが小さすぎると配置計算の負荷が増大するため、あまり小さくしすぎないように注意してください。",
+      "sourceHash": "a7a30eedbac54be3a11240b6c02fab1e6dbbc41432dcdcfa763f794640f11b4e",
+      "translation": "※If the grid is too small, the load from placement calculations will increase, so be careful not to make it too small.",
+      "contextHash": "a7a30eedbac54be3a11240b6c02fab1e6dbbc41432dcdcfa763f794640f11b4e"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "浮遊分を加算（addFloat）",
+      "sourceHash": "be1d29ef8d23c0adbd39d9cea5edeaafc446dd50f309ee44566d3567611eef0b",
+      "translation": "Add Floating Offset (addFloat)",
+      "contextHash": "be1d29ef8d23c0adbd39d9cea5edeaafc446dd50f309ee44566d3567611eef0b"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "これにより、敵の頭が隠れてしまう問題に対処できます。",
+      "sourceHash": "91206fd0871fa9357d18830bcea7ba69760bef6b8501a7fc725cd91257acf42a",
+      "translation": "This helps address the problem of enemies’ heads being hidden.",
+      "contextHash": "91206fd0871fa9357d18830bcea7ba69760bef6b8501a7fc725cd91257acf42a"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "プラグインパラメータ（敵の並び順）",
+      "sourceHash": "a012c3ac6b3324eef71ba238a7155bbcb1f3d99cbca35614d1b50ac5c7cbe5ff",
+      "translation": "Plugin Parameters (Enemy Order)",
+      "contextHash": "a012c3ac6b3324eef71ba238a7155bbcb1f3d99cbca35614d1b50ac5c7cbe5ff"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "敵のデータ上の並び順を調整するための項目です。これは対象選択時に名前が表示される順番となります。",
+      "sourceHash": "744c683d44b08d68d30fa2a7003f3e6cee3c9e507f18236c3e6c194c07265952",
+      "translation": "This setting adjusts the order of enemies in the data. This is the order in which their names are displayed when selecting a target.",
+      "contextHash": "744c683d44b08d68d30fa2a7003f3e6cee3c9e507f18236c3e6c194c07265952"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "サイドビューでは右上→右下→左上→左下。",
+      "sourceHash": "7f2fc0acf452440d120dc0c3c565e800af57e0120141036866cd50b64f7fa51f",
+      "translation": "In side-view battles: top right → bottom right → top left → bottom left.",
+      "contextHash": "7f2fc0acf452440d120dc0c3c565e800af57e0120141036866cd50b64f7fa51f"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "フロントビューでは左下→右下→左上→右上に配置された順に番号を振られます。",
+      "sourceHash": "2e370fa26396e0e25c58dcf0e044e95c2557b10f2864a78db7d1bdebe6474c74",
+      "translation": "In front-view battles, numbers are assigned in the order in which enemies are placed: bottom left → bottom right → top left → top right.",
+      "contextHash": "2e370fa26396e0e25c58dcf0e044e95c2557b10f2864a78db7d1bdebe6474c74"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "なお、以下２つの項目はサイドビューの場合のみ機能します。",
+      "sourceHash": "81dd940eb7349b1f5602895983ac11e04dc52a33832cc54de19e959aa8c67cf5",
+      "translation": "The following two settings function only in side-view battles.",
+      "contextHash": "81dd940eb7349b1f5602895983ac11e04dc52a33832cc54de19e959aa8c67cf5"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "同列とみなす範囲（sameRowBorder）",
+      "sourceHash": "e5662d213264091c0f2b5db6e987250a754cf65f12980c61c4e63e6b0c5276ce",
+      "translation": "Range Considered the Same Column (sameRowBorder)",
+      "contextHash": "e5662d213264091c0f2b5db6e987250a754cf65f12980c61c4e63e6b0c5276ce"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "互いのＸ座標の差が指定の数値内に収まる場合、同じ列とみなして番号を振ります。",
+      "sourceHash": "7dc37649ffd0eedcdc262f12e0f02bbd63f6426920bbae33e983e493d869336b",
+      "translation": "If the difference between their X coordinates is within the specified value, they are considered to be in the same column and numbered accordingly.",
+      "contextHash": "7dc37649ffd0eedcdc262f12e0f02bbd63f6426920bbae33e983e493d869336b"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "つまり「ちょっとぐらい横に位置がずれていても、同列として上から順番に番号を振るよ」という意味です。",
+      "sourceHash": "8f8a0db8b6dfbb28b5e0f7097b32fabfa3bb1dafc66f58a3d608303819d0466a",
+      "translation": "In other words, “Even if their horizontal positions are slightly different, they are treated as the same column and numbered from top to bottom.”",
+      "contextHash": "8f8a0db8b6dfbb28b5e0f7097b32fabfa3bb1dafc66f58a3d608303819d0466a"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "この画像では、ケルベロスよりオークのほうが左にいますが、番号はオークのほうが小さくなっています。",
+      "sourceHash": "2dcb26034b6b59f3ac0ed9f63f9682f8e753bc3e9cdbea57321f67628a2fc6fb",
+      "translation": "In this image, the orc is farther left than the Cerberus, but the orc has the lower number.",
+      "contextHash": "2dcb26034b6b59f3ac0ed9f63f9682f8e753bc3e9cdbea57321f67628a2fc6fb"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "基準となるＸ座標（sortBaseX）",
+      "sourceHash": "0b598eab51a67801abdc158e7f2999be828468a74b2fec9afad759b911edecf8",
+      "translation": "Reference X Coordinate (sortBaseX)",
+      "contextHash": "0b598eab51a67801abdc158e7f2999be828468a74b2fec9afad759b911edecf8"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "並び替えの基準とするＸ座標です。",
+      "sourceHash": "6efd3c0a0287eb6df893036afd8d74776c9ccdae8af9d9ae1762ccb4c542f513",
+      "translation": "The X coordinate used as the basis for sorting.",
+      "contextHash": "6efd3c0a0287eb6df893036afd8d74776c9ccdae8af9d9ae1762ccb4c542f513"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "『0:画像中央』『1:画像右端』が選択できます。初期状態では画像右端となっています。",
+      "sourceHash": "22bf48b8a3541c6708d9bfa0945887e8043bff245839405b45acae67dc200a10",
+      "translation": "『0: Image Center』 and 『1: Image Right Edge』 can be selected. The default is the image’s right edge.",
+      "contextHash": "22bf48b8a3541c6708d9bfa0945887e8043bff245839405b45acae67dc200a10"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "プラグインパラメータ（敵が一体の場合）",
+      "sourceHash": "cf07fc697de54e64f398661cc6a2d94aef5cae53b54386dfbd809a9cb58d665b",
+      "translation": "Plugin Parameters (When There Is One Enemy)",
+      "contextHash": "cf07fc697de54e64f398661cc6a2d94aef5cae53b54386dfbd809a9cb58d665b"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "敵が一体の場合に、どのように配置を行うかを設定する項目です。",
+      "sourceHash": "63865dd50ff6c330a2dff3602a3f35c9507d914f65e144a86427031c65234b9b",
+      "translation": "This setting determines how placement is performed when there is only one enemy.",
+      "contextHash": "63865dd50ff6c330a2dff3602a3f35c9507d914f65e144a86427031c65234b9b"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "「敵が一体の時までランダム配置したら、変な隙間ができて違和感あるんじゃね？」というわけで、この項目があります。",
+      "sourceHash": "5467b6b53dc90a5503d0e01c8fb90eda0619d43a74d0fa0f864c39df6b1727bb",
+      "translation": "If enemies were randomly positioned even when there is only one enemy, it would create a strange gap and look unnatural. That is why this option exists.",
+      "contextHash": "5467b6b53dc90a5503d0e01c8fb90eda0619d43a74d0fa0f864c39df6b1727bb"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "そんなわけで、初期設定では有効範囲の中央に配置します。",
+      "sourceHash": "a62695933caddc607dc7f3fff36a85d4f3afbcff2f569df63913b0ea9e8d032c",
+      "translation": "Therefore, the default setting places it in the center of the valid range.",
+      "contextHash": "a62695933caddc607dc7f3fff36a85d4f3afbcff2f569df63913b0ea9e8d032c"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "単体時の配置（singleEnemyPosition）",
+      "sourceHash": "fa0211cc49c6c9e23ba3013d23f0e38c61f044cb20046fe5195dd54734eaf65f",
+      "translation": "Single-enemy positioning (singleEnemyPosition)",
+      "contextHash": "fa0211cc49c6c9e23ba3013d23f0e38c61f044cb20046fe5195dd54734eaf65f"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "敵が一体の場合に配置する方法です。",
+      "sourceHash": "f1550f5bb68d63134e9444614e9d9347c2ba64807d427ea0d4748ffbffa805db",
+      "translation": "The positioning method used when there is only one enemy.",
+      "contextHash": "f1550f5bb68d63134e9444614e9d9347c2ba64807d427ea0d4748ffbffa805db"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "『0:ランダムに配置』ならば、二体以上の場合と同様にランダム配置します。",
+      "sourceHash": "d6084c4e8f3d3d53d3ef05f3cf664a9de05ac92bcaa4e3cd56ab0f0963d54b01",
+      "translation": "With “0: Random Placement,” it is placed randomly, just as when there are two or more enemies.",
+      "contextHash": "d6084c4e8f3d3d53d3ef05f3cf664a9de05ac92bcaa4e3cd56ab0f0963d54b01"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "『1:指定座標に配置』ならば、以下で設定した座標に配置します。",
+      "sourceHash": "de0dd11a44185fc5b9e3168009eeb0329a6da1c6ebdb8fbefa62f9941efc95ba",
+      "translation": "With “1: Place at Specified Coordinates,” it is placed at the coordinates configured below.",
+      "contextHash": "de0dd11a44185fc5b9e3168009eeb0329a6da1c6ebdb8fbefa62f9941efc95ba"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "初期値は『1:指定座標に配置』に配置です。",
+      "sourceHash": "16273c5c51106e513151bd10bd1a75595c087ec8cc8724a8d71c81917ca04295",
+      "translation": "The default setting is “1: Place at Specified Coordinates.”",
+      "contextHash": "16273c5c51106e513151bd10bd1a75595c087ec8cc8724a8d71c81917ca04295"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "単体時のＸ座標（singleEnemyX）",
+      "sourceHash": "97121aa68af8f6548ed3c126d8ee8da5e8368879cfe28bc0d8450c0389b9be2e",
+      "translation": "Single-enemy X coordinate (singleEnemyX)",
+      "contextHash": "97121aa68af8f6548ed3c126d8ee8da5e8368879cfe28bc0d8450c0389b9be2e"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "指定座標に配置する場合のＸ座標です。",
+      "sourceHash": "005a0490237726ed453659f506c31003255c4d38a54702e7f9997fa12f85638d",
+      "translation": "The X coordinate used when placing the enemy at specified coordinates.",
+      "contextHash": "005a0490237726ed453659f506c31003255c4d38a54702e7f9997fa12f85638d"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "初期値の『(startX + endX) / 2』は配置範囲の中央を表す数式です。",
+      "sourceHash": "41a881bea4bb2bbe956a2379c9a5f04272043be6e245f1b6c22743397be0eb2c",
+      "translation": "The default value, “(startX + endX) / 2,” is a formula representing the center of the placement range.",
+      "contextHash": "41a881bea4bb2bbe956a2379c9a5f04272043be6e245f1b6c22743397be0eb2c"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "単体時のＹ座標（singleEnemyY）",
+      "sourceHash": "cd973dd67bdee6d4ce4d6d9ef4951ec188fb2dfa97872289280dfdd8fd408c4f",
+      "translation": "Single-enemy Y coordinate (singleEnemyY)",
+      "contextHash": "cd973dd67bdee6d4ce4d6d9ef4951ec188fb2dfa97872289280dfdd8fd408c4f"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "指定座標に配置する場合のＹ座標です。",
+      "sourceHash": "aba49823ed01ce2f64366c58f064707b863b178311f71944c947b9c0e7c8f7fe",
+      "translation": "The Y coordinate used when placing the enemy at specified coordinates.",
+      "contextHash": "aba49823ed01ce2f64366c58f064707b863b178311f71944c947b9c0e7c8f7fe"
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "初期値の『((startHeadY + startFootY) / 2 + endY) / 2 + a.height/2』は中央らへんにそれっぽく見えるようにした数式です。",
+      "sourceHash": "241610ef9cc79433934e89329c095179b36d2b8d291049ccf1daebe10b53dbbd",
+      "translation": "The default value, “((startHeadY + startFootY) / 2 + endY) / 2 + a.height/2,” is a formula designed to make the enemy appear roughly in the center.",
+      "contextHash": "241610ef9cc79433934e89329c095179b36d2b8d291049ccf1daebe10b53dbbd"
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "※Ｘ座標とは異なり、大きさに関わらず敵を中央付近に表示する数式は地味に難しいです。気に入らなかったら適当に調整してください。",
+      "sourceHash": "ffcc7d60127c3f321e0a7b7046b228fb6affb7dff3d1966fa507d4ee826fddfd",
+      "translation": "※Unlike the X coordinate, creating a formula that displays enemies near the center regardless of their size is surprisingly difficult. If you do not like the result, adjust it as appropriate.",
+      "contextHash": "ffcc7d60127c3f321e0a7b7046b228fb6affb7dff3d1966fa507d4ee826fddfd"
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "プラグインパラメータ（演算方法）",
+      "sourceHash": "489796e8915d4ffecee0df9ce421e49f65c879079c89da6c44f441e397709c01",
+      "translation": "Plugin Parameters (Calculation Method)",
+      "contextHash": "489796e8915d4ffecee0df9ce421e49f65c879079c89da6c44f441e397709c01"
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "内部的に配置を計算する方法と、その試行を繰り返す回数と、およびその基準値を設定します。",
+      "sourceHash": "50c98961f08ad6c366a008f14396168de30161a83eeb71bf6aa5408cb42f2527",
+      "translation": "Set the method used to calculate positioning internally, the number of times the calculation is repeated, and the criterion value used.",
+      "contextHash": "50c98961f08ad6c366a008f14396168de30161a83eeb71bf6aa5408cb42f2527"
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "試行回数が小さい場合、不自然に敵が重なって配置されてしまうことがあります。回数を多くするほど配置が安定しますが、それだけ戦闘開始時の計算負荷が増大します。",
+      "sourceHash": "257046ed225c60bb4e0a245898b42b5a25c7e61a0bbb24d6dcf2685cf00fe1eb",
+      "translation": "If the number of attempts is too low, enemies may be placed overlapping each other unnaturally. Increasing the number makes the placement more stable, but also increases the computational load when battle starts.",
+      "contextHash": "257046ed225c60bb4e0a245898b42b5a25c7e61a0bbb24d6dcf2685cf00fe1eb"
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "よく分からなかったら初期値のままが無難だと思います。",
+      "sourceHash": "b256443e2cfaac79c8d79a708a0634cea46fe7cbe197af185a17d13a41188580",
+      "translation": "If you are unsure, it is probably safest to leave the default values unchanged.",
+      "contextHash": "b256443e2cfaac79c8d79a708a0634cea46fe7cbe197af185a17d13a41188580"
+    },
+    {
+      "id": "heading-075",
+      "type": "heading",
+      "source": "演算方式（algorithmType）",
+      "sourceHash": "6a98dab5463ff37355722197594839063a63dc6f2df83ba8d9537599b0a5d1c3",
+      "translation": "Calculation Method (algorithmType)",
+      "contextHash": "6a98dab5463ff37355722197594839063a63dc6f2df83ba8d9537599b0a5d1c3"
+    },
+    {
+      "id": "heading-076",
+      "type": "heading",
+      "source": "自動配置を行う演算方式です。",
+      "sourceHash": "755a30e9ce0708d3381ba81e2087bb2c3e53e2a9ba870e5e9e7b552a50eba72e",
+      "translation": "The calculation method used for automatic positioning.",
+      "contextHash": "755a30e9ce0708d3381ba81e2087bb2c3e53e2a9ba870e5e9e7b552a50eba72e"
+    },
+    {
+      "id": "heading-077",
+      "type": "heading",
+      "source": "0:座標総当り（推奨）",
+      "sourceHash": "f99a55da6acb2d1321ebf1ba23c8e1a737c856a36e373a05535fddb7f3b9521a",
+      "translation": "0: Brute-Force Coordinates (Recommended)",
+      "contextHash": "f99a55da6acb2d1321ebf1ba23c8e1a737c856a36e373a05535fddb7f3b9521a"
+    },
+    {
+      "id": "heading-078",
+      "type": "heading",
+      "source": "グリッド単位で全座標を検査し、適切な間隔が取れる座標の中からランダムで選択します。",
+      "sourceHash": "10b07e98c58a360a3530474a08f492d61889ce5940702c26e590160b152ed06f",
+      "translation": "It checks all coordinates on a grid and randomly selects one from among the coordinates that provide appropriate spacing.",
+      "contextHash": "10b07e98c58a360a3530474a08f492d61889ce5940702c26e590160b152ed06f"
+    },
+    {
+      "id": "heading-079",
+      "type": "heading",
+      "source": "高い精度で敵同士の重なりを防止できるため、基本的にはこちらの使用を推奨します。",
+      "sourceHash": "4e24665cb5aeb1fcd8656dec187e06d744f4f0eb0048bd41dfbe82861d398dac",
+      "translation": "Because it prevents enemies from overlapping with high accuracy, this method is generally recommended.",
+      "contextHash": "4e24665cb5aeb1fcd8656dec187e06d744f4f0eb0048bd41dfbe82861d398dac"
+    },
+    {
+      "id": "heading-080",
+      "type": "heading",
+      "source": "1:ランダム繰り返し",
+      "sourceHash": "9cca891aae887ab1d15978926308433ddb55260669eecdc015ffe4bf78721cf0",
+      "translation": "1: Random Iteration",
+      "contextHash": "9cca891aae887ab1d15978926308433ddb55260669eecdc015ffe4bf78721cf0"
+    },
+    {
+      "id": "heading-081",
+      "type": "heading",
+      "source": "ランダムで配置を繰り返し、その中で最もマシな座標を選びます。",
+      "sourceHash": "74fab631c171149ae8751c0bda718ad66a577d69181c6473e1fdbf2eb188edc0",
+      "translation": "It repeatedly places enemies randomly and selects the best coordinates among the results.",
+      "contextHash": "74fab631c171149ae8751c0bda718ad66a577d69181c6473e1fdbf2eb188edc0"
+    },
+    {
+      "id": "heading-082",
+      "type": "heading",
+      "source": "運が悪いと敵が不自然に重なってしまうのであまり推奨しません。",
+      "sourceHash": "b5c950ac83f6f6e66ffa5b73b48dddb56d1c5dad23ead5531b92c039ba4244cd",
+      "translation": "It is not highly recommended because enemies may overlap unnaturally if you are unlucky.",
+      "contextHash": "b5c950ac83f6f6e66ffa5b73b48dddb56d1c5dad23ead5531b92c039ba4244cd"
+    },
+    {
+      "id": "heading-083",
+      "type": "heading",
+      "source": "グループ当たりの試行回数（maxTryNoForTroop）",
+      "sourceHash": "67f7b2db320b3ca2b8cdd4d0a265ad1a540bf19c532911308799005e6a91852d",
+      "translation": "Attempts per Troop (maxTryNoForTroop)",
+      "contextHash": "67f7b2db320b3ca2b8cdd4d0a265ad1a540bf19c532911308799005e6a91852d"
+    },
+    {
+      "id": "heading-084",
+      "type": "heading",
+      "source": "自動配置を繰り返すグループ当たりの最大回数です。（初期値は50）",
+      "sourceHash": "2f33ddf9f67d73309302f6347ff1459b11c1365571fb347e2cc64178211daea7",
+      "translation": "The maximum number of times automatic positioning is repeated per troop. (The default is 50.)",
+      "contextHash": "2f33ddf9f67d73309302f6347ff1459b11c1365571fb347e2cc64178211daea7"
+    },
+    {
+      "id": "heading-085",
+      "type": "heading",
+      "source": "演算方式に従って比較＆配置を終えた後、さらにグループ全体として配置をやり直す回数です。このプラグインはそうやって最適な全体配置を求めています。",
+      "sourceHash": "217cb0bfc59a109f6e08748185fe17e6f1300a71a5a35a0a1cef21ebea9f8547",
+      "translation": "After comparison and placement according to the calculation method are complete, this is the number of times placement is redone for the troop as a whole. This plugin finds the optimal overall placement in this way.",
+      "contextHash": "217cb0bfc59a109f6e08748185fe17e6f1300a71a5a35a0a1cef21ebea9f8547"
+    },
+    {
+      "id": "heading-086",
+      "type": "heading",
+      "source": "この値を増やすと適切な配置になる可能性が高まりますが、同時に計算量も増大します。",
+      "sourceHash": "52f8b8a448511c817e23e10aff72600010833d8cf6b972580e4b015535f9d063",
+      "translation": "Increasing this value makes appropriate placement more likely, but also increases the amount of computation.",
+      "contextHash": "52f8b8a448511c817e23e10aff72600010833d8cf6b972580e4b015535f9d063"
+    },
+    {
+      "id": "heading-087",
+      "type": "heading",
+      "source": "一体当たりの試行回数（maxTryNoForEnemy）",
+      "sourceHash": "d6a41ce2d7149fee24a3052a6632bc605d40acd848eb289d120a6d9928edf995",
+      "translation": "Attempts per Enemy (maxTryNoForEnemy)",
+      "contextHash": "d6a41ce2d7149fee24a3052a6632bc605d40acd848eb289d120a6d9928edf995"
+    },
+    {
+      "id": "heading-088",
+      "type": "heading",
+      "source": "※この項目は『1:ランダム繰り返し』の場合のみ有効です。基本的には無視してもらって構いません。",
+      "sourceHash": "ac91b71763342b8cc7bd27d518f6524d400f3238f25aecbda930e02e539cfc1e",
+      "translation": "※This option is enabled only with “1: Random Iteration.” You can generally ignore it.",
+      "contextHash": "ac91b71763342b8cc7bd27d518f6524d400f3238f25aecbda930e02e539cfc1e"
+    },
+    {
+      "id": "heading-089",
+      "type": "heading",
+      "source": "自動配置を繰り返す一体当たりの最大回数です。（初期値は50）",
+      "sourceHash": "4368b46536e6374d3dff2a788f8feb7a2d682731110d53fd11272c671e93bf00",
+      "translation": "The maximum number of times automatic positioning is repeated per enemy. (The default is 50.)",
+      "contextHash": "4368b46536e6374d3dff2a788f8feb7a2d682731110d53fd11272c671e93bf00"
+    },
+    {
+      "id": "heading-090",
+      "type": "heading",
+      "source": "内部的には、一体毎にランダム配置を繰り返し、互いの座標を比較して間隔を確保できる配置を探しています。これはその配置を繰り返す回数です。",
+      "sourceHash": "15115df8984823fd6945c67090409e9c3efda55c9d46fe883704eacee97af25d",
+      "translation": "Internally, the plugin repeatedly places each enemy randomly, compares their coordinates, and searches for a placement that maintains sufficient spacing. This is the number of times that placement process is repeated.",
+      "contextHash": "15115df8984823fd6945c67090409e9c3efda55c9d46fe883704eacee97af25d"
+    },
+    {
+      "id": "heading-091",
+      "type": "heading",
+      "source": "敵の配置数が増えれば増えるほど、互いの比較を繰り返すのでこの値に乗算する形で試行回数も増えます。",
+      "sourceHash": "d6ef3886444c577cb85a0770e60bf01b00fef89363606e2864735e38c1bef4d8",
+      "translation": "As the number of enemies increases, their coordinates are compared repeatedly, so the number of attempts also increases by multiplying this value.",
+      "contextHash": "d6ef3886444c577cb85a0770e60bf01b00fef89363606e2864735e38c1bef4d8"
+    },
+    {
+      "id": "heading-092",
+      "type": "heading",
+      "source": "確定とする距離評価値（distanceBorder）",
+      "sourceHash": "96d887d4ee6fc0a949a3f5d99b87450bfe68b172b5ec40185ccef06d375708d8",
+      "translation": "Distance Evaluation Value for Confirming Placement (distanceBorder)",
+      "contextHash": "96d887d4ee6fc0a949a3f5d99b87450bfe68b172b5ec40185ccef06d375708d8"
+    },
+    {
+      "id": "heading-093",
+      "type": "heading",
+      "source": "この値を超える距離評価値を得た場合、配置を確定します。",
+      "sourceHash": "4c1d9836fa554df3aa539cccb9cea61f1b3df75df8fb43f8b59c4859f9b61f83",
+      "translation": "When a distance evaluation value exceeding this value is obtained, the placement is confirmed.",
+      "contextHash": "4c1d9836fa554df3aa539cccb9cea61f1b3df75df8fb43f8b59c4859f9b61f83"
+    },
+    {
+      "id": "heading-094",
+      "type": "heading",
+      "source": "値を大きくするほど間隔を確保します。",
+      "sourceHash": "4176d669f7c913d25bd86c35ecd774ffdff631f7ca1c182bb76be9c283b8bcaf",
+      "translation": "The larger the value, the more spacing is maintained.",
+      "contextHash": "4176d669f7c913d25bd86c35ecd774ffdff631f7ca1c182bb76be9c283b8bcaf"
+    },
+    {
+      "id": "heading-095",
+      "type": "heading",
+      "source": "基本的には、値が100なら100ピクセル間隔を取ると考えればよいです。敵の数が多い場合など間隔を確保できなければ、比較的間隔の広い配置を選びます。",
+      "sourceHash": "1b555fd72fe0e7ec393b0cc1667f7e567d1f3047bb64d99d3fea0729c61bf3d8",
+      "translation": "Generally, you can think of a value of 100 as maintaining a spacing of 100 pixels. If sufficient spacing cannot be maintained, such as when there are many enemies, the placement with relatively wider spacing is selected.",
+      "contextHash": "1b555fd72fe0e7ec393b0cc1667f7e567d1f3047bb64d99d3fea0729c61bf3d8"
+    },
+    {
+      "id": "heading-096",
+      "type": "heading",
+      "source": "値をマイナス値にすると、下の画像のような縦に重なったパターンも許可するようになります。なるべく自然に見せるため、上半分が隠れずに見えているパターンを優先的に選んでいます。",
+      "sourceHash": "a172b4792ae2cc1db21ed572b2cd75ed0e3ba498e8155af45a7300fb3885b1bd",
+      "translation": "Setting a negative value also permits vertically overlapping patterns like the one shown in the image below. To make them look as natural as possible, patterns in which the upper half remains visible are prioritized.",
+      "contextHash": "a172b4792ae2cc1db21ed572b2cd75ed0e3ba498e8155af45a7300fb3885b1bd"
+    },
+    {
+      "id": "heading-097",
+      "type": "heading",
+      "source": "実用性はありませんが、-10000を下回ると不自然に重なったパターンも出現するようになります。",
+      "sourceHash": "1d83e73f8e45417d807f3521367f14cea89fe9490fab2ecfccaff8924e884a4c",
+      "translation": "Although it is not practical, patterns with unnatural overlapping will also appear when the value falls below -10000.",
+      "contextHash": "1d83e73f8e45417d807f3521367f14cea89fe9490fab2ecfccaff8924e884a4c"
+    },
+    {
+      "id": "heading-098",
+      "type": "heading",
+      "source": "また、数式も使用可能です。",
+      "sourceHash": "34809c70a05cc705c7af5ecf9ff10a653fd10191eac73204fabb5dc1bc7bfff6",
+      "translation": "Formulas can also be used.",
+      "contextHash": "34809c70a05cc705c7af5ecf9ff10a653fd10191eac73204fabb5dc1bc7bfff6"
+    },
+    {
+      "id": "heading-099",
+      "type": "heading",
+      "source": "例えば『$gameTroop.members().length == 2 ? 100 : 0』なら、敵が２体の時のみ間隔を100とります。",
+      "sourceHash": "00a830976c6a29fe0027505dd67d5238f175585443e1f8bc8122d0153fc26d8a",
+      "translation": "For example, with “$gameTroop.members().length == 2 ? 100 : 0,” a spacing of 100 is used only when there are two enemies.",
+      "contextHash": "00a830976c6a29fe0027505dd67d5238f175585443e1f8bc8122d0153fc26d8a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]バトルイベントをフェードイン前に最速実行するプラグイン[[/LINK_1]]と組み合わせれば、敵キャラをランダムで生成することもできます（2023/06/25追記）",
+      "sourceHash": "07d53122cf8179f2338bd3236fb35c71e6c1e3fc4345b32201fee16cd6305cd1",
+      "parts": [
+        {
+          "source": "バトルイベントをフェードイン前に最速実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせれば、敵キャラをランダムで生成することもできます（2023/06/25追記）",
+          "link": false
+        }
+      ],
+      "translation": "By combining it with the [[LINK_1]] plugin that executes battle events as quickly as possible before the fade-in [[/LINK_1]], you can also generate enemies randomly (added 2023/06/25).",
+      "contextHash": "07d53122cf8179f2338bd3236fb35c71e6c1e3fc4345b32201fee16cd6305cd1"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法[[/LINK_1]]",
+      "sourceHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05",
+      "parts": [
+        {
+          "source": "導入方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴[[/LINK_1]]",
+      "sourceHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036",
+      "parts": [
+        {
+          "source": "更新履歴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法[[/LINK_1]]",
+      "sourceHash": "705d2683c1286fd797e87b0f9378dc0ce5276c95b882fda8f08135bf704445b9",
+      "parts": [
+        {
+          "source": "使用方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "705d2683c1286fd797e87b0f9378dc0ce5276c95b882fda8f08135bf704445b9"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]注意点[[/LINK_1]]",
+      "sourceHash": "dae1acf5bccb59b156ed9875bebe9c03cb8dc5f1164c511491615fc43145b6ce",
+      "parts": [
+        {
+          "source": "注意点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "dae1acf5bccb59b156ed9875bebe9c03cb8dc5f1164c511491615fc43145b6ce"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]競合情報[[/LINK_1]]2021/06/27",
+      "sourceHash": "07d9fd7be8d5a6bb058b7bca477e051441d727e05a0c865be0c25a52f60a46b7",
+      "parts": [
+        {
+          "source": "競合情報",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "2021/06/27",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]2021/06/27",
+      "contextHash": "07d9fd7be8d5a6bb058b7bca477e051441d727e05a0c865be0c25a52f60a46b7"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]外部連携[[/LINK_1]]",
+      "sourceHash": "83e26bfe5193fdffd87bc5fa869290cecf292589ba68449aac0177ebe5702f55",
+      "parts": [
+        {
+          "source": "外部連携",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "83e26bfe5193fdffd87bc5fa869290cecf292589ba68449aac0177ebe5702f55"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（適用条件）[[/LINK_1]]",
+      "sourceHash": "db9de74a30726aface5981c7a07b997633ab52a659ff58c6c974f7252ee9778d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（適用条件）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "db9de74a30726aface5981c7a07b997633ab52a659ff58c6c974f7252ee9778d"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]実行条件（condition）[[/LINK_1]]",
+      "sourceHash": "072f9984af777eb3cebc7cf1629b15481ad9126cf8ef3ceef700c642f0c2d8e7",
+      "parts": [
+        {
+          "source": "実行条件（condition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "072f9984af777eb3cebc7cf1629b15481ad9126cf8ef3ceef700c642f0c2d8e7"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]除外条件（exclusionCondition）[[/LINK_1]]",
+      "sourceHash": "e5f0cc63cb107bef1b6127742fe0ec08babb8c02ce88e4b090dd1f66464bee05",
+      "parts": [
+        {
+          "source": "除外条件（exclusionCondition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "e5f0cc63cb107bef1b6127742fe0ec08babb8c02ce88e4b090dd1f66464bee05"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（配置範囲）[[/LINK_1]]",
+      "sourceHash": "a7a17c286bac0eebdd185523b6c395a2ce364dc09bbafb06722d5ccf7bcc5739",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（配置範囲）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "a7a17c286bac0eebdd185523b6c395a2ce364dc09bbafb06722d5ccf7bcc5739"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｘ座標（左）（startX）[[/LINK_1]]",
+      "sourceHash": "4ca1eeaf3b7d4252f8951702ba95e2ec2d0fe1ae6efddc8b8b5a71b4ab548806",
+      "parts": [
+        {
+          "source": "開始Ｘ座標（左）（startX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "4ca1eeaf3b7d4252f8951702ba95e2ec2d0fe1ae6efddc8b8b5a71b4ab548806"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]終了Ｘ座標（右）（endX）[[/LINK_1]]",
+      "sourceHash": "b7a4248f41738c0e63240940ce0e3469ee54aa59a583d52f94eab3e47e4c372c",
+      "parts": [
+        {
+          "source": "終了Ｘ座標（右）（endX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "b7a4248f41738c0e63240940ce0e3469ee54aa59a583d52f94eab3e47e4c372c"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]開始頭上Ｙ座標（上）（startHeadY）[[/LINK_1]]",
+      "sourceHash": "fd0c5f54f65bbb41503c628f8e3124473f28575180a6632a8af593177627cf8d",
+      "parts": [
+        {
+          "source": "開始頭上Ｙ座標（上）（startHeadY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "fd0c5f54f65bbb41503c628f8e3124473f28575180a6632a8af593177627cf8d"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]開始足元Ｙ座標（上）（startFootY）[[/LINK_1]]",
+      "sourceHash": "3b50596fabc89397508d5a239baf93c429664ccd9eb881ab0115b71824dc5d29",
+      "parts": [
+        {
+          "source": "開始足元Ｙ座標（上）（startFootY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "3b50596fabc89397508d5a239baf93c429664ccd9eb881ab0115b71824dc5d29"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]終了Ｙ座標（下）（endY）[[/LINK_1]]",
+      "sourceHash": "4febea35cd37a460f2ec8c10e595525c60a5b4a443263d82f2c452c2c369989d",
+      "parts": [
+        {
+          "source": "終了Ｙ座標（下）（endY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "4febea35cd37a460f2ec8c10e595525c60a5b4a443263d82f2c452c2c369989d"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]グリッドサイズ（gridSize）[[/LINK_1]]",
+      "sourceHash": "f9d83e7378e05c5b39f2d22cdc9d41d9d4be0ffc4bc3df0c3cd8b81e387566d4",
+      "parts": [
+        {
+          "source": "グリッドサイズ（gridSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "f9d83e7378e05c5b39f2d22cdc9d41d9d4be0ffc4bc3df0c3cd8b81e387566d4"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]浮遊分を加算（addFloat）[[/LINK_1]]",
+      "sourceHash": "ee5ca56ff548bc0ad2549811e0c49ef97f18cec0e2288278a796b741f952c035",
+      "parts": [
+        {
+          "source": "浮遊分を加算（addFloat）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "ee5ca56ff548bc0ad2549811e0c49ef97f18cec0e2288278a796b741f952c035"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（敵の並び順）[[/LINK_1]]",
+      "sourceHash": "8866e4ae1d961477a81f0007e689a7e3e60f8992039d520d4410c656af3c8298",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（敵の並び順）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "8866e4ae1d961477a81f0007e689a7e3e60f8992039d520d4410c656af3c8298"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]同列とみなす範囲（sameRowBorder）[[/LINK_1]]",
+      "sourceHash": "ce5c11b833430d3570ead50cbc8d71b54e15cfc7bae1b0daab2055e46071b7a6",
+      "parts": [
+        {
+          "source": "同列とみなす範囲（sameRowBorder）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "ce5c11b833430d3570ead50cbc8d71b54e15cfc7bae1b0daab2055e46071b7a6"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]基準となるＸ座標（sortBaseX）[[/LINK_1]]",
+      "sourceHash": "5b27f78b0b5aa39e2d11fabe3ce08f6c4dff81fbb0cd28cf2eef8c2d15429040",
+      "parts": [
+        {
+          "source": "基準となるＸ座標（sortBaseX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "5b27f78b0b5aa39e2d11fabe3ce08f6c4dff81fbb0cd28cf2eef8c2d15429040"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（敵が一体の場合）[[/LINK_1]]",
+      "sourceHash": "9d6a545559adf160b9464a0dce7e94e392b7b3fe0da86440aaa4b5af42d54e4b",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（敵が一体の場合）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "9d6a545559adf160b9464a0dce7e94e392b7b3fe0da86440aaa4b5af42d54e4b"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]単体時の配置（singleEnemyPosition）[[/LINK_1]]",
+      "sourceHash": "4babeb12a44037bc9fb928339e377acde6e8381547a9c839f2bc8ffdce022d0d",
+      "parts": [
+        {
+          "source": "単体時の配置（singleEnemyPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "4babeb12a44037bc9fb928339e377acde6e8381547a9c839f2bc8ffdce022d0d"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]単体時のＸ座標（singleEnemyX）[[/LINK_1]]",
+      "sourceHash": "fd2731cb9acce91e53f257edd6d391fa0429fb9d13e3b3be1fc44854c0031cab",
+      "parts": [
+        {
+          "source": "単体時のＸ座標（singleEnemyX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "fd2731cb9acce91e53f257edd6d391fa0429fb9d13e3b3be1fc44854c0031cab"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]単体時のＸ座標（singleEnemyY）[[/LINK_1]]",
+      "sourceHash": "5a5b2a047db9c32d8bcf2635f3aa2130c946ba6f7c02e6627ed53037d27ada91",
+      "parts": [
+        {
+          "source": "単体時のＸ座標（singleEnemyY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "5a5b2a047db9c32d8bcf2635f3aa2130c946ba6f7c02e6627ed53037d27ada91"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（演算方法）[[/LINK_1]]",
+      "sourceHash": "340c39ffc38a9f0cd10383a6ca8a335719812fa46f55eafd120afc399da44086",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（演算方法）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "340c39ffc38a9f0cd10383a6ca8a335719812fa46f55eafd120afc399da44086"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]演算方式（algorithmType）[[/LINK_1]]",
+      "sourceHash": "f79e682ff7258d3796d4d67d22be5b75a03edfa09979f774a25f3df0b4a62b2e",
+      "parts": [
+        {
+          "source": "演算方式（algorithmType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "f79e682ff7258d3796d4d67d22be5b75a03edfa09979f774a25f3df0b4a62b2e"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]グループ当たりの試行回数（maxTryNoForTroop）[[/LINK_1]]",
+      "sourceHash": "282c3e4de0492f9ccdd3a00f84baee669e20512b7c99c600cd0c54b58c930d39",
+      "parts": [
+        {
+          "source": "グループ当たりの試行回数（maxTryNoForTroop）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "282c3e4de0492f9ccdd3a00f84baee669e20512b7c99c600cd0c54b58c930d39"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]一体当たりの試行回数（maxTryNoForEnemy）[[/LINK_1]]",
+      "sourceHash": "a66b65baaa809f11a6399fdc38ac647c9b29757e160af7a694181ac53b1abde6",
+      "parts": [
+        {
+          "source": "一体当たりの試行回数（maxTryNoForEnemy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "a66b65baaa809f11a6399fdc38ac647c9b29757e160af7a694181ac53b1abde6"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]確定とする距離評価値（distanceBorder）[[/LINK_1]]",
+      "sourceHash": "511dd591cf2dcdb1e1d1019a5fc04139de62879738fe4c39b74935a571f2ea61",
+      "parts": [
+        {
+          "source": "確定とする距離評価値（distanceBorder）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "511dd591cf2dcdb1e1d1019a5fc04139de62879738fe4c39b74935a571f2ea61"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]VanguardAndRearguard.js[[/LINK_1]]（トリアコンタン様）",
+      "sourceHash": "263fc2fae0e1c99fc8cd1574aecfab7e79fc235421a27529d0fa1f4ed6a06343",
+      "parts": [
+        {
+          "source": "VanguardAndRearguard.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（トリアコンタン様）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]] (by Triacontane)",
+      "contextHash": "263fc2fae0e1c99fc8cd1574aecfab7e79fc235421a27529d0fa1f4ed6a06343"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_ShadowAndLevitate.js[[/LINK_1]]の浮遊効果と併用した場合、[[LINK_2]]背の高い敵が画面上に隠れてしまう問題に対処。[[/LINK_2]]",
+      "sourceHash": "c4df3a04755fc0fea5a105ea2384bbf40f6b0328fb70d78b8d476a1991547d09",
+      "parts": [
+        {
+          "source": "NRP_ShadowAndLevitate.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の浮遊効果と併用した場合、",
+          "link": false
+        },
+        {
+          "source": "背の高い敵が画面上に隠れてしまう問題に対処。",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "When used together with the [[LINK_1]][[/LINK_1]] levitation effect, addresses the issue where [[LINK_2]][[/LINK_2]] tall enemies become hidden on the screen.",
+      "contextHash": "c4df3a04755fc0fea5a105ea2384bbf40f6b0328fb70d78b8d476a1991547d09"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "※単体では問題ありませんが、[[LINK_1]]NRP_DynamicReturningAction.js[[/LINK_1]]との競合を修正します。",
+      "sourceHash": "fe422df5c471e4db82ffcc10dca8e20301eb9a7882793dd7463a38aea8455a50",
+      "parts": [
+        {
+          "source": "※単体では問題ありませんが、",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicReturningAction.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との競合を修正します。",
+          "link": false
+        }
+      ],
+      "translation": "※Although there is no issue when used alone, this fixes conflicts with [[LINK_1]][[/LINK_1]].",
+      "contextHash": "fe422df5c471e4db82ffcc10dca8e20301eb9a7882793dd7463a38aea8455a50"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]影プラグイン[[/LINK_1]]の浮遊処理と[[LINK_2]]仲間を呼ぶプラグイン[[/LINK_2]]を組み合わせた際、適切に配置できなくなる問題に対処。",
+      "sourceHash": "fc4fc184d2619445d26cf27dc8a7b165c19ee31c7b071d489a14a68b91ae0f98",
+      "parts": [
+        {
+          "source": "影プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の浮遊処理と",
+          "link": false
+        },
+        {
+          "source": "仲間を呼ぶプラグイン",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "を組み合わせた際、適切に配置できなくなる問題に対処。",
+          "link": false
+        }
+      ],
+      "translation": "Addresses the issue where enemies can no longer be positioned properly when the levitation processing of the [[LINK_1]][[/LINK_1]] is combined with the [[LINK_2]][[/LINK_2]].",
+      "contextHash": "fc4fc184d2619445d26cf27dc8a7b165c19ee31c7b071d489a14a68b91ae0f98"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "※特に[[LINK_1]]NRP_DynamicReturningAction.js[[/LINK_1]]と併用時の不具合を解消します。",
+      "sourceHash": "e4386ea62919025f387e6be293ade1b9ea114187a7339435d5b7e68710fc66a0",
+      "parts": [
+        {
+          "source": "※特に",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicReturningAction.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用時の不具合を解消します。",
+          "link": false
+        }
+      ],
+      "translation": "※In particular, this resolves issues that occur when used together with [[LINK_1]][[/LINK_1]].",
+      "contextHash": "e4386ea62919025f387e6be293ade1b9ea114187a7339435d5b7e68710fc66a0"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "『[[LINK_1]]animatedSVEnemies.js[[/LINK_1]]』と併用できるように調整。",
+      "sourceHash": "a3bc8917b74ead0fced3a3ca4d36304b4cc0da67958e62fa07c8892abf1901b0",
+      "parts": [
+        {
+          "source": "『",
+          "link": false
+        },
+        {
+          "source": "animatedSVEnemies.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』と併用できるように調整。",
+          "link": false
+        }
+      ],
+      "translation": "Adjusted for compatibility with 『[[LINK_1]][[/LINK_1]]』.",
+      "contextHash": "a3bc8917b74ead0fced3a3ca4d36304b4cc0da67958e62fa07c8892abf1901b0"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "※今まで[[LINK_1]]NRP_VisualTurn[[/LINK_1]]の識別子表示しか対応してなかった模様……。",
+      "sourceHash": "6862771add5311f9543feb1de74c5f966529e02272ef80366e2911925227f976",
+      "parts": [
+        {
+          "source": "※今まで",
+          "link": false
+        },
+        {
+          "source": "NRP_VisualTurn",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の識別子表示しか対応してなかった模様……。",
+          "link": false
+        }
+      ],
+      "translation": "※Apparently, until now it only supported displaying identifiers from [[LINK_1]][[/LINK_1]]……",
+      "contextHash": "6862771add5311f9543feb1de74c5f966529e02272ef80366e2911925227f976"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]外部の敵グループランダム生成プラグイン[[/LINK_1]]との併用に対応。",
+      "sourceHash": "c4fe2ee25a0a2678a8ef6f595fea61d64518083e4a85497ffa8de5440008888e",
+      "parts": [
+        {
+          "source": "外部の敵グループランダム生成プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との併用に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Supports use together with the [[LINK_1]][[/LINK_1]].",
+      "contextHash": "c4fe2ee25a0a2678a8ef6f595fea61d64518083e4a85497ffa8de5440008888e"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "詳細は下の[[LINK_1]]プラグインパラメータ[[/LINK_1]]をご覧ください",
+      "sourceHash": "fc65a71776d67592c9f2b1b8f802cc675fb0de43fd660bf3edf66a2c49fda3ed",
+      "parts": [
+        {
+          "source": "詳細は下の",
+          "link": false
+        },
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください",
+          "link": false
+        }
+      ],
+      "translation": "For details, see the [[LINK_1]][[/LINK_1]] below.",
+      "contextHash": "fc65a71776d67592c9f2b1b8f802cc675fb0de43fd660bf3edf66a2c49fda3ed"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]SupponREE.js[[/LINK_1]]（Suppon様）",
+      "sourceHash": "ddb75c911f666acb97e0f34f447bf12d4f0199fe204a3512d37d462ce52f5f58",
+      "parts": [
+        {
+          "source": "SupponREE.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（Suppon様）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]] (by Suppon)",
+      "contextHash": "ddb75c911f666acb97e0f34f447bf12d4f0199fe204a3512d37d462ce52f5f58"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]DarkPlasma_SupponREE.js（ＭＶ版）[[/LINK_1]]（DarkPlasma様による↑の改修版）",
+      "sourceHash": "c92853ba4eaec36c3f23f9dae79fd7d1f6f81b37e02e8437d8d7cea68e2cb84a",
+      "parts": [
+        {
+          "source": "DarkPlasma_SupponREE.js（ＭＶ版）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（DarkPlasma様による↑の改修版）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]] (a modified version of the above by DarkPlasma)",
+      "contextHash": "c92853ba4eaec36c3f23f9dae79fd7d1f6f81b37e02e8437d8d7cea68e2cb84a"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]DarkPlasma_SupponREE.js（ＭＺ版）[[/LINK_1]]",
+      "sourceHash": "8ad54a768919482921153c22400957467eb2b20715156a28e350fc49142da30d",
+      "parts": [
+        {
+          "source": "DarkPlasma_SupponREE.js（ＭＺ版）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "8ad54a768919482921153c22400957467eb2b20715156a28e350fc49142da30d"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "ちなみに、これらのプラグインは[[LINK_1]]AB_EnemyBook.js[[/LINK_1]]（ヱビ様）のように、出現後の敵に対して処理を行うプラグインと競合するので要注意です。",
+      "sourceHash": "067c2e357bab1d25e7d4505432d8ef5015f8b7b6dda2b9daaf95cac9126d9fe3",
+      "parts": [
+        {
+          "source": "ちなみに、これらのプラグインは",
+          "link": false
+        },
+        {
+          "source": "AB_EnemyBook.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（ヱビ様）のように、出現後の敵に対して処理を行うプラグインと競合するので要注意です。",
+          "link": false
+        }
+      ],
+      "translation": "Incidentally, be careful, as these plugins conflict with plugins that process enemies after they appear, such as [[LINK_1]][[/LINK_1]].",
+      "contextHash": "067c2e357bab1d25e7d4505432d8ef5015f8b7b6dda2b9daaf95cac9126d9fe3"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_ShadowAndLevitate.js[[/LINK_1]]による浮遊値を敵キャラの高さに含めて配置を行います。",
+      "sourceHash": "863b424e5375811ea817b1fd3547034fceefc7c4db086fb399dccda48eadc305",
+      "parts": [
+        {
+          "source": "NRP_ShadowAndLevitate.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "による浮遊値を敵キャラの高さに含めて配置を行います。",
+          "link": false
+        }
+      ],
+      "translation": "Enemies are positioned with the levitation value from [[LINK_1]][[/LINK_1]] included in their height.",
+      "contextHash": "863b424e5375811ea817b1fd3547034fceefc7c4db086fb399dccda48eadc305"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "敵グループの配置を自動化＆ランダム化するプラグインです。": "This plugin automates and randomizes enemy troop formation.",
+    "ツクールＭＶ～ＭＺでは敵グループの設定画面に整列機能がありますが、これは基本的にフロントビュー用です。敵を左からまっすぐ並べるだけなので、サイドビューでは全く不自然になります。": "RPG Maker MV–MZ has an alignment feature in the enemy troop setup screen, but it is basically intended for front-view battles. Since it only lines enemies up from left to right, it looks completely unnatural in side-view battles.",
+    "そこでサイドビューでの敵の配置を自動化するプラグインを作成しました。": "I therefore created a plugin that automates enemy formation in side-view battles.",
+    "自動配置の仕様": "Automatic Formation Specifications",
+    "指定した範囲内に対して、ランダムで敵を配置。": "Places enemies randomly within the specified area.",
+    "グリッド単位で座標を検査し、適切な間隔を確保できれば配置確定。": "Checks coordinates by grid unit and confirms the formation if appropriate spacing can be maintained.",
+    "確保できなければ何度も繰り返して、最もマシな配置を選び出す。": "If sufficient spacing cannot be maintained, it repeats the process multiple times and selects the best formation found.",
+    "敵が一体の場合は中央に配置。": "Places a single enemy in the center.",
+    "仕様上、同じ敵グループでもエンカウントする度に配置が変わります。": "By design, the formation changes each time you encounter the same enemy troop.",
+    "前述の通り基本的にはサイドビュー用ですが、フロントビューにも一応は対応しています。": "As mentioned above, this is basically intended for side-view battles, but it also supports front-view battles to some extent.",
+    "目次": "Table of Contents",
+    "導入方法": "Installation",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_TroopRandomFormation.js": "NRP_TroopRandomFormation.js",
+    "競合対策用プラグイン": "Plugins for Conflict Prevention",
+    "NRP_TroopRandomFormation+.js": "NRP_TroopRandomFormation+.js",
+    "以下プラグインに対応しています。": "The following plugins are supported.",
+    "更新履歴": "Update History",
+    "Ｘ座標に小数点が入ってしまう問題を修正。（2025/02/09 ver1.091）": "Fixed an issue where X coordinates could contain decimal values. (2025/02/09 ver1.091)",
+    "VanguardAndRearguard.jsとの対策用プラグインを追加。（2022/06/10）": "Added a plugin for compatibility with VanguardAndRearguard.js. (2022/06/10)",
+    "仲間を呼ぶプラグインに対応するため改修。（2024/05/04 ver.1081）": "Modified to support plugins that call for reinforcements. (2024/05/04 ver.1081)",
+    "配置座標が小数点になってしまうことがある不具合修正。": "Fixed a bug that could cause formation coordinates to contain decimal values.",
+    "密になった際、敵画像が横に重なってしまうパターンが頻出する不具合を修正。": "Fixed a bug that frequently caused enemy images to overlap horizontally when formations were crowded.",
+    "仲間を呼ぶプラグインに対応するため改修。": "Modified to support plugins that call for reinforcements.",
+    "プラグインパラメータの初期値をＭＺ用に調整。（ver1.051）": "Adjusted the default plugin parameter values for MZ. (ver1.051)",
+    "※ＭＶでの初期値が少しズレますが、パラメータで簡単に調整できます。": "※The default values are slightly offset in MV, but they can be easily adjusted using the parameters.",
+    "自動配置後、敵のＩＤ（A,B,C…）を正しく振るように修正。": "Modified the plugin to assign enemy IDs (A, B, C…) correctly after automatic formation.",
+    "『開始頭上Ｙ座標（上）』の初期値をＭＺ用に調整。（ver1.041）": "Adjusted the default value of “Starting Overhead Y Coordinate (Top)” for MZ. (ver1.041)",
+    "ツクールＭＺ版（NRP_TroopRandomFormationMZ）を作成。": "Created the RPG Maker MZ version (NRP_TroopRandomFormationMZ).",
+    "→やっぱり同じJSファイルに統合。": "→ Ultimately integrated it into the same JS file.",
+    "YEP_BattleEngineCoreとの競合対策。(ver1.021)": "Added compatibility with YEP_BattleEngineCore. (ver1.021)",
+    "処理を『座標総当り方式』へと一新して配置を安定化。": "Completely revamped the process using an “exhaustive coordinate search” method to stabilize formations.",
+    "※旧処理（ランダム繰り返し方式）も選択できますが非推奨です。": "※The old process (repeated randomization method) can still be selected, but it is not recommended.",
+    "グリッドの基準位置を右下に変更。": "Changed the grid reference position to the bottom right.",
+    "公開！": "Released!",
+    "使用方法": "How to Use",
+    "初期状態では、名前が『#』で始まるグループを自動配置の対象としています。この条件はプラグインパラメータの『実行条件』で変更可能です。パラメータとグループ名を設定し、対象とするグループを決定してください。": "By default, groups whose names begin with “#” are targeted for automatic formation. This condition can be changed using the “Execution Condition” plugin parameter. Configure the parameter and group names to determine which groups are targeted.",
+    "他にも詳細な設定が可能ですが、基本的にはこれだけで即実用可です。最初からサイドビュー用にそれっぽい設定をしてあります。": "More detailed settings are also available, but basically, this is all you need to make it immediately usable. It comes preconfigured with settings suitable for side-view battles.",
+    "注意点": "Notes",
+    "このプラグインで自動配置を実施すると、敵グループ内のデータ上の並び順も変更されてしまいます。": "When automatic formation is performed by this plugin, the data order of the enemies within the troop is also changed.",
+    "バトルイベントで対象を固定した実装をしている場合は、ズレが生じる可能性があります。ご注意ください。": "If your battle events use a fixed target, this may cause discrepancies. Please be careful.",
+    "もし必要な場合は以下のようなスクリプトを使ってください。": "If necessary, use a script like the following.",
+    "// ID=3の敵をステート4:毒にする。": "// Make the enemy with ID=3 have state 4: Poison.",
+    "競合情報（2021/06/27）": "Compatibility Information (2021/06/27)",
+    "当プラグインとGALV_LayerGraphicsMZ、NRP_DynamicMotionMZの二つを併用すると、正しく敵が重なって表示されない模様です。競合を解消するプラグインを作成しましたのでご利用ください。": "When this plugin is used together with GALV_LayerGraphicsMZ and NRP_DynamicMotionMZ, enemy images apparently do not overlap correctly. I created a plugin to resolve the conflict, so please use it.",
+    "http://newrpg.seesaa.net/article/482187330.html": "http://newrpg.seesaa.net/article/482187330.html",
+    "外部連携": "External Integration",
+    "ver1.02で、外部の敵グループランダム生成プラグインとの併用に対応しました。": "As of ver1.02, this plugin supports use alongside external plugins that randomly generate enemy troops.",
+    "その際、必ずNRP_TroopRandomFormation.jsを下に配置してください。敵グループを生成→ランダム配置という順序で処理するためです。": "In that case, be sure to place NRP_TroopRandomFormation.js below it. This is because the processes run in the order of generating the enemy troop, then randomizing its formation.",
+    "※確定出現枠を指定する機能などが追加されています。": "※Features such as specifying guaranteed encounter slots have been added.",
+    "※プラグイン本体は『Raw』からダウンロードできます。": "※The plugin itself can be downloaded from “Raw”.",
+    "AB_EnemyBookについては、DarkPlasma_SupponREEより下に配置すればエラーが起きなくなるのを確認しています。": "For AB_EnemyBook, I have confirmed that placing it below DarkPlasma_SupponREE prevents the error from occurring.",
+    "プラグインパラメータ（適用条件）": "Plugin Parameters (Application Conditions)",
+    "自動配置の対象とするグループを決めるための条件を設定します。": "Sets the conditions for determining which groups are subject to automatic placement.",
+    "実行条件（condition）": "Execution Condition (condition)",
+    "自動配置を実行する条件（JavaScript計算式）です。": "The condition for executing automatic placement (JavaScript formula).",
+    "初期値の『name.startsWith(\"#\")』は「グループ名が#で始まる」という意味です。#の部分を好きな文字に変えて使ってください。": "The default value, 『name.startsWith(\"#\")』, means “the group name starts with #.” Change the # to any character you like.",
+    "空欄にすると全てのグループが自動配置の対象となります。": "If left blank, all groups will be subject to automatic placement.",
+    "他にも……": "Other options...",
+    "name.includes(\"#\")：グループ名に#を含む。": "name.includes(\"#\"): The group name contains #.",
+    "name.endswith(\"#\")：グループ名が#で終了する。": "name.endswith(\"#\"): The group name ends with #.",
+    "などが使えます。": "and so on.",
+    "グループ名の先頭を使うプラグインは他にもあったりするので、競合する場合はこれらを使ってください。ちなみに２文字以上でもＯＫです。": "There are other plugins that use the beginning of the group name, so use these if conflicts occur. Two or more characters work as well.",
+    "除外条件（exclusionCondition）": "Exclusion Condition (exclusionCondition)",
+    "自動配置を実行しない条件です。実行条件よりも優先されます。": "The condition for not executing automatic placement. This takes priority over the execution condition.",
+    "実行条件を全件有効にした場合でも、これを設定すれば除外するグループを設定できます。あまりこだわらない場合は、全件有効にしたほうが楽なのでオススメです。": "Even if all execution conditions are enabled, you can use this to specify groups to exclude. If you are not particular about the conditions, enabling all of them is easier and recommended.",
+    "プラグインパラメータ（配置範囲）": "Plugin Parameters (Placement Area)",
+    "自動配置を行う範囲です。この範囲内に敵の画像が収まるようランダム配置を実行します。": "The area in which automatic placement is performed. Enemies are placed randomly so that their images fit within this area.",
+    "初期値ではサイドビュー用の値が設定されています。": "The default values are set for side-view battles.",
+    "開始Ｘ座標（左）（startX）": "Starting X Coordinate (Left) (startX)",
+    "終了Ｘ座標（右）（endX）": "Ending X Coordinate (Right) (endX)",
+    "自動配置を行う開始Ｘ座標（左端）と終了Ｘ座標（右端）です。": "The starting X coordinate (left edge) and ending X coordinate (right edge) for automatic placement.",
+    "開始頭上Ｙ座標（上）（startHeadY）": "Starting Head-Top Y Coordinate (Top) (startHeadY)",
+    "自動配置を開始する敵の頭上に相当するＹ座標です。": "The Y coordinate corresponding to above the head of the enemy where automatic placement begins.",
+    "いくら背の高い敵でも、この座標の上に頭が出ることはありません。": "No matter how tall an enemy is, its head will not extend above this coordinate.",
+    "初期値はＭＺだと20、ＭＶだと0になっています。ＭＺの場合はなぜか20ピクセルほどズレるようなので調整しました。（ver1.041）": "The default is 20 for MZ and 0 for MV. In MZ, the position seemed to be offset by about 20 pixels for some reason, so I adjusted it. (ver1.041)",
+    "開始足元Ｙ座標（上）（startFootY）": "Starting Foot Y Coordinate (Top) (startFootY)",
+    "自動配置を開始する敵の足元に相当するＹ座標です。": "The Y coordinate corresponding to the feet of the enemy where automatic placement begins.",
+    "敵の足元の座標がこれより下となるように配置されます。": "Enemies are placed so that the coordinates of their feet are below this point.",
+    "終了Ｙ座標（下）（endY）": "Ending Y Coordinate (Bottom) (endY)",
+    "自動配置を行う終了Ｙ座標（下端）です。": "The ending Y coordinate (bottom edge) for automatic placement.",
+    "グリッドサイズ（gridSize）": "Grid Size (gridSize)",
+    "自動配置する座標の単位です。": "The unit used for the coordinates of automatically placed enemies.",
+    "『終了Ｘ座標』と『終了Ｙ座標』ーーつまり右下を基準として、指定値の倍数の地点に配置されます。": "Using 『Ending X Coordinate』 and 『Ending Y Coordinate』—that is, the bottom-right corner—as the reference, enemies are placed at points that are multiples of the specified value.",
+    "初期値は32です。": "The default value is 32.",
+    "※グリッドが小さすぎると配置計算の負荷が増大するため、あまり小さくしすぎないように注意してください。": "※If the grid is too small, the load from placement calculations will increase, so be careful not to make it too small.",
+    "浮遊分を加算（addFloat）": "Add Floating Offset (addFloat)",
+    "これにより、敵の頭が隠れてしまう問題に対処できます。": "This helps address the problem of enemies’ heads being hidden.",
+    "プラグインパラメータ（敵の並び順）": "Plugin Parameters (Enemy Order)",
+    "敵のデータ上の並び順を調整するための項目です。これは対象選択時に名前が表示される順番となります。": "This setting adjusts the order of enemies in the data. This is the order in which their names are displayed when selecting a target.",
+    "サイドビューでは右上→右下→左上→左下。": "In side-view battles: top right → bottom right → top left → bottom left.",
+    "フロントビューでは左下→右下→左上→右上に配置された順に番号を振られます。": "In front-view battles, numbers are assigned in the order in which enemies are placed: bottom left → bottom right → top left → top right.",
+    "なお、以下２つの項目はサイドビューの場合のみ機能します。": "The following two settings function only in side-view battles.",
+    "同列とみなす範囲（sameRowBorder）": "Range Considered the Same Column (sameRowBorder)",
+    "互いのＸ座標の差が指定の数値内に収まる場合、同じ列とみなして番号を振ります。": "If the difference between their X coordinates is within the specified value, they are considered to be in the same column and numbered accordingly.",
+    "つまり「ちょっとぐらい横に位置がずれていても、同列として上から順番に番号を振るよ」という意味です。": "In other words, “Even if their horizontal positions are slightly different, they are treated as the same column and numbered from top to bottom.”",
+    "この画像では、ケルベロスよりオークのほうが左にいますが、番号はオークのほうが小さくなっています。": "In this image, the orc is farther left than the Cerberus, but the orc has the lower number.",
+    "基準となるＸ座標（sortBaseX）": "Reference X Coordinate (sortBaseX)",
+    "並び替えの基準とするＸ座標です。": "The X coordinate used as the basis for sorting.",
+    "『0:画像中央』『1:画像右端』が選択できます。初期状態では画像右端となっています。": "『0: Image Center』 and 『1: Image Right Edge』 can be selected. The default is the image’s right edge.",
+    "プラグインパラメータ（敵が一体の場合）": "Plugin Parameters (When There Is One Enemy)",
+    "敵が一体の場合に、どのように配置を行うかを設定する項目です。": "This setting determines how placement is performed when there is only one enemy.",
+    "「敵が一体の時までランダム配置したら、変な隙間ができて違和感あるんじゃね？」というわけで、この項目があります。": "If enemies were randomly positioned even when there is only one enemy, it would create a strange gap and look unnatural. That is why this option exists.",
+    "そんなわけで、初期設定では有効範囲の中央に配置します。": "Therefore, the default setting places it in the center of the valid range.",
+    "単体時の配置（singleEnemyPosition）": "Single-enemy positioning (singleEnemyPosition)",
+    "敵が一体の場合に配置する方法です。": "The positioning method used when there is only one enemy.",
+    "『0:ランダムに配置』ならば、二体以上の場合と同様にランダム配置します。": "With “0: Random Placement,” it is placed randomly, just as when there are two or more enemies.",
+    "『1:指定座標に配置』ならば、以下で設定した座標に配置します。": "With “1: Place at Specified Coordinates,” it is placed at the coordinates configured below.",
+    "初期値は『1:指定座標に配置』に配置です。": "The default setting is “1: Place at Specified Coordinates.”",
+    "単体時のＸ座標（singleEnemyX）": "Single-enemy X coordinate (singleEnemyX)",
+    "指定座標に配置する場合のＸ座標です。": "The X coordinate used when placing the enemy at specified coordinates.",
+    "初期値の『(startX + endX) / 2』は配置範囲の中央を表す数式です。": "The default value, “(startX + endX) / 2,” is a formula representing the center of the placement range.",
+    "単体時のＹ座標（singleEnemyY）": "Single-enemy Y coordinate (singleEnemyY)",
+    "指定座標に配置する場合のＹ座標です。": "The Y coordinate used when placing the enemy at specified coordinates.",
+    "初期値の『((startHeadY + startFootY) / 2 + endY) / 2 + a.height/2』は中央らへんにそれっぽく見えるようにした数式です。": "The default value, “((startHeadY + startFootY) / 2 + endY) / 2 + a.height/2,” is a formula designed to make the enemy appear roughly in the center.",
+    "※Ｘ座標とは異なり、大きさに関わらず敵を中央付近に表示する数式は地味に難しいです。気に入らなかったら適当に調整してください。": "※Unlike the X coordinate, creating a formula that displays enemies near the center regardless of their size is surprisingly difficult. If you do not like the result, adjust it as appropriate.",
+    "プラグインパラメータ（演算方法）": "Plugin Parameters (Calculation Method)",
+    "内部的に配置を計算する方法と、その試行を繰り返す回数と、およびその基準値を設定します。": "Set the method used to calculate positioning internally, the number of times the calculation is repeated, and the criterion value used.",
+    "試行回数が小さい場合、不自然に敵が重なって配置されてしまうことがあります。回数を多くするほど配置が安定しますが、それだけ戦闘開始時の計算負荷が増大します。": "If the number of attempts is too low, enemies may be placed overlapping each other unnaturally. Increasing the number makes the placement more stable, but also increases the computational load when battle starts.",
+    "よく分からなかったら初期値のままが無難だと思います。": "If you are unsure, it is probably safest to leave the default values unchanged.",
+    "演算方式（algorithmType）": "Calculation Method (algorithmType)",
+    "自動配置を行う演算方式です。": "The calculation method used for automatic positioning.",
+    "0:座標総当り（推奨）": "0: Brute-Force Coordinates (Recommended)",
+    "グリッド単位で全座標を検査し、適切な間隔が取れる座標の中からランダムで選択します。": "It checks all coordinates on a grid and randomly selects one from among the coordinates that provide appropriate spacing.",
+    "高い精度で敵同士の重なりを防止できるため、基本的にはこちらの使用を推奨します。": "Because it prevents enemies from overlapping with high accuracy, this method is generally recommended.",
+    "1:ランダム繰り返し": "1: Random Iteration",
+    "ランダムで配置を繰り返し、その中で最もマシな座標を選びます。": "It repeatedly places enemies randomly and selects the best coordinates among the results.",
+    "運が悪いと敵が不自然に重なってしまうのであまり推奨しません。": "It is not highly recommended because enemies may overlap unnaturally if you are unlucky.",
+    "グループ当たりの試行回数（maxTryNoForTroop）": "Attempts per Troop (maxTryNoForTroop)",
+    "自動配置を繰り返すグループ当たりの最大回数です。（初期値は50）": "The maximum number of times automatic positioning is repeated per troop. (The default is 50.)",
+    "演算方式に従って比較＆配置を終えた後、さらにグループ全体として配置をやり直す回数です。このプラグインはそうやって最適な全体配置を求めています。": "After comparison and placement according to the calculation method are complete, this is the number of times placement is redone for the troop as a whole. This plugin finds the optimal overall placement in this way.",
+    "この値を増やすと適切な配置になる可能性が高まりますが、同時に計算量も増大します。": "Increasing this value makes appropriate placement more likely, but also increases the amount of computation.",
+    "一体当たりの試行回数（maxTryNoForEnemy）": "Attempts per Enemy (maxTryNoForEnemy)",
+    "※この項目は『1:ランダム繰り返し』の場合のみ有効です。基本的には無視してもらって構いません。": "※This option is enabled only with “1: Random Iteration.” You can generally ignore it.",
+    "自動配置を繰り返す一体当たりの最大回数です。（初期値は50）": "The maximum number of times automatic positioning is repeated per enemy. (The default is 50.)",
+    "内部的には、一体毎にランダム配置を繰り返し、互いの座標を比較して間隔を確保できる配置を探しています。これはその配置を繰り返す回数です。": "Internally, the plugin repeatedly places each enemy randomly, compares their coordinates, and searches for a placement that maintains sufficient spacing. This is the number of times that placement process is repeated.",
+    "敵の配置数が増えれば増えるほど、互いの比較を繰り返すのでこの値に乗算する形で試行回数も増えます。": "As the number of enemies increases, their coordinates are compared repeatedly, so the number of attempts also increases by multiplying this value.",
+    "確定とする距離評価値（distanceBorder）": "Distance Evaluation Value for Confirming Placement (distanceBorder)",
+    "この値を超える距離評価値を得た場合、配置を確定します。": "When a distance evaluation value exceeding this value is obtained, the placement is confirmed.",
+    "値を大きくするほど間隔を確保します。": "The larger the value, the more spacing is maintained.",
+    "基本的には、値が100なら100ピクセル間隔を取ると考えればよいです。敵の数が多い場合など間隔を確保できなければ、比較的間隔の広い配置を選びます。": "Generally, you can think of a value of 100 as maintaining a spacing of 100 pixels. If sufficient spacing cannot be maintained, such as when there are many enemies, the placement with relatively wider spacing is selected.",
+    "値をマイナス値にすると、下の画像のような縦に重なったパターンも許可するようになります。なるべく自然に見せるため、上半分が隠れずに見えているパターンを優先的に選んでいます。": "Setting a negative value also permits vertically overlapping patterns like the one shown in the image below. To make them look as natural as possible, patterns in which the upper half remains visible are prioritized.",
+    "実用性はありませんが、-10000を下回ると不自然に重なったパターンも出現するようになります。": "Although it is not practical, patterns with unnatural overlapping will also appear when the value falls below -10000.",
+    "また、数式も使用可能です。": "Formulas can also be used.",
+    "例えば『$gameTroop.members().length == 2 ? 100 : 0』なら、敵が２体の時のみ間隔を100とります。": "For example, with “$gameTroop.members().length == 2 ? 100 : 0,” a spacing of 100 is used only when there are two enemies."
+  }
+}
