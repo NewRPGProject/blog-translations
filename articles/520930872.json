@@ -1,0 +1,690 @@
+{
+  "articleId": "520930872",
+  "sourceUrl": "https://newrpg.seesaa.net/article/520930872.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2bf4fad143387a4d9e96efda0ca4aed58298051de15b57aede2ef97273f62b5a",
+  "translatedAt": "2026-08-30T08:49:41.163Z",
+  "title": "Ogg Loop Processing with CrossLooper",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "CrossLooperによるOggのループ処理",
+      "sourceHash": "94d18db64d0c0ed59412d6acca83f44843d1b944d0b6528d131b0610bd6ea93c",
+      "translation": "Ogg Loop Processing with CrossLooper",
+      "contextHash": "94d18db64d0c0ed59412d6acca83f44843d1b944d0b6528d131b0610bd6ea93c"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "Oggファイルのループ処理について調べている時に『CrossLooper』というソフトの存在を知りました。",
+      "sourceHash": "e957308ed41384b9bbcadd04d451b4099a29d47f73a91bba811b769a0eff9852",
+      "translation": "While researching loop processing for Ogg files, I learned about a software application called “CrossLooper.”",
+      "contextHash": "e957308ed41384b9bbcadd04d451b4099a29d47f73a91bba811b769a0eff9852"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "せっかくなので紹介＆説明してみます。",
+      "sourceHash": "ce393979c104bba1d8a41e367469f640dbfba215d5a77baccc43e18e8c3aeb91",
+      "translation": "Since I had the opportunity, I thought I’d introduce and explain it.",
+      "contextHash": "ce393979c104bba1d8a41e367469f640dbfba215d5a77baccc43e18e8c3aeb91"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "Oggファイルはご存知の通りツクールＭＺの標準的な音声フォーマットです。このOggに「LOOPSTART / LOOPLENGTH」というタグを埋め込むことでゲーム用ＢＧＭのループ再生が可能となります。",
+      "sourceHash": "52eede3c14060a7ffed0fd17edbe2816cb94cfd41b4e16a7995659ffa37ea774",
+      "translation": "As you probably know, Ogg files are the standard audio format for RPG Maker MZ. By embedding tags called “LOOPSTART / LOOPLENGTH” in an Ogg file, you can loop BGM during gameplay.",
+      "contextHash": "52eede3c14060a7ffed0fd17edbe2816cb94cfd41b4e16a7995659ffa37ea774"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "最初から作曲者がループ素材として提供してくれているのなら問題ありません。しかし、配布がＭＰ３形式だったり、最近だとSunoなどのＡＩ作曲で作ったものだったり、そもそも自分が作曲者だったりと、自力でループタグを入れたい場面もあるかと思います。",
+      "sourceHash": "969c3f494432d5985d3e2ee31c49ff9f76bfb274ce9c02c7a8994601d3cce69e",
+      "translation": "There’s no problem if the composer provided the track as a loopable asset from the start. However, you may sometimes want to add loop tags yourself—for example, when the track is distributed in MP3 format, was created with AI composition tools such as Suno, or you are the composer yourself.",
+      "contextHash": "969c3f494432d5985d3e2ee31c49ff9f76bfb274ce9c02c7a8994601d3cce69e"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "CrossLooperとは？",
+      "sourceHash": "aaa2c6bea3dbf13b53ac0b5b46457b6618d0d10850ba92a05fae09fb93bd0290",
+      "translation": "What Is CrossLooper?",
+      "contextHash": "aaa2c6bea3dbf13b53ac0b5b46457b6618d0d10850ba92a05fae09fb93bd0290"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "Oggファイルを解析し、ループポイントを自動で設定してくれるソフトです。（制作：Splendide Imaginarius様）",
+      "sourceHash": "aeea5de19191e18b36b8f346b53a6141b71bd28426b21389fb916d0fc5d0b0f2",
+      "translation": "This software analyzes Ogg files and automatically sets loop points. (Created by Splendide Imaginarius.)",
+      "contextHash": "aeea5de19191e18b36b8f346b53a6141b71bd28426b21389fb916d0fc5d0b0f2"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "この地味に大変な作業を自動化してくれるありがたいソフトです。",
+      "sourceHash": "e27a87a16d1efaf24fa63f4232de8d8cd24965be0992348e3ba1b76b4f1c884d",
+      "translation": "It’s a useful application that automates this tedious but surprisingly difficult task.",
+      "contextHash": "e27a87a16d1efaf24fa63f4232de8d8cd24965be0992348e3ba1b76b4f1c884d"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※どうせなら雲海のフロンティアの開発前に知りたかった……。",
+      "sourceHash": "762dcca9a8edef9c567e570f05baa4c6ee5f4d7a81f5738a1ae4897a1ee8fdac",
+      "translation": "※I wish I had known about it before developing Cloudsea Frontier……",
+      "contextHash": "762dcca9a8edef9c567e570f05baa4c6ee5f4d7a81f5738a1ae4897a1ee8fdac"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "成功率は完璧ではなく公式によると大体７６％だそうです。",
+      "sourceHash": "638c4cdabc07da1932d54f734a0fdcd3523c47f536d50001704ebd0dcfbcaf6d",
+      "translation": "The success rate isn’t perfect; according to the official information, it is approximately 76%.",
+      "contextHash": "638c4cdabc07da1932d54f734a0fdcd3523c47f536d50001704ebd0dcfbcaf6d"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "筆者が試した感じだとシンプルな構成の曲であれば、それなりの精度でループポイントを検出してくれました。",
+      "sourceHash": "1670160394d1775305fcf01672c5a038755f7faba4ba7430e976c90280754f84",
+      "translation": "In my testing, it detected loop points with reasonable accuracy for songs with simple arrangements.",
+      "contextHash": "1670160394d1775305fcf01672c5a038755f7faba4ba7430e976c90280754f84"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ただし、展開の激しい曲やそもそもループを前提として作られていない曲は、必ずしも自然な結果になるとは限りません。",
+      "sourceHash": "9091878ef5349f170978702ea7739763d86cfe3cedde7e5ea19e56573d58edc8",
+      "translation": "However, songs with dramatic changes or songs that were not originally designed to loop will not necessarily produce natural results.",
+      "contextHash": "9091878ef5349f170978702ea7739763d86cfe3cedde7e5ea19e56573d58edc8"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ともあれ、自力でループポイントを探すよりは遥かに楽なので、まず試してみる価値はあると思います。",
+      "sourceHash": "da728c91407ac13297665da6132c5fa791a6b628ba2ad20f724f795a399f3641",
+      "translation": "In any case, it’s much easier than searching for loop points yourself, so I think it’s worth trying first.",
+      "contextHash": "da728c91407ac13297665da6132c5fa791a6b628ba2ad20f724f795a399f3641"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "しかしながら、このソフトは導入が結構難しいです。Pythonのソースコードの形でしか配布されていないので、自力で環境設定する必要があります。",
+      "sourceHash": "c2c41d7070391d03aca7239b6da37a78b5f71481edf9dab24ef3506a8ab994c9",
+      "translation": "However, installing this software is fairly difficult. Since it is distributed only as Python source code, you need to configure the environment yourself.",
+      "contextHash": "c2c41d7070391d03aca7239b6da37a78b5f71481edf9dab24ef3506a8ab994c9"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "というわけで、以下で導入の解説をします。",
+      "sourceHash": "0b1905fc1c6f400fb5cc94882202969af8a70023e37ad808a022bf7523d981ba",
+      "translation": "With that in mind, I’ll explain how to install it below.",
+      "contextHash": "0b1905fc1c6f400fb5cc94882202969af8a70023e37ad808a022bf7523d981ba"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※なお、筆者はWindowsしか分かりませんので、Windows前提です。他はごめんなさい。",
+      "sourceHash": "89764ccffffd9eb02966bfdccdcf680f98d3163f932c22bc8f3dca1911b8ddf0",
+      "translation": "※I only know how to use Windows, so these instructions assume Windows. Sorry, everyone else.",
+      "contextHash": "89764ccffffd9eb02966bfdccdcf680f98d3163f932c22bc8f3dca1911b8ddf0"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "CrossLooperの導入方法",
+      "sourceHash": "17eb3e3751ea07985b11dfa4a3c26de5404dc16703d8f382b448e795afd69505",
+      "translation": "How to Install CrossLooper",
+      "contextHash": "17eb3e3751ea07985b11dfa4a3c26de5404dc16703d8f382b448e795afd69505"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "GitHubからダウンロード",
+      "sourceHash": "004f5c3c0bc0cf25ba9846d90ac4aada9515ca20d5da91ea4ab0568767fc8584",
+      "translation": "Download from GitHub",
+      "contextHash": "004f5c3c0bc0cf25ba9846d90ac4aada9515ca20d5da91ea4ab0568767fc8584"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "以下のページへアクセスし、『Code（緑のボタン）』→『Download ZIP』を選択してください。",
+      "sourceHash": "aaf85950069c17be9366564aba0dd9e5d06f3e8579b5aaa05502fc5df4a3d705",
+      "translation": "Access the page below and select “Code (the green button)” → “Download ZIP.”",
+      "contextHash": "aaf85950069c17be9366564aba0dd9e5d06f3e8579b5aaa05502fc5df4a3d705"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "https://github.com/Splendide-Imaginarius/crosslooper",
+      "sourceHash": "0350f1f9ac50e229e3ab7a1cae2ffe576ee32f39cef55c14a0be3f0c6963ffb0",
+      "translation": "https://github.com/Splendide-Imaginarius/crosslooper",
+      "contextHash": "30d4eec72d77226864d7d1ffd1024793d86aef0ed44543b9991b065d9a9ecf65"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ダウンロードしたＺＩＰを展開します。",
+      "sourceHash": "c095045a10cda2a97adda3e018fe09f941ed4e387542a099e54392d52382584d",
+      "translation": "Extract the downloaded ZIP file.",
+      "contextHash": "c095045a10cda2a97adda3e018fe09f941ed4e387542a099e54392d52382584d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "Pythonの確認",
+      "sourceHash": "dd4d3f698982f2a09704068e9c9c61287a3ff250f3b915b35b611299c96d6d91",
+      "translation": "Check Python",
+      "contextHash": "dd4d3f698982f2a09704068e9c9c61287a3ff250f3b915b35b611299c96d6d91"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "まず、コマンドプロンプトを起動してください。",
+      "sourceHash": "c42f3a092812c409b53ee430f5f037f956c9f56850a1db67c95269c11ac23d0a",
+      "translation": "First, launch Command Prompt.",
+      "contextHash": "c42f3a092812c409b53ee430f5f037f956c9f56850a1db67c95269c11ac23d0a"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※「コマンドプロンプトって何？」という人は、Windows左下のスタートメニューの検索欄に「cmd」と入力してください。",
+      "sourceHash": "36c285db9d4bac422858abe2ca36b57e7bc9c76f505aba6d79917c72e93f53fc",
+      "translation": "※If you’re wondering, “What is Command Prompt?”, enter “cmd” in the search box of the Start menu in the lower-left corner of Windows.",
+      "contextHash": "36c285db9d4bac422858abe2ca36b57e7bc9c76f505aba6d79917c72e93f53fc"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "起動したコマンドプロンプトで、以下のコマンドを実行してください。",
+      "sourceHash": "14c45417fcb56796789ff920cda9915e031ccd96cf1b19787fd28c64f67531ec",
+      "translation": "In the Command Prompt window you launched, run the following command.",
+      "contextHash": "14c45417fcb56796789ff920cda9915e031ccd96cf1b19787fd28c64f67531ec"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "Pythonのバージョンが表示されれば問題ありません。",
+      "sourceHash": "5eefe4238e6fa2db3e2037ea4d17ed00eec655003351feff8da945a7c4a1c780",
+      "translation": "If the Python version is displayed, everything is fine.",
+      "contextHash": "5eefe4238e6fa2db3e2037ea4d17ed00eec655003351feff8da945a7c4a1c780"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "エラーになった場合はPythonがインストールされてないので、ググってインストールしてください。",
+      "sourceHash": "c03942564ad734723b66906774cf186bdbdbc4d2f9be88305b998f3ba9b5f8e5",
+      "translation": "If an error occurs, Python is not installed, so search online and install it.",
+      "contextHash": "c03942564ad734723b66906774cf186bdbdbc4d2f9be88305b998f3ba9b5f8e5"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "※作者環境では最初から入っていたので説明できません。たぶん、そんなに難しくないと思います。",
+      "sourceHash": "7f33268b6ec49cabedc2c749df5b18fdd0e429b79b7bd98b388d26a525a09abd",
+      "translation": "※Python was already installed in my environment, so I can’t explain this part. It probably isn’t that difficult.",
+      "contextHash": "7f33268b6ec49cabedc2c749df5b18fdd0e429b79b7bd98b388d26a525a09abd"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "ffmpegの確認",
+      "sourceHash": "a2ca1de9a77ef503645975d4a8fd48ec0e735766a7a7cc45561f883ac9a431c4",
+      "translation": "Check ffmpeg",
+      "contextHash": "a2ca1de9a77ef503645975d4a8fd48ec0e735766a7a7cc45561f883ac9a431c4"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "続いてffmpegが利用可能か確認します。",
+      "sourceHash": "87fad39f2174d6a42db5263449fce00aa28d6e7e7aa420deff64b629bed57d7c",
+      "translation": "Next, check whether ffmpeg is available.",
+      "contextHash": "87fad39f2174d6a42db5263449fce00aa28d6e7e7aa420deff64b629bed57d7c"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "こちらもバージョン情報が表示されればＯＫです。",
+      "sourceHash": "ce35bcb396f6bfafb08bc0ae7c0550917c67625fa8d750003ce020a66977ef13",
+      "translation": "It’s also fine if the version information is displayed here.",
+      "contextHash": "ce35bcb396f6bfafb08bc0ae7c0550917c67625fa8d750003ce020a66977ef13"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "こちらは作者環境にも入っていませんでした。以下の「方法1: Wingetでインストール」でやるのが一番簡単だと思います。",
+      "sourceHash": "cad3196da4d3ced412223c56d074e54034eaff17518b2aa0cd61213b9c798b5b",
+      "translation": "It wasn’t installed in my environment either. I think the easiest approach is to use “Method 1: Install with Winget” below.",
+      "contextHash": "cad3196da4d3ced412223c56d074e54034eaff17518b2aa0cd61213b9c798b5b"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://qiita.com/Tadataka_Takahashi/items/9dcb0cf308db6f5dc31b",
+      "sourceHash": "1251e61149511faa601033a41cefc365388e402b6081686d59ba4c7af3cfff83",
+      "translation": "https://qiita.com/Tadataka_Takahashi/items/9dcb0cf308db6f5dc31b",
+      "contextHash": "b1be7419a50e6792f08d07e9779e0ea7b8223c895fc914b63ad93420eddad92a"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "CrossLooperのインストール",
+      "sourceHash": "394b611b0d5e7b2dee72bf8c3688a33be22c2b3dbcce6e13cc695c5c7a082360",
+      "translation": "Install CrossLooper",
+      "contextHash": "394b611b0d5e7b2dee72bf8c3688a33be22c2b3dbcce6e13cc695c5c7a082360"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "コマンドプロンプトでCrossLooperのＺＩＰを展開したフォルダへ移動します。",
+      "sourceHash": "2fc72cfd32a0a5732cb330643e7a1f715c8d69931e26d605bf3884aad6cf130d",
+      "translation": "In Command Prompt, move to the folder where you extracted the CrossLooper ZIP file.",
+      "contextHash": "2fc72cfd32a0a5732cb330643e7a1f715c8d69931e26d605bf3884aad6cf130d"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "※『C:\\test\\CrossLooper』の部分は自身のフォルダへ読み替えてください。フォルダ名に半角スペースが入っている場合は\"C:\\test folder\\CrossLooper\"みたいに\"\"で囲む必要があるかも。",
+      "sourceHash": "b9e39a6170f2fc8ac5d1ad7a733c9aeccab4d9eddf5d0786d1c7d0abcefafc3d",
+      "translation": "※Replace “C:\\test\\CrossLooper” with your own folder path. If the folder name contains a half-width space, you may need to enclose it in quotation marks, like “C:\\test folder\\CrossLooper”.",
+      "contextHash": "b9e39a6170f2fc8ac5d1ad7a733c9aeccab4d9eddf5d0786d1c7d0abcefafc3d"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "以下を実行します。",
+      "sourceHash": "e75694d4cee9164426f985dd91661ce64112f11f0c8eb4e853429b0f75bd3f3b",
+      "translation": "Run the following.",
+      "contextHash": "e75694d4cee9164426f985dd91661ce64112f11f0c8eb4e853429b0f75bd3f3b"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "インストール自体はこれで完了です。",
+      "sourceHash": "92ba74891e34d1e8aa621e8bfcc6e38617cd6f996123faf0134fc0cec53d76d6",
+      "translation": "The installation itself is now complete.",
+      "contextHash": "92ba74891e34d1e8aa621e8bfcc6e38617cd6f996123faf0134fc0cec53d76d6"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "これで、コマンドプロンプト上で",
+      "sourceHash": "38b9cdc06b50ae0d89f599c7d70f881fbc68b15391b4f74c4dbe0383d25afd35",
+      "translation": "Now, in Command Prompt,",
+      "contextHash": "38b9cdc06b50ae0d89f599c7d70f881fbc68b15391b4f74c4dbe0383d25afd35"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "と、打てば処理を呼べるはず。",
+      "sourceHash": "4edbc1e35fc8e9b38c8667a43a2252d615f96871e63c45c065fb43bf642f097b",
+      "translation": "you should be able to invoke the process by entering",
+      "contextHash": "4edbc1e35fc8e9b38c8667a43a2252d615f96871e63c45c065fb43bf642f097b"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "……ですが、筆者の環境では無効になりました。exeファイルのパスが通っていないためのようです。",
+      "sourceHash": "e218077c326a3020b25768298036b85b81b21cf7f700198e0cbcc8a44d568490",
+      "translation": "……but this did not work in my environment. Apparently, the path to the EXE file was not set.",
+      "contextHash": "e218077c326a3020b25768298036b85b81b21cf7f700198e0cbcc8a44d568490"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "で、パスを調べてそこに移動してください。",
+      "sourceHash": "4b299467cc41a6b4b80a0aa20238e51c7a769802555e0a06a79f37ec9162eec9",
+      "translation": "So, check the path with  and move there.",
+      "contextHash": "4b299467cc41a6b4b80a0aa20238e51c7a769802555e0a06a79f37ec9162eec9"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "C:\\Users\\[ユーザ名]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe",
+      "sourceHash": "bf901cbefa412acad5e46dd2a5edcfa6ef566dc1da0c4cc3240a1b3fade106c9",
+      "translation": "C:\\Users\\[Username]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe",
+      "contextHash": "bf901cbefa412acad5e46dd2a5edcfa6ef566dc1da0c4cc3240a1b3fade106c9"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "みたいな場所にあると思います。",
+      "sourceHash": "e5a1c7e0775782d29e620787c575eba5fe36f742f3cc2c63653d4fd2d4e82f70",
+      "translation": "It should be located somewhere like .",
+      "contextHash": "e5a1c7e0775782d29e620787c575eba5fe36f742f3cc2c63653d4fd2d4e82f70"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "詳しい方ならパスを通してもよいのですが、今回はバッチファイルを作成します。",
+      "sourceHash": "8e19ba83d67c88aa376005eb5b6e0b9742bfaeee17d90039960c0c4683ec4120",
+      "translation": "If you’re familiar with this, you could add the path, but this time we’ll create a batch file.",
+      "contextHash": "8e19ba83d67c88aa376005eb5b6e0b9742bfaeee17d90039960c0c4683ec4120"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "バッチファイルを作成",
+      "sourceHash": "f21122e35d3218b97205ade03fbeface1a2525913be3d1c92fb648b5b678f75f",
+      "translation": "Create a Batch File",
+      "contextHash": "f21122e35d3218b97205ade03fbeface1a2525913be3d1c92fb648b5b678f75f"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ファイルを新規作成し「crosslooper.bat」を作成します。",
+      "sourceHash": "7b30894c772abf43acd85621c67e1d1bd2936f9b62789c2bac7ce8270a49c8ec",
+      "translation": "Create a new file named “crosslooper.bat.”",
+      "contextHash": "7b30894c772abf43acd85621c67e1d1bd2936f9b62789c2bac7ce8270a49c8ec"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "中身は以下の通りにしてください。ファイルパスはご自身の環境のものを設定してください。",
+      "sourceHash": "7dffff7a69fcdc7723b4736969dfe7c1bd8f53d6ea83b58001b05c02ecaa019d",
+      "translation": "Set its contents as follows. Use the file path for your own environment.",
+      "contextHash": "7dffff7a69fcdc7723b4736969dfe7c1bd8f53d6ea83b58001b05c02ecaa019d"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "\"C:\\Users\\[ユーザ名]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe\" %*",
+      "sourceHash": "58970a0fc902e8002e623b0d2ede74e5c116b0f598b5b625140148914fc2ccb6",
+      "translation": "\"C:\\Users\\[Username]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe\" %*",
+      "contextHash": "58970a0fc902e8002e623b0d2ede74e5c116b0f598b5b625140148914fc2ccb6"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "※改行のせいで大変見苦しいですが、bat内にコピペすればまともに見えるようになります。",
+      "sourceHash": "fa75c285a6a57f0358765f8f36c750911b7af618407bdb40d5a6d9bb9f818513",
+      "translation": "※It looks quite messy because of the line breaks, but it should look normal when pasted into the BAT file.",
+      "contextHash": "fa75c285a6a57f0358765f8f36c750911b7af618407bdb40d5a6d9bb9f818513"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "これでバッチファイル経由で実行できるようになります。",
+      "sourceHash": "fd10ce7045ef2fa103fdd6def928f7247fee3259da05a6a8afef9c0ce39e6b3b",
+      "translation": "You can now run it through the batch file.",
+      "contextHash": "fd10ce7045ef2fa103fdd6def928f7247fee3259da05a6a8afef9c0ce39e6b3b"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "実行",
+      "sourceHash": "77721d5dea603e0065abc7c2d36b12c3914847a8b0698933eab7482dd5042ef0",
+      "translation": "Run",
+      "contextHash": "77721d5dea603e0065abc7c2d36b12c3914847a8b0698933eab7482dd5042ef0"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "コマンドプロンプトで以下を実行！",
+      "sourceHash": "3c6369251bd13e140ba73e70c6ba04aa27db463efa0e7a7dd6dbec4aff2e2de9",
+      "translation": "Run the following in Command Prompt!",
+      "contextHash": "3c6369251bd13e140ba73e70c6ba04aa27db463efa0e7a7dd6dbec4aff2e2de9"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "……してもいいですが、それよりもバッチファイルにOggを直接ドロップしたほうが簡単です。",
+      "sourceHash": "7cfcccde72728cc879a4ce0089978e5931146a0a0cd4a78358a3254fcf8c616b",
+      "translation": "……You can do that, but it’s easier to drop the Ogg file directly onto the batch file.",
+      "contextHash": "7cfcccde72728cc879a4ce0089978e5931146a0a0cd4a78358a3254fcf8c616b"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "※Oggファイルは直接更新されます。必要なら先にバックアップを取ってください。",
+      "sourceHash": "5cd386fd31468853d341b5573bdd34b4e90b68de136688d109037ffb31d49b05",
+      "translation": "※The Ogg files will be updated directly. Please back them up first if necessary.",
+      "contextHash": "5cd386fd31468853d341b5573bdd34b4e90b68de136688d109037ffb31d49b05"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "解析が完了するとOGGファイルへLOOPSTARTとLOOPLENGTHが設定されます。",
+      "sourceHash": "68e520961eb571c43a527f4653bd77f325e1fa9c31dd567245410e804036bf2b",
+      "translation": "Once the analysis is complete, LOOPSTART and LOOPLENGTH will be set in the OGG file.",
+      "contextHash": "68e520961eb571c43a527f4653bd77f325e1fa9c31dd567245410e804036bf2b"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "後はツクールＭＺなり、ループに対応した再生ソフトなりで確認してください。",
+      "sourceHash": "00c573dacc73cebb5432cd5d8825d355c23c17693ddd0a6034965e8329b3ce66",
+      "translation": "You can then check it in RPG Maker MZ or with playback software that supports looping.",
+      "contextHash": "00c573dacc73cebb5432cd5d8825d355c23c17693ddd0a6034965e8329b3ce66"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ライセンスについて",
+      "sourceHash": "000e068a4bd6dd73aead7d53770d3789c8c3233edb2677d0707234b0cf65371d",
+      "translation": "About the License",
+      "contextHash": "000e068a4bd6dd73aead7d53770d3789c8c3233edb2677d0707234b0cf65371d"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "CrossLooperはGPL-3.0ライセンスで公開されています。",
+      "sourceHash": "d85a5148dce51859f64b02072f4ab51ff15b5045c816f8ef6a292d6bf6ef1243",
+      "translation": "CrossLooper is released under the GPL-3.0 license.",
+      "contextHash": "d85a5148dce51859f64b02072f4ab51ff15b5045c816f8ef6a292d6bf6ef1243"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "個人利用・商用利用ともに可能です。",
+      "sourceHash": "82a942a7b1ab03fcff2b5d7ae254656621f69826bc4a5d4fefefad431822595e",
+      "translation": "It may be used for both personal and commercial purposes.",
+      "contextHash": "82a942a7b1ab03fcff2b5d7ae254656621f69826bc4a5d4fefefad431822595e"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "また、ソースコードを改造して利用することもできます。",
+      "sourceHash": "c93d564c961ce9e5a496d9ba92c6b117f91c75f1e1cf6295eb928af6f065ceb7",
+      "translation": "You may also modify and use the source code.",
+      "contextHash": "c93d564c961ce9e5a496d9ba92c6b117f91c75f1e1cf6295eb928af6f065ceb7"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "ただし、CrossLooper本体を改造して再配布する場合は、改造後のソースコードもGPL-3.0に従って公開する必要があります。",
+      "sourceHash": "709bb7f365895e6395f7b270ea8668b17d2ad6a973c69e66504358fd6ca23246",
+      "translation": "However, if you modify and redistribute CrossLooper itself, you must also release the modified source code under the GPL-3.0 license.",
+      "contextHash": "709bb7f365895e6395f7b270ea8668b17d2ad6a973c69e66504358fd6ca23246"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "なお、CrossLooperで処理したOGGファイルや、そのOGGファイルを利用したゲーム作品がGPLになるわけではありません。",
+      "sourceHash": "42cd9ea891bbaa1d3b517e329f46eaf16ff494bc82aba7d6ac8e701b07cb4554",
+      "translation": "The OGG files processed with CrossLooper, as well as games that use those OGG files, do not become GPL-licensed.",
+      "contextHash": "42cd9ea891bbaa1d3b517e329f46eaf16ff494bc82aba7d6ac8e701b07cb4554"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "あくまでGPLの対象となるのはCrossLooper自身（およびその改造版）です。",
+      "sourceHash": "04f8e1bd4d7939eacd70906a96ce923175460a86a9179f6c8b0bd295d192979e",
+      "translation": "Only CrossLooper itself (and modified versions thereof) is subject to the GPL.",
+      "contextHash": "04f8e1bd4d7939eacd70906a96ce923175460a86a9179f6c8b0bd295d192979e"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "ライセンス上、記載は必須要件ではありませんが、",
+      "sourceHash": "c3fd960a4300d022cb282d451d02b7e42524d8c92f80e0b9ab5b127e8fa9c0e6",
+      "translation": "Although including a notice is not a licensing requirement,",
+      "contextHash": "c3fd960a4300d022cb282d451d02b7e42524d8c92f80e0b9ab5b127e8fa9c0e6"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "CrossLooperを使用する場合は、クレジット表記をしていただけると大変ありがたいです。",
+      "sourceHash": "22d4a987de8a8fa453eb585e6301bb542ce490a9384e907830c99d080a569a4c",
+      "translation": "CrossLooperIf you use CrossLooper, I would greatly appreciate it if you could include a credit.",
+      "contextHash": "22d4a987de8a8fa453eb585e6301bb542ce490a9384e907830c99d080a569a4c"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "クレジット表記の例：「このＢＧＭはCrossLooper（制作：Splendide Imaginarius）によってループ処理されました。」",
+      "sourceHash": "f96a69c5ec077d948a9f2df8b966d811b349dabc086e21ea08495e30c2d972be",
+      "translation": "Example credit: “This BGM was loop-processed by CrossLooper (created by: Splendide Imaginarius).”",
+      "contextHash": "f96a69c5ec077d948a9f2df8b966d811b349dabc086e21ea08495e30c2d972be"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "このGitリポジトリへのリンクもいただけると大変ありがたいです。",
+      "sourceHash": "8f42a756f032f552b91297517d3babceedfcba1ff908f9f699977ba6aaf9553b",
+      "translation": "I would also greatly appreciate it if you could include a link to this Git repository.",
+      "contextHash": "8f42a756f032f552b91297517d3babceedfcba1ff908f9f699977ba6aaf9553b"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "https://github.com/Splendide-Imaginarius/crosslooper",
+      "sourceHash": "0350f1f9ac50e229e3ab7a1cae2ffe576ee32f39cef55c14a0be3f0c6963ffb0",
+      "translation": "https://github.com/Splendide-Imaginarius/crosslooper",
+      "contextHash": "30d4eec72d77226864d7d1ffd1024793d86aef0ed44543b9991b065d9a9ecf65"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "とのことです。（日本語訳）",
+      "sourceHash": "b88f6b2b9c49483518c395116820e6ff97e490848cdffc7470e8ad1dbc2000a2",
+      "translation": "that is what it says. (Japanese translation)",
+      "contextHash": "b88f6b2b9c49483518c395116820e6ff97e490848cdffc7470e8ad1dbc2000a2"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "既存の方法だと[[LINK_1]]Ogg Loop Editor[[/LINK_1]]や[[LINK_2]]Audacity[[/LINK_2]]などを使って、耳で調べて何度も聞き直しながら設定したりするのですが、地味に大変な作業です。",
+      "sourceHash": "c715e75f4739a5910cd01d295ea1505c851a706fbd938fc1f6ef9b793aa257e1",
+      "parts": [
+        {
+          "source": "既存の方法だと",
+          "link": false
+        },
+        {
+          "source": "Ogg Loop Editor",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "や",
+          "link": false
+        },
+        {
+          "source": "Audacity",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "などを使って、耳で調べて何度も聞き直しながら設定したりするのですが、地味に大変な作業です。",
+          "link": false
+        }
+      ],
+      "translation": "With the existing method, you use tools such as [[LINK_1]]Ogg Loop Editor[[/LINK_1]] and [[LINK_2]]Audacity[[/LINK_2]], then set the values by checking them by ear and listening to them repeatedly, but it is a surprisingly tedious task.",
+      "contextHash": "c715e75f4739a5910cd01d295ea1505c851a706fbd938fc1f6ef9b793aa257e1"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "Oggファイルのループ処理について調べている時に『CrossLooper』というソフトの存在を知りました。": "While researching loop processing for Ogg files, I learned about a software application called “CrossLooper.”",
+    "せっかくなので紹介＆説明してみます。": "Since I had the opportunity, I thought I’d introduce and explain it.",
+    "Oggファイルはご存知の通りツクールＭＺの標準的な音声フォーマットです。このOggに「LOOPSTART / LOOPLENGTH」というタグを埋め込むことでゲーム用ＢＧＭのループ再生が可能となります。": "As you probably know, Ogg files are the standard audio format for RPG Maker MZ. By embedding tags called “LOOPSTART / LOOPLENGTH” in an Ogg file, you can loop BGM during gameplay.",
+    "最初から作曲者がループ素材として提供してくれているのなら問題ありません。しかし、配布がＭＰ３形式だったり、最近だとSunoなどのＡＩ作曲で作ったものだったり、そもそも自分が作曲者だったりと、自力でループタグを入れたい場面もあるかと思います。": "There’s no problem if the composer provided the track as a loopable asset from the start. However, you may sometimes want to add loop tags yourself—for example, when the track is distributed in MP3 format, was created with AI composition tools such as Suno, or you are the composer yourself.",
+    "CrossLooperとは？": "What Is CrossLooper?",
+    "Oggファイルを解析し、ループポイントを自動で設定してくれるソフトです。（制作：Splendide Imaginarius様）": "This software analyzes Ogg files and automatically sets loop points. (Created by Splendide Imaginarius.)",
+    "この地味に大変な作業を自動化してくれるありがたいソフトです。": "It’s a useful application that automates this tedious but surprisingly difficult task.",
+    "※どうせなら雲海のフロンティアの開発前に知りたかった……。": "※I wish I had known about it before developing Cloudsea Frontier……",
+    "成功率は完璧ではなく公式によると大体７６％だそうです。": "The success rate isn’t perfect; according to the official information, it is approximately 76%.",
+    "筆者が試した感じだとシンプルな構成の曲であれば、それなりの精度でループポイントを検出してくれました。": "In my testing, it detected loop points with reasonable accuracy for songs with simple arrangements.",
+    "ただし、展開の激しい曲やそもそもループを前提として作られていない曲は、必ずしも自然な結果になるとは限りません。": "However, songs with dramatic changes or songs that were not originally designed to loop will not necessarily produce natural results.",
+    "ともあれ、自力でループポイントを探すよりは遥かに楽なので、まず試してみる価値はあると思います。": "In any case, it’s much easier than searching for loop points yourself, so I think it’s worth trying first.",
+    "しかしながら、このソフトは導入が結構難しいです。Pythonのソースコードの形でしか配布されていないので、自力で環境設定する必要があります。": "However, installing this software is fairly difficult. Since it is distributed only as Python source code, you need to configure the environment yourself.",
+    "というわけで、以下で導入の解説をします。": "With that in mind, I’ll explain how to install it below.",
+    "※なお、筆者はWindowsしか分かりませんので、Windows前提です。他はごめんなさい。": "※I only know how to use Windows, so these instructions assume Windows. Sorry, everyone else.",
+    "CrossLooperの導入方法": "How to Install CrossLooper",
+    "GitHubからダウンロード": "Download from GitHub",
+    "以下のページへアクセスし、『Code（緑のボタン）』→『Download ZIP』を選択してください。": "Access the page below and select “Code (the green button)” → “Download ZIP.”",
+    "https://github.com/Splendide-Imaginarius/crosslooper": "https://github.com/Splendide-Imaginarius/crosslooper",
+    "ダウンロードしたＺＩＰを展開します。": "Extract the downloaded ZIP file.",
+    "Pythonの確認": "Check Python",
+    "まず、コマンドプロンプトを起動してください。": "First, launch Command Prompt.",
+    "※「コマンドプロンプトって何？」という人は、Windows左下のスタートメニューの検索欄に「cmd」と入力してください。": "※If you’re wondering, “What is Command Prompt?”, enter “cmd” in the search box of the Start menu in the lower-left corner of Windows.",
+    "起動したコマンドプロンプトで、以下のコマンドを実行してください。": "In the Command Prompt window you launched, run the following command.",
+    "Pythonのバージョンが表示されれば問題ありません。": "If the Python version is displayed, everything is fine.",
+    "エラーになった場合はPythonがインストールされてないので、ググってインストールしてください。": "If an error occurs, Python is not installed, so search online and install it.",
+    "※作者環境では最初から入っていたので説明できません。たぶん、そんなに難しくないと思います。": "※Python was already installed in my environment, so I can’t explain this part. It probably isn’t that difficult.",
+    "ffmpegの確認": "Check ffmpeg",
+    "続いてffmpegが利用可能か確認します。": "Next, check whether ffmpeg is available.",
+    "こちらもバージョン情報が表示されればＯＫです。": "It’s also fine if the version information is displayed here.",
+    "こちらは作者環境にも入っていませんでした。以下の「方法1: Wingetでインストール」でやるのが一番簡単だと思います。": "It wasn’t installed in my environment either. I think the easiest approach is to use “Method 1: Install with Winget” below.",
+    "https://qiita.com/Tadataka_Takahashi/items/9dcb0cf308db6f5dc31b": "https://qiita.com/Tadataka_Takahashi/items/9dcb0cf308db6f5dc31b",
+    "CrossLooperのインストール": "Install CrossLooper",
+    "コマンドプロンプトでCrossLooperのＺＩＰを展開したフォルダへ移動します。": "In Command Prompt, move to the folder where you extracted the CrossLooper ZIP file.",
+    "※『C:\\test\\CrossLooper』の部分は自身のフォルダへ読み替えてください。フォルダ名に半角スペースが入っている場合は\"C:\\test folder\\CrossLooper\"みたいに\"\"で囲む必要があるかも。": "※Replace “C:\\test\\CrossLooper” with your own folder path. If the folder name contains a half-width space, you may need to enclose it in quotation marks, like “C:\\test folder\\CrossLooper”.",
+    "以下を実行します。": "Run the following.",
+    "インストール自体はこれで完了です。": "The installation itself is now complete.",
+    "これで、コマンドプロンプト上で": "Now, in Command Prompt,",
+    "と、打てば処理を呼べるはず。": "you should be able to invoke the process by entering",
+    "……ですが、筆者の環境では無効になりました。exeファイルのパスが通っていないためのようです。": "……but this did not work in my environment. Apparently, the path to the EXE file was not set.",
+    "で、パスを調べてそこに移動してください。": "So, check the path with  and move there.",
+    "C:\\Users\\[ユーザ名]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe": "C:\\Users\\[Username]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe",
+    "みたいな場所にあると思います。": "It should be located somewhere like .",
+    "詳しい方ならパスを通してもよいのですが、今回はバッチファイルを作成します。": "If you’re familiar with this, you could add the path, but this time we’ll create a batch file.",
+    "バッチファイルを作成": "Create a Batch File",
+    "ファイルを新規作成し「crosslooper.bat」を作成します。": "Create a new file named “crosslooper.bat.”",
+    "中身は以下の通りにしてください。ファイルパスはご自身の環境のものを設定してください。": "Set its contents as follows. Use the file path for your own environment.",
+    "\"C:\\Users\\[ユーザ名]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe\" %*": "\"C:\\Users\\[Username]\\AppData\\Roaming\\Python\\PythonXXX\\Scripts\\crosslooper.exe\" %*",
+    "※改行のせいで大変見苦しいですが、bat内にコピペすればまともに見えるようになります。": "※It looks quite messy because of the line breaks, but it should look normal when pasted into the BAT file.",
+    "これでバッチファイル経由で実行できるようになります。": "You can now run it through the batch file.",
+    "実行": "Run",
+    "コマンドプロンプトで以下を実行！": "Run the following in Command Prompt!",
+    "……してもいいですが、それよりもバッチファイルにOggを直接ドロップしたほうが簡単です。": "……You can do that, but it’s easier to drop the Ogg file directly onto the batch file.",
+    "※Oggファイルは直接更新されます。必要なら先にバックアップを取ってください。": "※The Ogg files will be updated directly. Please back them up first if necessary.",
+    "解析が完了するとOGGファイルへLOOPSTARTとLOOPLENGTHが設定されます。": "Once the analysis is complete, LOOPSTART and LOOPLENGTH will be set in the OGG file.",
+    "後はツクールＭＺなり、ループに対応した再生ソフトなりで確認してください。": "You can then check it in RPG Maker MZ or with playback software that supports looping.",
+    "ライセンスについて": "About the License",
+    "CrossLooperはGPL-3.0ライセンスで公開されています。": "CrossLooper is released under the GPL-3.0 license.",
+    "個人利用・商用利用ともに可能です。": "It may be used for both personal and commercial purposes.",
+    "また、ソースコードを改造して利用することもできます。": "You may also modify and use the source code.",
+    "ただし、CrossLooper本体を改造して再配布する場合は、改造後のソースコードもGPL-3.0に従って公開する必要があります。": "However, if you modify and redistribute CrossLooper itself, you must also release the modified source code under the GPL-3.0 license.",
+    "なお、CrossLooperで処理したOGGファイルや、そのOGGファイルを利用したゲーム作品がGPLになるわけではありません。": "The OGG files processed with CrossLooper, as well as games that use those OGG files, do not become GPL-licensed.",
+    "あくまでGPLの対象となるのはCrossLooper自身（およびその改造版）です。": "Only CrossLooper itself (and modified versions thereof) is subject to the GPL.",
+    "ライセンス上、記載は必須要件ではありませんが、": "Although including a notice is not a licensing requirement,",
+    "CrossLooperを使用する場合は、クレジット表記をしていただけると大変ありがたいです。": "CrossLooperIf you use CrossLooper, I would greatly appreciate it if you could include a credit.",
+    "クレジット表記の例：「このＢＧＭはCrossLooper（制作：Splendide Imaginarius）によってループ処理されました。」": "Example credit: “This BGM was loop-processed by CrossLooper (created by: Splendide Imaginarius).”",
+    "このGitリポジトリへのリンクもいただけると大変ありがたいです。": "I would also greatly appreciate it if you could include a link to this Git repository.",
+    "とのことです。（日本語訳）": "that is what it says. (Japanese translation)"
+  }
+}

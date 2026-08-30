@@ -1,0 +1,875 @@
+{
+  "articleId": "499197962",
+  "sourceUrl": "https://newrpg.seesaa.net/article/499197962.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "ace72267cb83f3c9379e5cfff005d582818afe69a4c7d1e346a6bd285401b032",
+  "translatedAt": "2026-08-30T08:50:48.635Z",
+  "title": "Add Parameter Displays and Effects Upon Leveling Up [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "レベルアップ時にパラメータ表示や演出を追加【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "d7a99665dc8260d82935394de79e860bc74047391fec94a41760dbd0820c681b",
+      "translation": "Add Parameter Displays and Effects Upon Leveling Up [RPG Maker MZ & MV Plugin]",
+      "contextHash": "d7a99665dc8260d82935394de79e860bc74047391fec94a41760dbd0820c681b"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "レベルアップ時に以下のような機能を追加します。",
+      "sourceHash": "f996c282915109f807593e6f48b0ddbb8954b3c80aa5423479efc81661506db4",
+      "translation": "The following features are added when leveling up.",
+      "contextHash": "f996c282915109f807593e6f48b0ddbb8954b3c80aa5423479efc81661506db4"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "上昇パラメータの表示。",
+      "sourceHash": "964749a2cda9248c1523d72ff5d58d603864d639b29489addde0d44758c86cc5",
+      "translation": "Displays increased parameters.",
+      "contextHash": "964749a2cda9248c1523d72ff5d58d603864d639b29489addde0d44758c86cc5"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "効果音やＭＥを指定。",
+      "sourceHash": "1995e59429377d8c9a986e34f298bbc3e425f68050ed6bc63c522fc57109291a",
+      "translation": "Specify sound effects and ME.",
+      "contextHash": "1995e59429377d8c9a986e34f298bbc3e425f68050ed6bc63c522fc57109291a"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_LevelUpDirection.js",
+      "sourceHash": "e0e36357db2416ece3dfc774ea16234a64309dd2e5d4d8f7e3287c1d6dbfad3e",
+      "translation": "NRP_LevelUpDirection.js",
+      "contextHash": "30761f9ff92c3c0f0a69ce93396489fbcaccbfdddd1668725268e73ffa15a6cf"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "非戦闘メンバーのレベルアップ時に演出が存在する場合、エラーになってしまう不具合修正。",
+      "sourceHash": "696a7d9e5213f2bb81c081cc48d40dd8a28d4297a0242047597222ef68f7a635",
+      "translation": "Fixed a bug that caused an error when an effect was present upon leveling up a non-battle member.",
+      "contextHash": "696a7d9e5213f2bb81c081cc48d40dd8a28d4297a0242047597222ef68f7a635"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "多重職業の設定をしなかった場合は制御文字も埋め込まないようにした。（2024/07/21 ver1.021）",
+      "sourceHash": "0ab853119aa008e889310e09488caa4a0856ee1e95f4754580555e0ed287ef84",
+      "translation": "When no additional classes were configured, control characters were no longer embedded. (2024/07/21 ver1.021)",
+      "contextHash": "0ab853119aa008e889310e09488caa4a0856ee1e95f4754580555e0ed287ef84"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※ルビ系プラグインと組み合わせた場合などの競合が改善します。",
+      "sourceHash": "7c35f8227e838ba4f1068550a021a060c64a23c22822d71022dbf7f89768587b",
+      "translation": "※This improves conflicts that can occur when combined with ruby-related plugins, for example.",
+      "contextHash": "7c35f8227e838ba4f1068550a021a060c64a23c22822d71022dbf7f89768587b"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ＭＶで動作しない不具合修正。（2025/09/11 ver1.022）",
+      "sourceHash": "42d501d60c7a0879b30933fcdf08a993a965846fdfdc746014cd18dbf5081dd5",
+      "translation": "Fixed a bug that prevented operation in MV. (2025/09/11 ver1.022)",
+      "contextHash": "42d501d60c7a0879b30933fcdf08a993a965846fdfdc746014cd18dbf5081dd5"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "一部条件で循環参照エラー（Object too deep）が起きる問題へ対処。",
+      "sourceHash": "9845a8a87b89f9ab7f67dbfb393036e606b0116caae0f931a48b49676945c492",
+      "translation": "Addressed an issue where a circular reference error (Object too deep) could occur under certain conditions.",
+      "contextHash": "9845a8a87b89f9ab7f67dbfb393036e606b0116caae0f931a48b49676945c492"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "※NRP_DynamicAnimationMapMZ.jsを戦闘終了時に並列実行していた場合など。",
+      "sourceHash": "5b1031c3b3ec8cec26040ac5cf696c0242fbf760304d185933e97769bcca8dd4",
+      "translation": "※For example, when NRP_DynamicAnimationMapMZ.js was running in parallel at the end of battle.",
+      "contextHash": "5b1031c3b3ec8cec26040ac5cf696c0242fbf760304d185933e97769bcca8dd4"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "Dynamic用スキルを指定した状態で、マップ上でレベルアップメッセージを表示するとエラーになる不具合修正。（2023/06/06 ver1.001）",
+      "sourceHash": "6c2f12be7162298176d03555f7049348c0caa34b77a7c3e09b680ca749d48894",
+      "translation": "Fixed a bug that caused an error when a Dynamic skill was specified and a level-up message was displayed on the map. (2023/06/06 ver1.001)",
+      "contextHash": "6c2f12be7162298176d03555f7049348c0caa34b77a7c3e09b680ca749d48894"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "適用するとレベルアップ時の上昇パラメータが表示されるようになります。",
+      "sourceHash": "b84f43f6ad599e09026a08f8d50c34e3bd4ef55530080f065f8640965f3994e5",
+      "translation": "When applied, the parameters increased upon leveling up will be displayed.",
+      "contextHash": "b84f43f6ad599e09026a08f8d50c34e3bd4ef55530080f065f8640965f3994e5"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "あとはお好みで効果音などを設定してください。",
+      "sourceHash": "eda51bbede1725e5a694832328de2508e7ba2222ce9eb4e134b6b8268e17108e",
+      "translation": "After that, configure sound effects and other settings as desired.",
+      "contextHash": "eda51bbede1725e5a694832328de2508e7ba2222ce9eb4e134b6b8268e17108e"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "なお、DynamicAnimation&Motionや多重職業プラグインとの連携には、該当のプラグインを導入する必要があります。",
+      "sourceHash": "ac52fac86df89f1990833c347252a328e34ccfe2f7a5aaacac183768e70341f3",
+      "translation": "To integrate with DynamicAnimation&Motion or the Additional Classes plugin, you must install the corresponding plugin.",
+      "contextHash": "ac52fac86df89f1990833c347252a328e34ccfe2f7a5aaacac183768e70341f3"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "DynamicMotionについて（About DynamicMotion）",
+      "sourceHash": "7c090b9a168f868724daa1b795e66480bcd923c2f78d0b8e0ccbb7da1b6aca36",
+      "translation": "About DynamicMotion (About DynamicMotion)",
+      "contextHash": "7c090b9a168f868724daa1b795e66480bcd923c2f78d0b8e0ccbb7da1b6aca36"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "DynamicMotionによって、モーションを指定した場合は、通常の勝利モーションが解除されます。",
+      "sourceHash": "0440e307ef37f3ccf65f475ed5a24006721028e0dfdb5410de2328e265550b52",
+      "translation": "When a motion is specified through DynamicMotion, the normal victory motion is canceled.",
+      "contextHash": "0440e307ef37f3ccf65f475ed5a24006721028e0dfdb5410de2328e265550b52"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "必要ならスキルのメモ欄の末尾で以下のようにモーションを再設定してください。",
+      "sourceHash": "252be2b3a3629c1bbf08691f08b2dc30538a46ec48e78b7fc5f4fa4ebf882c3f",
+      "translation": "If necessary, reset the motion as follows at the end of the skill's note field.",
+      "contextHash": "252be2b3a3629c1bbf08691f08b2dc30538a46ec48e78b7fc5f4fa4ebf882c3f"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "なお、勝利モーション以外のものを指定しても構いません。",
+      "sourceHash": "e07f15d1e2a353068ccf8e62f653af13338fbe292a204afa4a364cab49052584",
+      "translation": "You may also specify something other than the victory motion.",
+      "contextHash": "e07f15d1e2a353068ccf8e62f653af13338fbe292a204afa4a364cab49052584"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "応用（Application）",
+      "sourceHash": "2d156c5d35af83fbf4ff32986de70503525175b844057fbd83dbef978558f678",
+      "translation": "Application (Application)",
+      "contextHash": "2d156c5d35af83fbf4ff32986de70503525175b844057fbd83dbef978558f678"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "制御文字を使用することで細かい調整も可能です。",
+      "sourceHash": "f77a399594cb682c0c4581bd911294c4524566180af86000c90d19768454cdab",
+      "translation": "You can also make detailed adjustments by using control characters.",
+      "contextHash": "f77a399594cb682c0c4581bd911294c4524566180af86000c90d19768454cdab"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "例えば、表示フォーマットを「\\c[15]%1\\c[0] +%2」とすれば、パラメータ名だけ色を変えることができます。",
+      "sourceHash": "ce33acb3cf908ed50e183fb2197cd3124644812623c66ca8e99625e526df9198",
+      "translation": "For example, if you set the display format to \"\\c[15]%1\\c[0] +%2\", you can change the color of only the parameter name.",
+      "contextHash": "ce33acb3cf908ed50e183fb2197cd3124644812623c66ca8e99625e526df9198"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "他にもデータベースの用語のレベルアップにウェイトを挟めば、ＭＥの演奏待ちをさせたりできます。",
+      "sourceHash": "dd65e555d8628db848e2116b9627057e7c3f3756d13ae0de2920ed574fb36058",
+      "translation": "You can also make the game wait for the ME to finish playing by inserting a wait into the database term for leveling up.",
+      "contextHash": "dd65e555d8628db848e2116b9627057e7c3f3756d13ae0de2920ed574fb36058"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "（例：%1は%2 %3 に上がった！\\|\\|）",
+      "sourceHash": "09b44d0eeebde37f7065cd80d94dc014f157c05e60ed88df2979febac829c165",
+      "translation": "(Example: %1 increased to %2 %3!\\|\\|)",
+      "contextHash": "09b44d0eeebde37f7065cd80d94dc014f157c05e60ed88df2979febac829c165"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "パラメータ一覧（ParameterList）",
+      "sourceHash": "060133a2be4279783cb944d233606638c5c00369038d765cd2775069ceee05ed",
+      "translation": "Parameter List (ParameterList)",
+      "contextHash": "060133a2be4279783cb944d233606638c5c00369038d765cd2775069ceee05ed"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "レベルアップ時に表示するパラメータの一覧です。",
+      "sourceHash": "cc3195f9a8ade3079c091dd8acac8e9ed6db711cb246d64e9d264ae8134017d5",
+      "translation": "This is the list of parameters displayed when leveling up.",
+      "contextHash": "cc3195f9a8ade3079c091dd8acac8e9ed6db711cb246d64e9d264ae8134017d5"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "パラメータの表示名を変更したり、追加のパラメータを表示したりできます。",
+      "sourceHash": "cdd30e9f353f53a6af7e1f33c5eafc21d459e769776edff0a29a1db47fa88581",
+      "translation": "You can change parameter display names and display additional parameters.",
+      "contextHash": "cdd30e9f353f53a6af7e1f33c5eafc21d459e769776edff0a29a1db47fa88581"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "列数（NumberOfColumns）",
+      "sourceHash": "7c09ca20d56442ad27c0208f145d16502dec6f4abfd7207b43271cb06729c7b1",
+      "translation": "Number of Columns (NumberOfColumns)",
+      "contextHash": "7c09ca20d56442ad27c0208f145d16502dec6f4abfd7207b43271cb06729c7b1"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "パラメータを表示する際の列数です。",
+      "sourceHash": "b36a2f0761316fd08d95db29e04aa3077ad3f605458b881948a8e48caa322bc5",
+      "translation": "The number of columns used to display parameters.",
+      "contextHash": "b36a2f0761316fd08d95db29e04aa3077ad3f605458b881948a8e48caa322bc5"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "表示フォーマット（DisplayFormat）",
+      "sourceHash": "59fb96c9041cb2ae057da68feda2adb3d3eec1b37223103cc3032b5f90a84646",
+      "translation": "Display Format (DisplayFormat)",
+      "contextHash": "59fb96c9041cb2ae057da68feda2adb3d3eec1b37223103cc3032b5f90a84646"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "パラメータの上昇量を表示するフォーマットです。",
+      "sourceHash": "571b9ab08ff16cbeb9b9aa9c28d1cb81205e0b31f9e32a095171f7270410ba38",
+      "translation": "The format used to display the amount by which a parameter increased.",
+      "contextHash": "571b9ab08ff16cbeb9b9aa9c28d1cb81205e0b31f9e32a095171f7270410ba38"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "%1: パラメータ名, %2: 上昇量",
+      "sourceHash": "6e11559f9408168406dfbdea8fff18467af5d7a22cc49ab26ba45f99a92d6bbb",
+      "translation": "%1: Parameter name, %2: Increase",
+      "contextHash": "6e11559f9408168406dfbdea8fff18467af5d7a22cc49ab26ba45f99a92d6bbb"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "レベルアップ効果音（LevelUpSe）",
+      "sourceHash": "5a4eaef2450de28077768bcd9a9bc76cb62657db8b0f545b04d842a46bc6cb2d",
+      "translation": "Level-Up Sound Effect (LevelUpSe)",
+      "contextHash": "5a4eaef2450de28077768bcd9a9bc76cb62657db8b0f545b04d842a46bc6cb2d"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "レベルアップ時に鳴らす効果音です。",
+      "sourceHash": "72abf7b36c7b085c6dc3f1facf3701f9b14d3d42e6adf334278c6aca4ff684d6",
+      "translation": "The sound effect played when leveling up.",
+      "contextHash": "72abf7b36c7b085c6dc3f1facf3701f9b14d3d42e6adf334278c6aca4ff684d6"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "レベルアップＭＥ（LevelUpMe）",
+      "sourceHash": "2ec606c66ce203dea09ceabc57469c71321d6e02dc9f056da21e91bebd2383c7",
+      "translation": "Level-Up ME (LevelUpMe)",
+      "contextHash": "2ec606c66ce203dea09ceabc57469c71321d6e02dc9f056da21e91bebd2383c7"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "レベルアップ時に演奏するＭＥです。",
+      "sourceHash": "f21c2761e5373c7a00c3b79b84c4895ade81f2565b4a246273a3087721af614b",
+      "translation": "The ME played when leveling up.",
+      "contextHash": "f21c2761e5373c7a00c3b79b84c4895ade81f2565b4a246273a3087721af614b"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "Dynamic用スキル（DynamicSkill）",
+      "sourceHash": "6dcb1c3b16fa697a94578fd94888a39f15d26683ca6aac595362f60e020f4460",
+      "translation": "Dynamic Skill (DynamicSkill)",
+      "contextHash": "6dcb1c3b16fa697a94578fd94888a39f15d26683ca6aac595362f60e020f4460"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "レベルアップ時に実行するDynamicAnimation&Motionのスキルです。",
+      "sourceHash": "92d0cac32faeeaafac1ef517d6b467be810fb4602ff0264a118075ff297ca8f9",
+      "translation": "The DynamicAnimation&Motion skill executed when leveling up.",
+      "contextHash": "92d0cac32faeeaafac1ef517d6b467be810fb4602ff0264a118075ff297ca8f9"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "使用には該当プラグインが必須です。",
+      "sourceHash": "327cf0b4c4fc64b508cefeb4ca9aaf2f4390fb8cd8cce1794d579197640f6f34",
+      "translation": "The corresponding plugin is required for use.",
+      "contextHash": "327cf0b4c4fc64b508cefeb4ca9aaf2f4390fb8cd8cce1794d579197640f6f34"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "＜多重職業連携用＞（<AdditionalClasses>）",
+      "sourceHash": "f451000593cd3df06c77af51970d7ce7b19d6f5025af05f82522799a7e98c4c3",
+      "translation": "<For Additional Classes Integration> (<AdditionalClasses>)",
+      "contextHash": "f451000593cd3df06c77af51970d7ce7b19d6f5025af05f82522799a7e98c4c3"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "該当プラグインを使用しないなら無効です。",
+      "sourceHash": "0a678d6f045c546976decbf14ca3d72e8f9b892e28014929141e3bca708a072c",
+      "translation": "Disable this if you are not using the corresponding plugin.",
+      "contextHash": "0a678d6f045c546976decbf14ca3d72e8f9b892e28014929141e3bca708a072c"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "レベルアップ効果音（AC_LevelUpSe）",
+      "sourceHash": "683da07cbe1411a8cdd59591982761531f1426dc1c9e07bd7ffd5a645e229c30",
+      "translation": "Level-Up Sound Effect (AC_LevelUpSe)",
+      "contextHash": "683da07cbe1411a8cdd59591982761531f1426dc1c9e07bd7ffd5a645e229c30"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "追加職業のレベルアップ時に鳴らす効果音です。",
+      "sourceHash": "9d0a032289deb3015d3aa6143de0fbfd706526e5d94fc9e049b99815de088894",
+      "translation": "The sound effect played when leveling up an additional class.",
+      "contextHash": "9d0a032289deb3015d3aa6143de0fbfd706526e5d94fc9e049b99815de088894"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "レベルアップＭＥ（AC_LevelUpMe）",
+      "sourceHash": "f0a7ac2c9985e29c74937eb7d06fa1d273f99c744973e569e57698c76c938844",
+      "translation": "Level-Up ME (AC_LevelUpMe)",
+      "contextHash": "f0a7ac2c9985e29c74937eb7d06fa1d273f99c744973e569e57698c76c938844"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "追加職業のレベルアップ時に演奏するＭＥです。",
+      "sourceHash": "f390c5b55024fc596365e5280f967627a0001500e8557d3f3a0d71199bce4c37",
+      "translation": "This is the ME played when an additional class levels up.",
+      "contextHash": "f390c5b55024fc596365e5280f967627a0001500e8557d3f3a0d71199bce4c37"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "Dynamic用スキル（AC_DynamicSkill）",
+      "sourceHash": "9414af5f17965b7d6276efdfc408c8317eca51fcb6131c9a81652e2a83d2065d",
+      "translation": "Skill for Dynamic (AC_DynamicSkill)",
+      "contextHash": "9414af5f17965b7d6276efdfc408c8317eca51fcb6131c9a81652e2a83d2065d"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "追加職業のレベルアップ時に実行するDynamicAnimation&Motionのスキルです。",
+      "sourceHash": "5e1e25a4b8115bb2081943dc9bfca5df6531b8c0dde89cf70e64670836967e9b",
+      "translation": "This is a DynamicAnimation&Motion skill executed when an additional class levels up.",
+      "contextHash": "5e1e25a4b8115bb2081943dc9bfca5df6531b8c0dde89cf70e64670836967e9b"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "使用には該当プラグインが必須です。",
+      "sourceHash": "327cf0b4c4fc64b508cefeb4ca9aaf2f4390fb8cd8cce1794d579197640f6f34",
+      "translation": "The corresponding plugin is required for use.",
+      "contextHash": "327cf0b4c4fc64b508cefeb4ca9aaf2f4390fb8cd8cce1794d579197640f6f34"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicAnimation&Motion[[/LINK_1]]によってアクターを動かす。",
+      "sourceHash": "ae2aba2dac2d955594128ba478ac88fe6c0e905bd5ce29b4ae9235d8b583941c",
+      "parts": [
+        {
+          "source": "DynamicAnimation&Motion",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "によってアクターを動かす。",
+          "link": false
+        }
+      ],
+      "translation": "Move actors using [[LINK_1]]DynamicAnimation&Motion[[/LINK_1]].",
+      "contextHash": "ae2aba2dac2d955594128ba478ac88fe6c0e905bd5ce29b4ae9235d8b583941c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]多重職業プラグイン[[/LINK_1]]との連携も考慮。",
+      "sourceHash": "09bf31174d1c16f6cc27e03b48638fe4d4d58a7b08a996a5af5146bf8c28dae0",
+      "parts": [
+        {
+          "source": "多重職業プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との連携も考慮。",
+          "link": false
+        }
+      ],
+      "translation": "Also supports integration with the [[LINK_1]]Multiple Classes Plugin[[/LINK_1]].",
+      "contextHash": "09bf31174d1c16f6cc27e03b48638fe4d4d58a7b08a996a5af5146bf8c28dae0"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "なお、上記の動画は[[LINK_1]]戦闘勝利時の表示をカスタマイズするプラグイン[[/LINK_1]]によってウィンドウを引き伸ばしています。",
+      "sourceHash": "bbeabf87e834aa482e980dca5d647382fc0d9c9dcc35abe26f79eb5ea376b9ef",
+      "parts": [
+        {
+          "source": "なお、上記の動画は",
+          "link": false
+        },
+        {
+          "source": "戦闘勝利時の表示をカスタマイズするプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "によってウィンドウを引き伸ばしています。",
+          "link": false
+        }
+      ],
+      "translation": "The window in the video above has been extended using the [[LINK_1]]plugin that customizes the victory display[[/LINK_1]].",
+      "contextHash": "bbeabf87e834aa482e980dca5d647382fc0d9c9dcc35abe26f79eb5ea376b9ef"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionについて（About DynamicMotion）[[/LINK_1]]",
+      "sourceHash": "d432cad99e54e577efb5a53ff67293705d3e28b771efc42c8d08e985b86177f3",
+      "parts": [
+        {
+          "source": "DynamicMotionについて（About DynamicMotion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About DynamicMotion (About DynamicMotion)[[/LINK_1]]",
+      "contextHash": "d432cad99e54e577efb5a53ff67293705d3e28b771efc42c8d08e985b86177f3"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]応用（Application）[[/LINK_1]]",
+      "sourceHash": "0869e3dcb4b5f6063545cc9a7e75388e2e1076f03411a7e759a7d4a7510a1a82",
+      "parts": [
+        {
+          "source": "応用（Application）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Applications (Application)[[/LINK_1]]",
+      "contextHash": "0869e3dcb4b5f6063545cc9a7e75388e2e1076f03411a7e759a7d4a7510a1a82"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータ一覧（ParameterList）[[/LINK_1]]",
+      "sourceHash": "4fe19486c037aa952e3ec0c4108fc74caee16965e4ed13a0f435f6beebf9462e",
+      "parts": [
+        {
+          "source": "パラメータ一覧（ParameterList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameter List (ParameterList)[[/LINK_1]]",
+      "contextHash": "4fe19486c037aa952e3ec0c4108fc74caee16965e4ed13a0f435f6beebf9462e"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]列数（NumberOfColumns）[[/LINK_1]]",
+      "sourceHash": "ab1987225479846ab78c848b42ab435ef1394b2d71ab30951f0ae9a0800a26df",
+      "parts": [
+        {
+          "source": "列数（NumberOfColumns）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Columns (NumberOfColumns)[[/LINK_1]]",
+      "contextHash": "ab1987225479846ab78c848b42ab435ef1394b2d71ab30951f0ae9a0800a26df"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]表示フォーマット（DisplayFormat）[[/LINK_1]]",
+      "sourceHash": "c43c7dbcd21af87e27839f6baaf0804f1a46774da873c5939d6ca65220689bcb",
+      "parts": [
+        {
+          "source": "表示フォーマット（DisplayFormat）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Format (DisplayFormat)[[/LINK_1]]",
+      "contextHash": "c43c7dbcd21af87e27839f6baaf0804f1a46774da873c5939d6ca65220689bcb"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]レベルアップ効果音（LevelUpSe）[[/LINK_1]]",
+      "sourceHash": "e29148005b49add18c9f0eb29411acdf91175c01b6a07a7f3336b68f66705751",
+      "parts": [
+        {
+          "source": "レベルアップ効果音（LevelUpSe）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Level-Up Sound Effect (LevelUpSe)[[/LINK_1]]",
+      "contextHash": "e29148005b49add18c9f0eb29411acdf91175c01b6a07a7f3336b68f66705751"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]レベルアップＭＥ（LevelUpMe）[[/LINK_1]]",
+      "sourceHash": "b1819afd32a487b227ae80d25ef0cad682bb0be8245aff8cd1e797dc6828eda0",
+      "parts": [
+        {
+          "source": "レベルアップＭＥ（LevelUpMe）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Level-Up ME (LevelUpMe)[[/LINK_1]]",
+      "contextHash": "b1819afd32a487b227ae80d25ef0cad682bb0be8245aff8cd1e797dc6828eda0"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]Dynamic用スキル（DynamicSkill）[[/LINK_1]]",
+      "sourceHash": "036f3ddaa451f24f465a06e03ac450e145636545037605eec85bb3ac07d7afd0",
+      "parts": [
+        {
+          "source": "Dynamic用スキル（DynamicSkill）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill for Dynamic (DynamicSkill)[[/LINK_1]]",
+      "contextHash": "036f3ddaa451f24f465a06e03ac450e145636545037605eec85bb3ac07d7afd0"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＜多重職業連携用＞（<AdditionalClasses>）[[/LINK_1]]",
+      "sourceHash": "7dd2db20cb3ebebd1ba9c303b87ac84db33d27d22c808986ae16138627771052",
+      "parts": [
+        {
+          "source": "＜多重職業連携用＞（<AdditionalClasses>）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]For Multiple Classes (<AdditionalClasses>)[[/LINK_1]]",
+      "contextHash": "7dd2db20cb3ebebd1ba9c303b87ac84db33d27d22c808986ae16138627771052"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]レベルアップ効果音（AC_LevelUpSe）[[/LINK_1]]",
+      "sourceHash": "d3c9f9a2f03dddd6cad9a284f2fc641dd609291117149e3169f2e0e46d1a94c8",
+      "parts": [
+        {
+          "source": "レベルアップ効果音（AC_LevelUpSe）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Level-Up Sound Effect (AC_LevelUpSe)[[/LINK_1]]",
+      "contextHash": "d3c9f9a2f03dddd6cad9a284f2fc641dd609291117149e3169f2e0e46d1a94c8"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]レベルアップＭＥ（AC_LevelUpMe）[[/LINK_1]]",
+      "sourceHash": "7f16961c8ba1af05afdff8dbde657fc1e589fec951173f5336b0d745eb0fc730",
+      "parts": [
+        {
+          "source": "レベルアップＭＥ（AC_LevelUpMe）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Level-Up ME (AC_LevelUpMe)[[/LINK_1]]",
+      "contextHash": "7f16961c8ba1af05afdff8dbde657fc1e589fec951173f5336b0d745eb0fc730"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]Dynamic用スキル（AC_DynamicSkill）[[/LINK_1]]",
+      "sourceHash": "e1263b9792fd8862382349b60eb8140b97682b36796c5b4ae7582dc82673a1ac",
+      "parts": [
+        {
+          "source": "Dynamic用スキル（AC_DynamicSkill）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill for Dynamic (AC_DynamicSkill)[[/LINK_1]]",
+      "contextHash": "e1263b9792fd8862382349b60eb8140b97682b36796c5b4ae7582dc82673a1ac"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "例えば、[[LINK_1]]ＴＰをレベル成長させるプラグインと連携[[/LINK_1]]させれば、最大ＴＰの成長量を表示させることも可能です。",
+      "sourceHash": "0d0afecbd35b5e9d06ba81f7cb32d28d3fa65383706ecd210a79df899caf52fc",
+      "parts": [
+        {
+          "source": "例えば、",
+          "link": false
+        },
+        {
+          "source": "ＴＰをレベル成長させるプラグインと連携",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "させれば、最大ＴＰの成長量を表示させることも可能です。",
+          "link": false
+        }
+      ],
+      "translation": "For example, by [[LINK_1]]integrating with a plugin that increases TP with each level[[/LINK_1]], you can also display the amount by which Max TP increases.",
+      "contextHash": "0d0afecbd35b5e9d06ba81f7cb32d28d3fa65383706ecd210a79df899caf52fc"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]多重職業プラグイン[[/LINK_1]]との連携用の項目です。",
+      "sourceHash": "ed9bff106bfb3df22aff16b7af3094a2482676460c927c4ef8db05f7fc8f5445",
+      "parts": [
+        {
+          "source": "多重職業プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との連携用の項目です。",
+          "link": false
+        }
+      ],
+      "translation": "This item is for integration with the [[LINK_1]]Multiple Classes Plugin[[/LINK_1]].",
+      "contextHash": "ed9bff106bfb3df22aff16b7af3094a2482676460c927c4ef8db05f7fc8f5445"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "レベルアップ時に以下のような機能を追加します。": "The following features are added when leveling up.",
+    "上昇パラメータの表示。": "Displays increased parameters.",
+    "効果音やＭＥを指定。": "Specify sound effects and ME.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_LevelUpDirection.js": "NRP_LevelUpDirection.js",
+    "更新履歴（History）": "Update History (History)",
+    "非戦闘メンバーのレベルアップ時に演出が存在する場合、エラーになってしまう不具合修正。": "Fixed a bug that caused an error when an effect was present upon leveling up a non-battle member.",
+    "多重職業の設定をしなかった場合は制御文字も埋め込まないようにした。（2024/07/21 ver1.021）": "When no additional classes were configured, control characters were no longer embedded. (2024/07/21 ver1.021)",
+    "※ルビ系プラグインと組み合わせた場合などの競合が改善します。": "※This improves conflicts that can occur when combined with ruby-related plugins, for example.",
+    "ＭＶで動作しない不具合修正。（2025/09/11 ver1.022）": "Fixed a bug that prevented operation in MV. (2025/09/11 ver1.022)",
+    "一部条件で循環参照エラー（Object too deep）が起きる問題へ対処。": "Addressed an issue where a circular reference error (Object too deep) could occur under certain conditions.",
+    "※NRP_DynamicAnimationMapMZ.jsを戦闘終了時に並列実行していた場合など。": "※For example, when NRP_DynamicAnimationMapMZ.js was running in parallel at the end of battle.",
+    "公開！": "Released!",
+    "Dynamic用スキルを指定した状態で、マップ上でレベルアップメッセージを表示するとエラーになる不具合修正。（2023/06/06 ver1.001）": "Fixed a bug that caused an error when a Dynamic skill was specified and a level-up message was displayed on the map. (2023/06/06 ver1.001)",
+    "使用方法（Usage）": "Usage (Usage)",
+    "適用するとレベルアップ時の上昇パラメータが表示されるようになります。": "When applied, the parameters increased upon leveling up will be displayed.",
+    "あとはお好みで効果音などを設定してください。": "After that, configure sound effects and other settings as desired.",
+    "なお、DynamicAnimation&Motionや多重職業プラグインとの連携には、該当のプラグインを導入する必要があります。": "To integrate with DynamicAnimation&Motion or the Additional Classes plugin, you must install the corresponding plugin.",
+    "DynamicMotionについて（About DynamicMotion）": "About DynamicMotion (About DynamicMotion)",
+    "DynamicMotionによって、モーションを指定した場合は、通常の勝利モーションが解除されます。": "When a motion is specified through DynamicMotion, the normal victory motion is canceled.",
+    "必要ならスキルのメモ欄の末尾で以下のようにモーションを再設定してください。": "If necessary, reset the motion as follows at the end of the skill's note field.",
+    "なお、勝利モーション以外のものを指定しても構いません。": "You may also specify something other than the victory motion.",
+    "応用（Application）": "Application (Application)",
+    "制御文字を使用することで細かい調整も可能です。": "You can also make detailed adjustments by using control characters.",
+    "例えば、表示フォーマットを「\\c[15]%1\\c[0] +%2」とすれば、パラメータ名だけ色を変えることができます。": "For example, if you set the display format to \"\\c[15]%1\\c[0] +%2\", you can change the color of only the parameter name.",
+    "他にもデータベースの用語のレベルアップにウェイトを挟めば、ＭＥの演奏待ちをさせたりできます。": "You can also make the game wait for the ME to finish playing by inserting a wait into the database term for leveling up.",
+    "（例：%1は%2 %3 に上がった！\\|\\|）": "(Example: %1 increased to %2 %3!\\|\\|)",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "パラメータ一覧（ParameterList）": "Parameter List (ParameterList)",
+    "レベルアップ時に表示するパラメータの一覧です。": "This is the list of parameters displayed when leveling up.",
+    "パラメータの表示名を変更したり、追加のパラメータを表示したりできます。": "You can change parameter display names and display additional parameters.",
+    "列数（NumberOfColumns）": "Number of Columns (NumberOfColumns)",
+    "パラメータを表示する際の列数です。": "The number of columns used to display parameters.",
+    "表示フォーマット（DisplayFormat）": "Display Format (DisplayFormat)",
+    "パラメータの上昇量を表示するフォーマットです。": "The format used to display the amount by which a parameter increased.",
+    "%1: パラメータ名, %2: 上昇量": "%1: Parameter name, %2: Increase",
+    "レベルアップ効果音（LevelUpSe）": "Level-Up Sound Effect (LevelUpSe)",
+    "レベルアップ時に鳴らす効果音です。": "The sound effect played when leveling up.",
+    "レベルアップＭＥ（LevelUpMe）": "Level-Up ME (LevelUpMe)",
+    "レベルアップ時に演奏するＭＥです。": "The ME played when leveling up.",
+    "Dynamic用スキル（DynamicSkill）": "Dynamic Skill (DynamicSkill)",
+    "レベルアップ時に実行するDynamicAnimation&Motionのスキルです。": "The DynamicAnimation&Motion skill executed when leveling up.",
+    "使用には該当プラグインが必須です。": "The corresponding plugin is required for use.",
+    "＜多重職業連携用＞（<AdditionalClasses>）": "<For Additional Classes Integration> (<AdditionalClasses>)",
+    "該当プラグインを使用しないなら無効です。": "Disable this if you are not using the corresponding plugin.",
+    "レベルアップ効果音（AC_LevelUpSe）": "Level-Up Sound Effect (AC_LevelUpSe)",
+    "追加職業のレベルアップ時に鳴らす効果音です。": "The sound effect played when leveling up an additional class.",
+    "レベルアップＭＥ（AC_LevelUpMe）": "Level-Up ME (AC_LevelUpMe)",
+    "追加職業のレベルアップ時に演奏するＭＥです。": "This is the ME played when an additional class levels up.",
+    "Dynamic用スキル（AC_DynamicSkill）": "Skill for Dynamic (AC_DynamicSkill)",
+    "追加職業のレベルアップ時に実行するDynamicAnimation&Motionのスキルです。": "This is a DynamicAnimation&Motion skill executed when an additional class levels up."
+  }
+}

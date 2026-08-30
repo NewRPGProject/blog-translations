@@ -1,0 +1,1067 @@
+{
+  "articleId": "483027532",
+  "sourceUrl": "https://newrpg.seesaa.net/article/483027532.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "b46eb74faff53fcd9454a68dbd3e7e31da09c073fc253e1f2d0aa90946307686",
+  "translatedAt": "2026-08-30T08:52:53.468Z",
+  "title": "Expanding Magic Reflection Features【RPG Maker MZ & MV Plugin】",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "魔法反射の仕様を拡張【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "4e2f2b29932ee068f1d68bb32d41a444fa6d3f9e0ad4c02f0099c8e29807ad65",
+      "translation": "Expanding Magic Reflection Features【RPG Maker MZ & MV Plugin】",
+      "contextHash": "4e2f2b29932ee068f1d68bb32d41a444fa6d3f9e0ad4c02f0099c8e29807ad65"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "魔法反射の仕様に関して、様々な調整が可能です。",
+      "sourceHash": "ab26fe596187d15a353ceee5d0fd7ed5e94e6426aea3aacb6fa1bb1832fbe368",
+      "translation": "Various adjustments can be made to the magic reflection behavior.",
+      "contextHash": "ab26fe596187d15a353ceee5d0fd7ed5e94e6426aea3aacb6fa1bb1832fbe368"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "反射元、反射先にそれぞれアニメーションを指定可",
+      "sourceHash": "72e195eee77509804a90950ddfab9c5d2f8d6a21af0a7379010c273d503f8771",
+      "translation": "Animations can be specified separately for the reflection source and destination.",
+      "contextHash": "72e195eee77509804a90950ddfab9c5d2f8d6a21af0a7379010c273d503f8771"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "反射先をスキル使用者ではなく、別サイドに変更可",
+      "sourceHash": "cee3e5c23d8df1424bbf679159120089393de454ce6d71c6e87810fade3fd8e2",
+      "translation": "The reflection destination can be changed to the other side instead of the skill user.",
+      "contextHash": "cee3e5c23d8df1424bbf679159120089393de454ce6d71c6e87810fade3fd8e2"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "スキルタイプ毎に反射の設定をすることが可能",
+      "sourceHash": "dc1742872ca0176b3caf1314d1a33a24d8bb64b450a3d3f44b7d48f14c9d7768",
+      "translation": "Reflection settings can be configured for each skill type.",
+      "contextHash": "dc1742872ca0176b3caf1314d1a33a24d8bb64b450a3d3f44b7d48f14c9d7768"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "※ツクールの標準仕様では、命中タイプが『魔法攻撃』のスキルを反射",
+      "sourceHash": "aa5cf35f94e906db41b7615dda42f7ffd7f53c6e9fbbe3998c84bb8ec71c3bd3",
+      "translation": "※By default, skills with the Hit Type set to “Magic Attack” are reflected.",
+      "contextHash": "aa5cf35f94e906db41b7615dda42f7ffd7f53c6e9fbbe3998c84bb8ec71c3bd3"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "反射無効のスキルを作成可",
+      "sourceHash": "c9be2f0d106348032ee8f138a8afd22d71c1b812f55e119980b9fd8487a4c0a3",
+      "translation": "Skills that ignore reflection can be created.",
+      "contextHash": "c9be2f0d106348032ee8f138a8afd22d71c1b812f55e119980b9fd8487a4c0a3"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn this feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_MagicReflection.js",
+      "sourceHash": "6d05890bcafb2b1f45171f80c4a5bec21724623947b67d5302504fb3a1e5789e",
+      "translation": "NRP_MagicReflection.js",
+      "contextHash": "82bfb016ada100b6f9c6f533573b3e2a43e588a92951b541bd8aed56b9d8edf2"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※NRP_DamageTiming.jsと併用する場合、このプラグインを下に配置してください。",
+      "sourceHash": "2b3ca008ad32f9afd0120eaa77ceed80693560e765a5d7277675a29f1dbd30f3",
+      "translation": "※When used with NRP_DamageTiming.js, place this plugin below it.",
+      "contextHash": "2b3ca008ad32f9afd0120eaa77ceed80693560e765a5d7277675a29f1dbd30f3"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ツクールMZ1.4のＭＶアニメーション表示に対応。",
+      "sourceHash": "03450201fdcd604b4073e7400c3b2ebdccf37f61d20c65f59a25d51bc5ad3797",
+      "translation": "Added support for displaying MV animations in RPG Maker MZ 1.4.",
+      "contextHash": "03450201fdcd604b4073e7400c3b2ebdccf37f61d20c65f59a25d51bc5ad3797"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "競合対策用に微調整。（2023/12/30 ver1.011）",
+      "sourceHash": "b1f46c46f5f12312449e68bca9085a8dcbda0fad8e5f2339c212a83fa0d1c013",
+      "translation": "Minor adjustments to prevent conflicts. (2023/12/30 ver1.011)",
+      "contextHash": "b1f46c46f5f12312449e68bca9085a8dcbda0fad8e5f2339c212a83fa0d1c013"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ステートのメモ欄（Note of states）",
+      "sourceHash": "b1cd141574246344ea7f4d9e8702ad7b901a5691476c97f0408f5a913288d01f",
+      "translation": "State Note Fields (Note of states)",
+      "contextHash": "b1cd141574246344ea7f4d9e8702ad7b901a5691476c97f0408f5a913288d01f"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "プラグインパラメータの『設定リスト』に登録すれば、スキルタイプを条件にして反射の設定が可能となります。",
+      "sourceHash": "081baa80b0ec17b3ace4ff97f30a640e2b6bdf14997a284615a9baea77388a0d",
+      "translation": "By registering settings in the plugin parameter “Setting List,” reflection settings can be configured based on the skill type.",
+      "contextHash": "081baa80b0ec17b3ace4ff97f30a640e2b6bdf14997a284615a9baea77388a0d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "例えば『必殺技』のみを反射するステートなどを作成可能です。",
+      "sourceHash": "f633548ccb54e52bd699ffbd65f777d8c442447fc000dc8a1ae523bcaf904d50",
+      "translation": "For example, you can create a state that reflects only “Special Attacks.”",
+      "contextHash": "f633548ccb54e52bd699ffbd65f777d8c442447fc000dc8a1ae523bcaf904d50"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "『設定リスト』に登録した設定ＩＤを、以下のようにステートのメモ欄に記入してください。",
+      "sourceHash": "e6b7e14725938d5c36c9889af738bd24c2a16c3b5b494602ed6d4a7d45b63d26",
+      "translation": "Enter the setting ID registered in the “Setting List” in the state's note field as shown below.",
+      "contextHash": "e6b7e14725938d5c36c9889af738bd24c2a16c3b5b494602ed6d4a7d45b63d26"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<MagicRefrection:[設定ＩＤ]>",
+      "sourceHash": "88b0d851384dd05d2f205a5d133da56adf0c1892f72d4641b87737f9c9df4686",
+      "translation": "<MagicRefrection:[Setting ID]>",
+      "contextHash": "88b0d851384dd05d2f205a5d133da56adf0c1892f72d4641b87737f9c9df4686"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※[]は含めないでください。。",
+      "sourceHash": "46762c2a4e28b822a27ce5cbee79510dce785468e246297e2f67e4bf88c043fb",
+      "translation": "※Do not include [].",
+      "contextHash": "46762c2a4e28b822a27ce5cbee79510dce785468e246297e2f67e4bf88c043fb"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※標準とは異なり、命中タイプは無視するようになります。",
+      "sourceHash": "1d30ffc3591693acd420a88e8b2e047a890bf60cc0292ca811e0a7e7bff5590e",
+      "translation": "※Unlike the default behavior, the Hit Type will be ignored.",
+      "contextHash": "1d30ffc3591693acd420a88e8b2e047a890bf60cc0292ca811e0a7e7bff5590e"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "また、以下を設定するとそのステート中はスキルを反射しなくなります。",
+      "sourceHash": "bd607d55ef54cef57e8f9bb73691f72ff95a7459486b95e2a055d81d6534276e",
+      "translation": "Additionally, setting the following will prevent skills from being reflected while the state is active.",
+      "contextHash": "bd607d55ef54cef57e8f9bb73691f72ff95a7459486b95e2a055d81d6534276e"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ジャンプなどの無敵系ステート時に反射を禁止したい場合を想定しています。",
+      "sourceHash": "716b36165a6999eb3ab20eb13b04a8b30f2e7bc58335a3900f86b18117cb6c4a",
+      "translation": "This is intended for cases where you want to prohibit reflection while an invincible state, such as Jump, is active.",
+      "contextHash": "716b36165a6999eb3ab20eb13b04a8b30f2e7bc58335a3900f86b18117cb6c4a"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "スキルのメモ欄（Note of skills）",
+      "sourceHash": "5e3359e87c0702ef5ae4825143bd2404f0b71ee60e0f8f9b71bf8eb44bed63ba",
+      "translation": "Skill Note Fields (Note of skills)",
+      "contextHash": "5e3359e87c0702ef5ae4825143bd2404f0b71ee60e0f8f9b71bf8eb44bed63ba"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "魔法反射を無効化するスキルを作成可能です。以下をスキルのメモ欄に指定してください。",
+      "sourceHash": "9888d087a5932ab7fc22dfb5c4164cde7e9dc09d00df66bb3fac8eff33ed71f9",
+      "translation": "You can create skills that disable magic reflection. Specify the following in the skill's note field.",
+      "contextHash": "9888d087a5932ab7fc22dfb5c4164cde7e9dc09d00df66bb3fac8eff33ed71f9"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "オブジェクトのメモ欄（Note of objects）",
+      "sourceHash": "698a1e7d7e3bd2e737bf95d40734c86d28a45c01aa1fd37ee88f530868358d50",
+      "translation": "Object Note Fields (Note of objects)",
+      "contextHash": "698a1e7d7e3bd2e737bf95d40734c86d28a45c01aa1fd37ee88f530868358d50"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を設定すればバトラーの使用した魔法が反射されなくなります。",
+      "sourceHash": "b308df4f8fe3306295dd818300b941a79792cd32c3cd78248385ae2feb4b6965",
+      "translation": "Setting the following in the note field of each object (actor, enemy, class, equipment, state, or skill) will prevent magic used by the battler from being reflected.",
+      "contextHash": "b308df4f8fe3306295dd818300b941a79792cd32c3cd78248385ae2feb4b6965"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "スキルについては覚えているだけで、発揮するパッシブスキルとなります。",
+      "sourceHash": "63b3846ebc56a4eddc782adb43e0deda60f35ca02b734af0f49b67e1642d99ed",
+      "translation": "For skills, simply learning the skill makes it an active passive skill.",
+      "contextHash": "63b3846ebc56a4eddc782adb43e0deda60f35ca02b734af0f49b67e1642d99ed"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "注意点（Notice）",
+      "sourceHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0",
+      "translation": "Notes (Notice)",
+      "contextHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "効果音について",
+      "sourceHash": "65cde37d10a602260d421a9b0e03f147313f4b2b21c25fa61090f036a6f92eea",
+      "translation": "About Sound Effects",
+      "contextHash": "65cde37d10a602260d421a9b0e03f147313f4b2b21c25fa61090f036a6f92eea"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "システム２で設定できる魔法反射の効果音は、なしにしておくことをオススメします。",
+      "sourceHash": "75f65ca6496bd82eed2fd91ef705c335ab93db7320d274e28cd75d3360059799",
+      "translation": "It is recommended to set the magic reflection sound effect configurable in System 2 to None.",
+      "contextHash": "75f65ca6496bd82eed2fd91ef705c335ab93db7320d274e28cd75d3360059799"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "効果音は反射アニメーションに任せたほうが自然です。",
+      "sourceHash": "8233e0917c750b9efccd4f81c93a69c823475a3adcc7bf3e07beecd242c8e7b3",
+      "translation": "It sounds more natural to leave the sound effects to the reflection animation.",
+      "contextHash": "8233e0917c750b9efccd4f81c93a69c823475a3adcc7bf3e07beecd242c8e7b3"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "高速化モードについて",
+      "sourceHash": "1b308027cd49e42ac7abd4c78bf03d3576f0937f9ae8adafd84815ebf9df369d",
+      "translation": "About High-Speed Mode",
+      "contextHash": "1b308027cd49e42ac7abd4c78bf03d3576f0937f9ae8adafd84815ebf9df369d"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "通常、反射処理は一体ずつメッセージ表示などの処理が行われるので、テンポが悪いです。",
+      "sourceHash": "81f5804b18ce6770e51a919ef79ffa7178fddc4bec360a146702096403e997f7",
+      "translation": "Normally, reflection processing displays messages and performs other processing one battler at a time, resulting in poor pacing.",
+      "contextHash": "81f5804b18ce6770e51a919ef79ffa7178fddc4bec360a146702096403e997f7"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "NRP_DamageTimingの『ダメージ一括表示』をオンにすると、自動で高速化モードが有効となります。",
+      "sourceHash": "79b986a9d68fd8237d12b835eb8911f5139ad27f76c2c0bf8c3267fab4b1f008",
+      "translation": "Enabling “Display Damage All at Once” in NRP_DamageTiming automatically enables High-Speed Mode.",
+      "contextHash": "79b986a9d68fd8237d12b835eb8911f5139ad27f76c2c0bf8c3267fab4b1f008"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "また、ディレイ関連の項目は高速化モード時しか機能しません。",
+      "sourceHash": "9005c83440085645493cb6899ee77e930ffb0de972bc75c71fca8ca4937cd96f",
+      "translation": "Also, delay-related settings only function in High-Speed Mode.",
+      "contextHash": "9005c83440085645493cb6899ee77e930ffb0de972bc75c71fca8ca4937cd96f"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "別サイドに反射（ReflectAnotherSide）",
+      "sourceHash": "63a671116af003685f7ef39beec850f939a7764493b69b1ba468c980f3b15a4b",
+      "translation": "Reflect to Another Side (ReflectAnotherSide)",
+      "contextHash": "63a671116af003685f7ef39beec850f939a7764493b69b1ba468c980f3b15a4b"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "魔法反射時、別サイドかつランダムに対象を変更します。",
+      "sourceHash": "7d2ac023f3b9850031a3f541fc24672932783a678d9f894ae0c6172073effb49",
+      "translation": "When magic is reflected, the target is randomly changed to a target on the other side.",
+      "contextHash": "7d2ac023f3b9850031a3f541fc24672932783a678d9f894ae0c6172073effb49"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "反射元のアニメーション（ReflectFromAnimation）",
+      "sourceHash": "a339623e8b6b512439a185e48f1f33ad2f80a6dcfe6144067fea389eef3ff9b7",
+      "translation": "Reflection Source Animation (ReflectFromAnimation)",
+      "contextHash": "a339623e8b6b512439a185e48f1f33ad2f80a6dcfe6144067fea389eef3ff9b7"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "反射を行うバトラーに表示するアニメーションです。",
+      "sourceHash": "8622a2e0b02501e7f1cafcd23e944111aec1d256aa5894e38f6df4dead4a92bf",
+      "translation": "The animation displayed on the battler performing the reflection.",
+      "contextHash": "8622a2e0b02501e7f1cafcd23e944111aec1d256aa5894e38f6df4dead4a92bf"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "反射先のアニメーション（ReflectToAnimation）",
+      "sourceHash": "f868458dfe3695f8112e016e7050648023fcf288e2d9fe2f11aa76b8fa864cac",
+      "translation": "Reflection Destination Animation (ReflectToAnimation)",
+      "contextHash": "f868458dfe3695f8112e016e7050648023fcf288e2d9fe2f11aa76b8fa864cac"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "反射先のバトラーに表示するアニメーションです。",
+      "sourceHash": "6639baf9bdf9480e333085649394ecace35fd3eb93d79b00066489518cf87884",
+      "translation": "The animation displayed on the battler at the reflection destination.",
+      "contextHash": "6639baf9bdf9480e333085649394ecace35fd3eb93d79b00066489518cf87884"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "反射先に元アニメを表示（ToOriginalAnimation）",
+      "sourceHash": "743d635ddf2cd766b77131f77fd14ec857e870b25b201c22714272351e7b88b7",
+      "translation": "Display the Original Animation at the Destination (ToOriginalAnimation)",
+      "contextHash": "743d635ddf2cd766b77131f77fd14ec857e870b25b201c22714272351e7b88b7"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "魔法反射時、反射先に本来のアニメーションを表示します。",
+      "sourceHash": "cc5540d31fbb0568be095d77575ab6c1557d8e35a5d0ec8dc9109dd30e32922a",
+      "translation": "When magic is reflected, the original animation is displayed at the reflection destination.",
+      "contextHash": "cc5540d31fbb0568be095d77575ab6c1557d8e35a5d0ec8dc9109dd30e32922a"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "オンにした場合、表示できるのはスキルに設定されているアニメーションだけです。",
+      "sourceHash": "df1d24b028360185353fc884387d33ad9e7ce648ba4126dad74a43a16059d6ab",
+      "translation": "When enabled, only animations configured for the skill can be displayed.",
+      "contextHash": "df1d24b028360185353fc884387d33ad9e7ce648ba4126dad74a43a16059d6ab"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "DynamicAnimationなどのプラグインと組み合わせた場合、メモ欄の記述までは実行されませんので、ご了承ください。",
+      "sourceHash": "546233441f0f12fe14c8626e5bd056bb72e13af71d187243cb49660399219651",
+      "translation": "When combined with plugins such as DynamicAnimation, note field entries will not be executed, so please be aware of this.",
+      "contextHash": "546233441f0f12fe14c8626e5bd056bb72e13af71d187243cb49660399219651"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "高速化モード（HighSpeedMode）",
+      "sourceHash": "2107872442234b436f165fc7f2c3459641c7ae36da7685e803e5133e831f0ee6",
+      "translation": "High-Speed Mode (HighSpeedMode)",
+      "contextHash": "2107872442234b436f165fc7f2c3459641c7ae36da7685e803e5133e831f0ee6"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "オンにするとディレイを無視してメッセージを待ちます。",
+      "sourceHash": "8828b41a61b50e3f38aef74895fa5f8c1da2453a11b9741a1c8c97252dcca4c0",
+      "translation": "When enabled, it ignores delays and waits for messages.",
+      "contextHash": "8828b41a61b50e3f38aef74895fa5f8c1da2453a11b9741a1c8c97252dcca4c0"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "通常は自動で判断しますので空白でＯＫです。",
+      "sourceHash": "2cbbd97276b551d8cfa3c06526d753f1f91a81baa242992c0aa2e1f96fb7fafb",
+      "translation": "Normally, this is determined automatically, so you can leave it blank.",
+      "contextHash": "2cbbd97276b551d8cfa3c06526d753f1f91a81baa242992c0aa2e1f96fb7fafb"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "強制的にモードを切り替えたい場合のみ、オンオフを設定してください。ただし、基本的には不自然な動作になります。",
+      "sourceHash": "deb30177e9b594bf94fffa73294a525994f0f73724fa3c7e2b3ec1ae968ee552",
+      "translation": "Set this to on or off only when you want to forcibly switch modes. However, this will generally result in unnatural behavior.",
+      "contextHash": "deb30177e9b594bf94fffa73294a525994f0f73724fa3c7e2b3ec1ae968ee552"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "反射先の標準ディレイ（ToBaseDelay）",
+      "sourceHash": "a6d5b0f98b1681012e60f4b4c664611ad0761ea4027f9d07b26f7eabc5c652ff",
+      "translation": "Standard Delay for Reflection Destination (ToBaseDelay)",
+      "contextHash": "a6d5b0f98b1681012e60f4b4c664611ad0761ea4027f9d07b26f7eabc5c652ff"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "反射先にアニメーションを表示するまでの時間差です。",
+      "sourceHash": "56453c3844b495429af8df775abdb247c870661a8921b63fff993d27eb3f6a66",
+      "translation": "The time delay before displaying the animation at the reflection destination.",
+      "contextHash": "56453c3844b495429af8df775abdb247c870661a8921b63fff993d27eb3f6a66"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "1/60秒単位で設定してください。",
+      "sourceHash": "ae691be50f4efd28ea4de545245da45be1844434fdb8dff5e8b38f0512eb1f5a",
+      "translation": "Set this in 1/60-second increments.",
+      "contextHash": "ae691be50f4efd28ea4de545245da45be1844434fdb8dff5e8b38f0512eb1f5a"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "※高速化モードがオンの場合のみ有効となります。",
+      "sourceHash": "55f952b72c1d2886adb99cba588504395b93c08fcb93ec4230c3df7a326ea8a1",
+      "translation": "※Only effective when acceleration mode is on.",
+      "contextHash": "55f952b72c1d2886adb99cba588504395b93c08fcb93ec4230c3df7a326ea8a1"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "対象別ディレイ（NextDelay）",
+      "sourceHash": "b9e20b63690e9b2b23792f90d10d2e2cdd16692a44dae6f89fb8c262b190d88e",
+      "translation": "Target-Specific Delay (NextDelay)",
+      "contextHash": "b9e20b63690e9b2b23792f90d10d2e2cdd16692a44dae6f89fb8c262b190d88e"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "反射アニメーションを表示する際の対象毎の時間差です。",
+      "sourceHash": "8a377a164fdaf1d6166b77cb45226768e79496aae09e81a5ed42d4c40cd7e214",
+      "translation": "The time delay for each target when displaying the reflection animation.",
+      "contextHash": "8a377a164fdaf1d6166b77cb45226768e79496aae09e81a5ed42d4c40cd7e214"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "1/60秒単位で設定してください。",
+      "sourceHash": "ae691be50f4efd28ea4de545245da45be1844434fdb8dff5e8b38f0512eb1f5a",
+      "translation": "Set this in 1/60-second increments.",
+      "contextHash": "ae691be50f4efd28ea4de545245da45be1844434fdb8dff5e8b38f0512eb1f5a"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "※高速化モードがオンの場合のみ有効となります。",
+      "sourceHash": "55f952b72c1d2886adb99cba588504395b93c08fcb93ec4230c3df7a326ea8a1",
+      "translation": "※Only effective when acceleration mode is on.",
+      "contextHash": "55f952b72c1d2886adb99cba588504395b93c08fcb93ec4230c3df7a326ea8a1"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "設定リスト（SettingList）",
+      "sourceHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287",
+      "translation": "Settings List (SettingList)",
+      "contextHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "魔法反射に関する設定の一覧です。",
+      "sourceHash": "9f52ef2443e1b69ed18a10459c722d5c5e21603003075cfaa7ac32ecfa699827",
+      "translation": "A list of settings related to magic reflection.",
+      "contextHash": "9f52ef2443e1b69ed18a10459c722d5c5e21603003075cfaa7ac32ecfa699827"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "細かい条件を指定したい場合に有効です。",
+      "sourceHash": "d8c04351fa5ad8598a43605558a01b6cdf8de4480c39ae52ffab38aaea55594f",
+      "translation": "Useful when you want to specify detailed conditions.",
+      "contextHash": "d8c04351fa5ad8598a43605558a01b6cdf8de4480c39ae52ffab38aaea55594f"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "プラグインパラメータ：設定リスト",
+      "sourceHash": "33032fa42f300e3ccb668d59d8773248fffe6b22a8a3164633963f43b7ee8e0e",
+      "translation": "Plugin Parameter: Settings List",
+      "contextHash": "33032fa42f300e3ccb668d59d8773248fffe6b22a8a3164633963f43b7ee8e0e"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "設定ＩＤ（SettingId）",
+      "sourceHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d",
+      "translation": "Setting ID (SettingId)",
+      "contextHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "ステートのメモ欄に指定する識別子です。",
+      "sourceHash": "7a22b3576e5c0be21e3913433356852bc02ae3465db1001cfb9c405209dc1feb",
+      "translation": "The identifier specified in a state's note field.",
+      "contextHash": "7a22b3576e5c0be21e3913433356852bc02ae3465db1001cfb9c405209dc1feb"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "スキルタイプ（SkillTypes）",
+      "sourceHash": "20674f8d1008dd48fc43b0264669a9c265d2c142857b513e0dadda6366468fc9",
+      "translation": "Skill Types (SkillTypes)",
+      "contextHash": "20674f8d1008dd48fc43b0264669a9c265d2c142857b513e0dadda6366468fc9"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "反射の対象とするスキルタイプです。",
+      "sourceHash": "706b39f3488beb45022bc312412614fe88c1d85ad34d319bed6f4fe00ad3e459",
+      "translation": "The skill types subject to reflection.",
+      "contextHash": "706b39f3488beb45022bc312412614fe88c1d85ad34d319bed6f4fe00ad3e459"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]対象サイドの変更プラグイン[[/LINK_1]]と組み合わせれば、ＦＦシリーズで有名な「仲間にかけた全体魔法を敵に反射して攻撃」というような芸当も可能となります。",
+      "sourceHash": "5eb097e5f3fe93de94b89fe8e50de83e91e22d374502aa610b06bf2c5955d613",
+      "parts": [
+        {
+          "source": "対象サイドの変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせれば、ＦＦシリーズで有名な「仲間にかけた全体魔法を敵に反射して攻撃」というような芸当も可能となります。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Target Side Change Plugin[[/LINK_1]] also enables tricks such as the famous FF series technique of reflecting an all-target spell cast on allies back at enemies to attack them.",
+      "contextHash": "5eb097e5f3fe93de94b89fe8e50de83e91e22d374502aa610b06bf2c5955d613"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄（Note of states）[[/LINK_1]]",
+      "sourceHash": "9ba15da26757d45ed2090d7020738834d4fd931ba15ce4d677c3719e9547d5bf",
+      "parts": [
+        {
+          "source": "ステートのメモ欄（Note of states）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Note (Note of states)[[/LINK_1]]",
+      "contextHash": "9ba15da26757d45ed2090d7020738834d4fd931ba15ce4d677c3719e9547d5bf"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（Note of skills）[[/LINK_1]]",
+      "sourceHash": "84579b35f158331205c470208b90de46e4591205216a18d4a68a333929449d78",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（Note of skills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note (Note of skills)[[/LINK_1]]",
+      "contextHash": "84579b35f158331205c470208b90de46e4591205216a18d4a68a333929449d78"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]オブジェクトのメモ欄（Note of objects）[[/LINK_1]]",
+      "sourceHash": "546a84decc062d05162a0764510437e07aa3b10bf8ac50e45fe6229e9754ebc2",
+      "parts": [
+        {
+          "source": "オブジェクトのメモ欄（Note of objects）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Object Note (Note of objects)[[/LINK_1]]",
+      "contextHash": "546a84decc062d05162a0764510437e07aa3b10bf8ac50e45fe6229e9754ebc2"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]注意点（Notice）[[/LINK_1]]",
+      "sourceHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e",
+      "parts": [
+        {
+          "source": "注意点（Notice）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Notice (Notice)[[/LINK_1]]",
+      "contextHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]効果音について[[/LINK_1]]",
+      "sourceHash": "f7be3eac2c06905195c33d638f130e6d8a47c5d12ff44f3158967d3126f8f469",
+      "parts": [
+        {
+          "source": "効果音について",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About Sound Effects[[/LINK_1]]",
+      "contextHash": "f7be3eac2c06905195c33d638f130e6d8a47c5d12ff44f3158967d3126f8f469"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]高速化モードについて[[/LINK_1]]",
+      "sourceHash": "c13902ec2d4b182f8141410e51c648199dea7e0c7a34c75ebbca9efa1a22aca5",
+      "parts": [
+        {
+          "source": "高速化モードについて",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About High-Speed Mode[[/LINK_1]]",
+      "contextHash": "c13902ec2d4b182f8141410e51c648199dea7e0c7a34c75ebbca9efa1a22aca5"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]別サイドに反射（ReflectAnotherSide）[[/LINK_1]]",
+      "sourceHash": "6e3d62f7e7a7381ae649ac61d987dd11ae2e6630a6f05229896909f401436ae4",
+      "parts": [
+        {
+          "source": "別サイドに反射（ReflectAnotherSide）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reflect on Another Side (ReflectAnotherSide)[[/LINK_1]]",
+      "contextHash": "6e3d62f7e7a7381ae649ac61d987dd11ae2e6630a6f05229896909f401436ae4"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]反射元のアニメーション（ReflectFromAnimation）[[/LINK_1]]",
+      "sourceHash": "9a6962d8277541fa64989add4da7a279e478188802b23977d090ed4369f8d673",
+      "parts": [
+        {
+          "source": "反射元のアニメーション（ReflectFromAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reflection Source Animation (ReflectFromAnimation)[[/LINK_1]]",
+      "contextHash": "9a6962d8277541fa64989add4da7a279e478188802b23977d090ed4369f8d673"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]反射先のアニメーション（ReflectToAnimation）[[/LINK_1]]",
+      "sourceHash": "d034be5f05999ba9eba437abb01fb3684ac76362506b9687c6fa8a86cde16b2b",
+      "parts": [
+        {
+          "source": "反射先のアニメーション（ReflectToAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reflection Target Animation (ReflectToAnimation)[[/LINK_1]]",
+      "contextHash": "d034be5f05999ba9eba437abb01fb3684ac76362506b9687c6fa8a86cde16b2b"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]反射先に元アニメを表示（ToOriginalAnimation）[[/LINK_1]]",
+      "sourceHash": "5000c32f0c4cf64f9bab04cc05835ac761c6a9079ce8f81220530649c8db43cb",
+      "parts": [
+        {
+          "source": "反射先に元アニメを表示（ToOriginalAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display the Original Animation at the Reflection Target (ToOriginalAnimation)[[/LINK_1]]",
+      "contextHash": "5000c32f0c4cf64f9bab04cc05835ac761c6a9079ce8f81220530649c8db43cb"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]タイミング調整（Timing）[[/LINK_1]]",
+      "sourceHash": "64d85ff5bec4af9d3b83473e2f83bc5e5396ef4d6771543b1e292650c313e1a9",
+      "parts": [
+        {
+          "source": "タイミング調整（Timing）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Timing Adjustment (Timing)[[/LINK_1]]",
+      "contextHash": "64d85ff5bec4af9d3b83473e2f83bc5e5396ef4d6771543b1e292650c313e1a9"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]高速化モード（HighSpeedMode）[[/LINK_1]]",
+      "sourceHash": "9e41c9c741001fd4f8cb545b9e0b7d6d8d435491ff6ef748fef2d5737995565e",
+      "parts": [
+        {
+          "source": "高速化モード（HighSpeedMode）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]High-Speed Mode (HighSpeedMode)[[/LINK_1]]",
+      "contextHash": "9e41c9c741001fd4f8cb545b9e0b7d6d8d435491ff6ef748fef2d5737995565e"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]反射先の標準ディレイ（ToBaseDelay）[[/LINK_1]]",
+      "sourceHash": "34b9a8c8b17d0ac1af32249f5a9ff383c4f661b4788513fe4ef4f4b0d87fcc66",
+      "parts": [
+        {
+          "source": "反射先の標準ディレイ（ToBaseDelay）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Default Delay for Reflection Targets (ToBaseDelay)[[/LINK_1]]",
+      "contextHash": "34b9a8c8b17d0ac1af32249f5a9ff383c4f661b4788513fe4ef4f4b0d87fcc66"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]対象別ディレイ（NextDelay）[[/LINK_1]]",
+      "sourceHash": "5015680340e7d9b323c495054a45766aad20cca08ca65a3bcb26ce31bd74c2e8",
+      "parts": [
+        {
+          "source": "対象別ディレイ（NextDelay）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target-Specific Delay (NextDelay)[[/LINK_1]]",
+      "contextHash": "5015680340e7d9b323c495054a45766aad20cca08ca65a3bcb26ce31bd74c2e8"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]詳細設定（Detail）[[/LINK_1]]",
+      "sourceHash": "536065401f2802f5c0e1de7823081dcaba9f8a36dd6e94101eaa1378abcd395a",
+      "parts": [
+        {
+          "source": "詳細設定（Detail）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Detailed Settings (Detail)[[/LINK_1]]",
+      "contextHash": "536065401f2802f5c0e1de7823081dcaba9f8a36dd6e94101eaa1378abcd395a"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]設定リスト（SettingList）[[/LINK_1]]",
+      "sourceHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a",
+      "parts": [
+        {
+          "source": "設定リスト（SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Settings List (SettingList)[[/LINK_1]]",
+      "contextHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ：設定リスト（Plugin Parameter SettingList）[[/LINK_1]]",
+      "sourceHash": "9f11df8513d3029f2b86453b2b3d372133ad33352c36104b25fdc448c1727114",
+      "parts": [
+        {
+          "source": "プラグインパラメータ：設定リスト（Plugin Parameter SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter: Settings List (Plugin Parameter SettingList)[[/LINK_1]]",
+      "contextHash": "9f11df8513d3029f2b86453b2b3d372133ad33352c36104b25fdc448c1727114"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]設定ＩＤ（SettingId）[[/LINK_1]]",
+      "sourceHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165",
+      "parts": [
+        {
+          "source": "設定ＩＤ（SettingId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting ID (SettingId)[[/LINK_1]]",
+      "contextHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]スキルタイプ（SkillTypes）[[/LINK_1]]",
+      "sourceHash": "e6c46b334edcb8a0c4498c9ad44bdbca563833f8c4beb0724a77fa008cf39d23",
+      "parts": [
+        {
+          "source": "スキルタイプ（SkillTypes）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Types (SkillTypes)[[/LINK_1]]",
+      "contextHash": "e6c46b334edcb8a0c4498c9ad44bdbca563833f8c4beb0724a77fa008cf39d23"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]自身への反射を無効化できるステート[[/LINK_1]]を作成できるようにした。",
+      "sourceHash": "93f992939fa804092e0721f2e5f410d5ed1e967feb0b285ab6ec72724b100ac6",
+      "parts": [
+        {
+          "source": "自身への反射を無効化できるステート",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を作成できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "You can now create a [[LINK_1]]state that can disable reflection toward itself[[/LINK_1]].",
+      "contextHash": "93f992939fa804092e0721f2e5f410d5ed1e967feb0b285ab6ec72724b100ac6"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]バトラーの使用した魔法が反射されなくなる特徴[[/LINK_1]]を設定可能に。",
+      "sourceHash": "e9d24ca150872f3e1dfc4f22b4ace745259bf5f0c0f25c56daf6590389b63c5f",
+      "parts": [
+        {
+          "source": "バトラーの使用した魔法が反射されなくなる特徴",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定可能に。",
+          "link": false
+        }
+      ],
+      "translation": "You can now configure a [[LINK_1]]feature that prevents magic used by a battler from being reflected[[/LINK_1]].",
+      "contextHash": "e9d24ca150872f3e1dfc4f22b4ace745259bf5f0c0f25c56daf6590389b63c5f"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "そこで[[LINK_1]]ダメージタイミングの調整プラグイン（NRP_DamageTiming.js）[[/LINK_1]]との連携によって、高速での反射表示を可能としています。",
+      "sourceHash": "9f822745c0f61f101725efaaf05f5a513bdb0895e203fab0c36ded40d9b215bc",
+      "parts": [
+        {
+          "source": "そこで",
+          "link": false
+        },
+        {
+          "source": "ダメージタイミングの調整プラグイン（NRP_DamageTiming.js）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との連携によって、高速での反射表示を可能としています。",
+          "link": false
+        }
+      ],
+      "translation": "This enables high-speed reflection display through integration with the [[LINK_1]]Damage Timing Adjustment Plugin (NRP_DamageTiming.js)[[/LINK_1]].",
+      "contextHash": "9f822745c0f61f101725efaaf05f5a513bdb0895e203fab0c36ded40d9b215bc"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "魔法反射の仕様に関して、様々な調整が可能です。": "Various adjustments can be made to the magic reflection behavior.",
+    "反射元、反射先にそれぞれアニメーションを指定可": "Animations can be specified separately for the reflection source and destination.",
+    "反射先をスキル使用者ではなく、別サイドに変更可": "The reflection destination can be changed to the other side instead of the skill user.",
+    "スキルタイプ毎に反射の設定をすることが可能": "Reflection settings can be configured for each skill type.",
+    "※ツクールの標準仕様では、命中タイプが『魔法攻撃』のスキルを反射": "※By default, skills with the Hit Type set to “Magic Attack” are reflected.",
+    "反射無効のスキルを作成可": "Skills that ignore reflection can be created.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn this feature ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_MagicReflection.js": "NRP_MagicReflection.js",
+    "※NRP_DamageTiming.jsと併用する場合、このプラグインを下に配置してください。": "※When used with NRP_DamageTiming.js, place this plugin below it.",
+    "更新履歴（History）": "Update History (History)",
+    "ツクールMZ1.4のＭＶアニメーション表示に対応。": "Added support for displaying MV animations in RPG Maker MZ 1.4.",
+    "競合対策用に微調整。（2023/12/30 ver1.011）": "Minor adjustments to prevent conflicts. (2023/12/30 ver1.011)",
+    "公開！": "Released!",
+    "ステートのメモ欄（Note of states）": "State Note Fields (Note of states)",
+    "プラグインパラメータの『設定リスト』に登録すれば、スキルタイプを条件にして反射の設定が可能となります。": "By registering settings in the plugin parameter “Setting List,” reflection settings can be configured based on the skill type.",
+    "例えば『必殺技』のみを反射するステートなどを作成可能です。": "For example, you can create a state that reflects only “Special Attacks.”",
+    "『設定リスト』に登録した設定ＩＤを、以下のようにステートのメモ欄に記入してください。": "Enter the setting ID registered in the “Setting List” in the state's note field as shown below.",
+    "<MagicRefrection:[設定ＩＤ]>": "<MagicRefrection:[Setting ID]>",
+    "※[]は含めないでください。。": "※Do not include [].",
+    "※標準とは異なり、命中タイプは無視するようになります。": "※Unlike the default behavior, the Hit Type will be ignored.",
+    "また、以下を設定するとそのステート中はスキルを反射しなくなります。": "Additionally, setting the following will prevent skills from being reflected while the state is active.",
+    "ジャンプなどの無敵系ステート時に反射を禁止したい場合を想定しています。": "This is intended for cases where you want to prohibit reflection while an invincible state, such as Jump, is active.",
+    "スキルのメモ欄（Note of skills）": "Skill Note Fields (Note of skills)",
+    "魔法反射を無効化するスキルを作成可能です。以下をスキルのメモ欄に指定してください。": "You can create skills that disable magic reflection. Specify the following in the skill's note field.",
+    "オブジェクトのメモ欄（Note of objects）": "Object Note Fields (Note of objects)",
+    "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を設定すればバトラーの使用した魔法が反射されなくなります。": "Setting the following in the note field of each object (actor, enemy, class, equipment, state, or skill) will prevent magic used by the battler from being reflected.",
+    "スキルについては覚えているだけで、発揮するパッシブスキルとなります。": "For skills, simply learning the skill makes it an active passive skill.",
+    "注意点（Notice）": "Notes (Notice)",
+    "効果音について": "About Sound Effects",
+    "システム２で設定できる魔法反射の効果音は、なしにしておくことをオススメします。": "It is recommended to set the magic reflection sound effect configurable in System 2 to None.",
+    "効果音は反射アニメーションに任せたほうが自然です。": "It sounds more natural to leave the sound effects to the reflection animation.",
+    "高速化モードについて": "About High-Speed Mode",
+    "通常、反射処理は一体ずつメッセージ表示などの処理が行われるので、テンポが悪いです。": "Normally, reflection processing displays messages and performs other processing one battler at a time, resulting in poor pacing.",
+    "NRP_DamageTimingの『ダメージ一括表示』をオンにすると、自動で高速化モードが有効となります。": "Enabling “Display Damage All at Once” in NRP_DamageTiming automatically enables High-Speed Mode.",
+    "また、ディレイ関連の項目は高速化モード時しか機能しません。": "Also, delay-related settings only function in High-Speed Mode.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "別サイドに反射（ReflectAnotherSide）": "Reflect to Another Side (ReflectAnotherSide)",
+    "魔法反射時、別サイドかつランダムに対象を変更します。": "When magic is reflected, the target is randomly changed to a target on the other side.",
+    "反射元のアニメーション（ReflectFromAnimation）": "Reflection Source Animation (ReflectFromAnimation)",
+    "反射を行うバトラーに表示するアニメーションです。": "The animation displayed on the battler performing the reflection.",
+    "反射先のアニメーション（ReflectToAnimation）": "Reflection Destination Animation (ReflectToAnimation)",
+    "反射先のバトラーに表示するアニメーションです。": "The animation displayed on the battler at the reflection destination.",
+    "反射先に元アニメを表示（ToOriginalAnimation）": "Display the Original Animation at the Destination (ToOriginalAnimation)",
+    "魔法反射時、反射先に本来のアニメーションを表示します。": "When magic is reflected, the original animation is displayed at the reflection destination.",
+    "オンにした場合、表示できるのはスキルに設定されているアニメーションだけです。": "When enabled, only animations configured for the skill can be displayed.",
+    "DynamicAnimationなどのプラグインと組み合わせた場合、メモ欄の記述までは実行されませんので、ご了承ください。": "When combined with plugins such as DynamicAnimation, note field entries will not be executed, so please be aware of this.",
+    "高速化モード（HighSpeedMode）": "High-Speed Mode (HighSpeedMode)",
+    "オンにするとディレイを無視してメッセージを待ちます。": "When enabled, it ignores delays and waits for messages.",
+    "通常は自動で判断しますので空白でＯＫです。": "Normally, this is determined automatically, so you can leave it blank.",
+    "強制的にモードを切り替えたい場合のみ、オンオフを設定してください。ただし、基本的には不自然な動作になります。": "Set this to on or off only when you want to forcibly switch modes. However, this will generally result in unnatural behavior.",
+    "反射先の標準ディレイ（ToBaseDelay）": "Standard Delay for Reflection Destination (ToBaseDelay)",
+    "反射先にアニメーションを表示するまでの時間差です。": "The time delay before displaying the animation at the reflection destination.",
+    "1/60秒単位で設定してください。": "Set this in 1/60-second increments.",
+    "※高速化モードがオンの場合のみ有効となります。": "※Only effective when acceleration mode is on.",
+    "対象別ディレイ（NextDelay）": "Target-Specific Delay (NextDelay)",
+    "反射アニメーションを表示する際の対象毎の時間差です。": "The time delay for each target when displaying the reflection animation.",
+    "設定リスト（SettingList）": "Settings List (SettingList)",
+    "魔法反射に関する設定の一覧です。": "A list of settings related to magic reflection.",
+    "細かい条件を指定したい場合に有効です。": "Useful when you want to specify detailed conditions.",
+    "プラグインパラメータ：設定リスト": "Plugin Parameter: Settings List",
+    "設定ＩＤ（SettingId）": "Setting ID (SettingId)",
+    "ステートのメモ欄に指定する識別子です。": "The identifier specified in a state's note field.",
+    "スキルタイプ（SkillTypes）": "Skill Types (SkillTypes)",
+    "反射の対象とするスキルタイプです。": "The skill types subject to reflection."
+  }
+}

@@ -1,0 +1,1178 @@
+{
+  "articleId": "498394064",
+  "sourceUrl": "https://newrpg.seesaa.net/article/498394064.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "e87e8a0821c5f2d848cf7b45eca9a83a425393ac1e537c2801b8f5b9d075a34e",
+  "translatedAt": "2026-08-30T08:50:07.826Z",
+  "title": "Creating a Shop That Uses a Custom Currency [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "独自通貨を使用した店を作成する【RPGツクールMZプラグイン】",
+      "sourceHash": "96789118b09e3a1f9188985ab7aea0ce8b9c719a07a0b0f7cfd693d047372691",
+      "translation": "Creating a Shop That Uses a Custom Currency [RPG Maker MZ Plugin]",
+      "contextHash": "96789118b09e3a1f9188985ab7aea0ce8b9c719a07a0b0f7cfd693d047372691"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "独自通貨を使用した店を作成します。",
+      "sourceHash": "1efdbdaa50b8aa7e72e6c2df485b90ba296069ce058865c5c2ec26e32b327348",
+      "translation": "Create a shop that uses a custom currency.",
+      "contextHash": "1efdbdaa50b8aa7e72e6c2df485b90ba296069ce058865c5c2ec26e32b327348"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "※上記はお金ではなく魔石を使用した魔法店を作った例です。",
+      "sourceHash": "523e3edf983001bc517cf4e1dca786dbbe112b5a4db780693a27f999208594ed",
+      "translation": "※The example above is a magic shop that uses magic stones instead of money.",
+      "contextHash": "523e3edf983001bc517cf4e1dca786dbbe112b5a4db780693a27f999208594ed"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "独自通貨の管理には変数を使用します。",
+      "sourceHash": "98e44dd955b9f48774de24160d5b4eec7ed6aab1b522fe7ba4691f2d652560da",
+      "translation": "A variable is used to manage the custom currency.",
+      "contextHash": "98e44dd955b9f48774de24160d5b4eec7ed6aab1b522fe7ba4691f2d652560da"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "カジノなどの景品の他、独自システムにも使用できます。",
+      "sourceHash": "45f1be78a1c5c1b108f72ea62ce07d3bbcf95de32a4e9ae8a0f545f5e8c9ed81",
+      "translation": "In addition to casino prizes, it can also be used for custom systems.",
+      "contextHash": "45f1be78a1c5c1b108f72ea62ce07d3bbcf95de32a4e9ae8a0f545f5e8c9ed81"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "また、指定したアイテムを通常の店で売却禁止とすることで、独自通貨でしか取引できないようにもできます。",
+      "sourceHash": "a828ab9fafd6b274bc1d8168993386e93fd0e6d251060cef2f35138ffa5258f7",
+      "translation": "You can also make specified items tradable only with the custom currency by prohibiting their sale in regular shops.",
+      "contextHash": "a828ab9fafd6b274bc1d8168993386e93fd0e6d251060cef2f35138ffa5258f7"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※なお、このプラグイン単体ではメニュー画面への独自通貨の表示や、戦闘勝利時の独自通貨の獲得といった機能はサポートしていません。",
+      "sourceHash": "9848a9f8d2c890c7e99d53fa94ae9de63291158327a34aa2425dad7e305dd266",
+      "translation": "※This plugin alone does not support displaying the custom currency on the menu screen or obtaining custom currency upon winning battles.",
+      "contextHash": "9848a9f8d2c890c7e99d53fa94ae9de63291158327a34aa2425dad7e305dd266"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "How to Install (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the following file to save it, then place it in [Project]\\js\\plugins. Enable the plugin through the RPG Maker plugin manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_OriginalShop.js",
+      "sourceHash": "9cb82f0e936e217c4a63c5838d7988dae35a96086a6076c4513b95e86fcd1334",
+      "translation": "NRP_OriginalShop.js",
+      "contextHash": "c9635b3b9609ab5feb69772bb6e8462b8dd5d5a5a1ce08d98c61307d168e214d"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Revision History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "『前の文字列』『後の文字列』が空欄の場合、表示領域のサイズを正しく判定できなくなる不具合修正。",
+      "sourceHash": "2489679cb3502e13e9a9967d902e7bd6b52280575c4a75b8aaa7607d7eb42ebd",
+      "translation": "Fixed a bug that prevented the display area size from being determined correctly when “Previous String” and “Next String” were blank.",
+      "contextHash": "2489679cb3502e13e9a9967d902e7bd6b52280575c4a75b8aaa7607d7eb42ebd"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "How to Use (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "『独自通貨の変数』に独自通貨として扱いたい変数を登録してください。",
+      "sourceHash": "db9077a16568f09f0c075b653d23b2532b3618730a8f8ed0ab6d547b1bb772cf",
+      "translation": "Register the variable you want to treat as custom currency in “Custom Currency Variables.”",
+      "contextHash": "db9077a16568f09f0c075b653d23b2532b3618730a8f8ed0ab6d547b1bb772cf"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "『有効にするスイッチ』がオンになっている状態で店を呼び出すと、独自通貨で取引を行うことができます。",
+      "sourceHash": "d5c10a7814171411c8eab4cb024194b8722a41ac31ea173636e172662ead42a5",
+      "translation": "When a shop is called while “Enable Switch” is turned on, transactions can be made using custom currency.",
+      "contextHash": "d5c10a7814171411c8eab4cb024194b8722a41ac31ea173636e172662ead42a5"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "スイッチがオンの状態でメッセージ内に\\$を指定すれば、所持金の表記も独自通貨のものになります。",
+      "sourceHash": "6dfec0ba46ccb18d4d5ab5b9724ce5d2ff82b553a731b39075dda0742ee772fb",
+      "translation": "If you specify \\$ in a message while the switch is on, the display of your funds will also use the custom currency.",
+      "contextHash": "6dfec0ba46ccb18d4d5ab5b9724ce5d2ff82b553a731b39075dda0742ee772fb"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "取引制限（Trade Restriction）",
+      "sourceHash": "1104db64b2e7740a050690f21422ced2d3638010596e8fa6fe12253520e232fe",
+      "translation": "Trade Restrictions (Trade Restriction)",
+      "contextHash": "1104db64b2e7740a050690f21422ced2d3638010596e8fa6fe12253520e232fe"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "指定したアイテムを独自通貨の店でのみ売却できるようになります。",
+      "sourceHash": "8d5490f1ff11ffc9bb30d3b21482e5e7445df200bd1d3ce9b668d3738eec4126",
+      "translation": "Specified items can be sold only in shops that use the custom currency.",
+      "contextHash": "8d5490f1ff11ffc9bb30d3b21482e5e7445df200bd1d3ce9b668d3738eec4126"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "プラグインパラメータの『対象アイテムリスト』『対象武器リスト』『対象防具リスト』に条件を指定してください。",
+      "sourceHash": "996c6bd175df7fc74ec76de8d05ffaf753a82fd268827921d333d759ec5e7ef9",
+      "translation": "Specify the conditions in the plugin parameters “Target Item List,” “Target Weapon List,” and “Target Armor List.”",
+      "contextHash": "996c6bd175df7fc74ec76de8d05ffaf753a82fd268827921d333d759ec5e7ef9"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "また、ここに登録したアイテムは通常の店では売却できなくなります。",
+      "sourceHash": "a94dead8d9e86ea5520d263cd1ff89286f5a7a1f7b0f23d27ad800f42ac55ea5",
+      "translation": "Items registered here can no longer be sold in regular shops.",
+      "contextHash": "a94dead8d9e86ea5520d263cd1ff89286f5a7a1f7b0f23d27ad800f42ac55ea5"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "独自通貨の変数（CurrencyVariable）",
+      "sourceHash": "cb909222fb194d2cab645f7a9466b460b2bf35143b9d0e0d93a992a3ac5d04b8",
+      "translation": "Custom Currency Variable (CurrencyVariable)",
+      "contextHash": "cb909222fb194d2cab645f7a9466b460b2bf35143b9d0e0d93a992a3ac5d04b8"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "独自通貨として扱う変数です。",
+      "sourceHash": "7dea0e7f5e0646a64ec6d9fc98aadeef2c8b298349e5235b76877f71a86d49b6",
+      "translation": "The variable to treat as the custom currency.",
+      "contextHash": "7dea0e7f5e0646a64ec6d9fc98aadeef2c8b298349e5235b76877f71a86d49b6"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "有効にするスイッチ（Switch）",
+      "sourceHash": "dc077628a5761f89d6f3faa4272a12d32f5720f30e52f23bbbb759f289e54a07",
+      "translation": "Enable Switch (Switch)",
+      "contextHash": "dc077628a5761f89d6f3faa4272a12d32f5720f30e52f23bbbb759f289e54a07"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "独自通貨を有効にするスイッチです。これがオンの時のみ店を切替します。",
+      "sourceHash": "d26a6e727424a3d996d0091de68efbc95d7b4858c5ca05dac14f58ca5102ba0e",
+      "translation": "The switch that enables the custom currency. The shop is switched only when this is on.",
+      "contextHash": "d26a6e727424a3d996d0091de68efbc95d7b4858c5ca05dac14f58ca5102ba0e"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "対象アイテムリスト（TargetItemList）",
+      "sourceHash": "a68c3f78f718b5047cf7d5444ca06baab288e9c1a1383438e35d43bde7472cd7",
+      "translation": "Target Item List (TargetItemList)",
+      "contextHash": "a68c3f78f718b5047cf7d5444ca06baab288e9c1a1383438e35d43bde7472cd7"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "対象アイテムの条件を指定するリストです。ここで指定したアイテムのみ売却できます。",
+      "sourceHash": "1a395e42e9cad3f4c3b04a444727fa5a8049c830bd1df81a39d1959a20ce694f",
+      "translation": "A list for specifying the conditions for target items. Only the items specified here can be sold.",
+      "contextHash": "1a395e42e9cad3f4c3b04a444727fa5a8049c830bd1df81a39d1959a20ce694f"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "対象武器リスト（TargetWeaponList）",
+      "sourceHash": "97c87194a864eb4d118657b7a81d2c4de93e88436e21d704370ee7ee29522127",
+      "translation": "Target Weapon List (TargetWeaponList)",
+      "contextHash": "97c87194a864eb4d118657b7a81d2c4de93e88436e21d704370ee7ee29522127"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "対象武器の条件を指定するリストです。ここで指定した武器のみ売却できます。",
+      "sourceHash": "2c14fc8479c0346939c19521b33f35b7b13e771797a7ba7b274e3ec899b05d80",
+      "translation": "A list for specifying the conditions for target weapons. Only the weapons specified here can be sold.",
+      "contextHash": "2c14fc8479c0346939c19521b33f35b7b13e771797a7ba7b274e3ec899b05d80"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "対象防具リスト（TargetArmorList）",
+      "sourceHash": "99f34a7d64c2c537ed04793f5ba4cadec10ccd8c2b1a9e564c459a6708af9b2c",
+      "translation": "Target Armor List (TargetArmorList)",
+      "contextHash": "99f34a7d64c2c537ed04793f5ba4cadec10ccd8c2b1a9e564c459a6708af9b2c"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "対象防具の条件を指定するリストです。ここで指定した防具のみ売却できます。",
+      "sourceHash": "d7643bb1c4f28b62ebf1df89f976b607a2f90a6b69e0f516f9df486b8d159c59",
+      "translation": "A list for specifying the conditions for target armor. Only the armor specified here can be sold.",
+      "contextHash": "d7643bb1c4f28b62ebf1df89f976b607a2f90a6b69e0f516f9df486b8d159c59"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "カテゴリ表示しない（NoCategory）",
+      "sourceHash": "ac69ce5868685d8f109c5c937aee174e5735848637091431bb8a01368c727423",
+      "translation": "Hide Category (NoCategory)",
+      "contextHash": "ac69ce5868685d8f109c5c937aee174e5735848637091431bb8a01368c727423"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "売却時はカテゴリ表示をしません。",
+      "sourceHash": "c24d9cab931982cdc1933ad7525016989a877c7de89b02c52cbef9bfd00200fa",
+      "translation": "Categories are not displayed when selling.",
+      "contextHash": "c24d9cab931982cdc1933ad7525016989a877c7de89b02c52cbef9bfd00200fa"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "前の文字列（Prefix）",
+      "sourceHash": "2b6e876896efe40dfccccd16e307e7ff4a1e97dc1ce36ed70f3f065ecd71ebde",
+      "translation": "Prefix (Prefix)",
+      "contextHash": "2b6e876896efe40dfccccd16e307e7ff4a1e97dc1ce36ed70f3f065ecd71ebde"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "独自通貨の前方に表示する文字列です。",
+      "sourceHash": "485b30d86dfe65c97b699ac25435065631ad3b3711558d8dba714c34719f863b",
+      "translation": "The text displayed before the custom currency.",
+      "contextHash": "485b30d86dfe65c97b699ac25435065631ad3b3711558d8dba714c34719f863b"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "アイコン（\\i[?]）も有効です。",
+      "sourceHash": "480c35cda686e013f8239a891b16fa7ff5cb939a9eaf498839e1ccd57accfc0e",
+      "translation": "Icons (\\i[?]) are also supported.",
+      "contextHash": "480c35cda686e013f8239a891b16fa7ff5cb939a9eaf498839e1ccd57accfc0e"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "後の文字列（Suffix）",
+      "sourceHash": "fe30adf15a1286923e060e559aca1905f394010215252a8a71569d04b04e1af1",
+      "translation": "Suffix (Suffix)",
+      "contextHash": "fe30adf15a1286923e060e559aca1905f394010215252a8a71569d04b04e1af1"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "独自通貨の後方に表示する文字列です。",
+      "sourceHash": "b899cebd46d715c4402c0cde697b87142bbf257058ad88f6142d3e19e0d1a9e4",
+      "translation": "The text displayed after the custom currency.",
+      "contextHash": "b899cebd46d715c4402c0cde697b87142bbf257058ad88f6142d3e19e0d1a9e4"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "アイコン（\\i[?]）も有効です。",
+      "sourceHash": "480c35cda686e013f8239a891b16fa7ff5cb939a9eaf498839e1ccd57accfc0e",
+      "translation": "Icons (\\i[?]) are also supported.",
+      "contextHash": "480c35cda686e013f8239a891b16fa7ff5cb939a9eaf498839e1ccd57accfc0e"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "購入メッセージ（MessageBuy）",
+      "sourceHash": "d54d16a4468f4d0c3b22b4b42ef1060ae7a7c123330deaac191e92b2a1a27b17",
+      "translation": "Purchase Message (MessageBuy)",
+      "contextHash": "d54d16a4468f4d0c3b22b4b42ef1060ae7a7c123330deaac191e92b2a1a27b17"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "購入コマンドとして表示するメッセージです。",
+      "sourceHash": "67fb1560cc7054f4e9ee738a1cde02188d3ecbd75cc6f04918712364193376d5",
+      "translation": "The message displayed as the purchase command.",
+      "contextHash": "67fb1560cc7054f4e9ee738a1cde02188d3ecbd75cc6f04918712364193376d5"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "売却メッセージ（MessageSale）",
+      "sourceHash": "a8e7d23c8d75d30e9374b7a937c6bd198a1d17075b0101605b25d92612d12f5f",
+      "translation": "Sale Message (MessageSale)",
+      "contextHash": "a8e7d23c8d75d30e9374b7a937c6bd198a1d17075b0101605b25d92612d12f5f"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "売却コマンドとして表示するメッセージです。",
+      "sourceHash": "b97a3fd4f89c475cc499c1857724e9ada439807f84827aeefb0ef7bc54181943",
+      "translation": "The message displayed as the sale command.",
+      "contextHash": "b97a3fd4f89c475cc499c1857724e9ada439807f84827aeefb0ef7bc54181943"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "キャンセルメッセージ（MessageCancel）",
+      "sourceHash": "1414e18dd858abd1d853c8160e6f2ca7f63c5ba6a0c343a1b614fbc392f30641",
+      "translation": "Cancel Message (MessageCancel)",
+      "contextHash": "1414e18dd858abd1d853c8160e6f2ca7f63c5ba6a0c343a1b614fbc392f30641"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "キャンセルコマンドとして表示するメッセージです。",
+      "sourceHash": "a4fe5dccd58d30690a6f30ca71f155f089b9c11428dcaaf43e51824cb980dc3c",
+      "translation": "The message displayed as the cancel command.",
+      "contextHash": "a4fe5dccd58d30690a6f30ca71f155f089b9c11428dcaaf43e51824cb980dc3c"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "購入時の効果音（SoundBuy）",
+      "sourceHash": "eadefd4285886d79b56c225b121a18d08f1695eedca5b0713ba5a857b527be88",
+      "translation": "Purchase Sound Effect (SoundBuy)",
+      "contextHash": "eadefd4285886d79b56c225b121a18d08f1695eedca5b0713ba5a857b527be88"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "購入した際の効果音です。",
+      "sourceHash": "fdf7061adc16cdb761e7b0e483d2f4c205c6e732f499204f7af57064f48306c3",
+      "translation": "The sound effect played when making a purchase.",
+      "contextHash": "fdf7061adc16cdb761e7b0e483d2f4c205c6e732f499204f7af57064f48306c3"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "売却時の効果音（SoundSale）",
+      "sourceHash": "4951e6eba2b1975f62c5b16772d511bdbddf118c6a332f4dffa32b448780b42a",
+      "translation": "Sale Sound Effect (SoundSale)",
+      "contextHash": "4951e6eba2b1975f62c5b16772d511bdbddf118c6a332f4dffa32b448780b42a"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "売却した際の効果音です。",
+      "sourceHash": "f46c55275d958bf95e0e10cace29e93ee9a2f15b2e4fe5b427619be64cd4e22c",
+      "translation": "This is the sound effect played when selling.",
+      "contextHash": "f46c55275d958bf95e0e10cace29e93ee9a2f15b2e4fe5b427619be64cd4e22c"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "プラグインパラメータ（対象アイテム）（Plugin Parameter Item）",
+      "sourceHash": "a0db0067b29053d8dbbed472851fa43068db403e58b8737784e2fdd22ad93dac",
+      "translation": "Plugin Parameters (Target Item) (Plugin Parameter Item)",
+      "contextHash": "a0db0067b29053d8dbbed472851fa43068db403e58b8737784e2fdd22ad93dac"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "アイテムタイプ（ItemType）",
+      "sourceHash": "c7ad37a28725df43f9d0b27a881454466e64500c938eacfcae95af79bad9d536",
+      "translation": "Item Type (ItemType)",
+      "contextHash": "c7ad37a28725df43f9d0b27a881454466e64500c938eacfcae95af79bad9d536"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "対象とするアイテムタイプです。",
+      "sourceHash": "65b653cfa73a683bcfc05b43ab3211cef5b1e7ff04359dc175aaf81f598d001a",
+      "translation": "The item types to target.",
+      "contextHash": "65b653cfa73a683bcfc05b43ab3211cef5b1e7ff04359dc175aaf81f598d001a"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "複数指定可（例：1,2,4~6）",
+      "sourceHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a",
+      "translation": "Multiple values can be specified (e.g., 1,2,4~6)",
+      "contextHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "1:通常, 2:大事, 3:隠しＡ, 4:隠しＢ",
+      "sourceHash": "2f3f1e9909f8d5577063f22a288e03ea12aacb390ef1c6ca8f4a057ac40a6f6e",
+      "translation": "1: Regular, 2: Key, 3: Hidden A, 4: Hidden B",
+      "contextHash": "2f3f1e9909f8d5577063f22a288e03ea12aacb390ef1c6ca8f4a057ac40a6f6e"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "アイテムＩＤ（ItemId）",
+      "sourceHash": "5765b11db74eae3c2464140fc89954692d72ec41885c77b1543c1286cba1badd",
+      "translation": "Item ID (ItemId)",
+      "contextHash": "5765b11db74eae3c2464140fc89954692d72ec41885c77b1543c1286cba1badd"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "対象とするアイテムＩＤです。",
+      "sourceHash": "24416da8222cc4b0963f64637b17ec73ab34dc59c1a416ed8af86d91d59318e4",
+      "translation": "The item IDs to target.",
+      "contextHash": "24416da8222cc4b0963f64637b17ec73ab34dc59c1a416ed8af86d91d59318e4"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "複数指定可（例：1,2,4~6）",
+      "sourceHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a",
+      "translation": "Multiple values can be specified (e.g., 1,2,4~6)",
+      "contextHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "プラグインパラメータ（対象武器）（Plugin Parameter Weapon）",
+      "sourceHash": "74342dfff0937a9544906cfca125ef578e46f1674fffdb64af863d9f3db478df",
+      "translation": "Plugin Parameters (Target Weapon) (Plugin Parameter Weapon)",
+      "contextHash": "74342dfff0937a9544906cfca125ef578e46f1674fffdb64af863d9f3db478df"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "武器タイプ（WeaponType）",
+      "sourceHash": "3003073d7194ec3a213447efc542a2904dad32ea4b691a8b88826b209230df1e",
+      "translation": "Weapon Type (WeaponType)",
+      "contextHash": "3003073d7194ec3a213447efc542a2904dad32ea4b691a8b88826b209230df1e"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "対象とする武器タイプです。",
+      "sourceHash": "bb62adeeeef161f894e1a7fe23cef28c7f1cf55ea93e4f0cdc77c4d91b9e08b9",
+      "translation": "The weapon types to target.",
+      "contextHash": "bb62adeeeef161f894e1a7fe23cef28c7f1cf55ea93e4f0cdc77c4d91b9e08b9"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "複数指定可（例：1,2,4~6）",
+      "sourceHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a",
+      "translation": "Multiple values can be specified (e.g., 1,2,4~6)",
+      "contextHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "武器ＩＤ（WeaponId）",
+      "sourceHash": "6f2a205b39aad0c59906a7b5ec2f5f118df94a01c01d24a8d63f662907380f26",
+      "translation": "Weapon ID (WeaponId)",
+      "contextHash": "6f2a205b39aad0c59906a7b5ec2f5f118df94a01c01d24a8d63f662907380f26"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "対象とする武器ＩＤです。",
+      "sourceHash": "58ee9210e8bafb74ae026a0c6606bdb628784027d67f3b2b0f5d62621ed53d61",
+      "translation": "The weapon IDs to target.",
+      "contextHash": "58ee9210e8bafb74ae026a0c6606bdb628784027d67f3b2b0f5d62621ed53d61"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "複数指定可（例：1,2,4~6）",
+      "sourceHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a",
+      "translation": "Multiple values can be specified (e.g., 1,2,4~6)",
+      "contextHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "プラグインパラメータ（対象防具）（Plugin Parameter Armor）",
+      "sourceHash": "272779d5ed1ff4cfa368520ef5186514f39b210681e619840585a9967d640c79",
+      "translation": "Plugin Parameters (Target Armor) (Plugin Parameter Armor)",
+      "contextHash": "272779d5ed1ff4cfa368520ef5186514f39b210681e619840585a9967d640c79"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "防具タイプ（ArmorType）",
+      "sourceHash": "4966e8303f219870dc79006bc10e6a72f92d9b39d96c3b98e4689ee32727aa09",
+      "translation": "Armor Type (ArmorType)",
+      "contextHash": "4966e8303f219870dc79006bc10e6a72f92d9b39d96c3b98e4689ee32727aa09"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "対象とする防具タイプです。",
+      "sourceHash": "e39b0594e82a8a5f9921e97c3b54e34f10610429540a8cdbd35078637103a7f2",
+      "translation": "The armor types to target.",
+      "contextHash": "e39b0594e82a8a5f9921e97c3b54e34f10610429540a8cdbd35078637103a7f2"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "複数指定可（例：1,2,4~6）",
+      "sourceHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a",
+      "translation": "Multiple values can be specified (e.g., 1,2,4~6)",
+      "contextHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "装備タイプ（EquipType）",
+      "sourceHash": "5d87e80b58da8e676dbdf63526a9817f42be511c80fba1af7b112fbd44147761",
+      "translation": "Equipment Type (EquipType)",
+      "contextHash": "5d87e80b58da8e676dbdf63526a9817f42be511c80fba1af7b112fbd44147761"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "装備タイプです。以下はＤＢのデフォルト値です。",
+      "sourceHash": "e9c09dfb698438b3658fba2048637eb35fbda01e262e2af4eb65ae8b0dbe5a32",
+      "translation": "The equipment types. The following are the default database values.",
+      "contextHash": "e9c09dfb698438b3658fba2048637eb35fbda01e262e2af4eb65ae8b0dbe5a32"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "1:武器, 2:盾, 3:頭, 4:身体, 5:装飾品",
+      "sourceHash": "909c06f2526a98ff4b28f31f8289f6467e78ae520250ecd87cc3911905ddbe38",
+      "translation": "1: Weapon, 2: Shield, 3: Head, 4: Body, 5: Accessory",
+      "contextHash": "909c06f2526a98ff4b28f31f8289f6467e78ae520250ecd87cc3911905ddbe38"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "防具ＩＤ（ArmorId）",
+      "sourceHash": "aabf215ded843f25c9b8c757597f0eb303e6f46a2747bb4641d6c78a637b13fc",
+      "translation": "Armor ID (ArmorId)",
+      "contextHash": "aabf215ded843f25c9b8c757597f0eb303e6f46a2747bb4641d6c78a637b13fc"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "対象とする防具ＩＤです。",
+      "sourceHash": "ad9f1323a478afc548b32ff2bff9a22e5b9155557290d0826809cf1a68d9caae",
+      "translation": "The armor IDs to target.",
+      "contextHash": "ad9f1323a478afc548b32ff2bff9a22e5b9155557290d0826809cf1a68d9caae"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "複数指定可（例：1,2,4~6）",
+      "sourceHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a",
+      "translation": "Multiple values can be specified (e.g., 1,2,4~6)",
+      "contextHash": "7fe06d743c43c265f03a699614c837e382eb047f8b4d912260db8a7f530df75a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "独自通貨の獲得については[[LINK_1]]独自の戦闘報酬を追加するプラグイン[[/LINK_1]]をご利用ください。",
+      "sourceHash": "1020e02cae65f427bc4ed5f0b211c13ab06a5e94cd7a2de7f203b48d68676fea",
+      "parts": [
+        {
+          "source": "独自通貨の獲得については",
+          "link": false
+        },
+        {
+          "source": "独自の戦闘報酬を追加するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご利用ください。",
+          "link": false
+        }
+      ],
+      "translation": "For obtaining custom currency, please use [[LINK_1]]the plugin that adds custom battle rewards[[/LINK_1]].",
+      "contextHash": "1020e02cae65f427bc4ed5f0b211c13ab06a5e94cd7a2de7f203b48d68676fea"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]取引制限（Trade Restriction）[[/LINK_1]]",
+      "sourceHash": "0e49fdc02e660d10100f0af82df028d25004e287eefc4d5efafb592e797de548",
+      "parts": [
+        {
+          "source": "取引制限（Trade Restriction）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Trade Restrictions (Trade Restriction)[[/LINK_1]]",
+      "contextHash": "0e49fdc02e660d10100f0af82df028d25004e287eefc4d5efafb592e797de548"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]独自通貨の変数（CurrencyVariable）[[/LINK_1]]",
+      "sourceHash": "e341b3005bf404bafe29aca902fbf15afec82902736c68eddbe0488f3068b80b",
+      "parts": [
+        {
+          "source": "独自通貨の変数（CurrencyVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Custom Currency Variable (CurrencyVariable)[[/LINK_1]]",
+      "contextHash": "e341b3005bf404bafe29aca902fbf15afec82902736c68eddbe0488f3068b80b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]有効にするスイッチ（Switch）[[/LINK_1]]",
+      "sourceHash": "f09881e5360ba078e479f7fe538945ef1f41812dfc0171ffb50501c3c5a57b9f",
+      "parts": [
+        {
+          "source": "有効にするスイッチ（Switch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch to Enable (Switch)[[/LINK_1]]",
+      "contextHash": "f09881e5360ba078e479f7fe538945ef1f41812dfc0171ffb50501c3c5a57b9f"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]対象アイテムリスト（TargetItemList）[[/LINK_1]]",
+      "sourceHash": "8a09815b8ca0685e1c3d6ab7e3185f1f37fa9c8ea5a8b0256621578d2ecbb012",
+      "parts": [
+        {
+          "source": "対象アイテムリスト（TargetItemList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Item List (TargetItemList)[[/LINK_1]]",
+      "contextHash": "8a09815b8ca0685e1c3d6ab7e3185f1f37fa9c8ea5a8b0256621578d2ecbb012"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]対象武器リスト（TargetWeaponList）[[/LINK_1]]",
+      "sourceHash": "08064fbd097a78c04ec3f7a9614276839a5a7e6e987570aa9b2eac250eb0f6b5",
+      "parts": [
+        {
+          "source": "対象武器リスト（TargetWeaponList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Weapon List (TargetWeaponList)[[/LINK_1]]",
+      "contextHash": "08064fbd097a78c04ec3f7a9614276839a5a7e6e987570aa9b2eac250eb0f6b5"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]対象防具リスト（TargetArmorList）[[/LINK_1]]",
+      "sourceHash": "ab6d2c41e56a18425988a6b8e07e139512b4f825a3c670e6e8d827b891f66016",
+      "parts": [
+        {
+          "source": "対象防具リスト（TargetArmorList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Armor List (TargetArmorList)[[/LINK_1]]",
+      "contextHash": "ab6d2c41e56a18425988a6b8e07e139512b4f825a3c670e6e8d827b891f66016"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]カテゴリ表示しない（NoCategory）[[/LINK_1]]",
+      "sourceHash": "83e4045c95b22775ddafa634fb258f24a3e28787b9ae4774337edd0bc48139d6",
+      "parts": [
+        {
+          "source": "カテゴリ表示しない（NoCategory）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Do Not Display Category (NoCategory)[[/LINK_1]]",
+      "contextHash": "83e4045c95b22775ddafa634fb258f24a3e28787b9ae4774337edd0bc48139d6"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]前の文字列（Prefix）[[/LINK_1]]",
+      "sourceHash": "0bb3a986fd604f32e1cce961d02d620a5398a617c3587c048b956d588f4256b1",
+      "parts": [
+        {
+          "source": "前の文字列（Prefix）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Text Before (Prefix)[[/LINK_1]]",
+      "contextHash": "0bb3a986fd604f32e1cce961d02d620a5398a617c3587c048b956d588f4256b1"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]後の文字列（Suffix）[[/LINK_1]]",
+      "sourceHash": "99aa0ef114cbfe839f9fd65c393764ce32c1186c1d0a4fb8464785541f40df76",
+      "parts": [
+        {
+          "source": "後の文字列（Suffix）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Text After (Suffix)[[/LINK_1]]",
+      "contextHash": "99aa0ef114cbfe839f9fd65c393764ce32c1186c1d0a4fb8464785541f40df76"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]購入メッセージ（MessageBuy）[[/LINK_1]]",
+      "sourceHash": "78e7dd95995df55d23b78bcd23bbaaff629fb4e6c013450bc02ef1e6cae311c2",
+      "parts": [
+        {
+          "source": "購入メッセージ（MessageBuy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Purchase Message (MessageBuy)[[/LINK_1]]",
+      "contextHash": "78e7dd95995df55d23b78bcd23bbaaff629fb4e6c013450bc02ef1e6cae311c2"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]売却メッセージ（MessageSale）[[/LINK_1]]",
+      "sourceHash": "b26e6bb66415d4cf2e18b3b8a60f4e6233c520cc8c8aec4cf5aee9263192d941",
+      "parts": [
+        {
+          "source": "売却メッセージ（MessageSale）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sale Message (MessageSale)[[/LINK_1]]",
+      "contextHash": "b26e6bb66415d4cf2e18b3b8a60f4e6233c520cc8c8aec4cf5aee9263192d941"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]キャンセルメッセージ（MessageCancel）[[/LINK_1]]",
+      "sourceHash": "dd187bf61914e36aa369a7cb6644e7e0b24acc7115acaae4c10b1f1db282584a",
+      "parts": [
+        {
+          "source": "キャンセルメッセージ（MessageCancel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Cancel Message (MessageCancel)[[/LINK_1]]",
+      "contextHash": "dd187bf61914e36aa369a7cb6644e7e0b24acc7115acaae4c10b1f1db282584a"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]購入時の効果音（SoundBuy）[[/LINK_1]]",
+      "sourceHash": "b526a452a458c193b867fc43ded8c5bf135145ef0b9ba5037fae0bb6cd13f189",
+      "parts": [
+        {
+          "source": "購入時の効果音（SoundBuy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Purchase Sound Effect (SoundBuy)[[/LINK_1]]",
+      "contextHash": "b526a452a458c193b867fc43ded8c5bf135145ef0b9ba5037fae0bb6cd13f189"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]売却時の効果音（SoundSale）[[/LINK_1]]",
+      "sourceHash": "13f3bd7e40fffb936b52f8a6e1befa5f979d2b0d23bd038d25bcc1644f6676de",
+      "parts": [
+        {
+          "source": "売却時の効果音（SoundSale）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sale Sound Effect (SoundSale)[[/LINK_1]]",
+      "contextHash": "13f3bd7e40fffb936b52f8a6e1befa5f979d2b0d23bd038d25bcc1644f6676de"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（対象アイテム）（Plugin Parameter Item）[[/LINK_1]]",
+      "sourceHash": "054100f643737cff5fd5d43c4d826573a5dd0864f97e5bc274b4e26a06264232",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（対象アイテム）（Plugin Parameter Item）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Target Item) (Plugin Parameter Item)[[/LINK_1]]",
+      "contextHash": "054100f643737cff5fd5d43c4d826573a5dd0864f97e5bc274b4e26a06264232"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムタイプ（ItemType）[[/LINK_1]]",
+      "sourceHash": "1346b61a0dfbd366f0bb46453fc3f519226368ef7ca477e6d26691442060b968",
+      "parts": [
+        {
+          "source": "アイテムタイプ（ItemType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Item Type (ItemType)[[/LINK_1]]",
+      "contextHash": "1346b61a0dfbd366f0bb46453fc3f519226368ef7ca477e6d26691442060b968"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムＩＤ（ItemId）[[/LINK_1]]",
+      "sourceHash": "489345647592d28937641ff98655f01121900893c2fd53a7b2d3af29f6244bc1",
+      "parts": [
+        {
+          "source": "アイテムＩＤ（ItemId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Item ID (ItemId)[[/LINK_1]]",
+      "contextHash": "489345647592d28937641ff98655f01121900893c2fd53a7b2d3af29f6244bc1"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（対象武器）（Plugin Parameter Weapon）[[/LINK_1]]",
+      "sourceHash": "09bb64fd4c86022cc0ffdfc39149eb5edfd3df8dd6a5c0238cc3059e875710c3",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（対象武器）（Plugin Parameter Weapon）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Target Weapon) (Plugin Parameter Weapon)[[/LINK_1]]",
+      "contextHash": "09bb64fd4c86022cc0ffdfc39149eb5edfd3df8dd6a5c0238cc3059e875710c3"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]武器タイプ（WeaponType）[[/LINK_1]]",
+      "sourceHash": "e9ab9cc37d3b908f1456deb24852b21bd456109c5f086e4cb000eaaee9938507",
+      "parts": [
+        {
+          "source": "武器タイプ（WeaponType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Weapon Type (WeaponType)[[/LINK_1]]",
+      "contextHash": "e9ab9cc37d3b908f1456deb24852b21bd456109c5f086e4cb000eaaee9938507"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]武器ＩＤ（WeaponId）[[/LINK_1]]",
+      "sourceHash": "d85c18eeab6ddd0090e7facb5516581cd8bec661935059d849d928a7cbe2087d",
+      "parts": [
+        {
+          "source": "武器ＩＤ（WeaponId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Weapon ID (WeaponId)[[/LINK_1]]",
+      "contextHash": "d85c18eeab6ddd0090e7facb5516581cd8bec661935059d849d928a7cbe2087d"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（対象防具）（Plugin Parameter Armor）[[/LINK_1]]",
+      "sourceHash": "d2e62d1c6674760c214ca0b95e65af14c7737d91e72340c4cc2d4df5a54b1f29",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（対象防具）（Plugin Parameter Armor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Target Armor) (Plugin Parameter Armor)[[/LINK_1]]",
+      "contextHash": "d2e62d1c6674760c214ca0b95e65af14c7737d91e72340c4cc2d4df5a54b1f29"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]防具タイプ（ArmorType）[[/LINK_1]]",
+      "sourceHash": "1312d6a7ea8c84186d7e8665d40bf9f12f4f2f08390ed46d89b6de86d5680e81",
+      "parts": [
+        {
+          "source": "防具タイプ（ArmorType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Armor Type (ArmorType)[[/LINK_1]]",
+      "contextHash": "1312d6a7ea8c84186d7e8665d40bf9f12f4f2f08390ed46d89b6de86d5680e81"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]装備タイプ（EquipType）[[/LINK_1]]",
+      "sourceHash": "090428e0717c6986c39995bc215458a0e5ae64a6f8dec1cc0b13b39667c7135b",
+      "parts": [
+        {
+          "source": "装備タイプ（EquipType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Equipment Type (EquipType)[[/LINK_1]]",
+      "contextHash": "090428e0717c6986c39995bc215458a0e5ae64a6f8dec1cc0b13b39667c7135b"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]防具ＩＤ（ArmorId）[[/LINK_1]]",
+      "sourceHash": "2d795ce94c7e069505d2a8c9587a35c18a8ecaf557568e506e365bd829ce7023",
+      "parts": [
+        {
+          "source": "防具ＩＤ（ArmorId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Armor ID (ArmorId)[[/LINK_1]]",
+      "contextHash": "2d795ce94c7e069505d2a8c9587a35c18a8ecaf557568e506e365bd829ce7023"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]カテゴリ表示しない[[/LINK_1]]がオンの場合、売却時のリスト下側のアイテムが表示されなくなる不具合修正。（2025/10/14 ver1.011）",
+      "sourceHash": "f6a245b2b0829c48d2f3a348e2fdc5696c1fee01b030177c4534304bca5a9d31",
+      "parts": [
+        {
+          "source": "カテゴリ表示しない",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "がオンの場合、売却時のリスト下側のアイテムが表示されなくなる不具合修正。（2025/10/14 ver1.011）",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where items in the lower part of the sale list were not displayed when [[LINK_1]]Do Not Display Category[[/LINK_1]] was enabled. (2025/10/14 ver1.011)",
+      "contextHash": "f6a245b2b0829c48d2f3a348e2fdc5696c1fee01b030177c4534304bca5a9d31"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "独自通貨を使用した店を作成します。": "Create a shop that uses a custom currency.",
+    "※上記はお金ではなく魔石を使用した魔法店を作った例です。": "※The example above is a magic shop that uses magic stones instead of money.",
+    "独自通貨の管理には変数を使用します。": "A variable is used to manage the custom currency.",
+    "カジノなどの景品の他、独自システムにも使用できます。": "In addition to casino prizes, it can also be used for custom systems.",
+    "また、指定したアイテムを通常の店で売却禁止とすることで、独自通貨でしか取引できないようにもできます。": "You can also make specified items tradable only with the custom currency by prohibiting their sale in regular shops.",
+    "※なお、このプラグイン単体ではメニュー画面への独自通貨の表示や、戦闘勝利時の独自通貨の獲得といった機能はサポートしていません。": "※This plugin alone does not support displaying the custom currency on the menu screen or obtaining custom currency upon winning battles.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "How to Install (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the following file to save it, then place it in [Project]\\js\\plugins. Enable the plugin through the RPG Maker plugin manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_OriginalShop.js": "NRP_OriginalShop.js",
+    "更新履歴（History）": "Revision History (History)",
+    "『前の文字列』『後の文字列』が空欄の場合、表示領域のサイズを正しく判定できなくなる不具合修正。": "Fixed a bug that prevented the display area size from being determined correctly when “Previous String” and “Next String” were blank.",
+    "公開！": "Released!",
+    "使用方法（Usage）": "How to Use (Usage)",
+    "『独自通貨の変数』に独自通貨として扱いたい変数を登録してください。": "Register the variable you want to treat as custom currency in “Custom Currency Variables.”",
+    "『有効にするスイッチ』がオンになっている状態で店を呼び出すと、独自通貨で取引を行うことができます。": "When a shop is called while “Enable Switch” is turned on, transactions can be made using custom currency.",
+    "スイッチがオンの状態でメッセージ内に\\$を指定すれば、所持金の表記も独自通貨のものになります。": "If you specify \\$ in a message while the switch is on, the display of your funds will also use the custom currency.",
+    "取引制限（Trade Restriction）": "Trade Restrictions (Trade Restriction)",
+    "指定したアイテムを独自通貨の店でのみ売却できるようになります。": "Specified items can be sold only in shops that use the custom currency.",
+    "プラグインパラメータの『対象アイテムリスト』『対象武器リスト』『対象防具リスト』に条件を指定してください。": "Specify the conditions in the plugin parameters “Target Item List,” “Target Weapon List,” and “Target Armor List.”",
+    "また、ここに登録したアイテムは通常の店では売却できなくなります。": "Items registered here can no longer be sold in regular shops.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "独自通貨の変数（CurrencyVariable）": "Custom Currency Variable (CurrencyVariable)",
+    "独自通貨として扱う変数です。": "The variable to treat as the custom currency.",
+    "有効にするスイッチ（Switch）": "Enable Switch (Switch)",
+    "独自通貨を有効にするスイッチです。これがオンの時のみ店を切替します。": "The switch that enables the custom currency. The shop is switched only when this is on.",
+    "対象アイテムリスト（TargetItemList）": "Target Item List (TargetItemList)",
+    "対象アイテムの条件を指定するリストです。ここで指定したアイテムのみ売却できます。": "A list for specifying the conditions for target items. Only the items specified here can be sold.",
+    "対象武器リスト（TargetWeaponList）": "Target Weapon List (TargetWeaponList)",
+    "対象武器の条件を指定するリストです。ここで指定した武器のみ売却できます。": "A list for specifying the conditions for target weapons. Only the weapons specified here can be sold.",
+    "対象防具リスト（TargetArmorList）": "Target Armor List (TargetArmorList)",
+    "対象防具の条件を指定するリストです。ここで指定した防具のみ売却できます。": "A list for specifying the conditions for target armor. Only the armor specified here can be sold.",
+    "カテゴリ表示しない（NoCategory）": "Hide Category (NoCategory)",
+    "売却時はカテゴリ表示をしません。": "Categories are not displayed when selling.",
+    "前の文字列（Prefix）": "Prefix (Prefix)",
+    "独自通貨の前方に表示する文字列です。": "The text displayed before the custom currency.",
+    "アイコン（\\i[?]）も有効です。": "Icons (\\i[?]) are also supported.",
+    "後の文字列（Suffix）": "Suffix (Suffix)",
+    "独自通貨の後方に表示する文字列です。": "The text displayed after the custom currency.",
+    "購入メッセージ（MessageBuy）": "Purchase Message (MessageBuy)",
+    "購入コマンドとして表示するメッセージです。": "The message displayed as the purchase command.",
+    "売却メッセージ（MessageSale）": "Sale Message (MessageSale)",
+    "売却コマンドとして表示するメッセージです。": "The message displayed as the sale command.",
+    "キャンセルメッセージ（MessageCancel）": "Cancel Message (MessageCancel)",
+    "キャンセルコマンドとして表示するメッセージです。": "The message displayed as the cancel command.",
+    "購入時の効果音（SoundBuy）": "Purchase Sound Effect (SoundBuy)",
+    "購入した際の効果音です。": "The sound effect played when making a purchase.",
+    "売却時の効果音（SoundSale）": "Sale Sound Effect (SoundSale)",
+    "売却した際の効果音です。": "This is the sound effect played when selling.",
+    "プラグインパラメータ（対象アイテム）（Plugin Parameter Item）": "Plugin Parameters (Target Item) (Plugin Parameter Item)",
+    "アイテムタイプ（ItemType）": "Item Type (ItemType)",
+    "対象とするアイテムタイプです。": "The item types to target.",
+    "複数指定可（例：1,2,4~6）": "Multiple values can be specified (e.g., 1,2,4~6)",
+    "1:通常, 2:大事, 3:隠しＡ, 4:隠しＢ": "1: Regular, 2: Key, 3: Hidden A, 4: Hidden B",
+    "アイテムＩＤ（ItemId）": "Item ID (ItemId)",
+    "対象とするアイテムＩＤです。": "The item IDs to target.",
+    "プラグインパラメータ（対象武器）（Plugin Parameter Weapon）": "Plugin Parameters (Target Weapon) (Plugin Parameter Weapon)",
+    "武器タイプ（WeaponType）": "Weapon Type (WeaponType)",
+    "対象とする武器タイプです。": "The weapon types to target.",
+    "武器ＩＤ（WeaponId）": "Weapon ID (WeaponId)",
+    "対象とする武器ＩＤです。": "The weapon IDs to target.",
+    "プラグインパラメータ（対象防具）（Plugin Parameter Armor）": "Plugin Parameters (Target Armor) (Plugin Parameter Armor)",
+    "防具タイプ（ArmorType）": "Armor Type (ArmorType)",
+    "対象とする防具タイプです。": "The armor types to target.",
+    "装備タイプ（EquipType）": "Equipment Type (EquipType)",
+    "装備タイプです。以下はＤＢのデフォルト値です。": "The equipment types. The following are the default database values.",
+    "1:武器, 2:盾, 3:頭, 4:身体, 5:装飾品": "1: Weapon, 2: Shield, 3: Head, 4: Body, 5: Accessory",
+    "防具ＩＤ（ArmorId）": "Armor ID (ArmorId)",
+    "対象とする防具ＩＤです。": "The armor IDs to target."
+  }
+}

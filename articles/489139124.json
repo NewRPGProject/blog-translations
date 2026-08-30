@@ -1,0 +1,663 @@
+{
+  "articleId": "489139124",
+  "sourceUrl": "https://newrpg.seesaa.net/article/489139124.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "fa3b73dcea67b00068033581ea8b27cedaa4d3ad81839ea7e7815c7ab676a4be",
+  "translatedAt": "2026-08-30T08:52:29.094Z",
+  "title": "Adjust Event Trigger Behavior【RPG Maker MZ & MV Plugin】",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "イベントトリガーの挙動を調整【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "d338ae41b57cb3e1afbdee8b9599bdd08e884a586c489c60e8a920f472e0703f",
+      "translation": "Adjust Event Trigger Behavior【RPG Maker MZ & MV Plugin】",
+      "contextHash": "d338ae41b57cb3e1afbdee8b9599bdd08e884a586c489c60e8a920f472e0703f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "不具合の原因となりやすいイベントトリガーの挙動を調整します。",
+      "sourceHash": "49783f0541d9b3f35bea5a65b532627a979821403d6d22b66cffe591c5a83466",
+      "translation": "Adjusts the behavior of event triggers that are prone to causing problems.",
+      "contextHash": "49783f0541d9b3f35bea5a65b532627a979821403d6d22b66cffe591c5a83466"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "機能は以下の２つです。",
+      "sourceHash": "03832c956283a2ff4539d027a9c425a08828e41922d89c3c891fe940ddeda5cd",
+      "translation": "It has the following two features.",
+      "contextHash": "03832c956283a2ff4539d027a9c425a08828e41922d89c3c891fe940ddeda5cd"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "プラグインパラメータによる切り替えも可能です。",
+      "sourceHash": "af7a2636eac7977b716c9c66c0e8ee82fac0b2d9be23d6057235d0cef18549a9",
+      "translation": "They can also be switched using plugin parameters.",
+      "contextHash": "af7a2636eac7977b716c9c66c0e8ee82fac0b2d9be23d6057235d0cef18549a9"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "イベントから接触を厳密に",
+      "sourceHash": "07902b707588df7fb91b313bd1ad401b7caa25deacdf51476815f8f7a465a39c",
+      "translation": "Strict Event Touch",
+      "contextHash": "07902b707588df7fb91b313bd1ad401b7caa25deacdf51476815f8f7a465a39c"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "トリガーが『イベントから接触』の際、移動中のプレイヤーに対して、イベントが起動する判定を調整します。",
+      "sourceHash": "fe60ecd3747004df0cc7cd7740e2e0efe5e3c4f5ad3912c332ef87debcb13b40",
+      "translation": "When the trigger is “Event Touch,” this adjusts the conditions under which the event is activated when the player is moving.",
+      "contextHash": "fe60ecd3747004df0cc7cd7740e2e0efe5e3c4f5ad3912c332ef87debcb13b40"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "例えば、上記の動画はシンボルエンカウントを想定しています。",
+      "sourceHash": "823ef79ec3cf1b865e8e978d82bddb7ca3fbfe8c6507295377ecb8990928cc1a",
+      "translation": "For example, the video above assumes a symbol encounter system.",
+      "contextHash": "823ef79ec3cf1b865e8e978d82bddb7ca3fbfe8c6507295377ecb8990928cc1a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "プレイヤーが階段へと一歩踏み出した瞬間に敵シンボルがぶつかってきた場合、ツクールの仕様では敵イベントのほうが優先的に実行されてしまいます。",
+      "sourceHash": "74f34a1fe91e4b189fc65cbf64dc5d0c039871efa4ecdf80d66077eb01569f2d",
+      "translation": "If an enemy symbol collides with the player just as the player takes a step toward the stairs, the enemy event takes priority and is executed first according to RPG Maker's specifications.",
+      "contextHash": "74f34a1fe91e4b189fc65cbf64dc5d0c039871efa4ecdf80d66077eb01569f2d"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "結果、階段イベントが実行されないまま、その上に乗ってしまう可能性があります。この仕様は重大な不具合を引き起こしかねません。",
+      "sourceHash": "da1dc1fd7ed575486073a01f2ded4725f63b25a75d99731fe4964aa8db61c167",
+      "translation": "As a result, the player may end up standing on the stairs without the stair event being executed. This behavior could cause serious problems.",
+      "contextHash": "da1dc1fd7ed575486073a01f2ded4725f63b25a75d99731fe4964aa8db61c167"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※何度か実験しましたが、遅れて階段イベントが実行されることもあれば、完全に無視されることもあったりと挙動が安定しません……。",
+      "sourceHash": "c2d8d9c452feb70c43a32489f3e6649130bac8e36ea29ae2bdeed9855aa0ae4c",
+      "translation": "※I ran several experiments, but the behavior was unstable: sometimes the stair event was executed with a delay, while other times it was completely ignored…….",
+      "contextHash": "c2d8d9c452feb70c43a32489f3e6649130bac8e36ea29ae2bdeed9855aa0ae4c"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "そこで当機能では『イベントから接触』の実行を遅らせることで、足元のイベントを先に実行させます。これにより、シンボルエンカウントの作品において、足元のイベントが適切に実行されない問題に対処できます。",
+      "sourceHash": "56d5bb6ffca6bd8cbeea65316166f35d8caa19fadd4c7567909590fdb9518bf3",
+      "translation": "This feature delays the execution of “Event Touch,” allowing events at the player's feet to execute first. This addresses the issue of events at the player's feet not executing properly in games with symbol encounters.",
+      "contextHash": "56d5bb6ffca6bd8cbeea65316166f35d8caa19fadd4c7567909590fdb9518bf3"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※仕様上、イベントとの接触をやや回避しやすくなります。",
+      "sourceHash": "172e42137aeb33baad25e767b075c1cf72767f80d04bd831de8f55a279f7f9cc",
+      "translation": "※By design, this makes it slightly easier to avoid touching events.",
+      "contextHash": "172e42137aeb33baad25e767b075c1cf72767f80d04bd831de8f55a279f7f9cc"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "決定ボタンによる接触無効",
+      "sourceHash": "cc12d0bf33340dea054b2b9167fbeff46670e52385596a8f599c09bfce257510",
+      "translation": "Disable Touch via the Decision Button",
+      "contextHash": "cc12d0bf33340dea054b2b9167fbeff46670e52385596a8f599c09bfce257510"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "トリガーが『プレイヤーから接触』『イベントから接触』のイベントに対して、決定ボタンでの起動を禁止します。",
+      "sourceHash": "aa8944df1c94bc0317af2f565c7c39c54fa73ce00f204c72fefece5666e1df80",
+      "translation": "Prevents events with the “Player Touch” or “Event Touch” trigger from being activated with the decision button.",
+      "contextHash": "aa8944df1c94bc0317af2f565c7c39c54fa73ce00f204c72fefece5666e1df80"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "例えば、上記は『プレイヤーから接触』の橋に接触した際に、船をすり抜けで移動させることで自然に見せかけています。あくまで移動の一環として見せたいため、決定ボタンでは起動しないようにしています。",
+      "sourceHash": "48078598a7a5638a894e85b1f906a2c3a6adf81327aefa9913427ca17c3430aa",
+      "translation": "For example, in the example above, when the player touches a bridge with the “Player Touch” trigger, the boat is moved through it to make the transition look natural. Since this is intended to appear as part of the movement, it is not activated with the decision button.",
+      "contextHash": "48078598a7a5638a894e85b1f906a2c3a6adf81327aefa9913427ca17c3430aa"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "接触系のイベントを決定ボタンで起動できるのは、わりと気づきにくい仕様です。",
+      "sourceHash": "6bbb8aa02ae07d374d63bb129240ed2f0ab560119c7d27f7ae20d2975d59e308",
+      "translation": "It is fairly easy to overlook that touch-based events can be activated with the decision button.",
+      "contextHash": "6bbb8aa02ae07d374d63bb129240ed2f0ab560119c7d27f7ae20d2975d59e308"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "しかしながら、接触を前提にしてイベントを組んでいる場合は、不自然な挙動になりがちです。",
+      "sourceHash": "3a4813e3392a2a2bad207b82d8bcd0aae5d44100e78163830279c3609c17d839",
+      "translation": "However, when events are designed on the assumption that they will be triggered by contact, this can result in unnatural behavior.",
+      "contextHash": "3a4813e3392a2a2bad207b82d8bcd0aae5d44100e78163830279c3609c17d839"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "加えて、イベントコマンドの条件分岐では決定ボタンで起動されたことを判定する方法はありません。",
+      "sourceHash": "0b62cb239116e755676cf433059b930fef9e518a59d3e7b73b63cf88971f2d8f",
+      "translation": "In addition, there is no way to determine in an event command conditional branch whether an event was activated with the decision button.",
+      "contextHash": "0b62cb239116e755676cf433059b930fef9e518a59d3e7b73b63cf88971f2d8f"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "「決定が押されている」という判定はありますが、ボタンを押しっぱなしで接触した場合も含まれてしまいます。",
+      "sourceHash": "291630014ab88ef9901197e0bb0524a6b4cc2a5272f92e82da17a600a463115b",
+      "translation": "There is a condition for “Decision is pressed,” but it also includes cases where the button is held down while making contact.",
+      "contextHash": "291630014ab88ef9901197e0bb0524a6b4cc2a5272f92e82da17a600a463115b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "というわけで、決定ボタンでの起動を禁止できるようにしました。",
+      "sourceHash": "fb95a23dd20ba954e620891b0eabdcc171a15eecf3d087657235deb6bb87ea4e",
+      "translation": "For this reason, I made it possible to disable activation with the decision button.",
+      "contextHash": "fb95a23dd20ba954e620891b0eabdcc171a15eecf3d087657235deb6bb87ea4e"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "すり抜け衝突の禁止",
+      "sourceHash": "8133cdc050ce182fbc061be316804bd235a7795b39b19abcee09cde173ab39e6",
+      "translation": "Disable Pass-Through Collisions",
+      "contextHash": "8133cdc050ce182fbc061be316804bd235a7795b39b19abcee09cde173ab39e6"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "プライオリティが『通常キャラと同じ』かつトリガーが『プレイヤーから接触』『イベントから接触』のイベントをすり抜けにした際、他のイベントと重なっているときのみ起動できてしまう挙動を修正します。",
+      "sourceHash": "58f039ff348832d94ddfcbfeaa8501e12b5dc57efb7dc5cfbe2cdf1a96343367",
+      "translation": "Fixes the behavior whereby an event with the same priority as a normal character and a “Player Touch” or “Event Touch” trigger can be activated only when it overlaps another event after being set to pass through.",
+      "contextHash": "58f039ff348832d94ddfcbfeaa8501e12b5dc57efb7dc5cfbe2cdf1a96343367"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※上記の動画は修正前の挙動です。すり抜け状態になったイベントの内容が、イベント同士が重なっている場合に実行されてしまうことが分かると思います。",
+      "sourceHash": "9c3b54309308ebadb7ecaf6ed50a799d05fbc27f149b24215d523a0c99a6b353",
+      "translation": "※The video above shows the behavior before the fix. You can see that the contents of an event set to pass through are executed when events overlap each other.",
+      "contextHash": "9c3b54309308ebadb7ecaf6ed50a799d05fbc27f149b24215d523a0c99a6b353"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "仕様上、決定ボタンによる接触無効と同時にオンにしたほうが自然です。",
+      "sourceHash": "6215675b89489c5a43c18eb016fdc3917475f0052763f33e1ae43e4a2267f607",
+      "translation": "By design, it is more natural to enable this at the same time as disabling touch via the decision button.",
+      "contextHash": "6215675b89489c5a43c18eb016fdc3917475f0052763f33e1ae43e4a2267f607"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from RPG Maker's Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TriggerSetting.js",
+      "sourceHash": "ea02b4fd644678c4fa2128a928ee79b700a707ab54cfbedcb76a7ba4604b7fa3",
+      "translation": "NRP_TriggerSetting.js",
+      "contextHash": "f0acdaea681b84729eab707954582a1256672454ec5d620aae305eead77ee177"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "プライオリティが『通常キャラと同じ』かつトリガーが『プレイヤーから接触』『イベントから接触』のイベントをすり抜けにした際、他のイベントと重なっているときのみ起動できてしまう挙動を修正できるようにした。",
+      "sourceHash": "03edaadcaba52fa4441d37fcb6f184a25f0e83c162f711e9503358d84d83b55c",
+      "translation": "Made it possible to fix the behavior whereby an event with the same priority as a normal character and a “Player Touch” or “Event Touch” trigger can be activated only when it overlaps another event after being set to pass through.",
+      "contextHash": "03edaadcaba52fa4441d37fcb6f184a25f0e83c162f711e9503358d84d83b55c"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "イベントから接触を厳密にする機能を追加。",
+      "sourceHash": "bf984afdf56f6d87834303fc4cffd6f8143bbba36f332dec32abaea937ea0c39",
+      "translation": "Added a feature for making Event Touch strict.",
+      "contextHash": "bf984afdf56f6d87834303fc4cffd6f8143bbba36f332dec32abaea937ea0c39"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "プラグイン名も汎用的に『イベントトリガーの挙動を調整』へと変更。",
+      "sourceHash": "d068c9d73f4f1d0dc12a632168178abd0033de5a5dcc9f0ecf0d1bd17d7d7c75",
+      "translation": "Also changed the plugin name to the more general “Adjust Event Trigger Behavior.”",
+      "contextHash": "d068c9d73f4f1d0dc12a632168178abd0033de5a5dcc9f0ecf0d1bd17d7d7c75"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "『接触系のイベントで決定ボタンでの起動を禁止する』プラグインとして公開！",
+      "sourceHash": "d84f948dac603ec55d919748948b3099a975be70bf5dfbcd2ce290a4d2d2cc78",
+      "translation": "Released as a plugin that “Disables activation with the decision button for touch-based events”!",
+      "contextHash": "d84f948dac603ec55d919748948b3099a975be70bf5dfbcd2ce290a4d2d2cc78"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "【ＭＺ】プラグインコマンド（Plugin Commands）",
+      "sourceHash": "c449ae6abbf8ffd13b8393cdffe3a6901eab92ccf9217554376ecd46b5a24044",
+      "translation": "【MZ】Plugin Commands (Plugin Commands)",
+      "contextHash": "c449ae6abbf8ffd13b8393cdffe3a6901eab92ccf9217554376ecd46b5a24044"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "足元イベントの確認（CheckStepsEvent）",
+      "sourceHash": "9d3b72dfb59628b08b18c125499b15244fc5a0454e4d4a75161084106fbd9c29",
+      "translation": "Check Events at Player's Feet (CheckStepsEvent)",
+      "contextHash": "9d3b72dfb59628b08b18c125499b15244fc5a0454e4d4a75161084106fbd9c29"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "プレイヤーが移動中かつ足元のイベントに接触しているかどうかを確認し、指定のスイッチをオンにします。",
+      "sourceHash": "2e659156bf75b1608bb67df28bbd6daf4cf7750f9626bf5f63e3ab558ea7c550",
+      "translation": "Checks whether the player is moving and touching an event at their feet, then turns on the specified switch.",
+      "contextHash": "2e659156bf75b1608bb67df28bbd6daf4cf7750f9626bf5f63e3ab558ea7c550"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "主にシンボルエンカウントなどの自作エンカウントにおいて、タイミング調整をするための機能です。",
+      "sourceHash": "b80e14828be994c4f76d77777847e5a259ac5f7babcf18d9604a43f7e098eaa9",
+      "translation": "This feature is mainly intended for adjusting timing in custom encounter systems such as symbol encounters.",
+      "contextHash": "b80e14828be994c4f76d77777847e5a259ac5f7babcf18d9604a43f7e098eaa9"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "例えば、エンカウント処理の直前でこのプラグインコマンドを実行し、スイッチがオンになった際はエンカウントを停止すれば、足元のイベントを優先実行することができます。",
+      "sourceHash": "a9af4733c85539eee4551f0ad0f74b03d16aa7281163977c39fc364e4ecd490f",
+      "translation": "For example, if you execute this plugin command immediately before encounter processing and stop the encounter when the switch is turned on, you can give priority to the event at the player's feet.",
+      "contextHash": "a9af4733c85539eee4551f0ad0f74b03d16aa7281163977c39fc364e4ecd490f"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "※プレイヤーが移動中でない場合もチェックできる機能を追加しました。（2025/08/27）",
+      "sourceHash": "07eea98854fd541f00d11c76225b321ed33eb61f983f4f8dd3186c9dd9ae99df",
+      "translation": "※Added a feature that also allows checking when the player is not moving. (2025/08/27)",
+      "contextHash": "07eea98854fd541f00d11c76225b321ed33eb61f983f4f8dd3186c9dd9ae99df"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "イベントから接触を厳密に（StrictEventTouch）",
+      "sourceHash": "b71230e089d626d69991c8fbb015c519bfa3b814320b3f7f1e34452a8ac28613",
+      "translation": "Strict Event Touch (StrictEventTouch)",
+      "contextHash": "b71230e089d626d69991c8fbb015c519bfa3b814320b3f7f1e34452a8ac28613"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "数字が小さいほど移動中のプレイヤーに対して、イベントから接触できるタイミングが限定されます。",
+      "sourceHash": "e83d0c25f131ffd9a1d9542d530711d9847246cda00a811fe7ecfac99ebbb2f0",
+      "translation": "The smaller the number, the more limited the timing at which an event can touch a moving player.",
+      "contextHash": "e83d0c25f131ffd9a1d9542d530711d9847246cda00a811fe7ecfac99ebbb2f0"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "この項目には数値を設定してください。",
+      "sourceHash": "a6317b11bd71191b6382c2456c75a1d9780ac9fc2357860ea5b015f7bf0c3b97",
+      "translation": "Set a numerical value for this option.",
+      "contextHash": "a6317b11bd71191b6382c2456c75a1d9780ac9fc2357860ea5b015f7bf0c3b97"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "値が0ならば、プレイヤーが目的の座標に、完全に到達した瞬間、もしくは静止した時のみ接触の対象になります。",
+      "sourceHash": "a999856aff91ad7e4c655f8966fbc89f45f331bc75e8465569dcb1f913c725e1",
+      "translation": "If the value is 0, the player is considered a touch target only at the moment they completely reach the destination coordinates or when they come to a stop.",
+      "contextHash": "a999856aff91ad7e4c655f8966fbc89f45f331bc75e8465569dcb1f913c725e1"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "値が0.5ならば、プレイヤーが目的の座標から0.5タイル以内に位置している時のみ接触の対象になります。",
+      "sourceHash": "310dda2c962d3c9e7f40d67b513677a64328a4d2235af8a9043d8f9ffe844605",
+      "translation": "If the value is 0.5, the player is considered a touch target only when they are within 0.5 tiles of the destination coordinates.",
+      "contextHash": "310dda2c962d3c9e7f40d67b513677a64328a4d2235af8a9043d8f9ffe844605"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "基本的には0でよいと思います。数値が小さくないと効果が実感できません。",
+      "sourceHash": "5d9bb7e4b03b48820c9173c4368f0914ed12b075c669e11bdc8f705c153abf84",
+      "translation": "In most cases, 0 should be sufficient. You will not notice much effect unless the value is small.",
+      "contextHash": "5d9bb7e4b03b48820c9173c4368f0914ed12b075c669e11bdc8f705c153abf84"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "不要な場合はＤＥＬキーで空白にしてください。",
+      "sourceHash": "abe2cb9ef44caee43990c35d6c6a990e7cd97cd670004aa5992178a57f9b2b76",
+      "translation": "If you do not need this, clear the field with the DEL key.",
+      "contextHash": "abe2cb9ef44caee43990c35d6c6a990e7cd97cd670004aa5992178a57f9b2b76"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "※仕様上、半歩移動などのプラグインには対応していません。",
+      "sourceHash": "0c6f795246036012eaccb68f71afb3d57e5f8352c3d1d53280a32a8572563f6f",
+      "translation": "※By design, this does not support plugins such as half-step movement plugins.",
+      "contextHash": "0c6f795246036012eaccb68f71afb3d57e5f8352c3d1d53280a32a8572563f6f"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "決定ボタンによる接触無効（DisableDecisionTouch）",
+      "sourceHash": "c81a645fb77130219cf3c0c9eeeb2ca54dc46000db7e315141d883877ab180e1",
+      "translation": "Disable Touch via the Decision Button (DisableDecisionTouch)",
+      "contextHash": "c81a645fb77130219cf3c0c9eeeb2ca54dc46000db7e315141d883877ab180e1"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "トリガーが『プレイヤーから接触』『イベントから接触』のイベントに対して、決定ボタンでの起動を禁止します。",
+      "sourceHash": "aa8944df1c94bc0317af2f565c7c39c54fa73ce00f204c72fefece5666e1df80",
+      "translation": "Prevents events with the “Player Touch” or “Event Touch” trigger from being activated with the decision button.",
+      "contextHash": "aa8944df1c94bc0317af2f565c7c39c54fa73ce00f204c72fefece5666e1df80"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "すり抜け衝突の禁止（DisableThroughCollision）",
+      "sourceHash": "d6ca63e35dfa2e8b78d7fbc89f3b7a896aceff058414b66251b023ae6caba551",
+      "translation": "Disable Through Collision (DisableThroughCollision)",
+      "contextHash": "d6ca63e35dfa2e8b78d7fbc89f3b7a896aceff058414b66251b023ae6caba551"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "トリガーが『プレイヤーから接触』『イベントから接触』のイベントに対して、すり抜け状態での衝突を禁止します。",
+      "sourceHash": "5ee43869b9b94633663912f0c3e43e82fa143552581288c7490241c03d7ed4e2",
+      "translation": "For events whose trigger is “Player Touch” or “Event Touch,” this prohibits collisions while in through mode.",
+      "contextHash": "5ee43869b9b94633663912f0c3e43e82fa143552581288c7490241c03d7ed4e2"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]【ＭＺ】プラグインコマンド（Plugin Commands）[[/LINK_1]]",
+      "sourceHash": "ea802063fe6e569235861fa569e6f9b1761286dfef02a3c1201c4e671602d284",
+      "parts": [
+        {
+          "source": "【ＭＺ】プラグインコマンド（Plugin Commands）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][MZ] Plugin Commands (Plugin Commands)[[/LINK_1]]",
+      "contextHash": "ea802063fe6e569235861fa569e6f9b1761286dfef02a3c1201c4e671602d284"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]足元イベントの確認（CheckStepsEvent）[[/LINK_1]]",
+      "sourceHash": "96b9af44ec48ba4ca1604d166d78fa8c39921c9648b1e91cc479017881ef208f",
+      "parts": [
+        {
+          "source": "足元イベントの確認（CheckStepsEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Check Events at Player's Feet (CheckStepsEvent)[[/LINK_1]]",
+      "contextHash": "96b9af44ec48ba4ca1604d166d78fa8c39921c9648b1e91cc479017881ef208f"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]イベントから接触を厳密に（StrictEventTouch）[[/LINK_1]]",
+      "sourceHash": "a90da1014fe348209e6ec5e1c61e764c1124894e312e9fb1f52f6281562c0b90",
+      "parts": [
+        {
+          "source": "イベントから接触を厳密に（StrictEventTouch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Strict Event Touch (StrictEventTouch)[[/LINK_1]]",
+      "contextHash": "a90da1014fe348209e6ec5e1c61e764c1124894e312e9fb1f52f6281562c0b90"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]決定ボタンによる接触無効（DisableDecisionTouch）[[/LINK_1]]",
+      "sourceHash": "4abe60eff25db979249b0195bf4c3d5d158bf4737ddf775a5664b0eabb5d83dd",
+      "parts": [
+        {
+          "source": "決定ボタンによる接触無効（DisableDecisionTouch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Decision Button Touch (DisableDecisionTouch)[[/LINK_1]]",
+      "contextHash": "4abe60eff25db979249b0195bf4c3d5d158bf4737ddf775a5664b0eabb5d83dd"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]すり抜け衝突の禁止（DisableThroughCollision）[[/LINK_1]]",
+      "sourceHash": "f7fdb3760824aba3ef595e7b2a7e6bb8073ec846202006679a7d3807890350aa",
+      "parts": [
+        {
+          "source": "すり抜け衝突の禁止（DisableThroughCollision）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Through Collision (DisableThroughCollision)[[/LINK_1]]",
+      "contextHash": "f7fdb3760824aba3ef595e7b2a7e6bb8073ec846202006679a7d3807890350aa"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]足元イベントの接触確認を行うプラグインコマンド（ＭＺ）[[/LINK_1]]について、プレイヤーが停止時もチェックできるようにした。",
+      "sourceHash": "da11a7acc4fef39501f6b3a6cf7d9172dbeed91ba488a0f8f3fa62db8f0f0156",
+      "parts": [
+        {
+          "source": "足元イベントの接触確認を行うプラグインコマンド（ＭＺ）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "について、プレイヤーが停止時もチェックできるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Command for Checking Events at the Player's Feet (MZ)[[/LINK_1]] has been updated to also check when the player is stopped.",
+      "contextHash": "da11a7acc4fef39501f6b3a6cf7d9172dbeed91ba488a0f8f3fa62db8f0f0156"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]足元イベントの接触確認を行うプラグインコマンド（ＭＺ）[[/LINK_1]]を追加した。",
+      "sourceHash": "4a4411b7a5871deacdd2ca0aabb83a906f2de3d314a4a10409250c02bc598de0",
+      "parts": [
+        {
+          "source": "足元イベントの接触確認を行うプラグインコマンド（ＭＺ）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Command for Checking Events at the Player's Feet (MZ)[[/LINK_1]] has been added.",
+      "contextHash": "4a4411b7a5871deacdd2ca0aabb83a906f2de3d314a4a10409250c02bc598de0"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "> [[LINK_1]]Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "不具合の原因となりやすいイベントトリガーの挙動を調整します。": "Adjusts the behavior of event triggers that are prone to causing problems.",
+    "機能は以下の２つです。": "It has the following two features.",
+    "プラグインパラメータによる切り替えも可能です。": "They can also be switched using plugin parameters.",
+    "イベントから接触を厳密に": "Strict Event Touch",
+    "トリガーが『イベントから接触』の際、移動中のプレイヤーに対して、イベントが起動する判定を調整します。": "When the trigger is “Event Touch,” this adjusts the conditions under which the event is activated when the player is moving.",
+    "例えば、上記の動画はシンボルエンカウントを想定しています。": "For example, the video above assumes a symbol encounter system.",
+    "プレイヤーが階段へと一歩踏み出した瞬間に敵シンボルがぶつかってきた場合、ツクールの仕様では敵イベントのほうが優先的に実行されてしまいます。": "If an enemy symbol collides with the player just as the player takes a step toward the stairs, the enemy event takes priority and is executed first according to RPG Maker's specifications.",
+    "結果、階段イベントが実行されないまま、その上に乗ってしまう可能性があります。この仕様は重大な不具合を引き起こしかねません。": "As a result, the player may end up standing on the stairs without the stair event being executed. This behavior could cause serious problems.",
+    "※何度か実験しましたが、遅れて階段イベントが実行されることもあれば、完全に無視されることもあったりと挙動が安定しません……。": "※I ran several experiments, but the behavior was unstable: sometimes the stair event was executed with a delay, while other times it was completely ignored…….",
+    "そこで当機能では『イベントから接触』の実行を遅らせることで、足元のイベントを先に実行させます。これにより、シンボルエンカウントの作品において、足元のイベントが適切に実行されない問題に対処できます。": "This feature delays the execution of “Event Touch,” allowing events at the player's feet to execute first. This addresses the issue of events at the player's feet not executing properly in games with symbol encounters.",
+    "※仕様上、イベントとの接触をやや回避しやすくなります。": "※By design, this makes it slightly easier to avoid touching events.",
+    "決定ボタンによる接触無効": "Disable Touch via the Decision Button",
+    "トリガーが『プレイヤーから接触』『イベントから接触』のイベントに対して、決定ボタンでの起動を禁止します。": "Prevents events with the “Player Touch” or “Event Touch” trigger from being activated with the decision button.",
+    "例えば、上記は『プレイヤーから接触』の橋に接触した際に、船をすり抜けで移動させることで自然に見せかけています。あくまで移動の一環として見せたいため、決定ボタンでは起動しないようにしています。": "For example, in the example above, when the player touches a bridge with the “Player Touch” trigger, the boat is moved through it to make the transition look natural. Since this is intended to appear as part of the movement, it is not activated with the decision button.",
+    "接触系のイベントを決定ボタンで起動できるのは、わりと気づきにくい仕様です。": "It is fairly easy to overlook that touch-based events can be activated with the decision button.",
+    "しかしながら、接触を前提にしてイベントを組んでいる場合は、不自然な挙動になりがちです。": "However, when events are designed on the assumption that they will be triggered by contact, this can result in unnatural behavior.",
+    "加えて、イベントコマンドの条件分岐では決定ボタンで起動されたことを判定する方法はありません。": "In addition, there is no way to determine in an event command conditional branch whether an event was activated with the decision button.",
+    "「決定が押されている」という判定はありますが、ボタンを押しっぱなしで接触した場合も含まれてしまいます。": "There is a condition for “Decision is pressed,” but it also includes cases where the button is held down while making contact.",
+    "というわけで、決定ボタンでの起動を禁止できるようにしました。": "For this reason, I made it possible to disable activation with the decision button.",
+    "すり抜け衝突の禁止": "Disable Pass-Through Collisions",
+    "プライオリティが『通常キャラと同じ』かつトリガーが『プレイヤーから接触』『イベントから接触』のイベントをすり抜けにした際、他のイベントと重なっているときのみ起動できてしまう挙動を修正します。": "Fixes the behavior whereby an event with the same priority as a normal character and a “Player Touch” or “Event Touch” trigger can be activated only when it overlaps another event after being set to pass through.",
+    "※上記の動画は修正前の挙動です。すり抜け状態になったイベントの内容が、イベント同士が重なっている場合に実行されてしまうことが分かると思います。": "※The video above shows the behavior before the fix. You can see that the contents of an event set to pass through are executed when events overlap each other.",
+    "仕様上、決定ボタンによる接触無効と同時にオンにしたほうが自然です。": "By design, it is more natural to enable this at the same time as disabling touch via the decision button.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from RPG Maker's Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_TriggerSetting.js": "NRP_TriggerSetting.js",
+    "更新履歴（History）": "Update History (History)",
+    "プライオリティが『通常キャラと同じ』かつトリガーが『プレイヤーから接触』『イベントから接触』のイベントをすり抜けにした際、他のイベントと重なっているときのみ起動できてしまう挙動を修正できるようにした。": "Made it possible to fix the behavior whereby an event with the same priority as a normal character and a “Player Touch” or “Event Touch” trigger can be activated only when it overlaps another event after being set to pass through.",
+    "イベントから接触を厳密にする機能を追加。": "Added a feature for making Event Touch strict.",
+    "プラグイン名も汎用的に『イベントトリガーの挙動を調整』へと変更。": "Also changed the plugin name to the more general “Adjust Event Trigger Behavior.”",
+    "『接触系のイベントで決定ボタンでの起動を禁止する』プラグインとして公開！": "Released as a plugin that “Disables activation with the decision button for touch-based events”!",
+    "【ＭＺ】プラグインコマンド（Plugin Commands）": "【MZ】Plugin Commands (Plugin Commands)",
+    "足元イベントの確認（CheckStepsEvent）": "Check Events at Player's Feet (CheckStepsEvent)",
+    "プレイヤーが移動中かつ足元のイベントに接触しているかどうかを確認し、指定のスイッチをオンにします。": "Checks whether the player is moving and touching an event at their feet, then turns on the specified switch.",
+    "主にシンボルエンカウントなどの自作エンカウントにおいて、タイミング調整をするための機能です。": "This feature is mainly intended for adjusting timing in custom encounter systems such as symbol encounters.",
+    "例えば、エンカウント処理の直前でこのプラグインコマンドを実行し、スイッチがオンになった際はエンカウントを停止すれば、足元のイベントを優先実行することができます。": "For example, if you execute this plugin command immediately before encounter processing and stop the encounter when the switch is turned on, you can give priority to the event at the player's feet.",
+    "※プレイヤーが移動中でない場合もチェックできる機能を追加しました。（2025/08/27）": "※Added a feature that also allows checking when the player is not moving. (2025/08/27)",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "イベントから接触を厳密に（StrictEventTouch）": "Strict Event Touch (StrictEventTouch)",
+    "数字が小さいほど移動中のプレイヤーに対して、イベントから接触できるタイミングが限定されます。": "The smaller the number, the more limited the timing at which an event can touch a moving player.",
+    "この項目には数値を設定してください。": "Set a numerical value for this option.",
+    "値が0ならば、プレイヤーが目的の座標に、完全に到達した瞬間、もしくは静止した時のみ接触の対象になります。": "If the value is 0, the player is considered a touch target only at the moment they completely reach the destination coordinates or when they come to a stop.",
+    "値が0.5ならば、プレイヤーが目的の座標から0.5タイル以内に位置している時のみ接触の対象になります。": "If the value is 0.5, the player is considered a touch target only when they are within 0.5 tiles of the destination coordinates.",
+    "基本的には0でよいと思います。数値が小さくないと効果が実感できません。": "In most cases, 0 should be sufficient. You will not notice much effect unless the value is small.",
+    "不要な場合はＤＥＬキーで空白にしてください。": "If you do not need this, clear the field with the DEL key.",
+    "※仕様上、半歩移動などのプラグインには対応していません。": "※By design, this does not support plugins such as half-step movement plugins.",
+    "決定ボタンによる接触無効（DisableDecisionTouch）": "Disable Touch via the Decision Button (DisableDecisionTouch)",
+    "すり抜け衝突の禁止（DisableThroughCollision）": "Disable Through Collision (DisableThroughCollision)",
+    "トリガーが『プレイヤーから接触』『イベントから接触』のイベントに対して、すり抜け状態での衝突を禁止します。": "For events whose trigger is “Player Touch” or “Event Touch,” this prohibits collisions while in through mode."
+  }
+}
