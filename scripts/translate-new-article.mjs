@@ -98,20 +98,20 @@ function normalizeJapaneseQuoteBoundaries(source, value) {
     let translation = String(value || "");
     const startsWithQuote = /^[\s\u3000]*[「『]/u.test(original);
     const endsWithQuote = /[」』][\s\u3000]*$/u.test(original);
+    const containsLinkMarker = /\[\[LINK_\d+\]\]/u.test(original);
 
-    if (startsWithQuote) {
+    // A quote surrounding a link can legitimately move to the translated link
+    // title (for example: 『<a>title</a>』の記事 → the article “title”).
+    // Do not invent a new quote at the start of such a sentence.
+    if (startsWithQuote && !containsLinkMarker) {
         if (/^[ \t]*[「『“”"]/u.test(translation)) {
             translation = translation.replace(/^[ \t]*[「『“”"]/u, ' "');
-        } else {
-            translation = ` "${translation.replace(/^[ \t]*/u, "")}`;
         }
     }
 
-    if (endsWithQuote) {
+    if (endsWithQuote && !containsLinkMarker) {
         if (/[「『」』“”"][ \t]*$/u.test(translation)) {
             translation = translation.replace(/[「『」』“”"][ \t]*$/u, '"');
-        } else {
-            translation = `${translation.replace(/[ \t]*$/u, "")}"`;
         }
     }
 
