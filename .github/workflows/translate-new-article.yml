@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       article_url:
-        description: "翻訳または更新確認する記事URL（空欄ならサイトマップを監視）"
+        description: "翻訳または更新確認する記事URL（旧形式・空欄ならサイトマップを監視）"
+        required: false
+        type: string
+      article_urls:
+        description: "一括英訳する記事URL（改行またはカンマ区切り。指定時は article_url より優先）"
         required: false
         type: string
       force_retranslate:
@@ -67,6 +71,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-luna
           ARTICLE_URL: ${{ inputs.article_url }}
+          ARTICLE_URLS: ${{ inputs.article_urls }}
           FORCE_RETRANSLATE: ${{ inputs.force_retranslate }}
 
       - name: Update article status
