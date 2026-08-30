@@ -1,0 +1,1037 @@
+{
+  "articleId": "520798611",
+  "sourceUrl": "https://newrpg.seesaa.net/article/520798611.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "39d23595071fc78d631a6262788f82126822aa40a577c4b87e360ec116678f02",
+  "translatedAt": "2026-08-30T02:50:22.884Z",
+  "title": "Change the Rendering FPS [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "描画ＦＰＳを変更する【RPGツクールMZプラグイン】",
+      "sourceHash": "87346ac5962ca2254ebcbf617bd99b377cf39c286c4512a2a86023734fdcebfa",
+      "translation": "Change the Rendering FPS [RPG Maker MZ Plugin]",
+      "contextHash": "87346ac5962ca2254ebcbf617bd99b377cf39c286c4512a2a86023734fdcebfa"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "描画ＦＰＳを変更して、描画負荷を軽減します。",
+      "sourceHash": "ea2e53650c77b4e7795dc7d2c4d8fe71784da3863cbb0111638a5b1d092a915c",
+      "translation": "Change the rendering FPS to reduce the rendering load.",
+      "contextHash": "ea2e53650c77b4e7795dc7d2c4d8fe71784da3863cbb0111638a5b1d092a915c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ＲＰＧツクールＭＺの描画は標準で６０回／秒（６０ＦＰＳ）に固定されています。",
+      "sourceHash": "a20496b1afbfb452942fa167837f05b6db7b3474204be324755e08181c65525f",
+      "translation": "By default, RPG Maker MZ rendering is fixed at 60 times per second (60 FPS).",
+      "contextHash": "a20496b1afbfb452942fa167837f05b6db7b3474204be324755e08181c65525f"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "このプラグインを導入すると、描画の回数を３０ＦＰＳや４５ＦＰＳなどに間引いて処理負荷を下げることができます。",
+      "sourceHash": "2fb5c10a26bfe67688f0ccc74ed9090171297543a549f8ce3114f0cf4224a072",
+      "translation": "By installing this plugin, you can reduce the processing load by skipping rendering frames, such as rendering at 30 FPS or 45 FPS.",
+      "contextHash": "2fb5c10a26bfe67688f0ccc74ed9090171297543a549f8ce3114f0cf4224a072"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ゲームロジック（キャラ移動・イベント・戦闘計算など）は引き続き６０ＦＰＳ相当で動作します。つまり、プレイヤーの操作感やゲーム速度は変わりません。",
+      "sourceHash": "ba8f8cc8ee6dacc0cd7fd8dc7eaa5e2219517229a14dad4ddcc35b62d818e938",
+      "translation": "Game logic (character movement, events, battle calculations, etc.) continues to run at the equivalent of 60 FPS. In other words, the controls and game speed remain unchanged.",
+      "contextHash": "ba8f8cc8ee6dacc0cd7fd8dc7eaa5e2219517229a14dad4ddcc35b62d818e938"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "プラグインを適用すると、オプション画面でＦＰＳを選択できるようになります。",
+      "sourceHash": "ce1d05dcfeb88ce39dd90d836570dd3ae0635589774ce37fa2aea2a0b6baeb7c",
+      "translation": "Once the plugin is applied, you can select the FPS on the Options screen.",
+      "contextHash": "ce1d05dcfeb88ce39dd90d836570dd3ae0635589774ce37fa2aea2a0b6baeb7c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "重い演出が多い作品や、スペックの低い環境でのプレイ体験向上に役立つプラグインです。",
+      "sourceHash": "f46f8318f907eda1f83f2c1c6bb52e1df330a2015540372a945e6923d467f918",
+      "translation": "This plugin helps improve the playing experience for games with many demanding effects or for play on low-spec systems.",
+      "contextHash": "f46f8318f907eda1f83f2c1c6bb52e1df330a2015540372a945e6923d467f918"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "fee9a112cf31d48dd12b4ea0aa581800cedfceef38aeec145dde0db30419d71c",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "fee9a112cf31d48dd12b4ea0aa581800cedfceef38aeec145dde0db30419d71c"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_ChangeFpsMode.js",
+      "sourceHash": "9301aeb9d8bd6abb6d82cf790bc5e26be500264942d06a206d91bd65f95b0eab",
+      "translation": "NRP_ChangeFpsMode.js",
+      "contextHash": "80c7fecb752e59c47feca12a2787eb38f843764534424b707d5899f0e01d8649"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ＦＰＳの切替方法",
+      "sourceHash": "cbce0153c08ab3f6ecea181dfaa3b021eba1607264cf28b0b7859ad94a8b8d9a",
+      "translation": "How to Switch the FPS",
+      "contextHash": "cbce0153c08ab3f6ecea181dfaa3b021eba1607264cf28b0b7859ad94a8b8d9a"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "オプション画面を使う方法（初期状態）",
+      "sourceHash": "0bf272585951241f3d83fc448b8610c577449ed9b66ce992c198ae75be3fe06f",
+      "translation": "Using the Options Screen (Initial State)",
+      "contextHash": "0bf272585951241f3d83fc448b8610c577449ed9b66ce992c198ae75be3fe06f"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "プラグインパラメータ『オプションに表示』がオンの場合、オプション画面でＦＰＳを選択できるようになります。",
+      "sourceHash": "e14809e280581ec502a309d42154590bfbd42d0bc3e4a406935863b4b4caaa63",
+      "translation": "When the plugin parameter 'Show in Options' is on, you can select the FPS on the Options screen.",
+      "contextHash": "e14809e280581ec502a309d42154590bfbd42d0bc3e4a406935863b4b4caaa63"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "プレイヤーは左右キーで『FPS候補リスト』に登録したＦＰＳ値を切り替えることができます。",
+      "sourceHash": "1fcd3082a8954f51b4fcc225a7f713f0f39eaad5fb7449cb683187de88ccbb31",
+      "translation": "The player can use the left and right keys to switch between the FPS values registered in the 'FPS Candidate List'.",
+      "contextHash": "1fcd3082a8954f51b4fcc225a7f713f0f39eaad5fb7449cb683187de88ccbb31"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "この設定はセーブデータとは独立して保存されます（config.rmmzsave）。",
+      "sourceHash": "d8f71070957b39e3eee086a7502cbf2194981d8038e60a2d2f4417b12a7184b2",
+      "translation": "This setting is saved separately from the save data (config.rmmzsave).",
+      "contextHash": "d8f71070957b39e3eee086a7502cbf2194981d8038e60a2d2f4417b12a7184b2"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "設定を変更すると、連動して『FPS変数』にも現在のＦＰＳ値が格納されます。",
+      "sourceHash": "c01451a469e44d6a0470d68a7a86e41879e22931248bb255a0c5d7d3948f79af",
+      "translation": "When the setting is changed, the current FPS value is also stored in the 'FPS Variable'.",
+      "contextHash": "c01451a469e44d6a0470d68a7a86e41879e22931248bb255a0c5d7d3948f79af"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "イベント等で現在のＦＰＳ状態を参照したい場合は、この変数の値を確認してください。",
+      "sourceHash": "d15f1ef8e15a671238b1b202da4eae414e907993282b34b35e99227525170fdf",
+      "translation": "If you want to check the current FPS state in an event or elsewhere, check the value of this variable.",
+      "contextHash": "d15f1ef8e15a671238b1b202da4eae414e907993282b34b35e99227525170fdf"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※変数を直接操作した場合は一時的にＦＰＳを変更できますが、オプション側には連動しませんのでご注意ください。",
+      "sourceHash": "9c03669c659f883fd320d490ffdc082249b6e057c3ca64580bc0a016a1fb6486",
+      "translation": "※If you manipulate the variable directly, you can temporarily change the FPS, but please note that it will not be linked to the Options setting.",
+      "contextHash": "9c03669c659f883fd320d490ffdc082249b6e057c3ca64580bc0a016a1fb6486"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "変数で制御する方法",
+      "sourceHash": "884081041d50c948be4da3964e9ca344a8494cb9b267697f2a52ef66556c62ec",
+      "translation": "Controlling It with a Variable",
+      "contextHash": "884081041d50c948be4da3964e9ca344a8494cb9b267697f2a52ef66556c62ec"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "『オプションに表示』をオフにした場合は、イベントコマンドの変数操作によってＦＰＳを切り替えます。",
+      "sourceHash": "830d6d1b2870819db26cb24ead1d23c1dd12eade0a1b1b925200652b5c16c10c",
+      "translation": "When 'Show in Options' is off, switch the FPS using the variable operation event command.",
+      "contextHash": "830d6d1b2870819db26cb24ead1d23c1dd12eade0a1b1b925200652b5c16c10c"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "変数に希望のＦＰＳ値（例：30）を設定してください。",
+      "sourceHash": "fdf91bde95c1ed221ecc9309262023a804408fb1919878af9607f99dcd5cfdb3",
+      "translation": "Set the desired FPS value (e.g., 30) in the variable.",
+      "contextHash": "fdf91bde95c1ed221ecc9309262023a804408fb1919878af9607f99dcd5cfdb3"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "値が0以下または60より大きい場合は、自動的に６０ＦＰＳとして扱われます。",
+      "sourceHash": "c6470ee5a47e64999ce3989f31d9e343ef060605a5dcd1f556984c32e8421fac",
+      "translation": "If the value is 0 or less, or greater than 60, it is automatically treated as 60 FPS.",
+      "contextHash": "c6470ee5a47e64999ce3989f31d9e343ef060605a5dcd1f556984c32e8421fac"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "状態は、セーブデータ毎に個別に記録されます。",
+      "sourceHash": "b9808a9fd602fb720f43872e4cfd8b5744c6ecc5665276b498e2065c7f9c492f",
+      "translation": "The state is recorded separately for each save data.",
+      "contextHash": "b9808a9fd602fb720f43872e4cfd8b5744c6ecc5665276b498e2065c7f9c492f"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "FPS候補リストについて",
+      "sourceHash": "986d2d94d4600f5d60c1e204a720da79081503ebe529690e607c64113b809cc3",
+      "translation": "About the FPS Candidate List",
+      "contextHash": "986d2d94d4600f5d60c1e204a720da79081503ebe529690e607c64113b809cc3"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "プラグインパラメータの『FPS候補リスト』で、オプション画面に表示するＦＰＳ値と表示ラベルを複数登録できます。",
+      "sourceHash": "87e4ade1597b008a45388a2fbc9fe414324c3bb4ec1c33587d48b16513a75ffd",
+      "translation": "In the plugin parameter 'FPS Candidate List', you can register multiple FPS values and display labels for the Options screen.",
+      "contextHash": "87e4ade1597b008a45388a2fbc9fe414324c3bb4ec1c33587d48b16513a75ffd"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "設定例",
+      "sourceHash": "15d685e1ce8196afae71f07ecd65528d2a79cad01a3a2158ac07dcc3b70bcff8",
+      "translation": "Example Configuration",
+      "contextHash": "15d685e1ce8196afae71f07ecd65528d2a79cad01a3a2158ac07dcc3b70bcff8"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "FPS: 60 ラベル: 60（標準）",
+      "sourceHash": "868b27690bb639d6552f271ea7562d5f7e301c0f877d75b8dcb395064b8ca31f",
+      "translation": "FPS: 60 Label: 60 (Standard)",
+      "contextHash": "868b27690bb639d6552f271ea7562d5f7e301c0f877d75b8dcb395064b8ca31f"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "FPS: 30 ラベル: 30（低負荷）",
+      "sourceHash": "33ee01bf5a080f8c2e3a0954dd5a8f3d7f8832f10ca7d9736c9f012c98966111",
+      "translation": "FPS: 30 Label: 30 (Low Load)",
+      "contextHash": "33ee01bf5a080f8c2e3a0954dd5a8f3d7f8832f10ca7d9736c9f012c98966111"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "FPS: 15 ラベル: 15（超低負荷）",
+      "sourceHash": "ab95da4461899faca1e0adb628d9b34d59514c2d1e54fdf0931b3611954babc1",
+      "translation": "FPS: 15 Label: 15 (Very Low Load)",
+      "contextHash": "ab95da4461899faca1e0adb628d9b34d59514c2d1e54fdf0931b3611954babc1"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ラベルは長い文字列も設定できますが、ＭＺのオプション画面の仕様上、値の表示領域は120px固定のため、文字が縮小されて表示されてしまいます。",
+      "sourceHash": "9a13c960864e180df92a334799719c06a2f31f2cc07607cd3a98822594c61b47",
+      "translation": "Although long strings can be used for labels, due to the specifications of the MZ Options screen, the value display area is fixed at 120px, so the text will be displayed in a reduced size.",
+      "contextHash": "9a13c960864e180df92a334799719c06a2f31f2cc07607cd3a98822594c61b47"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "アニメーションや移動の見た目は多少カクつきます（描画間引きの性質上）。",
+      "sourceHash": "2c7fea9367006a6e3d10d9c29b6c15ea96b727c695478902d3e830dc80eac17d",
+      "translation": "Animations and movement may appear somewhat choppy (due to the nature of skipping rendered frames).",
+      "contextHash": "2c7fea9367006a6e3d10d9c29b6c15ea96b727c695478902d3e830dc80eac17d"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ＢＧＭや効果音のタイミングには影響しません。",
+      "sourceHash": "c00ef881ab5e9a94f85ec3ef30f6864bfec9b69825364911c3ceb9e9abc4be2e",
+      "translation": "This does not affect the timing of BGM or sound effects.",
+      "contextHash": "c00ef881ab5e9a94f85ec3ef30f6864bfec9b69825364911c3ceb9e9abc4be2e"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ゲーム速度・操作応答は６０ＦＰＳ時と同一です。",
+      "sourceHash": "156a1b0729b989f67b8d24bc5864d83510250653563a35bb8bb12dccf6471c1e",
+      "translation": "The game speed and input response are the same as at 60 FPS.",
+      "contextHash": "156a1b0729b989f67b8d24bc5864d83510250653563a35bb8bb12dccf6471c1e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "他のＦＰＳ変更プラグインとの併用はしないでください。",
+      "sourceHash": "32cfbeb71d080b4982a0ba2c76ac94cb9c78b0027595ea1448ac715907c76571",
+      "translation": "Do not use this together with other FPS-changing plugins.",
+      "contextHash": "32cfbeb71d080b4982a0ba2c76ac94cb9c78b0027595ea1448ac715907c76571"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "このプラグインは解説含め大体をClaudeAIで作成しました。",
+      "sourceHash": "89e0cc6e22c90755a9f6484821ae966dbddfe154db263c85c7c71eb0c692d515",
+      "translation": "Most of this plugin, including its documentation, was created using Claude AI.",
+      "contextHash": "89e0cc6e22c90755a9f6484821ae966dbddfe154db263c85c7c71eb0c692d515"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "作者は↓のBresenham方式が何かよく分かっていませんが、テストなどのチェックはしています。",
+      "sourceHash": "07e87b054ba080768b1bf1c6d48ac7b4f18a9fdb87fe018a673092b429b9ba7b",
+      "translation": "The author does not really understand what the Bresenham method below is, but has performed checks such as testing.",
+      "contextHash": "07e87b054ba080768b1bf1c6d48ac7b4f18a9fdb87fe018a673092b429b9ba7b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "仕組み",
+      "sourceHash": "04f89470260c7714ef32fe9a40bd75d7de32e9c428a2a999496bfea205492ce6",
+      "translation": "How It Works",
+      "contextHash": "04f89470260c7714ef32fe9a40bd75d7de32e9c428a2a999496bfea205492ce6"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "描画はrmmz_core.jsの",
+      "sourceHash": "697bae9a0bc0ea86d4f2351e63448d7858d1541f4aad8d4baa7117a017002701",
+      "translation": "Rendering is performed in rmmz_core.js's",
+      "contextHash": "c7479adfefa4d67b2452df8c77d97825f9ad9250899722251676816168b8ccb0"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "内の",
+      "sourceHash": "a0838d72685a3ae27f11e277d9f26b60ff632d26aa3be6b3d7cdc39c58f10868",
+      "translation": "Graphics._onTick() by ",
+      "contextHash": "c7479adfefa4d67b2452df8c77d97825f9ad9250899722251676816168b8ccb0"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "で行われています。",
+      "sourceHash": "1ba0e8ee038c4ac4f3703bcd4bc7e9d81f909810f96d1545340569d3f1f02da5",
+      "translation": "this._app.render().",
+      "contextHash": "c7479adfefa4d67b2452df8c77d97825f9ad9250899722251676816168b8ccb0"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "このプラグインは",
+      "sourceHash": "2b28cd9820183f8162fcbcd33f746a11113c98ce1bbb4c5c56d05e528994512f",
+      "translation": "This plugin",
+      "contextHash": "ece994060195bdef0cfead10d5f707d0c653d155e6ca80a7ff6d6d244baeca49"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "をラップし、render呼び出しを指定FPSの比率でスキップすることで、ロジックに一切手を加えずに描画だけを制限します。",
+      "sourceHash": "58baae425bfe793100f1b7aa1409300e8bd2d35209bbd6b413222b8a38b775d6",
+      "translation": "wraps Graphics._onTick() and limits rendering only by skipping render calls at the specified FPS ratio, without modifying the logic at all.",
+      "contextHash": "ece994060195bdef0cfead10d5f707d0c653d155e6ca80a7ff6d6d244baeca49"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "├─ fpsCounter.startTick() : 毎フレーム",
+      "sourceHash": "c19aa3e68aff0799a5e5b801c422557e0f44f836184dd2d12ca0cb2173be9aff",
+      "translation": "├─ fpsCounter.startTick() : Every frame",
+      "contextHash": "c19aa3e68aff0799a5e5b801c422557e0f44f836184dd2d12ca0cb2173be9aff"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "├─ tickHandler(deltaTime) : 毎フレーム（ロジックは変わらない）",
+      "sourceHash": "24d421636a4b352dd28650a11760d10e7b534126f02013c150709c05293a6286",
+      "translation": "├─ tickHandler(deltaTime) : Every frame (the logic remains unchanged)",
+      "contextHash": "24d421636a4b352dd28650a11760d10e7b534126f02013c150709c05293a6286"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "├─ this._app.render() : 比率に応じてスキップ",
+      "sourceHash": "8bdd9f6e0f3e4e066375be5f98e4021c5db6608b041c0bdec230144977d17fec",
+      "translation": "├─ this._app.render() : Skip according to the ratio",
+      "contextHash": "8bdd9f6e0f3e4e066375be5f98e4021c5db6608b041c0bdec230144977d17fec"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "└─ fpsCounter.endTick() : 毎フレーム（FPS表示は補正）",
+      "sourceHash": "e7cc55320cf2fa850e5ba6ae7b8fd95cf84aebb1c566d179184c8fb14aeb17eb",
+      "translation": "└─ fpsCounter.endTick() : Every frame (the FPS display is adjusted)",
+      "contextHash": "e7cc55320cf2fa850e5ba6ae7b8fd95cf84aebb1c566d179184c8fb14aeb17eb"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "描画のスキップはBresenham方式の誤差蓄積によって均等に間引かれるため、ムラなく滑らかな間引きが実現されています。",
+      "sourceHash": "50a8a6b8de92b4fd76e23ecb1742376f2184fed59a20cd47fd4446c3ae3aab9a",
+      "translation": "Because skipped frames are evenly distributed through error accumulation using the Bresenham method, smooth, uniform frame skipping is achieved.",
+      "contextHash": "50a8a6b8de92b4fd76e23ecb1742376f2184fed59a20cd47fd4446c3ae3aab9a"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "FPS変数（VariableId）",
+      "sourceHash": "b79674d0ff68dafb5e7f2e3b7fa31a62cc544276f8f99b8c928b2b3d5b99337c",
+      "translation": "FPS Variable (VariableId)",
+      "contextHash": "b79674d0ff68dafb5e7f2e3b7fa31a62cc544276f8f99b8c928b2b3d5b99337c"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "現在の描画FPSを格納する変数を指定します。",
+      "sourceHash": "c6e78e6679ffe91e8c91742539a1d573dfa534d2eea0db80ed6f079d9bc36bb8",
+      "translation": "Specifies the variable that stores the current rendering FPS.",
+      "contextHash": "c6e78e6679ffe91e8c91742539a1d573dfa534d2eea0db80ed6f079d9bc36bb8"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "値が0以下または60より大きい場合は、通常の６０ＦＰＳとして扱われます。",
+      "sourceHash": "07606b6c4fc62cefda8497326441ee9f4b375d2887837172d4098be26d466df0",
+      "translation": "If the value is 0 or less, or greater than 60, it is treated as the standard 60 FPS.",
+      "contextHash": "07606b6c4fc62cefda8497326441ee9f4b375d2887837172d4098be26d466df0"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "デフォルトは変数1番になっていますが、必ず適切な変数を設定してください。",
+      "sourceHash": "0a8e35b1fb81f809e80cf7470fb428aa1a06cab2c35850121413ff89576943fe",
+      "translation": "The default is variable 1, but be sure to set an appropriate variable.",
+      "contextHash": "0a8e35b1fb81f809e80cf7470fb428aa1a06cab2c35850121413ff89576943fe"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "戦闘時に限定（OnlyBattle）",
+      "sourceHash": "26308708a92e28ddb1c1ba1b06201a571cef86444b1db988ae754057b39d85ee",
+      "translation": "Only During Battle (OnlyBattle)",
+      "contextHash": "26308708a92e28ddb1c1ba1b06201a571cef86444b1db988ae754057b39d85ee"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "オンにすると、ＦＰＳ低下の効果を戦闘シーンのみに限定します。",
+      "sourceHash": "2de7526d9b9c2274f2c3d4ed9d57ff1967dd9dd2cb5392aaffd74f4ad8bf2f22",
+      "translation": "When enabled, the FPS reduction effect is limited to battle scenes only.",
+      "contextHash": "2de7526d9b9c2274f2c3d4ed9d57ff1967dd9dd2cb5392aaffd74f4ad8bf2f22"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "マップ上では常に６０ＦＰＳを維持したい場合に使用します。",
+      "sourceHash": "e49893622f4d6447bc7f206bf9b4ca4bb1c051103c0746fa880c436b225ce1c8",
+      "translation": "Use this when you want to maintain 60 FPS at all times on the map.",
+      "contextHash": "e49893622f4d6447bc7f206bf9b4ca4bb1c051103c0746fa880c436b225ce1c8"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "デフォルトはオフです。",
+      "sourceHash": "6ed364aebe3ea2dcc133c4fbfde942aae40a5840fd725d4a36799d0af55727fd",
+      "translation": "The default is off.",
+      "contextHash": "6ed364aebe3ea2dcc133c4fbfde942aae40a5840fd725d4a36799d0af55727fd"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "起動時のデフォルトFPS（DefaultFps）",
+      "sourceHash": "1a76dd93ae482fd087ffbdc936127efa36f1c626e4369580131d3240bef9a4c6",
+      "translation": "Default FPS at Startup (DefaultFps)",
+      "contextHash": "1a76dd93ae482fd087ffbdc936127efa36f1c626e4369580131d3240bef9a4c6"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "ゲーム起動時に使用するＦＰＳを指定します。",
+      "sourceHash": "75cb88c5e3746c667592f2737fcb832a8e4a3dd5cd136851ad52a24021b4054b",
+      "translation": "Specifies the FPS used when the game starts.",
+      "contextHash": "75cb88c5e3746c667592f2737fcb832a8e4a3dd5cd136851ad52a24021b4054b"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "必ず下記の『FPS候補リスト』に存在する値を設定してください。",
+      "sourceHash": "ed718eaf328613d325c10d2b500510a68ed2c92d5be55507a9c1d3d9757446a8",
+      "translation": "Be sure to set a value that exists in the “FPS Candidate List” below.",
+      "contextHash": "ed718eaf328613d325c10d2b500510a68ed2c92d5be55507a9c1d3d9757446a8"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "デフォルトは60です。",
+      "sourceHash": "0323f8e094b837c3e33b3f38f3994c445aaefda867ab42681d30319880ac57d1",
+      "translation": "The default is 60.",
+      "contextHash": "0323f8e094b837c3e33b3f38f3994c445aaefda867ab42681d30319880ac57d1"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "オプションに表示（UseOption）",
+      "sourceHash": "65b7ed94d4342069160dae45749a5c468c83667f38469d3f78c727ffc64bd030",
+      "translation": "Display in Options (UseOption)",
+      "contextHash": "65b7ed94d4342069160dae45749a5c468c83667f38469d3f78c727ffc64bd030"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "オンにすると、オプション画面にＦＰＳ選択項目を追加します。",
+      "sourceHash": "a5a80a73315bc0ffc16bd90a026fed56dc37e577fe79db4da32d0de68cd7bd4d",
+      "translation": "When enabled, an FPS selection option is added to the Options screen.",
+      "contextHash": "a5a80a73315bc0ffc16bd90a026fed56dc37e577fe79db4da32d0de68cd7bd4d"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "オフにすると、イベントコマンドによる変数操作でＦＰＳを制御するモードになります。",
+      "sourceHash": "0812ceafdedaa9c45e6fe863c29f7c84d23839af5b4c2bd78f8b34356af6e86c",
+      "translation": "When disabled, FPS is controlled by manipulating a variable via event commands.",
+      "contextHash": "0812ceafdedaa9c45e6fe863c29f7c84d23839af5b4c2bd78f8b34356af6e86c"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "デフォルトはオンです。",
+      "sourceHash": "1c637c7eacb5ad74bee006c4cd363cf9846e6c98770d753f891909d88398582f",
+      "translation": "The default is on.",
+      "contextHash": "1c637c7eacb5ad74bee006c4cd363cf9846e6c98770d753f891909d88398582f"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "オプション挿入位置（OptionPosition）",
+      "sourceHash": "c2014895ecb100b80c3d709848845ecd0accc16730636002fa51ca3a4bd475af",
+      "translation": "Option Insertion Position (OptionPosition)",
+      "contextHash": "c2014895ecb100b80c3d709848845ecd0accc16730636002fa51ca3a4bd475af"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "オプション画面へのＦＰＳ選択項目の挿入位置（0始まりの番号）を指定します。",
+      "sourceHash": "1f7519b1d0c23f5cf1ae5493ca8caaeb53ac0f5cee912d22a29aeb0791a54022",
+      "translation": "Specifies the insertion position of the FPS selection option in the Options screen (0-based index).",
+      "contextHash": "1f7519b1d0c23f5cf1ae5493ca8caaeb53ac0f5cee912d22a29aeb0791a54022"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "デフォルトの2は「コマンド記憶」の下に相当します。",
+      "sourceHash": "0d45720d8c66fa3529c1b2ebf1f79e5affd0ea25ea2a8046152d53c706244ba1",
+      "translation": "The default value of 2 corresponds to the position below “Command Remember.”",
+      "contextHash": "0d45720d8c66fa3529c1b2ebf1f79e5affd0ea25ea2a8046152d53c706244ba1"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "『オプションに表示』がオンの場合のみ有効です。",
+      "sourceHash": "07085de36df259f9abf08d65038818cb70b49639c80e9614292c4145a6eb2301",
+      "translation": "This is effective only when “Display in Options” is enabled.",
+      "contextHash": "07085de36df259f9abf08d65038818cb70b49639c80e9614292c4145a6eb2301"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "オプション表示名（OptionName）",
+      "sourceHash": "e5c5b47331811f6aa56024d2771e5fd0dca8190838fce2ec7f61b1a793a2e37b",
+      "translation": "Option Display Name (OptionName)",
+      "contextHash": "e5c5b47331811f6aa56024d2771e5fd0dca8190838fce2ec7f61b1a793a2e37b"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "オプション画面に表示する項目名を設定します。",
+      "sourceHash": "a184b93a8dbd1c8c9bafb3dc6e548c50fe3ae39ae6ad6ac2f157398f57f105fa",
+      "translation": "Sets the name of the option displayed on the Options screen.",
+      "contextHash": "a184b93a8dbd1c8c9bafb3dc6e548c50fe3ae39ae6ad6ac2f157398f57f105fa"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "デフォルトは「描画FPS」です。",
+      "sourceHash": "0c6480030edf8ca3c3be063b03cbbaba88180946f21a6e2ec9b91349039e69da",
+      "translation": "The default is “Rendering FPS.”",
+      "contextHash": "0c6480030edf8ca3c3be063b03cbbaba88180946f21a6e2ec9b91349039e69da"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "『オプションに表示』がオンの場合のみ有効です。",
+      "sourceHash": "07085de36df259f9abf08d65038818cb70b49639c80e9614292c4145a6eb2301",
+      "translation": "This is effective only when “Display in Options” is enabled.",
+      "contextHash": "07085de36df259f9abf08d65038818cb70b49639c80e9614292c4145a6eb2301"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "FPS候補リスト（FpsList）",
+      "sourceHash": "f1db74913685695a720638e4e9929a12faa1b6a4a3c20af23d6710194efd9fa3",
+      "translation": "FPS Candidate List (FpsList)",
+      "contextHash": "f1db74913685695a720638e4e9929a12faa1b6a4a3c20af23d6710194efd9fa3"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "オプション画面でプレイヤーが選択できるＦＰＳ値の一覧です。",
+      "sourceHash": "f384207fb63eb0ee24477d3da0c4309e184403ee427f4a9f97711ba68302ff91",
+      "translation": "This is a list of FPS values that the player can select on the Options screen.",
+      "contextHash": "f384207fb63eb0ee24477d3da0c4309e184403ee427f4a9f97711ba68302ff91"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "各エントリにFPS値（1～60）と表示ラベルを設定します。",
+      "sourceHash": "84a0ae8bc24888fe52af8b5cf24c13236aa33a94b190d1ae563b8e68dd78428a",
+      "translation": "Set an FPS value (1–60) and display label for each entry.",
+      "contextHash": "84a0ae8bc24888fe52af8b5cf24c13236aa33a94b190d1ae563b8e68dd78428a"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "ラベルを空欄にするとＦＰＳ値の数字がそのまま表示されます。",
+      "sourceHash": "360471b68e7c0b0c527692d3f76a3068a017d89eba538f5a11fce05ea753603f",
+      "translation": "If the label is left blank, the FPS value is displayed as-is.",
+      "contextHash": "360471b68e7c0b0c527692d3f76a3068a017d89eba538f5a11fce05ea753603f"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "デフォルトは30／40／50／60の4段階が登録されています。",
+      "sourceHash": "4e0842d27aca48bba6c7904a2e3a836076d6760cf6dfd5367d965563e27bfffd",
+      "translation": "By default, four levels—30, 40, 50, and 60—are registered.",
+      "contextHash": "4e0842d27aca48bba6c7904a2e3a836076d6760cf6dfd5367d965563e27bfffd"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "『オプションに表示』がオンの場合のみ有効です。",
+      "sourceHash": "07085de36df259f9abf08d65038818cb70b49639c80e9614292c4145a6eb2301",
+      "translation": "This is effective only when “Display in Options” is enabled.",
+      "contextHash": "07085de36df259f9abf08d65038818cb70b49639c80e9614292c4145a6eb2301"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]ＦＰＳの切替方法[[/LINK_1]]",
+      "sourceHash": "4a70b4a656e558ed95f5c954606d839e1062893deeda70fc2fbfaf5e4f4ba032",
+      "parts": [
+        {
+          "source": "ＦＰＳの切替方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Switch FPS[[/LINK_1]]",
+      "contextHash": "4a70b4a656e558ed95f5c954606d839e1062893deeda70fc2fbfaf5e4f4ba032"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]オプション画面を使う方法（初期状態）[[/LINK_1]]",
+      "sourceHash": "0204a15e62fc0e61ef80b6b5f5bc62f91effb72a268734362e6925721fd2fbce",
+      "parts": [
+        {
+          "source": "オプション画面を使う方法（初期状態）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Use the Options Screen (Initial State)[[/LINK_1]]",
+      "contextHash": "0204a15e62fc0e61ef80b6b5f5bc62f91effb72a268734362e6925721fd2fbce"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]変数で制御する方法[[/LINK_1]]",
+      "sourceHash": "bee9c75a31703a6734804ee49a6addc827936d470b87ce9dab3d6c4686064d2d",
+      "parts": [
+        {
+          "source": "変数で制御する方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Control It Using Variables[[/LINK_1]]",
+      "contextHash": "bee9c75a31703a6734804ee49a6addc827936d470b87ce9dab3d6c4686064d2d"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]FPS候補リストについて[[/LINK_1]]",
+      "sourceHash": "224cc1fb2250d8405940743ea40b95f62ba9492ab158989f8e4ae76a7c02117d",
+      "parts": [
+        {
+          "source": "FPS候補リストについて",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About the FPS Candidate List[[/LINK_1]]",
+      "contextHash": "224cc1fb2250d8405940743ea40b95f62ba9492ab158989f8e4ae76a7c02117d"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]注意点[[/LINK_1]]",
+      "sourceHash": "dae1acf5bccb59b156ed9875bebe9c03cb8dc5f1164c511491615fc43145b6ce",
+      "parts": [
+        {
+          "source": "注意点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Notes[[/LINK_1]]",
+      "contextHash": "dae1acf5bccb59b156ed9875bebe9c03cb8dc5f1164c511491615fc43145b6ce"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]仕組み[[/LINK_1]]",
+      "sourceHash": "a86b14d5e55c68937d11d6eda4ee685bd2ec115f7c63119260e568f30f3d8c77",
+      "parts": [
+        {
+          "source": "仕組み",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How It Works[[/LINK_1]]",
+      "contextHash": "a86b14d5e55c68937d11d6eda4ee685bd2ec115f7c63119260e568f30f3d8c77"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]FPS変数（VariableId）[[/LINK_1]]",
+      "sourceHash": "d005f3a9ab02d9cd46243d06fad7d741d3df081442dcaa3ef37688eb9ba0cbd7",
+      "parts": [
+        {
+          "source": "FPS変数（VariableId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]FPS Variable (VariableId)[[/LINK_1]]",
+      "contextHash": "d005f3a9ab02d9cd46243d06fad7d741d3df081442dcaa3ef37688eb9ba0cbd7"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘時に限定（OnlyBattle）[[/LINK_1]]",
+      "sourceHash": "876282f6dc08bf4975b8d3914e8c390ec6f717b13a593b5c3c1d56f3fe47546d",
+      "parts": [
+        {
+          "source": "戦闘時に限定（OnlyBattle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Only During Battles (OnlyBattle)[[/LINK_1]]",
+      "contextHash": "876282f6dc08bf4975b8d3914e8c390ec6f717b13a593b5c3c1d56f3fe47546d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]起動時のデフォルトFPS（DefaultFps）[[/LINK_1]]",
+      "sourceHash": "598ebc65bfee4ff642627ac548e21230fbcb3394a5691c70e0bd08b57c258e9f",
+      "parts": [
+        {
+          "source": "起動時のデフォルトFPS（DefaultFps）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Default FPS on Startup (DefaultFps)[[/LINK_1]]",
+      "contextHash": "598ebc65bfee4ff642627ac548e21230fbcb3394a5691c70e0bd08b57c258e9f"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]オプションに表示（UseOption）[[/LINK_1]]",
+      "sourceHash": "5e58627d22a9844546a85154601db05735d5bfe56ca6f5c0e173184c776e7358",
+      "parts": [
+        {
+          "source": "オプションに表示（UseOption）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display in Options (UseOption)[[/LINK_1]]",
+      "contextHash": "5e58627d22a9844546a85154601db05735d5bfe56ca6f5c0e173184c776e7358"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]オプション挿入位置（OptionPosition）[[/LINK_1]]",
+      "sourceHash": "095d87090a4ae9cd4c0fd681972e5b6b8a591a7c87a0e8162e80099f16575c1a",
+      "parts": [
+        {
+          "source": "オプション挿入位置（OptionPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Option Insertion Position (OptionPosition)[[/LINK_1]]",
+      "contextHash": "095d87090a4ae9cd4c0fd681972e5b6b8a591a7c87a0e8162e80099f16575c1a"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]オプション表示名（OptionName）[[/LINK_1]]",
+      "sourceHash": "3bc4833bf242a83fa994c8cd045b4602121e25e06e8b53817c08a9af8b43ecbe",
+      "parts": [
+        {
+          "source": "オプション表示名（OptionName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Option Display Name (OptionName)[[/LINK_1]]",
+      "contextHash": "3bc4833bf242a83fa994c8cd045b4602121e25e06e8b53817c08a9af8b43ecbe"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]FPS候補リスト（FpsList）[[/LINK_1]]",
+      "sourceHash": "0c07d68ecccf962b204446560de7554026e89546fa43c5bddaf589d92b52c88e",
+      "parts": [
+        {
+          "source": "FPS候補リスト（FpsList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]FPS Candidate List (FpsList)[[/LINK_1]]",
+      "contextHash": "0c07d68ecccf962b204446560de7554026e89546fa43c5bddaf589d92b52c88e"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "表示領域の幅を広げたい場合は、[[LINK_1]]NRP_OptionCustomize.js（ver1.01以上）[[/LINK_1]]などの外部プラグインを組み合わせてください。",
+      "sourceHash": "3b7cb78715c954a2ddcddee0e4ea0e498e6412a59a14bde6560961fdcaed33eb",
+      "parts": [
+        {
+          "source": "表示領域の幅を広げたい場合は、",
+          "link": false
+        },
+        {
+          "source": "NRP_OptionCustomize.js（ver1.01以上）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などの外部プラグインを組み合わせてください。",
+          "link": false
+        }
+      ],
+      "translation": "If you want to widen the display area, combine it with an external plugin such as [[LINK_1]]NRP_OptionCustomize.js (ver1.01 or later)[[/LINK_1]].",
+      "contextHash": "3b7cb78715c954a2ddcddee0e4ea0e498e6412a59a14bde6560961fdcaed33eb"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "描画ＦＰＳを変更して、描画負荷を軽減します。": "Change the rendering FPS to reduce the rendering load.",
+    "ＲＰＧツクールＭＺの描画は標準で６０回／秒（６０ＦＰＳ）に固定されています。": "By default, RPG Maker MZ rendering is fixed at 60 times per second (60 FPS).",
+    "このプラグインを導入すると、描画の回数を３０ＦＰＳや４５ＦＰＳなどに間引いて処理負荷を下げることができます。": "By installing this plugin, you can reduce the processing load by skipping rendering frames, such as rendering at 30 FPS or 45 FPS.",
+    "ゲームロジック（キャラ移動・イベント・戦闘計算など）は引き続き６０ＦＰＳ相当で動作します。つまり、プレイヤーの操作感やゲーム速度は変わりません。": "Game logic (character movement, events, battle calculations, etc.) continues to run at the equivalent of 60 FPS. In other words, the controls and game speed remain unchanged.",
+    "プラグインを適用すると、オプション画面でＦＰＳを選択できるようになります。": "Once the plugin is applied, you can select the FPS on the Options screen.",
+    "重い演出が多い作品や、スペックの低い環境でのプレイ体験向上に役立つプラグインです。": "This plugin helps improve the playing experience for games with many demanding effects or for play on low-spec systems.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "以下のファイルをダウンロードし、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_ChangeFpsMode.js": "NRP_ChangeFpsMode.js",
+    "更新履歴（History）": "Update History (History)",
+    "公開！": "Released!",
+    "ＦＰＳの切替方法": "How to Switch the FPS",
+    "オプション画面を使う方法（初期状態）": "Using the Options Screen (Initial State)",
+    "プラグインパラメータ『オプションに表示』がオンの場合、オプション画面でＦＰＳを選択できるようになります。": "When the plugin parameter 'Show in Options' is on, you can select the FPS on the Options screen.",
+    "プレイヤーは左右キーで『FPS候補リスト』に登録したＦＰＳ値を切り替えることができます。": "The player can use the left and right keys to switch between the FPS values registered in the 'FPS Candidate List'.",
+    "この設定はセーブデータとは独立して保存されます（config.rmmzsave）。": "This setting is saved separately from the save data (config.rmmzsave).",
+    "設定を変更すると、連動して『FPS変数』にも現在のＦＰＳ値が格納されます。": "When the setting is changed, the current FPS value is also stored in the 'FPS Variable'.",
+    "イベント等で現在のＦＰＳ状態を参照したい場合は、この変数の値を確認してください。": "If you want to check the current FPS state in an event or elsewhere, check the value of this variable.",
+    "※変数を直接操作した場合は一時的にＦＰＳを変更できますが、オプション側には連動しませんのでご注意ください。": "※If you manipulate the variable directly, you can temporarily change the FPS, but please note that it will not be linked to the Options setting.",
+    "変数で制御する方法": "Controlling It with a Variable",
+    "『オプションに表示』をオフにした場合は、イベントコマンドの変数操作によってＦＰＳを切り替えます。": "When 'Show in Options' is off, switch the FPS using the variable operation event command.",
+    "変数に希望のＦＰＳ値（例：30）を設定してください。": "Set the desired FPS value (e.g., 30) in the variable.",
+    "値が0以下または60より大きい場合は、自動的に６０ＦＰＳとして扱われます。": "If the value is 0 or less, or greater than 60, it is automatically treated as 60 FPS.",
+    "状態は、セーブデータ毎に個別に記録されます。": "The state is recorded separately for each save data.",
+    "FPS候補リストについて": "About the FPS Candidate List",
+    "プラグインパラメータの『FPS候補リスト』で、オプション画面に表示するＦＰＳ値と表示ラベルを複数登録できます。": "In the plugin parameter 'FPS Candidate List', you can register multiple FPS values and display labels for the Options screen.",
+    "設定例": "Example Configuration",
+    "FPS: 60 ラベル: 60（標準）": "FPS: 60 Label: 60 (Standard)",
+    "FPS: 30 ラベル: 30（低負荷）": "FPS: 30 Label: 30 (Low Load)",
+    "FPS: 15 ラベル: 15（超低負荷）": "FPS: 15 Label: 15 (Very Low Load)",
+    "ラベルは長い文字列も設定できますが、ＭＺのオプション画面の仕様上、値の表示領域は120px固定のため、文字が縮小されて表示されてしまいます。": "Although long strings can be used for labels, due to the specifications of the MZ Options screen, the value display area is fixed at 120px, so the text will be displayed in a reduced size.",
+    "注意点": "Notes",
+    "アニメーションや移動の見た目は多少カクつきます（描画間引きの性質上）。": "Animations and movement may appear somewhat choppy (due to the nature of skipping rendered frames).",
+    "ＢＧＭや効果音のタイミングには影響しません。": "This does not affect the timing of BGM or sound effects.",
+    "ゲーム速度・操作応答は６０ＦＰＳ時と同一です。": "The game speed and input response are the same as at 60 FPS.",
+    "他のＦＰＳ変更プラグインとの併用はしないでください。": "Do not use this together with other FPS-changing plugins.",
+    "このプラグインは解説含め大体をClaudeAIで作成しました。": "Most of this plugin, including its documentation, was created using Claude AI.",
+    "作者は↓のBresenham方式が何かよく分かっていませんが、テストなどのチェックはしています。": "The author does not really understand what the Bresenham method below is, but has performed checks such as testing.",
+    "仕組み": "How It Works",
+    "描画はrmmz_core.jsの": "Rendering is performed in rmmz_core.js's",
+    "内の": "Graphics._onTick() by ",
+    "で行われています。": "this._app.render().",
+    "このプラグインは": "This plugin",
+    "をラップし、render呼び出しを指定FPSの比率でスキップすることで、ロジックに一切手を加えずに描画だけを制限します。": "wraps Graphics._onTick() and limits rendering only by skipping render calls at the specified FPS ratio, without modifying the logic at all.",
+    "├─ fpsCounter.startTick() : 毎フレーム": "├─ fpsCounter.startTick() : Every frame",
+    "├─ tickHandler(deltaTime) : 毎フレーム（ロジックは変わらない）": "├─ tickHandler(deltaTime) : Every frame (the logic remains unchanged)",
+    "├─ this._app.render() : 比率に応じてスキップ": "├─ this._app.render() : Skip according to the ratio",
+    "└─ fpsCounter.endTick() : 毎フレーム（FPS表示は補正）": "└─ fpsCounter.endTick() : Every frame (the FPS display is adjusted)",
+    "描画のスキップはBresenham方式の誤差蓄積によって均等に間引かれるため、ムラなく滑らかな間引きが実現されています。": "Because skipped frames are evenly distributed through error accumulation using the Bresenham method, smooth, uniform frame skipping is achieved.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "FPS変数（VariableId）": "FPS Variable (VariableId)",
+    "現在の描画FPSを格納する変数を指定します。": "Specifies the variable that stores the current rendering FPS.",
+    "値が0以下または60より大きい場合は、通常の６０ＦＰＳとして扱われます。": "If the value is 0 or less, or greater than 60, it is treated as the standard 60 FPS.",
+    "デフォルトは変数1番になっていますが、必ず適切な変数を設定してください。": "The default is variable 1, but be sure to set an appropriate variable.",
+    "戦闘時に限定（OnlyBattle）": "Only During Battle (OnlyBattle)",
+    "オンにすると、ＦＰＳ低下の効果を戦闘シーンのみに限定します。": "When enabled, the FPS reduction effect is limited to battle scenes only.",
+    "マップ上では常に６０ＦＰＳを維持したい場合に使用します。": "Use this when you want to maintain 60 FPS at all times on the map.",
+    "デフォルトはオフです。": "The default is off.",
+    "起動時のデフォルトFPS（DefaultFps）": "Default FPS at Startup (DefaultFps)",
+    "ゲーム起動時に使用するＦＰＳを指定します。": "Specifies the FPS used when the game starts.",
+    "必ず下記の『FPS候補リスト』に存在する値を設定してください。": "Be sure to set a value that exists in the “FPS Candidate List” below.",
+    "デフォルトは60です。": "The default is 60.",
+    "オプションに表示（UseOption）": "Display in Options (UseOption)",
+    "オンにすると、オプション画面にＦＰＳ選択項目を追加します。": "When enabled, an FPS selection option is added to the Options screen.",
+    "オフにすると、イベントコマンドによる変数操作でＦＰＳを制御するモードになります。": "When disabled, FPS is controlled by manipulating a variable via event commands.",
+    "デフォルトはオンです。": "The default is on.",
+    "オプション挿入位置（OptionPosition）": "Option Insertion Position (OptionPosition)",
+    "オプション画面へのＦＰＳ選択項目の挿入位置（0始まりの番号）を指定します。": "Specifies the insertion position of the FPS selection option in the Options screen (0-based index).",
+    "デフォルトの2は「コマンド記憶」の下に相当します。": "The default value of 2 corresponds to the position below “Command Remember.”",
+    "『オプションに表示』がオンの場合のみ有効です。": "This is effective only when “Display in Options” is enabled.",
+    "オプション表示名（OptionName）": "Option Display Name (OptionName)",
+    "オプション画面に表示する項目名を設定します。": "Sets the name of the option displayed on the Options screen.",
+    "デフォルトは「描画FPS」です。": "The default is “Rendering FPS.”",
+    "FPS候補リスト（FpsList）": "FPS Candidate List (FpsList)",
+    "オプション画面でプレイヤーが選択できるＦＰＳ値の一覧です。": "This is a list of FPS values that the player can select on the Options screen.",
+    "各エントリにFPS値（1～60）と表示ラベルを設定します。": "Set an FPS value (1–60) and display label for each entry.",
+    "ラベルを空欄にするとＦＰＳ値の数字がそのまま表示されます。": "If the label is left blank, the FPS value is displayed as-is.",
+    "デフォルトは30／40／50／60の4段階が登録されています。": "By default, four levels—30, 40, 50, and 60—are registered."
+  }
+}
