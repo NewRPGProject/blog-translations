@@ -378,12 +378,22 @@ function textLookupKeys(text) {
     return decoded === normalized ? [normalized] : [normalized, decoded];
 }
 
+// Convert only the full-width ASCII block. The ideographic space used for
+// Japanese paragraph indentation is U+3000 and deliberately remains intact.
+function normalizeEnglishAscii(text) {
+    return String(text).replace(/[\uFF01-\uFF5E]/g, character =>
+        String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
+}
+
 function lookupTranslation(dictionary, normalized) {
     const texts = dictionary.texts || dictionary;
     if (typeof texts[normalized] === "string") {
-        return texts[normalized];
+        return normalizeEnglishAscii(texts[normalized]);
     }
-    return texts[normalizeText(decodeHtmlEntities(normalized))];
+    const translated = texts[normalizeText(decodeHtmlEntities(normalized))];
+    return typeof translated === "string"
+        ? normalizeEnglishAscii(translated)
+        : translated;
 }
 
 function createArticleDictionary(translation) {
@@ -599,7 +609,7 @@ function makeLineFragment(line, matchedNodes) {
     const lastNode = matchedNodes[matchedNodes.length - 1];
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(firstNode.nodeValue);
-    let translation = String(line.translation)
+    let translation = normalizeEnglishAscii(line.translation)
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
 
@@ -996,7 +1006,7 @@ async function applyIndexLanguage(language, options = {}) {
           );
         }
 
-        article.titleElement.textContent = translation.title;
+        article.titleElement.textContent = normalizeEnglishAscii(translation.title);
 
         translateLinkedLines(article.bodyElement, translation, "en");
         translateTextNodes(
@@ -1118,7 +1128,7 @@ async function applyLanguage(language, options = {}) {
 
                 if (titleElement) {
                     titleElement.textContent =
-                        translation.title;
+                        normalizeEnglishAscii(translation.title);
                 }
 
                 translateLinkedLines(bodyElement, translation, "en");
