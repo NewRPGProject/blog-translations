@@ -767,6 +767,19 @@ function isInsideArticleArea(node) {
         return false;
     }
 
+    // Once the article body has been identified, this is the definitive
+    // boundary. Do not let a common-site dictionary overwrite an article
+    // translation simply because both use the same Japanese word (for
+    // example, "まとめ" → "Conclusion" in an article and "Index" in the
+    // site navigation).
+    if (
+        cachedBodyElement &&
+        document.contains(cachedBodyElement) &&
+        cachedBodyElement.contains(parent)
+    ) {
+        return true;
+    }
+
     const articleId = getArticleId();
 
     if (!articleId) {
@@ -1064,9 +1077,6 @@ async function applyLanguage(language, options = {}) {
     //---------------------------------------------
     // 英訳する場合
     //---------------------------------------------
-    // 共通部分は、記事翻訳の有無に関係なく先に適用する
-    const commonPromise = applyCommonLanguage("en");
-
     let articleSucceeded = false;
 
     if (articleId) {
@@ -1127,7 +1137,11 @@ async function applyLanguage(language, options = {}) {
         });
     }
 
-    const commonSucceeded = await commonPromise;
+    // Identify and translate the article before applying the common-site
+    // dictionary. The common dictionary deliberately contains short labels
+    // that can also occur in article text, so running these two passes in
+    // parallel makes the final wording depend on network timing.
+    const commonSucceeded = await applyCommonLanguage("en");
 
     document.documentElement.lang = "en";
     updateButtons("en");
