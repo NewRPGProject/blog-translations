@@ -394,6 +394,11 @@ function normalizeEnglishAscii(text) {
             String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
 }
 
+function isStandaloneFullWidthAscii(text) {
+    return /[\uFF01-\uFF5E]/.test(text)
+        && !/[ぁ-んァ-ヶ一-龠々〆〤ー]/u.test(text);
+}
+
 function lookupTranslation(dictionary, normalized) {
     const texts = dictionary.texts || dictionary;
     if (typeof texts[normalized] === "string") {
@@ -520,6 +525,15 @@ function translateTextNodes(
             takeTranslation(dictionary, normalized);
 
         if (typeof translated !== "string") {
+            // Older JSON files did not contain lines made only of full-width
+            // ASCII (for example, "ＤＱ３、６、７"). Normalize those visible
+            // English identifiers even before the JSON is regenerated.
+            if (language === "en" && isStandaloneFullWidthAscii(original)) {
+                node.nodeValue = restoreOriginalLineFormat(
+                    original,
+                    normalizeEnglishAscii(original)
+                );
+            }
             continue;
         }
 
