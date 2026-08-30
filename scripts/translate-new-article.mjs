@@ -1035,18 +1035,23 @@ function sameContext(left, right) {
     return Boolean(left.contextHash && right.contextHash && left.contextHash === right.contextHash);
 }
 
-function repairLinkBoundarySpaces(blocks) {
+function repairInlineBoundarySpaces(blocks) {
     let repaired = false;
     for (let index = 1; index < blocks.length; index++) {
         const previous = blocks[index - 1];
         const current = blocks[index];
         if (!sameContext(previous, current)
-            || (previous.type !== "link" && current.type !== "link")
+            || previous.type === "code" || current.type === "code"
             || !previous.translation || !current.translation
+            || /\s$/u.test(previous.source || "")
+            || /^\s/u.test(current.source || "")
             || /\s$/u.test(previous.translation)
             || /^\s/u.test(current.translation)
-            || !/[A-Za-z0-9)\]}]$/u.test(previous.translation)
-            || !/^[A-Za-z0-9([{]/u.test(current.translation)) {
+            // Text nodes split by <a>, <strong>, <span>, <del>, etc. are
+            // adjacent in the original Japanese. Their English translations
+            // still need a word boundary when the two fragments meet.
+            || !/[\p{L}\p{N})\]}\]"'”.,;:!?]$/u.test(previous.translation)
+            || !/^[\p{L}\p{N}([{\["“]/u.test(current.translation)) {
             continue;
         }
         previous.translation += " ";
@@ -1236,15 +1241,15 @@ async function main() {
             && invalidStoredLines.length === 0) {
             console.log(`本文に差分はありません: articles/${target.articleId}.json`);
             const existingBlocks = existingArticle?.blocks || [];
-            const repairedLinkSpaces = !dryRun && repairLinkBoundarySpaces(existingBlocks);
+            const repairedInlineSpaces = !dryRun && repairInlineBoundarySpaces(existingBlocks);
             const repairedAngleBrackets = !dryRun && preserveFullWidthAngleBrackets(existingBlocks);
             const repairedParentheses = !dryRun && normalizeOpenParenthesisBoundaries(existingBlocks);
             const normalizedEnglishAscii = !dryRun && normalizeStoredEnglishAscii(existingArticle);
-            if (repairedLinkSpaces || repairedAngleBrackets || repairedParentheses || normalizedEnglishAscii) {
+            if (repairedInlineSpaces || repairedAngleBrackets || repairedParentheses || normalizedEnglishAscii) {
                 synchronizeTextsFromBlocks(existingArticle);
                 await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
                 translatedArticleCount++;
-                console.log(`リンク境界の空白を修正しました: articles/${target.articleId}.json`);
+                console.log(`インライン要素境界の空白を修正しました: articles/${target.articleId}.json`);
             }
             if (!dryRun) rememberArticleState();
             continue;
@@ -1298,7 +1303,7 @@ async function main() {
             usage.total += lineUsage.total;
         }
 
-        repairLinkBoundarySpaces(blocks);
+        repairInlineBoundarySpaces(blocks);
         preserveFullWidthAngleBrackets(blocks);
         normalizeOpenParenthesisBoundaries(blocks);
 
