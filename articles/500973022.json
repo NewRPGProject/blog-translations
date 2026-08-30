@@ -1,0 +1,451 @@
+{
+  "articleId": "500973022",
+  "sourceUrl": "https://newrpg.seesaa.net/article/500973022.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "6f1a3ffa9a585c10e9079ce7cfdef855de9b2977d86059e0aab07cb4fef78754",
+  "translatedAt": "2026-08-30T04:32:07.066Z",
+  "title": "Adjust Flash Effects During Enemy Actions [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵の行動時のフラッシュを調整【RPGツクールMZプラグイン】",
+      "sourceHash": "429fbd7842fb29c9c0f40b47c7e2d63c3ac35c85ad2d4b46db65f5926bf78d64",
+      "translation": "Adjust Flash Effects During Enemy Actions [RPG Maker MZ Plugin]",
+      "contextHash": "429fbd7842fb29c9c0f40b47c7e2d63c3ac35c85ad2d4b46db65f5926bf78d64"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "敵の行動時のフラッシュを調整します。",
+      "sourceHash": "f800d8e5249ea461a80de20e8ad6fe5664edec3a18978caa6e339f3b5a7e5179",
+      "translation": "Adjusts the flash effect during enemy actions.",
+      "contextHash": "f800d8e5249ea461a80de20e8ad6fe5664edec3a18978caa6e339f3b5a7e5179"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "フラッシュの強さ、時間、ディレイ（ウェイト）などを設定できます。",
+      "sourceHash": "ef96ba886aff4734cc26f0f9038e2e9605bf1479d23afab80951d97d99f393e7",
+      "translation": "You can configure the flash strength, duration, delay (wait), and more.",
+      "contextHash": "ef96ba886aff4734cc26f0f9038e2e9605bf1479d23afab80951d97d99f393e7"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "また、当プラグインの副次的な機能として、ツクールのデフォルトに存在する余計なウェイトの一つである『animationBaseDelay』を変更できます。戦闘高速化したい方はどうぞ。",
+      "sourceHash": "ea7d744a7144c7b702097bf35b44d641de2f96f7bf53239d44a8ebe39cdafc1c",
+      "translation": "As an additional feature of this plugin, you can change `animationBaseDelay`, one of the unnecessary waits in the default RPG Maker settings. Use it if you want to speed up battles.",
+      "contextHash": "ea7d744a7144c7b702097bf35b44d641de2f96f7bf53239d44a8ebe39cdafc1c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EnemyActionFlash.js",
+      "sourceHash": "9f0f3d3ca9df55a87b0548598acc05988a0424eaafa7dcea0e3d091fda4e47fd",
+      "translation": "NRP_EnemyActionFlash.js",
+      "contextHash": "4f93036daee1662aef9aebd30005c912631ba02e0245cace71be79ad83dd37f8"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "コモンイベントを呼び出すスキルに<NoEnemyActionFlash>を記述していた場合、該当スキル使用後に特定条件（アクターが戦闘不能になったなど）でフリーズする不具合修正。",
+      "sourceHash": "3bcf7935b02235bf990ca614830fca0622bf3273a1019f078e09c902be8e979f",
+      "translation": "Fixed a bug that caused the game to freeze under certain conditions (such as when an actor became incapacitated) after using a skill that calls a common event if the skill's note field contained <NoEnemyActionFlash>.",
+      "contextHash": "3bcf7935b02235bf990ca614830fca0622bf3273a1019f078e09c902be8e979f"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "基本ディレイが0の時に設定が無視されてしまう不具合修正。",
+      "sourceHash": "eb42d2e7f718faf16f13f5a983de1b89ac1beb1cf776ff03d530b41ce4aa96f8",
+      "translation": "Fixed a bug where the setting was ignored when the base delay was 0.",
+      "contextHash": "eb42d2e7f718faf16f13f5a983de1b89ac1beb1cf776ff03d530b41ce4aa96f8"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "スキルのメモ欄（Note of Skills）",
+      "sourceHash": "2f2081f42c3b8fd9e353a886b2a6e7595e9fc74658db6660c0873363ad5d8470",
+      "translation": "Skill Note Field (Note of Skills)",
+      "contextHash": "2f2081f42c3b8fd9e353a886b2a6e7595e9fc74658db6660c0873363ad5d8470"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "スキル実行時、敵キャラのフラッシュを禁止します。",
+      "sourceHash": "a18ab0efb310107e635b079dd3cf222b5994768ccdcf357f62f0c7d2f98cc782",
+      "translation": "Prohibits enemy flashes when a skill is executed.",
+      "contextHash": "a18ab0efb310107e635b079dd3cf222b5994768ccdcf357f62f0c7d2f98cc782"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "フラッシュの強さ（FlashStrong）",
+      "sourceHash": "447cabfaf500b5b22b2b66c3e469f75be48fb2c673d46b57bfc4e74fdfa768de",
+      "translation": "Flash Strength (FlashStrong)",
+      "contextHash": "447cabfaf500b5b22b2b66c3e469f75be48fb2c673d46b57bfc4e74fdfa768de"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "敵のフラッシュの強さです。",
+      "sourceHash": "2dd90a14edd2463fae05608991afc5156df96dddaa470ff056e132eb25de84ed",
+      "translation": "The strength of the enemy flash.",
+      "contextHash": "2dd90a14edd2463fae05608991afc5156df96dddaa470ff056e132eb25de84ed"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "255を最大として入力してください。",
+      "sourceHash": "da0305775596ddcb1988ebd3e5f5708e5ef11d418dc1715085e753f0074210d4",
+      "translation": "Enter a value up to a maximum of 255.",
+      "contextHash": "da0305775596ddcb1988ebd3e5f5708e5ef11d418dc1715085e753f0074210d4"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "フラッシュの長さ（FlashDuration）",
+      "sourceHash": "3eff099a074a9e36204e711f0a7a6504fa8c770c5069557b0b9f90098d96677c",
+      "translation": "Flash Duration (FlashDuration)",
+      "contextHash": "3eff099a074a9e36204e711f0a7a6504fa8c770c5069557b0b9f90098d96677c"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "敵のフラッシュの長さです。",
+      "sourceHash": "87af2e4b447d3e22387afcec6f038cf5e2537723578e9dcd517c321ccd3bb478",
+      "translation": "The duration of the enemy flash.",
+      "contextHash": "87af2e4b447d3e22387afcec6f038cf5e2537723578e9dcd517c321ccd3bb478"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "1が1/60秒に相当します。",
+      "sourceHash": "bcecfad0bc4f594b5fe7df1a0641873ef9181d75a91b7b0a44ea63a62071ebce",
+      "translation": "1 corresponds to 1/60 of a second.",
+      "contextHash": "bcecfad0bc4f594b5fe7df1a0641873ef9181d75a91b7b0a44ea63a62071ebce"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "敵の基本ディレイ（EnemyAnimationBaseDelay）",
+      "sourceHash": "dd8b7ef8e8af72f9a1941466e6b0aed4d05f212e09a31baa6ab380621cce2e1a",
+      "translation": "Enemy Base Delay (EnemyAnimationBaseDelay)",
+      "contextHash": "dd8b7ef8e8af72f9a1941466e6b0aed4d05f212e09a31baa6ab380621cce2e1a"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "敵が行動する際の基本ディレイです。",
+      "sourceHash": "4215c1fc42c928706683583bd872cec8ca12e62f17ab4f7ddcead21dddb77586",
+      "translation": "The base delay when an enemy acts.",
+      "contextHash": "4215c1fc42c928706683583bd872cec8ca12e62f17ab4f7ddcead21dddb77586"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "1が1/60秒に相当。初期値は8。",
+      "sourceHash": "1c4f1be2d2e79d69e7c8cb4d766b6692ef1c093a7dc9c24c763472f51b5dd50b",
+      "translation": "1 corresponds to 1/60 of a second. The default value is 8.",
+      "contextHash": "1c4f1be2d2e79d69e7c8cb4d766b6692ef1c093a7dc9c24c763472f51b5dd50b"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "事実上、この値がフラッシュの待ち時間になります。",
+      "sourceHash": "b49f1a535e5cd0b903295d78c38862cbe0fc392426d72871496efd643cb90a12",
+      "translation": "In effect, this value is the flash wait time.",
+      "contextHash": "b49f1a535e5cd0b903295d78c38862cbe0fc392426d72871496efd643cb90a12"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "アクターの基本ディレイ（ActorAnimationBaseDelay）",
+      "sourceHash": "614687d4d06d95a773b5bb47687404b66d676ca61d629b9216e5c9d964d543d9",
+      "translation": "Actor Base Delay (ActorAnimationBaseDelay)",
+      "contextHash": "614687d4d06d95a773b5bb47687404b66d676ca61d629b9216e5c9d964d543d9"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "アクターが行動する際の基本ディレイです。",
+      "sourceHash": "5efaa94fadc2940006e57e99bd0768abac6985be01b688b88719fb03fb562912",
+      "translation": "The base delay when an actor acts.",
+      "contextHash": "5efaa94fadc2940006e57e99bd0768abac6985be01b688b88719fb03fb562912"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "1が1/60秒に相当。",
+      "sourceHash": "d460c8e762d5bf65508a3887bbec2dc3d858cda7b8cd470ae9a4ca6d677fadf5",
+      "translation": "1 corresponds to 1/60 of a second.",
+      "contextHash": "d460c8e762d5bf65508a3887bbec2dc3d858cda7b8cd470ae9a4ca6d677fadf5"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "初期値は8ですが、基本的に不要なので0でよいと思います。",
+      "sourceHash": "572a732b262163a1f9452f0f8ee080eecde4997fb3bf05ed18e684106d9512e7",
+      "translation": "The default value is 8, but since it is essentially unnecessary, I think 0 is fine.",
+      "contextHash": "572a732b262163a1f9452f0f8ee080eecde4997fb3bf05ed18e684106d9512e7"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※本来、アクターにはフラッシュ処理がないので、このディレイは不要なはずです。しかしながら、なぜかツクールの標準では敵のフラッシュ時間と値を共有しているため、変更できるようにしています。",
+      "sourceHash": "fd47c95019a41e8444ce783adb494c633749ebe888423f25fae024994172dadf",
+      "translation": "※Actors do not normally have flash processing, so this delay should be unnecessary. However, for some reason, RPG Maker's default settings share the flash duration and value with enemies, so this can be changed.",
+      "contextHash": "fd47c95019a41e8444ce783adb494c633749ebe888423f25fae024994172dadf"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（Note of Skills）[[/LINK_1]]",
+      "sourceHash": "d83c7f0bf121e3d9643bf25c65293911583fc6f1b044dbf964d897b2c21338c3",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（Note of Skills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field (Note of Skills)[[/LINK_1]]",
+      "contextHash": "d83c7f0bf121e3d9643bf25c65293911583fc6f1b044dbf964d897b2c21338c3"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]フラッシュの強さ（FlashStrong）[[/LINK_1]]",
+      "sourceHash": "07ec0a93ea0d1b8248b0a1f94a63d91a5a300e1e7508a3bdf190aaaa8ce8522d",
+      "parts": [
+        {
+          "source": "フラッシュの強さ（FlashStrong）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Flash Strength (FlashStrong)[[/LINK_1]]",
+      "contextHash": "07ec0a93ea0d1b8248b0a1f94a63d91a5a300e1e7508a3bdf190aaaa8ce8522d"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]フラッシュの長さ（FlashDuration）[[/LINK_1]]",
+      "sourceHash": "3dd14d517380d0edb08fdfc9602f485476eaa97e698eed3e852aa5f2e4f78b7a",
+      "parts": [
+        {
+          "source": "フラッシュの長さ（FlashDuration）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Flash Duration (FlashDuration)[[/LINK_1]]",
+      "contextHash": "3dd14d517380d0edb08fdfc9602f485476eaa97e698eed3e852aa5f2e4f78b7a"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]敵の基本ディレイ（EnemyAnimationBaseDelay）[[/LINK_1]]",
+      "sourceHash": "cdc8f145b13c1219a28207321025a60d6e4b6d6372ab94364f8ad8aff2cdd781",
+      "parts": [
+        {
+          "source": "敵の基本ディレイ（EnemyAnimationBaseDelay）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Base Delay (EnemyAnimationBaseDelay)[[/LINK_1]]",
+      "contextHash": "cdc8f145b13c1219a28207321025a60d6e4b6d6372ab94364f8ad8aff2cdd781"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]アクターの基本ディレイ（ActorAnimationBaseDelay）[[/LINK_1]]",
+      "sourceHash": "513dcad5d7dcc68d25d8644db96d4afd44352841697d78455d8e8d2c0e46709c",
+      "parts": [
+        {
+          "source": "アクターの基本ディレイ（ActorAnimationBaseDelay）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Base Delay (ActorAnimationBaseDelay)[[/LINK_1]]",
+      "contextHash": "513dcad5d7dcc68d25d8644db96d4afd44352841697d78455d8e8d2c0e46709c"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "スキル毎に敵キャラの[[LINK_1]]行動時のフラッシュを禁止[[/LINK_1]]できるようにした。",
+      "sourceHash": "e883a3ab08b4c136d6d679459979fd14b68d06f621b68c6c7ad2d1f85681b26a",
+      "parts": [
+        {
+          "source": "スキル毎に敵キャラの",
+          "link": false
+        },
+        {
+          "source": "行動時のフラッシュを禁止",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "For each skill, it is now possible to [[LINK_1]]disable an enemy's flash when acting[[/LINK_1]].",
+      "contextHash": "e883a3ab08b4c136d6d679459979fd14b68d06f621b68c6c7ad2d1f85681b26a"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]＞Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "敵の行動時のフラッシュを調整します。": "Adjusts the flash effect during enemy actions.",
+    "フラッシュの強さ、時間、ディレイ（ウェイト）などを設定できます。": "You can configure the flash strength, duration, delay (wait), and more.",
+    "また、当プラグインの副次的な機能として、ツクールのデフォルトに存在する余計なウェイトの一つである『animationBaseDelay』を変更できます。戦闘高速化したい方はどうぞ。": "As an additional feature of this plugin, you can change `animationBaseDelay`, one of the unnecessary waits in the default RPG Maker settings. Use it if you want to speed up battles.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_EnemyActionFlash.js": "NRP_EnemyActionFlash.js",
+    "更新履歴（History）": "Update History (History)",
+    "コモンイベントを呼び出すスキルに<NoEnemyActionFlash>を記述していた場合、該当スキル使用後に特定条件（アクターが戦闘不能になったなど）でフリーズする不具合修正。": "Fixed a bug that caused the game to freeze under certain conditions (such as when an actor became incapacitated) after using a skill that calls a common event if the skill's note field contained <NoEnemyActionFlash>.",
+    "公開！": "Released!",
+    "基本ディレイが0の時に設定が無視されてしまう不具合修正。": "Fixed a bug where the setting was ignored when the base delay was 0.",
+    "スキルのメモ欄（Note of Skills）": "Skill Note Field (Note of Skills)",
+    "スキル実行時、敵キャラのフラッシュを禁止します。": "Prohibits enemy flashes when a skill is executed.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "フラッシュの強さ（FlashStrong）": "Flash Strength (FlashStrong)",
+    "敵のフラッシュの強さです。": "The strength of the enemy flash.",
+    "255を最大として入力してください。": "Enter a value up to a maximum of 255.",
+    "フラッシュの長さ（FlashDuration）": "Flash Duration (FlashDuration)",
+    "敵のフラッシュの長さです。": "The duration of the enemy flash.",
+    "1が1/60秒に相当します。": "1 corresponds to 1/60 of a second.",
+    "敵の基本ディレイ（EnemyAnimationBaseDelay）": "Enemy Base Delay (EnemyAnimationBaseDelay)",
+    "敵が行動する際の基本ディレイです。": "The base delay when an enemy acts.",
+    "1が1/60秒に相当。初期値は8。": "1 corresponds to 1/60 of a second. The default value is 8.",
+    "事実上、この値がフラッシュの待ち時間になります。": "In effect, this value is the flash wait time.",
+    "アクターの基本ディレイ（ActorAnimationBaseDelay）": "Actor Base Delay (ActorAnimationBaseDelay)",
+    "アクターが行動する際の基本ディレイです。": "The base delay when an actor acts.",
+    "1が1/60秒に相当。": "1 corresponds to 1/60 of a second.",
+    "初期値は8ですが、基本的に不要なので0でよいと思います。": "The default value is 8, but since it is essentially unnecessary, I think 0 is fine.",
+    "※本来、アクターにはフラッシュ処理がないので、このディレイは不要なはずです。しかしながら、なぜかツクールの標準では敵のフラッシュ時間と値を共有しているため、変更できるようにしています。": "※Actors do not normally have flash processing, so this delay should be unnecessary. However, for some reason, RPG Maker's default settings share the flash duration and value with enemies, so this can be changed."
+  }
+}
