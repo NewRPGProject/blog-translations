@@ -6,7 +6,7 @@
   <title>Blog Translation Status</title>
   <style>
     :root { color-scheme: light; font-family: Arial, "Meiryo", sans-serif; }
-    body { margin: 24px; color: #222; background: #f6f8fa; }
+    body { margin: 24px; padding-bottom: 84px; color: #222; background: #f6f8fa; }
     main { max-width: 1100px; margin: 0 auto; }
     h1 { margin: 0 0 8px; font-size: 24px; }
     .summary { margin: 0 0 16px; color: #57606a; }
@@ -21,9 +21,13 @@
     th { position: sticky; top: 0; background: #f6f8fa; font-size: 13px; white-space: nowrap; }
     td.done { color: #1a7f37; font-family: "Arial Unicode MS", Arial, sans-serif; font-size: 22px; font-weight: bold; line-height: 1; text-align: center; }
     td.edit { white-space: nowrap; }
-    td.translate { white-space: nowrap; }
-    .translate-button { padding: 4px 8px; border: 1px solid #1f883d; border-radius: 5px; color: #fff; background: #1f883d; font: inherit; font-size: 13px; cursor: pointer; }
-    .translate-button:hover { background: #1a7f37; }
+    td.translate { text-align: center; }
+    .translate-check { width: 16px; height: 16px; margin: 0; accent-color: #1f883d; cursor: pointer; }
+    .translation-actions { position: fixed; left: 24px; bottom: 20px; z-index: 10; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #d0d7de; border-radius: 8px; background: rgba(255, 255, 255, .96); box-shadow: 0 3px 12px rgba(31, 35, 40, .18); }
+    #translate-selected { padding: 7px 12px; border: 1px solid #1f883d; border-radius: 6px; color: #fff; background: #1f883d; font: inherit; cursor: pointer; }
+    #translate-selected:hover:not(:disabled) { background: #1a7f37; }
+    #translate-selected:disabled { border-color: #8c959f; background: #8c959f; cursor: default; }
+    #selected-count { color: #57606a; font-size: 13px; white-space: nowrap; }
     td.id { white-space: nowrap; }
     td.title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     td.updated { white-space: nowrap; }
@@ -31,7 +35,7 @@
     tr:last-child td { border-bottom: 0; }
     a { color: #0969da; }
     .error { color: #cf222e; font-weight: bold; }
-    @media (max-width: 600px) { body { margin: 12px; } .toolbar { align-items: stretch; flex-direction: column; } .status { margin-left: 0; } }
+    @media (max-width: 600px) { body { margin: 12px; padding-bottom: 76px; } .toolbar { align-items: stretch; flex-direction: column; } .status { margin-left: 0; } .translation-actions { left: 12px; bottom: 12px; } }
   </style>
 </head>
 <body>
@@ -47,7 +51,7 @@
       <table>
         <colgroup>
           <col style="width: 48px">
-          <col style="width: 66px">
+          <col style="width: 52px">
           <col style="width: 58px">
           <col style="width: 160px">
           <col>
@@ -58,6 +62,10 @@
       </table>
     </div>
   </main>
+  <div class="translation-actions" aria-live="polite">
+    <button id="translate-selected" type="button" disabled>選択した記事を英訳</button>
+    <span id="selected-count">0 件選択</span>
+  </div>
   <script>
     "use strict";
 
@@ -67,7 +75,10 @@
     const status = document.getElementById("status");
     const search = document.getElementById("search");
     const onlyUntranslated = document.getElementById("only-untranslated");
+    const translateSelected = document.getElementById("translate-selected");
+    const selectedCount = document.getElementById("selected-count");
     const translationLauncherOrigin = "https://blog-translation-launcher.newrpg2012.workers.dev";
+    const selectedArticleIds = new Set();
 
     function formatDate(value) {
       const date = new Date(value);
@@ -91,24 +102,40 @@
       cell.append(link);
     }
 
-    function startTranslation(article) {
+    function updateSelectionUi() {
+      const count = selectedArticleIds.size;
+      selectedCount.textContent = `${count} 件選択`;
+      translateSelected.disabled = count === 0;
+      translateSelected.textContent = count > 0
+        ? `選択した ${count} 件を英訳`
+        : "選択した記事を英訳";
+    }
+
+    function startTranslations(articles) {
+      if (articles.length === 0) return;
       const url = new URL("/start", translationLauncherOrigin);
-      url.searchParams.set("article_url", article.url);
+      for (const article of articles) {
+        url.searchParams.append("article_url", article.url);
+      }
       const popup = window.open(
         url.href,
         "nrp-translation-launcher",
         "popup=yes,width=520,height=260"
       );
       status.textContent = popup
-        ? `${article.id}.html の英訳を開始しています。GitHub認証が必要な場合は、開いた画面で完了してください。`
+        ? `${articles.length} 件の英訳を開始しています。GitHub認証が必要な場合は、開いた画面で完了してください。`
         : "ポップアップがブロックされました。ブラウザの許可後にもう一度押してください。";
     }
 
     window.addEventListener("message", event => {
       if (event.origin !== translationLauncherOrigin) return;
       if (event.data?.type !== "nrp-translation-dispatched") return;
-      const id = event.data.articleUrl?.match(/\/(\d+)\.html$/u)?.[1] || "対象記事";
-      status.textContent = `${id}.html の英訳を開始しました。GitHub Actionsの完了後に一覧を再読み込みしてください。`;
+      const count = Array.isArray(event.data.articleUrls)
+        ? event.data.articleUrls.length
+        : 1;
+      selectedArticleIds.clear();
+      render();
+      status.textContent = `${count} 件の英訳を開始しました。GitHub Actionsの完了後に一覧を再読み込みしてください。`;
     });
 
     function render() {
@@ -129,13 +156,18 @@
 
         const translate = document.createElement("td");
         translate.className = "translate";
-        const translateButton = document.createElement("button");
-        translateButton.type = "button";
-        translateButton.className = "translate-button";
-        translateButton.textContent = "英訳";
-        translateButton.title = "GitHub認証後、強制再翻訳を開始します";
-        translateButton.addEventListener("click", () => startTranslation(article));
-        translate.append(translateButton);
+        const translateCheck = document.createElement("input");
+        translateCheck.type = "checkbox";
+        translateCheck.className = "translate-check";
+        translateCheck.checked = selectedArticleIds.has(article.id);
+        translateCheck.title = "一括英訳する記事として選択";
+        translateCheck.setAttribute("aria-label", `${article.id}.html を英訳対象として選択`);
+        translateCheck.addEventListener("change", () => {
+          if (translateCheck.checked) selectedArticleIds.add(article.id);
+          else selectedArticleIds.delete(article.id);
+          updateSelectionUi();
+        });
+        translate.append(translateCheck);
         row.append(translate);
 
         const edit = document.createElement("td");
@@ -160,6 +192,7 @@
         table.append(row);
       }
       status.textContent = `${articles.length} / ${state.articles.length} 件`;
+      updateSelectionUi();
     }
 
     async function initialize() {
@@ -180,6 +213,10 @@
 
     search.addEventListener("input", render);
     onlyUntranslated.addEventListener("change", render);
+    translateSelected.addEventListener("click", () => {
+      const articles = state.articles.filter(article => selectedArticleIds.has(article.id));
+      startTranslations(articles);
+    });
     initialize();
   </script>
 </body>
