@@ -381,8 +381,13 @@ function restoreOriginalLineFormat(original, translated) {
     // A leading ASCII space is meaningful when the source node begins with a
     // Japanese opening quote but follows an inline node in the original HTML.
     // Keep it so the quote cannot become glued to the preceding word.
+    // Ordinary spaces at the beginning of an HTML text node are collapsed by
+    // the browser. Use a non-breaking space only for this display boundary so
+    // the requested half-width gap before the opening quote is actually
+    // visible even at the start of a blockquote line.
     const quoteBoundary = /^[\s\u3000]*[「『]/u.test(original)
-        ? translatedLeading.replace(/[\u3000]/gu, " ")
+        && translatedLeading
+        ? "\u00A0"
         : "";
     return indentation + quoteBoundary + content + (translatedTrailing || trailing);
 }
@@ -671,7 +676,9 @@ function makeLineFragment(line, matchedNodes) {
     const lastNode = matchedNodes[matchedNodes.length - 1];
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(firstNode.nodeValue);
-    const quoteBoundary = /^[\s\u3000]*[「『]/u.test(line.source) ? " " : "";
+    // See restoreOriginalLineFormat: an ordinary leading space would be
+    // collapsed by HTML layout, so keep the visible half-width boundary.
+    const quoteBoundary = /^[\s\u3000]*[「『]/u.test(line.source) ? "\u00A0" : "";
     let translation = normalizeJapaneseQuoteBoundaries(line.source, line.translation)
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
