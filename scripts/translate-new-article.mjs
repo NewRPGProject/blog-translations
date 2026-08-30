@@ -84,7 +84,8 @@ function normalizeEnglishAscii(value) {
         .replace(/[ \t]*\uFF08/gu, " (")
         .replace(/\uFF09[ \t]*/gu, ") ")
         .replace(/[\uFF01-\uFF5E]/gu, character =>
-        String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
+            String.fromCharCode(character.charCodeAt(0) - 0xFEE0))
+        .replace(/、[ \t]*/gu, ", ");
 }
 
 function decodeHtml(value) {
