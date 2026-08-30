@@ -1254,7 +1254,7 @@ async function main() {
         console.log(`JSONを更新しました: articles/${target.articleId}.json`);
     }
 
-    if (!requestedArticle && !dryRun) {
+    if (!requestedArticles && !dryRun) {
         await writeFile(MONITOR_STATE_PATH, `${JSON.stringify({
             lastCheckedAt: new Date().toISOString(),
             articles: state.articles
