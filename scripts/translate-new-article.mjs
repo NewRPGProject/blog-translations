@@ -71,6 +71,15 @@ function normalizeText(value) {
         .replace(WHITESPACE, " ");
 }
 
+// Keep Japanese typography intact (notably U+3000 paragraph indentation),
+// while making the ASCII portion of every English output usable in IDs, URLs,
+// code samples, and normal prose. U+FF01–U+FF5E covers full-width ASCII
+// symbols, letters, and digits but intentionally excludes U+3000.
+function normalizeEnglishAscii(value) {
+    return String(value).replace(/[\uFF01-\uFF5E]/gu, character =>
+        String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
+}
+
 function decodeHtml(value) {
     return value
         // Some older Seesaa entries omit the optional semicolon in named
@@ -610,7 +619,7 @@ function parseBlocks(articleHtml, title) {
             const segment = segments[index];
             const fixedTranslation = STRUCTURAL_PUNCTUATION_TRANSLATIONS.get(segment.source)
                 || (!JAPANESE_CHARACTERS.test(segment.source) && segment.type === "link"
-                    ? segment.source
+                    ? normalizeEnglishAscii(segment.source)
                     : null);
             const codeSegments = segment.type === "code"
                 ? extractCodeTranslationSegments(segment.source)
@@ -803,7 +812,7 @@ async function translateSimpleBlocks(blocks, apiKey, rules, glossary) {
         const result = await translateChunk(chunk, apiKey, rules, glossary);
         const retryBlocks = [];
         for (const block of chunk) {
-            const translation = result.translations.get(block.id);
+            const translation = normalizeEnglishAscii(result.translations.get(block.id) || "");
             if (typeof translation !== "string" || !translation.trim()) {
                 retryBlocks.push({ block, initialTranslation: null });
                 continue;
@@ -830,7 +839,7 @@ async function translateSimpleBlocks(blocks, apiKey, rules, glossary) {
             addUsage(usage, retryResult.usage);
 
             for (const { block, initialTranslation } of retryBlocks) {
-                const translation = retryResult.translations.get(block.id);
+                const translation = normalizeEnglishAscii(retryResult.translations.get(block.id) || "");
                 if (typeof translation !== "string" || !translation.trim()
                     || hasUntranslatedJapanese(translation)
                     || /<\/?a\b/iu.test(translation)
@@ -956,7 +965,7 @@ function splitReusableBlocks(blocks, existingArticle, retranslateLinkContexts = 
         const refreshThisLinkContext = retranslateLinkContexts && block.linkAdjacent;
         const refreshThisCodeBlock = retranslateCodeBlocks && block.type === "code";
         if (!refreshThisLinkContext && !refreshThisCodeBlock && translation && !hasUntranslatedJapanese(translation)) {
-            block.translation = translation;
+            block.translation = normalizeEnglishAscii(translation);
         } else {
             pending.push(block);
         }
@@ -973,7 +982,7 @@ function splitReusableLines(lines, existingArticle, forceRetranslate = false) {
         const translation = previous.get(line.sourceHash);
         if (!forceRetranslate && translation && !hasUntranslatedJapanese(translation)
             && hasValidLinkTemplate(line, translation)) {
-            line.translation = translation;
+            line.translation = normalizeEnglishAscii(translation);
         } else {
             pending.push(line);
         }
@@ -1068,6 +1077,35 @@ function normalizeOpenParenthesisBoundaries(blocks) {
     return repaired;
 }
 
+function normalizeStoredEnglishAscii(article) {
+    if (!article) return false;
+    let repaired = false;
+    for (const item of [...(article.blocks || []), ...(article.lines || [])]) {
+        if (typeof item.translation !== "string") continue;
+        const normalized = normalizeEnglishAscii(item.translation);
+        if (normalized !== item.translation) {
+            item.translation = normalized;
+            repaired = true;
+        }
+    }
+    if (typeof article.title === "string") {
+        const normalizedTitle = normalizeEnglishAscii(article.title);
+        if (normalizedTitle !== article.title) {
+            article.title = normalizedTitle;
+            repaired = true;
+        }
+    }
+    for (const [source, translation] of Object.entries(article.texts || {})) {
+        if (typeof translation !== "string") continue;
+        const normalized = normalizeEnglishAscii(translation);
+        if (normalized !== translation) {
+            article.texts[source] = normalized;
+            repaired = true;
+        }
+    }
+    return repaired;
+}
+
 function synchronizeTextsFromBlocks(article) {
     article.texts ||= {};
     for (const block of article.blocks || []) {
@@ -1078,6 +1116,11 @@ function synchronizeTextsFromBlocks(article) {
 }
 
 function makeOutput({ articleId, articleUrl, lastModified, blocks, linkedLines }) {
+    for (const item of [...blocks, ...linkedLines]) {
+        if (typeof item.translation === "string") {
+            item.translation = normalizeEnglishAscii(item.translation);
+        }
+    }
     const titleBlock = blocks.find(block => block.type === "title");
     const texts = Object.fromEntries(blocks
         .filter(block => block.type !== "title")
@@ -1179,7 +1222,8 @@ async function main() {
             const repairedLinkSpaces = !dryRun && repairLinkBoundarySpaces(existingBlocks);
             const repairedAngleBrackets = !dryRun && preserveFullWidthAngleBrackets(existingBlocks);
             const repairedParentheses = !dryRun && normalizeOpenParenthesisBoundaries(existingBlocks);
-            if (repairedLinkSpaces || repairedAngleBrackets || repairedParentheses) {
+            const normalizedEnglishAscii = !dryRun && normalizeStoredEnglishAscii(existingArticle);
+            if (repairedLinkSpaces || repairedAngleBrackets || repairedParentheses || normalizedEnglishAscii) {
                 synchronizeTextsFromBlocks(existingArticle);
                 await writeFile(outputPath, `${JSON.stringify(existingArticle, null, 2)}\n`, "utf8");
                 translatedArticleCount++;
