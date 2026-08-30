@@ -358,11 +358,14 @@ function getOriginalLineFormat(text) {
 function restoreOriginalLineFormat(original, translated) {
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(original);
-    const decoded = decodeHtmlEntities(translated);
+    const decoded = decodeHtmlEntities(
+        normalizeJapaneseQuoteBoundaries(original, translated)
+    );
     // A translated fragment can intentionally end with a space when the next
     // visible fragment sits inside <strong>, <span>, <a>, or another inline
     // element. Keep that boundary space; otherwise "Also," + <strong>"when"
     // is rendered as "Also,when".
+    const translatedLeading = decoded.match(/^[\s\u3000]*/u)?.[0] || "";
     const translatedTrailing = decoded.match(/[\s\u3000]*$/u)?.[0] || "";
     let content = decoded
         .replace(/^[\s\u3000]*/u, "")
@@ -375,7 +378,13 @@ function restoreOriginalLineFormat(original, translated) {
         content = noteMarker + content;
     }
 
-    return indentation + content + (translatedTrailing || trailing);
+    // A leading ASCII space is meaningful when the source node begins with a
+    // Japanese opening quote but follows an inline node in the original HTML.
+    // Keep it so the quote cannot become glued to the preceding word.
+    const quoteBoundary = /^[\s\u3000]*[「『]/u.test(original)
+        ? translatedLeading.replace(/[\u3000]/gu, " ")
+        : "";
+    return indentation + quoteBoundary + content + (translatedTrailing || trailing);
 }
 
 function textLookupKeys(text) {
@@ -393,6 +402,35 @@ function normalizeEnglishAscii(text) {
         .replace(/[\uFF01-\uFF5E]/g, character =>
             String.fromCharCode(character.charCodeAt(0) - 0xFEE0))
         .replace(/、[ \t]*/g, ", ");
+}
+
+// Some old dialogue is split over several text nodes. In that situation a
+// translation can retain only the Japanese opening quote (「/『) while the
+// closing side becomes an English quote. The original source tells us which
+// side belongs to this node, so normalise the pair consistently.
+function normalizeJapaneseQuoteBoundaries(source, text) {
+    const original = String(source || "");
+    let translation = normalizeEnglishAscii(text);
+    const startsWithQuote = /^[\s\u3000]*[「『]/u.test(original);
+    const endsWithQuote = /[」』][\s\u3000]*$/u.test(original);
+
+    if (startsWithQuote) {
+        if (/^[ \t]*[「『“”"]/u.test(translation)) {
+            translation = translation.replace(/^[ \t]*[「『“”"]/u, ' "');
+        } else {
+            translation = ` "${translation.replace(/^[ \t]*/u, "")}`;
+        }
+    }
+
+    if (endsWithQuote) {
+        if (/[「『」』“”"][ \t]*$/u.test(translation)) {
+            translation = translation.replace(/[「『」』“”"][ \t]*$/u, '"');
+        } else {
+            translation = `${translation.replace(/[ \t]*$/u, "")}"`;
+        }
+    }
+
+    return translation;
 }
 
 function isStandaloneFullWidthAscii(text) {
@@ -633,9 +671,11 @@ function makeLineFragment(line, matchedNodes) {
     const lastNode = matchedNodes[matchedNodes.length - 1];
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(firstNode.nodeValue);
-    let translation = normalizeEnglishAscii(line.translation)
+    const quoteBoundary = /^[\s\u3000]*[「『]/u.test(line.source) ? " " : "";
+    let translation = normalizeJapaneseQuoteBoundaries(line.source, line.translation)
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
+    translation = quoteBoundary + translation;
 
     if (noteMarker) {
         // A logical line can begin with a link. Keep the original note marker
