@@ -1,0 +1,1057 @@
+{
+  "articleId": "488700523",
+  "sourceUrl": "https://newrpg.seesaa.net/article/488700523.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "0908e9d69ecb5ade4b12fef51532685342b9d36126904c77e8893b79b2557c1c",
+  "translatedAt": "2026-08-30T10:14:20.860Z",
+  "title": "[RPG Development Tutorial] Balancing CTB Combat",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】ＣＴＢの戦闘バランス",
+      "sourceHash": "f96316ace41042ac74558c50964b9298a508a2ab627c1ba95e66e3d644724e27",
+      "translation": "[RPG Development Tutorial] Balancing CTB Combat",
+      "contextHash": "f96316ace41042ac74558c50964b9298a508a2ab627c1ba95e66e3d644724e27"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ＣＴＢ（カウントタイムバトル）はＲＰＧにおいて、ターン制に次いで採用されることが多い戦闘システム（たぶん……）である。",
+      "sourceHash": "494a6e8e897db88c9e36a8c948436030b3afe0e7c0de5005586a8163470e5433",
+      "translation": "CTB (Count Time Battle) is a combat system often used in RPGs, second only to turn-based systems (probably...).",
+      "contextHash": "494a6e8e897db88c9e36a8c948436030b3afe0e7c0de5005586a8163470e5433"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "特にＦＦ１０で採用された敵味方の行動順序を表示するＵＩは秀逸であり、",
+      "sourceHash": "4f58d2ab425b02b19b92cb14c87ef16c6f5e7b6b4e09d76a78bbe79593ac2c96",
+      "translation": "In particular, the UI used in FF10 that displays the action order of enemies and allies is excellent,",
+      "contextHash": "4f58d2ab425b02b19b92cb14c87ef16c6f5e7b6b4e09d76a78bbe79593ac2c96"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "身軽なキャラクターは何度も動けるという直感的な分かりやすさ。",
+      "sourceHash": "115bcc6afdcd692ef1f85066b98329a63dff36937d42f79f77da756d3ae26005",
+      "translation": "The intuitive clarity that nimble characters can act multiple times.",
+      "contextHash": "115bcc6afdcd692ef1f85066b98329a63dff36937d42f79f77da756d3ae26005"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "それによるキャラクターの差別化。",
+      "sourceHash": "cee2a27da1712fe9ef44f5f0b0472ee1fce5a14dd8417563873b2b16497819c4",
+      "translation": "The resulting differentiation between characters.",
+      "contextHash": "cee2a27da1712fe9ef44f5f0b0472ee1fce5a14dd8417563873b2b16497819c4"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "行動順序を可視化することによる高い戦術性。",
+      "sourceHash": "2d9de13e1349cb179ec3e53a58a0dacc6bfef2437854fad03d8815d99ebef3a1",
+      "translation": "The high level of tactical depth achieved by visualizing the action order.",
+      "contextHash": "2d9de13e1349cb179ec3e53a58a0dacc6bfef2437854fad03d8815d99ebef3a1"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "……といった長所を持つＣＴＢは後続の作品へも多大な影響を与えた。",
+      "sourceHash": "ea3b8d875af8f71b8d4c25aa99f75d6d474fc2e0f58a38d46598f376ce9f265a",
+      "translation": "CTB's strengths, such as these, had a major influence on later games.",
+      "contextHash": "ea3b8d875af8f71b8d4c25aa99f75d6d474fc2e0f58a38d46598f376ce9f265a"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "実際、ほぼ同じような仕組みを採用している作品は、現在もプロ・アマ問わず多数見かける。比較的後発の戦闘システムながら、これほど定着したものは珍しいだろう。",
+      "sourceHash": "ea0a6ecd0bddf36207c10dc7efa5220ce2cd0402c3b7bfca28b5eda925669ea3",
+      "translation": "In fact, even today, many professional and amateur games alike use systems that work in almost exactly the same way. Despite being a relatively recent combat system, it is rare for one to become this firmly established.",
+      "contextHash": "ea0a6ecd0bddf36207c10dc7efa5220ce2cd0402c3b7bfca28b5eda925669ea3"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "しかしながら、ＣＴＢはターン制ほど経験者が多くなく、あまり研究されているとは言い難い。というわけで、ＣＴＢで中～長編を３回ほど完成させたことがある経験者として、バランス調整法をまとめてみた。",
+      "sourceHash": "fb1e4a2295c7e5836247c9e40448a80cdbc425984842be7ee57ecaa088ad2122",
+      "translation": "However, CTB has fewer experienced users than turn-based systems, and it would be difficult to say that it has been studied extensively. So, as someone with experience completing around three medium- to long-length games using CTB, I have put together some methods for balancing it.",
+      "contextHash": "fb1e4a2295c7e5836247c9e40448a80cdbc425984842be7ee57ecaa088ad2122"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "素早さの重要性",
+      "sourceHash": "bd736706258f20a35e7c66405a6115c36435d61d59d2d6b921a421b861361223",
+      "translation": "The Importance of Agility",
+      "contextHash": "bd736706258f20a35e7c66405a6115c36435d61d59d2d6b921a421b861361223"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ご存知の通りＣＴＢにおいて『素早さ』は極めて重要なパラメータである。",
+      "sourceHash": "12a3f61eacaea9f9ee44c99aa95cc7a85f8cf2e84361af61bf09032ad6e2ec2f",
+      "translation": "As you know, Agility is an extremely important parameter in CTB.",
+      "contextHash": "12a3f61eacaea9f9ee44c99aa95cc7a85f8cf2e84361af61bf09032ad6e2ec2f"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "古典的なターン制において、素早さの価値はそれほど高くない。",
+      "sourceHash": "610eeba8eaae8bc23382ecd9b34492d772a052d1fe481bf0677e512c204b4150",
+      "translation": "In classic turn-based systems, Agility is not particularly valuable.",
+      "contextHash": "610eeba8eaae8bc23382ecd9b34492d772a052d1fe481bf0677e512c204b4150"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "それもそのはず、キャラごとに２倍、３倍の差があろうが、行動順序が変わるだけ。大きな違いにはならないためだ。",
+      "sourceHash": "14c29388f9571f545bb74d6c3f84dc15a0f21f2c3f9567c2b01ceee421facce0",
+      "translation": "And that's only natural: even if characters have Agility differences of two or three times, it only changes the action order. It does not make a major difference.",
+      "contextHash": "14c29388f9571f545bb74d6c3f84dc15a0f21f2c3f9567c2b01ceee421facce0"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※素早さが命中回避などに関わってくるパターンは除きます。",
+      "sourceHash": "0badba1749320c6380b32106f1b2c692eaf2cec240d573df6924c72c1fd5c7eb",
+      "translation": "※This excludes systems in which Agility affects things such as hit and evasion rates.",
+      "contextHash": "0badba1749320c6380b32106f1b2c692eaf2cec240d573df6924c72c1fd5c7eb"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "素早さが低いキャラは、確実に敵より後に行動するため、それを利用するなんて戦術も有力になるほどである。",
+      "sourceHash": "6eb7bc07aadc62a40dc1df4589f0f838b66312254709d993b85ff4d4b7a78f52",
+      "translation": "Characters with low Agility always act after the enemies, to the point that tactics taking advantage of this can even be effective.",
+      "contextHash": "6eb7bc07aadc62a40dc1df4589f0f838b66312254709d993b85ff4d4b7a78f52"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※いわゆる『置きベホマラー』『置き賢者の石』など。",
+      "sourceHash": "930b8ff94a6216d3d849dc84bec3c2f03ab52b78a39788f4dc1c5ec2b65488b2",
+      "translation": "※So-called \"pre-placed Omniheal\" and \"pre-placed Sage's Stone,\" for example.",
+      "contextHash": "930b8ff94a6216d3d849dc84bec3c2f03ab52b78a39788f4dc1c5ec2b65488b2"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "しかしながら、ＣＴＢにおいてはそうではない。",
+      "sourceHash": "9d7608d1274ebd83fa89e2c229796a2597fee8a77bde72777d26546763fb2a8e",
+      "translation": "However, that is not the case in CTB.",
+      "contextHash": "9d7608d1274ebd83fa89e2c229796a2597fee8a77bde72777d26546763fb2a8e"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "素早さに比例して行動回数が増えるため、攻撃や回復・補助などあらゆる行動に対して恩恵が得られるようになっている。",
+      "sourceHash": "d9677ff981bce29e2cb533a7d1309d1e932ea076884e5d24fa4945cfa534729c",
+      "translation": "Because the number of actions increases in proportion to Agility, it provides benefits for all kinds of actions, including attacks, healing, and support.",
+      "contextHash": "d9677ff981bce29e2cb533a7d1309d1e932ea076884e5d24fa4945cfa534729c"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "そのため、ターン制と同じ感覚で素早さを設定すると、バランスが崩壊してしまう。そうならないように、ＣＴＢでは入念に敵味方の素早さを調整したい。",
+      "sourceHash": "27cbb1647d163f6b581400f57cde0b2fb6e552057605258266cf78b720522162",
+      "translation": "Therefore, if you set Agility with the same mindset as in a turn-based system, the balance will collapse. To prevent that, you should carefully adjust the Agility of both enemies and allies in CTB.",
+      "contextHash": "27cbb1647d163f6b581400f57cde0b2fb6e552057605258266cf78b720522162"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "以降の内容も大半が素早さに関するものとなる。",
+      "sourceHash": "5af3f7bfcc7dfa8dfaf38745a30fe49877e3896c7ea5fb8aebe3fb1139af7b31",
+      "translation": "Most of what follows will also concern Agility.",
+      "contextHash": "5af3f7bfcc7dfa8dfaf38745a30fe49877e3896c7ea5fb8aebe3fb1139af7b31"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ＣＴＢは素早さ至上主義か？",
+      "sourceHash": "ce5b2897f031902f079b3e8a0097be969a2a1ff0a9c3aa64807b796c0387a993",
+      "translation": "Is CTB All About Agility?",
+      "contextHash": "ce5b2897f031902f079b3e8a0097be969a2a1ff0a9c3aa64807b796c0387a993"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "もっとも、ＣＴＢは『素早さ史上主義』である――という極端な見方にも反論しておきたい。",
+      "sourceHash": "b384e6ac58ab7217fd9bc173a561e0108626aebb7e56c38223f1e4d623382bbd",
+      "translation": "That said, I would also like to counter the extreme view that CTB is based on “Agility supremacy.”",
+      "contextHash": "b384e6ac58ab7217fd9bc173a561e0108626aebb7e56c38223f1e4d623382bbd"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "無論、素早さが重要なパラメータなのは間違いない。",
+      "sourceHash": "82f4070c32aeffb4596169f7ef3ba1c8681a38f6b2b3669fa67d42f6afecd1b8",
+      "translation": "Of course, there is no doubt that Agility is an important parameter.",
+      "contextHash": "82f4070c32aeffb4596169f7ef3ba1c8681a38f6b2b3669fa67d42f6afecd1b8"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "しかし、あらゆるパラメータを上回るほどに重要かというと、実はそうではない。",
+      "sourceHash": "56ddf50e8dce0c1cb005c901756d1258a1b770010d864869eb12fce1bcae274e",
+      "translation": "However, it is not actually so important that it surpasses every other parameter.",
+      "contextHash": "56ddf50e8dce0c1cb005c901756d1258a1b770010d864869eb12fce1bcae274e"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "あくまでＨＰ、攻撃力、防御力、魔力などと、素早さが同等の価値になるだけだと考えて欲しい。",
+      "sourceHash": "870e14249019fab36c977a706a5082390cee64d5623be60fc5fbc852bcf0d782",
+      "translation": "Please think of Agility as having no more than the same value as HP, Attack, Defense, Magic Power, and so on.",
+      "contextHash": "870e14249019fab36c977a706a5082390cee64d5623be60fc5fbc852bcf0d782"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "例えば、単純に「攻撃力 - 防御力」の引き算でダメージが決定されるゲームを考えてみよう。",
+      "sourceHash": "27b4dc0652b27e5b20caa7734fc821845d787b3aaadf08c0494466762002b186",
+      "translation": "For example, let's consider a game in which damage is determined simply by subtracting Defense from Attack.",
+      "contextHash": "27b4dc0652b27e5b20caa7734fc821845d787b3aaadf08c0494466762002b186"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※いわゆるアルテリオス計算式。言うまでもなく『攻撃側の攻撃力』と『防御側の防御力』という意味です。",
+      "sourceHash": "1c06555491ccea5262c96f108d2dc68c413597f800d11d958d57fcf328662658",
+      "translation": "※The so-called Alterios damage formula. Needless to say, this means the “attacker's Attack” and the “defender's Defense.”",
+      "contextHash": "1c06555491ccea5262c96f108d2dc68c413597f800d11d958d57fcf328662658"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "攻撃力５０ - 防御力４０ = ダメージ１０",
+      "sourceHash": "067362a0c491794b4d49efadf4bdf8921e7c1ed0054bc185c02695eab3b9bf3a",
+      "translation": "Attack 50 - Defense 40 = 10 damage",
+      "contextHash": "067362a0c491794b4d49efadf4bdf8921e7c1ed0054bc185c02695eab3b9bf3a"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "という決め手不足の状況を、能力の引き上げによって改善したい。",
+      "sourceHash": "2a61a246f722a83fa6bfd3a9020b576f51aa751e1cf9a9f4b9a7324eb4f91b8e",
+      "translation": "Suppose we want to improve this situation, where attacks lack the power to finish the job, by increasing stats.",
+      "contextHash": "2a61a246f722a83fa6bfd3a9020b576f51aa751e1cf9a9f4b9a7324eb4f91b8e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "攻撃力１００ - 防御力４０ = ダメージ６０",
+      "sourceHash": "ce624a659e534ef8f2b8dc754c82b02c2870a6768d100a4374daeb7cb2f2cabb",
+      "translation": "Attack 100 - Defense 40 = 60 damage",
+      "contextHash": "ce624a659e534ef8f2b8dc754c82b02c2870a6768d100a4374daeb7cb2f2cabb"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "この通り、攻撃力を倍にすればダメージは６倍になる。",
+      "sourceHash": "f46c2d708e078382b86d0e3317181799b5ebba7997fe81423d77e034d04ae887",
+      "translation": "As you can see, doubling Attack increases damage sixfold.",
+      "contextHash": "f46c2d708e078382b86d0e3317181799b5ebba7997fe81423d77e034d04ae887"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "しかし、素早さで同等の火力を出そうとすると、素早さを６倍にする必要がある。",
+      "sourceHash": "796700956eaa55db91cd39ecf7d286ce468026fec0fe5bd0261a0275315bc730",
+      "translation": "However, to achieve equivalent firepower through Agility, you would need to increase Agility sixfold.",
+      "contextHash": "796700956eaa55db91cd39ecf7d286ce468026fec0fe5bd0261a0275315bc730"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "この場合、明らかに攻撃力を上げたほうが効率がよい。",
+      "sourceHash": "e8b1889f230f1b2bbaa99b2ae61a2b4bc50591086a7ba4309ccb1e06384c42ed",
+      "translation": "In this case, it is clearly more efficient to increase Attack.",
+      "contextHash": "e8b1889f230f1b2bbaa99b2ae61a2b4bc50591086a7ba4309ccb1e06384c42ed"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ＣＴＢだからといって、素早さが最重要とは限らないのだ。",
+      "sourceHash": "907c90707bea75af651ea0ea8ce11387f78e7ea346acede0478293a22ac25f74",
+      "translation": "Just because a system is CTB does not mean Agility is necessarily the most important stat.",
+      "contextHash": "907c90707bea75af651ea0ea8ce11387f78e7ea346acede0478293a22ac25f74"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "そもそも、キャラクター毎のパラメータに２～３倍もの差をつけたら、大抵はバランスが崩れる。ＨＰだろうが攻撃力だろうが魔力だろうが、それは同じだ。",
+      "sourceHash": "c621c8eb6415aef883e62ac8015cad595cd65e4166c87cb31d68bd2a72dfbcbd",
+      "translation": "To begin with, if characters have parameter differences of two or three times, the balance will usually collapse. It makes no difference whether the parameter is HP, Attack, or Magic Power.",
+      "contextHash": "c621c8eb6415aef883e62ac8015cad595cd65e4166c87cb31d68bd2a72dfbcbd"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "崩れないとしたら「戦士の魔力」「魔法使いの攻撃力」のように事実上の『死にステータス』と化している場合だろう。",
+      "sourceHash": "372a9e4a05cb03988c57f1c47edae76147b0016e20eb14b1befa226892995546",
+      "translation": "If the balance does not collapse, it is probably because the stat has effectively become a “dead stat,” such as a warrior's Magic Power or a mage's Attack.",
+      "contextHash": "372a9e4a05cb03988c57f1c47edae76147b0016e20eb14b1befa226892995546"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "事実、ターン制の素早さは相手をある程度上回っていれば十分であり、過度に上昇させても恩恵はない。状況によっては半ば『死にステータス』と化すため、そのような問題が起きないというだけに過ぎない。",
+      "sourceHash": "696713ed3f703220efc8cd17e576676b0d2e03df9e1b01779d708d75fe75fac9",
+      "translation": "In fact, in a turn-based system, it is enough for Agility to exceed the opponent's by a certain amount, and increasing it excessively provides no benefit. Depending on the situation, it effectively becomes a “dead stat”; the only reason this problem does not arise is that circumstance.",
+      "contextHash": "696713ed3f703220efc8cd17e576676b0d2e03df9e1b01779d708d75fe75fac9"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "素早さに大きな差をつけない",
+      "sourceHash": "5b0df199d8c14eaf6666c9cfd8ab08955819dcae4aeacb2b24dc45f0d070f257",
+      "translation": "Do Not Create Large Agility Differences",
+      "contextHash": "5b0df199d8c14eaf6666c9cfd8ab08955819dcae4aeacb2b24dc45f0d070f257"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ＣＴＢにおける素早さは常に機能するパラメータであるため、『死にステータス』にはまずならない。ＨＰのように全てのキャラに対して、しっかり調整する必要がある。",
+      "sourceHash": "99c246341fb7d9378c4e3bc96911dfe256d3919479ce45eb8cfa41bedbe8c46f",
+      "translation": "Because Agility in CTB is a parameter that always functions, it will almost never become a “dead stat.” Like HP, it needs to be carefully adjusted for every character.",
+      "contextHash": "99c246341fb7d9378c4e3bc96911dfe256d3919479ce45eb8cfa41bedbe8c46f"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "というわけで、答えは単純。",
+      "sourceHash": "bbcb1dfe9548681279dd3e286566fec62fbd2eba3b190434dd9ce4650bfe90d8",
+      "translation": "So the answer is simple.",
+      "contextHash": "bbcb1dfe9548681279dd3e286566fec62fbd2eba3b190434dd9ce4650bfe90d8"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "ＣＴＢにおいてバランス調整する際は、素早さに大きな差をつけなければよい。",
+      "sourceHash": "1a4d7b57c08a60d01c8a9e1982407b37dfe6a1471ff39f48d8e385198120b885",
+      "translation": "When balancing CTB, you should avoid creating large differences in Agility.",
+      "contextHash": "1a4d7b57c08a60d01c8a9e1982407b37dfe6a1471ff39f48d8e385198120b885"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "素早さをインフレさせない",
+      "sourceHash": "0cc6786126c811ac3da042af744ece25b663a8c293ae5b282ef5eb157ac73912",
+      "translation": "Do Not Inflate Agility",
+      "contextHash": "0cc6786126c811ac3da042af744ece25b663a8c293ae5b282ef5eb157ac73912"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "また、レベルアップなどにおける上昇量も重要。",
+      "sourceHash": "9d709d875778acaafc477bd41a03e256f620f4ca5ef1c68db76388c6a6b2164a",
+      "translation": "The amount by which stats increase through level-ups and the like is also important.",
+      "contextHash": "9d709d875778acaafc477bd41a03e256f620f4ca5ef1c68db76388c6a6b2164a"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "プレイスタイル次第で素早さに大きな差がつくようなバランスだと、調整が難しくなる。",
+      "sourceHash": "6aaaa446ba599212a38d43428ead520025371cb0708eeb05dae0a5f75a0a69ca",
+      "translation": "If your balance allows play style to create large differences in Agility, balancing will become difficult.",
+      "contextHash": "6aaaa446ba599212a38d43428ead520025371cb0708eeb05dae0a5f75a0a69ca"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "実際、ＣＴＢの先駆者のＦＦ１０はプレイスタイル次第で素早さに大きな差がつくシステムになっている。そのせいで後半は極めてバランス崩壊を起こしやすかった。",
+      "sourceHash": "430f8a85417999a8cbc60fb60b92d1f96dfaf1f3d002482ec99e86f768f1ff0d",
+      "translation": "In fact, FF10, a pioneer of CTB, has a system in which play style can create large differences in Agility. As a result, its balance was extremely prone to breaking down in the latter half.",
+      "contextHash": "430f8a85417999a8cbc60fb60b92d1f96dfaf1f3d002482ec99e86f768f1ff0d"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "なので、レベルアップなどによる上昇量も控えめにしたほうが無難だろう。",
+      "sourceHash": "4c929c1c52bb796c948e06ae46a5a54ca269a3b9bc89908002370130d1796bc1",
+      "translation": "Therefore, it would be safer to keep increases from level-ups and the like modest as well.",
+      "contextHash": "4c929c1c52bb796c948e06ae46a5a54ca269a3b9bc89908002370130d1796bc1"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "例えば、ＨＰや攻撃力のようなステータスならある程度インフレさせたほうがよいかもしれない。序盤は１０ダメージしか与えられなかったキャラが、後半１００ダメージを与えられるようになるのは、プレイヤーも気持ちが良い。",
+      "sourceHash": "a58bec87ee2446d366ae514651c5bf8563a2916fde4809e9ba275b1f2e636099",
+      "translation": "For example, it may be better to allow stats such as HP and Attack to inflate to some extent. Players find it satisfying when a character who could deal only 10 damage early on becomes capable of dealing 100 damage later.",
+      "contextHash": "a58bec87ee2446d366ae514651c5bf8563a2916fde4809e9ba275b1f2e636099"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "けれど、素早さは他の敵味方との相対的な差によって、行動回数に差がつくだけである。数値そのものをインフレさせても、プレイヤーの快感にはならない。",
+      "sourceHash": "8766cd80c40dc6c5d66af4247f20ceb38546f1a03a38abaa27cdf81d395a33ef",
+      "translation": "Agility, however, only creates differences in the number of actions based on its relative difference from other enemies and allies. Inflating the numbers themselves does not give players a sense of satisfaction.",
+      "contextHash": "8766cd80c40dc6c5d66af4247f20ceb38546f1a03a38abaa27cdf81d395a33ef"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "※参考：ミスティックスターの一番素早いキャラの素早さ初期値は５０。クリアレベルでの素早さは１１０～１２０程度になっている。つまり変化は二倍強に過ぎない。ＨＰや攻撃力が１０倍近くにインフレするのと比較して控えめ。",
+      "sourceHash": "66a4e6934db7af21bfc2b625be259f0b2000de119113a8ca13fae93ba47673b7",
+      "translation": "※For reference: The initial Agility of the fastest character in Mystic Star is 50. At the level required to clear the game, their Agility is around 110–120. In other words, the change is only a little more than twofold. This is modest compared with HP and Attack inflating to nearly ten times their original values.",
+      "contextHash": "66a4e6934db7af21bfc2b625be259f0b2000de119113a8ca13fae93ba47673b7"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "極端な話。素早さはレベルで成長しないステータスでも問題ない。つまりキャラの個性として設定してしまうというわけだ。",
+      "sourceHash": "093c82bf1e62957beb6f87396cb3c525e467186511c370836cf8dd14eea181d4",
+      "translation": "In extreme cases, it is perfectly fine for Agility to be a stat that does not grow with level. In other words, you can simply make it part of a character's individuality.",
+      "contextHash": "093c82bf1e62957beb6f87396cb3c525e467186511c370836cf8dd14eea181d4"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "もちろん、キャラクターだけでなく装備や職業の特性としてもＯＫ。",
+      "sourceHash": "7a2d69c4a6639711cbe3f5b22caa055c4786899b18be72db3bc7752b579d564a",
+      "translation": "Of course, this also works as a characteristic of equipment or classes, not just characters.",
+      "contextHash": "7a2d69c4a6639711cbe3f5b22caa055c4786899b18be72db3bc7752b579d564a"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "実際、ＦＦ５やロマサガ２～３のように素早さがレベルで成長しない名作はたくさんある。",
+      "sourceHash": "def754a11973988db5f3645ae6f82f5e2a34c2bdf3249a6c6a305b86e907abd6",
+      "translation": "In fact, there are many masterpieces, such as FFV and Romancing SaGa 2 and 3, in which Agility does not grow with level.",
+      "contextHash": "def754a11973988db5f3645ae6f82f5e2a34c2bdf3249a6c6a305b86e907abd6"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "ちなみに、これはＣＴＢに限ったことではなく、通常のターン制でも同じである。",
+      "sourceHash": "c3ee0ecf199dd0132766888b6c95436025105f0efe4c9cbbd6a5d894a4b93d7d",
+      "translation": "Incidentally, this is not limited to CTB; the same applies to ordinary turn-based systems.",
+      "contextHash": "c3ee0ecf199dd0132766888b6c95436025105f0efe4c9cbbd6a5d894a4b93d7d"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "敵が素早すぎる場合の弊害",
+      "sourceHash": "a7cecf580a5bf37831900fd70374b3a6cdc5357b2e127545a193329dad3b2d53",
+      "translation": "Drawbacks of Enemies Being Too Fast",
+      "contextHash": "a7cecf580a5bf37831900fd70374b3a6cdc5357b2e127545a193329dad3b2d53"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "ＣＴＢの性質上、敵が素早すぎる場合はターン制以上に一方的な攻撃を受けることになる。",
+      "sourceHash": "8fcb9191070cbf052a3cf704bca37758e9752cbfbefc1b572bccc0b1d73df993",
+      "translation": "Due to the nature of CTB, if enemies are too fast, you will be subjected to one-sided attacks even more than in a turn-based system.",
+      "contextHash": "8fcb9191070cbf052a3cf704bca37758e9752cbfbefc1b572bccc0b1d73df993"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "特に戦闘開始時の行動順序には注意を払いたい。",
+      "sourceHash": "44f3d303a1263db302eb8d719ec5c76e44d55b06d4f4bba9e2e91c7aa0cc3e07",
+      "translation": "Particular attention should be paid to the action order at the start of battle.",
+      "contextHash": "44f3d303a1263db302eb8d719ec5c76e44d55b06d4f4bba9e2e91c7aa0cc3e07"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "ＣＴＢでは戦闘開始直後に逃げるなどのコマンドを選べない作品も多いが、その場合は為す術がなくなってしまう。",
+      "sourceHash": "7e4af18ff294c77de5124e465db870523c6330019ccb56c46d68467f20b47d9e",
+      "translation": "In many CTB games, commands such as Escape cannot be selected immediately after battle begins. In such cases, you are left completely helpless.",
+      "contextHash": "7e4af18ff294c77de5124e465db870523c6330019ccb56c46d68467f20b47d9e"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "対策として、戦闘開始時に全体コマンド（パーティコマンド）を表示して逃げるを選択できるようにするのも一つの手。コマンド入力手順が一つ増えるのは難点だが、理不尽感は軽減できる。",
+      "sourceHash": "778c6045fa9f6c12a7552bea734a3b4b791490a7a285cdb52fef685cf31bc9b5",
+      "translation": "As a countermeasure, you could display the party commands at the start of battle so that the player can choose Escape. The drawback is that it adds one step to the command input process, but it can reduce the feeling that the situation is unreasonable.",
+      "contextHash": "778c6045fa9f6c12a7552bea734a3b4b791490a7a285cdb52fef685cf31bc9b5"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "味方が素早すぎる場合の弊害",
+      "sourceHash": "d78cb905699f5057d9cfbe86bbe48f9c16b27ddc460ea8cf340c103d4a07b4b1",
+      "translation": "Drawbacks of Allies Being Too Fast",
+      "contextHash": "d78cb905699f5057d9cfbe86bbe48f9c16b27ddc460ea8cf340c103d4a07b4b1"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "より見落としがちなのは、味方が素早すぎる場合の弊害だ。",
+      "sourceHash": "479a3ddb758dfaa3cbc81c1f384fb369bd8134c6696a38c88149183280f39b3a",
+      "translation": "Even more often overlooked are the drawbacks of allies being too fast.",
+      "contextHash": "479a3ddb758dfaa3cbc81c1f384fb369bd8134c6696a38c88149183280f39b3a"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "例えば、４人パーティの作品で全員が敵より素早く先制できるとする。さらに内２人の素早さが非常に高く、敵より先に２回行動できるとしよう。",
+      "sourceHash": "c16dd0faef7a585594f034d7fb86a7ebe7fffc185e386ad5109967bc89b3140e",
+      "translation": "For example, suppose that in a game with a four-member party, everyone is faster than the enemies and can act first. Furthermore, suppose that two of them have extremely high Agility and can act twice before the enemies.",
+      "contextHash": "c16dd0faef7a585594f034d7fb86a7ebe7fffc185e386ad5109967bc89b3140e"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "通常のターン制なら計４回しか攻撃できない場面で、先に計６回行動できる状況となるわけだ。",
+      "sourceHash": "49a3d8061106a54fbd719ef6b9bb667a78b43a61334cc34ceedd7a3bc174d298",
+      "translation": "In a situation where you could attack only four times in total under a normal turn-based system, you can instead act six times in total before the enemies.",
+      "contextHash": "49a3d8061106a54fbd719ef6b9bb667a78b43a61334cc34ceedd7a3bc174d298"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "一見すると、一方的に何度も攻撃できて爽快感があるのだが、そこに落とし穴がある。",
+      "sourceHash": "68152e91a90256dca43042268003cafc72c297ed685163d03dea258c175865e1",
+      "translation": "At first glance, being able to attack repeatedly without opposition seems exhilarating, but there is a catch.",
+      "contextHash": "68152e91a90256dca43042268003cafc72c297ed685163d03dea258c175865e1"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "６回行動できるということは、一方的に敵を封殺できる可能性が高いということでもある。となると、敵の行動を見る前に戦闘が終わる可能性も高い。",
+      "sourceHash": "9726b0f1383375e62eeb614d857eff91caa3c556517e52c24c1ea2cc5f4ed7e2",
+      "translation": "Being able to act six times also means that you are highly likely to completely shut down the enemies. Consequently, the battle is also highly likely to end before you ever see the enemies act.",
+      "contextHash": "9726b0f1383375e62eeb614d857eff91caa3c556517e52c24c1ea2cc5f4ed7e2"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "通常のＲＰＧにおいては、敵のほうが遥かに種類が多いため、その行動も多彩になる。ダンジョン毎に異なるモンスター達は作品を大きく彩ってくれるはず。",
+      "sourceHash": "8325e5419ebc70f63367fa52bf3faa5cc98242703db3efa891cf1f162948916c",
+      "translation": "In a typical RPG, there are far more types of enemies than allies, so their actions are also more varied. The different monsters in each dungeon should add a great deal of color to the game.",
+      "contextHash": "8325e5419ebc70f63367fa52bf3faa5cc98242703db3efa891cf1f162948916c"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "対してプレイヤーが扱う味方は精々４～８人程度、自然とその行動も決まったものになりがち。",
+      "sourceHash": "c8b0dab042d4eb93485580c234ce17a3dfec14dc4cab26c21ddceac7667a3bec",
+      "translation": "By contrast, the allies controlled by the player number only around four to eight at most, so their actions naturally tend to become predictable.",
+      "contextHash": "c8b0dab042d4eb93485580c234ce17a3dfec14dc4cab26c21ddceac7667a3bec"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "敵を完封できるということは、敵の行動を見る機会が奪われるということでもある。これは戦闘が単調になる危険性を秘めている。工夫すれば敵を完封できる――というのは確かに気持ちいいのだが、このデメリットもよく考えよう。",
+      "sourceHash": "f380272d61e413e828afa82d365d4369cc044f3d73a14088828f5283f20f2446",
+      "translation": "Being able to completely shut down the enemies also means losing opportunities to see them act. This carries the risk of making battles monotonous. It certainly feels good to completely shut down enemies through clever play—but this disadvantage should also be considered carefully.",
+      "contextHash": "f380272d61e413e828afa82d365d4369cc044f3d73a14088828f5283f20f2446"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "では、６回行動しても終わらないように敵をしぶとくしてはどうか――と考えた人もいるかもしれない。",
+      "sourceHash": "bece57323c055f64d24f6ee51da8846870962d54faccdc73bdf3037ade463107",
+      "translation": "Some of you may be thinking: Why not make the enemies tough enough to survive even six actions?",
+      "contextHash": "bece57323c055f64d24f6ee51da8846870962d54faccdc73bdf3037ade463107"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "残念ながら、こちらはこちらで問題がある。",
+      "sourceHash": "a2beffad931d9af6f0abb4959b96ee62150cb2d857d7c0b0bd60a9ad59239298",
+      "translation": "Unfortunately, that approach has problems of its own.",
+      "contextHash": "a2beffad931d9af6f0abb4959b96ee62150cb2d857d7c0b0bd60a9ad59239298"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "ターン制なら４回行動で一巡するところが、この例では６回行動が一巡になっているわけだ。単純計算で味方の行動時間とコマンド入力回数は１．５倍である。その分、ゲームテンポが遅くなるのは避けられない。",
+      "sourceHash": "d671c5bd8c4c74ba931999d678c376f2d836e3e272364750028391235064d8d9",
+      "translation": "In a turn-based system, four actions make up one complete cycle, whereas in this example, six actions make up one cycle. By simple calculation, the allies' action time and number of command inputs are 1.5 times greater. As a result, slowing down the game tempo is unavoidable.",
+      "contextHash": "d671c5bd8c4c74ba931999d678c376f2d836e3e272364750028391235064d8d9"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "そんなわけで、戦闘開始直後から何度も行動できるような調整は避けたほうが無難かと思う。たま～にあえて素早さが極端に低い敵を作ってみるぐらいでちょうど良いのではないだろうか。",
+      "sourceHash": "1c88a16812fd3743d71c7c399df6abda0f31a948598dc576a40c757ecb55e8b6",
+      "translation": "For that reason, I think it is safer to avoid adjustments that allow characters to act repeatedly immediately after battle begins. It may be just right to occasionally create an enemy with deliberately extremely low Agility.",
+      "contextHash": "1c88a16812fd3743d71c7c399df6abda0f31a948598dc576a40c757ecb55e8b6"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "なお、戦闘メンバーが１～３人の作品では、これらのデメリットも軽減される。この点では、人数の少ない作品のほうが自由にやれるかもしれない。",
+      "sourceHash": "052336b3b47c07cfe99b0123bcb2324ad9393fccecdf5038fbd48814cab66ba2",
+      "translation": "In games with one to three battle members, these disadvantages are reduced as well. In that respect, games with smaller party sizes may offer more freedom.",
+      "contextHash": "052336b3b47c07cfe99b0123bcb2324ad9393fccecdf5038fbd48814cab66ba2"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "個別行動の問題点",
+      "sourceHash": "35cb3fd359b067317b46dc2a95a056389cec21d2108077c7f07d2c352ed03e32",
+      "translation": "Issues with Individual Actions",
+      "contextHash": "35cb3fd359b067317b46dc2a95a056389cec21d2108077c7f07d2c352ed03e32"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "最後に、素早さ以外の問題点も一つだけ指摘したい。",
+      "sourceHash": "87b2f44dac30db07cf5bba7d96097d2a73657d96463722804c061b8f8422a6cc",
+      "translation": "Finally, I would like to point out one issue unrelated to Agility.",
+      "contextHash": "87b2f44dac30db07cf5bba7d96097d2a73657d96463722804c061b8f8422a6cc"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "ＣＴＢではターン制と異なり、一人ずつコマンド入力を行う。また、行動順序が可視化されており、順序のランダム性が低い。",
+      "sourceHash": "8d7d0720cebb1cbbba23315c9e9f58a22d891c70cbfe7d6a5ab6e810b61ce6db",
+      "translation": "Unlike in a turn-based system, CTB requires commands to be entered one character at a time. In addition, the action order is visible, and there is little randomness in that order.",
+      "contextHash": "8d7d0720cebb1cbbba23315c9e9f58a22d891c70cbfe7d6a5ab6e810b61ce6db"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "これらの特徴によりターン制よりも機敏かつ安定した行動判断が可能となる。",
+      "sourceHash": "46d6e145f76bca90bc79ac37ab72580c936e7f5904293ef718c2fdd926f15c46",
+      "translation": "These features make it possible to make more agile and reliable decisions than in a turn-based system.",
+      "contextHash": "46d6e145f76bca90bc79ac37ab72580c936e7f5904293ef718c2fdd926f15c46"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ターン制の場合",
+      "sourceHash": "93b2e2eb66a0b0a9d0eb9f5be9bd185c1f242aed967deffe146c9c9030da0783",
+      "translation": "In a Turn-Based System",
+      "contextHash": "93b2e2eb66a0b0a9d0eb9f5be9bd185c1f242aed967deffe146c9c9030da0783"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "敵１が味方１を攻撃",
+      "sourceHash": "fd10241357024f283a5101d187e1a4252b416459efa40012209fde5a4addd484",
+      "translation": "Enemy 1 attacks Ally 1",
+      "contextHash": "fd10241357024f283a5101d187e1a4252b416459efa40012209fde5a4addd484"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "味方１の攻撃",
+      "sourceHash": "f80cb894ff2e58bb62b85e514767bbe13ba5864f8d949f55aa0626d911e7230d",
+      "translation": "Ally 1 attacks",
+      "contextHash": "f80cb894ff2e58bb62b85e514767bbe13ba5864f8d949f55aa0626d911e7230d"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "敵２が味方１を攻撃→死亡",
+      "sourceHash": "954e0dd4ed620622876806358307f5e558f15d5b178f5ce217ea6b08cf3bc4c0",
+      "translation": "Enemy 2 attacks Ally 1 → Ally 1 dies",
+      "contextHash": "954e0dd4ed620622876806358307f5e558f15d5b178f5ce217ea6b08cf3bc4c0"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "となる場面でも……",
+      "sourceHash": "f5fe877958dfa782ae1d1d705b36079c177ff74e30c3aa1d0ad100f1c65c22b2",
+      "translation": "Even in a situation like this...",
+      "contextHash": "f5fe877958dfa782ae1d1d705b36079c177ff74e30c3aa1d0ad100f1c65c22b2"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "ＣＴＢの場合",
+      "sourceHash": "0fca6590b671c67c06b9b3ae547c59bbef4e09da6230c6d6a84245a0572f7124",
+      "translation": "In CTB",
+      "contextHash": "0fca6590b671c67c06b9b3ae547c59bbef4e09da6230c6d6a84245a0572f7124"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "敵１が味方１を攻撃",
+      "sourceHash": "fd10241357024f283a5101d187e1a4252b416459efa40012209fde5a4addd484",
+      "translation": "Enemy 1 attacks Ally 1",
+      "contextHash": "fd10241357024f283a5101d187e1a4252b416459efa40012209fde5a4addd484"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "味方１が自分を回復",
+      "sourceHash": "76a2044ffbbfbe70f47b7fcd692e6f0c37f32fa553b0396e341fd499393c7ba0",
+      "translation": "Ally 1 heals themself",
+      "contextHash": "76a2044ffbbfbe70f47b7fcd692e6f0c37f32fa553b0396e341fd499393c7ba0"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "敵２が味方１を攻撃→耐える",
+      "sourceHash": "71b7f75d958000a9eadb616df185f0b6b9c5d83f5b52b3f519d7ff4bd5e1d7a5",
+      "translation": "Enemy 2 attacks Ally 1 → Ally 1 withstands it",
+      "contextHash": "71b7f75d958000a9eadb616df185f0b6b9c5d83f5b52b3f519d7ff4bd5e1d7a5"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "……と、全く異なる結果となる。",
+      "sourceHash": "8ca004a0d0840ab96a29c668fd30f2342e9e779d94cd479f02194390338c3aa1",
+      "translation": "...the result is completely different.",
+      "contextHash": "8ca004a0d0840ab96a29c668fd30f2342e9e779d94cd479f02194390338c3aa1"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "ターン制とＣＴＢを比較すると、同じような状況でもプレイヤーにとって有利な展開になりやすい。",
+      "sourceHash": "2b6b4c3d2e3d6af0dff003143db1fc300fd762387d0524651c8d5c8b27b0977a",
+      "translation": "Compared with a turn-based system, CTB is more likely to produce an outcome favorable to the player even in similar situations.",
+      "contextHash": "2b6b4c3d2e3d6af0dff003143db1fc300fd762387d0524651c8d5c8b27b0977a"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "※もっとも、ターン制の代表格であるドラクエシリーズの『作戦』でも、機敏な回復は可能だったりする。",
+      "sourceHash": "7ca924cda5a4c7ef40f4b7f5babe0c8a8a78a59935aa583dbaa4c020071d726a",
+      "translation": "※That said, quick healing is also possible with the Dragon Quest series' \"Tactics,\" a defining example of a turn-based system.",
+      "contextHash": "7ca924cda5a4c7ef40f4b7f5babe0c8a8a78a59935aa583dbaa4c020071d726a"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "これは長所でもあるのだが、一方でピンチに陥りにくいことはゲームバランス上の注意点となる。",
+      "sourceHash": "a7ad0bf2e765f6b615166766f46f64a44071619f5eb205bc7af0191790133504",
+      "translation": "This is an advantage, but on the other hand, the fact that players are less likely to find themselves in a desperate situation is something to consider when balancing the game.",
+      "contextHash": "a7ad0bf2e765f6b615166766f46f64a44071619f5eb205bc7af0191790133504"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "ＣＴＢでは「攻撃を受けたら回復」でしのげる範囲が、ターン制よりも幅広い。……ということは、「攻撃→回復」の単調パターンの繰り返しに陥りやすいということでもある。",
+      "sourceHash": "c683c210a431cc5dc8dcf8c6de478496e836e6f5bdf46d1e9065274c01175008",
+      "translation": "In CTB, the range of situations you can survive by healing after taking an attack is broader than in a turn-based system. ...In other words, it is also easier to fall into the monotonous cycle of \"attack → heal.\"",
+      "contextHash": "c683c210a431cc5dc8dcf8c6de478496e836e6f5bdf46d1e9065274c01175008"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "ＣＴＢにおいて、ターン制と同じような難易度＆緊張感を維持したい場合は、敵の攻撃を激しくしたり、味方の回復を制限したりする必要があるだろう。",
+      "sourceHash": "594905f88450bfec2abc5bad8359476aea38845549404dbedb6a01050e559c88",
+      "translation": "If you want to maintain a difficulty level and sense of tension in CTB similar to those of a turn-based system, you will probably need to make enemy attacks more intense or limit the allies' healing.",
+      "contextHash": "594905f88450bfec2abc5bad8359476aea38845549404dbedb6a01050e559c88"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "基本的には回復魔法の制限がポイントになるかな～というのが僕の意見。例によって、以下の記事を貼っておきます。",
+      "sourceHash": "caa7bcc1269e886dc50e45d800af056e18c737d8d8a9f9820097dd19bbd91417",
+      "translation": "My opinion is that limiting healing magic is generally the key. As usual, I will link the following article.",
+      "contextHash": "caa7bcc1269e886dc50e45d800af056e18c737d8d8a9f9820097dd19bbd91417"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "回復魔法の問題点",
+      "sourceHash": "ee9ba3cad381a5c5d195cf1520eecd73d9e8b11701b96e5254b7066991253f57",
+      "translation": "Issues with Healing Magic",
+      "contextHash": "ee9ba3cad381a5c5d195cf1520eecd73d9e8b11701b96e5254b7066991253f57"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/462407181.html",
+      "sourceHash": "ba7664c0c1d440bfcfb0a48e824033ecf66bc541f8777fc1f4ec39cf7e3c82d6",
+      "translation": "https://newrpg.seesaa.net/article/462407181.html",
+      "contextHash": "33bdae264c910d2d3a31ac9af9c4b202d56ea6dd74f05e36a54ed6fe1b19228f"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※当ブログでも、ＲＰＧツクールＭＶ～ＭＺで使用できる[[LINK_1]]ＣＴＢプラグイン[[/LINK_1]]を公開しています。",
+      "sourceHash": "7fa7f8123325544fcddac7124923a2031a7f06938ca4405f8bc07dbda81e0616",
+      "parts": [
+        {
+          "source": "※当ブログでも、ＲＰＧツクールＭＶ～ＭＺで使用できる",
+          "link": false
+        },
+        {
+          "source": "ＣＴＢプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を公開しています。",
+          "link": false
+        }
+      ],
+      "translation": "※I also publish a [[LINK_1]]CTB plugin[[/LINK_1]] for use with RPG Maker MV–MZ on this blog.",
+      "contextHash": "7fa7f8123325544fcddac7124923a2031a7f06938ca4405f8bc07dbda81e0616"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "※なお、ＣＴＢそのものについての説明は『[[LINK_1]]戦闘システム① 行動順序システム[[/LINK_1]]』を参照してください。",
+      "sourceHash": "64027764e8b6fc08097c1dcdc1c4e149c82cc58bbc621251b637aa9f7168b1b7",
+      "parts": [
+        {
+          "source": "※なお、ＣＴＢそのものについての説明は『",
+          "link": false
+        },
+        {
+          "source": "戦闘システム① 行動順序システム",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "※For an explanation of CTB itself, please see “[[LINK_1]]Battle System 1: Action Order System[[/LINK_1]].”",
+      "contextHash": "64027764e8b6fc08097c1dcdc1c4e149c82cc58bbc621251b637aa9f7168b1b7"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]素早さの重要性[[/LINK_1]]",
+      "sourceHash": "0c736ba0d8d56834ad7d29a452105e3c99e5bd5062cacb77698f99773eb69748",
+      "parts": [
+        {
+          "source": "素早さの重要性",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The Importance of Agility[[/LINK_1]]",
+      "contextHash": "0c736ba0d8d56834ad7d29a452105e3c99e5bd5062cacb77698f99773eb69748"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ＣＴＢは素早さ至上主義か？[[/LINK_1]]",
+      "sourceHash": "045f1ee702c9a42fb8cedae5250dfc3624ba3e700c30e9e19e63115ae313ed19",
+      "parts": [
+        {
+          "source": "ＣＴＢは素早さ至上主義か？",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Does CTB Prioritize Agility Above All Else?[[/LINK_1]]",
+      "contextHash": "045f1ee702c9a42fb8cedae5250dfc3624ba3e700c30e9e19e63115ae313ed19"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]素早さに大きな差をつけない[[/LINK_1]]",
+      "sourceHash": "cd30f485abcc5d7e69d8661855256721f9433a2affdfede74e3f19d50e2d077c",
+      "parts": [
+        {
+          "source": "素早さに大きな差をつけない",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Don’t Create a Large Gap in Agility[[/LINK_1]]",
+      "contextHash": "cd30f485abcc5d7e69d8661855256721f9433a2affdfede74e3f19d50e2d077c"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]素早さをインフレさせない[[/LINK_1]]",
+      "sourceHash": "2ac2743f6947988dfcf5e3f53ad54e853b141f7a333c5327f54f3da7f16ec50d",
+      "parts": [
+        {
+          "source": "素早さをインフレさせない",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Don’t Inflate Agility[[/LINK_1]]",
+      "contextHash": "2ac2743f6947988dfcf5e3f53ad54e853b141f7a333c5327f54f3da7f16ec50d"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]敵が素早すぎる場合の弊害[[/LINK_1]]",
+      "sourceHash": "72857b4bd83cf4c10ebf82ec3c135be7988860eca46cdd3d72c37c45516d8602",
+      "parts": [
+        {
+          "source": "敵が素早すぎる場合の弊害",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Drawbacks of Enemies Being Too Fast[[/LINK_1]]",
+      "contextHash": "72857b4bd83cf4c10ebf82ec3c135be7988860eca46cdd3d72c37c45516d8602"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]味方が素早すぎる場合の弊害[[/LINK_1]]",
+      "sourceHash": "3d7157ebbf0f616870e767ee3be0dae310ae01be753d8749d05c22447061d8f5",
+      "parts": [
+        {
+          "source": "味方が素早すぎる場合の弊害",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Drawbacks of Allies Being Too Fast[[/LINK_1]]",
+      "contextHash": "3d7157ebbf0f616870e767ee3be0dae310ae01be753d8749d05c22447061d8f5"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]個別行動の問題点[[/LINK_1]]",
+      "sourceHash": "008a67e0e9ec994eda877c5a55bce301bddb1e5fdffce864764df89f2c813eaa",
+      "parts": [
+        {
+          "source": "個別行動の問題点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Problems with Individual Actions[[/LINK_1]]",
+      "contextHash": "008a67e0e9ec994eda877c5a55bce301bddb1e5fdffce864764df89f2c813eaa"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "※参考：拙作[[LINK_1]]ミスティックスター[[/LINK_1]]の最も遅いキャラのクリアレベルの素早さは７０強、最も速いキャラは１１０強。だいたい１．５倍ぐらいの差が無難かなって気がします。これに加えて装備で補強できる仕様です。",
+      "sourceHash": "696add8102d1606b14496ac31a61d9ac4362cf0bd8921a85658d28213bc0dd0a",
+      "parts": [
+        {
+          "source": "※参考：拙作",
+          "link": false
+        },
+        {
+          "source": "ミスティックスター",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の最も遅いキャラのクリアレベルの素早さは７０強、最も速いキャラは１１０強。だいたい１．５倍ぐらいの差が無難かなって気がします。これに加えて装備で補強できる仕様です。",
+          "link": false
+        }
+      ],
+      "translation": "※For reference: In my game [[LINK_1]]Mystic Star[[/LINK_1]], the slowest character has just over 70 Agility at the level needed to clear the game, while the fastest has just over 110. I feel that a difference of about 1.5 times is probably reasonable. The system also allows Agility to be supplemented with equipment.",
+      "contextHash": "696add8102d1606b14496ac31a61d9ac4362cf0bd8921a85658d28213bc0dd0a"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Creation Tutorial Index[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "ＣＴＢ（カウントタイムバトル）はＲＰＧにおいて、ターン制に次いで採用されることが多い戦闘システム（たぶん……）である。": "CTB (Count Time Battle) is a combat system often used in RPGs, second only to turn-based systems (probably...).",
+    "特にＦＦ１０で採用された敵味方の行動順序を表示するＵＩは秀逸であり、": "In particular, the UI used in FF10 that displays the action order of enemies and allies is excellent,",
+    "身軽なキャラクターは何度も動けるという直感的な分かりやすさ。": "The intuitive clarity that nimble characters can act multiple times.",
+    "それによるキャラクターの差別化。": "The resulting differentiation between characters.",
+    "行動順序を可視化することによる高い戦術性。": "The high level of tactical depth achieved by visualizing the action order.",
+    "……といった長所を持つＣＴＢは後続の作品へも多大な影響を与えた。": "CTB's strengths, such as these, had a major influence on later games.",
+    "実際、ほぼ同じような仕組みを採用している作品は、現在もプロ・アマ問わず多数見かける。比較的後発の戦闘システムながら、これほど定着したものは珍しいだろう。": "In fact, even today, many professional and amateur games alike use systems that work in almost exactly the same way. Despite being a relatively recent combat system, it is rare for one to become this firmly established.",
+    "しかしながら、ＣＴＢはターン制ほど経験者が多くなく、あまり研究されているとは言い難い。というわけで、ＣＴＢで中～長編を３回ほど完成させたことがある経験者として、バランス調整法をまとめてみた。": "However, CTB has fewer experienced users than turn-based systems, and it would be difficult to say that it has been studied extensively. So, as someone with experience completing around three medium- to long-length games using CTB, I have put together some methods for balancing it.",
+    "目次": "Table of Contents",
+    "素早さの重要性": "The Importance of Agility",
+    "ご存知の通りＣＴＢにおいて『素早さ』は極めて重要なパラメータである。": "As you know, Agility is an extremely important parameter in CTB.",
+    "古典的なターン制において、素早さの価値はそれほど高くない。": "In classic turn-based systems, Agility is not particularly valuable.",
+    "それもそのはず、キャラごとに２倍、３倍の差があろうが、行動順序が変わるだけ。大きな違いにはならないためだ。": "And that's only natural: even if characters have Agility differences of two or three times, it only changes the action order. It does not make a major difference.",
+    "※素早さが命中回避などに関わってくるパターンは除きます。": "※This excludes systems in which Agility affects things such as hit and evasion rates.",
+    "素早さが低いキャラは、確実に敵より後に行動するため、それを利用するなんて戦術も有力になるほどである。": "Characters with low Agility always act after the enemies, to the point that tactics taking advantage of this can even be effective.",
+    "※いわゆる『置きベホマラー』『置き賢者の石』など。": "※So-called \"pre-placed Omniheal\" and \"pre-placed Sage's Stone,\" for example.",
+    "しかしながら、ＣＴＢにおいてはそうではない。": "However, that is not the case in CTB.",
+    "素早さに比例して行動回数が増えるため、攻撃や回復・補助などあらゆる行動に対して恩恵が得られるようになっている。": "Because the number of actions increases in proportion to Agility, it provides benefits for all kinds of actions, including attacks, healing, and support.",
+    "そのため、ターン制と同じ感覚で素早さを設定すると、バランスが崩壊してしまう。そうならないように、ＣＴＢでは入念に敵味方の素早さを調整したい。": "Therefore, if you set Agility with the same mindset as in a turn-based system, the balance will collapse. To prevent that, you should carefully adjust the Agility of both enemies and allies in CTB.",
+    "以降の内容も大半が素早さに関するものとなる。": "Most of what follows will also concern Agility.",
+    "ＣＴＢは素早さ至上主義か？": "Is CTB All About Agility?",
+    "もっとも、ＣＴＢは『素早さ史上主義』である――という極端な見方にも反論しておきたい。": "That said, I would also like to counter the extreme view that CTB is based on “Agility supremacy.”",
+    "無論、素早さが重要なパラメータなのは間違いない。": "Of course, there is no doubt that Agility is an important parameter.",
+    "しかし、あらゆるパラメータを上回るほどに重要かというと、実はそうではない。": "However, it is not actually so important that it surpasses every other parameter.",
+    "あくまでＨＰ、攻撃力、防御力、魔力などと、素早さが同等の価値になるだけだと考えて欲しい。": "Please think of Agility as having no more than the same value as HP, Attack, Defense, Magic Power, and so on.",
+    "例えば、単純に「攻撃力 - 防御力」の引き算でダメージが決定されるゲームを考えてみよう。": "For example, let's consider a game in which damage is determined simply by subtracting Defense from Attack.",
+    "※いわゆるアルテリオス計算式。言うまでもなく『攻撃側の攻撃力』と『防御側の防御力』という意味です。": "※The so-called Alterios damage formula. Needless to say, this means the “attacker's Attack” and the “defender's Defense.”",
+    "攻撃力５０ - 防御力４０ = ダメージ１０": "Attack 50 - Defense 40 = 10 damage",
+    "という決め手不足の状況を、能力の引き上げによって改善したい。": "Suppose we want to improve this situation, where attacks lack the power to finish the job, by increasing stats.",
+    "攻撃力１００ - 防御力４０ = ダメージ６０": "Attack 100 - Defense 40 = 60 damage",
+    "この通り、攻撃力を倍にすればダメージは６倍になる。": "As you can see, doubling Attack increases damage sixfold.",
+    "しかし、素早さで同等の火力を出そうとすると、素早さを６倍にする必要がある。": "However, to achieve equivalent firepower through Agility, you would need to increase Agility sixfold.",
+    "この場合、明らかに攻撃力を上げたほうが効率がよい。": "In this case, it is clearly more efficient to increase Attack.",
+    "ＣＴＢだからといって、素早さが最重要とは限らないのだ。": "Just because a system is CTB does not mean Agility is necessarily the most important stat.",
+    "そもそも、キャラクター毎のパラメータに２～３倍もの差をつけたら、大抵はバランスが崩れる。ＨＰだろうが攻撃力だろうが魔力だろうが、それは同じだ。": "To begin with, if characters have parameter differences of two or three times, the balance will usually collapse. It makes no difference whether the parameter is HP, Attack, or Magic Power.",
+    "崩れないとしたら「戦士の魔力」「魔法使いの攻撃力」のように事実上の『死にステータス』と化している場合だろう。": "If the balance does not collapse, it is probably because the stat has effectively become a “dead stat,” such as a warrior's Magic Power or a mage's Attack.",
+    "事実、ターン制の素早さは相手をある程度上回っていれば十分であり、過度に上昇させても恩恵はない。状況によっては半ば『死にステータス』と化すため、そのような問題が起きないというだけに過ぎない。": "In fact, in a turn-based system, it is enough for Agility to exceed the opponent's by a certain amount, and increasing it excessively provides no benefit. Depending on the situation, it effectively becomes a “dead stat”; the only reason this problem does not arise is that circumstance.",
+    "素早さに大きな差をつけない": "Do Not Create Large Agility Differences",
+    "ＣＴＢにおける素早さは常に機能するパラメータであるため、『死にステータス』にはまずならない。ＨＰのように全てのキャラに対して、しっかり調整する必要がある。": "Because Agility in CTB is a parameter that always functions, it will almost never become a “dead stat.” Like HP, it needs to be carefully adjusted for every character.",
+    "というわけで、答えは単純。": "So the answer is simple.",
+    "ＣＴＢにおいてバランス調整する際は、素早さに大きな差をつけなければよい。": "When balancing CTB, you should avoid creating large differences in Agility.",
+    "素早さをインフレさせない": "Do Not Inflate Agility",
+    "また、レベルアップなどにおける上昇量も重要。": "The amount by which stats increase through level-ups and the like is also important.",
+    "プレイスタイル次第で素早さに大きな差がつくようなバランスだと、調整が難しくなる。": "If your balance allows play style to create large differences in Agility, balancing will become difficult.",
+    "実際、ＣＴＢの先駆者のＦＦ１０はプレイスタイル次第で素早さに大きな差がつくシステムになっている。そのせいで後半は極めてバランス崩壊を起こしやすかった。": "In fact, FF10, a pioneer of CTB, has a system in which play style can create large differences in Agility. As a result, its balance was extremely prone to breaking down in the latter half.",
+    "なので、レベルアップなどによる上昇量も控えめにしたほうが無難だろう。": "Therefore, it would be safer to keep increases from level-ups and the like modest as well.",
+    "例えば、ＨＰや攻撃力のようなステータスならある程度インフレさせたほうがよいかもしれない。序盤は１０ダメージしか与えられなかったキャラが、後半１００ダメージを与えられるようになるのは、プレイヤーも気持ちが良い。": "For example, it may be better to allow stats such as HP and Attack to inflate to some extent. Players find it satisfying when a character who could deal only 10 damage early on becomes capable of dealing 100 damage later.",
+    "けれど、素早さは他の敵味方との相対的な差によって、行動回数に差がつくだけである。数値そのものをインフレさせても、プレイヤーの快感にはならない。": "Agility, however, only creates differences in the number of actions based on its relative difference from other enemies and allies. Inflating the numbers themselves does not give players a sense of satisfaction.",
+    "※参考：ミスティックスターの一番素早いキャラの素早さ初期値は５０。クリアレベルでの素早さは１１０～１２０程度になっている。つまり変化は二倍強に過ぎない。ＨＰや攻撃力が１０倍近くにインフレするのと比較して控えめ。": "※For reference: The initial Agility of the fastest character in Mystic Star is 50. At the level required to clear the game, their Agility is around 110–120. In other words, the change is only a little more than twofold. This is modest compared with HP and Attack inflating to nearly ten times their original values.",
+    "極端な話。素早さはレベルで成長しないステータスでも問題ない。つまりキャラの個性として設定してしまうというわけだ。": "In extreme cases, it is perfectly fine for Agility to be a stat that does not grow with level. In other words, you can simply make it part of a character's individuality.",
+    "もちろん、キャラクターだけでなく装備や職業の特性としてもＯＫ。": "Of course, this also works as a characteristic of equipment or classes, not just characters.",
+    "実際、ＦＦ５やロマサガ２～３のように素早さがレベルで成長しない名作はたくさんある。": "In fact, there are many masterpieces, such as FFV and Romancing SaGa 2 and 3, in which Agility does not grow with level.",
+    "ちなみに、これはＣＴＢに限ったことではなく、通常のターン制でも同じである。": "Incidentally, this is not limited to CTB; the same applies to ordinary turn-based systems.",
+    "敵が素早すぎる場合の弊害": "Drawbacks of Enemies Being Too Fast",
+    "ＣＴＢの性質上、敵が素早すぎる場合はターン制以上に一方的な攻撃を受けることになる。": "Due to the nature of CTB, if enemies are too fast, you will be subjected to one-sided attacks even more than in a turn-based system.",
+    "特に戦闘開始時の行動順序には注意を払いたい。": "Particular attention should be paid to the action order at the start of battle.",
+    "ＣＴＢでは戦闘開始直後に逃げるなどのコマンドを選べない作品も多いが、その場合は為す術がなくなってしまう。": "In many CTB games, commands such as Escape cannot be selected immediately after battle begins. In such cases, you are left completely helpless.",
+    "対策として、戦闘開始時に全体コマンド（パーティコマンド）を表示して逃げるを選択できるようにするのも一つの手。コマンド入力手順が一つ増えるのは難点だが、理不尽感は軽減できる。": "As a countermeasure, you could display the party commands at the start of battle so that the player can choose Escape. The drawback is that it adds one step to the command input process, but it can reduce the feeling that the situation is unreasonable.",
+    "味方が素早すぎる場合の弊害": "Drawbacks of Allies Being Too Fast",
+    "より見落としがちなのは、味方が素早すぎる場合の弊害だ。": "Even more often overlooked are the drawbacks of allies being too fast.",
+    "例えば、４人パーティの作品で全員が敵より素早く先制できるとする。さらに内２人の素早さが非常に高く、敵より先に２回行動できるとしよう。": "For example, suppose that in a game with a four-member party, everyone is faster than the enemies and can act first. Furthermore, suppose that two of them have extremely high Agility and can act twice before the enemies.",
+    "通常のターン制なら計４回しか攻撃できない場面で、先に計６回行動できる状況となるわけだ。": "In a situation where you could attack only four times in total under a normal turn-based system, you can instead act six times in total before the enemies.",
+    "一見すると、一方的に何度も攻撃できて爽快感があるのだが、そこに落とし穴がある。": "At first glance, being able to attack repeatedly without opposition seems exhilarating, but there is a catch.",
+    "６回行動できるということは、一方的に敵を封殺できる可能性が高いということでもある。となると、敵の行動を見る前に戦闘が終わる可能性も高い。": "Being able to act six times also means that you are highly likely to completely shut down the enemies. Consequently, the battle is also highly likely to end before you ever see the enemies act.",
+    "通常のＲＰＧにおいては、敵のほうが遥かに種類が多いため、その行動も多彩になる。ダンジョン毎に異なるモンスター達は作品を大きく彩ってくれるはず。": "In a typical RPG, there are far more types of enemies than allies, so their actions are also more varied. The different monsters in each dungeon should add a great deal of color to the game.",
+    "対してプレイヤーが扱う味方は精々４～８人程度、自然とその行動も決まったものになりがち。": "By contrast, the allies controlled by the player number only around four to eight at most, so their actions naturally tend to become predictable.",
+    "敵を完封できるということは、敵の行動を見る機会が奪われるということでもある。これは戦闘が単調になる危険性を秘めている。工夫すれば敵を完封できる――というのは確かに気持ちいいのだが、このデメリットもよく考えよう。": "Being able to completely shut down the enemies also means losing opportunities to see them act. This carries the risk of making battles monotonous. It certainly feels good to completely shut down enemies through clever play—but this disadvantage should also be considered carefully.",
+    "では、６回行動しても終わらないように敵をしぶとくしてはどうか――と考えた人もいるかもしれない。": "Some of you may be thinking: Why not make the enemies tough enough to survive even six actions?",
+    "残念ながら、こちらはこちらで問題がある。": "Unfortunately, that approach has problems of its own.",
+    "ターン制なら４回行動で一巡するところが、この例では６回行動が一巡になっているわけだ。単純計算で味方の行動時間とコマンド入力回数は１．５倍である。その分、ゲームテンポが遅くなるのは避けられない。": "In a turn-based system, four actions make up one complete cycle, whereas in this example, six actions make up one cycle. By simple calculation, the allies' action time and number of command inputs are 1.5 times greater. As a result, slowing down the game tempo is unavoidable.",
+    "そんなわけで、戦闘開始直後から何度も行動できるような調整は避けたほうが無難かと思う。たま～にあえて素早さが極端に低い敵を作ってみるぐらいでちょうど良いのではないだろうか。": "For that reason, I think it is safer to avoid adjustments that allow characters to act repeatedly immediately after battle begins. It may be just right to occasionally create an enemy with deliberately extremely low Agility.",
+    "なお、戦闘メンバーが１～３人の作品では、これらのデメリットも軽減される。この点では、人数の少ない作品のほうが自由にやれるかもしれない。": "In games with one to three battle members, these disadvantages are reduced as well. In that respect, games with smaller party sizes may offer more freedom.",
+    "個別行動の問題点": "Issues with Individual Actions",
+    "最後に、素早さ以外の問題点も一つだけ指摘したい。": "Finally, I would like to point out one issue unrelated to Agility.",
+    "ＣＴＢではターン制と異なり、一人ずつコマンド入力を行う。また、行動順序が可視化されており、順序のランダム性が低い。": "Unlike in a turn-based system, CTB requires commands to be entered one character at a time. In addition, the action order is visible, and there is little randomness in that order.",
+    "これらの特徴によりターン制よりも機敏かつ安定した行動判断が可能となる。": "These features make it possible to make more agile and reliable decisions than in a turn-based system.",
+    "ターン制の場合": "In a Turn-Based System",
+    "敵１が味方１を攻撃": "Enemy 1 attacks Ally 1",
+    "味方１の攻撃": "Ally 1 attacks",
+    "敵２が味方１を攻撃→死亡": "Enemy 2 attacks Ally 1 → Ally 1 dies",
+    "となる場面でも……": "Even in a situation like this...",
+    "ＣＴＢの場合": "In CTB",
+    "味方１が自分を回復": "Ally 1 heals themself",
+    "敵２が味方１を攻撃→耐える": "Enemy 2 attacks Ally 1 → Ally 1 withstands it",
+    "……と、全く異なる結果となる。": "...the result is completely different.",
+    "ターン制とＣＴＢを比較すると、同じような状況でもプレイヤーにとって有利な展開になりやすい。": "Compared with a turn-based system, CTB is more likely to produce an outcome favorable to the player even in similar situations.",
+    "※もっとも、ターン制の代表格であるドラクエシリーズの『作戦』でも、機敏な回復は可能だったりする。": "※That said, quick healing is also possible with the Dragon Quest series' \"Tactics,\" a defining example of a turn-based system.",
+    "これは長所でもあるのだが、一方でピンチに陥りにくいことはゲームバランス上の注意点となる。": "This is an advantage, but on the other hand, the fact that players are less likely to find themselves in a desperate situation is something to consider when balancing the game.",
+    "ＣＴＢでは「攻撃を受けたら回復」でしのげる範囲が、ターン制よりも幅広い。……ということは、「攻撃→回復」の単調パターンの繰り返しに陥りやすいということでもある。": "In CTB, the range of situations you can survive by healing after taking an attack is broader than in a turn-based system. ...In other words, it is also easier to fall into the monotonous cycle of \"attack → heal.\"",
+    "ＣＴＢにおいて、ターン制と同じような難易度＆緊張感を維持したい場合は、敵の攻撃を激しくしたり、味方の回復を制限したりする必要があるだろう。": "If you want to maintain a difficulty level and sense of tension in CTB similar to those of a turn-based system, you will probably need to make enemy attacks more intense or limit the allies' healing.",
+    "基本的には回復魔法の制限がポイントになるかな～というのが僕の意見。例によって、以下の記事を貼っておきます。": "My opinion is that limiting healing magic is generally the key. As usual, I will link the following article.",
+    "回復魔法の問題点": "Issues with Healing Magic",
+    "https://newrpg.seesaa.net/article/462407181.html": "https://newrpg.seesaa.net/article/462407181.html"
+  }
+}
