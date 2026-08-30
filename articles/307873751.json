@@ -1,0 +1,811 @@
+{
+  "articleId": "307873751",
+  "sourceUrl": "https://newrpg.seesaa.net/article/307873751.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2c204bf65c23759b7896bf1cbe5b568868ee279d00aba46b5a8c8c230b9b8a51",
+  "translatedAt": "2026-08-30T12:17:38.330Z",
+  "title": "[RPG Design Guides] Battle Systems ① Action Order Systems",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】戦闘システム① 行動順序システム",
+      "sourceHash": "e4650b0de0f62597402d64f93915c1d086f5a42c7679f5441d4c836031272767",
+      "translation": "[RPG Design Guides] Battle Systems ① Action Order Systems",
+      "contextHash": "e4650b0de0f62597402d64f93915c1d086f5a42c7679f5441d4c836031272767"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "『戦闘システム』とは、味方と敵が戦って勝負し、勝敗を決めるためのシステムである。ＲＰＧにおける最大のウリとなることが多い。一応、戦闘から逃げたりとか、敵と交渉で解決したりする場合もあるが、基本は勝敗である。",
+      "sourceHash": "850638293ba7bac56aa4e844464270e607a2767489fa9939f6f9f5933644105d",
+      "translation": "A “battle system” is a system for allies and enemies to fight, compete, and determine the winner. It is often the biggest selling point of an RPG. Of course, there are also cases where you flee from battle or resolve matters by negotiating with enemies, but fundamentally, it is about victory or defeat.",
+      "contextHash": "850638293ba7bac56aa4e844464270e607a2767489fa9939f6f9f5933644105d"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "戦闘という要素は単にゲームシステムの一部というだけではなく、ストーリーとの親和性も高い。多くのＲＰＧでストーリー及びシステムの中核として扱われる。「主人公達が戦いの中で成長し、やがて強大なラスボスを死闘の末に倒して、目的を果たす」という大きな流れは、もはや様式美と言ってよいだろう。",
+      "sourceHash": "c6a143620f7aa1e7b4b3087a69a0217a6722105a6b28122a0910dbb030cd66f7",
+      "translation": "The battle element is not merely a part of the game system; it also has a strong affinity with the story. In many RPGs, it serves as the core of both the story and the system. The broad flow of “the protagonists grow through battle, eventually defeat a powerful final boss after a fierce struggle, and accomplish their goal” could now be called a stylistic convention.",
+      "contextHash": "c6a143620f7aa1e7b4b3087a69a0217a6722105a6b28122a0910dbb030cd66f7"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ＲＰＧにおいては、命をかけた死闘が表現されることが多いが、もちろん、スポーツや料理、カードゲーム等を題材にしても『勝負』はできる。いずれにしても、勝敗を決めるためのシステムが必要となるのは同じである。",
+      "sourceHash": "cf00d385eb1f568884b467ce10bdbd8453923b2713b75a9d0a639436c4d95b06",
+      "translation": "RPGs often depict fierce battles in which the characters stake their lives, but of course, a “competition” can also be based on sports, cooking, card games, and so on. In any case, the need for a system to determine victory or defeat remains the same.",
+      "contextHash": "cf00d385eb1f568884b467ce10bdbd8453923b2713b75a9d0a639436c4d95b06"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "『戦闘システム』と一言で言っても、その中身はいくつかの要素に分解できる。手始めに、今回は戦闘システムにおける『行動順序システム』をまとめてみたい。つまり、『ターン制』とか『ＡＴＢ』とか『ＣＴＢ』とかいう、キャラクターが行動する順番を決定するためのシステムのことである。",
+      "sourceHash": "6a57ccda04cc3743245c70b467a80c865b209c4ba735b4e8242aeb655354814e",
+      "translation": "Even when referred to simply as a “battle system,” its contents can be broken down into several elements. To begin with, I would like to summarize “action order systems” in battle systems. In other words, these are systems such as “turn-based,” “ATB,” and “CTB” that determine the order in which characters act.",
+      "contextHash": "6a57ccda04cc3743245c70b467a80c865b209c4ba735b4e8242aeb655354814e"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "どんなシステムが理想か、というような単純な答えは出せないが、既存ＲＰＧの行動順序システムを分類していくことで、何か見えてくるものがあるかもしれない。",
+      "sourceHash": "073a50d459de7b14a8223a5710ecc05211555197b1065e151a74ea56f74d3a23",
+      "translation": "There is no simple answer to what kind of system is ideal, but classifying the action order systems of existing RPGs might reveal something.",
+      "contextHash": "073a50d459de7b14a8223a5710ecc05211555197b1065e151a74ea56f74d3a23"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "大きな括りでの行動順序システム",
+      "sourceHash": "341bbc540f0fb73e477e6cdf37fbfae55c8720a779d884ac5bdbeeb2a55e9679",
+      "translation": "Action Order Systems in Broad Categories",
+      "contextHash": "341bbc540f0fb73e477e6cdf37fbfae55c8720a779d884ac5bdbeeb2a55e9679"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ターン制",
+      "sourceHash": "ff2e11d50cd06d9dc7d95124cc12cee7de41c3c43e92797ea84acae60154cabc",
+      "translation": "Turn-Based",
+      "contextHash": "ff2e11d50cd06d9dc7d95124cc12cee7de41c3c43e92797ea84acae60154cabc"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ＤＱシリーズを初めとした古くから数々のＲＰＧで採用されているシステム。",
+      "sourceHash": "4c658b8740452974ec8f543392f9e47b7beb4bf3127a28594f561ebc023ee187",
+      "translation": "A system used since long ago in numerous RPGs, beginning with the Dragon Quest series.",
+      "contextHash": "4c658b8740452974ec8f543392f9e47b7beb4bf3127a28594f561ebc023ee187"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "１ターンという区切りの中で、味方と敵で素早さが高い順番に１度ずつ行動する。順番には多少のランダム性を持たせる場合も多い。",
+      "sourceHash": "f6edf2a5b7609c6416a4440b08b14d733b0b6af0d87c6abe213fe219fe0d0b6f",
+      "translation": "Within a unit called a turn, allies and enemies each act once, in order of decreasing Agility. The order is also often given some degree of randomness.",
+      "contextHash": "f6edf2a5b7609c6416a4440b08b14d733b0b6af0d87c6abe213fe219fe0d0b6f"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ロマンシングサガ・ミンストレルソングの様に味方の行動順序を指定できるタイプもあれば、ポケモンのように１対１のルール上に、入替の要素を加えることで、一味違う戦闘システムを構築している例もある。",
+      "sourceHash": "9e16cc3d488f1507b1494c4cbb1a511bbef992551b7a7452f1dcae049ee6fcc5",
+      "translation": "Some games, such as Romancing SaGa: Minstrel Song, allow you to specify the action order of your allies. Others, such as Pokémon, build a distinctive battle system by adding the element of switching to a one-on-one rule set.",
+      "contextHash": "9e16cc3d488f1507b1494c4cbb1a511bbef992551b7a7452f1dcae049ee6fcc5"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "どんなに素早いキャラクターであっても、１ターンには１度しか行動できない。",
+      "sourceHash": "b68ca8c659bafc56589ff415ed116b3604b0059ba283056f79709bcb3f9d6ecd",
+      "translation": "No matter how fast a character is, they can act only once per turn.",
+      "contextHash": "b68ca8c659bafc56589ff415ed116b3604b0059ba283056f79709bcb3f9d6ecd"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "そのため、ＨＰや攻撃力のような高ければ高いほど有利になるパラメータと比較すると、素早さの重要性が低くなりがち。ただし、素早さが低いキャラクターが敵より後で行動することを予想して、回復行動を取らせるといったテクニックもある。",
+      "sourceHash": "c8486c004e7d8f38ca73a7036478a10ebb199ff1ab4f151a2949b7693c04d05c",
+      "translation": "As a result, compared with parameters such as HP and Attack Power, where higher values are generally more advantageous, Agility tends to be less important. However, there are also techniques such as having a character with low Agility perform a healing action, anticipating that they will act after the enemy.",
+      "contextHash": "c8486c004e7d8f38ca73a7036478a10ebb199ff1ab4f151a2949b7693c04d05c"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "古典的なターン制では、プレイヤーは１ターン分の行動をまとめて入力する。従って、ＡＴＢやＣＴＢのように、「敵の攻撃を待ち受けて、即座に回復する」というような柔軟な行動は取り辛い。",
+      "sourceHash": "9e1f598104a06391b8ca7e8214f4f53131378339ca8e914468e62268b28c1c1f",
+      "translation": "In classic turn-based systems, the player inputs all of their actions for one turn at once. Consequently, it is difficult to take flexible actions such as “wait for the enemy to attack, then heal immediately,” as in ATB or CTB.",
+      "contextHash": "9e1f598104a06391b8ca7e8214f4f53131378339ca8e914468e62268b28c1c1f"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "一見、短所と思えるが、これは大きな長所でもある。",
+      "sourceHash": "6ae06de7a5e1a019e841a09a1ad1399def702e73a8e799ee415ee6c23ee3b04f",
+      "translation": "This may seem like a drawback at first glance, but it is also a major strength.",
+      "contextHash": "6ae06de7a5e1a019e841a09a1ad1399def702e73a8e799ee415ee6c23ee3b04f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "逆に言えば、プレイヤーは１ターン分のまとまった流れを予想する必要があるということである。これはＡＴＢやＣＴＢにはない独自の戦略性だと言える。また、回復行動が柔軟に取れないということは、緊張感にもつながるし、戦闘がダラダラと伸びずにも済む。",
+      "sourceHash": "823810c1703377c4794c40025f255a8a4db6426d3a5ea31544453eb0e5ef7e6c",
+      "translation": "In other words, the player must anticipate the overall flow of one turn. This can be called a unique strategic element not found in ATB or CTB. Also, the inability to heal flexibly creates tension and prevents battles from dragging on endlessly.",
+      "contextHash": "823810c1703377c4794c40025f255a8a4db6426d3a5ea31544453eb0e5ef7e6c"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ただし、演出時間の長さが目立ちやすい点が短所として挙げられる。",
+      "sourceHash": "172fbe36072c359994c768ff66a1d2eeae9ff41e2bdafafcd5f742bdf1fbd682",
+      "translation": "One drawback, however, is that the length of battle animations tends to stand out.",
+      "contextHash": "172fbe36072c359994c768ff66a1d2eeae9ff41e2bdafafcd5f742bdf1fbd682"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "多人数がまとまって行動するため、長時間に渡ってプレイヤーが何もできない時間が発生する。ＡＴＢやＣＴＢなどのキャラが個別に行動するシステムと比較すると、必然的に「思考→入力→演出」の１サイクルが長くなるため退屈を誘いやすい。",
+      "sourceHash": "9938ea7a838f5665d86ed5bbf103ef8e725c81ba59d72e1158bd911d113210f7",
+      "translation": "Because multiple characters act together, there are long periods during which the player cannot do anything. Compared with systems such as ATB and CTB, in which characters act individually, the “think → input → animation” cycle inevitably becomes longer, making boredom more likely.",
+      "contextHash": "9938ea7a838f5665d86ed5bbf103ef8e725c81ba59d72e1158bd911d113210f7"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "そのため、テンポ面での配慮は他のシステムより必要になってくる。",
+      "sourceHash": "65f6c2d2ebcb65bab645b1fd2ae3d54cbfd828f981900f130dedddf15fee3aac",
+      "translation": "For this reason, more attention must be paid to pacing than with other systems.",
+      "contextHash": "65f6c2d2ebcb65bab645b1fd2ae3d54cbfd828f981900f130dedddf15fee3aac"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※ＤＱ１１（ＰＳ４版）やＤＱ１０オフラインでは、１ターンまとめてではなく一人ずつ行動するようになった。地味ながら大きな変更点と言える。",
+      "sourceHash": "3afe1f60f443463d29a91bc6fe5ada29e4254669dbcad69dfcffc0ed0a778d3c",
+      "translation": "※In Dragon Quest XI (PS4 version) and the offline version of Dragon Quest X, characters came to act one at a time instead of all at once per turn. It may seem minor, but it can be considered a major change.",
+      "contextHash": "3afe1f60f443463d29a91bc6fe5ada29e4254669dbcad69dfcffc0ed0a778d3c"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "古臭いと思われがちなターン制だが、意外と捨てたものではないように思う。かくいう筆者も最近はＣＴＢを採用することが多いが、だからこそ、ターン制の長所も再認識している次第だ。",
+      "sourceHash": "98414c39343a44865b7f13b29a9bfe2e947259f116cd4de2ebc668117bf375ea",
+      "translation": "Turn-based systems are often considered old-fashioned, but I think they are surprisingly far from obsolete. I myself have been using CTB more often lately, but precisely because of that, I have come to appreciate the strengths of turn-based systems again.",
+      "contextHash": "98414c39343a44865b7f13b29a9bfe2e947259f116cd4de2ebc668117bf375ea"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "サイドターン制",
+      "sourceHash": "43a44605f7d702a351ea07b8c6f22014a31393b4b816abee8cd9346685b1d2b1",
+      "translation": "Side-Turn-Based",
+      "contextHash": "43a44605f7d702a351ea07b8c6f22014a31393b4b816abee8cd9346685b1d2b1"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "味方・敵毎に片方のサイドのキャラ全員の行動が終わるまで、一方的に行動できるターン制。",
+      "sourceHash": "573ea4ed217a9e15450d3c98f4602cf1897c1845693597686dee4f14307ae479",
+      "translation": "A turn-based system in which one side can act unilaterally until all of its characters have finished acting, whether that side is the allies or the enemies.",
+      "contextHash": "573ea4ed217a9e15450d3c98f4602cf1897c1845693597686dee4f14307ae479"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "順序が固定される場合と、自由に行動順序を決められるパターンがある。",
+      "sourceHash": "8aab30e537268a49d113e82cb4b0d1a4dc64f34590b5741600ccde011a8669a5",
+      "translation": "There are cases where the order is fixed, as well as patterns where the action order can be freely determined.",
+      "contextHash": "8aab30e537268a49d113e82cb4b0d1a4dc64f34590b5741600ccde011a8669a5"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "主にＳＲＰＧで使用されるが、ヴァルキリープロファイルや真女神転生３のように一般ＲＰＧで使用される例もある。",
+      "sourceHash": "2f2d89c48d6326fc3a847880481f7d2dabf209393da3a4e4b2df3a2968e0e44a",
+      "translation": "It is mainly used in SRPGs, but there are also examples of it being used in standard RPGs, such as Valkyrie Profile and Shin Megami Tensei III.",
+      "contextHash": "2f2d89c48d6326fc3a847880481f7d2dabf209393da3a4e4b2df3a2968e0e44a"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "味方ターンで敵を叩いて、できるだけ敵戦力を削ることがカギとなる。逆に敵戦力が減ってない状態で敵ターンに回ると一方的にボコられる。やはり、この点が一般ＲＰＧで用いるには極端なのか例はやや少ない。",
+      "sourceHash": "3c31f33d7fe01d08e4e5dc4afc8e022c212a86d626bb3a0e58cc130d0bc37cfa",
+      "translation": "The key is to attack the enemies during the ally turn and reduce their forces as much as possible. Conversely, if the enemy turn begins while the enemy forces remain intact, you will be beaten up one-sidedly. Perhaps this aspect is too extreme for use in standard RPGs, as there are relatively few examples.",
+      "contextHash": "3c31f33d7fe01d08e4e5dc4afc8e022c212a86d626bb3a0e58cc130d0bc37cfa"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "長所としては相手サイドによる割り込みがないので、連携のようなシステムを組み込みやすいことが挙げられる。",
+      "sourceHash": "abf551e22b2984c272845c8f2ecb26e9cdb971946094fe66f46ca714144a6d13",
+      "translation": "One advantage is that, because there is no interruption by the opposing side, it is easy to incorporate systems such as combos.",
+      "contextHash": "abf551e22b2984c272845c8f2ecb26e9cdb971946094fe66f46ca714144a6d13"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "先手を取ったサイドが非常に有利になる仕様なので、それを決めるルールはプレイヤーにとって、納得行くものにする必要がある。",
+      "sourceHash": "fd13497d44bf18f882636586bcd51a84283e9b9b2f06fb4fba0350329175e1f5",
+      "translation": "Since the side that acts first gains a tremendous advantage, the rules determining which side goes first must be acceptable to the player.",
+      "contextHash": "fd13497d44bf18f882636586bcd51a84283e9b9b2f06fb4fba0350329175e1f5"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "例えば、ヴァルキリープロファイルでは、移動時の敵シンボルに攻撃アクションを当てた場合に、先手を取れるというようになっている。素早さの概念はない、あるいは行動順序の決定には関係ないことが多い。",
+      "sourceHash": "7f5c75f047f08229f3ff8172aa355a13f399d21a45059448ec8ef21a322d8931",
+      "translation": "For example, in Valkyrie Profile, you can gain the first move by hitting an enemy symbol with an attack action while moving. In many cases, Agility does not exist as a concept, or does not affect the determination of action order.",
+      "contextHash": "7f5c75f047f08229f3ff8172aa355a13f399d21a45059448ec8ef21a322d8931"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ちなみに『サイドターン』なる名称は僕が勝手に付けただけ。一般的には単に『ターン制』と言われていて、区別できないので便宜的に付けてみた。",
+      "sourceHash": "99efe8e7cbecacf4dccca6363618e4a3f003ac9162f6794c250b87845cea8881",
+      "translation": "Incidentally, I came up with the name “side turn” myself. It is generally just called “turn-based,” which makes it difficult to distinguish, so I coined the term for convenience.",
+      "contextHash": "99efe8e7cbecacf4dccca6363618e4a3f003ac9162f6794c250b87845cea8881"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ＡＴＢ（リアルタイム系）",
+      "sourceHash": "7e34316ff9de74f8b97d6952da094d3970fd411fed0dfd5d26019340b702c780",
+      "translation": "ATB (Real-Time Systems)",
+      "contextHash": "7e34316ff9de74f8b97d6952da094d3970fd411fed0dfd5d26019340b702c780"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "ＡＴＢとはアクティブタイムバトルの略。",
+      "sourceHash": "2511ee05b6b19e808c8bd34343e23c6d8fee9c66b207830c6039243752283e25",
+      "translation": "ATB stands for Active Time Battle.",
+      "contextHash": "2511ee05b6b19e808c8bd34343e23c6d8fee9c66b207830c6039243752283e25"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "素早さが高いキャラクターに『多く』『早く』順番が回ってくる。順番が回ってきたキャラクターの行動を入力しないと、敵にも順番が回って攻撃されたりするので、アクション的な緊張感もある。",
+      "sourceHash": "87266dcdb7e3004d9b926969f9b5c91e9d68bdce8eded5be8bace791d8fc5599",
+      "translation": "Characters with higher Agility get their turns “more often” and “sooner.” If you do not input an action for a character whose turn has come, the enemy may also get a turn and attack, creating action-like tension.",
+      "contextHash": "87266dcdb7e3004d9b926969f9b5c91e9d68bdce8eded5be8bace791d8fc5599"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "ターン制と比較して、素早さの重要性が高いことは言うまでもない。ただし、後述のＣＴＢと比較するとコマンド入力時にタイムロスがあるので、その利点はやや減退する。",
+      "sourceHash": "c0030da8ffb9306dea6d75199b6b3a329fc07cdb09ccd2b6a27eeb729b149b2f",
+      "translation": "Needless to say, Agility is more important than in turn-based systems. However, compared with CTB, discussed below, there is time lost while inputting commands, so this advantage is somewhat diminished.",
+      "contextHash": "c0030da8ffb9306dea6d75199b6b3a329fc07cdb09ccd2b6a27eeb729b149b2f"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ターン制と異なり、行動に明確な区切りがない。そのため、敵の行動への対処も即座にできる。",
+      "sourceHash": "6e0e016fe33ee75f246c4dd2701d88bbd9c70a18d440d9adb3d138c988c932bc",
+      "translation": "Unlike turn-based systems, there are no clear divisions between actions. Therefore, you can respond to enemy actions immediately.",
+      "contextHash": "6e0e016fe33ee75f246c4dd2701d88bbd9c70a18d440d9adb3d138c988c932bc"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "味方の行動順序をリアルタイムで細かく調整できることは戦略性にもつながる。例えば、クロノトリガーでは、「１人で攻撃する」「仲間のターンを待って、合体技を使う」「他の仲間で先に回復を行う」というように細かく選択肢がある。",
+      "sourceHash": "473bef5bc73dd44fe0079a104d68394f5cae02cd8c1b91be6505f0a9702f5365",
+      "translation": "Being able to finely adjust the action order of allies in real time also contributes to strategic depth. For example, in Chrono Trigger, you have detailed choices such as “attack alone,” “wait for an ally’s turn and use a combo technique,” or “have another ally heal first.”",
+      "contextHash": "473bef5bc73dd44fe0079a104d68394f5cae02cd8c1b91be6505f0a9702f5365"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "また、技によって、次の順番が回るまでの時間を変化させたり、詠唱時間を付けたりといった味付けもできる。",
+      "sourceHash": "fa402e68f2878283f79675994df3cb2b713404330c2d33a732756e789a320c8f",
+      "translation": "You can also add variety by making techniques change the time until the next turn comes around or by giving them casting times.",
+      "contextHash": "fa402e68f2878283f79675994df3cb2b713404330c2d33a732756e789a320c8f"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "欠点としては、敵の行動への対処が即座にできてしまう点がそのまま挙げられる。",
+      "sourceHash": "4d4a630765f6bb7ae6376bd3a9c8ff187c3b486befd8d0e9ed68c7ed2714c6e3",
+      "translation": "A drawback is that you can respond to enemy actions immediately.",
+      "contextHash": "4d4a630765f6bb7ae6376bd3a9c8ff187c3b486befd8d0e9ed68c7ed2714c6e3"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "例えば、ＦＦシリーズのＡＴＢでは「即死攻撃を受ける→蘇生アイテムで即回復」といった対処が可能になる。便利ではあるが、一方でプレイヤー側を崩すのは簡単ではない。「攻撃を受けたら回復」の単調な繰り返しに陥りやすい危険性を秘めている。",
+      "sourceHash": "369bbc698bb2831e8bab0a036401b1a5cab63bda6b2ce6bf5d636c4bfb0a08b3",
+      "translation": "For example, in the ATB system of the Final Fantasy series, you can respond by “taking an instant-death attack → immediately healing with a revival item.” While convenient, this also makes it difficult to break through the player’s defenses. It carries the risk of falling into the monotonous cycle of “heal whenever you are attacked.”",
+      "contextHash": "369bbc698bb2831e8bab0a036401b1a5cab63bda6b2ce6bf5d636c4bfb0a08b3"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "行動の間隔を短くした場合はキングダムハーツなど、ほぼアクションの部類になる。この講座では、アクション的な要素は基本的に扱わないが……。",
+      "sourceHash": "856d4c132e9938c07f59bee826e1d0e34250f5c01e2f925be06f1965080fe92b",
+      "translation": "If the interval between actions is shortened, the system becomes almost an action game, as in Kingdom Hearts. This guide basically does not cover action-oriented elements, though…",
+      "contextHash": "856d4c132e9938c07f59bee826e1d0e34250f5c01e2f925be06f1965080fe92b"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ＣＴＢとはカウントタイムバトルの略。",
+      "sourceHash": "ee72579615e4627e8b855383fc984fac2e33d02178c49cdd35c23c6db594d5a9",
+      "translation": "CTB stands for Count Time Battle.",
+      "contextHash": "ee72579615e4627e8b855383fc984fac2e33d02178c49cdd35c23c6db594d5a9"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "素早さが高いキャラクターに『多く』『早く』順番が回ってくるのはＡＴＢと同じだが、リアルタイム性はなく、ＡＴＢと異なり放っておいても、敵に順番は回らない。比較すると、アクション性の代わりに戦略性を重視した形になる。",
+      "sourceHash": "79206c49c8f3b6f3c7829d9eb67363216ea022a6f4b1f3a2a2f11f82382ab0aa",
+      "translation": "As with ATB, characters with higher Agility get their turns “more often” and “sooner,” but it is not real-time. Unlike ATB, the enemy’s turn will not come around even if you do nothing. Compared with ATB, it places greater emphasis on strategy instead of action.",
+      "contextHash": "79206c49c8f3b6f3c7829d9eb67363216ea022a6f4b1f3a2a2f11f82382ab0aa"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "例えば、ターン制のＲＰＧだと「ＨＰ・守備力などの耐久性能」「力・魔力などの攻撃性能」「回復技・補助技などの支援性能」といった三つの軸でキャラクター性能が決まりがちだ。",
+      "sourceHash": "c665be6666b52b7337c4098c0744e3cb2604e7f46090330d8d720f25b0c4cc40",
+      "translation": "For example, in a turn-based RPG, character performance tends to be determined along three axes: “durability, such as HP and Defense,” “offensive ability, such as Strength and Magic,” and “support ability, such as healing and support techniques.”",
+      "contextHash": "c665be6666b52b7337c4098c0744e3cb2604e7f46090330d8d720f25b0c4cc40"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "ＡＴＢ、ＣＴＢでは、素早さの重要度が飛躍的に上昇するため、よりキャラクター性能のバリエーションを増やすことが可能となる。",
+      "sourceHash": "32701f7afcf8c6f151038bf89e0900cd1248d64dcfd1533576fd1af779825835",
+      "translation": "In ATB and CTB, the importance of Agility rises dramatically, making it possible to create greater variety in character performance.",
+      "contextHash": "32701f7afcf8c6f151038bf89e0900cd1248d64dcfd1533576fd1af779825835"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "ＡＴＢのようにコマンド入力にもたついてもターンをロスすることはない。この点において、素早さの重要性はＡＴＢよりもさらに高くなる。",
+      "sourceHash": "c8db92f38d23c933e3419deabff3068bb9c053751f4ac93e68bf121ab0dbc155",
+      "translation": "Unlike ATB, you do not lose a turn even if you take a while to input commands. In this respect, Agility becomes even more important than in ATB.",
+      "contextHash": "c8db92f38d23c933e3419deabff3068bb9c053751f4ac93e68bf121ab0dbc155"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "ＡＴＢほどの柔軟性はないが、ＣＴＢでも敵の行動への対処が即座にできる。それゆえの悪い部分も同じ。",
+      "sourceHash": "496acfc66621a148ae522f8a4b5157364ec933d078bdfe2abee4f9b1820712bc",
+      "translation": "CTB is not as flexible as ATB, but it still allows you to respond immediately to enemy actions. The resulting drawbacks are the same.",
+      "contextHash": "496acfc66621a148ae522f8a4b5157364ec933d078bdfe2abee4f9b1820712bc"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "ＦＦ１０では行動順序を常に画面上に表示することによって、快適性と戦略性を高めた。現在使用されるＣＴＢは、これと同じようなユーザインタフェースになっていることが多い。そもそも、ＣＴＢという名称自体がＦＦ１０由来である。",
+      "sourceHash": "f758bb8c0ce491808debfe5254238254da55bd54f33ff5fe557b6e88d282b330",
+      "translation": "Final Fantasy X improved convenience and strategic depth by constantly displaying the action order on screen. CTB systems used today often have a similar user interface. In the first place, the name CTB itself originated with Final Fantasy X.",
+      "contextHash": "f758bb8c0ce491808debfe5254238254da55bd54f33ff5fe557b6e88d282b330"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "小さな括りでの行動順序システム",
+      "sourceHash": "b31816f26b4e1e0019cf3a7f68f3dc6d3cc73cfe4b51230c96a192e3f0afa0a6",
+      "translation": "Action Order Systems in Narrower Categories",
+      "contextHash": "b31816f26b4e1e0019cf3a7f68f3dc6d3cc73cfe4b51230c96a192e3f0afa0a6"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "以下の行動順序システムは、上記の４システムとは少し括りが異なる。",
+      "sourceHash": "65ed96da3fc17ec858e5fda0ef38647bd726a1bc0077c74d4ad75121b5036cea",
+      "translation": "The action order systems below are categorized somewhat differently from the four systems above.",
+      "contextHash": "65ed96da3fc17ec858e5fda0ef38647bd726a1bc0077c74d4ad75121b5036cea"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "全く別のシステムと言うよりは、『大きな括りでの行動順序システム』という枠の中で、さらに『順序に変化をつけるためのオプション』と考えたほうがよいかもしれない。",
+      "sourceHash": "e27ac76baa41fcb5976fb0ab08eb3e6e67785bb6b748195774e5a618da7d2e43",
+      "translation": "Rather than considering them completely different systems, it may be better to think of them as “options for varying the order” within the framework of “action order systems in broad categories.”",
+      "contextHash": "e27ac76baa41fcb5976fb0ab08eb3e6e67785bb6b748195774e5a618da7d2e43"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "プレスターン",
+      "sourceHash": "6969588f239cb105bdd194cac7689ba43a2a3b7b56144f22728d450b00915352",
+      "translation": "Press Turn",
+      "contextHash": "6969588f239cb105bdd194cac7689ba43a2a3b7b56144f22728d450b00915352"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "真女神転生３以降のアトラス作品で採用されているシステム。作品毎に細かくシステムに違いがあるが、大まかな特徴を挙げると……",
+      "sourceHash": "bd3566e5de473ba11b752d34aa3c8b70c5f09444a14dfe4ed56d7ad9ac4dfb2d",
+      "translation": "A system used in Atlus titles since Shin Megami Tensei III. While the details vary between games, its general characteristics include the following:",
+      "contextHash": "bd3566e5de473ba11b752d34aa3c8b70c5f09444a14dfe4ed56d7ad9ac4dfb2d"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "相手の弱点属性を突いたり、クリティカルを当てたりすると、攻撃した側の行動回数が１回分増加する。",
+      "sourceHash": "f62cccf34758ad75c5d1c17554ec059e040cec324c99235676bd1aca489ec547",
+      "translation": "When you hit an enemy's elemental weakness or land a critical hit, the attacking side gains one additional action.",
+      "contextHash": "f62cccf34758ad75c5d1c17554ec059e040cec324c99235676bd1aca489ec547"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "相手に攻撃を防がれたり、回避されたりすると、攻撃した側の行動回数が１回分減少する。",
+      "sourceHash": "5a06f6bfe7ee9946e10feb59b4b6017b7ab9532ce0d50affb10ec1daa7e2c688",
+      "translation": "When an attack is blocked or evaded, the attacking side loses one action.",
+      "contextHash": "5a06f6bfe7ee9946e10feb59b4b6017b7ab9532ce0d50affb10ec1daa7e2c688"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "真女神転生３は基本的には上でいうサイドターン制になる。",
+      "sourceHash": "5e390779f32ccd89a87a996e21fc7ff8f236ed7df194b6de190a9c2d294953d5",
+      "translation": "Shin Megami Tensei III basically uses the side-turn system described above.",
+      "contextHash": "5e390779f32ccd89a87a996e21fc7ff8f236ed7df194b6de190a9c2d294953d5"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "行動回数をパーティ全体で保有しており、４人パーティで、１→２→３→４という順番で行動し、４人目が敵の弱点を付いた場合は、再び１人目に行動が回ってくる。",
+      "sourceHash": "83fb19444500a04c49baac018e5ebcba156debed0e5ef606beeaa22a2544151c",
+      "translation": "The party shares a pool of actions. In a four-member party, the members act in order—first, second, third, and fourth—and if the fourth member hits an enemy's weakness, the turn comes back around to the first member.",
+      "contextHash": "83fb19444500a04c49baac018e5ebcba156debed0e5ef606beeaa22a2544151c"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "ペルソナ３は基本的にはターン制だが、全員分の行動をまとめて入力するのではなく１人ずつ入力を行う。",
+      "sourceHash": "09cb1ca3f202f67a785f165a9504d9b2d22d0565bf8ff7c5a3753756e474033d",
+      "translation": "Persona 3 is basically turn-based, but instead of entering commands for everyone at once, commands are entered one character at a time.",
+      "contextHash": "09cb1ca3f202f67a785f165a9504d9b2d22d0565bf8ff7c5a3753756e474033d"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "弱点を突いた場合は、そのキャラクター自身が再度行動できる様になる、と同時に敵がダウンして一回行動不能になる。ダウンした敵が起き上がるまでに、再度弱点を突いても行動回数は増えない。",
+      "sourceHash": "b2db9a7b2509bd2a9573407299b46b6309be1af48ab26751f6c502d810b9f9c9",
+      "translation": "When a weakness is hit, that character becomes able to act again, while the enemy is knocked down and unable to act once. Hitting the weakness again before the downed enemy gets back up does not increase the number of actions.",
+      "contextHash": "b2db9a7b2509bd2a9573407299b46b6309be1af48ab26751f6c502d810b9f9c9"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "なお、知らない方のために補足すると、これらのシリーズでは多くのＲＰＧと異なり、味方側のキャラクターであっても大抵何らかの弱点を抱えている。そのため、その対策が必要となることを付け加えておく。",
+      "sourceHash": "c61b16c7439b1c37b07e011cf663dbf75be88305b24afcb8236b5d739db001a9",
+      "translation": "For those unfamiliar with these games, unlike many RPGs, even allied characters in these series usually have some kind of weakness. Therefore, it is important to take measures to deal with them.",
+      "contextHash": "c61b16c7439b1c37b07e011cf663dbf75be88305b24afcb8236b5d739db001a9"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "上手くやれば一方的に攻めることができるシステムだが、逆を言えば、敵の攻撃で一方的にやられることもある。大雑把に言えば、既存ＲＰＧにおける『属性相性』と『運の要素』を先鋭化したものと言える。",
+      "sourceHash": "3b6bf7812877345e770da481ac1e8189a064b5c364f8fb640d24c1eb75c731b5",
+      "translation": "If played well, this system lets you attack unilaterally, but conversely, enemy attacks can also leave you unable to fight back. Put broadly, it can be described as an intensified version of the elemental affinities and elements of chance found in traditional RPGs.",
+      "contextHash": "3b6bf7812877345e770da481ac1e8189a064b5c364f8fb640d24c1eb75c731b5"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "緊張感が高まる反面、『初見殺し』や『運ゲー』の要素も大きい所は好みが分かれる。",
+      "sourceHash": "8d5844b54a6d9b0fbb318d992694332980643316547a3712fc093fd048da466a",
+      "translation": "While it heightens the tension, the large elements of trial-and-error traps and luck-based gameplay make it a matter of personal preference.",
+      "contextHash": "8d5844b54a6d9b0fbb318d992694332980643316547a3712fc093fd048da466a"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "特にアトラス作品は主人公が戦闘不能になると、ゲームオーバーになるものが多いのでなおさら。",
+      "sourceHash": "4d362eccf9cd7f426d8bfa77280027de8798694e125d3f2f93e68a10bda091b3",
+      "translation": "This is especially true of Atlus titles, many of which result in a game over when the protagonist is incapacitated. ",
+      "contextHash": "ee03f2394671d84545c0b2e1fb49ef8f4174a6ed8893ddb48bc758dee9fbc072"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "真女神転生３の敵の眼光系スキルの理不尽さは異常。",
+      "sourceHash": "63ffda11ccbe2ebbb5c847f40c240dcf482a7ec672c4c8076032b91f55efa72e",
+      "translation": "The unfairness of the enemy's Eye skills in Shin Megami Tensei III is especially extreme.",
+      "contextHash": "ee03f2394671d84545c0b2e1fb49ef8f4174a6ed8893ddb48bc758dee9fbc072"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "ターン制、サイドターン制と合わせて使用されることが多いが、「弱点を突くと行動回数が増える」という中核要素は別にＡＴＢやＣＴＢにだって組み込むことが可能だ。",
+      "sourceHash": "d405ad04df050edb6e6c3e2b1951489528ec08d2b0d7bc04d9dbb3b2bffefaa2",
+      "translation": "It is often used together with turn-based and side-turn systems, but the core element of gaining additional actions by hitting weaknesses can also be incorporated into ATB or CTB systems.",
+      "contextHash": "d405ad04df050edb6e6c3e2b1951489528ec08d2b0d7bc04d9dbb3b2bffefaa2"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "行動コスト制",
+      "sourceHash": "5d402fffd57867e546f3774affc6c42b0ef22d817b2b489c872c607c93f931c7",
+      "translation": "Action Cost System",
+      "contextHash": "5d402fffd57867e546f3774affc6c42b0ef22d817b2b489c872c607c93f931c7"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "各行動にコストが割り振られており、１ターンの間に限界値に達するまで複数回の行動が可能となる。コストの限界は個人で保有する場合と、パーティ全体で保有する場合がある。これも、ターン制、ＡＴＢ、ＣＴＢのいずれにも組み込める。",
+      "sourceHash": "417fee94fcdc61cbae6d1d7e9f66acc50b5a1bff08102f141f14ba068ca2716f",
+      "translation": "Each action is assigned a cost, allowing multiple actions within a single turn until a limit is reached. The cost limit may be held individually or shared by the entire party. This system can also be incorporated into turn-based, ATB, or CTB systems.",
+      "contextHash": "417fee94fcdc61cbae6d1d7e9f66acc50b5a1bff08102f141f14ba068ca2716f"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "アークライズファンタジアでは、１ターンに敵味方合わせて多くの行動を取ることになるため、その行動を予測しながら、入力する戦略性がある。コストの限界はパーティで保有しており、特定のキャラばかり行動させることも可能である。",
+      "sourceHash": "0c20416c2fe383f159fc0de5651d036d6e66482322e006ce8f6c1eda78c381f9",
+      "translation": "In Arc Rise Fantasia, many actions are taken by both enemies and allies in a single turn, creating a strategic element in entering commands while anticipating those actions. The party shares the cost limit, making it possible to have a particular character take most of the actions.",
+      "contextHash": "0c20416c2fe383f159fc0de5651d036d6e66482322e006ce8f6c1eda78c381f9"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "ＦＦ１３では、入力操作が複雑になってしまった結果、操作対象は先頭キャラのみであり、仲間には作戦を与えるだけという仕組みになっていた。どうも大味なプレイになりがちで、正直、ＡＴＢとの相性は余り良くないような……。",
+      "sourceHash": "34e2926af94abf06d568f52fc8b71b1bd8c72d17266828221aa06ea2863888b1",
+      "translation": "In FF XIII, the complexity of command input resulted in only the lead character being directly controlled, while the other members were simply given tactics. The gameplay tends to feel rather simplistic, and honestly, it does not seem to pair particularly well with ATB...",
+      "contextHash": "34e2926af94abf06d568f52fc8b71b1bd8c72d17266828221aa06ea2863888b1"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "欠点は入力操作に時間がかかること。また、攻撃と回復が同時にできるという仕様上、ちまちまとした戦い方になる傾向もある。これらが合わさって、戦闘が長引く可能性も高い。",
+      "sourceHash": "9c0c5f7a7c3a46378b0b14d57ccf79f5052ede03569dbea0f2161d16d3247bc9",
+      "translation": "One drawback is that entering commands takes time. Also, because attacks and healing can be performed simultaneously, the system tends to encourage a slow, incremental style of fighting. Together, these factors make battles more likely to drag on.",
+      "contextHash": "9c0c5f7a7c3a46378b0b14d57ccf79f5052ede03569dbea0f2161d16d3247bc9"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "例が少なく、まだこれからといったところ。",
+      "sourceHash": "e2973c855810666903c7c4f03ba278f07ef249ee82254807b763d0685424bcf6",
+      "translation": "There are few examples, so this system is still in its early stages.",
+      "contextHash": "e2973c855810666903c7c4f03ba278f07ef249ee82254807b763d0685424bcf6"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "２つ挙げた欠点はどちらもかなり重たいので、うまくシステム構築するのは難しいかもしれない。",
+      "sourceHash": "7dc11a4c47448db70bfccb3af5f7cdbcf56935dabc04ea270d55048f5b197693",
+      "translation": "Both of the drawbacks mentioned above are quite serious, so building the system effectively may be difficult.",
+      "contextHash": "7dc11a4c47448db70bfccb3af5f7cdbcf56935dabc04ea270d55048f5b197693"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "まとめ",
+      "sourceHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72",
+      "translation": "Summary",
+      "contextHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "アクション戦闘を除くと、ほとんどのＲＰＧの行動順序システムはターン制、サイドターン制、ＡＴＢ、ＣＴＢの４つに集約される。プレスターンや行動コスト制も別の分類というよりは、これらに＋αしたものといった感じである。",
+      "sourceHash": "75c3449c67b9919dd3356913ec17b67c66d8718bf0380d5e2bff937f4607e42f",
+      "translation": "Excluding action combat, most RPG action-order systems fall into four categories: turn-based, side-turn, ATB, and CTB. Press Turn and action cost systems feel less like separate categories and more like additions to one of these systems.",
+      "contextHash": "75c3449c67b9919dd3356913ec17b67c66d8718bf0380d5e2bff937f4607e42f"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "これ以外の例が余り見当たらない理由は、人間の思考や習慣から考えて、理解が容易な仕組み自体が限られているということがあると思う。なので、これらの枠組みを越えて、他作品との差別化を行うことは困難かもしれない。",
+      "sourceHash": "af82ce362edb479cd9c6f0f38d9e6c6e64bc467df2991280c4679f44ed3fa4ff",
+      "translation": "I think the reason there are so few other examples is that, given human thought processes and habits, the number of systems that are easy to understand is itself limited. Therefore, it may be difficult to differentiate a game from others by going beyond these frameworks.",
+      "contextHash": "af82ce362edb479cd9c6f0f38d9e6c6e64bc467df2991280c4679f44ed3fa4ff"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "基本的には、何らかの既存の枠組みを選んだ上で、細部でのアイデアを練る方が無難だとは思う。とはいえ、新しいシステムの構築は絶対に不可能という程でも無いので、挑戦してみるのも自由だ。",
+      "sourceHash": "75c6829f1c764745e915169aa6148ae9933e8fc5ee23c2b54e79d9d7606da279",
+      "translation": "Basically, I think it is safer to choose some existing framework and then develop ideas for the details. That said, creating a new system is not absolutely impossible, so you are free to give it a try.",
+      "contextHash": "75c6829f1c764745e915169aa6148ae9933e8fc5ee23c2b54e79d9d7606da279"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "参考まで以下に特徴的な行動順序システムを持った例を挙げておく。",
+      "sourceHash": "fbe566fd4dcc769a4dae1f7cb6a48b74aa27eb40beca61b50350a5a65c2938fb",
+      "translation": "For reference, here are some examples with distinctive action-order systems.",
+      "contextHash": "fbe566fd4dcc769a4dae1f7cb6a48b74aa27eb40beca61b50350a5a65c2938fb"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "ターン制に組み込んだ例 →[[LINK_1]]アークライズファンタジア[[/LINK_1]]",
+      "sourceHash": "72c69398c136e04b4fcd633627f48e876efd7526b4f15545986e8201d1def916",
+      "parts": [
+        {
+          "source": "ターン制に組み込んだ例 →",
+          "link": false
+        },
+        {
+          "source": "アークライズファンタジア",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "Example incorporated into turn-based combat →[[LINK_1]]Arc Rise Fantasia[[/LINK_1]]",
+      "contextHash": "72c69398c136e04b4fcd633627f48e876efd7526b4f15545986e8201d1def916"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "ＡＴＢに組み込んだ例 →[[LINK_1]]ＦＦ１３[[/LINK_1]]",
+      "sourceHash": "32b5b724f29d79adc751eddb37d28321ab0d747ddd9d38453292697a77bfe8a7",
+      "parts": [
+        {
+          "source": "ＡＴＢに組み込んだ例 →",
+          "link": false
+        },
+        {
+          "source": "ＦＦ１３",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "Example incorporated into ATB →[[LINK_1]]FF13[[/LINK_1]]",
+      "contextHash": "32b5b724f29d79adc751eddb37d28321ab0d747ddd9d38453292697a77bfe8a7"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]ＣＴＢとターン制の夢の融合[[/LINK_1]]",
+      "sourceHash": "bdf9babc2e75e08e180bab07db74e1ae24fdfc4c98fe0648be0e48f990186b13",
+      "parts": [
+        {
+          "source": "ＣＴＢとターン制の夢の融合",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The Dream Fusion of CTB and Turn-Based Combat[[/LINK_1]]",
+      "contextHash": "bdf9babc2e75e08e180bab07db74e1ae24fdfc4c98fe0648be0e48f990186b13"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]アンリミテッド:サガ（行動参加者の自由選択）[[/LINK_1]]",
+      "sourceHash": "0a51bf86733a2aa37dc2da026f8efe15926ad0985965ccb94482d377c835ad08",
+      "parts": [
+        {
+          "source": "アンリミテッド:サガ（行動参加者の自由選択）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Unlimited: SaGa (Free Selection of Participants) [[/LINK_1]]",
+      "contextHash": "0a51bf86733a2aa37dc2da026f8efe15926ad0985965ccb94482d377c835ad08"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ベルウィックサーガ（同時ターン制）[[/LINK_1]]",
+      "sourceHash": "6047c5d58fc4d435a8079266803404e619313918c7b99036a4206bc5a73a34d3",
+      "parts": [
+        {
+          "source": "ベルウィックサーガ（同時ターン制）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Berwick Saga (simultaneous turn-based system)[[/LINK_1]]",
+      "contextHash": "6047c5d58fc4d435a8079266803404e619313918c7b99036a4206bc5a73a34d3"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]将棋（これもある意味……）[[/LINK_1]]",
+      "sourceHash": "d64f7332037de35a61ca4c036a31068dace7ef8f77641b6b712d057663ad4155",
+      "parts": [
+        {
+          "source": "将棋（これもある意味……）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Shogi (in a sense, this too...)[[/LINK_1]]",
+      "contextHash": "d64f7332037de35a61ca4c036a31068dace7ef8f77641b6b712d057663ad4155"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Design Guides table of contents[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "『戦闘システム』とは、味方と敵が戦って勝負し、勝敗を決めるためのシステムである。ＲＰＧにおける最大のウリとなることが多い。一応、戦闘から逃げたりとか、敵と交渉で解決したりする場合もあるが、基本は勝敗である。": "A “battle system” is a system for allies and enemies to fight, compete, and determine the winner. It is often the biggest selling point of an RPG. Of course, there are also cases where you flee from battle or resolve matters by negotiating with enemies, but fundamentally, it is about victory or defeat.",
+    "戦闘という要素は単にゲームシステムの一部というだけではなく、ストーリーとの親和性も高い。多くのＲＰＧでストーリー及びシステムの中核として扱われる。「主人公達が戦いの中で成長し、やがて強大なラスボスを死闘の末に倒して、目的を果たす」という大きな流れは、もはや様式美と言ってよいだろう。": "The battle element is not merely a part of the game system; it also has a strong affinity with the story. In many RPGs, it serves as the core of both the story and the system. The broad flow of “the protagonists grow through battle, eventually defeat a powerful final boss after a fierce struggle, and accomplish their goal” could now be called a stylistic convention.",
+    "ＲＰＧにおいては、命をかけた死闘が表現されることが多いが、もちろん、スポーツや料理、カードゲーム等を題材にしても『勝負』はできる。いずれにしても、勝敗を決めるためのシステムが必要となるのは同じである。": "RPGs often depict fierce battles in which the characters stake their lives, but of course, a “competition” can also be based on sports, cooking, card games, and so on. In any case, the need for a system to determine victory or defeat remains the same.",
+    "『戦闘システム』と一言で言っても、その中身はいくつかの要素に分解できる。手始めに、今回は戦闘システムにおける『行動順序システム』をまとめてみたい。つまり、『ターン制』とか『ＡＴＢ』とか『ＣＴＢ』とかいう、キャラクターが行動する順番を決定するためのシステムのことである。": "Even when referred to simply as a “battle system,” its contents can be broken down into several elements. To begin with, I would like to summarize “action order systems” in battle systems. In other words, these are systems such as “turn-based,” “ATB,” and “CTB” that determine the order in which characters act.",
+    "どんなシステムが理想か、というような単純な答えは出せないが、既存ＲＰＧの行動順序システムを分類していくことで、何か見えてくるものがあるかもしれない。": "There is no simple answer to what kind of system is ideal, but classifying the action order systems of existing RPGs might reveal something.",
+    "大きな括りでの行動順序システム": "Action Order Systems in Broad Categories",
+    "ターン制": "Turn-Based",
+    "ＤＱシリーズを初めとした古くから数々のＲＰＧで採用されているシステム。": "A system used since long ago in numerous RPGs, beginning with the Dragon Quest series.",
+    "１ターンという区切りの中で、味方と敵で素早さが高い順番に１度ずつ行動する。順番には多少のランダム性を持たせる場合も多い。": "Within a unit called a turn, allies and enemies each act once, in order of decreasing Agility. The order is also often given some degree of randomness.",
+    "ロマンシングサガ・ミンストレルソングの様に味方の行動順序を指定できるタイプもあれば、ポケモンのように１対１のルール上に、入替の要素を加えることで、一味違う戦闘システムを構築している例もある。": "Some games, such as Romancing SaGa: Minstrel Song, allow you to specify the action order of your allies. Others, such as Pokémon, build a distinctive battle system by adding the element of switching to a one-on-one rule set.",
+    "どんなに素早いキャラクターであっても、１ターンには１度しか行動できない。": "No matter how fast a character is, they can act only once per turn.",
+    "そのため、ＨＰや攻撃力のような高ければ高いほど有利になるパラメータと比較すると、素早さの重要性が低くなりがち。ただし、素早さが低いキャラクターが敵より後で行動することを予想して、回復行動を取らせるといったテクニックもある。": "As a result, compared with parameters such as HP and Attack Power, where higher values are generally more advantageous, Agility tends to be less important. However, there are also techniques such as having a character with low Agility perform a healing action, anticipating that they will act after the enemy.",
+    "古典的なターン制では、プレイヤーは１ターン分の行動をまとめて入力する。従って、ＡＴＢやＣＴＢのように、「敵の攻撃を待ち受けて、即座に回復する」というような柔軟な行動は取り辛い。": "In classic turn-based systems, the player inputs all of their actions for one turn at once. Consequently, it is difficult to take flexible actions such as “wait for the enemy to attack, then heal immediately,” as in ATB or CTB.",
+    "一見、短所と思えるが、これは大きな長所でもある。": "This may seem like a drawback at first glance, but it is also a major strength.",
+    "逆に言えば、プレイヤーは１ターン分のまとまった流れを予想する必要があるということである。これはＡＴＢやＣＴＢにはない独自の戦略性だと言える。また、回復行動が柔軟に取れないということは、緊張感にもつながるし、戦闘がダラダラと伸びずにも済む。": "In other words, the player must anticipate the overall flow of one turn. This can be called a unique strategic element not found in ATB or CTB. Also, the inability to heal flexibly creates tension and prevents battles from dragging on endlessly.",
+    "ただし、演出時間の長さが目立ちやすい点が短所として挙げられる。": "One drawback, however, is that the length of battle animations tends to stand out.",
+    "多人数がまとまって行動するため、長時間に渡ってプレイヤーが何もできない時間が発生する。ＡＴＢやＣＴＢなどのキャラが個別に行動するシステムと比較すると、必然的に「思考→入力→演出」の１サイクルが長くなるため退屈を誘いやすい。": "Because multiple characters act together, there are long periods during which the player cannot do anything. Compared with systems such as ATB and CTB, in which characters act individually, the “think → input → animation” cycle inevitably becomes longer, making boredom more likely.",
+    "そのため、テンポ面での配慮は他のシステムより必要になってくる。": "For this reason, more attention must be paid to pacing than with other systems.",
+    "※ＤＱ１１（ＰＳ４版）やＤＱ１０オフラインでは、１ターンまとめてではなく一人ずつ行動するようになった。地味ながら大きな変更点と言える。": "※In Dragon Quest XI (PS4 version) and the offline version of Dragon Quest X, characters came to act one at a time instead of all at once per turn. It may seem minor, but it can be considered a major change.",
+    "古臭いと思われがちなターン制だが、意外と捨てたものではないように思う。かくいう筆者も最近はＣＴＢを採用することが多いが、だからこそ、ターン制の長所も再認識している次第だ。": "Turn-based systems are often considered old-fashioned, but I think they are surprisingly far from obsolete. I myself have been using CTB more often lately, but precisely because of that, I have come to appreciate the strengths of turn-based systems again.",
+    "サイドターン制": "Side-Turn-Based",
+    "味方・敵毎に片方のサイドのキャラ全員の行動が終わるまで、一方的に行動できるターン制。": "A turn-based system in which one side can act unilaterally until all of its characters have finished acting, whether that side is the allies or the enemies.",
+    "順序が固定される場合と、自由に行動順序を決められるパターンがある。": "There are cases where the order is fixed, as well as patterns where the action order can be freely determined.",
+    "主にＳＲＰＧで使用されるが、ヴァルキリープロファイルや真女神転生３のように一般ＲＰＧで使用される例もある。": "It is mainly used in SRPGs, but there are also examples of it being used in standard RPGs, such as Valkyrie Profile and Shin Megami Tensei III.",
+    "味方ターンで敵を叩いて、できるだけ敵戦力を削ることがカギとなる。逆に敵戦力が減ってない状態で敵ターンに回ると一方的にボコられる。やはり、この点が一般ＲＰＧで用いるには極端なのか例はやや少ない。": "The key is to attack the enemies during the ally turn and reduce their forces as much as possible. Conversely, if the enemy turn begins while the enemy forces remain intact, you will be beaten up one-sidedly. Perhaps this aspect is too extreme for use in standard RPGs, as there are relatively few examples.",
+    "長所としては相手サイドによる割り込みがないので、連携のようなシステムを組み込みやすいことが挙げられる。": "One advantage is that, because there is no interruption by the opposing side, it is easy to incorporate systems such as combos.",
+    "先手を取ったサイドが非常に有利になる仕様なので、それを決めるルールはプレイヤーにとって、納得行くものにする必要がある。": "Since the side that acts first gains a tremendous advantage, the rules determining which side goes first must be acceptable to the player.",
+    "例えば、ヴァルキリープロファイルでは、移動時の敵シンボルに攻撃アクションを当てた場合に、先手を取れるというようになっている。素早さの概念はない、あるいは行動順序の決定には関係ないことが多い。": "For example, in Valkyrie Profile, you can gain the first move by hitting an enemy symbol with an attack action while moving. In many cases, Agility does not exist as a concept, or does not affect the determination of action order.",
+    "ちなみに『サイドターン』なる名称は僕が勝手に付けただけ。一般的には単に『ターン制』と言われていて、区別できないので便宜的に付けてみた。": "Incidentally, I came up with the name “side turn” myself. It is generally just called “turn-based,” which makes it difficult to distinguish, so I coined the term for convenience.",
+    "ＡＴＢ（リアルタイム系）": "ATB (Real-Time Systems)",
+    "ＡＴＢとはアクティブタイムバトルの略。": "ATB stands for Active Time Battle.",
+    "素早さが高いキャラクターに『多く』『早く』順番が回ってくる。順番が回ってきたキャラクターの行動を入力しないと、敵にも順番が回って攻撃されたりするので、アクション的な緊張感もある。": "Characters with higher Agility get their turns “more often” and “sooner.” If you do not input an action for a character whose turn has come, the enemy may also get a turn and attack, creating action-like tension.",
+    "ターン制と比較して、素早さの重要性が高いことは言うまでもない。ただし、後述のＣＴＢと比較するとコマンド入力時にタイムロスがあるので、その利点はやや減退する。": "Needless to say, Agility is more important than in turn-based systems. However, compared with CTB, discussed below, there is time lost while inputting commands, so this advantage is somewhat diminished.",
+    "ターン制と異なり、行動に明確な区切りがない。そのため、敵の行動への対処も即座にできる。": "Unlike turn-based systems, there are no clear divisions between actions. Therefore, you can respond to enemy actions immediately.",
+    "味方の行動順序をリアルタイムで細かく調整できることは戦略性にもつながる。例えば、クロノトリガーでは、「１人で攻撃する」「仲間のターンを待って、合体技を使う」「他の仲間で先に回復を行う」というように細かく選択肢がある。": "Being able to finely adjust the action order of allies in real time also contributes to strategic depth. For example, in Chrono Trigger, you have detailed choices such as “attack alone,” “wait for an ally’s turn and use a combo technique,” or “have another ally heal first.”",
+    "また、技によって、次の順番が回るまでの時間を変化させたり、詠唱時間を付けたりといった味付けもできる。": "You can also add variety by making techniques change the time until the next turn comes around or by giving them casting times.",
+    "欠点としては、敵の行動への対処が即座にできてしまう点がそのまま挙げられる。": "A drawback is that you can respond to enemy actions immediately.",
+    "例えば、ＦＦシリーズのＡＴＢでは「即死攻撃を受ける→蘇生アイテムで即回復」といった対処が可能になる。便利ではあるが、一方でプレイヤー側を崩すのは簡単ではない。「攻撃を受けたら回復」の単調な繰り返しに陥りやすい危険性を秘めている。": "For example, in the ATB system of the Final Fantasy series, you can respond by “taking an instant-death attack → immediately healing with a revival item.” While convenient, this also makes it difficult to break through the player’s defenses. It carries the risk of falling into the monotonous cycle of “heal whenever you are attacked.”",
+    "行動の間隔を短くした場合はキングダムハーツなど、ほぼアクションの部類になる。この講座では、アクション的な要素は基本的に扱わないが……。": "If the interval between actions is shortened, the system becomes almost an action game, as in Kingdom Hearts. This guide basically does not cover action-oriented elements, though…",
+    "ＣＴＢとはカウントタイムバトルの略。": "CTB stands for Count Time Battle.",
+    "素早さが高いキャラクターに『多く』『早く』順番が回ってくるのはＡＴＢと同じだが、リアルタイム性はなく、ＡＴＢと異なり放っておいても、敵に順番は回らない。比較すると、アクション性の代わりに戦略性を重視した形になる。": "As with ATB, characters with higher Agility get their turns “more often” and “sooner,” but it is not real-time. Unlike ATB, the enemy’s turn will not come around even if you do nothing. Compared with ATB, it places greater emphasis on strategy instead of action.",
+    "例えば、ターン制のＲＰＧだと「ＨＰ・守備力などの耐久性能」「力・魔力などの攻撃性能」「回復技・補助技などの支援性能」といった三つの軸でキャラクター性能が決まりがちだ。": "For example, in a turn-based RPG, character performance tends to be determined along three axes: “durability, such as HP and Defense,” “offensive ability, such as Strength and Magic,” and “support ability, such as healing and support techniques.”",
+    "ＡＴＢ、ＣＴＢでは、素早さの重要度が飛躍的に上昇するため、よりキャラクター性能のバリエーションを増やすことが可能となる。": "In ATB and CTB, the importance of Agility rises dramatically, making it possible to create greater variety in character performance.",
+    "ＡＴＢのようにコマンド入力にもたついてもターンをロスすることはない。この点において、素早さの重要性はＡＴＢよりもさらに高くなる。": "Unlike ATB, you do not lose a turn even if you take a while to input commands. In this respect, Agility becomes even more important than in ATB.",
+    "ＡＴＢほどの柔軟性はないが、ＣＴＢでも敵の行動への対処が即座にできる。それゆえの悪い部分も同じ。": "CTB is not as flexible as ATB, but it still allows you to respond immediately to enemy actions. The resulting drawbacks are the same.",
+    "ＦＦ１０では行動順序を常に画面上に表示することによって、快適性と戦略性を高めた。現在使用されるＣＴＢは、これと同じようなユーザインタフェースになっていることが多い。そもそも、ＣＴＢという名称自体がＦＦ１０由来である。": "Final Fantasy X improved convenience and strategic depth by constantly displaying the action order on screen. CTB systems used today often have a similar user interface. In the first place, the name CTB itself originated with Final Fantasy X.",
+    "小さな括りでの行動順序システム": "Action Order Systems in Narrower Categories",
+    "以下の行動順序システムは、上記の４システムとは少し括りが異なる。": "The action order systems below are categorized somewhat differently from the four systems above.",
+    "全く別のシステムと言うよりは、『大きな括りでの行動順序システム』という枠の中で、さらに『順序に変化をつけるためのオプション』と考えたほうがよいかもしれない。": "Rather than considering them completely different systems, it may be better to think of them as “options for varying the order” within the framework of “action order systems in broad categories.”",
+    "プレスターン": "Press Turn",
+    "真女神転生３以降のアトラス作品で採用されているシステム。作品毎に細かくシステムに違いがあるが、大まかな特徴を挙げると……": "A system used in Atlus titles since Shin Megami Tensei III. While the details vary between games, its general characteristics include the following:",
+    "相手の弱点属性を突いたり、クリティカルを当てたりすると、攻撃した側の行動回数が１回分増加する。": "When you hit an enemy's elemental weakness or land a critical hit, the attacking side gains one additional action.",
+    "相手に攻撃を防がれたり、回避されたりすると、攻撃した側の行動回数が１回分減少する。": "When an attack is blocked or evaded, the attacking side loses one action.",
+    "真女神転生３は基本的には上でいうサイドターン制になる。": "Shin Megami Tensei III basically uses the side-turn system described above.",
+    "行動回数をパーティ全体で保有しており、４人パーティで、１→２→３→４という順番で行動し、４人目が敵の弱点を付いた場合は、再び１人目に行動が回ってくる。": "The party shares a pool of actions. In a four-member party, the members act in order—first, second, third, and fourth—and if the fourth member hits an enemy's weakness, the turn comes back around to the first member.",
+    "ペルソナ３は基本的にはターン制だが、全員分の行動をまとめて入力するのではなく１人ずつ入力を行う。": "Persona 3 is basically turn-based, but instead of entering commands for everyone at once, commands are entered one character at a time.",
+    "弱点を突いた場合は、そのキャラクター自身が再度行動できる様になる、と同時に敵がダウンして一回行動不能になる。ダウンした敵が起き上がるまでに、再度弱点を突いても行動回数は増えない。": "When a weakness is hit, that character becomes able to act again, while the enemy is knocked down and unable to act once. Hitting the weakness again before the downed enemy gets back up does not increase the number of actions.",
+    "なお、知らない方のために補足すると、これらのシリーズでは多くのＲＰＧと異なり、味方側のキャラクターであっても大抵何らかの弱点を抱えている。そのため、その対策が必要となることを付け加えておく。": "For those unfamiliar with these games, unlike many RPGs, even allied characters in these series usually have some kind of weakness. Therefore, it is important to take measures to deal with them.",
+    "上手くやれば一方的に攻めることができるシステムだが、逆を言えば、敵の攻撃で一方的にやられることもある。大雑把に言えば、既存ＲＰＧにおける『属性相性』と『運の要素』を先鋭化したものと言える。": "If played well, this system lets you attack unilaterally, but conversely, enemy attacks can also leave you unable to fight back. Put broadly, it can be described as an intensified version of the elemental affinities and elements of chance found in traditional RPGs.",
+    "緊張感が高まる反面、『初見殺し』や『運ゲー』の要素も大きい所は好みが分かれる。": "While it heightens the tension, the large elements of trial-and-error traps and luck-based gameplay make it a matter of personal preference.",
+    "特にアトラス作品は主人公が戦闘不能になると、ゲームオーバーになるものが多いのでなおさら。": "This is especially true of Atlus titles, many of which result in a game over when the protagonist is incapacitated. ",
+    "真女神転生３の敵の眼光系スキルの理不尽さは異常。": "The unfairness of the enemy's Eye skills in Shin Megami Tensei III is especially extreme.",
+    "ターン制、サイドターン制と合わせて使用されることが多いが、「弱点を突くと行動回数が増える」という中核要素は別にＡＴＢやＣＴＢにだって組み込むことが可能だ。": "It is often used together with turn-based and side-turn systems, but the core element of gaining additional actions by hitting weaknesses can also be incorporated into ATB or CTB systems.",
+    "行動コスト制": "Action Cost System",
+    "各行動にコストが割り振られており、１ターンの間に限界値に達するまで複数回の行動が可能となる。コストの限界は個人で保有する場合と、パーティ全体で保有する場合がある。これも、ターン制、ＡＴＢ、ＣＴＢのいずれにも組み込める。": "Each action is assigned a cost, allowing multiple actions within a single turn until a limit is reached. The cost limit may be held individually or shared by the entire party. This system can also be incorporated into turn-based, ATB, or CTB systems.",
+    "アークライズファンタジアでは、１ターンに敵味方合わせて多くの行動を取ることになるため、その行動を予測しながら、入力する戦略性がある。コストの限界はパーティで保有しており、特定のキャラばかり行動させることも可能である。": "In Arc Rise Fantasia, many actions are taken by both enemies and allies in a single turn, creating a strategic element in entering commands while anticipating those actions. The party shares the cost limit, making it possible to have a particular character take most of the actions.",
+    "ＦＦ１３では、入力操作が複雑になってしまった結果、操作対象は先頭キャラのみであり、仲間には作戦を与えるだけという仕組みになっていた。どうも大味なプレイになりがちで、正直、ＡＴＢとの相性は余り良くないような……。": "In FF XIII, the complexity of command input resulted in only the lead character being directly controlled, while the other members were simply given tactics. The gameplay tends to feel rather simplistic, and honestly, it does not seem to pair particularly well with ATB...",
+    "欠点は入力操作に時間がかかること。また、攻撃と回復が同時にできるという仕様上、ちまちまとした戦い方になる傾向もある。これらが合わさって、戦闘が長引く可能性も高い。": "One drawback is that entering commands takes time. Also, because attacks and healing can be performed simultaneously, the system tends to encourage a slow, incremental style of fighting. Together, these factors make battles more likely to drag on.",
+    "例が少なく、まだこれからといったところ。": "There are few examples, so this system is still in its early stages.",
+    "２つ挙げた欠点はどちらもかなり重たいので、うまくシステム構築するのは難しいかもしれない。": "Both of the drawbacks mentioned above are quite serious, so building the system effectively may be difficult.",
+    "まとめ": "Summary",
+    "アクション戦闘を除くと、ほとんどのＲＰＧの行動順序システムはターン制、サイドターン制、ＡＴＢ、ＣＴＢの４つに集約される。プレスターンや行動コスト制も別の分類というよりは、これらに＋αしたものといった感じである。": "Excluding action combat, most RPG action-order systems fall into four categories: turn-based, side-turn, ATB, and CTB. Press Turn and action cost systems feel less like separate categories and more like additions to one of these systems.",
+    "これ以外の例が余り見当たらない理由は、人間の思考や習慣から考えて、理解が容易な仕組み自体が限られているということがあると思う。なので、これらの枠組みを越えて、他作品との差別化を行うことは困難かもしれない。": "I think the reason there are so few other examples is that, given human thought processes and habits, the number of systems that are easy to understand is itself limited. Therefore, it may be difficult to differentiate a game from others by going beyond these frameworks.",
+    "基本的には、何らかの既存の枠組みを選んだ上で、細部でのアイデアを練る方が無難だとは思う。とはいえ、新しいシステムの構築は絶対に不可能という程でも無いので、挑戦してみるのも自由だ。": "Basically, I think it is safer to choose some existing framework and then develop ideas for the details. That said, creating a new system is not absolutely impossible, so you are free to give it a try.",
+    "参考まで以下に特徴的な行動順序システムを持った例を挙げておく。": "For reference, here are some examples with distinctive action-order systems."
+  }
+}
