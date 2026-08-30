@@ -1,0 +1,834 @@
+{
+  "articleId": "312906303",
+  "sourceUrl": "https://newrpg.seesaa.net/article/312906303.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "6f955de69d23c2822bc7b8666776abe07e33c103b162f482ae9183315ee85ee2",
+  "translatedAt": "2026-08-30T12:27:43.789Z",
+  "title": "[RPG Design Guides] Battle Systems ② Spatial Systems",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】戦闘システム② 空間システム",
+      "sourceHash": "47e799167ccc43a1dc4e3d1e27127cd7a40919855c747b828f5ec12041a7174e",
+      "translation": "[RPG Design Guides] Battle Systems ② Spatial Systems",
+      "contextHash": "47e799167ccc43a1dc4e3d1e27127cd7a40919855c747b828f5ec12041a7174e"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ＲＰＧの戦闘システムは数多いが、いずれも分解すれば似たような要素で構成されていることが見えてくる。",
+      "sourceHash": "70c2274761542a607f93c420edf6e107f4aadc741d519671e7804d8b2c707d88",
+      "translation": "There are many RPG battle systems, but when broken down, they all reveal themselves to be made up of similar elements.",
+      "contextHash": "70c2274761542a607f93c420edf6e107f4aadc741d519671e7804d8b2c707d88"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "その中でも、前回扱った『行動順序システム』は構成要素の中で大きなウェイトを占める。これらは戦闘において、どのように味方や敵へ順序が回ってくるかをルール付ける『時間』のシステムとみなすことができる。",
+      "sourceHash": "df4db6d7cf26ebccec77ddbe5b3fafaa731944dc121a2a4c6bf6d35c69b07d56",
+      "translation": "Among them, the “turn order system” discussed last time accounts for a large portion of the overall structure. These can be seen as “time” systems that establish the rules for how turns come around for allies and enemies in battle.",
+      "contextHash": "df4db6d7cf26ebccec77ddbe5b3fafaa731944dc121a2a4c6bf6d35c69b07d56"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "さて、時間とくれば次は『空間』といきたいところ。",
+      "sourceHash": "cf4605c17e09a2c0016d4da028bd4be5acd7f72a26782ace0e5786da641ee2e7",
+      "translation": "Now that we’ve covered time, the next topic naturally has to be “space.”",
+      "contextHash": "cf4605c17e09a2c0016d4da028bd4be5acd7f72a26782ace0e5786da641ee2e7"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "昔のＲＰＧでは戦闘システムにおける空間の要素は薄く、精々仲間の並び順といった程度のものだった。しかし、ＳＦＣの中後期ぐらいからか、ＲＰＧにもＳＲＰＧやＡＲＰＧのような空間を動きまわる要素を取り入れる作品が徐々に増えてきた。",
+      "sourceHash": "98b3920c13e30b3aadb9d1122ddedd6f9224a8fa71c54d7641406caa247f54e8",
+      "translation": "In older RPGs, the spatial element of battle systems was minimal, amounting at most to things like the order in which party members stood. However, perhaps starting around the middle to latter half of the Super Famicom era, more and more RPGs began incorporating elements involving movement through space, as seen in SRPGs and ARPGs.",
+      "contextHash": "98b3920c13e30b3aadb9d1122ddedd6f9224a8fa71c54d7641406caa247f54e8"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "今となっては、空間は戦闘システムにおける重要要素となっている。",
+      "sourceHash": "b7fa46ac88b60b68c8643b87e7f0492f5db6b40890ac723682126613851ed9ed",
+      "translation": "Today, space has become an important element of battle systems.",
+      "contextHash": "b7fa46ac88b60b68c8643b87e7f0492f5db6b40890ac723682126613851ed9ed"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "というわけで、仲間の配置や移動に関するシステムである『空間システム』に付いて市販ＲＰＧのものを分類してまとめた。固定された隊列で戦う初歩的なものから、空間を自由自在に移動するものまで多種様々。さらには、天候など、戦闘空間自体に変化を起こす要素も一緒に扱ってみた。",
+      "sourceHash": "d7c1567ccb0d61368e9fa051df8e2a8771b1aae6ed54efa2c5081ec2f400257e",
+      "translation": "With that in mind, I classified and summarized the spatial systems found in commercial RPGs—systems concerning party member placement and movement. There is a wide variety, from basic systems involving battles in fixed formations to systems that allow free movement throughout the battlefield. I also covered elements that alter the battlefield itself, such as weather.",
+      "contextHash": "d7c1567ccb0d61368e9fa051df8e2a8771b1aae6ed54efa2c5081ec2f400257e"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "隊列型",
+      "sourceHash": "3f4cd4ef55f6b19507049b50bc41deb3d92fa917dd974a5b7df083fff1cf3baf",
+      "translation": "Formation-Based",
+      "contextHash": "3f4cd4ef55f6b19507049b50bc41deb3d92fa917dd974a5b7df083fff1cf3baf"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "戦闘前に並び順、前列後列などの隊列を指定し、そのまま固定した隊列で戦闘を行う。隊列は戦闘に多少の影響を与えるが、システムと大々的に銘打つ程の大きなものでは無いかもしれない。",
+      "sourceHash": "7ce7e97307491114e60f7d82d527baf80bc9e8acd20b13fb6b7d0b77962bab40",
+      "translation": "Before battle, the party’s formation—such as the order of the members or the front and back rows—is specified, and battle is then fought in that fixed formation. Formation has some effect on battle, but perhaps not enough to warrant being prominently labeled a system.",
+      "contextHash": "7ce7e97307491114e60f7d82d527baf80bc9e8acd20b13fb6b7d0b77962bab40"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ドラゴンクエスト２～９",
+      "sourceHash": "767eee0a63a06eba2b4c19daba554283569b394571257e994131f21a486dcfb3",
+      "translation": "Dragon Quest II–IX",
+      "contextHash": "767eee0a63a06eba2b4c19daba554283569b394571257e994131f21a486dcfb3"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "大体４人までの仲間の順番を指定する。前のキャラほど狙われやすく、後ろのキャラほど狙われにくい。ちなみに狙われる確率は先頭から順に「40%,30%,20%,10%」だそうな。呪文の範囲に『グループ』という分類があるのは何気に特徴的だ。",
+      "sourceHash": "7876d4fd3ccce5804fc15dc1b17fdd1836652e60910f08de57f5f91d68d8a389",
+      "translation": "You specify the order of up to about four party members. Characters at the front are more likely to be targeted, while those at the back are less likely. Incidentally, the targeting probabilities are apparently “40%, 30%, 20%, 10%” from the front onward. The fact that spell ranges include a “group” classification is a subtly distinctive feature.",
+      "contextHash": "7876d4fd3ccce5804fc15dc1b17fdd1836652e60910f08de57f5f91d68d8a389"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "馬車の要素についても後述。",
+      "sourceHash": "8e7daf155961ddf4dc6a48cee5d9eb34c573eca78df4621e52a1c9b96e89f7ef",
+      "translation": "The wagon element is discussed later as well.",
+      "contextHash": "8e7daf155961ddf4dc6a48cee5d9eb34c573eca78df4621e52a1c9b96e89f7ef"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ファイナルファンタジー１～９",
+      "sourceHash": "221349b40a95aff1d0af70256d63216293a4c9ca099698b0af73a6bb2438184a",
+      "translation": "Final Fantasy I–IX",
+      "contextHash": "221349b40a95aff1d0af70256d63216293a4c9ca099698b0af73a6bb2438184a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "前列、後列の切り替えが可能。後列に下げたキャラは近接攻撃のダメージを半減する代わりに、自分の近接攻撃のダメージも敵に半減される。弓や銃などの遠距離武器ならば、その影響を受けずに攻撃できる。ちなみにＦＦ２のみ、後列では近接攻撃で一切、狙われないという尖った仕様になっている。",
+      "sourceHash": "a4d31a4d8a371dfeed9a5aae2780a2d79919e2f3e6fa00895fdd7333e1868779",
+      "translation": "You can switch between the front and back rows. Moving a character to the back row halves the damage they take from melee attacks, but also halves the damage dealt by their own melee attacks to enemies. Long-range weapons such as bows and guns can be used without being affected by this. Incidentally, FFII alone has the distinctive specification that characters in the back row cannot be targeted by melee attacks at all.",
+      "contextHash": "a4d31a4d8a371dfeed9a5aae2780a2d79919e2f3e6fa00895fdd7333e1868779"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ロマンシングサガ１",
+      "sourceHash": "646144adc1e6100d8b2cd1770e515c35164ccbf8f0bb98392934da6f5709109d",
+      "translation": "Romancing SaGa I",
+      "contextHash": "646144adc1e6100d8b2cd1770e515c35164ccbf8f0bb98392934da6f5709109d"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "キャラ毎に、前列・中列・後列の指定が可能。同じ列には３人（仲間６人制）までしか配置できない。武器や技毎に射程があり、中列・後列では射程が届くものでしか攻撃できない。戦闘中の前進・後退によって位置を移動できるのも特徴。",
+      "sourceHash": "8ebedd9786f39dd45ddda4a346ab9b312d0c33102e0cd36161065c7770bb3c7c",
+      "translation": "Each character can be assigned to the front, middle, or back row. No more than three characters can be placed in the same row (with a six-member party). Each weapon and Tech has its own range, and characters in the middle or back row can attack only targets within that range. Another distinctive feature is the ability to change position by advancing or retreating during battle.",
+      "contextHash": "8ebedd9786f39dd45ddda4a346ab9b312d0c33102e0cd36161065c7770bb3c7c"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "隊列配置型",
+      "sourceHash": "257fd3140f13e86dafae893acfbb7a66594649ea50bc7f2a969044fa4f6d6319",
+      "translation": "Formation Placement",
+      "contextHash": "257fd3140f13e86dafae893acfbb7a66594649ea50bc7f2a969044fa4f6d6319"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "平面上の空間（大抵は四角）に対して、仲間の配置位置を指定する。縦列・横列など技の攻撃範囲によって、ダメージを受ける人数が変わるといった要素が加わる。微妙に例が少ない。",
+      "sourceHash": "20fd3593757220e6b4f04d3bce920751883ec6d90393cb7a10c6662b7eeff0e9",
+      "translation": "You specify where party members are placed in a two-dimensional space, usually a square. Elements are added in which the number of characters damaged changes depending on the attack area of a Tech, such as a vertical or horizontal line. There are surprisingly few examples.",
+      "contextHash": "20fd3593757220e6b4f04d3bce920751883ec6d90393cb7a10c6662b7eeff0e9"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ペルソナ１",
+      "sourceHash": "cee307471b6ca41a1b875162b5dab694f309de15a2ebd25a2fe1c29429754119",
+      "translation": "Persona I",
+      "contextHash": "cee307471b6ca41a1b875162b5dab694f309de15a2ebd25a2fe1c29429754119"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ロマサガ１と違うのは、前後左右にキャラを並べる事ができる事。武器の射程が重要となるのは同じ。中途半端だったのか、次回作以降では、単なる↑の隊列型になった。",
+      "sourceHash": "90a5acae049f5d56b0bbac1b659d90aae7ad742590d377cebed16adfdc0fc1de",
+      "translation": "Unlike Romancing SaGa I, characters can be arranged front, back, left, and right. The importance of weapon range is the same. Perhaps it was considered incomplete; in later games, it became merely the formation-based system mentioned above.",
+      "contextHash": "90a5acae049f5d56b0bbac1b659d90aae7ad742590d377cebed16adfdc0fc1de"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "陣形型",
+      "sourceHash": "6e7cb87fed71a1ebcf1353ebebc6b2e8fdf535ecd7ac301a474839eac4aa91cd",
+      "translation": "Formation-Type",
+      "contextHash": "6e7cb87fed71a1ebcf1353ebebc6b2e8fdf535ecd7ac301a474839eac4aa91cd"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "あらかじめ決められたいくつかの陣形を元にキャラクターの配置を決める。技の攻撃範囲の要素は↑と同じ。",
+      "sourceHash": "2af780f76b6e3c131ec388ce1bfbb89e2a19dec1092d05fb97104f7660085d84",
+      "translation": "Character placement is determined based on several predetermined formations. The element involving the attack range of Techs is the same as above.",
+      "contextHash": "2af780f76b6e3c131ec388ce1bfbb89e2a19dec1092d05fb97104f7660085d84"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "ロマンシングサガ２～３",
+      "sourceHash": "23809394a726cac1bd30b6070c3eba00e162c74e03da5728ca70df89de1a8b2d",
+      "translation": "Romancing SaGa II–III",
+      "contextHash": "23809394a726cac1bd30b6070c3eba00e162c74e03da5728ca70df89de1a8b2d"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "陣形毎に様々な恩恵を受ける事ができる。能力に変化をもたらすものや、毎ターンＨＰが回復するものまで様々。",
+      "sourceHash": "beecc3f08433b2238c931d7d020533ab2b2d9859819e719d04e9161e32b9ea6a",
+      "translation": "Each formation provides various benefits. These range from changes to abilities to effects that restore HP every turn.",
+      "contextHash": "beecc3f08433b2238c931d7d020533ab2b2d9859819e719d04e9161e32b9ea6a"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ここまで劇的な影響はないけれど、ブレスオブファイア２にも似たようなものがある。",
+      "sourceHash": "ccd8a23f35a7c7fe986dbec69fe7975f30797e85fe129ea30ff5c11a07297655",
+      "translation": "Although the effects are not as dramatic as these, Breath of Fire II has something similar.",
+      "contextHash": "ccd8a23f35a7c7fe986dbec69fe7975f30797e85fe129ea30ff5c11a07297655"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "固定マップ移動型",
+      "sourceHash": "55474acb1e9005648c345247aff194e181b47a7dfdd31f65e9604d5cd3fad570",
+      "translation": "Fixed-Map Movement",
+      "contextHash": "55474acb1e9005648c345247aff194e181b47a7dfdd31f65e9604d5cd3fad570"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "定められた範囲のマップ上を動きながら戦うというＳＲＰＧ的な要素を盛り込んだシステム。範囲をどうするかによって、戦闘システムは大きく変化する。その範囲は単なる四角とは限らない。特に下のワイルドアームズ４～５などは特徴的だ。",
+      "sourceHash": "fa64a6c36a9bc533dca1c44e0521bdf06e7bd057bfc19ef135a03ffea21ae525",
+      "translation": "This system incorporates an SRPG-like element in which battles are fought while moving around a designated area of the map. The battle system changes significantly depending on how that area is defined. The area is not necessarily just a square. Wild Arms 4–5, mentioned below, are particularly distinctive in this regard.",
+      "contextHash": "fa64a6c36a9bc533dca1c44e0521bdf06e7bd057bfc19ef135a03ffea21ae525"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "下の『可変マップ移動型』もそうだが、『移動力』など、移動に関わる要素が非常に重要となる。これにより『攻撃力』『耐久力』『素早さ』に加えて、新しいキャラ性能の軸を作ることができるのは大きな魅力だ。",
+      "sourceHash": "32df39c82321c5d0b2f21cdfdf3ddccc8f535a51ca219b8e95bc5b200bfd7a76",
+      "translation": "The “variable-map movement” type below is similar, but movement-related elements such as “Movement” become extremely important. The ability to create a new axis of character performance alongside “Attack Power,” “Durability,” and “Agility” is a major appeal.",
+      "contextHash": "32df39c82321c5d0b2f21cdfdf3ddccc8f535a51ca219b8e95bc5b200bfd7a76"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "反面、移動による面倒臭さをどうするのかというのも大きな課題。",
+      "sourceHash": "4a15959b360fbc95eb71a86f40692d75bb315f15745053af60cc3259a63eefdb",
+      "translation": "On the other hand, dealing with the tediousness caused by movement is also a major challenge.",
+      "contextHash": "4a15959b360fbc95eb71a86f40692d75bb315f15745053af60cc3259a63eefdb"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ＳＲＰＧならともかく、何度も繰り返すＲＰＧの戦闘において、最初の１ターンは移動に費やされて、誰も攻撃できないなんてのは辛い。また、できれば移動と攻撃を少ないボタン操作で実行できることが望ましい。",
+      "sourceHash": "ad5c7474aad3927926f2ea4471117a219bd3410182a148b3fd4dcc9a7188bea3",
+      "translation": "That may be fine for an SRPG, but in RPG battles that are repeated many times, it is frustrating when the first turn is spent moving and nobody can attack. Ideally, movement and attacks should also be executable with as few button inputs as possible.",
+      "contextHash": "ad5c7474aad3927926f2ea4471117a219bd3410182a148b3fd4dcc9a7188bea3"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "軌跡シリーズ",
+      "sourceHash": "651b412669932038053d173332934f609e71f13f5ba6345a23e7922d50feb947",
+      "translation": "Trails Series",
+      "contextHash": "651b412669932038053d173332934f609e71f13f5ba6345a23e7922d50feb947"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "戦闘マップ上を移動しながら戦う。技毎に射程や範囲が異なる。通常攻撃や技の一部に限り、移動と攻撃を同時に行うことができる。このタイプの戦闘システムとしては比較的オーソドックス。",
+      "sourceHash": "d4cfe05dafdb7869a9a2426f13e36f0cbdab0561958c48a2d92fbc179074c35f",
+      "translation": "You fight while moving around the battle map. Each Tech has a different range and area of effect. Only normal attacks and some Techs allow movement and attacking to be performed simultaneously. This is relatively orthodox for this type of battle system.",
+      "contextHash": "d4cfe05dafdb7869a9a2426f13e36f0cbdab0561958c48a2d92fbc179074c35f"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "シリーズが進むにつれて、技の射程や範囲や拡大した結果、移動の要素が形骸化している気がしないでもない。",
+      "sourceHash": "166f01ac1983411b76e65139f246559f465436a637273e589c32ed6118c616c0",
+      "translation": "As the series progressed and the range and area of Techs expanded, I can’t help feeling that the movement element became somewhat hollow.",
+      "contextHash": "166f01ac1983411b76e65139f246559f465436a637273e589c32ed6118c616c0"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "ライブアライブ",
+      "sourceHash": "eced9eb24349d01427713e82b58ae0df7f99e1a6ff1a88713ff95e3fd2361d2a",
+      "translation": "Live A Live",
+      "contextHash": "eced9eb24349d01427713e82b58ae0df7f99e1a6ff1a88713ff95e3fd2361d2a"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "７&times;７のマス目形式。移動にはわずかにターンを消耗する。背後から攻撃されると大きくダメージを受けるといった要素も。",
+      "sourceHash": "6b2b34d3fa3819ed6b5bfaec4d358013bd9bee1447ab4e5ada0d24e38288f1b0",
+      "translation": "A 7&times;7 grid. Movement consumes a small amount of a turn. There are also elements such as taking significantly more damage when attacked from behind.",
+      "contextHash": "6b2b34d3fa3819ed6b5bfaec4d358013bd9bee1447ab4e5ada0d24e38288f1b0"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "ワイルドアームズ４～５",
+      "sourceHash": "8d09066379b7b46155aab50982c8083d6c079e4a537f63945042bbfd1d4ce625",
+      "translation": "Wild Arms 4–5",
+      "contextHash": "8d09066379b7b46155aab50982c8083d6c079e4a537f63945042bbfd1d4ce625"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "↑こういう感じで配置された７つのマス上を移動しながら戦う。",
+      "sourceHash": "7bcbccdb98029afc3b12200a6064fff4fbab672d7c306d01f4557a85ef86bcdf",
+      "translation": "You fight while moving across the seven squares arranged in a configuration like the one above.",
+      "contextHash": "7bcbccdb98029afc3b12200a6064fff4fbab672d7c306d01f4557a85ef86bcdf"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "敵味方ともに初期配置はランダム。基本的に１ターンに１マスしか移動できない。味方同士、敵同士ならば、複数人で同じマスに留まることも可能。ただし、攻撃はマスに対して行うため、同じマスにいるキャラは同時にダメージを受ける。",
+      "sourceHash": "99d410aa488d71b32aa249f5c6f0fdcba2255e558c87a2c901f67fc6186de863",
+      "translation": "The initial positions of both allies and enemies are random. Generally, each character can move only one square per turn. Allies can occupy the same square with other allies, and enemies can do the same with other enemies. However, because attacks are directed at squares, characters occupying the same square all take damage simultaneously.",
+      "contextHash": "99d410aa488d71b32aa249f5c6f0fdcba2255e558c87a2c901f67fc6186de863"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "個人的には移動と行動を同時にできるようにしたＷＡ５は、システムの味をかなり殺してしまっているように思う。移動と行動を同時にできないＷＡ４の方が戦術性は高かったのではないかと。",
+      "sourceHash": "69356286f0a74998a64cca4d1f55624772873e65aa86730bbff9659859f94ec2",
+      "translation": "Personally, I feel that WA5, which allows movement and actions to be performed simultaneously, considerably diminishes the system’s distinctive flavor. I think WA4, where movement and actions could not be performed simultaneously, may have offered greater tactical depth.",
+      "contextHash": "69356286f0a74998a64cca4d1f55624772873e65aa86730bbff9659859f94ec2"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "テイルズオブシリーズ",
+      "sourceHash": "5483ec9448ea2868927fdc3935f3eb5ee9773a95453ad5a42ad5814fae6b5f1d",
+      "translation": "Tales Series",
+      "contextHash": "5483ec9448ea2868927fdc3935f3eb5ee9773a95453ad5a42ad5814fae6b5f1d"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "マップ上をリアルタイムで自由自在に動き回るアクション戦闘。マップは初代ファンタジアの横スクロールから、ジアビス以降の円形３Ｄ空間まで様々。",
+      "sourceHash": "895e4b2fd215be85fb6539a11334ee43f6015ffb3f24aa820d3de355cc0cc95a",
+      "translation": "Action battles in which you move freely around the map in real time. The maps vary from the side-scrolling stages of the original Tales of Phantasia to the circular 3D spaces starting with Tales of the Abyss.",
+      "contextHash": "895e4b2fd215be85fb6539a11334ee43f6015ffb3f24aa820d3de355cc0cc95a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "可変マップ移動型",
+      "sourceHash": "5d35d2c2ac6fb349e99f303ae8e2bcfc7c41d8f23b99b78190d417d1327a2d34",
+      "translation": "Variable-Map Movement",
+      "contextHash": "5d35d2c2ac6fb349e99f303ae8e2bcfc7c41d8f23b99b78190d417d1327a2d34"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "↑と異なり戦闘毎にマップの形状が異なるのが特徴。",
+      "sourceHash": "f9deb42890b2eb3a38cc589b7f74c40c6e33ff890107f0cc12e7d465d3893ce8",
+      "translation": "Unlike the type above, this type is characterized by having a different map layout for each battle.",
+      "contextHash": "f9deb42890b2eb3a38cc589b7f74c40c6e33ff890107f0cc12e7d465d3893ce8"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "多くのＳＲＰＧやＡＲＰｇがこれ。地形の要素が非常に大きく関わってくる。",
+      "sourceHash": "ecc99839e97a5a3a331caad6f0a91c3949544345d59dfcb32704c43d51fdb3c4",
+      "translation": "Many SRPGs and ARPGs use this system. Terrain plays a very significant role.",
+      "contextHash": "ecc99839e97a5a3a331caad6f0a91c3949544345d59dfcb32704c43d51fdb3c4"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ファイアーエムブレム",
+      "sourceHash": "c3e979de4d4dea81f9d70b71db2bbbc1a9b9912d267c1b44f7110214134a7296",
+      "translation": "Fire Emblem",
+      "contextHash": "c3e979de4d4dea81f9d70b71db2bbbc1a9b9912d267c1b44f7110214134a7296"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "森や山といった地形は移動力を大きく消費するが、その上にいるキャラクターの回避や守備が上昇する。",
+      "sourceHash": "7f4ebcf8626726cbceb3cd1b24081f2c4b86996b11dc766ad5cba41aa9361e1f",
+      "translation": "Terrain such as forests and mountains consumes a great deal of Movement, but increases the evasion and defense of characters standing on it.",
+      "contextHash": "7f4ebcf8626726cbceb3cd1b24081f2c4b86996b11dc766ad5cba41aa9361e1f"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "城の上にいると、ＨＰが毎ターン回復するといった要素も。移動力だけでなく移動タイプが非常に重要となるのも特徴。",
+      "sourceHash": "800acf6d36f921284f525faef17a10e56cecb0a8c4a0cf88dbe60d47046c2643",
+      "translation": "There are also elements such as restoring HP every turn while standing on a castle. Another distinctive feature is that movement type is extremely important, not just Movement.",
+      "contextHash": "800acf6d36f921284f525faef17a10e56cecb0a8c4a0cf88dbe60d47046c2643"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "例えば、空を飛べるキャラクターはどの地形も移動力を消費せずに、遠くまで移動できる。他多くのＳＲＰＧも類似の要素を備えている。",
+      "sourceHash": "a1fab57be790d4b884a23fdc91173544c6d9b5dbffd813fe756b23878695ee78",
+      "translation": "For example, characters that can fly can travel long distances across any terrain without consuming Movement. Many other SRPGs have similar elements.",
+      "contextHash": "a1fab57be790d4b884a23fdc91173544c6d9b5dbffd813fe756b23878695ee78"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "タクティクスオウガ",
+      "sourceHash": "d900baec752715e25a91565b2fb7da7d501f9cb60461cbdbd648e898eafc153a",
+      "translation": "Tactics Ogre",
+      "contextHash": "d900baec752715e25a91565b2fb7da7d501f9cb60461cbdbd648e898eafc153a"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "↑の要素に加えて、高低差を加えたもの。",
+      "sourceHash": "ed7b1f85be12a8b0f10277a24b6638acccc8328103301df55e5d3ce95c0b2007",
+      "translation": "This adds differences in elevation to the elements described above.",
+      "contextHash": "ed7b1f85be12a8b0f10277a24b6638acccc8328103301df55e5d3ce95c0b2007"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "高い所から弓を放つと遠くの敵に攻撃することができる、",
+      "sourceHash": "74f5ecc53dcf51831a0c624602189604bb310177898ff8a55b4d37b4c864e239",
+      "translation": "Firing a bow from a high place allows you to attack enemies in the distance,",
+      "contextHash": "74f5ecc53dcf51831a0c624602189604bb310177898ff8a55b4d37b4c864e239"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "アークザラッド２",
+      "sourceHash": "bb44405d77bfc8dd26240d3d3ec135cde6d77af5a6fc7b03125f24c4421a3a01",
+      "translation": "Arc the Lad II",
+      "contextHash": "bb44405d77bfc8dd26240d3d3ec135cde6d77af5a6fc7b03125f24c4421a3a01"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "大体はファイアーエムブレム等と同じだが、ＳＲＰＧ以外の一般ＲＰＧで採用している例。",
+      "sourceHash": "06a136e0c4d0667dcf3ca75ddffacaaf8af28e4f81267dabb6650c1553e4214b",
+      "translation": "It is generally the same as Fire Emblem and similar games, but this is an example of it being used in a regular RPG rather than a tactical RPG.",
+      "contextHash": "06a136e0c4d0667dcf3ca75ddffacaaf8af28e4f81267dabb6650c1553e4214b"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "町やダンジョンといったマップがそのまま戦闘フィールドとなる。",
+      "sourceHash": "283a75bace74cb1746143c9b7e4f3156ae054117555930de4dad3b99a49c5d67",
+      "translation": "Maps such as towns and dungeons themselves become the battlefields.",
+      "contextHash": "283a75bace74cb1746143c9b7e4f3156ae054117555930de4dad3b99a49c5d67"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "何気に少ないボタン操作で攻撃ができるという点で操作性が優れている。",
+      "sourceHash": "9379dbd5c046a94db07201f4f5c017fef4cf2587f3fbf030caff3da3a48fe673",
+      "translation": "Its controls are surprisingly good, as attacks can be performed with relatively few button presses.",
+      "contextHash": "9379dbd5c046a94db07201f4f5c017fef4cf2587f3fbf030caff3da3a48fe673"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "他にも、ブレスオブファイア５などもこれに近いか。",
+      "sourceHash": "b95af84c4758541c02cfdc221df5ab998cccc57137fa52217d38a479909b34b6",
+      "translation": "Breath of Fire 5 may also be similar to this.",
+      "contextHash": "b95af84c4758541c02cfdc221df5ab998cccc57137fa52217d38a479909b34b6"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "ファイナルファンタジー12",
+      "sourceHash": "e063c469e21c0c8ee401ad0a46a78bf6779941c492cd0e0296d8a95f5e1436f3",
+      "translation": "Final Fantasy XII",
+      "contextHash": "e063c469e21c0c8ee401ad0a46a78bf6779941c492cd0e0296d8a95f5e1436f3"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "移動と戦闘のはっきりした切替がなく、移動マップ上で抜刀しそのまま戦闘を行う。",
+      "sourceHash": "6a65d3e86227e0970cfd74173287ea0276282cfe71814670e1ed85607711fb9f",
+      "translation": "There is no clear transition between movement and combat; you draw your weapon on the movement map and fight right there.",
+      "contextHash": "6a65d3e86227e0970cfd74173287ea0276282cfe71814670e1ed85607711fb9f"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "あまり地形の要素は戦闘に関わってこないが、空間上で一度に多くの敵を相手にしないなどの戦略が求められる。",
+      "sourceHash": "79a8c6d0d2bfb7727fad80066e4fddc16e743c6dcf6a3bf7c69038a9d94e2021",
+      "translation": "Terrain does not have much of an impact on combat, but strategies such as not taking on too many enemies at once in the available space are required.",
+      "contextHash": "79a8c6d0d2bfb7727fad80066e4fddc16e743c6dcf6a3bf7c69038a9d94e2021"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "アクションＲＰＧなどもこれに同じ。",
+      "sourceHash": "75e497a1d5e665e4e32d211a96b482c13dab4fb11f532e6d2a3f5198ba9ba318",
+      "translation": "Action RPGs and similar games work the same way.",
+      "contextHash": "75e497a1d5e665e4e32d211a96b482c13dab4fb11f532e6d2a3f5198ba9ba318"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "以下は、空間システムに付属するオプション要素",
+      "sourceHash": "ee0777ded5710742bbd8951bafb4854b0a255411f53d29af11102520e7977884",
+      "translation": "The following are optional elements accompanying the spatial system.",
+      "contextHash": "ee0777ded5710742bbd8951bafb4854b0a255411f53d29af11102520e7977884"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "入替システム",
+      "sourceHash": "162a083d3f1b3a1897665cb6be0e17a1a806011ee903dad82820bc003c644fab",
+      "translation": "Party-Switching System",
+      "contextHash": "162a083d3f1b3a1897665cb6be0e17a1a806011ee903dad82820bc003c644fab"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "戦闘中に仲間の入替えが可能な要素。",
+      "sourceHash": "75ad39548820b8d6fb223ba12b2187a73519e3adec66b56fe203066eab87617d",
+      "translation": "An element that allows you to switch party members during battle.",
+      "contextHash": "75ad39548820b8d6fb223ba12b2187a73519e3adec66b56fe203066eab87617d"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "戦闘に参加しないキャラは毎ターン回復するとか、支援効果を発揮するとか、味付けすることも可能。",
+      "sourceHash": "9bd8bbf8b1a4d8b11d3b06383cb561e9bf74558c60bb16df2a85a051416c45c0",
+      "translation": "You can add extra touches, such as having characters not participating in battle recover every turn or provide support effects.",
+      "contextHash": "9bd8bbf8b1a4d8b11d3b06383cb561e9bf74558c60bb16df2a85a051416c45c0"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "ドラゴンクエスト4～6",
+      "sourceHash": "5ee5cc9d609147794ae760a92a356d2267f1b115588675ec2d0f26cb82505389",
+      "translation": "Dragon Quest IV–VI",
+      "contextHash": "5ee5cc9d609147794ae760a92a356d2267f1b115588675ec2d0f26cb82505389"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "馬車を引き連れている状態に限るが、毎ターン、パーティを自由に入替可能。",
+      "sourceHash": "9e967bbb7b1b2f63f767d5dc88973279b701bfe16f80d5cd7644b2bb1f618400",
+      "translation": "As long as you have a wagon in tow, you can freely switch party members every turn.",
+      "contextHash": "9e967bbb7b1b2f63f767d5dc88973279b701bfe16f80d5cd7644b2bb1f618400"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "何気にターンを消費せずに入替できるので強力なのだが、筆者は面倒臭くて一部のボス戦程度でしか、活用してなかったりする。",
+      "sourceHash": "ae3a82923a56676067d5bd56225351dda6abbca56ccce5eedb3f02b7ce99c53f",
+      "translation": "It is powerful because you can switch without consuming a turn, but I found it bothersome and only used it in a few boss battles.",
+      "contextHash": "ae3a82923a56676067d5bd56225351dda6abbca56ccce5eedb3f02b7ce99c53f"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "ファイナルファンタジー１０",
+      "sourceHash": "3e50d87afff4ac5abfb2049473c51af204037facf3789954f78647f62c03b61e",
+      "translation": "Final Fantasy X",
+      "contextHash": "3e50d87afff4ac5abfb2049473c51af204037facf3789954f78647f62c03b61e"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "現在ターンが回っているキャラを控えキャラと交換することが可能。こちらもターンを消費しない。",
+      "sourceHash": "3e457fe852cec6c66db508e7ae4968c3806e1d7165037217cb0288517653e943",
+      "translation": "You can replace the character whose turn it currently is with a reserve character. This also does not consume a turn.",
+      "contextHash": "3e457fe852cec6c66db508e7ae4968c3806e1d7165037217cb0288517653e943"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "同じようなものに、ブレスオブファイア４があるが、こちらは控えのキャラは徐々にＭＰが回復していくという特徴がある。",
+      "sourceHash": "bb8421b8caada5fb43adbbb61f58dbfce7236d2c88c67a87d0d504dd3f9ffef6",
+      "translation": "Breath of Fire 4 has something similar, but in that game, reserve characters gradually recover MP.",
+      "contextHash": "bb8421b8caada5fb43adbbb61f58dbfce7236d2c88c67a87d0d504dd3f9ffef6"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "ポケットモンスター",
+      "sourceHash": "2f4c3db13998e4e350e25882cfd108d053f10d793e30e0f42bced9daba21deda",
+      "translation": "Pokémon",
+      "contextHash": "2f4c3db13998e4e350e25882cfd108d053f10d793e30e0f42bced9daba21deda"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "１ＶＳ１の戦闘に入替の要素を組み込んでいる。戦闘システムの中核を成す非常に重要な要素となっている。",
+      "sourceHash": "7afa3a5da182fcc4d78bea2b6206a37be72f0146717cb9f002fe0b131ab00037",
+      "translation": "It incorporates switching into one-on-one battles. This has become an extremely important element at the core of the battle system.",
+      "contextHash": "7afa3a5da182fcc4d78bea2b6206a37be72f0146717cb9f002fe0b131ab00037"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "地形・天候",
+      "sourceHash": "e598c158fd4b65ed2e379ab340a3686bb8068a9b2326d46202b06c29c6a570f1",
+      "translation": "Terrain and Weather",
+      "contextHash": "e598c158fd4b65ed2e379ab340a3686bb8068a9b2326d46202b06c29c6a570f1"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "戦闘開始時から、地形効果が固定されているものもあれば、戦闘中に人為的に作り出すものもある。",
+      "sourceHash": "913213d2b6ddd47e0c9dad491fc94f893ea6858b9c2773e4ad2a3ef33ca2478b",
+      "translation": "Some terrain effects are fixed from the start of battle, while others are created artificially during battle.",
+      "contextHash": "913213d2b6ddd47e0c9dad491fc94f893ea6858b9c2773e4ad2a3ef33ca2478b"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "効果範囲は局所的なマスである場合もあれば、戦闘フィールド全体であったりもする。色々と状況に変化が付けられるので、単調な戦闘を打破したいという場合にも有効かも。",
+      "sourceHash": "cffcb236467a7c1a4b7f00e9555a8268c54f3e40d53b98e485ef7851b240d302",
+      "translation": "The area of effect may be limited to specific tiles, or it may encompass the entire battlefield. Since it can introduce various changes in circumstances, it may also be effective when you want to break up monotonous battles.",
+      "contextHash": "cffcb236467a7c1a4b7f00e9555a8268c54f3e40d53b98e485ef7851b240d302"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "ライブアライブ",
+      "sourceHash": "eced9eb24349d01427713e82b58ae0df7f99e1a6ff1a88713ff95e3fd2361d2a",
+      "translation": "Live A Live",
+      "contextHash": "eced9eb24349d01427713e82b58ae0df7f99e1a6ff1a88713ff95e3fd2361d2a"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "一定範囲のマスに対して、水・炎・毒といった属性を付加する技が存在する。そのマス上にいると、一定時間毎にダメージを受けたり回復したりする。",
+      "sourceHash": "bb0a0fa7eb29ccf3c16daa1fc6aee3337e8eb426e133c1fcda15a7e11833852e",
+      "translation": "There are Techs that add attributes such as water, fire, and poison to tiles within a certain area. While standing on such a tile, you periodically take damage or recover HP.",
+      "contextHash": "bb0a0fa7eb29ccf3c16daa1fc6aee3337e8eb426e133c1fcda15a7e11833852e"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "新桃太郎伝説",
+      "sourceHash": "f819b650376edd312a1621663a37b52dec80150e87f2cade07f426785bde6b79",
+      "translation": "New Momotaro Legend",
+      "contextHash": "f819b650376edd312a1621663a37b52dec80150e87f2cade07f426785bde6b79"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "普通のＤＱ型ターン制戦闘なのだが、天気の要素がある。例えば、雨が降っている時は特定の仲間・敵・術の強さに変動が起こる。",
+      "sourceHash": "8b475896e16157a5c5ebf3bd2674c6ba99eb3a6c53ceb51f18e1728e498e0a11",
+      "translation": "It uses ordinary Dragon Quest-style turn-based battles, but includes weather. For example, when it is raining, the strength of certain allies, enemies, and spells changes.",
+      "contextHash": "8b475896e16157a5c5ebf3bd2674c6ba99eb3a6c53ceb51f18e1728e498e0a11"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "似たようなものだと、ポケモンシリーズに天候を左右する技がある。",
+      "sourceHash": "da0f6b2195ef424fd1820553b2023fac5aaf2d2885677141cc598dd0b4a42a47",
+      "translation": "The Pokémon series has similar Techs that affect the weather.",
+      "contextHash": "da0f6b2195ef424fd1820553b2023fac5aaf2d2885677141cc598dd0b4a42a47"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "ワイルドアームズ４～５",
+      "sourceHash": "8d09066379b7b46155aab50982c8083d6c079e4a537f63945042bbfd1d4ce625",
+      "translation": "Wild Arms 4–5",
+      "contextHash": "8d09066379b7b46155aab50982c8083d6c079e4a537f63945042bbfd1d4ce625"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "戦闘開始時にランダムで属性付きのマスが登場する。その上で技を使用する事で効果が変化する。",
+      "sourceHash": "ea8cb37a18aa898ab8d92ddb3ac99b00d09dfb7cc9c4076b325fae284e8216f7",
+      "translation": "Tiles with random attributes appear when battle begins. Using a Tech on one of them changes its effect.",
+      "contextHash": "ea8cb37a18aa898ab8d92ddb3ac99b00d09dfb7cc9c4076b325fae284e8216f7"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "テイルズオブジアビス",
+      "sourceHash": "25d8b0bc19d1bd62d81321a18a74c522e8a1581f6a839b327498e3c8dfa822cd",
+      "translation": "Tales of the Abyss",
+      "contextHash": "25d8b0bc19d1bd62d81321a18a74c522e8a1581f6a839b327498e3c8dfa822cd"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "魔法を使った後に、局所的に魔法陣が残る。その魔法陣の上に乗って、技を使用すると、対応する属性によって技が強化されるという要素（ＦＯＥ）がある。",
+      "sourceHash": "68c18df807d1bcefe7281393fb7da5a88789a0ecbf3eb0a969c2184e9bd6dc66",
+      "translation": "After magic is used, a magic circle remains in a limited area. There is an element (FOE) where using a Tech while standing on that magic circle strengthens the Tech according to its corresponding attribute.",
+      "contextHash": "68c18df807d1bcefe7281393fb7da5a88789a0ecbf3eb0a969c2184e9bd6dc66"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "フリゲだが、似たような要素だとセラフィックブルーが秀逸だと思う。こちらは戦闘フィールド全体に属性が付属する。",
+      "sourceHash": "cbeb09f0022430792ca781998b8fe429457a31217be1422eb6d123856a8fa419",
+      "translation": "It is a freeware game, but I think Seraphic Blue is an excellent example of a similar element. In this game, an attribute is applied to the entire battlefield.",
+      "contextHash": "cbeb09f0022430792ca781998b8fe429457a31217be1422eb6d123856a8fa419"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "まとめ",
+      "sourceHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72",
+      "translation": "Summary",
+      "contextHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "時間と空間の２つの扱いを定めれば、戦闘システムの方向性はかなり固まる。僕的には、いずれ移動を伴うタイプの空間システムを構築してみたいが、技術的な難易度の高さが課題。",
+      "sourceHash": "a552451b8c4e04c249deb8541f0a8bfd069b66f34257dcd84443765a10e37f6f",
+      "translation": "Once you establish how to handle the two elements of time and space, the direction of the battle system becomes quite well defined. Personally, I would like to eventually build a spatial system involving movement, but its high technical difficulty remains a challenge.",
+      "contextHash": "a552451b8c4e04c249deb8541f0a8bfd069b66f34257dcd84443765a10e37f6f"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "あと、やったことないけどコレなんかもいいんではないかなと。",
+      "sourceHash": "e78c6a7e21c3bc4a078fac9ecd186c779ae524418a52e8c7bb4c544f5f101273",
+      "translation": "Also, I have not tried it, but I think something like this might work well too.",
+      "contextHash": "e78c6a7e21c3bc4a078fac9ecd186c779ae524418a52e8c7bb4c544f5f101273"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]7～モールモースの騎兵隊～（ローテーション・バトル）[[/LINK_1]]",
+      "sourceHash": "bc9d309e2c8886942d15930b63976ec154ea3c47ee817b358337f0c95046d39a",
+      "parts": [
+        {
+          "source": "7～モールモースの騎兵隊～（ローテーション・バトル）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]7: The Molmorth Cavalry (Rotation Battle)[[/LINK_1]]",
+      "contextHash": "bc9d309e2c8886942d15930b63976ec154ea3c47ee817b358337f0c95046d39a"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Design Guides index[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "ＲＰＧの戦闘システムは数多いが、いずれも分解すれば似たような要素で構成されていることが見えてくる。": "There are many RPG battle systems, but when broken down, they all reveal themselves to be made up of similar elements.",
+    "その中でも、前回扱った『行動順序システム』は構成要素の中で大きなウェイトを占める。これらは戦闘において、どのように味方や敵へ順序が回ってくるかをルール付ける『時間』のシステムとみなすことができる。": "Among them, the “turn order system” discussed last time accounts for a large portion of the overall structure. These can be seen as “time” systems that establish the rules for how turns come around for allies and enemies in battle.",
+    "さて、時間とくれば次は『空間』といきたいところ。": "Now that we’ve covered time, the next topic naturally has to be “space.”",
+    "昔のＲＰＧでは戦闘システムにおける空間の要素は薄く、精々仲間の並び順といった程度のものだった。しかし、ＳＦＣの中後期ぐらいからか、ＲＰＧにもＳＲＰＧやＡＲＰＧのような空間を動きまわる要素を取り入れる作品が徐々に増えてきた。": "In older RPGs, the spatial element of battle systems was minimal, amounting at most to things like the order in which party members stood. However, perhaps starting around the middle to latter half of the Super Famicom era, more and more RPGs began incorporating elements involving movement through space, as seen in SRPGs and ARPGs.",
+    "今となっては、空間は戦闘システムにおける重要要素となっている。": "Today, space has become an important element of battle systems.",
+    "というわけで、仲間の配置や移動に関するシステムである『空間システム』に付いて市販ＲＰＧのものを分類してまとめた。固定された隊列で戦う初歩的なものから、空間を自由自在に移動するものまで多種様々。さらには、天候など、戦闘空間自体に変化を起こす要素も一緒に扱ってみた。": "With that in mind, I classified and summarized the spatial systems found in commercial RPGs—systems concerning party member placement and movement. There is a wide variety, from basic systems involving battles in fixed formations to systems that allow free movement throughout the battlefield. I also covered elements that alter the battlefield itself, such as weather.",
+    "隊列型": "Formation-Based",
+    "戦闘前に並び順、前列後列などの隊列を指定し、そのまま固定した隊列で戦闘を行う。隊列は戦闘に多少の影響を与えるが、システムと大々的に銘打つ程の大きなものでは無いかもしれない。": "Before battle, the party’s formation—such as the order of the members or the front and back rows—is specified, and battle is then fought in that fixed formation. Formation has some effect on battle, but perhaps not enough to warrant being prominently labeled a system.",
+    "ドラゴンクエスト２～９": "Dragon Quest II–IX",
+    "大体４人までの仲間の順番を指定する。前のキャラほど狙われやすく、後ろのキャラほど狙われにくい。ちなみに狙われる確率は先頭から順に「40%,30%,20%,10%」だそうな。呪文の範囲に『グループ』という分類があるのは何気に特徴的だ。": "You specify the order of up to about four party members. Characters at the front are more likely to be targeted, while those at the back are less likely. Incidentally, the targeting probabilities are apparently “40%, 30%, 20%, 10%” from the front onward. The fact that spell ranges include a “group” classification is a subtly distinctive feature.",
+    "馬車の要素についても後述。": "The wagon element is discussed later as well.",
+    "ファイナルファンタジー１～９": "Final Fantasy I–IX",
+    "前列、後列の切り替えが可能。後列に下げたキャラは近接攻撃のダメージを半減する代わりに、自分の近接攻撃のダメージも敵に半減される。弓や銃などの遠距離武器ならば、その影響を受けずに攻撃できる。ちなみにＦＦ２のみ、後列では近接攻撃で一切、狙われないという尖った仕様になっている。": "You can switch between the front and back rows. Moving a character to the back row halves the damage they take from melee attacks, but also halves the damage dealt by their own melee attacks to enemies. Long-range weapons such as bows and guns can be used without being affected by this. Incidentally, FFII alone has the distinctive specification that characters in the back row cannot be targeted by melee attacks at all.",
+    "ロマンシングサガ１": "Romancing SaGa I",
+    "キャラ毎に、前列・中列・後列の指定が可能。同じ列には３人（仲間６人制）までしか配置できない。武器や技毎に射程があり、中列・後列では射程が届くものでしか攻撃できない。戦闘中の前進・後退によって位置を移動できるのも特徴。": "Each character can be assigned to the front, middle, or back row. No more than three characters can be placed in the same row (with a six-member party). Each weapon and Tech has its own range, and characters in the middle or back row can attack only targets within that range. Another distinctive feature is the ability to change position by advancing or retreating during battle.",
+    "隊列配置型": "Formation Placement",
+    "平面上の空間（大抵は四角）に対して、仲間の配置位置を指定する。縦列・横列など技の攻撃範囲によって、ダメージを受ける人数が変わるといった要素が加わる。微妙に例が少ない。": "You specify where party members are placed in a two-dimensional space, usually a square. Elements are added in which the number of characters damaged changes depending on the attack area of a Tech, such as a vertical or horizontal line. There are surprisingly few examples.",
+    "ペルソナ１": "Persona I",
+    "ロマサガ１と違うのは、前後左右にキャラを並べる事ができる事。武器の射程が重要となるのは同じ。中途半端だったのか、次回作以降では、単なる↑の隊列型になった。": "Unlike Romancing SaGa I, characters can be arranged front, back, left, and right. The importance of weapon range is the same. Perhaps it was considered incomplete; in later games, it became merely the formation-based system mentioned above.",
+    "陣形型": "Formation-Type",
+    "あらかじめ決められたいくつかの陣形を元にキャラクターの配置を決める。技の攻撃範囲の要素は↑と同じ。": "Character placement is determined based on several predetermined formations. The element involving the attack range of Techs is the same as above.",
+    "ロマンシングサガ２～３": "Romancing SaGa II–III",
+    "陣形毎に様々な恩恵を受ける事ができる。能力に変化をもたらすものや、毎ターンＨＰが回復するものまで様々。": "Each formation provides various benefits. These range from changes to abilities to effects that restore HP every turn.",
+    "ここまで劇的な影響はないけれど、ブレスオブファイア２にも似たようなものがある。": "Although the effects are not as dramatic as these, Breath of Fire II has something similar.",
+    "固定マップ移動型": "Fixed-Map Movement",
+    "定められた範囲のマップ上を動きながら戦うというＳＲＰＧ的な要素を盛り込んだシステム。範囲をどうするかによって、戦闘システムは大きく変化する。その範囲は単なる四角とは限らない。特に下のワイルドアームズ４～５などは特徴的だ。": "This system incorporates an SRPG-like element in which battles are fought while moving around a designated area of the map. The battle system changes significantly depending on how that area is defined. The area is not necessarily just a square. Wild Arms 4–5, mentioned below, are particularly distinctive in this regard.",
+    "下の『可変マップ移動型』もそうだが、『移動力』など、移動に関わる要素が非常に重要となる。これにより『攻撃力』『耐久力』『素早さ』に加えて、新しいキャラ性能の軸を作ることができるのは大きな魅力だ。": "The “variable-map movement” type below is similar, but movement-related elements such as “Movement” become extremely important. The ability to create a new axis of character performance alongside “Attack Power,” “Durability,” and “Agility” is a major appeal.",
+    "反面、移動による面倒臭さをどうするのかというのも大きな課題。": "On the other hand, dealing with the tediousness caused by movement is also a major challenge.",
+    "ＳＲＰＧならともかく、何度も繰り返すＲＰＧの戦闘において、最初の１ターンは移動に費やされて、誰も攻撃できないなんてのは辛い。また、できれば移動と攻撃を少ないボタン操作で実行できることが望ましい。": "That may be fine for an SRPG, but in RPG battles that are repeated many times, it is frustrating when the first turn is spent moving and nobody can attack. Ideally, movement and attacks should also be executable with as few button inputs as possible.",
+    "軌跡シリーズ": "Trails Series",
+    "戦闘マップ上を移動しながら戦う。技毎に射程や範囲が異なる。通常攻撃や技の一部に限り、移動と攻撃を同時に行うことができる。このタイプの戦闘システムとしては比較的オーソドックス。": "You fight while moving around the battle map. Each Tech has a different range and area of effect. Only normal attacks and some Techs allow movement and attacking to be performed simultaneously. This is relatively orthodox for this type of battle system.",
+    "シリーズが進むにつれて、技の射程や範囲や拡大した結果、移動の要素が形骸化している気がしないでもない。": "As the series progressed and the range and area of Techs expanded, I can’t help feeling that the movement element became somewhat hollow.",
+    "ライブアライブ": "Live A Live",
+    "７&times;７のマス目形式。移動にはわずかにターンを消耗する。背後から攻撃されると大きくダメージを受けるといった要素も。": "A 7&times;7 grid. Movement consumes a small amount of a turn. There are also elements such as taking significantly more damage when attacked from behind.",
+    "ワイルドアームズ４～５": "Wild Arms 4–5",
+    "↑こういう感じで配置された７つのマス上を移動しながら戦う。": "You fight while moving across the seven squares arranged in a configuration like the one above.",
+    "敵味方ともに初期配置はランダム。基本的に１ターンに１マスしか移動できない。味方同士、敵同士ならば、複数人で同じマスに留まることも可能。ただし、攻撃はマスに対して行うため、同じマスにいるキャラは同時にダメージを受ける。": "The initial positions of both allies and enemies are random. Generally, each character can move only one square per turn. Allies can occupy the same square with other allies, and enemies can do the same with other enemies. However, because attacks are directed at squares, characters occupying the same square all take damage simultaneously.",
+    "個人的には移動と行動を同時にできるようにしたＷＡ５は、システムの味をかなり殺してしまっているように思う。移動と行動を同時にできないＷＡ４の方が戦術性は高かったのではないかと。": "Personally, I feel that WA5, which allows movement and actions to be performed simultaneously, considerably diminishes the system’s distinctive flavor. I think WA4, where movement and actions could not be performed simultaneously, may have offered greater tactical depth.",
+    "テイルズオブシリーズ": "Tales Series",
+    "マップ上をリアルタイムで自由自在に動き回るアクション戦闘。マップは初代ファンタジアの横スクロールから、ジアビス以降の円形３Ｄ空間まで様々。": "Action battles in which you move freely around the map in real time. The maps vary from the side-scrolling stages of the original Tales of Phantasia to the circular 3D spaces starting with Tales of the Abyss.",
+    "可変マップ移動型": "Variable-Map Movement",
+    "↑と異なり戦闘毎にマップの形状が異なるのが特徴。": "Unlike the type above, this type is characterized by having a different map layout for each battle.",
+    "多くのＳＲＰＧやＡＲＰｇがこれ。地形の要素が非常に大きく関わってくる。": "Many SRPGs and ARPGs use this system. Terrain plays a very significant role.",
+    "ファイアーエムブレム": "Fire Emblem",
+    "森や山といった地形は移動力を大きく消費するが、その上にいるキャラクターの回避や守備が上昇する。": "Terrain such as forests and mountains consumes a great deal of Movement, but increases the evasion and defense of characters standing on it.",
+    "城の上にいると、ＨＰが毎ターン回復するといった要素も。移動力だけでなく移動タイプが非常に重要となるのも特徴。": "There are also elements such as restoring HP every turn while standing on a castle. Another distinctive feature is that movement type is extremely important, not just Movement.",
+    "例えば、空を飛べるキャラクターはどの地形も移動力を消費せずに、遠くまで移動できる。他多くのＳＲＰＧも類似の要素を備えている。": "For example, characters that can fly can travel long distances across any terrain without consuming Movement. Many other SRPGs have similar elements.",
+    "タクティクスオウガ": "Tactics Ogre",
+    "↑の要素に加えて、高低差を加えたもの。": "This adds differences in elevation to the elements described above.",
+    "高い所から弓を放つと遠くの敵に攻撃することができる、": "Firing a bow from a high place allows you to attack enemies in the distance,",
+    "アークザラッド２": "Arc the Lad II",
+    "大体はファイアーエムブレム等と同じだが、ＳＲＰＧ以外の一般ＲＰＧで採用している例。": "It is generally the same as Fire Emblem and similar games, but this is an example of it being used in a regular RPG rather than a tactical RPG.",
+    "町やダンジョンといったマップがそのまま戦闘フィールドとなる。": "Maps such as towns and dungeons themselves become the battlefields.",
+    "何気に少ないボタン操作で攻撃ができるという点で操作性が優れている。": "Its controls are surprisingly good, as attacks can be performed with relatively few button presses.",
+    "他にも、ブレスオブファイア５などもこれに近いか。": "Breath of Fire 5 may also be similar to this.",
+    "ファイナルファンタジー12": "Final Fantasy XII",
+    "移動と戦闘のはっきりした切替がなく、移動マップ上で抜刀しそのまま戦闘を行う。": "There is no clear transition between movement and combat; you draw your weapon on the movement map and fight right there.",
+    "あまり地形の要素は戦闘に関わってこないが、空間上で一度に多くの敵を相手にしないなどの戦略が求められる。": "Terrain does not have much of an impact on combat, but strategies such as not taking on too many enemies at once in the available space are required.",
+    "アクションＲＰＧなどもこれに同じ。": "Action RPGs and similar games work the same way.",
+    "以下は、空間システムに付属するオプション要素": "The following are optional elements accompanying the spatial system.",
+    "入替システム": "Party-Switching System",
+    "戦闘中に仲間の入替えが可能な要素。": "An element that allows you to switch party members during battle.",
+    "戦闘に参加しないキャラは毎ターン回復するとか、支援効果を発揮するとか、味付けすることも可能。": "You can add extra touches, such as having characters not participating in battle recover every turn or provide support effects.",
+    "ドラゴンクエスト4～6": "Dragon Quest IV–VI",
+    "馬車を引き連れている状態に限るが、毎ターン、パーティを自由に入替可能。": "As long as you have a wagon in tow, you can freely switch party members every turn.",
+    "何気にターンを消費せずに入替できるので強力なのだが、筆者は面倒臭くて一部のボス戦程度でしか、活用してなかったりする。": "It is powerful because you can switch without consuming a turn, but I found it bothersome and only used it in a few boss battles.",
+    "ファイナルファンタジー１０": "Final Fantasy X",
+    "現在ターンが回っているキャラを控えキャラと交換することが可能。こちらもターンを消費しない。": "You can replace the character whose turn it currently is with a reserve character. This also does not consume a turn.",
+    "同じようなものに、ブレスオブファイア４があるが、こちらは控えのキャラは徐々にＭＰが回復していくという特徴がある。": "Breath of Fire 4 has something similar, but in that game, reserve characters gradually recover MP.",
+    "ポケットモンスター": "Pokémon",
+    "１ＶＳ１の戦闘に入替の要素を組み込んでいる。戦闘システムの中核を成す非常に重要な要素となっている。": "It incorporates switching into one-on-one battles. This has become an extremely important element at the core of the battle system.",
+    "地形・天候": "Terrain and Weather",
+    "戦闘開始時から、地形効果が固定されているものもあれば、戦闘中に人為的に作り出すものもある。": "Some terrain effects are fixed from the start of battle, while others are created artificially during battle.",
+    "効果範囲は局所的なマスである場合もあれば、戦闘フィールド全体であったりもする。色々と状況に変化が付けられるので、単調な戦闘を打破したいという場合にも有効かも。": "The area of effect may be limited to specific tiles, or it may encompass the entire battlefield. Since it can introduce various changes in circumstances, it may also be effective when you want to break up monotonous battles.",
+    "一定範囲のマスに対して、水・炎・毒といった属性を付加する技が存在する。そのマス上にいると、一定時間毎にダメージを受けたり回復したりする。": "There are Techs that add attributes such as water, fire, and poison to tiles within a certain area. While standing on such a tile, you periodically take damage or recover HP.",
+    "新桃太郎伝説": "New Momotaro Legend",
+    "普通のＤＱ型ターン制戦闘なのだが、天気の要素がある。例えば、雨が降っている時は特定の仲間・敵・術の強さに変動が起こる。": "It uses ordinary Dragon Quest-style turn-based battles, but includes weather. For example, when it is raining, the strength of certain allies, enemies, and spells changes.",
+    "似たようなものだと、ポケモンシリーズに天候を左右する技がある。": "The Pokémon series has similar Techs that affect the weather.",
+    "戦闘開始時にランダムで属性付きのマスが登場する。その上で技を使用する事で効果が変化する。": "Tiles with random attributes appear when battle begins. Using a Tech on one of them changes its effect.",
+    "テイルズオブジアビス": "Tales of the Abyss",
+    "魔法を使った後に、局所的に魔法陣が残る。その魔法陣の上に乗って、技を使用すると、対応する属性によって技が強化されるという要素（ＦＯＥ）がある。": "After magic is used, a magic circle remains in a limited area. There is an element (FOE) where using a Tech while standing on that magic circle strengthens the Tech according to its corresponding attribute.",
+    "フリゲだが、似たような要素だとセラフィックブルーが秀逸だと思う。こちらは戦闘フィールド全体に属性が付属する。": "It is a freeware game, but I think Seraphic Blue is an excellent example of a similar element. In this game, an attribute is applied to the entire battlefield.",
+    "まとめ": "Summary",
+    "時間と空間の２つの扱いを定めれば、戦闘システムの方向性はかなり固まる。僕的には、いずれ移動を伴うタイプの空間システムを構築してみたいが、技術的な難易度の高さが課題。": "Once you establish how to handle the two elements of time and space, the direction of the battle system becomes quite well defined. Personally, I would like to eventually build a spatial system involving movement, but its high technical difficulty remains a challenge.",
+    "あと、やったことないけどコレなんかもいいんではないかなと。": "Also, I have not tried it, but I think something like this might work well too."
+  }
+}

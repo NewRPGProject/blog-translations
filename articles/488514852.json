@@ -1,0 +1,941 @@
+{
+  "articleId": "488514852",
+  "sourceUrl": "https://newrpg.seesaa.net/article/488514852.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "e0127b1e66c5149c3b4ad26541f85c4e8cc62785b1027e064dae42ce4b494a05",
+  "translatedAt": "2026-08-30T12:24:58.911Z",
+  "title": "【RPG Design Guides】Battle Balance ④-2: The Boss Battle Cycle",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】戦闘バランス④-2 ボス戦のサイクル",
+      "sourceHash": "4e8b2eb5c3f38a9b73983f24e5eaa5a637b3e398a89f1686e8905009fd571a58",
+      "translation": "【RPG Design Guides】Battle Balance ④-2: The Boss Battle Cycle",
+      "contextHash": "4e8b2eb5c3f38a9b73983f24e5eaa5a637b3e398a89f1686e8905009fd571a58"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "以前、以下の記事でボス戦のバランス調整について考察した。",
+      "sourceHash": "8ad1b80d9b8230a107fdb6c79d176fa09cb6b70ae97d79b7e6ba0cd1f3ef9ea6",
+      "translation": "I previously discussed balancing boss battles in the following article.",
+      "contextHash": "8ad1b80d9b8230a107fdb6c79d176fa09cb6b70ae97d79b7e6ba0cd1f3ef9ea6"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "戦闘バランス④ ボス敵の設定",
+      "sourceHash": "f5723c661267a7616901cb0e371f9d6f5f617a8ea905d4e0902bcc2ecff050c2",
+      "translation": "Battle Balance ④: Setting Up Boss Enemies",
+      "contextHash": "f5723c661267a7616901cb0e371f9d6f5f617a8ea905d4e0902bcc2ecff050c2"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/206919474.html",
+      "sourceHash": "39d5daaede11306392c3689c070d20817f7e583a6e7654ae868be2d94d9f1b66",
+      "translation": "https://newrpg.seesaa.net/article/206919474.html",
+      "contextHash": "de445300c8f848e1990523908db6e39ea47a6772d03a2c6aa2ed82c04a639c15"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "なお、この記事を書いた2022/05/31の時点で１０年以上が経過している模様。月日の流れは早い……。",
+      "sourceHash": "78d743593ead069156aef6d647da8f4a715891bf1079813c3e897813c5c067ad",
+      "translation": "Incidentally, as of 2022/05/31, when I wrote that article, it seems that more than ten years had already passed. Time flies…",
+      "contextHash": "78d743593ead069156aef6d647da8f4a715891bf1079813c3e897813c5c067ad"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "ボス戦を面白くするためには、戦闘を単調化させないことが何より重要。基本はザコ戦と同じで、無闇に戦闘を長引かせないこと。特に何十ターンも同じ攻撃と回復を延々と繰り返し続けるような、長いだけの戦闘はつまらないの一言に尽きる。",
+      "sourceHash": "ed4c0cf98e0b2135269d1abedc716328b1d30afd472dcf0ea6ba054fb226b9a3",
+      "translation": "To make boss battles interesting, the most important thing is to avoid making them monotonous. The basic principle is the same as for regular battles: do not prolong combat unnecessarily. Battles that consist solely of endlessly repeating the same attacks and healing for dozens of turns are, in a word, boring.",
+      "contextHash": "ed4c0cf98e0b2135269d1abedc716328b1d30afd472dcf0ea6ba054fb226b9a3"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "……なんてことを書いていたけど、もう少し理論的に掘り下げてみたい。",
+      "sourceHash": "5d065985f485f855461d93880c98152798bacf4b84821ace33f8e927ed884807",
+      "translation": "…That’s what I wrote back then, but I’d like to explore the subject a little more theoretically.",
+      "contextHash": "5d065985f485f855461d93880c98152798bacf4b84821ace33f8e927ed884807"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ボス戦のサイクル",
+      "sourceHash": "c8dc141189f0738362987ff7b77ef8f2a8a98a351701a507292bf6dd1dfdedd6",
+      "translation": "The Boss Battle Cycle",
+      "contextHash": "c8dc141189f0738362987ff7b77ef8f2a8a98a351701a507292bf6dd1dfdedd6"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ボス戦のバランス調整において、まず考えたいのは「ボスの攻撃をプレイヤーが安定して受けられるか否か？」である。",
+      "sourceHash": "359d88a2295f6d4330852d563f2563f348b529dc5e4db926cff4cdc041e3c52c",
+      "translation": "When balancing a boss battle, the first thing to consider is: “Can the player consistently withstand the boss’s attacks?”",
+      "contextHash": "359d88a2295f6d4330852d563f2563f348b529dc5e4db926cff4cdc041e3c52c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "これは逆の事象――「プレイヤーの攻撃をボスがどの程度耐えられるか？」よりも優先して考えておきたい。",
+      "sourceHash": "8fa38d59b42572b451133a7a1c52fa195f86b031cfe68715aac1fc5796f87bbd",
+      "translation": "This should take priority over the opposite question: “How much of the player’s attacks can the boss withstand?”",
+      "contextHash": "8fa38d59b42572b451133a7a1c52fa195f86b031cfe68715aac1fc5796f87bbd"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "なぜかというのは、オーソドックスなＲＰＧのボス戦の特徴を考えてみれば分かりやすいだろう。",
+      "sourceHash": "8d255e3bf2c15fe697cbb7bf1b9c8c9f83d7c22abde752775e2d5fed1b5d86d1",
+      "translation": "The reason becomes clear when you consider the characteristics of a conventional RPG boss battle.",
+      "contextHash": "8d255e3bf2c15fe697cbb7bf1b9c8c9f83d7c22abde752775e2d5fed1b5d86d1"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ボスは一体、味方は複数人。",
+      "sourceHash": "1cfd554f036c9c22f3e3b88eec19e4b2cbc2b409c571a054bdf34940e1be70c3",
+      "translation": "There is one boss, but multiple allies.",
+      "contextHash": "1cfd554f036c9c22f3e3b88eec19e4b2cbc2b409c571a054bdf34940e1be70c3"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ボスのＨＰは味方の何倍も高い。十倍以上も当たり前。",
+      "sourceHash": "1f0d7a56f38b23f3048e7d0a0756e187da08f0ec55db0bd1871e9f7addfb2552",
+      "translation": "The boss’s HP is many times higher than the allies’. Ten times higher or more is not unusual.",
+      "contextHash": "1f0d7a56f38b23f3048e7d0a0756e187da08f0ec55db0bd1871e9f7addfb2552"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "味方は強力な回復能力を持ち、何度も使える。",
+      "sourceHash": "050912a0b1a7b597b90456323ae2afa001fd17feff99838f9f8a2242665d1d57",
+      "translation": "The allies have powerful healing abilities that they can use repeatedly.",
+      "contextHash": "050912a0b1a7b597b90456323ae2afa001fd17feff99838f9f8a2242665d1d57"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ボスは回復能力を持たないか、あっても限定的。",
+      "sourceHash": "b7e9e56c93800adc8931470d3b55f56e7478cf23cfcf91f59889682ce5822980",
+      "translation": "The boss either has no healing abilities or only limited ones.",
+      "contextHash": "b7e9e56c93800adc8931470d3b55f56e7478cf23cfcf91f59889682ce5822980"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "これらの特徴により、プレイヤーは「ボスの攻撃を受ける」→「回復する」→「合間に攻撃する」というサイクルを繰り返すことになる。そして、その繰り返しによってダメージを蓄積し、ボスを倒すという流れになるはずだ。",
+      "sourceHash": "1411072be3392c19a256fe45d4bd2fbcb0002298e5c71f537e767a75cec35122",
+      "translation": "Because of these characteristics, the player repeats the cycle of “taking the boss’s attack” → “healing” → “attacking in between.” The battle should then proceed by accumulating damage through this repetition until the boss is defeated.",
+      "contextHash": "1411072be3392c19a256fe45d4bd2fbcb0002298e5c71f537e767a75cec35122"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "これはドラクエ３の時代には確立されていた様式である。",
+      "sourceHash": "239573eebac3cdad96741933bd29c1db60a2c3aa444996429887ab8b05d44999",
+      "translation": "This was an established format by the time of Dragon Quest III.",
+      "contextHash": "239573eebac3cdad96741933bd29c1db60a2c3aa444996429887ab8b05d44999"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ストーリーと絡めて考察すれば「強大な人外の敵を人間達が力を合わせて倒す」という構図をゲームデザインに落とし込んだものといえそうだ。",
+      "sourceHash": "7826ec80279d7871776015472c598471b5470c7936bd1de8394f86c47808e47f",
+      "translation": "Viewed in relation to the story, it could be said to be a game-design implementation of the premise that “humans join forces to defeat a mighty inhuman enemy.”",
+      "contextHash": "7826ec80279d7871776015472c598471b5470c7936bd1de8394f86c47808e47f"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "例えば、剣で何十回と斬られても倒れない巨竜と、人間の戦士が同程度にタフならば違和感があるだろう。",
+      "sourceHash": "e9b276bf164479368d3cda3f9cf145437f0c4a481e711112531cf075c49c4555",
+      "translation": "For example, it would feel strange if a giant dragon that can withstand dozens of sword strikes were just as tough as a human warrior.",
+      "contextHash": "e9b276bf164479368d3cda3f9cf145437f0c4a481e711112531cf075c49c4555"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "そこでＨＰに大差をつけた上で、味方には回復能力を付与することでバランスを取るという仕組みである。",
+      "sourceHash": "accc06537d92cda181687e43c2db926aef0af3033b1c490eb48303230ac658e3",
+      "translation": "The system balances this by creating a large difference in HP and granting the allies healing abilities.",
+      "contextHash": "accc06537d92cda181687e43c2db926aef0af3033b1c490eb48303230ac658e3"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "※当前、例外も存在するが、有名なのはポケモンだろう。モンスター同士の戦いであるため、味方と敵の条件はほぼ同じ。ボス戦であっても短期決戦が基本となるため、必ずしも耐久側が優先事項にはならない。",
+      "sourceHash": "044ce514a541a8507d002963d8d94c238a5d941a59ecae66a86bfd03c1e0e6cc",
+      "translation": "※There are exceptions, of course, with Pokémon being the most famous example. Since it is a battle between monsters, the conditions for allies and enemies are almost the same. Even in boss battles, the basic approach is to settle things quickly, so durability is not necessarily the priority.",
+      "contextHash": "044ce514a541a8507d002963d8d94c238a5d941a59ecae66a86bfd03c1e0e6cc"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "これにより、サイクルを維持できるかどうかが、勝敗を分ける基準となることが分かる。難易度調整をする上で大きな目安となるだろう。",
+      "sourceHash": "7f3332e133ce904f42c3a2a40003ce75ff0bebb497acce748f6d9e42f6c881bf",
+      "translation": "This shows that whether the cycle can be maintained is a deciding factor in victory or defeat. It is likely to be an important guideline when adjusting difficulty.",
+      "contextHash": "7f3332e133ce904f42c3a2a40003ce75ff0bebb497acce748f6d9e42f6c881bf"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "そして、重要なのは「サイクルを安定して維持できる」ならば事実上、勝利は確定するということだ。",
+      "sourceHash": "444f6e00985a88204b5f42af2bb6b1ff098e4f5fc0a0d0e4ea3cea7ed6eda9ea",
+      "translation": "More importantly, if the cycle can be maintained consistently, victory is effectively guaranteed.",
+      "contextHash": "444f6e00985a88204b5f42af2bb6b1ff098e4f5fc0a0d0e4ea3cea7ed6eda9ea"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "つまり、『安定サイクル』が達成できた時点で、ボス戦は事実上の作業と化してしまう。これは見た目上、どんなに派手な演出や数値が飛び交っていても変わらない。",
+      "sourceHash": "f8a424d05b4c57f8f5a9cc9f480ee91ae708fb4c12d4c1f7a35de69a0f9ebdc3",
+      "translation": "In other words, once a “stable cycle” has been established, the boss battle effectively becomes a chore. This remains true no matter how flashy the visual effects or the numbers flying across the screen may be.",
+      "contextHash": "f8a424d05b4c57f8f5a9cc9f480ee91ae708fb4c12d4c1f7a35de69a0f9ebdc3"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "また、こうなると「プレイヤーの攻撃をボスがどの程度耐えられるか？」はほとんど問題にならない。「時間がかかるかかからないか」の違いでしかないからだ。",
+      "sourceHash": "bd3814823ca7513a2edbe14ced1a8ec6b5891005e245479510feb63898ba3939",
+      "translation": "Once this happens, “How much of the player’s attacks can the boss withstand?” is hardly an issue. It only determines whether the battle takes more or less time.",
+      "contextHash": "bd3814823ca7513a2edbe14ced1a8ec6b5891005e245479510feb63898ba3939"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※あくまで難易度面の問題であって、ゲームテンポ面では重大です。",
+      "sourceHash": "510c5662400d72d7e9d0345bd87aeb5e37bcaf7fbb194f120ed051b435141566",
+      "translation": "※This is only an issue in terms of difficulty, but it is significant in terms of game pace.",
+      "contextHash": "510c5662400d72d7e9d0345bd87aeb5e37bcaf7fbb194f120ed051b435141566"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "安定サイクルを崩そう",
+      "sourceHash": "20134a39a42df72a7105324aac4eb692b1ac2e315191fcdb38e12d48cac2aecd",
+      "translation": "Disrupt the Stable Cycle",
+      "contextHash": "20134a39a42df72a7105324aac4eb692b1ac2e315191fcdb38e12d48cac2aecd"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "では、具体的なバランス調整方法を考えてみよう。",
+      "sourceHash": "f5c4231830d532734534d6c7c757fa851ec532a68ec81db26447703736b1e424",
+      "translation": "Now, let’s consider some specific ways to adjust the balance.",
+      "contextHash": "f5c4231830d532734534d6c7c757fa851ec532a68ec81db26447703736b1e424"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "例えば、以下のケースはほぼ完全な安定サイクルとなって、勝ちは確定したも同然である。",
+      "sourceHash": "68abf00977592458dd6896c8f7b8f254615a5ba3917d2f42da794f04b2d323e2",
+      "translation": "For example, the following scenario creates an almost perfect stable cycle, making victory practically certain.",
+      "contextHash": "68abf00977592458dd6896c8f7b8f254615a5ba3917d2f42da794f04b2d323e2"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "ターン制",
+      "sourceHash": "ff2e11d50cd06d9dc7d95124cc12cee7de41c3c43e92797ea84acae60154cabc",
+      "translation": "Turn-based system",
+      "contextHash": "ff2e11d50cd06d9dc7d95124cc12cee7de41c3c43e92797ea84acae60154cabc"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ボスは単体で出現、かつ一回行動＆単体攻撃のみ。",
+      "sourceHash": "9eb199630f7cdbd531d27b9d4482eac9fccca83cc2e6e5492b7d76e052c3e03d",
+      "translation": "The boss appears alone and only takes one action, using single-target attacks.",
+      "contextHash": "9eb199630f7cdbd531d27b9d4482eac9fccca83cc2e6e5492b7d76e052c3e03d"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "最もＨＰが低い味方キャラのＨＰが１００",
+      "sourceHash": "9b6f7774e0175b714863a4a1a350c4ea3d4ad816055a3c1a7a6b07217c86e07b",
+      "translation": "The ally with the lowest HP has 100 HP.",
+      "contextHash": "9b6f7774e0175b714863a4a1a350c4ea3d4ad816055a3c1a7a6b07217c86e07b"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "受ける最大ダメージが９９",
+      "sourceHash": "0ccc5c44a4ad3658d48fd749bcb9539eb7116d9adf5a3cb784fd9ed9de128d3a",
+      "translation": "The maximum damage taken is 99.",
+      "contextHash": "0ccc5c44a4ad3658d48fd749bcb9539eb7116d9adf5a3cb784fd9ed9de128d3a"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "味方は回復魔法で全回復できる。",
+      "sourceHash": "e8fd03e19f8d364087ec4aa008d1ad24a692acc9629344d826557e25c7a044eb",
+      "translation": "The allies can fully recover with healing magic.",
+      "contextHash": "e8fd03e19f8d364087ec4aa008d1ad24a692acc9629344d826557e25c7a044eb"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "回復魔法は３０回使える。",
+      "sourceHash": "84feb4941ffaa48aa0acf0461e72c30df6ac31196bd80cb5d23cb6e97d35ef25",
+      "translation": "The healing magic can be used 30 times.",
+      "contextHash": "84feb4941ffaa48aa0acf0461e72c30df6ac31196bd80cb5d23cb6e97d35ef25"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "回復役は必ず先制できる。",
+      "sourceHash": "ad9fa7699039077ec126e4644e839c3857a3d82d30b2332f672e1c9ff35b57ef",
+      "translation": "The healer can always act first.",
+      "contextHash": "ad9fa7699039077ec126e4644e839c3857a3d82d30b2332f672e1c9ff35b57ef"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "唯一の不安定要素は回復魔法の回数制限（３０回）だけ。普通のＲＰＧならば、十分な安定状態と言ってもいいだろう。",
+      "sourceHash": "ba80ee8d67811f5b79626e9200677d2a354c90f1adccdf40b3e5bc6946911039",
+      "translation": "The only unstable element is the limit of 30 uses for the healing magic. In a typical RPG, this could still be considered a sufficiently stable situation.",
+      "contextHash": "ba80ee8d67811f5b79626e9200677d2a354c90f1adccdf40b3e5bc6946911039"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "理論上、回復魔法を３０回使い切るように敵の耐久度を調整すれば、ギリギリの戦いになる。……が、まず面白くならないのでやめよう。３０回は明らかに長すぎる。",
+      "sourceHash": "4733dc1ef49aaacfc0e49da116ece26b422679b55035b008841d2e33da2e71e1",
+      "translation": "In theory, adjusting the enemy’s durability so that all 30 uses of the healing magic are needed would create a close battle. …But don’t do that—it wouldn’t be fun. Thirty uses is clearly far too many.",
+      "contextHash": "4733dc1ef49aaacfc0e49da116ece26b422679b55035b008841d2e33da2e71e1"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "当然ながら、これでは戦闘に緊張感がなく同じことを延々と繰り返すだけである。面白くすることは難しいだろう。",
+      "sourceHash": "22e607451a5ac1be79d1acb1140ecba981b65a99c212792a3106a3e3c06cddc9",
+      "translation": "Naturally, this would make the battle devoid of tension and reduce it to endlessly repeating the same actions. It would be difficult to make that fun.",
+      "contextHash": "22e607451a5ac1be79d1acb1140ecba981b65a99c212792a3106a3e3c06cddc9"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "そこで、少し不安定となるように崩してみよう。",
+      "sourceHash": "ed38590fc7210de57590853f23098109443bd01cfa4dbedf04d0981b8182737f",
+      "translation": "So let’s disrupt the cycle to make it somewhat unstable.",
+      "contextHash": "ed38590fc7210de57590853f23098109443bd01cfa4dbedf04d0981b8182737f"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "例えば、以下のような手段が考えられる。",
+      "sourceHash": "920b503309bf30acb9217611e0babbcac62cbbe137a2a069c5310d68d541e968",
+      "translation": "For example, the following approaches are possible.",
+      "contextHash": "920b503309bf30acb9217611e0babbcac62cbbe137a2a069c5310d68d541e968"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "敵味方の行動順にランダム性を出し、死人が出る可能性を生む。",
+      "sourceHash": "afb83f0c14a9da209ebba04e999a38a66713988c44f7bb87e6a305d45ad52114",
+      "translation": "Add randomness to the action order of enemies and allies, creating the possibility of someone dying.",
+      "contextHash": "afb83f0c14a9da209ebba04e999a38a66713988c44f7bb87e6a305d45ad52114"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "ボスを二回行動にしたり、お供を付けたり。",
+      "sourceHash": "1bbe6d841bf59f88861a3f8e9edaeaae0c9ab8a90f5053e25685fbccd3c2d93f",
+      "translation": "Give the boss two actions per turn or add accompanying enemies.",
+      "contextHash": "1bbe6d841bf59f88861a3f8e9edaeaae0c9ab8a90f5053e25685fbccd3c2d93f"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "ＨＰの低いキャラに攻撃が集中すると倒れるようにする。",
+      "sourceHash": "1378915381060955c4301ecdfa28d9150a3221a7917c41e0694036bfa4b9d950",
+      "translation": "Make a character fall if attacks are concentrated on one with low HP.",
+      "contextHash": "1378915381060955c4301ecdfa28d9150a3221a7917c41e0694036bfa4b9d950"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "ターンによってボスの攻撃の強さに格差をつける。",
+      "sourceHash": "45fb34794b274c8729ae2f89ae26fc9daf31c065a73a76f1690de8dcdc5b8fee",
+      "translation": "Create differences in the strength of the boss’s attacks from turn to turn.",
+      "contextHash": "45fb34794b274c8729ae2f89ae26fc9daf31c065a73a76f1690de8dcdc5b8fee"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "時折、強力な全体攻撃を使ってくるなど。",
+      "sourceHash": "b0fbc45b916cb41881de87d0366940d69aa4cd61eb8fac169e9aef595acbe2fd",
+      "translation": "Have the boss occasionally use a powerful area-of-effect attack, for example.",
+      "contextHash": "b0fbc45b916cb41881de87d0366940d69aa4cd61eb8fac169e9aef595acbe2fd"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "ボスのＨＰが減ると行動が強化される。",
+      "sourceHash": "691b1989e97a82c108238b4edb62692847fae7846772e1a6867e7cbba7e53d73",
+      "translation": "Strengthen the boss’s actions as its HP decreases.",
+      "contextHash": "691b1989e97a82c108238b4edb62692847fae7846772e1a6867e7cbba7e53d73"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "味方の回復魔法の使用回数をもっと限定する。",
+      "sourceHash": "28d8d0cfb23c61d1125930e294b8afd7eb75e9eedfcbc6554205c7b0726a9bf5",
+      "translation": "Further limit the number of times the allies can use healing magic.",
+      "contextHash": "28d8d0cfb23c61d1125930e294b8afd7eb75e9eedfcbc6554205c7b0726a9bf5"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "ボスに異常や補助を使わせて、こちらの計算を崩す。",
+      "sourceHash": "76dad5a13e0ec7d63a2e9190ac16680506173097bed83b29b58395d5c5ae73e3",
+      "translation": "Have the boss inflict status ailments or use support abilities to disrupt the player’s calculations.",
+      "contextHash": "76dad5a13e0ec7d63a2e9190ac16680506173097bed83b29b58395d5c5ae73e3"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "ボス戦前の戦闘やダンジョンで消耗させる。",
+      "sourceHash": "8b66a099489da62ff505764425e3d82b02d6535e49acdcc5ba9490fb3b2e9212",
+      "translation": "Wear the party down through battles or a dungeon before the boss battle.",
+      "contextHash": "8b66a099489da62ff505764425e3d82b02d6535e49acdcc5ba9490fb3b2e9212"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "わずかな不安定感を演出するだけでも、意外と緊張感が出る。",
+      "sourceHash": "a9a7cf3cd08df7b9e0103f4d417754c7aad18a11e5361c2e4be49221e4f9d18e",
+      "translation": "Even creating just a slight sense of instability can produce surprising amounts of tension.",
+      "contextHash": "a9a7cf3cd08df7b9e0103f4d417754c7aad18a11e5361c2e4be49221e4f9d18e"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "例えば、ドラクエシリーズ（正確には４以降）で隊列の４番目のキャラが狙われる確率は約１０％である。",
+      "sourceHash": "ef6560214acce3e4dbf793a3c45649d5f67f6043c06a16bc3e06cc198b44e376",
+      "translation": "For example, in the Dragon Quest series (more precisely, from IV onward), the chance of the fourth character in the formation being targeted is approximately 10%.",
+      "contextHash": "ef6560214acce3e4dbf793a3c45649d5f67f6043c06a16bc3e06cc198b44e376"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "最もＨＰの低い４番目のキャラにボス（二回行動）の攻撃が連続ヒットした場合、死亡するバランスにしたとしよう。",
+      "sourceHash": "8223193b842eada2cc092b95d9026303badc7d8d2f0e9e8e6614b1e466eedded",
+      "translation": "Suppose the balance is such that the character with the lowest HP—the fourth character—will die if hit consecutively by the boss's attacks (the boss acts twice).",
+      "contextHash": "8223193b842eada2cc092b95d9026303badc7d8d2f0e9e8e6614b1e466eedded"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "一見、厳しそうに見えるが、その確率は１ターン辺りわずか１％。",
+      "sourceHash": "2041e9a0c1b97fd0a903966d9d2dc7b7d46def2d343b01412fcb45fa757edf08",
+      "translation": "It may seem harsh at first glance, but the chance of this happening is only 1% per turn.",
+      "contextHash": "2041e9a0c1b97fd0a903966d9d2dc7b7d46def2d343b01412fcb45fa757edf08"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ボス戦が５～１０ターン程度で終わると想定した場合、それが原因でプレイヤーが全滅まで追い込まれる確率はほとんどなかったりする。",
+      "sourceHash": "4fd55aeabfbe01ab46e13f077d0efebb73a346f4ec5def81361d3ce68dc47db9",
+      "translation": "If we assume that a boss battle ends in roughly five to ten turns, the chance of this causing the player to be driven to a party wipe may be almost nonexistent.",
+      "contextHash": "4fd55aeabfbe01ab46e13f077d0efebb73a346f4ec5def81361d3ce68dc47db9"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "このようにして、理不尽でない範囲で崩しを入れてみよう。",
+      "sourceHash": "106e1905ad178447adccb6a63910146a5aeed832ce4d2e74b9615f09339002d2",
+      "translation": "In this way, try introducing disruptions within a reasonable range.",
+      "contextHash": "106e1905ad178447adccb6a63910146a5aeed832ce4d2e74b9615f09339002d2"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "この崩しは厳密である必要はない。",
+      "sourceHash": "1a84db698146b291773ccb0ee778699fc5a5f8c2ace7ad6529fc4c3fda8a6486",
+      "translation": "This disruption does not need to be precise.",
+      "contextHash": "1a84db698146b291773ccb0ee778699fc5a5f8c2ace7ad6529fc4c3fda8a6486"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "事実上の安定状態でも、ほどよいランダム性があれば意外と緊張感が出たりする。プレイヤーはデータを完全に把握していないため、安定サイクルに入ったかどうかは容易には分からないためだ。",
+      "sourceHash": "ede9d4c652cfadca510b25b9e6c02642bb43e7d37f3e101b7c52a9e31fd53d3e",
+      "translation": "Even in a de facto stable state, a moderate degree of randomness can create a surprising amount of tension. Since players do not have a complete grasp of the data, they cannot easily tell whether they have entered a stable cycle.",
+      "contextHash": "ede9d4c652cfadca510b25b9e6c02642bb43e7d37f3e101b7c52a9e31fd53d3e"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "逆に言えば、「パターン入った！」と簡単に分かるようでは困るということでもある。",
+      "sourceHash": "62921e4ec42a8fb32cdc8a4d0b024f800d35cc56518e228dc91f60b1af574e02",
+      "translation": "In other words, it would be a problem if players could easily tell, “I’m in the pattern now!”",
+      "contextHash": "62921e4ec42a8fb32cdc8a4d0b024f800d35cc56518e228dc91f60b1af574e02"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "強力すぎる回復の弊害",
+      "sourceHash": "1625d8b23722458953eff4925cc5ceda5966c0373685defb3c7b586f0313ea68",
+      "translation": "The Drawbacks of Overly Powerful Healing",
+      "contextHash": "1625d8b23722458953eff4925cc5ceda5966c0373685defb3c7b586f0313ea68"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "何度も似たようなことを書いているけれど、全体回復、蘇生、ＭＰ回復が容易な調整だった場合、ちょっとやそっとでは安定サイクルを崩せないため調整が難しくなる。",
+      "sourceHash": "b01b7da1d02029f676a7beb50c14002f01180fab75dc43d531b19af332af9a43",
+      "translation": "I have written similar things many times, but if overall healing, revival, and MP recovery are easy to use, it becomes difficult to balance the battle because the stable cycle cannot be disrupted by just any minor setback.",
+      "contextHash": "b01b7da1d02029f676a7beb50c14002f01180fab75dc43d531b19af332af9a43"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "それは今回の安定サイクル理論を元に考えれば、より明白になる。",
+      "sourceHash": "76eb4b9e62377093feb43a565d15a2f7444665b400ef2ee2f995abb977fbe49e",
+      "translation": "This becomes even clearer when considered in terms of the stable cycle theory discussed here.",
+      "contextHash": "76eb4b9e62377093feb43a565d15a2f7444665b400ef2ee2f995abb977fbe49e"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "例えば、蘇生アイテムが誰でも簡単に使えるようなバランスならば、単体即死攻撃ですらサイクルを崩壊させられない。",
+      "sourceHash": "96de21ab481bac407109cb56ce2a73dd6485aa57819618fdfe16367fc5acb094",
+      "translation": "For example, if revival items are balanced so that anyone can use them easily, even a single-target instant-death attack cannot collapse the cycle.",
+      "contextHash": "96de21ab481bac407109cb56ce2a73dd6485aa57819618fdfe16367fc5acb094"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "従って、ボス戦が容易に作業となり得る危険性を秘めている。",
+      "sourceHash": "29c89d63337f9745ca08b8860d31ca99528c37f138fb3caf77810444b2335719",
+      "translation": "Consequently, this creates the risk of boss battles easily turning into routine work.",
+      "contextHash": "29c89d63337f9745ca08b8860d31ca99528c37f138fb3caf77810444b2335719"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "それ以上の攻撃手段をボスに設定するとなると、かなり際どいところを突くしかなくなってくる。一歩間違えれば、ライトユーザお断りの理不尽ゲーだ。",
+      "sourceHash": "b16d860a0e90009163e921c671c85802f1aa1f8703b6614c6bf993bd629035e7",
+      "translation": "If you give the boss even more powerful means of attack, you will have no choice but to push things to the very edge. One mistake, and you end up with an unfair game that is not for casual players.",
+      "contextHash": "b16d860a0e90009163e921c671c85802f1aa1f8703b6614c6bf993bd629035e7"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "また、「強力な全体攻撃」→「強力な全体回復」の繰り返しや「単体即死攻撃」→「蘇生」の繰り返しは非常に目立つ。回復側に選択の余地が少ないため、単調になりやすい。必然的にパターンに入ったことが、プレイヤーに見抜かれやすいのも注意すべき点だ。",
+      "sourceHash": "c5706f0d3c294cf662e7489a820adfd2be649b0a1eb38370566047f21a80450c",
+      "translation": "Also, repeating “powerful area attack” → “powerful area healing” or “single-target instant-death attack” → “revival” is extremely conspicuous. Since the healer has few choices, the battle can easily become monotonous. It is also important to note that players will consequently be able to see through the pattern easily.",
+      "contextHash": "c5706f0d3c294cf662e7489a820adfd2be649b0a1eb38370566047f21a80450c"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "その他についても、以下の記事で散々書いたので割愛する。",
+      "sourceHash": "820331cd77680c3a5cef5c56cfc5879215cac50dbada05fabb1ac7c396221f84",
+      "translation": "As for the other points, I have covered them extensively in the following article, so I will omit them here.",
+      "contextHash": "820331cd77680c3a5cef5c56cfc5879215cac50dbada05fabb1ac7c396221f84"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "回復魔法の問題点",
+      "sourceHash": "ee9ba3cad381a5c5d195cf1520eecd73d9e8b11701b96e5254b7066991253f57",
+      "translation": "Problems with Healing Magic",
+      "contextHash": "ee9ba3cad381a5c5d195cf1520eecd73d9e8b11701b96e5254b7066991253f57"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/462407181.html",
+      "sourceHash": "ba7664c0c1d440bfcfb0a48e824033ecf66bc541f8777fc1f4ec39cf7e3c82d6",
+      "translation": "https://newrpg.seesaa.net/article/462407181.html",
+      "contextHash": "33bdae264c910d2d3a31ac9af9c4b202d56ea6dd74f05e36a54ed6fe1b19228f"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "プレイヤーの戦術性",
+      "sourceHash": "098f109fb68925aa4528b350ee7130487803271dac3a075a43d11ef5f40dc133",
+      "translation": "Player Tactics",
+      "contextHash": "098f109fb68925aa4528b350ee7130487803271dac3a075a43d11ef5f40dc133"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "さて、ある程度まで安定サイクルを崩せたとする。",
+      "sourceHash": "b8510116c3878f59d8970073826ba14eae69ff46455625c0b9d4b6deb106c5d7",
+      "translation": "Now, suppose that you have managed to disrupt the stable cycle to some extent.",
+      "contextHash": "b8510116c3878f59d8970073826ba14eae69ff46455625c0b9d4b6deb106c5d7"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "無策では確実な勝利を望めないとなると、プレイヤーは勝率を高める対策を練る必要がある。そして、そこに戦術性が生まれる。",
+      "sourceHash": "15349b6a2ca3713a116d93cb0e1a0c52c21f4b89c9b21c2bc51e84b91fcd043f",
+      "translation": "If players cannot expect a guaranteed victory without a plan, they need to devise countermeasures to improve their chances of winning. This is where tactical depth emerges.",
+      "contextHash": "15349b6a2ca3713a116d93cb0e1a0c52c21f4b89c9b21c2bc51e84b91fcd043f"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "防具を見直す。",
+      "sourceHash": "f90dba08437e7d86661b8399b4b79f3e63492bead972fd3653761d375eaa186f",
+      "translation": "Review your armor.",
+      "contextHash": "f90dba08437e7d86661b8399b4b79f3e63492bead972fd3653761d375eaa186f"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "異常で敵の攻撃を妨害する。",
+      "sourceHash": "0243bfeebcfc862693ce2c84569dcafb8c6373f049a75b77d82b3f4323791772",
+      "translation": "Disrupt the enemy's attacks with status ailments.",
+      "contextHash": "0243bfeebcfc862693ce2c84569dcafb8c6373f049a75b77d82b3f4323791772"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "補助で味方の防御を強化する。",
+      "sourceHash": "ce6263d05d7a1caf1abd966b1ac4de1e00a8be7c46bf60dc12ccd8e1919df9d2",
+      "translation": "Strengthen your allies' defense with support abilities.",
+      "contextHash": "ce6263d05d7a1caf1abd966b1ac4de1e00a8be7c46bf60dc12ccd8e1919df9d2"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "お供がいる場合はお供を倒し、敵の戦力を削る。",
+      "sourceHash": "48fbee0ce33172c2a7965e12577e7fabbc5e3a604fe3f91e82cd5ac4accf1b02",
+      "translation": "If there are minions, defeat them to reduce the enemy's strength.",
+      "contextHash": "48fbee0ce33172c2a7965e12577e7fabbc5e3a604fe3f91e82cd5ac4accf1b02"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "節約しながら、回復魔法を使う。",
+      "sourceHash": "890498fc19bc68739739a5819e9bf906e16975a3d0a1a67bccd911a96be0ce77",
+      "translation": "Use healing magic while conserving resources.",
+      "contextHash": "890498fc19bc68739739a5819e9bf906e16975a3d0a1a67bccd911a96be0ce77"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "ピンチに防御する。",
+      "sourceHash": "8a46796ed83eb8795e774a12aa61e0f635d59a8dc8c2f031b8a2f1733fb8173e",
+      "translation": "Guard when in a pinch.",
+      "contextHash": "8a46796ed83eb8795e774a12aa61e0f635d59a8dc8c2f031b8a2f1733fb8173e"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "やられる前にやる。",
+      "sourceHash": "33320114a6d91d77b8f757caea4f6023ffb3094b0452af0cdc5797a2080f83a5",
+      "translation": "Defeat them before they defeat you.",
+      "contextHash": "33320114a6d91d77b8f757caea4f6023ffb3094b0452af0cdc5797a2080f83a5"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "無論、プレイヤーが最適解を取れば、理論上１００％勝ててしまう調整でも問題ない。大事なのは、何の工夫もなく安定状態にならないことだ。",
+      "sourceHash": "692bb61c61cf07f1a8c05b6ff96b065166b9973e8c9be02662c555f905c7b2b2",
+      "translation": "Of course, there is no problem with a balance in which players can theoretically win 100% of the time if they use the optimal strategy. What matters is that they cannot reach a stable state without making any effort.",
+      "contextHash": "692bb61c61cf07f1a8c05b6ff96b065166b9973e8c9be02662c555f905c7b2b2"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "この中で最も基本的な対策は「やられる前にやる」である。",
+      "sourceHash": "cc87d33c2f4b5c4cc6da157e0ccbd9b0be0d2c038a659826ecb3ccdde6647e79",
+      "translation": "The most basic countermeasure among these is “defeat them before they defeat you.”",
+      "contextHash": "cc87d33c2f4b5c4cc6da157e0ccbd9b0be0d2c038a659826ecb3ccdde6647e79"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "これは最初に掲示した逆の事象――「プレイヤーの攻撃をボスがどの程度耐えられるか？」に対応する。",
+      "sourceHash": "d251798858bc2453566325321fdf73c0e3a774f6cdb8327bace8efd2af269b95",
+      "translation": "This corresponds to the converse of the question posed at the beginning: “How much damage can the boss withstand from the player's attacks?”",
+      "contextHash": "d251798858bc2453566325321fdf73c0e3a774f6cdb8327bace8efd2af269b95"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "その内実も様々で、ダメージ効率の高い技を模索したり、武器を整えたりといった選択肢がある。",
+      "sourceHash": "b5a95615e778aef9c343edb5bcc7ee85d1c0af77a406a7539ab035f67795ce23",
+      "translation": "There are various ways to do this, such as searching for abilities with high damage efficiency or preparing better weapons.",
+      "contextHash": "b5a95615e778aef9c343edb5bcc7ee85d1c0af77a406a7539ab035f67795ce23"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "そして、これによって、プレイヤーが勝利するための戦術の軸が倍になる。戦術性を高める上ではかなり有用だ。",
+      "sourceHash": "cb269456249618042d9b8dd404ce659fa7ed114e0b51cbc03558d44c9134097d",
+      "translation": "This doubles the number of tactical approaches available to players seeking victory. It is highly useful for increasing tactical depth.",
+      "contextHash": "cb269456249618042d9b8dd404ce659fa7ed114e0b51cbc03558d44c9134097d"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "そのため、ボス戦は「やられる前にやる」がある程度成り立つバランスを心がけておくとよいだろう。基本は過度にボスをしぶとくしないこと。これはゲームテンポをよくする効果も得られる。",
+      "sourceHash": "bb9eedb689808ec223482fc20d1be8318a1b1c57865809117c053b71700236ee",
+      "translation": "Therefore, it is a good idea to design boss battles with a balance in which “defeat them before they defeat you” is viable to some extent. The basic principle is not to make the boss excessively tough. This also helps improve the game's pace.",
+      "contextHash": "bb9eedb689808ec223482fc20d1be8318a1b1c57865809117c053b71700236ee"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "ボスがしぶとすぎると「やられる前にやる」が成り立たなくなる。結果、敵の攻撃をしのぎ切る以外の選択肢がなくなってしまう。",
+      "sourceHash": "786e35d1776315483cbfe596db41a8e7498dd5d39d5e96b6e1e24494622c0e62",
+      "translation": "If the boss is too tough, “defeat them before they defeat you” is no longer viable. As a result, players are left with no choice but to endure the enemy's attacks.",
+      "contextHash": "786e35d1776315483cbfe596db41a8e7498dd5d39d5e96b6e1e24494622c0e62"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "そうなると、戦闘が単調になってしまう上に、戦闘テンポも悪化するので注意したい。",
+      "sourceHash": "2d9a191895697e4202b71dad545a214c5df08afdbbf02ddec4a693e13aa641c8",
+      "translation": "When that happens, the battle becomes monotonous and its pace deteriorates, so be careful.",
+      "contextHash": "2d9a191895697e4202b71dad545a214c5df08afdbbf02ddec4a693e13aa641c8"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "まとめ",
+      "sourceHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72",
+      "translation": "Conclusion",
+      "contextHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "今回の記事で、面白いボス戦とつまらないボス戦の一つの境界線を示せたと思う。",
+      "sourceHash": "497e4ee751d065991c6ad9efe4914d0564f68493f3d456dd7b01efef376e3be7",
+      "translation": "I believe this article has shown one dividing line between interesting and boring boss battles.",
+      "contextHash": "497e4ee751d065991c6ad9efe4914d0564f68493f3d456dd7b01efef376e3be7"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "現行のオーソドックスなＲＰＧを何も考えず踏襲すると、この安定サイクルに陥りやすい。面白い戦闘を目指すならば、何らかの崩しを入れてみよう。",
+      "sourceHash": "1850e34ad9287310496f131cc4d31f86520c0947a332a90ad511baa5e1e02592",
+      "translation": "If you thoughtlessly follow the current conventions of orthodox RPGs, you are likely to fall into this stable cycle. If you want to create interesting battles, try introducing some kind of disruption.",
+      "contextHash": "1850e34ad9287310496f131cc4d31f86520c0947a332a90ad511baa5e1e02592"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "もちろんポケモンのようにゲームデザインの段階で崩すのも面白いだろう。",
+      "sourceHash": "c4c7c063aa3fe4e5f5fc4a13492249f647911a1b63cee07425c3e74a5acb709b",
+      "translation": "Of course, it could also be interesting to disrupt the cycle at the game design stage, as Pokémon does.",
+      "contextHash": "c4c7c063aa3fe4e5f5fc4a13492249f647911a1b63cee07425c3e74a5acb709b"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "なお、ストーリー重視などで難易度が低い作品を目指す場合や、重要度の低いボス戦を難しくしたくない場合は、無理に安定サイクルを崩す必要はない。そういった場合も長期戦でテンポが悪くならないようにだけ注意しておきたい。",
+      "sourceHash": "a0277d51c9bd82cd160595ad5a42724421c4f1534b2b271d274273b9eae65867",
+      "translation": "However, if you are aiming for a low-difficulty game, such as one focused on its story, or if you do not want to make battles against less important bosses difficult, there is no need to forcefully disrupt the stable cycle. Even in such cases, you should take care to prevent long battles from harming the pace.",
+      "contextHash": "a0277d51c9bd82cd160595ad5a42724421c4f1534b2b271d274273b9eae65867"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]ボス戦のサイクル[[/LINK_1]]",
+      "sourceHash": "e559a0c2086c6262f4b78163bf0fb1b51ccd633ade8ce3aff2ddb39c3cb2917e",
+      "parts": [
+        {
+          "source": "ボス戦のサイクル",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Boss Battle Cycles[[/LINK_1]]",
+      "contextHash": "e559a0c2086c6262f4b78163bf0fb1b51ccd633ade8ce3aff2ddb39c3cb2917e"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]安定サイクルを崩そう[[/LINK_1]]",
+      "sourceHash": "2821be031aa4dd9dd494ca572759158d49ed8075a5ad5038dea6d2bd210fc9f3",
+      "parts": [
+        {
+          "source": "安定サイクルを崩そう",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disrupting Stable Cycles[[/LINK_1]]",
+      "contextHash": "2821be031aa4dd9dd494ca572759158d49ed8075a5ad5038dea6d2bd210fc9f3"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]強力すぎる回復の弊害[[/LINK_1]]",
+      "sourceHash": "ec59720873bed6c02c8f84c84a56d86b8f6121fa8195c807fd61e163e7fe1f0b",
+      "parts": [
+        {
+          "source": "強力すぎる回復の弊害",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The Drawbacks of Overly Powerful Healing[[/LINK_1]]",
+      "contextHash": "ec59720873bed6c02c8f84c84a56d86b8f6121fa8195c807fd61e163e7fe1f0b"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プレイヤーの戦術性[[/LINK_1]]",
+      "sourceHash": "bc40d3bf6e5ab1c43007b11a6c3a46fb58a3a9caa081f43bb54b87cbc054b3d9",
+      "parts": [
+        {
+          "source": "プレイヤーの戦術性",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Player Strategy[[/LINK_1]]",
+      "contextHash": "bc40d3bf6e5ab1c43007b11a6c3a46fb58a3a9caa081f43bb54b87cbc054b3d9"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]まとめ[[/LINK_1]]",
+      "sourceHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de",
+      "parts": [
+        {
+          "source": "まとめ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Summary[[/LINK_1]]",
+      "contextHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Design Guides Table of Contents[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "以前、以下の記事でボス戦のバランス調整について考察した。": "I previously discussed balancing boss battles in the following article.",
+    "戦闘バランス④ ボス敵の設定": "Battle Balance ④: Setting Up Boss Enemies",
+    "https://newrpg.seesaa.net/article/206919474.html": "https://newrpg.seesaa.net/article/206919474.html",
+    "なお、この記事を書いた2022/05/31の時点で１０年以上が経過している模様。月日の流れは早い……。": "Incidentally, as of 2022/05/31, when I wrote that article, it seems that more than ten years had already passed. Time flies…",
+    "ボス戦を面白くするためには、戦闘を単調化させないことが何より重要。基本はザコ戦と同じで、無闇に戦闘を長引かせないこと。特に何十ターンも同じ攻撃と回復を延々と繰り返し続けるような、長いだけの戦闘はつまらないの一言に尽きる。": "To make boss battles interesting, the most important thing is to avoid making them monotonous. The basic principle is the same as for regular battles: do not prolong combat unnecessarily. Battles that consist solely of endlessly repeating the same attacks and healing for dozens of turns are, in a word, boring.",
+    "……なんてことを書いていたけど、もう少し理論的に掘り下げてみたい。": "…That’s what I wrote back then, but I’d like to explore the subject a little more theoretically.",
+    "目次": "Table of Contents",
+    "ボス戦のサイクル": "The Boss Battle Cycle",
+    "ボス戦のバランス調整において、まず考えたいのは「ボスの攻撃をプレイヤーが安定して受けられるか否か？」である。": "When balancing a boss battle, the first thing to consider is: “Can the player consistently withstand the boss’s attacks?”",
+    "これは逆の事象――「プレイヤーの攻撃をボスがどの程度耐えられるか？」よりも優先して考えておきたい。": "This should take priority over the opposite question: “How much of the player’s attacks can the boss withstand?”",
+    "なぜかというのは、オーソドックスなＲＰＧのボス戦の特徴を考えてみれば分かりやすいだろう。": "The reason becomes clear when you consider the characteristics of a conventional RPG boss battle.",
+    "ボスは一体、味方は複数人。": "There is one boss, but multiple allies.",
+    "ボスのＨＰは味方の何倍も高い。十倍以上も当たり前。": "The boss’s HP is many times higher than the allies’. Ten times higher or more is not unusual.",
+    "味方は強力な回復能力を持ち、何度も使える。": "The allies have powerful healing abilities that they can use repeatedly.",
+    "ボスは回復能力を持たないか、あっても限定的。": "The boss either has no healing abilities or only limited ones.",
+    "これらの特徴により、プレイヤーは「ボスの攻撃を受ける」→「回復する」→「合間に攻撃する」というサイクルを繰り返すことになる。そして、その繰り返しによってダメージを蓄積し、ボスを倒すという流れになるはずだ。": "Because of these characteristics, the player repeats the cycle of “taking the boss’s attack” → “healing” → “attacking in between.” The battle should then proceed by accumulating damage through this repetition until the boss is defeated.",
+    "これはドラクエ３の時代には確立されていた様式である。": "This was an established format by the time of Dragon Quest III.",
+    "ストーリーと絡めて考察すれば「強大な人外の敵を人間達が力を合わせて倒す」という構図をゲームデザインに落とし込んだものといえそうだ。": "Viewed in relation to the story, it could be said to be a game-design implementation of the premise that “humans join forces to defeat a mighty inhuman enemy.”",
+    "例えば、剣で何十回と斬られても倒れない巨竜と、人間の戦士が同程度にタフならば違和感があるだろう。": "For example, it would feel strange if a giant dragon that can withstand dozens of sword strikes were just as tough as a human warrior.",
+    "そこでＨＰに大差をつけた上で、味方には回復能力を付与することでバランスを取るという仕組みである。": "The system balances this by creating a large difference in HP and granting the allies healing abilities.",
+    "※当前、例外も存在するが、有名なのはポケモンだろう。モンスター同士の戦いであるため、味方と敵の条件はほぼ同じ。ボス戦であっても短期決戦が基本となるため、必ずしも耐久側が優先事項にはならない。": "※There are exceptions, of course, with Pokémon being the most famous example. Since it is a battle between monsters, the conditions for allies and enemies are almost the same. Even in boss battles, the basic approach is to settle things quickly, so durability is not necessarily the priority.",
+    "これにより、サイクルを維持できるかどうかが、勝敗を分ける基準となることが分かる。難易度調整をする上で大きな目安となるだろう。": "This shows that whether the cycle can be maintained is a deciding factor in victory or defeat. It is likely to be an important guideline when adjusting difficulty.",
+    "そして、重要なのは「サイクルを安定して維持できる」ならば事実上、勝利は確定するということだ。": "More importantly, if the cycle can be maintained consistently, victory is effectively guaranteed.",
+    "つまり、『安定サイクル』が達成できた時点で、ボス戦は事実上の作業と化してしまう。これは見た目上、どんなに派手な演出や数値が飛び交っていても変わらない。": "In other words, once a “stable cycle” has been established, the boss battle effectively becomes a chore. This remains true no matter how flashy the visual effects or the numbers flying across the screen may be.",
+    "また、こうなると「プレイヤーの攻撃をボスがどの程度耐えられるか？」はほとんど問題にならない。「時間がかかるかかからないか」の違いでしかないからだ。": "Once this happens, “How much of the player’s attacks can the boss withstand?” is hardly an issue. It only determines whether the battle takes more or less time.",
+    "※あくまで難易度面の問題であって、ゲームテンポ面では重大です。": "※This is only an issue in terms of difficulty, but it is significant in terms of game pace.",
+    "安定サイクルを崩そう": "Disrupt the Stable Cycle",
+    "では、具体的なバランス調整方法を考えてみよう。": "Now, let’s consider some specific ways to adjust the balance.",
+    "例えば、以下のケースはほぼ完全な安定サイクルとなって、勝ちは確定したも同然である。": "For example, the following scenario creates an almost perfect stable cycle, making victory practically certain.",
+    "ターン制": "Turn-based system",
+    "ボスは単体で出現、かつ一回行動＆単体攻撃のみ。": "The boss appears alone and only takes one action, using single-target attacks.",
+    "最もＨＰが低い味方キャラのＨＰが１００": "The ally with the lowest HP has 100 HP.",
+    "受ける最大ダメージが９９": "The maximum damage taken is 99.",
+    "味方は回復魔法で全回復できる。": "The allies can fully recover with healing magic.",
+    "回復魔法は３０回使える。": "The healing magic can be used 30 times.",
+    "回復役は必ず先制できる。": "The healer can always act first.",
+    "唯一の不安定要素は回復魔法の回数制限（３０回）だけ。普通のＲＰＧならば、十分な安定状態と言ってもいいだろう。": "The only unstable element is the limit of 30 uses for the healing magic. In a typical RPG, this could still be considered a sufficiently stable situation.",
+    "理論上、回復魔法を３０回使い切るように敵の耐久度を調整すれば、ギリギリの戦いになる。……が、まず面白くならないのでやめよう。３０回は明らかに長すぎる。": "In theory, adjusting the enemy’s durability so that all 30 uses of the healing magic are needed would create a close battle. …But don’t do that—it wouldn’t be fun. Thirty uses is clearly far too many.",
+    "当然ながら、これでは戦闘に緊張感がなく同じことを延々と繰り返すだけである。面白くすることは難しいだろう。": "Naturally, this would make the battle devoid of tension and reduce it to endlessly repeating the same actions. It would be difficult to make that fun.",
+    "そこで、少し不安定となるように崩してみよう。": "So let’s disrupt the cycle to make it somewhat unstable.",
+    "例えば、以下のような手段が考えられる。": "For example, the following approaches are possible.",
+    "敵味方の行動順にランダム性を出し、死人が出る可能性を生む。": "Add randomness to the action order of enemies and allies, creating the possibility of someone dying.",
+    "ボスを二回行動にしたり、お供を付けたり。": "Give the boss two actions per turn or add accompanying enemies.",
+    "ＨＰの低いキャラに攻撃が集中すると倒れるようにする。": "Make a character fall if attacks are concentrated on one with low HP.",
+    "ターンによってボスの攻撃の強さに格差をつける。": "Create differences in the strength of the boss’s attacks from turn to turn.",
+    "時折、強力な全体攻撃を使ってくるなど。": "Have the boss occasionally use a powerful area-of-effect attack, for example.",
+    "ボスのＨＰが減ると行動が強化される。": "Strengthen the boss’s actions as its HP decreases.",
+    "味方の回復魔法の使用回数をもっと限定する。": "Further limit the number of times the allies can use healing magic.",
+    "ボスに異常や補助を使わせて、こちらの計算を崩す。": "Have the boss inflict status ailments or use support abilities to disrupt the player’s calculations.",
+    "ボス戦前の戦闘やダンジョンで消耗させる。": "Wear the party down through battles or a dungeon before the boss battle.",
+    "わずかな不安定感を演出するだけでも、意外と緊張感が出る。": "Even creating just a slight sense of instability can produce surprising amounts of tension.",
+    "例えば、ドラクエシリーズ（正確には４以降）で隊列の４番目のキャラが狙われる確率は約１０％である。": "For example, in the Dragon Quest series (more precisely, from IV onward), the chance of the fourth character in the formation being targeted is approximately 10%.",
+    "最もＨＰの低い４番目のキャラにボス（二回行動）の攻撃が連続ヒットした場合、死亡するバランスにしたとしよう。": "Suppose the balance is such that the character with the lowest HP—the fourth character—will die if hit consecutively by the boss's attacks (the boss acts twice).",
+    "一見、厳しそうに見えるが、その確率は１ターン辺りわずか１％。": "It may seem harsh at first glance, but the chance of this happening is only 1% per turn.",
+    "ボス戦が５～１０ターン程度で終わると想定した場合、それが原因でプレイヤーが全滅まで追い込まれる確率はほとんどなかったりする。": "If we assume that a boss battle ends in roughly five to ten turns, the chance of this causing the player to be driven to a party wipe may be almost nonexistent.",
+    "このようにして、理不尽でない範囲で崩しを入れてみよう。": "In this way, try introducing disruptions within a reasonable range.",
+    "この崩しは厳密である必要はない。": "This disruption does not need to be precise.",
+    "事実上の安定状態でも、ほどよいランダム性があれば意外と緊張感が出たりする。プレイヤーはデータを完全に把握していないため、安定サイクルに入ったかどうかは容易には分からないためだ。": "Even in a de facto stable state, a moderate degree of randomness can create a surprising amount of tension. Since players do not have a complete grasp of the data, they cannot easily tell whether they have entered a stable cycle.",
+    "逆に言えば、「パターン入った！」と簡単に分かるようでは困るということでもある。": "In other words, it would be a problem if players could easily tell, “I’m in the pattern now!”",
+    "強力すぎる回復の弊害": "The Drawbacks of Overly Powerful Healing",
+    "何度も似たようなことを書いているけれど、全体回復、蘇生、ＭＰ回復が容易な調整だった場合、ちょっとやそっとでは安定サイクルを崩せないため調整が難しくなる。": "I have written similar things many times, but if overall healing, revival, and MP recovery are easy to use, it becomes difficult to balance the battle because the stable cycle cannot be disrupted by just any minor setback.",
+    "それは今回の安定サイクル理論を元に考えれば、より明白になる。": "This becomes even clearer when considered in terms of the stable cycle theory discussed here.",
+    "例えば、蘇生アイテムが誰でも簡単に使えるようなバランスならば、単体即死攻撃ですらサイクルを崩壊させられない。": "For example, if revival items are balanced so that anyone can use them easily, even a single-target instant-death attack cannot collapse the cycle.",
+    "従って、ボス戦が容易に作業となり得る危険性を秘めている。": "Consequently, this creates the risk of boss battles easily turning into routine work.",
+    "それ以上の攻撃手段をボスに設定するとなると、かなり際どいところを突くしかなくなってくる。一歩間違えれば、ライトユーザお断りの理不尽ゲーだ。": "If you give the boss even more powerful means of attack, you will have no choice but to push things to the very edge. One mistake, and you end up with an unfair game that is not for casual players.",
+    "また、「強力な全体攻撃」→「強力な全体回復」の繰り返しや「単体即死攻撃」→「蘇生」の繰り返しは非常に目立つ。回復側に選択の余地が少ないため、単調になりやすい。必然的にパターンに入ったことが、プレイヤーに見抜かれやすいのも注意すべき点だ。": "Also, repeating “powerful area attack” → “powerful area healing” or “single-target instant-death attack” → “revival” is extremely conspicuous. Since the healer has few choices, the battle can easily become monotonous. It is also important to note that players will consequently be able to see through the pattern easily.",
+    "その他についても、以下の記事で散々書いたので割愛する。": "As for the other points, I have covered them extensively in the following article, so I will omit them here.",
+    "回復魔法の問題点": "Problems with Healing Magic",
+    "https://newrpg.seesaa.net/article/462407181.html": "https://newrpg.seesaa.net/article/462407181.html",
+    "プレイヤーの戦術性": "Player Tactics",
+    "さて、ある程度まで安定サイクルを崩せたとする。": "Now, suppose that you have managed to disrupt the stable cycle to some extent.",
+    "無策では確実な勝利を望めないとなると、プレイヤーは勝率を高める対策を練る必要がある。そして、そこに戦術性が生まれる。": "If players cannot expect a guaranteed victory without a plan, they need to devise countermeasures to improve their chances of winning. This is where tactical depth emerges.",
+    "防具を見直す。": "Review your armor.",
+    "異常で敵の攻撃を妨害する。": "Disrupt the enemy's attacks with status ailments.",
+    "補助で味方の防御を強化する。": "Strengthen your allies' defense with support abilities.",
+    "お供がいる場合はお供を倒し、敵の戦力を削る。": "If there are minions, defeat them to reduce the enemy's strength.",
+    "節約しながら、回復魔法を使う。": "Use healing magic while conserving resources.",
+    "ピンチに防御する。": "Guard when in a pinch.",
+    "やられる前にやる。": "Defeat them before they defeat you.",
+    "無論、プレイヤーが最適解を取れば、理論上１００％勝ててしまう調整でも問題ない。大事なのは、何の工夫もなく安定状態にならないことだ。": "Of course, there is no problem with a balance in which players can theoretically win 100% of the time if they use the optimal strategy. What matters is that they cannot reach a stable state without making any effort.",
+    "この中で最も基本的な対策は「やられる前にやる」である。": "The most basic countermeasure among these is “defeat them before they defeat you.”",
+    "これは最初に掲示した逆の事象――「プレイヤーの攻撃をボスがどの程度耐えられるか？」に対応する。": "This corresponds to the converse of the question posed at the beginning: “How much damage can the boss withstand from the player's attacks?”",
+    "その内実も様々で、ダメージ効率の高い技を模索したり、武器を整えたりといった選択肢がある。": "There are various ways to do this, such as searching for abilities with high damage efficiency or preparing better weapons.",
+    "そして、これによって、プレイヤーが勝利するための戦術の軸が倍になる。戦術性を高める上ではかなり有用だ。": "This doubles the number of tactical approaches available to players seeking victory. It is highly useful for increasing tactical depth.",
+    "そのため、ボス戦は「やられる前にやる」がある程度成り立つバランスを心がけておくとよいだろう。基本は過度にボスをしぶとくしないこと。これはゲームテンポをよくする効果も得られる。": "Therefore, it is a good idea to design boss battles with a balance in which “defeat them before they defeat you” is viable to some extent. The basic principle is not to make the boss excessively tough. This also helps improve the game's pace.",
+    "ボスがしぶとすぎると「やられる前にやる」が成り立たなくなる。結果、敵の攻撃をしのぎ切る以外の選択肢がなくなってしまう。": "If the boss is too tough, “defeat them before they defeat you” is no longer viable. As a result, players are left with no choice but to endure the enemy's attacks.",
+    "そうなると、戦闘が単調になってしまう上に、戦闘テンポも悪化するので注意したい。": "When that happens, the battle becomes monotonous and its pace deteriorates, so be careful.",
+    "まとめ": "Conclusion",
+    "今回の記事で、面白いボス戦とつまらないボス戦の一つの境界線を示せたと思う。": "I believe this article has shown one dividing line between interesting and boring boss battles.",
+    "現行のオーソドックスなＲＰＧを何も考えず踏襲すると、この安定サイクルに陥りやすい。面白い戦闘を目指すならば、何らかの崩しを入れてみよう。": "If you thoughtlessly follow the current conventions of orthodox RPGs, you are likely to fall into this stable cycle. If you want to create interesting battles, try introducing some kind of disruption.",
+    "もちろんポケモンのようにゲームデザインの段階で崩すのも面白いだろう。": "Of course, it could also be interesting to disrupt the cycle at the game design stage, as Pokémon does.",
+    "なお、ストーリー重視などで難易度が低い作品を目指す場合や、重要度の低いボス戦を難しくしたくない場合は、無理に安定サイクルを崩す必要はない。そういった場合も長期戦でテンポが悪くならないようにだけ注意しておきたい。": "However, if you are aiming for a low-difficulty game, such as one focused on its story, or if you do not want to make battles against less important bosses difficult, there is no need to forcefully disrupt the stable cycle. Even in such cases, you should take care to prevent long battles from harming the pace."
+  }
+}
