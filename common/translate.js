@@ -381,8 +381,11 @@ function textLookupKeys(text) {
 // Convert only the full-width ASCII block. The ideographic space used for
 // Japanese paragraph indentation is U+3000 and deliberately remains intact.
 function normalizeEnglishAscii(text) {
-    return String(text).replace(/[\uFF01-\uFF5E]/g, character =>
-        String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
+    return String(text)
+        .replace(/[ \t]*\uFF08/g, " (")
+        .replace(/\uFF09[ \t]*/g, ") ")
+        .replace(/[\uFF01-\uFF5E]/g, character =>
+            String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
 }
 
 function lookupTranslation(dictionary, normalized) {
