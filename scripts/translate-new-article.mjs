@@ -332,6 +332,15 @@ function tokenizeHtml(html) {
             continue;
         }
 
+        // A comparison operator such as "<=" can occur in visible plugin
+        // formulas. Treat only a real HTML tag start as markup; otherwise the
+        // scanner would consume text until the next actual tag and lose the
+        // remainder of that sentence from the translation source.
+        if (!/^<\/?\s*[a-z][a-z0-9:-]*/iu.test(html.slice(index))) {
+            index++;
+            continue;
+        }
+
         let quote = null;
         let tagEnd = -1;
         for (let cursor = index + 1; cursor < html.length; cursor++) {
