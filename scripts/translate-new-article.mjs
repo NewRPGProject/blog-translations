@@ -44,6 +44,7 @@ const BROWSER_HEADERS = {
     "referer": "https://newrpg.seesaa.net/"
 };
 const JAPANESE_CHARACTERS = /[ぁ-んァ-ヶ一-龠々〆〤ー]/u;
+const FULL_WIDTH_ASCII = /[\uFF01-\uFF5E]/u;
 const WHITESPACE = /\s+/gu;
 const IGNORED_TAGS = new Set([
     "script", "style", "noscript", "textarea", "select", "option"
@@ -633,7 +634,8 @@ function parseBlocks(articleHtml, title) {
         for (let index = 0; index < segments.length; index++) {
             const segment = segments[index];
             const fixedTranslation = STRUCTURAL_PUNCTUATION_TRANSLATIONS.get(segment.source)
-                || (!JAPANESE_CHARACTERS.test(segment.source) && segment.type === "link"
+                || (!JAPANESE_CHARACTERS.test(segment.source)
+                    && (segment.type === "link" || FULL_WIDTH_ASCII.test(segment.source))
                     ? normalizeEnglishAscii(segment.source)
                     : null);
             const codeSegments = segment.type === "code"
