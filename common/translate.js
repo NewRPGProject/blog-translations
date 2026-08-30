@@ -358,7 +358,13 @@ function getOriginalLineFormat(text) {
 function restoreOriginalLineFormat(original, translated) {
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(original);
-    let content = decodeHtmlEntities(translated)
+    const decoded = decodeHtmlEntities(translated);
+    // A translated fragment can intentionally end with a space when the next
+    // visible fragment sits inside <strong>, <span>, <a>, or another inline
+    // element. Keep that boundary space; otherwise "Also," + <strong>"when"
+    // is rendered as "Also,when".
+    const translatedTrailing = decoded.match(/[\s\u3000]*$/u)?.[0] || "";
+    let content = decoded
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
 
@@ -369,7 +375,7 @@ function restoreOriginalLineFormat(original, translated) {
         content = noteMarker + content;
     }
 
-    return indentation + content + trailing;
+    return indentation + content + (translatedTrailing || trailing);
 }
 
 function textLookupKeys(text) {
