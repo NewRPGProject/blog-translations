@@ -387,6 +387,7 @@ function restoreOriginalLineFormat(original, translated) {
     // visible even at the start of a blockquote line.
     const quoteBoundary = /^[\s\u3000]*[「『]/u.test(original)
         && translatedLeading
+        && /^[ \t]*"/u.test(decoded)
         ? "\u00A0"
         : "";
     return indentation + quoteBoundary + content + (translatedTrailing || trailing);
@@ -418,20 +419,20 @@ function normalizeJapaneseQuoteBoundaries(source, text) {
     let translation = normalizeEnglishAscii(text);
     const startsWithQuote = /^[\s\u3000]*[「『]/u.test(original);
     const endsWithQuote = /[」』][\s\u3000]*$/u.test(original);
+    const containsLinkMarker = /\[\[LINK_\d+\]\]/u.test(original);
 
-    if (startsWithQuote) {
+    // A quote surrounding a link can move around the translated link title.
+    // Keep that natural English order instead of adding a second quote at the
+    // beginning of the line.
+    if (startsWithQuote && !containsLinkMarker) {
         if (/^[ \t]*[「『“”"]/u.test(translation)) {
             translation = translation.replace(/^[ \t]*[「『“”"]/u, ' "');
-        } else {
-            translation = ` "${translation.replace(/^[ \t]*/u, "")}`;
         }
     }
 
-    if (endsWithQuote) {
+    if (endsWithQuote && !containsLinkMarker) {
         if (/[「『」』“”"][ \t]*$/u.test(translation)) {
             translation = translation.replace(/[「『」』“”"][ \t]*$/u, '"');
-        } else {
-            translation = `${translation.replace(/[ \t]*$/u, "")}"`;
         }
     }
 
@@ -676,12 +677,17 @@ function makeLineFragment(line, matchedNodes) {
     const lastNode = matchedNodes[matchedNodes.length - 1];
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(firstNode.nodeValue);
-    // See restoreOriginalLineFormat: an ordinary leading space would be
-    // collapsed by HTML layout, so keep the visible half-width boundary.
-    const quoteBoundary = /^[\s\u3000]*[「『]/u.test(line.source) ? "\u00A0" : "";
     let translation = normalizeJapaneseQuoteBoundaries(line.source, line.translation)
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
+    // See restoreOriginalLineFormat: an ordinary leading space would be
+    // collapsed by HTML layout, so keep the visible half-width boundary only
+    // when this line really does begin with the normalised quote.
+    const quoteBoundary = /^[\s\u3000]*[「『]/u.test(line.source)
+        && !/\[\[LINK_\d+\]\]/u.test(line.source)
+        && /^"/u.test(translation)
+        ? "\u00A0"
+        : "";
     translation = quoteBoundary + translation;
 
     if (noteMarker) {
