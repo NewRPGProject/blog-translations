@@ -1,0 +1,1506 @@
+{
+  "articleId": "316336123",
+  "sourceUrl": "https://newrpg.seesaa.net/article/316336123.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "005892994500314111e1f2f982af8cfe24b1f3b077f11797efceddce9179811e",
+  "translatedAt": "2026-08-30T11:31:57.284Z",
+  "title": "[RPG Design Guides] Battle System ③: Resource System",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】戦闘システム③ リソースシステム",
+      "sourceHash": "9d897ff512265debc35919f873ee08853408d8bf9ac0c9432aa7e6f218321ffc",
+      "translation": "[RPG Design Guides] Battle System ③: Resource System",
+      "contextHash": "9d897ff512265debc35919f873ee08853408d8bf9ac0c9432aa7e6f218321ffc"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "リソース（資源）とはゲームをプレイする中で、獲得したり消費したりする要素である。",
+      "sourceHash": "975d7f47f34b41accd61201eacb179f87a33f7e1d84ddebfe7a6cf0924c05314",
+      "translation": "Resources are elements that are acquired or consumed while playing a game.",
+      "contextHash": "975d7f47f34b41accd61201eacb179f87a33f7e1d84ddebfe7a6cf0924c05314"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "お金やＨＰ、ＭＰが特に代表的。これらのやり繰りはＲＰＧのゲーム性において中核を担う部分の１つである。",
+      "sourceHash": "7051ef4eeb439c16ec7c2811b7085a5119f04de5907b42ac0a2c8c73fd4dc6f9",
+      "translation": "Money, HP, and MP are especially representative examples. Managing these is one of the core aspects of RPG gameplay.",
+      "contextHash": "7051ef4eeb439c16ec7c2811b7085a5119f04de5907b42ac0a2c8c73fd4dc6f9"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ＨＰやＭＰといったリソースは多くの場合、空気のようにごく当たり前に存在している。しかし、このリソースの在り方を工夫すれば、ゲームシステムにも個性を出すことができるので、一度焦点を当ててみたい。",
+      "sourceHash": "b4b693a8a2e693a70589d901710ed73589bbe28d8fbc0f262ee351e1c9e99ff0",
+      "translation": "Resources such as HP and MP often exist as naturally as air. However, by putting a unique spin on how resources work, you can give a game system its own personality, so I would like to focus on them for a moment.",
+      "contextHash": "b4b693a8a2e693a70589d901710ed73589bbe28d8fbc0f262ee351e1c9e99ff0"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "ＨＰ",
+      "sourceHash": "40d4ffff0f30d58f9a1a0f65e7e47f232ad06fe5a14523cb56384bcd1ef5794c",
+      "translation": "HP",
+      "contextHash": "df38071e50f4bb915de811e2876740ced6b2d99df5c2068a913ae63c7d296a10"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "ＬＰ",
+      "sourceHash": "df0266c2add5555e592a0dbcfb9284aab959e0cc8f6da9c92398257ad844e5cc",
+      "translation": "LP",
+      "contextHash": "5099ac92f4ce4bb6dff378982869b65943e00953570384b91b354439b927fd8a"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "耐久／生存に関するリソース",
+      "sourceHash": "2a60f09de0ebd456efbbd6139459dd357fdcdbdfedfce0d7e6fea3a2ec269739",
+      "translation": "Resources Related to Durability and Survival",
+      "contextHash": "2a60f09de0ebd456efbbd6139459dd357fdcdbdfedfce0d7e6fea3a2ec269739"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "キャラクターが死んだり、戦闘不能になったりしないためのリソース。",
+      "sourceHash": "87ae6ed6f02eaddec7877ddfe473822658a2e16e2b266bc45019747493a7a21f",
+      "translation": "Resources that prevent characters from dying or becoming incapacitated.",
+      "contextHash": "87ae6ed6f02eaddec7877ddfe473822658a2e16e2b266bc45019747493a7a21f"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ＨＰを単独で用いるのが主流だが、それ以外の要素が存在する場合も。",
+      "sourceHash": "a1b35e01ac0d5c1a15c1ba9ff5a78c3cda78dd8e60cb7593a13ff47901623aba",
+      "translation": "Using HP alone is the standard, but some games have other elements as well.",
+      "contextHash": "a1b35e01ac0d5c1a15c1ba9ff5a78c3cda78dd8e60cb7593a13ff47901623aba"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "大半のＲＰＧにとっては最も重要なリソース。",
+      "sourceHash": "f024f8b480b9b04af75739666c67bf19e40a62b29b53de95d45363088bdf0eb6",
+      "translation": "For most RPGs, this is the most important resource.",
+      "contextHash": "f024f8b480b9b04af75739666c67bf19e40a62b29b53de95d45363088bdf0eb6"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "大抵の場合、敵の攻撃を受けると値が減って、０になるとキャラクターは戦闘不能となる。",
+      "sourceHash": "c0432dc2c5dc8b97ac40bdf1f7a7326cb03a96cd46b39a141343f54cec27f0c4",
+      "translation": "In most cases, the value decreases when the character is attacked by an enemy, and the character becomes incapacitated when it reaches 0.",
+      "contextHash": "c0432dc2c5dc8b97ac40bdf1f7a7326cb03a96cd46b39a141343f54cec27f0c4"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "どのＲＰＧもほぼ同じルールだが、ここに独自性を打ち出す方法もある。",
+      "sourceHash": "6bf38d7e4db457590c9fcec6898eaecc37e2a58bd50d7563d4159435e6e73317",
+      "translation": "Nearly every RPG uses essentially the same rules, but there are ways to give this aspect some originality.",
+      "contextHash": "6bf38d7e4db457590c9fcec6898eaecc37e2a58bd50d7563d4159435e6e73317"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "例えば……",
+      "sourceHash": "c1cd6579a35677239f7e66be3ad6d39b458355337e2575625f7f4c8f7a4d56dd",
+      "translation": "For example...",
+      "contextHash": "c1cd6579a35677239f7e66be3ad6d39b458355337e2575625f7f4c8f7a4d56dd"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ファイアーエムブレムシリーズ",
+      "sourceHash": "ac8b83c9a95496f15b254bf5604a44a4d0b55d9ad4ea044d8d7233bdbda36c4a",
+      "translation": "Fire Emblem Series",
+      "contextHash": "ac8b83c9a95496f15b254bf5604a44a4d0b55d9ad4ea044d8d7233bdbda36c4a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ＨＰが０になると、キャラが消滅するという強烈なペナルティがある。",
+      "sourceHash": "9a6ef1b2057fffdd4c864f16dba3b423b39723688c71002e5b89db31d794123e",
+      "translation": "When HP reaches 0, there is the severe penalty of the character disappearing.",
+      "contextHash": "9a6ef1b2057fffdd4c864f16dba3b423b39723688c71002e5b89db31d794123e"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "緊張感が増す反面、気軽には遊び辛くなる諸刃の剣。素人にはお勧めできない。そのせいか、近年のシリーズ作品では消滅しない設定ができるようになっている。",
+      "sourceHash": "ff305a46d4229763017fd4a07910d015531caaaf805c77866aa8c21df0edef69",
+      "translation": "It is a double-edged sword: while it increases the tension, it also makes the game difficult to play casually. I would not recommend it to beginners. Perhaps for that reason, recent games in the series allow you to configure characters so they do not disappear.",
+      "contextHash": "ff305a46d4229763017fd4a07910d015531caaaf805c77866aa8c21df0edef69"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "キャラの生存状況で会話パターンが変わったりするので制作者としては大変かも。",
+      "sourceHash": "792a960c6290c1ae6902aa5d903df9acd5482f55f93b41a4ec2c9f4e20bf6e02",
+      "translation": "It may be difficult for creators, since dialogue patterns can change depending on which characters are alive.",
+      "contextHash": "792a960c6290c1ae6902aa5d903df9acd5482f55f93b41a4ec2c9f4e20bf6e02"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ＳＲＰＧには同様のシステムを持っている作品も多い。",
+      "sourceHash": "ed8598fb06617b1b983a04af97eb7559781ab5649bdb71846cde67457611954d",
+      "translation": "Many SRPGs have similar systems.",
+      "contextHash": "ed8598fb06617b1b983a04af97eb7559781ab5649bdb71846cde67457611954d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "スターオーシャン３",
+      "sourceHash": "36b4ffad4bef936de7b594a196fab74433d32cab9ff756cdf943cb3420ec72ae",
+      "translation": "Star Ocean 3",
+      "contextHash": "36b4ffad4bef936de7b594a196fab74433d32cab9ff756cdf943cb3420ec72ae"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ＭＰもＨＰと同じ役割を持つ。",
+      "sourceHash": "a9ef473027f5fa86559fee20eb52b391a76ac45cc0f5d7a153c4b2f6615c0dc1",
+      "translation": "MP serves the same role as HP.",
+      "contextHash": "a9ef473027f5fa86559fee20eb52b391a76ac45cc0f5d7a153c4b2f6615c0dc1"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "ＨＰ、ＭＰの片方が０になると戦闘不能になってしまう。",
+      "sourceHash": "2d460be475b362f085d7ce1664671e0c1ba5c991f1392dd85c2b9f9f3ac4a93c",
+      "translation": "If either HP or MP reaches 0, the character becomes incapacitated.",
+      "contextHash": "2d460be475b362f085d7ce1664671e0c1ba5c991f1392dd85c2b9f9f3ac4a93c"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "ブレスオブファイア４",
+      "sourceHash": "084a3682cd3e2e063229cb4ef07c1fa5e0cf9d997c39a718ed39381569a25977",
+      "translation": "Breath of Fire IV",
+      "contextHash": "084a3682cd3e2e063229cb4ef07c1fa5e0cf9d997c39a718ed39381569a25977"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ＨＰが０になった場合、蘇生しても最大ＨＰが減少する。",
+      "sourceHash": "ea7faaf99049ce2bf1214b9c115a07279486569dcab3b3bcfb6596f93cefde0a",
+      "translation": "If HP reaches 0, the character's maximum HP is reduced even after revival.",
+      "contextHash": "ea7faaf99049ce2bf1214b9c115a07279486569dcab3b3bcfb6596f93cefde0a"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "宿に泊まると回復する仕様。",
+      "sourceHash": "601078a112393753e429cdf326da92ff440510744935105808d81718ca7ca009",
+      "translation": "It is restored by staying at an inn.",
+      "contextHash": "601078a112393753e429cdf326da92ff440510744935105808d81718ca7ca009"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "マザー２～３",
+      "sourceHash": "3e1c9d8dcc371456817fd0d3574ed8ab561a1379bd6af67043e3a99b718c96e0",
+      "translation": "MOTHER 2–3",
+      "contextHash": "3e1c9d8dcc371456817fd0d3574ed8ab561a1379bd6af67043e3a99b718c96e0"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ダメージを受けても、ＨＰは即座に減らない。",
+      "sourceHash": "f94dd3facc787b00170ea9b8ada2c7fbf36ebd22f01732c71deb5bc8248cba0a",
+      "translation": "HP does not decrease immediately when damage is taken.",
+      "contextHash": "f94dd3facc787b00170ea9b8ada2c7fbf36ebd22f01732c71deb5bc8248cba0a"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "ドラムロール式カウンタによって、徐々に減っていくのが特徴。",
+      "sourceHash": "a635e751ea7fb3e4b4ed7335e043cc618e479503acf8e108a8e7d0eb75dd99a7",
+      "translation": "Instead, it gradually decreases according to a drum-roll-style counter.",
+      "contextHash": "a635e751ea7fb3e4b4ed7335e043cc618e479503acf8e108a8e7d0eb75dd99a7"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "致命傷となる攻撃を喰らっても、ＨＰが０になるまでに回復を行えば戦闘不能とならない。",
+      "sourceHash": "c23b5b8e618149726d05e537d30e1b26b8e22309a2f3046dbc913635e20c3394",
+      "translation": "Even after taking a fatal attack, the character will not become incapacitated if healed before HP reaches 0.",
+      "contextHash": "c23b5b8e618149726d05e537d30e1b26b8e22309a2f3046dbc913635e20c3394"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "他にも「大ダメージを受けるとＨＰがマイナスになって、それを回復するまで戦闘不能から復帰できない」なんてシステムを筆者は思いついた。思いついただけで実装はしなかったが……。",
+      "sourceHash": "d806da349e2bb02d80f1a9aa4616940b80963a51634a93ef8c6fe25f3bc9ece8",
+      "translation": "I also came up with a system where taking heavy damage causes HP to drop below zero, and the character cannot recover from incapacitation until that damage is healed. I only came up with it and never implemented it, though...",
+      "contextHash": "d806da349e2bb02d80f1a9aa4616940b80963a51634a93ef8c6fe25f3bc9ece8"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "サガシリーズに登場。",
+      "sourceHash": "1eb7476ba96ccb2449b3c2d845eb7a90caa7720d1cd2c48a3bb9626c2d5af691",
+      "translation": "This appears in the SaGa series.",
+      "contextHash": "1eb7476ba96ccb2449b3c2d845eb7a90caa7720d1cd2c48a3bb9626c2d5af691"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "ＨＰが０になると、ＬＰが減少する。ＬＰが０になると宿屋に泊まるまで蘇生ができなくなったり、キャラ消滅したりする。",
+      "sourceHash": "beaea7c130f33e3ac7de8a8a2406bc083566f354458dfb85a2d335b67c2c9f9a",
+      "translation": "When HP reaches 0, LP decreases. When LP reaches 0, the character may be unable to revive until staying at an inn, or may disappear entirely.",
+      "contextHash": "beaea7c130f33e3ac7de8a8a2406bc083566f354458dfb85a2d335b67c2c9f9a"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ちなみに初代ＧＢサガの時代から同様の要素（ハート）が存在している。",
+      "sourceHash": "efc445aa3353e5ccf2db48c9d7ae27fdb9060342a99a02fc0d6157052efdeef6",
+      "translation": "Incidentally, a similar element (hearts) has existed since the days of the original Game Boy SaGa.",
+      "contextHash": "efc445aa3353e5ccf2db48c9d7ae27fdb9060342a99a02fc0d6157052efdeef6"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "アクションやシューティングにおける残機のようなものと考えることもできる。",
+      "sourceHash": "9242f5c7e0035d1bd7de9e69a63f596cea18e2ad44256097e5cb7431c58529e6",
+      "translation": "It can also be thought of as being similar to extra lives in action games and shooters.",
+      "contextHash": "9242f5c7e0035d1bd7de9e69a63f596cea18e2ad44256097e5cb7431c58529e6"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ロマサガ２以降のサガシリーズでは、敵の攻撃が非常に激しく簡単にＨＰが０になる。",
+      "sourceHash": "6ca1cb25a728d94faafd5ff1405b7a4687d3d399d8a2310e2ca686ec359b7c0d",
+      "translation": "In the SaGa series from Romancing SaGa 2 onward, enemy attacks are extremely fierce, and HP reaches 0 easily.",
+      "contextHash": "6ca1cb25a728d94faafd5ff1405b7a4687d3d399d8a2310e2ca686ec359b7c0d"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "代わりに、ＨＰが０になっても、回復術によって簡単に蘇生できる。",
+      "sourceHash": "9b2f098a6fcf4498e8659954f938010ee3bc1a4fcdf28a3c8a45365bcc26ca74",
+      "translation": "In exchange, even if HP reaches 0, the character can be revived easily with healing spells.",
+      "contextHash": "9b2f098a6fcf4498e8659954f938010ee3bc1a4fcdf28a3c8a45365bcc26ca74"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "このままだと戦闘不能→蘇生のイタチごっこになってしまうので、歯止めにＬＰを導入していると考えられる。これらの構造によって、他のＲＰＧよりも高い緊張感を演出していると推察できる。",
+      "sourceHash": "cf899315957998c1cf622e8e7f537f79ba9481770b9fe662c08397c11a9dd242",
+      "translation": "Otherwise, battles would become an endless cycle of incapacitation and revival, so LP can be seen as having been introduced to put a brake on that cycle. It can be inferred that these structures create a higher level of tension than in other RPGs.",
+      "contextHash": "cf899315957998c1cf622e8e7f537f79ba9481770b9fe662c08397c11a9dd242"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ロマンシングサガ２",
+      "sourceHash": "8dbd3c8e91dbf0d30c29da2f0e56c84be60791b7765f9d7aaaa0865d1cb7aeef",
+      "translation": "Romancing SaGa 2",
+      "contextHash": "8dbd3c8e91dbf0d30c29da2f0e56c84be60791b7765f9d7aaaa0865d1cb7aeef"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "ＬＰが０になるとキャラクターは消滅する。",
+      "sourceHash": "9904f23b9033682f2cd59e5cf43f8d6dacd4509cac82fd13cdae39c7d7ae8517",
+      "translation": "When LP reaches 0, the character disappears.",
+      "contextHash": "9904f23b9033682f2cd59e5cf43f8d6dacd4509cac82fd13cdae39c7d7ae8517"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ＬＰは宿屋でも回復せず、回復手段は一部のアイテムなどに限定される。",
+      "sourceHash": "994562f34d45f763a23e7333875a8f1351fb7bacc21ee6bc0a1c27a044dcaf6a",
+      "translation": "LP is not restored even at an inn, and the means of restoring it are limited to certain items and the like.",
+      "contextHash": "994562f34d45f763a23e7333875a8f1351fb7bacc21ee6bc0a1c27a044dcaf6a"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "サガフロンティア１",
+      "sourceHash": "6fb5f2947a6d987b60c5c901633caa948968903ce11941f88fb23e662f8e67b1",
+      "translation": "SaGa Frontier 1",
+      "contextHash": "6fb5f2947a6d987b60c5c901633caa948968903ce11941f88fb23e662f8e67b1"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "宿屋に泊まることによって、ＬＰは全回復するので制約はゆるい。",
+      "sourceHash": "3bad722b7621717bbf09cc7b3654f7b71cb35632c85480f55f1285fe2cf24b7c",
+      "translation": "The restriction is lenient because staying at an inn fully restores LP.",
+      "contextHash": "3bad722b7621717bbf09cc7b3654f7b71cb35632c85480f55f1285fe2cf24b7c"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "ＬＰを消費する事で貴重な全体回復技を使用できるキャラクターも存在する。",
+      "sourceHash": "7accefcc80cf3f011c6e1937312d7d8f67ece3795504af87b9d72da13a65c11c",
+      "translation": "Some characters can use valuable party-wide healing techniques by consuming LP.",
+      "contextHash": "7accefcc80cf3f011c6e1937312d7d8f67ece3795504af87b9d72da13a65c11c"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "サガフロンティア２",
+      "sourceHash": "04edead7905706f5823a7d4e602361ea78ed316a5768fdd94e801df83bf80ba7",
+      "translation": "SaGa Frontier 2",
+      "contextHash": "04edead7905706f5823a7d4e602361ea78ed316a5768fdd94e801df83bf80ba7"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "戦闘中にＬＰを１消耗する事で、ＨＰを全快できる。ターン経過しないので強力だが、戦闘は長引く傾向あり。",
+      "sourceHash": "d3df9fce3976f95afc3dc673b51c9e35bc31a82f1b4065d25c57423154f7d57c",
+      "translation": "By consuming 1 LP during battle, HP can be fully restored. This is powerful because it does not advance the turn, but battles tend to drag on.",
+      "contextHash": "d3df9fce3976f95afc3dc673b51c9e35bc31a82f1b4065d25c57423154f7d57c"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "また、術や技に使用するＪＰ、ＷＰを切らしていた場合、ＬＰを消費する事で代わりとするなんて要素も存在する。",
+      "sourceHash": "0952071d20df4b863b61740276b3b7d9a986ffa5ea5f3a1f461d8f7965a05f01",
+      "translation": "There is also an element where, if you run out of JP or WP used for spells and techniques, you can consume LP as a substitute.",
+      "contextHash": "0952071d20df4b863b61740276b3b7d9a986ffa5ea5f3a1f461d8f7965a05f01"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "アンリミテッドサガ",
+      "sourceHash": "9577137929ae06de83725b7f7de308f0aa09caddb89ada54e26884381b0a8726",
+      "translation": "Unlimited SaGa",
+      "contextHash": "9577137929ae06de83725b7f7de308f0aa09caddb89ada54e26884381b0a8726"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "ＨＰが０になっても戦闘不能にならないが、ＨＰが減っているとＬＰが減りやすくなる。",
+      "sourceHash": "d3c23badb6420b2d1b66269018fa3acd908a7e1421427ecc1784570f38894a1c",
+      "translation": "The character does not become incapacitated even when HP reaches 0, but LP is more likely to decrease when HP is low.",
+      "contextHash": "d3c23badb6420b2d1b66269018fa3acd908a7e1421427ecc1784570f38894a1c"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ＬＰが０になるとようやく戦闘不能に。",
+      "sourceHash": "24aa6f1ea8f149fc00a1d5dcdad100227ecda3fddc508d7d38f03abcc6cfc36b",
+      "translation": "The character finally becomes incapacitated when LP reaches 0.",
+      "contextHash": "24aa6f1ea8f149fc00a1d5dcdad100227ecda3fddc508d7d38f03abcc6cfc36b"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "全員のＬＰが０になるまで全滅しないため、強敵相手の戦闘は非常に長引く。",
+      "sourceHash": "34723680f1739f3fed5a4e8fb4f0557b3f819cf88733aad056d028f45d5bc7a1",
+      "translation": "Because the entire party is not wiped out until everyone's LP reaches 0, battles against powerful enemies can become extremely prolonged.",
+      "contextHash": "34723680f1739f3fed5a4e8fb4f0557b3f819cf88733aad056d028f45d5bc7a1"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "満腹度",
+      "sourceHash": "493ab44f979cf5d7586507602447cde6546e847c5d5958b30a90e596785a5f02",
+      "translation": "Fullness",
+      "contextHash": "493ab44f979cf5d7586507602447cde6546e847c5d5958b30a90e596785a5f02"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "風来のシレンなど、ローグ系ゲームなどで扱われる。",
+      "sourceHash": "40b602cbbdca49936a3bbb04f004627e6d68e6161c9e438b43027a21c7a435f0",
+      "translation": "This is used in roguelike games such as Shiren the Wanderer.",
+      "contextHash": "40b602cbbdca49936a3bbb04f004627e6d68e6161c9e438b43027a21c7a435f0"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "人が生きるために当然の要素をシステムとして表現したもの。似たようなものに疲労度などがある。",
+      "sourceHash": "8bb0d256ef990264160730e7741e3a2bd59a73796ed9f15478b3bda5dccaa32c",
+      "translation": "A system that represents elements naturally necessary for people to live. Similar examples include fatigue.",
+      "contextHash": "8bb0d256ef990264160730e7741e3a2bd59a73796ed9f15478b3bda5dccaa32c"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "大半の場合は、移動や戦闘などの行動によって消耗していく。これが０になると、ＨＰが減少し始めたり、能力が下がるといったペナルティが課せられることが多い。",
+      "sourceHash": "d87fb6c537599d168ee8613be73ecfd26f38e5534301f6be5186719095768739",
+      "translation": "In most cases, it is depleted by actions such as moving and fighting. When it reaches 0, penalties such as HP beginning to decrease or abilities being reduced are often imposed.",
+      "contextHash": "d87fb6c537599d168ee8613be73ecfd26f38e5534301f6be5186719095768739"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "回復は食料によって行うのが基本。",
+      "sourceHash": "bcf4395bb0d4a103ef03e28b4338cd744fe885dcbb31d869aeac8c599f8db082",
+      "translation": "It is generally restored by consuming food.",
+      "contextHash": "bcf4395bb0d4a103ef03e28b4338cd744fe885dcbb31d869aeac8c599f8db082"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "プレイヤーにとっては面倒なだけのことも多いので、大半のゲームでは省略される。",
+      "sourceHash": "dfff09ddf208262f43ada1630b4617c2f9502133b0240b17e47f4e30694de539",
+      "translation": "Since it is often nothing more than a nuisance for players, it is omitted from most games.",
+      "contextHash": "dfff09ddf208262f43ada1630b4617c2f9502133b0240b17e47f4e30694de539"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "一般ＲＰＧで採用する場合は、ダンジョンの探索量を制限する目的などに利用できるかも。",
+      "sourceHash": "bc1ecf99395fcc529bea44c786958da287b407c221773401d6fadd45d8e423f7",
+      "translation": "When used in a standard RPG, it could serve to limit how much of a dungeon the player can explore.",
+      "contextHash": "bc1ecf99395fcc529bea44c786958da287b407c221773401d6fadd45d8e423f7"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "行動に要するリソース",
+      "sourceHash": "b0b38c8f351ec22fe8c0a0c04a13104ddb742326855468af1a19db6872ab004d",
+      "translation": "Resources Required for Actions",
+      "contextHash": "b0b38c8f351ec22fe8c0a0c04a13104ddb742326855468af1a19db6872ab004d"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "ＭＰを初めとした魔法や特技を使用するためのリソース。",
+      "sourceHash": "ac5aef74f1146bc87a854be5041aba1a6ae208530d1c10c24d7df9f1d01a2235",
+      "translation": "Resources used to cast spells and use Techs, including MP.",
+      "contextHash": "ac5aef74f1146bc87a854be5041aba1a6ae208530d1c10c24d7df9f1d01a2235"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "消費型（ＭＰなど）",
+      "sourceHash": "0c2d739d48e439a4f0111a84a7b98c85e8f5d7ef7e78fa807af6d86fbaf131ca",
+      "translation": "Expenditure Type (MP, etc.)",
+      "contextHash": "0c2d739d48e439a4f0111a84a7b98c85e8f5d7ef7e78fa807af6d86fbaf131ca"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "技を使用すると設定された値（例：消費ＭＰ）だけキャラクターの保持ポイントが減少するというのが定番。",
+      "sourceHash": "775eb212480210dc9c313a4460c37e071777c8194a335066f99d57de713369e8",
+      "translation": "The standard approach is for using a skill to reduce the character's stored points by a set amount (e.g., MP cost).",
+      "contextHash": "775eb212480210dc9c313a4460c37e071777c8194a335066f99d57de713369e8"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "減ったポイントは宿屋などで回復できる。",
+      "sourceHash": "df504aceee04cf8fbc4d6bae66384bd44f1d62a5791ba41ddff73537f3cc8ddd",
+      "translation": "Lost points can be restored at an inn or similar location.",
+      "contextHash": "df504aceee04cf8fbc4d6bae66384bd44f1d62a5791ba41ddff73537f3cc8ddd"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "ただし、「キャラクターがＭＰを保有する」という一般的な型にこだわる必要はない。",
+      "sourceHash": "55d0efdb51df826177b9e20f58869a2e9898b6de3624bf284f3f041cf33530a2",
+      "translation": "However, there is no need to adhere to the conventional model in which a character possesses MP.",
+      "contextHash": "55d0efdb51df826177b9e20f58869a2e9898b6de3624bf284f3f041cf33530a2"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ロマンシングサガ１",
+      "sourceHash": "646144adc1e6100d8b2cd1770e515c35164ccbf8f0bb98392934da6f5709109d",
+      "translation": "Romancing SaGa 1",
+      "contextHash": "646144adc1e6100d8b2cd1770e515c35164ccbf8f0bb98392934da6f5709109d"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "術属性毎に法力（ＭＰに該当）を保有している。例えば、火の術法を使用しても、風の術法の法力は減少しない。下の回数制もそうだが、調整次第では色々な種類の技をプレイヤーに使用させる事ができる。",
+      "sourceHash": "2658bf0961d66b68d3cbe4c5b3a84445afef49997eaf029869c281e746dd1298",
+      "translation": "The character possesses magic power (equivalent to MP) for each spell element. For example, using a fire spell does not reduce their wind magic power. As with the usage-count system below, adjusting the system appropriately can encourage players to use a wide variety of skills.",
+      "contextHash": "2658bf0961d66b68d3cbe4c5b3a84445afef49997eaf029869c281e746dd1298"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ロマンシングサガ２",
+      "sourceHash": "8dbd3c8e91dbf0d30c29da2f0e56c84be60791b7765f9d7aaaa0865d1cb7aeef",
+      "translation": "Romancing SaGa 2",
+      "contextHash": "8dbd3c8e91dbf0d30c29da2f0e56c84be60791b7765f9d7aaaa0865d1cb7aeef"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "術（ＪＰ）と技（ＷＰ）で別々に消費ポイントが設定されている。",
+      "sourceHash": "bda7ad9bcbf969d02b48f6b4520acae6f34311911ac37d808b2b04811dc2553a",
+      "translation": "Separate costs are set for spells (JP) and skills (WP).",
+      "contextHash": "bda7ad9bcbf969d02b48f6b4520acae6f34311911ac37d808b2b04811dc2553a"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "このようにすると、武器技と魔法を明確に差別化できるのが利点。",
+      "sourceHash": "7235b03bb883439ddade18c88dbfa02d23d9857ca16cfea4681c70942f1c6f66",
+      "translation": "The advantage of this approach is that it clearly differentiates weapon skills from magic.",
+      "contextHash": "7235b03bb883439ddade18c88dbfa02d23d9857ca16cfea4681c70942f1c6f66"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "例えば、６以降のＤＱは呪文と特技の区別が曖昧なので、こういうのを導入してはどうかと個人的には思っていたりする。",
+      "sourceHash": "2cdaa3ee1e4933e511b6da53f9c09a2fbe0d01d5e79037a984dd14d0e8c5f8c7",
+      "translation": "For example, since Dragon Quest VI and later entries have an ambiguous distinction between spells and Techs, I personally think it might be worth introducing something like this.",
+      "contextHash": "2cdaa3ee1e4933e511b6da53f9c09a2fbe0d01d5e79037a984dd14d0e8c5f8c7"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "グランディアＸ",
+      "sourceHash": "2484761e57764578512730ca3c8d0710e0fc55700100851ca90de43380aa30e9",
+      "translation": "Grandia X",
+      "contextHash": "2484761e57764578512730ca3c8d0710e0fc55700100851ca90de43380aa30e9"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "魔法の使用にはマナエッグと呼ばれる物を装備する。",
+      "sourceHash": "3026d194828fce93aae4324f951703441616a9d4d7734ddc6d276b38f50a0504",
+      "translation": "To use magic, the player equips an item called a Mana Egg.",
+      "contextHash": "3026d194828fce93aae4324f951703441616a9d4d7734ddc6d276b38f50a0504"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "ＭＰは装備したマナエッグ毎に保有するので、キャラクターには依存しない。",
+      "sourceHash": "d65b4c810eae1fac0adace431ff5861c3941147e92e9cbab1ae8fbd04bda93fb",
+      "translation": "Since MP is held by each equipped Mana Egg, it is not dependent on the character.",
+      "contextHash": "d65b4c810eae1fac0adace431ff5861c3941147e92e9cbab1ae8fbd04bda93fb"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "蓄積型",
+      "sourceHash": "9c57cb9b3d2501c4ae485e94c35db625fa3e2a8bbbbfd5b772a66161b3ce6d73",
+      "translation": "Accumulation Type",
+      "contextHash": "9c57cb9b3d2501c4ae485e94c35db625fa3e2a8bbbbfd5b772a66161b3ce6d73"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "ＭＰにおける宿屋のような手軽な全快手段はないが、代わりに戦いの中でポイントを蓄積することで技を使用できるようになる。",
+      "sourceHash": "7a92ea8c8a922c6b348d31d74a918d7ffe934e104dcdf6a620ae593e8e8ed5d6",
+      "translation": "Unlike MP, there is no convenient way to fully restore the resource, such as staying at an inn. Instead, skills become usable by accumulating points during battle.",
+      "contextHash": "7a92ea8c8a922c6b348d31d74a918d7ffe934e104dcdf6a620ae593e8e8ed5d6"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "蓄積するための条件は時間の経過やダメージを受けることなど。",
+      "sourceHash": "6cea51602989b326d760848fe5427b8ca713e9bec46e550cabf791236888e4a2",
+      "translation": "Conditions for accumulating points include the passage of time and taking damage.",
+      "contextHash": "6cea51602989b326d760848fe5427b8ca713e9bec46e550cabf791236888e4a2"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "結局、技を使用するためにポイントを消費するという点では、上の消費型と明確な境界はない。実際、ＭＰが時間経過で徐々に回復していくＲＰＧも存在する。あくまで、数が多いので便宜的に分けただけである。",
+      "sourceHash": "8caf501ccdf41dc6e93bc2a52b917ac3a865d544956876dff122135f83dde7a6",
+      "translation": "Ultimately, there is no clear boundary between this and the expenditure type above, since both consume points to use skills. In fact, some RPGs allow MP to gradually recover as time passes. I separated them merely for convenience because there are so many variations.",
+      "contextHash": "8caf501ccdf41dc6e93bc2a52b917ac3a865d544956876dff122135f83dde7a6"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "ファイナルファンタジー7：リミット技",
+      "sourceHash": "e4b539e624932aa7068b7eeb0e512a19cf061172c320ddebe3a3f41649ac3eda",
+      "translation": "Final Fantasy VII: Limit Skills",
+      "contextHash": "e4b539e624932aa7068b7eeb0e512a19cf061172c320ddebe3a3f41649ac3eda"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "ダメージによってポイント（リミットゲージ）を蓄積し、ゲージを満タンにすることで発動できる。",
+      "sourceHash": "3b42429a690c7fdbc66bce4062b8a6a01c1db21b69ed3658f4b9114c07bdb415",
+      "translation": "Points (the Limit Gauge) are accumulated by taking damage, and the skill can be activated once the gauge is full.",
+      "contextHash": "3b42429a690c7fdbc66bce4062b8a6a01c1db21b69ed3658f4b9114c07bdb415"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "いかにも必殺技といった印象が強く、派手さ優先に思えるシステムなのだが、長所も中々多くて侮れない。",
+      "sourceHash": "d135b9ac0f445f106ffb957ed81a257df4c554ef88a11a731b0e7aba5881824f",
+      "translation": "It strongly gives the impression of a flashy finishing move, making the system seem focused on spectacle, but it has many merits and should not be underestimated.",
+      "contextHash": "d135b9ac0f445f106ffb957ed81a257df4c554ef88a11a731b0e7aba5881824f"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "ＭＰ消費魔法のように連発はできないのだが、それだけに普通ならゲームバランスを崩しかねない強力な技も設定可能だ。",
+      "sourceHash": "c90a6a11e4f4386a374be970c1dbac50af14761ede51781bad0d8d40b1226712",
+      "translation": "Although it cannot be used repeatedly like MP-cost spells, this makes it possible to include powerful skills that would normally risk disrupting the game balance.",
+      "contextHash": "c90a6a11e4f4386a374be970c1dbac50af14761ede51781bad0d8d40b1226712"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "例えば「時間を停止して一方的に攻撃する」というような、味方側が自由に使えたらバランス崩壊必至な大技も現実的に組み込める。",
+      "sourceHash": "f44fb10bc0bcef86b467f62c6422af4b4ae661dcba0a194900ee2995e6059118",
+      "translation": "For example, it is feasible to include a powerful move such as stopping time and attacking unopposed—something that would inevitably destroy the balance if allies could use it freely.",
+      "contextHash": "f44fb10bc0bcef86b467f62c6422af4b4ae661dcba0a194900ee2995e6059118"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "また、連発できないだけに長いアニメーションでもある程度我慢できるというのも大きな利点。ワンパターンに陥りがちな戦闘を崩す意味でも、アクセントとしての意義は大きい。",
+      "sourceHash": "4cc18149a8e557a630af400acd73b6fc671a706a8951986044c82b1ef8b930d5",
+      "translation": "Another major advantage is that, since it cannot be used repeatedly, players can tolerate relatively long animations. It also serves as an important accent for breaking up battles that tend to become repetitive.",
+      "contextHash": "4cc18149a8e557a630af400acd73b6fc671a706a8951986044c82b1ef8b930d5"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "戦闘前に全員のゲージを溜めて、ボス戦で一気に発動することも可能。ただしこれは、強力過ぎてバランス崩壊の恐れも。",
+      "sourceHash": "84c46e97f5cc639ecdb7ce9e687452ebbf59a2e1e67e08dd1a8ab4c46cb378a5",
+      "translation": "It is possible to fill everyone's gauge before battle and activate all of them at once during a boss fight. However, this can be so powerful that it risks destroying the balance.",
+      "contextHash": "84c46e97f5cc639ecdb7ce9e687452ebbf59a2e1e67e08dd1a8ab4c46cb378a5"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "ファイナルファンタジー１３：ＴＰ",
+      "sourceHash": "80eab488e99ccc931db2d7ac5397e6461f0d60383e9ef8bdeb27fec3182dfc4d",
+      "translation": "Final Fantasy XIII: TP",
+      "contextHash": "80eab488e99ccc931db2d7ac5397e6461f0d60383e9ef8bdeb27fec3182dfc4d"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "ＭＰの概念が存在せず、代わりにパーティ全体で共有するＴＰが存在する。これを消費することで召喚などのＴＰアビリティを使用できる。",
+      "sourceHash": "7caa28c74f4cd34404fdb4c135790e953e75ae28c2671ea69695e1b3ac632579",
+      "translation": "There is no concept of MP; instead, the entire party shares TP. Consuming TP allows the player to use TP abilities such as summoning.",
+      "contextHash": "7caa28c74f4cd34404fdb4c135790e953e75ae28c2671ea69695e1b3ac632579"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "ポイントを回復する条件は戦闘で高いランクを出すことなど。",
+      "sourceHash": "c16abef52492090abcad2c3228fdb1870c24efb61f8a5f0ec3a91b610cafdcd6",
+      "translation": "Conditions for restoring points include achieving a high rank in battle.",
+      "contextHash": "c16abef52492090abcad2c3228fdb1870c24efb61f8a5f0ec3a91b610cafdcd6"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "このようにパーティ全体で１つのポイントを共有するという方法もある。",
+      "sourceHash": "8acee852b39cc573334776f44aee5c56eb85a3685257e7618bc0a0840e0f85ce",
+      "translation": "As this shows, another approach is to have the entire party share a single pool of points.",
+      "contextHash": "8acee852b39cc573334776f44aee5c56eb85a3685257e7618bc0a0840e0f85ce"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "使用できる機会が少なすぎて正直微妙だったけど……。",
+      "sourceHash": "fbfcf0193360cb5a08abe8aea5876f9ba52f6fa8819501445ce362edc611a77b",
+      "translation": "To be honest, it was rather underwhelming because opportunities to use it were too few…",
+      "contextHash": "fbfcf0193360cb5a08abe8aea5876f9ba52f6fa8819501445ce362edc611a77b"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "ロマンシングサガ ミンストレルソング：ＢＰ",
+      "sourceHash": "2f41c35518d77c4d39faadc7e2d388e23e145b3f9cf9c66620d0ac16436ae7c3",
+      "translation": "Romancing SaGa: Minstrel Song: BP",
+      "contextHash": "2f41c35518d77c4d39faadc7e2d388e23e145b3f9cf9c66620d0ac16436ae7c3"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "時間（ターン）が経過する毎に技を使用するためのポイントが増加する。",
+      "sourceHash": "0388632cf2d5c66edf6dad9289e18cb8175c4ea00375d11a7a642a0e6a74430a",
+      "translation": "The points used to perform skills increase with each passing unit of time (turn).",
+      "contextHash": "0388632cf2d5c66edf6dad9289e18cb8175c4ea00375d11a7a642a0e6a74430a"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "次の戦闘に値を持ち越すことはできない。",
+      "sourceHash": "44c23e6754da87de26d0ac5b9ba5b3e78306d05a9a4ecf27f7de16b5d4fcb120",
+      "translation": "The value cannot be carried over to the next battle.",
+      "contextHash": "44c23e6754da87de26d0ac5b9ba5b3e78306d05a9a4ecf27f7de16b5d4fcb120"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "この種のシステムは、最初の数ターンで強力な技を使用し辛いため、雑魚戦が地味になる可能性も。",
+      "sourceHash": "f2637ccd61f285c110e2862258b1ea41f15988d0c370579b5edd0280ffc8fead",
+      "translation": "With this type of system, it is difficult to use powerful skills during the first few turns, which can make regular battles feel lackluster.",
+      "contextHash": "f2637ccd61f285c110e2862258b1ea41f15988d0c370579b5edd0280ffc8fead"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "当作品では初期値を設定したり、武器に消費型の耐久度を設定することで欠点を緩和している。",
+      "sourceHash": "18168073e48a062a7d724ece244259db31a8ceae27f4b09ca5052d4c90f8ffee",
+      "translation": "This game mitigates the drawback by setting an initial value and giving weapons consumable durability.",
+      "contextHash": "18168073e48a062a7d724ece244259db31a8ceae27f4b09ca5052d4c90f8ffee"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "クールタイム型",
+      "sourceHash": "3558c260a081a00a69af4c03a68c71177a185e2745b756873060a49490732113",
+      "translation": "Cooldown Type",
+      "contextHash": "3558c260a081a00a69af4c03a68c71177a185e2745b756873060a49490732113"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "技を使用すると、再使用までに一定の時間を空ける必要がある。ターン制ではターン数、リアルタイム制では秒数が制限の条件になる。",
+      "sourceHash": "d31a5267eb260124114df9764d3bc299e30b8ecefd98a5bb2676e2eaa12cdf6b",
+      "translation": "After using a skill, a certain amount of time must pass before it can be used again. In turn-based systems, the restriction is measured in turns; in real-time systems, it is measured in seconds.",
+      "contextHash": "d31a5267eb260124114df9764d3bc299e30b8ecefd98a5bb2676e2eaa12cdf6b"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "戦闘開始時に技のクールタイムが必要かは作品によって個性が出る。",
+      "sourceHash": "e3e4d317479fe4226e315caf438a6a716f6823560e4cc9d80dc2dd70f2c2a86a",
+      "translation": "Whether skills require a cooldown at the start of battle varies from game to game.",
+      "contextHash": "e3e4d317479fe4226e315caf438a6a716f6823560e4cc9d80dc2dd70f2c2a86a"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "蓄積型にも似ているが、管理が技毎という点で異なっている。",
+      "sourceHash": "139716e8c31af1509e8520186a9eec5cf65c51a1dc1f11d3980ed522b994064d",
+      "translation": "It resembles the accumulation type, but differs in that it is managed separately for each skill.",
+      "contextHash": "139716e8c31af1509e8520186a9eec5cf65c51a1dc1f11d3980ed522b994064d"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "様々な技を使わせたい場合に有効となる。連発されるとゲームバランスを崩しかねない強力な技も、採用しやすいため多彩な戦闘を演出しやすい。",
+      "sourceHash": "2ffaac3d07ce11dcc6f03c312412c13f272015202529e7bac91776f393336e72",
+      "translation": "This is effective when you want players to use a variety of skills. Since powerful skills that could disrupt the game balance if used repeatedly are easier to implement, it also helps create diverse battles.",
+      "contextHash": "2ffaac3d07ce11dcc6f03c312412c13f272015202529e7bac91776f393336e72"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "ネトゲやソシャゲでも流行の型。オフラインＲＰＧではゼノブレイドなどが有名だろうか。",
+      "sourceHash": "5c5f95b884e920f56236e3136535c41a1176a6db3a5092134bf23faa72213bf5",
+      "translation": "This is a popular system type in online and mobile social games. Among offline RPGs, Xenoblade is probably one of the better-known examples.",
+      "contextHash": "5c5f95b884e920f56236e3136535c41a1176a6db3a5092134bf23faa72213bf5"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "欠点としては、把握の難しさが挙げられる。技毎にクールタイムを保有する仕様上、技の多い作品では管理が複雑になる。",
+      "sourceHash": "7e3d307b6a0a44c2579a16d6b7a1f19fb7537009f2993fecc919eb4004ced798",
+      "translation": "One drawback is that it can be difficult to keep track of. Since each skill has its own cooldown, management becomes complicated in games with many skills.",
+      "contextHash": "7e3d307b6a0a44c2579a16d6b7a1f19fb7537009f2993fecc919eb4004ced798"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "技を再使用できるかどうかをプレイヤーが把握する負担がある。いちいち技一覧を開いて確認するか、記憶しておく必要があるのだが、これはＭＰ制などよりも煩雑な作業となりやすい。",
+      "sourceHash": "7cf3600726dcddbdf34fa9121bb8494bd33e6333d4d98630dca53a5a9f6b7519",
+      "translation": "Players must keep track of whether a skill can be used again. They need to open the skill list every time to check, or remember it, and this tends to be more cumbersome than an MP-based system.",
+      "contextHash": "7cf3600726dcddbdf34fa9121bb8494bd33e6333d4d98630dca53a5a9f6b7519"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "コマンド入力時に全スキルのクールタイムを表示する方法もあるが、情報量も多くなるためＵＩが課題となる。やはり、技の多い作品ほど大変になるだろう。",
+      "sourceHash": "bed710f4669abf76e02a15ca67a57d8ab451f92636e98a3eb8c3dd57f6a77fbb",
+      "translation": "Another option is to display the cooldowns of all skills when entering commands, but the large amount of information makes the UI a challenge. As expected, the more skills a game has, the more difficult this becomes.",
+      "contextHash": "bed710f4669abf76e02a15ca67a57d8ab451f92636e98a3eb8c3dd57f6a77fbb"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "また、それなりに工夫しないと、再使用が可能になった技を順番に使用していくだけの作業になる。この型は技を早く発動したほうが、再使用も早まるため温存する意味が薄いためだ。",
+      "sourceHash": "778f770852e02786a01352bf79bf22c671b60c405e3ad3f41205f64a3fc2342c",
+      "translation": "Also, without putting some thought into it, this type can turn into nothing more than using skills one after another as they become available again. With this type, using a skill sooner also makes it available again sooner, so there is little point in saving it.",
+      "contextHash": "778f770852e02786a01352bf79bf22c671b60c405e3ad3f41205f64a3fc2342c"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "そうならないためには、技を使用するタイミングを見計らうような戦術性が欲しいところ。",
+      "sourceHash": "cb0fe5c7f1d200100814000aeae6857a67acade157187893f9a0dbc88986a257",
+      "translation": "To prevent that, it would be desirable to have tactical elements that require players to judge when to use their skills.",
+      "contextHash": "cb0fe5c7f1d200100814000aeae6857a67acade157187893f9a0dbc88986a257"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "そして、雑魚戦のような短期決戦での扱いも難しい。",
+      "sourceHash": "019362c2e789264409bd785460bd7794b43c89a35e1627e484574754af358c1e",
+      "translation": "It is also difficult to handle in short battles, such as fights against weak enemies.",
+      "contextHash": "019362c2e789264409bd785460bd7794b43c89a35e1627e484574754af358c1e"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "開幕から大技を連発できる仕様の場合、戦闘がかえって単調化する可能性がある。",
+      "sourceHash": "9bd4897913d631b000f3332d5a1facb5e50271155c7d78704b276105a4aebf2d",
+      "translation": "If the system allows powerful skills to be used repeatedly from the start of battle, the battle may become monotonous instead.",
+      "contextHash": "9bd4897913d631b000f3332d5a1facb5e50271155c7d78704b276105a4aebf2d"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "開幕時にクールタイムを設定する場合は、逆に地味な戦いを強いられる可能性がある。",
+      "sourceHash": "3a9485005a21f505cfabe416fb0d94afd996905edc8821e374dc9aef2f726546",
+      "translation": "Conversely, setting cooldowns at the start of battle may force players into rather uneventful fights.",
+      "contextHash": "3a9485005a21f505cfabe416fb0d94afd996905edc8821e374dc9aef2f726546"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "……というようになかなか課題が多い。",
+      "sourceHash": "85526b5f4aa981658444abad111913136fd336acc2e02e0e9e54ace906430275",
+      "translation": "…So, there are quite a few issues to address.",
+      "contextHash": "85526b5f4aa981658444abad111913136fd336acc2e02e0e9e54ace906430275"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "とはいえ、個人的にも注目の型なので上手な運用を考えてみたいところである。",
+      "sourceHash": "c8f98a000140c4f8765c7417c9412762d2d62b6b97b70c9da3c88a63d7ca78be",
+      "translation": "Even so, this is a type that I personally find interesting, so I would like to consider ways to use it effectively.",
+      "contextHash": "c8f98a000140c4f8765c7417c9412762d2d62b6b97b70c9da3c88a63d7ca78be"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "例えば、ＭＰ型などを組み合わせることで、上述の欠点を補う方法もある。もっとも、複雑化も避けられないけれど……。",
+      "sourceHash": "21871f6f21df083785df01cb570c04b4b60f898d2ef873348a5c77cdabcafabf",
+      "translation": "For example, combining it with an MP-based system could help compensate for the shortcomings mentioned above. That said, increased complexity would be unavoidable…",
+      "contextHash": "21871f6f21df083785df01cb570c04b4b60f898d2ef873348a5c77cdabcafabf"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "個数型",
+      "sourceHash": "bfb8aa7c7919e9b06190db2c785e08fcd3d6d34028aab55249f35d4e2f9a7c3e",
+      "translation": "Quantity-Based Type",
+      "contextHash": "bfb8aa7c7919e9b06190db2c785e08fcd3d6d34028aab55249f35d4e2f9a7c3e"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "要するにアイテム。所持しているアイテムの個数を減らして使用する。",
+      "sourceHash": "96cc8f40c5891f77db865e72ee317d80b8fbeedb06780cb93d7f4a0909704630",
+      "translation": "In short, items. Items are used by reducing the number in your inventory.",
+      "contextHash": "96cc8f40c5891f77db865e72ee317d80b8fbeedb06780cb93d7f4a0909704630"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "もちろんこれもリソースである。",
+      "sourceHash": "26280c7c3467542412a2e720adf0975d8affc4a8bb9b2b64647480a6e12e82b7",
+      "translation": "Of course, this is also a resource.",
+      "contextHash": "26280c7c3467542412a2e720adf0975d8affc4a8bb9b2b64647480a6e12e82b7"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "一般的にはお金を消費して、アイテムを購入することが多い。",
+      "sourceHash": "dbe758f4b241d137b5a79b5e3304b195d03c05cbe9e8e3ee5bdad2d5fe5ddbbf",
+      "translation": "Generally, players consume money to purchase items.",
+      "contextHash": "dbe758f4b241d137b5a79b5e3304b195d03c05cbe9e8e3ee5bdad2d5fe5ddbbf"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "パーティ全体で共有する場合と、キャラクターが個別に所有する場合の２通り。",
+      "sourceHash": "5aed0e4a6186b8447c00e55b492699ac87c52b603217ca88d88e921214ed0a45",
+      "translation": "There are two possibilities: items can be shared by the entire party, or owned individually by each character.",
+      "contextHash": "5aed0e4a6186b8447c00e55b492699ac87c52b603217ca88d88e921214ed0a45"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "基本的には攻撃よりも、回復のために使用することが多いが、何らかの制約を課さないと戦闘が長引く原因となる。",
+      "sourceHash": "5c9601e13b7504b7d14996b7b02dc577718be48b5a18575fea36e7614d8d8a72",
+      "translation": "They are generally used more for healing than for attacking, but unless some kind of restriction is imposed, they can cause battles to drag on.",
+      "contextHash": "5c9601e13b7504b7d14996b7b02dc577718be48b5a18575fea36e7614d8d8a72"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "とりあえず、僕としては９９個まで所有できるアイテムで延々と回復しながら戦うようなバランスはご遠慮願いたい。",
+      "sourceHash": "7461024fdec82bf01e096f9fbeff65db106c9052fb80098bed1a40ce7c89794b",
+      "translation": "For my part, I would rather avoid a balance where players can endlessly heal during battle using items that can be carried in quantities of up to 99.",
+      "contextHash": "7461024fdec82bf01e096f9fbeff65db106c9052fb80098bed1a40ce7c89794b"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "アイテムは誰でも使える場合が多いが、これが便利過ぎるとキャラクターの個性は薄れやすい。",
+      "sourceHash": "fe32b7920eb14a630c0d8189327511318004d0c4a76f9b2f6dc0963b5d7840cd",
+      "translation": "Items can often be used by anyone, but if they are too convenient, the characters' individuality tends to fade.",
+      "contextHash": "fe32b7920eb14a630c0d8189327511318004d0c4a76f9b2f6dc0963b5d7840cd"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "ＦＦシリーズの『投げる』など、特定のキャラクターしか使用できない設定にすれば多少の個性化も可能となる。あるいは特定のキャラクターのみ威力アップといった方法もある。",
+      "sourceHash": "b248ed9a78ae77997e800fb0893ab30da715c1474ce781e9202409e7b9b22173",
+      "translation": "Some individualization is possible by making certain items usable only by specific characters, such as the “Throw” command in the Final Fantasy series. Another option is to increase the power of an item only for specific characters.",
+      "contextHash": "b248ed9a78ae77997e800fb0893ab30da715c1474ce781e9202409e7b9b22173"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "耐久度型",
+      "sourceHash": "563a9e3dafc6b569633695a06bbad3ff51c9ae5da762b99f1fc203773d4d6633",
+      "translation": "Durability-Based Type",
+      "contextHash": "563a9e3dafc6b569633695a06bbad3ff51c9ae5da762b99f1fc203773d4d6633"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "攻撃を行う度に使用した武器の耐久度が減少する。",
+      "sourceHash": "b7d9fc3fd4b7b6449caee853194d28d8f00b855c2f2eb4ebcad32b4c62094141",
+      "translation": "Each time an attack is made, the durability of the weapon used decreases.",
+      "contextHash": "b7d9fc3fd4b7b6449caee853194d28d8f00b855c2f2eb4ebcad32b4c62094141"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "何かとお金がかかるシステムで、ややヘビーユーザ向けだが、逆にお金や武器の有り難みが増すという利点も。",
+      "sourceHash": "7180f56a6540cacdf04d73ebf90d9c76e850b39289d010e31f105c5003acc8dd",
+      "translation": "This system can be rather demanding because it costs money in various ways, making it somewhat geared toward heavy users. On the other hand, it also makes money and weapons feel more valuable.",
+      "contextHash": "7180f56a6540cacdf04d73ebf90d9c76e850b39289d010e31f105c5003acc8dd"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "耐久度の回復手段をどうするかも重要。もちろん、防具や他の物に耐久度があっても良い。",
+      "sourceHash": "8ba774f378d1191e921cf271dd4d092eb6aef3e312b8a2ccf76c95ba2f139077",
+      "translation": "How durability is restored is also important. Of course, armor and other items can have durability as well.",
+      "contextHash": "8ba774f378d1191e921cf271dd4d092eb6aef3e312b8a2ccf76c95ba2f139077"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "魔界塔士Sa・Ga",
+      "sourceHash": "e2cd7793b12e2f59effd6420dda75d118f3319c73ea17acb2bdea4c5843a6473",
+      "translation": "SaGa: The Final Fantasy Legend",
+      "contextHash": "e2cd7793b12e2f59effd6420dda75d118f3319c73ea17acb2bdea4c5843a6473"
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "攻撃する度に使用した武器の耐久度が１ずつ減少する。",
+      "sourceHash": "937c378a5e9d6a4ccf9e22258bd875a7b5aa96ed8c3acb0e9115b9fe5d6c871b",
+      "translation": "Each time an attack is made, the durability of the weapon used decreases by 1.",
+      "contextHash": "937c378a5e9d6a4ccf9e22258bd875a7b5aa96ed8c3acb0e9115b9fe5d6c871b"
+    },
+    {
+      "id": "text-099",
+      "type": "text",
+      "source": "減った耐久度の回復手段はなく、武器は使い捨てである。",
+      "sourceHash": "4a7da1b63b36763f151052db1bf2dd50e8f0e028c06335fb48749a9f7bb6950a",
+      "translation": "There is no way to restore lost durability, so weapons are disposable.",
+      "contextHash": "4a7da1b63b36763f151052db1bf2dd50e8f0e028c06335fb48749a9f7bb6950a"
+    },
+    {
+      "id": "text-100",
+      "type": "text",
+      "source": "ただし、エスパーやモンスターの特殊能力は宿屋に泊まることで全快する。",
+      "sourceHash": "d30ca6de83b45ab5f59174684e6d9c37a4ec985051acb305c60e44ceacb6226c",
+      "translation": "However, the special abilities of espers and monsters are fully restored by staying at an inn.",
+      "contextHash": "d30ca6de83b45ab5f59174684e6d9c37a4ec985051acb305c60e44ceacb6226c"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "ロマンシングサガ ミンストレルソング",
+      "sourceHash": "c2e5d03c021eea7a34a1681ea58324b74073da191472c80bd28f163ca06d29c3",
+      "translation": "Romancing SaGa: Minstrel Song",
+      "contextHash": "c2e5d03c021eea7a34a1681ea58324b74073da191472c80bd28f163ca06d29c3"
+    },
+    {
+      "id": "text-101",
+      "type": "text",
+      "source": "強力な技ほど多く耐久度が減少する。",
+      "sourceHash": "fa197ff5a139cc1db9c7acca8d5fb9ca45ee241333665219e9d2f4310f458e0d",
+      "translation": "The more powerful the skill, the more durability it consumes.",
+      "contextHash": "fa197ff5a139cc1db9c7acca8d5fb9ca45ee241333665219e9d2f4310f458e0d"
+    },
+    {
+      "id": "text-102",
+      "type": "text",
+      "source": "武器の丈夫さやキャラクターのスキルによって、減少値を抑えたり、０にすることも可能となっている。",
+      "sourceHash": "b6b2deb9995151906bdb0deb2f9478936d243aa3ff04061fbabb001d1bca6321",
+      "translation": "Depending on the weapon's sturdiness and the character's skills, it is possible to reduce the amount lost or even reduce it to 0.",
+      "contextHash": "b6b2deb9995151906bdb0deb2f9478936d243aa3ff04061fbabb001d1bca6321"
+    },
+    {
+      "id": "text-103",
+      "type": "text",
+      "source": "耐久度の回復は鍛冶屋で素材を用いて行う。",
+      "sourceHash": "6aec0dcbf67ad01582edea77cbe156e4f579ae3746d68af66560b4bd97eea8f1",
+      "translation": "Durability is restored at a blacksmith using materials.",
+      "contextHash": "6aec0dcbf67ad01582edea77cbe156e4f579ae3746d68af66560b4bd97eea8f1"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "使用回数型",
+      "sourceHash": "407ba7b5ccc45e5ea58b2bd81c209664e41c5b931d66f79e77462f0a9ea27e30",
+      "translation": "Uses-Based Type",
+      "contextHash": "407ba7b5ccc45e5ea58b2bd81c209664e41c5b931d66f79e77462f0a9ea27e30"
+    },
+    {
+      "id": "text-104",
+      "type": "text",
+      "source": "ＭＰのような共有の消費ポイントは存在せず、各技あるいはレベル毎に使用できる回数が設定されている。",
+      "sourceHash": "ed5ead714fd7cb7d05144e04ff70b8b64030eadf248329dca21b5f04af1d5a5a",
+      "translation": "There is no shared resource pool like MP; instead, each skill or level has a set number of uses.",
+      "contextHash": "ed5ead714fd7cb7d05144e04ff70b8b64030eadf248329dca21b5f04af1d5a5a"
+    },
+    {
+      "id": "text-105",
+      "type": "text",
+      "source": "色んな技を使わせたい場合は特に有効だ。",
+      "sourceHash": "e91684e6ed6d383368e70ed1e878ea11dcce55fc3a1bc45072b03883014e54e5",
+      "translation": "This is especially effective when you want players to use a variety of skills.",
+      "contextHash": "e91684e6ed6d383368e70ed1e878ea11dcce55fc3a1bc45072b03883014e54e5"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "ファイナルファンタジー１、３",
+      "sourceHash": "be999f22a493cac2bce204d0816c8727c0868033e8ecf71fd4ce7e1e1a0f7396",
+      "translation": "Final Fantasy I and III",
+      "contextHash": "be999f22a493cac2bce204d0816c8727c0868033e8ecf71fd4ce7e1e1a0f7396"
+    },
+    {
+      "id": "text-106",
+      "type": "text",
+      "source": "魔法が複数のレベルに分かれており、レベル毎に使用できる回数が異なる。",
+      "sourceHash": "96c455e3d26f07773adf1baf9b58c19202f4aeddbb4d42c239d18f767f9a4c8d",
+      "translation": "Magic is divided into multiple levels, and the number of uses differs for each level.",
+      "contextHash": "96c455e3d26f07773adf1baf9b58c19202f4aeddbb4d42c239d18f767f9a4c8d"
+    },
+    {
+      "id": "text-107",
+      "type": "text",
+      "source": "例えば、レベル１の魔法を使いきっても、レベル２の魔法は使用することができる。",
+      "sourceHash": "e2103f566fd13fc6484ae7a9753760adc30b8dcbea4934c953ce0b1c6022d96c",
+      "translation": "For example, even after using up all level 1 magic, level 2 magic can still be used.",
+      "contextHash": "e2103f566fd13fc6484ae7a9753760adc30b8dcbea4934c953ce0b1c6022d96c"
+    },
+    {
+      "id": "text-108",
+      "type": "text",
+      "source": "ちなみにウィザードリィの時代から同様の仕様なので、ＭＰ型よりも歴史は古いと思われる。プログラム的には管理が大変そうなのに不思議。",
+      "sourceHash": "413ac7021f3de003f66184d14d620a50629c5bb85e4e3a9d5f639fda5c665ac7",
+      "translation": "Incidentally, this system has existed since the days of Wizardry, so it seems to have a longer history than the MP-based type. It is curious, considering how difficult it seems to be to manage programmatically.",
+      "contextHash": "413ac7021f3de003f66184d14d620a50629c5bb85e4e3a9d5f639fda5c665ac7"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "ポケットモンスターシリーズ",
+      "sourceHash": "c6e34bca87db78107bc3531cafe5d43d0ac5e58f40beed33ff4241a2422bd061",
+      "translation": "Pokémon Series",
+      "contextHash": "c6e34bca87db78107bc3531cafe5d43d0ac5e58f40beed33ff4241a2422bd061"
+    },
+    {
+      "id": "text-109",
+      "type": "text",
+      "source": "各技毎に使用回数を保持している。",
+      "sourceHash": "70bbad8de048c92ca447117207e056b6a3a99b4e94e8185d5b2835714f592eb7",
+      "translation": "Each skill has its own number of uses.",
+      "contextHash": "70bbad8de048c92ca447117207e056b6a3a99b4e94e8185d5b2835714f592eb7"
+    },
+    {
+      "id": "text-110",
+      "type": "text",
+      "source": "技は一体当たり４つまで保有できないので、回数の少ない技ばかりだとすぐに燃料切れになる。",
+      "sourceHash": "b053f1afeb205e80d9920a469b4556f81a3027ac90849a577e7302858b40b940",
+      "translation": "Since a Pokémon cannot have more than four moves, relying mostly on moves with few uses will quickly leave it out of fuel.",
+      "contextHash": "b053f1afeb205e80d9920a469b4556f81a3027ac90849a577e7302858b40b940"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "まとめ",
+      "sourceHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72",
+      "translation": "Summary",
+      "contextHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72"
+    },
+    {
+      "id": "text-111",
+      "type": "text",
+      "source": "「ＨＰが０になると戦闘不能になる」「ＭＰを消費して魔法を使う」といった当たり前のシステムにも、様々な工夫ができることが分かったかと思う。",
+      "sourceHash": "135477e5bb16f9ca6f7fa3552e72534a99ecf3e8f3f8403ae865d669a39a5bbb",
+      "translation": "I hope you can see that even seemingly obvious systems, such as “a character becomes incapacitated when their HP reaches 0” and “magic consumes MP,” can be customized in many different ways.",
+      "contextHash": "135477e5bb16f9ca6f7fa3552e72534a99ecf3e8f3f8403ae865d669a39a5bbb"
+    },
+    {
+      "id": "text-112",
+      "type": "text",
+      "source": "もちろん、消費型とクールタイム型のように複数の型を組み合わせることも可能だ。複雑になるかもしれないが、工夫の余地は大きいだろう。",
+      "sourceHash": "85adb8a4dc5cf1eeb3b0c3fbd18837aa469e60156b204b9f971a1387ffd316f3",
+      "translation": "Of course, it is also possible to combine multiple types, such as a resource-based type and a cooldown-based type. It may become more complex, but there is plenty of room for creativity.",
+      "contextHash": "85adb8a4dc5cf1eeb3b0c3fbd18837aa469e60156b204b9f971a1387ffd316f3"
+    },
+    {
+      "id": "text-113",
+      "type": "text",
+      "source": "また、戦闘に勝つことによって、プレイヤーは経験値やお金、アイテムといった新たなリソースを手に入れることができる。それらを活用してどうパーティを強化するかというのもＲＰＧの大きな楽しみだ。",
+      "sourceHash": "95378489adf8a9fd1987341d36712d0908e072f5c13e9fbc20d6e7194738e275",
+      "translation": "Furthermore, by winning battles, players can acquire new resources such as experience points, money, and items. Deciding how to use those resources to strengthen the party is also one of the great pleasures of RPGs.",
+      "contextHash": "95378489adf8a9fd1987341d36712d0908e072f5c13e9fbc20d6e7194738e275"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]耐久／生存に関するリソース[[/LINK_1]]",
+      "sourceHash": "03729459ad3aededc38526ad4f254e6ff96d75b956d25c09af082d019ae74249",
+      "parts": [
+        {
+          "source": "耐久／生存に関するリソース",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Durability / survival-related resources[[/LINK_1]]",
+      "contextHash": "03729459ad3aededc38526ad4f254e6ff96d75b956d25c09af082d019ae74249"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]満腹度[[/LINK_1]]",
+      "sourceHash": "05c2bc8b015646cfc770303cbf9ff2dad3e323dfbe6107f5cc1bc128c2c9cb85",
+      "parts": [
+        {
+          "source": "満腹度",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Satiety[[/LINK_1]]",
+      "contextHash": "05c2bc8b015646cfc770303cbf9ff2dad3e323dfbe6107f5cc1bc128c2c9cb85"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]行動に要するリソース[[/LINK_1]]",
+      "sourceHash": "4e38bd5ae395286566f896f7568f7db5f11679a29f96f0e1bfb34a1a73bef582",
+      "parts": [
+        {
+          "source": "行動に要するリソース",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Resources required for actions[[/LINK_1]]",
+      "contextHash": "4e38bd5ae395286566f896f7568f7db5f11679a29f96f0e1bfb34a1a73bef582"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]消費型（ＭＰなど）[[/LINK_1]]",
+      "sourceHash": "9ad555488e05b898b5a1d421a84c0f4b9108f9e3aa942ed9faf3072e2a1ad94f",
+      "parts": [
+        {
+          "source": "消費型（ＭＰなど）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Consumable (such as MP)[[/LINK_1]]",
+      "contextHash": "9ad555488e05b898b5a1d421a84c0f4b9108f9e3aa942ed9faf3072e2a1ad94f"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]蓄積型[[/LINK_1]]",
+      "sourceHash": "551da37e3ab18ed7a6e06c1f1eb456b57b13b7573d549df7b7eec4f47d0c426d",
+      "parts": [
+        {
+          "source": "蓄積型",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Accumulation-based[[/LINK_1]]",
+      "contextHash": "551da37e3ab18ed7a6e06c1f1eb456b57b13b7573d549df7b7eec4f47d0c426d"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]クールタイム型[[/LINK_1]]",
+      "sourceHash": "ea84c6b26d5ec2628db35b2c064f5cb974db294e6037e55b8090819d419f8e19",
+      "parts": [
+        {
+          "source": "クールタイム型",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Cooldown-based[[/LINK_1]]",
+      "contextHash": "ea84c6b26d5ec2628db35b2c064f5cb974db294e6037e55b8090819d419f8e19"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]個数型[[/LINK_1]]",
+      "sourceHash": "02de633a87d8b20f460180e92163b557e54c9f7fdddfb5c894e03deaa4e9aea7",
+      "parts": [
+        {
+          "source": "個数型",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Quantity-based[[/LINK_1]]",
+      "contextHash": "02de633a87d8b20f460180e92163b557e54c9f7fdddfb5c894e03deaa4e9aea7"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]耐久度型[[/LINK_1]]",
+      "sourceHash": "f8e52e02fc3e51650159cd485c2b0e4e3574e38638ef1915c107f4edb2e4c4c7",
+      "parts": [
+        {
+          "source": "耐久度型",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Durability-based[[/LINK_1]]",
+      "contextHash": "f8e52e02fc3e51650159cd485c2b0e4e3574e38638ef1915c107f4edb2e4c4c7"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]使用回数型[[/LINK_1]]",
+      "sourceHash": "a0b81a8c1fbcec82aff6fa6624abdb2b71a4022b6753a65e95bfc3a8d820524c",
+      "parts": [
+        {
+          "source": "使用回数型",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Uses-based[[/LINK_1]]",
+      "contextHash": "a0b81a8c1fbcec82aff6fa6624abdb2b71a4022b6753a65e95bfc3a8d820524c"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]まとめ[[/LINK_1]]",
+      "sourceHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de",
+      "parts": [
+        {
+          "source": "まとめ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Summary[[/LINK_1]]",
+      "contextHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "なお、そちらについては『[[LINK_1]]強化システム（成長システム）[[/LINK_1]]』で既に記述している。",
+      "sourceHash": "4e4b882a9b43c2e83945a0bbb2a4de0eaeb987d5291518cecc77bdf55faa6cff",
+      "parts": [
+        {
+          "source": "なお、そちらについては『",
+          "link": false
+        },
+        {
+          "source": "強化システム（成長システム）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』で既に記述している。",
+          "link": false
+        }
+      ],
+      "translation": "I have already described that in “[[LINK_1]]Enhancement System (Growth System)[[/LINK_1]].”",
+      "contextHash": "4e4b882a9b43c2e83945a0bbb2a4de0eaeb987d5291518cecc77bdf55faa6cff"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Design Guides table of contents[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "リソース（資源）とはゲームをプレイする中で、獲得したり消費したりする要素である。": "Resources are elements that are acquired or consumed while playing a game.",
+    "お金やＨＰ、ＭＰが特に代表的。これらのやり繰りはＲＰＧのゲーム性において中核を担う部分の１つである。": "Money, HP, and MP are especially representative examples. Managing these is one of the core aspects of RPG gameplay.",
+    "ＨＰやＭＰといったリソースは多くの場合、空気のようにごく当たり前に存在している。しかし、このリソースの在り方を工夫すれば、ゲームシステムにも個性を出すことができるので、一度焦点を当ててみたい。": "Resources such as HP and MP often exist as naturally as air. However, by putting a unique spin on how resources work, you can give a game system its own personality, so I would like to focus on them for a moment.",
+    "目次": "Table of Contents",
+    "ＨＰ": "HP",
+    "ＬＰ": "LP",
+    "耐久／生存に関するリソース": "Resources Related to Durability and Survival",
+    "キャラクターが死んだり、戦闘不能になったりしないためのリソース。": "Resources that prevent characters from dying or becoming incapacitated.",
+    "ＨＰを単独で用いるのが主流だが、それ以外の要素が存在する場合も。": "Using HP alone is the standard, but some games have other elements as well.",
+    "大半のＲＰＧにとっては最も重要なリソース。": "For most RPGs, this is the most important resource.",
+    "大抵の場合、敵の攻撃を受けると値が減って、０になるとキャラクターは戦闘不能となる。": "In most cases, the value decreases when the character is attacked by an enemy, and the character becomes incapacitated when it reaches 0.",
+    "どのＲＰＧもほぼ同じルールだが、ここに独自性を打ち出す方法もある。": "Nearly every RPG uses essentially the same rules, but there are ways to give this aspect some originality.",
+    "例えば……": "For example...",
+    "ファイアーエムブレムシリーズ": "Fire Emblem Series",
+    "ＨＰが０になると、キャラが消滅するという強烈なペナルティがある。": "When HP reaches 0, there is the severe penalty of the character disappearing.",
+    "緊張感が増す反面、気軽には遊び辛くなる諸刃の剣。素人にはお勧めできない。そのせいか、近年のシリーズ作品では消滅しない設定ができるようになっている。": "It is a double-edged sword: while it increases the tension, it also makes the game difficult to play casually. I would not recommend it to beginners. Perhaps for that reason, recent games in the series allow you to configure characters so they do not disappear.",
+    "キャラの生存状況で会話パターンが変わったりするので制作者としては大変かも。": "It may be difficult for creators, since dialogue patterns can change depending on which characters are alive.",
+    "ＳＲＰＧには同様のシステムを持っている作品も多い。": "Many SRPGs have similar systems.",
+    "スターオーシャン３": "Star Ocean 3",
+    "ＭＰもＨＰと同じ役割を持つ。": "MP serves the same role as HP.",
+    "ＨＰ、ＭＰの片方が０になると戦闘不能になってしまう。": "If either HP or MP reaches 0, the character becomes incapacitated.",
+    "ブレスオブファイア４": "Breath of Fire IV",
+    "ＨＰが０になった場合、蘇生しても最大ＨＰが減少する。": "If HP reaches 0, the character's maximum HP is reduced even after revival.",
+    "宿に泊まると回復する仕様。": "It is restored by staying at an inn.",
+    "マザー２～３": "MOTHER 2–3",
+    "ダメージを受けても、ＨＰは即座に減らない。": "HP does not decrease immediately when damage is taken.",
+    "ドラムロール式カウンタによって、徐々に減っていくのが特徴。": "Instead, it gradually decreases according to a drum-roll-style counter.",
+    "致命傷となる攻撃を喰らっても、ＨＰが０になるまでに回復を行えば戦闘不能とならない。": "Even after taking a fatal attack, the character will not become incapacitated if healed before HP reaches 0.",
+    "他にも「大ダメージを受けるとＨＰがマイナスになって、それを回復するまで戦闘不能から復帰できない」なんてシステムを筆者は思いついた。思いついただけで実装はしなかったが……。": "I also came up with a system where taking heavy damage causes HP to drop below zero, and the character cannot recover from incapacitation until that damage is healed. I only came up with it and never implemented it, though...",
+    "サガシリーズに登場。": "This appears in the SaGa series.",
+    "ＨＰが０になると、ＬＰが減少する。ＬＰが０になると宿屋に泊まるまで蘇生ができなくなったり、キャラ消滅したりする。": "When HP reaches 0, LP decreases. When LP reaches 0, the character may be unable to revive until staying at an inn, or may disappear entirely.",
+    "ちなみに初代ＧＢサガの時代から同様の要素（ハート）が存在している。": "Incidentally, a similar element (hearts) has existed since the days of the original Game Boy SaGa.",
+    "アクションやシューティングにおける残機のようなものと考えることもできる。": "It can also be thought of as being similar to extra lives in action games and shooters.",
+    "ロマサガ２以降のサガシリーズでは、敵の攻撃が非常に激しく簡単にＨＰが０になる。": "In the SaGa series from Romancing SaGa 2 onward, enemy attacks are extremely fierce, and HP reaches 0 easily.",
+    "代わりに、ＨＰが０になっても、回復術によって簡単に蘇生できる。": "In exchange, even if HP reaches 0, the character can be revived easily with healing spells.",
+    "このままだと戦闘不能→蘇生のイタチごっこになってしまうので、歯止めにＬＰを導入していると考えられる。これらの構造によって、他のＲＰＧよりも高い緊張感を演出していると推察できる。": "Otherwise, battles would become an endless cycle of incapacitation and revival, so LP can be seen as having been introduced to put a brake on that cycle. It can be inferred that these structures create a higher level of tension than in other RPGs.",
+    "ロマンシングサガ２": "Romancing SaGa 2",
+    "ＬＰが０になるとキャラクターは消滅する。": "When LP reaches 0, the character disappears.",
+    "ＬＰは宿屋でも回復せず、回復手段は一部のアイテムなどに限定される。": "LP is not restored even at an inn, and the means of restoring it are limited to certain items and the like.",
+    "サガフロンティア１": "SaGa Frontier 1",
+    "宿屋に泊まることによって、ＬＰは全回復するので制約はゆるい。": "The restriction is lenient because staying at an inn fully restores LP.",
+    "ＬＰを消費する事で貴重な全体回復技を使用できるキャラクターも存在する。": "Some characters can use valuable party-wide healing techniques by consuming LP.",
+    "サガフロンティア２": "SaGa Frontier 2",
+    "戦闘中にＬＰを１消耗する事で、ＨＰを全快できる。ターン経過しないので強力だが、戦闘は長引く傾向あり。": "By consuming 1 LP during battle, HP can be fully restored. This is powerful because it does not advance the turn, but battles tend to drag on.",
+    "また、術や技に使用するＪＰ、ＷＰを切らしていた場合、ＬＰを消費する事で代わりとするなんて要素も存在する。": "There is also an element where, if you run out of JP or WP used for spells and techniques, you can consume LP as a substitute.",
+    "アンリミテッドサガ": "Unlimited SaGa",
+    "ＨＰが０になっても戦闘不能にならないが、ＨＰが減っているとＬＰが減りやすくなる。": "The character does not become incapacitated even when HP reaches 0, but LP is more likely to decrease when HP is low.",
+    "ＬＰが０になるとようやく戦闘不能に。": "The character finally becomes incapacitated when LP reaches 0.",
+    "全員のＬＰが０になるまで全滅しないため、強敵相手の戦闘は非常に長引く。": "Because the entire party is not wiped out until everyone's LP reaches 0, battles against powerful enemies can become extremely prolonged.",
+    "満腹度": "Fullness",
+    "風来のシレンなど、ローグ系ゲームなどで扱われる。": "This is used in roguelike games such as Shiren the Wanderer.",
+    "人が生きるために当然の要素をシステムとして表現したもの。似たようなものに疲労度などがある。": "A system that represents elements naturally necessary for people to live. Similar examples include fatigue.",
+    "大半の場合は、移動や戦闘などの行動によって消耗していく。これが０になると、ＨＰが減少し始めたり、能力が下がるといったペナルティが課せられることが多い。": "In most cases, it is depleted by actions such as moving and fighting. When it reaches 0, penalties such as HP beginning to decrease or abilities being reduced are often imposed.",
+    "回復は食料によって行うのが基本。": "It is generally restored by consuming food.",
+    "プレイヤーにとっては面倒なだけのことも多いので、大半のゲームでは省略される。": "Since it is often nothing more than a nuisance for players, it is omitted from most games.",
+    "一般ＲＰＧで採用する場合は、ダンジョンの探索量を制限する目的などに利用できるかも。": "When used in a standard RPG, it could serve to limit how much of a dungeon the player can explore.",
+    "行動に要するリソース": "Resources Required for Actions",
+    "ＭＰを初めとした魔法や特技を使用するためのリソース。": "Resources used to cast spells and use Techs, including MP.",
+    "消費型（ＭＰなど）": "Expenditure Type (MP, etc.)",
+    "技を使用すると設定された値（例：消費ＭＰ）だけキャラクターの保持ポイントが減少するというのが定番。": "The standard approach is for using a skill to reduce the character's stored points by a set amount (e.g., MP cost).",
+    "減ったポイントは宿屋などで回復できる。": "Lost points can be restored at an inn or similar location.",
+    "ただし、「キャラクターがＭＰを保有する」という一般的な型にこだわる必要はない。": "However, there is no need to adhere to the conventional model in which a character possesses MP.",
+    "ロマンシングサガ１": "Romancing SaGa 1",
+    "術属性毎に法力（ＭＰに該当）を保有している。例えば、火の術法を使用しても、風の術法の法力は減少しない。下の回数制もそうだが、調整次第では色々な種類の技をプレイヤーに使用させる事ができる。": "The character possesses magic power (equivalent to MP) for each spell element. For example, using a fire spell does not reduce their wind magic power. As with the usage-count system below, adjusting the system appropriately can encourage players to use a wide variety of skills.",
+    "術（ＪＰ）と技（ＷＰ）で別々に消費ポイントが設定されている。": "Separate costs are set for spells (JP) and skills (WP).",
+    "このようにすると、武器技と魔法を明確に差別化できるのが利点。": "The advantage of this approach is that it clearly differentiates weapon skills from magic.",
+    "例えば、６以降のＤＱは呪文と特技の区別が曖昧なので、こういうのを導入してはどうかと個人的には思っていたりする。": "For example, since Dragon Quest VI and later entries have an ambiguous distinction between spells and Techs, I personally think it might be worth introducing something like this.",
+    "グランディアＸ": "Grandia X",
+    "魔法の使用にはマナエッグと呼ばれる物を装備する。": "To use magic, the player equips an item called a Mana Egg.",
+    "ＭＰは装備したマナエッグ毎に保有するので、キャラクターには依存しない。": "Since MP is held by each equipped Mana Egg, it is not dependent on the character.",
+    "蓄積型": "Accumulation Type",
+    "ＭＰにおける宿屋のような手軽な全快手段はないが、代わりに戦いの中でポイントを蓄積することで技を使用できるようになる。": "Unlike MP, there is no convenient way to fully restore the resource, such as staying at an inn. Instead, skills become usable by accumulating points during battle.",
+    "蓄積するための条件は時間の経過やダメージを受けることなど。": "Conditions for accumulating points include the passage of time and taking damage.",
+    "結局、技を使用するためにポイントを消費するという点では、上の消費型と明確な境界はない。実際、ＭＰが時間経過で徐々に回復していくＲＰＧも存在する。あくまで、数が多いので便宜的に分けただけである。": "Ultimately, there is no clear boundary between this and the expenditure type above, since both consume points to use skills. In fact, some RPGs allow MP to gradually recover as time passes. I separated them merely for convenience because there are so many variations.",
+    "ファイナルファンタジー7：リミット技": "Final Fantasy VII: Limit Skills",
+    "ダメージによってポイント（リミットゲージ）を蓄積し、ゲージを満タンにすることで発動できる。": "Points (the Limit Gauge) are accumulated by taking damage, and the skill can be activated once the gauge is full.",
+    "いかにも必殺技といった印象が強く、派手さ優先に思えるシステムなのだが、長所も中々多くて侮れない。": "It strongly gives the impression of a flashy finishing move, making the system seem focused on spectacle, but it has many merits and should not be underestimated.",
+    "ＭＰ消費魔法のように連発はできないのだが、それだけに普通ならゲームバランスを崩しかねない強力な技も設定可能だ。": "Although it cannot be used repeatedly like MP-cost spells, this makes it possible to include powerful skills that would normally risk disrupting the game balance.",
+    "例えば「時間を停止して一方的に攻撃する」というような、味方側が自由に使えたらバランス崩壊必至な大技も現実的に組み込める。": "For example, it is feasible to include a powerful move such as stopping time and attacking unopposed—something that would inevitably destroy the balance if allies could use it freely.",
+    "また、連発できないだけに長いアニメーションでもある程度我慢できるというのも大きな利点。ワンパターンに陥りがちな戦闘を崩す意味でも、アクセントとしての意義は大きい。": "Another major advantage is that, since it cannot be used repeatedly, players can tolerate relatively long animations. It also serves as an important accent for breaking up battles that tend to become repetitive.",
+    "戦闘前に全員のゲージを溜めて、ボス戦で一気に発動することも可能。ただしこれは、強力過ぎてバランス崩壊の恐れも。": "It is possible to fill everyone's gauge before battle and activate all of them at once during a boss fight. However, this can be so powerful that it risks destroying the balance.",
+    "ファイナルファンタジー１３：ＴＰ": "Final Fantasy XIII: TP",
+    "ＭＰの概念が存在せず、代わりにパーティ全体で共有するＴＰが存在する。これを消費することで召喚などのＴＰアビリティを使用できる。": "There is no concept of MP; instead, the entire party shares TP. Consuming TP allows the player to use TP abilities such as summoning.",
+    "ポイントを回復する条件は戦闘で高いランクを出すことなど。": "Conditions for restoring points include achieving a high rank in battle.",
+    "このようにパーティ全体で１つのポイントを共有するという方法もある。": "As this shows, another approach is to have the entire party share a single pool of points.",
+    "使用できる機会が少なすぎて正直微妙だったけど……。": "To be honest, it was rather underwhelming because opportunities to use it were too few…",
+    "ロマンシングサガ ミンストレルソング：ＢＰ": "Romancing SaGa: Minstrel Song: BP",
+    "時間（ターン）が経過する毎に技を使用するためのポイントが増加する。": "The points used to perform skills increase with each passing unit of time (turn).",
+    "次の戦闘に値を持ち越すことはできない。": "The value cannot be carried over to the next battle.",
+    "この種のシステムは、最初の数ターンで強力な技を使用し辛いため、雑魚戦が地味になる可能性も。": "With this type of system, it is difficult to use powerful skills during the first few turns, which can make regular battles feel lackluster.",
+    "当作品では初期値を設定したり、武器に消費型の耐久度を設定することで欠点を緩和している。": "This game mitigates the drawback by setting an initial value and giving weapons consumable durability.",
+    "クールタイム型": "Cooldown Type",
+    "技を使用すると、再使用までに一定の時間を空ける必要がある。ターン制ではターン数、リアルタイム制では秒数が制限の条件になる。": "After using a skill, a certain amount of time must pass before it can be used again. In turn-based systems, the restriction is measured in turns; in real-time systems, it is measured in seconds.",
+    "戦闘開始時に技のクールタイムが必要かは作品によって個性が出る。": "Whether skills require a cooldown at the start of battle varies from game to game.",
+    "蓄積型にも似ているが、管理が技毎という点で異なっている。": "It resembles the accumulation type, but differs in that it is managed separately for each skill.",
+    "様々な技を使わせたい場合に有効となる。連発されるとゲームバランスを崩しかねない強力な技も、採用しやすいため多彩な戦闘を演出しやすい。": "This is effective when you want players to use a variety of skills. Since powerful skills that could disrupt the game balance if used repeatedly are easier to implement, it also helps create diverse battles.",
+    "ネトゲやソシャゲでも流行の型。オフラインＲＰＧではゼノブレイドなどが有名だろうか。": "This is a popular system type in online and mobile social games. Among offline RPGs, Xenoblade is probably one of the better-known examples.",
+    "欠点としては、把握の難しさが挙げられる。技毎にクールタイムを保有する仕様上、技の多い作品では管理が複雑になる。": "One drawback is that it can be difficult to keep track of. Since each skill has its own cooldown, management becomes complicated in games with many skills.",
+    "技を再使用できるかどうかをプレイヤーが把握する負担がある。いちいち技一覧を開いて確認するか、記憶しておく必要があるのだが、これはＭＰ制などよりも煩雑な作業となりやすい。": "Players must keep track of whether a skill can be used again. They need to open the skill list every time to check, or remember it, and this tends to be more cumbersome than an MP-based system.",
+    "コマンド入力時に全スキルのクールタイムを表示する方法もあるが、情報量も多くなるためＵＩが課題となる。やはり、技の多い作品ほど大変になるだろう。": "Another option is to display the cooldowns of all skills when entering commands, but the large amount of information makes the UI a challenge. As expected, the more skills a game has, the more difficult this becomes.",
+    "また、それなりに工夫しないと、再使用が可能になった技を順番に使用していくだけの作業になる。この型は技を早く発動したほうが、再使用も早まるため温存する意味が薄いためだ。": "Also, without putting some thought into it, this type can turn into nothing more than using skills one after another as they become available again. With this type, using a skill sooner also makes it available again sooner, so there is little point in saving it.",
+    "そうならないためには、技を使用するタイミングを見計らうような戦術性が欲しいところ。": "To prevent that, it would be desirable to have tactical elements that require players to judge when to use their skills.",
+    "そして、雑魚戦のような短期決戦での扱いも難しい。": "It is also difficult to handle in short battles, such as fights against weak enemies.",
+    "開幕から大技を連発できる仕様の場合、戦闘がかえって単調化する可能性がある。": "If the system allows powerful skills to be used repeatedly from the start of battle, the battle may become monotonous instead.",
+    "開幕時にクールタイムを設定する場合は、逆に地味な戦いを強いられる可能性がある。": "Conversely, setting cooldowns at the start of battle may force players into rather uneventful fights.",
+    "……というようになかなか課題が多い。": "…So, there are quite a few issues to address.",
+    "とはいえ、個人的にも注目の型なので上手な運用を考えてみたいところである。": "Even so, this is a type that I personally find interesting, so I would like to consider ways to use it effectively.",
+    "例えば、ＭＰ型などを組み合わせることで、上述の欠点を補う方法もある。もっとも、複雑化も避けられないけれど……。": "For example, combining it with an MP-based system could help compensate for the shortcomings mentioned above. That said, increased complexity would be unavoidable…",
+    "個数型": "Quantity-Based Type",
+    "要するにアイテム。所持しているアイテムの個数を減らして使用する。": "In short, items. Items are used by reducing the number in your inventory.",
+    "もちろんこれもリソースである。": "Of course, this is also a resource.",
+    "一般的にはお金を消費して、アイテムを購入することが多い。": "Generally, players consume money to purchase items.",
+    "パーティ全体で共有する場合と、キャラクターが個別に所有する場合の２通り。": "There are two possibilities: items can be shared by the entire party, or owned individually by each character.",
+    "基本的には攻撃よりも、回復のために使用することが多いが、何らかの制約を課さないと戦闘が長引く原因となる。": "They are generally used more for healing than for attacking, but unless some kind of restriction is imposed, they can cause battles to drag on.",
+    "とりあえず、僕としては９９個まで所有できるアイテムで延々と回復しながら戦うようなバランスはご遠慮願いたい。": "For my part, I would rather avoid a balance where players can endlessly heal during battle using items that can be carried in quantities of up to 99.",
+    "アイテムは誰でも使える場合が多いが、これが便利過ぎるとキャラクターの個性は薄れやすい。": "Items can often be used by anyone, but if they are too convenient, the characters' individuality tends to fade.",
+    "ＦＦシリーズの『投げる』など、特定のキャラクターしか使用できない設定にすれば多少の個性化も可能となる。あるいは特定のキャラクターのみ威力アップといった方法もある。": "Some individualization is possible by making certain items usable only by specific characters, such as the “Throw” command in the Final Fantasy series. Another option is to increase the power of an item only for specific characters.",
+    "耐久度型": "Durability-Based Type",
+    "攻撃を行う度に使用した武器の耐久度が減少する。": "Each time an attack is made, the durability of the weapon used decreases.",
+    "何かとお金がかかるシステムで、ややヘビーユーザ向けだが、逆にお金や武器の有り難みが増すという利点も。": "This system can be rather demanding because it costs money in various ways, making it somewhat geared toward heavy users. On the other hand, it also makes money and weapons feel more valuable.",
+    "耐久度の回復手段をどうするかも重要。もちろん、防具や他の物に耐久度があっても良い。": "How durability is restored is also important. Of course, armor and other items can have durability as well.",
+    "魔界塔士Sa・Ga": "SaGa: The Final Fantasy Legend",
+    "攻撃する度に使用した武器の耐久度が１ずつ減少する。": "Each time an attack is made, the durability of the weapon used decreases by 1.",
+    "減った耐久度の回復手段はなく、武器は使い捨てである。": "There is no way to restore lost durability, so weapons are disposable.",
+    "ただし、エスパーやモンスターの特殊能力は宿屋に泊まることで全快する。": "However, the special abilities of espers and monsters are fully restored by staying at an inn.",
+    "ロマンシングサガ ミンストレルソング": "Romancing SaGa: Minstrel Song",
+    "強力な技ほど多く耐久度が減少する。": "The more powerful the skill, the more durability it consumes.",
+    "武器の丈夫さやキャラクターのスキルによって、減少値を抑えたり、０にすることも可能となっている。": "Depending on the weapon's sturdiness and the character's skills, it is possible to reduce the amount lost or even reduce it to 0.",
+    "耐久度の回復は鍛冶屋で素材を用いて行う。": "Durability is restored at a blacksmith using materials.",
+    "使用回数型": "Uses-Based Type",
+    "ＭＰのような共有の消費ポイントは存在せず、各技あるいはレベル毎に使用できる回数が設定されている。": "There is no shared resource pool like MP; instead, each skill or level has a set number of uses.",
+    "色んな技を使わせたい場合は特に有効だ。": "This is especially effective when you want players to use a variety of skills.",
+    "ファイナルファンタジー１、３": "Final Fantasy I and III",
+    "魔法が複数のレベルに分かれており、レベル毎に使用できる回数が異なる。": "Magic is divided into multiple levels, and the number of uses differs for each level.",
+    "例えば、レベル１の魔法を使いきっても、レベル２の魔法は使用することができる。": "For example, even after using up all level 1 magic, level 2 magic can still be used.",
+    "ちなみにウィザードリィの時代から同様の仕様なので、ＭＰ型よりも歴史は古いと思われる。プログラム的には管理が大変そうなのに不思議。": "Incidentally, this system has existed since the days of Wizardry, so it seems to have a longer history than the MP-based type. It is curious, considering how difficult it seems to be to manage programmatically.",
+    "ポケットモンスターシリーズ": "Pokémon Series",
+    "各技毎に使用回数を保持している。": "Each skill has its own number of uses.",
+    "技は一体当たり４つまで保有できないので、回数の少ない技ばかりだとすぐに燃料切れになる。": "Since a Pokémon cannot have more than four moves, relying mostly on moves with few uses will quickly leave it out of fuel.",
+    "まとめ": "Summary",
+    "「ＨＰが０になると戦闘不能になる」「ＭＰを消費して魔法を使う」といった当たり前のシステムにも、様々な工夫ができることが分かったかと思う。": "I hope you can see that even seemingly obvious systems, such as “a character becomes incapacitated when their HP reaches 0” and “magic consumes MP,” can be customized in many different ways.",
+    "もちろん、消費型とクールタイム型のように複数の型を組み合わせることも可能だ。複雑になるかもしれないが、工夫の余地は大きいだろう。": "Of course, it is also possible to combine multiple types, such as a resource-based type and a cooldown-based type. It may become more complex, but there is plenty of room for creativity.",
+    "また、戦闘に勝つことによって、プレイヤーは経験値やお金、アイテムといった新たなリソースを手に入れることができる。それらを活用してどうパーティを強化するかというのもＲＰＧの大きな楽しみだ。": "Furthermore, by winning battles, players can acquire new resources such as experience points, money, and items. Deciding how to use those resources to strengthen the party is also one of the great pleasures of RPGs."
+  }
+}
