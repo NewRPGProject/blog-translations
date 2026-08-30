@@ -88,6 +88,36 @@ function normalizeEnglishAscii(value) {
         .replace(/、[ \t]*/gu, ", ");
 }
 
+// Dialogue in older articles is often split across several <br>-separated
+// text nodes. Models can then leave the Japanese opening quote in the first
+// node while converting only the closing quote in a later node. Use the source
+// punctuation as the authority and consistently render such pairs as ASCII
+// double quotes in English.
+function normalizeJapaneseQuoteBoundaries(source, value) {
+    const original = String(source || "");
+    let translation = String(value || "");
+    const startsWithQuote = /^[\s\u3000]*[「『]/u.test(original);
+    const endsWithQuote = /[」』][\s\u3000]*$/u.test(original);
+
+    if (startsWithQuote) {
+        if (/^[ \t]*[「『“”"]/u.test(translation)) {
+            translation = translation.replace(/^[ \t]*[「『“”"]/u, ' "');
+        } else {
+            translation = ` "${translation.replace(/^[ \t]*/u, "")}`;
+        }
+    }
+
+    if (endsWithQuote) {
+        if (/[「『」』“”"][ \t]*$/u.test(translation)) {
+            translation = translation.replace(/[「『」』“”"][ \t]*$/u, '"');
+        } else {
+            translation = `${translation.replace(/[ \t]*$/u, "")}"`;
+        }
+    }
+
+    return translation;
+}
+
 function decodeHtml(value) {
     return value
         // Some older Seesaa entries omit the optional semicolon in named
@@ -1105,7 +1135,10 @@ function normalizeStoredEnglishAscii(article) {
     let repaired = false;
     for (const item of [...(article.blocks || []), ...(article.lines || [])]) {
         if (typeof item.translation !== "string") continue;
-        const normalized = normalizeEnglishAscii(item.translation);
+        const normalized = normalizeJapaneseQuoteBoundaries(
+            item.source,
+            normalizeEnglishAscii(item.translation)
+        );
         if (normalized !== item.translation) {
             item.translation = normalized;
             repaired = true;
@@ -1120,7 +1153,10 @@ function normalizeStoredEnglishAscii(article) {
     }
     for (const [source, translation] of Object.entries(article.texts || {})) {
         if (typeof translation !== "string") continue;
-        const normalized = normalizeEnglishAscii(translation);
+        const normalized = normalizeJapaneseQuoteBoundaries(
+            source,
+            normalizeEnglishAscii(translation)
+        );
         if (normalized !== translation) {
             article.texts[source] = normalized;
             repaired = true;
@@ -1141,7 +1177,10 @@ function synchronizeTextsFromBlocks(article) {
 function makeOutput({ articleId, articleUrl, lastModified, blocks, linkedLines }) {
     for (const item of [...blocks, ...linkedLines]) {
         if (typeof item.translation === "string") {
-            item.translation = normalizeEnglishAscii(item.translation);
+            item.translation = normalizeJapaneseQuoteBoundaries(
+                item.source,
+                normalizeEnglishAscii(item.translation)
+            );
         }
     }
     const titleBlock = blocks.find(block => block.type === "title");
