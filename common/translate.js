@@ -391,7 +391,8 @@ function normalizeEnglishAscii(text) {
         .replace(/[ \t]*\uFF08/g, " (")
         .replace(/\uFF09[ \t]*/g, ") ")
         .replace(/[\uFF01-\uFF5E]/g, character =>
-            String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
+            String.fromCharCode(character.charCodeAt(0) - 0xFEE0))
+        .replace(/、[ \t]*/g, ", ");
 }
 
 function isStandaloneFullWidthAscii(text) {
