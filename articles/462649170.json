@@ -1,0 +1,945 @@
+{
+  "articleId": "462649170",
+  "sourceUrl": "https://newrpg.seesaa.net/article/462649170.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "270f654eb802d8dbce45cda6906acb0dabfd1b577541a3c9232ca1e4e2d41513",
+  "translatedAt": "2026-08-30T02:54:03.772Z",
+  "title": "[RPG Development Tutorial] Game Balance in the Second Half",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【RPG制作講座】後半のゲームバランス",
+      "sourceHash": "43384196cb5d87478cf7d2dc870134cece7d5a9628dbc0009ece0a916c1633f3",
+      "translation": "[RPG Development Tutorial] Game Balance in the Second Half",
+      "contextHash": "43384196cb5d87478cf7d2dc870134cece7d5a9628dbc0009ece0a916c1633f3"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ゲームバランスを調整するにおいて、特に難しいのはゲーム後半である。序盤からの積み重ねによって、様々な要素が集まるためバランス崩壊が起こりやすいからだ。",
+      "sourceHash": "5361404d2b3d747ac7a9d2c368db5791f0a3e2eb3c8a022cd722a19e92ece1f9",
+      "translation": "The second half of a game is particularly difficult when adjusting its balance. As various elements accumulate from the early stages onward, the balance is more likely to break down.",
+      "contextHash": "5361404d2b3d747ac7a9d2c368db5791f0a3e2eb3c8a022cd722a19e92ece1f9"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "長編であればあるほど要素が積み重なるため、調整も難しくなっていく。",
+      "sourceHash": "3221d35fe9cf94dca2f1689b03e1bce16d6a9d3f32472aea991ae792235d62b9",
+      "translation": "The longer the game, the more elements accumulate, making it increasingly difficult to balance.",
+      "contextHash": "3221d35fe9cf94dca2f1689b03e1bce16d6a9d3f32472aea991ae792235d62b9"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "市販ＲＰＧの中にも、序盤～中盤は面白かったのに、後半は……といわれる作品も珍しくない。",
+      "sourceHash": "8a76fc692357e8f98617a8a0aefe2524e65187c7823b8471df64c4ad3bcdfe02",
+      "translation": "Among commercial RPGs, it is not uncommon to hear people say, “The early to mid-game was fun, but the second half was…”",
+      "contextHash": "8a76fc692357e8f98617a8a0aefe2524e65187c7823b8471df64c4ad3bcdfe02"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "ＲＰＧをクリア手前で飽きる現象",
+      "sourceHash": "884e02e3d300fe6a0681cd6cc1e88217f2997afd38e019a10fc1bd8c215ba64d",
+      "translation": "The Phenomenon of Getting Bored with an RPG Just Before Clearing It",
+      "contextHash": "884e02e3d300fe6a0681cd6cc1e88217f2997afd38e019a10fc1bd8c215ba64d"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "……というものをご存知でしょうか？",
+      "sourceHash": "2eb6d418d03264ba51275cd7d4d122b3d3110889fbb2dd1cdb16f69ce0c6ad53",
+      "translation": "Are you familiar with this phenomenon?",
+      "contextHash": "2eb6d418d03264ba51275cd7d4d122b3d3110889fbb2dd1cdb16f69ce0c6ad53"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "理由は色々考えられる。「話の先が見えて満足してしまう」といったストーリー面の問題も大きいのももちろん事実だけど、ここでは置いておきます。",
+      "sourceHash": "0eeda0255eb7ca1153596459f6ee89380585c3241584b0dcf1b9ddd62145a1ab",
+      "translation": "There are many possible reasons. Story-related issues, such as “I was satisfied because I could see where the story was headed,” certainly play a major role, but I will set those aside here.",
+      "contextHash": "0eeda0255eb7ca1153596459f6ee89380585c3241584b0dcf1b9ddd62145a1ab"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ここで取り上げるのはゲームバランスについて。クリア前に飽きるのは、後半のゲームバランスの調整が難しいことと無関係ではないはず。",
+      "sourceHash": "dbc9d4cb7b3d4ec283c8790d5a7f06db3ae349cddb809ba9c630aa249aad713b",
+      "translation": "What I want to discuss here is game balance. Getting bored before clearing a game is surely not unrelated to the difficulty of balancing the second half.",
+      "contextHash": "dbc9d4cb7b3d4ec283c8790d5a7f06db3ae349cddb809ba9c630aa249aad713b"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "制作者として、この問題にも立ち向かっていきたい。",
+      "sourceHash": "94c89fbd22e938e18c6e9b77def21a2f454bdf20ba3f7b4abb3335dc1252f775",
+      "translation": "As a creator, I want to face this problem as well.",
+      "contextHash": "94c89fbd22e938e18c6e9b77def21a2f454bdf20ba3f7b4abb3335dc1252f775"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "とはいえ、これは何度か長編を完成させてみないことには、コツはつかめない。かといって、長編なんて簡単に完成できるわけもないから、経験を積むのも楽じゃない。そこで自分の経験談として注意点をまとめてみた。",
+      "sourceHash": "e044c5b6891dd58b157c5825c4a712802936cdb3b6573c26410a850ea4d816f4",
+      "translation": "That said, you cannot really get the hang of this without completing several long games. On the other hand, long games are not something you can easily complete, so gaining experience is no easy task either. With that in mind, I have summarized some points to keep in mind based on my own experiences.",
+      "contextHash": "e044c5b6891dd58b157c5825c4a712802936cdb3b6573c26410a850ea4d816f4"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ゲーム後半の落とし穴",
+      "sourceHash": "444a13b1cd6122afcc55b4c77e2e472d733f4a8e03300cc466322341991b07b3",
+      "translation": "Pitfalls in the Second Half of a Game",
+      "contextHash": "444a13b1cd6122afcc55b4c77e2e472d733f4a8e03300cc466322341991b07b3"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "『ゲーム後半が面白くない』という場合には、いくつかパターンがある。例を挙げてみたい。",
+      "sourceHash": "501b4b15a4db7366ef0e474099ba45d7697792f7ea9f9c0ce9d7a1d8512da5ba",
+      "translation": "When people say that “the second half of a game is not fun,” there are several possible patterns. I would like to give some examples.",
+      "contextHash": "501b4b15a4db7366ef0e474099ba45d7697792f7ea9f9c0ce9d7a1d8512da5ba"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "回復の充実",
+      "sourceHash": "ba092d14224f7fae96dea4c3190b1cebfd0e87aef6a463f6186af70e0c880371",
+      "translation": "Abundant Recovery Options",
+      "contextHash": "ba092d14224f7fae96dea4c3190b1cebfd0e87aef6a463f6186af70e0c880371"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "多くのゲームでは、進行するに従って回復手段が充実していく。",
+      "sourceHash": "e5e37d0e6850230c25c19353f963802a6466f79b9b4d375f7479aaa89ef7e090",
+      "translation": "In many games, recovery options become more plentiful as the game progresses.",
+      "contextHash": "e5e37d0e6850230c25c19353f963802a6466f79b9b4d375f7479aaa89ef7e090"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "全体回復、蘇生、ＭＰ回復などがゆるい制約で使えてしまうと、ちょっとやそっとの攻撃を受けても味方が全滅しなくなる。",
+      "sourceHash": "53a1df748fa3dd457d8f2c79c30a53f89659e32e309491bf9357c56f32f6a6dc",
+      "translation": "If options such as party-wide healing, revival, and MP recovery can be used with few restrictions, the party will no longer be wiped out even after taking fairly powerful attacks.",
+      "contextHash": "53a1df748fa3dd457d8f2c79c30a53f89659e32e309491bf9357c56f32f6a6dc"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "特に敵がしぶとい場合は、ただダラダラした戦闘が続いてしまう傾向も。",
+      "sourceHash": "125019bb94302cd1f9996afe275b24f008e8ce5cb5ee4bf42977b742000f7f32",
+      "translation": "This is especially likely to lead to drawn-out battles when the enemies are tough.",
+      "contextHash": "125019bb94302cd1f9996afe275b24f008e8ce5cb5ee4bf42977b742000f7f32"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "回復手段が充実することで、緊張感がなくなってしまうわけだ。",
+      "sourceHash": "ee8c2dce52933092038388ab76528b37bdf893a6c2377fb84bcc03d3a5920f19",
+      "translation": "Having abundant recovery options causes the tension to disappear.",
+      "contextHash": "ee8c2dce52933092038388ab76528b37bdf893a6c2377fb84bcc03d3a5920f19"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "これについては既に細かく書いたので、別記事参照。",
+      "sourceHash": "8a2bb480b69d4d2443ef11291dd4c20021a7ea5e90796fa9480556c1bddc1ed3",
+      "translation": "I have already written about this in detail, so please see the separate article.",
+      "contextHash": "8a2bb480b69d4d2443ef11291dd4c20021a7ea5e90796fa9480556c1bddc1ed3"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "戦法のパターン化",
+      "sourceHash": "487bdc25c802b9a6647eed08cc8a1d7ce4ae3ae17ea8f5b17fb762153e0b78a6",
+      "translation": "Falling into Set Battle Patterns",
+      "contextHash": "487bdc25c802b9a6647eed08cc8a1d7ce4ae3ae17ea8f5b17fb762153e0b78a6"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "ゲームが中盤から後半へと進行する中で、プレイヤーも次第に慣れてくるもの。するとある程度、戦法も固定されていく。",
+      "sourceHash": "f8b6288032d774e08a677da0d4b816552d30ed34c62bfcb35f814d4fc5cc7932",
+      "translation": "As the game progresses from the middle to the second half, players gradually become accustomed to it. As a result, their battle strategies become fixed to some extent.",
+      "contextHash": "f8b6288032d774e08a677da0d4b816552d30ed34c62bfcb35f814d4fc5cc7932"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "自分なりの戦法を編み出せるというのは、良いゲームの条件でもあるため、必ずしも悪いとは言えない。けれど、戦い方があまりにも変化に乏しいと、プレイヤーだって飽きてくる。",
+      "sourceHash": "c20ba8dbff38be295e12a7eb8de8edb34c5bccc8f401f50cf8d6ed48a0de6c5c",
+      "translation": "Being able to develop your own battle strategy is also a condition of a good game, so this is not necessarily a bad thing. However, if the way of fighting lacks too much variety, players will eventually get bored too.",
+      "contextHash": "c20ba8dbff38be295e12a7eb8de8edb34c5bccc8f401f50cf8d6ed48a0de6c5c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "中にはゲーム序盤～中盤から同じ技ばかりを使用するようなゲームも見かける。ＤＱ７の『剣の舞』『怒涛の羊』、あるいはＦＦ５の『みだれうち』なんかが有名なところか。",
+      "sourceHash": "1d3105bc48c14717d29cf301ad4b5f3cdccac3dbfb8501ddcaf0356722964a4b",
+      "translation": "Some games have players use the same skills over and over from the early to mid-game. Famous examples include “Sword Dance” and “Sheep Song” from DQ7, or “Rapid Fire” from FF5.",
+      "contextHash": "1d3105bc48c14717d29cf301ad4b5f3cdccac3dbfb8501ddcaf0356722964a4b"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "やはり、後半に手に入れる魔法や特技は、中盤までのものよりも役立つものにしたい。",
+      "sourceHash": "ef32b641d3910f716a1cc2e44c533c8b7766db4fe51947bcc808a4bf620b25aa",
+      "translation": "Ideally, spells and Techs acquired in the second half should be more useful than those available up to the middle of the game.",
+      "contextHash": "ef32b641d3910f716a1cc2e44c533c8b7766db4fe51947bcc808a4bf620b25aa"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "『回復の充実』と重なるけれど、補助や回復についてもパターン化を引き起こしやすい。",
+      "sourceHash": "db2104aba71e0e64a74336eb0aa1a47fb14b98043491fe1bbf2ef9449ed385f1",
+      "translation": "This overlaps with “Abundant Recovery Options,” but support and recovery can also easily lead to repetitive patterns.",
+      "contextHash": "db2104aba71e0e64a74336eb0aa1a47fb14b98043491fe1bbf2ef9449ed385f1"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "毎ターン全体回復をかけておけばＯＫ。",
+      "sourceHash": "5f91279da158d4baf5c1eac5fa1cdef51236a930ea3d3102ffbf36b131717524",
+      "translation": "As long as you cast party-wide healing every turn, you are fine.",
+      "contextHash": "5f91279da158d4baf5c1eac5fa1cdef51236a930ea3d3102ffbf36b131717524"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "とりあえず攻撃力アップの魔法をかけておけばＯＫ。",
+      "sourceHash": "cc9188b009d1b8da1470522421c7d0d3ae1d95589b5a51b0ddd45d56807cba63",
+      "translation": "For now, just cast an attack-power-up spell and you are fine.",
+      "contextHash": "cc9188b009d1b8da1470522421c7d0d3ae1d95589b5a51b0ddd45d56807cba63"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "こんな感じで、作業的な要素が強くなってきた場合は要注意。",
+      "sourceHash": "289d5083469cffdefe4e8c4fae3867298b81d419d18771ccc8669c478444b5ef",
+      "translation": "When things start to become this routine, you need to be careful.",
+      "contextHash": "289d5083469cffdefe4e8c4fae3867298b81d419d18771ccc8669c478444b5ef"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "戦法を固定させないためには、敵のバリエーションを増やすことも重要となる。",
+      "sourceHash": "0f2d11ff24ec8b107799ed35e541d3d4347fffb49189235f1e67d3efc27cf102",
+      "translation": "Increasing enemy variety is also important for preventing players from settling into a fixed strategy.",
+      "contextHash": "0f2d11ff24ec8b107799ed35e541d3d4347fffb49189235f1e67d3efc27cf102"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "状態異常に弱い敵",
+      "sourceHash": "2dd8a29c2f40bcc377ebd71a0cfdb5e57e420ec2e6642df8ed93cdef99381071",
+      "translation": "Enemies vulnerable to status ailments",
+      "contextHash": "2dd8a29c2f40bcc377ebd71a0cfdb5e57e420ec2e6642df8ed93cdef99381071"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "物理攻撃が強力な敵",
+      "sourceHash": "5141fe2cdb82930add5b125072d403c0c8ca1ce04d2faeb68ae4f9b37182b3b2",
+      "translation": "Enemies with powerful physical attacks",
+      "contextHash": "5141fe2cdb82930add5b125072d403c0c8ca1ce04d2faeb68ae4f9b37182b3b2"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "数で攻めてくる敵",
+      "sourceHash": "813531c1b0f6536c4a9f82a33f4dd58abb6b1e8ce1cac3cb571f57491015d74e",
+      "translation": "Enemies that overwhelm you with numbers",
+      "contextHash": "813531c1b0f6536c4a9f82a33f4dd58abb6b1e8ce1cac3cb571f57491015d74e"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "一体で登場する強敵",
+      "sourceHash": "395ec4818a745aef4268e5489b513626d460e855eb465edeea03482c74f53705",
+      "translation": "A powerful enemy that appears alone",
+      "contextHash": "395ec4818a745aef4268e5489b513626d460e855eb465edeea03482c74f53705"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "このようにすれば、プレイヤーの取る戦術の幅も広がりやすい。",
+      "sourceHash": "46c74f0bd37e38257fcb354545d54d0642135045e981ba2804e0b5c723bd3d15",
+      "translation": "This makes it easier to expand the range of tactics available to the player.",
+      "contextHash": "46c74f0bd37e38257fcb354545d54d0642135045e981ba2804e0b5c723bd3d15"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "戦闘演出の長期化",
+      "sourceHash": "a54c5bac520f89dc8385b1355eab4f0254f7228b405bd990a52075cebcb528ba",
+      "translation": "Lengthening Battle Effects",
+      "contextHash": "a54c5bac520f89dc8385b1355eab4f0254f7228b405bd990a52075cebcb528ba"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "意外と盲点になりそうなのがこれ。",
+      "sourceHash": "b07bb3330851a885c4df71114e9c9027192fdaf4471590ee81f049164339acb5",
+      "translation": "This is something that may surprisingly become a blind spot.",
+      "contextHash": "b07bb3330851a885c4df71114e9c9027192fdaf4471590ee81f049164339acb5"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "大抵のゲームは序盤から後半にかけて、使用する技が派手になっていくもの。その結果、後半は演出の長い技ばかりになりやすい。そうなると「見てるだけ」の時間が長くなってテンポが悪化していく。",
+      "sourceHash": "4cf545a4819cf458ae5768594d97c8d9a79c001a2f742a1192a86830bea9835a",
+      "translation": "In most games, the skills used become flashier from the beginning toward the second half. As a result, the second half tends to be filled with skills that have lengthy effects. When that happens, the amount of time spent “just watching” increases, making the pace worse.",
+      "contextHash": "4cf545a4819cf458ae5768594d97c8d9a79c001a2f742a1192a86830bea9835a"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "結果、プレイが面倒になってしまいがち。",
+      "sourceHash": "9c1153554df6da552466f863c63444b25bbe1e53242b629290f79f2c7d34a643",
+      "translation": "As a result, playing the game tends to become tedious.",
+      "contextHash": "9c1153554df6da552466f863c63444b25bbe1e53242b629290f79f2c7d34a643"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "そこで、後半の技は短くカッコいいものを意識してみよう。",
+      "sourceHash": "02cab0885444e086853a5c17cbd50f26763641651aa70b21fd3b6cde88984cf6",
+      "translation": "So for skills used in the second half, try to focus on making them short and cool.",
+      "contextHash": "02cab0885444e086853a5c17cbd50f26763641651aa70b21fd3b6cde88984cf6"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "ＦＦ７以降（リミット技など）にあるような特定条件で使える大技もオススメ。毎回使えるわけではないので、多少演出が長くてもゲームテンポを壊しにくい。「通常技はテンポよく」「大技は少し長く」とメリハリを付けておけば安心。",
+      "sourceHash": "65f814a8c90d0f0891939844e0f573ff1ebda25cdf71bb479ede7f66c2099b1c",
+      "translation": "Powerful skills usable under specific conditions, such as those found in FF7 and later games (including Limit skills), are also recommended. Since they cannot be used every time, they are less likely to disrupt the game’s pace even if their effects are somewhat lengthy. You should be fine as long as you create contrast: “Regular skills should be fast-paced,” while “powerful skills can be a little longer.”",
+      "contextHash": "65f814a8c90d0f0891939844e0f573ff1ebda25cdf71bb479ede7f66c2099b1c"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "ちなみに、昔のドラクエのように通常攻撃が強いゲームはこれに陥りにくい。通常攻撃中心で戦うゲームは、地味で古臭いと思われがちだけど、なかなか侮れない長所だったりする。",
+      "sourceHash": "79c685597e37592f9235898b434a4ade8f1b00c5b1d72561edf47a0733d68bcd",
+      "translation": "Incidentally, games with powerful normal attacks, like older Dragon Quest games, are less likely to fall into this trap. Games centered around normal attacks tend to be seen as plain and old-fashioned, but this can actually be a surprisingly valuable strength.",
+      "contextHash": "79c685597e37592f9235898b434a4ade8f1b00c5b1d72561edf47a0733d68bcd"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "テンポ悪化要素の相乗効果",
+      "sourceHash": "f3666c32f416372704cd5fef7eba93f8f41365d566aad2d37c6960891487bb76",
+      "translation": "The Cumulative Effects of Factors That Slow the Pace",
+      "contextHash": "f3666c32f416372704cd5fef7eba93f8f41365d566aad2d37c6960891487bb76"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "これこそが『ＲＰＧをクリア手前で飽きる現象』の決定的な原因だと、僕は推測している。",
+      "sourceHash": "2155d7f1ef2f00aa0724b06041ea1b3af0524c7b4027c8a25bdcebd5bf94d49e",
+      "translation": "I suspect this is the decisive cause of “the phenomenon of getting bored with an RPG just before clearing it.”",
+      "contextHash": "2155d7f1ef2f00aa0724b06041ea1b3af0524c7b4027c8a25bdcebd5bf94d49e"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ゲームというのは大抵の場合、序盤～後半に向かって難易度が上がっていくもの。この難易度上昇への意識が落とし穴になりやすい。",
+      "sourceHash": "850ee45293a0acbe749e052717b90e792a1b949ddca1372086a31d144cb8bdec",
+      "translation": "In most cases, games become more difficult as they progress from the beginning toward the second half. Focusing too much on this increase in difficulty can easily become a pitfall.",
+      "contextHash": "850ee45293a0acbe749e052717b90e792a1b949ddca1372086a31d144cb8bdec"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "難易度上昇のための調整は色々と考えられる。『敵の強化』『ボス戦の多用』『ダンジョンの巨大化』『トラップの悪質化』『エンカウント率の増加』などなど……。",
+      "sourceHash": "2f0a8a6db2223912e7ebbc951dee5376131a22eb7e4500828194065d7aea9ad2",
+      "translation": "There are many ways to adjust a game to increase its difficulty: “strengthening enemies,” “using more boss battles,” “making dungeons larger,” “making traps nastier,” “increasing the encounter rate,” and so on…",
+      "contextHash": "2f0a8a6db2223912e7ebbc951dee5376131a22eb7e4500828194065d7aea9ad2"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "一つ一つでは大した問題ではないかもしれない。実際、「後半のダンジョンがあっさりでは手応えがない」という人は多いと思う。",
+      "sourceHash": "04a091d48319c341bcc8e53b5cee73dba2afcf2115eaa3c825b7e47795720c8b",
+      "translation": "Each one on its own may not be a major problem. In fact, I think many people feel that “a late-game dungeon that is too easy lacks a sense of challenge.”",
+      "contextHash": "04a091d48319c341bcc8e53b5cee73dba2afcf2115eaa3c825b7e47795720c8b"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "しかし、これらが集まると……",
+      "sourceHash": "7cfd5dd836f34dddc8732e28d016abca1e28e65e809fa3761a889d6bdb6fe35b",
+      "translation": "However, when these factors come together…",
+      "contextHash": "7cfd5dd836f34dddc8732e28d016abca1e28e65e809fa3761a889d6bdb6fe35b"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "後半のダンジョンは一戦闘にかかる時間が序盤の二倍",
+      "sourceHash": "00f965837a869d7812fcc0abb3fcf06b96e406d24661e00c97c049cc69f75902",
+      "translation": "In late-game dungeons, each battle takes twice as long as it does in early-game dungeons",
+      "contextHash": "00f965837a869d7812fcc0abb3fcf06b96e406d24661e00c97c049cc69f75902"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "後半のダンジョンはボスの数が序盤の二倍",
+      "sourceHash": "651c46f5f46104be668e0c66271217a4eb050474e1dcfc0b531d23dcd8dfa97a",
+      "translation": "Late-game dungeons have twice as many bosses as early-game dungeons",
+      "contextHash": "651c46f5f46104be668e0c66271217a4eb050474e1dcfc0b531d23dcd8dfa97a"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "後半のダンジョンは広さが序盤の二倍",
+      "sourceHash": "5f4a091a53ca34c6b3cd89ac076c6ca177730f8c88217bf09c1d7ab94e7dd3cc",
+      "translation": "Late-game dungeons are twice as large as early-game dungeons",
+      "contextHash": "5f4a091a53ca34c6b3cd89ac076c6ca177730f8c88217bf09c1d7ab94e7dd3cc"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "後半のダンジョンは謎解きにかかる時間が序盤の二倍",
+      "sourceHash": "b3393e0e6563a8249eead023380be67a8ac78351917425afbd59231963dd1fda",
+      "translation": "Solving puzzles in late-game dungeons takes twice as long as it does in early-game dungeons",
+      "contextHash": "b3393e0e6563a8249eead023380be67a8ac78351917425afbd59231963dd1fda"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "後半のダンジョンはエンカウント率が序盤の二倍",
+      "sourceHash": "56aa0c805120dd6017b8463a74969198761a146605550aaf1b10e7ba3481a05c",
+      "translation": "Late-game dungeons have twice the encounter rate of early-game dungeons",
+      "contextHash": "56aa0c805120dd6017b8463a74969198761a146605550aaf1b10e7ba3481a05c"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "後半のダンジョンは全滅率が序盤の二倍",
+      "sourceHash": "7607df59356f4ff73171ae186a1367b671a85345f19598c129dad12df828a14c",
+      "translation": "Late-game dungeons have twice the wipe rate of early-game dungeons",
+      "contextHash": "7607df59356f4ff73171ae186a1367b671a85345f19598c129dad12df828a14c"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "例えば、序盤のダンジョンについて……",
+      "sourceHash": "7525e8a5c86411de642a9153e98b54595a38438a259b2caa621267c6bd6bc214",
+      "translation": "For example, an early-game dungeon might take…",
+      "contextHash": "7525e8a5c86411de642a9153e98b54595a38438a259b2caa621267c6bd6bc214"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "移動 ：１０分",
+      "sourceHash": "52dcdac99e023f848aad934da59fb9de446a41180773512053f0abd37fa27c8e",
+      "translation": "Travel: 10 minutes",
+      "contextHash": "52dcdac99e023f848aad934da59fb9de446a41180773512053f0abd37fa27c8e"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "謎解き：１０分",
+      "sourceHash": "1681e91c3e9abdd84026918ccf232c067e160959d23178ec9cf585faddbe924c",
+      "translation": "Puzzles: 10 minutes",
+      "contextHash": "1681e91c3e9abdd84026918ccf232c067e160959d23178ec9cf585faddbe924c"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "ザコ戦：２０分",
+      "sourceHash": "b66b76a6cd46cfd85ad83c05ecff0bf93d107e63eb67ed1940568272420fe19f",
+      "translation": "Minor battles: 20 minutes",
+      "contextHash": "b66b76a6cd46cfd85ad83c05ecff0bf93d107e63eb67ed1940568272420fe19f"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "ボス戦：１０分",
+      "sourceHash": "e4c6e6094929bf86d46ed0523d03225571b81fbf5276840a76bb4ab8431431be",
+      "translation": "Boss battle: 10 minutes",
+      "contextHash": "e4c6e6094929bf86d46ed0523d03225571b81fbf5276840a76bb4ab8431431be"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "だったのが、後半のダンジョンになると……",
+      "sourceHash": "737dfd3a538b5597de174dd68102f248f3f6fdb0ae86589d1614baf2729ff531",
+      "translation": "but when it comes to a late-game dungeon…",
+      "contextHash": "737dfd3a538b5597de174dd68102f248f3f6fdb0ae86589d1614baf2729ff531"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "移動 ：２０分",
+      "sourceHash": "f130d60deb4512ff69cda0614154fd0d4106691762290d5eda9a3cbad72aa51b",
+      "translation": "Travel: 20 minutes",
+      "contextHash": "f130d60deb4512ff69cda0614154fd0d4106691762290d5eda9a3cbad72aa51b"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "謎解き：２０分",
+      "sourceHash": "bbc714cc7a8eddaba4a9eada34a6b960a2e625e7fe46c3859b2899989d2176f3",
+      "translation": "Puzzles: 20 minutes",
+      "contextHash": "bbc714cc7a8eddaba4a9eada34a6b960a2e625e7fe46c3859b2899989d2176f3"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "ザコ戦：１６０分",
+      "sourceHash": "91dab63ffcca72e6fc708aa2c5764f35d6d4c63f03abd9582528e50bc461b992",
+      "translation": "Minor battles: 160 minutes",
+      "contextHash": "91dab63ffcca72e6fc708aa2c5764f35d6d4c63f03abd9582528e50bc461b992"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "ボス戦：４０分",
+      "sourceHash": "6ee0d3ae75502a1eaaa5b8c29d40780507b59ed9ecaf9829592e40267ee2ae4d",
+      "translation": "Boss battle: 40 minutes",
+      "contextHash": "6ee0d3ae75502a1eaaa5b8c29d40780507b59ed9ecaf9829592e40267ee2ae4d"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "というように、気づいてみれば、何倍も面倒なダンジョンになっていたりする。",
+      "sourceHash": "2448e1063b84273a3e4f2780e3db23975c1146d71750851cd65bbdf8bf36a60b",
+      "translation": "before you know it, you may end up with a dungeon that is several times more tedious.",
+      "contextHash": "2448e1063b84273a3e4f2780e3db23975c1146d71750851cd65bbdf8bf36a60b"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "これは『全滅によるやり直し』を想定していない時間なので、さらに膨れ上がる可能性もある。",
+      "sourceHash": "cff0a17a9f7ce16dc518e416e2e0e9294c1e02df971d9f9c8ba2927b9aaaad26",
+      "translation": "Since these estimates do not account for having to start over after a party wipe, the time could grow even further.",
+      "contextHash": "cff0a17a9f7ce16dc518e416e2e0e9294c1e02df971d9f9c8ba2927b9aaaad26"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "とりわけザコ戦にかかる時間が、予想以上に増えやすいので気をつけたい。『１戦闘の時間』『ダンジョンの広さ』『エンカウント率』といったほとんど全てに影響を受けるためだ。",
+      "sourceHash": "1ef34ab7bde13535fd03a0485cb1a1455be60f6813033655373d31b07caa758e",
+      "translation": "In particular, be careful because the time spent on minor battles tends to increase more than expected. This is because it is affected by nearly everything, including the length of each battle, the size of the dungeon, and the encounter rate.",
+      "contextHash": "1ef34ab7bde13535fd03a0485cb1a1455be60f6813033655373d31b07caa758e"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "また、これは謎解きの途中にはザコ戦がない前提で書いている。謎解き中にザコが襲ってくるような設計ならば、さらにさらに酷くなるかもしれない。",
+      "sourceHash": "fa0e71256c54fd792d5b1a9b1d4116fb15abb88eacd799c4bc41efe3b451b2f2",
+      "translation": "Also, these estimates assume that no minor battles occur during the puzzles. If the dungeon is designed so that minor enemies attack during the puzzles, things could become even, even worse.",
+      "contextHash": "fa0e71256c54fd792d5b1a9b1d4116fb15abb88eacd799c4bc41efe3b451b2f2"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "序盤のダンジョンは５０分でクリアできたのに、後半のダンジョンは４時間かかる。……なんて、プレイヤーもうんざりしてしまうこと請け合い。",
+      "sourceHash": "ab3301e7ca1b0be148b1b7e2478242cb72c8d19da2476f944f9735f03ef1c8c9",
+      "translation": "An early-game dungeon can be cleared in 50 minutes, while a late-game dungeon takes four hours… Players are sure to get fed up with that.",
+      "contextHash": "ab3301e7ca1b0be148b1b7e2478242cb72c8d19da2476f944f9735f03ef1c8c9"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "面白い後半を実現するには？",
+      "sourceHash": "8a968f272e515991deb1a155a5c511d5cb5c8d8d211bac43795670e5ba2c79ba",
+      "translation": "How can you make the late game enjoyable?",
+      "contextHash": "8a968f272e515991deb1a155a5c511d5cb5c8d8d211bac43795670e5ba2c79ba"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "ここまでは『ゲーム後半が面白くなくなる』要因を挙げてみた。それでは、そうならないためにはどうすればよいだろうか。",
+      "sourceHash": "2a665d347eedf423241f315b5ce98e7ec7082f686c640d3fda05e0918d0c8c5c",
+      "translation": "So far, I have listed some factors that can make the latter half of a game less enjoyable. What, then, can we do to prevent that from happening?",
+      "contextHash": "2a665d347eedf423241f315b5ce98e7ec7082f686c640d3fda05e0918d0c8c5c"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "いくつか考えてみた。",
+      "sourceHash": "8876b2584cdb10973330fcaccc27d3defeb38daab87d625eb09c95759224c058",
+      "translation": "I came up with a few ideas.",
+      "contextHash": "8876b2584cdb10973330fcaccc27d3defeb38daab87d625eb09c95759224c058"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "ゲームテンポを意識する",
+      "sourceHash": "9bef2ab07281a917a8f26ad764d6d18b1ad6dab3e40aee2966a1437638f8fe48",
+      "translation": "Be mindful of the game's pace",
+      "contextHash": "9bef2ab07281a917a8f26ad764d6d18b1ad6dab3e40aee2966a1437638f8fe48"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "後半のゲームテンポが悪化していないか、意識して調整を行う。",
+      "sourceHash": "dafdf954b203eb8ebbd5063758741087660e51e01482927d1b38297689dfe289",
+      "translation": "Consciously adjust the latter half of the game to ensure that its pace does not deteriorate.",
+      "contextHash": "dafdf954b203eb8ebbd5063758741087660e51e01482927d1b38297689dfe289"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "特に戦闘はザコ・ボス共、無闇に長引かせないことを心がける。『短期決戦』を意識するといいかもしれない。",
+      "sourceHash": "32c4fea75c9babb3816198c62ed9aa3b353147f370752c1cc07a7c457b93c510",
+      "translation": "In particular, try not to let battles—whether against minor enemies or bosses—drag on unnecessarily. It may help to keep \"short, decisive battles\" in mind.",
+      "contextHash": "32c4fea75c9babb3816198c62ed9aa3b353147f370752c1cc07a7c457b93c510"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "上に挙げた『テンポ悪化要素の相乗効果』にある通り、色んな要素が戦闘テンポの悪化には関わってくる。",
+      "sourceHash": "1e0d7485c7c13acc563ffdffc7f8b567549843211b955f03aeef1c7a0641c080",
+      "translation": "As noted above under \"the synergistic effects of factors that slow the pace,\" all sorts of elements can contribute to a deterioration in battle tempo.",
+      "contextHash": "1e0d7485c7c13acc563ffdffc7f8b567549843211b955f03aeef1c7a0641c080"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "短期決戦にするためには、回復手段を制限する必要があるし、戦闘アニメの長さも抑える必要がある。",
+      "sourceHash": "8ca53dd9608b084d5afa7f9bbd276199d2a387a5f9070b957365a2bce99e0d65",
+      "translation": "To keep battles short and decisive, you need to limit the means of recovery and keep battle animation lengths under control.",
+      "contextHash": "8ca53dd9608b084d5afa7f9bbd276199d2a387a5f9070b957365a2bce99e0d65"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "ボス戦も短期決戦ならば、同じことの繰り返しにもなりにくい。結果的に戦法のパターン化が起こりにくいという利点もある。",
+      "sourceHash": "62bbd4f4d101506ed3ecf9cdc2b0862628cbb5e90ff991f1635abef5be4dad11",
+      "translation": "If boss battles are also short and decisive, they are less likely to become repetitive. This also has the advantage of making it less likely that players will settle into a fixed pattern of tactics.",
+      "contextHash": "62bbd4f4d101506ed3ecf9cdc2b0862628cbb5e90ff991f1635abef5be4dad11"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "また、ダンジョンの長さやエンカウント率もほどほどにして、戦闘回数が過剰にならないようにしたい。",
+      "sourceHash": "14364fbaec7c0c57b48d734339d6272fb3ea7d9cab77d8606d18ce2454828d91",
+      "translation": "You should also keep the dungeon length and encounter rate reasonable so that the number of battles does not become excessive.",
+      "contextHash": "14364fbaec7c0c57b48d734339d6272fb3ea7d9cab77d8606d18ce2454828d91"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "どんな名作でも同じことを千回も繰り返せば、いずれ飽きが来るのは避けられない。戦闘回数を抑えれば、それだけ底が知れるのは遅くなる。「同じことを繰り返している」という作業感も大きく軽減される。",
+      "sourceHash": "d8b9684fd76b5c9ff0c3574ea545d9ff1d79c4622839510df05ebea1e774cf63",
+      "translation": "Even the greatest masterpiece will inevitably become boring if you repeat the same thing a thousand times. By limiting the number of battles, you delay the point at which players reach their limit. It also greatly reduces the sense of busywork that comes from \"repeating the same thing.\"",
+      "contextHash": "d8b9684fd76b5c9ff0c3574ea545d9ff1d79c4622839510df05ebea1e774cf63"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "これらは机上の計算だけで予測することは難しいので、作者自身が実際にテストプレイしてみるのが肝心。うんざりなゲームテンポになっていたなら改めよう。",
+      "sourceHash": "72ac5d5436298d89f432112ffc0c6bcddc754b3d9b3c4325970726867860d507",
+      "translation": "These factors are difficult to predict through calculations alone, so it is essential for the creator to playtest the game personally. If the game has become a slog, make changes.",
+      "contextHash": "72ac5d5436298d89f432112ffc0c6bcddc754b3d9b3c4325970726867860d507"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "特に集団での制作の場合、マップ担当や演出担当ががんばりすぎた結果、過剰になってしまうこともある。",
+      "sourceHash": "e6d357f8a57b852eae6f895560dc7fb389c59da1c1c0994b7c2c78f1879facee",
+      "translation": "This is especially likely during team development, when the map designer or presentation designer goes overboard and the result becomes excessive.",
+      "contextHash": "e6d357f8a57b852eae6f895560dc7fb389c59da1c1c0994b7c2c78f1879facee"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "「作ったものは使わないともったいない」という気持ちは分かるけれど、削るべきものは削ろう。後半だからといって、何でもかんでも拡大すればよいというものではない。",
+      "sourceHash": "f16a15d852f2059f5daa8ae3845b7daf814d7e7c6d096a92c602a7cf2e7eacd8",
+      "translation": "I understand the feeling that \"it would be a waste not to use something we've made,\" but cut what needs to be cut. Just because it is the latter half of the game does not mean everything should be expanded.",
+      "contextHash": "f16a15d852f2059f5daa8ae3845b7daf814d7e7c6d096a92c602a7cf2e7eacd8"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ラスボス戦を考える",
+      "sourceHash": "16b6b81db8a35e68cc74c3bcf4d1cb654940919562e46c902a07b28b1cba4e1c",
+      "translation": "Think about the final boss battle",
+      "contextHash": "16b6b81db8a35e68cc74c3bcf4d1cb654940919562e46c902a07b28b1cba4e1c"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "どんなラストバトルを作りたいかを開発途中から考えてみよう。",
+      "sourceHash": "cb747611577e3ec6a26a243d07b7e5ea562268905351db8bda44d846370af1c4",
+      "translation": "Start thinking about what kind of final battle you want to create while the game is still in development.",
+      "contextHash": "cb747611577e3ec6a26a243d07b7e5ea562268905351db8bda44d846370af1c4"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "ラストバトルとは、ゲームデザインの結晶とも考えられる。設計がよくできていれば、自然とよくできたラストバトルへと繋がる。",
+      "sourceHash": "182a4279efe4dc70b138d7f20ad4705b51cf3ec7bcf7590e8f007fdda4449cbc",
+      "translation": "The final battle can be considered the culmination of the game's design. If the game has been designed well, it will naturally lead to a well-designed final battle.",
+      "contextHash": "182a4279efe4dc70b138d7f20ad4705b51cf3ec7bcf7590e8f007fdda4449cbc"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "ゲームシステムが活かせるラストバトル",
+      "sourceHash": "e6577851854cb57e88b79a819872d503a305f9a5bfaa55573b7dd22e9a4df82f",
+      "translation": "A final battle that makes use of the game system",
+      "contextHash": "e6577851854cb57e88b79a819872d503a305f9a5bfaa55573b7dd22e9a4df82f"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "キャラクターの個性が活かせるラストバトル",
+      "sourceHash": "1415786c6894d3bf5802e7a7d9bd3fc4e6c78eb54f41c5e82013fc6a6489d07e",
+      "translation": "A final battle that makes use of the characters' individual traits",
+      "contextHash": "1415786c6894d3bf5802e7a7d9bd3fc4e6c78eb54f41c5e82013fc6a6489d07e"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "物理と魔法の両方が活かせるラストバトル",
+      "sourceHash": "a5c5fc8b58df8d58c693eef2963ef2b6e3e8a702ee44e2fefd96cd190ca73acb",
+      "translation": "A final battle that makes use of both physical and magical attacks",
+      "contextHash": "a5c5fc8b58df8d58c693eef2963ef2b6e3e8a702ee44e2fefd96cd190ca73acb"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "色んな属性が活かせるラストバトル",
+      "sourceHash": "9d762de4b6b5b9f01ab14240fce481b51de3482d18e9c9bf48038a9e37c178d0",
+      "translation": "A final battle that makes use of various attributes",
+      "contextHash": "9d762de4b6b5b9f01ab14240fce481b51de3482d18e9c9bf48038a9e37c178d0"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "逆に設計が適当で何も考えていないと、ラストバトルに歪みが出やすい。",
+      "sourceHash": "85181190dfc5698507d7f02729765433b84e75ca278eb1b04f2716a754947d85",
+      "translation": "Conversely, if the design is careless and nothing has been thought through, the final battle is likely to feel distorted.",
+      "contextHash": "85181190dfc5698507d7f02729765433b84e75ca278eb1b04f2716a754947d85"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "毎ターン回復魔法を放ちながら、ただ強い攻撃を放つだけのラストバトル",
+      "sourceHash": "c1d5c27ee2b96d3ee4e28090df9d344209cd5febfa85d0c7e8f59a9c27b26a80",
+      "translation": "A final battle where the boss simply unleashes powerful attacks while casting a healing spell every turn",
+      "contextHash": "c1d5c27ee2b96d3ee4e28090df9d344209cd5febfa85d0c7e8f59a9c27b26a80"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "敵の長い攻撃演出を延々と見せられるラストバトル",
+      "sourceHash": "842ccbadc88d1c43c2492f2efbe9625a2de3a4005f5dba635e79648b39522b30",
+      "translation": "A final battle where you are forced to watch the enemy's long attack animations over and over",
+      "contextHash": "842ccbadc88d1c43c2492f2efbe9625a2de3a4005f5dba635e79648b39522b30"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "今までのゲームシステムを否定するようなラストバトル",
+      "sourceHash": "6401564e8aaad3744479e978ad0441fa82c0e97e6d35580714307864cfd49ea9",
+      "translation": "A final battle that contradicts the game systems used up to that point",
+      "contextHash": "6401564e8aaad3744479e978ad0441fa82c0e97e6d35580714307864cfd49ea9"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "→例：パーティバトルが基本だったのに、なぜかラストだけタイマン。",
+      "sourceHash": "08ae963c0c33f7dddf2c6f991b649f9b8d3f5f2fbee2786af684b152525734fa",
+      "translation": "→Example: Party battles were the norm, but for some reason, the final battle is a one-on-one duel.",
+      "contextHash": "08ae963c0c33f7dddf2c6f991b649f9b8d3f5f2fbee2786af684b152525734fa"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "→例：ＳＲＰＧ的な戦闘システムなのに、移動もなく殴り合うだけ。",
+      "sourceHash": "99fd0ee4b7f79273bc8ce989dfe5b955f4155141122bd0764baa231655798b70",
+      "translation": "→Example: Despite having an SRPG-style battle system, the battle consists only of trading blows without any movement.",
+      "contextHash": "99fd0ee4b7f79273bc8ce989dfe5b955f4155141122bd0764baa231655798b70"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "→例：アクション戦闘なのに、なぜかラストがシューティング。",
+      "sourceHash": "b3b7b74136ee6d5eb0ad8689e6b7aa9f5a1de04e8a5c3753c279399ecac584de",
+      "translation": "→Example: Despite being an action battle system, the final battle is inexplicably a shooter.",
+      "contextHash": "b3b7b74136ee6d5eb0ad8689e6b7aa9f5a1de04e8a5c3753c279399ecac584de"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "→例：アクション戦闘なのに、なぜかラストが音ゲー。",
+      "sourceHash": "6c49a1f1e65c644d9968d49755084e25c4fea445cfba68c3d7aebc8065ed903f",
+      "translation": "→Example: Despite being an action battle system, the final battle is inexplicably a rhythm game.",
+      "contextHash": "6c49a1f1e65c644d9968d49755084e25c4fea445cfba68c3d7aebc8065ed903f"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "大局観のないゲームシステム、その場しのぎのゲームバランスからはまともなラストバトルを生み出すのは難しい。",
+      "sourceHash": "a79ee5c1837287ccba9e1f6c2628a205ab0075552bd08d3b9363a90810121cef",
+      "translation": "It is difficult to create a proper final battle from a game system without a broad perspective and a game balance that only provides short-term fixes.",
+      "contextHash": "a79ee5c1837287ccba9e1f6c2628a205ab0075552bd08d3b9363a90810121cef"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "そのためにも、大雑把でよいから早い内に理想のラストバトルのイメージを持っておきたい。それこそ、ゲームシステムやキャラクターの能力、登場する魔法・特技を決める段階で、構想を立ててしまってもよいと思う。",
+      "sourceHash": "af579dd0da8d05c01726ec758ebf3458a32de7981a2702da24a4860165fe325f",
+      "translation": "For that reason, you should form an image of your ideal final battle early on, even if it is only a rough one. In fact, I think it is perfectly fine to formulate the concept while deciding on the game system, the characters' abilities, and the spells and Techs that will appear.",
+      "contextHash": "af579dd0da8d05c01726ec758ebf3458a32de7981a2702da24a4860165fe325f"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]ググってみれば、クリア前にゲームを飽きてしまう人々の体験談がたくさん見つかる。[[/LINK_1]]巷ではゲーム終盤に飽きてしまうのは、定番の現象らしい。",
+      "sourceHash": "08b54785e21a9b8ffbf9f1e92fca76ce0a128a9bd5bed296a570b55b72aaa2d2",
+      "parts": [
+        {
+          "source": "ググってみれば、クリア前にゲームを飽きてしまう人々の体験談がたくさん見つかる。",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "巷ではゲーム終盤に飽きてしまうのは、定番の現象らしい。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]If you Google it, you'll find many accounts from people who got bored with a game before clearing it.[[/LINK_1]] Apparently, getting bored near the end of a game is a common phenomenon.",
+      "contextHash": "08b54785e21a9b8ffbf9f1e92fca76ce0a128a9bd5bed296a570b55b72aaa2d2"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]→回復魔法の問題点[[/LINK_1]]",
+      "sourceHash": "a0183e0566e4cf10831b39598a653945dd903ab250cce5690ce3194bb81c2cb1",
+      "parts": [
+        {
+          "source": "→回復魔法の問題点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]→ Problems with Healing Magic[[/LINK_1]]",
+      "contextHash": "a0183e0566e4cf10831b39598a653945dd903ab250cce5690ce3194bb81c2cb1"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPG制作講座目次に戻る[[/LINK_1]]",
+      "sourceHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86",
+      "parts": [
+        {
+          "source": "＞RPG制作講座目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]＞ Return to the RPG Development Tutorial Table of Contents[[/LINK_1]]",
+      "contextHash": "f4fcc263acf7f2afb7b7c29e28d97bd4009201b00ab0129b9237d2de4fb00b86"
+    }
+  ],
+  "texts": {
+    "ゲームバランスを調整するにおいて、特に難しいのはゲーム後半である。序盤からの積み重ねによって、様々な要素が集まるためバランス崩壊が起こりやすいからだ。": "The second half of a game is particularly difficult when adjusting its balance. As various elements accumulate from the early stages onward, the balance is more likely to break down.",
+    "長編であればあるほど要素が積み重なるため、調整も難しくなっていく。": "The longer the game, the more elements accumulate, making it increasingly difficult to balance.",
+    "市販ＲＰＧの中にも、序盤～中盤は面白かったのに、後半は……といわれる作品も珍しくない。": "Among commercial RPGs, it is not uncommon to hear people say, “The early to mid-game was fun, but the second half was…”",
+    "ＲＰＧをクリア手前で飽きる現象": "The Phenomenon of Getting Bored with an RPG Just Before Clearing It",
+    "……というものをご存知でしょうか？": "Are you familiar with this phenomenon?",
+    "理由は色々考えられる。「話の先が見えて満足してしまう」といったストーリー面の問題も大きいのももちろん事実だけど、ここでは置いておきます。": "There are many possible reasons. Story-related issues, such as “I was satisfied because I could see where the story was headed,” certainly play a major role, but I will set those aside here.",
+    "ここで取り上げるのはゲームバランスについて。クリア前に飽きるのは、後半のゲームバランスの調整が難しいことと無関係ではないはず。": "What I want to discuss here is game balance. Getting bored before clearing a game is surely not unrelated to the difficulty of balancing the second half.",
+    "制作者として、この問題にも立ち向かっていきたい。": "As a creator, I want to face this problem as well.",
+    "とはいえ、これは何度か長編を完成させてみないことには、コツはつかめない。かといって、長編なんて簡単に完成できるわけもないから、経験を積むのも楽じゃない。そこで自分の経験談として注意点をまとめてみた。": "That said, you cannot really get the hang of this without completing several long games. On the other hand, long games are not something you can easily complete, so gaining experience is no easy task either. With that in mind, I have summarized some points to keep in mind based on my own experiences.",
+    "ゲーム後半の落とし穴": "Pitfalls in the Second Half of a Game",
+    "『ゲーム後半が面白くない』という場合には、いくつかパターンがある。例を挙げてみたい。": "When people say that “the second half of a game is not fun,” there are several possible patterns. I would like to give some examples.",
+    "回復の充実": "Abundant Recovery Options",
+    "多くのゲームでは、進行するに従って回復手段が充実していく。": "In many games, recovery options become more plentiful as the game progresses.",
+    "全体回復、蘇生、ＭＰ回復などがゆるい制約で使えてしまうと、ちょっとやそっとの攻撃を受けても味方が全滅しなくなる。": "If options such as party-wide healing, revival, and MP recovery can be used with few restrictions, the party will no longer be wiped out even after taking fairly powerful attacks.",
+    "特に敵がしぶとい場合は、ただダラダラした戦闘が続いてしまう傾向も。": "This is especially likely to lead to drawn-out battles when the enemies are tough.",
+    "回復手段が充実することで、緊張感がなくなってしまうわけだ。": "Having abundant recovery options causes the tension to disappear.",
+    "これについては既に細かく書いたので、別記事参照。": "I have already written about this in detail, so please see the separate article.",
+    "戦法のパターン化": "Falling into Set Battle Patterns",
+    "ゲームが中盤から後半へと進行する中で、プレイヤーも次第に慣れてくるもの。するとある程度、戦法も固定されていく。": "As the game progresses from the middle to the second half, players gradually become accustomed to it. As a result, their battle strategies become fixed to some extent.",
+    "自分なりの戦法を編み出せるというのは、良いゲームの条件でもあるため、必ずしも悪いとは言えない。けれど、戦い方があまりにも変化に乏しいと、プレイヤーだって飽きてくる。": "Being able to develop your own battle strategy is also a condition of a good game, so this is not necessarily a bad thing. However, if the way of fighting lacks too much variety, players will eventually get bored too.",
+    "中にはゲーム序盤～中盤から同じ技ばかりを使用するようなゲームも見かける。ＤＱ７の『剣の舞』『怒涛の羊』、あるいはＦＦ５の『みだれうち』なんかが有名なところか。": "Some games have players use the same skills over and over from the early to mid-game. Famous examples include “Sword Dance” and “Sheep Song” from DQ7, or “Rapid Fire” from FF5.",
+    "やはり、後半に手に入れる魔法や特技は、中盤までのものよりも役立つものにしたい。": "Ideally, spells and Techs acquired in the second half should be more useful than those available up to the middle of the game.",
+    "『回復の充実』と重なるけれど、補助や回復についてもパターン化を引き起こしやすい。": "This overlaps with “Abundant Recovery Options,” but support and recovery can also easily lead to repetitive patterns.",
+    "毎ターン全体回復をかけておけばＯＫ。": "As long as you cast party-wide healing every turn, you are fine.",
+    "とりあえず攻撃力アップの魔法をかけておけばＯＫ。": "For now, just cast an attack-power-up spell and you are fine.",
+    "こんな感じで、作業的な要素が強くなってきた場合は要注意。": "When things start to become this routine, you need to be careful.",
+    "戦法を固定させないためには、敵のバリエーションを増やすことも重要となる。": "Increasing enemy variety is also important for preventing players from settling into a fixed strategy.",
+    "状態異常に弱い敵": "Enemies vulnerable to status ailments",
+    "物理攻撃が強力な敵": "Enemies with powerful physical attacks",
+    "数で攻めてくる敵": "Enemies that overwhelm you with numbers",
+    "一体で登場する強敵": "A powerful enemy that appears alone",
+    "このようにすれば、プレイヤーの取る戦術の幅も広がりやすい。": "This makes it easier to expand the range of tactics available to the player.",
+    "戦闘演出の長期化": "Lengthening Battle Effects",
+    "意外と盲点になりそうなのがこれ。": "This is something that may surprisingly become a blind spot.",
+    "大抵のゲームは序盤から後半にかけて、使用する技が派手になっていくもの。その結果、後半は演出の長い技ばかりになりやすい。そうなると「見てるだけ」の時間が長くなってテンポが悪化していく。": "In most games, the skills used become flashier from the beginning toward the second half. As a result, the second half tends to be filled with skills that have lengthy effects. When that happens, the amount of time spent “just watching” increases, making the pace worse.",
+    "結果、プレイが面倒になってしまいがち。": "As a result, playing the game tends to become tedious.",
+    "そこで、後半の技は短くカッコいいものを意識してみよう。": "So for skills used in the second half, try to focus on making them short and cool.",
+    "ＦＦ７以降（リミット技など）にあるような特定条件で使える大技もオススメ。毎回使えるわけではないので、多少演出が長くてもゲームテンポを壊しにくい。「通常技はテンポよく」「大技は少し長く」とメリハリを付けておけば安心。": "Powerful skills usable under specific conditions, such as those found in FF7 and later games (including Limit skills), are also recommended. Since they cannot be used every time, they are less likely to disrupt the game’s pace even if their effects are somewhat lengthy. You should be fine as long as you create contrast: “Regular skills should be fast-paced,” while “powerful skills can be a little longer.”",
+    "ちなみに、昔のドラクエのように通常攻撃が強いゲームはこれに陥りにくい。通常攻撃中心で戦うゲームは、地味で古臭いと思われがちだけど、なかなか侮れない長所だったりする。": "Incidentally, games with powerful normal attacks, like older Dragon Quest games, are less likely to fall into this trap. Games centered around normal attacks tend to be seen as plain and old-fashioned, but this can actually be a surprisingly valuable strength.",
+    "テンポ悪化要素の相乗効果": "The Cumulative Effects of Factors That Slow the Pace",
+    "これこそが『ＲＰＧをクリア手前で飽きる現象』の決定的な原因だと、僕は推測している。": "I suspect this is the decisive cause of “the phenomenon of getting bored with an RPG just before clearing it.”",
+    "ゲームというのは大抵の場合、序盤～後半に向かって難易度が上がっていくもの。この難易度上昇への意識が落とし穴になりやすい。": "In most cases, games become more difficult as they progress from the beginning toward the second half. Focusing too much on this increase in difficulty can easily become a pitfall.",
+    "難易度上昇のための調整は色々と考えられる。『敵の強化』『ボス戦の多用』『ダンジョンの巨大化』『トラップの悪質化』『エンカウント率の増加』などなど……。": "There are many ways to adjust a game to increase its difficulty: “strengthening enemies,” “using more boss battles,” “making dungeons larger,” “making traps nastier,” “increasing the encounter rate,” and so on…",
+    "一つ一つでは大した問題ではないかもしれない。実際、「後半のダンジョンがあっさりでは手応えがない」という人は多いと思う。": "Each one on its own may not be a major problem. In fact, I think many people feel that “a late-game dungeon that is too easy lacks a sense of challenge.”",
+    "しかし、これらが集まると……": "However, when these factors come together…",
+    "後半のダンジョンは一戦闘にかかる時間が序盤の二倍": "In late-game dungeons, each battle takes twice as long as it does in early-game dungeons",
+    "後半のダンジョンはボスの数が序盤の二倍": "Late-game dungeons have twice as many bosses as early-game dungeons",
+    "後半のダンジョンは広さが序盤の二倍": "Late-game dungeons are twice as large as early-game dungeons",
+    "後半のダンジョンは謎解きにかかる時間が序盤の二倍": "Solving puzzles in late-game dungeons takes twice as long as it does in early-game dungeons",
+    "後半のダンジョンはエンカウント率が序盤の二倍": "Late-game dungeons have twice the encounter rate of early-game dungeons",
+    "後半のダンジョンは全滅率が序盤の二倍": "Late-game dungeons have twice the wipe rate of early-game dungeons",
+    "例えば、序盤のダンジョンについて……": "For example, an early-game dungeon might take…",
+    "移動 ：１０分": "Travel: 10 minutes",
+    "謎解き：１０分": "Puzzles: 10 minutes",
+    "ザコ戦：２０分": "Minor battles: 20 minutes",
+    "ボス戦：１０分": "Boss battle: 10 minutes",
+    "だったのが、後半のダンジョンになると……": "but when it comes to a late-game dungeon…",
+    "移動 ：２０分": "Travel: 20 minutes",
+    "謎解き：２０分": "Puzzles: 20 minutes",
+    "ザコ戦：１６０分": "Minor battles: 160 minutes",
+    "ボス戦：４０分": "Boss battle: 40 minutes",
+    "というように、気づいてみれば、何倍も面倒なダンジョンになっていたりする。": "before you know it, you may end up with a dungeon that is several times more tedious.",
+    "これは『全滅によるやり直し』を想定していない時間なので、さらに膨れ上がる可能性もある。": "Since these estimates do not account for having to start over after a party wipe, the time could grow even further.",
+    "とりわけザコ戦にかかる時間が、予想以上に増えやすいので気をつけたい。『１戦闘の時間』『ダンジョンの広さ』『エンカウント率』といったほとんど全てに影響を受けるためだ。": "In particular, be careful because the time spent on minor battles tends to increase more than expected. This is because it is affected by nearly everything, including the length of each battle, the size of the dungeon, and the encounter rate.",
+    "また、これは謎解きの途中にはザコ戦がない前提で書いている。謎解き中にザコが襲ってくるような設計ならば、さらにさらに酷くなるかもしれない。": "Also, these estimates assume that no minor battles occur during the puzzles. If the dungeon is designed so that minor enemies attack during the puzzles, things could become even, even worse.",
+    "序盤のダンジョンは５０分でクリアできたのに、後半のダンジョンは４時間かかる。……なんて、プレイヤーもうんざりしてしまうこと請け合い。": "An early-game dungeon can be cleared in 50 minutes, while a late-game dungeon takes four hours… Players are sure to get fed up with that.",
+    "面白い後半を実現するには？": "How can you make the late game enjoyable?",
+    "ここまでは『ゲーム後半が面白くなくなる』要因を挙げてみた。それでは、そうならないためにはどうすればよいだろうか。": "So far, I have listed some factors that can make the latter half of a game less enjoyable. What, then, can we do to prevent that from happening?",
+    "いくつか考えてみた。": "I came up with a few ideas.",
+    "ゲームテンポを意識する": "Be mindful of the game's pace",
+    "後半のゲームテンポが悪化していないか、意識して調整を行う。": "Consciously adjust the latter half of the game to ensure that its pace does not deteriorate.",
+    "特に戦闘はザコ・ボス共、無闇に長引かせないことを心がける。『短期決戦』を意識するといいかもしれない。": "In particular, try not to let battles—whether against minor enemies or bosses—drag on unnecessarily. It may help to keep \"short, decisive battles\" in mind.",
+    "上に挙げた『テンポ悪化要素の相乗効果』にある通り、色んな要素が戦闘テンポの悪化には関わってくる。": "As noted above under \"the synergistic effects of factors that slow the pace,\" all sorts of elements can contribute to a deterioration in battle tempo.",
+    "短期決戦にするためには、回復手段を制限する必要があるし、戦闘アニメの長さも抑える必要がある。": "To keep battles short and decisive, you need to limit the means of recovery and keep battle animation lengths under control.",
+    "ボス戦も短期決戦ならば、同じことの繰り返しにもなりにくい。結果的に戦法のパターン化が起こりにくいという利点もある。": "If boss battles are also short and decisive, they are less likely to become repetitive. This also has the advantage of making it less likely that players will settle into a fixed pattern of tactics.",
+    "また、ダンジョンの長さやエンカウント率もほどほどにして、戦闘回数が過剰にならないようにしたい。": "You should also keep the dungeon length and encounter rate reasonable so that the number of battles does not become excessive.",
+    "どんな名作でも同じことを千回も繰り返せば、いずれ飽きが来るのは避けられない。戦闘回数を抑えれば、それだけ底が知れるのは遅くなる。「同じことを繰り返している」という作業感も大きく軽減される。": "Even the greatest masterpiece will inevitably become boring if you repeat the same thing a thousand times. By limiting the number of battles, you delay the point at which players reach their limit. It also greatly reduces the sense of busywork that comes from \"repeating the same thing.\"",
+    "これらは机上の計算だけで予測することは難しいので、作者自身が実際にテストプレイしてみるのが肝心。うんざりなゲームテンポになっていたなら改めよう。": "These factors are difficult to predict through calculations alone, so it is essential for the creator to playtest the game personally. If the game has become a slog, make changes.",
+    "特に集団での制作の場合、マップ担当や演出担当ががんばりすぎた結果、過剰になってしまうこともある。": "This is especially likely during team development, when the map designer or presentation designer goes overboard and the result becomes excessive.",
+    "「作ったものは使わないともったいない」という気持ちは分かるけれど、削るべきものは削ろう。後半だからといって、何でもかんでも拡大すればよいというものではない。": "I understand the feeling that \"it would be a waste not to use something we've made,\" but cut what needs to be cut. Just because it is the latter half of the game does not mean everything should be expanded.",
+    "ラスボス戦を考える": "Think about the final boss battle",
+    "どんなラストバトルを作りたいかを開発途中から考えてみよう。": "Start thinking about what kind of final battle you want to create while the game is still in development.",
+    "ラストバトルとは、ゲームデザインの結晶とも考えられる。設計がよくできていれば、自然とよくできたラストバトルへと繋がる。": "The final battle can be considered the culmination of the game's design. If the game has been designed well, it will naturally lead to a well-designed final battle.",
+    "ゲームシステムが活かせるラストバトル": "A final battle that makes use of the game system",
+    "キャラクターの個性が活かせるラストバトル": "A final battle that makes use of the characters' individual traits",
+    "物理と魔法の両方が活かせるラストバトル": "A final battle that makes use of both physical and magical attacks",
+    "色んな属性が活かせるラストバトル": "A final battle that makes use of various attributes",
+    "逆に設計が適当で何も考えていないと、ラストバトルに歪みが出やすい。": "Conversely, if the design is careless and nothing has been thought through, the final battle is likely to feel distorted.",
+    "毎ターン回復魔法を放ちながら、ただ強い攻撃を放つだけのラストバトル": "A final battle where the boss simply unleashes powerful attacks while casting a healing spell every turn",
+    "敵の長い攻撃演出を延々と見せられるラストバトル": "A final battle where you are forced to watch the enemy's long attack animations over and over",
+    "今までのゲームシステムを否定するようなラストバトル": "A final battle that contradicts the game systems used up to that point",
+    "→例：パーティバトルが基本だったのに、なぜかラストだけタイマン。": "→Example: Party battles were the norm, but for some reason, the final battle is a one-on-one duel.",
+    "→例：ＳＲＰＧ的な戦闘システムなのに、移動もなく殴り合うだけ。": "→Example: Despite having an SRPG-style battle system, the battle consists only of trading blows without any movement.",
+    "→例：アクション戦闘なのに、なぜかラストがシューティング。": "→Example: Despite being an action battle system, the final battle is inexplicably a shooter.",
+    "→例：アクション戦闘なのに、なぜかラストが音ゲー。": "→Example: Despite being an action battle system, the final battle is inexplicably a rhythm game.",
+    "大局観のないゲームシステム、その場しのぎのゲームバランスからはまともなラストバトルを生み出すのは難しい。": "It is difficult to create a proper final battle from a game system without a broad perspective and a game balance that only provides short-term fixes.",
+    "そのためにも、大雑把でよいから早い内に理想のラストバトルのイメージを持っておきたい。それこそ、ゲームシステムやキャラクターの能力、登場する魔法・特技を決める段階で、構想を立ててしまってもよいと思う。": "For that reason, you should form an image of your ideal final battle early on, even if it is only a rough one. In fact, I think it is perfectly fine to formulate the concept while deciding on the game system, the characters' abilities, and the spells and Techs that will appear."
+  }
+}
