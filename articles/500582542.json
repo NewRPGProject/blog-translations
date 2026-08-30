@@ -1,0 +1,1197 @@
+{
+  "articleId": "500582542",
+  "sourceUrl": "https://newrpg.seesaa.net/article/500582542.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "c7a1757fbc2f808785deabee5226bb2e0176c8bede0f744b984f8f713fe2a036",
+  "translatedAt": "2026-08-30T10:07:06.287Z",
+  "title": "[RPG Maker MZ & MV Plugin] Implementing Special Traits",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "特殊な特徴を実現する【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "6191b058fc15862b6a05df5e8e4592658842803991d1de6621a2fcaf5a05b733",
+      "translation": "[RPG Maker MZ & MV Plugin] Implementing Special Traits",
+      "contextHash": "6191b058fc15862b6a05df5e8e4592658842803991d1de6621a2fcaf5a05b733"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "特殊な特徴を実現します。",
+      "sourceHash": "04dae67764af8abc92361e87c9f51d223335ac3e46b671b7f4cb36e02eeb2143",
+      "translation": "Implements special traits.",
+      "contextHash": "04dae67764af8abc92361e87c9f51d223335ac3e46b671b7f4cb36e02eeb2143"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）に対して、特殊な特徴を設定できます。",
+      "sourceHash": "0f9b37bb8b4dfee655508159905ebbf363b52bb4f72624e4961295a770130c61",
+      "translation": "You can set special traits for each object (actor, enemy, class, equipment, state, or skill).",
+      "contextHash": "0f9b37bb8b4dfee655508159905ebbf363b52bb4f72624e4961295a770130c61"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "スキルについては覚えているだけで、発揮するパッシブスキルとなります。",
+      "sourceHash": "63b3846ebc56a4eddc782adb43e0deda60f35ca02b734af0f49b67e1642d99ed",
+      "translation": "Skills become passive skills that take effect simply by being learned.",
+      "contextHash": "63b3846ebc56a4eddc782adb43e0deda60f35ca02b734af0f49b67e1642d99ed"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "例えば、以下のような特徴を設定できます。",
+      "sourceHash": "50ea8f1b0ea3f0515a2f970105a03056a54a8ec6ae1858c884df33e480e3bea7",
+      "translation": "For example, you can set traits such as the following.",
+      "contextHash": "50ea8f1b0ea3f0515a2f970105a03056a54a8ec6ae1858c884df33e480e3bea7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "与えるダメージ、受けるダメージ倍率を変更する。",
+      "sourceHash": "714bca821dc5821f261a459f56e9fa32e6a5d2bbc818f8c521380e7348eb1cfb",
+      "translation": "Change the damage dealt or damage received multiplier.",
+      "contextHash": "714bca821dc5821f261a459f56e9fa32e6a5d2bbc818f8c521380e7348eb1cfb"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ステートの継続ターンを変更する。",
+      "sourceHash": "8579afe2e9d73855146d15f34a70ddb4c32d434b72d36a1b7513a5e19882160c",
+      "translation": "Change the number of turns a state lasts.",
+      "contextHash": "8579afe2e9d73855146d15f34a70ddb4c32d434b72d36a1b7513a5e19882160c"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "無敵になってあらゆる効果を受けなくする。",
+      "sourceHash": "37ac6d20fb578cd609155d4324fca8581b99241eaa69e40faecacf591a6e1cab",
+      "translation": "Become invincible and receive no effects.",
+      "contextHash": "37ac6d20fb578cd609155d4324fca8581b99241eaa69e40faecacf591a6e1cab"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the plugin on in the plugin manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TraitsEX.js",
+      "sourceHash": "e3845b85fafd5e108c04aa7efa8102c78b56fe45a596e014a0ef6f7984c79b7c",
+      "translation": "NRP_TraitsEX.js",
+      "contextHash": "6cd450cbe2962bc3fcb0d9abaefa3caba9da962a1792adc5f28a2b704ecfeb5f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "例えば、条件を満たした時のみフラッシュさせるようなことができます。",
+      "sourceHash": "93fe8e5062f994f57ca8530be541a13fb8b0a2b8bc7875ed4ccc0331e302f531",
+      "translation": "For example, you can make the screen flash only when certain conditions are met.",
+      "contextHash": "93fe8e5062f994f57ca8530be541a13fb8b0a2b8bc7875ed4ccc0331e302f531"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "自動戦闘のアクターが最適な行動を選択できなくなる不具合修正。",
+      "sourceHash": "fb749afe4cbcaee0f368431f79b27113ac60ff109d48bd1b5e7c8d8b24f624ab",
+      "translation": "Fixed a bug that prevented auto-battle actors from selecting the optimal action.",
+      "contextHash": "fb749afe4cbcaee0f368431f79b27113ac60ff109d48bd1b5e7c8d8b24f624ab"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "※特にＭＶでは行動自体ができなくなっていた。",
+      "sourceHash": "2f90ff5e8d3a9fb1a4a3b3d975f77cbc9aa9ecf7cb89b669bdef96bfe1d62ecb",
+      "translation": "※In MV especially, they were unable to act at all.",
+      "contextHash": "2f90ff5e8d3a9fb1a4a3b3d975f77cbc9aa9ecf7cb89b669bdef96bfe1d62ecb"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "ダメージ倍率関連の条件を細かく指定できるように機能追加。",
+      "sourceHash": "4a3b607712f3431fc410da73d878821c5369272a3efdb121e56780ea03da2df0",
+      "translation": "Added functionality to specify damage multiplier conditions in greater detail.",
+      "contextHash": "4a3b607712f3431fc410da73d878821c5369272a3efdb121e56780ea03da2df0"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "無敵効果がＭＶでエラーになる不具合修正。（2023/10/19 ver1.012）",
+      "sourceHash": "e35f668cb13176b75629a40477079b04da3771dca50bd1ee1ed29a89ffba2d6e",
+      "translation": "Fixed a bug that caused the invincibility effect to produce an error in MV. (2023/10/19 ver1.012)",
+      "contextHash": "e35f668cb13176b75629a40477079b04da3771dca50bd1ee1ed29a89ffba2d6e"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ダメージ倍率の変更（Damage Rate）",
+      "sourceHash": "cb62b404537fb91ff305de84fdeacdf454d3b0111dd91d254cce7e87d8684569",
+      "translation": "Changing the Damage Multiplier (Damage Rate)",
+      "contextHash": "cb62b404537fb91ff305de84fdeacdf454d3b0111dd91d254cce7e87d8684569"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "オブジェクトのメモ欄に以下を指定してください。",
+      "sourceHash": "2c7603c3dd735da951432e2d75d92467067e1b5bb0d42aff532490338ffb7663",
+      "translation": "Specify the following in the object's note field.",
+      "contextHash": "2c7603c3dd735da951432e2d75d92467067e1b5bb0d42aff532490338ffb7663"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "与えるダメージを１．５倍にします。",
+      "sourceHash": "e4579e6cc47ab3f24a628964248bf76a0fea1892124443f01cb139f8ac4f913b",
+      "translation": "Multiplies damage dealt by 1.5.",
+      "contextHash": "e4579e6cc47ab3f24a628964248bf76a0fea1892124443f01cb139f8ac4f913b"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "1.0が100%に相当します。",
+      "sourceHash": "0fe5b896c1cc5f0ba7490f0c31c3422f9515629339d6531d5030cc78b50e3407",
+      "translation": "1.0 corresponds to 100%.",
+      "contextHash": "0fe5b896c1cc5f0ba7490f0c31c3422f9515629339d6531d5030cc78b50e3407"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "また、数式も有効です。",
+      "sourceHash": "7793867913a7b09f0369ead599cc67b5cfdde7844bc26426dc5afb7d7905cd55",
+      "translation": "You can also use formulas.",
+      "contextHash": "7793867913a7b09f0369ead599cc67b5cfdde7844bc26426dc5afb7d7905cd55"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "例：ＨＰが減るほど与ダメージ増加（最大２００％）",
+      "sourceHash": "4f1b18f37e4769489a7bbdadce7ea38324577e9b252db0c196702e2855232086",
+      "translation": "Example: Increase damage dealt as HP decreases (maximum 200%)",
+      "contextHash": "4f1b18f37e4769489a7bbdadce7ea38324577e9b252db0c196702e2855232086"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "受けるダメージを１．５倍にします。",
+      "sourceHash": "20dec60aca11bb011b5611cee7438c786c5b99a29fde9303100e9758d9cc58b7",
+      "translation": "Multiplies damage received by 1.5.",
+      "contextHash": "20dec60aca11bb011b5611cee7438c786c5b99a29fde9303100e9758d9cc58b7"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "1.0が100%に相当します。",
+      "sourceHash": "0fe5b896c1cc5f0ba7490f0c31c3422f9515629339d6531d5030cc78b50e3407",
+      "translation": "1.0 corresponds to 100%.",
+      "contextHash": "0fe5b896c1cc5f0ba7490f0c31c3422f9515629339d6531d5030cc78b50e3407"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "以降はダメージ倍率の変更を行うスキルを判定するための条件です。",
+      "sourceHash": "58071db553e7054189753599e5f15d311f48c7a5af344600e94581ac354615fe",
+      "translation": "The following are conditions for determining which skills change the damage multiplier.",
+      "contextHash": "58071db553e7054189753599e5f15d311f48c7a5af344600e94581ac354615fe"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "組み合わせて使用してください。",
+      "sourceHash": "358c9082d931709e53586fdfd2ddf2117794fed509453e56c59b2bfc4d5e24bc",
+      "translation": "Use them in combination.",
+      "contextHash": "358c9082d931709e53586fdfd2ddf2117794fed509453e56c59b2bfc4d5e24bc"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ダメージタイプ1,5のスキルのダメージ倍率を変更します。",
+      "sourceHash": "6cfedf5237610fd16a386fcc8131b8d33acc744014a5eb5555b0dcf5ae9a3f11",
+      "translation": "Changes the damage multiplier for skills with damage types 1 and 5.",
+      "contextHash": "6cfedf5237610fd16a386fcc8131b8d33acc744014a5eb5555b0dcf5ae9a3f11"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "1:HPダメージ, 2:MPダメージ, 3:HP回復, 4:MP回復, 5:HP吸収, 6:MP回復です。",
+      "sourceHash": "fea7c4643945b15e0b24e74f20cbdf3c0f6c4bbb2f4e9f24101fd27897425208",
+      "translation": "1: HP Damage, 2: MP Damage, 3: HP Recovery, 4: MP Recovery, 5: HP Drain, 6: MP Recovery.",
+      "contextHash": "fea7c4643945b15e0b24e74f20cbdf3c0f6c4bbb2f4e9f24101fd27897425208"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※省略時はプラグインパラメータの設定を使用します。空欄にした場合は全て有効となります。",
+      "sourceHash": "428f4a25c2173b1ea79a288f6931749cc354d0f8dd2dc0f4a8db9b454e390f84",
+      "translation": "※When omitted, the plugin parameter settings are used. When left blank, all types are enabled.",
+      "contextHash": "428f4a25c2173b1ea79a288f6931749cc354d0f8dd2dc0f4a8db9b454e390f84"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "命中タイプ1のスキルのダメージ倍率を変更します。",
+      "sourceHash": "7365f37b665d42b674f915c81295afc66afbb88012dbcf957e16890bf24f09e5",
+      "translation": "Changes the damage multiplier for skills with hit type 1.",
+      "contextHash": "7365f37b665d42b674f915c81295afc66afbb88012dbcf957e16890bf24f09e5"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "0:必中, 1:物理攻撃, 2:魔法攻撃です。",
+      "sourceHash": "6c0a7876e9b63b0e4d074e65485719e4662b9398a643c3e9efe68f0c059b3dad",
+      "translation": "0: Certain Hit, 1: Physical Attack, 2: Magical Attack.",
+      "contextHash": "6c0a7876e9b63b0e4d074e65485719e4662b9398a643c3e9efe68f0c059b3dad"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※省略時はプラグインパラメータの設定を使用します。空欄にした場合は全て有効となります。",
+      "sourceHash": "428f4a25c2173b1ea79a288f6931749cc354d0f8dd2dc0f4a8db9b454e390f84",
+      "translation": "※When omitted, the plugin parameter settings are used. When left blank, all types are enabled.",
+      "contextHash": "428f4a25c2173b1ea79a288f6931749cc354d0f8dd2dc0f4a8db9b454e390f84"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "スキルタイプ0,2のスキルのダメージ倍率を変更します。",
+      "sourceHash": "3cbd9b5652c787c44e1b5ecb560fa021db1eac0cd302f687a4691af70c5c8958",
+      "translation": "Changes the damage multiplier for skills with skill types 0 and 2.",
+      "contextHash": "3cbd9b5652c787c44e1b5ecb560fa021db1eac0cd302f687a4691af70c5c8958"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "通常だと0は通常攻撃、2:必殺技です。",
+      "sourceHash": "4fe398be9c5b15c24a212c87398663900c97de4c6e982913cd094592042a74d3",
+      "translation": "Normally, 0 is the Normal Attack and 2 is the Special Skill.",
+      "contextHash": "4fe398be9c5b15c24a212c87398663900c97de4c6e982913cd094592042a74d3"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "対応については、データベースのタイプ＞スキルタイプをご覧ください。",
+      "sourceHash": "cce28ca1869923efe8a27a126e618f715e4ccbda90037f8e25ad63d02d9153ef",
+      "translation": "For the applicable types, see Database > Types > Skill Types.",
+      "contextHash": "cce28ca1869923efe8a27a126e618f715e4ccbda90037f8e25ad63d02d9153ef"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "※省略時はプラグインパラメータの設定を使用します。空欄にした場合は全て有効となります。",
+      "sourceHash": "428f4a25c2173b1ea79a288f6931749cc354d0f8dd2dc0f4a8db9b454e390f84",
+      "translation": "※When omitted, the plugin parameter settings are used. When left blank, all types are enabled.",
+      "contextHash": "428f4a25c2173b1ea79a288f6931749cc354d0f8dd2dc0f4a8db9b454e390f84"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "与えるダメージ倍率によってスクリプトを実行します。",
+      "sourceHash": "4e63e9c24035f778ac68ef724f6f08cc6d797e6db7a4c73e2a6e1912b1ba29e2",
+      "translation": "Executes a script based on the damage multiplier dealt.",
+      "contextHash": "4e63e9c24035f778ac68ef724f6f08cc6d797e6db7a4c73e2a6e1912b1ba29e2"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "<InflictedDamageRate>とセットで使用してください。",
+      "sourceHash": "840d436dc28f9ea6367cf8b8d56ed2c4fd8d38d4c8fffff48644b0bf0d0cb85d",
+      "translation": "Use this together with <InflictedDamageRate>.",
+      "contextHash": "840d436dc28f9ea6367cf8b8d56ed2c4fd8d38d4c8fffff48644b0bf0d0cb85d"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "例：ダメージ倍率が１．５以上の場合にフラッシュを実行します。",
+      "sourceHash": "283c847df617ffa78393ce52c13cea4240a0d842323bbdbd6197115c43f4b994",
+      "translation": "Example: Executes a flash when the damage multiplier is 1.5 or higher.",
+      "contextHash": "283c847df617ffa78393ce52c13cea4240a0d842323bbdbd6197115c43f4b994"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "ちなみに『$gameScreen.startFlash([赤,緑,青,強さ], 時間)』です。",
+      "sourceHash": "62d19d03723f8716dfe1f30864bf3bec45819b3d885116a80ccf4672051cd84e",
+      "translation": "By the way, it is 『$gameScreen.startFlash([red,green,blue,intensity], duration)』.",
+      "contextHash": "62d19d03723f8716dfe1f30864bf3bec45819b3d885116a80ccf4672051cd84e"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "<InflictedDamageRate>とセットで使用してください。",
+      "sourceHash": "840d436dc28f9ea6367cf8b8d56ed2c4fd8d38d4c8fffff48644b0bf0d0cb85d",
+      "translation": "Use this together with <InflictedDamageRate>.",
+      "contextHash": "840d436dc28f9ea6367cf8b8d56ed2c4fd8d38d4c8fffff48644b0bf0d0cb85d"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "例：ダメージ倍率が１．５以上の場合に弱点として扱います。",
+      "sourceHash": "070c6f96b00e9ad0eb85b759fe9633e1cba2cff165babb60077a3940b9eb1091",
+      "translation": "Example: Treats the attack as hitting a weakness when the damage multiplier is 1.5 or higher.",
+      "contextHash": "070c6f96b00e9ad0eb85b759fe9633e1cba2cff165babb60077a3940b9eb1091"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "ダメージ倍率の変更無効（No Change Damage Rate）",
+      "sourceHash": "422d40efcd34af1ca30ec461500e56297aee621808f887c73232e463633ca2de",
+      "translation": "Disabling Damage Multiplier Changes (No Change Damage Rate)",
+      "contextHash": "422d40efcd34af1ca30ec461500e56297aee621808f887c73232e463633ca2de"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "スキル（またはアイテム）のメモ欄に以下を指定してください。",
+      "sourceHash": "55ddac6fa28544990dea27c489b74b18a3b3637681660fff98659d0b10a9aa96",
+      "translation": "Specify the following in the note field of the skill (or item).",
+      "contextHash": "55ddac6fa28544990dea27c489b74b18a3b3637681660fff98659d0b10a9aa96"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "スキル使用時のダメージ倍率の変更を無効化します。",
+      "sourceHash": "79b0b3c969e5982b616b541bc146a7b7136f3df6b4b3aa35df4342a8e803a689",
+      "translation": "Disables changes to the damage multiplier when using the skill.",
+      "contextHash": "79b0b3c969e5982b616b541bc146a7b7136f3df6b4b3aa35df4342a8e803a689"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "固定ダメージ技など他の特徴による影響を受けさせたくない場合に設定してください。",
+      "sourceHash": "c961f7e5e974bc5ed5a39a12d7359a3b5082e812d8ba8365f2338f8ea025ade5",
+      "translation": "Set this when you do not want the skill to be affected by other traits, such as fixed-damage skills.",
+      "contextHash": "c961f7e5e974bc5ed5a39a12d7359a3b5082e812d8ba8365f2338f8ea025ade5"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ステート継続ターンの変更（State Turn）",
+      "sourceHash": "d9c6b1f460fc4738665ae505018f5da1949a10cd19c17c518943251fa3a67312",
+      "translation": "Changing State Duration (State Turn)",
+      "contextHash": "d9c6b1f460fc4738665ae505018f5da1949a10cd19c17c518943251fa3a67312"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "オブジェクトのメモ欄に以下を指定してください。",
+      "sourceHash": "2c7603c3dd735da951432e2d75d92467067e1b5bb0d42aff532490338ffb7663",
+      "translation": "Specify the following in the object's note field.",
+      "contextHash": "2c7603c3dd735da951432e2d75d92467067e1b5bb0d42aff532490338ffb7663"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "与えたステートの継続ターンを1延長します。",
+      "sourceHash": "745c80498fa678284f372a2065924d65844227784eb34a669cf046c055ec5d7f",
+      "translation": "Extends the duration of the applied state by 1 turn.",
+      "contextHash": "745c80498fa678284f372a2065924d65844227784eb34a669cf046c055ec5d7f"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "受けたステートの継続ターンを1減らします。",
+      "sourceHash": "bd9a385206e5a13c6840154a6afadf7c0d12b74dc73a9428e1beabd8307f8142",
+      "translation": "Reduces the duration of the received state by 1 turn.",
+      "contextHash": "bd9a385206e5a13c6840154a6afadf7c0d12b74dc73a9428e1beabd8307f8142"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "ステートターンタイプを\"test\"に設定します。",
+      "sourceHash": "4348d62ec037ef3ccf53ca0ae73ce20ebff9ce6373ae07d81ff2f28e72d52991",
+      "translation": "Sets the state turn type to \"test\".",
+      "contextHash": "4348d62ec037ef3ccf53ca0ae73ce20ebff9ce6373ae07d81ff2f28e72d52991"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "上述の継続ターンを影響させるステートを限定させたい場合に組み合わせて使用します。",
+      "sourceHash": "12c7fdce6f65b6add079daac28bf6c35c5a629a511535b74d3a03d1b5d08214d",
+      "translation": "Use this in combination when you want to limit the states affected by the duration effects described above.",
+      "contextHash": "12c7fdce6f65b6add079daac28bf6c35c5a629a511535b74d3a03d1b5d08214d"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "さらにターンを延長したいステートのメモ欄に以下を指定してください。",
+      "sourceHash": "a5b3732b65e2475f279cadf177c07d6ed9535b505e002cd13c2b54b242834851",
+      "translation": "Specify the following in the note field of the state whose duration you want to extend further.",
+      "contextHash": "a5b3732b65e2475f279cadf177c07d6ed9535b505e002cd13c2b54b242834851"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "※カンマ区切りで複数指定も可能です。",
+      "sourceHash": "e8f1214d3117c3a03fdce56482f72d02d69df3784141d16dd068cecad0532dec",
+      "translation": "※Multiple entries can be specified, separated by commas.",
+      "contextHash": "e8f1214d3117c3a03fdce56482f72d02d69df3784141d16dd068cecad0532dec"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "（例：<StateTurnType:test1,test2>）",
+      "sourceHash": "82417ee67e2cbc4eaa6ae2e8dd55e770247ccc8a48e0e21d81ac8d7a06b5d4ab",
+      "translation": "(Example: <StateTurnType:test1,test2>)",
+      "contextHash": "82417ee67e2cbc4eaa6ae2e8dd55e770247ccc8a48e0e21d81ac8d7a06b5d4ab"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "例：与えた毒ステートを延長する特徴を持った職業",
+      "sourceHash": "f36eae010b34cb338f239b876407b204503f8479f20d42137136b0d3d0ba8b94",
+      "translation": "Example: A class with a trait that extends the duration of applied Poison states",
+      "contextHash": "f36eae010b34cb338f239b876407b204503f8479f20d42137136b0d3d0ba8b94"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "職業のメモ欄に以下２つを指定",
+      "sourceHash": "1e13d34603a67971ee49eb13028a947e4d78b3b738ca5b04787d5776c3a2ec56",
+      "translation": "Specify the following two entries in the class's note field",
+      "contextHash": "1e13d34603a67971ee49eb13028a947e4d78b3b738ca5b04787d5776c3a2ec56"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "毒ステートのメモ欄に以下を指定",
+      "sourceHash": "e4fdcf7a30279be430126973009f564cf5764faece37158fc7e1b9af27441fcd",
+      "translation": "Specify the following in the Poison state's note field",
+      "contextHash": "e4fdcf7a30279be430126973009f564cf5764faece37158fc7e1b9af27441fcd"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "スキル毎の設定",
+      "sourceHash": "810f50fa8200da630abb6f0a461cd0a5527aa918e93307ba9fd3d0aa58fda37f",
+      "translation": "Settings for Each Skill",
+      "contextHash": "810f50fa8200da630abb6f0a461cd0a5527aa918e93307ba9fd3d0aa58fda37f"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "以下はスキルのメモ欄のみ有効です。",
+      "sourceHash": "fed41dbf2bb0e80f420ea23c5da7a9a012aaf56a8ffc8765a89c72c0e75b9056",
+      "translation": "The following is only valid in skill note fields.",
+      "contextHash": "fed41dbf2bb0e80f420ea23c5da7a9a012aaf56a8ffc8765a89c72c0e75b9056"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "そのスキルで与えたステートの継続ターンを1延長します。",
+      "sourceHash": "55a5bdee90566975464b4fb47570306e853b2b9d452e61dabab91e767790c2af",
+      "translation": "Extends the duration of states applied by that skill by 1 turn.",
+      "contextHash": "55a5bdee90566975464b4fb47570306e853b2b9d452e61dabab91e767790c2af"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "無敵（Invincible）",
+      "sourceHash": "0038f11291ff45a584e2ea5017a2afa064ad7e9eb89ab60da352aedac1f35d62",
+      "translation": "Invincible (Invincible)",
+      "contextHash": "0038f11291ff45a584e2ea5017a2afa064ad7e9eb89ab60da352aedac1f35d62"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "オブジェクトのメモ欄に以下を指定してください。",
+      "sourceHash": "2c7603c3dd735da951432e2d75d92467067e1b5bb0d42aff532490338ffb7663",
+      "translation": "Specify the following in the object's note field.",
+      "contextHash": "2c7603c3dd735da951432e2d75d92467067e1b5bb0d42aff532490338ffb7663"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "無敵になってあらゆるスキルを受けつけなくなります。",
+      "sourceHash": "1e4262b9b99624322f1dc5ddb79a9e070695bac9c46ad94ce4d0ef3a89f12ec9",
+      "translation": "The battler becomes invincible and no longer accepts any skills.",
+      "contextHash": "1e4262b9b99624322f1dc5ddb79a9e070695bac9c46ad94ce4d0ef3a89f12ec9"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "数値が0なら結果非表示, 1ならミス、2なら回避として扱います。",
+      "sourceHash": "e66d422966bc4ce912acdbeb3a936187c285b099d579b88ddac93bf8a5da1ae4",
+      "translation": "If the value is 0, the result is hidden; if it is 1, it is treated as a miss; and if it is 2, it is treated as an evasion.",
+      "contextHash": "e66d422966bc4ce912acdbeb3a936187c285b099d579b88ddac93bf8a5da1ae4"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "また、スキルのメモ欄に以下を指定すると、無敵状態を無視して命中するスキルを作成できます。",
+      "sourceHash": "107a9bd5f56d133b70ef960a54b0aee50f03456285cc8e524a8f747c2f5d5d1f",
+      "translation": "Additionally, specifying the following in a skill's note field allows you to create a skill that hits while ignoring the invincible state.",
+      "contextHash": "107a9bd5f56d133b70ef960a54b0aee50f03456285cc8e524a8f747c2f5d5d1f"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "なお、バトラーが無敵状態かどうかは以下の関数で判定できます。",
+      "sourceHash": "48e655b74b22d7199df32fa908bcdf559788a8f59e4f5d71879233833985d1ef",
+      "translation": "You can determine whether a battler is invincible using the following function.",
+      "contextHash": "48e655b74b22d7199df32fa908bcdf559788a8f59e4f5d71879233833985d1ef"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "※aはバトラー",
+      "sourceHash": "8e77b68dbabfc7aa8040f72753b9da833805a4b14106de1e4f93047a657248b0",
+      "translation": "※a is a battler",
+      "contextHash": "8e77b68dbabfc7aa8040f72753b9da833805a4b14106de1e4f93047a657248b0"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "＜ダメージ倍率関連＞（DamageRate）",
+      "sourceHash": "4f1080067c7e4172c4061b65b984acc1d5608268c96d1678eb544386b0153360",
+      "translation": "<Damage Rate Related> (DamageRate)",
+      "contextHash": "4f1080067c7e4172c4061b65b984acc1d5608268c96d1678eb544386b0153360"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "ダメージ倍率変更の対象とするスキルの条件を指定します。",
+      "sourceHash": "46e6817974654802295ff7d504829dd22ef135dc210588d3261a91be816d1167",
+      "translation": "Specifies the conditions for skills subject to damage rate changes.",
+      "contextHash": "46e6817974654802295ff7d504829dd22ef135dc210588d3261a91be816d1167"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "対象のダメージタイプ（DR_DamageType）",
+      "sourceHash": "67e44c361f168fbd22f1e01548898a96651798b564b81a0e661ad5c6bce38359",
+      "translation": "Target Damage Type (DR_DamageType)",
+      "contextHash": "67e44c361f168fbd22f1e01548898a96651798b564b81a0e661ad5c6bce38359"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "ダメージ倍率を変更するダメージタイプ。",
+      "sourceHash": "15f28d6913ab583b6b5daf163a6d2160da84c1a454ce59adfe89213f906ee0bb",
+      "translation": "The damage types whose damage rates will be changed.",
+      "contextHash": "15f28d6913ab583b6b5daf163a6d2160da84c1a454ce59adfe89213f906ee0bb"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "複数可。",
+      "sourceHash": "83e595bb303438991d0a4add01de5392e53229822e9cccff1afb4c46b6c6a901",
+      "translation": "Multiple entries allowed.",
+      "contextHash": "83e595bb303438991d0a4add01de5392e53229822e9cccff1afb4c46b6c6a901"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "0:なし, 1:HPﾀﾞﾒｰｼﾞ, 2:MPﾀﾞﾒｰｼﾞ, 3:HP回復, 4:MP回復, 5:HP吸収, 6:MP吸収",
+      "sourceHash": "d70adbe195591485631bd3a47d54b01ad9d746d103971cb41822c5bfeb3fc588",
+      "translation": "0: None, 1: HP Damage, 2: MP Damage, 3: HP Recovery, 4: MP Recovery, 5: HP Drain, 6: MP Drain",
+      "contextHash": "d70adbe195591485631bd3a47d54b01ad9d746d103971cb41822c5bfeb3fc588"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "対象の命中タイプ（DR_HitType）",
+      "sourceHash": "01dd2824efdd15b4283ed0432a3e33e303e80c682c046858c12f0f8c2768b40e",
+      "translation": "Target Hit Type (DR_HitType)",
+      "contextHash": "01dd2824efdd15b4283ed0432a3e33e303e80c682c046858c12f0f8c2768b40e"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "ダメージ倍率を変更するスキルの命中タイプ。",
+      "sourceHash": "826b28afdd837f33988816928c1607023e0bb6e41e16f34e92126236e0f78681",
+      "translation": "The hit types of skills whose damage rates will be changed.",
+      "contextHash": "826b28afdd837f33988816928c1607023e0bb6e41e16f34e92126236e0f78681"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "複数可。",
+      "sourceHash": "83e595bb303438991d0a4add01de5392e53229822e9cccff1afb4c46b6c6a901",
+      "translation": "Multiple entries allowed.",
+      "contextHash": "83e595bb303438991d0a4add01de5392e53229822e9cccff1afb4c46b6c6a901"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "0:必中, 1:物理攻撃, 2:魔法攻撃",
+      "sourceHash": "8e18042f659c9a1a78ebce1cefd2e7db721f46d8b63d392e569128c80d94f175",
+      "translation": "0: Certain Hit, 1: Physical Attack, 2: Magical Attack",
+      "contextHash": "8e18042f659c9a1a78ebce1cefd2e7db721f46d8b63d392e569128c80d94f175"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "対象のスキルタイプ（DR_SkillType）",
+      "sourceHash": "62c38a9161d4e50f9b4b04d18f828054168f0b6bcb5f6b1385bc1101091601c5",
+      "translation": "Target Skill Type (DR_SkillType)",
+      "contextHash": "62c38a9161d4e50f9b4b04d18f828054168f0b6bcb5f6b1385bc1101091601c5"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "ダメージ倍率を変更するスキルタイプ。",
+      "sourceHash": "3e2c40e87f436dcada27d0325f40f2ca2c220112a59d57e5638c22c551997c4c",
+      "translation": "The skill types whose damage rates will be changed.",
+      "contextHash": "3e2c40e87f436dcada27d0325f40f2ca2c220112a59d57e5638c22c551997c4c"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "複数可。",
+      "sourceHash": "83e595bb303438991d0a4add01de5392e53229822e9cccff1afb4c46b6c6a901",
+      "translation": "Multiple entries allowed.",
+      "contextHash": "83e595bb303438991d0a4add01de5392e53229822e9cccff1afb4c46b6c6a901"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "標準だと0:通常攻撃. 1:魔法, 2:必殺技となります。",
+      "sourceHash": "5f9c915b4556fd05d8127b8cbeaa5d04c078b38cdaf56f20a8a69d3d75650fb6",
+      "translation": "By default, 0 is Normal Attack, 1 is Magic, and 2 is Special.",
+      "contextHash": "5f9c915b4556fd05d8127b8cbeaa5d04c078b38cdaf56f20a8a69d3d75650fb6"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "上の動画では無敵効果によって、[[LINK_1]]ＦＦの竜騎士っぽいジャンプ技[[/LINK_1]]を実現しています。",
+      "sourceHash": "ad4d773edf85632ebe1af32a61aa7985f691506372da44ac6ff90baab4a31eae",
+      "parts": [
+        {
+          "source": "上の動画では無敵効果によって、",
+          "link": false
+        },
+        {
+          "source": "ＦＦの竜騎士っぽいジャンプ技",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を実現しています。",
+          "link": false
+        }
+      ],
+      "translation": "The video above uses an invincibility effect to recreate a [[LINK_1]]Final Fantasy-style Dragoon jump technique[[/LINK_1]].",
+      "contextHash": "ad4d773edf85632ebe1af32a61aa7985f691506372da44ac6ff90baab4a31eae"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージ倍率の変更（Damage Rate）[[/LINK_1]]",
+      "sourceHash": "b5d38d15d9aba0d9a8024200947b551e281a73341b1ed870a9156f00e8e56a91",
+      "parts": [
+        {
+          "source": "ダメージ倍率の変更（Damage Rate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changing the Damage Multiplier (Damage Rate)[[/LINK_1]]",
+      "contextHash": "b5d38d15d9aba0d9a8024200947b551e281a73341b1ed870a9156f00e8e56a91"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ステート継続ターンの変更（State Turn）[[/LINK_1]]",
+      "sourceHash": "fdba353559d97b4ebcb3b05e0f28c836c99e708d13fad3d6749eef70435467d7",
+      "parts": [
+        {
+          "source": "ステート継続ターンの変更（State Turn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Changing State Duration in Turns (State Turn)[[/LINK_1]]",
+      "contextHash": "fdba353559d97b4ebcb3b05e0f28c836c99e708d13fad3d6749eef70435467d7"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]無敵（Invincible）[[/LINK_1]]",
+      "sourceHash": "6d69fadc7d5a515fe52a4bea9e5b36a6df547540b71e76fd7cc1f802ca297ac1",
+      "parts": [
+        {
+          "source": "無敵（Invincible）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Invincibility (Invincible)[[/LINK_1]]",
+      "contextHash": "6d69fadc7d5a515fe52a4bea9e5b36a6df547540b71e76fd7cc1f802ca297ac1"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＜ダメージ倍率関連＞（DamageRate）[[/LINK_1]]",
+      "sourceHash": "103c65591bcfb4ccb6e52da175542c02c20c59966c2ed6254a16530e793d8282",
+      "parts": [
+        {
+          "source": "＜ダメージ倍率関連＞（DamageRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<Damage Rate Related> (DamageRate)[[/LINK_1]]",
+      "contextHash": "103c65591bcfb4ccb6e52da175542c02c20c59966c2ed6254a16530e793d8282"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]対象のダメージタイプ（DR_DamageType）[[/LINK_1]]",
+      "sourceHash": "0927d163f5eb314f26271bad9f0ef69f89e805e6c69e23d6bccb825fcb8536e2",
+      "parts": [
+        {
+          "source": "対象のダメージタイプ（DR_DamageType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Damage Type (DR_DamageType)[[/LINK_1]]",
+      "contextHash": "0927d163f5eb314f26271bad9f0ef69f89e805e6c69e23d6bccb825fcb8536e2"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]対象の命中タイプ（DR_HitType）[[/LINK_1]]",
+      "sourceHash": "62b93f3c19a5acfef4a9d7489f2b71d5b37eaa48728dec1dc335ff945ca1e0e4",
+      "parts": [
+        {
+          "source": "対象の命中タイプ（DR_HitType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Hit Type (DR_HitType)[[/LINK_1]]",
+      "contextHash": "62b93f3c19a5acfef4a9d7489f2b71d5b37eaa48728dec1dc335ff945ca1e0e4"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]対象のスキルタイプ（DR_SkillType）[[/LINK_1]]",
+      "sourceHash": "e7c73a7f80cf2d316d68168f525cc89757b193df6eef30b7c20880ebe8e3ed54",
+      "parts": [
+        {
+          "source": "対象のスキルタイプ（DR_SkillType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Skill Type (DR_SkillType)[[/LINK_1]]",
+      "contextHash": "e7c73a7f80cf2d316d68168f525cc89757b193df6eef30b7c20880ebe8e3ed54"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]スキル毎に付加したステートの継続ターンを変更[[/LINK_1]]できるようにした。",
+      "sourceHash": "ce1129b034564acc1458630a7d92dcb23867d74f82326b0b94f56fbfdca099ec",
+      "parts": [
+        {
+          "source": "スキル毎に付加したステートの継続ターンを変更",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Made it possible to [[LINK_1]]change the duration in turns of states added by each skill[[/LINK_1]].",
+      "contextHash": "ce1129b034564acc1458630a7d92dcb23867d74f82326b0b94f56fbfdca099ec"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]スキル使用時のダメージ倍率の変更を無効[[/LINK_1]]にする機能を追加した。",
+      "sourceHash": "b0430d8fb6b93c71fe45b1a770c4ad4cb1de0541132b1e26970ed5a9cb63c6b7",
+      "parts": [
+        {
+          "source": "スキル使用時のダメージ倍率の変更を無効",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にする機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added a function to [[LINK_1]]disable changes to the damage multiplier when using a skill[[/LINK_1]].",
+      "contextHash": "b0430d8fb6b93c71fe45b1a770c4ad4cb1de0541132b1e26970ed5a9cb63c6b7"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_CalcResultFirst.js[[/LINK_1]]と併用した際に[[LINK_2]]ステート継続ターンの変更[[/LINK_2]]が機能しなくなる競合に対処。（2025/07/02 ver1.061）",
+      "sourceHash": "d58a42a66bdae5e083f41f39cf77379ede44c1bc6e2d00517f1b514c02b3401c",
+      "parts": [
+        {
+          "source": "NRP_CalcResultFirst.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用した際に",
+          "link": false
+        },
+        {
+          "source": "ステート継続ターンの変更",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "が機能しなくなる競合に対処。（2025/07/02 ver1.061）",
+          "link": false
+        }
+      ],
+      "translation": "Addresses a conflict where [[LINK_1]]NRP_CalcResultFirst.js[[/LINK_1]] caused [[LINK_2]]changes to state duration turns[[/LINK_2]] to stop working when used together. (2025/07/02 ver1.061)",
+      "contextHash": "d58a42a66bdae5e083f41f39cf77379ede44c1bc6e2d00517f1b514c02b3401c"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DamageEffect.js[[/LINK_1]]と連動し、[[LINK_2]]弱点を判定する機能[[/LINK_2]]を追加した。",
+      "sourceHash": "65696629c82fc0ccd433078e02b013e716ea245d5bcf0914eea500b3e78a035e",
+      "parts": [
+        {
+          "source": "NRP_DamageEffect.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と連動し、",
+          "link": false
+        },
+        {
+          "source": "弱点を判定する機能",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added a function that works with [[LINK_1]]NRP_DamageEffect.js[[/LINK_1]] to [[LINK_2]]determine weaknesses[[/LINK_2]].",
+      "contextHash": "65696629c82fc0ccd433078e02b013e716ea245d5bcf0914eea500b3e78a035e"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの結果計算を演出より先に実行するプラグイン[[/LINK_1]]用に調整した。（2025/03/15 ver1.051）",
+      "sourceHash": "0ac7ebff69142ad803fb297667edf27c4f40b5ac3e0892bdeb721a51a1a9b22f",
+      "parts": [
+        {
+          "source": "スキルの結果計算を演出より先に実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "用に調整した。（2025/03/15 ver1.051）",
+          "link": false
+        }
+      ],
+      "translation": "Adjusted it for use with a [[LINK_1]]plugin that executes skill result calculations before the animation[[/LINK_1]]. (2025/03/15 ver1.051)",
+      "contextHash": "0ac7ebff69142ad803fb297667edf27c4f40b5ac3e0892bdeb721a51a1a9b22f"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "与えるダメージ倍率によって[[LINK_1]]スクリプトを実行[[/LINK_1]]できるようにした。",
+      "sourceHash": "3c6c61dc7ef33c9b2cd4d95c6fde0b16510cacb7fc26ffb45cddb12897b0d73c",
+      "parts": [
+        {
+          "source": "与えるダメージ倍率によって",
+          "link": false
+        },
+        {
+          "source": "スクリプトを実行",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Made it possible to [[LINK_1]]execute a script[[/LINK_1]] based on the damage multiplier dealt.",
+      "contextHash": "3c6c61dc7ef33c9b2cd4d95c6fde0b16510cacb7fc26ffb45cddb12897b0d73c"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]無敵状態を判定する関数[[/LINK_1]]を追加した。（2024/06/17 ver1.041）",
+      "sourceHash": "22dfceb7372a007b3c332204a6a65213267f57182c40bccff130dbf29b242da5",
+      "parts": [
+        {
+          "source": "無敵状態を判定する関数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加した。（2024/06/17 ver1.041）",
+          "link": false
+        }
+      ],
+      "translation": "Added a [[LINK_1]]function for determining invincibility[[/LINK_1]]. (2024/06/17 ver1.041)",
+      "contextHash": "22dfceb7372a007b3c332204a6a65213267f57182c40bccff130dbf29b242da5"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]無敵効果を無視して命中するスキル[[/LINK_1]]を作成できるようにした。",
+      "sourceHash": "5d251adbb611f4ad766899a503d42dc385b233ebd70ed8850634f01beb87d648",
+      "parts": [
+        {
+          "source": "無敵効果を無視して命中するスキル",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を作成できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Made it possible to create [[LINK_1]]skills that hit while ignoring invincibility effects[[/LINK_1]].",
+      "contextHash": "5d251adbb611f4ad766899a503d42dc385b233ebd70ed8850634f01beb87d648"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "なお、こちらの機能に対しては[[LINK_1]]スキルの性能を変化させるプラグイン[[/LINK_1]]のほうがより詳細に設定できます。",
+      "sourceHash": "b82f65dc56341090705245bcf772bd4d055de06035cede1560bc05c135e1f842",
+      "parts": [
+        {
+          "source": "なお、こちらの機能に対しては",
+          "link": false
+        },
+        {
+          "source": "スキルの性能を変化させるプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のほうがより詳細に設定できます。",
+          "link": false
+        }
+      ],
+      "translation": "For this function, the [[LINK_1]]plugin that changes skill performance[[/LINK_1]] allows more detailed configuration.",
+      "contextHash": "b82f65dc56341090705245bcf772bd4d055de06035cede1560bc05c135e1f842"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "指定したスクリプト条件を元に、[[LINK_1]]NRP_DamageEffect.js[[/LINK_1]]における弱点として判定するようになります。",
+      "sourceHash": "a2591f160795f3bee23a5b755d0ff9181314d80cb0df909dcfb0376154fbd1d2",
+      "parts": [
+        {
+          "source": "指定したスクリプト条件を元に、",
+          "link": false
+        },
+        {
+          "source": "NRP_DamageEffect.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "における弱点として判定するようになります。",
+          "link": false
+        }
+      ],
+      "translation": "Based on the specified script condition, it will be treated as a weakness in [[LINK_1]]NRP_DamageEffect.js[[/LINK_1]].",
+      "contextHash": "a2591f160795f3bee23a5b755d0ff9181314d80cb0df909dcfb0376154fbd1d2"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "特殊な特徴を実現します。": "Implements special traits.",
+    "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）に対して、特殊な特徴を設定できます。": "You can set special traits for each object (actor, enemy, class, equipment, state, or skill).",
+    "スキルについては覚えているだけで、発揮するパッシブスキルとなります。": "Skills become passive skills that take effect simply by being learned.",
+    "例えば、以下のような特徴を設定できます。": "For example, you can set traits such as the following.",
+    "与えるダメージ、受けるダメージ倍率を変更する。": "Change the damage dealt or damage received multiplier.",
+    "ステートの継続ターンを変更する。": "Change the number of turns a state lasts.",
+    "無敵になってあらゆる効果を受けなくする。": "Become invincible and receive no effects.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the plugin on in the plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_TraitsEX.js": "NRP_TraitsEX.js",
+    "更新履歴（History）": "Update History (History)",
+    "例えば、条件を満たした時のみフラッシュさせるようなことができます。": "For example, you can make the screen flash only when certain conditions are met.",
+    "自動戦闘のアクターが最適な行動を選択できなくなる不具合修正。": "Fixed a bug that prevented auto-battle actors from selecting the optimal action.",
+    "※特にＭＶでは行動自体ができなくなっていた。": "※In MV especially, they were unable to act at all.",
+    "ダメージ倍率関連の条件を細かく指定できるように機能追加。": "Added functionality to specify damage multiplier conditions in greater detail.",
+    "無敵効果がＭＶでエラーになる不具合修正。（2023/10/19 ver1.012）": "Fixed a bug that caused the invincibility effect to produce an error in MV. (2023/10/19 ver1.012)",
+    "公開！": "Released!",
+    "ダメージ倍率の変更（Damage Rate）": "Changing the Damage Multiplier (Damage Rate)",
+    "オブジェクトのメモ欄に以下を指定してください。": "Specify the following in the object's note field.",
+    "与えるダメージを１．５倍にします。": "Multiplies damage dealt by 1.5.",
+    "1.0が100%に相当します。": "1.0 corresponds to 100%.",
+    "また、数式も有効です。": "You can also use formulas.",
+    "例：ＨＰが減るほど与ダメージ増加（最大２００％）": "Example: Increase damage dealt as HP decreases (maximum 200%)",
+    "受けるダメージを１．５倍にします。": "Multiplies damage received by 1.5.",
+    "以降はダメージ倍率の変更を行うスキルを判定するための条件です。": "The following are conditions for determining which skills change the damage multiplier.",
+    "組み合わせて使用してください。": "Use them in combination.",
+    "ダメージタイプ1,5のスキルのダメージ倍率を変更します。": "Changes the damage multiplier for skills with damage types 1 and 5.",
+    "1:HPダメージ, 2:MPダメージ, 3:HP回復, 4:MP回復, 5:HP吸収, 6:MP回復です。": "1: HP Damage, 2: MP Damage, 3: HP Recovery, 4: MP Recovery, 5: HP Drain, 6: MP Recovery.",
+    "※省略時はプラグインパラメータの設定を使用します。空欄にした場合は全て有効となります。": "※When omitted, the plugin parameter settings are used. When left blank, all types are enabled.",
+    "命中タイプ1のスキルのダメージ倍率を変更します。": "Changes the damage multiplier for skills with hit type 1.",
+    "0:必中, 1:物理攻撃, 2:魔法攻撃です。": "0: Certain Hit, 1: Physical Attack, 2: Magical Attack.",
+    "スキルタイプ0,2のスキルのダメージ倍率を変更します。": "Changes the damage multiplier for skills with skill types 0 and 2.",
+    "通常だと0は通常攻撃、2:必殺技です。": "Normally, 0 is the Normal Attack and 2 is the Special Skill.",
+    "対応については、データベースのタイプ＞スキルタイプをご覧ください。": "For the applicable types, see Database > Types > Skill Types.",
+    "与えるダメージ倍率によってスクリプトを実行します。": "Executes a script based on the damage multiplier dealt.",
+    "<InflictedDamageRate>とセットで使用してください。": "Use this together with <InflictedDamageRate>.",
+    "例：ダメージ倍率が１．５以上の場合にフラッシュを実行します。": "Example: Executes a flash when the damage multiplier is 1.5 or higher.",
+    "ちなみに『$gameScreen.startFlash([赤,緑,青,強さ], 時間)』です。": "By the way, it is 『$gameScreen.startFlash([red,green,blue,intensity], duration)』.",
+    "例：ダメージ倍率が１．５以上の場合に弱点として扱います。": "Example: Treats the attack as hitting a weakness when the damage multiplier is 1.5 or higher.",
+    "ダメージ倍率の変更無効（No Change Damage Rate）": "Disabling Damage Multiplier Changes (No Change Damage Rate)",
+    "スキル（またはアイテム）のメモ欄に以下を指定してください。": "Specify the following in the note field of the skill (or item).",
+    "スキル使用時のダメージ倍率の変更を無効化します。": "Disables changes to the damage multiplier when using the skill.",
+    "固定ダメージ技など他の特徴による影響を受けさせたくない場合に設定してください。": "Set this when you do not want the skill to be affected by other traits, such as fixed-damage skills.",
+    "ステート継続ターンの変更（State Turn）": "Changing State Duration (State Turn)",
+    "与えたステートの継続ターンを1延長します。": "Extends the duration of the applied state by 1 turn.",
+    "受けたステートの継続ターンを1減らします。": "Reduces the duration of the received state by 1 turn.",
+    "ステートターンタイプを\"test\"に設定します。": "Sets the state turn type to \"test\".",
+    "上述の継続ターンを影響させるステートを限定させたい場合に組み合わせて使用します。": "Use this in combination when you want to limit the states affected by the duration effects described above.",
+    "さらにターンを延長したいステートのメモ欄に以下を指定してください。": "Specify the following in the note field of the state whose duration you want to extend further.",
+    "※カンマ区切りで複数指定も可能です。": "※Multiple entries can be specified, separated by commas.",
+    "（例：<StateTurnType:test1,test2>）": "(Example: <StateTurnType:test1,test2>)",
+    "例：与えた毒ステートを延長する特徴を持った職業": "Example: A class with a trait that extends the duration of applied Poison states",
+    "職業のメモ欄に以下２つを指定": "Specify the following two entries in the class's note field",
+    "毒ステートのメモ欄に以下を指定": "Specify the following in the Poison state's note field",
+    "スキル毎の設定": "Settings for Each Skill",
+    "以下はスキルのメモ欄のみ有効です。": "The following is only valid in skill note fields.",
+    "そのスキルで与えたステートの継続ターンを1延長します。": "Extends the duration of states applied by that skill by 1 turn.",
+    "無敵（Invincible）": "Invincible (Invincible)",
+    "無敵になってあらゆるスキルを受けつけなくなります。": "The battler becomes invincible and no longer accepts any skills.",
+    "数値が0なら結果非表示, 1ならミス、2なら回避として扱います。": "If the value is 0, the result is hidden; if it is 1, it is treated as a miss; and if it is 2, it is treated as an evasion.",
+    "また、スキルのメモ欄に以下を指定すると、無敵状態を無視して命中するスキルを作成できます。": "Additionally, specifying the following in a skill's note field allows you to create a skill that hits while ignoring the invincible state.",
+    "なお、バトラーが無敵状態かどうかは以下の関数で判定できます。": "You can determine whether a battler is invincible using the following function.",
+    "※aはバトラー": "※a is a battler",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "＜ダメージ倍率関連＞（DamageRate）": "<Damage Rate Related> (DamageRate)",
+    "ダメージ倍率変更の対象とするスキルの条件を指定します。": "Specifies the conditions for skills subject to damage rate changes.",
+    "対象のダメージタイプ（DR_DamageType）": "Target Damage Type (DR_DamageType)",
+    "ダメージ倍率を変更するダメージタイプ。": "The damage types whose damage rates will be changed.",
+    "複数可。": "Multiple entries allowed.",
+    "0:なし, 1:HPﾀﾞﾒｰｼﾞ, 2:MPﾀﾞﾒｰｼﾞ, 3:HP回復, 4:MP回復, 5:HP吸収, 6:MP吸収": "0: None, 1: HP Damage, 2: MP Damage, 3: HP Recovery, 4: MP Recovery, 5: HP Drain, 6: MP Drain",
+    "対象の命中タイプ（DR_HitType）": "Target Hit Type (DR_HitType)",
+    "ダメージ倍率を変更するスキルの命中タイプ。": "The hit types of skills whose damage rates will be changed.",
+    "0:必中, 1:物理攻撃, 2:魔法攻撃": "0: Certain Hit, 1: Physical Attack, 2: Magical Attack",
+    "対象のスキルタイプ（DR_SkillType）": "Target Skill Type (DR_SkillType)",
+    "ダメージ倍率を変更するスキルタイプ。": "The skill types whose damage rates will be changed.",
+    "標準だと0:通常攻撃. 1:魔法, 2:必殺技となります。": "By default, 0 is Normal Attack, 1 is Magic, and 2 is Special."
+  }
+}

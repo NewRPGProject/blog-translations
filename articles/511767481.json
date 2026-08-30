@@ -1,0 +1,733 @@
+{
+  "articleId": "511767481",
+  "sourceUrl": "https://newrpg.seesaa.net/article/511767481.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "6065bdcc8266fb53e153df35d5fa5a8f6f50f89918a34b6433e27f0b782419ee",
+  "translatedAt": "2026-08-30T10:07:53.463Z",
+  "title": "Execute Skill Result Calculations Before Effects [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "スキルの結果計算を演出より先に実行【RPGツクールMZプラグイン】",
+      "sourceHash": "0543a52bc8749e6d2e98c443e7591cb29f275271daaa984c96e13f174114c4ca",
+      "translation": "Execute Skill Result Calculations Before Effects [RPG Maker MZ Plugin]",
+      "contextHash": "0543a52bc8749e6d2e98c443e7591cb29f275271daaa984c96e13f174114c4ca"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "スキルの結果計算を演出より先に実行します。",
+      "sourceHash": "a77544d4613d1dbe87a000566d089525b68b5cad2e3e69dae0e7a690b262a193",
+      "translation": "Skill result calculations are executed before effects.",
+      "contextHash": "a77544d4613d1dbe87a000566d089525b68b5cad2e3e69dae0e7a690b262a193"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールの従来の仕様では、アニメーションの表示→ダメージ計算という順序で処理をしていました。",
+      "sourceHash": "ab68a6ff1ee5a8d43038106e9bf144bfee4882a0b08563875de2df2acc6e4a29",
+      "translation": "In the traditional RPG Maker specification, processing was performed in the order of displaying the animation, followed by calculating damage.",
+      "contextHash": "ab68a6ff1ee5a8d43038106e9bf144bfee4882a0b08563875de2df2acc6e4a29"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "そのため、ダメージ計算（命中）の内容を演出に反映するような凝った処理は不可能でした。当プラグインはこの仕様を変更して、複雑なスキルの演出を実現可能とします。",
+      "sourceHash": "28c7a87d95e7f2ef9f322750b3d9ee6db0adee36c67b4fa08dec267458645a43",
+      "translation": "Therefore, it was impossible to create elaborate effects that reflected the results of damage calculations (hit determination). This plugin changes that specification, making complex skill effects possible.",
+      "contextHash": "28c7a87d95e7f2ef9f322750b3d9ee6db0adee36c67b4fa08dec267458645a43"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※処理の流れを変えてしまうという性質上、当プラグインは競合もしやすいのでご注意ください。",
+      "sourceHash": "6b760c93b7a104dc664fae676b378a72116a8cd76e5c9bd11c455fa630eb0dc1",
+      "translation": "※Please note that this plugin is prone to compatibility issues because it changes the processing flow.",
+      "contextHash": "6b760c93b7a104dc664fae676b378a72116a8cd76e5c9bd11c455fa630eb0dc1"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "特に反撃、身代わりなどの動作を挿入するプラグインと相性が悪いです。NRP系プラグインについては動作確認済みですが、外部のプラグインについては保証できません。開発終盤などで十分なテスト時間を取れないなら採用を見送ったほうが無難だと思われます。",
+      "sourceHash": "914c4563f4172256d3f917b3835073663bcbecec9c6f6242a31df15e1e9ed14a",
+      "translation": "It is particularly incompatible with plugins that insert actions such as counterattacks and substitutions. Compatibility with NRP plugins has been confirmed, but compatibility with external plugins cannot be guaranteed. If you cannot allow sufficient time for testing, such as near the end of development, it would be safest not to use this plugin.",
+      "contextHash": "914c4563f4172256d3f917b3835073663bcbecec9c6f6242a31df15e1e9ed14a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "具体的には以下のような処理が可能になります。",
+      "sourceHash": "0c61f5a5855858906384461006e4cc09214f2baee3c38db5271196e541d70ca7",
+      "translation": "Specifically, the following processes become possible.",
+      "contextHash": "0c61f5a5855858906384461006e4cc09214f2baee3c38db5271196e541d70ca7"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "DynamicAnimation&Motionの成功分岐",
+      "sourceHash": "fb62cc2518c1e37d37fcac312482f30467f6e31c85921e5b59ffe202a64f6961",
+      "translation": "DynamicAnimation&Motion Success Branching",
+      "contextHash": "fb62cc2518c1e37d37fcac312482f30467f6e31c85921e5b59ffe202a64f6961"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "DynamicAnimation&Motionにて、スキルが成功した時と失敗した時によって演出を分岐させます。",
+      "sourceHash": "fccbf54b4b6afae9edbc322420a221c5e2ae175cbb41abf224ee1770cf3c16d0",
+      "translation": "With DynamicAnimation&Motion, you can branch the effect depending on whether the skill succeeds or fails.",
+      "contextHash": "fccbf54b4b6afae9edbc322420a221c5e2ae175cbb41abf224ee1770cf3c16d0"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "上記は攻撃が外れた場合にコケるようにした演出です。",
+      "sourceHash": "912efd46b5a6c75a8e589a43c1f6ed66eaaaf54b97aa5572054a61cd31e768e9",
+      "translation": "The effect above makes the character fall over when the attack misses.",
+      "contextHash": "912efd46b5a6c75a8e589a43c1f6ed66eaaaf54b97aa5572054a61cd31e768e9"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "対象がランダムな複数回攻撃の無駄打ちを停止",
+      "sourceHash": "9721e5c488e75ace56983d5975c16b9f38009366b3122dce75c44c28ef5bf0c4",
+      "translation": "Stop Wasteful Attacks When Multiple Attacks Have Random Targets",
+      "contextHash": "9721e5c488e75ace56983d5975c16b9f38009366b3122dce75c44c28ef5bf0c4"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "範囲がランダムのスキルで対象を撃破できた場合は、対象を生存者へと修正します。これにより、敵を全滅させるまではランダム攻撃の無駄打ちをしないようになります。",
+      "sourceHash": "06251479840a768989f9195952dbd4e29938ffd77577695c697b3374010fdf2f",
+      "translation": "If a skill with a random range defeats its target, the target is changed to a surviving battler. This prevents wasteful random attacks until all enemies have been defeated.",
+      "contextHash": "06251479840a768989f9195952dbd4e29938ffd77577695c697b3374010fdf2f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "以下２つのファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "fa8a8cf5448b0b18c110e24902d75eb54adaff8ffd96587dfc08418712ed35a5",
+      "translation": "Download the following two files and place them in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "fa8a8cf5448b0b18c110e24902d75eb54adaff8ffd96587dfc08418712ed35a5"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_CalcResultFirst.js",
+      "sourceHash": "2c87e9ab29e2fa3d837d41deb95638d883ac2e45e9406010c8becaec327e3564",
+      "translation": "NRP_CalcResultFirst.js",
+      "contextHash": "d263bbdddac2af9b2e55479fe6400989eb29544d59e47cefcd41f1d15bbb9675"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_CalcResultFirstAfter.js",
+      "sourceHash": "19d8477813903bef39a497f22148b4a22141d8be3a7b492927ad90963369cf46",
+      "translation": "NRP_CalcResultFirstAfter.js",
+      "contextHash": "b806dbb581f1cc47a6d7c80e6375ee0697fc41cc74ac2b88be264e62b7c03ddf"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※NRP_CalcResultFirst.jsはプラグイン一覧の上側に配置してください。",
+      "sourceHash": "487411712345570f76fc1ac2d8e11a20d0c598d227d51d4372aa07f8298d4eaa",
+      "translation": "※Place NRP_CalcResultFirst.js near the top of the plugin list.",
+      "contextHash": "487411712345570f76fc1ac2d8e11a20d0c598d227d51d4372aa07f8298d4eaa"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "※NRP_CalcResultFirstAfter.jsはプラグイン一覧の下側に配置してください。",
+      "sourceHash": "efe456701a3f9bf364ae891f2841dd9f1f3a77200f174dca0309533a0c37d722",
+      "translation": "※Place NRP_CalcResultFirstAfter.js near the bottom of the plugin list.",
+      "contextHash": "efe456701a3f9bf364ae891f2841dd9f1f3a77200f174dca0309533a0c37d722"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "以下のプラグインを併用する場合は最新化をお願いします。バージョンが古いと正常に動作しない箇所があります。",
+      "sourceHash": "8dc341a7341bfbeb024e001399b272f672b9d2460f59ff6cdc875d7a32db8b37",
+      "translation": "Please update the following plugins if you use them together. Some features may not work correctly with older versions.",
+      "contextHash": "8dc341a7341bfbeb024e001399b272f672b9d2460f59ff6cdc875d7a32db8b37"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMZ.js",
+      "sourceHash": "fa0e68b187fc9e909dcdfd5b9e1eb27abf2d72d3865a7bd24988dc71d6430eca",
+      "translation": "NRP_DynamicAnimationMZ.js",
+      "contextHash": "a53caea5f3fbe14206901c1eb18db12c2865d4da8a9614ea1be01d651713e5d8"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "NRP_DynamicMotionMZ.js",
+      "sourceHash": "878e7fdf99848828874c485887618ca3318d57cecf5fabb10299d2c76a168c6e",
+      "translation": "NRP_DynamicMotionMZ.js",
+      "contextHash": "5f97c7944c753e90924bc7f1104876c5ad7679c87c7405f946c04074407ceba0"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "NRP_SkillEX.js",
+      "sourceHash": "71f1522823223c4a37970ca0471300f27937ca24ec85758366b97da813fac57b",
+      "translation": "NRP_SkillEX.js",
+      "contextHash": "5a035530ecdc829ea6028f2cea7f3935383c7222327619e5760d2fbf4384a0d5"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "NRP_TraitsEX.js",
+      "sourceHash": "e3845b85fafd5e108c04aa7efa8102c78b56fe45a596e014a0ef6f7984c79b7c",
+      "translation": "NRP_TraitsEX.js",
+      "contextHash": "c78ef4f71470eadd4b37cf828b788ac6e1e9c249b6a89d91bd93f380211391a3"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "NRP_TraitsPlus.js",
+      "sourceHash": "067fd3089ec5b4d78e2ec09bca21344315fe77bb3e65dd767a24133447f0e1f9",
+      "translation": "NRP_TraitsPlus.js",
+      "contextHash": "90a8490c3bd6a718625e6c72795ddfe63326ba372eb1ef9ca55475e488c5f7d2"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "プラグインの組み合わせによってＨＰ再生（毒）が表示されないことがある競合へ対処した。",
+      "sourceHash": "c5f1634e99a59e764dda76a8af7731fbc69a036c0249fe2714b577bc6a185608",
+      "translation": "Addressed a compatibility issue where HP regeneration (poison) might not be displayed depending on the combination of plugins.",
+      "contextHash": "c5f1634e99a59e764dda76a8af7731fbc69a036c0249fe2714b577bc6a185608"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "NRP_ChargeSkill.jsによる溜め攻撃の事前計算ができていない競合に対処。",
+      "sourceHash": "e6b723fdf3e21d3bdad147a5bc0dc983c80db308fa88c86d8a712819a352b794",
+      "translation": "Addressed a compatibility issue where preliminary calculations for charge attacks by NRP_ChargeSkill.js were not being performed.",
+      "contextHash": "e6b723fdf3e21d3bdad147a5bc0dc983c80db308fa88c86d8a712819a352b794"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "処理を大幅に見直し、プラグインを二つに分割した。これにより、身代わりなどの対象を操作するプラグインとの競合を大幅に抑えられます。",
+      "sourceHash": "07fbb3397465e9c9bfdf4cfbfcc807abc28636bda9307bc32a0c6fc5205a3f83",
+      "translation": "Significantly revised the processing and split the plugin into two. This greatly reduces compatibility issues with plugins that manipulate targets, such as substitutions.",
+      "contextHash": "07fbb3397465e9c9bfdf4cfbfcc807abc28636bda9307bc32a0c6fc5205a3f83"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "※また、それに伴いNRP_SkillEX.jsを更新しています。",
+      "sourceHash": "8ea374e94fe0617e5db1a6bceaea503194d0dee8a4728e7f7ab86438c187a980",
+      "translation": "※NRP_SkillEX.js was also updated accordingly.",
+      "contextHash": "8ea374e94fe0617e5db1a6bceaea503194d0dee8a4728e7f7ab86438c187a980"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "他プラグイン（NRP_CountTimeBattle.jsなど）によるステート系処理が重複してしまう競合対策のために調整した。",
+      "sourceHash": "725f4576be1ca0894f9e77c1037ff1eee57a893c3a76ac609332412d651ec135",
+      "translation": "Adjusted the plugin to prevent compatibility issues caused by state-related processing being duplicated by other plugins (such as NRP_CountTimeBattle.js).",
+      "contextHash": "725f4576be1ca0894f9e77c1037ff1eee57a893c3a76ac609332412d651ec135"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "NRP_Substitute.jsなど他プラグインとの併用でエラーになる問題に対応するため、処理を大幅に見直した。",
+      "sourceHash": "fd277471cec83ff178d1c9397e7688a05364b1e852bbb47f9bec1ac8f46e804e",
+      "translation": "Significantly revised the processing to address errors that occurred when used with other plugins, such as NRP_Substitute.js.",
+      "contextHash": "fd277471cec83ff178d1c9397e7688a05364b1e852bbb47f9bec1ac8f46e804e"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "撃破処理用の関数（b.isDeadReserved()）を実装した。",
+      "sourceHash": "7e0536b1c281fdac3459ea97f8f29a991dac7f02e1fb7c9a9191e89932882cef",
+      "translation": "Implemented the defeat-processing function (b.isDeadReserved()).",
+      "contextHash": "7e0536b1c281fdac3459ea97f8f29a991dac7f02e1fb7c9a9191e89932882cef"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "不要な変数（removedDebuffs）を参照していたため削除した。",
+      "sourceHash": "4a4224c2b7cf8dd1790b1e18618702737613411e20a22c6ea213d9fd765613b3",
+      "translation": "Removed the unnecessary variable (removedDebuffs), which was being referenced.",
+      "contextHash": "4a4224c2b7cf8dd1790b1e18618702737613411e20a22c6ea213d9fd765613b3"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（DynamicAnimation & Motion）",
+      "sourceHash": "6438c7067898f74277c695b09961d61e5a5fc9f9c38fb79df5faa30a246cd8d9",
+      "translation": "Usage (DynamicAnimation & Motion)",
+      "contextHash": "6438c7067898f74277c695b09961d61e5a5fc9f9c38fb79df5faa30a246cd8d9"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "成功判定（Judgment of Success）",
+      "sourceHash": "3cb45f2c3389d07458d3885698d0cb38b3335c42e37d86a1e6398f641da30a3e",
+      "translation": "Success Determination (Judgment of Success)",
+      "contextHash": "3cb45f2c3389d07458d3885698d0cb38b3335c42e37d86a1e6398f641da30a3e"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "NRP_DynamicAnimationMZ.jsおよびNRP_DynamicMotionMZ.jsから、以下のスクリプトを呼び出すことで成功判定を使用できます。",
+      "sourceHash": "4584b4d28e819df8575ef40f09d2336c55756e660cd20807bae943b0e1faeb61",
+      "translation": "You can use success determination by calling the following script from NRP_DynamicAnimationMZ.js and NRP_DynamicMotionMZ.js.",
+      "contextHash": "4584b4d28e819df8575ef40f09d2336c55756e660cd20807bae943b0e1faeb61"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "例：成功時のみアニメーションを実行",
+      "sourceHash": "6cc4eef3baed945efd4f0cc5a66007452dfb6f0a45d133595236fb87012bcbfd",
+      "translation": "Example: Execute the Animation Only on Success",
+      "contextHash": "6cc4eef3baed945efd4f0cc5a66007452dfb6f0a45d133595236fb87012bcbfd"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※１ヒットの単体スキルならtargetNoは省略可",
+      "sourceHash": "38b3ce87fc888a0b5be3b9dabceffea1022bb78dceaf02e6cf0d087c092a011b",
+      "translation": "※targetNo may be omitted for a single-target skill with one hit.",
+      "contextHash": "38b3ce87fc888a0b5be3b9dabceffea1022bb78dceaf02e6cf0d087c092a011b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ちなみに『targetNo』は現在のアニメーションが何番目の攻撃かを指しています。",
+      "sourceHash": "d9c3fe36df0870bfc0dd9664b19ca70fdf873b61cfdea26b7b7fd1547ee78ad9",
+      "translation": "Incidentally, “targetNo” indicates which attack number the current animation represents.",
+      "contextHash": "d9c3fe36df0870bfc0dd9664b19ca70fdf873b61cfdea26b7b7fd1547ee78ad9"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "数字を指定しても構いませんが、そのまま『targetNo』の文字列を指定しておけば、大抵は問題ないはずです。",
+      "sourceHash": "704f5d7dec08777da7e404077f5bf4f00c8ee2aabb93e3b26419d990899fcf9e",
+      "translation": "You may specify a number, but in most cases simply specifying the string “targetNo” as-is should work without issue.",
+      "contextHash": "704f5d7dec08777da7e404077f5bf4f00c8ee2aabb93e3b26419d990899fcf9e"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "計算結果の取得（Obtaining Calculation Results）",
+      "sourceHash": "dcc685aa5492aa2591e262ea93173fc8a755345e0893748903ed4dd9589aabe5",
+      "translation": "Obtaining Calculation Results (Obtaining Calculation Results)",
+      "contextHash": "dcc685aa5492aa2591e262ea93173fc8a755345e0893748903ed4dd9589aabe5"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "以下のスクリプトでダメージ計算の結果を取得できます。",
+      "sourceHash": "47c34c111e0a3844293687e9e162270b0c43ccd5105831629788b2565bb80bd3",
+      "translation": "You can obtain the damage calculation results with the following script.",
+      "contextHash": "47c34c111e0a3844293687e9e162270b0c43ccd5105831629788b2565bb80bd3"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "中身はGame_ActionResult型のオブジェクトです。",
+      "sourceHash": "be20c604dbeac4e493a1616c7d2e0d8e0f6ac52499d663265895976a763197d3",
+      "translation": "The contents are an object of type Game_ActionResult.",
+      "contextHash": "be20c604dbeac4e493a1616c7d2e0d8e0f6ac52499d663265895976a763197d3"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "例：ダメージ > 0 の場合のみアニメーションを実行",
+      "sourceHash": "abbd2bb745a777f06b17b56092ded64e450ed7d8cd10c0b3fcf4fd47e3d834c5",
+      "translation": "Example: Execute the Animation Only When Damage > 0",
+      "contextHash": "abbd2bb745a777f06b17b56092ded64e450ed7d8cd10c0b3fcf4fd47e3d834c5"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "撃破判定（Judgment of Dead）",
+      "sourceHash": "35bad6de0026a6b9efc53f1e993096a367b70865b333df25d9a594e1e748f337",
+      "translation": "Defeat Determination (Judgment of Dead)",
+      "contextHash": "35bad6de0026a6b9efc53f1e993096a367b70865b333df25d9a594e1e748f337"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "以下のスクリプトで対象が戦闘不能になったかどうかを判定できます。",
+      "sourceHash": "ff10b2dc967bbebaa4f572d7317580a4735753cc53c3e846b1adc0a32838991e",
+      "translation": "You can determine whether the target has become incapable of fighting with the following script.",
+      "contextHash": "ff10b2dc967bbebaa4f572d7317580a4735753cc53c3e846b1adc0a32838991e"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "例：撃破時のみアニメーションを実行",
+      "sourceHash": "86279a596713c7c731cc4d819b240bef89f0697f9b46661b3978d3a63b3fbdfc",
+      "translation": "Example: Execute the Animation Only When the Target Is Defeated",
+      "contextHash": "86279a596713c7c731cc4d819b240bef89f0697f9b46661b3978d3a63b3fbdfc"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "スキル演出のサンプル（Dynamic Sample）",
+      "sourceHash": "4d5f6b2806cf9be91f0d3132914267f441c52e0e0bdd34ec9e4ab25e60a99b93",
+      "translation": "Skill Effect Sample (Dynamic Sample)",
+      "contextHash": "4d5f6b2806cf9be91f0d3132914267f441c52e0e0bdd34ec9e4ab25e60a99b93"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "DynamicAnimation&Motionを使用したサンプルについては、以下の記事をご覧ください。",
+      "sourceHash": "67fcbdcd576a560e12d60da24c681f361ae4b568ee3addd101b24410746620ac",
+      "translation": "For a sample using DynamicAnimation&Motion, see the following article.",
+      "contextHash": "67fcbdcd576a560e12d60da24c681f361ae4b568ee3addd101b24410746620ac"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/511771250.html",
+      "sourceHash": "cc9e0f24b7d390dad786dd9291a0b5bbc73a593801f0c3158a8afb2e306960d6",
+      "translation": "https://newrpg.seesaa.net/article/511771250.html",
+      "contextHash": "a4b85d6bf360bd061b991829b17d7594fc7927f5cf28b5203000587242510b03"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ランダム対象を修正（CorrectRandomTarget）",
+      "sourceHash": "abd12454ef98ddf3ee0ac712a000b8c3e8c3bf3859a536ead3129a0f1449e512",
+      "translation": "Correct Random Target (CorrectRandomTarget)",
+      "contextHash": "abd12454ef98ddf3ee0ac712a000b8c3e8c3bf3859a536ead3129a0f1449e512"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "範囲がランダムのスキルで対象を撃破できた場合は、対象を生存者へと修正します。",
+      "sourceHash": "aab777d2eac73789fe74b63b0565c15bc4fe26f1a2acf13f785bf2c931e0a723",
+      "translation": "If a skill with a random range defeats its target, the target is changed to a surviving battler.",
+      "contextHash": "aab777d2eac73789fe74b63b0565c15bc4fe26f1a2acf13f785bf2c931e0a723"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "ステート無効は失敗（StateResistToFailure）",
+      "sourceHash": "205864c1df30bbf86b856537f726ddd3fdadd5dc60e6ad48db3df2d0522168a0",
+      "translation": "State Resistance Counts as Failure (StateResistToFailure)",
+      "contextHash": "205864c1df30bbf86b856537f726ddd3fdadd5dc60e6ad48db3df2d0522168a0"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ステートが無効な場合は失敗として扱い、成功判定しません。",
+      "sourceHash": "43e7a1c8d11a10bf69e838af51f984f2cae555305c7d35783209bc94ccbaaff9",
+      "translation": "If a state is invalid, it is treated as a failure and is not determined to be successful.",
+      "contextHash": "43e7a1c8d11a10bf69e838af51f984f2cae555305c7d35783209bc94ccbaaff9"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "ツクールの仕様では、命中したステートが無効化された場合でも成功と判定されてしまいます。この仕様は不自然なので、失敗として扱われるように修正します。",
+      "sourceHash": "71dca93db3f28d55d8485340545f8d514f4eee371d7db57c9f448a5b1dea9e12",
+      "translation": "By default, even when the state that was hit is nullified, it is still judged as a success. Since this behavior is unnatural, this plugin changes it to be treated as a failure.",
+      "contextHash": "71dca93db3f28d55d8485340545f8d514f4eee371d7db57c9f448a5b1dea9e12"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "必要な場合は[[LINK_1]]該当のパラメータ[[/LINK_1]]をオンにしてください。",
+      "sourceHash": "16c73e79eddf14d678ed369ee6f092cd84821c30718cdece23eb1c47d3753d4b",
+      "parts": [
+        {
+          "source": "必要な場合は",
+          "link": false
+        },
+        {
+          "source": "該当のパラメータ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をオンにしてください。",
+          "link": false
+        }
+      ],
+      "translation": "Please turn on the [[LINK_1]]relevant parameter[[/LINK_1]] if necessary.",
+      "contextHash": "16c73e79eddf14d678ed369ee6f092cd84821c30718cdece23eb1c47d3753d4b"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（DynamicAnimation & Motion）[[/LINK_1]]",
+      "sourceHash": "dce25def0e5a7907c40a5e6350bf9d7deff342dd4732a0cf9244ed5397002804",
+      "parts": [
+        {
+          "source": "使用方法（DynamicAnimation & Motion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (DynamicAnimation & Motion)[[/LINK_1]]",
+      "contextHash": "dce25def0e5a7907c40a5e6350bf9d7deff342dd4732a0cf9244ed5397002804"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]成功判定（Judgment of Success）[[/LINK_1]]",
+      "sourceHash": "ae115ca197c270a43e60f42d53856c1d6657a2f0669a0054bb56c8a7e6e86f88",
+      "parts": [
+        {
+          "source": "成功判定（Judgment of Success）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Success Judgment (Judgment of Success)[[/LINK_1]]",
+      "contextHash": "ae115ca197c270a43e60f42d53856c1d6657a2f0669a0054bb56c8a7e6e86f88"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]計算結果の取得（Obtaining Calculation Results）[[/LINK_1]]",
+      "sourceHash": "8b5ae99ada10946733b55a6e1f83432d0798762082a182bfa4a11b2d4f59a259",
+      "parts": [
+        {
+          "source": "計算結果の取得（Obtaining Calculation Results）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Obtaining Calculation Results (Obtaining Calculation Results)[[/LINK_1]]",
+      "contextHash": "8b5ae99ada10946733b55a6e1f83432d0798762082a182bfa4a11b2d4f59a259"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]撃破判定（Judgment of Dead）[[/LINK_1]]",
+      "sourceHash": "4fec9d6485454ca4863cd69caae1e07d2641e897247bd0119e73eef99fdae7e9",
+      "parts": [
+        {
+          "source": "撃破判定（Judgment of Dead）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Defeat Judgment (Judgment of Dead)[[/LINK_1]]",
+      "contextHash": "4fec9d6485454ca4863cd69caae1e07d2641e897247bd0119e73eef99fdae7e9"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]スキル演出のサンプル（Dynamic Sample）[[/LINK_1]]",
+      "sourceHash": "3cde44ad1e261cc32970cd50de72e2736392838d2af80367376317c461e866c1",
+      "parts": [
+        {
+          "source": "スキル演出のサンプル（Dynamic Sample）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Effect Sample (Dynamic Sample)[[/LINK_1]]",
+      "contextHash": "3cde44ad1e261cc32970cd50de72e2736392838d2af80367376317c461e866c1"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ランダム対象を修正（CorrectRandomTarget）[[/LINK_1]]",
+      "sourceHash": "7aeca61e6bbfd76ec28b343954865702a82d01de750e9e4ad7cf7e049a91991e",
+      "parts": [
+        {
+          "source": "ランダム対象を修正（CorrectRandomTarget）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Correct Random Target (CorrectRandomTarget)[[/LINK_1]]",
+      "contextHash": "7aeca61e6bbfd76ec28b343954865702a82d01de750e9e4ad7cf7e049a91991e"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]ステート無効は失敗（StateResistToFailure）[[/LINK_1]]",
+      "sourceHash": "ef88e4a96e7f26a908fe0826dad9a2f0c03bb051f8eb335582a4d80b0d636a84",
+      "parts": [
+        {
+          "source": "ステート無効は失敗（StateResistToFailure）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Resistance Causes Failure (StateResistToFailure)[[/LINK_1]]",
+      "contextHash": "ef88e4a96e7f26a908fe0826dad9a2f0c03bb051f8eb335582a4d80b0d636a84"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "スキルの結果計算を演出より先に実行します。": "Skill result calculations are executed before effects.",
+    "ツクールの従来の仕様では、アニメーションの表示→ダメージ計算という順序で処理をしていました。": "In the traditional RPG Maker specification, processing was performed in the order of displaying the animation, followed by calculating damage.",
+    "そのため、ダメージ計算（命中）の内容を演出に反映するような凝った処理は不可能でした。当プラグインはこの仕様を変更して、複雑なスキルの演出を実現可能とします。": "Therefore, it was impossible to create elaborate effects that reflected the results of damage calculations (hit determination). This plugin changes that specification, making complex skill effects possible.",
+    "※処理の流れを変えてしまうという性質上、当プラグインは競合もしやすいのでご注意ください。": "※Please note that this plugin is prone to compatibility issues because it changes the processing flow.",
+    "特に反撃、身代わりなどの動作を挿入するプラグインと相性が悪いです。NRP系プラグインについては動作確認済みですが、外部のプラグインについては保証できません。開発終盤などで十分なテスト時間を取れないなら採用を見送ったほうが無難だと思われます。": "It is particularly incompatible with plugins that insert actions such as counterattacks and substitutions. Compatibility with NRP plugins has been confirmed, but compatibility with external plugins cannot be guaranteed. If you cannot allow sufficient time for testing, such as near the end of development, it would be safest not to use this plugin.",
+    "具体的には以下のような処理が可能になります。": "Specifically, the following processes become possible.",
+    "DynamicAnimation&Motionの成功分岐": "DynamicAnimation&Motion Success Branching",
+    "DynamicAnimation&Motionにて、スキルが成功した時と失敗した時によって演出を分岐させます。": "With DynamicAnimation&Motion, you can branch the effect depending on whether the skill succeeds or fails.",
+    "上記は攻撃が外れた場合にコケるようにした演出です。": "The effect above makes the character fall over when the attack misses.",
+    "対象がランダムな複数回攻撃の無駄打ちを停止": "Stop Wasteful Attacks When Multiple Attacks Have Random Targets",
+    "範囲がランダムのスキルで対象を撃破できた場合は、対象を生存者へと修正します。これにより、敵を全滅させるまではランダム攻撃の無駄打ちをしないようになります。": "If a skill with a random range defeats its target, the target is changed to a surviving battler. This prevents wasteful random attacks until all enemies have been defeated.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下２つのファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following two files and place them in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_CalcResultFirst.js": "NRP_CalcResultFirst.js",
+    "NRP_CalcResultFirstAfter.js": "NRP_CalcResultFirstAfter.js",
+    "※NRP_CalcResultFirst.jsはプラグイン一覧の上側に配置してください。": "※Place NRP_CalcResultFirst.js near the top of the plugin list.",
+    "※NRP_CalcResultFirstAfter.jsはプラグイン一覧の下側に配置してください。": "※Place NRP_CalcResultFirstAfter.js near the bottom of the plugin list.",
+    "以下のプラグインを併用する場合は最新化をお願いします。バージョンが古いと正常に動作しない箇所があります。": "Please update the following plugins if you use them together. Some features may not work correctly with older versions.",
+    "NRP_DynamicAnimationMZ.js": "NRP_DynamicAnimationMZ.js",
+    "NRP_DynamicMotionMZ.js": "NRP_DynamicMotionMZ.js",
+    "NRP_SkillEX.js": "NRP_SkillEX.js",
+    "NRP_TraitsEX.js": "NRP_TraitsEX.js",
+    "NRP_TraitsPlus.js": "NRP_TraitsPlus.js",
+    "更新履歴（History）": "Update History (History)",
+    "プラグインの組み合わせによってＨＰ再生（毒）が表示されないことがある競合へ対処した。": "Addressed a compatibility issue where HP regeneration (poison) might not be displayed depending on the combination of plugins.",
+    "NRP_ChargeSkill.jsによる溜め攻撃の事前計算ができていない競合に対処。": "Addressed a compatibility issue where preliminary calculations for charge attacks by NRP_ChargeSkill.js were not being performed.",
+    "処理を大幅に見直し、プラグインを二つに分割した。これにより、身代わりなどの対象を操作するプラグインとの競合を大幅に抑えられます。": "Significantly revised the processing and split the plugin into two. This greatly reduces compatibility issues with plugins that manipulate targets, such as substitutions.",
+    "※また、それに伴いNRP_SkillEX.jsを更新しています。": "※NRP_SkillEX.js was also updated accordingly.",
+    "他プラグイン（NRP_CountTimeBattle.jsなど）によるステート系処理が重複してしまう競合対策のために調整した。": "Adjusted the plugin to prevent compatibility issues caused by state-related processing being duplicated by other plugins (such as NRP_CountTimeBattle.js).",
+    "NRP_Substitute.jsなど他プラグインとの併用でエラーになる問題に対応するため、処理を大幅に見直した。": "Significantly revised the processing to address errors that occurred when used with other plugins, such as NRP_Substitute.js.",
+    "撃破処理用の関数（b.isDeadReserved()）を実装した。": "Implemented the defeat-processing function (b.isDeadReserved()).",
+    "不要な変数（removedDebuffs）を参照していたため削除した。": "Removed the unnecessary variable (removedDebuffs), which was being referenced.",
+    "公開！": "Released!",
+    "使用方法（DynamicAnimation & Motion）": "Usage (DynamicAnimation & Motion)",
+    "成功判定（Judgment of Success）": "Success Determination (Judgment of Success)",
+    "NRP_DynamicAnimationMZ.jsおよびNRP_DynamicMotionMZ.jsから、以下のスクリプトを呼び出すことで成功判定を使用できます。": "You can use success determination by calling the following script from NRP_DynamicAnimationMZ.js and NRP_DynamicMotionMZ.js.",
+    "例：成功時のみアニメーションを実行": "Example: Execute the Animation Only on Success",
+    "※１ヒットの単体スキルならtargetNoは省略可": "※targetNo may be omitted for a single-target skill with one hit.",
+    "ちなみに『targetNo』は現在のアニメーションが何番目の攻撃かを指しています。": "Incidentally, “targetNo” indicates which attack number the current animation represents.",
+    "数字を指定しても構いませんが、そのまま『targetNo』の文字列を指定しておけば、大抵は問題ないはずです。": "You may specify a number, but in most cases simply specifying the string “targetNo” as-is should work without issue.",
+    "計算結果の取得（Obtaining Calculation Results）": "Obtaining Calculation Results (Obtaining Calculation Results)",
+    "以下のスクリプトでダメージ計算の結果を取得できます。": "You can obtain the damage calculation results with the following script.",
+    "中身はGame_ActionResult型のオブジェクトです。": "The contents are an object of type Game_ActionResult.",
+    "例：ダメージ > 0 の場合のみアニメーションを実行": "Example: Execute the Animation Only When Damage > 0",
+    "撃破判定（Judgment of Dead）": "Defeat Determination (Judgment of Dead)",
+    "以下のスクリプトで対象が戦闘不能になったかどうかを判定できます。": "You can determine whether the target has become incapable of fighting with the following script.",
+    "例：撃破時のみアニメーションを実行": "Example: Execute the Animation Only When the Target Is Defeated",
+    "スキル演出のサンプル（Dynamic Sample）": "Skill Effect Sample (Dynamic Sample)",
+    "DynamicAnimation&Motionを使用したサンプルについては、以下の記事をご覧ください。": "For a sample using DynamicAnimation&Motion, see the following article.",
+    "https://newrpg.seesaa.net/article/511771250.html": "https://newrpg.seesaa.net/article/511771250.html",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "ランダム対象を修正（CorrectRandomTarget）": "Correct Random Target (CorrectRandomTarget)",
+    "範囲がランダムのスキルで対象を撃破できた場合は、対象を生存者へと修正します。": "If a skill with a random range defeats its target, the target is changed to a surviving battler.",
+    "ステート無効は失敗（StateResistToFailure）": "State Resistance Counts as Failure (StateResistToFailure)",
+    "ステートが無効な場合は失敗として扱い、成功判定しません。": "If a state is invalid, it is treated as a failure and is not determined to be successful.",
+    "ツクールの仕様では、命中したステートが無効化された場合でも成功と判定されてしまいます。この仕様は不自然なので、失敗として扱われるように修正します。": "By default, even when the state that was hit is nullified, it is still judged as a success. Since this behavior is unnatural, this plugin changes it to be treated as a failure."
+  }
+}

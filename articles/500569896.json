@@ -1,0 +1,1361 @@
+{
+  "articleId": "500569896",
+  "sourceUrl": "https://newrpg.seesaa.net/article/500569896.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "608946b186ac6dd60e40921725f7d062cb28155802e469ca677ac57d138765fd",
+  "translatedAt": "2026-08-30T10:07:34.778Z",
+  "title": "Extending Skill Effects [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "スキルの効果を拡張する【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "964ad1e5ce7d04167132f93505f646e7f932728f832ad1cc4b03700c8b2e0d1e",
+      "translation": "Extending Skill Effects [RPG Maker MZ & MV Plugin]",
+      "contextHash": "964ad1e5ce7d04167132f93505f646e7f932728f832ad1cc4b03700c8b2e0d1e"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "スキルの効果を拡張します。",
+      "sourceHash": "858b0edd9655c00735194eef88db898b564d051fae0dc93d8347c947176e344b",
+      "translation": "Extends the effects of skills.",
+      "contextHash": "858b0edd9655c00735194eef88db898b564d051fae0dc93d8347c947176e344b"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "例えば、以下のようなスキルが作成できます。",
+      "sourceHash": "2e23977febb0133bfae5a2368f6f8969a866133b43cde627438f52af6e67f10b",
+      "translation": "For example, you can create skills such as the following.",
+      "contextHash": "2e23977febb0133bfae5a2368f6f8969a866133b43cde627438f52af6e67f10b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "会心率の高いスキル",
+      "sourceHash": "c0d54f0409d7d8f5dbbd2c02fba42b63ab6d40512f37d5530ade194d786410ef",
+      "translation": "Skills with a high critical hit rate",
+      "contextHash": "c0d54f0409d7d8f5dbbd2c02fba42b63ab6d40512f37d5530ade194d786410ef"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "成功率が１００を超えるスキル",
+      "sourceHash": "ec71cc9b4e21751ac8fbffc69b59a8dae9834ab0346cd672e8ae3ae7baa9bb50",
+      "translation": "Skills with a success rate exceeding 100%",
+      "contextHash": "ec71cc9b4e21751ac8fbffc69b59a8dae9834ab0346cd672e8ae3ae7baa9bb50"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ランダムでステートを付加するスキル",
+      "sourceHash": "bfe39b23e35ba36e79b1001c9dea1a1830c317de7500647f1b8dad2d374d8696",
+      "translation": "Skills that randomly inflict states",
+      "contextHash": "bfe39b23e35ba36e79b1001c9dea1a1830c317de7500647f1b8dad2d374d8696"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "条件によって属性や範囲が変化するスキル",
+      "sourceHash": "c0881e1971e6f82e8ba389942185f77d466b0312d64bf52a18bd8a6794c4f86e",
+      "translation": "Skills whose element or scope changes depending on conditions",
+      "contextHash": "c0881e1971e6f82e8ba389942185f77d466b0312d64bf52a18bd8a6794c4f86e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "全てのＭＰを消費するスキル",
+      "sourceHash": "cd645dd93ffa2fda62b3faddd78fa07336432b0b4fcb1a983617d08068d754e6",
+      "translation": "Skills that consume all MP",
+      "contextHash": "cd645dd93ffa2fda62b3faddd78fa07336432b0b4fcb1a983617d08068d754e6"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the plugin ON in the Plugin Manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin is compatible with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_SkillEX.js",
+      "sourceHash": "71f1522823223c4a37970ca0471300f27937ca24ec85758366b97da813fac57b",
+      "translation": "NRP_SkillEX.js",
+      "contextHash": "b79a92e473383d6de3efd51cecce0da8e5045a68bfe02edc423af754c8ebac77"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "<AddState>で指定したステートがスキルの命中・失敗を無視して発動する不具合修正。（2025/04/19 ver1.075）",
+      "sourceHash": "8bdadcfb4e5003e6d855624d88dd112383616d1e45104190653593267cc0cd20",
+      "translation": "Fixed a bug where states specified with <AddState> were applied regardless of whether the skill hit or missed. (2025/04/19 ver1.075)",
+      "contextHash": "8bdadcfb4e5003e6d855624d88dd112383616d1e45104190653593267cc0cd20"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "NRP_CalcResultFirst.jsと併用時、一部でa,bによる参照が使えないことがある不具合修正。（2025/08/13 ver1.076）",
+      "sourceHash": "e3c8cec2eb4eaf0a69be5f736d6fb00f8f7fb504554d15c5da9d818b80be2c98",
+      "translation": "Fixed a bug where references using a and b could not be used in some cases when used together with NRP_CalcResultFirst.js. (2025/08/13 ver1.076)",
+      "contextHash": "e3c8cec2eb4eaf0a69be5f736d6fb00f8f7fb504554d15c5da9d818b80be2c98"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "ＴＰ回復量に小数が含まれる場合、正しく表示されないため、四捨五入するようにした。（2024/07/22 ver1.051）",
+      "sourceHash": "0799b5b6bdffaf0fc06a1343a7a753c4883646904c00ed4b09431ffdc18ae0a9",
+      "translation": "TP recovery amounts are now rounded because decimal values were not displayed correctly. (2024/07/22 ver1.051)",
+      "contextHash": "0799b5b6bdffaf0fc06a1343a7a753c4883646904c00ed4b09431ffdc18ae0a9"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "ステート付加率が１００倍で計算されていた不具合を修正。",
+      "sourceHash": "9beb395dd89cb5438844fc8fe22eef5a3bc721748e10af56b7c8f226bea659d1",
+      "translation": "Fixed a bug where the state application rate was calculated as 100 times its intended value.",
+      "contextHash": "9beb395dd89cb5438844fc8fe22eef5a3bc721748e10af56b7c8f226bea659d1"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "<StateRate:100>は命中率１００％となるのが正しいです。",
+      "sourceHash": "39534be56acee34ae4dff14fa6e76911296b3e8e8d1974b6eeba8716870a3334",
+      "translation": "<StateRate:100> correctly results in a 100% hit rate.",
+      "contextHash": "39534be56acee34ae4dff14fa6e76911296b3e8e8d1974b6eeba8716870a3334"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "※影響が大きいので注意してください！",
+      "sourceHash": "a959a47b9a70d91395075557a25ea02f09105395450eb7d12c16f56c798cba0b",
+      "translation": "※Please be careful, as this has a significant impact!",
+      "contextHash": "a959a47b9a70d91395075557a25ea02f09105395450eb7d12c16f56c798cba0b"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "各数式でb（対象）を使用可能にした。",
+      "sourceHash": "1f204d2014573540f15d9f0529db726c3cbf46aa7aa5ecb99c0c21cf8caa3021",
+      "translation": "Made b (the target) available in each formula.",
+      "contextHash": "1f204d2014573540f15d9f0529db726c3cbf46aa7aa5ecb99c0c21cf8caa3021"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "ＴＰＢかつ敵の行動が存在しない場合にエラーになる不具合修正。",
+      "sourceHash": "449e7506169cb9db3e1ecd94f41969c6dbe596d8493f20227305bbae7c05129b",
+      "translation": "Fixed a bug that caused an error when using TPB if the enemy had no action.",
+      "contextHash": "449e7506169cb9db3e1ecd94f41969c6dbe596d8493f20227305bbae7c05129b"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "スキル、アイテムのメモ欄に以下を記載してください。",
+      "sourceHash": "f14290f74ac6b65eddedbdc08d1e24e5ea4eae05921f47aea3c92b20d3e6a04d",
+      "translation": "Add the following to the note field of the skill or item.",
+      "contextHash": "f14290f74ac6b65eddedbdc08d1e24e5ea4eae05921f47aea3c92b20d3e6a04d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下はいずれも数式が使用できます。",
+      "sourceHash": "2cd026bc44aab26a64176cfaf0a06bd89ec8a4039561090a5064d0f5b3bff01b",
+      "translation": "Formulas can be used in all of the following.",
+      "contextHash": "2cd026bc44aab26a64176cfaf0a06bd89ec8a4039561090a5064d0f5b3bff01b"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "会心率を加算",
+      "sourceHash": "ec6e5f7055aa9cedad47fbd6dda294a63027d4e5c43a12512e058d170d4e11fa",
+      "translation": "Add to Critical Hit Rate",
+      "contextHash": "ec6e5f7055aa9cedad47fbd6dda294a63027d4e5c43a12512e058d170d4e11fa"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "会心率を５０％加算します。",
+      "sourceHash": "85e4a6d85525a11882d5e067b859a15a4f8019e0b90efaa3dae7d40165d88236",
+      "translation": "Adds 50% to the critical hit rate.",
+      "contextHash": "85e4a6d85525a11882d5e067b859a15a4f8019e0b90efaa3dae7d40165d88236"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "成功率を変更",
+      "sourceHash": "e61c0705cdcc905eb3e3eddc1143e3d96e522c8c2c02a2fdd4763d3f0d111664",
+      "translation": "Change Success Rate",
+      "contextHash": "e61c0705cdcc905eb3e3eddc1143e3d96e522c8c2c02a2fdd4763d3f0d111664"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "スキルの成功率を１５０％にします。",
+      "sourceHash": "1c2b4dadacaf624ec9a77fef6849c3531562375617eb52083d38f3daacebe07e",
+      "translation": "Sets the skill's success rate to 150%.",
+      "contextHash": "1c2b4dadacaf624ec9a77fef6849c3531562375617eb52083d38f3daacebe07e"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "（元の値は無視されます。）",
+      "sourceHash": "b4c1bb737685ece90e1a40ba429b018810f7a884b18209a1e93e6e032efce876",
+      "translation": "(The original value is ignored.)",
+      "contextHash": "b4c1bb737685ece90e1a40ba429b018810f7a884b18209a1e93e6e032efce876"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "例えば、以下のようにすればレベルが上がるに従い命中率が上がります。",
+      "sourceHash": "8565b506f13172ebe6d4eb1345b827dc0e88180eabcfd0f4c84138e9bc010ec4",
+      "translation": "For example, the following increases the hit rate as the level increases.",
+      "contextHash": "8565b506f13172ebe6d4eb1345b827dc0e88180eabcfd0f4c84138e9bc010ec4"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ステート付加率を変更",
+      "sourceHash": "6a8c4fabec1c6393cec801b2104aa0554ae732acee84aa39f518dc717e91c85d",
+      "translation": "Change State Application Rate",
+      "contextHash": "6a8c4fabec1c6393cec801b2104aa0554ae732acee84aa39f518dc717e91c85d"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "使用効果のステート付加率を１５０％にします。",
+      "sourceHash": "534bc34869c92b151dce70134c39ed5444afe10a67e9eb0f6a6cb88074463f87",
+      "translation": "Sets the state application rate of the skill effect to 150%.",
+      "contextHash": "534bc34869c92b151dce70134c39ed5444afe10a67e9eb0f6a6cb88074463f87"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "（元の値は無視されます。）",
+      "sourceHash": "b4c1bb737685ece90e1a40ba429b018810f7a884b18209a1e93e6e032efce876",
+      "translation": "(The original value is ignored.)",
+      "contextHash": "b4c1bb737685ece90e1a40ba429b018810f7a884b18209a1e93e6e032efce876"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "追加ステートを付与",
+      "sourceHash": "0f30a53877c6db0034e17170106cf14f5e882fd89d1fb16789be09098be99730",
+      "translation": "Apply an Additional State",
+      "contextHash": "0f30a53877c6db0034e17170106cf14f5e882fd89d1fb16789be09098be99730"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "４番のステートを５０％の確率で付加します。",
+      "sourceHash": "ac8245d54d1dfcf15e687616258e419f1624b4f95e949c2d7928a313f03f9620",
+      "translation": "Inflicts state 4 with a 50% chance.",
+      "contextHash": "ac8245d54d1dfcf15e687616258e419f1624b4f95e949c2d7928a313f03f9620"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※<AddStateRate>を省略すると１００％になります。",
+      "sourceHash": "4a86b8ca7638edcb3ad60e290619944aa991999139bb0db6884409ce65dcad4a",
+      "translation": "※If <AddStateRate> is omitted, it defaults to 100%.",
+      "contextHash": "4a86b8ca7638edcb3ad60e290619944aa991999139bb0db6884409ce65dcad4a"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "例えば、以下は4,5,6のステートをランダムで付加します。",
+      "sourceHash": "9447194c8d9f1234ac5bdf4740092e55fb623b5297cea02a81eed637918eaae8",
+      "translation": "For example, the following randomly applies state 4, 5, or 6.",
+      "contextHash": "9447194c8d9f1234ac5bdf4740092e55fb623b5297cea02a81eed637918eaae8"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "例えば、以下は4,7,10のステートをランダムで付加します。",
+      "sourceHash": "870843c6f2bc5f9e5a9b3e71b19521b6aa344236cc6d4d6918283760a193bb35",
+      "translation": "For example, the following randomly applies state 4, 7, or 10.",
+      "contextHash": "870843c6f2bc5f9e5a9b3e71b19521b6aa344236cc6d4d6918283760a193bb35"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※Math.randomInt(3)は３未満の整数をランダムで選択します。この場合は０～２となり、３は含みません。",
+      "sourceHash": "86b862d2e971f5304d8ba457579729161105cfb76d089d96e2dec1fa166c07fd",
+      "translation": "※Math.randomInt(3) randomly selects an integer less than 3. In this case, the result is 0–2, and 3 is not included.",
+      "contextHash": "86b862d2e971f5304d8ba457579729161105cfb76d089d96e2dec1fa166c07fd"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "自身にステートを付与",
+      "sourceHash": "e352fdf6ec032d2174818a0b65810685e14f8e74ccc12ae634ed541b278dd203",
+      "translation": "Apply a State to the User",
+      "contextHash": "e352fdf6ec032d2174818a0b65810685e14f8e74ccc12ae634ed541b278dd203"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "スキルの使用者に４番のステートを付加します。",
+      "sourceHash": "7101391c3475329953d5433cfe812452b3bd53db49a925af92aba836fb65f080",
+      "translation": "Inflicts state 4 on the skill user.",
+      "contextHash": "7101391c3475329953d5433cfe812452b3bd53db49a925af92aba836fb65f080"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "属性を変更",
+      "sourceHash": "28b514c41506cace61392156f40bacf318279787866d5953d9157fb157a94ca4",
+      "translation": "Change Element",
+      "contextHash": "28b514c41506cace61392156f40bacf318279787866d5953d9157fb157a94ca4"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "属性を2:炎に変更します。",
+      "sourceHash": "815af167702f1a4d6b50bfcfe05adf24f4b1723c577d16455c1d3027b5ef33cb",
+      "translation": "Changes the element to 2: Fire.",
+      "contextHash": "815af167702f1a4d6b50bfcfe05adf24f4b1723c577d16455c1d3027b5ef33cb"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "範囲を変更",
+      "sourceHash": "21f432d6898b32a8511a0dc03b4b0a0f0a0040c416d662c5e82ebf5d0adc3428",
+      "translation": "Change Scope",
+      "contextHash": "21f432d6898b32a8511a0dc03b4b0a0f0a0040c416d662c5e82ebf5d0adc3428"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "範囲を指定した値へ変更します。",
+      "sourceHash": "0e6f380ee6d76348cc6a261faa92ca7b3ff424770fc2a0028cdc4042427f81e5",
+      "translation": "Changes the scope to the specified value.",
+      "contextHash": "0e6f380ee6d76348cc6a261faa92ca7b3ff424770fc2a0028cdc4042427f81e5"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "0:なし, 1:敵単体, 2:敵全体, 3:敵1体ランダム, 4:敵2体ランダム,",
+      "sourceHash": "1bbdd536d29f75533120ff1f5aa2cf234b084522b8f9f07476304579f36e4d4e",
+      "translation": "0: None, 1: One Enemy, 2: All Enemies, 3: 1 Random Enemy, 4: 2 Random Enemies,",
+      "contextHash": "1bbdd536d29f75533120ff1f5aa2cf234b084522b8f9f07476304579f36e4d4e"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "5:敵3体ランダム, 6:敵4体ランダム, 7:味方単体, 8:味方全体,",
+      "sourceHash": "5517acbce278e4d03b97f3a0a186cbd49d7e33fcd8aeda22697fa3c37a243f1e",
+      "translation": "5: 3 Random Enemies, 6: 4 Random Enemies, 7: One Ally, 8: All Allies,",
+      "contextHash": "5517acbce278e4d03b97f3a0a186cbd49d7e33fcd8aeda22697fa3c37a243f1e"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "9:味方単体(戦闘不能), 10:味方全体(戦闘不能), 11:使用者,",
+      "sourceHash": "933295daed968fc261cfed2a4279122a7abb1ea64c2b7e22bb1c85c336d28a9f",
+      "translation": "9: One Ally (Dead), 10: All Allies (Dead), 11: User,",
+      "contextHash": "933295daed968fc261cfed2a4279122a7abb1ea64c2b7e22bb1c85c336d28a9f"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "12:味方単体(無条件), 13:味方全体(無条件), 14:敵味方全体",
+      "sourceHash": "a5dc34d5ad4cd1abf25f43ae84a9e5513abfc96e86ba27aefd931a0769d007fa",
+      "translation": "12: One Ally (Unconditional), 13: All Allies (Unconditional), 14: All Enemies and Allies",
+      "contextHash": "a5dc34d5ad4cd1abf25f43ae84a9e5513abfc96e86ba27aefd931a0769d007fa"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "例：スキル100を覚えている場合は敵全体。それ以外は敵単体",
+      "sourceHash": "97d0d6f678d8fec6338d0536f7d6f1f26325919ff0015d23185e59c1ca359551",
+      "translation": "Example: If Skill 100 is learned, all enemies; otherwise, a single enemy.",
+      "contextHash": "97d0d6f678d8fec6338d0536f7d6f1f26325919ff0015d23185e59c1ca359551"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "ダメージタイプを変更",
+      "sourceHash": "73c255468a9da03c72f45f391432a7694fccbdfb763a44e3a67c1fce6bc67bb8",
+      "translation": "Change Damage Type",
+      "contextHash": "73c255468a9da03c72f45f391432a7694fccbdfb763a44e3a67c1fce6bc67bb8"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ダメージタイプを指定した値へ変更します。",
+      "sourceHash": "16a3aa4e9d00fd82ea60b087206c70c6db75c6a360f3658b20d95325bd8b621b",
+      "translation": "Changes the damage type to the specified value.",
+      "contextHash": "16a3aa4e9d00fd82ea60b087206c70c6db75c6a360f3658b20d95325bd8b621b"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "1:HPダメージ, 2:MPダメージ, 3:HP回復, 4:MP回復, 5:HP吸収, 6:MP回復",
+      "sourceHash": "627fad318fbff495e1c529b32c48dd6daecab4259deba7cdb399fa02f88ce4a9",
+      "translation": "1: HP Damage, 2: MP Damage, 3: HP Recovery, 4: MP Recovery, 5: HP Drain, 6: MP Recovery",
+      "contextHash": "627fad318fbff495e1c529b32c48dd6daecab4259deba7cdb399fa02f88ce4a9"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "例：味方全体のＨＰを回復するが、自分はダメージを受ける。",
+      "sourceHash": "2f85aa0f5944ea3910e99c910bdfef87db0cc25d2011d4071b9fdfb2112fe6f3",
+      "translation": "Example: Recovers the HP of all allies, but the user takes damage.",
+      "contextHash": "2f85aa0f5944ea3910e99c910bdfef87db0cc25d2011d4071b9fdfb2112fe6f3"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "連続回数を変更",
+      "sourceHash": "b8cb8fc82a140dfdf4b472d6d5e8a32105fa0ebff3891e557379d1d38c002c08",
+      "translation": "Change Number of Repeats",
+      "contextHash": "b8cb8fc82a140dfdf4b472d6d5e8a32105fa0ebff3891e557379d1d38c002c08"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "連続回数を指定した値へ変更します。",
+      "sourceHash": "3ff9764f2ee2f5a585cdfc26f20747dea9b7355bfff86c5d1da82087fb79ef24",
+      "translation": "Changes the number of repeats to the specified value.",
+      "contextHash": "3ff9764f2ee2f5a585cdfc26f20747dea9b7355bfff86c5d1da82087fb79ef24"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ランダム回数を変更",
+      "sourceHash": "a5e41cf87b8d2e9a4bd87d3b105eeaea07348e2c97d22435c9b8e1a85a28682a",
+      "translation": "Change Random Number of Repeats",
+      "contextHash": "a5e41cf87b8d2e9a4bd87d3b105eeaea07348e2c97d22435c9b8e1a85a28682a"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "範囲がランダムの場合の対象数を指定した値へ変更します。",
+      "sourceHash": "6cd572e7101f40f90f988d77ab4763c59b352d852304ed806c362308312793df",
+      "translation": "Changes the number of targets when the scope is random to the specified value.",
+      "contextHash": "6cd572e7101f40f90f988d77ab4763c59b352d852304ed806c362308312793df"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "通常は不可能な５回以上も有効です。",
+      "sourceHash": "a777ef9cd1a72a9461485d8c797387307816d542d9522eef00bec26d3036ff80",
+      "translation": "Values of five or more, which are normally impossible, are also valid.",
+      "contextHash": "a777ef9cd1a72a9461485d8c797387307816d542d9522eef00bec26d3036ff80"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "例：２～４回、ランダムに実行する。",
+      "sourceHash": "55b262d804666ccaf1e8f89118d110ffa6d9af03faf5c75bf81bf81d214df723",
+      "translation": "Example: Execute randomly 2–4 times.",
+      "contextHash": "55b262d804666ccaf1e8f89118d110ffa6d9af03faf5c75bf81bf81d214df723"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "※Math.randomInt(3)は３未満の整数をランダムで選択します。",
+      "sourceHash": "2766637f9db44d477b8253ef4b20d95590ca330c78f745427a61de191f3cdf08",
+      "translation": "※Math.randomInt(3) randomly selects an integer less than 3.",
+      "contextHash": "2766637f9db44d477b8253ef4b20d95590ca330c78f745427a61de191f3cdf08"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ＴＰ回復",
+      "sourceHash": "39eee6752152306ad2c48fc971e7d4d85d46e8688f79388fd8e2f2c0d715702c",
+      "translation": "TP Recovery",
+      "contextHash": "39eee6752152306ad2c48fc971e7d4d85d46e8688f79388fd8e2f2c0d715702c"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "ＴＰを１００回復します。",
+      "sourceHash": "20cc444947fec9a1986fac01f87ebde88464f28b2973cd5e9d14ed65653fc50f",
+      "translation": "Recovers 100 TP.",
+      "contextHash": "20cc444947fec9a1986fac01f87ebde88464f28b2973cd5e9d14ed65653fc50f"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "マイナスならダメージになります。",
+      "sourceHash": "532c52ad49b7ca7d33a1b5d09cc934fa6aa9cf4968bec4a2eea383023b71bda8",
+      "translation": "A negative value deals damage instead.",
+      "contextHash": "532c52ad49b7ca7d33a1b5d09cc934fa6aa9cf4968bec4a2eea383023b71bda8"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "例：使用者の魔力分だけＴＰを回復。",
+      "sourceHash": "05f4a546196632c32848bbc668c379910ca133435b9d323cc28a2ef4f2db221b",
+      "translation": "Example: Recover TP equal to the user's Magic Power.",
+      "contextHash": "05f4a546196632c32848bbc668c379910ca133435b9d323cc28a2ef4f2db221b"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "自身にダメージ",
+      "sourceHash": "1e61fd0000bcdf4958398f0a0d939a0c5870bec74dd8e4448729f17b67843ecc",
+      "translation": "Damage Self",
+      "contextHash": "1e61fd0000bcdf4958398f0a0d939a0c5870bec74dd8e4448729f17b67843ecc"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "自身に最大ＨＰの1/10のダメージを与えます。",
+      "sourceHash": "f91b3e9e1c5e50ddad71016a1a2dd565e0cc7f271433570e7d4c510522bc37a5",
+      "translation": "Deals damage equal to 1/10 of the user's maximum HP.",
+      "contextHash": "f91b3e9e1c5e50ddad71016a1a2dd565e0cc7f271433570e7d4c510522bc37a5"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "消費ＭＰを変更",
+      "sourceHash": "36bfec95bc427c0268220f7857b9d40043e2aa8f96be4544ed15593c51469f49",
+      "translation": "Change MP Cost",
+      "contextHash": "36bfec95bc427c0268220f7857b9d40043e2aa8f96be4544ed15593c51469f49"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "消費ＭＰを指定した値へ変更します。",
+      "sourceHash": "4a203208bf9abf293d0cc19a1dad1facffd3da28df333e866b3d536fe1efb65c",
+      "translation": "Changes the MP cost to the specified value.",
+      "contextHash": "4a203208bf9abf293d0cc19a1dad1facffd3da28df333e866b3d536fe1efb65c"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "例：全ＭＰを消費",
+      "sourceHash": "eb75079c3f235366eb3ed30b4d571c43679b8c5cc0b9da3e6c3459034731bd0b",
+      "translation": "Example: Consume all MP",
+      "contextHash": "eb75079c3f235366eb3ed30b4d571c43679b8c5cc0b9da3e6c3459034731bd0b"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "なお、ＭＰ消費率は無視されるようになります。",
+      "sourceHash": "208a3e88333cc07ef7d95c19ab9a5580b3375088f970e82a92395e7779122842",
+      "translation": "The MP cost rate will be ignored.",
+      "contextHash": "208a3e88333cc07ef7d95c19ab9a5580b3375088f970e82a92395e7779122842"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "もし、含みたい場合は以下のように数式にＭＰ消費率（mcr）を組み込んでください。",
+      "sourceHash": "9a24742ed8ecdd24ddf8b632e27ec85b408c2593dc9dbfdb49612c5341265e2c",
+      "translation": "If you want to include it, incorporate the MP cost rate (mcr) into the formula as follows.",
+      "contextHash": "9a24742ed8ecdd24ddf8b632e27ec85b408c2593dc9dbfdb49612c5341265e2c"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "ダメージ計算式に消費前のＭＰを使用したい場合は以下で参照できます。",
+      "sourceHash": "e30666e0ad1c92be1a804fb0ce630405e4dcf81f606a37c622d5a8175eefb88b",
+      "translation": "If you want to use the MP before consumption in the damage formula, you can reference it as follows.",
+      "contextHash": "e30666e0ad1c92be1a804fb0ce630405e4dcf81f606a37c622d5a8175eefb88b"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "消費ＴＰを変更",
+      "sourceHash": "899411f0abd9de4c04f71a5fe49cf537ad2598840ba1b90e0d1f8e0974197c3d",
+      "translation": "Change TP Cost",
+      "contextHash": "899411f0abd9de4c04f71a5fe49cf537ad2598840ba1b90e0d1f8e0974197c3d"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "消費ＴＰを指定した値へ変更します。",
+      "sourceHash": "aa7027978af0f716ea272da9fa3bbd22cf5c660e4d3858697e08777e29f98b0a",
+      "translation": "Changes the TP cost to the specified value.",
+      "contextHash": "aa7027978af0f716ea272da9fa3bbd22cf5c660e4d3858697e08777e29f98b0a"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "ダメージ計算式に消費前のＴＰを使用したい場合は以下で参照できます。",
+      "sourceHash": "e24c1f76db7b43e5535c5071c21b5bc441005301b578968eaeb9402e0444cd44",
+      "translation": "If you want to use the TP before consumption in the damage formula, you can reference it as follows.",
+      "contextHash": "e24c1f76db7b43e5535c5071c21b5bc441005301b578968eaeb9402e0444cd44"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "防御ステートを無視",
+      "sourceHash": "af34c9e679af85f7ca060600fd95f329e90f422ad478021d0d50aabfc4cae03c",
+      "translation": "Ignore Defensive States",
+      "contextHash": "af34c9e679af85f7ca060600fd95f329e90f422ad478021d0d50aabfc4cae03c"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "防御ステートを無視して、半減されずにダメージを与えます。",
+      "sourceHash": "5c9fbe8c7d6f3e4bbf1329de3fbc1efcc3b513d12dccf34fac9cc0a4133c0274",
+      "translation": "Ignores defensive states and deals damage without halving it.",
+      "contextHash": "5c9fbe8c7d6f3e4bbf1329de3fbc1efcc3b513d12dccf34fac9cc0a4133c0274"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "数式用の変数",
+      "sourceHash": "87fc4522459451a8a4bc8be4fa7b0d7f4645de20d3513bb377ba7a0947113697",
+      "translation": "Variables for Formulas",
+      "contextHash": "87fc4522459451a8a4bc8be4fa7b0d7f4645de20d3513bb377ba7a0947113697"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "当プラグインの数式では以下の変数を使用できます。",
+      "sourceHash": "e78fd05e44e542867a322109ff57b612e274f83f77530ef54a4c784481bf9fb4",
+      "translation": "The following variables can be used in this plugin's formulas.",
+      "contextHash": "e78fd05e44e542867a322109ff57b612e274f83f77530ef54a4c784481bf9fb4"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "targetNo（対象番号）",
+      "sourceHash": "640a9106aed79c2d70fe31d9df8682b7697a845e171c743c4990bfe4f0cf67e4",
+      "translation": "targetNo (Target Number)",
+      "contextHash": "640a9106aed79c2d70fe31d9df8682b7697a845e171c743c4990bfe4f0cf67e4"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "例えば、範囲が『敵4体 ランダム』だった場合、0,1,2,3の数値で区別できます。",
+      "sourceHash": "2b162a7b413642b8c2fa40fdb1dee1c04c297d1463a552acb6483eff7f5b0272",
+      "translation": "For example, if the scope is “4 Random Enemies,” the targets can be distinguished using the values 0, 1, 2, and 3.",
+      "contextHash": "2b162a7b413642b8c2fa40fdb1dee1c04c297d1463a552acb6483eff7f5b0272"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "以下は４撃目のみ炎属性、それ以外は物理属性となります。",
+      "sourceHash": "763f2eaa544582657f3e36c8896429be559b333a4daf46d488d16298f540a5e5",
+      "translation": "The fourth hit below has the Fire attribute only; all other hits have the Physical attribute.",
+      "contextHash": "763f2eaa544582657f3e36c8896429be559b333a4daf46d488d16298f540a5e5"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※TorigoyaMZ_AddStateSkill.jsとタグ名（<AddState>）が被っていて併用できないらしいので、ご注意ください。その代わりとして、[[LINK_1]]似たような機能[[/LINK_1]]を提供しています。",
+      "sourceHash": "a95f9fb6023985ad3839781a40ddf314e3090a9f06090aadcf6f7472a39b01bb",
+      "parts": [
+        {
+          "source": "※TorigoyaMZ_AddStateSkill.jsとタグ名（<AddState>）が被っていて併用できないらしいので、ご注意ください。その代わりとして、",
+          "link": false
+        },
+        {
+          "source": "似たような機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を提供しています。",
+          "link": false
+        }
+      ],
+      "translation": "※Please note that it apparently cannot be used together with TorigoyaMZ_AddStateSkill.js because the tag name (<AddState>) conflicts. Instead, it provides [[LINK_1]]a similar function[[/LINK_1]].",
+      "contextHash": "a95f9fb6023985ad3839781a40ddf314e3090a9f06090aadcf6f7472a39b01bb"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "また、[[LINK_1]]スキル連結プラグイン[[/LINK_1]]でも色々とできるのでオススメです。",
+      "sourceHash": "2f66e75c6dad6a82236ebd4e8e7f851e3eed6de8eee77f0ae109222103957a6d",
+      "parts": [
+        {
+          "source": "また、",
+          "link": false
+        },
+        {
+          "source": "スキル連結プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "でも色々とできるのでオススメです。",
+          "link": false
+        }
+      ],
+      "translation": "Also, the [[LINK_1]]Skill Link Plugin[[/LINK_1]] can do various things, so I recommend it.",
+      "contextHash": "2f66e75c6dad6a82236ebd4e8e7f851e3eed6de8eee77f0ae109222103957a6d"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]会心率を加算[[/LINK_1]]",
+      "sourceHash": "e36aa20e1b11e954a455a0d475bfec08ea409f6e5537202f6f87e5142605c947",
+      "parts": [
+        {
+          "source": "会心率を加算",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add to Critical Hit Rate[[/LINK_1]]",
+      "contextHash": "e36aa20e1b11e954a455a0d475bfec08ea409f6e5537202f6f87e5142605c947"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]成功率を変更[[/LINK_1]]",
+      "sourceHash": "724e136a5c7b460dd5d4244c6438ccdde81f4deaf7c40051723c326aa0b4c62e",
+      "parts": [
+        {
+          "source": "成功率を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Success Rate[[/LINK_1]]",
+      "contextHash": "724e136a5c7b460dd5d4244c6438ccdde81f4deaf7c40051723c326aa0b4c62e"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]ステート付加率を変更[[/LINK_1]]",
+      "sourceHash": "e811e0a33d6fa508e2ddb01a7121f329c1a1614ece56fcb38b787beb7cf9d87b",
+      "parts": [
+        {
+          "source": "ステート付加率を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change State Rate[[/LINK_1]]",
+      "contextHash": "e811e0a33d6fa508e2ddb01a7121f329c1a1614ece56fcb38b787beb7cf9d87b"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]追加ステートを付与[[/LINK_1]]",
+      "sourceHash": "f0cb93f0af02121d9c440d223522f5478a6d48dad4a1faad9913cbba1f108169",
+      "parts": [
+        {
+          "source": "追加ステートを付与",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply an Additional State[[/LINK_1]]",
+      "contextHash": "f0cb93f0af02121d9c440d223522f5478a6d48dad4a1faad9913cbba1f108169"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]自身にステートを付与[[/LINK_1]]",
+      "sourceHash": "f3213a1b8031f1021bd2fbc10692dd424e9c68798f0b02a95c2d1b3e8eb4a849",
+      "parts": [
+        {
+          "source": "自身にステートを付与",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply a State to the User[[/LINK_1]]",
+      "contextHash": "f3213a1b8031f1021bd2fbc10692dd424e9c68798f0b02a95c2d1b3e8eb4a849"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]属性を変更[[/LINK_1]]",
+      "sourceHash": "95c688ab65852efcecf692145b72b11fbb4d899d8a72af86166e9ac1f6a1dd7f",
+      "parts": [
+        {
+          "source": "属性を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Element[[/LINK_1]]",
+      "contextHash": "95c688ab65852efcecf692145b72b11fbb4d899d8a72af86166e9ac1f6a1dd7f"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]範囲を変更[[/LINK_1]]",
+      "sourceHash": "6e1afe27cae71dfacf673fd677bb2ba93f0d841392cb6a078ebe9b31fe24a326",
+      "parts": [
+        {
+          "source": "範囲を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Scope[[/LINK_1]]",
+      "contextHash": "6e1afe27cae71dfacf673fd677bb2ba93f0d841392cb6a078ebe9b31fe24a326"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージタイプを変更[[/LINK_1]]",
+      "sourceHash": "169b8d3101a474fb3677bcb29b48acf4ed89eb7fa3745a4d7dae68fbca2e5d01",
+      "parts": [
+        {
+          "source": "ダメージタイプを変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Damage Type[[/LINK_1]]",
+      "contextHash": "169b8d3101a474fb3677bcb29b48acf4ed89eb7fa3745a4d7dae68fbca2e5d01"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]連続回数を変更[[/LINK_1]]",
+      "sourceHash": "4ad8b7e37fc68a18490d4e420f270a2f74a4765db3a0a4aaf1292b6ced701a1d",
+      "parts": [
+        {
+          "source": "連続回数を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Repeats[[/LINK_1]]",
+      "contextHash": "4ad8b7e37fc68a18490d4e420f270a2f74a4765db3a0a4aaf1292b6ced701a1d"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ランダム回数を変更[[/LINK_1]]",
+      "sourceHash": "b6882b712b40147fdb757dfa74c7e5a226b0fe01b26cdddb4c95eda2f868ed3f",
+      "parts": [
+        {
+          "source": "ランダム回数を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Random Repeats[[/LINK_1]]",
+      "contextHash": "b6882b712b40147fdb757dfa74c7e5a226b0fe01b26cdddb4c95eda2f868ed3f"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]ＴＰ回復[[/LINK_1]]",
+      "sourceHash": "8baa570aedd2e5d973da8a821756a2ab7c6507623c702fe37b7fd043f4b081db",
+      "parts": [
+        {
+          "source": "ＴＰ回復",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover TP[[/LINK_1]]",
+      "contextHash": "8baa570aedd2e5d973da8a821756a2ab7c6507623c702fe37b7fd043f4b081db"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]自身にダメージ[[/LINK_1]]",
+      "sourceHash": "d7bf51133292ef7a409716de0ebe35c810f699c7777bd66776dddd407127b813",
+      "parts": [
+        {
+          "source": "自身にダメージ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Deal Damage to the User[[/LINK_1]]",
+      "contextHash": "d7bf51133292ef7a409716de0ebe35c810f699c7777bd66776dddd407127b813"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]消費ＭＰを変更[[/LINK_1]]",
+      "sourceHash": "ebdfcac4a8b99d52128bf32664cb9220e6506acd381d6c5a094882fe0d400721",
+      "parts": [
+        {
+          "source": "消費ＭＰを変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change MP Cost[[/LINK_1]]",
+      "contextHash": "ebdfcac4a8b99d52128bf32664cb9220e6506acd381d6c5a094882fe0d400721"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]消費ＴＰを変更[[/LINK_1]]",
+      "sourceHash": "f409c993835805422a01f749a1f3f3c29d63dc2abd16c3cac4689507b12f8163",
+      "parts": [
+        {
+          "source": "消費ＴＰを変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change TP Cost[[/LINK_1]]",
+      "contextHash": "f409c993835805422a01f749a1f3f3c29d63dc2abd16c3cac4689507b12f8163"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]防御ステートを無視[[/LINK_1]]",
+      "sourceHash": "d146e7c1b3f9cd63fb02d764b9150e49307bd19de172ddc78c3c66c7a8f0681d",
+      "parts": [
+        {
+          "source": "防御ステートを無視",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Ignore Defense States[[/LINK_1]]",
+      "contextHash": "d146e7c1b3f9cd63fb02d764b9150e49307bd19de172ddc78c3c66c7a8f0681d"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]数式用の変数[[/LINK_1]]",
+      "sourceHash": "200e1714d0aa7c5566f98cfd36b849d241aa29f0804addb96923068e14f1e1d8",
+      "parts": [
+        {
+          "source": "数式用の変数",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Variables for Formulas[[/LINK_1]]",
+      "contextHash": "200e1714d0aa7c5566f98cfd36b849d241aa29f0804addb96923068e14f1e1d8"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]防御ステートを無視してダメージ[[/LINK_1]]を与える機能を追加した。",
+      "sourceHash": "6391c7c12fcbea4f843983ec739e8f4dc39149b2549b9711e881bb2034f20973",
+      "parts": [
+        {
+          "source": "防御ステートを無視してダメージ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を与える機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to [[LINK_1]]deal damage while ignoring defense states[[/LINK_1]].",
+      "contextHash": "6391c7c12fcbea4f843983ec739e8f4dc39149b2549b9711e881bb2034f20973"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの結果計算を演出より先に実行するプラグイン[[/LINK_1]]用に調整した。（2025/03/15 ver1.071）",
+      "sourceHash": "0e278cfb13ad6fd05d369cae290f4e03241592ac31ba701380a8f391abadf8d8",
+      "parts": [
+        {
+          "source": "スキルの結果計算を演出より先に実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "用に調整した。（2025/03/15 ver1.071）",
+          "link": false
+        }
+      ],
+      "translation": "Adjusted it for the [[LINK_1]]plugin that executes skill result calculations before effects[[/LINK_1]]. (2025/03/15 ver1.071)",
+      "contextHash": "0e278cfb13ad6fd05d369cae290f4e03241592ac31ba701380a8f391abadf8d8"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの結果計算を演出より先に実行するプラグイン[[/LINK_1]]用にさらに調整した。（2025/03/27 ver1.073）",
+      "sourceHash": "39d9c9aac902275aafcca3ebc0f222ef9090ed4262eb4d9cff92bddaaa2f8faf",
+      "parts": [
+        {
+          "source": "スキルの結果計算を演出より先に実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "用にさらに調整した。（2025/03/27 ver1.073）",
+          "link": false
+        }
+      ],
+      "translation": "Further adjusted it for the [[LINK_1]]plugin that executes skill result calculations before effects[[/LINK_1]]. (2025/03/27 ver1.073)",
+      "contextHash": "39d9c9aac902275aafcca3ebc0f222ef9090ed4262eb4d9cff92bddaaa2f8faf"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの結果計算を演出より先に実行するプラグイン[[/LINK_1]]と併用時、<AddState>による変動ステートの事前計算ができていない競合に対処。",
+      "sourceHash": "9ce82e7521a1e1df9a015accb1cfccabd4b2bc12bc9e6ed32adc6264d8116715",
+      "parts": [
+        {
+          "source": "スキルの結果計算を演出より先に実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用時、<AddState>による変動ステートの事前計算ができていない競合に対処。",
+          "link": false
+        }
+      ],
+      "translation": "Addressed a conflict that prevented advance calculation of variable states caused by <AddState> when used together with the [[LINK_1]]plugin that executes skill result calculations before effects[[/LINK_1]].",
+      "contextHash": "9ce82e7521a1e1df9a015accb1cfccabd4b2bc12bc9e6ed32adc6264d8116715"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]連続回数[[/LINK_1]]を変更する機能を追加した。",
+      "sourceHash": "6b152e4af59d89a45dae45aa6582df738d1b76fc9e3c2927a888f919815dc174",
+      "parts": [
+        {
+          "source": "連続回数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を変更する機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to change [[LINK_1]]repeats[[/LINK_1]].",
+      "contextHash": "6b152e4af59d89a45dae45aa6582df738d1b76fc9e3c2927a888f919815dc174"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]ランダム回数[[/LINK_1]]を変更する機能を追加した。",
+      "sourceHash": "4708a6af7fef4c006a791e50ed8f697631aa3110978649d1aeaf08768dacfe89",
+      "parts": [
+        {
+          "source": "ランダム回数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を変更する機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to change [[LINK_1]]random repeats[[/LINK_1]].",
+      "contextHash": "4708a6af7fef4c006a791e50ed8f697631aa3110978649d1aeaf08768dacfe89"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]消費ＭＰ[[/LINK_1]]、[[LINK_2]]消費ＴＰ[[/LINK_2]]を変更する機能を追加した。",
+      "sourceHash": "136641cb277e210a3a0ac9b7fc7024572fbe0ab4e6888a95a9a818388da0fb78",
+      "parts": [
+        {
+          "source": "消費ＭＰ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "消費ＴＰ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "を変更する機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to change [[LINK_1]]MP cost[[/LINK_1]] and [[LINK_2]]TP cost[[/LINK_2]].",
+      "contextHash": "136641cb277e210a3a0ac9b7fc7024572fbe0ab4e6888a95a9a818388da0fb78"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージタイプを変更する機能[[/LINK_1]]を追加。",
+      "sourceHash": "650fe8add6bb37a136e31f10bd14f81d429ea5c90e98dde7c3ae19f71ffcb3ad",
+      "parts": [
+        {
+          "source": "ダメージタイプを変更する機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]feature to change the damage type[[/LINK_1]].",
+      "contextHash": "650fe8add6bb37a136e31f10bd14f81d429ea5c90e98dde7c3ae19f71ffcb3ad"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]自身にステートを付与する機能[[/LINK_1]]を追加。",
+      "sourceHash": "0cc19eaba30d501fe31e124775e335b26f045f5bbec4d3eb5806fbafdcb09e72",
+      "parts": [
+        {
+          "source": "自身にステートを付与する機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]feature to apply a state to the user[[/LINK_1]].",
+      "contextHash": "0cc19eaba30d501fe31e124775e335b26f045f5bbec4d3eb5806fbafdcb09e72"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]スキル使用者にダメージを与える機能[[/LINK_1]]を追加。",
+      "sourceHash": "d02ffaa13a837a187d9348a2f19b036ef165fd98201ac65e23b93eb39ee12f3f",
+      "parts": [
+        {
+          "source": "スキル使用者にダメージを与える機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]feature to deal damage to the skill user[[/LINK_1]].",
+      "contextHash": "d02ffaa13a837a187d9348a2f19b036ef165fd98201ac65e23b93eb39ee12f3f"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]対象番号[[/LINK_1]]を数式で使用可能にした。",
+      "sourceHash": "1ae31fa39198f126a9c0e12cfa07dd4408c5b051811a41588fae7ee96af52698",
+      "parts": [
+        {
+          "source": "対象番号",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を数式で使用可能にした。",
+          "link": false
+        }
+      ],
+      "translation": "Made [[LINK_1]]target number[[/LINK_1]] available in formulas.",
+      "contextHash": "1ae31fa39198f126a9c0e12cfa07dd4408c5b051811a41588fae7ee96af52698"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]ＴＰ回復[[/LINK_1]]を追加。",
+      "sourceHash": "afdb96b9a43f1bb6fbace2f0deb4044029b228799c9dd0bcb6aaf2172e2b9598",
+      "parts": [
+        {
+          "source": "ＴＰ回復",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]TP recovery[[/LINK_1]].",
+      "contextHash": "afdb96b9a43f1bb6fbace2f0deb4044029b228799c9dd0bcb6aaf2172e2b9598"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV index[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "スキルの効果を拡張します。": "Extends the effects of skills.",
+    "例えば、以下のようなスキルが作成できます。": "For example, you can create skills such as the following.",
+    "会心率の高いスキル": "Skills with a high critical hit rate",
+    "成功率が１００を超えるスキル": "Skills with a success rate exceeding 100%",
+    "ランダムでステートを付加するスキル": "Skills that randomly inflict states",
+    "条件によって属性や範囲が変化するスキル": "Skills whose element or scope changes depending on conditions",
+    "全てのＭＰを消費するスキル": "Skills that consume all MP",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the plugin ON in the Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin is compatible with both MV and MZ.",
+    "NRP_SkillEX.js": "NRP_SkillEX.js",
+    "更新履歴（History）": "Update History (History)",
+    "<AddState>で指定したステートがスキルの命中・失敗を無視して発動する不具合修正。（2025/04/19 ver1.075）": "Fixed a bug where states specified with <AddState> were applied regardless of whether the skill hit or missed. (2025/04/19 ver1.075)",
+    "NRP_CalcResultFirst.jsと併用時、一部でa,bによる参照が使えないことがある不具合修正。（2025/08/13 ver1.076）": "Fixed a bug where references using a and b could not be used in some cases when used together with NRP_CalcResultFirst.js. (2025/08/13 ver1.076)",
+    "ＴＰ回復量に小数が含まれる場合、正しく表示されないため、四捨五入するようにした。（2024/07/22 ver1.051）": "TP recovery amounts are now rounded because decimal values were not displayed correctly. (2024/07/22 ver1.051)",
+    "ステート付加率が１００倍で計算されていた不具合を修正。": "Fixed a bug where the state application rate was calculated as 100 times its intended value.",
+    "<StateRate:100>は命中率１００％となるのが正しいです。": "<StateRate:100> correctly results in a 100% hit rate.",
+    "※影響が大きいので注意してください！": "※Please be careful, as this has a significant impact!",
+    "各数式でb（対象）を使用可能にした。": "Made b (the target) available in each formula.",
+    "ＴＰＢかつ敵の行動が存在しない場合にエラーになる不具合修正。": "Fixed a bug that caused an error when using TPB if the enemy had no action.",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "スキル、アイテムのメモ欄に以下を記載してください。": "Add the following to the note field of the skill or item.",
+    "以下はいずれも数式が使用できます。": "Formulas can be used in all of the following.",
+    "会心率を加算": "Add to Critical Hit Rate",
+    "会心率を５０％加算します。": "Adds 50% to the critical hit rate.",
+    "成功率を変更": "Change Success Rate",
+    "スキルの成功率を１５０％にします。": "Sets the skill's success rate to 150%.",
+    "（元の値は無視されます。）": "(The original value is ignored.)",
+    "例えば、以下のようにすればレベルが上がるに従い命中率が上がります。": "For example, the following increases the hit rate as the level increases.",
+    "ステート付加率を変更": "Change State Application Rate",
+    "使用効果のステート付加率を１５０％にします。": "Sets the state application rate of the skill effect to 150%.",
+    "追加ステートを付与": "Apply an Additional State",
+    "４番のステートを５０％の確率で付加します。": "Inflicts state 4 with a 50% chance.",
+    "※<AddStateRate>を省略すると１００％になります。": "※If <AddStateRate> is omitted, it defaults to 100%.",
+    "例えば、以下は4,5,6のステートをランダムで付加します。": "For example, the following randomly applies state 4, 5, or 6.",
+    "例えば、以下は4,7,10のステートをランダムで付加します。": "For example, the following randomly applies state 4, 7, or 10.",
+    "※Math.randomInt(3)は３未満の整数をランダムで選択します。この場合は０～２となり、３は含みません。": "※Math.randomInt(3) randomly selects an integer less than 3. In this case, the result is 0–2, and 3 is not included.",
+    "自身にステートを付与": "Apply a State to the User",
+    "スキルの使用者に４番のステートを付加します。": "Inflicts state 4 on the skill user.",
+    "属性を変更": "Change Element",
+    "属性を2:炎に変更します。": "Changes the element to 2: Fire.",
+    "範囲を変更": "Change Scope",
+    "範囲を指定した値へ変更します。": "Changes the scope to the specified value.",
+    "0:なし, 1:敵単体, 2:敵全体, 3:敵1体ランダム, 4:敵2体ランダム,": "0: None, 1: One Enemy, 2: All Enemies, 3: 1 Random Enemy, 4: 2 Random Enemies,",
+    "5:敵3体ランダム, 6:敵4体ランダム, 7:味方単体, 8:味方全体,": "5: 3 Random Enemies, 6: 4 Random Enemies, 7: One Ally, 8: All Allies,",
+    "9:味方単体(戦闘不能), 10:味方全体(戦闘不能), 11:使用者,": "9: One Ally (Dead), 10: All Allies (Dead), 11: User,",
+    "12:味方単体(無条件), 13:味方全体(無条件), 14:敵味方全体": "12: One Ally (Unconditional), 13: All Allies (Unconditional), 14: All Enemies and Allies",
+    "例：スキル100を覚えている場合は敵全体。それ以外は敵単体": "Example: If Skill 100 is learned, all enemies; otherwise, a single enemy.",
+    "ダメージタイプを変更": "Change Damage Type",
+    "ダメージタイプを指定した値へ変更します。": "Changes the damage type to the specified value.",
+    "1:HPダメージ, 2:MPダメージ, 3:HP回復, 4:MP回復, 5:HP吸収, 6:MP回復": "1: HP Damage, 2: MP Damage, 3: HP Recovery, 4: MP Recovery, 5: HP Drain, 6: MP Recovery",
+    "例：味方全体のＨＰを回復するが、自分はダメージを受ける。": "Example: Recovers the HP of all allies, but the user takes damage.",
+    "連続回数を変更": "Change Number of Repeats",
+    "連続回数を指定した値へ変更します。": "Changes the number of repeats to the specified value.",
+    "ランダム回数を変更": "Change Random Number of Repeats",
+    "範囲がランダムの場合の対象数を指定した値へ変更します。": "Changes the number of targets when the scope is random to the specified value.",
+    "通常は不可能な５回以上も有効です。": "Values of five or more, which are normally impossible, are also valid.",
+    "例：２～４回、ランダムに実行する。": "Example: Execute randomly 2–4 times.",
+    "※Math.randomInt(3)は３未満の整数をランダムで選択します。": "※Math.randomInt(3) randomly selects an integer less than 3.",
+    "ＴＰ回復": "TP Recovery",
+    "ＴＰを１００回復します。": "Recovers 100 TP.",
+    "マイナスならダメージになります。": "A negative value deals damage instead.",
+    "例：使用者の魔力分だけＴＰを回復。": "Example: Recover TP equal to the user's Magic Power.",
+    "自身にダメージ": "Damage Self",
+    "自身に最大ＨＰの1/10のダメージを与えます。": "Deals damage equal to 1/10 of the user's maximum HP.",
+    "消費ＭＰを変更": "Change MP Cost",
+    "消費ＭＰを指定した値へ変更します。": "Changes the MP cost to the specified value.",
+    "例：全ＭＰを消費": "Example: Consume all MP",
+    "なお、ＭＰ消費率は無視されるようになります。": "The MP cost rate will be ignored.",
+    "もし、含みたい場合は以下のように数式にＭＰ消費率（mcr）を組み込んでください。": "If you want to include it, incorporate the MP cost rate (mcr) into the formula as follows.",
+    "ダメージ計算式に消費前のＭＰを使用したい場合は以下で参照できます。": "If you want to use the MP before consumption in the damage formula, you can reference it as follows.",
+    "消費ＴＰを変更": "Change TP Cost",
+    "消費ＴＰを指定した値へ変更します。": "Changes the TP cost to the specified value.",
+    "ダメージ計算式に消費前のＴＰを使用したい場合は以下で参照できます。": "If you want to use the TP before consumption in the damage formula, you can reference it as follows.",
+    "防御ステートを無視": "Ignore Defensive States",
+    "防御ステートを無視して、半減されずにダメージを与えます。": "Ignores defensive states and deals damage without halving it.",
+    "数式用の変数": "Variables for Formulas",
+    "当プラグインの数式では以下の変数を使用できます。": "The following variables can be used in this plugin's formulas.",
+    "targetNo（対象番号）": "targetNo (Target Number)",
+    "例えば、範囲が『敵4体 ランダム』だった場合、0,1,2,3の数値で区別できます。": "For example, if the scope is “4 Random Enemies,” the targets can be distinguished using the values 0, 1, 2, and 3.",
+    "以下は４撃目のみ炎属性、それ以外は物理属性となります。": "The fourth hit below has the Fire attribute only; all other hits have the Physical attribute."
+  }
+}
