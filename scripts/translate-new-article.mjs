@@ -76,7 +76,13 @@ function normalizeText(value) {
 // code samples, and normal prose. U+FF01–U+FF5E covers full-width ASCII
 // symbols, letters, and digits but intentionally excludes U+3000.
 function normalizeEnglishAscii(value) {
-    return String(value).replace(/[\uFF01-\uFF5E]/gu, character =>
+    return String(value)
+        // Full-width parentheses in Japanese prose are separator punctuation,
+        // so preserve their intended word boundaries in English. Existing
+        // ASCII parentheses (for example, function(arg)) are left untouched.
+        .replace(/[ \t]*\uFF08/gu, " (")
+        .replace(/\uFF09[ \t]*/gu, ") ")
+        .replace(/[\uFF01-\uFF5E]/gu, character =>
         String.fromCharCode(character.charCodeAt(0) - 0xFEE0));
 }
 
