@@ -1199,10 +1199,12 @@ async function main() {
     let translatedArticleCount = 0;
     let checkedArticleCount = 0;
     let usage = { input: 0, output: 0, reasoning: 0, total: 0 };
+    const failedArticles = [];
     if (forceRetranslate) {
         console.log("強制再翻訳: 既存JSONの差分判定を使用しません。");
     }
     for (const target of targets) {
+        try {
         const outputPath = join(ARTICLES_DIRECTORY, `${target.articleId}.json`);
         const existingArticle = await readJson(outputPath);
         const trackedArticle = state.articles[target.articleId];
@@ -1311,6 +1313,11 @@ async function main() {
         rememberArticleState();
         translatedArticleCount++;
         console.log(`JSONを更新しました: articles/${target.articleId}.json`);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            failedArticles.push({ articleId: target.articleId, message });
+            console.error(`記事の翻訳に失敗しましたが、残りの記事を続行します: ${target.articleId} (${message})`);
+        }
     }
 
     if (!requestedArticles && !dryRun) {
@@ -1324,6 +1331,11 @@ async function main() {
         console.log("検証のみ: API呼び出し・JSON書き込みは行いません。");
     } else {
         console.log(`API使用量: 入力 ${usage.input} / 出力 ${usage.output} / 推論 ${usage.reasoning} / 合計 ${usage.total}`);
+    }
+    if (failedArticles.length > 0) {
+        fail(`翻訳に失敗した記事: ${failedArticles
+            .map(item => `${item.articleId} (${item.message})`)
+            .join(" / ")}`);
     }
 }
 
