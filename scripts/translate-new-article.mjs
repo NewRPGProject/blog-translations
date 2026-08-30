@@ -415,8 +415,20 @@ function extractCodeTranslationSegments(source) {
             }
         }
         if (source[index] === "\\") {
-            const escapeEnd = /^\\[A-Za-z]+(?:\[[^\]]*\])?/u.exec(source.slice(index))?.[0].length || 1;
-            index += escapeEnd;
+            const escape = /^\\[A-Za-z]+(?:\[([^\]]*)\])?/u.exec(source.slice(index));
+            if (escape) {
+                // Keep the control code itself intact (for example, \MP),
+                // but translate the explanatory value supplied in brackets.
+                // These labels are visible instructions in blog code samples,
+                // not program identifiers.
+                if (typeof escape[1] === "string") {
+                    const labelStart = index + escape[0].indexOf("[") + 1;
+                    add(labelStart, labelStart + escape[1].length, "label");
+                }
+                index += escape[0].length;
+                continue;
+            }
+            index++;
             continue;
         }
         if (source[index] === "%" && /\d/u.test(source[index + 1] || "")) {
