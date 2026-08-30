@@ -160,14 +160,27 @@ async function getSitemapEntries() {
     return entries;
 }
 
-async function getRequestedArticle() {
-    const requestedUrl = process.env.ARTICLE_URL?.trim();
-    if (!requestedUrl) return null;
-    const articleId = extractArticleId(requestedUrl);
-    if (!articleId) {
-        fail("ARTICLE_URL は /article/記事ID.html の形式にしてください。");
+async function getRequestedArticles() {
+    // ARTICLE_URL remains for existing manual workflows. ARTICLE_URLS is used
+    // by the status page and accepts a newline- or comma-separated batch.
+    const requestedInput = process.env.ARTICLE_URLS?.trim()
+        || process.env.ARTICLE_URL?.trim();
+    if (!requestedInput) return null;
+
+    const articles = new Map();
+    for (const requestedUrl of requestedInput.split(/[\r\n,]+/u)) {
+        const url = requestedUrl.trim();
+        if (!url) continue;
+        const articleId = extractArticleId(url);
+        if (!articleId) {
+            fail("ARTICLE_URLS は /article/記事ID.html の形式にしてください。");
+        }
+        articles.set(articleId, { url, articleId, lastModified: null });
     }
-    return { url: requestedUrl, articleId, lastModified: null };
+    if (articles.size === 0) {
+        fail("ARTICLE_URLS に有効な記事URLがありません。");
+    }
+    return [...articles.values()];
 }
 
 function isMoreRecent(first, second) {
@@ -1102,8 +1115,8 @@ async function main() {
         fail("glossary/translation_rules.md が見つからないか、内容が空です。");
     }
     await mkdir(ARTICLES_DIRECTORY, { recursive: true });
-    const requestedArticle = await getRequestedArticle();
-    const sitemapEntries = requestedArticle ? null : await getSitemapEntries();
+    const requestedArticles = await getRequestedArticles();
+    const sitemapEntries = requestedArticles ? null : await getSitemapEntries();
     const state = await readMonitorState();
     const outputFiles = await readdir(ARTICLES_DIRECTORY, { withFileTypes: true });
     const existingIds = new Set(outputFiles
@@ -1111,8 +1124,8 @@ async function main() {
         .map(entry => entry.name.slice(0, -5)));
 
     let targets;
-    if (requestedArticle) {
-        targets = [requestedArticle];
+    if (requestedArticles) {
+        targets = requestedArticles;
     } else {
         targets = [...sitemapEntries.values()].filter(entry => {
             if (existingIds.has(entry.articleId)) return true;
