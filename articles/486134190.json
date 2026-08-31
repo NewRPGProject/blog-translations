@@ -1,0 +1,1214 @@
+{
+  "articleId": "486134190",
+  "sourceUrl": "https://newrpg.seesaa.net/article/486134190.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "050ee0e5cf0de38f73534b7e479f9ce8f96837009f68d8f04f159bcdeb85ae02",
+  "translatedAt": "2026-08-31T02:11:42.609Z",
+  "title": "Change Event Passage Checks [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "イベントの通行判定を変更【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "448d2f9516073a53cc6894f8cb6b0f59bc673e481bf55f5c27854d36813af329",
+      "translation": "Change Event Passage Checks [RPG Maker MZ & MV Plugin]",
+      "contextHash": "448d2f9516073a53cc6894f8cb6b0f59bc673e481bf55f5c27854d36813af329"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "イベントの通行判定を変更します。",
+      "sourceHash": "149547fc05cfcb5ec7f6c7bf8dc5d49bd3d6423b3ebbe6c058daa06b222abd40",
+      "translation": "Changes event passage checks.",
+      "contextHash": "149547fc05cfcb5ec7f6c7bf8dc5d49bd3d6423b3ebbe6c058daa06b222abd40"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "空を飛ぶ鳥（接触可）や、水中を泳ぐ魚などが作成できます。",
+      "sourceHash": "c88d3e3be8265154df688b4d1374fdfbf4ac33f3c6a5c346d10843170c9c8af6",
+      "translation": "You can create birds flying through the sky (that can be touched), fish swimming underwater, and more.",
+      "contextHash": "c88d3e3be8265154df688b4d1374fdfbf4ac33f3c6a5c346d10843170c9c8af6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "地形タグやリージョンＩＤ、タイルＩＤやオートタイルタイプを条件にして、通行判定を細かく設定できます。",
+      "sourceHash": "de4c6d7c928aef97b3157d5379479a3d685f1b5c33d19ca0429d186ee5065fce",
+      "translation": "You can configure passage checks in detail based on terrain tags, region IDs, tile IDs, and autotile types.",
+      "contextHash": "de4c6d7c928aef97b3157d5379479a3d685f1b5c33d19ca0429d186ee5065fce"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "また『通常キャラの下』や『通常キャラの上』のイベントをプレイヤーと衝突可能にすることができます。",
+      "sourceHash": "522b1c7ba4cc2ccac8d8dd773db914b2549c17a209a59a6c2e754d36c53349a7",
+      "translation": "You can also make events set to “Below characters” or “Above characters” collide with the player.",
+      "contextHash": "522b1c7ba4cc2ccac8d8dd773db914b2549c17a209a59a6c2e754d36c53349a7"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "これにより、障害物を無視して接触してくる鳥型の敵（シンボルエンカウント）などを作成できます。",
+      "sourceHash": "33a4a77d8bce1b447e089d3e992729b72b9b17405db133030f0cab24d0b4ed90",
+      "translation": "This allows you to create bird-like enemies (symbol encounters) that fly into contact with the player while ignoring obstacles.",
+      "contextHash": "33a4a77d8bce1b447e089d3e992729b72b9b17405db133030f0cab24d0b4ed90"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save the file, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_ChangePassage.js",
+      "sourceHash": "23a32afa6ba76ca991c1a370944ab5b9629b9a33c0e8f507fda606df21fd4f88",
+      "translation": "NRP_ChangePassage.js ",
+      "contextHash": "43c33674e76ea6023279420059c35e0dcb1383796b922748bcfedfe953da6ad3"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.022（2025/03/31）",
+      "sourceHash": "60782ee5a91e99a96c73bc0e7b51423511d77021e80cfb525eee751f37156350",
+      "translation": "ver1.022 (2025/03/31) ",
+      "contextHash": "43c33674e76ea6023279420059c35e0dcb1383796b922748bcfedfe953da6ad3"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "オプション",
+      "sourceHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5",
+      "translation": "Options",
+      "contextHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DebugTile.js",
+      "sourceHash": "d839245e2d4ad88768cbb74e24135b6d06d5363d64d3fc85797e48514859684d",
+      "translation": "NRP_DebugTile.js ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.01（2021/08/15）",
+      "sourceHash": "5951f72e8493d63ef9b4ecf28b1663a47bcbcd982784edf97350cbc43b29937d",
+      "translation": "ver1.01 (2021/08/15) ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_ChangePassage.jsの補助用に使えます。",
+      "sourceHash": "a0e19e6fce6dd0348a1c354d68a611cd7af657983ebeba5f51836d19cc94841a",
+      "translation": "※This plugin allows you to check the autotile type and tile ID beneath your feet simply by pressing F2. It can be used as an aid for NRP_ChangePassage.js.",
+      "contextHash": "a0e19e6fce6dd0348a1c354d68a611cd7af657983ebeba5f51836d19cc94841a"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/03/05 -> 2025/03/31（ver1.02 -> 1.022）",
+      "sourceHash": "251b851086d549c4325e9ac2cdfd64001f063e8e31307edc6022d295c9adafe6",
+      "translation": "2024/03/05 -> 2025/03/31 (ver1.02 -> 1.022) ",
+      "contextHash": "251b851086d549c4325e9ac2cdfd64001f063e8e31307edc6022d295c9adafe6"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "※ver1.01以前から更新した場合は『飛行タイプ』の設定を手動で変更する必要があります。",
+      "sourceHash": "6cedbd25c06a9f0c602e246cb90efe56bf4aed6b722a5b96ef98e614fd0cf5d9",
+      "translation": "※If updating from a version earlier than ver1.01, you must manually change the “Flight Type” setting.",
+      "contextHash": "6cedbd25c06a9f0c602e246cb90efe56bf4aed6b722a5b96ef98e614fd0cf5d9"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ＭＶでエラーが出る不具合修正。（2025/03/24 ver1.021）",
+      "sourceHash": "b10e74742b7b4e1387b51aaa074c99918c2ce807e15bcb58bb012e1f3eaff10f",
+      "translation": "Fixed an issue that caused errors in MV. (2025/03/24 ver1.021)",
+      "contextHash": "b10e74742b7b4e1387b51aaa074c99918c2ce807e15bcb58bb012e1f3eaff10f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "※この他にも、FISHイベントが陸に上がってしまうなどＭＶでは若干挙動が怪しい気がします。",
+      "sourceHash": "eb6ce859826b0c2ced2708f5999df2bc7a9a3080c77f7a484cf28194cd58a4e7",
+      "translation": "※In addition, the behavior in MV still seems somewhat unreliable, such as FISH events coming ashore.",
+      "contextHash": "eb6ce859826b0c2ced2708f5999df2bc7a9a3080c77f7a484cf28194cd58a4e7"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ver1.021（ＭＶ対応）の実装が誤っており、通行禁止判定がＭＺ含めて正しく動作しなくなってしまっていた不具合修正。（2025/03/31 ver1.022）",
+      "sourceHash": "6f48f8c21ad0c1cae29947ddcbd52d62a223afd19988596e37560cdc456058be",
+      "translation": "Fixed an issue caused by an incorrect implementation of ver1.021 (MV support), which caused passage-blocking checks to stop working correctly, including in MZ. (2025/03/31 ver1.022)",
+      "contextHash": "6f48f8c21ad0c1cae29947ddcbd52d62a223afd19988596e37560cdc456058be"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/07/23（ver1.01）",
+      "sourceHash": "277f0a9e65d915f2dcb61d719370a73c781849e7a0613de6a35fdecab459cd66",
+      "translation": "2023/07/23 (ver1.01) ",
+      "contextHash": "277f0a9e65d915f2dcb61d719370a73c781849e7a0613de6a35fdecab459cd66"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "移動先の通行判定を有効にした場合、通行（４方向）が無視されてしまう不具合修正。",
+      "sourceHash": "542d761e4010352001d79852e6f3d98aad77fd701e20d785ef1a01d98515e819",
+      "translation": "Fixed an issue where the four-direction passage settings were ignored when passage checks for the destination were enabled.",
+      "contextHash": "542d761e4010352001d79852e6f3d98aad77fd701e20d785ef1a01d98515e819"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2022/03/24（ver1.00）",
+      "sourceHash": "f6159bb07e17deadc6327aefcf3ac14ab1cb7a937ebbd4756e8d04608da1e8a0",
+      "translation": "2022/03/24 (ver1.00) ",
+      "contextHash": "f6159bb07e17deadc6327aefcf3ac14ab1cb7a937ebbd4756e8d04608da1e8a0"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "プラグインパラメータの通行タイプリストに、通行情報を設定してください。",
+      "sourceHash": "41c77770df87e4aeb9b3f2b5a122722c8ce151b47279510b80c667aeed876d2c",
+      "translation": "Configure the passage information in the Passage Type List in the plugin parameters.",
+      "contextHash": "41c77770df87e4aeb9b3f2b5a122722c8ce151b47279510b80c667aeed876d2c"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※タイルＩＤやオートタイルタイプの確認には、NRP_DebugTile.jsが便利です。",
+      "sourceHash": "a9f92a5d6faafcd865357ca62215c4a081952bd19eb4a400945b8011f4992c82",
+      "translation": "※NRP_DebugTile.js is useful for checking tile IDs and autotile types.",
+      "contextHash": "a9f92a5d6faafcd865357ca62215c4a081952bd19eb4a400945b8011f4992c82"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "登録した『タイプＩＤ』を以下のように、イベントのメモ欄に記入することで紐付けを行います。",
+      "sourceHash": "ee379bb8faba9e56867b56a2f7ddc0a18a86e37d33a5efc049dee22838e3fe3f",
+      "translation": "Associate an event by entering the registered “Type ID” in the event's note field as shown below.",
+      "contextHash": "ee379bb8faba9e56867b56a2f7ddc0a18a86e37d33a5efc049dee22838e3fe3f"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<ChangePassage:[タイプＩＤ]>",
+      "sourceHash": "6563db1940946f312665c004e46a4627525291755cff630fd6a5a5dfa0043eb2",
+      "translation": "<ChangePassage:[Type ID]>",
+      "contextHash": "6563db1940946f312665c004e46a4627525291755cff630fd6a5a5dfa0043eb2"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "また、通行リストに設定した通行判定はタイルセットとの紐付けが可能です。",
+      "sourceHash": "f1df9a3da6d11044873e0a1f46ab35daaa2e8c21b0817a0fce727e10559c4a48",
+      "translation": "The passage checks configured in the passage list can also be associated with tilesets.",
+      "contextHash": "f1df9a3da6d11044873e0a1f46ab35daaa2e8c21b0817a0fce727e10559c4a48"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "タイルセットのメモ欄に『通行ＩＤ』を記入してください。",
+      "sourceHash": "33766fd8c571283d1e8716603aa49108282ebbb40df122d599a219d630c76586",
+      "translation": "Enter the “Passage ID” in the tileset's note field.",
+      "contextHash": "33766fd8c571283d1e8716603aa49108282ebbb40df122d599a219d630c76586"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "<ChangePassageTile:[通行ＩＤ]>",
+      "sourceHash": "1233586fda8f445be6f8be64fd5ce2c3c607b50ed59986a998a1e2484ad1bb7f",
+      "translation": "<ChangePassageTile:[Passage ID]>",
+      "contextHash": "1233586fda8f445be6f8be64fd5ce2c3c607b50ed59986a998a1e2484ad1bb7f"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『通行ＩＤ』が空欄の場合は全てのタイルセットに対して有効となります。",
+      "sourceHash": "f072911922d885c8dcece4152ad8ceb707f04c16814870f5b7ce4dd5415f3a06",
+      "translation": "If “Passage ID” is blank, it will apply to all tilesets.",
+      "contextHash": "f072911922d885c8dcece4152ad8ceb707f04c16814870f5b7ce4dd5415f3a06"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "サンプル（Sample）",
+      "sourceHash": "076bbe45f0928d9434f0482f38c763ad52439ee605e700f95ee77ad3570a3f10",
+      "translation": "Sample (Sample)",
+      "contextHash": "076bbe45f0928d9434f0482f38c763ad52439ee605e700f95ee77ad3570a3f10"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "初期状態で以下の設定が登録されています。",
+      "sourceHash": "c770bb9a4fccc8bbf1bd879718469815d3d85500892ca2c14a471633831b8f55",
+      "translation": "The following settings are registered by default.",
+      "contextHash": "c770bb9a4fccc8bbf1bd879718469815d3d85500892ca2c14a471633831b8f55"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "イベントのメモ欄に設定すれば、すぐに使用可能です。",
+      "sourceHash": "f3f7495c61f84cff172da4eb9d6f977c3657ef2da5703072628807689240b6b0",
+      "translation": "You can use them immediately by configuring them in an event's note field.",
+      "contextHash": "f3f7495c61f84cff172da4eb9d6f977c3657ef2da5703072628807689240b6b0"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "飛行タイプ",
+      "sourceHash": "050614a697ab01b3ff20a758930c4dfdcd54191178270dea87185139928207e6",
+      "translation": "Flight Type",
+      "contextHash": "050614a697ab01b3ff20a758930c4dfdcd54191178270dea87185139928207e6"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "障害物を無視する飛行型の通行タイプです。",
+      "sourceHash": "cb565b8d7aea39011a6694c2703cf2b9349098a833a6a0634b43e66f82d3582e",
+      "translation": "A flight-type passage setting that ignores obstacles.",
+      "contextHash": "cb565b8d7aea39011a6694c2703cf2b9349098a833a6a0634b43e66f82d3582e"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "プライオリティタイプを『通常キャラの上』にしたほうが自然になります。",
+      "sourceHash": "c609dcd8ca072449d87594d3d55a03b7628707e791bab713f565b58831717c13",
+      "translation": "Setting the priority type to “Above characters” will look more natural.",
+      "contextHash": "c609dcd8ca072449d87594d3d55a03b7628707e791bab713f565b58831717c13"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "なお、シンボルエンカウントを想定しているため、プレイヤー（および他イベント）と衝突する仕様です。",
+      "sourceHash": "39ca9cd51eaa19bc9ec2e3ceab704348cee5978028de8c2e57e683b5d938c5d7",
+      "translation": "Since this is intended for symbol encounters, it is designed to collide with the player (and other events).",
+      "contextHash": "39ca9cd51eaa19bc9ec2e3ceab704348cee5978028de8c2e57e683b5d938c5d7"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "※削除する際にスイッチなどで空のページに切り替えても、衝突判定が残るので注意です。『すり抜け』にしておけば問題ありません。",
+      "sourceHash": "8c33ee35709d5f1b21604ac1b76051871eae7ee4e47c171863737e20f0998c96",
+      "translation": "※When removing it, be aware that switching to an empty page using a switch or similar will leave the collision check active. Setting it to “Through” will prevent any problems.",
+      "contextHash": "8c33ee35709d5f1b21604ac1b76051871eae7ee4e47c171863737e20f0998c96"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "水中タイプ",
+      "sourceHash": "2641d9ab098edbefb95f640a9b486d1b724873c3768f7fbb9e7520765d489505",
+      "translation": "Underwater Type",
+      "contextHash": "2641d9ab098edbefb95f640a9b486d1b724873c3768f7fbb9e7520765d489505"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "魚や船を想定した水中のみを移動する通行タイプです。",
+      "sourceHash": "375fc136f1f5128607b57465d994c8bb3b3a3b127340d59850af5795f9d6fa53",
+      "translation": "A passage type intended for fish and boats that only move underwater.",
+      "contextHash": "375fc136f1f5128607b57465d994c8bb3b3a3b127340d59850af5795f9d6fa53"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "A1タイルセットの左上のタイルが水中として扱われます。",
+      "sourceHash": "80cdeefcd7bab11fd03f60938f87f5d11a0654b4a6940e39b453ed2c5fcb27d1",
+      "translation": "The upper-left tile of the A1 tileset is treated as underwater.",
+      "contextHash": "80cdeefcd7bab11fd03f60938f87f5d11a0654b4a6940e39b453ed2c5fcb27d1"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "通行タイプリスト（PassageTypeList）",
+      "sourceHash": "a8fd6a7906034665370508b3d4639bd342449bd78d0e9f14769ae69805e88573",
+      "translation": "Passage Type List (PassageTypeList)",
+      "contextHash": "a8fd6a7906034665370508b3d4639bd342449bd78d0e9f14769ae69805e88573"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "通行タイプの設定を登録する一覧です。",
+      "sourceHash": "3a3c3ad4fa38de9a3fefdc5385df009dfc7f5d8a42a17b0ef60970bea83fd1e9",
+      "translation": "A list for registering passage type settings.",
+      "contextHash": "3a3c3ad4fa38de9a3fefdc5385df009dfc7f5d8a42a17b0ef60970bea83fd1e9"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインパラメータ（通行タイプリスト）",
+      "sourceHash": "a61ef4d63f86f00dc118efd6f7d7874d6d2cc1860377bce7ef60207c8e0d00cd",
+      "translation": "Plugin Parameters (Passage Type List)",
+      "contextHash": "a61ef4d63f86f00dc118efd6f7d7874d6d2cc1860377bce7ef60207c8e0d00cd"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "タイプＩＤ（TypeId）",
+      "sourceHash": "39f68a798a28d52a22da9a78ee905cb184bf0ea1e5a2fa1ec4f5496c22fe3ca6",
+      "translation": "Type ID (TypeId)",
+      "contextHash": "39f68a798a28d52a22da9a78ee905cb184bf0ea1e5a2fa1ec4f5496c22fe3ca6"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "通行タイプの識別子です。",
+      "sourceHash": "c43a5fc85d996fb3d56bf279ec09fa73e6664bb1b0f80f0e7c8726c9fc4149be",
+      "translation": "The identifier for a passage type.",
+      "contextHash": "c43a5fc85d996fb3d56bf279ec09fa73e6664bb1b0f80f0e7c8726c9fc4149be"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "通行リスト（PassageList）",
+      "sourceHash": "a66ccc57df15e0d2e2f7a8ccb4fc8b4b598de1cb3e927b5bc6510b90c0ca0b67",
+      "translation": "Passage List (PassageList)",
+      "contextHash": "a66ccc57df15e0d2e2f7a8ccb4fc8b4b598de1cb3e927b5bc6510b90c0ca0b67"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "通行設定の一覧です。",
+      "sourceHash": "4dc7a11cef62f9bd70123ad7d555b580bbc4651ee856aea8b2fcba4ae82ae9de",
+      "translation": "A list of passage settings.",
+      "contextHash": "4dc7a11cef62f9bd70123ad7d555b580bbc4651ee856aea8b2fcba4ae82ae9de"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "基本通行設定（BasePassage）",
+      "sourceHash": "c4dbc265a82971ed3e1f2a666874946b69092b71294a32646f7d66d55b8a6c87",
+      "translation": "Base Passage (BasePassage)",
+      "contextHash": "c4dbc265a82971ed3e1f2a666874946b69092b71294a32646f7d66d55b8a6c87"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "通行の基本設定です。これを基準にして通行リストに例外を設定します。",
+      "sourceHash": "5757b82f0940a099d3f0c30d91647c83f9c53902eae4c6fad9fee621bc90b16f",
+      "translation": "The basic passage settings. Exceptions are configured in the passage list based on these settings.",
+      "contextHash": "5757b82f0940a099d3f0c30d91647c83f9c53902eae4c6fad9fee621bc90b16f"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "衝突判定を拡張（ExtendCollied）",
+      "sourceHash": "fca022f0d8d33b14fdd4d18ffc74fb771ecec407ecda0a4e9ede8a91a99c3aea",
+      "translation": "Extend Collision Checks (ExtendCollied)",
+      "contextHash": "fca022f0d8d33b14fdd4d18ffc74fb771ecec407ecda0a4e9ede8a91a99c3aea"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "プライオリティタイプが『通常キャラと重ならない』以外のイベントにも衝突判定を付与し、トリガーを有効化します。",
+      "sourceHash": "926d6158136fde1b4868c5c70b5a2be8d2c4f32868938275557fb0d18a577156",
+      "translation": "Adds collision checks and enables the trigger for events whose priority type is anything other than “Below characters.”",
+      "contextHash": "926d6158136fde1b4868c5c70b5a2be8d2c4f32868938275557fb0d18a577156"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "通常はプライオリティタイプが『通常キャラの下』『通常キャラの上』のイベントは、トリガーを『イベントから接触』にしてもプレイヤーと接触できません。これは鳥のような飛行系のシンボルエンカウントを行いたい場合に問題となります。",
+      "sourceHash": "bfd8641cc97e82c628a62c57465b3bcfedd65bedf415d0fb5c52fa2a4a017e4e",
+      "translation": "Normally, events with a priority type of “Below characters” or “Above characters” cannot come into contact with the player, even when their trigger is set to “Player Touch.” This is a problem when you want to create flying symbol encounters, such as birds.",
+      "contextHash": "bfd8641cc97e82c628a62c57465b3bcfedd65bedf415d0fb5c52fa2a4a017e4e"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "そこでそれを解決するための機能です。",
+      "sourceHash": "674cf90cfd36f63316f596ec96416b53def0aa7a93a22aecae6355ba484377e9",
+      "translation": "This is the function for resolving that issue.",
+      "contextHash": "674cf90cfd36f63316f596ec96416b53def0aa7a93a22aecae6355ba484377e9"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "ハシゴ属性を無視（IgnoreLadder）ver1.02",
+      "sourceHash": "bcd26af7bedf6214cb14809732771963354ecc70ef12e410c6863eb28cb772c3",
+      "translation": "Ignore Ladder (IgnoreLadder) ver1.02",
+      "contextHash": "bcd26af7bedf6214cb14809732771963354ecc70ef12e410c6863eb28cb772c3"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "ハシゴ属性の影響を受けないようになります。",
+      "sourceHash": "46224c65b3c69c5a64d96a6e0e1db9cad5f518071437f7497deb8c548d572991",
+      "translation": "The character will no longer be affected by the ladder attribute.",
+      "contextHash": "46224c65b3c69c5a64d96a6e0e1db9cad5f518071437f7497deb8c548d572991"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "上述した鳥のようなイベントを作りたい場合に有効です。",
+      "sourceHash": "96077e5e3e202a3f26617bb1d91431ab65abaceaf9e208df0a8a27a8af9491b0",
+      "translation": "This is useful when you want to create an event like the bird described above.",
+      "contextHash": "96077e5e3e202a3f26617bb1d91431ab65abaceaf9e208df0a8a27a8af9491b0"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "プラグインパラメータ（通行リスト）",
+      "sourceHash": "57f905dfa3372d1d6d48d045adc6a1f68e48ab5d31337919557a552f6607d35b",
+      "translation": "Plugin Parameter (Passage List)",
+      "contextHash": "57f905dfa3372d1d6d48d045adc6a1f68e48ab5d31337919557a552f6607d35b"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "通行ＩＤ（PassageId）",
+      "sourceHash": "c3e5a05c1bb3d12b123d76b063946f95f21dc0868a9bddb71f2c11942edb691e",
+      "translation": "Passage ID (PassageId)",
+      "contextHash": "c3e5a05c1bb3d12b123d76b063946f95f21dc0868a9bddb71f2c11942edb691e"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "タイルセットと紐付ける識別子です。",
+      "sourceHash": "d7ae0cd87b086ca1bdb82fc0e816f0947df39223dddf8eb0c9092d5dfce0ee10",
+      "translation": "This is an identifier associated with a tileset.",
+      "contextHash": "d7ae0cd87b086ca1bdb82fc0e816f0947df39223dddf8eb0c9092d5dfce0ee10"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "空欄の場合は全タイルセットで有効となります。",
+      "sourceHash": "bff0c19f429146ac213f096218325308905b999c1fc1ef07a6bf7063f9308c3b",
+      "translation": "If left blank, it will be enabled for all tilesets.",
+      "contextHash": "bff0c19f429146ac213f096218325308905b999c1fc1ef07a6bf7063f9308c3b"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "メモ（Memo）",
+      "sourceHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8",
+      "translation": "Memo (Memo)",
+      "contextHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "判別用のメモです。分かりやすい名前を付けてください。",
+      "sourceHash": "b3aaf3202c3af0390586ba43dde7def0c4b6307918586dc4cd9358751702864f",
+      "translation": "This memo is used for identification. Please give it an easily recognizable name.",
+      "contextHash": "b3aaf3202c3af0390586ba43dde7def0c4b6307918586dc4cd9358751702864f"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "地形タグ（TerrainTag）",
+      "sourceHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061",
+      "translation": "Terrain Tag (TerrainTag)",
+      "contextHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "対象とする地形タグ（1~7）を指定します。",
+      "sourceHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6",
+      "translation": "Specify the target terrain tags (1~7).",
+      "contextHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "７つまでしか設定できないのでご利用は計画的に。",
+      "sourceHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620",
+      "translation": "Since only up to seven can be configured, use them wisely.",
+      "contextHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "リージョンＩＤ（RegionId）",
+      "sourceHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78",
+      "translation": "Region ID (RegionId)",
+      "contextHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "対象とするリージョン（1~255）を指定します。",
+      "sourceHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644",
+      "translation": "Specify the target regions (1~255).",
+      "contextHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "オートタイルタイプ（AutotileType）",
+      "sourceHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e",
+      "translation": "Autotile Type (AutotileType)",
+      "contextHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "対象とするオートタイルタイプを指定します。",
+      "sourceHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b",
+      "translation": "Specify the target autotile types.",
+      "contextHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。",
+      "sourceHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8",
+      "translation": "An autotile type is a number assigned to each autotile. By default, it is used to determine battle backgrounds.",
+      "contextHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "地形タグと異なり数の制限がないため、自由に設定が可能です。",
+      "sourceHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61",
+      "translation": "Unlike terrain tags, there is no limit on the number of these, so they can be configured freely.",
+      "contextHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "ただし、この値は通常確認できません。",
+      "sourceHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1",
+      "translation": "However, this value cannot normally be checked.",
+      "contextHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "オプションにあるNRP_DebugTile.jsで確認ができます。",
+      "sourceHash": "c0bdd6ad92b992c4e4a9fe1d23949b3cf580c2d5e42c2fd6948bff59e94dadd8",
+      "translation": "You can check it using NRP_DebugTile.js in the options.",
+      "contextHash": "c0bdd6ad92b992c4e4a9fe1d23949b3cf580c2d5e42c2fd6948bff59e94dadd8"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "タイルＩＤ（TileId）",
+      "sourceHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e",
+      "translation": "Tile ID (TileId)",
+      "contextHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "対象とするタイルＩＤを指定します。",
+      "sourceHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf",
+      "translation": "Specify the target tile IDs.",
+      "contextHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "こちらはエディタの機能で普通に取得できますが、面倒です。",
+      "sourceHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4",
+      "translation": "This can be obtained normally using the editor's functions, but doing so is tedious.",
+      "contextHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "こちらもNRP_DebugTile.jsでの確認をオススメします。",
+      "sourceHash": "9524cc4766101d1907e050e1a97035b925a97d4bdd97a6666281ac6ce1de8443",
+      "translation": "I also recommend checking this using NRP_DebugTile.js.",
+      "contextHash": "9524cc4766101d1907e050e1a97035b925a97d4bdd97a6666281ac6ce1de8443"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "通行可能（CanPass）",
+      "sourceHash": "acadaa03b57e6e1e069893d285d29544fc6fdf49528e5cf58c570c10917af542",
+      "translation": "Can Pass (CanPass)",
+      "contextHash": "acadaa03b57e6e1e069893d285d29544fc6fdf49528e5cf58c570c10917af542"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "通行可能かどうか？",
+      "sourceHash": "3b2e554e170f8154f2ad146b4265da1c9766226fc40969e9d5023f7106bfb531",
+      "translation": "Whether passage is possible.",
+      "contextHash": "3b2e554e170f8154f2ad146b4265da1c9766226fc40969e9d5023f7106bfb531"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "特に変更したくない場合は空欄にしておいてください",
+      "sourceHash": "cddf610c43e60addda72f9a4c92bd7dff852e7501d314539e19f093f663ef06d",
+      "translation": "If you do not want to change anything in particular, leave this blank.",
+      "contextHash": "cddf610c43e60addda72f9a4c92bd7dff852e7501d314539e19f093f663ef06d"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]サンプル（Sample）[[/LINK_1]]",
+      "sourceHash": "5bb9dc59020d636bf976e1807a403af94cbf4542b5da1fa2a9332265e43fe815",
+      "parts": [
+        {
+          "source": "サンプル（Sample）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sample (Sample)[[/LINK_1]]",
+      "contextHash": "5bb9dc59020d636bf976e1807a403af94cbf4542b5da1fa2a9332265e43fe815"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]通行タイプリスト（PassageTypeList）[[/LINK_1]]",
+      "sourceHash": "adf97f6e4d2278abf4c44775a969eb006bbed3d6a6b001417f4dfba6139928ee",
+      "parts": [
+        {
+          "source": "通行タイプリスト（PassageTypeList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Passage Type List (PassageTypeList)[[/LINK_1]]",
+      "contextHash": "adf97f6e4d2278abf4c44775a969eb006bbed3d6a6b001417f4dfba6139928ee"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（通行タイプリスト）[[/LINK_1]]",
+      "sourceHash": "604102fff3c8b37d19535ec0ba40801c91d63e1f8d6653c8ed0dafe01b0740b4",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（通行タイプリスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Passage Type List)[[/LINK_1]]",
+      "contextHash": "604102fff3c8b37d19535ec0ba40801c91d63e1f8d6653c8ed0dafe01b0740b4"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]タイプＩＤ（TypeId）[[/LINK_1]]",
+      "sourceHash": "d3be41180396b53b4d70458123bbecd5c037cb937ddbf8d4d1683c513a50e352",
+      "parts": [
+        {
+          "source": "タイプＩＤ（TypeId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Type ID (TypeId)[[/LINK_1]]",
+      "contextHash": "d3be41180396b53b4d70458123bbecd5c037cb937ddbf8d4d1683c513a50e352"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]通行リスト（PassageList）[[/LINK_1]]",
+      "sourceHash": "9bd86e59d5d65300c02d11c48d6eee2b52373f7fe178fc7aeb63acaa999f1459",
+      "parts": [
+        {
+          "source": "通行リスト（PassageList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Passage List (PassageList)[[/LINK_1]]",
+      "contextHash": "9bd86e59d5d65300c02d11c48d6eee2b52373f7fe178fc7aeb63acaa999f1459"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]基本通行設定（BasePassage）[[/LINK_1]]",
+      "sourceHash": "ca63658ec2456b99c5c8b46970e8172a42b7d50d5a62f80d1e4484bb92ac0393",
+      "parts": [
+        {
+          "source": "基本通行設定（BasePassage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Base Passage Settings (BasePassage)[[/LINK_1]]",
+      "contextHash": "ca63658ec2456b99c5c8b46970e8172a42b7d50d5a62f80d1e4484bb92ac0393"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]衝突判定を拡張（ExtendCollied）[[/LINK_1]]",
+      "sourceHash": "f7b57a33039e7c26ddd1b07cd3f4ee582c6fdd89a4830394cc358ae90970d788",
+      "parts": [
+        {
+          "source": "衝突判定を拡張（ExtendCollied）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Extend Collision Detection (ExtendCollied)[[/LINK_1]]",
+      "contextHash": "f7b57a33039e7c26ddd1b07cd3f4ee582c6fdd89a4830394cc358ae90970d788"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]ハシゴ属性を無視（IgnoreLadder）[[/LINK_1]]ver1.02",
+      "sourceHash": "846024e413fd57e3c75841e4cd86b74606a07a6f31fa464c51c17c186b22d5af",
+      "parts": [
+        {
+          "source": "ハシゴ属性を無視（IgnoreLadder）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Ignore Ladder Attribute (IgnoreLadder)[[/LINK_1]] ver1.02",
+      "contextHash": "846024e413fd57e3c75841e4cd86b74606a07a6f31fa464c51c17c186b22d5af"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（通行リスト）[[/LINK_1]]",
+      "sourceHash": "262cfe88d773451a057bb4221ace813e80010d7e0e93592a8ae8d87f8dcb21d9",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（通行リスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Passage List)[[/LINK_1]]",
+      "contextHash": "262cfe88d773451a057bb4221ace813e80010d7e0e93592a8ae8d87f8dcb21d9"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]通行ＩＤ（PassageId）[[/LINK_1]]",
+      "sourceHash": "eedb645913babb0f2559f290cb0a8867021d078a7bd25253b956bf3721582321",
+      "parts": [
+        {
+          "source": "通行ＩＤ（PassageId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Passage ID (PassageId)[[/LINK_1]]",
+      "contextHash": "eedb645913babb0f2559f290cb0a8867021d078a7bd25253b956bf3721582321"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]メモ（Memo）[[/LINK_1]]",
+      "sourceHash": "e6a4240e809eb471ecd4c12c0d1a5548fe8b272f3936e05c201c5a51321ad0bc",
+      "parts": [
+        {
+          "source": "メモ（Memo）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Memo (Memo)[[/LINK_1]]",
+      "contextHash": "e6a4240e809eb471ecd4c12c0d1a5548fe8b272f3936e05c201c5a51321ad0bc"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]地形タグ（TerrainTag）[[/LINK_1]]",
+      "sourceHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0",
+      "parts": [
+        {
+          "source": "地形タグ（TerrainTag）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Terrain Tag (TerrainTag)[[/LINK_1]]",
+      "contextHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]リージョンＩＤ（RegionId）[[/LINK_1]]",
+      "sourceHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3",
+      "parts": [
+        {
+          "source": "リージョンＩＤ（RegionId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Region ID (RegionId)[[/LINK_1]]",
+      "contextHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]オートタイルタイプ（AutotileType）[[/LINK_1]]",
+      "sourceHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6",
+      "parts": [
+        {
+          "source": "オートタイルタイプ（AutotileType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Autotile Type (AutotileType)[[/LINK_1]]",
+      "contextHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]タイルＩＤ（TileId）[[/LINK_1]]",
+      "sourceHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065",
+      "parts": [
+        {
+          "source": "タイルＩＤ（TileId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tile ID (TileId)[[/LINK_1]]",
+      "contextHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]通行可能（CanPass）[[/LINK_1]]",
+      "sourceHash": "eed27b19da357033d206d7024761bab90455f4a7645675b8b6d33bd8d88f8c39",
+      "parts": [
+        {
+          "source": "通行可能（CanPass）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Can Pass (CanPass)[[/LINK_1]]",
+      "contextHash": "eed27b19da357033d206d7024761bab90455f4a7645675b8b6d33bd8d88f8c39"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "※NRP_EventCollisionEX.js（当たり判定拡張プラグイン）と併用する場合は、[[LINK_1]]NRP_EventCollisionEX.js[[/LINK_1]]を最新化してください。さらに当プラグインを下に配置してください。",
+      "sourceHash": "76f59af295e5a70dd44a2f284a6f53a4b6d476fe1c833e6551efda6f1cbccfeb",
+      "parts": [
+        {
+          "source": "※NRP_EventCollisionEX.js（当たり判定拡張プラグイン）と併用する場合は、",
+          "link": false
+        },
+        {
+          "source": "NRP_EventCollisionEX.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を最新化してください。さらに当プラグインを下に配置してください。",
+          "link": false
+        }
+      ],
+      "translation": "※When using NRP_EventCollisionEX.js (the collision detection extension plugin) together with this plugin, please update [[LINK_1]]NRP_EventCollisionEX.js[[/LINK_1]] to the latest version. Also, place this plugin below it.",
+      "contextHash": "76f59af295e5a70dd44a2f284a6f53a4b6d476fe1c833e6551efda6f1cbccfeb"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "タイル情報をデバッグ表示する（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887",
+      "parts": [
+        {
+          "source": "タイル情報をデバッグ表示する（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Display tile information for debugging ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]ハシゴ属性を無視[[/LINK_1]]する機能を追加。それに伴い『飛行タイプ』はハシゴを無視するようにした。",
+      "sourceHash": "8722fcd2f552a110facdb9a98f363006b33432e57618b1af44ef72a5f753f0c6",
+      "parts": [
+        {
+          "source": "ハシゴ属性を無視",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "する機能を追加。それに伴い『飛行タイプ』はハシゴを無視するようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Adds the function to [[LINK_1]]ignore ladder attributes[[/LINK_1]]. Accordingly, the “Flying Type” now ignores ladders.",
+      "contextHash": "8722fcd2f552a110facdb9a98f363006b33432e57618b1af44ef72a5f753f0c6"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "イベントの通行判定を変更します。": "Changes event passage checks.",
+    "空を飛ぶ鳥（接触可）や、水中を泳ぐ魚などが作成できます。": "You can create birds flying through the sky (that can be touched), fish swimming underwater, and more.",
+    "地形タグやリージョンＩＤ、タイルＩＤやオートタイルタイプを条件にして、通行判定を細かく設定できます。": "You can configure passage checks in detail based on terrain tags, region IDs, tile IDs, and autotile types.",
+    "また『通常キャラの下』や『通常キャラの上』のイベントをプレイヤーと衝突可能にすることができます。": "You can also make events set to “Below characters” or “Above characters” collide with the player.",
+    "これにより、障害物を無視して接触してくる鳥型の敵（シンボルエンカウント）などを作成できます。": "This allows you to create bird-like enemies (symbol encounters) that fly into contact with the player while ignoring obstacles.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save the file, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_ChangePassage.js": "NRP_ChangePassage.js ",
+    "ver1.022（2025/03/31）": "ver1.022 (2025/03/31) ",
+    "オプション": "Options",
+    "NRP_DebugTile.js": "NRP_DebugTile.js ",
+    "ver1.01（2021/08/15）": "ver1.01 (2021/08/15) ",
+    "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_ChangePassage.jsの補助用に使えます。": "※This plugin allows you to check the autotile type and tile ID beneath your feet simply by pressing F2. It can be used as an aid for NRP_ChangePassage.js.",
+    "更新履歴（History）": "Update History (History)",
+    "2024/03/05 -> 2025/03/31（ver1.02 -> 1.022）": "2024/03/05 -> 2025/03/31 (ver1.02 -> 1.022) ",
+    "※ver1.01以前から更新した場合は『飛行タイプ』の設定を手動で変更する必要があります。": "※If updating from a version earlier than ver1.01, you must manually change the “Flight Type” setting.",
+    "ＭＶでエラーが出る不具合修正。（2025/03/24 ver1.021）": "Fixed an issue that caused errors in MV. (2025/03/24 ver1.021)",
+    "※この他にも、FISHイベントが陸に上がってしまうなどＭＶでは若干挙動が怪しい気がします。": "※In addition, the behavior in MV still seems somewhat unreliable, such as FISH events coming ashore.",
+    "ver1.021（ＭＶ対応）の実装が誤っており、通行禁止判定がＭＺ含めて正しく動作しなくなってしまっていた不具合修正。（2025/03/31 ver1.022）": "Fixed an issue caused by an incorrect implementation of ver1.021 (MV support), which caused passage-blocking checks to stop working correctly, including in MZ. (2025/03/31 ver1.022)",
+    "2023/07/23（ver1.01）": "2023/07/23 (ver1.01) ",
+    "移動先の通行判定を有効にした場合、通行（４方向）が無視されてしまう不具合修正。": "Fixed an issue where the four-direction passage settings were ignored when passage checks for the destination were enabled.",
+    "2022/03/24（ver1.00）": "2022/03/24 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータの通行タイプリストに、通行情報を設定してください。": "Configure the passage information in the Passage Type List in the plugin parameters.",
+    "※タイルＩＤやオートタイルタイプの確認には、NRP_DebugTile.jsが便利です。": "※NRP_DebugTile.js is useful for checking tile IDs and autotile types.",
+    "登録した『タイプＩＤ』を以下のように、イベントのメモ欄に記入することで紐付けを行います。": "Associate an event by entering the registered “Type ID” in the event's note field as shown below.",
+    "<ChangePassage:[タイプＩＤ]>": "<ChangePassage:[Type ID]>",
+    "また、通行リストに設定した通行判定はタイルセットとの紐付けが可能です。": "The passage checks configured in the passage list can also be associated with tilesets.",
+    "タイルセットのメモ欄に『通行ＩＤ』を記入してください。": "Enter the “Passage ID” in the tileset's note field.",
+    "<ChangePassageTile:[通行ＩＤ]>": "<ChangePassageTile:[Passage ID]>",
+    "『通行ＩＤ』が空欄の場合は全てのタイルセットに対して有効となります。": "If “Passage ID” is blank, it will apply to all tilesets.",
+    "サンプル（Sample）": "Sample (Sample)",
+    "初期状態で以下の設定が登録されています。": "The following settings are registered by default.",
+    "イベントのメモ欄に設定すれば、すぐに使用可能です。": "You can use them immediately by configuring them in an event's note field.",
+    "飛行タイプ": "Flight Type",
+    "障害物を無視する飛行型の通行タイプです。": "A flight-type passage setting that ignores obstacles.",
+    "プライオリティタイプを『通常キャラの上』にしたほうが自然になります。": "Setting the priority type to “Above characters” will look more natural.",
+    "なお、シンボルエンカウントを想定しているため、プレイヤー（および他イベント）と衝突する仕様です。": "Since this is intended for symbol encounters, it is designed to collide with the player (and other events).",
+    "※削除する際にスイッチなどで空のページに切り替えても、衝突判定が残るので注意です。『すり抜け』にしておけば問題ありません。": "※When removing it, be aware that switching to an empty page using a switch or similar will leave the collision check active. Setting it to “Through” will prevent any problems.",
+    "水中タイプ": "Underwater Type",
+    "魚や船を想定した水中のみを移動する通行タイプです。": "A passage type intended for fish and boats that only move underwater.",
+    "A1タイルセットの左上のタイルが水中として扱われます。": "The upper-left tile of the A1 tileset is treated as underwater.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "通行タイプリスト（PassageTypeList）": "Passage Type List (PassageTypeList)",
+    "通行タイプの設定を登録する一覧です。": "A list for registering passage type settings.",
+    "プラグインパラメータ（通行タイプリスト）": "Plugin Parameters (Passage Type List)",
+    "タイプＩＤ（TypeId）": "Type ID (TypeId)",
+    "通行タイプの識別子です。": "The identifier for a passage type.",
+    "通行リスト（PassageList）": "Passage List (PassageList)",
+    "通行設定の一覧です。": "A list of passage settings.",
+    "基本通行設定（BasePassage）": "Base Passage (BasePassage)",
+    "通行の基本設定です。これを基準にして通行リストに例外を設定します。": "The basic passage settings. Exceptions are configured in the passage list based on these settings.",
+    "衝突判定を拡張（ExtendCollied）": "Extend Collision Checks (ExtendCollied)",
+    "プライオリティタイプが『通常キャラと重ならない』以外のイベントにも衝突判定を付与し、トリガーを有効化します。": "Adds collision checks and enables the trigger for events whose priority type is anything other than “Below characters.”",
+    "通常はプライオリティタイプが『通常キャラの下』『通常キャラの上』のイベントは、トリガーを『イベントから接触』にしてもプレイヤーと接触できません。これは鳥のような飛行系のシンボルエンカウントを行いたい場合に問題となります。": "Normally, events with a priority type of “Below characters” or “Above characters” cannot come into contact with the player, even when their trigger is set to “Player Touch.” This is a problem when you want to create flying symbol encounters, such as birds.",
+    "そこでそれを解決するための機能です。": "This is the function for resolving that issue.",
+    "ハシゴ属性を無視（IgnoreLadder）ver1.02": "Ignore Ladder (IgnoreLadder) ver1.02",
+    "ハシゴ属性の影響を受けないようになります。": "The character will no longer be affected by the ladder attribute.",
+    "上述した鳥のようなイベントを作りたい場合に有効です。": "This is useful when you want to create an event like the bird described above.",
+    "プラグインパラメータ（通行リスト）": "Plugin Parameter (Passage List)",
+    "通行ＩＤ（PassageId）": "Passage ID (PassageId)",
+    "タイルセットと紐付ける識別子です。": "This is an identifier associated with a tileset.",
+    "空欄の場合は全タイルセットで有効となります。": "If left blank, it will be enabled for all tilesets.",
+    "メモ（Memo）": "Memo (Memo)",
+    "判別用のメモです。分かりやすい名前を付けてください。": "This memo is used for identification. Please give it an easily recognizable name.",
+    "地形タグ（TerrainTag）": "Terrain Tag (TerrainTag)",
+    "対象とする地形タグ（1~7）を指定します。": "Specify the target terrain tags (1~7).",
+    "複数指定も可能です。（例：1,3~5）": "Multiple values can be specified. (Example: 1,3~5)",
+    "７つまでしか設定できないのでご利用は計画的に。": "Since only up to seven can be configured, use them wisely.",
+    "リージョンＩＤ（RegionId）": "Region ID (RegionId)",
+    "対象とするリージョン（1~255）を指定します。": "Specify the target regions (1~255).",
+    "オートタイルタイプ（AutotileType）": "Autotile Type (AutotileType)",
+    "対象とするオートタイルタイプを指定します。": "Specify the target autotile types.",
+    "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。": "An autotile type is a number assigned to each autotile. By default, it is used to determine battle backgrounds.",
+    "地形タグと異なり数の制限がないため、自由に設定が可能です。": "Unlike terrain tags, there is no limit on the number of these, so they can be configured freely.",
+    "ただし、この値は通常確認できません。": "However, this value cannot normally be checked.",
+    "オプションにあるNRP_DebugTile.jsで確認ができます。": "You can check it using NRP_DebugTile.js in the options.",
+    "タイルＩＤ（TileId）": "Tile ID (TileId)",
+    "対象とするタイルＩＤを指定します。": "Specify the target tile IDs.",
+    "こちらはエディタの機能で普通に取得できますが、面倒です。": "This can be obtained normally using the editor's functions, but doing so is tedious.",
+    "こちらもNRP_DebugTile.jsでの確認をオススメします。": "I also recommend checking this using NRP_DebugTile.js.",
+    "通行可能（CanPass）": "Can Pass (CanPass)",
+    "通行可能かどうか？": "Whether passage is possible.",
+    "特に変更したくない場合は空欄にしておいてください": "If you do not want to change anything in particular, leave this blank."
+  }
+}

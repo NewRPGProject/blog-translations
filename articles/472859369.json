@@ -1,0 +1,3522 @@
+{
+  "articleId": "472859369",
+  "sourceUrl": "https://newrpg.seesaa.net/article/472859369.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "9792bde906e89d7148f9f7a8c48088051a96adae796b69630c7d5674089de48f",
+  "translatedAt": "2026-08-31T02:05:47.247Z",
+  "title": "Change the Battle System to CTB [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "戦闘システムをＣＴＢに変更する【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "6355ec352d67878a10b5b88444507e540dcbfe6e2514193cfff8708cca05a2ed",
+      "translation": "Change the Battle System to CTB [RPG Maker MZ & MV Plugin]",
+      "contextHash": "6355ec352d67878a10b5b88444507e540dcbfe6e2514193cfff8708cca05a2ed"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ツクールＭＶ～ＭＺ向けＣＴＢ（カウントタイムバトル）を実現するプラグインを公開しました。",
+      "sourceHash": "7585688f58049dec90a344744f11eab2371b1bc75bacb763b8028c29b06489c3",
+      "translation": "I have released a plugin that implements CTB (Count Time Battle) for RPG Maker MV and MZ.",
+      "contextHash": "7585688f58049dec90a344744f11eab2371b1bc75bacb763b8028c29b06489c3"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ＣＴＢについては説明不要かと思いますが、素早さによって行動回数の増える戦闘システムです。",
+      "sourceHash": "40d85914d39979783911aefddf800273db16bd88c9c2864d782af0c15e61ee8d",
+      "translation": "CTB probably needs no explanation, but it is a battle system where agility increases the number of actions you can take.",
+      "contextHash": "40d85914d39979783911aefddf800273db16bd88c9c2864d782af0c15e61ee8d"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "特に設定をしなくとも、プラグインをオンにするだけで即動きます。",
+      "sourceHash": "c7ea415ed8544c2c558e47d14f879e306c0b4951d299b986ac1de86e3efc2e7b",
+      "translation": "It works immediately simply by turning on the plugin, without any special configuration.",
+      "contextHash": "c7ea415ed8544c2c558e47d14f879e306c0b4951d299b986ac1de86e3efc2e7b"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "初期設定では顔グラを表示しますが、キャラグラを出したり名前を文字表示したりとカスタマイズも可能です。",
+      "sourceHash": "38bf98c4ab1e378fd9e048325246bedd43493e01569d2fd500774d32436df038",
+      "translation": "Face images are displayed by default, but you can customize it to display character sprites or names as text.",
+      "contextHash": "38bf98c4ab1e378fd9e048325246bedd43493e01569d2fd500774d32436df038"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "フロントビューでもサイドビューでも問題なく機能します。",
+      "sourceHash": "2faea7d839ff0c6ee920f5ee6a45b733142f58a808d11229a7a2bcead4408aea",
+      "translation": "It works properly with both front-view and side-view battles.",
+      "contextHash": "2faea7d839ff0c6ee920f5ee6a45b733142f58a808d11229a7a2bcead4408aea"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "導入方法",
+      "sourceHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4",
+      "translation": "Installation",
+      "contextHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下２つのファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "fa8a8cf5448b0b18c110e24902d75eb54adaff8ffd96587dfc08418712ed35a5",
+      "translation": "Download the following two files and place them in [Project]\\js\\plugins. Turn the feature ON in the plugin manager.",
+      "contextHash": "fa8a8cf5448b0b18c110e24902d75eb54adaff8ffd96587dfc08418712ed35a5"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※ＭＺで使用する場合、システム上の設定は必ずターン制にしてください。タイムプログレスになっていると動きません。",
+      "sourceHash": "2b6518922277313605f912170edb97f1ae536628964966b15a7cf955db140877",
+      "translation": "※When using it with MZ, be sure to set the system's battle system to turn-based. It will not work when set to time progress.",
+      "contextHash": "2b6518922277313605f912170edb97f1ae536628964966b15a7cf955db140877"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_CountTimeBattle.js",
+      "sourceHash": "70ee0db7970537666679887e04dc942790fbadaee2f624b6f871fe216f5d15c8",
+      "translation": "NRP_CountTimeBattle.js ",
+      "contextHash": "16774d51367ba2220d03a4e12f4b4d3aa0b6a731440bf1517319987488115df9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.25（2025/06/02）",
+      "sourceHash": "f5d91101ae69e01fe29efb4228a68a7d7fc760c87027db191a4c70c3a4db44d5",
+      "translation": "ver1.25 (2025/06/02) ",
+      "contextHash": "16774d51367ba2220d03a4e12f4b4d3aa0b6a731440bf1517319987488115df9"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_VisualTurn.js",
+      "sourceHash": "c92d40c2be2427e6efd567f73d1f2b22826c76bf9dfba326b81d4255293e145e",
+      "translation": "NRP_VisualTurn.js ",
+      "contextHash": "89ce293fdbe4ffaa3bcbc34ab69d2c9ba7639cf34344ef892460d3233fd49287"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ver2.03（2024/05/01）",
+      "sourceHash": "f076fda00d0e935fff17d8902f393f245a4174e6af12cb18ea399a0db482c93f",
+      "translation": "ver2.03 (2024/05/01) ",
+      "contextHash": "89ce293fdbe4ffaa3bcbc34ab69d2c9ba7639cf34344ef892460d3233fd49287"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "上から順番に取り込む必要があるので注意です。",
+      "sourceHash": "db8f0952db990ddf43aac2a0fe4d3bff5c018f81798879cb10d8ede3882e8467",
+      "translation": "Note that they must be imported in the order shown above.",
+      "contextHash": "db8f0952db990ddf43aac2a0fe4d3bff5c018f81798879cb10d8ede3882e8467"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ファイルが２つあるのは、制御系と表示系で分割したためです。更新日を見て最新を取るように気をつけてください。",
+      "sourceHash": "df6c03b4873e52577314133352f2ce51fb3da5a26c7dfafdf75b8b550d6e44f1",
+      "translation": "There are two files because the control and display functions have been separated. Be sure to check the update date and use the latest versions.",
+      "contextHash": "df6c03b4873e52577314133352f2ce51fb3da5a26c7dfafdf75b8b550d6e44f1"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "更新履歴",
+      "sourceHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d",
+      "translation": "Update History",
+      "contextHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "連続行動スキル（速度補正2000）の直後に行動異常になると無限ループ（フリーズ）に陥ってしまう不具合修正。",
+      "sourceHash": "ef48826a9931359152499841d366cf75e4830110a44f74c0d974798d6bbad19b",
+      "translation": "Fixed a bug that caused an infinite loop (freeze) when an action abnormality occurred immediately after a repeated-action skill (speed modifier 2000).",
+      "contextHash": "ef48826a9931359152499841d366cf75e4830110a44f74c0d974798d6bbad19b"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "蘇生スキルを選択時、蘇生対象者の行動予測を表示できるようにした。",
+      "sourceHash": "0ef151fb3a4a723a1cf1449351108a174a158373a7899454e5b65c43db584308",
+      "translation": "Action predictions for the revival target are now displayed when selecting a revival skill.",
+      "contextHash": "0ef151fb3a4a723a1cf1449351108a174a158373a7899454e5b65c43db584308"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "戦闘不能者に対して範囲が有効でないスキルまで行動予測を表示してしまう不具合修正。（2024/08/23 ver1.231）",
+      "sourceHash": "63f4d5eb05078c05fc2122895143c5c7a5fd38663369a81f2fb7e52991d126cd",
+      "translation": "Fixed a bug that displayed action predictions even for skills whose scope was not effective against incapacitated battlers. (2024/08/23 ver1.231)",
+      "contextHash": "63f4d5eb05078c05fc2122895143c5c7a5fd38663369a81f2fb7e52991d126cd"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ＭＶにてスキルの順序変化を予測する機能をオンにすると、エラーになってしまう不具合修正。（2024/08/28 ver1.232）",
+      "sourceHash": "464c05ce0f08495baa697a6cc8b1422f05c0703d9ebdc08b06d91d9309eb4dcc",
+      "translation": "Fixed an error that occurred in MV when the feature for predicting changes in skill order was enabled. (2024/08/28 ver1.232)",
+      "contextHash": "464c05ce0f08495baa697a6cc8b1422f05c0703d9ebdc08b06d91d9309eb4dcc"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "スキルが不発になった場合、スキルの終了処理が適切に行われない問題に対処。（NumbStates.jsなどとの競合解消）（2024/09/15 ver1.233）",
+      "sourceHash": "4e4f7da408ca8117e5164c6e1033ad851728ecdbe8baf5c4c65dbaed5f9dcbb9",
+      "translation": "Addressed an issue where skill termination processing was not performed correctly when a skill failed to activate. (Resolved conflicts with NumbStates.js and others) (2024/09/15 ver1.233)",
+      "contextHash": "4e4f7da408ca8117e5164c6e1033ad851728ecdbe8baf5c4c65dbaed5f9dcbb9"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "スキルの範囲が味方単体（無条件）の場合、行動予測に反映されなくなる不具合修正。（2024/11/03 ver1.234）",
+      "sourceHash": "89f348180312ad809fc7a766d9b4977649292466d28ccb46d95ae45ca005307f",
+      "translation": "Fixed a bug where skills with a scope of one ally (no conditions) were no longer reflected in action predictions. (2024/11/03 ver1.234)",
+      "contextHash": "89f348180312ad809fc7a766d9b4977649292466d28ccb46d95ae45ca005307f"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "敵キャラの変身時、敏捷性の変化が行動順に反映されない不具合修正。（2024/11/03 ver1.235）",
+      "sourceHash": "0c17d9d98b50128b9db4c5c63195ced883b284fa49e86309c78f54bc334690df",
+      "translation": "Fixed a bug where changes in an enemy's agility upon transformation were not reflected in the action order. (2024/11/03 ver1.235)",
+      "contextHash": "0c17d9d98b50128b9db4c5c63195ced883b284fa49e86309c78f54bc334690df"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "ＭＶにてスキルの順序変化を予測する機能をオンにすると、エラーになってしまう不具合修正。（2025/04/15 ver1.236）",
+      "sourceHash": "977c09165f8a38113869142da71f6d0bd4e99a479fd9a85d3164ce9eba9b3b0a",
+      "translation": "Fixed an error that occurred in MV when the feature for predicting changes in skill order was enabled. (2025/04/15 ver1.236)",
+      "contextHash": "977c09165f8a38113869142da71f6d0bd4e99a479fd9a85d3164ce9eba9b3b0a"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "※初期設定では命中タイプが必中のスキルのみが対象となります。",
+      "sourceHash": "6e78d825e9c9656a280c1461823919a9000d084ae6e8c675ede8754a298b8b25",
+      "translation": "※By default, only skills with Certain Hit as their hit type are covered.",
+      "contextHash": "6e78d825e9c9656a280c1461823919a9000d084ae6e8c675ede8754a298b8b25"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "ver1.21にて、自身の敏捷性を変化させた場合、次の行動が即時行動になってしまう不具合修正。",
+      "sourceHash": "47b6f7d4f2df8b07624b44dafb61a9e0b80fad25861ebbd9b8cf4f8b22ceed0c",
+      "translation": "Fixed a bug in ver1.21 where changing one's own agility caused the next action to occur immediately.",
+      "contextHash": "47b6f7d4f2df8b07624b44dafb61a9e0b80fad25861ebbd9b8cf4f8b22ceed0c"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "戦闘勝利時など文章表示時に動作が非常に重くなる不具合を修正。",
+      "sourceHash": "92af5f8db6d5e342076dc021f80fe2c9f5e8c2046f9a5f3b86c5349e1bbe8f4e",
+      "translation": "Fixed a bug that caused severe slowdown when displaying text, such as upon victory in battle.",
+      "contextHash": "92af5f8db6d5e342076dc021f80fe2c9f5e8c2046f9a5f3b86c5349e1bbe8f4e"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "（2024/08/16 ver1.221）",
+      "sourceHash": "f695cc84e23b6b7b0f501558267551105f3e3137b481a4069493780664209135",
+      "translation": " (2024/08/16 ver1.221) ",
+      "contextHash": "f695cc84e23b6b7b0f501558267551105f3e3137b481a4069493780664209135"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "自身の敏捷性を変化させた場合、次の行動が早くならない不具合修正。",
+      "sourceHash": "e0e9407ae52636d6d0c0f9c9f121445fcee04dc24db603f1845bbf4b8d5b62c9",
+      "translation": "Fixed a bug where changing one's own agility did not make the next action occur sooner.",
+      "contextHash": "e0e9407ae52636d6d0c0f9c9f121445fcee04dc24db603f1845bbf4b8d5b62c9"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "『味方の始動時間バラツキ』『敵の始動時間バラツキ』『先制時の始動時間ボーナス』『奇襲時の始動時間ボーナス』『逃走時のペナルティ時間』に数式を設定できるようにした。（2024/06/12 ver1.191）",
+      "sourceHash": "7cd113d15c4d5dc3be649e7b649fad035f2fba3b7a75298f0837e16c81223339",
+      "translation": "Formulas can now be set for “Ally Start Time Variance,” “Enemy Start Time Variance,” “Preemptive Start Time Bonus,” “Surprise Start Time Bonus,” and “Escape Penalty Time.” (2024/06/12 ver1.191)",
+      "contextHash": "7cd113d15c4d5dc3be649e7b649fad035f2fba3b7a75298f0837e16c81223339"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "画像Ｘ座標シフト、画像Ｙ座標シフトを追加。",
+      "sourceHash": "9ac9f9bc5be79b09db7dfbfdc6557ecae0d1031bc2eae7397ba7156d5286fe8e",
+      "translation": "Added Image X Coordinate Shift and Image Y Coordinate Shift.",
+      "contextHash": "9ac9f9bc5be79b09db7dfbfdc6557ecae0d1031bc2eae7397ba7156d5286fe8e"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "敵の表示倍率を100より大きくすると、敵の画像が途切れてしまうことがある不具合修正。",
+      "sourceHash": "042722ab866e53ab82545454f64cc660e5551bb01aaec571761a6c224013eef0",
+      "translation": "Fixed a bug where an enemy's image could be clipped when its display scale was set above 100.",
+      "contextHash": "042722ab866e53ab82545454f64cc660e5551bb01aaec571761a6c224013eef0"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "※敵の表示倍率を100以外にしている場合、今までと若干表示がズレる可能性があるのでご注意ください。",
+      "sourceHash": "7b631a1f3e4564c608afe301b995a14e8a6f83969e645656b35ddafe36907607",
+      "translation": "※Please note that when an enemy's display scale is set to anything other than 100, its position may be slightly different from before.",
+      "contextHash": "7b631a1f3e4564c608afe301b995a14e8a6f83969e645656b35ddafe36907607"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "レイアウト関連の機能を大幅に強化。",
+      "sourceHash": "582c029b1243bc640aba918320b007991f58979752ee5431754f4aec8d401168",
+      "translation": "Significantly enhanced layout-related features.",
+      "contextHash": "582c029b1243bc640aba918320b007991f58979752ee5431754f4aec8d401168"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "NRP_PartyAttack.jsと併用し、かつ自身が対象のスキルを使うと行動順序のアクターが白表示されてしまう問題に対処。",
+      "sourceHash": "d2581721e13936632c02db3ed016142ec5e32dba4cb410104dbc14e030308369",
+      "translation": "Addressed an issue where, when used together with NRP_PartyAttack.js, the actor in the action order was displayed in white when using a skill targeting oneself.",
+      "contextHash": "d2581721e13936632c02db3ed016142ec5e32dba4cb410104dbc14e030308369"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "ＭＶにて戦闘中に仲間を加えた場合、ＷＴが初期設定されない不具合を修正。",
+      "sourceHash": "2e5a28b5f8d10dbecdafb92ef79083f785f967de4072bf51514f3d93de989560",
+      "translation": "Fixed a bug in MV where WT was not initialized when an ally was added during battle.",
+      "contextHash": "2e5a28b5f8d10dbecdafb92ef79083f785f967de4072bf51514f3d93de989560"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "ＭＶかつパーティコマンドを表示しない設定の場合、戦闘開始直後に付加したステートが表示されない不具合修正。",
+      "sourceHash": "613e6556d8a014113ff9ecda63ed77077333cdb53dead588c957d841f1026e93",
+      "translation": "Fixed a bug in MV where states applied immediately after battle started were not displayed when the setting to hide party commands was enabled.",
+      "contextHash": "613e6556d8a014113ff9ecda63ed77077333cdb53dead588c957d841f1026e93"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "ＣＴＢにてパーティコマンドを表示しない設定の場合、順序が初期表示されない不具合を修正。",
+      "sourceHash": "2a1b91f1134d31e1c68fb01cc579eca64d3a27493ca6a28710bdc945cc4f3cd6",
+      "translation": "Fixed a bug where the order was not displayed initially when party commands were set not to be displayed in CTB.",
+      "contextHash": "2a1b91f1134d31e1c68fb01cc579eca64d3a27493ca6a28710bdc945cc4f3cd6"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "敏捷性が０の際に何度も行動できてしまう不具合修正。",
+      "sourceHash": "b586d15c5840694148710d3df8dbf4cb923beb1998ea348fe31425ebdfd973ab",
+      "translation": "Fixed a bug that allowed repeated actions when agility was 0.",
+      "contextHash": "b586d15c5840694148710d3df8dbf4cb923beb1998ea348fe31425ebdfd973ab"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "（2022/08/05 ver1.131）",
+      "sourceHash": "f8f9742f6a749230af05334dbb50c81ef5f43e7eef2b321e13c6fde3ce42aa0a",
+      "translation": " (2022/08/05 ver1.131) ",
+      "contextHash": "f8f9742f6a749230af05334dbb50c81ef5f43e7eef2b321e13c6fde3ce42aa0a"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "選択中のバトラーシンボルについて画像のみを白く強調表示するように変更。",
+      "sourceHash": "20e580dc8b71d1aee33096f5940878c563d1a7ce0f6454db5b211bc0d106300d",
+      "translation": "Changed the selected battler symbol so that only its image is highlighted in white.",
+      "contextHash": "20e580dc8b71d1aee33096f5940878c563d1a7ce0f6454db5b211bc0d106300d"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "ＵＩエリアの幅が一部ウィンドウに反映されていない不具合修正。",
+      "sourceHash": "c29650e9fc89b216ee45620ecb9aaf63c7bfa4d8dd2861eeb32dd6353c5d67f4",
+      "translation": "Fixed a bug where the UI area's width was not reflected in some windows.",
+      "contextHash": "c29650e9fc89b216ee45620ecb9aaf63c7bfa4d8dd2861eeb32dd6353c5d67f4"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "新規登場したバトラーのＷＴを初期設定するように修正。",
+      "sourceHash": "470a9fb72f718cfd73b578836678757279076a03827c892587927f38544cad5a",
+      "translation": "Changed the system to initialize the WT of newly appearing battlers.",
+      "contextHash": "470a9fb72f718cfd73b578836678757279076a03827c892587927f38544cad5a"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "一人が行動終了した際に全員分の行動終了処理（毒やＨＰ再生、ステートの継続ターンなど）が実行されてしまう不具合に対応。",
+      "sourceHash": "ef64042b3fe66db1b9defaeb7999699c30903d885eb3740ba301e49204cc0f88",
+      "translation": "Addressed a bug where, when one battler finished acting, action-end processing for all battlers (such as poison, HP regeneration, and state duration turns) was executed.",
+      "contextHash": "ef64042b3fe66db1b9defaeb7999699c30903d885eb3740ba301e49204cc0f88"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "※MZ1.4.0の更新の影響のようです。該当の方は更新をお願いします！",
+      "sourceHash": "511d7622ce7bd29b9177ef25df3b3fc9e0b18f3ebe5eab538efc47b27b177aba",
+      "translation": "※This appears to be caused by the MZ1.4.0 update. If this applies to you, please update!",
+      "contextHash": "511d7622ce7bd29b9177ef25df3b3fc9e0b18f3ebe5eab538efc47b27b177aba"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "戦闘開始直後にピクチャーなどの画像表示を行うと、順序画像の表示が不安定になる不具合修正。",
+      "sourceHash": "1b86e01c41b676057fc1c548ec407b3f74c851c6af74cdaea8ef48ad503a289c",
+      "translation": "Fixed a bug where displaying images such as pictures immediately after battle started made the order images display unstably.",
+      "contextHash": "1b86e01c41b676057fc1c548ec407b3f74c851c6af74cdaea8ef48ad503a289c"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "↑の修正漏れ（背景画像が適切に読み込まれない問題）を再修正。（ver1.141）",
+      "sourceHash": "ca1ecd2448f62aab5a0a953cbf30da9244baf98f9be823045e1fd5ccd8e3213b",
+      "translation": "Re-fixed the issue missed in the fix above (background images were not loaded properly). (ver1.141)",
+      "contextHash": "ca1ecd2448f62aab5a0a953cbf30da9244baf98f9be823045e1fd5ccd8e3213b"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "プラグイン内の解説を大幅拡充。（11/20 ver1.142）",
+      "sourceHash": "04e24c4615e65df0619eba56c96353e2db5f0f6b60b6f23b0b2aaf4eb0d2975c",
+      "translation": "Significantly expanded the explanations within the plugin. (11/20 ver1.142)",
+      "contextHash": "04e24c4615e65df0619eba56c96353e2db5f0f6b60b6f23b0b2aaf4eb0d2975c"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "ため技プラグインとの競合対策用に調整。（2022/01/11 ver1.143）",
+      "sourceHash": "3fdb515862034e3720c2aa4d7c7216c8b5d9b3625f979333c8948fdf37010ba8",
+      "translation": "Adjusted the plugin to prevent conflicts with the Charge Skill plugin. (2022/01/11 ver1.143)",
+      "contextHash": "3fdb515862034e3720c2aa4d7c7216c8b5d9b3625f979333c8948fdf37010ba8"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "外部プラグインによる顔グラやキャラグラの変更が、反映されない不具合修正。",
+      "sourceHash": "8d679f70da4e0324526a184f22c853793fbabbafd464b21e8ccd590e0ce6af9c",
+      "translation": "Fixed a bug where changes to face images or character sprites made by external plugins were not reflected.",
+      "contextHash": "8d679f70da4e0324526a184f22c853793fbabbafd464b21e8ccd590e0ce6af9c"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "ウィンドウを重ねて表示できるように改良。",
+      "sourceHash": "4f070790aa1412e84ba039f641094e15200822f3d275cf9e3331a35ee52f8e99",
+      "translation": "Improved the plugin to allow windows to be displayed overlapping one another.",
+      "contextHash": "4f070790aa1412e84ba039f641094e15200822f3d275cf9e3331a35ee52f8e99"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "それに伴い初期状態では行動順序を右寄せ＆上寄せするように変更。",
+      "sourceHash": "077e72151eb7979918d2338da0fd89154fb628a82937f21ab4fed4328edcb263",
+      "translation": "Accordingly, the default setting was changed so that the action order is aligned to the right and top.",
+      "contextHash": "077e72151eb7979918d2338da0fd89154fb628a82937f21ab4fed4328edcb263"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "また、ウィンドウ表示系のパラメータを追加（細分化）＆整理。",
+      "sourceHash": "3430ef11726a10b6522f0c3d04001adf4a14f6e8220d885de6f2179d957bc21b",
+      "translation": "Window display parameters were also added (and subdivided) and reorganized.",
+      "contextHash": "3430ef11726a10b6522f0c3d04001adf4a14f6e8220d885de6f2179d957bc21b"
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "強化/弱体を自身にかけた場合、即座に１ターン経過してしまう問題への対処。",
+      "sourceHash": "45df8f4ec5b1f4d8764b47ed7810823cdb3362e3505dc0d458513c2028e62574",
+      "translation": "Addressed an issue where applying a buff or debuff to oneself caused one turn to elapse immediately.",
+      "contextHash": "45df8f4ec5b1f4d8764b47ed7810823cdb3362e3505dc0d458513c2028e62574"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "※ステートは対策済みでしたが、強化/弱体への考慮が抜けていました。",
+      "sourceHash": "71546f135ecd7120e3d31014fff75c63229ca425e1efa18614d47ea272a2b930",
+      "translation": "※States had already been addressed, but buffs and debuffs had been overlooked.",
+      "contextHash": "71546f135ecd7120e3d31014fff75c63229ca425e1efa18614d47ea272a2b930"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "基本的には初期値のオンを推奨します。以前のverと挙動が変わるのが嫌な場合は『自身への強化弱体ターン+1』の項目をオフにしてください。",
+      "sourceHash": "e4bd1ea8ac9436a2e5dab8c82d077f600768b575131ec8051987fad3fdb2a305",
+      "translation": "Basically, I recommend leaving it enabled by default. If you do not want the behavior to change from previous versions, turn off the “+1 Turn for Buffs and Debuffs on Self” option.",
+      "contextHash": "e4bd1ea8ac9436a2e5dab8c82d077f600768b575131ec8051987fad3fdb2a305"
+    },
+    {
+      "id": "list-041",
+      "type": "list",
+      "source": "二段階の強化/弱体を自分にかけた場合、想定より１ターン長く効果がかかってしまう不具合修正。（11/01 ver1.101）",
+      "sourceHash": "391fef938ce46ab0015d4ffa76f6b3c0d3bef22ed75748f11b676af7c066471f",
+      "translation": "Fixed a bug where applying a two-stage buff/debuff to oneself caused the effect to last one turn longer than intended. (11/01 ver1.101)",
+      "contextHash": "391fef938ce46ab0015d4ffa76f6b3c0d3bef22ed75748f11b676af7c066471f"
+    },
+    {
+      "id": "list-042",
+      "type": "list",
+      "source": "ツクールＭＺに対応。",
+      "sourceHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9",
+      "translation": "Supports RPG Maker MZ. ",
+      "contextHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9"
+    },
+    {
+      "id": "list-043",
+      "type": "list",
+      "source": "ツクールＭＺに対応。",
+      "sourceHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9",
+      "translation": "Supports RPG Maker MZ.",
+      "contextHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "2020/08/03～2020/08/14",
+      "sourceHash": "4520a223cdb49fb1e1b9d26898e4a3b15b312fdada2f93d44f94253c3ab89b5d",
+      "translation": "2020/08/03~2020/08/14",
+      "contextHash": "4520a223cdb49fb1e1b9d26898e4a3b15b312fdada2f93d44f94253c3ab89b5d"
+    },
+    {
+      "id": "list-044",
+      "type": "list",
+      "source": "それに伴い、スキル選択時の行動予測で行動者を先頭表示しないようにした。",
+      "sourceHash": "8d14671507b2d06b70948631d62844919b266c763348e56754af34f144249005",
+      "translation": "Accordingly, the acting battler is no longer displayed first in the action prediction when selecting a skill.",
+      "contextHash": "8d14671507b2d06b70948631d62844919b266c763348e56754af34f144249005"
+    },
+    {
+      "id": "list-045",
+      "type": "list",
+      "source": "行動異常時にターンが回らなくなる不具合修正。（ver1.081）",
+      "sourceHash": "9e97bdd581913297adf7fb56b727c255c46644a2c671e4e1591dbf7396702084",
+      "translation": "Fixed a bug where the turn would not advance when an action was abnormal. (ver1.081)",
+      "contextHash": "9e97bdd581913297adf7fb56b727c255c46644a2c671e4e1591dbf7396702084"
+    },
+    {
+      "id": "list-046",
+      "type": "list",
+      "source": "コマンド入力中（inputting）状態を正しく設定するように対応。",
+      "sourceHash": "a1ac9fb9e390ec204fe1a1452c536a1b3633dd1fe94211209d790045ed9976d4",
+      "translation": "The inputting state is now set correctly.",
+      "contextHash": "a1ac9fb9e390ec204fe1a1452c536a1b3633dd1fe94211209d790045ed9976d4"
+    },
+    {
+      "id": "list-047",
+      "type": "list",
+      "source": "※他プラグインとの連携に関係するだけで、大きな影響はありません",
+      "sourceHash": "45edff6e85339adff1670d8594734bb369efbaf12d2e31768ad1e0a8d615b277",
+      "translation": "※This only concerns compatibility with other plugins and has no major impact.",
+      "contextHash": "45edff6e85339adff1670d8594734bb369efbaf12d2e31768ad1e0a8d615b277"
+    },
+    {
+      "id": "list-048",
+      "type": "list",
+      "source": "英語対応。",
+      "sourceHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978",
+      "translation": "Added English support.",
+      "contextHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978"
+    },
+    {
+      "id": "list-049",
+      "type": "list",
+      "source": "睡眠などの異常モーションが正しく表示されない不具合修正。（ver1.071）",
+      "sourceHash": "2f30dc4aebf008377fb409210086f5aa2910c1cdf2f0f14420a5a89dfd577295",
+      "translation": "Fixed a bug where abnormal motions such as sleep were not displayed correctly. (ver1.071)",
+      "contextHash": "2f30dc4aebf008377fb409210086f5aa2910c1cdf2f0f14420a5a89dfd577295"
+    },
+    {
+      "id": "list-050",
+      "type": "list",
+      "source": "英語対応。",
+      "sourceHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978",
+      "translation": "Added English support.",
+      "contextHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978"
+    },
+    {
+      "id": "list-051",
+      "type": "list",
+      "source": "バトルイベントでアクターの個別ターンが正常に取得できない不具合修正。",
+      "sourceHash": "3fd481604a95e2d9ffd657d44bfb9f8ad2e8a093f07db012c07c65847a53e9df",
+      "translation": "Fixed a bug where an actor's individual turn could not be retrieved correctly in battle events.",
+      "contextHash": "3fd481604a95e2d9ffd657d44bfb9f8ad2e8a093f07db012c07c65847a53e9df"
+    },
+    {
+      "id": "list-052",
+      "type": "list",
+      "source": "複数回行動をキャンセルできない不具合修正。（04/25 ver1.061）",
+      "sourceHash": "27991f77957b1f72fdcf6409f35d7d2cc76e5e61ee3bb1f757bdb952f51e6d3e",
+      "translation": "Fixed a bug where multiple actions could not be canceled. (04/25 ver1.061)",
+      "contextHash": "27991f77957b1f72fdcf6409f35d7d2cc76e5e61ee3bb1f757bdb952f51e6d3e"
+    },
+    {
+      "id": "list-053",
+      "type": "list",
+      "source": "行動時に一瞬余計なモーションが入る不具合修正。（04/25 ver1.062）",
+      "sourceHash": "085252dc590b3fc6420da45534257254f8ef6692517bd1f7f1da5822c1691b92",
+      "translation": "Fixed a bug where an unnecessary motion was briefly displayed when acting. (04/25 ver1.062)",
+      "contextHash": "085252dc590b3fc6420da45534257254f8ef6692517bd1f7f1da5822c1691b92"
+    },
+    {
+      "id": "list-054",
+      "type": "list",
+      "source": "ターン終了時のバトルイベントで行動主体が次の行動者となる不具合修正。",
+      "sourceHash": "8c2b5d2993ff1cfba8f7908ee38c23b74a1292c7a8df51f2e77ec42d37e3848e",
+      "translation": "Fixed a bug where the acting subject became the next battler to act in a battle event at the end of a turn.",
+      "contextHash": "8c2b5d2993ff1cfba8f7908ee38c23b74a1292c7a8df51f2e77ec42d37e3848e"
+    },
+    {
+      "id": "list-055",
+      "type": "list",
+      "source": "ＴＰの初期値が行動するまで表示されない不具合修正。",
+      "sourceHash": "e24232d35fe21e20e6c13174c1408415ac0b5ad9e356dd5919fcaa9817a40a8c",
+      "translation": "Fixed a bug where the initial TP value was not displayed until the battler acted.",
+      "contextHash": "e24232d35fe21e20e6c13174c1408415ac0b5ad9e356dd5919fcaa9817a40a8c"
+    },
+    {
+      "id": "list-056",
+      "type": "list",
+      "source": "味方のターンが来るまで行動順が表示されない不具合修正。",
+      "sourceHash": "2f0134d469c73d63b5167f0ce4762404dd9f708fef5a235740b04b2d2e14a24c",
+      "translation": "Fixed a bug where the action order was not displayed until an ally's turn came.",
+      "contextHash": "2f0134d469c73d63b5167f0ce4762404dd9f708fef5a235740b04b2d2e14a24c"
+    },
+    {
+      "id": "list-057",
+      "type": "list",
+      "source": "不要な重複処理を削除。（01/30 ver1.052）",
+      "sourceHash": "e731e6b8a5ec2cd16511880f53004cfad8ebc4e34982cfd9cfaa8be215c2dc84",
+      "translation": "Removed unnecessary duplicate processing. (01/30 ver1.052)",
+      "contextHash": "e731e6b8a5ec2cd16511880f53004cfad8ebc4e34982cfd9cfaa8be215c2dc84"
+    },
+    {
+      "id": "list-058",
+      "type": "list",
+      "source": "ウィンドウ及び敵味方の背景を指定可能に。",
+      "sourceHash": "4d818b8b8539f083dd6e016dd6dc053af45b06aae6d47ab4b99f442b9c6dc368",
+      "translation": "Windows and enemy/ally backgrounds can now be specified.",
+      "contextHash": "4d818b8b8539f083dd6e016dd6dc053af45b06aae6d47ab4b99f442b9c6dc368"
+    },
+    {
+      "id": "list-059",
+      "type": "list",
+      "source": "キャラグラの向き指定を可能に。",
+      "sourceHash": "96843d7aaacd6be18b07bf1e782a65c56b03242092b2e7a83f927f05ee8fab04",
+      "translation": "Character graphic directions can now be specified.",
+      "contextHash": "96843d7aaacd6be18b07bf1e782a65c56b03242092b2e7a83f927f05ee8fab04"
+    },
+    {
+      "id": "list-060",
+      "type": "list",
+      "source": "プラグインパラメータの画像縦幅・横幅を整理。",
+      "sourceHash": "06f6591d56658362bf94256f278df66b334840450dc6bdaefd5f0bd3133ba46c",
+      "translation": "Reorganized the image height and width plugin parameters.",
+      "contextHash": "06f6591d56658362bf94256f278df66b334840450dc6bdaefd5f0bd3133ba46c"
+    },
+    {
+      "id": "list-061",
+      "type": "list",
+      "source": "※画像サイズの指定が前バージョンと変わるのでご注意！",
+      "sourceHash": "f4f5c9e1a3a755c64bcbe4eb744fbb4918febd8547d8c8191cefe7ab2ba8af46",
+      "translation": "※Please note that the way image sizes are specified has changed from the previous version!",
+      "contextHash": "f4f5c9e1a3a755c64bcbe4eb744fbb4918febd8547d8c8191cefe7ab2ba8af46"
+    },
+    {
+      "id": "list-062",
+      "type": "list",
+      "source": "SV戦闘キャラに対応。",
+      "sourceHash": "58e464486df35764456159d6c9b98244edef79f77ae7dffb40006cdc87eb002f",
+      "translation": "Supports side-view battle characters.",
+      "contextHash": "58e464486df35764456159d6c9b98244edef79f77ae7dffb40006cdc87eb002f"
+    },
+    {
+      "id": "list-063",
+      "type": "list",
+      "source": "敵の表示モードを別途指定可能に。",
+      "sourceHash": "21f77078b8f8f680108e0374513b78e6426ff097ba7dcb98aad2aeb6b7cf1387",
+      "translation": "The enemy display mode can now be specified separately.",
+      "contextHash": "21f77078b8f8f680108e0374513b78e6426ff097ba7dcb98aad2aeb6b7cf1387"
+    },
+    {
+      "id": "list-064",
+      "type": "list",
+      "source": "敵の表示モードにピクチャーを指定可能に。",
+      "sourceHash": "94e0c78e8d9dc44b89fba3d5921fde05af53c5ef6cc0f4ec9e1801cfcdde23a9",
+      "translation": "Pictures can now be specified as the enemy display mode.",
+      "contextHash": "94e0c78e8d9dc44b89fba3d5921fde05af53c5ef6cc0f4ec9e1801cfcdde23a9"
+    },
+    {
+      "id": "list-065",
+      "type": "list",
+      "source": "アクター、敵キャラのメモ欄で画像を個別指定可能に。",
+      "sourceHash": "b43c84444ac30d8272d0352c5e8a8cde7a1ab5d1e5835f2265119b2f3edfb0d4",
+      "translation": "Images can now be specified individually in the note fields of actors and enemies.",
+      "contextHash": "b43c84444ac30d8272d0352c5e8a8cde7a1ab5d1e5835f2265119b2f3edfb0d4"
+    },
+    {
+      "id": "list-066",
+      "type": "list",
+      "source": "ウィンドウの余白を変更できるようにした。",
+      "sourceHash": "9018d18456a1125469c91d7c8d26837810909edcc335b741fccdf575bd5d5ae4",
+      "translation": "Window padding can now be changed.",
+      "contextHash": "9018d18456a1125469c91d7c8d26837810909edcc335b741fccdf575bd5d5ae4"
+    },
+    {
+      "id": "list-067",
+      "type": "list",
+      "source": "ウィンドウを暗くできるようにした。",
+      "sourceHash": "c9255367b59a9999215c4324e8d0cbd718aa0d135bf2ce8159b35f85feb44007",
+      "translation": "Windows can now be darkened.",
+      "contextHash": "c9255367b59a9999215c4324e8d0cbd718aa0d135bf2ce8159b35f85feb44007"
+    },
+    {
+      "id": "list-068",
+      "type": "list",
+      "source": "ターゲット選択時に行動順序の更新処理が何度も呼ばれる問題に対応。",
+      "sourceHash": "79c04fbe7642e8d36f6bd15987c4e339e39484452b65cf0feb79fa98cb9cdb74",
+      "translation": "Addressed an issue where the action order update process was called repeatedly when selecting a target.",
+      "contextHash": "79c04fbe7642e8d36f6bd15987c4e339e39484452b65cf0feb79fa98cb9cdb74"
+    },
+    {
+      "id": "list-069",
+      "type": "list",
+      "source": "レイアウトのずれを全体的に修正。",
+      "sourceHash": "953588f5708d986cd5c3f0bc65a5e809b8bde379027dcdbd934208ef3043c31e",
+      "translation": "Fixed layout misalignment throughout.",
+      "contextHash": "953588f5708d986cd5c3f0bc65a5e809b8bde379027dcdbd934208ef3043c31e"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2019/12/31（ver1.02）",
+      "sourceHash": "bb4014f2d66809622acf09684e450daac79c8975b838dda255e02431ca3fe6be",
+      "translation": "2019/12/31 (ver1.02) ",
+      "contextHash": "bb4014f2d66809622acf09684e450daac79c8975b838dda255e02431ca3fe6be"
+    },
+    {
+      "id": "list-070",
+      "type": "list",
+      "source": "解除が『行動終了時』かつ対象が自身のステートの効果を＋１ターン延長。",
+      "sourceHash": "38d33868e57662e36fde772e29649a4eb181ca13d4dca216ba80ee00f663e5da",
+      "translation": "If removal is set to “at action end” and the target is oneself, extends the effect of one's own state by 1 turn.",
+      "contextHash": "38d33868e57662e36fde772e29649a4eb181ca13d4dca216ba80ee00f663e5da"
+    },
+    {
+      "id": "list-071",
+      "type": "list",
+      "source": "以前と挙動が変わるので注意です。",
+      "sourceHash": "0298b662611ecaf7dbef169dd750ec2a52802633c5a55ee80ff4c01e5665acbc",
+      "translation": "Please note that the behavior differs from before.",
+      "contextHash": "0298b662611ecaf7dbef169dd750ec2a52802633c5a55ee80ff4c01e5665acbc"
+    },
+    {
+      "id": "list-072",
+      "type": "list",
+      "source": "スキルの速度補正を行動予測へ反映した。",
+      "sourceHash": "634af92e97592121a418cff7d0c63099b8b70150441d1d445a59ddfaaa6761fa",
+      "translation": "Skill speed modifiers are now reflected in action predictions.",
+      "contextHash": "634af92e97592121a418cff7d0c63099b8b70150441d1d445a59ddfaaa6761fa"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2019/12/30（ver1.01）",
+      "sourceHash": "5d9f7645968f5c09c77ed51eff32ebd6d78cb1b55a98d0c376619f522a4a5b60",
+      "translation": "2019/12/30 (ver1.01) ",
+      "contextHash": "5d9f7645968f5c09c77ed51eff32ebd6d78cb1b55a98d0c376619f522a4a5b60"
+    },
+    {
+      "id": "list-073",
+      "type": "list",
+      "source": "解除を『行動終了時』に設定したステートが解除されない不具合を修正。",
+      "sourceHash": "a5957bf803359cfdb41f9bab95dae1c3c539ccdcba2a4637df975885bddda464",
+      "translation": "Fixed a bug where states set to be removed “at action end” were not removed.",
+      "contextHash": "a5957bf803359cfdb41f9bab95dae1c3c539ccdcba2a4637df975885bddda464"
+    },
+    {
+      "id": "list-074",
+      "type": "list",
+      "source": "ディレイ、即時行動などＷＴ（待ち時間）を変化させる技を実装。",
+      "sourceHash": "1d8de2680dd9c1326280d4406e54cb5f2178fdee014eaf1b5bd9cabf94e50c8a",
+      "translation": "Implemented Techs that change WT (wait time), such as delay and instant action.",
+      "contextHash": "1d8de2680dd9c1326280d4406e54cb5f2178fdee014eaf1b5bd9cabf94e50c8a"
+    },
+    {
+      "id": "list-075",
+      "type": "list",
+      "source": "状態変化によって敏捷性が変化した際、即座に行動順序へ反映するよう修正。",
+      "sourceHash": "4bcfca26fe5ff452f142e6ae37236ac0fca26d61db2d57ad4218419e6a03a332",
+      "translation": "When agility changes due to a state change, it is now immediately reflected in the action order.",
+      "contextHash": "4bcfca26fe5ff452f142e6ae37236ac0fca26d61db2d57ad4218419e6a03a332"
+    },
+    {
+      "id": "list-076",
+      "type": "list",
+      "source": "名前表示の場合、単体の敵でも末尾にアルファベットが表示されるのを修正。",
+      "sourceHash": "ff6ac86c40ad3b834678261f182e34a5e7189b78905b552ece2bbbafbf36a667",
+      "translation": "When displaying names, fixed an issue where a trailing letter was displayed even for a single enemy.",
+      "contextHash": "ff6ac86c40ad3b834678261f182e34a5e7189b78905b552ece2bbbafbf36a667"
+    },
+    {
+      "id": "list-077",
+      "type": "list",
+      "source": "利用規約を明記。",
+      "sourceHash": "1f1fc4d0f82ead9f9ffa62c397c721d7ea1a3e33d9cce01262920fcc3a66cff2",
+      "translation": "The terms of use are now clearly stated.",
+      "contextHash": "1f1fc4d0f82ead9f9ffa62c397c721d7ea1a3e33d9cce01262920fcc3a66cff2"
+    },
+    {
+      "id": "list-078",
+      "type": "list",
+      "source": "プラグインのパラメータを型指定した。",
+      "sourceHash": "63840522da1a7947e6d5094ef6340041bb7ed7a812b50b8a8b6d376d530fb331",
+      "translation": "Plugin parameters are now type-specified.",
+      "contextHash": "63840522da1a7947e6d5094ef6340041bb7ed7a812b50b8a8b6d376d530fb331"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2019/12/29（ver1.00）",
+      "sourceHash": "ca2d328452ddc5e2f289869602c65103d0a3571d5b1d8a4506798c40d278e096",
+      "translation": "2019/12/29 (ver1.00) ",
+      "contextHash": "ca2d328452ddc5e2f289869602c65103d0a3571d5b1d8a4506798c40d278e096"
+    },
+    {
+      "id": "list-079",
+      "type": "list",
+      "source": "公開開始！",
+      "sourceHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5",
+      "translation": "Now available!",
+      "contextHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "パラメータ（基本設定）",
+      "sourceHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704",
+      "translation": "Parameters (Basic Settings)",
+      "contextHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "計算人数（表示人数）（number）",
+      "sourceHash": "bb5491b0228bc22ec471b187364b58ee42e8cdb444f6e418106ecba7013f28b6",
+      "translation": "Number of Battlers (Number Displayed) (number)",
+      "contextHash": "bb5491b0228bc22ec471b187364b58ee42e8cdb444f6e418106ecba7013f28b6"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ターン順序の計算を行う人数。これがそのまま画面に表示する人数となります。指定なしなら9人です。",
+      "sourceHash": "5b1c852690e108e8b295e01a807c57b96301a8d17afa48279a02642f2a1fa84e",
+      "translation": "The number of battlers used to calculate the turn order. This is also the number displayed on the screen. If unspecified, the value is 9.",
+      "contextHash": "5b1c852690e108e8b295e01a807c57b96301a8d17afa48279a02642f2a1fa84e"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "防御選択時に計算（calcGuardCommand）ver1.14",
+      "sourceHash": "c007e9a11ff80646726e0e2fd25a8602077da9130b8ffa806d670b162275a259",
+      "translation": "Calculate When Guard Is Selected (calcGuardCommand) ver1.14",
+      "contextHash": "c007e9a11ff80646726e0e2fd25a8602077da9130b8ffa806d670b162275a259"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "防御コマンドにカーソルを合わせた際、速度補正に応じて順序表示の計算を行います。",
+      "sourceHash": "6972839d747fce38f6d94af4beaabeae5a03b940453f2c506231c1c376663c90",
+      "translation": "When the cursor is placed over the Guard command, the order display is calculated according to the speed modifier.",
+      "contextHash": "6972839d747fce38f6d94af4beaabeae5a03b940453f2c506231c1c376663c90"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※ＭＶでは動かないらしいです。",
+      "sourceHash": "393e25e094e0cd3e4ef02e8b43550d562f350c79767ab539208a35e66cba3578",
+      "translation": "※Apparently, this does not work in MV.",
+      "contextHash": "393e25e094e0cd3e4ef02e8b43550d562f350c79767ab539208a35e66cba3578"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "行動選択時に行動者を表示（showActionUser）ver1.15",
+      "sourceHash": "7aeb4cfd1d130d84f03089073f34e6e44950c597e1d86d514ed10776496d65fd",
+      "translation": "Show Acting Battler When Selecting an Action (showActionUser) ver1.15",
+      "contextHash": "7aeb4cfd1d130d84f03089073f34e6e44950c597e1d86d514ed10776496d65fd"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "行動選択時、順序の先頭に現在の行動者を表示したままにします。",
+      "sourceHash": "fca082c49bd53215d7999c57334b309fef275041cf9f2ed582f625a070ffaac2",
+      "translation": "When selecting an action, keeps the current acting battler displayed at the front of the order.",
+      "contextHash": "fca082c49bd53215d7999c57334b309fef275041cf9f2ed582f625a070ffaac2"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "不要なモーション更新削除（notPartyMotionRefresh）ver1.20",
+      "sourceHash": "9215b1b0cd00298dcfc40b0375ff67a4bc6c7b994b669bb715a6d2b4988067c7",
+      "translation": "Remove Unnecessary Motion Updates (notPartyMotionRefresh) ver1.20",
+      "contextHash": "9215b1b0cd00298dcfc40b0375ff67a4bc6c7b994b669bb715a6d2b4988067c7"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "行動選択時、全員のモーション更新をやらないようにします。",
+      "sourceHash": "4fd5e94161ba1b6174c591d5096e49810c02a13d70a27a8ec0a4a068b6f448f9",
+      "translation": "When selecting an action, prevents motion updates for all battlers.",
+      "contextHash": "4fd5e94161ba1b6174c591d5096e49810c02a13d70a27a8ec0a4a068b6f448f9"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "パラメータ（戦闘開始関連）",
+      "sourceHash": "bcd6a5ef7906e089ca993f27e0040cbe27f7d36fa241f78109c373d31de64192",
+      "translation": "Parameters (Battle Start-Related)",
+      "contextHash": "bcd6a5ef7906e089ca993f27e0040cbe27f7d36fa241f78109c373d31de64192"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "パーティコマンドの表示（showPartyCommand）ver1.13",
+      "sourceHash": "6a65aa8d79c1d8afe63cb4286cea22801a582e482e5bd59593ec75b25b0e250f",
+      "translation": "Display Party Command (showPartyCommand) ver1.13",
+      "contextHash": "6a65aa8d79c1d8afe63cb4286cea22801a582e482e5bd59593ec75b25b0e250f"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "戦闘開始時にパーティコマンドを表示する方法です。",
+      "sourceHash": "403ea25d197e34efdb473bfb9493228dea6387f7377d9781488c2b63a2ef2c5e",
+      "translation": "This determines whether to display the party command when a battle starts.",
+      "contextHash": "403ea25d197e34efdb473bfb9493228dea6387f7377d9781488c2b63a2ef2c5e"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "表示する設定にしておけば、『逃げる』の選択が表示される前に素早い敵から一方的な攻撃を受ける問題にも対応できます。",
+      "sourceHash": "19895501030968fa6b7b5416711da31a41b4f197759c5bd7a502a4648af016fe",
+      "translation": "When enabled, this also prevents the party from being attacked by fast enemies before the “Escape” option is displayed.",
+      "contextHash": "19895501030968fa6b7b5416711da31a41b4f197759c5bd7a502a4648af016fe"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "他にも、敵が先に行動する場合のみ表示させて、普段は表示しないこともできます。",
+      "sourceHash": "8f341ada9743be610cb75243368f85b5008727ce8d03ad3789e85d98117a90aa",
+      "translation": "You can also display it only when the enemies act first, and normally keep it hidden.",
+      "contextHash": "8f341ada9743be610cb75243368f85b5008727ce8d03ad3789e85d98117a90aa"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "味方の始動時間バラツキ（actorStartRandomWt）ver1.04",
+      "sourceHash": "b055351cd918baacfe4f93f86c37b1cf6bc6f678efecffc571e50b058120f7fb",
+      "translation": "Ally Start Time Variation (actorStartRandomWt) ver1.04",
+      "contextHash": "b055351cd918baacfe4f93f86c37b1cf6bc6f678efecffc571e50b058120f7fb"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "戦闘開始時の味方の敏捷性を数値％分だけ分散させます。",
+      "sourceHash": "32b7f7869fb8ec99a1079280b33f6bfdf362e1dadaedd5c882e4cc470934dece",
+      "translation": "Disperses allies’ agility at battle start by the specified percentage.",
+      "contextHash": "32b7f7869fb8ec99a1079280b33f6bfdf362e1dadaedd5c882e4cc470934dece"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "例：20ならば、90～110%に分散。指定なしは0。",
+      "sourceHash": "38e72c02f156e2f39aa93b185f796ac468804698fe8e3ad71ed42f9c6f7add2c",
+      "translation": "Example: 20 disperses it between 90% and 110%. The default is 0.",
+      "contextHash": "38e72c02f156e2f39aa93b185f796ac468804698fe8e3ad71ed42f9c6f7add2c"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "要するに戦闘開始時の行動順序をバラけさせるか否かということです。初期値0のままだと毎戦闘、同じ順番で動きます。",
+      "sourceHash": "20ecc319f7a1a9a0e45419f2203d7691a77a6ee6f94e137c504e6437723287c9",
+      "translation": "In short, this determines whether to randomize the action order at battle start. If left at the default value of 0, everyone acts in the same order every battle.",
+      "contextHash": "20ecc319f7a1a9a0e45419f2203d7691a77a6ee6f94e137c504e6437723287c9"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "敵の始動時間バラツキ（enemyStartRandomWt）ver1.04",
+      "sourceHash": "d3b708e1a2cbe8def6921d85140f2fb049508125e3e0ec85d56aa39c79c026d0",
+      "translation": "Enemy Start Time Variation (enemyStartRandomWt) ver1.04",
+      "contextHash": "d3b708e1a2cbe8def6921d85140f2fb049508125e3e0ec85d56aa39c79c026d0"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "戦闘開始時の敵の敏捷性を数値％分だけ分散させます。",
+      "sourceHash": "e5f2c15403514608c928a01af62370a5a5019630c3ce2219d20e15eeca226fd9",
+      "translation": "Disperses enemies’ agility at battle start by the specified percentage.",
+      "contextHash": "e5f2c15403514608c928a01af62370a5a5019630c3ce2219d20e15eeca226fd9"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "例：20ならば、90～110%に分散。指定なしは20。",
+      "sourceHash": "e521378348d717b456e611b928c6f09bb757f7ef75982a3913399bf0f13f2960",
+      "translation": "Example: 20 disperses it between 90% and 110%. The default is 20.",
+      "contextHash": "e521378348d717b456e611b928c6f09bb757f7ef75982a3913399bf0f13f2960"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "0にすると同種の敵が一斉に行動してきます。それを避けるために20ほど初期値を分散させています。",
+      "sourceHash": "d22338c844f9542ab8fe2eb724cf6bb78d5e579485407d40974453049b8deeb5",
+      "translation": "When set to 0, enemies of the same type all act simultaneously. The default is set to 20 to avoid this.",
+      "contextHash": "d22338c844f9542ab8fe2eb724cf6bb78d5e579485407d40974453049b8deeb5"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "先制時の始動時間ボーナス（preemptiveAdvantage）ver1.04",
+      "sourceHash": "05dce59ed26c18a67e5e1cc4eeb8f26b0eef1a5888719867762e2ed9d3a35d23",
+      "translation": "Start Time Bonus for Preemptive Attacks (preemptiveAdvantage) ver1.04",
+      "contextHash": "05dce59ed26c18a67e5e1cc4eeb8f26b0eef1a5888719867762e2ed9d3a35d23"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "先制攻撃時に、指定した数値の％分だけ味方のターンを早めます。",
+      "sourceHash": "c1c9138e46e8a3cb2d9365c139dd04fe92a76ea148be9853ecd76b5d698b5c95",
+      "translation": "During a preemptive attack, advances the allies’ turns by the specified percentage.",
+      "contextHash": "c1c9138e46e8a3cb2d9365c139dd04fe92a76ea148be9853ecd76b5d698b5c95"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "初期値は50%です。つまり1/2ターンほど通常より早く行動します。",
+      "sourceHash": "7c7a1316f5179d7e5e10ff0527e39d8ebf06c805ab38fb5bb61bc2340d791470",
+      "translation": "The default is 50%. In other words, they act about half a turn earlier than usual.",
+      "contextHash": "7c7a1316f5179d7e5e10ff0527e39d8ebf06c805ab38fb5bb61bc2340d791470"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "奇襲時の始動時間ボーナス（surpriseAdvantage）ver1.04",
+      "sourceHash": "804254f9e1c08d430fedf833945211b8e92675453fe6c650ad78a9b6e11e6c2d",
+      "translation": "Start Time Bonus for Surprise Attacks (surpriseAdvantage) ver1.04",
+      "contextHash": "804254f9e1c08d430fedf833945211b8e92675453fe6c650ad78a9b6e11e6c2d"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "敵の奇襲時に、指定した数値の％分だけ敵のターンを早めます。",
+      "sourceHash": "1ee5f01fdd8377276b9d1eeeab2b2360c98f22b7a0a1b008994e7fcab58e195f",
+      "translation": "During an enemy surprise attack, advances the enemies’ turns by the specified percentage.",
+      "contextHash": "1ee5f01fdd8377276b9d1eeeab2b2360c98f22b7a0a1b008994e7fcab58e195f"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "初期値は50%です。",
+      "sourceHash": "7df939f1b78299e320c0dafa1ecaea5d638fad227645d9b48853dab11cbc882c",
+      "translation": "The default is 50%.",
+      "contextHash": "7df939f1b78299e320c0dafa1ecaea5d638fad227645d9b48853dab11cbc882c"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "開始ターン数（startTurn）ver1.04",
+      "sourceHash": "01f55279f2d54c4ab69d8e545437b64e83f3257e751e1ee1ccfb4ee0c806b44e",
+      "translation": "Starting Turn (startTurn) ver1.04",
+      "contextHash": "01f55279f2d54c4ab69d8e545437b64e83f3257e751e1ee1ccfb4ee0c806b44e"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "戦闘開始時のターン数を設定します。",
+      "sourceHash": "c26b83dacdb61976975184dea8573a47c0ba34ebc53d83f8e888660035474380",
+      "translation": "Sets the turn number at battle start.",
+      "contextHash": "c26b83dacdb61976975184dea8573a47c0ba34ebc53d83f8e888660035474380"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "これは主に敵の行動パターンの判定に使用されます。",
+      "sourceHash": "ebf17657751ea892bb609172461c20baf59fa9e63536ca826bfc7c1db66162bf",
+      "translation": "This is mainly used to determine enemy action patterns.",
+      "contextHash": "ebf17657751ea892bb609172461c20baf59fa9e63536ca826bfc7c1db66162bf"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "初期値は1です。",
+      "sourceHash": "6f896d6a98355fd171fa207ba209975832c9c1d0e2eaed207944643e62171195",
+      "translation": "The default is 1.",
+      "contextHash": "6f896d6a98355fd171fa207ba209975832c9c1d0e2eaed207944643e62171195"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "MVのデフォルトの仕様では、0ターンから開始します。これは公式の説明とも食い違っているので、バグっぽい気がしますが……。一応、元の通り0ターン開始も選択できるようにしています。",
+      "sourceHash": "c465e68594f1afe928db4b62e4977e5ed2ebb15e72e146144d022ff1a57e7def",
+      "translation": "With MV’s default specifications, battles start at turn 0. This also contradicts the official explanation, so it seems like a bug... In any case, I have made it possible to choose to start at turn 0 as before.",
+      "contextHash": "c465e68594f1afe928db4b62e4977e5ed2ebb15e72e146144d022ff1a57e7def"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "パラメータ（逃走関連）",
+      "sourceHash": "f26a5f96ed9f68a4e9648de8b2852a34b5ec62c332bfa1306df11f5042ed0fc9",
+      "translation": "Parameters (Escape-Related)",
+      "contextHash": "f26a5f96ed9f68a4e9648de8b2852a34b5ec62c332bfa1306df11f5042ed0fc9"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "逃走時のペナルティ時間（escapePenalty）ver1.04",
+      "sourceHash": "a4c7480c5534ec3c7208aa3f1ec91d039f5aec1c19aaa2f97f9390d556c42908",
+      "translation": "Penalty Time on Escape (escapePenalty) ver1.04",
+      "contextHash": "a4c7480c5534ec3c7208aa3f1ec91d039f5aec1c19aaa2f97f9390d556c42908"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "逃走失敗時のペナルティです。",
+      "sourceHash": "6629a78e3a7100ffadb4e03df364dd416f3f50d80c7edcc73be66d0e57f1badd",
+      "translation": "This is the penalty for failing to escape.",
+      "contextHash": "6629a78e3a7100ffadb4e03df364dd416f3f50d80c7edcc73be66d0e57f1badd"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "指定した数値の％分だけ味方のターンを遅らせます。",
+      "sourceHash": "92359e3e69d12de3d391e3c1e46055db2fa96b5ef26c3234d36176e336c5689f",
+      "translation": "Delays the allies’ turns by the specified percentage.",
+      "contextHash": "92359e3e69d12de3d391e3c1e46055db2fa96b5ef26c3234d36176e336c5689f"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "初期値は25です。つまり、1/4ターンほど行動を遅らせます。",
+      "sourceHash": "e8b7f063bad66895e9a92145f9718c4f8cfa50b7772f2a59fc826d3f00facc99",
+      "translation": "The default is 25. In other words, it delays their actions by about a quarter of a turn.",
+      "contextHash": "e8b7f063bad66895e9a92145f9718c4f8cfa50b7772f2a59fc826d3f00facc99"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "※逃走を失敗した当人は、まるまる１ターン消耗します。",
+      "sourceHash": "268bb565bf8cf40dd46455b7de46d7f318f5e9ec5bba550f61707590c9725833",
+      "translation": "※The person who failed to escape consumes an entire turn.",
+      "contextHash": "268bb565bf8cf40dd46455b7de46d7f318f5e9ec5bba550f61707590c9725833"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "一人のターンを消費するだけだとターン制に比較してペナルティが低すぎるため、こういう措置にしています。",
+      "sourceHash": "2635af343020573b0ef5b22b3ff86f0ba9c622e95d09b41f2ed9decda7bea3ba",
+      "translation": "Since consuming only one person’s turn would make the penalty too low compared to turn-based battles, this measure has been implemented.",
+      "contextHash": "2635af343020573b0ef5b22b3ff86f0ba9c622e95d09b41f2ed9decda7bea3ba"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "パラメータ（ステート／能力変化関連） ver1.10",
+      "sourceHash": "2c2abce5f918cb1462fbff808f8c5ac6bd4bc10e64ee50f0f67aa0bd66589709",
+      "translation": "Parameters (States / Parameter Changes) ver1.10",
+      "contextHash": "2c2abce5f918cb1462fbff808f8c5ac6bd4bc10e64ee50f0f67aa0bd66589709"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "自身へのステートターン+1（selfStatePlusTurn）",
+      "sourceHash": "c5d9a5c12e353e0bf0e39fbfbdf77bca3b46829dbbd57e9fdb83697e76eaa7e2",
+      "translation": "State Turns on Self +1 (selfStatePlusTurn)",
+      "contextHash": "c5d9a5c12e353e0bf0e39fbfbdf77bca3b46829dbbd57e9fdb83697e76eaa7e2"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "自分にかけたステートは継続ターンを+1します。",
+      "sourceHash": "eb5b6e0a5d8184c2af4f2cb617936df4aa01fd176fe522873cf19c6680b29469",
+      "translation": "Adds 1 turn to the duration of states applied to oneself.",
+      "contextHash": "eb5b6e0a5d8184c2af4f2cb617936df4aa01fd176fe522873cf19c6680b29469"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "自動解除のタイミングが『行動終了時』のものが対象です。",
+      "sourceHash": "e56c7bb4a7aa0986aa8cb1c68f3651decd12e2e5a369a21dd2954bd752378821",
+      "translation": "This applies to states whose automatic removal timing is “At Action End.”",
+      "contextHash": "e56c7bb4a7aa0986aa8cb1c68f3651decd12e2e5a369a21dd2954bd752378821"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "この項目は「自分にかけた効果が即座に切れてしまう問題」への対処として設定されたものです。",
+      "sourceHash": "68ddf0c52131a14d6b084db13e75217099ddf34c00f00cf5308c687cc71e36b2",
+      "translation": "This setting was added to address the “problem of effects applied to oneself ending immediately.”",
+      "contextHash": "68ddf0c52131a14d6b084db13e75217099ddf34c00f00cf5308c687cc71e36b2"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "基本的にはオンのままで構いません。",
+      "sourceHash": "c0276a5633165d861b9077dfdad4e5be1c3069c599f1cda17914a4d75c580592",
+      "translation": "Basically, you can leave this enabled.",
+      "contextHash": "c0276a5633165d861b9077dfdad4e5be1c3069c599f1cda17914a4d75c580592"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "自身への強化弱体ターン+1（selfBufPlusTurn）",
+      "sourceHash": "ba7ae82a5e93bf7299a1ab758449623b5822f6a012c0323e019bc014d53bbbc7",
+      "translation": "Self Buff/Debuff Turns +1 (selfBufPlusTurn)",
+      "contextHash": "ba7ae82a5e93bf7299a1ab758449623b5822f6a012c0323e019bc014d53bbbc7"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "自分にかけた強化弱体は継続ターンを+1します。",
+      "sourceHash": "de9944bc01f0cf9824804bb353c67da83f084124a56a17f99e4c6cf9ab827c51",
+      "translation": "Adds 1 turn to the duration of buffs and debuffs applied to oneself.",
+      "contextHash": "de9944bc01f0cf9824804bb353c67da83f084124a56a17f99e4c6cf9ab827c51"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "同じく「自分にかけた効果が即座に切れてしまう問題」への対処として設定されました。",
+      "sourceHash": "550a353d98af520682ef5d3ccb09c72b6e2b622a95a17ec4744a32d551265d13",
+      "translation": "This was likewise added to address the “problem of effects applied to oneself ending immediately.”",
+      "contextHash": "550a353d98af520682ef5d3ccb09c72b6e2b622a95a17ec4744a32d551265d13"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "ただし、ver1.09まではステートのみこの考慮がされており、強化弱体と不揃いな状態になっていました。",
+      "sourceHash": "7e462eb644966cceca38f4c5d55fbb46d462572c6f2013f1b6e59dba09b2ebb5",
+      "translation": "However, up through ver1.09, this consideration applied only to states, leaving buffs and debuffs inconsistent with them.",
+      "contextHash": "7e462eb644966cceca38f4c5d55fbb46d462572c6f2013f1b6e59dba09b2ebb5"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "ver1.09までの動作に戻したい場合はこちらだけをオフにしてください。",
+      "sourceHash": "c083052863e25fb6f55438f001aec2eea695d35b745202039a6e321771b4e391",
+      "translation": "If you want to restore the behavior from ver1.09 and earlier, turn off only this option.",
+      "contextHash": "c083052863e25fb6f55438f001aec2eea695d35b745202039a6e321771b4e391"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "蘇生時のＷＴ（reviveWT）",
+      "sourceHash": "917fb6c61c8f838c94a723b45340c8a34d64c9ac6a53c84cbe13802f2b1726dd",
+      "translation": "WT Upon Revival (reviveWT)",
+      "contextHash": "917fb6c61c8f838c94a723b45340c8a34d64c9ac6a53c84cbe13802f2b1726dd"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "蘇生時に待ち時間を再設定します。",
+      "sourceHash": "849bf6d69863b53ba78dad6c6fad9b72ffa5a21e221c662b0beceb027f026c3e",
+      "translation": "Resets the wait time upon revival.",
+      "contextHash": "849bf6d69863b53ba78dad6c6fad9b72ffa5a21e221c662b0beceb027f026c3e"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "baseWt: １ターン分の待ち時間",
+      "sourceHash": "1152956c3ed3fc34bfd2cf73357b9525e5fdcc880f077e5ae51024fb1a350938",
+      "translation": "baseWt: Wait time for one turn",
+      "contextHash": "1152956c3ed3fc34bfd2cf73357b9525e5fdcc880f077e5ae51024fb1a350938"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "wt: 戦闘不能になった際の待ち時間",
+      "sourceHash": "04639684bb7cbca32bfdaf7e52fb9079045c03c9d57ec980dbb39eac0b56d090",
+      "translation": "wt: Wait time when incapacitated",
+      "contextHash": "04639684bb7cbca32bfdaf7e52fb9079045c03c9d57ec980dbb39eac0b56d090"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "数式も可能です。",
+      "sourceHash": "a768f0be0122588a607da0f9f01cbf73d2688051f6f9e856de4de1a89b5919f3",
+      "translation": "Formulas are also supported.",
+      "contextHash": "a768f0be0122588a607da0f9f01cbf73d2688051f6f9e856de4de1a89b5919f3"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "例えば、(baseWt / 2)ならば、蘇生してから0.5ターンで動けるようになります。",
+      "sourceHash": "e4946687159310f85aa3d6bb7593b01cb4dc121afabe9d31e20a9429f76f8ebb",
+      "translation": "For example, with (baseWt / 2), the battler can act 0.5 turns after being revived.",
+      "contextHash": "e4946687159310f85aa3d6bb7593b01cb4dc121afabe9d31e20a9429f76f8ebb"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "空欄の場合は戦闘不能になった際の待ち時間をそのまま使用します。",
+      "sourceHash": "df7c6e3bb246e93df70c7b38afc88bf9813d75817db359ca74ac2fb81b03c682",
+      "translation": "If left blank, the wait time from when the battler became incapacitated is used as is.",
+      "contextHash": "df7c6e3bb246e93df70c7b38afc88bf9813d75817db359ca74ac2fb81b03c682"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "スキルの順序変化を予測（predictionSkillOrder）",
+      "sourceHash": "c57de5856d286b9518fbaca148a8dfb2130f249846df74f0f654730f08b8281b",
+      "translation": "Predict Skill Order Changes (predictionSkillOrder)",
+      "contextHash": "c57de5856d286b9518fbaca148a8dfb2130f249846df74f0f654730f08b8281b"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "ＷＴや敏捷性を変化させるスキル（ステート、能力変化）によって行動順序が変化する場合、それを予測して表示します。",
+      "sourceHash": "20ee20f9fc4156fef5880995973412d990b51a0dded7e5f53d9b6ac562a05acb",
+      "translation": "If the action order changes due to a skill (state or parameter change) that alters WT or agility, the change is predicted and displayed.",
+      "contextHash": "20ee20f9fc4156fef5880995973412d990b51a0dded7e5f53d9b6ac562a05acb"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "必中のみ予測（predictionCertain）",
+      "sourceHash": "72ec38418a67768f0e1220d02563f5bf6d799a9b482f68c160c032147d5b70e5",
+      "translation": "Predict Certain-Hit Skills Only (predictionCertain)",
+      "contextHash": "72ec38418a67768f0e1220d02563f5bf6d799a9b482f68c160c032147d5b70e5"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "命中タイプが必中のスキルのみ予測の対象とします。",
+      "sourceHash": "423967b9c032707113897f65dd295b97b4b76a0384ae6eb0b9fd9a685f4fdf3c",
+      "translation": "Only skills with a Certain Hit success type are included in the predictions.",
+      "contextHash": "423967b9c032707113897f65dd295b97b4b76a0384ae6eb0b9fd9a685f4fdf3c"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "オフの場合は全て対象とします。",
+      "sourceHash": "22a61b746a798cce932bce7e923e9b2d757bb3821adc02943b3f6f03b1076611",
+      "translation": "If this is off, all skills are included.",
+      "contextHash": "22a61b746a798cce932bce7e923e9b2d757bb3821adc02943b3f6f03b1076611"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "NRP_VisualTurn.jsのパラメータ",
+      "sourceHash": "54185fb99c56961325d96af2fa851570288b8589a3a278b78d2e6d5331fc4969",
+      "translation": "NRP_VisualTurn.js Parameters",
+      "contextHash": "54185fb99c56961325d96af2fa851570288b8589a3a278b78d2e6d5331fc4969"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "画面表示については、主にこちらで設定します。",
+      "sourceHash": "b4496c480ab22063b0253d0d186308a9868b0a448cf8b5789bc0b689d8e1cfc1",
+      "translation": "These parameters are mainly used to configure the display.",
+      "contextHash": "b4496c480ab22063b0253d0d186308a9868b0a448cf8b5789bc0b689d8e1cfc1"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "色々とカスタマイズが可能ですが、長くなったので別記事に分割しました。",
+      "sourceHash": "05c11cee5f09400f0cdc54a08b7b0b166d397c74c9649c4b9f95386f8c6df443",
+      "translation": "Various customizations are possible, but the article became too long, so I split them into a separate article.",
+      "contextHash": "05c11cee5f09400f0cdc54a08b7b0b166d397c74c9649c4b9f95386f8c6df443"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "仕様・注意点",
+      "sourceHash": "deddd9fcdcbe5974b4924525db539b5d869973b717c39496ec66ac53e393f8d3",
+      "translation": "Specifications and Notes",
+      "contextHash": "deddd9fcdcbe5974b4924525db539b5d869973b717c39496ec66ac53e393f8d3"
+    },
+    {
+      "id": "list-080",
+      "type": "list",
+      "source": "ステートの自動解除のタイミングが『行動終了時』の場合は個人のターンで効果が切れます。『ターン終了時』の場合は全員のターンで判定されます。基本的には『行動終了時』のほうが使いやすいです。（ver1.01）",
+      "sourceHash": "d6f4b0075afe094a1f19fecba454d1198007f57d833b918b3c4dd97f441fe0b0",
+      "translation": "If a state's auto-removal timing is set to “At the End of Action,” its effect wears off on the individual battler's turn. If set to “At the End of Turn,” it is checked on everyone's turn. In general, “At the End of Action” is easier to use. (ver1.01)",
+      "contextHash": "d6f4b0075afe094a1f19fecba454d1198007f57d833b918b3c4dd97f441fe0b0"
+    },
+    {
+      "id": "list-081",
+      "type": "list",
+      "source": "エディタ上から入力する速度補正の値は％にしています。",
+      "sourceHash": "212eda19dee1fb7608578d1b957649e7d4e3d30334c29cb9abe80e960aaa0515",
+      "translation": "The speed modifier value entered in the editor is expressed as a percentage.",
+      "contextHash": "212eda19dee1fb7608578d1b957649e7d4e3d30334c29cb9abe80e960aaa0515"
+    },
+    {
+      "id": "list-082",
+      "type": "list",
+      "source": "速度補正100の技は+100%。つまり二倍速ということです。",
+      "sourceHash": "f90befe72a1ebbb76e2faedeb3b5706ac4c40ad9bddc2852c78f9c9fe5744c65",
+      "translation": "A skill with a speed modifier of 100 has a modifier of +100%, meaning it acts at double speed.",
+      "contextHash": "f90befe72a1ebbb76e2faedeb3b5706ac4c40ad9bddc2852c78f9c9fe5744c65"
+    },
+    {
+      "id": "list-083",
+      "type": "list",
+      "source": "速度補正-50で1/2倍速です。-100以下だとターンがほぼ回らなくなります。",
+      "sourceHash": "03fe83679302f439d8ce359e7fd8822f03ebd43ecac602336a70cab1e635dd19",
+      "translation": "A speed modifier of -50 results in half speed. At -100 or lower, turns will almost never come around.",
+      "contextHash": "03fe83679302f439d8ce359e7fd8822f03ebd43ecac602336a70cab1e635dd19"
+    },
+    {
+      "id": "list-084",
+      "type": "list",
+      "source": "デフォルトにある防御の設定は必ず変えてください。",
+      "sourceHash": "81f5e9e347f2392d928fe40b4cd29198b6bfb19a95eb7d1d38957b24540c9f52",
+      "translation": "Be sure to change the default Defense settings.",
+      "contextHash": "81f5e9e347f2392d928fe40b4cd29198b6bfb19a95eb7d1d38957b24540c9f52"
+    },
+    {
+      "id": "list-085",
+      "type": "list",
+      "source": "速度補正が2000のままだと「ずっと俺のターン」になります。",
+      "sourceHash": "2ab4fc21bf7bf23f3e6df676e13b5c0a692bbd51803824e1f0ef34322c03265d",
+      "translation": "If the speed modifier remains at 2000, it becomes “It's always my turn.”",
+      "contextHash": "2ab4fc21bf7bf23f3e6df676e13b5c0a692bbd51803824e1f0ef34322c03265d"
+    },
+    {
+      "id": "list-086",
+      "type": "list",
+      "source": "また、防御ステートの自動解除は『行動終了時』を推奨します。",
+      "sourceHash": "41384a45b73f8787d0cb4e9fc650bc08ff4eba93f5c5a291b295206e2671727c",
+      "translation": "Also, I recommend setting the auto-removal timing for the Defense state to “At the End of Action.”",
+      "contextHash": "41384a45b73f8787d0cb4e9fc650bc08ff4eba93f5c5a291b295206e2671727c"
+    },
+    {
+      "id": "list-087",
+      "type": "list",
+      "source": "アクターの複数回行動には対応していません。",
+      "sourceHash": "be33ca5cb15edacda9e2e4295506c2023bf7c349ce78211dd51882166af87c26",
+      "translation": "Multiple actions for actors are not supported.",
+      "contextHash": "be33ca5cb15edacda9e2e4295506c2023bf7c349ce78211dd51882166af87c26"
+    },
+    {
+      "id": "list-088",
+      "type": "list",
+      "source": "戦う、逃げるのパーティコマンドは初期表示しません。",
+      "sourceHash": "60badcd9c4b3115ad98f9c92e1f17521970abf91527a71b6559d27f33948f344",
+      "translation": "The Fight and Escape party commands are not displayed initially.",
+      "contextHash": "60badcd9c4b3115ad98f9c92e1f17521970abf91527a71b6559d27f33948f344"
+    },
+    {
+      "id": "list-089",
+      "type": "list",
+      "source": "キャンセルを押すと表示するようになっています。",
+      "sourceHash": "82485734ddb5ae4c701b80d4ced5db68abccdf44875e78b1bd99bd5957c930fc",
+      "translation": "They are displayed when Cancel is pressed.",
+      "contextHash": "82485734ddb5ae4c701b80d4ced5db68abccdf44875e78b1bd99bd5957c930fc"
+    },
+    {
+      "id": "list-090",
+      "type": "list",
+      "source": "戦闘の流れを根本的に変えているため、その辺に触れるプラグインとは競合しまくります。",
+      "sourceHash": "940aee0f49e1d5deb4c7559449adbae673413eb7119418d534b1189033a939ae",
+      "translation": "Because this fundamentally changes the flow of battle, it conflicts heavily with plugins that affect similar aspects.",
+      "contextHash": "940aee0f49e1d5deb4c7559449adbae673413eb7119418d534b1189033a939ae"
+    },
+    {
+      "id": "list-091",
+      "type": "list",
+      "source": "参考までにこういった影響の大きなプラグインほど上側に配置したほうが、動きやすい傾向にあります。※あくまで傾向です。確実ではありません。",
+      "sourceHash": "b97b6d9aa4c04e4de98358b72a500d8c368df0649de4fdbc5651127d8470bc78",
+      "translation": "For reference, plugins with effects this significant tend to work better when placed higher in the list. ※This is only a tendency, not a guarantee.",
+      "contextHash": "b97b6d9aa4c04e4de98358b72a500d8c368df0649de4fdbc5651127d8470bc78"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "追加機能",
+      "sourceHash": "e9f29c7549be10bbc2c3d66911c0fa9b2ee35cd5b26321b8da3accb555c595c9",
+      "translation": "Additional Features",
+      "contextHash": "e9f29c7549be10bbc2c3d66911c0fa9b2ee35cd5b26321b8da3accb555c595c9"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "ステートのメモ欄",
+      "sourceHash": "179d4ef44842958e99040a9f4319781906247e60e5eeb0f06598407218095352",
+      "translation": "State Note Field",
+      "contextHash": "179d4ef44842958e99040a9f4319781906247e60e5eeb0f06598407218095352"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "ステート欄のメモに以下を記入することで、対象の待ち時間を変更できます。",
+      "sourceHash": "ae311297118b1f49987331c4e133d7848b003796e5cd63e137ed57a2f1d2ebc9",
+      "translation": "You can change the target's wait time by entering the following in the state's note field.",
+      "contextHash": "ae311297118b1f49987331c4e133d7848b003796e5cd63e137ed57a2f1d2ebc9"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "数値は100で対象の１ターン分の待ち時間となります。",
+      "sourceHash": "359b0902d53ca2c549b73a969a431790796c81b74bdf775b9572c14ab25ca56b",
+      "translation": "A value of 100 corresponds to one turn of the target's wait time.",
+      "contextHash": "359b0902d53ca2c549b73a969a431790796c81b74bdf775b9572c14ab25ca56b"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "数式やマイナス値も可能です。",
+      "sourceHash": "153e0c0f0bdbe3ee2936aaf495beb25c264fbbf8e4ac2ae412d21d22a06c83f7",
+      "translation": "Formulas and negative values are also supported.",
+      "contextHash": "153e0c0f0bdbe3ee2936aaf495beb25c264fbbf8e4ac2ae412d21d22a06c83f7"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "<SetWt:[数値]>",
+      "sourceHash": "0252ef4763562b142861d9dfe04ec318d4b6f6e0be4cbcccdae2b982cd79ab86",
+      "translation": "<SetWt:[number]>",
+      "contextHash": "0252ef4763562b142861d9dfe04ec318d4b6f6e0be4cbcccdae2b982cd79ab86"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "対象の待ち時間を変更します。",
+      "sourceHash": "e33c0dd13211b6113c1f479d10e84fa740a0220b48819ecbb6f41c7081362561",
+      "translation": "Changes the target's wait time.",
+      "contextHash": "e33c0dd13211b6113c1f479d10e84fa740a0220b48819ecbb6f41c7081362561"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "<AddWt:[数値]>",
+      "sourceHash": "e51a81a7561973ed8ab90340a5dd681d84c9dd968a24de8b77f785d057cd8999",
+      "translation": "<AddWt:[number]>",
+      "contextHash": "e51a81a7561973ed8ab90340a5dd681d84c9dd968a24de8b77f785d057cd8999"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "対象の待ち時間を加算します。",
+      "sourceHash": "89e9491c7d4760911f97b612d8ded1e524951216f49d1109f50b5a39bbaca934",
+      "translation": "Adds to the target's wait time.",
+      "contextHash": "89e9491c7d4760911f97b612d8ded1e524951216f49d1109f50b5a39bbaca934"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "例",
+      "sourceHash": "9a4632346963d7e188fd63da51ea5fc16d9b2274b4574bf371f7cbe50a15d61b",
+      "translation": "Examples",
+      "contextHash": "9a4632346963d7e188fd63da51ea5fc16d9b2274b4574bf371f7cbe50a15d61b"
+    },
+    {
+      "id": "list-092",
+      "type": "list",
+      "source": "1/2ターン分、相手の行動を遅らせます。いわゆるディレイアタックですね。",
+      "sourceHash": "2505084123c04ac72170e91ba653191ad62dcd7d2a38009ae6abff34dd2d089d",
+      "translation": "Delays the opponent's action by half a turn. In other words, it's a delay attack.",
+      "contextHash": "2505084123c04ac72170e91ba653191ad62dcd7d2a38009ae6abff34dd2d089d"
+    },
+    {
+      "id": "list-093",
+      "type": "list",
+      "source": "対象の待ち時間を０にし、即時行動させます。",
+      "sourceHash": "6b3ad195250ae6a3656a2a9a38d1d0be11d31fdc4419da8b426122547cb52534",
+      "translation": "Sets the target's wait time to 0, allowing it to act immediately.",
+      "contextHash": "6b3ad195250ae6a3656a2a9a38d1d0be11d31fdc4419da8b426122547cb52534"
+    },
+    {
+      "id": "list-094",
+      "type": "list",
+      "source": "ただし、行動者自身にかけても、この直後にターン経過するので無意味です。",
+      "sourceHash": "9222b3d70323d308d9c55a9839b2a27e03df8ef3ed7d703db75f5f490ba5cf35",
+      "translation": "However, applying it to the acting battler is pointless, since a turn passes immediately afterward.",
+      "contextHash": "9222b3d70323d308d9c55a9839b2a27e03df8ef3ed7d703db75f5f490ba5cf35"
+    },
+    {
+      "id": "list-095",
+      "type": "list",
+      "source": "連続行動をさせたい場合は、スキルの速度補正を2000に設定してください。",
+      "sourceHash": "67fbda91fea2be865c6c4430c98cdd64e23a15064accb990a61a9a317c103b19",
+      "translation": "To make a battler act consecutively, set the skill's speed modifier to 2000.",
+      "contextHash": "67fbda91fea2be865c6c4430c98cdd64e23a15064accb990a61a9a317c103b19"
+    },
+    {
+      "id": "list-096",
+      "type": "list",
+      "source": "（※参照：連続行動技）",
+      "sourceHash": "46434208498fb772ccab4d3ce5537246cee18e509473df91774743b720a3d3bf",
+      "translation": "(※Reference: Consecutive Action Skill)",
+      "contextHash": "46434208498fb772ccab4d3ce5537246cee18e509473df91774743b720a3d3bf"
+    },
+    {
+      "id": "list-097",
+      "type": "list",
+      "source": "全体にかければ、サガのクイックタイムっぽくなって最強です。",
+      "sourceHash": "ee4bb926594228541e34e63090ace51d640a4945d1829c3ca543d956c8dbe2d6",
+      "translation": "Applying it to everyone makes it something like SaGa's Quick Time—and incredibly powerful.",
+      "contextHash": "ee4bb926594228541e34e63090ace51d640a4945d1829c3ca543d956c8dbe2d6"
+    },
+    {
+      "id": "list-098",
+      "type": "list",
+      "source": "対象の待ち時間を－５ターンに変更します。",
+      "sourceHash": "753f2e00be13b48bd4a34dad58d9e95a86d4dc48897304223f2ae5bfb29df58e",
+      "translation": "Changes the target's wait time to -5 turns.",
+      "contextHash": "753f2e00be13b48bd4a34dad58d9e95a86d4dc48897304223f2ae5bfb29df58e"
+    },
+    {
+      "id": "list-099",
+      "type": "list",
+      "source": "つまり、一方的に５回程度動けるようになります。",
+      "sourceHash": "edeb2ff155ee41b86448c4de7e1883a138ceef8c0c9daf9033e5b9142a1527aa",
+      "translation": "In other words, the target can act unilaterally about five times.",
+      "contextHash": "edeb2ff155ee41b86448c4de7e1883a138ceef8c0c9daf9033e5b9142a1527aa"
+    },
+    {
+      "id": "list-100",
+      "type": "list",
+      "source": "自分にかければ、同じくサガのオーヴァドライブっぽくなって最強です。",
+      "sourceHash": "fe0a6198c54d85ddee284804da5d17bbb3f57c4acd16a2abff3fe9a6b2436c39",
+      "translation": "Applying it to yourself makes it something like SaGa's Overdrive, and incredibly powerful.",
+      "contextHash": "fe0a6198c54d85ddee284804da5d17bbb3f57c4acd16a2abff3fe9a6b2436c39"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "なお、これらはステートがかかった際にのみ発生する効果となります。",
+      "sourceHash": "2c1d74b9c79ebc3df4ea148018e40f6148211216e74609533ce1b41614b326d8",
+      "translation": "These effects occur only when the state is applied.",
+      "contextHash": "2c1d74b9c79ebc3df4ea148018e40f6148211216e74609533ce1b41614b326d8"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "そのため、同一のステートがかかったままだと重ねがけできません。これは自動解除のタイミングを『ターン終了時』の1ターンにしておけば、即座に重ねられるようになります。",
+      "sourceHash": "07cadc270f1a0cf86dea2e64f14666005702cf4cd0e3e2e42e5d346768b196d5",
+      "translation": "Therefore, they cannot be stacked while the same state remains active. However, if you set the auto-removal timing to one turn at “At the End of Turn,” you can stack them immediately.",
+      "contextHash": "07cadc270f1a0cf86dea2e64f14666005702cf4cd0e3e2e42e5d346768b196d5"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "逆に言えば、自動解除のタイミングを『行動終了時』の1ターンにしておけば、「敵が一度行動するまで重ねられないディレイ」のような異常を狙って作れます。",
+      "sourceHash": "9fc813dfd8fbe54050da19ae630b56e3213edc2196146b34c81e711d6a4b0d7c",
+      "translation": "Conversely, if you set the auto-removal timing to one turn at “At the End of Action,” you can intentionally create an effect like a delay that cannot be stacked until the enemy acts once.",
+      "contextHash": "9fc813dfd8fbe54050da19ae630b56e3213edc2196146b34c81e711d6a4b0d7c"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "戦闘不能状態でも行動順序に表示されるようになります。",
+      "sourceHash": "cf858dc6a5286969929843c2a1ba2acbcac816d90c606e4398e5c4ad6c62fd26",
+      "translation": "The battler will also be displayed in the action order while incapacitated.",
+      "contextHash": "cf858dc6a5286969929843c2a1ba2acbcac816d90c606e4398e5c4ad6c62fd26"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "一定時間で復活などの特殊なステートを想定しています。",
+      "sourceHash": "1c0653adca54d1d23ddd9211429cc0312a642edeff56fafaeec9e76cc0dca9af",
+      "translation": "This is intended for special states, such as one that revives the battler after a set amount of time.",
+      "contextHash": "1c0653adca54d1d23ddd9211429cc0312a642edeff56fafaeec9e76cc0dca9af"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "自動解除のタイミングが行動終了時のステートに対して、ターン開始時（入力開始時）にステートの自動解除を発生させます。",
+      "sourceHash": "c1fe43be60bb90968a935dfad41d7fe541e0b2a99bbcddcaf966c58b3e9404d9",
+      "translation": "For states whose auto-removal timing is set to the end of action, this triggers auto-removal at the start of the turn (when input begins).",
+      "contextHash": "c1fe43be60bb90968a935dfad41d7fe541e0b2a99bbcddcaf966c58b3e9404d9"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "防御など入力開始時に効果を切れさせたい場合に有効です。",
+      "sourceHash": "27312aad15c2ece80e8e10246bb093238d867dcc5295485a33db62b203f1a48a",
+      "translation": "This is useful when you want an effect, such as Defense, to wear off when input begins.",
+      "contextHash": "27312aad15c2ece80e8e10246bb093238d867dcc5295485a33db62b203f1a48a"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "ステートを自分にかけた際、継続ターンを+1します。",
+      "sourceHash": "188cff9c936ae046608f2e8cad197a6afd2bc99bb87219f4f7bd6d5709473a7f",
+      "translation": "When a state is applied to oneself, increases its duration by 1 turn.",
+      "contextHash": "188cff9c936ae046608f2e8cad197a6afd2bc99bb87219f4f7bd6d5709473a7f"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "ステートを自分にかけた際、継続ターンを+1しません。",
+      "sourceHash": "2257f649a7cecbd46b3a38c9ec9d7971f84f5239dde96e82e32fc7f2b41ce250",
+      "translation": "When a state is applied to oneself, does not increase its duration by 1 turn.",
+      "contextHash": "2257f649a7cecbd46b3a38c9ec9d7971f84f5239dde96e82e32fc7f2b41ce250"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "オブジェクトのメモ欄",
+      "sourceHash": "0518cdb1ccf2f1322afbe951455b5ca3a421dc5cd40094ec8e56e2eaf8403edd",
+      "translation": "Object Note Field",
+      "contextHash": "0518cdb1ccf2f1322afbe951455b5ca3a421dc5cd40094ec8e56e2eaf8403edd"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "特徴を保有するオブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を記載してください。",
+      "sourceHash": "5af5ccafe062581b5db1ec3dba2ecb689119a608f232d37888e4ea919295b8bc",
+      "translation": "Enter the following in the note field of objects that have traits (actors, enemies, classes, equipment, states, and skills).",
+      "contextHash": "5af5ccafe062581b5db1ec3dba2ecb689119a608f232d37888e4ea919295b8bc"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "スキルについては覚えているだけで、機能するパッシブスキルとなります。",
+      "sourceHash": "5ad8eb8f107e691a857f2e2db77ee02e672740a0b2f547a5d1512967af79c167",
+      "translation": "For skills, simply learning them makes them function as passive skills.",
+      "contextHash": "5ad8eb8f107e691a857f2e2db77ee02e672740a0b2f547a5d1512967af79c167"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<StartWt:[数値]>",
+      "sourceHash": "766f5fab9aad84e63d21a879cb973fc4b9d4f5328d0be622fb1470fcaa059369",
+      "translation": "<StartWt:[[Number]]>",
+      "contextHash": "766f5fab9aad84e63d21a879cb973fc4b9d4f5328d0be622fb1470fcaa059369"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "戦闘開始時の待ち時間（基準:100）を指定した値に変更します。",
+      "sourceHash": "009f79582f0871eeb3580935b93a4b1c7aa1052b4e19fc0c61af37732b9920e0",
+      "translation": "Changes the waiting time at the start of battle (base: 100) to the specified value.",
+      "contextHash": "009f79582f0871eeb3580935b93a4b1c7aa1052b4e19fc0c61af37732b9920e0"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "例えば、<StartWt:0>なら即時行動します。",
+      "sourceHash": "2ba2f5a14df9f7216fe0292c3314e8a732faee332b1f3d850f339ee1262d7f4e",
+      "translation": "For example, <StartWt:0> allows you to act immediately.",
+      "contextHash": "2ba2f5a14df9f7216fe0292c3314e8a732faee332b1f3d850f339ee1262d7f4e"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "<StartWt:200>ならば、１ターン分行動開始が遅れます。",
+      "sourceHash": "78ea725e15b8150bf1864c1bb605d83e9237bf7f78e996a202371c5fb913a701",
+      "translation": "With <StartWt:200>, action begins one turn later.",
+      "contextHash": "78ea725e15b8150bf1864c1bb605d83e9237bf7f78e996a202371c5fb913a701"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "スキルのメモ欄",
+      "sourceHash": "a43c41425aafbc8045a47fbcd6991a2f075bdf9e29a68d8be2f8e4656fe9fb61",
+      "translation": "Skill Note Field",
+      "contextHash": "a43c41425aafbc8045a47fbcd6991a2f075bdf9e29a68d8be2f8e4656fe9fb61"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "<ReviveWt:[数値]>",
+      "sourceHash": "ed235ea9e99a42df32ea6e21f6a707ae1e1fede3688792ef846633093d18f1f0",
+      "translation": "<ReviveWt:[[Number]]>",
+      "contextHash": "ed235ea9e99a42df32ea6e21f6a707ae1e1fede3688792ef846633093d18f1f0"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "蘇生スキルに対して、蘇生時の待ち時間（基準:100）を設定します。",
+      "sourceHash": "f42eca1f3d1d445df8c685edff6edeaac7952c132d9d75662285a2cb35268aa8",
+      "translation": "Sets the waiting time when reviving (base: 100) for revival skills.",
+      "contextHash": "f42eca1f3d1d445df8c685edff6edeaac7952c132d9d75662285a2cb35268aa8"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "<ReviveWt:50>ならば、1/2ターンで行動開始します。",
+      "sourceHash": "549739f05891bb3fa38867fe6024ef7bdcb1ff4c41a2183cf397e8daa0a3d9ef",
+      "translation": "With <ReviveWt:50>, action begins after half a turn.",
+      "contextHash": "549739f05891bb3fa38867fe6024ef7bdcb1ff4c41a2183cf397e8daa0a3d9ef"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "自身へのステートターン+1（ver1.24）",
+      "sourceHash": "413fda905c230bd5165f3a88a6eec715dfe1879482e8309e588b7e5229cf652e",
+      "translation": "State Turn +1 for Self (ver1.24)",
+      "contextHash": "413fda905c230bd5165f3a88a6eec715dfe1879482e8309e588b7e5229cf652e"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "初期設定では自身にかけたステート（強化／弱体）の効果を＋１ターン延長する仕様になっています。",
+      "sourceHash": "ba003ba9004d895836a0988df9d39262c82e3c7bb7e51d1f659c4d57fd9f6fcd",
+      "translation": "By default, the effects of states (buffs/debuffs) applied to oneself are extended by 1 turn.",
+      "contextHash": "ba003ba9004d895836a0988df9d39262c82e3c7bb7e51d1f659c4d57fd9f6fcd"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "※自動解除のタイミングが『行動終了時』のものが対象です。",
+      "sourceHash": "774e3a7d85b3c3d447e00df0b0fd3c2dc710bbf730e25e2b6aa3a16d57f1c1ef",
+      "translation": "※This applies to states whose auto-removal timing is “Action End.”",
+      "contextHash": "774e3a7d85b3c3d447e00df0b0fd3c2dc710bbf730e25e2b6aa3a16d57f1c1ef"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "これはスキル使用直後に自身のターンが終了してしまうための調整です。",
+      "sourceHash": "a4380562405be83ff7d4fbd6648faf9eba5da58a996e5faa9cc169da908182ea",
+      "translation": "This adjustment prevents the user's turn from ending immediately after using a skill.",
+      "contextHash": "a4380562405be83ff7d4fbd6648faf9eba5da58a996e5faa9cc169da908182ea"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "（例えば、継続ターン数が１のステートが瞬時に切れてしまう問題への対応。）",
+      "sourceHash": "037bf17c395ffc410d6b0ae2f8ce4a25c98e2106e20513e825b39332923859a9",
+      "translation": " (For example, it addresses the issue of a state with a duration of 1 turn expiring instantly.)",
+      "contextHash": "037bf17c395ffc410d6b0ae2f8ce4a25c98e2106e20513e825b39332923859a9"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "一方で再生系のような行動終了時に効果を発揮するステートは、回数が増えてしまうという問題があるため、ステート毎に切り替えられるようにしています。",
+      "sourceHash": "c76d1bdf4dcc47d04b80f77c1da49f6ea3858ea2e659596db1ee1d1f88a52b7d",
+      "translation": "On the other hand, states such as regeneration that take effect at the end of an action would occur more times, so this setting can be switched for each state.",
+      "contextHash": "c76d1bdf4dcc47d04b80f77c1da49f6ea3858ea2e659596db1ee1d1f88a52b7d"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "以下をステートのメモ欄に記入してください。",
+      "sourceHash": "d0d1614e3c4727bdb66ff7af84f255747120efc58ac630521632b65aa5209769",
+      "translation": "Enter the following in the state's note field.",
+      "contextHash": "d0d1614e3c4727bdb66ff7af84f255747120efc58ac630521632b65aa5209769"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "ステートを自分にかけた際、継続ターンを+1します。",
+      "sourceHash": "188cff9c936ae046608f2e8cad197a6afd2bc99bb87219f4f7bd6d5709473a7f",
+      "translation": "Adds +1 to the duration when the state is applied to oneself.",
+      "contextHash": "188cff9c936ae046608f2e8cad197a6afd2bc99bb87219f4f7bd6d5709473a7f"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "ステートを自分にかけた際、継続ターンを+1しません。",
+      "sourceHash": "2257f649a7cecbd46b3a38c9ec9d7971f84f5239dde96e82e32fc7f2b41ce250",
+      "translation": "Does not add +1 to the duration when the state is applied to oneself.",
+      "contextHash": "2257f649a7cecbd46b3a38c9ec9d7971f84f5239dde96e82e32fc7f2b41ce250"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "連続行動技（ver1.02）",
+      "sourceHash": "22e393697be89ced85348f655741979806c3cb4db517ac6d02a7949b5e1a17c2",
+      "translation": "Consecutive Action Skills (ver1.02)",
+      "contextHash": "22e393697be89ced85348f655741979806c3cb4db517ac6d02a7949b5e1a17c2"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "スキルの速度補正を2000（MAX）にしておくと、時間経過なしで連続行動を行います。",
+      "sourceHash": "b241fa11d7f852be3306e30b92051566adeaaba95be231d97c7d07af780cadd2",
+      "translation": "Setting a skill's speed modifier to 2000 (MAX) allows consecutive actions without any time passing.",
+      "contextHash": "b241fa11d7f852be3306e30b92051566adeaaba95be231d97c7d07af780cadd2"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "瞬時に効果を発動する補助スキルなどの作成に便利です。",
+      "sourceHash": "e351a7de7438bb1c8a454945e3028eaf25483abb8c14eadfe3441358fbae7a5d",
+      "translation": "This is useful for creating support skills that activate their effects instantly.",
+      "contextHash": "e351a7de7438bb1c8a454945e3028eaf25483abb8c14eadfe3441358fbae7a5d"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "画面イメージ",
+      "sourceHash": "57e508426d2edc56ba0b506dfa349c3ea42fe6f73450d0f0b5082e3741ab6b3a",
+      "translation": "Screen Image",
+      "contextHash": "57e508426d2edc56ba0b506dfa349c3ea42fe6f73450d0f0b5082e3741ab6b3a"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "敏捷性１０倍アップの魔法で「ずっと俺のターン！」してみました。",
+      "sourceHash": "112afe8875c472a02edf1d8970243554008bd6b16c848b749cf836bd1a5dd66d",
+      "translation": "I tried “It's always my turn!” with a spell that increases agility tenfold.",
+      "contextHash": "112afe8875c472a02edf1d8970243554008bd6b16c848b749cf836bd1a5dd66d"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "レイアウトは「NRP_VisualTurn.js」によって色々と変えられます。なお、配置を考えないとキャラやメッセージとかぶりますので工夫してみてください。",
+      "sourceHash": "4bbfd7c626bdea4c58c2046dff159595509dd6ebe34d3cc26117e4836cd61f4a",
+      "translation": "The layout can be changed in various ways using “NRP_VisualTurn.js.” If you do not plan the placement carefully, it may overlap with characters or messages, so try adjusting it creatively.",
+      "contextHash": "4bbfd7c626bdea4c58c2046dff159595509dd6ebe34d3cc26117e4836cd61f4a"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "行動時のみ枠を非表示にすることも可能です。",
+      "sourceHash": "bede1810b1a99262249c11226a19a43103cd50bfc9bb2134858dd61db48cf358",
+      "translation": "It is also possible to hide the frame only while an action is being performed.",
+      "contextHash": "bede1810b1a99262249c11226a19a43103cd50bfc9bb2134858dd61db48cf358"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "バトルイベント",
+      "sourceHash": "b9fad8c5202fa161dae57354aaa9b5c0a5b04f91812c29ef8bb23cba7995e644",
+      "translation": "Battle Events",
+      "contextHash": "b9fad8c5202fa161dae57354aaa9b5c0a5b04f91812c29ef8bb23cba7995e644"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "ＣＴＢでは各行動毎にターンが経過します。そのため、バトルイベントで指定できるターン数は全体での行動回数と一致します。",
+      "sourceHash": "6a778ad21a29c335a348744f2d3ef9e373a0048a40fd7e4325ede2d966591b38",
+      "translation": "In CTB, a turn passes with each action. Therefore, the number of turns specified in a battle event corresponds to the total number of actions.",
+      "contextHash": "6a778ad21a29c335a348744f2d3ef9e373a0048a40fd7e4325ede2d966591b38"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "各キャラ毎のターン数を参照したい場合はスクリプトで情報を取得します。",
+      "sourceHash": "677999f2c13123c4635deb753e1d493511b9e6afecedb9c3bb04a034d59541d3",
+      "translation": "If you want to reference the turn count for each character, retrieve the information using a script.",
+      "contextHash": "677999f2c13123c4635deb753e1d493511b9e6afecedb9c3bb04a034d59541d3"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "取得項目の例",
+      "sourceHash": "cf271760ded4abacd419468d982308dd52c5ce20bdb8cea1bd7a086d512a471b",
+      "translation": "Examples of Retrievable Data",
+      "contextHash": "cf271760ded4abacd419468d982308dd52c5ce20bdb8cea1bd7a086d512a471b"
+    },
+    {
+      "id": "list-101",
+      "type": "list",
+      "source": "個別ターン数：BattleManager._subject.turnCount()",
+      "sourceHash": "eca02850234811aedbfbbc2a0a87ce50368ae4d91eaab2e7c8edfe79a4dc36b2",
+      "translation": "Individual turn count: BattleManager._subject.turnCount()",
+      "contextHash": "eca02850234811aedbfbbc2a0a87ce50368ae4d91eaab2e7c8edfe79a4dc36b2"
+    },
+    {
+      "id": "list-102",
+      "type": "list",
+      "source": "アクターＩＤ：BattleManager._subject._actorId",
+      "sourceHash": "b6861e15286fdc940a47791b0f8216a09ca4ff3c067cefb40057d84cb3f53b6f",
+      "translation": "Actor ID: BattleManager._subject._actorId",
+      "contextHash": "b6861e15286fdc940a47791b0f8216a09ca4ff3c067cefb40057d84cb3f53b6f"
+    },
+    {
+      "id": "list-103",
+      "type": "list",
+      "source": "敵ＩＤ：BattleManager._subject._enemyId",
+      "sourceHash": "2fab1973b080ae1337e718cef6cc88bc0bf20e3ecadaa54fdfd15afe2ebbbe7c",
+      "translation": "Enemy ID: BattleManager._subject._enemyId",
+      "contextHash": "2fab1973b080ae1337e718cef6cc88bc0bf20e3ecadaa54fdfd15afe2ebbbe7c"
+    },
+    {
+      "id": "list-104",
+      "type": "list",
+      "source": "インデックス：BattleManager._subject.index()",
+      "sourceHash": "029a99069e711888d58f02ed2a2f4f25eabed60d43f5e0e7bb8d9e20e73050fd",
+      "translation": "Index: BattleManager._subject.index()",
+      "contextHash": "029a99069e711888d58f02ed2a2f4f25eabed60d43f5e0e7bb8d9e20e73050fd"
+    },
+    {
+      "id": "list-105",
+      "type": "list",
+      "source": "※配置順で0から始まる番号のことです。",
+      "sourceHash": "1eabcfed866896fef2cab0cfd5a0203e80ac8e537402714102eae356f4d5d7ac",
+      "translation": "※This is a number starting from 0 according to the placement order.",
+      "contextHash": "1eabcfed866896fef2cab0cfd5a0203e80ac8e537402714102eae356f4d5d7ac"
+    },
+    {
+      "id": "list-106",
+      "type": "list",
+      "source": "敵味方別なのでisActor, isEnemy()で区別する必要あり。",
+      "sourceHash": "926f530f38c5ef4e203feb7cff86087e407fe9519ca08522eb8930a88dbccbfc",
+      "translation": "Since this differs between allies and enemies, they must be distinguished using isActor and isEnemy().",
+      "contextHash": "926f530f38c5ef4e203feb7cff86087e407fe9519ca08522eb8930a88dbccbfc"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "例１：アクター１の２ターン目にイベントを起こす場合の条件。",
+      "sourceHash": "457111757b295eb8ee57ee8d66ea265e0ab0f00866bbda3a7c3fa78469e0c2bf",
+      "translation": "Example 1: Condition for triggering an event on Actor 1's second turn.",
+      "contextHash": "457111757b295eb8ee57ee8d66ea265e0ab0f00866bbda3a7c3fa78469e0c2bf"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "例２：先頭の敵が３ターン目にイベントを起こす場合の条件。",
+      "sourceHash": "3a8cab0b4283e5147216a10848e7a39366052fc532d95589586c5aa4fa685989",
+      "translation": "Example 2: Condition for triggering an event on the first enemy's third turn.",
+      "contextHash": "3a8cab0b4283e5147216a10848e7a39366052fc532d95589586c5aa4fa685989"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "※バトルイベントの条件自体は毎ターン実行するようなものにしてください。",
+      "sourceHash": "fc5fa0a104bbbc6e7bf6eb537c6002475fa911c231c7e5c254f00be9d4b4a925",
+      "translation": "※Set the battle event's condition itself to something that is executed every turn.",
+      "contextHash": "fc5fa0a104bbbc6e7bf6eb537c6002475fa911c231c7e5c254f00be9d4b4a925"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "関連情報",
+      "sourceHash": "4b820f7236cd259ead1d326e48457ee03b33cf4f39cb68c0180aee25bc2e0a21",
+      "translation": "Related Information",
+      "contextHash": "4b820f7236cd259ead1d326e48457ee03b33cf4f39cb68c0180aee25bc2e0a21"
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "また、ＲＰＧ制作講座にＣＴＢの戦闘バランスについて記事を書きました。ターン制との勝手の違いなど、ＣＴＢのバランス調整に悩んでいる人はご参考にどうぞ。",
+      "sourceHash": "7489fd0db84309d695852541f741c3d537d7c118f33dd774d305db9b73658cc3",
+      "translation": "I also wrote an article about CTB battle balance in RPG Design Guides. If you are struggling to balance CTB, please refer to it for differences in feel from turn-based systems and other considerations.",
+      "contextHash": "7489fd0db84309d695852541f741c3d537d7c118f33dd774d305db9b73658cc3"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/488700523.html",
+      "sourceHash": "0be601debaa473fae15224afb389dbdf4b97fbfcb67d7145f5f2489f34869362",
+      "translation": "https://newrpg.seesaa.net/article/488700523.html",
+      "contextHash": "f15bcec47343db5d2ce714070fd0b3681b76adb432b69f28a279cf38ee1f91a1"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "拙作、[[LINK_1]]ミスティックスター[[/LINK_1]]にて採用しているシステムを、ツクールＭＶ～ＭＺで実現できるようにしたものとなります。",
+      "sourceHash": "f520815bfa838032a7fa1b4eac431de1a6dfeb25a7caeb4ecc0acbfbda23ec4f",
+      "parts": [
+        {
+          "source": "拙作、",
+          "link": false
+        },
+        {
+          "source": "ミスティックスター",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にて採用しているシステムを、ツクールＭＶ～ＭＺで実現できるようにしたものとなります。",
+          "link": false
+        }
+      ],
+      "translation": "This implements the system used in my work, [[LINK_1]]Mystic Star[[/LINK_1]], so that it can be recreated in RPG Maker MV–MZ.",
+      "contextHash": "f520815bfa838032a7fa1b4eac431de1a6dfeb25a7caeb4ecc0acbfbda23ec4f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法[[/LINK_1]]",
+      "sourceHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05",
+      "parts": [
+        {
+          "source": "導入方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation[[/LINK_1]]",
+      "contextHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴[[/LINK_1]]",
+      "sourceHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036",
+      "parts": [
+        {
+          "source": "更新履歴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History[[/LINK_1]]",
+      "contextHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]制御系パラメータ（NRP_CountTimeBattle.js）[[/LINK_1]]",
+      "sourceHash": "32aac757e9e83f35527248a7edad477dce33b3a0384eefda8f77839344ba093a",
+      "parts": [
+        {
+          "source": "制御系パラメータ（NRP_CountTimeBattle.js）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Control Parameters (NRP_CountTimeBattle.js)[[/LINK_1]]",
+      "contextHash": "32aac757e9e83f35527248a7edad477dce33b3a0384eefda8f77839344ba093a"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]計算人数（表示人数）（number）[[/LINK_1]]",
+      "sourceHash": "771f26c5760e83ed666ff83923873cb96cbfbf202448bc5d0e5923d91eaa5d5f",
+      "parts": [
+        {
+          "source": "計算人数（表示人数）（number）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Battlers (Number Displayed) (number)[[/LINK_1]]",
+      "contextHash": "771f26c5760e83ed666ff83923873cb96cbfbf202448bc5d0e5923d91eaa5d5f"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]防御選択時に計算（calcGuardCommand）[[/LINK_1]]",
+      "sourceHash": "65d6af854c56419db6976612670344ff6bb1ab21d6fe01de6e23d59d9fceb842",
+      "parts": [
+        {
+          "source": "防御選択時に計算（calcGuardCommand）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Calculate When Guard Is Selected (calcGuardCommand)[[/LINK_1]]",
+      "contextHash": "65d6af854c56419db6976612670344ff6bb1ab21d6fe01de6e23d59d9fceb842"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]行動選択時に行動者を表示（showActionUser）[[/LINK_1]]",
+      "sourceHash": "d33534c608753007dc6c372161f0e9fe0ea3e8b04acfaef0fa87fb595aed3f1b",
+      "parts": [
+        {
+          "source": "行動選択時に行動者を表示（showActionUser）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display the Actor When Selecting an Action (showActionUser)[[/LINK_1]]",
+      "contextHash": "d33534c608753007dc6c372161f0e9fe0ea3e8b04acfaef0fa87fb595aed3f1b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]不要なモーション更新削除（notPartyMotionRefresh）[[/LINK_1]]",
+      "sourceHash": "311bb56d7de1b3c4ca1bb5f8a2d7cfdf2e08112722c2bed129f7054cb402757f",
+      "parts": [
+        {
+          "source": "不要なモーション更新削除（notPartyMotionRefresh）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Remove Unnecessary Motion Refreshes (notPartyMotionRefresh)[[/LINK_1]]",
+      "contextHash": "311bb56d7de1b3c4ca1bb5f8a2d7cfdf2e08112722c2bed129f7054cb402757f"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンドの表示（showPartyCommand）[[/LINK_1]]",
+      "sourceHash": "e8ba63e41f29c7328b18ae09fba4a47dd97d84b07e38821b20f0c3dd40036283",
+      "parts": [
+        {
+          "source": "パーティコマンドの表示（showPartyCommand）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Party Commands (showPartyCommand)[[/LINK_1]]",
+      "contextHash": "e8ba63e41f29c7328b18ae09fba4a47dd97d84b07e38821b20f0c3dd40036283"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]味方の始動時間バラツキ（actorStartRandomWt）[[/LINK_1]]",
+      "sourceHash": "fdad2eb966e2703a21317977ff9eaa45cff75b3fc737966754a22b1e461d11d2",
+      "parts": [
+        {
+          "source": "味方の始動時間バラツキ（actorStartRandomWt）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Variation in Allies' Start Time (actorStartRandomWt)[[/LINK_1]]",
+      "contextHash": "fdad2eb966e2703a21317977ff9eaa45cff75b3fc737966754a22b1e461d11d2"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]敵の始動時間バラツキ（enemyStartRandomWt）[[/LINK_1]]",
+      "sourceHash": "738c1a531890d6c5072d9f18645248282339f1ab2370a680b8c91f8869c7300d",
+      "parts": [
+        {
+          "source": "敵の始動時間バラツキ（enemyStartRandomWt）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Variation in Enemies' Start Time (enemyStartRandomWt)[[/LINK_1]]",
+      "contextHash": "738c1a531890d6c5072d9f18645248282339f1ab2370a680b8c91f8869c7300d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]先制時の始動時間ボーナス（preemptiveAdvantage）[[/LINK_1]]",
+      "sourceHash": "6f05502a0c4ab2295b73b9a2135a6323e3c8ec21d1e2f1f93843e192471036e2",
+      "parts": [
+        {
+          "source": "先制時の始動時間ボーナス（preemptiveAdvantage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Time Bonus for Preemptive Attacks (preemptiveAdvantage)[[/LINK_1]]",
+      "contextHash": "6f05502a0c4ab2295b73b9a2135a6323e3c8ec21d1e2f1f93843e192471036e2"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]奇襲時の始動時間ボーナス（surpriseAdvantage）[[/LINK_1]]",
+      "sourceHash": "c1187fa3a47485da050fa3dec295c1497b226e1672157d33c65bc5769322e55f",
+      "parts": [
+        {
+          "source": "奇襲時の始動時間ボーナス（surpriseAdvantage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Time Bonus for Surprise Attacks (surpriseAdvantage)[[/LINK_1]]",
+      "contextHash": "c1187fa3a47485da050fa3dec295c1497b226e1672157d33c65bc5769322e55f"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]開始ターン数（startTurn）[[/LINK_1]]",
+      "sourceHash": "c3fd209cc372e718a731ce25f2b22979f41664e74fcdcd02e726a5689c464a5b",
+      "parts": [
+        {
+          "source": "開始ターン数（startTurn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting Turn Number (startTurn)[[/LINK_1]]",
+      "contextHash": "c3fd209cc372e718a731ce25f2b22979f41664e74fcdcd02e726a5689c464a5b"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]逃走時のペナルティ時間（escapePenalty）[[/LINK_1]]",
+      "sourceHash": "43e672c7e24b0ee098cb39bf44a5cf5bab4c98d8a68b8899c0f29c055baef765",
+      "parts": [
+        {
+          "source": "逃走時のペナルティ時間（escapePenalty）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Penalty Time When Escaping (escapePenalty)[[/LINK_1]]",
+      "contextHash": "43e672c7e24b0ee098cb39bf44a5cf5bab4c98d8a68b8899c0f29c055baef765"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]自身へのステートターン+1（selfStatePlusTurn）[[/LINK_1]]",
+      "sourceHash": "0ebea5bb4d374f1f2d98b446c91781b7bcefe10f43f7f8a827489b6822b3befe",
+      "parts": [
+        {
+          "source": "自身へのステートターン+1（selfStatePlusTurn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add 1 to State Turns on Self (selfStatePlusTurn)[[/LINK_1]]",
+      "contextHash": "0ebea5bb4d374f1f2d98b446c91781b7bcefe10f43f7f8a827489b6822b3befe"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]自身への強化弱体ターン+1（selfBufPlusTurn）[[/LINK_1]]",
+      "sourceHash": "1aeb4c11630238cdef4218cfeaa7e6dafe81800ae65c2e7cfb97f403ddd9b9c5",
+      "parts": [
+        {
+          "source": "自身への強化弱体ターン+1（selfBufPlusTurn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add 1 to Buff/Debuff Turns on Self (selfBufPlusTurn)[[/LINK_1]]",
+      "contextHash": "1aeb4c11630238cdef4218cfeaa7e6dafe81800ae65c2e7cfb97f403ddd9b9c5"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]蘇生時のＷＴ（reviveWT）[[/LINK_1]]",
+      "sourceHash": "82edf42dd16742f7025299ffa18d856390d9359f21e455cf2f6d5a94d2cfe7b4",
+      "parts": [
+        {
+          "source": "蘇生時のＷＴ（reviveWT）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]WT Upon Revival (reviveWT)[[/LINK_1]]",
+      "contextHash": "82edf42dd16742f7025299ffa18d856390d9359f21e455cf2f6d5a94d2cfe7b4"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの順序変化を予測（predictionSkillOrder）[[/LINK_1]]",
+      "sourceHash": "92d934366aca907d66f2d956f7876d21f7fd7d6eb86e78ab51a7bddf596aa09b",
+      "parts": [
+        {
+          "source": "スキルの順序変化を予測（predictionSkillOrder）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Predict Changes in Skill Order (predictionSkillOrder)[[/LINK_1]]",
+      "contextHash": "92d934366aca907d66f2d956f7876d21f7fd7d6eb86e78ab51a7bddf596aa09b"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]必中のみ予測（predictionCertain）[[/LINK_1]]",
+      "sourceHash": "93142488d3d9b4a48bdc1087a506fdfe4628984a62a6fc26366a3c1ae40d243f",
+      "parts": [
+        {
+          "source": "必中のみ予測（predictionCertain）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Predict Certain Hits Only (predictionCertain)[[/LINK_1]]",
+      "contextHash": "93142488d3d9b4a48bdc1087a506fdfe4628984a62a6fc26366a3c1ae40d243f"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]仕様・注意点[[/LINK_1]]",
+      "sourceHash": "e7e89253f612aafeca1960d4624224b445b6e38c0bbe2362341661efed48818a",
+      "parts": [
+        {
+          "source": "仕様・注意点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Specifications and Notes[[/LINK_1]]",
+      "contextHash": "e7e89253f612aafeca1960d4624224b445b6e38c0bbe2362341661efed48818a"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]追加機能[[/LINK_1]]",
+      "sourceHash": "ad2d550be04a50ff23f2ebfa14440a4bc886caf1b48f23255d6f97a19cce7902",
+      "parts": [
+        {
+          "source": "追加機能",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additional Features[[/LINK_1]]",
+      "contextHash": "ad2d550be04a50ff23f2ebfa14440a4bc886caf1b48f23255d6f97a19cce7902"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄[[/LINK_1]]",
+      "sourceHash": "e037e22dcad00f0f2ef6eaba63152e10a0c9c3f9ffbdac3d66c1ab488279cd73",
+      "parts": [
+        {
+          "source": "ステートのメモ欄",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Note Field[[/LINK_1]]",
+      "contextHash": "e037e22dcad00f0f2ef6eaba63152e10a0c9c3f9ffbdac3d66c1ab488279cd73"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]オブジェクトのメモ欄[[/LINK_1]]",
+      "sourceHash": "9b72d22bf8b10924c76286ee7401aa22eb5a72bd2f3a077a5c5f95247f85c686",
+      "parts": [
+        {
+          "source": "オブジェクトのメモ欄",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Object Note Field[[/LINK_1]]",
+      "contextHash": "9b72d22bf8b10924c76286ee7401aa22eb5a72bd2f3a077a5c5f95247f85c686"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄[[/LINK_1]]",
+      "sourceHash": "e34d7cfd1796fade3389f61758709639c069ce2522133a6c1529193fbefe3574",
+      "parts": [
+        {
+          "source": "スキルのメモ欄",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field[[/LINK_1]]",
+      "contextHash": "e34d7cfd1796fade3389f61758709639c069ce2522133a6c1529193fbefe3574"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]自身へのステートターン+1[[/LINK_1]]",
+      "sourceHash": "2c96dfed2ea6124b76e4dd72060011e4a7d543b80a01d7a9b028d082e7e4340c",
+      "parts": [
+        {
+          "source": "自身へのステートターン+1",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add 1 to State Turns on Self[[/LINK_1]]",
+      "contextHash": "2c96dfed2ea6124b76e4dd72060011e4a7d543b80a01d7a9b028d082e7e4340c"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]画面イメージ[[/LINK_1]]",
+      "sourceHash": "6ea066f107b4368b7d1777ec0e8e5b96146012ff3fd0cd1457c0b71f34ca0e14",
+      "parts": [
+        {
+          "source": "画面イメージ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Screen Image[[/LINK_1]]",
+      "contextHash": "6ea066f107b4368b7d1777ec0e8e5b96146012ff3fd0cd1457c0b71f34ca0e14"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]バトルイベント[[/LINK_1]]",
+      "sourceHash": "c8e6460f8045ad965b9ec5cb273791bdafd2a65f1ce5aeaafe689546e7f6fe29",
+      "parts": [
+        {
+          "source": "バトルイベント",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Event[[/LINK_1]]",
+      "contextHash": "c8e6460f8045ad965b9ec5cb273791bdafd2a65f1ce5aeaafe689546e7f6fe29"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]関連情報[[/LINK_1]]",
+      "sourceHash": "652eff8c851913f2e7072f495a1f60680612262f995c4fe609e6ca3efffc2e0e",
+      "parts": [
+        {
+          "source": "関連情報",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Related Information[[/LINK_1]]",
+      "contextHash": "652eff8c851913f2e7072f495a1f60680612262f995c4fe609e6ca3efffc2e0e"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "※[[LINK_1]]NRP_StateEX.js[[/LINK_1]]の<StateEndSkill>機能も内部的に連続行動スキルとして扱われているので心当たりがある方は更新してください。",
+      "sourceHash": "3686daea4029d305f01920b5b870dc6fa4dc598639e61ef4b5200348559382d4",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "NRP_StateEX.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の<StateEndSkill>機能も内部的に連続行動スキルとして扱われているので心当たりがある方は更新してください。",
+          "link": false
+        }
+      ],
+      "translation": "※The <StateEndSkill> function in [[LINK_1]]NRP_StateEX.js[[/LINK_1]] is also internally treated as a consecutive-action skill, so please update it if this applies to you.",
+      "contextHash": "3686daea4029d305f01920b5b870dc6fa4dc598639e61ef4b5200348559382d4"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]自身へのステートターン+1をステート毎に切り替え[[/LINK_1]]られるようにした。",
+      "sourceHash": "0223ae9cdb791c51124ca4fbfd77d163b2c9f2408deaa55b525bf587cff069e8",
+      "parts": [
+        {
+          "source": "自身へのステートターン+1をステート毎に切り替え",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "られるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Made it possible to switch Add 1 to State Turns on Self for each state[[/LINK_1]].",
+      "contextHash": "0223ae9cdb791c51124ca4fbfd77d163b2c9f2408deaa55b525bf587cff069e8"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]蘇生スキルの蘇生時待ち時間[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "7e7bd6b79d23570af2c55679dcaac77695619df4a1b3f43fb7bfdbbf51e592e1",
+      "parts": [
+        {
+          "source": "蘇生スキルの蘇生時待ち時間",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Made it possible to set the revival wait time for revival skills[[/LINK_1]].",
+      "contextHash": "7e7bd6b79d23570af2c55679dcaac77695619df4a1b3f43fb7bfdbbf51e592e1"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "ＷＴや敏捷性を変化させるスキル（ステート、能力変化）によって行動順序が変化する場合、それを[[LINK_1]]予測して表示[[/LINK_1]]できるようにした。",
+      "sourceHash": "1c06038e5ce6843d38da730bd011e5ff15978b101c8ed9b50adb6940f4acbeb6",
+      "parts": [
+        {
+          "source": "ＷＴや敏捷性を変化させるスキル（ステート、能力変化）によって行動順序が変化する場合、それを",
+          "link": false
+        },
+        {
+          "source": "予測して表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "When the action order changes due to a skill (state or parameter change) that alters WT or Agility, it can now be [[LINK_1]]predicted and displayed[[/LINK_1]].",
+      "contextHash": "1c06038e5ce6843d38da730bd011e5ff15978b101c8ed9b50adb6940f4acbeb6"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘開始時の待ち時間（<StartWt>）を設定[[/LINK_1]]できるようにした。",
+      "sourceHash": "1722979c48fc1d386f7f2edbbc63e3073a28787cc6bf3efd90c9174127e56e8d",
+      "parts": [
+        {
+          "source": "戦闘開始時の待ち時間（<StartWt>）を設定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Made it possible to set the wait time at the start of battle (<StartWt>)[[/LINK_1]].",
+      "contextHash": "1722979c48fc1d386f7f2edbbc63e3073a28787cc6bf3efd90c9174127e56e8d"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]不要なモーション更新削除[[/LINK_1]]を追加。",
+      "sourceHash": "c68c5d78f4ccdc819a15d72be70cba4a8b5326945c517a57b2b6aa935c933a79",
+      "parts": [
+        {
+          "source": "不要なモーション更新削除",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]Remove Unnecessary Motion Refreshes[[/LINK_1]].",
+      "contextHash": "c68c5d78f4ccdc819a15d72be70cba4a8b5326945c517a57b2b6aa935c933a79"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "※[[LINK_1]]NRP_DamageTiming.js[[/LINK_1]]などの戦闘高速化系プラグインを入れている場合、回避やダメージのモーションが最後まで再生されない問題に対処できます。",
+      "sourceHash": "98c949f5750ceb97c840e41bb561fd9a3dbbe1dff3f9526b8457f8c0c789fdaf",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "NRP_DamageTiming.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などの戦闘高速化系プラグインを入れている場合、回避やダメージのモーションが最後まで再生されない問題に対処できます。",
+          "link": false
+        }
+      ],
+      "translation": "※When using battle-speedup plugins such as [[LINK_1]]NRP_DamageTiming.js[[/LINK_1]], this can address the issue where evasion and damage motions do not play to the end.",
+      "contextHash": "98c949f5750ceb97c840e41bb561fd9a3dbbe1dff3f9526b8457f8c0c789fdaf"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄[[/LINK_1]]に記述する<SetWt>と<AddWt>について、数式を設定できるようにした。（2024/07/24 ver1.201）",
+      "sourceHash": "077226872060245a9317d976d589215abc015d7d086a2ec50ba6b81c470bd194",
+      "parts": [
+        {
+          "source": "ステートのメモ欄",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に記述する<SetWt>と<AddWt>について、数式を設定できるようにした。（2024/07/24 ver1.201）",
+          "link": false
+        }
+      ],
+      "translation": "For <SetWt> and <AddWt> written in the [[LINK_1]]state note field[[/LINK_1]], it is now possible to set formulas. (2024/07/24 ver1.201)",
+      "contextHash": "077226872060245a9317d976d589215abc015d7d086a2ec50ba6b81c470bd194"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]蘇生時のＷＴ（待ち時間）を設定[[/LINK_1]]できるようにした。",
+      "sourceHash": "f369bebb7fcfb82430a0e4263d31d549463b442934cf733bcd9732826442a246",
+      "parts": [
+        {
+          "source": "蘇生時のＷＴ（待ち時間）を設定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Made it possible to set the WT (wait time) upon revival[[/LINK_1]].",
+      "contextHash": "f369bebb7fcfb82430a0e4263d31d549463b442934cf733bcd9732826442a246"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "※詳細は[[LINK_1]]こちら[[/LINK_1]]をご覧ください。",
+      "sourceHash": "5a7361543d887a014a8e52d3fbaa39d293a6fc84dae342b28db570c177f801a8",
+      "parts": [
+        {
+          "source": "※詳細は",
+          "link": false
+        },
+        {
+          "source": "こちら",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "※Please see [[LINK_1]]here[[/LINK_1]] for details.",
+      "contextHash": "5a7361543d887a014a8e52d3fbaa39d293a6fc84dae342b28db570c177f801a8"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "※詳細は[[LINK_1]]こちら[[/LINK_1]]をご覧ください。",
+      "sourceHash": "5a7361543d887a014a8e52d3fbaa39d293a6fc84dae342b28db570c177f801a8",
+      "parts": [
+        {
+          "source": "※詳細は",
+          "link": false
+        },
+        {
+          "source": "こちら",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "※Please see [[LINK_1]]here[[/LINK_1]] for details.",
+      "contextHash": "5a7361543d887a014a8e52d3fbaa39d293a6fc84dae342b28db570c177f801a8"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "ステートの自動解除のタイミングを、[[LINK_1]]ターンが回ってきた時に早める[[/LINK_1]]機能を追加。",
+      "sourceHash": "09eab58f20206ff69d160ddc4697d18cc87372447814754a5de6b18048fdfd7b",
+      "parts": [
+        {
+          "source": "ステートの自動解除のタイミングを、",
+          "link": false
+        },
+        {
+          "source": "ターンが回ってきた時に早める",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "機能を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature that [[LINK_1]]moves up the timing of automatic state removal to when the turn comes around[[/LINK_1]].",
+      "contextHash": "09eab58f20206ff69d160ddc4697d18cc87372447814754a5de6b18048fdfd7b"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘不能状態でも行動順序に表示[[/LINK_1]]する機能を追加。",
+      "sourceHash": "1f0725d576fdaa4c8bf2b23a9ec5514ebcff0925c1e91c4f1c02c88871d24ec1",
+      "parts": [
+        {
+          "source": "戦闘不能状態でも行動順序に表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "する機能を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to [[LINK_1]]display battlers in the action order even when incapacitated[[/LINK_1]].",
+      "contextHash": "1f0725d576fdaa4c8bf2b23a9ec5514ebcff0925c1e91c4f1c02c88871d24ec1"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "[[LINK_1]]防御選択時に計算[[/LINK_1]]がオンの場合、逃げるに失敗しても、そのまま行動できてしまう不具合修正。",
+      "sourceHash": "f440365e05afdc0acea6e0117072edfcb65108b4e2abc9e1924f9a169f961f4f",
+      "parts": [
+        {
+          "source": "防御選択時に計算",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "がオンの場合、逃げるに失敗しても、そのまま行動できてしまう不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where, when [[LINK_1]]Calculate When Guard Is Selected[[/LINK_1]] was enabled, an actor could act immediately even after failing to escape.",
+      "contextHash": "f440365e05afdc0acea6e0117072edfcb65108b4e2abc9e1924f9a169f961f4f"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "[[LINK_1]]行動選択時、現在の行動者を順序の先頭に表示したままにできる[[/LINK_1]]ように対応。",
+      "sourceHash": "ec45668fd2f7f0a9481067d0ca8231322cef1872085c654da77cce00b1f6e5a3",
+      "parts": [
+        {
+          "source": "行動選択時、現在の行動者を順序の先頭に表示したままにできる",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ように対応。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]When selecting an action, the current battler can remain displayed at the front of the action order[[/LINK_1]].",
+      "contextHash": "ec45668fd2f7f0a9481067d0ca8231322cef1872085c654da77cce00b1f6e5a3"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]防御コマンドにカーソルを合わせた際、速度補正に応じて順序表示の計算を行う[[/LINK_1]]ように対応。",
+      "sourceHash": "d86eda482f59d3cae659f5431291abc3c443929451e1e69d05cc86b37a63a1fd",
+      "parts": [
+        {
+          "source": "防御コマンドにカーソルを合わせた際、速度補正に応じて順序表示の計算を行う",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ように対応。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]When the cursor is positioned over the Guard command, the action order can be calculated according to the speed modifier[[/LINK_1]].",
+      "contextHash": "d86eda482f59d3cae659f5431291abc3c443929451e1e69d05cc86b37a63a1fd"
+    },
+    {
+      "id": "line-046",
+      "type": "line",
+      "source": "戦闘開始時、[[LINK_1]]パーティコマンドを表示[[/LINK_1]]できるように対応。",
+      "sourceHash": "3b3e6a25a6083fa0b3470346102fae64e5429369f02c836191ecec584eeef500",
+      "parts": [
+        {
+          "source": "戦闘開始時、",
+          "link": false
+        },
+        {
+          "source": "パーティコマンドを表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるように対応。",
+          "link": false
+        }
+      ],
+      "translation": "At the start of battle, [[LINK_1]]the party command can be displayed[[/LINK_1]].",
+      "contextHash": "3b3e6a25a6083fa0b3470346102fae64e5429369f02c836191ecec584eeef500"
+    },
+    {
+      "id": "line-047",
+      "type": "line",
+      "source": "※プラグイン更新時に少しだけ挙動が変わる可能性があります。変更箇所は[[LINK_1]]パラメータ（各ウィンドウの表示）[[/LINK_1]]だけなので見直しをお願いします。",
+      "sourceHash": "b28d84e05d1e88ffa5274c2df99d1c1fade2f48f388783e0b2d5bbc1348da04b",
+      "parts": [
+        {
+          "source": "※プラグイン更新時に少しだけ挙動が変わる可能性があります。変更箇所は",
+          "link": false
+        },
+        {
+          "source": "パラメータ（各ウィンドウの表示）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "だけなので見直しをお願いします。",
+          "link": false
+        }
+      ],
+      "translation": "※The behavior may change slightly when updating the plugin. Since the only changes concern the [[LINK_1]]parameters (display of each window)[[/LINK_1]], please review them.",
+      "contextHash": "b28d84e05d1e88ffa5274c2df99d1c1fade2f48f388783e0b2d5bbc1348da04b"
+    },
+    {
+      "id": "line-048",
+      "type": "line",
+      "source": "それに伴い、[[LINK_1]]切替用のプラグインパラメータ[[/LINK_1]]を追加。",
+      "sourceHash": "10c5a8b38ad91476c624b244616b1f764d86313bad151599e72868114c9a39f1",
+      "parts": [
+        {
+          "source": "それに伴い、",
+          "link": false
+        },
+        {
+          "source": "切替用のプラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Accordingly, [[LINK_1]]plugin parameters for switching[[/LINK_1]] were added.",
+      "contextHash": "10c5a8b38ad91476c624b244616b1f764d86313bad151599e72868114c9a39f1"
+    },
+    {
+      "id": "line-049",
+      "type": "line",
+      "source": "それに伴い、パラメータに[[LINK_1]]スキル選択時の表示制御[[/LINK_1]]を追加。",
+      "sourceHash": "574d001d64ebe41412f04a87094e863b7d7a704fea89aa8b2800cd16a1a23181",
+      "parts": [
+        {
+          "source": "それに伴い、パラメータに",
+          "link": false
+        },
+        {
+          "source": "スキル選択時の表示制御",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Accordingly, [[LINK_1]]display controls when selecting a skill[[/LINK_1]] were added to the parameters.",
+      "contextHash": "574d001d64ebe41412f04a87094e863b7d7a704fea89aa8b2800cd16a1a23181"
+    },
+    {
+      "id": "line-050",
+      "type": "line",
+      "source": "[[LINK_1]]速度補正がマイナス[[/LINK_1]]の場合、行動予測が正しく表示されない不具合修正。",
+      "sourceHash": "7b8f624e5a60ff2d5f9c8adf53de5f53a258a711dbc511f9a55e828eccb60453",
+      "parts": [
+        {
+          "source": "速度補正がマイナス",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の場合、行動予測が正しく表示されない不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where action predictions were not displayed correctly when the [[LINK_1]]speed modifier is negative[[/LINK_1]].",
+      "contextHash": "7b8f624e5a60ff2d5f9c8adf53de5f53a258a711dbc511f9a55e828eccb60453"
+    },
+    {
+      "id": "line-051",
+      "type": "line",
+      "source": "敵の識別子表示機能を追加。（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "80bad9d95f9b27b5e9507607c3b9ff1267cb15883a330faeeb9303b409fc6ba6",
+      "parts": [
+        {
+          "source": "敵の識別子表示機能を追加。（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to display enemy identifiers. ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "80bad9d95f9b27b5e9507607c3b9ff1267cb15883a330faeeb9303b409fc6ba6"
+    },
+    {
+      "id": "line-052",
+      "type": "line",
+      "source": "[[LINK_1]]<CtbHide>[[/LINK_1]]によって、スキル発動時の順序欄を非表示できるようにした。",
+      "sourceHash": "f56255ba6ed2dd395ca7f6f98d232be7a0308d2a4f808b148f806eed21a66736",
+      "parts": [
+        {
+          "source": "<CtbHide>",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "によって、スキル発動時の順序欄を非表示できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]<CtbHide>[[/LINK_1]] now allows you to hide the order field when activating a skill.",
+      "contextHash": "f56255ba6ed2dd395ca7f6f98d232be7a0308d2a4f808b148f806eed21a66736"
+    },
+    {
+      "id": "line-053",
+      "type": "line",
+      "source": "行動する度にコマンドを隠れないように変更（切替可能）。[[LINK_1]]（詳細）[[/LINK_1]]",
+      "sourceHash": "dd6bde7cfc3c606bc09d75256b9b1a1c01debf34ae23870da46d1b56b6d4ec6f",
+      "parts": [
+        {
+          "source": "行動する度にコマンドを隠れないように変更（切替可能）。",
+          "link": false
+        },
+        {
+          "source": "（詳細）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "Changed the settings so that commands remain visible each time an action is taken (toggleable). [[LINK_1]](Details)[[/LINK_1]]",
+      "contextHash": "dd6bde7cfc3c606bc09d75256b9b1a1c01debf34ae23870da46d1b56b6d4ec6f"
+    },
+    {
+      "id": "line-054",
+      "type": "line",
+      "source": "右寄せ下寄せをやりやすいように調整。（01/19 ver1.051[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "faf87d6fb9d28af59f0510e4db4825bd4bf2f588ddcca5b3e95b447c7ec21aab",
+      "parts": [
+        {
+          "source": "右寄せ下寄せをやりやすいように調整。（01/19 ver1.051",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Adjusted the settings to make right and bottom alignment easier. (01/19 ver1.051 [[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "faf87d6fb9d28af59f0510e4db4825bd4bf2f588ddcca5b3e95b447c7ec21aab"
+    },
+    {
+      "id": "line-055",
+      "type": "line",
+      "source": "戦闘開始時の敏捷性の分散値など各パラメータを設定可能に。[[LINK_1]]（詳細）[[/LINK_1]]",
+      "sourceHash": "1e04b002c3e9c4bbb265260873365928f41b39b2038d20f66b7d62d2826c0746",
+      "parts": [
+        {
+          "source": "戦闘開始時の敏捷性の分散値など各パラメータを設定可能に。",
+          "link": false
+        },
+        {
+          "source": "（詳細）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "Parameters such as the variance value for Agility at battle start can now be configured. [[LINK_1]](Details)[[/LINK_1]]",
+      "contextHash": "1e04b002c3e9c4bbb265260873365928f41b39b2038d20f66b7d62d2826c0746"
+    },
+    {
+      "id": "line-056",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_VisualTurn.js ver1.04（詳細はこちら）[[/LINK_1]]",
+      "sourceHash": "eef215e97c9f899236440e8ab57394b39eaaa97ba50d4c5ae06ded896fb7338c",
+      "parts": [
+        {
+          "source": "NRP_VisualTurn.js ver1.04（詳細はこちら）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_VisualTurn.js ver1.04 (Details here)[[/LINK_1]]",
+      "contextHash": "eef215e97c9f899236440e8ab57394b39eaaa97ba50d4c5ae06ded896fb7338c"
+    },
+    {
+      "id": "line-057",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_VisualTurn.js ver1.03（詳細はこちら）[[/LINK_1]]",
+      "sourceHash": "830f42151f9bcb014a7ef400dad3207d3c75b2d2ec2a2794b44ef1e3080ddbda",
+      "parts": [
+        {
+          "source": "NRP_VisualTurn.js ver1.03（詳細はこちら）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_VisualTurn.js ver1.03 (Details here)[[/LINK_1]]",
+      "contextHash": "830f42151f9bcb014a7ef400dad3207d3c75b2d2ec2a2794b44ef1e3080ddbda"
+    },
+    {
+      "id": "line-058",
+      "type": "line",
+      "source": "画像の拡大縮小率（zoom）を設定可能に。（[[LINK_1]]詳細はこちら[[/LINK_1]]）",
+      "sourceHash": "af1a9db1d396f7339ac556e183627c428f8fb0a1140664e5469eeb0fa41b5768",
+      "parts": [
+        {
+          "source": "画像の拡大縮小率（zoom）を設定可能に。（",
+          "link": false
+        },
+        {
+          "source": "詳細はこちら",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "The image scaling factor (zoom) can now be configured. ([[LINK_1]]Details here[[/LINK_1]])",
+      "contextHash": "af1a9db1d396f7339ac556e183627c428f8fb0a1140664e5469eeb0fa41b5768"
+    },
+    {
+      "id": "line-059",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DamageTiming.js[[/LINK_1]]などの戦闘高速化系プラグインを入れている場合、回避やダメージのモーションが最後まで再生されない問題に対処できます。",
+      "sourceHash": "d20e5f1da33bf9f34a8bf43f3c0ac0f25adf488b267fb3907bbc9a745b05e001",
+      "parts": [
+        {
+          "source": "NRP_DamageTiming.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などの戦闘高速化系プラグインを入れている場合、回避やダメージのモーションが最後まで再生されない問題に対処できます。",
+          "link": false
+        }
+      ],
+      "translation": "When using battle speedup plugins such as [[LINK_1]]NRP_DamageTiming.js[[/LINK_1]], this resolves the issue where evasion and damage motions do not play to the end.",
+      "contextHash": "d20e5f1da33bf9f34a8bf43f3c0ac0f25adf488b267fb3907bbc9a745b05e001"
+    },
+    {
+      "id": "line-060",
+      "type": "line",
+      "source": "※ただし、ＨＰ再生系のステートの効果回数が増えてしまうことに注意（[[LINK_1]]詳細[[/LINK_1]]）してください。",
+      "sourceHash": "92ff29d3cb3436d59b595a78aace9ae01181d3edee49d37501362e36f9852350",
+      "parts": [
+        {
+          "source": "※ただし、ＨＰ再生系のステートの効果回数が増えてしまうことに注意（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）してください。",
+          "link": false
+        }
+      ],
+      "translation": "※However, please note that the number of times HP regeneration-type states take effect will increase ([[LINK_1]]Details[[/LINK_1]]).",
+      "contextHash": "92ff29d3cb3436d59b595a78aace9ae01181d3edee49d37501362e36f9852350"
+    },
+    {
+      "id": "line-061",
+      "type": "line",
+      "source": "[[LINK_1]]こちらをご参照ください。[[/LINK_1]]",
+      "sourceHash": "efc0a3287c3f8f11c7960f272bd3409f9132cead37edf175016b49d92319612e",
+      "parts": [
+        {
+          "source": "こちらをご参照ください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Please refer to this.[[/LINK_1]]",
+      "contextHash": "efc0a3287c3f8f11c7960f272bd3409f9132cead37edf175016b49d92319612e"
+    },
+    {
+      "id": "line-062",
+      "type": "line",
+      "source": "詳細は[[LINK_1]]自身へのステートターン+1[[/LINK_1]]をご覧ください。",
+      "sourceHash": "06aeaf6bd64a4adc5effc9bd7289cb42f31f40ac30fc5b44cb570117bb691076",
+      "parts": [
+        {
+          "source": "詳細は",
+          "link": false
+        },
+        {
+          "source": "自身へのステートターン+1",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "For details, see [[LINK_1]]State Turn +1 on Self[[/LINK_1]].",
+      "contextHash": "06aeaf6bd64a4adc5effc9bd7289cb42f31f40ac30fc5b44cb570117bb691076"
+    },
+    {
+      "id": "line-063",
+      "type": "line",
+      "source": "詳細は[[LINK_1]]自身へのステートターン+1[[/LINK_1]]をご覧ください。",
+      "sourceHash": "06aeaf6bd64a4adc5effc9bd7289cb42f31f40ac30fc5b44cb570117bb691076",
+      "parts": [
+        {
+          "source": "詳細は",
+          "link": false
+        },
+        {
+          "source": "自身へのステートターン+1",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "For details, see [[LINK_1]]State Turn +1 on Self[[/LINK_1]].",
+      "contextHash": "06aeaf6bd64a4adc5effc9bd7289cb42f31f40ac30fc5b44cb570117bb691076"
+    },
+    {
+      "id": "line-064",
+      "type": "line",
+      "source": "※指定がない場合、[[LINK_1]]プラグインパラメータの設定値[[/LINK_1]]が使用されます。",
+      "sourceHash": "ce47d8735293bff48e25df6d7a599ed6a820ca4c2445733e7ac6765bc7dcdab5",
+      "parts": [
+        {
+          "source": "※指定がない場合、",
+          "link": false
+        },
+        {
+          "source": "プラグインパラメータの設定値",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が使用されます。",
+          "link": false
+        }
+      ],
+      "translation": "※If unspecified, the [[LINK_1]]plugin parameter setting value[[/LINK_1]] will be used.",
+      "contextHash": "ce47d8735293bff48e25df6d7a599ed6a820ca4c2445733e7ac6765bc7dcdab5"
+    },
+    {
+      "id": "line-065",
+      "type": "line",
+      "source": "詳細な制御方法については[[LINK_1]]バトルイベント拡張プラグイン[[/LINK_1]]でも解説しています。",
+      "sourceHash": "3e1efbbd3bf88d990553e941cc59186fb2dd1d4923990635e29941de8f8e752f",
+      "parts": [
+        {
+          "source": "詳細な制御方法については",
+          "link": false
+        },
+        {
+          "source": "バトルイベント拡張プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "でも解説しています。",
+          "link": false
+        }
+      ],
+      "translation": "Detailed control methods are also explained in the [[LINK_1]]Battle Event Expansion Plugin[[/LINK_1]].",
+      "contextHash": "3e1efbbd3bf88d990553e941cc59186fb2dd1d4923990635e29941de8f8e752f"
+    },
+    {
+      "id": "line-066",
+      "type": "line",
+      "source": "[[LINK_1]]ため技を作成[[/LINK_1]]：ＣＴＢ用にチャージタイムが設定可能です。",
+      "sourceHash": "3d6b1e1814f6949bbd813494d27ff7915e5b311fcf2780a8ff481bcb6565a8e2",
+      "parts": [
+        {
+          "source": "ため技を作成",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "：ＣＴＢ用にチャージタイムが設定可能です。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Create a Charging Skill[[/LINK_1]]: A charge time can be set for CTB.",
+      "contextHash": "3d6b1e1814f6949bbd813494d27ff7915e5b311fcf2780a8ff481bcb6565a8e2"
+    },
+    {
+      "id": "line-067",
+      "type": "line",
+      "source": "なお、ソースコードにはたくさん注釈を入れてみたので、興味ある人は覗いてみてください。時々ゴミが入っているのはご愛嬌。[[LINK_1]]ＣＴＢの実装方法[[/LINK_1]]について過去に解説しているので、よければどうぞ。",
+      "sourceHash": "8f0b2451565ac55dd174c85e151c8926848095713df6811943af19a95d98230e",
+      "parts": [
+        {
+          "source": "なお、ソースコードにはたくさん注釈を入れてみたので、興味ある人は覗いてみてください。時々ゴミが入っているのはご愛嬌。",
+          "link": false
+        },
+        {
+          "source": "ＣＴＢの実装方法",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "について過去に解説しているので、よければどうぞ。",
+          "link": false
+        }
+      ],
+      "translation": "I added lots of comments to the source code, so if you're interested, please take a look. Please forgive the occasional bits of clutter. I previously explained the [[LINK_1]]CTB Implementation Method[[/LINK_1]], so feel free to check it out.",
+      "contextHash": "8f0b2451565ac55dd174c85e151c8926848095713df6811943af19a95d98230e"
+    },
+    {
+      "id": "line-068",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ツクールＭＶ～ＭＺ向けＣＴＢ（カウントタイムバトル）を実現するプラグインを公開しました。": "I have released a plugin that implements CTB (Count Time Battle) for RPG Maker MV and MZ.",
+    "ＣＴＢについては説明不要かと思いますが、素早さによって行動回数の増える戦闘システムです。": "CTB probably needs no explanation, but it is a battle system where agility increases the number of actions you can take.",
+    "特に設定をしなくとも、プラグインをオンにするだけで即動きます。": "It works immediately simply by turning on the plugin, without any special configuration.",
+    "初期設定では顔グラを表示しますが、キャラグラを出したり名前を文字表示したりとカスタマイズも可能です。": "Face images are displayed by default, but you can customize it to display character sprites or names as text.",
+    "フロントビューでもサイドビューでも問題なく機能します。": "It works properly with both front-view and side-view battles.",
+    "導入方法": "Installation",
+    "以下２つのファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following two files and place them in [Project]\\js\\plugins. Turn the feature ON in the plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "※ＭＺで使用する場合、システム上の設定は必ずターン制にしてください。タイムプログレスになっていると動きません。": "※When using it with MZ, be sure to set the system's battle system to turn-based. It will not work when set to time progress.",
+    "NRP_CountTimeBattle.js": "NRP_CountTimeBattle.js ",
+    "ver1.25（2025/06/02）": "ver1.25 (2025/06/02) ",
+    "NRP_VisualTurn.js": "NRP_VisualTurn.js ",
+    "ver2.03（2024/05/01）": "ver2.03 (2024/05/01) ",
+    "上から順番に取り込む必要があるので注意です。": "Note that they must be imported in the order shown above.",
+    "ファイルが２つあるのは、制御系と表示系で分割したためです。更新日を見て最新を取るように気をつけてください。": "There are two files because the control and display functions have been separated. Be sure to check the update date and use the latest versions.",
+    "更新履歴": "Update History",
+    "連続行動スキル（速度補正2000）の直後に行動異常になると無限ループ（フリーズ）に陥ってしまう不具合修正。": "Fixed a bug that caused an infinite loop (freeze) when an action abnormality occurred immediately after a repeated-action skill (speed modifier 2000).",
+    "蘇生スキルを選択時、蘇生対象者の行動予測を表示できるようにした。": "Action predictions for the revival target are now displayed when selecting a revival skill.",
+    "戦闘不能者に対して範囲が有効でないスキルまで行動予測を表示してしまう不具合修正。（2024/08/23 ver1.231）": "Fixed a bug that displayed action predictions even for skills whose scope was not effective against incapacitated battlers. (2024/08/23 ver1.231)",
+    "ＭＶにてスキルの順序変化を予測する機能をオンにすると、エラーになってしまう不具合修正。（2024/08/28 ver1.232）": "Fixed an error that occurred in MV when the feature for predicting changes in skill order was enabled. (2024/08/28 ver1.232)",
+    "スキルが不発になった場合、スキルの終了処理が適切に行われない問題に対処。（NumbStates.jsなどとの競合解消）（2024/09/15 ver1.233）": "Addressed an issue where skill termination processing was not performed correctly when a skill failed to activate. (Resolved conflicts with NumbStates.js and others) (2024/09/15 ver1.233)",
+    "スキルの範囲が味方単体（無条件）の場合、行動予測に反映されなくなる不具合修正。（2024/11/03 ver1.234）": "Fixed a bug where skills with a scope of one ally (no conditions) were no longer reflected in action predictions. (2024/11/03 ver1.234)",
+    "敵キャラの変身時、敏捷性の変化が行動順に反映されない不具合修正。（2024/11/03 ver1.235）": "Fixed a bug where changes in an enemy's agility upon transformation were not reflected in the action order. (2024/11/03 ver1.235)",
+    "ＭＶにてスキルの順序変化を予測する機能をオンにすると、エラーになってしまう不具合修正。（2025/04/15 ver1.236）": "Fixed an error that occurred in MV when the feature for predicting changes in skill order was enabled. (2025/04/15 ver1.236)",
+    "※初期設定では命中タイプが必中のスキルのみが対象となります。": "※By default, only skills with Certain Hit as their hit type are covered.",
+    "ver1.21にて、自身の敏捷性を変化させた場合、次の行動が即時行動になってしまう不具合修正。": "Fixed a bug in ver1.21 where changing one's own agility caused the next action to occur immediately.",
+    "戦闘勝利時など文章表示時に動作が非常に重くなる不具合を修正。": "Fixed a bug that caused severe slowdown when displaying text, such as upon victory in battle.",
+    "（2024/08/16 ver1.221）": " (2024/08/16 ver1.221) ",
+    "自身の敏捷性を変化させた場合、次の行動が早くならない不具合修正。": "Fixed a bug where changing one's own agility did not make the next action occur sooner.",
+    "『味方の始動時間バラツキ』『敵の始動時間バラツキ』『先制時の始動時間ボーナス』『奇襲時の始動時間ボーナス』『逃走時のペナルティ時間』に数式を設定できるようにした。（2024/06/12 ver1.191）": "Formulas can now be set for “Ally Start Time Variance,” “Enemy Start Time Variance,” “Preemptive Start Time Bonus,” “Surprise Start Time Bonus,” and “Escape Penalty Time.” (2024/06/12 ver1.191)",
+    "画像Ｘ座標シフト、画像Ｙ座標シフトを追加。": "Added Image X Coordinate Shift and Image Y Coordinate Shift.",
+    "敵の表示倍率を100より大きくすると、敵の画像が途切れてしまうことがある不具合修正。": "Fixed a bug where an enemy's image could be clipped when its display scale was set above 100.",
+    "※敵の表示倍率を100以外にしている場合、今までと若干表示がズレる可能性があるのでご注意ください。": "※Please note that when an enemy's display scale is set to anything other than 100, its position may be slightly different from before.",
+    "レイアウト関連の機能を大幅に強化。": "Significantly enhanced layout-related features.",
+    "NRP_PartyAttack.jsと併用し、かつ自身が対象のスキルを使うと行動順序のアクターが白表示されてしまう問題に対処。": "Addressed an issue where, when used together with NRP_PartyAttack.js, the actor in the action order was displayed in white when using a skill targeting oneself.",
+    "ＭＶにて戦闘中に仲間を加えた場合、ＷＴが初期設定されない不具合を修正。": "Fixed a bug in MV where WT was not initialized when an ally was added during battle.",
+    "ＭＶかつパーティコマンドを表示しない設定の場合、戦闘開始直後に付加したステートが表示されない不具合修正。": "Fixed a bug in MV where states applied immediately after battle started were not displayed when the setting to hide party commands was enabled.",
+    "ＣＴＢにてパーティコマンドを表示しない設定の場合、順序が初期表示されない不具合を修正。": "Fixed a bug where the order was not displayed initially when party commands were set not to be displayed in CTB.",
+    "敏捷性が０の際に何度も行動できてしまう不具合修正。": "Fixed a bug that allowed repeated actions when agility was 0.",
+    "（2022/08/05 ver1.131）": " (2022/08/05 ver1.131) ",
+    "選択中のバトラーシンボルについて画像のみを白く強調表示するように変更。": "Changed the selected battler symbol so that only its image is highlighted in white.",
+    "ＵＩエリアの幅が一部ウィンドウに反映されていない不具合修正。": "Fixed a bug where the UI area's width was not reflected in some windows.",
+    "新規登場したバトラーのＷＴを初期設定するように修正。": "Changed the system to initialize the WT of newly appearing battlers.",
+    "一人が行動終了した際に全員分の行動終了処理（毒やＨＰ再生、ステートの継続ターンなど）が実行されてしまう不具合に対応。": "Addressed a bug where, when one battler finished acting, action-end processing for all battlers (such as poison, HP regeneration, and state duration turns) was executed.",
+    "※MZ1.4.0の更新の影響のようです。該当の方は更新をお願いします！": "※This appears to be caused by the MZ1.4.0 update. If this applies to you, please update!",
+    "戦闘開始直後にピクチャーなどの画像表示を行うと、順序画像の表示が不安定になる不具合修正。": "Fixed a bug where displaying images such as pictures immediately after battle started made the order images display unstably.",
+    "↑の修正漏れ（背景画像が適切に読み込まれない問題）を再修正。（ver1.141）": "Re-fixed the issue missed in the fix above (background images were not loaded properly). (ver1.141)",
+    "プラグイン内の解説を大幅拡充。（11/20 ver1.142）": "Significantly expanded the explanations within the plugin. (11/20 ver1.142)",
+    "ため技プラグインとの競合対策用に調整。（2022/01/11 ver1.143）": "Adjusted the plugin to prevent conflicts with the Charge Skill plugin. (2022/01/11 ver1.143)",
+    "外部プラグインによる顔グラやキャラグラの変更が、反映されない不具合修正。": "Fixed a bug where changes to face images or character sprites made by external plugins were not reflected.",
+    "ウィンドウを重ねて表示できるように改良。": "Improved the plugin to allow windows to be displayed overlapping one another.",
+    "それに伴い初期状態では行動順序を右寄せ＆上寄せするように変更。": "Accordingly, the default setting was changed so that the action order is aligned to the right and top.",
+    "また、ウィンドウ表示系のパラメータを追加（細分化）＆整理。": "Window display parameters were also added (and subdivided) and reorganized.",
+    "強化/弱体を自身にかけた場合、即座に１ターン経過してしまう問題への対処。": "Addressed an issue where applying a buff or debuff to oneself caused one turn to elapse immediately.",
+    "※ステートは対策済みでしたが、強化/弱体への考慮が抜けていました。": "※States had already been addressed, but buffs and debuffs had been overlooked.",
+    "基本的には初期値のオンを推奨します。以前のverと挙動が変わるのが嫌な場合は『自身への強化弱体ターン+1』の項目をオフにしてください。": "Basically, I recommend leaving it enabled by default. If you do not want the behavior to change from previous versions, turn off the “+1 Turn for Buffs and Debuffs on Self” option.",
+    "二段階の強化/弱体を自分にかけた場合、想定より１ターン長く効果がかかってしまう不具合修正。（11/01 ver1.101）": "Fixed a bug where applying a two-stage buff/debuff to oneself caused the effect to last one turn longer than intended. (11/01 ver1.101)",
+    "ツクールＭＺに対応。": "Supports RPG Maker MZ.",
+    "2020/08/03～2020/08/14": "2020/08/03~2020/08/14",
+    "それに伴い、スキル選択時の行動予測で行動者を先頭表示しないようにした。": "Accordingly, the acting battler is no longer displayed first in the action prediction when selecting a skill.",
+    "行動異常時にターンが回らなくなる不具合修正。（ver1.081）": "Fixed a bug where the turn would not advance when an action was abnormal. (ver1.081)",
+    "コマンド入力中（inputting）状態を正しく設定するように対応。": "The inputting state is now set correctly.",
+    "※他プラグインとの連携に関係するだけで、大きな影響はありません": "※This only concerns compatibility with other plugins and has no major impact.",
+    "英語対応。": "Added English support.",
+    "睡眠などの異常モーションが正しく表示されない不具合修正。（ver1.071）": "Fixed a bug where abnormal motions such as sleep were not displayed correctly. (ver1.071)",
+    "バトルイベントでアクターの個別ターンが正常に取得できない不具合修正。": "Fixed a bug where an actor's individual turn could not be retrieved correctly in battle events.",
+    "複数回行動をキャンセルできない不具合修正。（04/25 ver1.061）": "Fixed a bug where multiple actions could not be canceled. (04/25 ver1.061)",
+    "行動時に一瞬余計なモーションが入る不具合修正。（04/25 ver1.062）": "Fixed a bug where an unnecessary motion was briefly displayed when acting. (04/25 ver1.062)",
+    "ターン終了時のバトルイベントで行動主体が次の行動者となる不具合修正。": "Fixed a bug where the acting subject became the next battler to act in a battle event at the end of a turn.",
+    "ＴＰの初期値が行動するまで表示されない不具合修正。": "Fixed a bug where the initial TP value was not displayed until the battler acted.",
+    "味方のターンが来るまで行動順が表示されない不具合修正。": "Fixed a bug where the action order was not displayed until an ally's turn came.",
+    "不要な重複処理を削除。（01/30 ver1.052）": "Removed unnecessary duplicate processing. (01/30 ver1.052)",
+    "ウィンドウ及び敵味方の背景を指定可能に。": "Windows and enemy/ally backgrounds can now be specified.",
+    "キャラグラの向き指定を可能に。": "Character graphic directions can now be specified.",
+    "プラグインパラメータの画像縦幅・横幅を整理。": "Reorganized the image height and width plugin parameters.",
+    "※画像サイズの指定が前バージョンと変わるのでご注意！": "※Please note that the way image sizes are specified has changed from the previous version!",
+    "SV戦闘キャラに対応。": "Supports side-view battle characters.",
+    "敵の表示モードを別途指定可能に。": "The enemy display mode can now be specified separately.",
+    "敵の表示モードにピクチャーを指定可能に。": "Pictures can now be specified as the enemy display mode.",
+    "アクター、敵キャラのメモ欄で画像を個別指定可能に。": "Images can now be specified individually in the note fields of actors and enemies.",
+    "ウィンドウの余白を変更できるようにした。": "Window padding can now be changed.",
+    "ウィンドウを暗くできるようにした。": "Windows can now be darkened.",
+    "ターゲット選択時に行動順序の更新処理が何度も呼ばれる問題に対応。": "Addressed an issue where the action order update process was called repeatedly when selecting a target.",
+    "レイアウトのずれを全体的に修正。": "Fixed layout misalignment throughout.",
+    "2019/12/31（ver1.02）": "2019/12/31 (ver1.02) ",
+    "解除が『行動終了時』かつ対象が自身のステートの効果を＋１ターン延長。": "If removal is set to “at action end” and the target is oneself, extends the effect of one's own state by 1 turn.",
+    "以前と挙動が変わるので注意です。": "Please note that the behavior differs from before.",
+    "スキルの速度補正を行動予測へ反映した。": "Skill speed modifiers are now reflected in action predictions.",
+    "2019/12/30（ver1.01）": "2019/12/30 (ver1.01) ",
+    "解除を『行動終了時』に設定したステートが解除されない不具合を修正。": "Fixed a bug where states set to be removed “at action end” were not removed.",
+    "ディレイ、即時行動などＷＴ（待ち時間）を変化させる技を実装。": "Implemented Techs that change WT (wait time), such as delay and instant action.",
+    "状態変化によって敏捷性が変化した際、即座に行動順序へ反映するよう修正。": "When agility changes due to a state change, it is now immediately reflected in the action order.",
+    "名前表示の場合、単体の敵でも末尾にアルファベットが表示されるのを修正。": "When displaying names, fixed an issue where a trailing letter was displayed even for a single enemy.",
+    "利用規約を明記。": "The terms of use are now clearly stated.",
+    "プラグインのパラメータを型指定した。": "Plugin parameters are now type-specified.",
+    "2019/12/29（ver1.00）": "2019/12/29 (ver1.00) ",
+    "公開開始！": "Now available!",
+    "パラメータ（基本設定）": "Parameters (Basic Settings)",
+    "計算人数（表示人数）（number）": "Number of Battlers (Number Displayed) (number)",
+    "ターン順序の計算を行う人数。これがそのまま画面に表示する人数となります。指定なしなら9人です。": "The number of battlers used to calculate the turn order. This is also the number displayed on the screen. If unspecified, the value is 9.",
+    "防御選択時に計算（calcGuardCommand）ver1.14": "Calculate When Guard Is Selected (calcGuardCommand) ver1.14",
+    "防御コマンドにカーソルを合わせた際、速度補正に応じて順序表示の計算を行います。": "When the cursor is placed over the Guard command, the order display is calculated according to the speed modifier.",
+    "※ＭＶでは動かないらしいです。": "※Apparently, this does not work in MV.",
+    "行動選択時に行動者を表示（showActionUser）ver1.15": "Show Acting Battler When Selecting an Action (showActionUser) ver1.15",
+    "行動選択時、順序の先頭に現在の行動者を表示したままにします。": "When selecting an action, keeps the current acting battler displayed at the front of the order.",
+    "不要なモーション更新削除（notPartyMotionRefresh）ver1.20": "Remove Unnecessary Motion Updates (notPartyMotionRefresh) ver1.20",
+    "行動選択時、全員のモーション更新をやらないようにします。": "When selecting an action, prevents motion updates for all battlers.",
+    "パラメータ（戦闘開始関連）": "Parameters (Battle Start-Related)",
+    "パーティコマンドの表示（showPartyCommand）ver1.13": "Display Party Command (showPartyCommand) ver1.13",
+    "戦闘開始時にパーティコマンドを表示する方法です。": "This determines whether to display the party command when a battle starts.",
+    "表示する設定にしておけば、『逃げる』の選択が表示される前に素早い敵から一方的な攻撃を受ける問題にも対応できます。": "When enabled, this also prevents the party from being attacked by fast enemies before the “Escape” option is displayed.",
+    "他にも、敵が先に行動する場合のみ表示させて、普段は表示しないこともできます。": "You can also display it only when the enemies act first, and normally keep it hidden.",
+    "味方の始動時間バラツキ（actorStartRandomWt）ver1.04": "Ally Start Time Variation (actorStartRandomWt) ver1.04",
+    "戦闘開始時の味方の敏捷性を数値％分だけ分散させます。": "Disperses allies’ agility at battle start by the specified percentage.",
+    "例：20ならば、90～110%に分散。指定なしは0。": "Example: 20 disperses it between 90% and 110%. The default is 0.",
+    "要するに戦闘開始時の行動順序をバラけさせるか否かということです。初期値0のままだと毎戦闘、同じ順番で動きます。": "In short, this determines whether to randomize the action order at battle start. If left at the default value of 0, everyone acts in the same order every battle.",
+    "敵の始動時間バラツキ（enemyStartRandomWt）ver1.04": "Enemy Start Time Variation (enemyStartRandomWt) ver1.04",
+    "戦闘開始時の敵の敏捷性を数値％分だけ分散させます。": "Disperses enemies’ agility at battle start by the specified percentage.",
+    "例：20ならば、90～110%に分散。指定なしは20。": "Example: 20 disperses it between 90% and 110%. The default is 20.",
+    "0にすると同種の敵が一斉に行動してきます。それを避けるために20ほど初期値を分散させています。": "When set to 0, enemies of the same type all act simultaneously. The default is set to 20 to avoid this.",
+    "先制時の始動時間ボーナス（preemptiveAdvantage）ver1.04": "Start Time Bonus for Preemptive Attacks (preemptiveAdvantage) ver1.04",
+    "先制攻撃時に、指定した数値の％分だけ味方のターンを早めます。": "During a preemptive attack, advances the allies’ turns by the specified percentage.",
+    "初期値は50%です。つまり1/2ターンほど通常より早く行動します。": "The default is 50%. In other words, they act about half a turn earlier than usual.",
+    "奇襲時の始動時間ボーナス（surpriseAdvantage）ver1.04": "Start Time Bonus for Surprise Attacks (surpriseAdvantage) ver1.04",
+    "敵の奇襲時に、指定した数値の％分だけ敵のターンを早めます。": "During an enemy surprise attack, advances the enemies’ turns by the specified percentage.",
+    "初期値は50%です。": "The default is 50%.",
+    "開始ターン数（startTurn）ver1.04": "Starting Turn (startTurn) ver1.04",
+    "戦闘開始時のターン数を設定します。": "Sets the turn number at battle start.",
+    "これは主に敵の行動パターンの判定に使用されます。": "This is mainly used to determine enemy action patterns.",
+    "初期値は1です。": "The default is 1.",
+    "MVのデフォルトの仕様では、0ターンから開始します。これは公式の説明とも食い違っているので、バグっぽい気がしますが……。一応、元の通り0ターン開始も選択できるようにしています。": "With MV’s default specifications, battles start at turn 0. This also contradicts the official explanation, so it seems like a bug... In any case, I have made it possible to choose to start at turn 0 as before.",
+    "パラメータ（逃走関連）": "Parameters (Escape-Related)",
+    "逃走時のペナルティ時間（escapePenalty）ver1.04": "Penalty Time on Escape (escapePenalty) ver1.04",
+    "逃走失敗時のペナルティです。": "This is the penalty for failing to escape.",
+    "指定した数値の％分だけ味方のターンを遅らせます。": "Delays the allies’ turns by the specified percentage.",
+    "初期値は25です。つまり、1/4ターンほど行動を遅らせます。": "The default is 25. In other words, it delays their actions by about a quarter of a turn.",
+    "※逃走を失敗した当人は、まるまる１ターン消耗します。": "※The person who failed to escape consumes an entire turn.",
+    "一人のターンを消費するだけだとターン制に比較してペナルティが低すぎるため、こういう措置にしています。": "Since consuming only one person’s turn would make the penalty too low compared to turn-based battles, this measure has been implemented.",
+    "パラメータ（ステート／能力変化関連） ver1.10": "Parameters (States / Parameter Changes) ver1.10",
+    "自身へのステートターン+1（selfStatePlusTurn）": "State Turns on Self +1 (selfStatePlusTurn)",
+    "自分にかけたステートは継続ターンを+1します。": "Adds 1 turn to the duration of states applied to oneself.",
+    "自動解除のタイミングが『行動終了時』のものが対象です。": "This applies to states whose automatic removal timing is “At Action End.”",
+    "この項目は「自分にかけた効果が即座に切れてしまう問題」への対処として設定されたものです。": "This setting was added to address the “problem of effects applied to oneself ending immediately.”",
+    "基本的にはオンのままで構いません。": "Basically, you can leave this enabled.",
+    "自身への強化弱体ターン+1（selfBufPlusTurn）": "Self Buff/Debuff Turns +1 (selfBufPlusTurn)",
+    "自分にかけた強化弱体は継続ターンを+1します。": "Adds 1 turn to the duration of buffs and debuffs applied to oneself.",
+    "同じく「自分にかけた効果が即座に切れてしまう問題」への対処として設定されました。": "This was likewise added to address the “problem of effects applied to oneself ending immediately.”",
+    "ただし、ver1.09まではステートのみこの考慮がされており、強化弱体と不揃いな状態になっていました。": "However, up through ver1.09, this consideration applied only to states, leaving buffs and debuffs inconsistent with them.",
+    "ver1.09までの動作に戻したい場合はこちらだけをオフにしてください。": "If you want to restore the behavior from ver1.09 and earlier, turn off only this option.",
+    "蘇生時のＷＴ（reviveWT）": "WT Upon Revival (reviveWT)",
+    "蘇生時に待ち時間を再設定します。": "Resets the wait time upon revival.",
+    "baseWt: １ターン分の待ち時間": "baseWt: Wait time for one turn",
+    "wt: 戦闘不能になった際の待ち時間": "wt: Wait time when incapacitated",
+    "数式も可能です。": "Formulas are also supported.",
+    "例えば、(baseWt / 2)ならば、蘇生してから0.5ターンで動けるようになります。": "For example, with (baseWt / 2), the battler can act 0.5 turns after being revived.",
+    "空欄の場合は戦闘不能になった際の待ち時間をそのまま使用します。": "If left blank, the wait time from when the battler became incapacitated is used as is.",
+    "スキルの順序変化を予測（predictionSkillOrder）": "Predict Skill Order Changes (predictionSkillOrder)",
+    "ＷＴや敏捷性を変化させるスキル（ステート、能力変化）によって行動順序が変化する場合、それを予測して表示します。": "If the action order changes due to a skill (state or parameter change) that alters WT or agility, the change is predicted and displayed.",
+    "必中のみ予測（predictionCertain）": "Predict Certain-Hit Skills Only (predictionCertain)",
+    "命中タイプが必中のスキルのみ予測の対象とします。": "Only skills with a Certain Hit success type are included in the predictions.",
+    "オフの場合は全て対象とします。": "If this is off, all skills are included.",
+    "NRP_VisualTurn.jsのパラメータ": "NRP_VisualTurn.js Parameters",
+    "画面表示については、主にこちらで設定します。": "These parameters are mainly used to configure the display.",
+    "色々とカスタマイズが可能ですが、長くなったので別記事に分割しました。": "Various customizations are possible, but the article became too long, so I split them into a separate article.",
+    "仕様・注意点": "Specifications and Notes",
+    "ステートの自動解除のタイミングが『行動終了時』の場合は個人のターンで効果が切れます。『ターン終了時』の場合は全員のターンで判定されます。基本的には『行動終了時』のほうが使いやすいです。（ver1.01）": "If a state's auto-removal timing is set to “At the End of Action,” its effect wears off on the individual battler's turn. If set to “At the End of Turn,” it is checked on everyone's turn. In general, “At the End of Action” is easier to use. (ver1.01)",
+    "エディタ上から入力する速度補正の値は％にしています。": "The speed modifier value entered in the editor is expressed as a percentage.",
+    "速度補正100の技は+100%。つまり二倍速ということです。": "A skill with a speed modifier of 100 has a modifier of +100%, meaning it acts at double speed.",
+    "速度補正-50で1/2倍速です。-100以下だとターンがほぼ回らなくなります。": "A speed modifier of -50 results in half speed. At -100 or lower, turns will almost never come around.",
+    "デフォルトにある防御の設定は必ず変えてください。": "Be sure to change the default Defense settings.",
+    "速度補正が2000のままだと「ずっと俺のターン」になります。": "If the speed modifier remains at 2000, it becomes “It's always my turn.”",
+    "また、防御ステートの自動解除は『行動終了時』を推奨します。": "Also, I recommend setting the auto-removal timing for the Defense state to “At the End of Action.”",
+    "アクターの複数回行動には対応していません。": "Multiple actions for actors are not supported.",
+    "戦う、逃げるのパーティコマンドは初期表示しません。": "The Fight and Escape party commands are not displayed initially.",
+    "キャンセルを押すと表示するようになっています。": "They are displayed when Cancel is pressed.",
+    "戦闘の流れを根本的に変えているため、その辺に触れるプラグインとは競合しまくります。": "Because this fundamentally changes the flow of battle, it conflicts heavily with plugins that affect similar aspects.",
+    "参考までにこういった影響の大きなプラグインほど上側に配置したほうが、動きやすい傾向にあります。※あくまで傾向です。確実ではありません。": "For reference, plugins with effects this significant tend to work better when placed higher in the list. ※This is only a tendency, not a guarantee.",
+    "追加機能": "Additional Features",
+    "ステートのメモ欄": "State Note Field",
+    "ステート欄のメモに以下を記入することで、対象の待ち時間を変更できます。": "You can change the target's wait time by entering the following in the state's note field.",
+    "数値は100で対象の１ターン分の待ち時間となります。": "A value of 100 corresponds to one turn of the target's wait time.",
+    "数式やマイナス値も可能です。": "Formulas and negative values are also supported.",
+    "<SetWt:[数値]>": "<SetWt:[number]>",
+    "対象の待ち時間を変更します。": "Changes the target's wait time.",
+    "<AddWt:[数値]>": "<AddWt:[number]>",
+    "対象の待ち時間を加算します。": "Adds to the target's wait time.",
+    "例": "Examples",
+    "1/2ターン分、相手の行動を遅らせます。いわゆるディレイアタックですね。": "Delays the opponent's action by half a turn. In other words, it's a delay attack.",
+    "対象の待ち時間を０にし、即時行動させます。": "Sets the target's wait time to 0, allowing it to act immediately.",
+    "ただし、行動者自身にかけても、この直後にターン経過するので無意味です。": "However, applying it to the acting battler is pointless, since a turn passes immediately afterward.",
+    "連続行動をさせたい場合は、スキルの速度補正を2000に設定してください。": "To make a battler act consecutively, set the skill's speed modifier to 2000.",
+    "（※参照：連続行動技）": "(※Reference: Consecutive Action Skill)",
+    "全体にかければ、サガのクイックタイムっぽくなって最強です。": "Applying it to everyone makes it something like SaGa's Quick Time—and incredibly powerful.",
+    "対象の待ち時間を－５ターンに変更します。": "Changes the target's wait time to -5 turns.",
+    "つまり、一方的に５回程度動けるようになります。": "In other words, the target can act unilaterally about five times.",
+    "自分にかければ、同じくサガのオーヴァドライブっぽくなって最強です。": "Applying it to yourself makes it something like SaGa's Overdrive, and incredibly powerful.",
+    "注意点": "Notes",
+    "なお、これらはステートがかかった際にのみ発生する効果となります。": "These effects occur only when the state is applied.",
+    "そのため、同一のステートがかかったままだと重ねがけできません。これは自動解除のタイミングを『ターン終了時』の1ターンにしておけば、即座に重ねられるようになります。": "Therefore, they cannot be stacked while the same state remains active. However, if you set the auto-removal timing to one turn at “At the End of Turn,” you can stack them immediately.",
+    "逆に言えば、自動解除のタイミングを『行動終了時』の1ターンにしておけば、「敵が一度行動するまで重ねられないディレイ」のような異常を狙って作れます。": "Conversely, if you set the auto-removal timing to one turn at “At the End of Action,” you can intentionally create an effect like a delay that cannot be stacked until the enemy acts once.",
+    "戦闘不能状態でも行動順序に表示されるようになります。": "The battler will also be displayed in the action order while incapacitated.",
+    "一定時間で復活などの特殊なステートを想定しています。": "This is intended for special states, such as one that revives the battler after a set amount of time.",
+    "自動解除のタイミングが行動終了時のステートに対して、ターン開始時（入力開始時）にステートの自動解除を発生させます。": "For states whose auto-removal timing is set to the end of action, this triggers auto-removal at the start of the turn (when input begins).",
+    "防御など入力開始時に効果を切れさせたい場合に有効です。": "This is useful when you want an effect, such as Defense, to wear off when input begins.",
+    "ステートを自分にかけた際、継続ターンを+1します。": "Adds +1 to the duration when the state is applied to oneself.",
+    "ステートを自分にかけた際、継続ターンを+1しません。": "Does not add +1 to the duration when the state is applied to oneself.",
+    "オブジェクトのメモ欄": "Object Note Field",
+    "特徴を保有するオブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を記載してください。": "Enter the following in the note field of objects that have traits (actors, enemies, classes, equipment, states, and skills).",
+    "スキルについては覚えているだけで、機能するパッシブスキルとなります。": "For skills, simply learning them makes them function as passive skills.",
+    "<StartWt:[数値]>": "<StartWt:[[Number]]>",
+    "戦闘開始時の待ち時間（基準:100）を指定した値に変更します。": "Changes the waiting time at the start of battle (base: 100) to the specified value.",
+    "例えば、<StartWt:0>なら即時行動します。": "For example, <StartWt:0> allows you to act immediately.",
+    "<StartWt:200>ならば、１ターン分行動開始が遅れます。": "With <StartWt:200>, action begins one turn later.",
+    "スキルのメモ欄": "Skill Note Field",
+    "<ReviveWt:[数値]>": "<ReviveWt:[[Number]]>",
+    "蘇生スキルに対して、蘇生時の待ち時間（基準:100）を設定します。": "Sets the waiting time when reviving (base: 100) for revival skills.",
+    "<ReviveWt:50>ならば、1/2ターンで行動開始します。": "With <ReviveWt:50>, action begins after half a turn.",
+    "自身へのステートターン+1（ver1.24）": "State Turn +1 for Self (ver1.24)",
+    "初期設定では自身にかけたステート（強化／弱体）の効果を＋１ターン延長する仕様になっています。": "By default, the effects of states (buffs/debuffs) applied to oneself are extended by 1 turn.",
+    "※自動解除のタイミングが『行動終了時』のものが対象です。": "※This applies to states whose auto-removal timing is “Action End.”",
+    "これはスキル使用直後に自身のターンが終了してしまうための調整です。": "This adjustment prevents the user's turn from ending immediately after using a skill.",
+    "（例えば、継続ターン数が１のステートが瞬時に切れてしまう問題への対応。）": " (For example, it addresses the issue of a state with a duration of 1 turn expiring instantly.)",
+    "一方で再生系のような行動終了時に効果を発揮するステートは、回数が増えてしまうという問題があるため、ステート毎に切り替えられるようにしています。": "On the other hand, states such as regeneration that take effect at the end of an action would occur more times, so this setting can be switched for each state.",
+    "以下をステートのメモ欄に記入してください。": "Enter the following in the state's note field.",
+    "連続行動技（ver1.02）": "Consecutive Action Skills (ver1.02)",
+    "スキルの速度補正を2000（MAX）にしておくと、時間経過なしで連続行動を行います。": "Setting a skill's speed modifier to 2000 (MAX) allows consecutive actions without any time passing.",
+    "瞬時に効果を発動する補助スキルなどの作成に便利です。": "This is useful for creating support skills that activate their effects instantly.",
+    "画面イメージ": "Screen Image",
+    "敏捷性１０倍アップの魔法で「ずっと俺のターン！」してみました。": "I tried “It's always my turn!” with a spell that increases agility tenfold.",
+    "レイアウトは「NRP_VisualTurn.js」によって色々と変えられます。なお、配置を考えないとキャラやメッセージとかぶりますので工夫してみてください。": "The layout can be changed in various ways using “NRP_VisualTurn.js.” If you do not plan the placement carefully, it may overlap with characters or messages, so try adjusting it creatively.",
+    "行動時のみ枠を非表示にすることも可能です。": "It is also possible to hide the frame only while an action is being performed.",
+    "バトルイベント": "Battle Events",
+    "ＣＴＢでは各行動毎にターンが経過します。そのため、バトルイベントで指定できるターン数は全体での行動回数と一致します。": "In CTB, a turn passes with each action. Therefore, the number of turns specified in a battle event corresponds to the total number of actions.",
+    "各キャラ毎のターン数を参照したい場合はスクリプトで情報を取得します。": "If you want to reference the turn count for each character, retrieve the information using a script.",
+    "取得項目の例": "Examples of Retrievable Data",
+    "個別ターン数：BattleManager._subject.turnCount()": "Individual turn count: BattleManager._subject.turnCount()",
+    "アクターＩＤ：BattleManager._subject._actorId": "Actor ID: BattleManager._subject._actorId",
+    "敵ＩＤ：BattleManager._subject._enemyId": "Enemy ID: BattleManager._subject._enemyId",
+    "インデックス：BattleManager._subject.index()": "Index: BattleManager._subject.index()",
+    "※配置順で0から始まる番号のことです。": "※This is a number starting from 0 according to the placement order.",
+    "敵味方別なのでisActor, isEnemy()で区別する必要あり。": "Since this differs between allies and enemies, they must be distinguished using isActor and isEnemy().",
+    "例１：アクター１の２ターン目にイベントを起こす場合の条件。": "Example 1: Condition for triggering an event on Actor 1's second turn.",
+    "例２：先頭の敵が３ターン目にイベントを起こす場合の条件。": "Example 2: Condition for triggering an event on the first enemy's third turn.",
+    "※バトルイベントの条件自体は毎ターン実行するようなものにしてください。": "※Set the battle event's condition itself to something that is executed every turn.",
+    "関連情報": "Related Information",
+    "また、ＲＰＧ制作講座にＣＴＢの戦闘バランスについて記事を書きました。ターン制との勝手の違いなど、ＣＴＢのバランス調整に悩んでいる人はご参考にどうぞ。": "I also wrote an article about CTB battle balance in RPG Design Guides. If you are struggling to balance CTB, please refer to it for differences in feel from turn-based systems and other considerations.",
+    "https://newrpg.seesaa.net/article/488700523.html": "https://newrpg.seesaa.net/article/488700523.html"
+  }
+}

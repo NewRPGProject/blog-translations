@@ -1,0 +1,1313 @@
+{
+  "articleId": "500297653",
+  "sourceUrl": "https://newrpg.seesaa.net/article/500297653.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "df976cc065f05122d49ace0abbb1106f8751ec4b0487bde0527c3b2ae8641a76",
+  "translatedAt": "2026-08-31T02:14:25.348Z",
+  "title": "Implementing a Party Formation Screen [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "パーティ編成画面を実装【RPGツクールMZプラグイン】",
+      "sourceHash": "2b47ae7d852267b05114a3b284371acf8704d3570239ee40fa9b9d410bef91b1",
+      "translation": "Implementing a Party Formation Screen [RPG Maker MZ Plugin]",
+      "contextHash": "2b47ae7d852267b05114a3b284371acf8704d3570239ee40fa9b9d410bef91b1"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "パーティ編成画面を実装します。",
+      "sourceHash": "12d0f1262fe7d1157eb452c271e5b5101e872151731f562f8e7d06a73a58a0b5",
+      "translation": "This plugin implements a party formation screen.",
+      "contextHash": "12d0f1262fe7d1157eb452c271e5b5101e872151731f562f8e7d06a73a58a0b5"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "戦闘メンバーと控えメンバーを入れ替えるシンプルな編成画面です。",
+      "sourceHash": "81aa6b41487d748bd4c261e06bb094337b7cd2264673c3a82529c8fbacf9e30b",
+      "translation": "This is a simple formation screen for swapping battle members and reserve members.",
+      "contextHash": "81aa6b41487d748bd4c261e06bb094337b7cd2264673c3a82529c8fbacf9e30b"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "前提として、ツクールＭＺでは標準の並び替え機能によって、戦闘メンバーと控えメンバーを簡単に入れ替えることができます。",
+      "sourceHash": "dbfa28c9370b63798d89ff0340041ffaba94b62aa1efba57f31ce60bc040ce0f",
+      "translation": "First, RPG Maker MZ's standard rearrangement feature allows you to easily swap battle members and reserve members.",
+      "contextHash": "dbfa28c9370b63798d89ff0340041ffaba94b62aa1efba57f31ce60bc040ce0f"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "なので、それで足りるなら編成画面は必要ありません。",
+      "sourceHash": "4b3b857566908aeddf3550d40611300c29f3ca7db3398b7f43036f45cfc0ab82",
+      "translation": "Therefore, if that is sufficient, you do not need a formation screen.",
+      "contextHash": "4b3b857566908aeddf3550d40611300c29f3ca7db3398b7f43036f45cfc0ab82"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "では、このプラグインは何のためにあるのかというと、主に控えメンバーの利用を制限するためです。",
+      "sourceHash": "ad4be92ee4a18d3a76c3a3a4986b96ac66fc5ee564926881afc1aba685ff06e8",
+      "translation": "So, what is this plugin for? Primarily, it is intended to restrict the use of reserve members.",
+      "contextHash": "ad4be92ee4a18d3a76c3a3a4986b96ac66fc5ee564926881afc1aba685ff06e8"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "特に控えメンバーの回復スキルが自由に利用できてしまうと、難易度が想定よりも下がってしまうことが予想されます。",
+      "sourceHash": "3c525b1cb816e55a9c5b2507f289042e73eff85ff6d7bbbcdf53578e8c03f9d1",
+      "translation": "In particular, if reserve members can freely use healing skills, the difficulty is likely to become lower than intended.",
+      "contextHash": "3c525b1cb816e55a9c5b2507f289042e73eff85ff6d7bbbcdf53578e8c03f9d1"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そこで当プラグインでは、メニュー画面での入替を禁止し、控えメンバーによる回復スキルの使用を禁止します。",
+      "sourceHash": "f1a09943ee421b4fcbba76cdf139a208e44d463ea7624fced242f3f41440a93a",
+      "translation": "Therefore, this plugin prohibits swapping members on the menu screen and prevents reserve members from using healing skills.",
+      "contextHash": "f1a09943ee421b4fcbba76cdf139a208e44d463ea7624fced242f3f41440a93a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "その上で拠点やセーブポイントなどから編成画面を呼び出せるようにすれば、控えメンバーの使用を制限できます。",
+      "sourceHash": "32cada1ee3fc4e42efd7e2b525ca63ab142570c6f6604883e7480cbb65b5cd3d",
+      "translation": "You can then restrict the use of reserve members by making the formation screen available from places such as bases and save points.",
+      "contextHash": "32cada1ee3fc4e42efd7e2b525ca63ab142570c6f6604883e7480cbb65b5cd3d"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Turn the feature ON from RPG Maker's Plugin Manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_ChangeParty.js",
+      "sourceHash": "4de889f5e0e9048e55681d050f051555b9b259fac10540531ca1f094376ee098",
+      "translation": "NRP_ChangeParty.js ",
+      "contextHash": "8f31193ca8bfa394ff73f842c0709af3a5ff308a275660efa9e858d9f7ebd8fe"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ver1.07（2025/03/20）",
+      "sourceHash": "c88918c3fc15b42749f44fa3ed1a540c91ec43c8039815a94e29b764706c4ce5",
+      "translation": "ver1.07 (2025/03/20) ",
+      "contextHash": "8f31193ca8bfa394ff73f842c0709af3a5ff308a275660efa9e858d9f7ebd8fe"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "関連プラグイン",
+      "sourceHash": "c128f48ccc8cfd9a1788e135581280f4d566ff3b401bf9faf5ca98128072169a",
+      "translation": "Related Plugins",
+      "contextHash": "c128f48ccc8cfd9a1788e135581280f4d566ff3b401bf9faf5ca98128072169a"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "控えメンバーの経験値を減らしたいという方はこちらをお使いください。",
+      "sourceHash": "baccfe4dbd5e0293b8da6fdccc64c21236d093a0acccaa7f14c235d2cade1a36",
+      "translation": "If you want to reduce the experience gained by reserve members, use this plugin.",
+      "contextHash": "baccfe4dbd5e0293b8da6fdccc64c21236d093a0acccaa7f14c235d2cade1a36"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2025/03/20（ver1.07）",
+      "sourceHash": "c583d41da20f555f6e22c0aceb3343d103b5ec5e1a21977fd55ed3531064c820",
+      "translation": "2025/03/20 (ver1.07) ",
+      "contextHash": "c583d41da20f555f6e22c0aceb3343d103b5ec5e1a21977fd55ed3531064c820"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2025/02/24（ver1.06）",
+      "sourceHash": "06c34cfb950091e4dd39d70303e2a87827055ff04ccab774ed3da6c4149aaae7",
+      "translation": "2025/02/24 (ver1.06) ",
+      "contextHash": "06c34cfb950091e4dd39d70303e2a87827055ff04ccab774ed3da6c4149aaae7"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "入替対象を選択中にキャンセルするとフリーズする不具合修正。",
+      "sourceHash": "4e917bdd933d0a9e8f0048fd6ef28facc96e4fcfc791e97e8d39b3798df2d23e",
+      "translation": "Fixed a bug that caused the game to freeze when canceling while selecting a member to swap.",
+      "contextHash": "4e917bdd933d0a9e8f0048fd6ef28facc96e4fcfc791e97e8d39b3798df2d23e"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/07/30（ver1.05）",
+      "sourceHash": "4974e0eee6bf460e81438288337a52ca5390f1445e37f862d5c1581c88f884f5",
+      "translation": "2024/07/30 (ver1.05) ",
+      "contextHash": "4974e0eee6bf460e81438288337a52ca5390f1445e37f862d5c1581c88f884f5"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "左右を入力した際のカーソルの挙動が不安定だったので、処理を見直して安定化した。",
+      "sourceHash": "ae7ce620026056029e8a9fc9354534ce4139df1e184abf2588efa5f35ceefd46",
+      "translation": "The cursor behavior when entering left or right was unstable, so the processing was reviewed and stabilized.",
+      "contextHash": "ae7ce620026056029e8a9fc9354534ce4139df1e184abf2588efa5f35ceefd46"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2024/03/03（ver1.04）",
+      "sourceHash": "5245164d48a5e17b2b9453a9b34a9603c68e3bdab30a6e9df919c3b4250e8f68",
+      "translation": "2024/03/03 (ver1.04) ",
+      "contextHash": "5245164d48a5e17b2b9453a9b34a9603c68e3bdab30a6e9df919c3b4250e8f68"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "『控えメンバーのスキル禁止』がオンかつ控えメンバーに薬の知識所有者が存在する場合、回復アイテムが使用できなくなる不具合修正。",
+      "sourceHash": "20aaafe12d0edfa4126ad7815fd142eda053a1de43bdd53af0a3c76e43d845d4",
+      "translation": "Fixed a bug where recovery items could not be used when “Disable Reserve Member Skills” was ON and a reserve member possessed Pharmacology.",
+      "contextHash": "20aaafe12d0edfa4126ad7815fd142eda053a1de43bdd53af0a3c76e43d845d4"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2024/02/16（ver1.03）",
+      "sourceHash": "8ad4e9443ddd7e182fbd9bee2c7fa1a3bdc7920d60c79526eac5d87bd4e5ed55",
+      "translation": "2024/02/16 (ver1.03) ",
+      "contextHash": "8ad4e9443ddd7e182fbd9bee2c7fa1a3bdc7920d60c79526eac5d87bd4e5ed55"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "メニュー画面の構造によっては「控えを別ページに表示」が機能しない不具合修正。",
+      "sourceHash": "3c6dada6a5bfabe54bcef4415fbd15e98fecfa64e0243119aa798dc56a6047e9",
+      "translation": "Fixed a bug where “Show Reserves on a Separate Page” did not function depending on the structure of the menu screen.",
+      "contextHash": "3c6dada6a5bfabe54bcef4415fbd15e98fecfa64e0243119aa798dc56a6047e9"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2024/01/20（ver1.02）",
+      "sourceHash": "0961e33a00f9f61220b27deb89cb296caab82c03ed5ae14810f030f5981def7d",
+      "translation": "2024/01/20 (ver1.02) ",
+      "contextHash": "0961e33a00f9f61220b27deb89cb296caab82c03ed5ae14810f030f5981def7d"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "「戦闘メンバーの空白許可」がオンの場合、空白指定時にエラーとなる不具合修正。",
+      "sourceHash": "2b4fd4a3f2bd38c581b7a15f111ed38ef5e73a6fe7add7330426cea6e58ab009",
+      "translation": "Fixed a bug that caused an error when specifying a blank while “Allow Empty Battle Member Slots” was ON.",
+      "contextHash": "2b4fd4a3f2bd38c581b7a15f111ed38ef5e73a6fe7add7330426cea6e58ab009"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2023/08/09（ver1.01）",
+      "sourceHash": "de382003e47aeb47e9085688fb05551145f836e65b3fe3073680e0df90442d83",
+      "translation": "2023/08/09 (ver1.01) ",
+      "contextHash": "de382003e47aeb47e9085688fb05551145f836e65b3fe3073680e0df90442d83"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "2023/08/08（ver1.001）",
+      "sourceHash": "bc7ca1f5fd51e90d4a75754e1b2cb421277716d4a874ac3c8f21314efe66bee3",
+      "translation": "2023/08/08 (ver1.001) ",
+      "contextHash": "bc7ca1f5fd51e90d4a75754e1b2cb421277716d4a874ac3c8f21314efe66bee3"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "前述した通り、当プラグインの編成画面は、戦闘メンバーと控えメンバーを入れ替える仕様になっています。",
+      "sourceHash": "ef3712146bd53cedb3844d4c61a2afeb7a93e73793fcb821e07bbf653c1b9764",
+      "translation": "As mentioned above, this plugin's formation screen is designed to swap battle members and reserve members.",
+      "contextHash": "ef3712146bd53cedb3844d4c61a2afeb7a93e73793fcb821e07bbf653c1b9764"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "編成対象となるアクターは『メンバーの入れ替え』で追加してください。",
+      "sourceHash": "fe27cae83225944356b2d3a2959a80e95479e80881e2acc33c5f3619c86c18cc",
+      "translation": "Add the actors to be included in the formation using “Change Party Member”.",
+      "contextHash": "fe27cae83225944356b2d3a2959a80e95479e80881e2acc33c5f3619c86c18cc"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "プラグインを適用すると以下の機能が適用されます。",
+      "sourceHash": "5a30641d889e0c943cff974da1a0ea8e56d1c9b528886b1066df51edad6fb67f",
+      "translation": "Applying the plugin enables the following features.",
+      "contextHash": "5a30641d889e0c943cff974da1a0ea8e56d1c9b528886b1066df51edad6fb67f"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "メニューの並び替えにて、控えとの入替を禁止。",
+      "sourceHash": "b7d9b29d1f15908a17e2cf136b16360a42fae88cb4cf2c12294e9ec96b96cf73",
+      "translation": "Prohibits swapping with reserve members when rearranging the party from the menu.",
+      "contextHash": "b7d9b29d1f15908a17e2cf136b16360a42fae88cb4cf2c12294e9ec96b96cf73"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "控えメンバーのスキル使用を禁止。",
+      "sourceHash": "ec4f29640f9b52a10e56187a6c809c2d119797a8de0018bde2c35ef8748020f0",
+      "translation": "Prohibits reserve members from using skills.",
+      "contextHash": "ec4f29640f9b52a10e56187a6c809c2d119797a8de0018bde2c35ef8748020f0"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "さらにプラグインパラメータの設定によっては、控えメンバー自体をメニューに表示しない設定にできます。",
+      "sourceHash": "874571dcc580408b2a80a744b157fb5110b5b15f2bc3fd94162b741eaba867e9",
+      "translation": "Depending on the plugin parameter settings, you can also choose not to display reserve members in the menu at all.",
+      "contextHash": "874571dcc580408b2a80a744b157fb5110b5b15f2bc3fd94162b741eaba867e9"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "編成画面はお好みのタイミングで呼び出すようにしてください。",
+      "sourceHash": "c64b1fbaf272d51b8f6a4d4cc071472ee1d3a8a2f93f9dc7610e2e263dd516d1",
+      "translation": "Call up the formation screen whenever you like.",
+      "contextHash": "c64b1fbaf272d51b8f6a4d4cc071472ee1d3a8a2f93f9dc7610e2e263dd516d1"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "プラグインコマンドで呼び出す他にも、メニュー画面にコマンドを追加することもできます。メニューコマンドを使用できるタイミングもスイッチで制御できます。",
+      "sourceHash": "c5e7848cc3614280b5a65603db904b9f9b4eda95ce2552e0d2684e2b7638ab5a",
+      "translation": "In addition to calling it with a plugin command, you can also add a command to the menu screen. A switch can be used to control when the menu command is available.",
+      "contextHash": "c5e7848cc3614280b5a65603db904b9f9b4eda95ce2552e0d2684e2b7638ab5a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "シーン開始",
+      "sourceHash": "2aa97e25a655180f18fd14290ccf41815e5a62d4ec3f18d3b5b98a9b1f5756ce",
+      "translation": "Start Scene",
+      "contextHash": "2aa97e25a655180f18fd14290ccf41815e5a62d4ec3f18d3b5b98a9b1f5756ce"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "パーティ編成画面を呼び出します。",
+      "sourceHash": "b65af5bbfa56787dd3b8861383fd7beb6631c18b0404f17183390b8f0d0e5a50",
+      "translation": "Calls up the party formation screen.",
+      "contextHash": "b65af5bbfa56787dd3b8861383fd7beb6631c18b0404f17183390b8f0d0e5a50"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "最大戦闘人数の変更",
+      "sourceHash": "1e59c523d18e49c0b5f8bb14b779818d30164f81aea70bcae71971401e80e7fc",
+      "translation": "Change Maximum Battle Members",
+      "contextHash": "1e59c523d18e49c0b5f8bb14b779818d30164f81aea70bcae71971401e80e7fc"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "最大戦闘人数を変更します。",
+      "sourceHash": "7e65ab2e79c2369d2c246baa58521f4cf4ca400db16f79959957943b61963038",
+      "translation": "Changes the maximum number of battle members.",
+      "contextHash": "7e65ab2e79c2369d2c246baa58521f4cf4ca400db16f79959957943b61963038"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "空欄を設定すると初期化（通常は４）します。",
+      "sourceHash": "df2c8cfd041bab29c9fb1b42c81ce5032c0751e82a5649492137f793864f2fe9",
+      "translation": "Leaving this blank resets it to the default (normally 4).",
+      "contextHash": "df2c8cfd041bab29c9fb1b42c81ce5032c0751e82a5649492137f793864f2fe9"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "戦闘メンバーの空白許可（AllowRelease）",
+      "sourceHash": "da979dd4ebba2a57e0c212e1b8e5e31e0fd2c239ce69ac42d07546231715b678",
+      "translation": "Allow Empty Battle Member Slots (AllowRelease)",
+      "contextHash": "da979dd4ebba2a57e0c212e1b8e5e31e0fd2c239ce69ac42d07546231715b678"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "戦闘メンバーを減らして３人以下での編成をできるようにします。",
+      "sourceHash": "81545d0d6bf61ac8bb7a10b0c6bc0f6e5e3cf758742b4a0418fcfaf3cb25dfc5",
+      "translation": "Allows you to reduce the number of battle members and form a party of three or fewer.",
+      "contextHash": "81545d0d6bf61ac8bb7a10b0c6bc0f6e5e3cf758742b4a0418fcfaf3cb25dfc5"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "編成画面にて、控えメンバーの末尾に空欄が表示されるので、それと交換することで外せるようになります。",
+      "sourceHash": "8d4414ee746af6e5435d3adce4afc691420b24fb0d467b98deb493d133152505",
+      "translation": "On the formation screen, a blank slot is displayed at the end of the reserve members, allowing you to remove a member by swapping them with it.",
+      "contextHash": "8d4414ee746af6e5435d3adce4afc691420b24fb0d467b98deb493d133152505"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "※戦闘人数が減らされた状態でイベントコマンドからメンバーの追加をしても戦闘人数は戻りません。予期せぬ不具合を起こす可能性があるのでご注意ください。",
+      "sourceHash": "be5116f7e7f8bb13fea8b1d9fb1e950a77a978c529e429e165be002a2291b9c6",
+      "translation": "※If you add a member using an event command while the number of battle members has been reduced, the number of battle members will not be restored. Please be aware that this may cause unexpected problems.",
+      "contextHash": "be5116f7e7f8bb13fea8b1d9fb1e950a77a978c529e429e165be002a2291b9c6"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "控えを別ページに表示（ShowOtherPage）",
+      "sourceHash": "b7dc112cd4d269796886804b665ae5fc6b384e4be6bea117f3d1837dd2a4f058",
+      "translation": "Show Reserves on a Separate Page (ShowOtherPage)",
+      "contextHash": "b7dc112cd4d269796886804b665ae5fc6b384e4be6bea117f3d1837dd2a4f058"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "戦闘メンバーの空白許可がオンの際、メニュー画面にて控えメンバーを別ページに表示します。",
+      "sourceHash": "f629933d832fe8eb5ac46b4d16bb60b04d88998c8dd130538a56b13f00cc538a",
+      "translation": "When Allow Empty Battle Member Slots is ON, displays reserve members on a separate page in the menu screen.",
+      "contextHash": "f629933d832fe8eb5ac46b4d16bb60b04d88998c8dd130538a56b13f00cc538a"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "戦闘メンバーを３人以下に減らした場合、通常だとメニューの同一ページに戦闘メンバーと控えメンバーが表示されるようになります。それだと分かりにくいので、１ページ目には戦闘メンバーだけを表示するようにします。",
+      "sourceHash": "55e33e35465bb39668e85f43b10974343eb23b65dd85c07ee1da1b9655922f7b",
+      "translation": "If you reduce the number of battle members to three or fewer, battle members and reserve members will normally be displayed on the same menu page. Since this can be confusing, only battle members are displayed on the first page.",
+      "contextHash": "55e33e35465bb39668e85f43b10974343eb23b65dd85c07ee1da1b9655922f7b"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "控えの不透明度（ReserveOpacity）",
+      "sourceHash": "142f06c96d02044fbfcaf3b8b9a201e78c267c36518850fc8694ba78b8d59d4b",
+      "translation": "Reserve Opacity (ReserveOpacity)",
+      "contextHash": "142f06c96d02044fbfcaf3b8b9a201e78c267c36518850fc8694ba78b8d59d4b"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "控えメンバーの顔グラの不透明度です。",
+      "sourceHash": "ab78ca9c01ad90f9e516cf1d7e23167d7adece94f75915707914d46fc55d010a",
+      "translation": "The opacity of reserve members' face graphics.",
+      "contextHash": "ab78ca9c01ad90f9e516cf1d7e23167d7adece94f75915707914d46fc55d010a"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "255で不透明。",
+      "sourceHash": "1a5ff68fe325c39f49af267bca2a30dc48672472693e1a2391fc600f3066d5ae",
+      "translation": "255 is fully opaque.",
+      "contextHash": "1a5ff68fe325c39f49af267bca2a30dc48672472693e1a2391fc600f3066d5ae"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "空欄の場合、初期値の160が設定されます。",
+      "sourceHash": "7702c7d786233475740e978a029d1e4ef252b08eae0851d343d394a09d0b6ce0",
+      "translation": "If left blank, the default value of 160 is used.",
+      "contextHash": "7702c7d786233475740e978a029d1e4ef252b08eae0851d343d394a09d0b6ce0"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "160では表示がはっきりしすぎていて戦闘メンバーと控えメンバーの区別がつきにくいので、数字を下げて調整すると分かりやすくなります。",
+      "sourceHash": "23e81e356e26a599b5b8173cdbb1c61536f6f7935095476bdaa079c66d7afae7",
+      "translation": "At 160, the display is too distinct, making it difficult to distinguish battle members from reserve members. Lowering the number makes the distinction clearer.",
+      "contextHash": "23e81e356e26a599b5b8173cdbb1c61536f6f7935095476bdaa079c66d7afae7"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "ステータス表示方法（StatusType）",
+      "sourceHash": "0f4b17a90d21b217cff6882f449a3620aec5e0f35eb9c3abcbf6b3979984f84d",
+      "translation": "Status Display Method (StatusType)",
+      "contextHash": "0f4b17a90d21b217cff6882f449a3620aec5e0f35eb9c3abcbf6b3979984f84d"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "編成画面におけるステータスの表示方法です。",
+      "sourceHash": "60a27a3f26cd25a8080b22f7444a96f5e9968fa4df4ad43d2f73f9792a286b91",
+      "translation": "This is the method used to display statuses on the party formation screen.",
+      "contextHash": "60a27a3f26cd25a8080b22f7444a96f5e9968fa4df4ad43d2f73f9792a286b91"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "通常の画面サイズでは全表示は収まらないので非推奨です。",
+      "sourceHash": "2157cf84ec1b117cacf2f0f6ff8286d534f07a5e0ddd3b0854b9df5aa53e8828",
+      "translation": "Not recommended, as all information will not fit on a standard-sized screen.",
+      "contextHash": "2157cf84ec1b117cacf2f0f6ff8286d534f07a5e0ddd3b0854b9df5aa53e8828"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "入替禁止ステート（ChangeDisabledState）",
+      "sourceHash": "1be1453f3f8cc0a34189916e819500f0dea00afdba20b5775daaa6a59d31e83d",
+      "translation": "Formation Change-Prohibited State (ChangeDisabledState)",
+      "contextHash": "1be1453f3f8cc0a34189916e819500f0dea00afdba20b5775daaa6a59d31e83d"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "指定のステートにかかっているアクターは入替を禁止します。",
+      "sourceHash": "ac06a61131e92eac0ebfe66bd1724b863a0729f2bdf455aaba44d91f5cd0f13d",
+      "translation": "Actors affected by the specified state cannot be swapped.",
+      "contextHash": "ac06a61131e92eac0ebfe66bd1724b863a0729f2bdf455aaba44d91f5cd0f13d"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "※パーティ編成画面にて選択を受けつけなくなります。",
+      "sourceHash": "cff575bfb2b9994f87c5b829a0a8b6c0ec46497f6c2c0f5ea36ee90ff96776a7",
+      "translation": "※Actors can no longer be selected on the party formation screen.",
+      "contextHash": "cff575bfb2b9994f87c5b829a0a8b6c0ec46497f6c2c0f5ea36ee90ff96776a7"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "なお、ステート拡張プラグインを使えば、全回復や戦闘不能で解除されないステートを作れます。シナリオ上で入替を禁止したいアクターがいる場合に便利です。",
+      "sourceHash": "5cac6aa8b7e7246f44ec337adc326ad8695f7e4cd5670299aefa69e88ef43485",
+      "translation": "Additionally, using the State Extension plugin allows you to create states that are not removed by full recovery or incapacitation. This is useful when you want to prevent an actor from being swapped out as part of the scenario.",
+      "contextHash": "5cac6aa8b7e7246f44ec337adc326ad8695f7e4cd5670299aefa69e88ef43485"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/488957733.html",
+      "sourceHash": "a647830d4783499668845b42e6cbb8eee14ebb8c627f8654b407038959c831e6",
+      "translation": "https://newrpg.seesaa.net/article/488957733.html",
+      "contextHash": "9fced1318c4be19631f9fbaf41893422bd81a768e8e091408eed4cf0d4440d3a"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "＜メニュー関連＞（Menu Scene）",
+      "sourceHash": "c4b3b265d628734f72119b6fd5deaead742bf4cbe24bcfb45895130b719990b5",
+      "translation": "<Menu-Related> (Menu Scene)",
+      "contextHash": "c4b3b265d628734f72119b6fd5deaead742bf4cbe24bcfb45895130b719990b5"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "メニュー画面の関連項目です。",
+      "sourceHash": "2a3cab3286e22e2c03a785f45201b0859fa6952cf7f35ed0ceb11236a7857518",
+      "translation": "These settings are related to the menu screen.",
+      "contextHash": "2a3cab3286e22e2c03a785f45201b0859fa6952cf7f35ed0ceb11236a7857518"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "控えメンバーのスキル禁止（DisableReserveSkill）",
+      "sourceHash": "f23d89a3fe72f046245f45594045b49693acd18effb52cb606d6a7887852c5fb",
+      "translation": "Disable Reserve Members' Skills (DisableReserveSkill)",
+      "contextHash": "f23d89a3fe72f046245f45594045b49693acd18effb52cb606d6a7887852c5fb"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "控えメンバーのスキルの使用を禁止します。",
+      "sourceHash": "a2f8397c184d946e1781d87b525a4d880336aad1b7d7a76ff4629c29d47631d6",
+      "translation": "Prevents reserve members from using skills.",
+      "contextHash": "a2f8397c184d946e1781d87b525a4d880336aad1b7d7a76ff4629c29d47631d6"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "さらにスキルやアイテムの対象にもできなくなります。",
+      "sourceHash": "e5c1ee1c0dd7b3deada95629bc78ddaa5f10f0a90bb8a8c283861022a0ad8858",
+      "translation": "They also cannot be selected as targets for skills or items.",
+      "contextHash": "e5c1ee1c0dd7b3deada95629bc78ddaa5f10f0a90bb8a8c283861022a0ad8858"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "控えメンバーの並替禁止（DisableReserveFormation）",
+      "sourceHash": "31a4a65a46fa865bcfa426e4afdb450ddaf7607e55a37ba2df2bcbbf35d67a1f",
+      "translation": "Disable Reserve Member Reordering (DisableReserveFormation)",
+      "contextHash": "31a4a65a46fa865bcfa426e4afdb450ddaf7607e55a37ba2df2bcbbf35d67a1f"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "メニューの並び替え機能において、控えメンバーを非表示にします。",
+      "sourceHash": "f71a392d4cc1479135fed991d4de22838b51565ebf36a03797285940e5aa083a",
+      "translation": "Hides reserve members in the menu's reordering feature.",
+      "contextHash": "f71a392d4cc1479135fed991d4de22838b51565ebf36a03797285940e5aa083a"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "控えメンバーの表示禁止（DisableReserveStatus）",
+      "sourceHash": "ed2e736d918b3674bb870f05ea86083fe05e3b14e6ad3ba7d1d79708880bc828",
+      "translation": "Disable Reserve Member Display (DisableReserveStatus)",
+      "contextHash": "ed2e736d918b3674bb870f05ea86083fe05e3b14e6ad3ba7d1d79708880bc828"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "控えメンバーの各機能での表示を禁止します。",
+      "sourceHash": "6c6b0eddfd98952dc3ba04476bd5efc6cb4bec4b031bff650fbcb2897dcec290",
+      "translation": "Prevents reserve members from being displayed in various functions.",
+      "contextHash": "6c6b0eddfd98952dc3ba04476bd5efc6cb4bec4b031bff650fbcb2897dcec290"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "ステータスや装備などの表示ができなくなります。",
+      "sourceHash": "c1fdc474a426209c62d9eed77351d3549bac9f2e1c8f29ab97c5c43ecf9427e3",
+      "translation": "Their statuses, equipment, and other information can no longer be displayed.",
+      "contextHash": "c1fdc474a426209c62d9eed77351d3549bac9f2e1c8f29ab97c5c43ecf9427e3"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "＜メニューコマンド関連＞（Menu Command）",
+      "sourceHash": "b12c82db2d2af9dbcfb31ff05e1f2f18ac28259b37b0f94b42300a455716b4ac",
+      "translation": "<Menu Command-Related> (Menu Command)",
+      "contextHash": "b12c82db2d2af9dbcfb31ff05e1f2f18ac28259b37b0f94b42300a455716b4ac"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "メニューコマンドに編成を表示する際の関連項目です。",
+      "sourceHash": "f68ca627410d87764769461a235b528384298ec416f918be7ebf0aa324cf2278",
+      "translation": "These settings are related to displaying the party formation command in the menu commands.",
+      "contextHash": "f68ca627410d87764769461a235b528384298ec416f918be7ebf0aa324cf2278"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+      "contextHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "メニューコマンドにパーティ編成を挿入する位置です。",
+      "sourceHash": "27bae253db34429ddd7cd18829172cc919d267f523c5b52ec8a4a6d7bd2d2dde",
+      "translation": "The position at which to insert Party Formation into the menu commands.",
+      "contextHash": "27bae253db34429ddd7cd18829172cc919d267f523c5b52ec8a4a6d7bd2d2dde"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "0が先頭。",
+      "sourceHash": "c8362cfaa57627d0a0b8e4c6418f4794865798ee731403ca3e760608cb500ba9",
+      "translation": "0 is the first position.",
+      "contextHash": "c8362cfaa57627d0a0b8e4c6418f4794865798ee731403ca3e760608cb500ba9"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "不要ならDELで空欄にしてください。",
+      "sourceHash": "e47cb44ae216c249d00669f8bc1150406580221073c43a7010d1736bd3af99c2",
+      "translation": "If unnecessary, press DEL to leave it blank.",
+      "contextHash": "e47cb44ae216c249d00669f8bc1150406580221073c43a7010d1736bd3af99c2"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "メニュー表示名（CommandName）",
+      "sourceHash": "7b2b23e2036e6a66981b69c7fdaa7f0bcae4e66bbc110cbf1f7399129c291caa",
+      "translation": "Menu Display Name (CommandName)",
+      "contextHash": "7b2b23e2036e6a66981b69c7fdaa7f0bcae4e66bbc110cbf1f7399129c291caa"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "パーティ編成の表示コマンド名を設定します。",
+      "sourceHash": "53d58f9c553fd3014f0c0cf71277c2f1a1463aeaa265e891c8c666d65d25421f",
+      "translation": "Sets the command name displayed for party formation.",
+      "contextHash": "53d58f9c553fd3014f0c0cf71277c2f1a1463aeaa265e891c8c666d65d25421f"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "表示許可するスイッチ（MenuCommandSwitch）",
+      "sourceHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81",
+      "translation": "Switch Required to Display (MenuCommandSwitch)",
+      "contextHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "スイッチがオンの時のみコマンドを表示します。",
+      "sourceHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7",
+      "translation": "The command is displayed only when the switch is ON.",
+      "contextHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "空白なら常に表示します。",
+      "sourceHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e",
+      "translation": "If blank, it is always displayed.",
+      "contextHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "マスク文字列（MaskString）",
+      "sourceHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d",
+      "translation": "Mask String (MaskString)",
+      "contextHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。",
+      "sourceHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a",
+      "translation": "When the switch required for display is OFF, the command is displayed using the specified string.",
+      "contextHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "空欄ならコマンド自体を非表示。",
+      "sourceHash": "cfb9ff700cb0a301f42cf868347c37538c09c2e74e288d87b531a6883c6ba3db",
+      "translation": "If blank, the command itself is hidden.",
+      "contextHash": "cfb9ff700cb0a301f42cf868347c37538c09c2e74e288d87b531a6883c6ba3db"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "禁止するスイッチ（DisableSwitch）",
+      "sourceHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b",
+      "translation": "Disable Switch (DisableSwitch)",
+      "contextHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "スイッチがオンの時のみコマンドを禁止（灰色）します。",
+      "sourceHash": "222a12005dd77b43d982d7401dfca08e54a186b66a285aeb7bf82353668dfce1",
+      "translation": "The command is disabled (grayed out) only when the switch is ON.",
+      "contextHash": "222a12005dd77b43d982d7401dfca08e54a186b66a285aeb7bf82353668dfce1"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "空白なら常に許可します。",
+      "sourceHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333",
+      "translation": "If blank, it is always enabled.",
+      "contextHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Install (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド（Plugin Commands）[[/LINK_1]]",
+      "sourceHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174",
+      "parts": [
+        {
+          "source": "プラグインコマンド（Plugin Commands）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands (Plugin Commands)[[/LINK_1]]",
+      "contextHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]シーン開始[[/LINK_1]]",
+      "sourceHash": "a47b783a646d8e45e062a9092ec124777d777158a643ca8f21a6d6a3241119a4",
+      "parts": [
+        {
+          "source": "シーン開始",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Scene Start[[/LINK_1]]",
+      "contextHash": "a47b783a646d8e45e062a9092ec124777d777158a643ca8f21a6d6a3241119a4"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]最大戦闘人数の変更[[/LINK_1]]",
+      "sourceHash": "3a58949684adb26ae1e26051a44308aaa9113062192708131767658bda03d99d",
+      "parts": [
+        {
+          "source": "最大戦闘人数の変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Maximum Battle Party Size[[/LINK_1]]",
+      "contextHash": "3a58949684adb26ae1e26051a44308aaa9113062192708131767658bda03d99d"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘メンバーの空白許可（AllowRelease）[[/LINK_1]]",
+      "sourceHash": "4c542824068b7fbce62329588fb74b9f10bc94e07e434802c477e101c2270c59",
+      "parts": [
+        {
+          "source": "戦闘メンバーの空白許可（AllowRelease）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Allow Empty Battle Members (AllowRelease)[[/LINK_1]]",
+      "contextHash": "4c542824068b7fbce62329588fb74b9f10bc94e07e434802c477e101c2270c59"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]控えを別ページに表示（ShowOtherPage）[[/LINK_1]]",
+      "sourceHash": "a215434d09db88f90719b9f9bf272d579db2156042f35ec02ecc6001b117c0aa",
+      "parts": [
+        {
+          "source": "控えを別ページに表示（ShowOtherPage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Reserve Members on a Separate Page (ShowOtherPage)[[/LINK_1]]",
+      "contextHash": "a215434d09db88f90719b9f9bf272d579db2156042f35ec02ecc6001b117c0aa"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]控えの不透明度（ReserveOpacity）[[/LINK_1]]",
+      "sourceHash": "e2cdca0bd9f6f01f6a5ef6dea78a28674b2c3f2ae859f5dd31b989ebe56f86ce",
+      "parts": [
+        {
+          "source": "控えの不透明度（ReserveOpacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reserve Member Opacity (ReserveOpacity)[[/LINK_1]]",
+      "contextHash": "e2cdca0bd9f6f01f6a5ef6dea78a28674b2c3f2ae859f5dd31b989ebe56f86ce"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]ステータス表示方法（StatusType）[[/LINK_1]]",
+      "sourceHash": "7714e1cd9ce0d1f7f1bd38267909963d5978f1d46fae0f892cf576422eb5e327",
+      "parts": [
+        {
+          "source": "ステータス表示方法（StatusType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Status Display Method (StatusType)[[/LINK_1]]",
+      "contextHash": "7714e1cd9ce0d1f7f1bd38267909963d5978f1d46fae0f892cf576422eb5e327"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]入替禁止ステート（ChangeDisabledState）[[/LINK_1]]",
+      "sourceHash": "637394d55ecc62e57e3935243bee6ab8b3753b0b5f2ec3f4c7e930ff772de5aa",
+      "parts": [
+        {
+          "source": "入替禁止ステート（ChangeDisabledState）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State That Prevents Switching (ChangeDisabledState)[[/LINK_1]]",
+      "contextHash": "637394d55ecc62e57e3935243bee6ab8b3753b0b5f2ec3f4c7e930ff772de5aa"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＜メニュー関連＞（Menu Scene）[[/LINK_1]]",
+      "sourceHash": "ac573375ec7cb45878c6ab827954f96c64c2c5a88d0a1d038a6b07cff58f68c9",
+      "parts": [
+        {
+          "source": "＜メニュー関連＞（Menu Scene）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<Menu-Related> (Menu Scene)[[/LINK_1]]",
+      "contextHash": "ac573375ec7cb45878c6ab827954f96c64c2c5a88d0a1d038a6b07cff58f68c9"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]控えメンバーのスキル禁止（DisableReserveSkill）[[/LINK_1]]",
+      "sourceHash": "c634f3ae8481e14fcc42a01002d15a9cd46840d57b5c74fca98941a70e35c79e",
+      "parts": [
+        {
+          "source": "控えメンバーのスキル禁止（DisableReserveSkill）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Skills for Reserve Members (DisableReserveSkill)[[/LINK_1]]",
+      "contextHash": "c634f3ae8481e14fcc42a01002d15a9cd46840d57b5c74fca98941a70e35c79e"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]控えメンバーの並替禁止（DisableReserveFormation）[[/LINK_1]]",
+      "sourceHash": "8e079d47a971e989a42833246ffa6912bd82135535c5f2c9d42026b2f113e40f",
+      "parts": [
+        {
+          "source": "控えメンバーの並替禁止（DisableReserveFormation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Formation Changes for Reserve Members (DisableReserveFormation)[[/LINK_1]]",
+      "contextHash": "8e079d47a971e989a42833246ffa6912bd82135535c5f2c9d42026b2f113e40f"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]控えメンバーの表示禁止（DisableReserveStatus）[[/LINK_1]]",
+      "sourceHash": "57a4a766a2cebd505d032602183a2a8d30deddb531efe07623698c41bf10922b",
+      "parts": [
+        {
+          "source": "控えメンバーの表示禁止（DisableReserveStatus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Status Display for Reserve Members (DisableReserveStatus)[[/LINK_1]]",
+      "contextHash": "57a4a766a2cebd505d032602183a2a8d30deddb531efe07623698c41bf10922b"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]＜メニューコマンド関連＞（Menu Command）[[/LINK_1]]",
+      "sourceHash": "242db380b7b71eaf18020d769caa29055e9f713b4a8d1688d45287864f796772",
+      "parts": [
+        {
+          "source": "＜メニューコマンド関連＞（Menu Command）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<Menu Command-Related> (Menu Command)[[/LINK_1]]",
+      "contextHash": "242db380b7b71eaf18020d769caa29055e9f713b4a8d1688d45287864f796772"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンド挿入位置（ShowMenuCommandPosition）[[/LINK_1]]",
+      "sourceHash": "d7c1fcc9759c3e74ac0839d98eb837b82ce4d083a07dad7de3ac4b7166b98312",
+      "parts": [
+        {
+          "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Command Insertion Position (ShowMenuCommandPosition)[[/LINK_1]]",
+      "contextHash": "d7c1fcc9759c3e74ac0839d98eb837b82ce4d083a07dad7de3ac4b7166b98312"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]メニュー表示名（CommandName）[[/LINK_1]]",
+      "sourceHash": "0184489a7e062271ed74a7e00cff105704a3b8471ed6015f9870158250136e3d",
+      "parts": [
+        {
+          "source": "メニュー表示名（CommandName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Display Name (CommandName)[[/LINK_1]]",
+      "contextHash": "0184489a7e062271ed74a7e00cff105704a3b8471ed6015f9870158250136e3d"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]表示許可するスイッチ（MenuCommandSwitch）[[/LINK_1]]",
+      "sourceHash": "3293b80b5c91a2c4f95d75f6a4f4a7210c940b475c4dfec58745c59a68be668c",
+      "parts": [
+        {
+          "source": "表示許可するスイッチ（MenuCommandSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch That Allows Display (MenuCommandSwitch)[[/LINK_1]]",
+      "contextHash": "3293b80b5c91a2c4f95d75f6a4f4a7210c940b475c4dfec58745c59a68be668c"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]マスク文字列（MaskString）[[/LINK_1]]",
+      "sourceHash": "80baa1cc3f18b303620b1f83972e1cdd01dec75aa7a42ba372d38ea736fa0bbd",
+      "parts": [
+        {
+          "source": "マスク文字列（MaskString）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Mask String (MaskString)[[/LINK_1]]",
+      "contextHash": "80baa1cc3f18b303620b1f83972e1cdd01dec75aa7a42ba372d38ea736fa0bbd"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]禁止するスイッチ（DisableSwitch）[[/LINK_1]]",
+      "sourceHash": "25a913f2d8e9ea472489503918de504555fe4869abb6e04474347ab94b9e7536",
+      "parts": [
+        {
+          "source": "禁止するスイッチ（DisableSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch to Disable (DisableSwitch)[[/LINK_1]]",
+      "contextHash": "25a913f2d8e9ea472489503918de504555fe4869abb6e04474347ab94b9e7536"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]控えメンバーの経験値獲得率を変更[[/LINK_1]]",
+      "sourceHash": "a0565a161bdccb800fa63c4f2133e12eecbe9ef42ac5af7336a24fc1e0319641",
+      "parts": [
+        {
+          "source": "控えメンバーの経験値獲得率を変更",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change the EXP Gain Rate for Reserve Members[[/LINK_1]]",
+      "contextHash": "a0565a161bdccb800fa63c4f2133e12eecbe9ef42ac5af7336a24fc1e0319641"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "プラグインコマンドで[[LINK_1]]最大戦闘人数を変更[[/LINK_1]]できるようにした。",
+      "sourceHash": "71a779177a47dc849f760c741a2a3f324c319401b66af475d81841447f2d13c3",
+      "parts": [
+        {
+          "source": "プラグインコマンドで",
+          "link": false
+        },
+        {
+          "source": "最大戦闘人数を変更",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]maximum battle party size can be changed[[/LINK_1]] using a plugin command.",
+      "contextHash": "71a779177a47dc849f760c741a2a3f324c319401b66af475d81841447f2d13c3"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]入替禁止ステート[[/LINK_1]]を追加。",
+      "sourceHash": "32d170b9f9bae23af5e8833604edb814e72edaa5174c7ac3ee10d563169c3a27",
+      "parts": [
+        {
+          "source": "入替禁止ステート",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]state that prevents switching[[/LINK_1]].",
+      "contextHash": "32d170b9f9bae23af5e8833604edb814e72edaa5174c7ac3ee10d563169c3a27"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘メンバーの空白許可[[/LINK_1]]がオンの場合にしか機能しません。",
+      "sourceHash": "135b9fd69c2bada1d0c5c2822a97c424050d6220af97e488bb9d3bb7d7300ea7",
+      "parts": [
+        {
+          "source": "戦闘メンバーの空白許可",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "がオンの場合にしか機能しません。",
+          "link": false
+        }
+      ],
+      "translation": "This only functions when [[LINK_1]]Allow Empty Battle Members[[/LINK_1]] is on.",
+      "contextHash": "135b9fd69c2bada1d0c5c2822a97c424050d6220af97e488bb9d3bb7d7300ea7"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "もし、戦闘人数を元に戻したい場合は[[LINK_1]]最大戦闘人数の変更[[/LINK_1]]を呼び出してください。",
+      "sourceHash": "c7d358afd6ea569a679def89953be5588e994f66dba09f136c4ae1c6fb5a377d",
+      "parts": [
+        {
+          "source": "もし、戦闘人数を元に戻したい場合は",
+          "link": false
+        },
+        {
+          "source": "最大戦闘人数の変更",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を呼び出してください。",
+          "link": false
+        }
+      ],
+      "translation": "If you want to restore the battle party size, call [[LINK_1]]Change Maximum Battle Party Size[[/LINK_1]].",
+      "contextHash": "c7d358afd6ea569a679def89953be5588e994f66dba09f136c4ae1c6fb5a377d"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "パーティ編成画面を実装します。": "This plugin implements a party formation screen.",
+    "戦闘メンバーと控えメンバーを入れ替えるシンプルな編成画面です。": "This is a simple formation screen for swapping battle members and reserve members.",
+    "前提として、ツクールＭＺでは標準の並び替え機能によって、戦闘メンバーと控えメンバーを簡単に入れ替えることができます。": "First, RPG Maker MZ's standard rearrangement feature allows you to easily swap battle members and reserve members.",
+    "なので、それで足りるなら編成画面は必要ありません。": "Therefore, if that is sufficient, you do not need a formation screen.",
+    "では、このプラグインは何のためにあるのかというと、主に控えメンバーの利用を制限するためです。": "So, what is this plugin for? Primarily, it is intended to restrict the use of reserve members.",
+    "特に控えメンバーの回復スキルが自由に利用できてしまうと、難易度が想定よりも下がってしまうことが予想されます。": "In particular, if reserve members can freely use healing skills, the difficulty is likely to become lower than intended.",
+    "そこで当プラグインでは、メニュー画面での入替を禁止し、控えメンバーによる回復スキルの使用を禁止します。": "Therefore, this plugin prohibits swapping members on the menu screen and prevents reserve members from using healing skills.",
+    "その上で拠点やセーブポイントなどから編成画面を呼び出せるようにすれば、控えメンバーの使用を制限できます。": "You can then restrict the use of reserve members by making the formation screen available from places such as bases and save points.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Turn the feature ON from RPG Maker's Plugin Manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_ChangeParty.js": "NRP_ChangeParty.js ",
+    "ver1.07（2025/03/20）": "ver1.07 (2025/03/20) ",
+    "関連プラグイン": "Related Plugins",
+    "控えメンバーの経験値を減らしたいという方はこちらをお使いください。": "If you want to reduce the experience gained by reserve members, use this plugin.",
+    "更新履歴（History）": "Update History (History)",
+    "2025/03/20（ver1.07）": "2025/03/20 (ver1.07) ",
+    "2025/02/24（ver1.06）": "2025/02/24 (ver1.06) ",
+    "入替対象を選択中にキャンセルするとフリーズする不具合修正。": "Fixed a bug that caused the game to freeze when canceling while selecting a member to swap.",
+    "2024/07/30（ver1.05）": "2024/07/30 (ver1.05) ",
+    "左右を入力した際のカーソルの挙動が不安定だったので、処理を見直して安定化した。": "The cursor behavior when entering left or right was unstable, so the processing was reviewed and stabilized.",
+    "2024/03/03（ver1.04）": "2024/03/03 (ver1.04) ",
+    "『控えメンバーのスキル禁止』がオンかつ控えメンバーに薬の知識所有者が存在する場合、回復アイテムが使用できなくなる不具合修正。": "Fixed a bug where recovery items could not be used when “Disable Reserve Member Skills” was ON and a reserve member possessed Pharmacology.",
+    "2024/02/16（ver1.03）": "2024/02/16 (ver1.03) ",
+    "メニュー画面の構造によっては「控えを別ページに表示」が機能しない不具合修正。": "Fixed a bug where “Show Reserves on a Separate Page” did not function depending on the structure of the menu screen.",
+    "2024/01/20（ver1.02）": "2024/01/20 (ver1.02) ",
+    "「戦闘メンバーの空白許可」がオンの場合、空白指定時にエラーとなる不具合修正。": "Fixed a bug that caused an error when specifying a blank while “Allow Empty Battle Member Slots” was ON.",
+    "2023/08/09（ver1.01）": "2023/08/09 (ver1.01) ",
+    "2023/08/08（ver1.001）": "2023/08/08 (ver1.001) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "前述した通り、当プラグインの編成画面は、戦闘メンバーと控えメンバーを入れ替える仕様になっています。": "As mentioned above, this plugin's formation screen is designed to swap battle members and reserve members.",
+    "編成対象となるアクターは『メンバーの入れ替え』で追加してください。": "Add the actors to be included in the formation using “Change Party Member”.",
+    "プラグインを適用すると以下の機能が適用されます。": "Applying the plugin enables the following features.",
+    "メニューの並び替えにて、控えとの入替を禁止。": "Prohibits swapping with reserve members when rearranging the party from the menu.",
+    "控えメンバーのスキル使用を禁止。": "Prohibits reserve members from using skills.",
+    "さらにプラグインパラメータの設定によっては、控えメンバー自体をメニューに表示しない設定にできます。": "Depending on the plugin parameter settings, you can also choose not to display reserve members in the menu at all.",
+    "編成画面はお好みのタイミングで呼び出すようにしてください。": "Call up the formation screen whenever you like.",
+    "プラグインコマンドで呼び出す他にも、メニュー画面にコマンドを追加することもできます。メニューコマンドを使用できるタイミングもスイッチで制御できます。": "In addition to calling it with a plugin command, you can also add a command to the menu screen. A switch can be used to control when the menu command is available.",
+    "プラグインコマンド（Plugin Commands）": "Plugin Commands (Plugin Commands)",
+    "シーン開始": "Start Scene",
+    "パーティ編成画面を呼び出します。": "Calls up the party formation screen.",
+    "最大戦闘人数の変更": "Change Maximum Battle Members",
+    "最大戦闘人数を変更します。": "Changes the maximum number of battle members.",
+    "空欄を設定すると初期化（通常は４）します。": "Leaving this blank resets it to the default (normally 4).",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "戦闘メンバーの空白許可（AllowRelease）": "Allow Empty Battle Member Slots (AllowRelease)",
+    "戦闘メンバーを減らして３人以下での編成をできるようにします。": "Allows you to reduce the number of battle members and form a party of three or fewer.",
+    "編成画面にて、控えメンバーの末尾に空欄が表示されるので、それと交換することで外せるようになります。": "On the formation screen, a blank slot is displayed at the end of the reserve members, allowing you to remove a member by swapping them with it.",
+    "※戦闘人数が減らされた状態でイベントコマンドからメンバーの追加をしても戦闘人数は戻りません。予期せぬ不具合を起こす可能性があるのでご注意ください。": "※If you add a member using an event command while the number of battle members has been reduced, the number of battle members will not be restored. Please be aware that this may cause unexpected problems.",
+    "控えを別ページに表示（ShowOtherPage）": "Show Reserves on a Separate Page (ShowOtherPage)",
+    "戦闘メンバーの空白許可がオンの際、メニュー画面にて控えメンバーを別ページに表示します。": "When Allow Empty Battle Member Slots is ON, displays reserve members on a separate page in the menu screen.",
+    "戦闘メンバーを３人以下に減らした場合、通常だとメニューの同一ページに戦闘メンバーと控えメンバーが表示されるようになります。それだと分かりにくいので、１ページ目には戦闘メンバーだけを表示するようにします。": "If you reduce the number of battle members to three or fewer, battle members and reserve members will normally be displayed on the same menu page. Since this can be confusing, only battle members are displayed on the first page.",
+    "控えの不透明度（ReserveOpacity）": "Reserve Opacity (ReserveOpacity)",
+    "控えメンバーの顔グラの不透明度です。": "The opacity of reserve members' face graphics.",
+    "255で不透明。": "255 is fully opaque.",
+    "空欄の場合、初期値の160が設定されます。": "If left blank, the default value of 160 is used.",
+    "160では表示がはっきりしすぎていて戦闘メンバーと控えメンバーの区別がつきにくいので、数字を下げて調整すると分かりやすくなります。": "At 160, the display is too distinct, making it difficult to distinguish battle members from reserve members. Lowering the number makes the distinction clearer.",
+    "ステータス表示方法（StatusType）": "Status Display Method (StatusType)",
+    "編成画面におけるステータスの表示方法です。": "This is the method used to display statuses on the party formation screen.",
+    "通常の画面サイズでは全表示は収まらないので非推奨です。": "Not recommended, as all information will not fit on a standard-sized screen.",
+    "入替禁止ステート（ChangeDisabledState）": "Formation Change-Prohibited State (ChangeDisabledState)",
+    "指定のステートにかかっているアクターは入替を禁止します。": "Actors affected by the specified state cannot be swapped.",
+    "※パーティ編成画面にて選択を受けつけなくなります。": "※Actors can no longer be selected on the party formation screen.",
+    "なお、ステート拡張プラグインを使えば、全回復や戦闘不能で解除されないステートを作れます。シナリオ上で入替を禁止したいアクターがいる場合に便利です。": "Additionally, using the State Extension plugin allows you to create states that are not removed by full recovery or incapacitation. This is useful when you want to prevent an actor from being swapped out as part of the scenario.",
+    "https://newrpg.seesaa.net/article/488957733.html": "https://newrpg.seesaa.net/article/488957733.html",
+    "＜メニュー関連＞（Menu Scene）": "<Menu-Related> (Menu Scene)",
+    "メニュー画面の関連項目です。": "These settings are related to the menu screen.",
+    "控えメンバーのスキル禁止（DisableReserveSkill）": "Disable Reserve Members' Skills (DisableReserveSkill)",
+    "控えメンバーのスキルの使用を禁止します。": "Prevents reserve members from using skills.",
+    "さらにスキルやアイテムの対象にもできなくなります。": "They also cannot be selected as targets for skills or items.",
+    "控えメンバーの並替禁止（DisableReserveFormation）": "Disable Reserve Member Reordering (DisableReserveFormation)",
+    "メニューの並び替え機能において、控えメンバーを非表示にします。": "Hides reserve members in the menu's reordering feature.",
+    "控えメンバーの表示禁止（DisableReserveStatus）": "Disable Reserve Member Display (DisableReserveStatus)",
+    "控えメンバーの各機能での表示を禁止します。": "Prevents reserve members from being displayed in various functions.",
+    "ステータスや装備などの表示ができなくなります。": "Their statuses, equipment, and other information can no longer be displayed.",
+    "＜メニューコマンド関連＞（Menu Command）": "<Menu Command-Related> (Menu Command)",
+    "メニューコマンドに編成を表示する際の関連項目です。": "These settings are related to displaying the party formation command in the menu commands.",
+    "メニューコマンド挿入位置（ShowMenuCommandPosition）": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+    "メニューコマンドにパーティ編成を挿入する位置です。": "The position at which to insert Party Formation into the menu commands.",
+    "0が先頭。": "0 is the first position.",
+    "不要ならDELで空欄にしてください。": "If unnecessary, press DEL to leave it blank.",
+    "メニュー表示名（CommandName）": "Menu Display Name (CommandName)",
+    "パーティ編成の表示コマンド名を設定します。": "Sets the command name displayed for party formation.",
+    "表示許可するスイッチ（MenuCommandSwitch）": "Switch Required to Display (MenuCommandSwitch)",
+    "スイッチがオンの時のみコマンドを表示します。": "The command is displayed only when the switch is ON.",
+    "空白なら常に表示します。": "If blank, it is always displayed.",
+    "マスク文字列（MaskString）": "Mask String (MaskString)",
+    "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。": "When the switch required for display is OFF, the command is displayed using the specified string.",
+    "空欄ならコマンド自体を非表示。": "If blank, the command itself is hidden.",
+    "禁止するスイッチ（DisableSwitch）": "Disable Switch (DisableSwitch)",
+    "スイッチがオンの時のみコマンドを禁止（灰色）します。": "The command is disabled (grayed out) only when the switch is ON.",
+    "空白なら常に許可します。": "If blank, it is always enabled."
+  }
+}

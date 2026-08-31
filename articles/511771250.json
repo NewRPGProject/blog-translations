@@ -1,0 +1,533 @@
+{
+  "articleId": "511771250",
+  "sourceUrl": "https://newrpg.seesaa.net/article/511771250.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "ae4e11f67f94c9278b040effdd6d0972453d5dc4b93cff291c1afbe6c4fb7526",
+  "translatedAt": "2026-08-31T02:15:30.066Z",
+  "title": "DynamicAnimation&Motion Sample Techniques (Precalculation) [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技（事前計算）【RPGツクールMZプラグイン】",
+      "sourceHash": "fc159719446d2b8f4d4ae0ca335126fccff8612b4d083bda255c91505166d9c7",
+      "translation": "DynamicAnimation&Motion Sample Techniques (Precalculation) [RPG Maker MZ Plugin]",
+      "contextHash": "fc159719446d2b8f4d4ae0ca335126fccff8612b4d083bda255c91505166d9c7"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "突進（2025/03/15）",
+      "sourceHash": "2037d9dc0f74a97edbeb465b953bcc7c8221b3b50db824423f96a9d2eb9336cd",
+      "translation": "Charge (2025/03/15)",
+      "contextHash": "2037d9dc0f74a97edbeb465b953bcc7c8221b3b50db824423f96a9d2eb9336cd"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "命中の有無で挙動の変わる突進です。",
+      "sourceHash": "b8d0f46fa93461884e302fd46eb88c2502950ead44de660944dc429b9d38638d",
+      "translation": "This charge behaves differently depending on whether it hits.",
+      "contextHash": "b8d0f46fa93461884e302fd46eb88c2502950ead44de660944dc429b9d38638d"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "外れた場合は転びます。",
+      "sourceHash": "6c5ecbab0f7de713670fd4680059a33181e14dd5ab8ff2bd3e1c450c08263c98",
+      "translation": "If it misses, the user falls over.",
+      "contextHash": "6c5ecbab0f7de713670fd4680059a33181e14dd5ab8ff2bd3e1c450c08263c98"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<D-Setting:NoStep> // 自動前進禁止",
+      "sourceHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a",
+      "translation": "<D-Setting:NoStep> // Prohibit automatic advance",
+      "contextHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// 敵の元へ移動（成功時）",
+      "sourceHash": "045789cf56b1a107d201c8fa2c45a1c738fe00f16be992c87129ff9bc6485251",
+      "translation": "// Move toward the enemy (on success)",
+      "contextHash": "045789cf56b1a107d201c8fa2c45a1c738fe00f16be992c87129ff9bc6485251"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "// 対象を振動（成功時）",
+      "sourceHash": "eef17a01f5cf44f6e822e0cea0310bc7a6172995a4d288b4704ea188b86b52c7",
+      "translation": "// Shake the target (on success)",
+      "contextHash": "eef17a01f5cf44f6e822e0cea0310bc7a6172995a4d288b4704ea188b86b52c7"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "// アニメーション（成功時）",
+      "sourceHash": "7cd9e0325691074a5ea6bb0fe61c9631c88289e90367735d355b5c65951ce3a6",
+      "translation": "// Animation (on success)",
+      "contextHash": "7cd9e0325691074a5ea6bb0fe61c9631c88289e90367735d355b5c65951ce3a6"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "// 敵のそばへ移動（失敗時）",
+      "sourceHash": "d7eaafc8a039931fd79c4110d36ae6f789c904ac28d1c58beee90904ef682a05",
+      "translation": "// Move near the enemy (on failure)",
+      "contextHash": "d7eaafc8a039931fd79c4110d36ae6f789c904ac28d1c58beee90904ef682a05"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "// コケる（失敗時）",
+      "sourceHash": "fb9d5e79575bb7db39ca872006fd6330c74561e9808e1a5793ee454d903375ad",
+      "translation": "// Stumble (on failure)",
+      "contextHash": "fb9d5e79575bb7db39ca872006fd6330c74561e9808e1a5793ee454d903375ad"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "// 戻る（共通）",
+      "sourceHash": "89436a3d382c8c2d1c61829a30d41f298112ffdca098f436a60ffdd94c315083",
+      "translation": "// Return (common)",
+      "contextHash": "89436a3d382c8c2d1c61829a30d41f298112ffdca098f436a60ffdd94c315083"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "damageAll = false // ダメージタイミングの調整",
+      "sourceHash": "acd05b0318306fe41b28f3257d05af86e3135299323b5c13811b70fa4f51f396",
+      "translation": "damageAll = false // Adjust damage timing",
+      "contextHash": "acd05b0318306fe41b28f3257d05af86e3135299323b5c13811b70fa4f51f396"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "『condition = BattleManager.isReservedSuccess(targetNo)』によって成功かどうかを判定します。『!』を先頭に付けるとその反対になります。",
+      "sourceHash": "8e7914f5f6f5d304f218304f9599eb7051efd6b01187acc6227860f1830bb634",
+      "translation": "Success is determined by 『condition = BattleManager.isReservedSuccess(targetNo)』. Adding 『!』 at the beginning reverses the condition.",
+      "contextHash": "8e7914f5f6f5d304f218304f9599eb7051efd6b01187acc6227860f1830bb634"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "乱れうち（2025/03/15）",
+      "sourceHash": "0590bf58abbc617d32c16391c487193dd95335857465bbcbdf29407ceee48ea2",
+      "translation": "Barrage (2025/03/15)",
+      "contextHash": "0590bf58abbc617d32c16391c487193dd95335857465bbcbdf29407ceee48ea2"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "攻撃が命中した場合のみ敵を振動させます。",
+      "sourceHash": "e2916e9b354b207d882f1aaabcd620ed14f38cd9af708f038ea5f9b93527cf5c",
+      "translation": "The enemy is shaken only when the attack hits.",
+      "contextHash": "e2916e9b354b207d882f1aaabcd620ed14f38cd9af708f038ea5f9b93527cf5c"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "下の動画の場合は２撃目と４撃目のみ振動していることが分かると思います。",
+      "sourceHash": "f97dbfff4ea3a0f43eb3b04d90eb56e23518df4a95bee8542c95a97d396ee370",
+      "translation": "In the video below, you can see that only the second and fourth hits cause shaking.",
+      "contextHash": "f97dbfff4ea3a0f43eb3b04d90eb56e23518df4a95bee8542c95a97d396ee370"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※分かりやすくするために振動を強調しています。",
+      "sourceHash": "ba7cdd3a1982fab7e0fff7f670d4e2b01abb819fe8de7efae572121c8fb9ff51",
+      "translation": "※The shaking has been emphasized for clarity.",
+      "contextHash": "ba7cdd3a1982fab7e0fff7f670d4e2b01abb819fe8de7efae572121c8fb9ff51"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "<D-Setting:NoStep> // 自動前進禁止",
+      "sourceHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a",
+      "translation": "<D-Setting:NoStep> // Prohibit automatic advance",
+      "contextHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "// 対象ごとに接近",
+      "sourceHash": "fa9315ab44e40668bd5a39b110f197cc239ec63c05828ac65b203973c5b2cf4c",
+      "translation": "// Approach each target",
+      "contextHash": "fa9315ab44e40668bd5a39b110f197cc239ec63c05828ac65b203973c5b2cf4c"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "nextDelay = 6 // 武器を振る間隔",
+      "sourceHash": "7247e45a6674ce353ff0be4874c17a075f8b6b8a1a7c7057b58d265651a40a54",
+      "translation": "nextDelay = 6 // Weapon swing interval",
+      "contextHash": "7247e45a6674ce353ff0be4874c17a075f8b6b8a1a7c7057b58d265651a40a54"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "// 武器振り",
+      "sourceHash": "4aef4eb440547b15b2c175c9eedb3b58e155f8887c0c9c9f232aca262a774690",
+      "translation": "// Swing weapon",
+      "contextHash": "4aef4eb440547b15b2c175c9eedb3b58e155f8887c0c9c9f232aca262a774690"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "nextDelay = 6 // 武器を振る間隔",
+      "sourceHash": "7247e45a6674ce353ff0be4874c17a075f8b6b8a1a7c7057b58d265651a40a54",
+      "translation": "nextDelay = 6 // Weapon swing interval",
+      "contextHash": "7247e45a6674ce353ff0be4874c17a075f8b6b8a1a7c7057b58d265651a40a54"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "// 振動（成功時）",
+      "sourceHash": "5a245f05d1ecb299c22a5efe7bcd41bba78e907a147a7bdbbb88ffd335aebc8e",
+      "translation": "// Shake (on success)",
+      "contextHash": "5a245f05d1ecb299c22a5efe7bcd41bba78e907a147a7bdbbb88ffd335aebc8e"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "performerDelay = 6 // 武器を振る間隔",
+      "sourceHash": "4f38b610f9267fe942d6a1d7be5d8b77fd5b9e03530f315b5c191eef82514d53",
+      "translation": "performerDelay = 6 // Weapon swing interval",
+      "contextHash": "4f38b610f9267fe942d6a1d7be5d8b77fd5b9e03530f315b5c191eef82514d53"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "// タイミングを合わせてアニメーション表示",
+      "sourceHash": "cd54eb0189af81df5a3b1cfeff2c4ec71cac794a7c40c87a15d8d52fb6bde058",
+      "translation": "// Display animation in sync with timing",
+      "contextHash": "cd54eb0189af81df5a3b1cfeff2c4ec71cac794a7c40c87a15d8d52fb6bde058"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "nextDelay = 6 // 武器を振る間隔",
+      "sourceHash": "7247e45a6674ce353ff0be4874c17a075f8b6b8a1a7c7057b58d265651a40a54",
+      "translation": "nextDelay = 6 // Weapon swing interval",
+      "contextHash": "7247e45a6674ce353ff0be4874c17a075f8b6b8a1a7c7057b58d265651a40a54"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "// 戻る",
+      "sourceHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97",
+      "translation": "// Return",
+      "contextHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "『condition = BattleManager.isReservedSuccess(targetNo)』によって判定するのは突進と同じです。",
+      "sourceHash": "f39084b7c2b5beff10b508f6be8d26cecb24d034131fa3b5a488a2ba70b9f99d",
+      "translation": "The determination using 『condition = BattleManager.isReservedSuccess(targetNo)』 is the same as for Charge.",
+      "contextHash": "f39084b7c2b5beff10b508f6be8d26cecb24d034131fa3b5a488a2ba70b9f99d"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "さらに『useConditionDelay』によってアニメーションとタイミングがズレないようにしています。この指定がない場合は振動だけが先に実行されてしまうので注意してください。",
+      "sourceHash": "9af1b2ded4286431b2115fbbb4a795e809ee85f028948240a056179929c109eb",
+      "translation": "In addition, 『useConditionDelay』 prevents the animation and the timing from becoming misaligned. Please note that without this setting, the shaking will be executed first on its own.",
+      "contextHash": "9af1b2ded4286431b2115fbbb4a795e809ee85f028948240a056179929c109eb"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "撃破演出（2025/03/17）",
+      "sourceHash": "048aa11da760b664e8d3fb4f4fb3796a3d74df1e70856b7dc90c9dda0fcc0c5f",
+      "translation": "Defeat Effect (2025/03/17)",
+      "contextHash": "048aa11da760b664e8d3fb4f4fb3796a3d74df1e70856b7dc90c9dda0fcc0c5f"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "とどめを刺した場合のみアニメーションを追加します。下の例ではとどめを刺した敵のみ炎を追加表示しています。",
+      "sourceHash": "4d44306cba12ee4c8c0393e12b437d2fd22496454c712a737f3f558b8584bda2",
+      "translation": "An animation is added only when the target is dealt the finishing blow. In the example below, flames are displayed only on enemies dealt the finishing blow.",
+      "contextHash": "4d44306cba12ee4c8c0393e12b437d2fd22496454c712a737f3f558b8584bda2"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "// 弓を引く",
+      "sourceHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf",
+      "translation": "// Draw bow",
+      "contextHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "// 矢連射",
+      "sourceHash": "e85dcde90f40d9bf8a8264b7911c6a77dc2224a325dead3f3c80930a373df4d0",
+      "translation": "// Rapid-fire arrows",
+      "contextHash": "e85dcde90f40d9bf8a8264b7911c6a77dc2224a325dead3f3c80930a373df4d0"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "sx -= 10 * mirroring // 弓に位置を合わせる",
+      "sourceHash": "ee210ea17beb0f62ee7b963fde4c10b4ade956087ce6b738882a0f34c1b73abe",
+      "translation": "sx -= 10 * mirroring // Align position with the bow",
+      "contextHash": "ee210ea17beb0f62ee7b963fde4c10b4ade956087ce6b738882a0f34c1b73abe"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "sy += 10 // 弓に位置を合わせる",
+      "sourceHash": "5bb55a2322d8f066b6b68675fd32a7174a6330383d319b5891bcd0854959c5d7",
+      "translation": "sy += 10 // Align position with the bow",
+      "contextHash": "5bb55a2322d8f066b6b68675fd32a7174a6330383d319b5891bcd0854959c5d7"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "eyRandom = 130 // 終点Ｙ座標ランダム幅",
+      "sourceHash": "46c9d624cb2089bf426228bc2e131f5bc849c4a202a9fe79b7091fbd6323b077",
+      "translation": "eyRandom = 130 // Random range of endpoint Y coordinate",
+      "contextHash": "46c9d624cb2089bf426228bc2e131f5bc849c4a202a9fe79b7091fbd6323b077"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "arrival = 12 // 到達フレーム",
+      "sourceHash": "500a9a57ca71178ae46abf7d2076e9b287f2d40f4a852e239c7ff86d424cf38c",
+      "translation": "arrival = 12 // Frames to reach target",
+      "contextHash": "500a9a57ca71178ae46abf7d2076e9b287f2d40f4a852e239c7ff86d424cf38c"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "arcY = -500 // 放物線の高さ",
+      "sourceHash": "229ec795caf06bff6cb0e0eff1c688ec9df3c78f3ae9dc6f8533d0a811e3408c",
+      "translation": "arcY = -500 // Parabola height",
+      "contextHash": "229ec795caf06bff6cb0e0eff1c688ec9df3c78f3ae9dc6f8533d0a811e3408c"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "// とどめ演出",
+      "sourceHash": "1f63e3ac9519d1f29004522457b6da37928732e4e69857caa5270e917a5e637a",
+      "translation": "// Finishing blow effect",
+      "contextHash": "1f63e3ac9519d1f29004522457b6da37928732e4e69857caa5270e917a5e637a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "『condition = b.isDeadReserved()』によって対象が撃破されたかどうかを判定しています。",
+      "sourceHash": "e899afc9912213e1d9c4280c016c3970e2cfb37eb942b4479aa2f3bad02964ba",
+      "translation": " \"condition = b.isDeadReserved()』 determines whether the target has been defeated.",
+      "contextHash": "e899afc9912213e1d9c4280c016c3970e2cfb37eb942b4479aa2f3bad02964ba"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページは[[LINK_1]]DynamicAnimationMZ[[/LINK_1]]、および[[LINK_2]]DynamicMotionMZ[[/LINK_2]]プラグインの解説の一部です。",
+      "sourceHash": "60a2affb6f7ca764d523104aa6d79b681d85228c9fb0f352d2194cfd5e892ddf",
+      "parts": [
+        {
+          "source": "このページは",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationMZ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、および",
+          "link": false
+        },
+        {
+          "source": "DynamicMotionMZ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the explanations for the [[LINK_1]]DynamicAnimationMZ[[/LINK_1]] and [[LINK_2]]DynamicMotionMZ[[/LINK_2]] plugins.",
+      "contextHash": "60a2affb6f7ca764d523104aa6d79b681d85228c9fb0f352d2194cfd5e892ddf"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの結果計算を演出より先に実行するプラグイン[[/LINK_1]]を活用したサンプルを紹介しています。そのため、該当のプラグインを導入しないと機能しません。",
+      "sourceHash": "53866ff8c3d397fc2bbcf19ab2224840ea29fe66a9ef2299e4b83006ad950299",
+      "parts": [
+        {
+          "source": "スキルの結果計算を演出より先に実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を活用したサンプルを紹介しています。そのため、該当のプラグインを導入しないと機能しません。",
+          "link": false
+        }
+      ],
+      "translation": "This section introduces a sample that uses the [[LINK_1]]plugin for executing skill result calculations before the effects[[/LINK_1]]. Therefore, it will not function unless you install the relevant plugin.",
+      "contextHash": "53866ff8c3d397fc2bbcf19ab2224840ea29fe66a9ef2299e4b83006ad950299"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]突進[[/LINK_1]]（2025/03/15）",
+      "sourceHash": "3087aa0c87f7b1fa09e46dcb208fed8c592021c7745af9d1d2aaaf8faa7cbba3",
+      "parts": [
+        {
+          "source": "突進",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2025/03/15）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Charge[[/LINK_1]] (2025/03/15)",
+      "contextHash": "3087aa0c87f7b1fa09e46dcb208fed8c592021c7745af9d1d2aaaf8faa7cbba3"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]乱れうち[[/LINK_1]]（2025/03/15）",
+      "sourceHash": "774e5b4f5d61be100b65605d717cedaa136c9bf59dcce404b6ef7b1425bab20f",
+      "parts": [
+        {
+          "source": "乱れうち",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2025/03/15）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Barrage[[/LINK_1]] (2025/03/15)",
+      "contextHash": "774e5b4f5d61be100b65605d717cedaa136c9bf59dcce404b6ef7b1425bab20f"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]撃破演出[[/LINK_1]]（2025/03/17）",
+      "sourceHash": "7ae35cd0f9f9d051599abecd59be301f181650a025d5e02ed4d224c7d8e0d557",
+      "parts": [
+        {
+          "source": "撃破演出",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2025/03/17）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Defeat Effect[[/LINK_1]] (2025/03/17)",
+      "contextHash": "7ae35cd0f9f9d051599abecd59be301f181650a025d5e02ed4d224c7d8e0d557"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "目次": "Table of Contents",
+    "突進（2025/03/15）": "Charge (2025/03/15)",
+    "命中の有無で挙動の変わる突進です。": "This charge behaves differently depending on whether it hits.",
+    "外れた場合は転びます。": "If it misses, the user falls over.",
+    "<D-Setting:NoStep> // 自動前進禁止": "<D-Setting:NoStep> // Prohibit automatic advance",
+    "// 敵の元へ移動（成功時）": "// Move toward the enemy (on success)",
+    "// 対象を振動（成功時）": "// Shake the target (on success)",
+    "// アニメーション（成功時）": "// Animation (on success)",
+    "// 敵のそばへ移動（失敗時）": "// Move near the enemy (on failure)",
+    "// コケる（失敗時）": "// Stumble (on failure)",
+    "// 戻る（共通）": "// Return (common)",
+    "damageAll = false // ダメージタイミングの調整": "damageAll = false // Adjust damage timing",
+    "『condition = BattleManager.isReservedSuccess(targetNo)』によって成功かどうかを判定します。『!』を先頭に付けるとその反対になります。": "Success is determined by 『condition = BattleManager.isReservedSuccess(targetNo)』. Adding 『!』 at the beginning reverses the condition.",
+    "乱れうち（2025/03/15）": "Barrage (2025/03/15)",
+    "攻撃が命中した場合のみ敵を振動させます。": "The enemy is shaken only when the attack hits.",
+    "下の動画の場合は２撃目と４撃目のみ振動していることが分かると思います。": "In the video below, you can see that only the second and fourth hits cause shaking.",
+    "※分かりやすくするために振動を強調しています。": "※The shaking has been emphasized for clarity.",
+    "// 対象ごとに接近": "// Approach each target",
+    "nextDelay = 6 // 武器を振る間隔": "nextDelay = 6 // Weapon swing interval",
+    "// 武器振り": "// Swing weapon",
+    "// 振動（成功時）": "// Shake (on success)",
+    "performerDelay = 6 // 武器を振る間隔": "performerDelay = 6 // Weapon swing interval",
+    "// タイミングを合わせてアニメーション表示": "// Display animation in sync with timing",
+    "// 戻る": "// Return",
+    "『condition = BattleManager.isReservedSuccess(targetNo)』によって判定するのは突進と同じです。": "The determination using 『condition = BattleManager.isReservedSuccess(targetNo)』 is the same as for Charge.",
+    "さらに『useConditionDelay』によってアニメーションとタイミングがズレないようにしています。この指定がない場合は振動だけが先に実行されてしまうので注意してください。": "In addition, 『useConditionDelay』 prevents the animation and the timing from becoming misaligned. Please note that without this setting, the shaking will be executed first on its own.",
+    "撃破演出（2025/03/17）": "Defeat Effect (2025/03/17)",
+    "とどめを刺した場合のみアニメーションを追加します。下の例ではとどめを刺した敵のみ炎を追加表示しています。": "An animation is added only when the target is dealt the finishing blow. In the example below, flames are displayed only on enemies dealt the finishing blow.",
+    "// 弓を引く": "// Draw bow",
+    "// 矢連射": "// Rapid-fire arrows",
+    "sx -= 10 * mirroring // 弓に位置を合わせる": "sx -= 10 * mirroring // Align position with the bow",
+    "sy += 10 // 弓に位置を合わせる": "sy += 10 // Align position with the bow",
+    "eyRandom = 130 // 終点Ｙ座標ランダム幅": "eyRandom = 130 // Random range of endpoint Y coordinate",
+    "arrival = 12 // 到達フレーム": "arrival = 12 // Frames to reach target",
+    "arcY = -500 // 放物線の高さ": "arcY = -500 // Parabola height",
+    "// とどめ演出": "// Finishing blow effect",
+    "『condition = b.isDeadReserved()』によって対象が撃破されたかどうかを判定しています。": " \"condition = b.isDeadReserved()』 determines whether the target has been defeated."
+  }
+}

@@ -1,0 +1,1227 @@
+{
+  "articleId": "483215411",
+  "sourceUrl": "https://newrpg.seesaa.net/article/483215411.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2566e3b54475bfa19d17a3a3165b91628334e736eed087b5f69f090a4efd2867",
+  "translatedAt": "2026-08-31T02:16:51.915Z",
+  "title": "Change Traits (Parameter Bonuses and Element Rates) to an Additive System [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "特徴（能力補正や属性有効度）を加算方式に変更【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "02911e40c44c071b9936f75e511cb88ea96495141b9ec53441c2439620cd7a67",
+      "translation": "Change Traits (Parameter Bonuses and Element Rates) to an Additive System [RPG Maker MZ & MV Plugin]",
+      "contextHash": "02911e40c44c071b9936f75e511cb88ea96495141b9ec53441c2439620cd7a67"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "特徴に設定する各項目の計算を加算方式に変更します。",
+      "sourceHash": "50350fb312846fddd4e957040289745f1b3f0ac6767111208fd29fe3f91323a0",
+      "translation": "Changes the calculations for each item set in traits to an additive system.",
+      "contextHash": "50350fb312846fddd4e957040289745f1b3f0ac6767111208fd29fe3f91323a0"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "例えば、『通常能力値』の補正はアクター、職業、装備、ステートの全てに設定したものを単純に乗算して計算を行います。",
+      "sourceHash": "85148be00c9c4fefd4596d046ff1a2cc200cbe6e2486faf9832ccea956b9fa39",
+      "translation": "For example, bonuses to Regular Parameters are calculated by simply multiplying together the values set for the actor, class, equipment, and states.",
+      "contextHash": "85148be00c9c4fefd4596d046ff1a2cc200cbe6e2486faf9832ccea956b9fa39"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "仮に各装備に対して、以下のように補正を設定したとすると……",
+      "sourceHash": "fbbf3e683f214d157431e1314cc1cd0cfa222a118f47dd41bf79dfbe8eb5d673",
+      "translation": "Suppose bonuses are set for each piece of equipment as follows...",
+      "contextHash": "fbbf3e683f214d157431e1314cc1cd0cfa222a118f47dd41bf79dfbe8eb5d673"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "剣：攻撃力２００％",
+      "sourceHash": "3af106ba5eb3a9ddbc672ad73911f51d842df88c8c9cfa41ac6b6d2c066687aa",
+      "translation": "Sword: Attack +200%",
+      "contextHash": "3af106ba5eb3a9ddbc672ad73911f51d842df88c8c9cfa41ac6b6d2c066687aa"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "鎧：攻撃力２００％",
+      "sourceHash": "91ef3441e0051ade370abe409ec7ca03160ebd3c23486e4a1803183ed065b8dd",
+      "translation": "Armor: Attack +200%",
+      "contextHash": "91ef3441e0051ade370abe409ec7ca03160ebd3c23486e4a1803183ed065b8dd"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "兜：攻撃力２００％",
+      "sourceHash": "1fe7c986b9a44bd48670e53a41e7874b5f212065efd6a647a2ba4e8bfc4a4297",
+      "translation": "Helmet: Attack +200%",
+      "contextHash": "1fe7c986b9a44bd48670e53a41e7874b5f212065efd6a647a2ba4e8bfc4a4297"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "攻撃力は元の８００％の値になります。",
+      "sourceHash": "9f1cc13ac21a1966a81be3ad1d0a1bedd8cc34ce289dc5506e587fe5ec1eb9c5",
+      "translation": "Attack becomes 800% of its original value.",
+      "contextHash": "9f1cc13ac21a1966a81be3ad1d0a1bedd8cc34ce289dc5506e587fe5ec1eb9c5"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "大きなインフレが起こるため、バランス調整が困難です。",
+      "sourceHash": "f9499f1ee9ae93f339ebd80bf8e882cf3bc0144b6f17b7117bd58a7092879a9b",
+      "translation": "This causes massive inflation, making balance adjustments difficult.",
+      "contextHash": "f9499f1ee9ae93f339ebd80bf8e882cf3bc0144b6f17b7117bd58a7092879a9b"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "そこでこのプラグインによって、補正を加算方式へと変更します。",
+      "sourceHash": "d8748203c12054be82fd316f47d76c87f972cc989780afe6d2edbd4ac966bb33",
+      "translation": "This plugin changes the bonuses to an additive system.",
+      "contextHash": "d8748203c12054be82fd316f47d76c87f972cc989780afe6d2edbd4ac966bb33"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "攻撃力２００％は＋１００％として解釈し、それを加算します。",
+      "sourceHash": "9741513d3b6a7e1489c5546c55b3d8fce5194f003e48e98b95a7f219f8832381",
+      "translation": "Attack +200% is interpreted as +100%, which is then added.",
+      "contextHash": "9741513d3b6a7e1489c5546c55b3d8fce5194f003e48e98b95a7f219f8832381"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "つまり、上記の場合は＋３００％（元の４００％）の補正となります。",
+      "sourceHash": "471e238786b47c95fc4b0d2fc2e9819eee1a2d8301fb52d2cf56d5a3075bb514",
+      "translation": "In other words, in the above case, the bonus is +300% (400% of the original value).",
+      "contextHash": "471e238786b47c95fc4b0d2fc2e9819eee1a2d8301fb52d2cf56d5a3075bb514"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "『通常能力値』の他にも、『属性有効度』『ステート有効度』『弱体有効度』『特殊能力値』が対象となります。",
+      "sourceHash": "b048eeed033ea434023c2fe7e889186f44cfa00cbf12493130c71d3f4f7b52d2",
+      "translation": "In addition to Regular Parameters, this applies to Element Rates, State Rates, Debuff Rates, and Special Parameters.",
+      "contextHash": "b048eeed033ea434023c2fe7e889186f44cfa00cbf12493130c71d3f4f7b52d2"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "例えば、『属性有効度』を加算方式にすると炎属性スキルを吸収して回復する敵や装備を作成できます。",
+      "sourceHash": "0b1254f0a2ec645edb00b889f4a7b9a21721f42c76c6a46374963e18e6f33c82",
+      "translation": "For example, setting Element Rates to an additive system allows you to create enemies or equipment that absorb fire-element skills and recover HP.",
+      "contextHash": "0b1254f0a2ec645edb00b889f4a7b9a21721f42c76c6a46374963e18e6f33c82"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "また、命中率より回避率が優先される仕様も修正できます。",
+      "sourceHash": "7a9d30bcdc80587091658c09328a8d8fef5e3e2bb4ef37b3394a1aa79125fddb",
+      "translation": "It can also correct the default behavior in which Evasion Rate takes priority over Hit Rate.",
+      "contextHash": "7a9d30bcdc80587091658c09328a8d8fef5e3e2bb4ef37b3394a1aa79125fddb"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TraitsPlus.js",
+      "sourceHash": "067fd3089ec5b4d78e2ec09bca21344315fe77bb3e65dd767a24133447f0e1f9",
+      "translation": "NRP_TraitsPlus.js ",
+      "contextHash": "56a6aba6c7975e75b5c6e45e391241b3d8d45f7f714b2a444f93f2c347fa5dc8"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ver1.041（2025/03/15）",
+      "sourceHash": "0d31881b5672d316db8c7c92163b76fdcebdebcade19e26456cd2e731f0fd63b",
+      "translation": "ver1.041 (2025/03/15) ",
+      "contextHash": "56a6aba6c7975e75b5c6e45e391241b3d8d45f7f714b2a444f93f2c347fa5dc8"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/07/22 -> 2025/03/15（ver1.04 -> 1.041）",
+      "sourceHash": "225e4e6859ad29be5bca98dba9fee96744b00d20c7450623dc77d4871fdad4b1",
+      "translation": "2024/07/22 -> 2025/03/15 (ver1.04 -> 1.041) ",
+      "contextHash": "225e4e6859ad29be5bca98dba9fee96744b00d20c7450623dc77d4871fdad4b1"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/06/09（ver1.03）",
+      "sourceHash": "6791d7b60c83588f5c75f674a348d24d47d69e9c0d513cf6e55a4a9a7cb07dad",
+      "translation": "2024/06/09 (ver1.03) ",
+      "contextHash": "6791d7b60c83588f5c75f674a348d24d47d69e9c0d513cf6e55a4a9a7cb07dad"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/10/17（ver1.02）",
+      "sourceHash": "f4199dc6f8180d7cc46dafb6903b3b559cba0b0ea3aafd003e325557b2ef70c3",
+      "translation": "2021/10/17 (ver1.02) ",
+      "contextHash": "f4199dc6f8180d7cc46dafb6903b3b559cba0b0ea3aafd003e325557b2ef70c3"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/09/24（ver1.01）",
+      "sourceHash": "cc2ccaa9eb66b80c6fc9be5b16d9489ccc60b9ac4f7262a4141e7957833e5030",
+      "translation": "2021/09/24 (ver1.01) ",
+      "contextHash": "cc2ccaa9eb66b80c6fc9be5b16d9489ccc60b9ac4f7262a4141e7957833e5030"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "SimplePassiveSkillMZ.js（準公式）のパッシブスキルに対応。",
+      "sourceHash": "76ea14fa2ea64173b3289913fcccd4f8a6141b4db441faafbc9080da4229f9f1",
+      "translation": "Added support for the passive skills of SimplePassiveSkillMZ.js (semi-official).",
+      "contextHash": "76ea14fa2ea64173b3289913fcccd4f8a6141b4db441faafbc9080da4229f9f1"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/09/02（ver1.00）",
+      "sourceHash": "9f1464c3036e477e228745355183423061e4524aa0010102c7825ce45784d287",
+      "translation": "2021/09/02 (ver1.00) ",
+      "contextHash": "9f1464c3036e477e228745355183423061e4524aa0010102c7825ce45784d287"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "スキルのメモ欄（Note of Skill）",
+      "sourceHash": "9a3134c88850fb5468b85225b1825e92c86488caa192c7b9c56d2b6e8345e231",
+      "translation": "Skill Note (Note of Skill)",
+      "contextHash": "9a3134c88850fb5468b85225b1825e92c86488caa192c7b9c56d2b6e8345e231"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "属性有効度の限界設定",
+      "sourceHash": "7a631560e001047e71ce158c7d2aede39c9608d28748282670048ccb31f7f253",
+      "translation": "Set the Element Rate Limits",
+      "contextHash": "7a631560e001047e71ce158c7d2aede39c9608d28748282670048ccb31f7f253"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "スキル毎に属性有効度の限界値を変更することができます。",
+      "sourceHash": "bfd4f2b84c4d58d7f8d90780ec39705e0a121c5451630bb9ff53b5eec77e7ebb",
+      "translation": "You can change the limit values for Element Rates for each skill.",
+      "contextHash": "bfd4f2b84c4d58d7f8d90780ec39705e0a121c5451630bb9ff53b5eec77e7ebb"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "例えば、無効化されない属性技のようなものを作成できます。",
+      "sourceHash": "134737f57bf338fce9a996d0ad80837f38a50e6e2aab945f53464ebda0193a22",
+      "translation": "For example, you can create an elemental skill that cannot be nullified.",
+      "contextHash": "134737f57bf338fce9a996d0ad80837f38a50e6e2aab945f53464ebda0193a22"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "属性有効度の最大値を２倍に設定します。",
+      "sourceHash": "82f7a5b83514bd05107e3c09ba5324c135f2328e57561e07ba9d0b937fc78a57",
+      "translation": "Sets the maximum Element Rate to 2x.",
+      "contextHash": "82f7a5b83514bd05107e3c09ba5324c135f2328e57561e07ba9d0b937fc78a57"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "属性有効度の最小値を０．５倍に設定します。",
+      "sourceHash": "e912974240b43018b9aa2e92eb6d7f854e005cfb57df9da43dcedd7b34d832b8",
+      "translation": "Sets the minimum Element Rate to 0.5x.",
+      "contextHash": "e912974240b43018b9aa2e92eb6d7f854e005cfb57df9da43dcedd7b34d832b8"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "通常能力値を加算（RegularParameterPlus）",
+      "sourceHash": "61fa7763ce43eafb9c9def4f17364f35a36666681f394e660d81904e73a481ee",
+      "translation": "Add Regular Parameters (RegularParameterPlus)",
+      "contextHash": "61fa7763ce43eafb9c9def4f17364f35a36666681f394e660d81904e73a481ee"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "通常能力値の補正を加算方式に変更します。",
+      "sourceHash": "d18734ae6f8c728047a19ed2830de36cefdb7310e0f53b52b6d386441df380ff",
+      "translation": "Changes bonuses to Regular Parameters to an additive system.",
+      "contextHash": "d18734ae6f8c728047a19ed2830de36cefdb7310e0f53b52b6d386441df380ff"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "攻撃力２００％の装備を二つ組み合わせた場合、攻撃力は３００％となります。",
+      "sourceHash": "56473fb24d113225aa899c5ef10287384b7adf6f9955b76ea2e455a220f2c69c",
+      "translation": "When two pieces of equipment with Attack +200% are combined, Attack becomes 300%.",
+      "contextHash": "56473fb24d113225aa899c5ef10287384b7adf6f9955b76ea2e455a220f2c69c"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "なお、正確には以下のように計算されます。",
+      "sourceHash": "67080a302c419793d91f30446a58c94d202a4b9474f96a1dc9637c8434445994",
+      "translation": "More precisely, it is calculated as follows.",
+      "contextHash": "67080a302c419793d91f30446a58c94d202a4b9474f96a1dc9637c8434445994"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "「アクター＆職業の加算合計」&times;「装備の加算合計」&times;「ステートの加算合計」&times;「能力値強化」",
+      "sourceHash": "70abe4da84c6871e32798bad31fe732d10b7d5709b34798f1bba3ae983cd56c6",
+      "translation": " \"Total additions from actor & class” &times; “total additions from equipment” &times; “total additions from states” &times; “parameter boosts\"",
+      "contextHash": "70abe4da84c6871e32798bad31fe732d10b7d5709b34798f1bba3ae983cd56c6"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "加算するのは、あくまで同一の分類内に対してとなります。",
+      "sourceHash": "af0d217593f127d2ae177c52b5d3c3ae10b64049448f8527ba26cee30847c8a7",
+      "translation": "The values are added only within the same category.",
+      "contextHash": "af0d217593f127d2ae177c52b5d3c3ae10b64049448f8527ba26cee30847c8a7"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "以下の３項目によって、分類毎の計算方式の切替も可能です。",
+      "sourceHash": "a0afc8b686f01bafd7b36093c12724b1c17b7d50fc0f2bc0f0251b794779af81",
+      "translation": "The calculation method can also be switched for each category using the following three options.",
+      "contextHash": "a0afc8b686f01bafd7b36093c12724b1c17b7d50fc0f2bc0f0251b794779af81"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "バトラー＆職業補正を加算（Battler&ClassPlus）",
+      "sourceHash": "eb8283f394f50b8f057fd07718bf932e2b31f44465f4d2894a65c67de09ff3ef",
+      "translation": "Add Battler & Class Bonuses (Battler&ClassPlus)",
+      "contextHash": "eb8283f394f50b8f057fd07718bf932e2b31f44465f4d2894a65c67de09ff3ef"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "バトラーおよび職業の通常能力値（補正）を加算方式に変更します。",
+      "sourceHash": "b045d056eb18890caa930cd172b660bf047510e41859c4f80cdd8b1f3971f004",
+      "translation": "Changes the Regular Parameter bonuses of battlers and classes to an additive system.",
+      "contextHash": "b045d056eb18890caa930cd172b660bf047510e41859c4f80cdd8b1f3971f004"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "装備補正を加算（EquipPlus）",
+      "sourceHash": "d752e25beedf0d6ed823b54b1bd3ded32ebb25cda31ed0dfe67c60146c0c753d",
+      "translation": "Add Equipment Bonuses (EquipPlus)",
+      "contextHash": "d752e25beedf0d6ed823b54b1bd3ded32ebb25cda31ed0dfe67c60146c0c753d"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "装備の通常能力値（補正）を加算方式に変更します。",
+      "sourceHash": "a785eb1ff2c37499eb17b0ca7be8041ef68ac01ecc5bcc59f1bf59e36807d0a2",
+      "translation": "Changes equipment's Regular Parameter bonuses to an additive system.",
+      "contextHash": "a785eb1ff2c37499eb17b0ca7be8041ef68ac01ecc5bcc59f1bf59e36807d0a2"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ステート補正を加算（StatePlus）",
+      "sourceHash": "e2a8b24ec2141be5c71c9b77c810f51a23a16e2035d5a999f33b4cb0f1d7c892",
+      "translation": "Add State Bonuses (StatePlus)",
+      "contextHash": "e2a8b24ec2141be5c71c9b77c810f51a23a16e2035d5a999f33b4cb0f1d7c892"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ステートの通常能力値（補正）を加算方式に変更します。",
+      "sourceHash": "a78bf3371b21fe6698492c2c065844de4d5369a28af623f64362f5b095e70082",
+      "translation": "Changes state Regular Parameter bonuses to an additive system.",
+      "contextHash": "a78bf3371b21fe6698492c2c065844de4d5369a28af623f64362f5b095e70082"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "装備補正を別計算（SeparateEquipment）",
+      "sourceHash": "bb74663b6d0b33707fc759c32eb84c3eff05a611b426907cfefee03e8fb5eb70",
+      "translation": "Calculate Equipment Bonuses Separately (SeparateEquipment)",
+      "contextHash": "bb74663b6d0b33707fc759c32eb84c3eff05a611b426907cfefee03e8fb5eb70"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "アクター＆職業のパラメータ補正が装備に影響を与えないようにします。",
+      "sourceHash": "48138aee742f2fadfe90052087c0aa5d568940a8e54d072f7e47936130c0579b",
+      "translation": "Prevents actor and class parameter bonuses from affecting equipment.",
+      "contextHash": "48138aee742f2fadfe90052087c0aa5d568940a8e54d072f7e47936130c0579b"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "例えば、職業の攻撃力が*200%の場合、ツクールＭＶ～ＭＺの仕様では、武器の攻撃力まで200%になってしまいます。",
+      "sourceHash": "15fc31840e114285ac45e37b698412359c414192cfde7020b2a812a7952f01c6",
+      "translation": "For example, if a class's Attack is *200%, under RPG Maker MV–MZ's default specifications, even the weapon's Attack becomes 200%.",
+      "contextHash": "15fc31840e114285ac45e37b698412359c414192cfde7020b2a812a7952f01c6"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "この項目をオンにすると、アクターとクラスの能力に対してのみ、補正をかけるようになります。",
+      "sourceHash": "471b35dfadd689cec1f6cdfed9c83b7185c046e08bdc19b86be16eab211a0c99",
+      "translation": "When this option is enabled, bonuses are applied only to the actor's and class's abilities.",
+      "contextHash": "471b35dfadd689cec1f6cdfed9c83b7185c046e08bdc19b86be16eab211a0c99"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "属性有効度を加算（ElementRatePlus）",
+      "sourceHash": "ea55ddf67e499dfe27ef56aadee14bda6e216147c5d863eec73c4093ff1b1cda",
+      "translation": "Add Element Rates (ElementRatePlus)",
+      "contextHash": "ea55ddf67e499dfe27ef56aadee14bda6e216147c5d863eec73c4093ff1b1cda"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "属性有効度を加算方式に変更します。",
+      "sourceHash": "d6aecd72e9bdd4d1f70360d503a9dc4fc01c04edc215e4aaf8a2385679e55650",
+      "translation": "Changes Element Rates to an additive system.",
+      "contextHash": "d6aecd72e9bdd4d1f70360d503a9dc4fc01c04edc215e4aaf8a2385679e55650"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "複数行の属性有効度をデータベースの特徴に設定すれば、通常は不可能なマイナスの属性有効度を実現できます。",
+      "sourceHash": "cdd2a617d13c6a602c7a5c31a9f368f2f9cea20e655941c8ba8de43953e582b3",
+      "translation": "By setting Element Rates across multiple lines in database traits, you can achieve negative Element Rates, which are normally impossible.",
+      "contextHash": "cdd2a617d13c6a602c7a5c31a9f368f2f9cea20e655941c8ba8de43953e582b3"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "0%を下回った分のポイントは正負が反転します。",
+      "sourceHash": "ae3b6820199ea281c4ebc66c77d0e2d132f5af892387aaf57740c17bbcc18475",
+      "translation": "The amount below 0% has its sign reversed.",
+      "contextHash": "ae3b6820199ea281c4ebc66c77d0e2d132f5af892387aaf57740c17bbcc18475"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "これにより、属性攻撃を吸収したり、逆にアンデッドが回復魔法を受けてダメージを受けるといった挙動を実現できます。",
+      "sourceHash": "8ee7b0b3c08dee13bf4d01700939260e916e7be500300baaa2fe2b6a65c90588",
+      "translation": "This allows elemental attacks to be absorbed, or conversely, undead to take damage when they receive healing magic.",
+      "contextHash": "8ee7b0b3c08dee13bf4d01700939260e916e7be500300baaa2fe2b6a65c90588"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "例えば、0%と30%を組み合わせると、属性有効度は-70%になります。",
+      "sourceHash": "8910b207a61367934925ae35ea6dec86e356a4d06f4aa7ac01946fc21570b186",
+      "translation": "For example, combining 0% and 30% results in an element rate of -70%.",
+      "contextHash": "8910b207a61367934925ae35ea6dec86e356a4d06f4aa7ac01946fc21570b186"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "つまり70%の吸収となります。",
+      "sourceHash": "f8d8dc02069a274290f23521b1a209b679ae223921ac04158b53a71a44e5a45d",
+      "translation": "In other words, this results in 70% absorption.",
+      "contextHash": "f8d8dc02069a274290f23521b1a209b679ae223921ac04158b53a71a44e5a45d"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "上記は回復属性の属性有効度を-100%、闇属性の属性有効度を-70%となるように設定した例です。",
+      "sourceHash": "0ae02376dbd8625e93fcb0a38507b127ee2745ab377c17307406a6c5e6288a8e",
+      "translation": "The example above sets the element rate for the Recovery element to -100% and the element rate for the Dark element to -70%.",
+      "contextHash": "0ae02376dbd8625e93fcb0a38507b127ee2745ab377c17307406a6c5e6288a8e"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "設定する特徴はアクター、職業、敵キャラ、装備などいずれも有効です。",
+      "sourceHash": "7df23d97966fcf29a24a765fc8f12ba525b54a3255356f9c448281d00e55ea83",
+      "translation": "The features you configure are all valid, including those for actors, classes, enemies, and equipment.",
+      "contextHash": "7df23d97966fcf29a24a765fc8f12ba525b54a3255356f9c448281d00e55ea83"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "「アクターと装備」など異なる項目の組み合わせでも、加算によって0%を下回った場合は同じように機能します。",
+      "sourceHash": "f4709cd096370b3b151bf43522fa656b423ff5ae19172ddf12f24702ed807f7f",
+      "translation": "Even when combining different categories, such as an actor and equipment, it works the same way if addition causes the value to fall below 0%.",
+      "contextHash": "f4709cd096370b3b151bf43522fa656b423ff5ae19172ddf12f24702ed807f7f"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "属性有効度の最大値（ElementRateMax）",
+      "sourceHash": "434bbc3ea8a5a7e6b2d0e328444854b1d175e1a7efcabe4396d1fc8c7e392678",
+      "translation": "Maximum Element Rate (ElementRateMax)",
+      "contextHash": "434bbc3ea8a5a7e6b2d0e328444854b1d175e1a7efcabe4396d1fc8c7e392678"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "属性有効度の最大値です。1.0が100%に相当します。",
+      "sourceHash": "4aab5b079eafe7f5b0c3a875937bf393b417897457e3956329d24901cd8faa46",
+      "translation": "This is the maximum element rate. 1.0 corresponds to 100%.",
+      "contextHash": "4aab5b079eafe7f5b0c3a875937bf393b417897457e3956329d24901cd8faa46"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "2.0ならば、通常の二倍がダメージの最大値になります。",
+      "sourceHash": "c574d324f7a3a00c0473dcff3a8f76c6d911c3a1ac4b9c4feb8870eac7ba99a1",
+      "translation": "At 2.0, the maximum damage is twice the normal amount.",
+      "contextHash": "c574d324f7a3a00c0473dcff3a8f76c6d911c3a1ac4b9c4feb8870eac7ba99a1"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "属性有効度の最小値（ElementRateMin）",
+      "sourceHash": "ffdc49c5dfb270f23a42df1011f5b72dce1a48c08e3ec1aa3ab95ea1bf34cb03",
+      "translation": "Minimum Element Rate (ElementRateMin)",
+      "contextHash": "ffdc49c5dfb270f23a42df1011f5b72dce1a48c08e3ec1aa3ab95ea1bf34cb03"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "属性有効度の最小値です。1.0が100%に相当します。",
+      "sourceHash": "f9a19157d13f91c28ec385144a215652b5d33b4c631bf42dda3ff347260a2722",
+      "translation": "This is the minimum element rate. 1.0 corresponds to 100%.",
+      "contextHash": "f9a19157d13f91c28ec385144a215652b5d33b4c631bf42dda3ff347260a2722"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "-2.0ならば、通常のマイナス二倍がダメージの最小値になります。",
+      "sourceHash": "2c726f063c7c62334c7286f59e16fa5088d5a4dd5a6f3c6f9c79d9783b75ed48",
+      "translation": "At -2.0, the minimum damage is negative twice the normal amount.",
+      "contextHash": "2c726f063c7c62334c7286f59e16fa5088d5a4dd5a6f3c6f9c79d9783b75ed48"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "ステート有効度を加算（StateRatePlus）",
+      "sourceHash": "4ad784b2e52d081c1802b85661a1f61cabb6e8462b088ea4b7d43e0a5aeb9cb3",
+      "translation": "Add State Rates (StateRatePlus)",
+      "contextHash": "4ad784b2e52d081c1802b85661a1f61cabb6e8462b088ea4b7d43e0a5aeb9cb3"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "ステート有効度を加算方式に変更します。",
+      "sourceHash": "6266bdba9394763437f4044652be54655849da8814fb5a38b5b1314aaf9c8a5b",
+      "translation": "Changes state rates to use an additive method.",
+      "contextHash": "6266bdba9394763437f4044652be54655849da8814fb5a38b5b1314aaf9c8a5b"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "要領は属性有効度と同じです。",
+      "sourceHash": "2ac75ed43409a7dea99675c8909c5fb163ebac7c21e616a17f71459c66aba666",
+      "translation": "The process is the same as for element rates.",
+      "contextHash": "2ac75ed43409a7dea99675c8909c5fb163ebac7c21e616a17f71459c66aba666"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "弱体有効度を加算（DebuffRatePlus）",
+      "sourceHash": "36748555f1eb598e7ae91d206f63377dbec1f88089516d9dca11515bfcc276e7",
+      "translation": "Add Debuff Rates (DebuffRatePlus)",
+      "contextHash": "36748555f1eb598e7ae91d206f63377dbec1f88089516d9dca11515bfcc276e7"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "弱体有効度を加算方式に変更します。",
+      "sourceHash": "95a3b688d5b9ec881bddb8faa6d39eac106195a20814015f4d952e06f1f00e63",
+      "translation": "Changes debuff rates to use an additive method.",
+      "contextHash": "95a3b688d5b9ec881bddb8faa6d39eac106195a20814015f4d952e06f1f00e63"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "要領は属性有効度と同じです。",
+      "sourceHash": "2ac75ed43409a7dea99675c8909c5fb163ebac7c21e616a17f71459c66aba666",
+      "translation": "The process is the same as for element rates.",
+      "contextHash": "2ac75ed43409a7dea99675c8909c5fb163ebac7c21e616a17f71459c66aba666"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "特殊能力値を加算（SpParameterPlus）",
+      "sourceHash": "5683b846f836cfa0273d4d6bf9f7c84162506e25f8025c5c6ed320e1bf4978cb",
+      "translation": "Add Special Parameters (SpParameterPlus)",
+      "contextHash": "5683b846f836cfa0273d4d6bf9f7c84162506e25f8025c5c6ed320e1bf4978cb"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "特殊能力値を加算方式に変更します。",
+      "sourceHash": "eb46536d4ca48495a1854946f7d771b294a701ae6dbd352a6d8223a5086adcc1",
+      "translation": "Changes special parameters to use an additive method.",
+      "contextHash": "eb46536d4ca48495a1854946f7d771b294a701ae6dbd352a6d8223a5086adcc1"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "要領は属性有効度と同じです。",
+      "sourceHash": "2ac75ed43409a7dea99675c8909c5fb163ebac7c21e616a17f71459c66aba666",
+      "translation": "The process is the same as for element rates.",
+      "contextHash": "2ac75ed43409a7dea99675c8909c5fb163ebac7c21e616a17f71459c66aba666"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "これについては、迂闊にやるとバランス崩壊を起こす項目もあるので注意です。",
+      "sourceHash": "ea01eb8b7981296e54ee9e552070cbbcb2763fff3fb7a6c474785dae6e5560f1",
+      "translation": "Be careful with this, as using it carelessly can cause some parameters to completely disrupt the game balance.",
+      "contextHash": "ea01eb8b7981296e54ee9e552070cbbcb2763fff3fb7a6c474785dae6e5560f1"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "例えば『MP消費率』が50%の装備を二つ組み合わせた場合、デフォルトでは1/4になるだけですが加算方式では0になってしまいます。",
+      "sourceHash": "3eed0743fa276704817ca266021d079a2c736de3cf2518cd971212f577ffb3d9",
+      "translation": "For example, when combining two pieces of equipment with an MP Cost Rate of 50%, the default method only reduces it to 1/4, whereas the additive method reduces it to 0.",
+      "contextHash": "3eed0743fa276704817ca266021d079a2c736de3cf2518cd971212f577ffb3d9"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "命中計算式を変更（FixHitFormula）",
+      "sourceHash": "b06b70dc850114ad15842f736185d0346151051b2c104d1f2766fe3305a334a4",
+      "translation": "Change the Hit Calculation Formula (FixHitFormula)",
+      "contextHash": "b06b70dc850114ad15842f736185d0346151051b2c104d1f2766fe3305a334a4"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "ツクールＭＶ～ＭＺの従来の仕様では、回避率と命中率は別々に計算されます。",
+      "sourceHash": "9fe3fbd3b677bd15adbb300eb73ff2457e7ded961faf71d70ee02efcdda21b30",
+      "translation": "Under the traditional specifications of RPG Maker MV–MZ, evasion rate and hit rate are calculated separately.",
+      "contextHash": "9fe3fbd3b677bd15adbb300eb73ff2457e7ded961faf71d70ee02efcdda21b30"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "つまり、命中＋２００％の武器を装備していても、回避１００％の敵には、絶対に攻撃が当たらない仕様です。",
+      "sourceHash": "a16458e263aae8ac2e964580d98ac661a84a31a9ad93382c61ed5865ef677838",
+      "translation": "In other words, even when equipped with a weapon granting +200% hit rate, an attack can never hit an enemy with 100% evasion.",
+      "contextHash": "a16458e263aae8ac2e964580d98ac661a84a31a9ad93382c61ed5865ef677838"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "このパラメータをオンにすると、命中率から回避率を引いた値で判定を行うようになります。",
+      "sourceHash": "8b4291ed0cc114b846b0bcf6134779213b788dcdc809146b323153048a090dfd",
+      "translation": "When this parameter is enabled, the check is performed using the value obtained by subtracting the evasion rate from the hit rate.",
+      "contextHash": "8b4291ed0cc114b846b0bcf6134779213b788dcdc809146b323153048a090dfd"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "※『攻撃を外した』か『回避された』かの区別も可能です。",
+      "sourceHash": "03822c7aa0d4927c9355a023453f1e97170d248b0fb99e5ebec595b0f0881018",
+      "translation": "※It is also possible to distinguish between an attack missing and an attack being evaded.",
+      "contextHash": "03822c7aa0d4927c9355a023453f1e97170d248b0fb99e5ebec595b0f0881018"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "マイナスの回避率を考慮（ConsiderNegativeEva）ver1.02",
+      "sourceHash": "483259719bea79949bec85ff4964d47eba9f4e776104b52b88f964911d53f5bc",
+      "translation": "Consider Negative Evasion Rates (ConsiderNegativeEva) ver1.02",
+      "contextHash": "483259719bea79949bec85ff4964d47eba9f4e776104b52b88f964911d53f5bc"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "回避率がマイナスの場合、本来の命中率よりも高確率で命中するように修正します。",
+      "sourceHash": "c42f2f0ce1fc2b38416788400b5439c40b7487aea400d3547171a1f1eb73b2d1",
+      "translation": "When the evasion rate is negative, it is adjusted so that attacks hit with a higher probability than the original hit rate.",
+      "contextHash": "c42f2f0ce1fc2b38416788400b5439c40b7487aea400d3547171a1f1eb73b2d1"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "例えば、睡眠ステートに回避率のマイナス補正を入れることで、攻撃が必中になるといった仕様が可能となります。",
+      "sourceHash": "3b7b4a3c4cabc3e1653b2717636e33f5f1d47a16566b2cb3ec76cd7646e49b5b",
+      "translation": "For example, applying a negative evasion rate modifier to the Sleep state makes it possible to have attacks always hit.",
+      "contextHash": "3b7b4a3c4cabc3e1653b2717636e33f5f1d47a16566b2cb3ec76cd7646e49b5b"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "他にも、[[LINK_1]]対象サイドの変更プラグイン[[/LINK_1]]と組み合わせれば、「アンデッドに回復魔法でダメージ」といったＲＰＧの定番も可能となります。",
+      "sourceHash": "83fd1e7d9debdbb9988ef10176a957229c8cefb7e1032cf7f33d29313043becc",
+      "parts": [
+        {
+          "source": "他にも、",
+          "link": false
+        },
+        {
+          "source": "対象サイドの変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせれば、「アンデッドに回復魔法でダメージ」といったＲＰＧの定番も可能となります。",
+          "link": false
+        }
+      ],
+      "translation": "In addition, combining it with the [[LINK_1]]Target Side Change Plugin[[/LINK_1]] makes classic RPG features such as \"damaging undead with healing magic\" possible.",
+      "contextHash": "83fd1e7d9debdbb9988ef10176a957229c8cefb7e1032cf7f33d29313043becc"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "※この機能は[[LINK_1]]属性有効度を拡張するプラグイン[[/LINK_1]]を統合したものです。内容は全く同じになります。",
+      "sourceHash": "8612a68d0adffc7bb0fb6eaee7c9cb058c4cd1c7fb8b51a2398aa149172c3641",
+      "parts": [
+        {
+          "source": "※この機能は",
+          "link": false
+        },
+        {
+          "source": "属性有効度を拡張するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を統合したものです。内容は全く同じになります。",
+          "link": false
+        }
+      ],
+      "translation": "※This feature integrates the [[LINK_1]]Plugin for Extending Element Rates[[/LINK_1]]. Its functionality is exactly the same.",
+      "contextHash": "8612a68d0adffc7bb0fb6eaee7c9cb058c4cd1c7fb8b51a2398aa149172c3641"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（Note of Skill）[[/LINK_1]]",
+      "sourceHash": "5e9e749841e32505df9f3b78e867233d39c91f8325614ca9b33de004f8a82e4c",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（Note of Skill）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field (Note of Skill)[[/LINK_1]]",
+      "contextHash": "5e9e749841e32505df9f3b78e867233d39c91f8325614ca9b33de004f8a82e4c"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]通常能力値を加算（RegularParameterPlus）[[/LINK_1]]",
+      "sourceHash": "cd6d4456a23f849dda231be633db3f4bbf6a270d99e468cc1f12c2b190269c2b",
+      "parts": [
+        {
+          "source": "通常能力値を加算（RegularParameterPlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Normal Parameters (RegularParameterPlus)[[/LINK_1]]",
+      "contextHash": "cd6d4456a23f849dda231be633db3f4bbf6a270d99e468cc1f12c2b190269c2b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]└バトラー＆職業補正を加算（Battler&ClassPlus）[[/LINK_1]]",
+      "sourceHash": "3f00ec0de7c4a5e6eb482d3c2756593218a0a6bb03950c700d5d53bfdd54bf45",
+      "parts": [
+        {
+          "source": "└バトラー＆職業補正を加算（Battler&ClassPlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]└Add Battler & Class Modifiers (Battler&ClassPlus)[[/LINK_1]]",
+      "contextHash": "3f00ec0de7c4a5e6eb482d3c2756593218a0a6bb03950c700d5d53bfdd54bf45"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]└装備補正を加算（EquipPlus）[[/LINK_1]]",
+      "sourceHash": "8eff259b008a46c0222ccb3108925e61ed138642cf15d8c21de06820433cdbca",
+      "parts": [
+        {
+          "source": "└装備補正を加算（EquipPlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]└Add Equipment Modifiers (EquipPlus)[[/LINK_1]]",
+      "contextHash": "8eff259b008a46c0222ccb3108925e61ed138642cf15d8c21de06820433cdbca"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]└ステート補正を加算（StatePlus）[[/LINK_1]]",
+      "sourceHash": "615fb1ce435b240426fe6d05b0f160d8c9b716e9a2b03cd2582179e08d923f0f",
+      "parts": [
+        {
+          "source": "└ステート補正を加算（StatePlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]└Add State Modifiers (StatePlus)[[/LINK_1]]",
+      "contextHash": "615fb1ce435b240426fe6d05b0f160d8c9b716e9a2b03cd2582179e08d923f0f"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]└装備補正を別計算（SeparateEquipment）[[/LINK_1]]",
+      "sourceHash": "64de24cf1ed3b6dd39d90c22cbc3ba004d60147db43782257ae29187ffa31d19",
+      "parts": [
+        {
+          "source": "└装備補正を別計算（SeparateEquipment）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]└Calculate Equipment Modifiers Separately (SeparateEquipment)[[/LINK_1]]",
+      "contextHash": "64de24cf1ed3b6dd39d90c22cbc3ba004d60147db43782257ae29187ffa31d19"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]属性有効度を加算（ElementRatePlus）[[/LINK_1]]",
+      "sourceHash": "49878da7574266ab50ffdd58817b81960bbb41c94648ac186f016d59245b38eb",
+      "parts": [
+        {
+          "source": "属性有効度を加算（ElementRatePlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Element Rates (ElementRatePlus)[[/LINK_1]]",
+      "contextHash": "49878da7574266ab50ffdd58817b81960bbb41c94648ac186f016d59245b38eb"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]└属性有効度の最大値（ElementRateMax）[[/LINK_1]]",
+      "sourceHash": "5db65e1f237c28d5c971c57a85c2d0a3aed1385aeec4ae0256ce4cdbd582a8ce",
+      "parts": [
+        {
+          "source": "└属性有効度の最大値（ElementRateMax）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]└Maximum Element Rate (ElementRateMax)[[/LINK_1]]",
+      "contextHash": "5db65e1f237c28d5c971c57a85c2d0a3aed1385aeec4ae0256ce4cdbd582a8ce"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]└属性有効度の最小値（ElementRateMin）[[/LINK_1]]",
+      "sourceHash": "7e056379c0f4431329f0b63f17a4fdcde8851424c6687216f34162bb86f2543d",
+      "parts": [
+        {
+          "source": "└属性有効度の最小値（ElementRateMin）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]└Minimum Element Rate (ElementRateMin)[[/LINK_1]]",
+      "contextHash": "7e056379c0f4431329f0b63f17a4fdcde8851424c6687216f34162bb86f2543d"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ステート有効度を加算（StateRatePlus）[[/LINK_1]]",
+      "sourceHash": "151dab5ec7dcab403dcfe237e08374b4c4e4177fe6f506672c74f608ffd4da63",
+      "parts": [
+        {
+          "source": "ステート有効度を加算（StateRatePlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add State Rates (StateRatePlus)[[/LINK_1]]",
+      "contextHash": "151dab5ec7dcab403dcfe237e08374b4c4e4177fe6f506672c74f608ffd4da63"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]弱体有効度を加算（DebuffRatePlus）[[/LINK_1]]",
+      "sourceHash": "eed73e3b865fd93c45fa385a9f468eb3f41c7d64180b7afaa5af942cd8254535",
+      "parts": [
+        {
+          "source": "弱体有効度を加算（DebuffRatePlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Debuff Rates (DebuffRatePlus)[[/LINK_1]]",
+      "contextHash": "eed73e3b865fd93c45fa385a9f468eb3f41c7d64180b7afaa5af942cd8254535"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]特殊能力値を加算（SpParameterPlus）[[/LINK_1]]",
+      "sourceHash": "158cc61cc540ec9c229cb10ec39ad80ca33ddb3ef9d4b3f947ceb9cae8002efd",
+      "parts": [
+        {
+          "source": "特殊能力値を加算（SpParameterPlus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Special Parameters (SpParameterPlus)[[/LINK_1]]",
+      "contextHash": "158cc61cc540ec9c229cb10ec39ad80ca33ddb3ef9d4b3f947ceb9cae8002efd"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]命中計算式を変更（FixHitFormula）[[/LINK_1]]",
+      "sourceHash": "b5d4e481f17c2232596b81be06b874ebba6db40067df1cba05faec84d34a10d7",
+      "parts": [
+        {
+          "source": "命中計算式を変更（FixHitFormula）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change the Hit Calculation Formula (FixHitFormula)[[/LINK_1]]",
+      "contextHash": "b5d4e481f17c2232596b81be06b874ebba6db40067df1cba05faec84d34a10d7"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]└マイナスの回避率を考慮（ConsiderNegativeEva）[[/LINK_1]]ver1.02",
+      "sourceHash": "859a3540aba9853a1779fec0234e59943748b798c8fee6b07bb796c71f66de49",
+      "parts": [
+        {
+          "source": "└マイナスの回避率を考慮（ConsiderNegativeEva）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]└Consider Negative Evasion Rates (ConsiderNegativeEva)[[/LINK_1]] ver1.02",
+      "contextHash": "859a3540aba9853a1779fec0234e59943748b798c8fee6b07bb796c71f66de49"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]スキル毎に属性有効度の限界値を設定[[/LINK_1]]できるようにした。",
+      "sourceHash": "ba10a8323f5c05d7196e87f5fd052b596c9cd7cce212c4a4b3d306d32c7e6002",
+      "parts": [
+        {
+          "source": "スキル毎に属性有効度の限界値を設定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to [[LINK_1]]set limit values for element rates for each skill[[/LINK_1]].",
+      "contextHash": "ba10a8323f5c05d7196e87f5fd052b596c9cd7cce212c4a4b3d306d32c7e6002"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの結果計算を演出より先に実行するプラグイン[[/LINK_1]]用に調整した。（2025/03/15 ver1.041）",
+      "sourceHash": "c3ddfe25360ee2bd47ca9428fbe601dc9044144f69d896f016d7423624863b61",
+      "parts": [
+        {
+          "source": "スキルの結果計算を演出より先に実行するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "用に調整した。（2025/03/15 ver1.041）",
+          "link": false
+        }
+      ],
+      "translation": "Adjusted for use with the [[LINK_1]]plugin that executes skill result calculations before effects[[/LINK_1]]. (2025/03/15 ver1.041)",
+      "contextHash": "c3ddfe25360ee2bd47ca9428fbe601dc9044144f69d896f016d7423624863b61"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "アクター＆職業のパラメータ補正が、[[LINK_1]]装備に影響を与えない設定[[/LINK_1]]を追加。",
+      "sourceHash": "b566bae4abf10d8638be4d90808cfad35b186f336b4c3c5eaca80ec9ad8ebe90",
+      "parts": [
+        {
+          "source": "アクター＆職業のパラメータ補正が、",
+          "link": false
+        },
+        {
+          "source": "装備に影響を与えない設定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a setting that prevents actor & class parameter modifiers from affecting [[LINK_1]]equipment[[/LINK_1]].",
+      "contextHash": "b566bae4abf10d8638be4d90808cfad35b186f336b4c3c5eaca80ec9ad8ebe90"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]マイナスの回避率を考慮[[/LINK_1]]（項目追加）できるように対応。",
+      "sourceHash": "8a4ed8e8629a6adb925a6c79305a90b25dfcb75e7f5f67babff898ab42b78e37",
+      "parts": [
+        {
+          "source": "マイナスの回避率を考慮",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（項目追加）できるように対応。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to [[LINK_1]]consider negative evasion rates[[/LINK_1]] (added option).",
+      "contextHash": "8a4ed8e8629a6adb925a6c79305a90b25dfcb75e7f5f67babff898ab42b78e37"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "特に[[LINK_1]]多重職業プラグイン（NRP_AdditionalClasses.js）[[/LINK_1]]にて、ドラクエ６～７っぽい転職システムを実現したい場合に問題になります。",
+      "sourceHash": "7f730a7e8abd8dba994bf10d4c91c2bcb80d908c5f8ff7e6fbe944de189cef0e",
+      "parts": [
+        {
+          "source": "特に",
+          "link": false
+        },
+        {
+          "source": "多重職業プラグイン（NRP_AdditionalClasses.js）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にて、ドラクエ６～７っぽい転職システムを実現したい場合に問題になります。",
+          "link": false
+        }
+      ],
+      "translation": "This is especially a problem with the [[LINK_1]]Multiple Classes Plugin (NRP_AdditionalClasses.js)[[/LINK_1]] when you want to implement a Dragon Quest VI–VII-style class-change system.",
+      "contextHash": "7f730a7e8abd8dba994bf10d4c91c2bcb80d908c5f8ff7e6fbe944de189cef0e"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "特徴に設定する各項目の計算を加算方式に変更します。": "Changes the calculations for each item set in traits to an additive system.",
+    "例えば、『通常能力値』の補正はアクター、職業、装備、ステートの全てに設定したものを単純に乗算して計算を行います。": "For example, bonuses to Regular Parameters are calculated by simply multiplying together the values set for the actor, class, equipment, and states.",
+    "仮に各装備に対して、以下のように補正を設定したとすると……": "Suppose bonuses are set for each piece of equipment as follows...",
+    "剣：攻撃力２００％": "Sword: Attack +200%",
+    "鎧：攻撃力２００％": "Armor: Attack +200%",
+    "兜：攻撃力２００％": "Helmet: Attack +200%",
+    "攻撃力は元の８００％の値になります。": "Attack becomes 800% of its original value.",
+    "大きなインフレが起こるため、バランス調整が困難です。": "This causes massive inflation, making balance adjustments difficult.",
+    "そこでこのプラグインによって、補正を加算方式へと変更します。": "This plugin changes the bonuses to an additive system.",
+    "攻撃力２００％は＋１００％として解釈し、それを加算します。": "Attack +200% is interpreted as +100%, which is then added.",
+    "つまり、上記の場合は＋３００％（元の４００％）の補正となります。": "In other words, in the above case, the bonus is +300% (400% of the original value).",
+    "『通常能力値』の他にも、『属性有効度』『ステート有効度』『弱体有効度』『特殊能力値』が対象となります。": "In addition to Regular Parameters, this applies to Element Rates, State Rates, Debuff Rates, and Special Parameters.",
+    "例えば、『属性有効度』を加算方式にすると炎属性スキルを吸収して回復する敵や装備を作成できます。": "For example, setting Element Rates to an additive system allows you to create enemies or equipment that absorb fire-element skills and recover HP.",
+    "また、命中率より回避率が優先される仕様も修正できます。": "It can also correct the default behavior in which Evasion Rate takes priority over Hit Rate.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_TraitsPlus.js": "NRP_TraitsPlus.js ",
+    "ver1.041（2025/03/15）": "ver1.041 (2025/03/15) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/07/22 -> 2025/03/15（ver1.04 -> 1.041）": "2024/07/22 -> 2025/03/15 (ver1.04 -> 1.041) ",
+    "2024/06/09（ver1.03）": "2024/06/09 (ver1.03) ",
+    "2021/10/17（ver1.02）": "2021/10/17 (ver1.02) ",
+    "2021/09/24（ver1.01）": "2021/09/24 (ver1.01) ",
+    "SimplePassiveSkillMZ.js（準公式）のパッシブスキルに対応。": "Added support for the passive skills of SimplePassiveSkillMZ.js (semi-official).",
+    "2021/09/02（ver1.00）": "2021/09/02 (ver1.00) ",
+    "公開！": "Released!",
+    "スキルのメモ欄（Note of Skill）": "Skill Note (Note of Skill)",
+    "属性有効度の限界設定": "Set the Element Rate Limits",
+    "スキル毎に属性有効度の限界値を変更することができます。": "You can change the limit values for Element Rates for each skill.",
+    "例えば、無効化されない属性技のようなものを作成できます。": "For example, you can create an elemental skill that cannot be nullified.",
+    "属性有効度の最大値を２倍に設定します。": "Sets the maximum Element Rate to 2x.",
+    "属性有効度の最小値を０．５倍に設定します。": "Sets the minimum Element Rate to 0.5x.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "通常能力値を加算（RegularParameterPlus）": "Add Regular Parameters (RegularParameterPlus)",
+    "通常能力値の補正を加算方式に変更します。": "Changes bonuses to Regular Parameters to an additive system.",
+    "攻撃力２００％の装備を二つ組み合わせた場合、攻撃力は３００％となります。": "When two pieces of equipment with Attack +200% are combined, Attack becomes 300%.",
+    "なお、正確には以下のように計算されます。": "More precisely, it is calculated as follows.",
+    "「アクター＆職業の加算合計」&times;「装備の加算合計」&times;「ステートの加算合計」&times;「能力値強化」": " \"Total additions from actor & class” &times; “total additions from equipment” &times; “total additions from states” &times; “parameter boosts\"",
+    "加算するのは、あくまで同一の分類内に対してとなります。": "The values are added only within the same category.",
+    "以下の３項目によって、分類毎の計算方式の切替も可能です。": "The calculation method can also be switched for each category using the following three options.",
+    "バトラー＆職業補正を加算（Battler&ClassPlus）": "Add Battler & Class Bonuses (Battler&ClassPlus)",
+    "バトラーおよび職業の通常能力値（補正）を加算方式に変更します。": "Changes the Regular Parameter bonuses of battlers and classes to an additive system.",
+    "装備補正を加算（EquipPlus）": "Add Equipment Bonuses (EquipPlus)",
+    "装備の通常能力値（補正）を加算方式に変更します。": "Changes equipment's Regular Parameter bonuses to an additive system.",
+    "ステート補正を加算（StatePlus）": "Add State Bonuses (StatePlus)",
+    "ステートの通常能力値（補正）を加算方式に変更します。": "Changes state Regular Parameter bonuses to an additive system.",
+    "装備補正を別計算（SeparateEquipment）": "Calculate Equipment Bonuses Separately (SeparateEquipment)",
+    "アクター＆職業のパラメータ補正が装備に影響を与えないようにします。": "Prevents actor and class parameter bonuses from affecting equipment.",
+    "例えば、職業の攻撃力が*200%の場合、ツクールＭＶ～ＭＺの仕様では、武器の攻撃力まで200%になってしまいます。": "For example, if a class's Attack is *200%, under RPG Maker MV–MZ's default specifications, even the weapon's Attack becomes 200%.",
+    "この項目をオンにすると、アクターとクラスの能力に対してのみ、補正をかけるようになります。": "When this option is enabled, bonuses are applied only to the actor's and class's abilities.",
+    "属性有効度を加算（ElementRatePlus）": "Add Element Rates (ElementRatePlus)",
+    "属性有効度を加算方式に変更します。": "Changes Element Rates to an additive system.",
+    "複数行の属性有効度をデータベースの特徴に設定すれば、通常は不可能なマイナスの属性有効度を実現できます。": "By setting Element Rates across multiple lines in database traits, you can achieve negative Element Rates, which are normally impossible.",
+    "0%を下回った分のポイントは正負が反転します。": "The amount below 0% has its sign reversed.",
+    "これにより、属性攻撃を吸収したり、逆にアンデッドが回復魔法を受けてダメージを受けるといった挙動を実現できます。": "This allows elemental attacks to be absorbed, or conversely, undead to take damage when they receive healing magic.",
+    "例えば、0%と30%を組み合わせると、属性有効度は-70%になります。": "For example, combining 0% and 30% results in an element rate of -70%.",
+    "つまり70%の吸収となります。": "In other words, this results in 70% absorption.",
+    "上記は回復属性の属性有効度を-100%、闇属性の属性有効度を-70%となるように設定した例です。": "The example above sets the element rate for the Recovery element to -100% and the element rate for the Dark element to -70%.",
+    "設定する特徴はアクター、職業、敵キャラ、装備などいずれも有効です。": "The features you configure are all valid, including those for actors, classes, enemies, and equipment.",
+    "「アクターと装備」など異なる項目の組み合わせでも、加算によって0%を下回った場合は同じように機能します。": "Even when combining different categories, such as an actor and equipment, it works the same way if addition causes the value to fall below 0%.",
+    "属性有効度の最大値（ElementRateMax）": "Maximum Element Rate (ElementRateMax)",
+    "属性有効度の最大値です。1.0が100%に相当します。": "This is the maximum element rate. 1.0 corresponds to 100%.",
+    "2.0ならば、通常の二倍がダメージの最大値になります。": "At 2.0, the maximum damage is twice the normal amount.",
+    "属性有効度の最小値（ElementRateMin）": "Minimum Element Rate (ElementRateMin)",
+    "属性有効度の最小値です。1.0が100%に相当します。": "This is the minimum element rate. 1.0 corresponds to 100%.",
+    "-2.0ならば、通常のマイナス二倍がダメージの最小値になります。": "At -2.0, the minimum damage is negative twice the normal amount.",
+    "ステート有効度を加算（StateRatePlus）": "Add State Rates (StateRatePlus)",
+    "ステート有効度を加算方式に変更します。": "Changes state rates to use an additive method.",
+    "要領は属性有効度と同じです。": "The process is the same as for element rates.",
+    "弱体有効度を加算（DebuffRatePlus）": "Add Debuff Rates (DebuffRatePlus)",
+    "弱体有効度を加算方式に変更します。": "Changes debuff rates to use an additive method.",
+    "特殊能力値を加算（SpParameterPlus）": "Add Special Parameters (SpParameterPlus)",
+    "特殊能力値を加算方式に変更します。": "Changes special parameters to use an additive method.",
+    "これについては、迂闊にやるとバランス崩壊を起こす項目もあるので注意です。": "Be careful with this, as using it carelessly can cause some parameters to completely disrupt the game balance.",
+    "例えば『MP消費率』が50%の装備を二つ組み合わせた場合、デフォルトでは1/4になるだけですが加算方式では0になってしまいます。": "For example, when combining two pieces of equipment with an MP Cost Rate of 50%, the default method only reduces it to 1/4, whereas the additive method reduces it to 0.",
+    "命中計算式を変更（FixHitFormula）": "Change the Hit Calculation Formula (FixHitFormula)",
+    "ツクールＭＶ～ＭＺの従来の仕様では、回避率と命中率は別々に計算されます。": "Under the traditional specifications of RPG Maker MV–MZ, evasion rate and hit rate are calculated separately.",
+    "つまり、命中＋２００％の武器を装備していても、回避１００％の敵には、絶対に攻撃が当たらない仕様です。": "In other words, even when equipped with a weapon granting +200% hit rate, an attack can never hit an enemy with 100% evasion.",
+    "このパラメータをオンにすると、命中率から回避率を引いた値で判定を行うようになります。": "When this parameter is enabled, the check is performed using the value obtained by subtracting the evasion rate from the hit rate.",
+    "※『攻撃を外した』か『回避された』かの区別も可能です。": "※It is also possible to distinguish between an attack missing and an attack being evaded.",
+    "マイナスの回避率を考慮（ConsiderNegativeEva）ver1.02": "Consider Negative Evasion Rates (ConsiderNegativeEva) ver1.02",
+    "回避率がマイナスの場合、本来の命中率よりも高確率で命中するように修正します。": "When the evasion rate is negative, it is adjusted so that attacks hit with a higher probability than the original hit rate.",
+    "例えば、睡眠ステートに回避率のマイナス補正を入れることで、攻撃が必中になるといった仕様が可能となります。": "For example, applying a negative evasion rate modifier to the Sleep state makes it possible to have attacks always hit."
+  }
+}

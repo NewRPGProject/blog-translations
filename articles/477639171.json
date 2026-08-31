@@ -1,0 +1,2952 @@
+{
+  "articleId": "477639171",
+  "sourceUrl": "https://newrpg.seesaa.net/article/477639171.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "c02fbf35ee99100df2c60de77e7740c11a3b58aa1cc7c31410eb442e4801c0db",
+  "translatedAt": "2026-08-31T02:06:54.526Z",
+  "title": "Launch DynamicAnimation on the Map [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimationをマップ上で起動【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "531a24ebe944c2727d6c4912dba00337ef24da613a916d6e1131dbb08a802f9f",
+      "translation": "Launch DynamicAnimation on the Map [RPG Maker MZ & MV Plugin]",
+      "contextHash": "531a24ebe944c2727d6c4912dba00337ef24da613a916d6e1131dbb08a802f9f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "DynamicAnimationをマップ上から起動します。",
+      "sourceHash": "98779f82917917d1d5be858029c34bde1649551f28ef973f95b0cdd210374357",
+      "translation": "Launches DynamicAnimation from the map.",
+      "contextHash": "98779f82917917d1d5be858029c34bde1649551f28ef973f95b0cdd210374357"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "イベント演出からダンジョンのギミックまで使い道は多種多様です。また、戦闘中にも演出用のアニメーションを実行できます。",
+      "sourceHash": "6390e7ec2b3d70d88c6a7c6ce84fde17f920b31725d3a4045aede7c2da6aa16c",
+      "translation": "It has a wide variety of uses, from event effects to dungeon gimmicks. You can also play animations for visual effects during battles.",
+      "contextHash": "6390e7ec2b3d70d88c6a7c6ce84fde17f920b31725d3a4045aede7c2da6aa16c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the plugin ON in the Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ＭＺ版",
+      "sourceHash": "f4e12ec1f262af102a6e78afd980be32c1cf3dc99bc801df41f42e942c3093f1",
+      "translation": "MZ Version",
+      "contextHash": "f4e12ec1f262af102a6e78afd980be32c1cf3dc99bc801df41f42e942c3093f1"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMapMZ.js",
+      "sourceHash": "a06f4b3b767bc48d351a5a9c5aff3e8c66fd9f68d4b43c6523495a77267de2e4",
+      "translation": "NRP_DynamicAnimationMapMZ.js ",
+      "contextHash": "35fe5dca8667d355de30d365e69126f27b7cffb2301d8d487385ca6b3a341e2e"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ver1.161（2025/05/03）",
+      "sourceHash": "388cbe7569ea037a0fcdc2c1c07e99ac1bbd105fb4fd8d78382ff82693edc5a4",
+      "translation": "ver1.161 (2025/05/03) ",
+      "contextHash": "35fe5dca8667d355de30d365e69126f27b7cffb2301d8d487385ca6b3a341e2e"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "さらに以下のプラグインを最新に更新してください。",
+      "sourceHash": "26a1055effd6ad08dbd10531ca205d492846a9ef8a47d817fd63a9098884fe2b",
+      "translation": "Also update the following plugins to the latest versions.",
+      "contextHash": "26a1055effd6ad08dbd10531ca205d492846a9ef8a47d817fd63a9098884fe2b"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※バージョンに食い違いがあると動作しない可能性があります。",
+      "sourceHash": "f27ccb661c9f9fe619a1b85c16aac845b3ced6b01cd8b0411102322c065ba39a",
+      "translation": "※It may not work correctly if the versions do not match.",
+      "contextHash": "f27ccb661c9f9fe619a1b85c16aac845b3ced6b01cd8b0411102322c065ba39a"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMZ.js",
+      "sourceHash": "fa0e68b187fc9e909dcdfd5b9e1eb27abf2d72d3865a7bd24988dc71d6430eca",
+      "translation": "NRP_DynamicAnimationMZ.js ",
+      "contextHash": "5a713ecb5a888fd1c68941985a90acf05a528eb5a63b02d401b706155c489c6b"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ver1.211（2024/07/15）",
+      "sourceHash": "7c1f0cc3ab5df6d5c8f2d0cb1f11cb7011c7601ce5cb999580273a169d23b4f5",
+      "translation": "ver1.211 (2024/07/15) ",
+      "contextHash": "5a713ecb5a888fd1c68941985a90acf05a528eb5a63b02d401b706155c489c6b"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMV2MZ.js",
+      "sourceHash": "1b0ca7231e7463983f15eb30747022e21a6a32fb791cd2a5bcc509a54d365292",
+      "translation": "NRP_DynamicAnimationMV2MZ.js ",
+      "contextHash": "6e2099be4accf15bda40072831c4c8fbf44c0b3b87c117edd07371aeddd5606a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.061（2024/06/10）",
+      "sourceHash": "304f7b555152c6b3a02597727f4a504a628c9bfbb4b35f68248180c79b7d0dd0",
+      "translation": "ver1.061 (2024/06/10) ",
+      "contextHash": "6e2099be4accf15bda40072831c4c8fbf44c0b3b87c117edd07371aeddd5606a"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "NRP_DynamicMotionMZ.js",
+      "sourceHash": "878e7fdf99848828874c485887618ca3318d57cecf5fabb10299d2c76a168c6e",
+      "translation": "NRP_DynamicMotionMZ.js ",
+      "contextHash": "5ab52471937297c37886f8eede4a57c0351f4f5d0475626d5307fd3c35a5220a"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.252（2024/07/13）",
+      "sourceHash": "81002c5018a00ddd49be8f1c5fb693b302c17f090aaf438e51039ac1b437d75c",
+      "translation": "ver1.252 (2024/07/13) ",
+      "contextHash": "5ab52471937297c37886f8eede4a57c0351f4f5d0475626d5307fd3c35a5220a"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ＭＶ版",
+      "sourceHash": "941cc4be91979678473712609fd10f5550941c370ac71bbf9f8464c7f48e0c25",
+      "translation": "MV Version",
+      "contextHash": "941cc4be91979678473712609fd10f5550941c370ac71bbf9f8464c7f48e0c25"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMap.js",
+      "sourceHash": "0a63dfce0483510ae0f0838e52fba42bbf85e5f0f587f244aedbeaab0aba03d2",
+      "translation": "NRP_DynamicAnimationMap.js ",
+      "contextHash": "79842d59dd3b9d0070d195e263bbb803fd0a2af1a699fa5f2f328b162de384b5"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ver1.16（2024/07/15）",
+      "sourceHash": "edd7af646268d8aeddd3c0761343bd0966d6a01f1617890cec623257a62bc1f0",
+      "translation": "ver1.16 (2024/07/15) ",
+      "contextHash": "79842d59dd3b9d0070d195e263bbb803fd0a2af1a699fa5f2f328b162de384b5"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "さらに以下のプラグインを最新に更新してください。",
+      "sourceHash": "26a1055effd6ad08dbd10531ca205d492846a9ef8a47d817fd63a9098884fe2b",
+      "translation": "Also update the following plugins to the latest versions.",
+      "contextHash": "26a1055effd6ad08dbd10531ca205d492846a9ef8a47d817fd63a9098884fe2b"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※バージョンに食い違いがあると動作しない可能性があります。",
+      "sourceHash": "f27ccb661c9f9fe619a1b85c16aac845b3ced6b01cd8b0411102322c065ba39a",
+      "translation": "※It may not work correctly if the versions do not match.",
+      "contextHash": "f27ccb661c9f9fe619a1b85c16aac845b3ced6b01cd8b0411102322c065ba39a"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "NRP_DynamicAnimation.js",
+      "sourceHash": "facb36459ea7d9229eac2351d47da4b7f4ca2dcb31cdfa61ce1fa606d456e521",
+      "translation": "NRP_DynamicAnimation.js ",
+      "contextHash": "34cb7f54b6fe9b10d3f7a5941b0e70d2763f5633cf05e4ebee1909c154490379"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ver1.251（2021/12/24）",
+      "sourceHash": "8970fe41b40e69cb5ea08c6bf5691031bb5b5b94ede15b2ef50f4affb174ad56",
+      "translation": "ver1.251 (2021/12/24) ",
+      "contextHash": "34cb7f54b6fe9b10d3f7a5941b0e70d2763f5633cf05e4ebee1909c154490379"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "NRP_DynamicMotion.js",
+      "sourceHash": "b55b0a1bef44ce850120d7297069697eff666e971716b55b4e0f49c34854800a",
+      "translation": "NRP_DynamicMotion.js ",
+      "contextHash": "5e721c48c1ae86b9f636c0d7bd479981ac5cc3638527f9799149e8b709adaa56"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ver1.21（2021/11/18）",
+      "sourceHash": "ae7044ed6930dfc2b51b9b8de33c0ce6420d87ba98c20f944d5edd2e6c2c5396",
+      "translation": "ver1.21 (2021/11/18) ",
+      "contextHash": "5e721c48c1ae86b9f636c0d7bd479981ac5cc3638527f9799149e8b709adaa56"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※上記のプラグインよりも、このプラグインは下に配置してください。",
+      "sourceHash": "e7470eed667575ee6ab99d38b24e227b4d2577fc726b3f6f464774042abb4bd8",
+      "translation": "※Place this plugin below the plugins listed above.",
+      "contextHash": "e7470eed667575ee6ab99d38b24e227b4d2577fc726b3f6f464774042abb4bd8"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "オプション（ＭＶ＆ＭＺ兼用）（option）",
+      "sourceHash": "f2ac62aece999dae212956b74327c7981492336138aeff3036f5b126f357b2c2",
+      "translation": "Options (for both MV & MZ) (option)",
+      "contextHash": "f2ac62aece999dae212956b74327c7981492336138aeff3036f5b126f357b2c2"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "NRP_DynamicMotionMap.js",
+      "sourceHash": "636a517588e08f09e6590812c1b355c8cd871828cade062c1343c086089bcc20",
+      "translation": "NRP_DynamicMotionMap.js ",
+      "contextHash": "8eca091676d56726357476ff03687c52d54e0692654f6dc1fbb29bb011a38550"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ver1.07（2021/07/24）",
+      "sourceHash": "332bbeb23e03862217d2268e57b907e9db81e22ab866b01d7e09a5701dcc1c47",
+      "translation": "ver1.07 (2021/07/24) ",
+      "contextHash": "8eca091676d56726357476ff03687c52d54e0692654f6dc1fbb29bb011a38550"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "更新履歴（history）",
+      "sourceHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09",
+      "translation": "Update History (history)",
+      "contextHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/07/15 -> 2025/05/03（ver1.16 -> 1.161）",
+      "sourceHash": "7d288c9737ba3de4c5884abb35a957d15253925633dc428ecabadb3e7737de4a",
+      "translation": "2024/07/15 -> 2025/05/03 (ver1.16 -> 1.161) ",
+      "contextHash": "7d288c9737ba3de4c5884abb35a957d15253925633dc428ecabadb3e7737de4a"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "※ただし、戦闘時の動作はイマイチ自信ないです……。",
+      "sourceHash": "0d8cf7b23ddc6ba15b2a313d87023c3b372013a0eb8bec30f8ca69157857955d",
+      "translation": "※However, I’m not very confident about how it works during battles…….",
+      "contextHash": "0d8cf7b23ddc6ba15b2a313d87023c3b372013a0eb8bec30f8ca69157857955d"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "【ＭＺ】プラグインコマンドでアニメを削除した際、キャラクターのフラッシュの色調が残ってしまう不具合修正。（2025/05/03 ver1.161）",
+      "sourceHash": "b23997fcdca71fb39010c0cbbb7c441d86e58823f5bef068a81d01d83d7534da",
+      "translation": "【MZ】Fixed a bug where the character’s flash tone remained after deleting an animation with a plugin command. (2025/05/03 ver1.161)",
+      "contextHash": "b23997fcdca71fb39010c0cbbb7c441d86e58823f5bef068a81d01d83d7534da"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2022/06/22 -> 2024/07/03（ver1.15 -> 1.153）",
+      "sourceHash": "c31af191c797a81f6f925064a5627b1aa744f4a23d2ee53d423d7ecb7fe7e735",
+      "translation": "2022/06/22 -> 2024/07/03 (ver1.15 -> 1.153) ",
+      "contextHash": "c31af191c797a81f6f925064a5627b1aa744f4a23d2ee53d423d7ecb7fe7e735"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ゲームロード時、イベントから自動実行したアニメーションが途中再開されない不具合修正が不完全だったので再修正。",
+      "sourceHash": "c33443c2bc9f98be9882013a0b59010b31f1c3a3afad3ec9d3bb6e3a52b4040c",
+      "translation": "The previous fix for an issue where animations automatically executed by events did not resume from where they left off when loading a game was incomplete, so it has been fixed again.",
+      "contextHash": "c33443c2bc9f98be9882013a0b59010b31f1c3a3afad3ec9d3bb6e3a52b4040c"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "シーン復帰時、2/60秒ほどループ中のアニメが途切れる問題に対処。",
+      "sourceHash": "de8141cabb552ec64f2ff98f834071f1b1dbb11a5c546e36c6f5c1f650f36207",
+      "translation": "Addressed an issue where looping animations were interrupted for about 2/60 of a second when returning to a scene.",
+      "contextHash": "de8141cabb552ec64f2ff98f834071f1b1dbb11a5c546e36c6f5c1f650f36207"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "ＭＺ版を競合用に微調整。（2022/06/25 ver1.152）",
+      "sourceHash": "d4f9204486ed3d3930ecd0904539ca3a42bb8d5797937dcdc87b85138b94e9c0",
+      "translation": "Fine-tuned the MZ version for compatibility. (2022/06/25 ver1.152)",
+      "contextHash": "d4f9204486ed3d3930ecd0904539ca3a42bb8d5797937dcdc87b85138b94e9c0"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "残像を使用している場合、戦闘時のタイミング調整が正常に処理できなくなる不具合修正。（2024/07/03 ver1.153）",
+      "sourceHash": "590ef05ec785d77e97d5dee00c09ee0773afd21044303c6201f5c350479fab53",
+      "translation": "Fixed a bug where timing adjustments during battles could not be processed correctly when afterimages were used. (2024/07/03 ver1.153)",
+      "contextHash": "590ef05ec785d77e97d5dee00c09ee0773afd21044303c6201f5c350479fab53"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2022/06/06 -> 2022/06/16（ver1.14 -> 1.141）",
+      "sourceHash": "a66568e170a690c831091fab3ace3d2d065be4bc9fd96821e3154cd71b7ee865",
+      "translation": "2022/06/06 -> 2022/06/16 (ver1.14 -> 1.141) ",
+      "contextHash": "a66568e170a690c831091fab3ace3d2d065be4bc9fd96821e3154cd71b7ee865"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "※初期状態ではオフになっています。",
+      "sourceHash": "eeae9c80e20672f20f7cd5823752111d414c08fef2d4975b27f1ff07b80ebfe4",
+      "translation": "※It is disabled by default.",
+      "contextHash": "eeae9c80e20672f20f7cd5823752111d414c08fef2d4975b27f1ff07b80ebfe4"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "ゲームロード時、イベントから自動実行したアニメーションが途中再開されない不具合修正。（2022/06/16 ver1.141）",
+      "sourceHash": "829aaa20293051643b346c592fb755fe6179b4160793936bdda09433d165fb8d",
+      "translation": "Fixed a bug where animations automatically executed by events did not resume from where they left off when loading a game. (2022/06/16 ver1.141)",
+      "contextHash": "829aaa20293051643b346c592fb755fe6179b4160793936bdda09433d165fb8d"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2022/01/27（ver1.13）",
+      "sourceHash": "ae69d0b4fa4e66f3888f28d0a1b3182ef5bb29d8cb599d5e0920fc394fa9b250",
+      "translation": "2022/01/27 (ver1.13) ",
+      "contextHash": "ae69d0b4fa4e66f3888f28d0a1b3182ef5bb29d8cb599d5e0920fc394fa9b250"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "計算レートが正しく参照されない不具合を修正。",
+      "sourceHash": "6a41259544aa14bce4094f1b6b7a3fa90e06b422795efa94e3dfe16b305ba6b2",
+      "translation": "Fixed a bug where the calculation rate was not referenced correctly.",
+      "contextHash": "6a41259544aa14bce4094f1b6b7a3fa90e06b422795efa94e3dfe16b305ba6b2"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2021/10/05 -> 12/24（ver1.12 -> 1.121）",
+      "sourceHash": "2e2adc559fd5ff38a8a9a53602dcde492b0b47e711aea3661075e83634b13638",
+      "translation": "2021/10/05 -> 12/24 (ver1.12 -> 1.121) ",
+      "contextHash": "2e2adc559fd5ff38a8a9a53602dcde492b0b47e711aea3661075e83634b13638"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "同一マップへの場所移動時にアニメーションが消える不具合修正。",
+      "sourceHash": "b2a6c0edaa4636bd49f979489a231bf80e41a5f6cabb28e797fa7013380f5d68",
+      "translation": "Fixed a bug where animations disappeared when moving to a location on the same map.",
+      "contextHash": "b2a6c0edaa4636bd49f979489a231bf80e41a5f6cabb28e797fa7013380f5d68"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "ＭＶ版にて他プラグインとの競合によるエラーを軽減。（12/24 ver1.121）",
+      "sourceHash": "b03d60487c3260def6b6e7b478ef0a86e16dfdb2769eeb2f09138383625f6de5",
+      "translation": "Reduced errors caused by conflicts with other plugins in the MV version. (12/24 ver1.121)",
+      "contextHash": "b03d60487c3260def6b6e7b478ef0a86e16dfdb2769eeb2f09138383625f6de5"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "※NRP_DynamicAnimation.jsも修正しています。",
+      "sourceHash": "09d6c55989e78dd6d66c2a12b696848ba5b61843d603373341fdbcde0f5e3f46",
+      "translation": "※NRP_DynamicAnimation.js has also been updated.",
+      "contextHash": "09d6c55989e78dd6d66c2a12b696848ba5b61843d603373341fdbcde0f5e3f46"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "2021/08/07（ver1.11）",
+      "sourceHash": "cb6472df399302c1de796fe1bd6871651d9d9cd2807e37ecc618e9a6bff75f95",
+      "translation": "2021/08/07 (ver1.11) ",
+      "contextHash": "cb6472df399302c1de796fe1bd6871651d9d9cd2807e37ecc618e9a6bff75f95"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "ＭＺ用アニメーションを並列実行した状態で、アニメーションやモーションを通常実行すると並列アニメーションの終了を待ってしまう不具合修正。",
+      "sourceHash": "08c77a60feddd2c157a573465b5f9435c59d7c7e81487c93eb09cec41a667e84",
+      "translation": "Fixed a bug where normally executing an animation or motion while an MZ animation was running in parallel caused the system to wait for the parallel animation to finish.",
+      "contextHash": "08c77a60feddd2c157a573465b5f9435c59d7c7e81487c93eb09cec41a667e84"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "2021/06/05（ver1.10）",
+      "sourceHash": "33021bf19f426b2cfec6cdd2d01978de5f9cd796fb68b9e976a05eb79c7aac16",
+      "translation": "2021/06/05 (ver1.10) ",
+      "contextHash": "33021bf19f426b2cfec6cdd2d01978de5f9cd796fb68b9e976a05eb79c7aac16"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "※ＭＶ版は未対応、ソース整理のみとなります",
+      "sourceHash": "b73d5411ea522074a26a00be85a2dc805bc13cbbb72a49da91414c126d71b806",
+      "translation": "※The MV version is not supported; this only organizes the source.",
+      "contextHash": "b73d5411ea522074a26a00be85a2dc805bc13cbbb72a49da91414c126d71b806"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "2021/04/24 -> 05/15（ver1.09 -> 1.091）",
+      "sourceHash": "9676ea7788efc5845c82175687bbec7689276dbe90f18e8f7c667fe9aafc0f83",
+      "translation": "2021/04/24 -> 05/15 (ver1.09 -> 1.091) ",
+      "contextHash": "9676ea7788efc5845c82175687bbec7689276dbe90f18e8f7c667fe9aafc0f83"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "<D-StartTiming:30>というように設定すると、アニメーションを30フレーム進めた状態から開始できます。",
+      "sourceHash": "11beb1f6cd99b7b94800c679d19760d401d20d259d95b235a366249093d20eb7",
+      "translation": "By setting it as <D-StartTiming:30>, you can start the animation after advancing it by 30 frames.",
+      "contextHash": "11beb1f6cd99b7b94800c679d19760d401d20d259d95b235a366249093d20eb7"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "並列処理からマップ版DynamicAnimationMZを起動した場合、セーブデータの作成に失敗することがある重大な不具合を修正。（ＭＺのみ）",
+      "sourceHash": "68810063a00b861582bc2e186955afa2f24847b9ea03cbb5c51545fa3b3732d4",
+      "translation": "Fixed a serious bug where launching the map version of DynamicAnimationMZ from a parallel process could cause save data creation to fail. (MZ only)",
+      "contextHash": "68810063a00b861582bc2e186955afa2f24847b9ea03cbb5c51545fa3b3732d4"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "※各関連プラグインも最新に更新してください。",
+      "sourceHash": "eddc59edadf36e2e0d02befdbe59082f495afa9f64891745feba8fdac9b5424f",
+      "translation": "※Please also update all related plugins to the latest versions.",
+      "contextHash": "eddc59edadf36e2e0d02befdbe59082f495afa9f64891745feba8fdac9b5424f"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "ゲームロード時、コモンイベントの並列処理で実行したアニメーションに対して途中から再生ができない不具合修正。（05/15 ver1.091）",
+      "sourceHash": "94fab070db7bed34bc38f6c6fc8b180aa8c71bf39d313cd39f858d0e44e0f6f5",
+      "translation": "Fixed a bug where animations executed by a parallel process in a common event could not be played from where they left off after loading a game. (05/15 ver1.091)",
+      "contextHash": "94fab070db7bed34bc38f6c6fc8b180aa8c71bf39d313cd39f858d0e44e0f6f5"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "2021/04/21（ver1.083）",
+      "sourceHash": "9af851066eae8411025c61f3ad40accba5df94051cc9cfa6609c84506b2a3c63",
+      "translation": "2021/04/21 (ver1.083) ",
+      "contextHash": "9af851066eae8411025c61f3ad40accba5df94051cc9cfa6609c84506b2a3c63"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "イベントのメモ欄に複数のタグが指定されている場合、正常に動作しない不具合を修正。",
+      "sourceHash": "26e802be00ad4319b050776c56367b3b0f15c2c9fd9e6282013df5dd4fcf37b7",
+      "translation": "Fixed a bug where the plugin did not work correctly when multiple tags were specified in an event’s note field.",
+      "contextHash": "26e802be00ad4319b050776c56367b3b0f15c2c9fd9e6282013df5dd4fcf37b7"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "画面スクロール時に一瞬だけアニメーションの位置がズレる不具合修正。",
+      "sourceHash": "51d9f0a53ae2ae203230850dfa72f41aa89b2040b9cb1c12b358352fc1944e99",
+      "translation": "Fixed a bug where the animation’s position shifted momentarily while the screen was scrolling.",
+      "contextHash": "51d9f0a53ae2ae203230850dfa72f41aa89b2040b9cb1c12b358352fc1944e99"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "※NRP_DynamicAnimationMap本体の更新はありません。NRP_DynamicAnimation（MV/MZ）およびNRP_DynamicAnimationMV2MZ（MZのみ）を最新に更新してください。",
+      "sourceHash": "540e502446bbf8ef5d93f77e5e3a7167aef32c82ae8ebaf4be80cc2a21797ce9",
+      "translation": "※NRP_DynamicAnimationMap itself has not been updated. Please update NRP_DynamicAnimation (MV/MZ) and NRP_DynamicAnimationMV2MZ (MZ only) to the latest versions.",
+      "contextHash": "540e502446bbf8ef5d93f77e5e3a7167aef32c82ae8ebaf4be80cc2a21797ce9"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "2020/11/05 -> 12/08（ver1.08 -> 1.082）",
+      "sourceHash": "3f57c938403f228e0571fac132a3a35a5a788e742596c2393af6622b4d5af4a4",
+      "translation": "2020/11/05 -> 12/08 (ver1.08 -> 1.082) ",
+      "contextHash": "3f57c938403f228e0571fac132a3a35a5a788e742596c2393af6622b4d5af4a4"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "外部プラグインとの連携用に調整。",
+      "sourceHash": "40d915dfdd762c4a9613a795fd87acd0af56557549b7998f81f8f459bdea4b4d",
+      "translation": "Adjusted for integration with external plugins.",
+      "contextHash": "40d915dfdd762c4a9613a795fd87acd0af56557549b7998f81f8f459bdea4b4d"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "ウェイトの数値指定がない場合、アニメーションの終了までウェイトされない不具合修正。",
+      "sourceHash": "31239096feabed5f852260e0b07575551ee4d27d37e7c95ff159ee2801751183",
+      "translation": "Fixed a bug where, when no wait value was specified, the system did not wait until the animation ended.",
+      "contextHash": "31239096feabed5f852260e0b07575551ee4d27d37e7c95ff159ee2801751183"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "アニメーションの位置が『画面』でもスクロールの影響を受けるように修正。",
+      "sourceHash": "14faa500abdcc1dd12c1f47b43c4dfdff00be1946a05aae9a89158678bbece7b",
+      "translation": "Fixed the plugin so that animations are affected by scrolling even when their position is set to “Screen.”",
+      "contextHash": "14faa500abdcc1dd12c1f47b43c4dfdff00be1946a05aae9a89158678bbece7b"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "ＭＶ用のプラグインコマンド『nrp.animation.item』でアイテムの定義も呼び出し可能に。",
+      "sourceHash": "6877519e4694ff7c2bce7f1e05b798d0b5ed0d13583a75cc983a67312ebbff67",
+      "translation": "The MV plugin command ‘nrp.animation.item’ can now also call item definitions.",
+      "contextHash": "6877519e4694ff7c2bce7f1e05b798d0b5ed0d13583a75cc983a67312ebbff67"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "外部プラグインとの連携用にダメージ処理部分を微調整。（11/08 ver1.081）",
+      "sourceHash": "72043ccfbc357d621efdf8e8028a73351d36331f686e375267ff93a55184182b",
+      "translation": "Fine-tuned the damage processing section for integration with external plugins. (11/08 ver1.081)",
+      "contextHash": "72043ccfbc357d621efdf8e8028a73351d36331f686e375267ff93a55184182b"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "※各関連プラグインも最新に更新してください。",
+      "sourceHash": "eddc59edadf36e2e0d02befdbe59082f495afa9f64891745feba8fdac9b5424f",
+      "translation": "※Please also update all related plugins to the latest versions.",
+      "contextHash": "eddc59edadf36e2e0d02befdbe59082f495afa9f64891745feba8fdac9b5424f"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "ＭＶ版にてエラーとなる重大な不具合修正。（12/08 ver1.082）",
+      "sourceHash": "4d622774e8df0624d74442331cbbab2e57bd998a3a152808af755cbec21b8eba",
+      "translation": "Fixed a serious bug that caused errors in the MV version. (12/08 ver1.082)",
+      "contextHash": "4d622774e8df0624d74442331cbbab2e57bd998a3a152808af755cbec21b8eba"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "ＭＺからＭＶアニメを正常再生できない重大な不具合修正。",
+      "sourceHash": "f5873960a8f2ccf9e168c09159e5b58bc90f4abafcb106f4524f65e9e3937083",
+      "translation": "Fixed a serious bug where MV animations could not be played correctly from MZ.",
+      "contextHash": "f5873960a8f2ccf9e168c09159e5b58bc90f4abafcb106f4524f65e9e3937083"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "※NRP_DynamicAnimationMV2MZを最新に更新してください。",
+      "sourceHash": "62b19893d80ee2c9f2f78fe7d90d2a6a7d7e993fcb56015fa0b27b279bc544c6",
+      "translation": "※Please update NRP_DynamicAnimationMV2MZ to the latest version.",
+      "contextHash": "62b19893d80ee2c9f2f78fe7d90d2a6a7d7e993fcb56015fa0b27b279bc544c6"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "2020/10/19 -> 10/20（ver1.07 -> 1.072）",
+      "sourceHash": "3e45507fde0b50ec7ea3c4b74cac4026a54065a5acdba373080f32617ab10ba3",
+      "translation": "2020/10/19 -> 10/20 (ver1.07 -> 1.072) ",
+      "contextHash": "3e45507fde0b50ec7ea3c4b74cac4026a54065a5acdba373080f32617ab10ba3"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "マップイベントのメモ欄からの実行でエラーになる不具合修正。（ver1.071）",
+      "sourceHash": "e4da9fe28a4c8d099de9413c29a24a1ee5cdc5907f387dab4a9a910b6238e203",
+      "translation": "Fixed a bug that caused an error when executed from a map event’s note field. (ver1.071)",
+      "contextHash": "e4da9fe28a4c8d099de9413c29a24a1ee5cdc5907f387dab4a9a910b6238e203"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "戦闘時に使用すると、セーブに保存できなくなったり、次回の戦闘開始時にエラーになったりする不具合修正。（10/20）",
+      "sourceHash": "ac6e7a6ae9ad5ed4e3acf99ef7c937729b1c16e1a7dd0cc1e7635456dc799895",
+      "translation": "Fixed a bug where using it during battles could prevent data from being saved or cause an error when the next battle started. (10/20)",
+      "contextHash": "ac6e7a6ae9ad5ed4e3acf99ef7c937729b1c16e1a7dd0cc1e7635456dc799895"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "※修正箇所はNRP_DynamicAnimationおよびNRP_DynamicMotionなので、そちらを最新にしてください。",
+      "sourceHash": "6d1519c1b3e9d3845e3642eafced38ece7dcc771fe8a88737ab7fe2d298f1ad3",
+      "translation": "※The fixes are in NRP_DynamicAnimation and NRP_DynamicMotion, so please update those plugins to the latest versions.",
+      "contextHash": "6d1519c1b3e9d3845e3642eafced38ece7dcc771fe8a88737ab7fe2d298f1ad3"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "ＭＶ版で実行時に必ずエラーになる不具合修正。（10/20 ver1.072）",
+      "sourceHash": "d233a72bf6732d6fe5c6ea6f623ce957d855c5a16c86973c0b086b8a5ca9d822",
+      "translation": "Fixed a bug that always caused an error during execution in the MV version. (10/20 ver1.072)",
+      "contextHash": "d233a72bf6732d6fe5c6ea6f623ce957d855c5a16c86973c0b086b8a5ca9d822"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "2020/10/18（ver1.06）",
+      "sourceHash": "30a02f89f6e1851555a085c91e018fbe77ce24c5e76ea2b160d0a64094f14ea9",
+      "translation": "2020/10/18 (ver1.06) ",
+      "contextHash": "30a02f89f6e1851555a085c91e018fbe77ce24c5e76ea2b160d0a64094f14ea9"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "対象に-2~-4を指定すれば、隊列歩行の仲間も対象にできるようにした。",
+      "sourceHash": "209297557d9d4321b9ac65a910590a05c2d5975b2e67fcf12d18cace3d6c6cf4",
+      "translation": "Party members walking in formation can now also be targeted by specifying -2~-4 as the target.",
+      "contextHash": "209297557d9d4321b9ac65a910590a05c2d5975b2e67fcf12d18cace3d6c6cf4"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "ＭＺアニメのウェイトが正しくかからない不具合修正。",
+      "sourceHash": "44c21b178b630b705899fa321219072f52e882dc5309ed6f0c993054a00e5ee3",
+      "translation": "Fixed an issue where the wait for MZ animations was not applied correctly.",
+      "contextHash": "44c21b178b630b705899fa321219072f52e882dc5309ed6f0c993054a00e5ee3"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "※NRP_DynamicMotionMapも最新に更新してください！",
+      "sourceHash": "13da892555ff7e2d86f1dfd7c784225d9cf16b05911b8606e29de9279661901c",
+      "translation": "※Please also update NRP_DynamicMotionMap to the latest version!",
+      "contextHash": "13da892555ff7e2d86f1dfd7c784225d9cf16b05911b8606e29de9279661901c"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "2020/10/15（ver1.05 -> 1.052）",
+      "sourceHash": "b3b4946622042c0dfa9b7b4656724fd1d1897894b1f687b37f8d061324a01db0",
+      "translation": "2020/10/15 (ver1.05 -> 1.052) ",
+      "contextHash": "b3b4946622042c0dfa9b7b4656724fd1d1897894b1f687b37f8d061324a01db0"
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "座標がループするとアニメーションが途切れる不具合を修正。",
+      "sourceHash": "268590b71acb31d81d23637c87e3298c45335313e3540428dc71459da1343527",
+      "translation": "Fixed an issue where animations were interrupted when coordinates looped.",
+      "contextHash": "268590b71acb31d81d23637c87e3298c45335313e3540428dc71459da1343527"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "ＭＶ版にてプラグインパラメータが有効にならない不具合修正。（10/16 ver1.051）",
+      "sourceHash": "d3aba71196b406470df6c8ca20bb3ad2c4991c4b855eca7c23f17d53828f78c6",
+      "translation": "Fixed an issue where plugin parameters were not enabled in the MV version. (10/16 ver1.051)",
+      "contextHash": "d3aba71196b406470df6c8ca20bb3ad2c4991c4b855eca7c23f17d53828f78c6"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "複数の命令を組み合わせた場合、不要なウェイトが発生する不具合を修正。および処理軽量化。（10/17 ver1.052）",
+      "sourceHash": "897e8ff1d3e9d6c14daf2eefd38dbec2cdb7aaf229165ca5a146ca2eca65a8d8",
+      "translation": "Fixed an issue where unnecessary waits occurred when combining multiple commands. Also reduced processing load. (10/17 ver1.052)",
+      "contextHash": "897e8ff1d3e9d6c14daf2eefd38dbec2cdb7aaf229165ca5a146ca2eca65a8d8"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "2020/10/10（ver1.04 -> 1.041）",
+      "sourceHash": "bb57bef56bf96659b02241e58c3a3383b8b823b10411f2c75f9b0ebeb6a66824",
+      "translation": "2020/10/10 (ver1.04 -> 1.041) ",
+      "contextHash": "bb57bef56bf96659b02241e58c3a3383b8b823b10411f2c75f9b0ebeb6a66824"
+    },
+    {
+      "id": "list-041",
+      "type": "list",
+      "source": "ツクールＭＶに対応。",
+      "sourceHash": "c30a6d97742a98b5403f86af359328fd0103fa1296e0273d241f443d02532704",
+      "translation": "Added support for RPG Maker MV.",
+      "contextHash": "c30a6d97742a98b5403f86af359328fd0103fa1296e0273d241f443d02532704"
+    },
+    {
+      "id": "list-042",
+      "type": "list",
+      "source": "ＭＶ版の吹き出し表示でフリーズする不具合修正。（10/12 ver1.041）",
+      "sourceHash": "665b4ce2e52ad8525d71083d8b6a33043e1d2d7a76e0c3a5a22dbeb80ddb91a2",
+      "translation": "Fixed an issue where the MV version froze when displaying speech balloons. (10/12 ver1.041)",
+      "contextHash": "665b4ce2e52ad8525d71083d8b6a33043e1d2d7a76e0c3a5a22dbeb80ddb91a2"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "2020/10/07（ver1.03）",
+      "sourceHash": "911c7737fc1815b02e016e640eb8d3ecbf2c04ccc4fda8969e3b2e622ecfd10e",
+      "translation": "2020/10/07 (ver1.03) ",
+      "contextHash": "911c7737fc1815b02e016e640eb8d3ecbf2c04ccc4fda8969e3b2e622ecfd10e"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "2020/10/05（ver1.02 -> 1.021）",
+      "sourceHash": "babb1e28fd2c06bdb22811d197f60f0c8527182d826b8a23e39d1510e9e7b61d",
+      "translation": "2020/10/05 (ver1.02 -> 1.021) ",
+      "contextHash": "babb1e28fd2c06bdb22811d197f60f0c8527182d826b8a23e39d1510e9e7b61d"
+    },
+    {
+      "id": "list-043",
+      "type": "list",
+      "source": "戦闘中の実行機能を追加。",
+      "sourceHash": "0c88e7ae86a9d3be316568269dc668c509f95b8c50b8ff5d8ddffeacb5e9608f",
+      "translation": "Added the ability to execute during battle.",
+      "contextHash": "0c88e7ae86a9d3be316568269dc668c509f95b8c50b8ff5d8ddffeacb5e9608f"
+    },
+    {
+      "id": "list-044",
+      "type": "list",
+      "source": "有効範囲について直線距離ではなく長辺を取るようにした。",
+      "sourceHash": "fefe93294d36536e9451263cb65fbf2d3c748796fb0906ce55def89cbe5d8f03",
+      "translation": "The effective range now uses the longer side instead of straight-line distance.",
+      "contextHash": "fefe93294d36536e9451263cb65fbf2d3c748796fb0906ce55def89cbe5d8f03"
+    },
+    {
+      "id": "list-045",
+      "type": "list",
+      "source": "英語版のプラグインコマンドが抜けていた不具合修正。（ver1.021）",
+      "sourceHash": "729da7939db0506d490e447b0742a59c2f6f0a2ab503735cf9c0880e6b8cec1e",
+      "translation": "Fixed an issue where the plugin commands for the English version were missing. (ver1.021)",
+      "contextHash": "729da7939db0506d490e447b0742a59c2f6f0a2ab503735cf9c0880e6b8cec1e"
+    },
+    {
+      "id": "list-046",
+      "type": "list",
+      "source": "※NRP_DynamicAnimationMZ.jsとNRP_DynamicMotionMZ.jsも最新に更新してください。",
+      "sourceHash": "671dcc14611af4607e2db693664a09cb52b4b506c617e05e7df6632d4147848c",
+      "translation": "※Please also update NRP_DynamicAnimationMZ.js and NRP_DynamicMotionMZ.js to the latest versions.",
+      "contextHash": "671dcc14611af4607e2db693664a09cb52b4b506c617e05e7df6632d4147848c"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "2020/10/03（ver1.01）",
+      "sourceHash": "d58e9b4a04625ad7a4088e73eff5c53e0450571db8fcffa8004ae70903399b98",
+      "translation": "2020/10/03 (ver1.01) ",
+      "contextHash": "d58e9b4a04625ad7a4088e73eff5c53e0450571db8fcffa8004ae70903399b98"
+    },
+    {
+      "id": "list-047",
+      "type": "list",
+      "source": "<D-Skill:ID>によるイベントメモ＆注釈からの自動起動に対応。",
+      "sourceHash": "6a87bbf13dc7e7afb598f2f240031f12ab8363517f522264c9d99e48aaff5ac5",
+      "translation": "Added support for automatic activation from event notes and comments using <D-Skill:ID>.",
+      "contextHash": "6a87bbf13dc7e7afb598f2f240031f12ab8363517f522264c9d99e48aaff5ac5"
+    },
+    {
+      "id": "list-048",
+      "type": "list",
+      "source": "※NRP_DynamicAnimationMZ.jsもver1.042に更新してください。",
+      "sourceHash": "828aa9a733f5ce3c60c4e313c54bd8d48c0216ef4ef2b4ec2bd833de40833ea9",
+      "translation": "※Please also update NRP_DynamicAnimationMZ.js to ver1.042.",
+      "contextHash": "828aa9a733f5ce3c60c4e313c54bd8d48c0216ef4ef2b4ec2bd833de40833ea9"
+    },
+    {
+      "id": "list-049",
+      "type": "list",
+      "source": "それに伴い『注釈実行時の有効範囲マス数 』をパラメータに追加。",
+      "sourceHash": "6fa0d18183d33fb55a1d967d59fd830b27555250b690a4aecbb4548c329fb5ee",
+      "translation": "Accordingly, added “Effective Range in Tiles When Executing a Comment” to the parameters.",
+      "contextHash": "6fa0d18183d33fb55a1d967d59fd830b27555250b690a4aecbb4548c329fb5ee"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "2020/10/02（ver1.00 -> 1.001）",
+      "sourceHash": "36f8c66e7e1c2375e03b83b1c8c37157671fade605fc9c508986f79cc9f8e2e7",
+      "translation": "2020/10/02 (ver1.00 -> 1.001) ",
+      "contextHash": "36f8c66e7e1c2375e03b83b1c8c37157671fade605fc9c508986f79cc9f8e2e7"
+    },
+    {
+      "id": "list-050",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-051",
+      "type": "list",
+      "source": "並列処理でのwait指定時に想定した動作をしない不具合修正。（ver1.001）",
+      "sourceHash": "258bc73944e72816ff39714ae4f6e65012e66293d4f9eb7beed83fd792926c6b",
+      "translation": "Fixed an issue where the expected behavior did not occur when specifying wait during parallel processing. (ver1.001)",
+      "contextHash": "258bc73944e72816ff39714ae4f6e65012e66293d4f9eb7beed83fd792926c6b"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "サンプル（sample）",
+      "sourceHash": "296416c27752b8c6890efaafa0b53ee1bf3585e5bc9ca3d70fd3eab8ed0062c3",
+      "translation": "Sample (sample)",
+      "contextHash": "296416c27752b8c6890efaafa0b53ee1bf3585e5bc9ca3d70fd3eab8ed0062c3"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "マップ用に特化したサンプルを用意しましたので、参考にどうぞ。",
+      "sourceHash": "591f29a751aae68ddb0867f29c5a08e466c689afbd5bb9ce49e3ebe5b4c61917",
+      "translation": "I have prepared a sample specialized for maps, so please use it as a reference.",
+      "contextHash": "591f29a751aae68ddb0867f29c5a08e466c689afbd5bb9ce49e3ebe5b4c61917"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "Plugin Commands for MZ (Plugin Command MZ)",
+      "contextHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ツクールＭＺとＭＶでプラグインコマンドの仕様が大きく異なります。ＭＺの場合は、コンボ形式であらかじめ候補が用意されているので便利です。",
+      "sourceHash": "c71e625b90cdbfd27d40f5d43631d8cb3dd890688a0acf7554d48610fea2f0a4",
+      "translation": "The plugin command specifications differ significantly between RPG Maker MZ and MV. In MZ, the available options are provided in advance as combo boxes, making it convenient.",
+      "contextHash": "c71e625b90cdbfd27d40f5d43631d8cb3dd890688a0acf7554d48610fea2f0a4"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "アニメーションの表示（showAnimation）",
+      "sourceHash": "bd2c33b8c077e07e3a7915c98abef9f3f3c7ab21294d623081cc3ca94e046c9c",
+      "translation": "Show Animation (showAnimation)",
+      "contextHash": "bd2c33b8c077e07e3a7915c98abef9f3f3c7ab21294d623081cc3ca94e046c9c"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "スキルと対象を指定してDynamicAnimationを起動します。",
+      "sourceHash": "f009cbe68abbd2e32629a8d1f996c0c159c32988f201fdc13867f2e2394a75ce",
+      "translation": "Starts DynamicAnimation by specifying a skill and target.",
+      "contextHash": "f009cbe68abbd2e32629a8d1f996c0c159c32988f201fdc13867f2e2394a75ce"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "また、始点を設定すれば、射撃などの始点から対象へと移動するアニメーションを使用できます。",
+      "sourceHash": "580614a201a913e43355d2780de631faaee99cab82ba197d2ef299c5d21faacd",
+      "translation": "You can also set a start point to use animations that move from the starting point, such as when firing a projectile, to the target.",
+      "contextHash": "580614a201a913e43355d2780de631faaee99cab82ba197d2ef299c5d21faacd"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "オプションからはウェイトの有無や画面スクロール連動の有無を設定できます。",
+      "sourceHash": "da7cd3e85b9dd83ad46187c9a9761c0b8b384b0c6dfb2c94e235b9548edc74ca",
+      "translation": "The options allow you to specify whether to wait and whether to synchronize with screen scrolling.",
+      "contextHash": "da7cd3e85b9dd83ad46187c9a9761c0b8b384b0c6dfb2c94e235b9548edc74ca"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "スキルID（skillId）",
+      "sourceHash": "b52aeb5d054a8b821eb1c3656c368bcab6b2aa9c2250e6c8e9dc2d29eac90ec7",
+      "translation": "Skill ID (skillId)",
+      "contextHash": "b52aeb5d054a8b821eb1c3656c368bcab6b2aa9c2250e6c8e9dc2d29eac90ec7"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "使用するスキルを選択します。",
+      "sourceHash": "7cb0e7e76bbc6141da096b6b3451e7382d569de61d340c9262045d182e30ca6b",
+      "translation": "Select the skill to use.",
+      "contextHash": "7cb0e7e76bbc6141da096b6b3451e7382d569de61d340c9262045d182e30ca6b"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "このスキルのメモ欄に従って、DynamicAnimationが実行されます。",
+      "sourceHash": "a5d7f911a97596efac7ed31ed1b7bc7b28af5008a8a4d6598d0b80fa02ce9127",
+      "translation": "DynamicAnimation is executed according to the note field of this skill.",
+      "contextHash": "a5d7f911a97596efac7ed31ed1b7bc7b28af5008a8a4d6598d0b80fa02ce9127"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "対象（target）",
+      "sourceHash": "1035040912fe967e7278cec99acac2c2d1b21110cdb273b80381a05526e9ba08",
+      "translation": "Target (target)",
+      "contextHash": "1035040912fe967e7278cec99acac2c2d1b21110cdb273b80381a05526e9ba08"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "アニメーションの対象（終点）を指定します。",
+      "sourceHash": "01856f0d300f48da68ab1269d752ad63e750847b7db0ed71eb4ce846c3a65339",
+      "translation": "Specifies the target (endpoint) of the animation.",
+      "contextHash": "01856f0d300f48da68ab1269d752ad63e750847b7db0ed71eb4ce846c3a65339"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "候補からは『このイベント』や『プレイヤー』を選択できます。",
+      "sourceHash": "c35f61d13c1bbb1c66075c8fd964880adcf032c31489a12b6d3bd2353d2f2c37",
+      "translation": "You can select “This Event” or “Player” from the available options.",
+      "contextHash": "c35f61d13c1bbb1c66075c8fd964880adcf032c31489a12b6d3bd2353d2f2c37"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "数値を入力すれば、その番号のイベントを対象とします。",
+      "sourceHash": "36fa74d9f193448a41dffe0d4d882e9f783ea5c174ff31e0e48749dbde39f81e",
+      "translation": "If you enter a number, the event with that ID will be targeted.",
+      "contextHash": "36fa74d9f193448a41dffe0d4d882e9f783ea5c174ff31e0e48749dbde39f81e"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "また、-2以下で隊列歩行の仲間を指定可能です。（-2が２人目、-3が３人目……）",
+      "sourceHash": "3947338535cc2ba18246a0f8e66ce5008883ca93028b0f81c3ff04ab5fa37a84",
+      "translation": "You can also specify party members walking in formation using -2 or lower. (-2 is the second member, -3 is the third member, and so on.)",
+      "contextHash": "3947338535cc2ba18246a0f8e66ce5008883ca93028b0f81c3ff04ab5fa37a84"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "複数指定も可能です。",
+      "sourceHash": "7e8fa9d2f35649e1294430a39f98abbb386c119f787ab3c04998dd12b7332948",
+      "translation": "Multiple targets can also be specified.",
+      "contextHash": "7e8fa9d2f35649e1294430a39f98abbb386c119f787ab3c04998dd12b7332948"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "\"1,2,3\"で一つずつ指定。\"1~5\"で一括指定となります。",
+      "sourceHash": "32fb70b5ceb7fe8843415c07b68585705e0cbec07e19113ee5324e49e8877dbc",
+      "translation": "“1,2,3” specifies each one individually. “1~5” specifies them all at once.",
+      "contextHash": "32fb70b5ceb7fe8843415c07b68585705e0cbec07e19113ee5324e49e8877dbc"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "また、数式も指定可能です。例えば……",
+      "sourceHash": "9cfdbf005c3909cf8afef3acfcdbb343e681580f578cd3202c8a267213a8f3af",
+      "translation": "You can also specify formulas. For example...",
+      "contextHash": "9cfdbf005c3909cf8afef3acfcdbb343e681580f578cd3202c8a267213a8f3af"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "はこのイベントのID+1のイベントとなります。",
+      "sourceHash": "edaefb97d572e022e0255967ecda590062bbdb6905f7c60e19369151d834b965",
+      "translation": "will be the event with an ID one greater than this event.",
+      "contextHash": "edaefb97d572e022e0255967ecda590062bbdb6905f7c60e19369151d834b965"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "というような複合も可能です。",
+      "sourceHash": "e2a1abb6adb525bf2ae3302653b01a061c63d20962adae79dff21d953babbac6",
+      "translation": "A combination like this is also possible.",
+      "contextHash": "e2a1abb6adb525bf2ae3302653b01a061c63d20962adae79dff21d953babbac6"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "始点（行動主体）（startPoint）",
+      "sourceHash": "72dee081f9d2f0778ff98f336b7a7f8dd3749e26d1e280d8bf327b48bba34ee1",
+      "translation": "Start Point (Action Subject) (startPoint)",
+      "contextHash": "72dee081f9d2f0778ff98f336b7a7f8dd3749e26d1e280d8bf327b48bba34ee1"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "アニメーションの始点（行動主体）を指定します。",
+      "sourceHash": "0a9b312529ca6781e06f17e45e180c960a7ecb6042fd03136fe5988c57757c5c",
+      "translation": "Specifies the start point (action subject) of the animation.",
+      "contextHash": "0a9b312529ca6781e06f17e45e180c960a7ecb6042fd03136fe5988c57757c5c"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "DynamicMotionと組み合わせる場合は、ここで指定したイベントが動作を実行します。",
+      "sourceHash": "0fb21ffdc531ac8768eb241e998531d36fd4ae4a893fce9a4117bd56c108e607",
+      "translation": "When combined with DynamicMotion, the event specified here performs the movement.",
+      "contextHash": "0fb21ffdc531ac8768eb241e998531d36fd4ae4a893fce9a4117bd56c108e607"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "指定の要領は『対象』と全く同じで、複数指定も可能です。",
+      "sourceHash": "27d1ede067fe9ebbfd1da0e21df739996c0be5e5c07443dd0957bc08be5633e1",
+      "translation": "The specification method is exactly the same as for “Target,” and multiple targets can also be specified.",
+      "contextHash": "27d1ede067fe9ebbfd1da0e21df739996c0be5e5c07443dd0957bc08be5633e1"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "以下はオプション内に含まれる項目です。",
+      "sourceHash": "2a7992af4599ab89f7d2d4af256804141a637315e1166f1ea3fc5b4828c95a45",
+      "translation": "The following items are included in the options.",
+      "contextHash": "2a7992af4599ab89f7d2d4af256804141a637315e1166f1ea3fc5b4828c95a45"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "完了までウェイト（wait）",
+      "sourceHash": "580d1bc8049e39cb26ba4c4a4834e05826e14de4e1f426dccefa5b2252c302f5",
+      "translation": "Wait for Completion (wait)",
+      "contextHash": "580d1bc8049e39cb26ba4c4a4834e05826e14de4e1f426dccefa5b2252c302f5"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "アニメーションの完了までウェイトします。",
+      "sourceHash": "0cf14bc81a6561dd80d31ad12681cfc28186a71e36a4df558e9d7609f7e26894",
+      "translation": "Waits until the animation is complete.",
+      "contextHash": "0cf14bc81a6561dd80d31ad12681cfc28186a71e36a4df558e9d7609f7e26894"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "通常はアニメーションの終了を待ちますが、<D-Animation>内のwaitの設定によっては異なるタイミングで完了させることも可能です。",
+      "sourceHash": "58d8bc3a7e6bb94bd3d6d92399c5d90848cf488594dec335e82ad166c61f912a",
+      "translation": "Normally, it waits for the animation to end, but depending on the wait setting within <D-Animation>, it can also be completed at a different timing.",
+      "contextHash": "58d8bc3a7e6bb94bd3d6d92399c5d90848cf488594dec335e82ad166c61f912a"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "また、並列処理からプラグインコマンドを呼び出してウェイトを指定した場合は、アニメーションの完了を待ってからループします。この際、プレイヤーの動作は停止しません。",
+      "sourceHash": "76f2feec9c7f904454cd02fe34fc5aacc892c3d5cd2b62386f9be1b5b5f4f93f",
+      "translation": "Also, when a plugin command is called from parallel processing with a wait specified, the loop waits for the animation to complete before continuing. During this time, the player can still move.",
+      "contextHash": "76f2feec9c7f904454cd02fe34fc5aacc892c3d5cd2b62386f9be1b5b5f4f93f"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "スクロールしない（noScroll）",
+      "sourceHash": "c7a9b018cb007726eb04428db5c4b042d0ee16b38b605cb58bba184330aaa862",
+      "translation": "No Scroll (noScroll)",
+      "contextHash": "c7a9b018cb007726eb04428db5c4b042d0ee16b38b605cb58bba184330aaa862"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "アニメーションが画面スクロールの影響を受けなくなります。",
+      "sourceHash": "5ab7ac58bc46838697c73325d7930e271e5f0e4db92663127e80e92e133e3aa5",
+      "translation": "The animation is no longer affected by screen scrolling.",
+      "contextHash": "5ab7ac58bc46838697c73325d7930e271e5f0e4db92663127e80e92e133e3aa5"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "プレイヤーに連動して移動するようなアニメーションを作りたい場合に。",
+      "sourceHash": "24bc25723c01359c4a921f3dde6c42f2565dd7ece4763af71a971e2dad06a256",
+      "translation": "Use this when you want to create an animation that moves in sync with the player.",
+      "contextHash": "24bc25723c01359c4a921f3dde6c42f2565dd7ece4763af71a971e2dad06a256"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "有効範囲（マス）（targetRangeGrid）",
+      "sourceHash": "e15050a5318a153ff97d58f415a4e4b2fedebc5afd7b1a2fca6d49f96e68a923",
+      "translation": "Effective Range (Tiles) (targetRangeGrid)",
+      "contextHash": "e15050a5318a153ff97d58f415a4e4b2fedebc5afd7b1a2fca6d49f96e68a923"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "並列処理からプラグインコマンドを実行した際、画面中央～イベント間の距離がこの範囲（マス数）に収まる場合のみアニメーションを実行します。",
+      "sourceHash": "4f42187dd1e2aecb769b64970755e27be3d0c6771d215c75fec87546b0930439",
+      "translation": "When executing a plugin command from a parallel process, the animation will only be played if the distance between the center of the screen and the event falls within this range (in tiles).",
+      "contextHash": "4f42187dd1e2aecb769b64970755e27be3d0c6771d215c75fec87546b0930439"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "フィールドなどの広いマップで負荷を抑えるための項目です。",
+      "sourceHash": "49aac90d514ba5313dd867c7490fbcec95844942017e614503705f5da5b90db5",
+      "translation": "This setting helps reduce the processing load on large maps such as fields.",
+      "contextHash": "49aac90d514ba5313dd867c7490fbcec95844942017e614503705f5da5b90db5"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "0なら無制限です。未指定の場合は共通設定の値が適用されます。",
+      "sourceHash": "2d6da447bdf6c63df47a7c10f7e8b305856b8db792ea6c7f17e4106cb37b287e",
+      "translation": "0 means unlimited. If unspecified, the value from the common settings will be applied.",
+      "contextHash": "2d6da447bdf6c63df47a7c10f7e8b305856b8db792ea6c7f17e4106cb37b287e"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "※正確には座標差分の長辺を求めています。Ｘ座標の差分が10マス、Ｙ座標の差分も15マスならば、差分は15マスとみなします。",
+      "sourceHash": "a69e475a475822cb0075a0c973cc653184259f2a74b15a446f8db5b0c8598a89",
+      "translation": "※Strictly speaking, this calculates the longer side of the coordinate difference. If the X-coordinate difference is 10 tiles and the Y-coordinate difference is 15 tiles, the difference is considered to be 15 tiles.",
+      "contextHash": "a69e475a475822cb0075a0c973cc653184259f2a74b15a446f8db5b0c8598a89"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "アニメーションの削除（removeAnimation）",
+      "sourceHash": "2ce9e0d7a9f9e40412f24e3321fef6ac3c39e33e0fdfb24cfd8a013658bc285a",
+      "translation": "Remove Animation (removeAnimation)",
+      "contextHash": "2f05562a72484f551d1650a4576df51792afcf2e75c357564ece2dc132fab890"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "実行中のDynamicAnimationの削除を行います。",
+      "sourceHash": "70cce86d05324e1c5f28c57f950f910499c011f660cc20de7f76d9c825ee7b77",
+      "translation": "Removes a DynamicAnimation currently in progress.",
+      "contextHash": "70cce86d05324e1c5f28c57f950f910499c011f660cc20de7f76d9c825ee7b77"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "削除する条件（ＡＮＤ）を指定してください。",
+      "sourceHash": "653966aa2dfa4fcd149b752b6a5b4d136bef8afeae49f036f393c01d294125ad",
+      "translation": "Specify the conditions (AND) for removal.",
+      "contextHash": "653966aa2dfa4fcd149b752b6a5b4d136bef8afeae49f036f393c01d294125ad"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "例えば、『対象』だけを指定した場合、対象に対して表示中のアニメーションを全て削除します。",
+      "sourceHash": "1996b92f21e13f1e1ad8f8df19e12a1449a28da9413d75bf13f016dbba9b31e2",
+      "translation": "For example, if you specify only “Target,” all animations currently displayed for the target will be removed.",
+      "contextHash": "1996b92f21e13f1e1ad8f8df19e12a1449a28da9413d75bf13f016dbba9b31e2"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "『スキルＩＤ』と『対象』の両方を指定した場合、両方が一致するアニメーションだけを削除します。",
+      "sourceHash": "5e5429844946e2177387c0ee6cff4176ba6b5aeb61748b3a9265c71f8989ef40",
+      "translation": "If both “Skill ID” and “Target” are specified, only animations matching both will be removed.",
+      "contextHash": "5e5429844946e2177387c0ee6cff4176ba6b5aeb61748b3a9265c71f8989ef40"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "アニメーションの表示（戦闘）（showAnimationBattle）",
+      "sourceHash": "5ba8a844a118519e74c279626ceb9367478e1d79c789e08984b1733f655cccf6",
+      "translation": "Show Animation (Battle) (showAnimationBattle)",
+      "contextHash": "5ba8a844a118519e74c279626ceb9367478e1d79c789e08984b1733f655cccf6"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "戦闘中にDynamicAnimationでの演出を行います。基本的には戦闘背景などの演出を想定しています。",
+      "sourceHash": "60464550a6367e636f1fb5d46f60b4ceb6b1fa9062d590da0935fa474cdf70ed",
+      "translation": "Performs DynamicAnimation effects during battle. This is primarily intended for effects such as battle backgrounds.",
+      "contextHash": "60464550a6367e636f1fb5d46f60b4ceb6b1fa9062d590da0935fa474cdf70ed"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "以下の戦闘中に並列処理を実行するプラグインとの連携をオススメします。というか、下はそのためだけに作ったプラグインです。",
+      "sourceHash": "3abe1e7ab9382bff4595dab585fc27ce39750124bb61cc759fc7b91398320803",
+      "translation": "I recommend using it together with the following plugin, which executes a parallel process during battle. Actually, I created the plugin below solely for this purpose.",
+      "contextHash": "3abe1e7ab9382bff4595dab585fc27ce39750124bb61cc759fc7b91398320803"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/477740800.html",
+      "sourceHash": "fe71de7101462461fdc287b1355f4468a8f74d229a5edf5446fec22d555ac8e2",
+      "translation": "http://newrpg.seesaa.net/article/477740800.html",
+      "contextHash": "ff12e57d35b6ef47d1d444100126efa079b3813c0705d104d463a68924fad89d"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "必要な場合は使用者や対象の選択も可能です。その際はコンボボックスの候補を参考に条件を設定してください。",
+      "sourceHash": "4fb39addbbc1afcc4b5a250310f61a6d1cba1814e1752d229526bcf7cd714c5b",
+      "translation": "You can also select the user or target if necessary. In that case, set the conditions based on the options in the combo box.",
+      "contextHash": "4fb39addbbc1afcc4b5a250310f61a6d1cba1814e1752d229526bcf7cd714c5b"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "スキルID（skillId）",
+      "sourceHash": "b52aeb5d054a8b821eb1c3656c368bcab6b2aa9c2250e6c8e9dc2d29eac90ec7",
+      "translation": "Skill ID (skillId)",
+      "contextHash": "b52aeb5d054a8b821eb1c3656c368bcab6b2aa9c2250e6c8e9dc2d29eac90ec7"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "使用するスキルを選択します。",
+      "sourceHash": "7cb0e7e76bbc6141da096b6b3451e7382d569de61d340c9262045d182e30ca6b",
+      "translation": "Select the skill to use.",
+      "contextHash": "7cb0e7e76bbc6141da096b6b3451e7382d569de61d340c9262045d182e30ca6b"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "このスキルのメモ欄に従って、DynamicAnimationが実行されます。",
+      "sourceHash": "a5d7f911a97596efac7ed31ed1b7bc7b28af5008a8a4d6598d0b80fa02ce9127",
+      "translation": "DynamicAnimation will be executed according to the note field of this skill.",
+      "contextHash": "a5d7f911a97596efac7ed31ed1b7bc7b28af5008a8a4d6598d0b80fa02ce9127"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "対象（条件）（targetCondition）",
+      "sourceHash": "f471a2986a05708a10a789e16242604c0f0978424d3b2ef7ca0dcc797af0ba15",
+      "translation": "Target (Condition) (targetCondition)",
+      "contextHash": "f471a2986a05708a10a789e16242604c0f0978424d3b2ef7ca0dcc797af0ba15"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "アニメーションの対象を決める条件を指定します。（複数可）",
+      "sourceHash": "0edaddeb723d2f00b549f7cd778e4c394f3a20de0ce0b02aa3237772908d14e0",
+      "translation": "Specify the conditions for determining the target of the animation. (Multiple conditions may be specified.)",
+      "contextHash": "0edaddeb723d2f00b549f7cd778e4c394f3a20de0ce0b02aa3237772908d14e0"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "具体的な指定方法はコンボボックスの候補を参考にしてください。",
+      "sourceHash": "5cd536a02b72768bb604082be6430fe8d0b8f544efd480671545979bd2b3a925",
+      "translation": "For specific instructions, refer to the options in the combo box.",
+      "contextHash": "5cd536a02b72768bb604082be6430fe8d0b8f544efd480671545979bd2b3a925"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "なお、画面対象のアニメーションならば特に対象や使用者を指定する必要はありません。",
+      "sourceHash": "d4e00b290246f224777b54576009478066548656785ab295ba8860566d6ad3e6",
+      "translation": "For screen-targeted animations, there is no need to specify a target or user.",
+      "contextHash": "d4e00b290246f224777b54576009478066548656785ab295ba8860566d6ad3e6"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "使用者（条件）（subjectCondition）",
+      "sourceHash": "984a1fdfb08628d7a1cbcbc2a2374747820a61c5f6e47a8cac32b5c37b113c0d",
+      "translation": "User (Condition) (subjectCondition)",
+      "contextHash": "984a1fdfb08628d7a1cbcbc2a2374747820a61c5f6e47a8cac32b5c37b113c0d"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "アニメーションの使用者を決める条件を指定します。",
+      "sourceHash": "d47859dee45e76750fe89deb09839c45e86c70359b156be4d42f4c5aa3cedf30",
+      "translation": "Specify the conditions for determining the user of the animation.",
+      "contextHash": "d47859dee45e76750fe89deb09839c45e86c70359b156be4d42f4c5aa3cedf30"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "具体的な指定方法はコンボボックスの候補を参考にしてください。",
+      "sourceHash": "5cd536a02b72768bb604082be6430fe8d0b8f544efd480671545979bd2b3a925",
+      "translation": "For specific instructions, refer to the options in the combo box.",
+      "contextHash": "5cd536a02b72768bb604082be6430fe8d0b8f544efd480671545979bd2b3a925"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "以下はオプション内に含まれる項目です。",
+      "sourceHash": "2a7992af4599ab89f7d2d4af256804141a637315e1166f1ea3fc5b4828c95a45",
+      "translation": "The following items are included in the options.",
+      "contextHash": "2a7992af4599ab89f7d2d4af256804141a637315e1166f1ea3fc5b4828c95a45"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "完了までウェイト（wait）",
+      "sourceHash": "580d1bc8049e39cb26ba4c4a4834e05826e14de4e1f426dccefa5b2252c302f5",
+      "translation": "Wait for Completion (wait)",
+      "contextHash": "580d1bc8049e39cb26ba4c4a4834e05826e14de4e1f426dccefa5b2252c302f5"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "アニメーションの完了までウェイトします。",
+      "sourceHash": "0cf14bc81a6561dd80d31ad12681cfc28186a71e36a4df558e9d7609f7e26894",
+      "translation": "Waits until the animation is complete.",
+      "contextHash": "0cf14bc81a6561dd80d31ad12681cfc28186a71e36a4df558e9d7609f7e26894"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "アニメーションの削除（戦闘）（removeAnimationBattle）",
+      "sourceHash": "eab68bda34c039aa97e4a8aa720847c4799b0eda7d2e567fd662630cc34898ca",
+      "translation": "Remove Animation (Battle) (removeAnimationBattle)",
+      "contextHash": "43edab3279d63b68fa6d077d71ada3d7072beb7c49f62fe0cc57541b111b07d9"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "戦闘中、実行中のDynamicAnimationの削除を行います。",
+      "sourceHash": "fcb362ce6fc8faadfbb0bce89338e0911eb7fcd8922287275b43c56c1b9d3971",
+      "translation": "Removes a DynamicAnimation currently in progress during battle.",
+      "contextHash": "fcb362ce6fc8faadfbb0bce89338e0911eb7fcd8922287275b43c56c1b9d3971"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "要領は『アニメーションの削除』と同じですが、条件の指定方法は『アニメーションの表示（戦闘）』と同じになります。",
+      "sourceHash": "c7e1a5f71a6db1884fc8ce3d4df578fd029ece38776001e1d5a25adf2eb6a223",
+      "translation": "The procedure is the same as for “Remove Animation,” but the method of specifying conditions is the same as for “Show Animation (Battle).”",
+      "contextHash": "c7e1a5f71a6db1884fc8ce3d4df578fd029ece38776001e1d5a25adf2eb6a223"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+      "sourceHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075",
+      "translation": "Plugin Command for MV (Plugin Command MV)",
+      "contextHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "ＭＶの場合は、コマンドをテキスト入力する必要があります。以下を参考にしてください。",
+      "sourceHash": "c338aafc75672c42b785893d7ddb758bfccca72046baddfce6c40130d01eea3e",
+      "translation": "With MV, you need to enter the command as text. Refer to the following examples.",
+      "contextHash": "c338aafc75672c42b785893d7ddb758bfccca72046baddfce6c40130d01eea3e"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "アニメーションの表示（showAnimation）",
+      "sourceHash": "bd2c33b8c077e07e3a7915c98abef9f3f3c7ab21294d623081cc3ca94e046c9c",
+      "translation": "Show Animation (showAnimation)",
+      "contextHash": "bd2c33b8c077e07e3a7915c98abef9f3f3c7ab21294d623081cc3ca94e046c9c"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "ID=100のスキルのDynamicAnimationを実行します。",
+      "sourceHash": "b80589e30d0fb273b24297bc121d58d9595e8f24e90daae558312a38e3ccaba6",
+      "translation": "Executes the DynamicAnimation for the skill with ID=100.",
+      "contextHash": "b80589e30d0fb273b24297bc121d58d9595e8f24e90daae558312a38e3ccaba6"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "マップ上でも戦闘中でも実行可能です。",
+      "sourceHash": "218155aa5e8ec99b89c0a2a933b905fa672a24032ab974049a030c5097cc3d56",
+      "translation": "It can be executed both on the map and during battle.",
+      "contextHash": "218155aa5e8ec99b89c0a2a933b905fa672a24032ab974049a030c5097cc3d56"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "このコマンドを指定する前に、オプション（下記参照）を指定可能です。",
+      "sourceHash": "39958488b7f353e198583e5240a10c1c2ba999c6c11935a62bf702086fa75c37",
+      "translation": "Options (see below) can be specified before specifying this command.",
+      "contextHash": "39958488b7f353e198583e5240a10c1c2ba999c6c11935a62bf702086fa75c37"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "[マップ上の使用例]",
+      "sourceHash": "4baaff2e619e320f9a509a1c82dba7ba2a3622ed7b97791ef4717995ae3085bd",
+      "translation": "[Example of use on a map]",
+      "contextHash": "4baaff2e619e320f9a509a1c82dba7ba2a3622ed7b97791ef4717995ae3085bd"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "上記の例ではイベントID=1からID=2に向けて、スキルID=100のアニメーションをウェイト指定で放ちます。",
+      "sourceHash": "d6a602df6477c72f598844e8866f3fbc4338f2ca14426d80c0a73f42ef823b52",
+      "translation": "In the example above, the animation for skill ID=100 is launched from event ID=1 toward event ID=2, with the wait option enabled.",
+      "contextHash": "d6a602df6477c72f598844e8866f3fbc4338f2ca14426d80c0a73f42ef823b52"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "[戦闘中の使用例]",
+      "sourceHash": "a7ea3b8dbfd536c83792651da51c2290dfb7f82e4e8f8819beb1f779e4e93678",
+      "translation": "[Example of use during battle]",
+      "contextHash": "a7ea3b8dbfd536c83792651da51c2290dfb7f82e4e8f8819beb1f779e4e93678"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "上記の例ではアクターID=1から敵キャラID=2に向けて、",
+      "sourceHash": "286a91c3f3b6cf83e2c8e53c8ad7457a2f0ed99c0b26958989abe9e2a86e9207",
+      "translation": "In the example above, the animation is launched from actor ID=1 toward enemy ID=2,",
+      "contextHash": "286a91c3f3b6cf83e2c8e53c8ad7457a2f0ed99c0b26958989abe9e2a86e9207"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "スキルID=100のアニメーションをウェイト指定で放ちます。",
+      "sourceHash": "b4da9878dd6c19272d4a56e0ae92a487f7193b61aa05a3ccf72fa278e326781a",
+      "translation": "with the animation for skill ID=100 and the wait option enabled.",
+      "contextHash": "b4da9878dd6c19272d4a56e0ae92a487f7193b61aa05a3ccf72fa278e326781a"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "また、以下のようにアイテムでも指定可能です。使い方はスキルの場合と全く同じなので割愛します。",
+      "sourceHash": "89ed51aeb9f9e2317dd4394845eac23f10446f190913fe9f5b2c5b1380bd68f6",
+      "translation": "Items can also be specified as shown below. The usage is exactly the same as for skills, so it is omitted here.",
+      "contextHash": "89ed51aeb9f9e2317dd4394845eac23f10446f190913fe9f5b2c5b1380bd68f6"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "オプションの詳細は以下をご覧ください。",
+      "sourceHash": "89d46dd81325426073927922c8cb17cd3ffea1712a3babf72316baef62ed6556",
+      "translation": "See below for details on the options.",
+      "contextHash": "89d46dd81325426073927922c8cb17cd3ffea1712a3babf72316baef62ed6556"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "共通オプション（commonOption）",
+      "sourceHash": "8821f153a32660b4eec4e08c8fa651adfa7e9a1aca0b44e4b7f9f0d46b1db593",
+      "translation": "Common Options (commonOption)",
+      "contextHash": "8821f153a32660b4eec4e08c8fa651adfa7e9a1aca0b44e4b7f9f0d46b1db593"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "アニメーションの終了を待ちます。",
+      "sourceHash": "cfb652b51876decc97c8035f7c381ead297b4dd309024bf3f73775eb497b5734",
+      "translation": "Waits for the animation to end.",
+      "contextHash": "cfb652b51876decc97c8035f7c381ead297b4dd309024bf3f73775eb497b5734"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "並列処理で指定するとアニメーションの終了を待ってからループするようになります。その際、プレイヤーの操作を停止しません。",
+      "sourceHash": "9ae7263a3d8619e4231138605d43743696e56a479cedbc75ed76900aa14e3b2f",
+      "translation": "When specified in a parallel process, the loop will wait for the animation to end before repeating. Player control is not stopped during this time.",
+      "contextHash": "9ae7263a3d8619e4231138605d43743696e56a479cedbc75ed76900aa14e3b2f"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "マップ用オプション（mapOption）",
+      "sourceHash": "f9d20ca9550d9e6b68f482a32d244021ca85f1e98a91cce6f0fe63d84d5ffa29",
+      "translation": "Map Options (mapOption)",
+      "contextHash": "f9d20ca9550d9e6b68f482a32d244021ca85f1e98a91cce6f0fe63d84d5ffa29"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "イベントID=1をアニメーションの対象とします。",
+      "sourceHash": "91ef6c44eef28af9d1c61a5ad00c48a289783bdc2277ff6640bf889a302fc663",
+      "translation": "Sets event ID=1 as the target of the animation.",
+      "contextHash": "91ef6c44eef28af9d1c61a5ad00c48a289783bdc2277ff6640bf889a302fc663"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "0ならばこのイベント、-1ならばプレイヤーです。",
+      "sourceHash": "c22f72c6859cdc99a90227a8bee0e8ea6b96d47a63296e889339c8a239c8d8e9",
+      "translation": "0 means this event, and -1 means the player.",
+      "contextHash": "c22f72c6859cdc99a90227a8bee0e8ea6b96d47a63296e889339c8a239c8d8e9"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "-2以下（-2, -3, -4）で隊列歩行の仲間も対象にできます。",
+      "sourceHash": "2c9639a46bd3cbd27bb3dad932282627f39099989ad0fb1b309479155c87fdde",
+      "translation": "Values of -2 or lower (-2, -3, -4) can also target party members walking in formation.",
+      "contextHash": "2c9639a46bd3cbd27bb3dad932282627f39099989ad0fb1b309479155c87fdde"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "さらに複数指定も可能です。",
+      "sourceHash": "b59620189d9b057591fcb8315b0bf606a7e5f2518fd46e3a2efcb2a183448125",
+      "translation": "Multiple values can also be specified.",
+      "contextHash": "b59620189d9b057591fcb8315b0bf606a7e5f2518fd46e3a2efcb2a183448125"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "\"1,2,3\"で一つずつ指定。\"1~5\"で一括指定となります。",
+      "sourceHash": "32fb70b5ceb7fe8843415c07b68585705e0cbec07e19113ee5324e49e8877dbc",
+      "translation": "Specify them individually with \"1,2,3\". Specify them all at once with \"1~5\".",
+      "contextHash": "32fb70b5ceb7fe8843415c07b68585705e0cbec07e19113ee5324e49e8877dbc"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "また、数式も指定可能です。例えば……",
+      "sourceHash": "9cfdbf005c3909cf8afef3acfcdbb343e681580f578cd3202c8a267213a8f3af",
+      "translation": "You can also specify a formula. For example...",
+      "contextHash": "9cfdbf005c3909cf8afef3acfcdbb343e681580f578cd3202c8a267213a8f3af"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "はこのイベントのID+1のイベントとなります。",
+      "sourceHash": "edaefb97d572e022e0255967ecda590062bbdb6905f7c60e19369151d834b965",
+      "translation": "refers to the event with an ID of this event's ID+1.",
+      "contextHash": "edaefb97d572e022e0255967ecda590062bbdb6905f7c60e19369151d834b965"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "イベントID=1をアニメーションの行動主体（始点）とします。",
+      "sourceHash": "9883983f748fad43243f83fe013022147a55f665745edfe5a3e7c4ca78f4aa0d",
+      "translation": "Event ID=1 is the subject (starting point) of the animation.",
+      "contextHash": "9883983f748fad43243f83fe013022147a55f665745edfe5a3e7c4ca78f4aa0d"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "複数指定ができることも含め、nrp.animation.targetと要領は同じです。",
+      "sourceHash": "1beb28fd7424d61ec087383a4490561bc9628b4e0126bf6af97558663147e3a9",
+      "translation": "The procedure is the same as nrp.animation.target, including the ability to specify multiple targets.",
+      "contextHash": "1beb28fd7424d61ec087383a4490561bc9628b4e0126bf6af97558663147e3a9"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "アニメーションが画面スクロールの影響を受けなくなります。",
+      "sourceHash": "5ab7ac58bc46838697c73325d7930e271e5f0e4db92663127e80e92e133e3aa5",
+      "translation": "The animation will no longer be affected by screen scrolling.",
+      "contextHash": "5ab7ac58bc46838697c73325d7930e271e5f0e4db92663127e80e92e133e3aa5"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "並列処理イベントとの距離が１０マス以内に収まる場合のみ、",
+      "sourceHash": "cc4f35a8c903d225c364bff05c98f38a7cdd37ca42f8905b727588edcfb8c637",
+      "translation": "Only when the distance from the parallel processing event is within 10 tiles,",
+      "contextHash": "cc4f35a8c903d225c364bff05c98f38a7cdd37ca42f8905b727588edcfb8c637"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "アニメーションを実行します。",
+      "sourceHash": "ab5d19322d3eaf52c66ffa149b13b1407de0be232f76e51ecbcc40d4de874e83",
+      "translation": "the animation will be played.",
+      "contextHash": "ab5d19322d3eaf52c66ffa149b13b1407de0be232f76e51ecbcc40d4de874e83"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "戦闘用オプション（battleOption）",
+      "sourceHash": "ce8c7ded43a024286ee156dcea26b5d33e6ca6080556c0c9cebbe1c974418a79",
+      "translation": "Battle Options (battleOption)",
+      "contextHash": "ce8c7ded43a024286ee156dcea26b5d33e6ca6080556c0c9cebbe1c974418a79"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "アニメーションの対象を決める条件を指定します。（対象複数可）",
+      "sourceHash": "9bbe502044e0f405bd25a1aea160cc54b0f2a8142e5f311da527960d6ff3b31d",
+      "translation": "Specify the conditions for determining the animation's targets. (Multiple targets may be specified.)",
+      "contextHash": "9bbe502044e0f405bd25a1aea160cc54b0f2a8142e5f311da527960d6ff3b31d"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "アニメーションの使用者を決める条件を指定します。",
+      "sourceHash": "d47859dee45e76750fe89deb09839c45e86c70359b156be4d42f4c5aa3cedf30",
+      "translation": "Specify the conditions for determining the user of the animation.",
+      "contextHash": "d47859dee45e76750fe89deb09839c45e86c70359b156be4d42f4c5aa3cedf30"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "要領はnrp.animation.targetConditionと同じです。",
+      "sourceHash": "0124448b6e21e9621affcf1edb75e84bb4f6b181881f2ad4dcac5fb86ac19a28",
+      "translation": "The procedure is the same as nrp.animation.targetCondition.",
+      "contextHash": "0124448b6e21e9621affcf1edb75e84bb4f6b181881f2ad4dcac5fb86ac19a28"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "もっとも基本的には背景など対象を取らないアニメーションを想定しています。",
+      "sourceHash": "580365d9b8cff3190d2c6d6f913a15e62dd67c09905a2a82632ee5b2b170fb28",
+      "translation": "Basically, this is intended for animations that do not have a target, such as backgrounds.",
+      "contextHash": "580365d9b8cff3190d2c6d6f913a15e62dd67c09905a2a82632ee5b2b170fb28"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "その場合はこれらの指定も不要です。",
+      "sourceHash": "e576e1f8941f4da773433cd45166e0b16cbab1b4921c63da796fbf5739f90167",
+      "translation": "In that case, these settings are not necessary either.",
+      "contextHash": "e576e1f8941f4da773433cd45166e0b16cbab1b4921c63da796fbf5739f90167"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "シーン変更時もアニメを維持（keepAnimation）",
+      "sourceHash": "50cf72d74c7bfacdf0203eadfe8e2027e437fe2187a020f7dcd7bb3dd4fb468f",
+      "translation": "Keep Animation When Changing Scenes (keepAnimation)",
+      "contextHash": "50cf72d74c7bfacdf0203eadfe8e2027e437fe2187a020f7dcd7bb3dd4fb468f"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "メニューや戦闘などシーン変更時もアニメの表示を維持します。",
+      "sourceHash": "fb25eabdc9443afd8873cc40049499d21b82f97025ade41ebca9226b60aaac7e",
+      "translation": "The animation remains displayed when changing scenes, such as opening the menu or entering battle.",
+      "contextHash": "fb25eabdc9443afd8873cc40049499d21b82f97025ade41ebca9226b60aaac7e"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "ＭＺ形式のアニメについては不完全です。",
+      "sourceHash": "2f167fcde91ec71e2aec95e23866c9a11558565e39a8a9ede2fd9404f29d91fa",
+      "translation": "This is incomplete for MZ-format animations.",
+      "contextHash": "2f167fcde91ec71e2aec95e23866c9a11558565e39a8a9ede2fd9404f29d91fa"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "Effekseerのアニメを途中から再開する方法が分かりませんでした。無念……。",
+      "sourceHash": "ed6ec928dbf0af72e9324975096743bd072931732c33732e95be93eaac02ef9a",
+      "translation": "I couldn't figure out how to resume an Effekseer animation from where it left off. What a shame...",
+      "contextHash": "ed6ec928dbf0af72e9324975096743bd072931732c33732e95be93eaac02ef9a"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "ロード時にイベントリセット（eventResetOnLoad） ver1.09",
+      "sourceHash": "e71f62ec5bb14b6960048d8109b153497f41b40022d89e96518dee07a96393b1",
+      "translation": "Reset Events on Load (eventResetOnLoad) ver1.09",
+      "contextHash": "e71f62ec5bb14b6960048d8109b153497f41b40022d89e96518dee07a96393b1"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "ゲームをロードで開始した際、DynamicAnimationを実行中のイベントの処理状況をリセットします。",
+      "sourceHash": "569648066a997d96df91a2ee6682d00f5deb2d5587d4443b1a79f483f99985be",
+      "translation": "When starting the game by loading a save, this resets the processing status of events that were running DynamicAnimation.",
+      "contextHash": "569648066a997d96df91a2ee6682d00f5deb2d5587d4443b1a79f483f99985be"
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "通常、イベントの処理状況はセーブ＆ロード後も保持されます。ですがそれによって、ロード時に半端な状況で処理が始まり、アニメーションが途切れてしまう問題が起こりえます。",
+      "sourceHash": "47b954e311af43398ae4cf7308ef24cb54a466c1ff35cd730d64252696de75cb",
+      "translation": "Normally, an event's processing status is retained after saving and loading. However, this can cause processing to resume in an incomplete state when loading, which may result in the animation being interrupted.",
+      "contextHash": "47b954e311af43398ae4cf7308ef24cb54a466c1ff35cd730d64252696de75cb"
+    },
+    {
+      "id": "text-099",
+      "type": "text",
+      "source": "ロード時に処理を先頭から開始させることで、そういった問題に対処します。",
+      "sourceHash": "79107eac115430dd8da328e2a846fdff92555fa451342b9a4db84ed3116effd4",
+      "translation": "Starting processing from the beginning when loading addresses these issues.",
+      "contextHash": "79107eac115430dd8da328e2a846fdff92555fa451342b9a4db84ed3116effd4"
+    },
+    {
+      "id": "text-100",
+      "type": "text",
+      "source": "なお、初期状態で有効になっています。",
+      "sourceHash": "b5c8405d55be9db7ebd09d3dceffbc85eb66c4aa6ff786c194774591dbee9347",
+      "translation": "This is enabled by default.",
+      "contextHash": "b5c8405d55be9db7ebd09d3dceffbc85eb66c4aa6ff786c194774591dbee9347"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "並列実行時の有効範囲マス数（targetRangeGrid）",
+      "sourceHash": "50e950bc3ed224cd379451a3a8634e75fbce11f4cefcee99cc3ffe5d93521297",
+      "translation": "Effective Range in Tiles During Parallel Execution (targetRangeGrid)",
+      "contextHash": "50e950bc3ed224cd379451a3a8634e75fbce11f4cefcee99cc3ffe5d93521297"
+    },
+    {
+      "id": "text-101",
+      "type": "text",
+      "source": "並列処理からプラグインコマンドを実行した際、画面中央～イベント間の距離がこの範囲（マス数）に収まる場合のみアニメーションを実行します。",
+      "sourceHash": "4f42187dd1e2aecb769b64970755e27be3d0c6771d215c75fec87546b0930439",
+      "translation": "When a plugin command is executed from parallel processing, the animation is played only when the distance between the center of the screen and the event is within this range (in tiles).",
+      "contextHash": "4f42187dd1e2aecb769b64970755e27be3d0c6771d215c75fec87546b0930439"
+    },
+    {
+      "id": "text-102",
+      "type": "text",
+      "source": "こちらは共通設定値です。",
+      "sourceHash": "853c10620b11883ea6527127eb79768c5c7d4921289ad6d5ecdb09664ba45acf",
+      "translation": "This is a common setting.",
+      "contextHash": "853c10620b11883ea6527127eb79768c5c7d4921289ad6d5ecdb09664ba45acf"
+    },
+    {
+      "id": "text-103",
+      "type": "text",
+      "source": "空白の場合は無制限となります。",
+      "sourceHash": "19d77a5f036e2b2bfaf7dadd66a979831009d3c5a8681a6bb935190587048736",
+      "translation": "If left blank, there is no limit.",
+      "contextHash": "19d77a5f036e2b2bfaf7dadd66a979831009d3c5a8681a6bb935190587048736"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "注釈実行時の有効範囲マス数 （noteTargetRangeGrid）",
+      "sourceHash": "1b076e3743b12ebefe794bf87a53e46f1c9fd62534422989114103bbace4cba1",
+      "translation": "Effective Range in Tiles When Executed from a Comment (noteTargetRangeGrid)",
+      "contextHash": "1b076e3743b12ebefe794bf87a53e46f1c9fd62534422989114103bbace4cba1"
+    },
+    {
+      "id": "text-104",
+      "type": "text",
+      "source": "注釈からアニメーションを実行した際、画面中央～イベント間の距離がこの範囲（マス数）に収まる場合のみアニメーションを実行します。",
+      "sourceHash": "2600f906505a5bbef9d62c0bb1e7b088ac24593e8b52d09f6e85588c40cc6a8c",
+      "translation": "When an animation is executed from a comment, it is played only when the distance between the center of the screen and the event is within this range (in tiles).",
+      "contextHash": "2600f906505a5bbef9d62c0bb1e7b088ac24593e8b52d09f6e85588c40cc6a8c"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "アニメの切目をなくす（closeAnimationGap） ver1.14",
+      "sourceHash": "1957af27a66540f9955584acddb1f85fec3c564be97ee4335fb1d6ee3f894916",
+      "translation": "Eliminate Animation Gaps (closeAnimationGap) ver1.14",
+      "contextHash": "1957af27a66540f9955584acddb1f85fec3c564be97ee4335fb1d6ee3f894916"
+    },
+    {
+      "id": "text-105",
+      "type": "text",
+      "source": "アニメーションの終了時のウェイトをわずかに短縮することで、注釈実行時や並列処理などで循環するアニメーションの切れ目をなくします。",
+      "sourceHash": "e96d22db2b3d82aa496ac58bc6f50a63aecc2893f6886929c9501f31c3784900",
+      "translation": "Slightly shortening the wait at the end of an animation eliminates gaps in looping animations executed from comments or by parallel processing.",
+      "contextHash": "e96d22db2b3d82aa496ac58bc6f50a63aecc2893f6886929c9501f31c3784900"
+    },
+    {
+      "id": "text-106",
+      "type": "text",
+      "source": "初期状態ではオフになっています。",
+      "sourceHash": "d0df64f5cc0e52e2c0525833af530fe5cd05a5f356ca52f55942af2ba7361375",
+      "translation": "This is disabled by default.",
+      "contextHash": "d0df64f5cc0e52e2c0525833af530fe5cd05a5f356ca52f55942af2ba7361375"
+    },
+    {
+      "id": "text-107",
+      "type": "text",
+      "source": "注釈実行時は1/60秒短縮、並列処理時は3/60秒（根拠不明の実測値です……）短縮します。",
+      "sourceHash": "3cd3b9b5dbb4a779fc0edbe951be70738e13570a388abdc0086ff8812f675010",
+      "translation": "The wait is shortened by 1/60 of a second when executed from a comment, and by 3/60 of a second during parallel processing (these are measured values with no known basis...).",
+      "contextHash": "3cd3b9b5dbb4a779fc0edbe951be70738e13570a388abdc0086ff8812f675010"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "行動中ステートアニメを禁止（actingNoStateAnimation） ver1.07",
+      "sourceHash": "357f6ef41e2471735e0d574f7a521dfd6d5a68da4d7795946ffbdde3c34e4b86",
+      "translation": "Disable State Animations While Acting (actingNoStateAnimation) ver1.07",
+      "contextHash": "357f6ef41e2471735e0d574f7a521dfd6d5a68da4d7795946ffbdde3c34e4b86"
+    },
+    {
+      "id": "text-108",
+      "type": "text",
+      "source": "アクション中はステートのメモ欄に指定したアニメーションを非表示にします。",
+      "sourceHash": "80229e185e0fc3825366cecb19a3985f2656334e68757949bec94f14968ab2aa",
+      "translation": "Animations specified in a state's note field are hidden while an action is being performed.",
+      "contextHash": "80229e185e0fc3825366cecb19a3985f2656334e68757949bec94f14968ab2aa"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "メモ欄＆注釈からの起動",
+      "sourceHash": "22c1d8ae42aed8769fddb481024b49ebd9c8278431d5f9ab16a8b4d19ed2e2dc",
+      "translation": "Activation from Note Fields and Comments",
+      "contextHash": "22c1d8ae42aed8769fddb481024b49ebd9c8278431d5f9ab16a8b4d19ed2e2dc"
+    },
+    {
+      "id": "text-109",
+      "type": "text",
+      "source": "というように、マップイベントやステート、アクター、敵キャラのメモ欄にスキルＩＤを指定すると、そのアニメーションが自動実行されます。煙突や燭台などのオブジェから炎をまとうステートまで様々な用途に活用できます。",
+      "sourceHash": "9c991d01cb485e6b487a535afe5248328a42ee3a4df3992155b655c5cac5dae5",
+      "translation": "As shown here, specifying a skill ID in the note field of a map event, state, actor, or enemy automatically plays that animation. It can be used for a variety of purposes, from objects such as chimneys and candlesticks to states that cover something in flames.",
+      "contextHash": "9c991d01cb485e6b487a535afe5248328a42ee3a4df3992155b655c5cac5dae5"
+    },
+    {
+      "id": "text-110",
+      "type": "text",
+      "source": "また、イベントページ先頭の注釈に記入しても有効です。",
+      "sourceHash": "d3f6881b183d9a0b1fcc94bc314ae3eaf7c49514d28b47ed6c02bb8affb68814",
+      "translation": "It is also effective when entered in a comment at the beginning of an event page.",
+      "contextHash": "d3f6881b183d9a0b1fcc94bc314ae3eaf7c49514d28b47ed6c02bb8affb68814"
+    },
+    {
+      "id": "text-111",
+      "type": "text",
+      "source": "こちらは現在のページ毎に状態を切り替えることも可能です。",
+      "sourceHash": "160bf3c16e9d9073639434c3b1f5ca5c9e9503dab21e97423103722591db160d",
+      "translation": "The state can also be switched for each current page.",
+      "contextHash": "160bf3c16e9d9073639434c3b1f5ca5c9e9503dab21e97423103722591db160d"
+    },
+    {
+      "id": "text-112",
+      "type": "text",
+      "source": "同時に指定した場合はページ毎の指定が優先されます。",
+      "sourceHash": "25d2c65139ed9e4adc786cdc321183955c95d918715c054f47f64bf9390d4e06",
+      "translation": "If both are specified, the setting for each page takes priority.",
+      "contextHash": "25d2c65139ed9e4adc786cdc321183955c95d918715c054f47f64bf9390d4e06"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "途中から再生 ver1.09",
+      "sourceHash": "84e1aefe69e567dee4422f8a0224f1c2d971a716535845e43e8766a0729da4ef",
+      "translation": "Play from the Middle ver1.09",
+      "contextHash": "84e1aefe69e567dee4422f8a0224f1c2d971a716535845e43e8766a0729da4ef"
+    },
+    {
+      "id": "text-113",
+      "type": "text",
+      "source": "アニメーションを進めた状態から再生します。マップを切り替えた直後から表示して欲しい演出などに有用です。",
+      "sourceHash": "d72f89fe1f6fae684abc1cfd05832810582f1fbb9da2778b625a7dc47de81a97",
+      "translation": "Plays the animation from an advanced state. This is useful for effects that should be displayed immediately after switching maps.",
+      "contextHash": "d72f89fe1f6fae684abc1cfd05832810582f1fbb9da2778b625a7dc47de81a97"
+    },
+    {
+      "id": "text-114",
+      "type": "text",
+      "source": "以下をスキルのメモ欄へ設定してください。",
+      "sourceHash": "b473c2ca08a964431779dde1476dd13e8f32bc71c66943d665e273f56ef7b289",
+      "translation": "Set the following in the skill's note field.",
+      "contextHash": "b473c2ca08a964431779dde1476dd13e8f32bc71c66943d665e273f56ef7b289"
+    },
+    {
+      "id": "text-115",
+      "type": "text",
+      "source": "?=30ならば、アニメーションを30フレーム進めた状態から開始します。",
+      "sourceHash": "448829d0f375bdc071c34fae4ad1e22cbb7105b62db4ce879722fba5e22e55e9",
+      "translation": "If ?=30, the animation starts after advancing 30 frames.",
+      "contextHash": "448829d0f375bdc071c34fae4ad1e22cbb7105b62db4ce879722fba5e22e55e9"
+    },
+    {
+      "id": "text-116",
+      "type": "text",
+      "source": "※標準では1フレーム＝1/15秒です。",
+      "sourceHash": "63d155b0f598b8f419eace41fe4ac0976af5b7d9fd2f9c2b5cc08426b531ba8b",
+      "translation": "※By default, 1 frame = 1/15 of a second.",
+      "contextHash": "63d155b0f598b8f419eace41fe4ac0976af5b7d9fd2f9c2b5cc08426b531ba8b"
+    },
+    {
+      "id": "text-117",
+      "type": "text",
+      "source": "※メモ欄で指定したDynamicAnimationの全体フレーム数よりも、長い値を指定しても機能しません。その場合は、repeatなどを指定して調整してください。",
+      "sourceHash": "a822b825a892a20baaea558b42410925071c25d40c619d073a464ab606bb9bd8",
+      "translation": "※This will not work if you specify a value longer than the total number of frames in the DynamicAnimation specified in the note field. In that case, adjust it by specifying repeat or another setting.",
+      "contextHash": "a822b825a892a20baaea558b42410925071c25d40c619d073a464ab606bb9bd8"
+    },
+    {
+      "id": "text-118",
+      "type": "text",
+      "source": "以下はこの機能を使用したサンプルです。",
+      "sourceHash": "c9eed47209755137df093cd8f175b51b284793375dc14b7009c7cf88e6554795",
+      "translation": "The following is a sample using this feature.",
+      "contextHash": "c9eed47209755137df093cd8f175b51b284793375dc14b7009c7cf88e6554795"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/477704129.html#sunshine",
+      "sourceHash": "9dade24592409d087449b1ab1ecedb3ec88d3665a7cd9931f1b84f77b27e5eb0",
+      "translation": "http://newrpg.seesaa.net/article/477704129.html#sunshine",
+      "contextHash": "8070bcb3b466cec68db2b412de2a1e7e2e0889b39bc371d9b161cbe0fdbeeb40"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "text-119",
+      "type": "text",
+      "source": "ＭＺアニメーションが非常に重いのは前述の通りです。",
+      "sourceHash": "a41a0db0792950e10471aba429899446bc2ef3337094d5a0694f43628bca46c0",
+      "translation": "As mentioned above, MZ animations are extremely resource-intensive.",
+      "contextHash": "a41a0db0792950e10471aba429899446bc2ef3337094d5a0694f43628bca46c0"
+    },
+    {
+      "id": "text-120",
+      "type": "text",
+      "source": "ＭＶアニメーションを使用しているのに、動作が重い場合は以下のような原因が考えられます。",
+      "sourceHash": "511864e20fc66cf60b9cc21db1698da2f5be0ac200ea3a595c545a08f856bb93",
+      "translation": "Even when using MV animations, the following causes may result in slow performance.",
+      "contextHash": "511864e20fc66cf60b9cc21db1698da2f5be0ac200ea3a595c545a08f856bb93"
+    },
+    {
+      "id": "list-052",
+      "type": "list",
+      "source": "色調変更を使用している。",
+      "sourceHash": "fe0d0e5423431404ae3f7b75aa97729147c0a0b5be114fab66062b247555076e",
+      "translation": "Using screen tone changes.",
+      "contextHash": "fe0d0e5423431404ae3f7b75aa97729147c0a0b5be114fab66062b247555076e"
+    },
+    {
+      "id": "list-053",
+      "type": "list",
+      "source": "代替案として、アニメーションの画像ファイル自体をペインターなどであらかじめ変更しておく方法があります。",
+      "sourceHash": "37f4b70f6253bdf095a391f16b3b93eb738a890830ef939a2f6d1640ffdc25f6",
+      "translation": "As an alternative, you can use a painter or similar tool to modify the animation image files themselves in advance.",
+      "contextHash": "37f4b70f6253bdf095a391f16b3b93eb738a890830ef939a2f6d1640ffdc25f6"
+    },
+    {
+      "id": "list-054",
+      "type": "list",
+      "source": "対象のフラッシュを多用している。",
+      "sourceHash": "d6b9a29e16715a1bc76225a5fe36dc7cd53c6b303ef4072e0cbd7015aca2f933",
+      "translation": "Using target flashes excessively.",
+      "contextHash": "d6b9a29e16715a1bc76225a5fe36dc7cd53c6b303ef4072e0cbd7015aca2f933"
+    },
+    {
+      "id": "list-055",
+      "type": "list",
+      "source": "効果音を多用している。",
+      "sourceHash": "362e52e87282c0aa3767d22caf6cd5a21ef83074d4d578fca9e8abda8d0aeb65",
+      "translation": "Using sound effects excessively.",
+      "contextHash": "362e52e87282c0aa3767d22caf6cd5a21ef83074d4d578fca9e8abda8d0aeb65"
+    },
+    {
+      "id": "list-056",
+      "type": "list",
+      "source": "動作に影響を与える外部プラグインを使っている。",
+      "sourceHash": "019c8f4bd83fec30f9119510a5442d63e1817b7f4ba0cff25aad718ae9a33a86",
+      "translation": "Using an external plugin that affects performance.",
+      "contextHash": "019c8f4bd83fec30f9119510a5442d63e1817b7f4ba0cff25aad718ae9a33a86"
+    },
+    {
+      "id": "list-057",
+      "type": "list",
+      "source": "特にデバッグ系やアニメーション系のプラグインにご注意ください。",
+      "sourceHash": "6b7bddd9ccc55862d5b72b219f342d497efb678b154647d9e93b09dd74ffc192",
+      "translation": "Be especially careful with debugging and animation plugins.",
+      "contextHash": "6b7bddd9ccc55862d5b72b219f342d497efb678b154647d9e93b09dd74ffc192"
+    },
+    {
+      "id": "text-121",
+      "type": "text",
+      "source": "Ｆ２でＦＰＳを表示できますので、どれぐらいの重さになるかが確認できます。",
+      "sourceHash": "15edb76f3423bf7c4318702f633ab9b25aa2a4cb21cfb6307727e8d173239f77",
+      "translation": "You can display the FPS by pressing F2, allowing you to check how much the performance is affected.",
+      "contextHash": "15edb76f3423bf7c4318702f633ab9b25aa2a4cb21cfb6307727e8d173239f77"
+    },
+    {
+      "id": "text-122",
+      "type": "text",
+      "source": "通常、処理の重さはアニメーションの表示間隔（interval）に依存します。単純なアニメーションをinterval = 1/2や1/4で表示した程度で動作が重くなることはまずありません。重くなる場合は何らかの要因がある可能性が高いです。",
+      "sourceHash": "e75802d787776cd24dcc1e7a44af6414b40bec26d29a859f95d018e642731bf7",
+      "translation": "Normally, processing load depends on the animation display interval (interval). Simply displaying a simple animation with interval = 1/2 or 1/4 will almost never cause slow performance. If performance does become slow, there is likely some underlying cause.",
+      "contextHash": "e75802d787776cd24dcc1e7a44af6414b40bec26d29a859f95d018e642731bf7"
+    },
+    {
+      "id": "text-123",
+      "type": "text",
+      "source": "なお、戦闘中のDynamicAnimationと完全に同じ動作を保証できるものではありません。どうにかこうにかいい感じになるよう調整していますが、ダメなこともあるかもしれません。",
+      "sourceHash": "8d29388f81d323c177d2df7957341635542398459d3669fb52fd7d9763934681",
+      "translation": "Please note that this cannot guarantee behavior exactly identical to DynamicAnimation during battles. I am adjusting it as best I can to make it work well, but there may be cases where it does not work properly.",
+      "contextHash": "8d29388f81d323c177d2df7957341635542398459d3669fb52fd7d9763934681"
+    },
+    {
+      "id": "text-124",
+      "type": "text",
+      "source": "特にスクロール時の挙動に対応できていない部分があります。",
+      "sourceHash": "f9dac927dc5554c2800132ca345a869b1e7e492b31c8cd3e9150f2b4ac43601e",
+      "translation": "In particular, there are parts that do not support behavior during scrolling.",
+      "contextHash": "f9dac927dc5554c2800132ca345a869b1e7e492b31c8cd3e9150f2b4ac43601e"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "具体的には、DynamicAnimation用に作成したスキルをプラグインコマンドで指定し、マップ上で再生します。スキルの作成については[[LINK_1]]DynamicAnimation[[/LINK_1]]および[[LINK_2]]DynamicAnimationMZ[[/LINK_2]]の各ページをご覧ください。",
+      "sourceHash": "9777d410d33657dc60c8c6cc400e242ecf3696975cf865eb4d35ba79f0df6967",
+      "parts": [
+        {
+          "source": "具体的には、DynamicAnimation用に作成したスキルをプラグインコマンドで指定し、マップ上で再生します。スキルの作成については",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "および",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationMZ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "の各ページをご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "Specifically, specify a skill created for DynamicAnimation with a plugin command and play it on the map. For information on creating skills, see the [[LINK_1]]DynamicAnimation[[/LINK_1]] and [[LINK_2]]DynamicAnimationMZ[[/LINK_2]] pages.",
+      "contextHash": "9777d410d33657dc60c8c6cc400e242ecf3696975cf865eb4d35ba79f0df6967"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（install）[[/LINK_1]]",
+      "sourceHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8",
+      "parts": [
+        {
+          "source": "導入方法（install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (install)[[/LINK_1]]",
+      "contextHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（history）[[/LINK_1]]",
+      "sourceHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73",
+      "parts": [
+        {
+          "source": "更新履歴（history）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (history)[[/LINK_1]]",
+      "contextHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]サンプル（sample）[[/LINK_1]]",
+      "sourceHash": "9369df29b84cea4f96609164bab19035d42ccecb97cd7aba1548bf275bbcbe59",
+      "parts": [
+        {
+          "source": "サンプル（sample）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sample (sample)[[/LINK_1]]",
+      "contextHash": "9369df29b84cea4f96609164bab19035d42ccecb97cd7aba1548bf275bbcbe59"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ版プラグインコマンド（Plugin Command MZ）[[/LINK_1]]",
+      "sourceHash": "746fd9b1b5c7042af322874df1076d7e6ecfd0ff70b57ce0c6a6a96613e139ea",
+      "parts": [
+        {
+          "source": "ＭＺ版プラグインコマンド（Plugin Command MZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MZ Plugin Commands (Plugin Command MZ)[[/LINK_1]]",
+      "contextHash": "746fd9b1b5c7042af322874df1076d7e6ecfd0ff70b57ce0c6a6a96613e139ea"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]アニメーションの表示（showAnimation）[[/LINK_1]]",
+      "sourceHash": "078b1fab58e4cb553545cf86a49c941ad83b84b65e1d814d3e7f60b446ed98af",
+      "parts": [
+        {
+          "source": "アニメーションの表示（showAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Animation (showAnimation)[[/LINK_1]]",
+      "contextHash": "078b1fab58e4cb553545cf86a49c941ad83b84b65e1d814d3e7f60b446ed98af"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]アニメーションの削除（removeAnimation）[[/LINK_1]]ver1.10",
+      "sourceHash": "611a9f0edcba3ea9ee489aaab55b18e84e468ee604ca18ad5c1526176ae2b283",
+      "parts": [
+        {
+          "source": "アニメーションの削除（removeAnimation）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.10",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Remove Animation (removeAnimation)[[/LINK_1]] ver1.10",
+      "contextHash": "611a9f0edcba3ea9ee489aaab55b18e84e468ee604ca18ad5c1526176ae2b283"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]アニメーションの表示（戦闘）（showAnimationBattle）[[/LINK_1]]",
+      "sourceHash": "e323832386cd4e666dd66648708bacb492c0fb655d04bf6ea913e23cee4e3e8c",
+      "parts": [
+        {
+          "source": "アニメーションの表示（戦闘）（showAnimationBattle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Animation (Battle) (showAnimationBattle)[[/LINK_1]]",
+      "contextHash": "e323832386cd4e666dd66648708bacb492c0fb655d04bf6ea913e23cee4e3e8c"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]アニメーションの削除（戦闘）（removeAnimationBattle）[[/LINK_1]]ver1.10",
+      "sourceHash": "e6f13a85790811e18e02ccaba757196fd066a266970812f0fc2599fdf32be608",
+      "parts": [
+        {
+          "source": "アニメーションの削除（戦闘）（removeAnimationBattle）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.10",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Remove Animation (Battle) (removeAnimationBattle)[[/LINK_1]] ver1.10",
+      "contextHash": "e6f13a85790811e18e02ccaba757196fd066a266970812f0fc2599fdf32be608"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ版プラグインコマンド（Plugin Command MV）[[/LINK_1]]",
+      "sourceHash": "53433d36640dcc2c6f3f1a87c953656e32dc329e30298cdb35a749e75cfc338a",
+      "parts": [
+        {
+          "source": "ＭＶ版プラグインコマンド（Plugin Command MV）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MV Plugin Commands (Plugin Command MV)[[/LINK_1]]",
+      "contextHash": "53433d36640dcc2c6f3f1a87c953656e32dc329e30298cdb35a749e75cfc338a"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]アニメーションの表示（showAnimation）[[/LINK_1]]",
+      "sourceHash": "078b1fab58e4cb553545cf86a49c941ad83b84b65e1d814d3e7f60b446ed98af",
+      "parts": [
+        {
+          "source": "アニメーションの表示（showAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Animation (showAnimation)[[/LINK_1]]",
+      "contextHash": "078b1fab58e4cb553545cf86a49c941ad83b84b65e1d814d3e7f60b446ed98af"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]共通オプション（commonOption）[[/LINK_1]]",
+      "sourceHash": "28094aee1f45edc67052df812c48a79c4d24fcc80a3cb0df4c4cec17b5a08ac2",
+      "parts": [
+        {
+          "source": "共通オプション（commonOption）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Common Options (commonOption)[[/LINK_1]]",
+      "contextHash": "28094aee1f45edc67052df812c48a79c4d24fcc80a3cb0df4c4cec17b5a08ac2"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]マップ用オプション（mapOption）[[/LINK_1]]",
+      "sourceHash": "1b14b41aee5aab61678034b4a8e6a0f397ff799c3cebc2e036be3393d582c497",
+      "parts": [
+        {
+          "source": "マップ用オプション（mapOption）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Map Options (mapOption)[[/LINK_1]]",
+      "contextHash": "1b14b41aee5aab61678034b4a8e6a0f397ff799c3cebc2e036be3393d582c497"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘用オプション（battleOption）[[/LINK_1]]",
+      "sourceHash": "24df1565a11fbd7189179b0f5e54ccb32f38a13406080d12251502c7ecdd5084",
+      "parts": [
+        {
+          "source": "戦闘用オプション（battleOption）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Options (battleOption)[[/LINK_1]]",
+      "contextHash": "24df1565a11fbd7189179b0f5e54ccb32f38a13406080d12251502c7ecdd5084"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]シーン変更時もアニメを維持（keepAnimation）[[/LINK_1]]",
+      "sourceHash": "17739c7797af7835d483668db968cdaeb013e72eda8736de25080245ebce3368",
+      "parts": [
+        {
+          "source": "シーン変更時もアニメを維持（keepAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Keep Animations When Changing Scenes (keepAnimation)[[/LINK_1]]",
+      "contextHash": "17739c7797af7835d483668db968cdaeb013e72eda8736de25080245ebce3368"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]ロード時にイベントリセット（eventResetOnLoad）[[/LINK_1]]ver1.09",
+      "sourceHash": "3122befbd690e541f4ed612e42835868467765d89d509f48deee9c3833963872",
+      "parts": [
+        {
+          "source": "ロード時にイベントリセット（eventResetOnLoad）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.09",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Reset Events on Load (eventResetOnLoad)[[/LINK_1]] ver1.09",
+      "contextHash": "3122befbd690e541f4ed612e42835868467765d89d509f48deee9c3833963872"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]並列実行時の有効範囲マス数（targetRangeGrid）[[/LINK_1]]",
+      "sourceHash": "fc8e827e16cd4962a3c9e4efbc969b7954a0d8ae03cc4c4aea8e1946d2492a47",
+      "parts": [
+        {
+          "source": "並列実行時の有効範囲マス数（targetRangeGrid）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Valid Range Tiles During Parallel Execution (targetRangeGrid)[[/LINK_1]]",
+      "contextHash": "fc8e827e16cd4962a3c9e4efbc969b7954a0d8ae03cc4c4aea8e1946d2492a47"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]注釈実行時の有効範囲マス数 （noteTargetRangeGrid）[[/LINK_1]]",
+      "sourceHash": "1940376477efaaac16106e70f5fed7f67ece45413c1ff8628038d0736e1d052b",
+      "parts": [
+        {
+          "source": "注釈実行時の有効範囲マス数 （noteTargetRangeGrid）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Valid Range Tiles When Executing Notes (noteTargetRangeGrid)[[/LINK_1]]",
+      "contextHash": "1940376477efaaac16106e70f5fed7f67ece45413c1ff8628038d0736e1d052b"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]アニメの切目をなくす（closeAnimationGap）[[/LINK_1]]ver1.14",
+      "sourceHash": "74df6b90dd8c6e80d19ea557201ef5c37a73b98f36b1810ed6d816292045c351",
+      "parts": [
+        {
+          "source": "アニメの切目をなくす（closeAnimationGap）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.14",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Eliminate Animation Gaps (closeAnimationGap)[[/LINK_1]] ver1.14",
+      "contextHash": "74df6b90dd8c6e80d19ea557201ef5c37a73b98f36b1810ed6d816292045c351"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]行動中ステートアニメを禁止（actingNoStateAnimation）[[/LINK_1]]ver1.07",
+      "sourceHash": "d7d681801e727b6d3571fd54cff223d68f45372e7e10ff348a3f472c7dbfd33b",
+      "parts": [
+        {
+          "source": "行動中ステートアニメを禁止（actingNoStateAnimation）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.07",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Prohibit State Animations While Acting (actingNoStateAnimation)[[/LINK_1]] ver1.07",
+      "contextHash": "d7d681801e727b6d3571fd54cff223d68f45372e7e10ff348a3f472c7dbfd33b"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]メモ欄＆注釈からの起動[[/LINK_1]]",
+      "sourceHash": "0ac0847b03eea282673d8e9c85ba563ab6fb25167325c2700755d71d43c1318e",
+      "parts": [
+        {
+          "source": "メモ欄＆注釈からの起動",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Activation from Note Fields and Annotations[[/LINK_1]]",
+      "contextHash": "0ac0847b03eea282673d8e9c85ba563ab6fb25167325c2700755d71d43c1318e"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]途中から再生[[/LINK_1]]ver1.09",
+      "sourceHash": "6b129773c6c4e53667c0697b65ef4e3f79411e498bcde571f1768735b73d66db",
+      "parts": [
+        {
+          "source": "途中から再生",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.09",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Play from the Middle[[/LINK_1]] ver1.09",
+      "contextHash": "6b129773c6c4e53667c0697b65ef4e3f79411e498bcde571f1768735b73d66db"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]注意点[[/LINK_1]]",
+      "sourceHash": "dae1acf5bccb59b156ed9875bebe9c03cb8dc5f1164c511491615fc43145b6ce",
+      "parts": [
+        {
+          "source": "注意点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Notes[[/LINK_1]]",
+      "contextHash": "dae1acf5bccb59b156ed9875bebe9c03cb8dc5f1164c511491615fc43145b6ce"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "DynamicMotionをマップ上で起動（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "fe8bb8b6705d6f02644bec48d2af3bd1e484307893cc114f091ef25c6db30af1",
+      "parts": [
+        {
+          "source": "DynamicMotionをマップ上で起動（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Launch DynamicMotion on the map ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "fe8bb8b6705d6f02644bec48d2af3bd1e484307893cc114f091ef25c6db30af1"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]途中から再生（<D-StartTiming>）[[/LINK_1]]の設定時、アニメーションのループのタイミングがズレてしまう不具合発生。",
+      "sourceHash": "b27098fb85811f6146fce2521a12d4c197beb7dbb0e94d8c5573e7c36e9eaded",
+      "parts": [
+        {
+          "source": "途中から再生（<D-StartTiming>）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の設定時、アニメーションのループのタイミングがズレてしまう不具合発生。",
+          "link": false
+        }
+      ],
+      "translation": "A bug occurred when configuring [[LINK_1]]Play from the Middle (<D-StartTiming>)[[/LINK_1]], causing the animation loop timing to become misaligned.",
+      "contextHash": "b27098fb85811f6146fce2521a12d4c197beb7dbb0e94d8c5573e7c36e9eaded"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]アニメの切目をなくす[[/LINK_1]]の効果が戦闘時に反映されていなかった不具合修正。",
+      "sourceHash": "68cc808b3cd842bbfdfd93a49b8ed80fdfe1231d60cdcf512d1b0d339c02a241",
+      "parts": [
+        {
+          "source": "アニメの切目をなくす",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の効果が戦闘時に反映されていなかった不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where the effect of [[LINK_1]]Eliminate Animation Gaps[[/LINK_1]] was not reflected during battles.",
+      "contextHash": "68cc808b3cd842bbfdfd93a49b8ed80fdfe1231d60cdcf512d1b0d339c02a241"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "プラグインパラメータに[[LINK_1]]アニメの切目をなくす[[/LINK_1]]を追加。",
+      "sourceHash": "122c5e3a66c6acba8c3bc0c4e31458dd84332f4313d2b4baeceafc6e695086d2",
+      "parts": [
+        {
+          "source": "プラグインパラメータに",
+          "link": false
+        },
+        {
+          "source": "アニメの切目をなくす",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]Eliminate Animation Gaps[[/LINK_1]] to the plugin parameters.",
+      "contextHash": "122c5e3a66c6acba8c3bc0c4e31458dd84332f4313d2b4baeceafc6e695086d2"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]アクター、敵キャラに対して常駐アニメーションを表示[[/LINK_1]]できる機能を追加。",
+      "sourceHash": "5648063f5b70ee574cefa4ba21f35bc02916cfca4483a1d5f210d543c9cb1385",
+      "parts": [
+        {
+          "source": "アクター、敵キャラに対して常駐アニメーションを表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できる機能を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the ability to [[LINK_1]]display persistent animations for actors and enemies[[/LINK_1]].",
+      "contextHash": "5648063f5b70ee574cefa4ba21f35bc02916cfca4483a1d5f210d543c9cb1385"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]途中から再生[[/LINK_1]]機能をステート、アクター、敵キャラのメモ欄にも対応。",
+      "sourceHash": "e4e8fa1ff81c308c6ec0132237679a521913a38f27f4640e423e4281c0f1d139",
+      "parts": [
+        {
+          "source": "途中から再生",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "機能をステート、アクター、敵キャラのメモ欄にも対応。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]Play from the Middle[[/LINK_1]] feature now also supports the note fields of states, actors, and enemies.",
+      "contextHash": "e4e8fa1ff81c308c6ec0132237679a521913a38f27f4640e423e4281c0f1d139"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "ＭＺ版に[[LINK_1]]アニメーションの削除機能[[/LINK_1]]を追加。",
+      "sourceHash": "12bccd2300e5eddcc6127fe1703bd7a87e1710eb840564ffecfcaf7feaa0435c",
+      "parts": [
+        {
+          "source": "ＭＺ版に",
+          "link": false
+        },
+        {
+          "source": "アニメーションの削除機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]animation removal feature[[/LINK_1]] to the MZ version.",
+      "contextHash": "12bccd2300e5eddcc6127fe1703bd7a87e1710eb840564ffecfcaf7feaa0435c"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]途中から再生[[/LINK_1]]に対応。",
+      "sourceHash": "41c0ed13c08dc7c123e7f8da38dc6bd9e92ecb9676f1652af97ef8c6223fd5ba",
+      "parts": [
+        {
+          "source": "途中から再生",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Added support for [[LINK_1]]Play from the Middle[[/LINK_1]].",
+      "contextHash": "41c0ed13c08dc7c123e7f8da38dc6bd9e92ecb9676f1652af97ef8c6223fd5ba"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "それに伴い『[[LINK_1]]ロード時にイベントリセット[[/LINK_1]]』のパラメータを追加。",
+      "sourceHash": "72344b42f623c7bb643f32c2093b48e88905b81918616844eb49e99968999b5a",
+      "parts": [
+        {
+          "source": "それに伴い『",
+          "link": false
+        },
+        {
+          "source": "ロード時にイベントリセット",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』のパラメータを追加。",
+          "link": false
+        }
+      ],
+      "translation": "Accordingly, the [[LINK_1]]Reset Events on Load[[/LINK_1]] parameter was added.",
+      "contextHash": "72344b42f623c7bb643f32c2093b48e88905b81918616844eb49e99968999b5a"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]始点（行動主体）を複数指定[[/LINK_1]]できるようにした。",
+      "sourceHash": "e4e1125a84df4c3c4f19ac61df4c9fdefae6d9df053543f7a759e0b57ae1981d",
+      "parts": [
+        {
+          "source": "始点（行動主体）を複数指定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "You can now [[LINK_1]]specify multiple starting points (acting subjects)[[/LINK_1]].",
+      "contextHash": "e4e1125a84df4c3c4f19ac61df4c9fdefae6d9df053543f7a759e0b57ae1981d"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄も<D-Skill:ID>による自動起動[[/LINK_1]]に対応。",
+      "sourceHash": "19517e923528bfe34cb1295e313030428af28a11b76d8538eb083773a531dbdb",
+      "parts": [
+        {
+          "source": "ステートのメモ欄も<D-Skill:ID>による自動起動",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "The note fields of [[LINK_1]]states now also support automatic activation via <D-Skill:ID>[[/LINK_1]].",
+      "contextHash": "19517e923528bfe34cb1295e313030428af28a11b76d8538eb083773a531dbdb"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionのマップ上での実行[[/LINK_1]]に対応。",
+      "sourceHash": "fe4413d0345c1565ce366a72183eed0693006d2aa6ea18a3597ed6f4259c5995",
+      "parts": [
+        {
+          "source": "DynamicMotionのマップ上での実行",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Added support for [[LINK_1]]executing DynamicMotion on the map[[/LINK_1]].",
+      "contextHash": "fe4413d0345c1565ce366a72183eed0693006d2aa6ea18a3597ed6f4259c5995"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]テキスト読込プラグイン[[/LINK_1]]に対応。",
+      "sourceHash": "fdc49e77b1ccfab85e1e15ec63d8cb31c5379d35119088d334612b9a900645fc",
+      "parts": [
+        {
+          "source": "テキスト読込プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Added support for the [[LINK_1]]Text Loading Plugin[[/LINK_1]].",
+      "contextHash": "fdc49e77b1ccfab85e1e15ec63d8cb31c5379d35119088d334612b9a900645fc"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]マップ用サンプル[[/LINK_1]]",
+      "sourceHash": "814fa492a403ec988900f3b76d3b43869938977c2ba9e2f8095e8bf580187d1a",
+      "parts": [
+        {
+          "source": "マップ用サンプル",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Map Sample[[/LINK_1]]",
+      "contextHash": "814fa492a403ec988900f3b76d3b43869938977c2ba9e2f8095e8bf580187d1a"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]limitFlash[[/LINK_1]]で制限が可能です。",
+      "sourceHash": "3fccf2d29d14356baa6b327f0ef3dae13a653f7af9dc149b01d62ec4b32eed8f",
+      "parts": [
+        {
+          "source": "limitFlash",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で制限が可能です。",
+          "link": false
+        }
+      ],
+      "translation": "You can limit it with [[LINK_1]]limitFlash[[/LINK_1]].",
+      "contextHash": "3fccf2d29d14356baa6b327f0ef3dae13a653f7af9dc149b01d62ec4b32eed8f"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]limitSound[[/LINK_1]]で制限が可能です。",
+      "sourceHash": "6b6f4d2bdcbc3d0a0f0ae3218b4a4346bf79702da486fbd5241f745d178c2fd6",
+      "parts": [
+        {
+          "source": "limitSound",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で制限が可能です。",
+          "link": false
+        }
+      ],
+      "translation": "You can limit it with [[LINK_1]]limitSound[[/LINK_1]].",
+      "contextHash": "6b6f4d2bdcbc3d0a0f0ae3218b4a4346bf79702da486fbd5241f745d178c2fd6"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "DynamicAnimationをマップ上から起動します。": "Launches DynamicAnimation from the map.",
+    "イベント演出からダンジョンのギミックまで使い道は多種多様です。また、戦闘中にも演出用のアニメーションを実行できます。": "It has a wide variety of uses, from event effects to dungeon gimmicks. You can also play animations for visual effects during battles.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the plugin ON in the Plugin Manager.",
+    "ＭＺ版": "MZ Version",
+    "NRP_DynamicAnimationMapMZ.js": "NRP_DynamicAnimationMapMZ.js ",
+    "ver1.161（2025/05/03）": "ver1.161 (2025/05/03) ",
+    "さらに以下のプラグインを最新に更新してください。": "Also update the following plugins to the latest versions.",
+    "※バージョンに食い違いがあると動作しない可能性があります。": "※It may not work correctly if the versions do not match.",
+    "NRP_DynamicAnimationMZ.js": "NRP_DynamicAnimationMZ.js ",
+    "ver1.211（2024/07/15）": "ver1.211 (2024/07/15) ",
+    "NRP_DynamicAnimationMV2MZ.js": "NRP_DynamicAnimationMV2MZ.js ",
+    "ver1.061（2024/06/10）": "ver1.061 (2024/06/10) ",
+    "NRP_DynamicMotionMZ.js": "NRP_DynamicMotionMZ.js ",
+    "ver1.252（2024/07/13）": "ver1.252 (2024/07/13) ",
+    "ＭＶ版": "MV Version",
+    "NRP_DynamicAnimationMap.js": "NRP_DynamicAnimationMap.js ",
+    "ver1.16（2024/07/15）": "ver1.16 (2024/07/15) ",
+    "NRP_DynamicAnimation.js": "NRP_DynamicAnimation.js ",
+    "ver1.251（2021/12/24）": "ver1.251 (2021/12/24) ",
+    "NRP_DynamicMotion.js": "NRP_DynamicMotion.js ",
+    "ver1.21（2021/11/18）": "ver1.21 (2021/11/18) ",
+    "※上記のプラグインよりも、このプラグインは下に配置してください。": "※Place this plugin below the plugins listed above.",
+    "オプション（ＭＶ＆ＭＺ兼用）（option）": "Options (for both MV & MZ) (option)",
+    "NRP_DynamicMotionMap.js": "NRP_DynamicMotionMap.js ",
+    "ver1.07（2021/07/24）": "ver1.07 (2021/07/24) ",
+    "更新履歴（history）": "Update History (history)",
+    "2024/07/15 -> 2025/05/03（ver1.16 -> 1.161）": "2024/07/15 -> 2025/05/03 (ver1.16 -> 1.161) ",
+    "※ただし、戦闘時の動作はイマイチ自信ないです……。": "※However, I’m not very confident about how it works during battles…….",
+    "【ＭＺ】プラグインコマンドでアニメを削除した際、キャラクターのフラッシュの色調が残ってしまう不具合修正。（2025/05/03 ver1.161）": "【MZ】Fixed a bug where the character’s flash tone remained after deleting an animation with a plugin command. (2025/05/03 ver1.161)",
+    "2022/06/22 -> 2024/07/03（ver1.15 -> 1.153）": "2022/06/22 -> 2024/07/03 (ver1.15 -> 1.153) ",
+    "ゲームロード時、イベントから自動実行したアニメーションが途中再開されない不具合修正が不完全だったので再修正。": "The previous fix for an issue where animations automatically executed by events did not resume from where they left off when loading a game was incomplete, so it has been fixed again.",
+    "シーン復帰時、2/60秒ほどループ中のアニメが途切れる問題に対処。": "Addressed an issue where looping animations were interrupted for about 2/60 of a second when returning to a scene.",
+    "ＭＺ版を競合用に微調整。（2022/06/25 ver1.152）": "Fine-tuned the MZ version for compatibility. (2022/06/25 ver1.152)",
+    "残像を使用している場合、戦闘時のタイミング調整が正常に処理できなくなる不具合修正。（2024/07/03 ver1.153）": "Fixed a bug where timing adjustments during battles could not be processed correctly when afterimages were used. (2024/07/03 ver1.153)",
+    "2022/06/06 -> 2022/06/16（ver1.14 -> 1.141）": "2022/06/06 -> 2022/06/16 (ver1.14 -> 1.141) ",
+    "※初期状態ではオフになっています。": "※It is disabled by default.",
+    "ゲームロード時、イベントから自動実行したアニメーションが途中再開されない不具合修正。（2022/06/16 ver1.141）": "Fixed a bug where animations automatically executed by events did not resume from where they left off when loading a game. (2022/06/16 ver1.141)",
+    "2022/01/27（ver1.13）": "2022/01/27 (ver1.13) ",
+    "計算レートが正しく参照されない不具合を修正。": "Fixed a bug where the calculation rate was not referenced correctly.",
+    "2021/10/05 -> 12/24（ver1.12 -> 1.121）": "2021/10/05 -> 12/24 (ver1.12 -> 1.121) ",
+    "同一マップへの場所移動時にアニメーションが消える不具合修正。": "Fixed a bug where animations disappeared when moving to a location on the same map.",
+    "ＭＶ版にて他プラグインとの競合によるエラーを軽減。（12/24 ver1.121）": "Reduced errors caused by conflicts with other plugins in the MV version. (12/24 ver1.121)",
+    "※NRP_DynamicAnimation.jsも修正しています。": "※NRP_DynamicAnimation.js has also been updated.",
+    "2021/08/07（ver1.11）": "2021/08/07 (ver1.11) ",
+    "ＭＺ用アニメーションを並列実行した状態で、アニメーションやモーションを通常実行すると並列アニメーションの終了を待ってしまう不具合修正。": "Fixed a bug where normally executing an animation or motion while an MZ animation was running in parallel caused the system to wait for the parallel animation to finish.",
+    "2021/06/05（ver1.10）": "2021/06/05 (ver1.10) ",
+    "※ＭＶ版は未対応、ソース整理のみとなります": "※The MV version is not supported; this only organizes the source.",
+    "2021/04/24 -> 05/15（ver1.09 -> 1.091）": "2021/04/24 -> 05/15 (ver1.09 -> 1.091) ",
+    "<D-StartTiming:30>というように設定すると、アニメーションを30フレーム進めた状態から開始できます。": "By setting it as <D-StartTiming:30>, you can start the animation after advancing it by 30 frames.",
+    "並列処理からマップ版DynamicAnimationMZを起動した場合、セーブデータの作成に失敗することがある重大な不具合を修正。（ＭＺのみ）": "Fixed a serious bug where launching the map version of DynamicAnimationMZ from a parallel process could cause save data creation to fail. (MZ only)",
+    "※各関連プラグインも最新に更新してください。": "※Please also update all related plugins to the latest versions.",
+    "ゲームロード時、コモンイベントの並列処理で実行したアニメーションに対して途中から再生ができない不具合修正。（05/15 ver1.091）": "Fixed a bug where animations executed by a parallel process in a common event could not be played from where they left off after loading a game. (05/15 ver1.091)",
+    "2021/04/21（ver1.083）": "2021/04/21 (ver1.083) ",
+    "イベントのメモ欄に複数のタグが指定されている場合、正常に動作しない不具合を修正。": "Fixed a bug where the plugin did not work correctly when multiple tags were specified in an event’s note field.",
+    "画面スクロール時に一瞬だけアニメーションの位置がズレる不具合修正。": "Fixed a bug where the animation’s position shifted momentarily while the screen was scrolling.",
+    "※NRP_DynamicAnimationMap本体の更新はありません。NRP_DynamicAnimation（MV/MZ）およびNRP_DynamicAnimationMV2MZ（MZのみ）を最新に更新してください。": "※NRP_DynamicAnimationMap itself has not been updated. Please update NRP_DynamicAnimation (MV/MZ) and NRP_DynamicAnimationMV2MZ (MZ only) to the latest versions.",
+    "2020/11/05 -> 12/08（ver1.08 -> 1.082）": "2020/11/05 -> 12/08 (ver1.08 -> 1.082) ",
+    "外部プラグインとの連携用に調整。": "Adjusted for integration with external plugins.",
+    "ウェイトの数値指定がない場合、アニメーションの終了までウェイトされない不具合修正。": "Fixed a bug where, when no wait value was specified, the system did not wait until the animation ended.",
+    "アニメーションの位置が『画面』でもスクロールの影響を受けるように修正。": "Fixed the plugin so that animations are affected by scrolling even when their position is set to “Screen.”",
+    "ＭＶ用のプラグインコマンド『nrp.animation.item』でアイテムの定義も呼び出し可能に。": "The MV plugin command ‘nrp.animation.item’ can now also call item definitions.",
+    "外部プラグインとの連携用にダメージ処理部分を微調整。（11/08 ver1.081）": "Fine-tuned the damage processing section for integration with external plugins. (11/08 ver1.081)",
+    "ＭＶ版にてエラーとなる重大な不具合修正。（12/08 ver1.082）": "Fixed a serious bug that caused errors in the MV version. (12/08 ver1.082)",
+    "ＭＺからＭＶアニメを正常再生できない重大な不具合修正。": "Fixed a serious bug where MV animations could not be played correctly from MZ.",
+    "※NRP_DynamicAnimationMV2MZを最新に更新してください。": "※Please update NRP_DynamicAnimationMV2MZ to the latest version.",
+    "2020/10/19 -> 10/20（ver1.07 -> 1.072）": "2020/10/19 -> 10/20 (ver1.07 -> 1.072) ",
+    "マップイベントのメモ欄からの実行でエラーになる不具合修正。（ver1.071）": "Fixed a bug that caused an error when executed from a map event’s note field. (ver1.071)",
+    "戦闘時に使用すると、セーブに保存できなくなったり、次回の戦闘開始時にエラーになったりする不具合修正。（10/20）": "Fixed a bug where using it during battles could prevent data from being saved or cause an error when the next battle started. (10/20)",
+    "※修正箇所はNRP_DynamicAnimationおよびNRP_DynamicMotionなので、そちらを最新にしてください。": "※The fixes are in NRP_DynamicAnimation and NRP_DynamicMotion, so please update those plugins to the latest versions.",
+    "ＭＶ版で実行時に必ずエラーになる不具合修正。（10/20 ver1.072）": "Fixed a bug that always caused an error during execution in the MV version. (10/20 ver1.072)",
+    "2020/10/18（ver1.06）": "2020/10/18 (ver1.06) ",
+    "対象に-2~-4を指定すれば、隊列歩行の仲間も対象にできるようにした。": "Party members walking in formation can now also be targeted by specifying -2~-4 as the target.",
+    "ＭＺアニメのウェイトが正しくかからない不具合修正。": "Fixed an issue where the wait for MZ animations was not applied correctly.",
+    "※NRP_DynamicMotionMapも最新に更新してください！": "※Please also update NRP_DynamicMotionMap to the latest version!",
+    "2020/10/15（ver1.05 -> 1.052）": "2020/10/15 (ver1.05 -> 1.052) ",
+    "座標がループするとアニメーションが途切れる不具合を修正。": "Fixed an issue where animations were interrupted when coordinates looped.",
+    "ＭＶ版にてプラグインパラメータが有効にならない不具合修正。（10/16 ver1.051）": "Fixed an issue where plugin parameters were not enabled in the MV version. (10/16 ver1.051)",
+    "複数の命令を組み合わせた場合、不要なウェイトが発生する不具合を修正。および処理軽量化。（10/17 ver1.052）": "Fixed an issue where unnecessary waits occurred when combining multiple commands. Also reduced processing load. (10/17 ver1.052)",
+    "2020/10/10（ver1.04 -> 1.041）": "2020/10/10 (ver1.04 -> 1.041) ",
+    "ツクールＭＶに対応。": "Added support for RPG Maker MV.",
+    "ＭＶ版の吹き出し表示でフリーズする不具合修正。（10/12 ver1.041）": "Fixed an issue where the MV version froze when displaying speech balloons. (10/12 ver1.041)",
+    "2020/10/07（ver1.03）": "2020/10/07 (ver1.03) ",
+    "2020/10/05（ver1.02 -> 1.021）": "2020/10/05 (ver1.02 -> 1.021) ",
+    "戦闘中の実行機能を追加。": "Added the ability to execute during battle.",
+    "有効範囲について直線距離ではなく長辺を取るようにした。": "The effective range now uses the longer side instead of straight-line distance.",
+    "英語版のプラグインコマンドが抜けていた不具合修正。（ver1.021）": "Fixed an issue where the plugin commands for the English version were missing. (ver1.021)",
+    "※NRP_DynamicAnimationMZ.jsとNRP_DynamicMotionMZ.jsも最新に更新してください。": "※Please also update NRP_DynamicAnimationMZ.js and NRP_DynamicMotionMZ.js to the latest versions.",
+    "2020/10/03（ver1.01）": "2020/10/03 (ver1.01) ",
+    "<D-Skill:ID>によるイベントメモ＆注釈からの自動起動に対応。": "Added support for automatic activation from event notes and comments using <D-Skill:ID>.",
+    "※NRP_DynamicAnimationMZ.jsもver1.042に更新してください。": "※Please also update NRP_DynamicAnimationMZ.js to ver1.042.",
+    "それに伴い『注釈実行時の有効範囲マス数 』をパラメータに追加。": "Accordingly, added “Effective Range in Tiles When Executing a Comment” to the parameters.",
+    "2020/10/02（ver1.00 -> 1.001）": "2020/10/02 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "並列処理でのwait指定時に想定した動作をしない不具合修正。（ver1.001）": "Fixed an issue where the expected behavior did not occur when specifying wait during parallel processing. (ver1.001)",
+    "サンプル（sample）": "Sample (sample)",
+    "マップ用に特化したサンプルを用意しましたので、参考にどうぞ。": "I have prepared a sample specialized for maps, so please use it as a reference.",
+    "ＭＺ用プラグインコマンド（Plugin Command MZ）": "Plugin Commands for MZ (Plugin Command MZ)",
+    "ツクールＭＺとＭＶでプラグインコマンドの仕様が大きく異なります。ＭＺの場合は、コンボ形式であらかじめ候補が用意されているので便利です。": "The plugin command specifications differ significantly between RPG Maker MZ and MV. In MZ, the available options are provided in advance as combo boxes, making it convenient.",
+    "アニメーションの表示（showAnimation）": "Show Animation (showAnimation)",
+    "スキルと対象を指定してDynamicAnimationを起動します。": "Starts DynamicAnimation by specifying a skill and target.",
+    "また、始点を設定すれば、射撃などの始点から対象へと移動するアニメーションを使用できます。": "You can also set a start point to use animations that move from the starting point, such as when firing a projectile, to the target.",
+    "オプションからはウェイトの有無や画面スクロール連動の有無を設定できます。": "The options allow you to specify whether to wait and whether to synchronize with screen scrolling.",
+    "スキルID（skillId）": "Skill ID (skillId)",
+    "使用するスキルを選択します。": "Select the skill to use.",
+    "このスキルのメモ欄に従って、DynamicAnimationが実行されます。": "DynamicAnimation will be executed according to the note field of this skill.",
+    "対象（target）": "Target (target)",
+    "アニメーションの対象（終点）を指定します。": "Specifies the target (endpoint) of the animation.",
+    "候補からは『このイベント』や『プレイヤー』を選択できます。": "You can select “This Event” or “Player” from the available options.",
+    "数値を入力すれば、その番号のイベントを対象とします。": "If you enter a number, the event with that ID will be targeted.",
+    "また、-2以下で隊列歩行の仲間を指定可能です。（-2が２人目、-3が３人目……）": "You can also specify party members walking in formation using -2 or lower. (-2 is the second member, -3 is the third member, and so on.)",
+    "複数指定も可能です。": "Multiple targets can also be specified.",
+    "\"1,2,3\"で一つずつ指定。\"1~5\"で一括指定となります。": "Specify them individually with \"1,2,3\". Specify them all at once with \"1~5\".",
+    "また、数式も指定可能です。例えば……": "You can also specify a formula. For example...",
+    "はこのイベントのID+1のイベントとなります。": "refers to the event with an ID of this event's ID+1.",
+    "というような複合も可能です。": "A combination like this is also possible.",
+    "始点（行動主体）（startPoint）": "Start Point (Action Subject) (startPoint)",
+    "アニメーションの始点（行動主体）を指定します。": "Specifies the start point (action subject) of the animation.",
+    "DynamicMotionと組み合わせる場合は、ここで指定したイベントが動作を実行します。": "When combined with DynamicMotion, the event specified here performs the movement.",
+    "指定の要領は『対象』と全く同じで、複数指定も可能です。": "The specification method is exactly the same as for “Target,” and multiple targets can also be specified.",
+    "以下はオプション内に含まれる項目です。": "The following items are included in the options.",
+    "完了までウェイト（wait）": "Wait for Completion (wait)",
+    "アニメーションの完了までウェイトします。": "Waits until the animation is complete.",
+    "通常はアニメーションの終了を待ちますが、<D-Animation>内のwaitの設定によっては異なるタイミングで完了させることも可能です。": "Normally, it waits for the animation to end, but depending on the wait setting within <D-Animation>, it can also be completed at a different timing.",
+    "また、並列処理からプラグインコマンドを呼び出してウェイトを指定した場合は、アニメーションの完了を待ってからループします。この際、プレイヤーの動作は停止しません。": "Also, when a plugin command is called from parallel processing with a wait specified, the loop waits for the animation to complete before continuing. During this time, the player can still move.",
+    "スクロールしない（noScroll）": "No Scroll (noScroll)",
+    "アニメーションが画面スクロールの影響を受けなくなります。": "The animation will no longer be affected by screen scrolling.",
+    "プレイヤーに連動して移動するようなアニメーションを作りたい場合に。": "Use this when you want to create an animation that moves in sync with the player.",
+    "有効範囲（マス）（targetRangeGrid）": "Effective Range (Tiles) (targetRangeGrid)",
+    "並列処理からプラグインコマンドを実行した際、画面中央～イベント間の距離がこの範囲（マス数）に収まる場合のみアニメーションを実行します。": "When a plugin command is executed from parallel processing, the animation is played only when the distance between the center of the screen and the event is within this range (in tiles).",
+    "フィールドなどの広いマップで負荷を抑えるための項目です。": "This setting helps reduce the processing load on large maps such as fields.",
+    "0なら無制限です。未指定の場合は共通設定の値が適用されます。": "0 means unlimited. If unspecified, the value from the common settings will be applied.",
+    "※正確には座標差分の長辺を求めています。Ｘ座標の差分が10マス、Ｙ座標の差分も15マスならば、差分は15マスとみなします。": "※Strictly speaking, this calculates the longer side of the coordinate difference. If the X-coordinate difference is 10 tiles and the Y-coordinate difference is 15 tiles, the difference is considered to be 15 tiles.",
+    "アニメーションの削除（removeAnimation）": "Remove Animation (removeAnimation)",
+    "実行中のDynamicAnimationの削除を行います。": "Removes a DynamicAnimation currently in progress.",
+    "削除する条件（ＡＮＤ）を指定してください。": "Specify the conditions (AND) for removal.",
+    "例えば、『対象』だけを指定した場合、対象に対して表示中のアニメーションを全て削除します。": "For example, if you specify only “Target,” all animations currently displayed for the target will be removed.",
+    "『スキルＩＤ』と『対象』の両方を指定した場合、両方が一致するアニメーションだけを削除します。": "If both “Skill ID” and “Target” are specified, only animations matching both will be removed.",
+    "アニメーションの表示（戦闘）（showAnimationBattle）": "Show Animation (Battle) (showAnimationBattle)",
+    "戦闘中にDynamicAnimationでの演出を行います。基本的には戦闘背景などの演出を想定しています。": "Performs DynamicAnimation effects during battle. This is primarily intended for effects such as battle backgrounds.",
+    "以下の戦闘中に並列処理を実行するプラグインとの連携をオススメします。というか、下はそのためだけに作ったプラグインです。": "I recommend using it together with the following plugin, which executes a parallel process during battle. Actually, I created the plugin below solely for this purpose.",
+    "http://newrpg.seesaa.net/article/477740800.html": "http://newrpg.seesaa.net/article/477740800.html",
+    "必要な場合は使用者や対象の選択も可能です。その際はコンボボックスの候補を参考に条件を設定してください。": "You can also select the user or target if necessary. In that case, set the conditions based on the options in the combo box.",
+    "対象（条件）（targetCondition）": "Target (Condition) (targetCondition)",
+    "アニメーションの対象を決める条件を指定します。（複数可）": "Specify the conditions for determining the target of the animation. (Multiple conditions may be specified.)",
+    "具体的な指定方法はコンボボックスの候補を参考にしてください。": "For specific instructions, refer to the options in the combo box.",
+    "なお、画面対象のアニメーションならば特に対象や使用者を指定する必要はありません。": "For screen-targeted animations, there is no need to specify a target or user.",
+    "使用者（条件）（subjectCondition）": "User (Condition) (subjectCondition)",
+    "アニメーションの使用者を決める条件を指定します。": "Specify the conditions for determining the user of the animation.",
+    "アニメーションの削除（戦闘）（removeAnimationBattle）": "Remove Animation (Battle) (removeAnimationBattle)",
+    "戦闘中、実行中のDynamicAnimationの削除を行います。": "Removes a DynamicAnimation currently in progress during battle.",
+    "要領は『アニメーションの削除』と同じですが、条件の指定方法は『アニメーションの表示（戦闘）』と同じになります。": "The procedure is the same as for “Remove Animation,” but the method of specifying conditions is the same as for “Show Animation (Battle).”",
+    "ＭＶ用プラグインコマンド（Plugin Command MV）": "Plugin Command for MV (Plugin Command MV)",
+    "ＭＶの場合は、コマンドをテキスト入力する必要があります。以下を参考にしてください。": "With MV, you need to enter the command as text. Refer to the following examples.",
+    "ID=100のスキルのDynamicAnimationを実行します。": "Executes the DynamicAnimation for the skill with ID=100.",
+    "マップ上でも戦闘中でも実行可能です。": "It can be executed both on the map and during battle.",
+    "このコマンドを指定する前に、オプション（下記参照）を指定可能です。": "Options (see below) can be specified before specifying this command.",
+    "[マップ上の使用例]": "[Example of use on a map]",
+    "上記の例ではイベントID=1からID=2に向けて、スキルID=100のアニメーションをウェイト指定で放ちます。": "In the example above, the animation for skill ID=100 is launched from event ID=1 toward event ID=2, with the wait option enabled.",
+    "[戦闘中の使用例]": "[Example of use during battle]",
+    "上記の例ではアクターID=1から敵キャラID=2に向けて、": "In the example above, the animation is launched from actor ID=1 toward enemy ID=2,",
+    "スキルID=100のアニメーションをウェイト指定で放ちます。": "with the animation for skill ID=100 and the wait option enabled.",
+    "また、以下のようにアイテムでも指定可能です。使い方はスキルの場合と全く同じなので割愛します。": "Items can also be specified as shown below. The usage is exactly the same as for skills, so it is omitted here.",
+    "オプションの詳細は以下をご覧ください。": "See below for details on the options.",
+    "共通オプション（commonOption）": "Common Options (commonOption)",
+    "アニメーションの終了を待ちます。": "Waits for the animation to end.",
+    "並列処理で指定するとアニメーションの終了を待ってからループするようになります。その際、プレイヤーの操作を停止しません。": "When specified in a parallel process, the loop will wait for the animation to end before repeating. Player control is not stopped during this time.",
+    "マップ用オプション（mapOption）": "Map Options (mapOption)",
+    "イベントID=1をアニメーションの対象とします。": "Sets event ID=1 as the target of the animation.",
+    "0ならばこのイベント、-1ならばプレイヤーです。": "0 means this event, and -1 means the player.",
+    "-2以下（-2, -3, -4）で隊列歩行の仲間も対象にできます。": "Values of -2 or lower (-2, -3, -4) can also target party members walking in formation.",
+    "さらに複数指定も可能です。": "Multiple values can also be specified.",
+    "イベントID=1をアニメーションの行動主体（始点）とします。": "Event ID=1 is the subject (starting point) of the animation.",
+    "複数指定ができることも含め、nrp.animation.targetと要領は同じです。": "The procedure is the same as nrp.animation.target, including the ability to specify multiple targets.",
+    "並列処理イベントとの距離が１０マス以内に収まる場合のみ、": "Only when the distance from the parallel processing event is within 10 tiles,",
+    "アニメーションを実行します。": "the animation will be played.",
+    "戦闘用オプション（battleOption）": "Battle Options (battleOption)",
+    "アニメーションの対象を決める条件を指定します。（対象複数可）": "Specify the conditions for determining the animation's targets. (Multiple targets may be specified.)",
+    "要領はnrp.animation.targetConditionと同じです。": "The procedure is the same as nrp.animation.targetCondition.",
+    "もっとも基本的には背景など対象を取らないアニメーションを想定しています。": "Basically, this is intended for animations that do not have a target, such as backgrounds.",
+    "その場合はこれらの指定も不要です。": "In that case, these settings are not necessary either.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "シーン変更時もアニメを維持（keepAnimation）": "Keep Animation When Changing Scenes (keepAnimation)",
+    "メニューや戦闘などシーン変更時もアニメの表示を維持します。": "The animation remains displayed when changing scenes, such as opening the menu or entering battle.",
+    "ＭＺ形式のアニメについては不完全です。": "This is incomplete for MZ-format animations.",
+    "Effekseerのアニメを途中から再開する方法が分かりませんでした。無念……。": "I couldn't figure out how to resume an Effekseer animation from where it left off. What a shame...",
+    "ロード時にイベントリセット（eventResetOnLoad） ver1.09": "Reset Events on Load (eventResetOnLoad) ver1.09",
+    "ゲームをロードで開始した際、DynamicAnimationを実行中のイベントの処理状況をリセットします。": "When starting the game by loading a save, this resets the processing status of events that were running DynamicAnimation.",
+    "通常、イベントの処理状況はセーブ＆ロード後も保持されます。ですがそれによって、ロード時に半端な状況で処理が始まり、アニメーションが途切れてしまう問題が起こりえます。": "Normally, an event's processing status is retained after saving and loading. However, this can cause processing to resume in an incomplete state when loading, which may result in the animation being interrupted.",
+    "ロード時に処理を先頭から開始させることで、そういった問題に対処します。": "Starting processing from the beginning when loading addresses these issues.",
+    "なお、初期状態で有効になっています。": "This is enabled by default.",
+    "並列実行時の有効範囲マス数（targetRangeGrid）": "Effective Range in Tiles During Parallel Execution (targetRangeGrid)",
+    "こちらは共通設定値です。": "This is a common setting.",
+    "空白の場合は無制限となります。": "If left blank, there is no limit.",
+    "注釈実行時の有効範囲マス数 （noteTargetRangeGrid）": "Effective Range in Tiles When Executed from a Comment (noteTargetRangeGrid)",
+    "注釈からアニメーションを実行した際、画面中央～イベント間の距離がこの範囲（マス数）に収まる場合のみアニメーションを実行します。": "When an animation is executed from a comment, it is played only when the distance between the center of the screen and the event is within this range (in tiles).",
+    "アニメの切目をなくす（closeAnimationGap） ver1.14": "Eliminate Animation Gaps (closeAnimationGap) ver1.14",
+    "アニメーションの終了時のウェイトをわずかに短縮することで、注釈実行時や並列処理などで循環するアニメーションの切れ目をなくします。": "Slightly shortening the wait at the end of an animation eliminates gaps in looping animations executed from comments or by parallel processing.",
+    "初期状態ではオフになっています。": "This is disabled by default.",
+    "注釈実行時は1/60秒短縮、並列処理時は3/60秒（根拠不明の実測値です……）短縮します。": "The wait is shortened by 1/60 of a second when executed from a comment, and by 3/60 of a second during parallel processing (these are measured values with no known basis...).",
+    "行動中ステートアニメを禁止（actingNoStateAnimation） ver1.07": "Disable State Animations While Acting (actingNoStateAnimation) ver1.07",
+    "アクション中はステートのメモ欄に指定したアニメーションを非表示にします。": "Animations specified in a state's note field are hidden while an action is being performed.",
+    "メモ欄＆注釈からの起動": "Activation from Note Fields and Comments",
+    "というように、マップイベントやステート、アクター、敵キャラのメモ欄にスキルＩＤを指定すると、そのアニメーションが自動実行されます。煙突や燭台などのオブジェから炎をまとうステートまで様々な用途に活用できます。": "As shown here, specifying a skill ID in the note field of a map event, state, actor, or enemy automatically plays that animation. It can be used for a variety of purposes, from objects such as chimneys and candlesticks to states that cover something in flames.",
+    "また、イベントページ先頭の注釈に記入しても有効です。": "It is also effective when entered in a comment at the beginning of an event page.",
+    "こちらは現在のページ毎に状態を切り替えることも可能です。": "The state can also be switched for each current page.",
+    "同時に指定した場合はページ毎の指定が優先されます。": "If both are specified, the setting for each page takes priority.",
+    "途中から再生 ver1.09": "Play from the Middle ver1.09",
+    "アニメーションを進めた状態から再生します。マップを切り替えた直後から表示して欲しい演出などに有用です。": "Plays the animation from an advanced state. This is useful for effects that should be displayed immediately after switching maps.",
+    "以下をスキルのメモ欄へ設定してください。": "Set the following in the skill's note field.",
+    "?=30ならば、アニメーションを30フレーム進めた状態から開始します。": "If ?=30, the animation starts after advancing 30 frames.",
+    "※標準では1フレーム＝1/15秒です。": "※By default, 1 frame = 1/15 of a second.",
+    "※メモ欄で指定したDynamicAnimationの全体フレーム数よりも、長い値を指定しても機能しません。その場合は、repeatなどを指定して調整してください。": "※This will not work if you specify a value longer than the total number of frames in the DynamicAnimation specified in the note field. In that case, adjust it by specifying repeat or another setting.",
+    "以下はこの機能を使用したサンプルです。": "The following is a sample using this feature.",
+    "http://newrpg.seesaa.net/article/477704129.html#sunshine": "http://newrpg.seesaa.net/article/477704129.html#sunshine",
+    "注意点": "Notes",
+    "ＭＺアニメーションが非常に重いのは前述の通りです。": "As mentioned above, MZ animations are extremely resource-intensive.",
+    "ＭＶアニメーションを使用しているのに、動作が重い場合は以下のような原因が考えられます。": "Even when using MV animations, the following causes may result in slow performance.",
+    "色調変更を使用している。": "Using screen tone changes.",
+    "代替案として、アニメーションの画像ファイル自体をペインターなどであらかじめ変更しておく方法があります。": "As an alternative, you can use a painter or similar tool to modify the animation image files themselves in advance.",
+    "対象のフラッシュを多用している。": "Using target flashes excessively.",
+    "効果音を多用している。": "Using sound effects excessively.",
+    "動作に影響を与える外部プラグインを使っている。": "Using an external plugin that affects performance.",
+    "特にデバッグ系やアニメーション系のプラグインにご注意ください。": "Be especially careful with debugging and animation plugins.",
+    "Ｆ２でＦＰＳを表示できますので、どれぐらいの重さになるかが確認できます。": "You can display the FPS by pressing F2, allowing you to check how much the performance is affected.",
+    "通常、処理の重さはアニメーションの表示間隔（interval）に依存します。単純なアニメーションをinterval = 1/2や1/4で表示した程度で動作が重くなることはまずありません。重くなる場合は何らかの要因がある可能性が高いです。": "Normally, processing load depends on the animation display interval (interval). Simply displaying a simple animation with interval = 1/2 or 1/4 will almost never cause slow performance. If performance does become slow, there is likely some underlying cause.",
+    "なお、戦闘中のDynamicAnimationと完全に同じ動作を保証できるものではありません。どうにかこうにかいい感じになるよう調整していますが、ダメなこともあるかもしれません。": "Please note that this cannot guarantee behavior exactly identical to DynamicAnimation during battles. I am adjusting it as best I can to make it work well, but there may be cases where it does not work properly.",
+    "特にスクロール時の挙動に対応できていない部分があります。": "In particular, there are parts that do not support behavior during scrolling."
+  }
+}

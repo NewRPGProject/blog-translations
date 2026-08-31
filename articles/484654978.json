@@ -1,0 +1,1392 @@
+{
+  "articleId": "484654978",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484654978.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2a28d938a8bdb5e06a5e019232c69e20186e432792c9b5457139ab1970bd7bdc",
+  "translatedAt": "2026-08-31T02:09:55.171Z",
+  "title": "Standardize Item Acquisition Processing [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "アイテムの入手処理を共通化【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "ad4faf7ee7fe74236bfd4db02b3ea09d1b6fc2efc586b4f9d520e703041cef4f",
+      "translation": "Standardize Item Acquisition Processing [RPG Maker MZ & MV Plugin]",
+      "contextHash": "ad4faf7ee7fe74236bfd4db02b3ea09d1b6fc2efc586b4f9d520e703041cef4f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "アイテムの入手処理を共通化します。",
+      "sourceHash": "235904f3d2644ee956c8b8a1c2e623d8c33eac2e1add2ad0303d9d5dc4e3331a",
+      "translation": "Standardizes item acquisition processing.",
+      "contextHash": "235904f3d2644ee956c8b8a1c2e623d8c33eac2e1add2ad0303d9d5dc4e3331a"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "※なお、以下ではアイテムと記載していますが、武器、防具、所持金の全てに対して有効です。",
+      "sourceHash": "5678f708b25d1794c2a6cc227f19064f6b8357a3542f096001f663891e5e8de6",
+      "translation": "※Although referred to as items below, this applies to items, weapons, armor, and gold.",
+      "contextHash": "5678f708b25d1794c2a6cc227f19064f6b8357a3542f096001f663891e5e8de6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "アイテムの増減時、自動的にコモンイベントを呼び出します。",
+      "sourceHash": "0865d90c4ee81b1ea76abea3581c227dd984a660cc7840d69b5dee11762aaf60",
+      "translation": "Automatically calls a common event when the amount of an item changes.",
+      "contextHash": "0865d90c4ee81b1ea76abea3581c227dd984a660cc7840d69b5dee11762aaf60"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "さらに直前に入手したアイテムの情報（アイテム名や増減量など）をプラグインコマンドで参照することによって、入手処理の共通化を実現します。",
+      "sourceHash": "b8604d98e2d3afe87d2587e100123b082d7776cc28e8fb65608d4b4a6641b854",
+      "translation": "You can standardize acquisition processing by referencing information about the item acquired most recently (such as its name and quantity change) using plugin commands.",
+      "contextHash": "b8604d98e2d3afe87d2587e100123b082d7776cc28e8fb65608d4b4a6641b854"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "また、指定のスイッチがオンの間だけ、コモンイベントの呼び出しを禁止することもできます。",
+      "sourceHash": "94be934ecb3fe9c2a582031038df42a88792a7e77b4683527c94e92cf5eb9f57",
+      "translation": "You can also prohibit common events from being called only while a specified switch is ON.",
+      "contextHash": "94be934ecb3fe9c2a582031038df42a88792a7e77b4683527c94e92cf5eb9f57"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the file below to save it, then place it in [Project]\\js\\plugins. Turn the plugin ON in the plugin manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_GetItemCommon.js",
+      "sourceHash": "cccbb4f79adf9bf5e099aa859befa024d6e1d647283246c9aa90079cde56f0fa",
+      "translation": "NRP_GetItemCommon.js ",
+      "contextHash": "ef7d2a8eaae3693766b0e697f120d3b7a081182065b5e76b19d5481f29b7f078"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.021（2025/04/07）",
+      "sourceHash": "10d7ac88fa60ee25d247428cda857dde1a416727084317d39e4588cac282630a",
+      "translation": "ver1.021 (2025/04/07) ",
+      "contextHash": "ef7d2a8eaae3693766b0e697f120d3b7a081182065b5e76b19d5481f29b7f078"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/12/04 -> 2025/04/07（ver1.02 -> 1.021）",
+      "sourceHash": "0c46741c91580cb1295aca6c89735fca8256d563f329a86f821a918d8054bc9c",
+      "translation": "2024/12/04 -> 2025/04/07 (ver1.02 -> 1.021) ",
+      "contextHash": "0c46741c91580cb1295aca6c89735fca8256d563f329a86f821a918d8054bc9c"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "↑のアイテム入手履歴が正しく設定できていない不具合修正。",
+      "sourceHash": "10ad376d5a59a0de1f5073376a42a79a4f8d952bcedd7e5d06db87279a8f2dd7",
+      "translation": "Fixed a bug that prevented the item acquisition history above from being set correctly.",
+      "contextHash": "10ad376d5a59a0de1f5073376a42a79a4f8d952bcedd7e5d06db87279a8f2dd7"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "（2025/04/07 ver1.021）",
+      "sourceHash": "e185f5d0e13084657ab97ad787cdb4f220ac3a5bf4bf0bcd5828bc64c1369aed",
+      "translation": " (2025/04/07 ver1.021) ",
+      "contextHash": "e185f5d0e13084657ab97ad787cdb4f220ac3a5bf4bf0bcd5828bc64c1369aed"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "※残念ながら、更新しても既に異常となったデータは修正されません……。",
+      "sourceHash": "d4d5d755d1eed18c357838f6a4bfd71342236ea904b5cfba68c28aa9f30ee848",
+      "translation": "※Unfortunately, updating will not fix data that has already become corrupted…….",
+      "contextHash": "d4d5d755d1eed18c357838f6a4bfd71342236ea904b5cfba68c28aa9f30ee848"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2022/01/08（ver1.01）",
+      "sourceHash": "52b6927cdfc61c15d6912afda835b2b627ade38722ab38f8ace1604777b321fe",
+      "translation": "2022/01/08 (ver1.01) ",
+      "contextHash": "52b6927cdfc61c15d6912afda835b2b627ade38722ab38f8ace1604777b321fe"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "説明文などの文字列が空の場合、不要な文字列が表示される不具合修正。",
+      "sourceHash": "813c1a743e1f5625fbaaf7b6d1e99ab65b180b66becfc16202021b4f43bbc729",
+      "translation": "Fixed a bug that displayed unnecessary text when strings such as descriptions were empty.",
+      "contextHash": "813c1a743e1f5625fbaaf7b6d1e99ab65b180b66becfc16202021b4f43bbc729"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "他プラグインとの競合対処用に微調整。",
+      "sourceHash": "64b39b8b5c3ce49e0e767eee15d077345b9c2d6391ad047cc8aa8af81e5426fe",
+      "translation": "Minor adjustments to address conflicts with other plugins.",
+      "contextHash": "64b39b8b5c3ce49e0e767eee15d077345b9c2d6391ad047cc8aa8af81e5426fe"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/12/04（ver1.00）",
+      "sourceHash": "e0e0fa389476f39724087cc5d4ed56fc7ee73b4e1816e9d574bb30eedcd19277",
+      "translation": "2021/12/04 (ver1.00) ",
+      "contextHash": "e0e0fa389476f39724087cc5d4ed56fc7ee73b4e1816e9d574bb30eedcd19277"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "アイテム入手後に呼び出されるコモンイベントを作成し、プラグインパラメータに設定してください。",
+      "sourceHash": "86aff83e5864f80c5f3058932eaf75b645fe0cd32cd35e77c9febdb44382b0e5",
+      "translation": "Create a common event to be called after an item is acquired and set it in the plugin parameter.",
+      "contextHash": "86aff83e5864f80c5f3058932eaf75b645fe0cd32cd35e77c9febdb44382b0e5"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※アイテム、武器、防具、所持金のそれぞれに対して設定可能ですが、所持金以外は同じコモンイベントでも問題ないと思います。",
+      "sourceHash": "de4d5a60acb7d0d1cfca5fb9c7fd472d42b9a314b3184b0f2a30d93b43fa021c",
+      "translation": "※You can configure each of items, weapons, armor, and gold separately, but items, weapons, and armor can probably use the same common event.",
+      "contextHash": "de4d5a60acb7d0d1cfca5fb9c7fd472d42b9a314b3184b0f2a30d93b43fa021c"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "プラグインコマンドで入手したアイテムの情報を取得し、変数に格納します。",
+      "sourceHash": "0ce46ac483e69e34aa1e859db55e06b97e2f25e5757713e4bc02ac1b4436f03a",
+      "translation": "Retrieve information about the item acquired using plugin commands and store it in variables.",
+      "contextHash": "0ce46ac483e69e34aa1e859db55e06b97e2f25e5757713e4bc02ac1b4436f03a"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "以下の例では……",
+      "sourceHash": "317cf395d0f8ae14086e2b10e141fca644ebaecec74b6264163efc416f2610fc",
+      "translation": "For example……",
+      "contextHash": "317cf395d0f8ae14086e2b10e141fca644ebaecec74b6264163efc416f2610fc"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "アイテム名を変数１",
+      "sourceHash": "a1118e5d88639b038902830b7c31867d707016fca48d7ae078b393c3426624b4",
+      "translation": "Item name in Variable 1",
+      "contextHash": "a1118e5d88639b038902830b7c31867d707016fca48d7ae078b393c3426624b4"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "増減量を変数２",
+      "sourceHash": "9cc60316d6e7e45d046f1628351dcd427101889c2e5a5ea9ada3ee6bb6161eb4",
+      "translation": "Quantity change in Variable 2",
+      "contextHash": "9cc60316d6e7e45d046f1628351dcd427101889c2e5a5ea9ada3ee6bb6161eb4"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "説明文を変数３",
+      "sourceHash": "408d7c5d4f8a9e34f70e21c999ca949366257233cb57ce9b9d0918dfd8078aa8",
+      "translation": "Description in Variable 3",
+      "contextHash": "408d7c5d4f8a9e34f70e21c999ca949366257233cb57ce9b9d0918dfd8078aa8"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "アイコンＩＤを変数４",
+      "sourceHash": "d2e83f95070573d0624d07b8de19606427eabe5d55ed85315557c87ed76f26cf",
+      "translation": "Icon ID in Variable 4",
+      "contextHash": "d2e83f95070573d0624d07b8de19606427eabe5d55ed85315557c87ed76f26cf"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "……にそれぞれ格納しています。",
+      "sourceHash": "89c101bd0882cc19bcf0fd76d39ea80c5e202740b7d2dad207b88081b47232aa",
+      "translation": "……respectively.",
+      "contextHash": "89c101bd0882cc19bcf0fd76d39ea80c5e202740b7d2dad207b88081b47232aa"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "さらにそれをメッセージで表示します。",
+      "sourceHash": "7d6737af10941e7b3a9d4a8c44307725be507e402544ecdcbf7eae29c3bada3a",
+      "translation": "You can then display it in a message.",
+      "contextHash": "7d6737af10941e7b3a9d4a8c44307725be507e402544ecdcbf7eae29c3bada3a"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "増減量によって、メッセージを分岐させたほうが違和感ないと思います。",
+      "sourceHash": "c46c221904e92e137580ccfed961cc58113e365804fbbd651ffae23f1d273311",
+      "translation": "It may feel more natural to branch the message depending on the quantity change.",
+      "contextHash": "c46c221904e92e137580ccfed961cc58113e365804fbbd651ffae23f1d273311"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "アイテム、武器、防具の場合",
+      "sourceHash": "816f6a9ba4475f5931a9d68644d00fa10486aca2868002532a00720d0fbca2fe",
+      "translation": "For Items, Weapons, and Armor",
+      "contextHash": "816f6a9ba4475f5931a9d68644d00fa10486aca2868002532a00720d0fbca2fe"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "増減量が１の時",
+      "sourceHash": "837df3e83c1452651135257a3f426cc8f99ac50af0a1b8d8600a2917f5f0390b",
+      "translation": "When the Quantity Change Is 1",
+      "contextHash": "837df3e83c1452651135257a3f426cc8f99ac50af0a1b8d8600a2917f5f0390b"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "\\i[\\v[4]]\\v[1]を手に入れた！",
+      "sourceHash": "3332d2c8da553601bc490cef731efaac092a81cc1e8e91c9bed1bba33120d494",
+      "translation": "\\i[\\v[4]]\\v[1] obtained!",
+      "contextHash": "3332d2c8da553601bc490cef731efaac092a81cc1e8e91c9bed1bba33120d494"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "アイテムの増減量が２以上の時",
+      "sourceHash": "777fd41ec6008efe7dcbdd11525df2793088bdf07bbdb49b3475c13b4cebe358",
+      "translation": "When the Item Quantity Change Is 2 or More",
+      "contextHash": "777fd41ec6008efe7dcbdd11525df2793088bdf07bbdb49b3475c13b4cebe358"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "\\i[\\v[4]]\\v[1]を\\v[2]個手に入れた！",
+      "sourceHash": "c74578d52d15c91f502376ba70def185e7fdfdef0d7fc0e78a1fa2dccb80b997",
+      "translation": "\\i[\\v[4]]\\v[1]to\\v[2] obtained!",
+      "contextHash": "c74578d52d15c91f502376ba70def185e7fdfdef0d7fc0e78a1fa2dccb80b997"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "アイテムの増減量が－１以下の時",
+      "sourceHash": "3f86f1bff8d4e448c017896d7d633575053e78b545e67d7715aca51a892b122b",
+      "translation": "When the Item Quantity Change Is -1 or Less",
+      "contextHash": "3f86f1bff8d4e448c017896d7d633575053e78b545e67d7715aca51a892b122b"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "\\i[\\v[4]]\\v[1]を\\v[2]個失った……。",
+      "sourceHash": "49be1bb0fd3709b797db25ccd0e115232eef8180566b87853dbde8f00c244101",
+      "translation": "\\i[\\v[4]]\\v[1]to\\v[2] lost...",
+      "contextHash": "49be1bb0fd3709b797db25ccd0e115232eef8180566b87853dbde8f00c244101"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※増減量に-1を乗算して反転させています。",
+      "sourceHash": "86978b58372b66289591cb11e51a8413f637fd854dc4f60d7b247ae7e3e8e720",
+      "translation": "※The quantity change is inverted by multiplying it by -1.",
+      "contextHash": "86978b58372b66289591cb11e51a8413f637fd854dc4f60d7b247ae7e3e8e720"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "所持金の場合",
+      "sourceHash": "8eef8085c6b5310e8f4c863075b64803b6eebc0fbe237a7358732f74a2ca980f",
+      "translation": "For Gold",
+      "contextHash": "8eef8085c6b5310e8f4c863075b64803b6eebc0fbe237a7358732f74a2ca980f"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※対象が『所持金』の場合は増減量のみが有効となります。",
+      "sourceHash": "c926db4d6856674abfbc9345910765720c4ae932c1cd6a3e008c5ec6ca89f298",
+      "translation": "※When the target is “Gold,” only the quantity change is effective.",
+      "contextHash": "c926db4d6856674abfbc9345910765720c4ae932c1cd6a3e008c5ec6ca89f298"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "増減量が１以上の時",
+      "sourceHash": "669e68f29ef5873e90062888c87adc42d367eb3c0e127f4443eeea844bab08ff",
+      "translation": "When the Quantity Change Is 1 or More",
+      "contextHash": "669e68f29ef5873e90062888c87adc42d367eb3c0e127f4443eeea844bab08ff"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "\\v[2]\\gを手に入れた！",
+      "sourceHash": "0c16faa1baf4177fe439326c0b0c8184da595f658362c85517e76634610e1a74",
+      "translation": "\\v[2]\\g obtained!",
+      "contextHash": "0c16faa1baf4177fe439326c0b0c8184da595f658362c85517e76634610e1a74"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "増減量が－１以下の時",
+      "sourceHash": "b1ebfb09df96cb111ccce927f0087497289d16ee9f5f4ec835f45703c7f71268",
+      "translation": "When the Quantity Change Is -1 or Less",
+      "contextHash": "b1ebfb09df96cb111ccce927f0087497289d16ee9f5f4ec835f45703c7f71268"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "\\v[2]\\gを失った……。",
+      "sourceHash": "cc1f6db72414a239d0d41d3a6b2f7a3c46aa3aef723ef22b39fe168f8cb5bc4e",
+      "translation": "\\v[2]\\g lost...",
+      "contextHash": "cc1f6db72414a239d0d41d3a6b2f7a3c46aa3aef723ef22b39fe168f8cb5bc4e"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※増減量に-1を乗算して反転させています。",
+      "sourceHash": "86978b58372b66289591cb11e51a8413f637fd854dc4f60d7b247ae7e3e8e720",
+      "translation": "※The quantity change is inverted by multiplying it by -1.",
+      "contextHash": "86978b58372b66289591cb11e51a8413f637fd854dc4f60d7b247ae7e3e8e720"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "これらはあくまで一例です。演出なども自由に挟んでください。",
+      "sourceHash": "7f48168676541f46ed10b7f330ea350bb2f15feda136235cbe29d9ab86f7f62d",
+      "translation": "These are only examples. Feel free to add effects and other elements as desired.",
+      "contextHash": "7f48168676541f46ed10b7f330ea350bb2f15feda136235cbe29d9ab86f7f62d"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "後は『アイテムの増減』『武器の増減』『防具の増減』『所持金の増減』の各処理を実行した際にメッセージが表示されればＯＫです。",
+      "sourceHash": "2aecaa6f51e42c2cd03bc6b6bade4045a408b8e0229b55e768886b9bd4d1d5f6",
+      "translation": "After that, messages should be displayed whenever you execute the “Change Items,” “Change Weapons,” “Change Armor,” or “Change Gold” processes.",
+      "contextHash": "2aecaa6f51e42c2cd03bc6b6bade4045a408b8e0229b55e768886b9bd4d1d5f6"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "また、必ずしも全ての場合に対してメッセージが必要なわけではありません。例えば「アイテムの『増減量が－１以下の時』については、頻度も低いので、通常のイベント内でメッセージを記述する」といった運用でもよいと思います。",
+      "sourceHash": "edb135fdb9fac95a5cb3047e3fbdf584bd235e5d6fccfc1a25aef41b63311bb2",
+      "translation": "A message is not necessarily required in every case. For example, since “when the item quantity change is -1 or less” occurs infrequently, you could simply write the message in the regular event instead.",
+      "contextHash": "edb135fdb9fac95a5cb3047e3fbdf584bd235e5d6fccfc1a25aef41b63311bb2"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "共通処理を実行したくない場合は『無効化スイッチ』を設定することもできますので、柔軟に対応してください。",
+      "sourceHash": "16e5e1169a297a36a18c4cca2bd09db81a791e2e4c577cf2e4ff6fdb0837e8d0",
+      "translation": "If you do not want to execute the common processing, you can set a “Disable Switch,” allowing for flexible handling.",
+      "contextHash": "16e5e1169a297a36a18c4cca2bd09db81a791e2e4c577cf2e4ff6fdb0837e8d0"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "Plugin Command for MZ (Plugin Command MZ)",
+      "contextHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "直前に入手したアイテムの各情報を変数に格納します。",
+      "sourceHash": "5d4cb4ea0cf0b73d0cffaa90253f5078d313cc1f6d18dede99900fa05b4f215b",
+      "translation": "Stores the information for the item acquired most recently in variables.",
+      "contextHash": "5d4cb4ea0cf0b73d0cffaa90253f5078d313cc1f6d18dede99900fa05b4f215b"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "メッセージ内で\\v[1]のように変数を指定すると、値が表示されます。",
+      "sourceHash": "f8716361432b983aec99ff2144008b01aa8eeb9528ea1ff1476b004c1c2fe895",
+      "translation": "Specifying a variable in a message, such as \\v[1], displays its value.",
+      "contextHash": "f8716361432b983aec99ff2144008b01aa8eeb9528ea1ff1476b004c1c2fe895"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "※対象が『所持金』の場合は増減量のみが有効となります。",
+      "sourceHash": "c926db4d6856674abfbc9345910765720c4ae932c1cd6a3e008c5ec6ca89f298",
+      "translation": "※When the target is “Gold,” only the quantity change is effective.",
+      "contextHash": "c926db4d6856674abfbc9345910765720c4ae932c1cd6a3e008c5ec6ca89f298"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "アイテム名を取得",
+      "sourceHash": "317b1aa913c48c3133e7021ed7ef4efa3d7279969db8476e0729bc9691288535",
+      "translation": "Get Item Name",
+      "contextHash": "317b1aa913c48c3133e7021ed7ef4efa3d7279969db8476e0729bc9691288535"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "直前に入手したアイテムの名前を変数へ格納します。",
+      "sourceHash": "453699a528aa36c56ef78f0fce5d41320f8f43a88658c1f6d8bf8c849677a072",
+      "translation": "Stores the name of the item acquired most recently in a variable.",
+      "contextHash": "453699a528aa36c56ef78f0fce5d41320f8f43a88658c1f6d8bf8c849677a072"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "増減量を取得",
+      "sourceHash": "7f4b81c5b7c39e3437f42266b7d34843e9bba4967e26ea1a0233035920d9d3f7",
+      "translation": "Get Quantity Change",
+      "contextHash": "7f4b81c5b7c39e3437f42266b7d34843e9bba4967e26ea1a0233035920d9d3f7"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "直前に入手したアイテムの増減量を変数へ格納します。",
+      "sourceHash": "38fb50d4fc5e4efbcf9481e4c5e8176789cd262667b0008dd299a0212e1a7ac9",
+      "translation": "Stores the quantity change of the item acquired most recently in a variable.",
+      "contextHash": "38fb50d4fc5e4efbcf9481e4c5e8176789cd262667b0008dd299a0212e1a7ac9"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "説明文を取得",
+      "sourceHash": "f75e07c006e36583611f93abd3c7c8ad73a1c41b727bdd5407d44258edb336a0",
+      "translation": "Get Description",
+      "contextHash": "f75e07c006e36583611f93abd3c7c8ad73a1c41b727bdd5407d44258edb336a0"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "直前に入手したアイテムの説明文を変数へ格納します。",
+      "sourceHash": "b177763b9530f069fae002523fcf3e452d0dc71e05be3d9b7d32ffc9fcf73afd",
+      "translation": "Stores the description of the most recently obtained item in a variable.",
+      "contextHash": "b177763b9530f069fae002523fcf3e452d0dc71e05be3d9b7d32ffc9fcf73afd"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "改行も有効です。",
+      "sourceHash": "0b63a14896fe67562285c8728841eba0a103932ec6ebca524abbe97aaa6d664a",
+      "translation": "Line breaks are also supported.",
+      "contextHash": "0b63a14896fe67562285c8728841eba0a103932ec6ebca524abbe97aaa6d664a"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "アイコンを取得",
+      "sourceHash": "23d4bf62c438c0f795e1b7f86de69a4fa894e6d6ecad1795efc5d108b37bcb65",
+      "translation": "Get Icon",
+      "contextHash": "23d4bf62c438c0f795e1b7f86de69a4fa894e6d6ecad1795efc5d108b37bcb65"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "直前に入手したアイテムのアイコンＩＤを変数へ格納します。",
+      "sourceHash": "a8f0d8ef0fe08d4cde06727acdfe76da04b49161a77b80b53b264270618b8658",
+      "translation": "Stores the icon ID of the most recently obtained item in a variable.",
+      "contextHash": "a8f0d8ef0fe08d4cde06727acdfe76da04b49161a77b80b53b264270618b8658"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "分類を取得",
+      "sourceHash": "85d105fac03c5f0cf94181cd017fb7d8e06659aeea93a5ff698f862df7ce934e",
+      "translation": "Get Classification",
+      "contextHash": "85d105fac03c5f0cf94181cd017fb7d8e06659aeea93a5ff698f862df7ce934e"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "直前に入手したアイテムの分類を変数へ格納します。",
+      "sourceHash": "a392b8db234c93f2ce87fb178c56c824865775866cbe8c488dc47d9d79cde420",
+      "translation": "Stores the classification of the most recently obtained item in a variable.",
+      "contextHash": "a392b8db234c93f2ce87fb178c56c824865775866cbe8c488dc47d9d79cde420"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "ＩＤを取得",
+      "sourceHash": "a43b4748d462d9cd3b79869b88e0ed80d78931687a25cad9ccf55a9fd1a8befa",
+      "translation": "Get ID",
+      "contextHash": "a43b4748d462d9cd3b79869b88e0ed80d78931687a25cad9ccf55a9fd1a8befa"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "直前に入手したアイテムＩＤを変数へ格納します。",
+      "sourceHash": "e5569399ffd7eacbb58f0e98d3da3d1bab404240fa39647f6332c4be17811ebc",
+      "translation": "Stores the ID of the most recently obtained item in a variable.",
+      "contextHash": "e5569399ffd7eacbb58f0e98d3da3d1bab404240fa39647f6332c4be17811ebc"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "タイプを取得",
+      "sourceHash": "f43083d404861ca644ccaac1b37cb125be65c548963e90bae15b661ef0c30710",
+      "translation": "Get Type",
+      "contextHash": "f43083d404861ca644ccaac1b37cb125be65c548963e90bae15b661ef0c30710"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "直前に入手したアイテムのタイプを変数へ格納します。",
+      "sourceHash": "d3f63ce18e64fab8fb2b3990efff338fad6156ad1360d104108d06f5fdae5f8a",
+      "translation": "Stores the type of the most recently obtained item in a variable.",
+      "contextHash": "d3f63ce18e64fab8fb2b3990efff338fad6156ad1360d104108d06f5fdae5f8a"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "アイテム、武器、防具、それぞれのタイプに対応します。",
+      "sourceHash": "9e64a5ff07796a9eb8b793c9c986be4e1257d54acc11765fa9468af6aed017a7",
+      "translation": "This corresponds to the types of items, weapons, and armor.",
+      "contextHash": "9e64a5ff07796a9eb8b793c9c986be4e1257d54acc11765fa9468af6aed017a7"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "アイテムの場合は以下の通りです。",
+      "sourceHash": "216eb9fd801d9183284b0ad75850f2e916c462cee6b5b1971fb33d93f316e715",
+      "translation": "For items, they are as follows.",
+      "contextHash": "216eb9fd801d9183284b0ad75850f2e916c462cee6b5b1971fb33d93f316e715"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "1:通常アイテム、2:大事なもの、3:隠しアイテムA、4:隠しアイテムB",
+      "sourceHash": "6d33b6d2a493c1a28671c64207d9c684c8039808d7ba41d4067d1fe4d3ca1492",
+      "translation": "1: Regular Item, 2: Key Item, 3: Hidden Item A, 4: Hidden Item B",
+      "contextHash": "6d33b6d2a493c1a28671c64207d9c684c8039808d7ba41d4067d1fe4d3ca1492"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "※武器防具についてはデータベースの設定値を参照してください。",
+      "sourceHash": "2d94ff50c53d69bb4259ec9bc1dd7c58c41e67abd3e034e054f130ed03bd8963",
+      "translation": "※For weapons and armor, refer to the values configured in the database.",
+      "contextHash": "2d94ff50c53d69bb4259ec9bc1dd7c58c41e67abd3e034e054f130ed03bd8963"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "装備タイプを取得",
+      "sourceHash": "911945f5baff718a323cb3ae207585e5a4560283f1f350e5dacb3d6d676983c0",
+      "translation": "Get Equip Type",
+      "contextHash": "911945f5baff718a323cb3ae207585e5a4560283f1f350e5dacb3d6d676983c0"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "直前に入手した防具の装備タイプを変数へ格納します。",
+      "sourceHash": "d751721a3321eed10b9b5577c665624832b706c2c06e499ecdbc366833c72de2",
+      "translation": "Stores the equip type of the most recently obtained armor in a variable.",
+      "contextHash": "d751721a3321eed10b9b5577c665624832b706c2c06e499ecdbc366833c72de2"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "※選択はできませんが、実際には武器も1が固定で設定される模様です。",
+      "sourceHash": "371e81245e3993f12d440c398f57b4236ebf1f711a65497ac3ebea6aa1487335",
+      "translation": "※Although it cannot be selected, weapons also appear to actually be assigned 1 by default.",
+      "contextHash": "371e81245e3993f12d440c398f57b4236ebf1f711a65497ac3ebea6aa1487335"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "メタ値を取得",
+      "sourceHash": "2016629ff8c21cd2115583455a0601d9d54f8228567df61e82765df83bba7ac6",
+      "translation": "Get Meta Value",
+      "contextHash": "2016629ff8c21cd2115583455a0601d9d54f8228567df61e82765df83bba7ac6"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "直前に入手したアイテムのメタ値を変数へ格納します。",
+      "sourceHash": "44c2a9a5c1fd95688ccaef6b6e709cbe90b22537059a2279cf8da50350be2dce",
+      "translation": "Stores the meta value of the most recently obtained item in a variable.",
+      "contextHash": "44c2a9a5c1fd95688ccaef6b6e709cbe90b22537059a2279cf8da50350be2dce"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "この項目のみ定義名の指定が必要です。",
+      "sourceHash": "59e46bbd9dfbe0a8211e436c2be1a5d87495cad42b5384db8402d6c75b454ffe",
+      "translation": "Only this item requires you to specify a definition name.",
+      "contextHash": "59e46bbd9dfbe0a8211e436c2be1a5d87495cad42b5384db8402d6c75b454ffe"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "メタ値とはメモ欄にユーザが定義した値のことです。",
+      "sourceHash": "2c46766ec0034223d4b3f43349dd0473149c4be9d70eb59c2446c86fb807cb56",
+      "translation": "A meta value is a value defined by the user in the note field.",
+      "contextHash": "2c46766ec0034223d4b3f43349dd0473149c4be9d70eb59c2446c86fb807cb56"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "例えば、<Test:100>と記述した場合、『Test』の部分を定義名に指定すると、変数に100が格納されます。",
+      "sourceHash": "31ba57cec7f72f75f5ac588bf78ade7a6e47e7bcb0f8d3826aca6916fe918a7d",
+      "translation": "For example, if you write <Test:100> and specify “Test” as the definition name, 100 is stored in the variable.",
+      "contextHash": "31ba57cec7f72f75f5ac588bf78ade7a6e47e7bcb0f8d3826aca6916fe918a7d"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "独自にアイテムの区別を行いたい場合などに便利かもしれません。",
+      "sourceHash": "928ae36bdd47d530783b781dc263b6ea6ee383d5fcd34d3a0ec926dc7a2f2924",
+      "translation": "This may be useful when you want to distinguish items in your own way.",
+      "contextHash": "928ae36bdd47d530783b781dc263b6ea6ee383d5fcd34d3a0ec926dc7a2f2924"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "※<Important:1>の場合のみ、入手時にファンファーレを鳴らすなど。",
+      "sourceHash": "af6d696a1ed339df42ed0546fc95ece3529259aecfbbdcd160dbe24de39fc8be",
+      "translation": "※For example, playing a fanfare when obtaining an item only if it has <Important:1>.",
+      "contextHash": "af6d696a1ed339df42ed0546fc95ece3529259aecfbbdcd160dbe24de39fc8be"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+      "sourceHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075",
+      "translation": "Plugin Commands for MV (Plugin Command MV)",
+      "contextHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "機能はＭＺ版と全く同じなので割愛します。",
+      "sourceHash": "76bce446c79faf932c33726c2bf257278ff6eee607302a7472ec417ebe314cd4",
+      "translation": "The functionality is exactly the same as in the MZ version, so it is omitted.",
+      "contextHash": "76bce446c79faf932c33726c2bf257278ff6eee607302a7472ec417ebe314cd4"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "以下のコマンドを呼び出してください。",
+      "sourceHash": "b93e3c47cece9823b0271477276159a890f352ae981db2df48deaa7a451d22ea",
+      "translation": "Call the following commands.",
+      "contextHash": "b93e3c47cece9823b0271477276159a890f352ae981db2df48deaa7a451d22ea"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "※大文字個別は区別しません。また[]は含まないでください。",
+      "sourceHash": "d3a3d00c8fe9cf82796ffd17b04f2921c5c289b78a8a442928a008833f653462",
+      "translation": "※Uppercase and lowercase letters are not distinguished. Also, do not include [].",
+      "contextHash": "d3a3d00c8fe9cf82796ffd17b04f2921c5c289b78a8a442928a008833f653462"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "アイテム名を取得",
+      "sourceHash": "317b1aa913c48c3133e7021ed7ef4efa3d7279969db8476e0729bc9691288535",
+      "translation": "Get Item Name",
+      "contextHash": "317b1aa913c48c3133e7021ed7ef4efa3d7279969db8476e0729bc9691288535"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetName [変数ＩＤ]",
+      "sourceHash": "a41de96005904196dc45b10dd171f8d79ad718328337758f6f42e624274b73d7",
+      "translation": "NRP.GetItemCommon.GetName [Variable ID]",
+      "contextHash": "a41de96005904196dc45b10dd171f8d79ad718328337758f6f42e624274b73d7"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "増減量を取得",
+      "sourceHash": "7f4b81c5b7c39e3437f42266b7d34843e9bba4967e26ea1a0233035920d9d3f7",
+      "translation": "Get Increase/Decrease Amount",
+      "contextHash": "7f4b81c5b7c39e3437f42266b7d34843e9bba4967e26ea1a0233035920d9d3f7"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetAmount [変数ＩＤ]",
+      "sourceHash": "12096d55798becf35281161b808111807b8569a5215062b0b993ce17a139f608",
+      "translation": "NRP.GetItemCommon.GetAmount [Variable ID]",
+      "contextHash": "12096d55798becf35281161b808111807b8569a5215062b0b993ce17a139f608"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "説明文を取得",
+      "sourceHash": "f75e07c006e36583611f93abd3c7c8ad73a1c41b727bdd5407d44258edb336a0",
+      "translation": "Get Description",
+      "contextHash": "f75e07c006e36583611f93abd3c7c8ad73a1c41b727bdd5407d44258edb336a0"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetDescription [変数ＩＤ]",
+      "sourceHash": "05feb996ec0ceb26b8b487f404ac2c6acb984ad272aa6fa2f5b6233aa38bbd16",
+      "translation": "NRP.GetItemCommon.GetDescription [Variable ID]",
+      "contextHash": "05feb996ec0ceb26b8b487f404ac2c6acb984ad272aa6fa2f5b6233aa38bbd16"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "アイコンを取得",
+      "sourceHash": "23d4bf62c438c0f795e1b7f86de69a4fa894e6d6ecad1795efc5d108b37bcb65",
+      "translation": "Get Icon",
+      "contextHash": "23d4bf62c438c0f795e1b7f86de69a4fa894e6d6ecad1795efc5d108b37bcb65"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetIcon [変数ＩＤ]",
+      "sourceHash": "c7197154ab04671c28eb58508c310f1dff8f0a4e3b8f40dc8120a3c607f2cefe",
+      "translation": "NRP.GetItemCommon.GetIcon [Variable ID]",
+      "contextHash": "c7197154ab04671c28eb58508c310f1dff8f0a4e3b8f40dc8120a3c607f2cefe"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "分類を取得",
+      "sourceHash": "85d105fac03c5f0cf94181cd017fb7d8e06659aeea93a5ff698f862df7ce934e",
+      "translation": "Get Classification",
+      "contextHash": "85d105fac03c5f0cf94181cd017fb7d8e06659aeea93a5ff698f862df7ce934e"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetCategory [変数ＩＤ]",
+      "sourceHash": "ebb0cb5e7ceda09b5c33480dcb29dfb9fe4a484e8eed1da48622f35a9d1f91a1",
+      "translation": "NRP.GetItemCommon.GetCategory [Variable ID]",
+      "contextHash": "ebb0cb5e7ceda09b5c33480dcb29dfb9fe4a484e8eed1da48622f35a9d1f91a1"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "ＩＤを取得",
+      "sourceHash": "a43b4748d462d9cd3b79869b88e0ed80d78931687a25cad9ccf55a9fd1a8befa",
+      "translation": "Get ID",
+      "contextHash": "a43b4748d462d9cd3b79869b88e0ed80d78931687a25cad9ccf55a9fd1a8befa"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetId [変数ＩＤ]",
+      "sourceHash": "81c9ff519164a8ccfafbfbdaa337411e7c901d00c75c3f83cc4672cb4ec3753a",
+      "translation": "NRP.GetItemCommon.GetId [Variable ID]",
+      "contextHash": "81c9ff519164a8ccfafbfbdaa337411e7c901d00c75c3f83cc4672cb4ec3753a"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "タイプを取得",
+      "sourceHash": "f43083d404861ca644ccaac1b37cb125be65c548963e90bae15b661ef0c30710",
+      "translation": "Get Type",
+      "contextHash": "f43083d404861ca644ccaac1b37cb125be65c548963e90bae15b661ef0c30710"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "NRP.GetItemCommon.Type [変数ＩＤ]",
+      "sourceHash": "5a80808ef7dac679a23398a6433096a8908641048acb56a2c32a7fc3bd31d771",
+      "translation": "NRP.GetItemCommon.Type [Variable ID]",
+      "contextHash": "5a80808ef7dac679a23398a6433096a8908641048acb56a2c32a7fc3bd31d771"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "装備タイプを取得",
+      "sourceHash": "911945f5baff718a323cb3ae207585e5a4560283f1f350e5dacb3d6d676983c0",
+      "translation": "Get Equip Type",
+      "contextHash": "911945f5baff718a323cb3ae207585e5a4560283f1f350e5dacb3d6d676983c0"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "NRP.GetItemCommon.EquipType [変数ＩＤ]",
+      "sourceHash": "d771c7a020381afeab350736894a42d56ac769fa5e3a04872d1a54528fac67d0",
+      "translation": "NRP.GetItemCommon.EquipType [Variable ID]",
+      "contextHash": "d771c7a020381afeab350736894a42d56ac769fa5e3a04872d1a54528fac67d0"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "メタ値を取得",
+      "sourceHash": "2016629ff8c21cd2115583455a0601d9d54f8228567df61e82765df83bba7ac6",
+      "translation": "Get Meta Value",
+      "contextHash": "2016629ff8c21cd2115583455a0601d9d54f8228567df61e82765df83bba7ac6"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "NRP.GetItemCommon.GetMetaValue [定義名] [変数ＩＤ]",
+      "sourceHash": "b100058321e3a965968100efd2d29166ff37c7d3f318e2e6d1322f9ea1c7b699",
+      "translation": "NRP.GetItemCommon.GetMetaValue [Definition Name] [Variable ID]",
+      "contextHash": "b100058321e3a965968100efd2d29166ff37c7d3f318e2e6d1322f9ea1c7b699"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "所持金コモンイベント（GoldCommonEvent）",
+      "sourceHash": "4da468d923a8a00d8720fd30b60b948e10f599ebc4b9589ed0bad4a26534a4b1",
+      "translation": "Gold Common Event (GoldCommonEvent)",
+      "contextHash": "4da468d923a8a00d8720fd30b60b948e10f599ebc4b9589ed0bad4a26534a4b1"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "所持金の増減時に呼び出されるコモンイベントです。",
+      "sourceHash": "5826ff69d1617c92328321aecc717af2f3df6972a7a5f73136683a85e2218307",
+      "translation": "This common event is called when the amount of gold changes.",
+      "contextHash": "5826ff69d1617c92328321aecc717af2f3df6972a7a5f73136683a85e2218307"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "アイテムコモンイベント（ItemCommonEvent）",
+      "sourceHash": "215fd1b6c2b47409b15fc448b2dec09b2f1770cf390d27206c76cbac718eb753",
+      "translation": "Item Common Event (ItemCommonEvent)",
+      "contextHash": "215fd1b6c2b47409b15fc448b2dec09b2f1770cf390d27206c76cbac718eb753"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "アイテムの増減時に呼び出されるコモンイベントです。",
+      "sourceHash": "db5977dd39ed715734e0afb9c85112cb1a934cc19656d781965b0a0fb2f249d5",
+      "translation": "This common event is called when the number of items changes.",
+      "contextHash": "db5977dd39ed715734e0afb9c85112cb1a934cc19656d781965b0a0fb2f249d5"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "武器コモンイベント（WeaponCommonEvent）",
+      "sourceHash": "84a8d832f69db1f6f294624c56407b42f867be527c45eea25fa3f6f12ab21ceb",
+      "translation": "Weapon Common Event (WeaponCommonEvent)",
+      "contextHash": "84a8d832f69db1f6f294624c56407b42f867be527c45eea25fa3f6f12ab21ceb"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "武器の増減時に呼び出されるコモンイベントです。",
+      "sourceHash": "d7bd2157114de1b95b235453fdd5995b1e509046a1c9702c1c321b439a3b1343",
+      "translation": "This common event is called when the number of weapons changes.",
+      "contextHash": "d7bd2157114de1b95b235453fdd5995b1e509046a1c9702c1c321b439a3b1343"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "防具コモンイベント（ArmorCommonEvent）",
+      "sourceHash": "0d8699a30e71c04496986f502cd4b53a2b1daf67c0175f98187737e85d8a8470",
+      "translation": "Armor Common Event (ArmorCommonEvent)",
+      "contextHash": "0d8699a30e71c04496986f502cd4b53a2b1daf67c0175f98187737e85d8a8470"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "防具の増減時に呼び出されるコモンイベントです。",
+      "sourceHash": "e3732302f0396bf9e2ae48f22a91818eb820609b017890a68940bf101adc8d1a",
+      "translation": "This common event is called when the number of armor pieces changes.",
+      "contextHash": "e3732302f0396bf9e2ae48f22a91818eb820609b017890a68940bf101adc8d1a"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "無効化スイッチ（DisableSwitch）",
+      "sourceHash": "20f5b59868914e45862525970812620547824eaf140c8f8eb14737f243b7055c",
+      "translation": "Disable Switch (DisableSwitch)",
+      "contextHash": "20f5b59868914e45862525970812620547824eaf140c8f8eb14737f243b7055c"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "指定のスイッチがオンの間、コモンイベントの呼び出しを無効化します。",
+      "sourceHash": "b0681f2c90815a7d5b7a76a4fac0a3f2aed3f99bb2dee0776642fdf5273be841",
+      "translation": "Disables calls to common events while the specified switch is on.",
+      "contextHash": "b0681f2c90815a7d5b7a76a4fac0a3f2aed3f99bb2dee0776642fdf5273be841"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "※なお、コモンイベントの先頭でスイッチ分岐させて『イベント処理の中断』を実行しても同じです。よく考えたらなくてもいいですよね、この項目……。",
+      "sourceHash": "369638907be63084c4611f340cfe68414068e91a25e46747b0f8eba246cf008b",
+      "translation": "※Incidentally, the same result can be achieved by branching based on a switch at the beginning of the common event and executing “Abort Event Processing.” Come to think of it, this item isn't really necessary...",
+      "contextHash": "369638907be63084c4611f340cfe68414068e91a25e46747b0f8eba246cf008b"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script (Script)",
+      "contextHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "以下の関数を条件分岐のスクリプトに使用できます。",
+      "sourceHash": "657310f6777d5e5c07750354147eaecf5cc24d749a8403a4708ea9ad0093ba12",
+      "translation": "The following functions can be used in the script for Conditional Branches.",
+      "contextHash": "657310f6777d5e5c07750354147eaecf5cc24d749a8403a4708ea9ad0093ba12"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "指定したＩＤのアイテムを入手したことがある。",
+      "sourceHash": "63c2d77538e121638035d223e165834a5db0e543795d6141937f149d8bc98744",
+      "translation": "Whether the specified item ID has ever been obtained.",
+      "contextHash": "63c2d77538e121638035d223e165834a5db0e543795d6141937f149d8bc98744"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "指定したＩＤの武器を入手したことがある。",
+      "sourceHash": "31a65419292c2883ae23d853b1678702ec9159d1282978e7a772b7e1d3a7b022",
+      "translation": "Whether the specified weapon ID has ever been obtained.",
+      "contextHash": "31a65419292c2883ae23d853b1678702ec9159d1282978e7a772b7e1d3a7b022"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "指定したＩＤの防具を入手したことがある。",
+      "sourceHash": "fa3cef68519ada1814c44f2bf312912770e2e6f6fa23c323c26eac689b8498c3",
+      "translation": "Whether the specified armor ID has ever been obtained.",
+      "contextHash": "fa3cef68519ada1814c44f2bf312912770e2e6f6fa23c323c26eac689b8498c3"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "※ただし、入手経験はプラグイン（ver1.02）導入後から保持されます。",
+      "sourceHash": "57dd92004dc2e41ee26a11ba7667b1009ac8213499b233c8eb4aebe695fa3a41",
+      "translation": "※However, acquisition history is retained only from after the plugin (ver1.02) is installed.",
+      "contextHash": "57dd92004dc2e41ee26a11ba7667b1009ac8213499b233c8eb4aebe695fa3a41"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "導入前に売却などでなくなったアイテムは判定できません。",
+      "sourceHash": "82588d200dad7a983791c6bb40cd3f0a0bea858b74646d2dd768b1e05801b291",
+      "translation": "Items that were lost through selling or other means before installation cannot be detected.",
+      "contextHash": "82588d200dad7a983791c6bb40cd3f0a0bea858b74646d2dd768b1e05801b291"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "入手状況をクリア",
+      "sourceHash": "2995ae39d93fd3db7a07e8876dc0fdd941c5c210b2d9fb4d88ae73efbb7ef652",
+      "translation": "Clear Acquisition History",
+      "contextHash": "2995ae39d93fd3db7a07e8876dc0fdd941c5c210b2d9fb4d88ae73efbb7ef652"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※ちなみに上記のアイコンのポップアップは[[LINK_1]]IconBalloon.js（シロップ様）[[/LINK_1]]によるものです。当プラグインはあくまで処理を共通化するだけとなります。",
+      "sourceHash": "d27180dc511ea371fdfb443455ffed413226214052246660d72f4192188882af",
+      "parts": [
+        {
+          "source": "※ちなみに上記のアイコンのポップアップは",
+          "link": false
+        },
+        {
+          "source": "IconBalloon.js（シロップ様）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "によるものです。当プラグインはあくまで処理を共通化するだけとなります。",
+          "link": false
+        }
+      ],
+      "translation": "※Incidentally, the popup for the icon above is provided by [[LINK_1]]IconBalloon.js (Syrup)[[/LINK_1]]. This plugin merely standardizes the processing.",
+      "contextHash": "d27180dc511ea371fdfb443455ffed413226214052246660d72f4192188882af"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（Plugin Command MZ）[[/LINK_1]]",
+      "sourceHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (Plugin Command MZ)[[/LINK_1]]",
+      "contextHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用プラグインコマンド（Plugin Command MV）[[/LINK_1]]",
+      "sourceHash": "59a9434efeeef39836941e71451372a70a8ce85928000c4dfa01d58dabbb3042",
+      "parts": [
+        {
+          "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MV (Plugin Command MV)[[/LINK_1]]",
+      "contextHash": "59a9434efeeef39836941e71451372a70a8ce85928000c4dfa01d58dabbb3042"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]所持金コモンイベント（GoldCommonEvent）[[/LINK_1]]",
+      "sourceHash": "53d382ce98febe928dc0895960997c868c5b77e920954ec8205db247bb458a4b",
+      "parts": [
+        {
+          "source": "所持金コモンイベント（GoldCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Gold Common Event (GoldCommonEvent)[[/LINK_1]]",
+      "contextHash": "53d382ce98febe928dc0895960997c868c5b77e920954ec8205db247bb458a4b"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムコモンイベント（ItemCommonEvent）[[/LINK_1]]",
+      "sourceHash": "a896f7f7f389c93be5ca762b8c9c77e4ed762b5f2053da41b2acffe6ffdc2222",
+      "parts": [
+        {
+          "source": "アイテムコモンイベント（ItemCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Item Common Event (ItemCommonEvent)[[/LINK_1]]",
+      "contextHash": "a896f7f7f389c93be5ca762b8c9c77e4ed762b5f2053da41b2acffe6ffdc2222"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]武器コモンイベント（WeaponCommonEvent）[[/LINK_1]]",
+      "sourceHash": "2733e441a72f5d1dacb4fb6c3dd027d1e92336f58522e30fccd6ffd298452626",
+      "parts": [
+        {
+          "source": "武器コモンイベント（WeaponCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Weapon Common Event (WeaponCommonEvent)[[/LINK_1]]",
+      "contextHash": "2733e441a72f5d1dacb4fb6c3dd027d1e92336f58522e30fccd6ffd298452626"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]防具コモンイベント（ArmorCommonEvent）[[/LINK_1]]",
+      "sourceHash": "b2d088b39c259bf5474866f8c07e1821947410aaf747ead70daf158da1c27363",
+      "parts": [
+        {
+          "source": "防具コモンイベント（ArmorCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Armor Common Event (ArmorCommonEvent)[[/LINK_1]]",
+      "contextHash": "b2d088b39c259bf5474866f8c07e1821947410aaf747ead70daf158da1c27363"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]無効化スイッチ（DisableSwitch）[[/LINK_1]]",
+      "sourceHash": "d767aba1a1a101910a78c72df2c58de74585ad8c7eb866231119aa4eaa418503",
+      "parts": [
+        {
+          "source": "無効化スイッチ（DisableSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Switch (DisableSwitch)[[/LINK_1]]",
+      "contextHash": "d767aba1a1a101910a78c72df2c58de74585ad8c7eb866231119aa4eaa418503"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]スクリプト（Script）[[/LINK_1]]",
+      "sourceHash": "5d2b31d8e691d3e03af02d6a49cf93329510ad46316bcab2ab41b548ce182aa4",
+      "parts": [
+        {
+          "source": "スクリプト（Script）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Script (Script)[[/LINK_1]]",
+      "contextHash": "5d2b31d8e691d3e03af02d6a49cf93329510ad46316bcab2ab41b548ce182aa4"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムの入手経験を判定するスクリプト[[/LINK_1]]を実装した。",
+      "sourceHash": "cf184e9838f401d2d80ec5fee45224ab346481b990bc641b0af03ac58b6e3496",
+      "parts": [
+        {
+          "source": "アイテムの入手経験を判定するスクリプト",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を実装した。",
+          "link": false
+        }
+      ],
+      "translation": "Implemented [[LINK_1]]a script to determine whether an item has been obtained[[/LINK_1]].",
+      "contextHash": "cf184e9838f401d2d80ec5fee45224ab346481b990bc641b0af03ac58b6e3496"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "アイテムの入手処理を共通化します。": "Standardizes item acquisition processing.",
+    "※なお、以下ではアイテムと記載していますが、武器、防具、所持金の全てに対して有効です。": "※Although referred to as items below, this applies to items, weapons, armor, and gold.",
+    "アイテムの増減時、自動的にコモンイベントを呼び出します。": "Automatically calls a common event when the amount of an item changes.",
+    "さらに直前に入手したアイテムの情報（アイテム名や増減量など）をプラグインコマンドで参照することによって、入手処理の共通化を実現します。": "You can standardize acquisition processing by referencing information about the item acquired most recently (such as its name and quantity change) using plugin commands.",
+    "また、指定のスイッチがオンの間だけ、コモンイベントの呼び出しを禁止することもできます。": "You can also prohibit common events from being called only while a specified switch is ON.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the file below to save it, then place it in [Project]\\js\\plugins. Turn the plugin ON in the plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_GetItemCommon.js": "NRP_GetItemCommon.js ",
+    "ver1.021（2025/04/07）": "ver1.021 (2025/04/07) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/12/04 -> 2025/04/07（ver1.02 -> 1.021）": "2024/12/04 -> 2025/04/07 (ver1.02 -> 1.021) ",
+    "↑のアイテム入手履歴が正しく設定できていない不具合修正。": "Fixed a bug that prevented the item acquisition history above from being set correctly.",
+    "（2025/04/07 ver1.021）": " (2025/04/07 ver1.021) ",
+    "※残念ながら、更新しても既に異常となったデータは修正されません……。": "※Unfortunately, updating will not fix data that has already become corrupted…….",
+    "2022/01/08（ver1.01）": "2022/01/08 (ver1.01) ",
+    "説明文などの文字列が空の場合、不要な文字列が表示される不具合修正。": "Fixed a bug that displayed unnecessary text when strings such as descriptions were empty.",
+    "他プラグインとの競合対処用に微調整。": "Minor adjustments to address conflicts with other plugins.",
+    "2021/12/04（ver1.00）": "2021/12/04 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "アイテム入手後に呼び出されるコモンイベントを作成し、プラグインパラメータに設定してください。": "Create a common event to be called after an item is acquired and set it in the plugin parameter.",
+    "※アイテム、武器、防具、所持金のそれぞれに対して設定可能ですが、所持金以外は同じコモンイベントでも問題ないと思います。": "※You can configure each of items, weapons, armor, and gold separately, but items, weapons, and armor can probably use the same common event.",
+    "プラグインコマンドで入手したアイテムの情報を取得し、変数に格納します。": "Retrieve information about the item acquired using plugin commands and store it in variables.",
+    "以下の例では……": "For example……",
+    "アイテム名を変数１": "Item name in Variable 1",
+    "増減量を変数２": "Quantity change in Variable 2",
+    "説明文を変数３": "Description in Variable 3",
+    "アイコンＩＤを変数４": "Icon ID in Variable 4",
+    "……にそれぞれ格納しています。": "……respectively.",
+    "さらにそれをメッセージで表示します。": "You can then display it in a message.",
+    "増減量によって、メッセージを分岐させたほうが違和感ないと思います。": "It may feel more natural to branch the message depending on the quantity change.",
+    "アイテム、武器、防具の場合": "For Items, Weapons, and Armor",
+    "増減量が１の時": "When the Quantity Change Is 1",
+    "\\i[\\v[4]]\\v[1]を手に入れた！": "\\i[\\v[4]]\\v[1] obtained!",
+    "アイテムの増減量が２以上の時": "When the Item Quantity Change Is 2 or More",
+    "\\i[\\v[4]]\\v[1]を\\v[2]個手に入れた！": "\\i[\\v[4]]\\v[1]to\\v[2] obtained!",
+    "アイテムの増減量が－１以下の時": "When the Item Quantity Change Is -1 or Less",
+    "\\i[\\v[4]]\\v[1]を\\v[2]個失った……。": "\\i[\\v[4]]\\v[1]to\\v[2] lost...",
+    "※増減量に-1を乗算して反転させています。": "※The quantity change is inverted by multiplying it by -1.",
+    "所持金の場合": "For Gold",
+    "※対象が『所持金』の場合は増減量のみが有効となります。": "※When the target is “Gold,” only the quantity change is effective.",
+    "増減量が１以上の時": "When the Quantity Change Is 1 or More",
+    "\\v[2]\\gを手に入れた！": "\\v[2]\\g obtained!",
+    "増減量が－１以下の時": "When the Quantity Change Is -1 or Less",
+    "\\v[2]\\gを失った……。": "\\v[2]\\g lost...",
+    "これらはあくまで一例です。演出なども自由に挟んでください。": "These are only examples. Feel free to add effects and other elements as desired.",
+    "後は『アイテムの増減』『武器の増減』『防具の増減』『所持金の増減』の各処理を実行した際にメッセージが表示されればＯＫです。": "After that, messages should be displayed whenever you execute the “Change Items,” “Change Weapons,” “Change Armor,” or “Change Gold” processes.",
+    "また、必ずしも全ての場合に対してメッセージが必要なわけではありません。例えば「アイテムの『増減量が－１以下の時』については、頻度も低いので、通常のイベント内でメッセージを記述する」といった運用でもよいと思います。": "A message is not necessarily required in every case. For example, since “when the item quantity change is -1 or less” occurs infrequently, you could simply write the message in the regular event instead.",
+    "共通処理を実行したくない場合は『無効化スイッチ』を設定することもできますので、柔軟に対応してください。": "If you do not want to execute the common processing, you can set a “Disable Switch,” allowing for flexible handling.",
+    "ＭＺ用プラグインコマンド（Plugin Command MZ）": "Plugin Command for MZ (Plugin Command MZ)",
+    "直前に入手したアイテムの各情報を変数に格納します。": "Stores the information for the item acquired most recently in variables.",
+    "メッセージ内で\\v[1]のように変数を指定すると、値が表示されます。": "Specifying a variable in a message, such as \\v[1], displays its value.",
+    "アイテム名を取得": "Get Item Name",
+    "直前に入手したアイテムの名前を変数へ格納します。": "Stores the name of the item acquired most recently in a variable.",
+    "増減量を取得": "Get Increase/Decrease Amount",
+    "直前に入手したアイテムの増減量を変数へ格納します。": "Stores the quantity change of the item acquired most recently in a variable.",
+    "説明文を取得": "Get Description",
+    "直前に入手したアイテムの説明文を変数へ格納します。": "Stores the description of the most recently obtained item in a variable.",
+    "改行も有効です。": "Line breaks are also supported.",
+    "アイコンを取得": "Get Icon",
+    "直前に入手したアイテムのアイコンＩＤを変数へ格納します。": "Stores the icon ID of the most recently obtained item in a variable.",
+    "分類を取得": "Get Classification",
+    "直前に入手したアイテムの分類を変数へ格納します。": "Stores the classification of the most recently obtained item in a variable.",
+    "ＩＤを取得": "Get ID",
+    "直前に入手したアイテムＩＤを変数へ格納します。": "Stores the ID of the most recently obtained item in a variable.",
+    "タイプを取得": "Get Type",
+    "直前に入手したアイテムのタイプを変数へ格納します。": "Stores the type of the most recently obtained item in a variable.",
+    "アイテム、武器、防具、それぞれのタイプに対応します。": "This corresponds to the types of items, weapons, and armor.",
+    "アイテムの場合は以下の通りです。": "For items, they are as follows.",
+    "1:通常アイテム、2:大事なもの、3:隠しアイテムA、4:隠しアイテムB": "1: Regular Item, 2: Key Item, 3: Hidden Item A, 4: Hidden Item B",
+    "※武器防具についてはデータベースの設定値を参照してください。": "※For weapons and armor, refer to the values configured in the database.",
+    "装備タイプを取得": "Get Equip Type",
+    "直前に入手した防具の装備タイプを変数へ格納します。": "Stores the equip type of the most recently obtained armor in a variable.",
+    "※選択はできませんが、実際には武器も1が固定で設定される模様です。": "※Although it cannot be selected, weapons also appear to actually be assigned 1 by default.",
+    "メタ値を取得": "Get Meta Value",
+    "直前に入手したアイテムのメタ値を変数へ格納します。": "Stores the meta value of the most recently obtained item in a variable.",
+    "この項目のみ定義名の指定が必要です。": "Only this item requires you to specify a definition name.",
+    "メタ値とはメモ欄にユーザが定義した値のことです。": "A meta value is a value defined by the user in the note field.",
+    "例えば、<Test:100>と記述した場合、『Test』の部分を定義名に指定すると、変数に100が格納されます。": "For example, if you write <Test:100> and specify “Test” as the definition name, 100 is stored in the variable.",
+    "独自にアイテムの区別を行いたい場合などに便利かもしれません。": "This may be useful when you want to distinguish items in your own way.",
+    "※<Important:1>の場合のみ、入手時にファンファーレを鳴らすなど。": "※For example, playing a fanfare when obtaining an item only if it has <Important:1>.",
+    "ＭＶ用プラグインコマンド（Plugin Command MV）": "Plugin Commands for MV (Plugin Command MV)",
+    "機能はＭＺ版と全く同じなので割愛します。": "The functionality is exactly the same as in the MZ version, so it is omitted.",
+    "以下のコマンドを呼び出してください。": "Call the following commands.",
+    "※大文字個別は区別しません。また[]は含まないでください。": "※Uppercase and lowercase letters are not distinguished. Also, do not include [].",
+    "NRP.GetItemCommon.GetName [変数ＩＤ]": "NRP.GetItemCommon.GetName [Variable ID]",
+    "NRP.GetItemCommon.GetAmount [変数ＩＤ]": "NRP.GetItemCommon.GetAmount [Variable ID]",
+    "NRP.GetItemCommon.GetDescription [変数ＩＤ]": "NRP.GetItemCommon.GetDescription [Variable ID]",
+    "NRP.GetItemCommon.GetIcon [変数ＩＤ]": "NRP.GetItemCommon.GetIcon [Variable ID]",
+    "NRP.GetItemCommon.GetCategory [変数ＩＤ]": "NRP.GetItemCommon.GetCategory [Variable ID]",
+    "NRP.GetItemCommon.GetId [変数ＩＤ]": "NRP.GetItemCommon.GetId [Variable ID]",
+    "NRP.GetItemCommon.Type [変数ＩＤ]": "NRP.GetItemCommon.Type [Variable ID]",
+    "NRP.GetItemCommon.EquipType [変数ＩＤ]": "NRP.GetItemCommon.EquipType [Variable ID]",
+    "NRP.GetItemCommon.GetMetaValue [定義名] [変数ＩＤ]": "NRP.GetItemCommon.GetMetaValue [Definition Name] [Variable ID]",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "所持金コモンイベント（GoldCommonEvent）": "Gold Common Event (GoldCommonEvent)",
+    "所持金の増減時に呼び出されるコモンイベントです。": "This common event is called when the amount of gold changes.",
+    "アイテムコモンイベント（ItemCommonEvent）": "Item Common Event (ItemCommonEvent)",
+    "アイテムの増減時に呼び出されるコモンイベントです。": "This common event is called when the number of items changes.",
+    "武器コモンイベント（WeaponCommonEvent）": "Weapon Common Event (WeaponCommonEvent)",
+    "武器の増減時に呼び出されるコモンイベントです。": "This common event is called when the number of weapons changes.",
+    "防具コモンイベント（ArmorCommonEvent）": "Armor Common Event (ArmorCommonEvent)",
+    "防具の増減時に呼び出されるコモンイベントです。": "This common event is called when the number of armor pieces changes.",
+    "無効化スイッチ（DisableSwitch）": "Disable Switch (DisableSwitch)",
+    "指定のスイッチがオンの間、コモンイベントの呼び出しを無効化します。": "Disables calls to common events while the specified switch is on.",
+    "※なお、コモンイベントの先頭でスイッチ分岐させて『イベント処理の中断』を実行しても同じです。よく考えたらなくてもいいですよね、この項目……。": "※Incidentally, the same result can be achieved by branching based on a switch at the beginning of the common event and executing “Abort Event Processing.” Come to think of it, this item isn't really necessary...",
+    "スクリプト（Script）": "Script (Script)",
+    "以下の関数を条件分岐のスクリプトに使用できます。": "The following functions can be used in the script for Conditional Branches.",
+    "指定したＩＤのアイテムを入手したことがある。": "Whether the specified item ID has ever been obtained.",
+    "指定したＩＤの武器を入手したことがある。": "Whether the specified weapon ID has ever been obtained.",
+    "指定したＩＤの防具を入手したことがある。": "Whether the specified armor ID has ever been obtained.",
+    "※ただし、入手経験はプラグイン（ver1.02）導入後から保持されます。": "※However, acquisition history is retained only from after the plugin (ver1.02) is installed.",
+    "導入前に売却などでなくなったアイテムは判定できません。": "Items that were lost through selling or other means before installation cannot be detected.",
+    "入手状況をクリア": "Clear Acquisition History"
+  }
+}

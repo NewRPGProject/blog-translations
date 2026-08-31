@@ -1,0 +1,1176 @@
+{
+  "articleId": "486255548",
+  "sourceUrl": "https://newrpg.seesaa.net/article/486255548.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "63d0d5d0bde404c54072cd21a7395d501c7ac3017f2184b92d2b3420ba857769",
+  "translatedAt": "2026-08-31T02:07:36.920Z",
+  "title": "Automating Symbol Encounter Placement [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "シンボルエンカウントの配置自動化【RPGツクールMZプラグイン】",
+      "sourceHash": "f74fc69ad012ed52709d054a8684b4e62308481ad86b4feea256645f3d490aea",
+      "translation": "Automating Symbol Encounter Placement [RPG Maker MZ Plugin]",
+      "contextHash": "f74fc69ad012ed52709d054a8684b4e62308481ad86b4feea256645f3d490aea"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "マップ上にイベントをランダム配置し、シンボルエンカウント用の配置処理を自動化します。",
+      "sourceHash": "bab9c15459d27359cbb3a74bfd9468e29f5367f15e69279ba93b64f7f3ece707",
+      "translation": "Randomly places events on the map and automates the placement process for symbol encounters.",
+      "contextHash": "bab9c15459d27359cbb3a74bfd9468e29f5367f15e69279ba93b64f7f3ece707"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "通行情報、リージョン、地形タグ、タイルＩＤ、オートタイルタイプを条件にして配置することができます。",
+      "sourceHash": "9a5c27d89b0c76797c8561d865a5bb0c9117c3b8dc2ffa6c483ff3503004db3f",
+      "translation": "Placement can be based on passage settings, regions, terrain tags, tile IDs, and autotile types.",
+      "contextHash": "9a5c27d89b0c76797c8561d865a5bb0c9117c3b8dc2ffa6c483ff3503004db3f"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "様々な機能によって、最小限の手間で配置を行えるようにしています。",
+      "sourceHash": "d31a1d01cdcf3aa054359907e907f073c11ccff2361a195b919cf1e07908fd26",
+      "translation": "Various features allow placement with minimal effort.",
+      "contextHash": "d31a1d01cdcf3aa054359907e907f073c11ccff2361a195b919cf1e07908fd26"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "つまり、",
+      "sourceHash": "06e0bd2d7404821ce3075fb09d75fde78467d136c98827cf5545d1210d7c60e8",
+      "translation": "In other words,",
+      "contextHash": "06e0bd2d7404821ce3075fb09d75fde78467d136c98827cf5545d1210d7c60e8"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "飛行系イベントは障害物の上を含めて自由に配置。",
+      "sourceHash": "4ee3f6bccfadf20c6d609f621e1a9c407728f515542bd86eab2d816e29b0dae8",
+      "translation": "Flying events can be placed freely, including on top of obstacles.",
+      "contextHash": "4ee3f6bccfadf20c6d609f621e1a9c407728f515542bd86eab2d816e29b0dae8"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "魚系イベントは水中に配置。",
+      "sourceHash": "3c3b72e550f75f00721b83b3cb7c48de4c6c2a639f230c98472bc5425f54e99d",
+      "translation": "Fish events can be placed underwater.",
+      "contextHash": "3c3b72e550f75f00721b83b3cb7c48de4c6c2a639f230c98472bc5425f54e99d"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "その他は陸地のみ配置。",
+      "sourceHash": "dde8e68f0504e5f857dd37b7243ffa7cdc5c8e1ea58a441d0b18e6b77186ccf7",
+      "translation": "Other events can be placed only on land.",
+      "contextHash": "dde8e68f0504e5f857dd37b7243ffa7cdc5c8e1ea58a441d0b18e6b77186ccf7"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "……といった操作を自動化できます。",
+      "sourceHash": "312a65b4dc0a1fb711859f466bf124ef4d71dce9a0118a85a94ae51e1f82fe7b",
+      "translation": "Operations like these can be automated.",
+      "contextHash": "312a65b4dc0a1fb711859f466bf124ef4d71dce9a0118a85a94ae51e1f82fe7b"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "『シンボルエンカウント』と書いていますが、実際の機能はイベントのランダム配置を行うというものです。それ以外にも、ＡＲＰＧにおける敵イベントの配置やランダムな宝箱の配置などにも使えると思います。",
+      "sourceHash": "5b7f6be2f89a1a6c579e1fb4010af422d0632a266d980ad340c177030810a551",
+      "translation": "Although this is called “symbol encounters,” its actual function is to randomly place events. It can also be used to place enemy events in an ARPG or randomly place treasure chests.",
+      "contextHash": "5b7f6be2f89a1a6c579e1fb4010af422d0632a266d980ad340c177030810a551"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_PutRandomEvents.js",
+      "sourceHash": "26afe05929ce7a6e6b8d799dc4f6efd48b1833d06a94ed05ca8cdc208efce0ae",
+      "translation": "NRP_PutRandomEvents.js ",
+      "contextHash": "8f451958f3f40359284300a75537a97ce977900f405c62e3771834a52d045c47"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.052（2025/04/15）",
+      "sourceHash": "6e01dd8a8a9f899d01146e75ca7718598c700d6d3824057845487d82a236c732",
+      "translation": "ver1.052 (2025/04/15) ",
+      "contextHash": "8f451958f3f40359284300a75537a97ce977900f405c62e3771834a52d045c47"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "このプラグインの使用には以下の公式ローンチプラグインが必須です。",
+      "sourceHash": "3d0deeb93f170bd93d01433a3492de1cc40da3d38efcd4e16becb0a15b113666",
+      "translation": "The following official launch plugin is required to use this plugin.",
+      "contextHash": "3d0deeb93f170bd93d01433a3492de1cc40da3d38efcd4e16becb0a15b113666"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "いずれも以下から入手できます。",
+      "sourceHash": "b32286332c452920f47e90fb43e77860098d44b5c2a2988c1fe5b7898e7b217c",
+      "translation": "Both can be obtained from below.",
+      "contextHash": "b32286332c452920f47e90fb43e77860098d44b5c2a2988c1fe5b7898e7b217c"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "オプション",
+      "sourceHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5",
+      "translation": "Options",
+      "contextHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DebugTile.js",
+      "sourceHash": "d839245e2d4ad88768cbb74e24135b6d06d5363d64d3fc85797e48514859684d",
+      "translation": "NRP_DebugTile.js ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ver1.01（2021/08/15）",
+      "sourceHash": "5951f72e8493d63ef9b4ecf28b1663a47bcbcd982784edf97350cbc43b29937d",
+      "translation": "ver1.01 (2021/08/15) ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_BushEXの補助用に使えます。",
+      "sourceHash": "c35698105d316881a94c17175d379d1bbc7ab2dc17cc4650379d631174a59e74",
+      "translation": "※This plugin allows you to check the autotile type and tile ID at your feet simply by pressing F2. It can be used as an aid for NRP_BushEX.",
+      "contextHash": "c35698105d316881a94c17175d379d1bbc7ab2dc17cc4650379d631174a59e74"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2025/03/18 -> 2025/04/15（ver1.05 -> 1.052）",
+      "sourceHash": "c9d90cf78ba4d6823e43bc6533c8f4968473188f3ccddf9606aba273da54600c",
+      "translation": "2025/03/18 -> 2025/04/15 (ver1.05 -> 1.052) ",
+      "contextHash": "c9d90cf78ba4d6823e43bc6533c8f4968473188f3ccddf9606aba273da54600c"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ver1.05の修正が不完全だったので再修正。（2025/03/28 ver1.051）",
+      "sourceHash": "2644bab2960ff5f1b885c3228ac53c323e2a1d700c581fa0fe40dc5cfbf269d1",
+      "translation": "Revised again because the ver1.05 fix was incomplete. (2025/03/28 ver1.051)",
+      "contextHash": "2644bab2960ff5f1b885c3228ac53c323e2a1d700c581fa0fe40dc5cfbf269d1"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/08/26（ver1.04）",
+      "sourceHash": "e14ce4bfbd15bfe8578e55909cc4f4d28237c876f5fa9704d59bfb80c2ddd81a",
+      "translation": "2024/08/26 (ver1.04) ",
+      "contextHash": "e14ce4bfbd15bfe8578e55909cc4f4d28237c876f5fa9704d59bfb80c2ddd81a"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "稀に既存イベントや通行不可な座標の上にイベントが配置されてしまう不具合修正。",
+      "sourceHash": "a0942d1b1e5dcbd5d30b3317b3b1dd5b50ea8002ec41ece29905e8c624d4a94e",
+      "translation": "Fixed a bug that occasionally placed events on existing events or impassable coordinates.",
+      "contextHash": "a0942d1b1e5dcbd5d30b3317b3b1dd5b50ea8002ec41ece29905e8c624d4a94e"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/08/14（ver1.03）",
+      "sourceHash": "3bd76e107741de3ecff501cb489807ab845101c0d29ecc105e46dfb03d3183c8",
+      "translation": "2024/08/14 (ver1.03) ",
+      "contextHash": "3bd76e107741de3ecff501cb489807ab845101c0d29ecc105e46dfb03d3183c8"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "配置処理を高速化した。",
+      "sourceHash": "4ca494d204267e2a86f63c8417be825a2f9c21e92ba435b54c7bc809b7c084cd",
+      "translation": "Improved placement processing speed.",
+      "contextHash": "4ca494d204267e2a86f63c8417be825a2f9c21e92ba435b54c7bc809b7c084cd"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "※特に大型のマップに配置する処理が大幅に改善（当社比５倍！）します。",
+      "sourceHash": "1911c22a4b1fca5e317e2902877e418547cb9311e9750be53a29ce860f99e5ba",
+      "translation": "※Placement processing, especially on large maps, is significantly improved (five times faster by my measurement!).",
+      "contextHash": "1911c22a4b1fca5e317e2902877e418547cb9311e9750be53a29ce860f99e5ba"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2024/06/02（ver1.02）",
+      "sourceHash": "14c5148fe2609ca1e768aa155b4f647f27a293dfebcb43c802ef9d6c4fa2fd2e",
+      "translation": "2024/06/02 (ver1.02) ",
+      "contextHash": "14c5148fe2609ca1e768aa155b4f647f27a293dfebcb43c802ef9d6c4fa2fd2e"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2023/07/07 -> 2023/07/18（ver1.01 -> 1.011）",
+      "sourceHash": "0f3baeee2bf81ccba587c98b81b7a2e2a0fa85453eca7ae8fee6ecfa247c6cec",
+      "translation": "2023/07/07 -> 2023/07/18 (ver1.01 -> 1.011) ",
+      "contextHash": "0f3baeee2bf81ccba587c98b81b7a2e2a0fa85453eca7ae8fee6ecfa247c6cec"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "プラグインコマンドで配置範囲を指定可能に。",
+      "sourceHash": "0a52453eff8654b797f613f4ca05b837ae89e4525601bf57f23c2df8756c832a",
+      "translation": "Placement ranges can now be specified using plugin commands.",
+      "contextHash": "0a52453eff8654b797f613f4ca05b837ae89e4525601bf57f23c2df8756c832a"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "有効な配置座標が存在しないとエラーになる不具合修正。",
+      "sourceHash": "69e3b5f389e2f3c582c2a73750bdd9d7baab936f0bd276a544fd7b05b4706407",
+      "translation": "Fixed a bug that caused an error when no valid placement coordinates existed.",
+      "contextHash": "69e3b5f389e2f3c582c2a73750bdd9d7baab936f0bd276a544fd7b05b4706407"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "（2023/07/18 ver1.011）",
+      "sourceHash": "571416cba51cf07626883cb590b00b93ec563f0d11eb3b23a8fedfe4f49fbf5b",
+      "translation": " (2023/07/18 ver1.011) ",
+      "contextHash": "571416cba51cf07626883cb590b00b93ec563f0d11eb3b23a8fedfe4f49fbf5b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2022/04/07（ver1.00）",
+      "sourceHash": "09c4511b2b77ec53f1df303d2ff5fa2e4dba7524e51cab03cea3ea796f203ddb",
+      "translation": "2022/04/07 (ver1.00) ",
+      "contextHash": "09c4511b2b77ec53f1df303d2ff5fa2e4dba7524e51cab03cea3ea796f203ddb"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "TemplateEvent.jsの説明に従い、テンプレートイベントを作成します。",
+      "sourceHash": "a197bdf84de229ff70697949498dcb1d2d6e3ca3ded186599bc2260e28155699",
+      "translation": "Create a template event according to the instructions for TemplateEvent.js.",
+      "contextHash": "a197bdf84de229ff70697949498dcb1d2d6e3ca3ded186599bc2260e28155699"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "各プラグインコマンドを実行し、テンプレートイベントのＩＤ等の情報を指定してください。",
+      "sourceHash": "52aac190c23102ca42a16abaa8fa6becf63ffde3e81f5e1743b95f6e915ce572",
+      "translation": "Execute each plugin command and specify information such as the template event ID.",
+      "contextHash": "52aac190c23102ca42a16abaa8fa6becf63ffde3e81f5e1743b95f6e915ce572"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "※詳細は以下のプラグインコマンドをご覧ください。",
+      "sourceHash": "4a59f0403ead4e61a599b216a8cf9e4bcdea7ab47613dcc9d2e081d7baa88d53",
+      "translation": "※See the plugin commands below for details.",
+      "contextHash": "4a59f0403ead4e61a599b216a8cf9e4bcdea7ab47613dcc9d2e081d7baa88d53"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "最も単純な使用方法は『イベントの配置(通行)』を選択し、『テンプレートＩＤ』と『配置する数』を指定することです。『通行タイプ』は『全て』のままで構いません。",
+      "sourceHash": "537d60893ee01ac7da2c1eb22f9b507745540083bd9bbed60b485a6b722ac708",
+      "translation": "The simplest way to use it is to select “Put Events (Passage)” and specify the “Template ID” and “Number to Place.” You can leave “Passage Type” set to “All.”",
+      "contextHash": "537d60893ee01ac7da2c1eb22f9b507745540083bd9bbed60b485a6b722ac708"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "これでイベント自身の通行判定に従って、自動的に配置が行われます。",
+      "sourceHash": "7d68d44eb4809459e3f7e7b7351c4f280f1765ecc0fa5d22805f5630f57a6412",
+      "translation": "Events will then be placed automatically according to the passage settings of the events themselves.",
+      "contextHash": "7d68d44eb4809459e3f7e7b7351c4f280f1765ecc0fa5d22805f5630f57a6412"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※なお、配置されたイベントの挙動は『TemplateEvent.js』および『EventReSpawn.js』の仕様に従います。",
+      "sourceHash": "05f80cc7ef929fac0522de83dbd255622753b255287526e5e1dba6250ea9ba5e",
+      "translation": "※The behavior of placed events follows the specifications of TemplateEvent.js and EventReSpawn.js.",
+      "contextHash": "05f80cc7ef929fac0522de83dbd255622753b255287526e5e1dba6250ea9ba5e"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "イベントの配置(通行)（PutEventsByPassage）",
+      "sourceHash": "8e1a5099060b23180499d168359c433e0c8db30615f799f214e89414ce14a5fb",
+      "translation": "Put Events (Passage) (PutEventsByPassage)",
+      "contextHash": "8e1a5099060b23180499d168359c433e0c8db30615f799f214e89414ce14a5fb"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "マップの通行情報を元にイベントをランダム配置します。",
+      "sourceHash": "bff487e57ad8ff96e45b32651ffde6cceb3dc723de759ca902bd0d8d642ffce8",
+      "translation": "Randomly places events based on the map's passage settings.",
+      "contextHash": "bff487e57ad8ff96e45b32651ffde6cceb3dc723de759ca902bd0d8d642ffce8"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "例えば、通行可能なタイル上にのみイベントを配置するといったことができます。",
+      "sourceHash": "8c108c87da0cdaccc866818d72c7318188efdcc0484b4943eed2495f5e82ab47",
+      "translation": "For example, events can be placed only on passable tiles.",
+      "contextHash": "8c108c87da0cdaccc866818d72c7318188efdcc0484b4943eed2495f5e82ab47"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "通常は『通行タイプ』を『全て』にして配置しておけば問題ありません。",
+      "sourceHash": "08b4f924f5159e8d4de0fd53d8f06516d0244488724e10c93baa416896254a6b",
+      "translation": "Normally, there should be no problem leaving “Passage Type” set to “All” when placing events.",
+      "contextHash": "08b4f924f5159e8d4de0fd53d8f06516d0244488724e10c93baa416896254a6b"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "プラグインパラメータの『通行可能な地点のみ配置』をオンにしていれば、イベント自身の通行判定が自動的に考慮されます。",
+      "sourceHash": "26d64993192519d98dce3afda074e4f24a3cccc9c21d936adb162f0287830df3",
+      "translation": "If the plugin parameter “Place Only on Passable Locations” is enabled, the passage settings of the event itself are automatically taken into account.",
+      "contextHash": "26d64993192519d98dce3afda074e4f24a3cccc9c21d936adb162f0287830df3"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "イベントの配置(リージョン)（PutEventsByRegion）",
+      "sourceHash": "a945a3a5ad4b4e4603cfcbdf58fffeda5ec7def2e39e5f6a19c8dbddd9da60dd",
+      "translation": "Put Events (Region) (PutEventsByRegion)",
+      "contextHash": "a945a3a5ad4b4e4603cfcbdf58fffeda5ec7def2e39e5f6a19c8dbddd9da60dd"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "指定したリージョン上にイベントをランダム配置します。",
+      "sourceHash": "b6ba3f40cc72a312a4216b9434101d3d05c07743a40a6218df3ff6855aee4b49",
+      "translation": "Randomly places events on the specified regions.",
+      "contextHash": "b6ba3f40cc72a312a4216b9434101d3d05c07743a40a6218df3ff6855aee4b49"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "イベントの配置(地形タグ)（PutEventsByTerrain）",
+      "sourceHash": "7798bb907473edd1fed90cc3971e5c37b6e02755ae8bed731dd8489879a6c647",
+      "translation": "Put Events (Terrain Tag) (PutEventsByTerrain)",
+      "contextHash": "7798bb907473edd1fed90cc3971e5c37b6e02755ae8bed731dd8489879a6c647"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "指定した地形タグのタイル上にイベントをランダム配置します。",
+      "sourceHash": "ff00ca182ece982044dc21a189243e956d4665983fcc3ccb2eb09db3f74793d2",
+      "translation": "Randomly places events on tiles with the specified terrain tags.",
+      "contextHash": "ff00ca182ece982044dc21a189243e956d4665983fcc3ccb2eb09db3f74793d2"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "イベントの配置(タイル)（PutEventsByTile）",
+      "sourceHash": "ce95b1b6b6a211a43fb58ee832442fc05da69f28ea24b9fb1479f6ec55ed193d",
+      "translation": "Put Events (Tile) (PutEventsByTile)",
+      "contextHash": "ce95b1b6b6a211a43fb58ee832442fc05da69f28ea24b9fb1479f6ec55ed193d"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "指定したタイルにイベントをランダム配置します。",
+      "sourceHash": "08d5b28d8e77850b5065bc9065f9743251d5578345d3b0b44de7e17390cf2712",
+      "translation": "Randomly places events on the specified tiles.",
+      "contextHash": "08d5b28d8e77850b5065bc9065f9743251d5578345d3b0b44de7e17390cf2712"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "オートタイルタイプでの指定も可能です。",
+      "sourceHash": "1b67fe18e78f06f3713be448c5fb0968ecab400a32a6c5b170cccd54aec2af98",
+      "translation": "Autotile types can also be specified.",
+      "contextHash": "1b67fe18e78f06f3713be448c5fb0968ecab400a32a6c5b170cccd54aec2af98"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "いずれのコマンドでも共通して、既にイベントが配置されている座標には配置されません。",
+      "sourceHash": "501cbe0ddddb189096513d6fe2c8c42b0d23c176c479c3bc789e35558b362cbc",
+      "translation": "With all commands, events will not be placed on coordinates where an event has already been placed.",
+      "contextHash": "501cbe0ddddb189096513d6fe2c8c42b0d23c176c479c3bc789e35558b362cbc"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "※すり抜けの場合のみ重複配置を許可します。",
+      "sourceHash": "f6c948756086a06bf06d9033969fadfe64780e88c9f04c96347adb8a79352ce4",
+      "translation": "※Overlapping placement is allowed only when through is enabled.",
+      "contextHash": "f6c948756086a06bf06d9033969fadfe64780e88c9f04c96347adb8a79352ce4"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "全ての座標が配置不可となった時点で配置は停止されます。",
+      "sourceHash": "78499bb1c966dfd7f596e343a83e8f372eba5c55cb9f303c871db35f920382fb",
+      "translation": "Placement stops once all coordinates become unavailable for placement.",
+      "contextHash": "78499bb1c966dfd7f596e343a83e8f372eba5c55cb9f303c871db35f920382fb"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "リージョンＩＤ、地形タグ、タイルＩＤ、オートタイルタイプについては、数式の使用や複数指定も可能です。",
+      "sourceHash": "7dc84a040b0622ef32a63c4def2e10b70dc317beeb05a45c873ed317758a5c3f",
+      "translation": "Formulas can be used and multiple values can be specified for region IDs, terrain tags, tile IDs, and autotile types.",
+      "contextHash": "7dc84a040b0622ef32a63c4def2e10b70dc317beeb05a45c873ed317758a5c3f"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※例１：1,3,5（1と3と5を指定）",
+      "sourceHash": "a723c770d849014e3c827bafc292c8e6bde8001308f0b02c29803dde74071bb4",
+      "translation": "※Example 1: 1,3,5 (specify 1, 3, and 5)",
+      "contextHash": "a723c770d849014e3c827bafc292c8e6bde8001308f0b02c29803dde74071bb4"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "※例２：1~3（1から3を指定）",
+      "sourceHash": "17c62eb5613ae7b6d102b911ad6b36cf50be75463d2bd928780d361b789a0d11",
+      "translation": "※Example 2: 1~3 (specify 1 through 3)",
+      "contextHash": "17c62eb5613ae7b6d102b911ad6b36cf50be75463d2bd928780d361b789a0d11"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "プレイヤーと離す距離（KeepPlayerDistance）",
+      "sourceHash": "46f74c6852a1887d4769723094ada2f561d00e79f48498ed232fb16b5c49951b",
+      "translation": "Keep Player Distance (KeepPlayerDistance)",
+      "contextHash": "46f74c6852a1887d4769723094ada2f561d00e79f48498ed232fb16b5c49951b"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "プレイヤーから指定範囲内のマスにはイベントの配置を禁止します。",
+      "sourceHash": "70029e16e0b312c9bd483e49f1a7590a8b9ab2d89b22d25646f8b4fc30c5a7dc",
+      "translation": "Events cannot be placed on tiles within the specified range of the player.",
+      "contextHash": "70029e16e0b312c9bd483e49f1a7590a8b9ab2d89b22d25646f8b4fc30c5a7dc"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "場所移動直後にプレイヤーのそばに敵イベントを置きたくない――といった場合に有効です。",
+      "sourceHash": "55d94cffa225cdd10fb854fd2e96d58270982fb5aefb7819717b44d20edcc57c",
+      "translation": "This is useful when you do not want enemy events to be placed near the player immediately after changing locations.",
+      "contextHash": "55d94cffa225cdd10fb854fd2e96d58270982fb5aefb7819717b44d20edcc57c"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "数式も可能です。テキストモードで入力してください。",
+      "sourceHash": "355b76fe6500eae36bd0b09251f9414def7e970e8ec64d98661855027cad8719",
+      "translation": "Formulas are also supported. Enter them in text mode.",
+      "contextHash": "355b76fe6500eae36bd0b09251f9414def7e970e8ec64d98661855027cad8719"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "例：$gameVariables.value(100)",
+      "sourceHash": "49ccc42007efa758ef2381d9687a3f90492c1b293f8e66d7d7b9991e51f6dea0",
+      "translation": "Example: $gameVariables.value(100)",
+      "contextHash": "49ccc42007efa758ef2381d9687a3f90492c1b293f8e66d7d7b9991e51f6dea0"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "※変数１００番を参照。",
+      "sourceHash": "5082a9d6881ce6cb7ce2f8533a9cda916120760c46b44db035155ece409324dd",
+      "translation": "※References variable 100.",
+      "contextHash": "5082a9d6881ce6cb7ce2f8533a9cda916120760c46b44db035155ece409324dd"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "配置禁止リージョン（ProhibitedRegion）",
+      "sourceHash": "59c50abb65ccbe561876c31630841f8dff4238fd54ed1faff0982a516aeb0aa8",
+      "translation": "Prohibited Region (ProhibitedRegion)",
+      "contextHash": "59c50abb65ccbe561876c31630841f8dff4238fd54ed1faff0982a516aeb0aa8"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "配置を禁止するリージョンＩＤです。",
+      "sourceHash": "5d60764cc2c523515af412aa3f533504d7d3bdaeb981b920ed2de674d148b736",
+      "translation": "The region IDs where placement is prohibited.",
+      "contextHash": "5d60764cc2c523515af412aa3f533504d7d3bdaeb981b920ed2de674d148b736"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "全てのプラグインコマンドに対して、指定したリージョン上にはイベントがランダム配置されなくなります。",
+      "sourceHash": "9ed6540123d773723b2b7bc9ae3390b20fab67436aed22c63de933702fe9d7d3",
+      "translation": "For all plugin commands, events will no longer be randomly placed on the specified regions.",
+      "contextHash": "9ed6540123d773723b2b7bc9ae3390b20fab67436aed22c63de933702fe9d7d3"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "開放確認範囲（CheckOpenDistance）",
+      "sourceHash": "85baca28e3b98766e56836f886681a3db26eb0c00ddf5d84980ee09164ff7280",
+      "translation": "Open Area Check Range (CheckOpenDistance)",
+      "contextHash": "85baca28e3b98766e56836f886681a3db26eb0c00ddf5d84980ee09164ff7280"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "イベントの設置座標が開けた場所であることを数値分だけ確認します。",
+      "sourceHash": "813d4ef7dfeea5ff3252eed3864067c81f222819f5f04c4257906f8fdc2296ee",
+      "translation": "Checks whether the event placement coordinates are in an open area for the specified number of tiles.",
+      "contextHash": "813d4ef7dfeea5ff3252eed3864067c81f222819f5f04c4257906f8fdc2296ee"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "値が5ならば５マス遠くまで移動できることを配置条件とします。",
+      "sourceHash": "50319b2e83838e0962abe257d3c55fc74bcd80de81101688824c8c6ade814359",
+      "translation": "If the value is 5, the placement condition is that the player must be able to move up to five tiles away.",
+      "contextHash": "50319b2e83838e0962abe257d3c55fc74bcd80de81101688824c8c6ade814359"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "上記の小島のようにプレイヤーが到達不能な孤立した地点にイベントを配置しないための機能です。",
+      "sourceHash": "b8abe6644f3de320c891df963046adfc9746e4c14cad9ab7a03bd2db828593b9",
+      "translation": "This feature prevents events from being placed in isolated locations that the player cannot reach, such as the small island mentioned above.",
+      "contextHash": "b8abe6644f3de320c891df963046adfc9746e4c14cad9ab7a03bd2db828593b9"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "値を大きくしすぎると配置処理が重くなるので注意してください。",
+      "sourceHash": "54e114553193310f79ee9eb851f0a436d741ebf48bf93e16abcd89bcdd241dc4",
+      "translation": "Be careful, as setting the value too high will make the placement process more demanding.",
+      "contextHash": "54e114553193310f79ee9eb851f0a436d741ebf48bf93e16abcd89bcdd241dc4"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "例えば、飛行移動などの設定がされているイベントは、周囲を障害物に囲まれていても配置対象になります。",
+      "sourceHash": "3f81ec5db4af38d148d7ce7a73b2621d504a9a60c6c206cb6053d08a7ab051af",
+      "translation": "For example, events configured for flying movement can be placement targets even when surrounded by obstacles.",
+      "contextHash": "3f81ec5db4af38d148d7ce7a73b2621d504a9a60c6c206cb6053d08a7ab051af"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "イベントの衝突確認（CheckEventCollision）",
+      "sourceHash": "dff8b2bdc605055636fa5b591a536f4ed743990812d6cdf045ddc84544b82d25",
+      "translation": "Check Event Collision (CheckEventCollision)",
+      "contextHash": "dff8b2bdc605055636fa5b591a536f4ed743990812d6cdf045ddc84544b82d25"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "開放確認範囲について、イベントの当たり判定の確認も行います。",
+      "sourceHash": "64374c83c9804e09845930e213811ca110413e01501ad11497033d2198f68b8b",
+      "translation": "It also checks event collision within the open area check range.",
+      "contextHash": "64374c83c9804e09845930e213811ca110413e01501ad11497033d2198f68b8b"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "通行可能な地点のみ配置（PassableOnly）",
+      "sourceHash": "ec6124877415eeaa8df3a48affa2fae0360fa490d012fccdb0824c8505dc69fa",
+      "translation": "Place Only on Passable Locations (PassableOnly)",
+      "contextHash": "ec6124877415eeaa8df3a48affa2fae0360fa490d012fccdb0824c8505dc69fa"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "イベントが通行可能な地点にのみ配置を行います。",
+      "sourceHash": "ed426e08cc864a0c9cade3b34d49ba5ed2374aeeea9a0d2ebb0eebfa6357a4d1",
+      "translation": "Events are placed only in locations they can pass through.",
+      "contextHash": "ed426e08cc864a0c9cade3b34d49ba5ed2374aeeea9a0d2ebb0eebfa6357a4d1"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "同じく別プラグインによる設定も参照されるので、通行判定変更プラグインと併用すると便利です。",
+      "sourceHash": "6b24b6ad4f2f954c8e423bca02804e24ebf252c755417e74787812f88bb00c55",
+      "translation": "Settings from other plugins are also referenced, so this is useful when used together with plugins that modify passage checks.",
+      "contextHash": "6b24b6ad4f2f954c8e423bca02804e24ebf252c755417e74787812f88bb00c55"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "☆タイルを除外（IgnoreStarTile）",
+      "sourceHash": "e3e885209f7a69d80d9246a19ced716acfaa9dee1e72c29e760f9de8bc46fc1e",
+      "translation": "Ignore ☆ Tiles (IgnoreStarTile)",
+      "contextHash": "e3e885209f7a69d80d9246a19ced716acfaa9dee1e72c29e760f9de8bc46fc1e"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "『イベントの配置(タイル)』を選択時に、☆タイル（上層）を無視します。",
+      "sourceHash": "c6d4b305ad0a730094fcfd3810677c6184325debe4d5aedeb87921a90f5fef1d",
+      "translation": "When “Event Placement (Tile)” is selected, ☆ tiles (upper layer) are ignored.",
+      "contextHash": "c6d4b305ad0a730094fcfd3810677c6184325debe4d5aedeb87921a90f5fef1d"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "つまり、上層タイルの下に隠れた下層タイルにも配置を行います。",
+      "sourceHash": "8ad19d0313a68607d0c3c0a37f59dfaac0e5d2a73e7c021b63b02ee7eed48529",
+      "translation": "In other words, events will also be placed on lower-layer tiles hidden beneath upper-layer tiles.",
+      "contextHash": "8ad19d0313a68607d0c3c0a37f59dfaac0e5d2a73e7c021b63b02ee7eed48529"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "詳細な配置ができる一方で、隠れたタイルも対象にする仕様上、思わぬミスにつながりやすいのでご注意ください。",
+      "sourceHash": "1e18f399433a21dd2f3f6ba852f035fbafc46c1c0c044635e1608aa3f8c50cf6",
+      "translation": "Although this allows for more detailed placement, please be careful, as the specifications also target hidden tiles, making unexpected mistakes more likely.",
+      "contextHash": "1e18f399433a21dd2f3f6ba852f035fbafc46c1c0c044635e1608aa3f8c50cf6"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "特に[[LINK_1]]通行判定変更プラグイン[[/LINK_1]]で設定したイベントの通行判定を参照し、通行可能な場所にのみ配置を限定できます。",
+      "sourceHash": "b88d8eb79b9c9bf7a9c0b53c9e2c60d4b8bdf6b8939d7e3ed382e9c663c32dc1",
+      "parts": [
+        {
+          "source": "特に",
+          "link": false
+        },
+        {
+          "source": "通行判定変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で設定したイベントの通行判定を参照し、通行可能な場所にのみ配置を限定できます。",
+          "link": false
+        }
+      ],
+      "translation": "In particular, you can reference the passage settings for events configured with the [[LINK_1]]Passage Change Plugin[[/LINK_1]] and limit placement to passable locations only.",
+      "contextHash": "b88d8eb79b9c9bf7a9c0b53c9e2c60d4b8bdf6b8939d7e3ed382e9c663c32dc1"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド（Plugin Commands）[[/LINK_1]]",
+      "sourceHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174",
+      "parts": [
+        {
+          "source": "プラグインコマンド（Plugin Commands）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands (Plugin Commands)[[/LINK_1]]",
+      "contextHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの配置(通行)（PutEventsByPassage）[[/LINK_1]]",
+      "sourceHash": "3d8d23d944be79714c7b6f9509d4acfa623743f8ed05883699b85c7099f869d9",
+      "parts": [
+        {
+          "source": "イベントの配置(通行)（PutEventsByPassage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Place Events (Passage) (PutEventsByPassage)[[/LINK_1]]",
+      "contextHash": "3d8d23d944be79714c7b6f9509d4acfa623743f8ed05883699b85c7099f869d9"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの配置(リージョン)（PutEventsByRegion）[[/LINK_1]]",
+      "sourceHash": "6203b3f7d22b3fab5bb59847db7d08b33d73845987e1542064bd994549a6b25b",
+      "parts": [
+        {
+          "source": "イベントの配置(リージョン)（PutEventsByRegion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Place Events (Region) (PutEventsByRegion)[[/LINK_1]]",
+      "contextHash": "6203b3f7d22b3fab5bb59847db7d08b33d73845987e1542064bd994549a6b25b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの配置(地形タグ)（PutEventsByTerrain）[[/LINK_1]]",
+      "sourceHash": "b921701c26e3447b821787dc8a6156816dc894e4979153c7eaba2d39a1d0afff",
+      "parts": [
+        {
+          "source": "イベントの配置(地形タグ)（PutEventsByTerrain）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Place Events (Terrain Tag) (PutEventsByTerrain)[[/LINK_1]]",
+      "contextHash": "b921701c26e3447b821787dc8a6156816dc894e4979153c7eaba2d39a1d0afff"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの配置(タイル)（PutEventsByTile）[[/LINK_1]]",
+      "sourceHash": "717cc7cf10da29b56b405329a0fd32f2eaaa3d0c3814398a26160657fee584d1",
+      "parts": [
+        {
+          "source": "イベントの配置(タイル)（PutEventsByTile）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Place Events (Tile) (PutEventsByTile)[[/LINK_1]]",
+      "contextHash": "717cc7cf10da29b56b405329a0fd32f2eaaa3d0c3814398a26160657fee584d1"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]プレイヤーと離す距離（KeepPlayerDistance）[[/LINK_1]]",
+      "sourceHash": "125473e905c94dae8864910ceff66311e0ad9f95c4a7cc7d752c6be67f5f1d0d",
+      "parts": [
+        {
+          "source": "プレイヤーと離す距離（KeepPlayerDistance）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Distance from Player (KeepPlayerDistance)[[/LINK_1]]",
+      "contextHash": "125473e905c94dae8864910ceff66311e0ad9f95c4a7cc7d752c6be67f5f1d0d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]配置禁止リージョン（ProhibitedRegion）[[/LINK_1]]",
+      "sourceHash": "2cdb91f9bee5fb8d16955a7825170b6f0cb42f660a6e09ebfc51d52ad895cd2f",
+      "parts": [
+        {
+          "source": "配置禁止リージョン（ProhibitedRegion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Prohibited Regions (ProhibitedRegion)[[/LINK_1]]",
+      "contextHash": "2cdb91f9bee5fb8d16955a7825170b6f0cb42f660a6e09ebfc51d52ad895cd2f"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]開放確認範囲（CheckOpenDistance）[[/LINK_1]]",
+      "sourceHash": "cfc332254215fb6988743f938f37c1366434d73373b2ab14708438d1bfc1343b",
+      "parts": [
+        {
+          "source": "開放確認範囲（CheckOpenDistance）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Open Area Check Range (CheckOpenDistance)[[/LINK_1]]",
+      "contextHash": "cfc332254215fb6988743f938f37c1366434d73373b2ab14708438d1bfc1343b"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの衝突確認（CheckEventCollision）[[/LINK_1]]",
+      "sourceHash": "786223b49b31a2f12a95547772e3f32f511a125a9b50ec4294be2098d9d7cab8",
+      "parts": [
+        {
+          "source": "イベントの衝突確認（CheckEventCollision）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Check Event Collision (CheckEventCollision)[[/LINK_1]]",
+      "contextHash": "786223b49b31a2f12a95547772e3f32f511a125a9b50ec4294be2098d9d7cab8"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]通行可能な地点のみ配置（PassableOnly）[[/LINK_1]]",
+      "sourceHash": "b6377ade7631ab49c693b7735b115d0c91989c3a39c818d76a74636b3dd08168",
+      "parts": [
+        {
+          "source": "通行可能な地点のみ配置（PassableOnly）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Place Only on Passable Locations (PassableOnly)[[/LINK_1]]",
+      "contextHash": "b6377ade7631ab49c693b7735b115d0c91989c3a39c818d76a74636b3dd08168"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]☆タイルを除外（IgnoreStarTile）[[/LINK_1]]",
+      "sourceHash": "f78d99bc6478005e00de9a7915e8ac6a9cbe364154dc8d991f7d5f653003a1b8",
+      "parts": [
+        {
+          "source": "☆タイルを除外（IgnoreStarTile）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Exclude ☆ Tiles (IgnoreStarTile)[[/LINK_1]]",
+      "contextHash": "f78d99bc6478005e00de9a7915e8ac6a9cbe364154dc8d991f7d5f653003a1b8"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "タイル情報をデバッグ表示する（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887",
+      "parts": [
+        {
+          "source": "タイル情報をデバッグ表示する（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Display tile information for debugging ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "開放確認範囲について、[[LINK_1]]イベントの衝突判定も確認[[/LINK_1]]できるように修正。",
+      "sourceHash": "41d955484d350f2ec22d25702ad390a72320710acef2db4e49c106fbeba4aa82",
+      "parts": [
+        {
+          "source": "開放確認範囲について、",
+          "link": false
+        },
+        {
+          "source": "イベントの衝突判定も確認",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるように修正。",
+          "link": false
+        }
+      ],
+      "translation": "The open area check range has been updated to also allow [[LINK_1]]checking event collisions[[/LINK_1]].",
+      "contextHash": "41d955484d350f2ec22d25702ad390a72320710acef2db4e49c106fbeba4aa82"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]プレイヤーと離す距離[[/LINK_1]]に数式を許可。ただし、テキストモードで入力する必要があります。（2025/04/15 ver1.052）",
+      "sourceHash": "0bd9ad46306b737499526277a5fd5c2891302016282ae67fbe8abb91efe31251",
+      "parts": [
+        {
+          "source": "プレイヤーと離す距離",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に数式を許可。ただし、テキストモードで入力する必要があります。（2025/04/15 ver1.052）",
+          "link": false
+        }
+      ],
+      "translation": "Formulas are now allowed for the [[LINK_1]]distance from the player[[/LINK_1]]. However, they must be entered in text mode. (2025/04/15 ver1.052)",
+      "contextHash": "0bd9ad46306b737499526277a5fd5c2891302016282ae67fbe8abb91efe31251"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]開放確認範囲[[/LINK_1]]が通行（４方向）を考慮できていない不具合修正。",
+      "sourceHash": "62c69a0ef03f8312ea0f25689a039dbaeb569ac7aafff624de3016f48a5a509a",
+      "parts": [
+        {
+          "source": "開放確認範囲",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が通行（４方向）を考慮できていない不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where the [[LINK_1]]open area check range[[/LINK_1]] did not account for passage in all four directions.",
+      "contextHash": "62c69a0ef03f8312ea0f25689a039dbaeb569ac7aafff624de3016f48a5a509a"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "イベント自身の通行判定を参照しているため、[[LINK_1]]通行判定変更プラグイン[[/LINK_1]]などの設定がある場合はそれも考慮されます。",
+      "sourceHash": "ba58b89b28faa0c364ece087e0c8f2a69cacd0ae1df328f96df6e366c2a597df",
+      "parts": [
+        {
+          "source": "イベント自身の通行判定を参照しているため、",
+          "link": false
+        },
+        {
+          "source": "通行判定変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などの設定がある場合はそれも考慮されます。",
+          "link": false
+        }
+      ],
+      "translation": "Because the event's own passage settings are referenced, settings from the [[LINK_1]]Passage Change Plugin[[/LINK_1]] and similar plugins are also taken into account.",
+      "contextHash": "ba58b89b28faa0c364ece087e0c8f2a69cacd0ae1df328f96df6e366c2a597df"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "マップ上にイベントをランダム配置し、シンボルエンカウント用の配置処理を自動化します。": "Randomly places events on the map and automates the placement process for symbol encounters.",
+    "通行情報、リージョン、地形タグ、タイルＩＤ、オートタイルタイプを条件にして配置することができます。": "Placement can be based on passage settings, regions, terrain tags, tile IDs, and autotile types.",
+    "様々な機能によって、最小限の手間で配置を行えるようにしています。": "Various features allow placement with minimal effort.",
+    "つまり、": "In other words,",
+    "飛行系イベントは障害物の上を含めて自由に配置。": "Flying events can be placed freely, including on top of obstacles.",
+    "魚系イベントは水中に配置。": "Fish events can be placed underwater.",
+    "その他は陸地のみ配置。": "Other events can be placed only on land.",
+    "……といった操作を自動化できます。": "Operations like these can be automated.",
+    "『シンボルエンカウント』と書いていますが、実際の機能はイベントのランダム配置を行うというものです。それ以外にも、ＡＲＰＧにおける敵イベントの配置やランダムな宝箱の配置などにも使えると思います。": "Although this is called “symbol encounters,” its actual function is to randomly place events. It can also be used to place enemy events in an ARPG or randomly place treasure chests.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_PutRandomEvents.js": "NRP_PutRandomEvents.js ",
+    "ver1.052（2025/04/15）": "ver1.052 (2025/04/15) ",
+    "このプラグインの使用には以下の公式ローンチプラグインが必須です。": "The following official launch plugin is required to use this plugin.",
+    "いずれも以下から入手できます。": "Both can be obtained from below.",
+    "オプション": "Options",
+    "NRP_DebugTile.js": "NRP_DebugTile.js ",
+    "ver1.01（2021/08/15）": "ver1.01 (2021/08/15) ",
+    "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_BushEXの補助用に使えます。": "※This plugin allows you to check the autotile type and tile ID at your feet simply by pressing F2. It can be used as an aid for NRP_BushEX.",
+    "更新履歴（History）": "Update History (History)",
+    "2025/03/18 -> 2025/04/15（ver1.05 -> 1.052）": "2025/03/18 -> 2025/04/15 (ver1.05 -> 1.052) ",
+    "ver1.05の修正が不完全だったので再修正。（2025/03/28 ver1.051）": "Revised again because the ver1.05 fix was incomplete. (2025/03/28 ver1.051)",
+    "2024/08/26（ver1.04）": "2024/08/26 (ver1.04) ",
+    "稀に既存イベントや通行不可な座標の上にイベントが配置されてしまう不具合修正。": "Fixed a bug that occasionally placed events on existing events or impassable coordinates.",
+    "2024/08/14（ver1.03）": "2024/08/14 (ver1.03) ",
+    "配置処理を高速化した。": "Improved placement processing speed.",
+    "※特に大型のマップに配置する処理が大幅に改善（当社比５倍！）します。": "※Placement processing, especially on large maps, is significantly improved (five times faster by my measurement!).",
+    "2024/06/02（ver1.02）": "2024/06/02 (ver1.02) ",
+    "2023/07/07 -> 2023/07/18（ver1.01 -> 1.011）": "2023/07/07 -> 2023/07/18 (ver1.01 -> 1.011) ",
+    "プラグインコマンドで配置範囲を指定可能に。": "Placement ranges can now be specified using plugin commands.",
+    "有効な配置座標が存在しないとエラーになる不具合修正。": "Fixed a bug that caused an error when no valid placement coordinates existed.",
+    "（2023/07/18 ver1.011）": " (2023/07/18 ver1.011) ",
+    "2022/04/07（ver1.00）": "2022/04/07 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "TemplateEvent.jsの説明に従い、テンプレートイベントを作成します。": "Create a template event according to the instructions for TemplateEvent.js.",
+    "各プラグインコマンドを実行し、テンプレートイベントのＩＤ等の情報を指定してください。": "Execute each plugin command and specify information such as the template event ID.",
+    "※詳細は以下のプラグインコマンドをご覧ください。": "※See the plugin commands below for details.",
+    "最も単純な使用方法は『イベントの配置(通行)』を選択し、『テンプレートＩＤ』と『配置する数』を指定することです。『通行タイプ』は『全て』のままで構いません。": "The simplest way to use it is to select “Put Events (Passage)” and specify the “Template ID” and “Number to Place.” You can leave “Passage Type” set to “All.”",
+    "これでイベント自身の通行判定に従って、自動的に配置が行われます。": "Events will then be placed automatically according to the passage settings of the events themselves.",
+    "※なお、配置されたイベントの挙動は『TemplateEvent.js』および『EventReSpawn.js』の仕様に従います。": "※The behavior of placed events follows the specifications of TemplateEvent.js and EventReSpawn.js.",
+    "プラグインコマンド（Plugin Commands）": "Plugin Commands (Plugin Commands)",
+    "イベントの配置(通行)（PutEventsByPassage）": "Put Events (Passage) (PutEventsByPassage)",
+    "マップの通行情報を元にイベントをランダム配置します。": "Randomly places events based on the map's passage settings.",
+    "例えば、通行可能なタイル上にのみイベントを配置するといったことができます。": "For example, events can be placed only on passable tiles.",
+    "通常は『通行タイプ』を『全て』にして配置しておけば問題ありません。": "Normally, there should be no problem leaving “Passage Type” set to “All” when placing events.",
+    "プラグインパラメータの『通行可能な地点のみ配置』をオンにしていれば、イベント自身の通行判定が自動的に考慮されます。": "If the plugin parameter “Place Only on Passable Locations” is enabled, the passage settings of the event itself are automatically taken into account.",
+    "イベントの配置(リージョン)（PutEventsByRegion）": "Put Events (Region) (PutEventsByRegion)",
+    "指定したリージョン上にイベントをランダム配置します。": "Randomly places events on the specified regions.",
+    "イベントの配置(地形タグ)（PutEventsByTerrain）": "Put Events (Terrain Tag) (PutEventsByTerrain)",
+    "指定した地形タグのタイル上にイベントをランダム配置します。": "Randomly places events on tiles with the specified terrain tags.",
+    "イベントの配置(タイル)（PutEventsByTile）": "Put Events (Tile) (PutEventsByTile)",
+    "指定したタイルにイベントをランダム配置します。": "Randomly places events on the specified tiles.",
+    "オートタイルタイプでの指定も可能です。": "Autotile types can also be specified.",
+    "いずれのコマンドでも共通して、既にイベントが配置されている座標には配置されません。": "With all commands, events will not be placed on coordinates where an event has already been placed.",
+    "※すり抜けの場合のみ重複配置を許可します。": "※Overlapping placement is allowed only when through is enabled.",
+    "全ての座標が配置不可となった時点で配置は停止されます。": "Placement stops once all coordinates become unavailable for placement.",
+    "リージョンＩＤ、地形タグ、タイルＩＤ、オートタイルタイプについては、数式の使用や複数指定も可能です。": "Formulas can be used and multiple values can be specified for region IDs, terrain tags, tile IDs, and autotile types.",
+    "※例１：1,3,5（1と3と5を指定）": "※Example 1: 1,3,5 (specify 1, 3, and 5)",
+    "※例２：1~3（1から3を指定）": "※Example 2: 1~3 (specify 1 through 3)",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters",
+    "プレイヤーと離す距離（KeepPlayerDistance）": "Keep Player Distance (KeepPlayerDistance)",
+    "プレイヤーから指定範囲内のマスにはイベントの配置を禁止します。": "Events cannot be placed on tiles within the specified range of the player.",
+    "場所移動直後にプレイヤーのそばに敵イベントを置きたくない――といった場合に有効です。": "This is useful when you do not want enemy events to be placed near the player immediately after changing locations.",
+    "数式も可能です。テキストモードで入力してください。": "Formulas are also supported. Enter them in text mode.",
+    "例：$gameVariables.value(100)": "Example: $gameVariables.value(100)",
+    "※変数１００番を参照。": "※References variable 100.",
+    "配置禁止リージョン（ProhibitedRegion）": "Prohibited Region (ProhibitedRegion)",
+    "配置を禁止するリージョンＩＤです。": "The region IDs where placement is prohibited.",
+    "全てのプラグインコマンドに対して、指定したリージョン上にはイベントがランダム配置されなくなります。": "For all plugin commands, events will no longer be randomly placed on the specified regions.",
+    "開放確認範囲（CheckOpenDistance）": "Open Area Check Range (CheckOpenDistance)",
+    "イベントの設置座標が開けた場所であることを数値分だけ確認します。": "Checks whether the event placement coordinates are in an open area for the specified number of tiles.",
+    "値が5ならば５マス遠くまで移動できることを配置条件とします。": "If the value is 5, the placement condition is that the player must be able to move up to five tiles away.",
+    "上記の小島のようにプレイヤーが到達不能な孤立した地点にイベントを配置しないための機能です。": "This feature prevents events from being placed in isolated locations that the player cannot reach, such as the small island mentioned above.",
+    "値を大きくしすぎると配置処理が重くなるので注意してください。": "Be careful, as setting the value too high will make the placement process more demanding.",
+    "例えば、飛行移動などの設定がされているイベントは、周囲を障害物に囲まれていても配置対象になります。": "For example, events configured for flying movement can be placement targets even when surrounded by obstacles.",
+    "イベントの衝突確認（CheckEventCollision）": "Check Event Collision (CheckEventCollision)",
+    "開放確認範囲について、イベントの当たり判定の確認も行います。": "It also checks event collision within the open area check range.",
+    "通行可能な地点のみ配置（PassableOnly）": "Place Only on Passable Locations (PassableOnly)",
+    "イベントが通行可能な地点にのみ配置を行います。": "Events are placed only in locations they can pass through.",
+    "同じく別プラグインによる設定も参照されるので、通行判定変更プラグインと併用すると便利です。": "Settings from other plugins are also referenced, so this is useful when used together with plugins that modify passage checks.",
+    "☆タイルを除外（IgnoreStarTile）": "Ignore ☆ Tiles (IgnoreStarTile)",
+    "『イベントの配置(タイル)』を選択時に、☆タイル（上層）を無視します。": "When “Event Placement (Tile)” is selected, ☆ tiles (upper layer) are ignored.",
+    "つまり、上層タイルの下に隠れた下層タイルにも配置を行います。": "In other words, events will also be placed on lower-layer tiles hidden beneath upper-layer tiles.",
+    "詳細な配置ができる一方で、隠れたタイルも対象にする仕様上、思わぬミスにつながりやすいのでご注意ください。": "Although this allows for more detailed placement, please be careful, as the specifications also target hidden tiles, making unexpected mistakes more likely."
+  }
+}
