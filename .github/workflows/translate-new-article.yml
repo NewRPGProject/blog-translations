@@ -74,6 +74,14 @@ jobs:
           ARTICLE_URLS: ${{ inputs.article_urls }}
           FORCE_RETRANSLATE: ${{ inputs.force_retranslate }}
 
+      - name: Translate common site text
+        id: common
+        continue-on-error: true
+        run: node scripts/translate-common.mjs
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-luna
+
       - name: Update article status
         id: status
         if: always()
@@ -93,9 +101,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add articles/
           git add common/article-titles.json
+          git add common/en.json
           git add status/articles.json
           if (Test-Path ".translation-monitor.json") {
             git add .translation-monitor.json
+          }
+          if (Test-Path ".common-translation-monitor.json") {
+            git add .common-translation-monitor.json
           }
           $changes = git status --porcelain
           if ($changes) {
@@ -110,10 +122,13 @@ jobs:
           }
 
       - name: Report translation failure
-        if: steps.translate.outcome == 'failure' || steps.status.outcome == 'failure' || steps.title_index.outcome == 'failure'
+        if: steps.translate.outcome == 'failure' || steps.common.outcome == 'failure' || steps.status.outcome == 'failure' || steps.title_index.outcome == 'failure'
         run: |
           if ("${{ steps.translate.outcome }}" -eq "failure") {
             Write-Error "Translation failed after completed articles were saved."
+          }
+          if ("${{ steps.common.outcome }}" -eq "failure") {
+            Write-Error "Common-site translation failed."
           }
           if ("${{ steps.status.outcome }}" -eq "failure") {
             Write-Error "Status update failed."
