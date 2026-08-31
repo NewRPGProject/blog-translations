@@ -359,7 +359,10 @@ function restoreOriginalLineFormat(original, translated) {
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(original);
     const decoded = decodeHtmlEntities(
-        normalizeJapaneseQuoteBoundaries(original, translated)
+        preserveCircledNumberMarkers(
+            original,
+            normalizeJapaneseQuoteBoundaries(original, translated)
+        )
     );
     // A translated fragment can intentionally end with a space when the next
     // visible fragment sits inside <strong>, <span>, <a>, or another inline
@@ -403,6 +406,9 @@ function textLookupKeys(text) {
 // Japanese paragraph indentation is U+3000 and deliberately remains intact.
 function normalizeEnglishAscii(text) {
     return String(text)
+        // Keep this article-category label consistent even in older JSON that
+        // was generated before the glossary entry was standardised.
+        .replace(/[【\[]RPG Design Guides[】\]][ \t]*/gi, "[RPG Design Guides] ")
         .replace(/[ \t]*\uFF08/g, " (")
         .replace(/\uFF09[ \t]*/g, ") ")
         .replace(/[\uFF01-\uFF5E]/g, character =>
@@ -436,6 +442,26 @@ function normalizeJapaneseQuoteBoundaries(source, text) {
         }
     }
 
+    return translation;
+}
+
+const CIRCLED_NUMBER_MARKERS = new Map([
+    ["①", "1"], ["②", "2"], ["③", "3"], ["④", "4"], ["⑤", "5"],
+    ["⑥", "6"], ["⑦", "7"], ["⑧", "8"], ["⑨", "9"], ["⑩", "10"]
+]);
+
+// Circled numbers identify an article series. They must remain exactly as in
+// the Japanese source instead of becoming ordinary English digits.
+function preserveCircledNumberMarkers(source, text) {
+    const original = String(source || "");
+    let translation = String(text || "");
+    for (const [marker, number] of CIRCLED_NUMBER_MARKERS) {
+        if (!original.includes(marker) || translation.includes(marker)) continue;
+        translation = translation.replace(
+            new RegExp(`(?<![0-9])${number}(?![0-9])`, "u"),
+            marker
+        );
+    }
     return translation;
 }
 
@@ -677,7 +703,10 @@ function makeLineFragment(line, matchedNodes) {
     const lastNode = matchedNodes[matchedNodes.length - 1];
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(firstNode.nodeValue);
-    let translation = normalizeJapaneseQuoteBoundaries(line.source, line.translation)
+    let translation = preserveCircledNumberMarkers(
+        line.source,
+        normalizeJapaneseQuoteBoundaries(line.source, line.translation)
+    )
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
     // See restoreOriginalLineFormat: an ordinary leading space would be
@@ -1083,7 +1112,10 @@ async function applyIndexLanguage(language, options = {}) {
           );
         }
 
-        article.titleElement.textContent = normalizeEnglishAscii(translation.title);
+        article.titleElement.textContent = preserveCircledNumberMarkers(
+          originalTitle.get(article.titleElement),
+          normalizeEnglishAscii(translation.title)
+        );
 
         translateLinkedLines(article.bodyElement, translation, "en");
         translateTextNodes(
@@ -1204,8 +1236,10 @@ async function applyLanguage(language, options = {}) {
                 }
 
                 if (titleElement) {
-                    titleElement.textContent =
-                        normalizeEnglishAscii(translation.title);
+                    titleElement.textContent = preserveCircledNumberMarkers(
+                        originalTitle.get(titleElement),
+                        normalizeEnglishAscii(translation.title)
+                    );
                 }
 
                 translateLinkedLines(bodyElement, translation, "en");
