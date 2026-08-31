@@ -1,0 +1,738 @@
+{
+  "articleId": "474179062",
+  "sourceUrl": "https://newrpg.seesaa.net/article/474179062.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "7bc687c7c0e5f5670bb568d0b5bdbe111999fd8de4a27d31f67dc5cd32da5f82",
+  "translatedAt": "2026-08-31T02:47:19.250Z",
+  "title": "DynamicMotion Other Features, etc. [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicMotion その他機能など【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "afd66a62f3fc2a37552a510525504803014389aa082f5957d43048133aba4291",
+      "translation": "DynamicMotion Other Features, etc. [RPG Maker MZ & MV Plugin]",
+      "contextHash": "afd66a62f3fc2a37552a510525504803014389aa082f5957d43048133aba4291"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "補足的な機能解説です。いくつかの機能はDynamicAnimationと同一です。",
+      "sourceHash": "ab61af9e1f61eef4076b6cc8d77216a2dda641986a73030ed7f2b7b231a86430",
+      "translation": "This section provides supplementary explanations of the features. Some features are the same as those in DynamicAnimation.",
+      "contextHash": "ab61af9e1f61eef4076b6cc8d77216a2dda641986a73030ed7f2b7b231a86430"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "こちらもご参照ください。",
+      "sourceHash": "52d00e9284f43db97d2a62a2bc5fc484455f351880239db570a791a9d346d7e2",
+      "translation": "Please refer to this as well.",
+      "contextHash": "52d00e9284f43db97d2a62a2bc5fc484455f351880239db570a791a9d346d7e2"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ミラーリング（mirroring）",
+      "sourceHash": "c98e6ba6cfb552787f68a0ede616fc5f1b938ba7d4b5fc6adc6a743cfcaf42b3",
+      "translation": "Mirroring (mirroring)",
+      "contextHash": "c98e6ba6cfb552787f68a0ede616fc5f1b938ba7d4b5fc6adc6a743cfcaf42b3"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "例えば、以下のような定義があるとします。",
+      "sourceHash": "389ed6b91f1e4771e6c804e3a4d93d7f31404e3d0cb97893020f7436d4905b66",
+      "translation": "For example, suppose you have a definition like the following.",
+      "contextHash": "389ed6b91f1e4771e6c804e3a4d93d7f31404e3d0cb97893020f7436d4905b66"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "ex = b.x + 200 // 終点Ｘ座標",
+      "sourceHash": "714be7f855e30bb628114f70a3a68656c9439d8a1c789220967c3c57f4b13ca1",
+      "translation": "ex = b.x + 200 // Ending X coordinate",
+      "contextHash": "714be7f855e30bb628114f70a3a68656c9439d8a1c789220967c3c57f4b13ca1"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "対象の右２００ピクセルへ移動するというものです。",
+      "sourceHash": "515bde6c5d1dfaaae557c3e4768f3924e94554ccab8accf3b4d5c9ab455be250",
+      "translation": "It moves 200 pixels to the right of the target.",
+      "contextHash": "515bde6c5d1dfaaae557c3e4768f3924e94554ccab8accf3b4d5c9ab455be250"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ところが一つ問題があります。",
+      "sourceHash": "46c03808237e797e6c2437ce1faa5fa1bcfce6bef8a16de400a492f6f46af2a9",
+      "translation": "However, there is one problem.",
+      "contextHash": "46c03808237e797e6c2437ce1faa5fa1bcfce6bef8a16de400a492f6f46af2a9"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "アクターが使用した場合は問題なく対象の正面である右側へ移動します。……が、これを敵が使うと今度はアクターの背中へと移動してしまいます。",
+      "sourceHash": "77fde940bc87e4f86953e023dfc4f15fc6a59546ec30685105547b5e07d67034",
+      "translation": "When used by an actor, it moves correctly to the right side, directly in front of the target. However, when an enemy uses it, it moves to the actor's back instead.",
+      "contextHash": "77fde940bc87e4f86953e023dfc4f15fc6a59546ec30685105547b5e07d67034"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "となると、味方なら『b.x + 200』、敵なら『b.x - 200』に定義を切り替えたい。",
+      "sourceHash": "ed7a0911cb44803e6db796a61d5856f0cec93ea89e415f24fba5f4e26abb9f0b",
+      "translation": "In that case, I want to switch the definition to “b.x + 200” for allies and “b.x - 200” for enemies.",
+      "contextHash": "ed7a0911cb44803e6db796a61d5856f0cec93ea89e415f24fba5f4e26abb9f0b"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "そこで、以下の機能を用意しました。",
+      "sourceHash": "51e2abf5ad632f55f2cf5eb746e2cb63d442731445d1be83b58f6e22774bcf6a",
+      "translation": "To address this, I added the following feature.",
+      "contextHash": "51e2abf5ad632f55f2cf5eb746e2cb63d442731445d1be83b58f6e22774bcf6a"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// 終点Ｘ座標",
+      "sourceHash": "af9fef6fc98475636f073e72ef8909efa28fb6b6769a7a80b0effa5c2a1d4aac",
+      "translation": "// Ending X coordinate",
+      "contextHash": "e46210140a51ca25ad0895996db1db636f2f33d6f8e445a29d66ce44b42ac8cb"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "この『mirroring』という変数は対象がアクターの場合に値が-1になります。これをかけることで必要な部分だけを左右反転させられます。",
+      "sourceHash": "61b99686c27ba45dd22ed8b202c21ad95b24b3e3f90ea916b77ee6ca5c000407",
+      "translation": "The variable “mirroring” has a value of -1 when the target is an actor. Multiplying by this value lets you mirror only the necessary parts horizontally.",
+      "contextHash": "61b99686c27ba45dd22ed8b202c21ad95b24b3e3f90ea916b77ee6ca5c000407"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "また、フロントビューなどで上下座標を反転させたいなら、Ｙ座標側に同様の操作をしてください。",
+      "sourceHash": "d8acdbb3a978e57fcc54c5ba4215c1361bfb1466d8508e070653abd6fc6b3b7e",
+      "translation": "Similarly, if you want to invert the vertical coordinates, such as in front-view battles, apply the same operation to the Y coordinate.",
+      "contextHash": "d8acdbb3a978e57fcc54c5ba4215c1361bfb1466d8508e070653abd6fc6b3b7e"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "この通り、対象の左へと移動するようになりました。",
+      "sourceHash": "ba3288670d5c0dd8d034fad39597ca4c6a3005563a949655173bbd7dd16e143d",
+      "translation": "As you can see, it now moves to the left of the target.",
+      "contextHash": "ba3288670d5c0dd8d034fad39597ca4c6a3005563a949655173bbd7dd16e143d"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "直接演算",
+      "sourceHash": "9c53db96dc91a78173157797eb0ec9d792f17133f82b723febeb4ca125b96489",
+      "translation": "Direct Calculations",
+      "contextHash": "9c53db96dc91a78173157797eb0ec9d792f17133f82b723febeb4ca125b96489"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "以下のように指定すれば、テンプレートの設定値に対して直接演算できます。元の値が分からなくとも設定できるので便利です。",
+      "sourceHash": "92455c6cbe9c33ad1f927a2bc23467d809833cc766db380c5a64d8ae4558218c",
+      "translation": "By specifying it as shown below, you can perform calculations directly on the template's setting values. This is convenient because you can configure them without knowing the original values.",
+      "contextHash": "92455c6cbe9c33ad1f927a2bc23467d809833cc766db380c5a64d8ae4558218c"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "ex += 100 // テンプレートの設定値 + 100",
+      "sourceHash": "75389ed997978c21e0c58905d65ae16a7c8006100d5610f01ec6263fb2fc034e",
+      "translation": "ex += 100 // Template setting value + 100",
+      "contextHash": "75389ed997978c21e0c58905d65ae16a7c8006100d5610f01ec6263fb2fc034e"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "ey -= 100 // テンプレートの設定値 - 100",
+      "sourceHash": "b44e9a98eb534706402a9aa725d54ba6d0599acb792faf731a5f983b04aa75be",
+      "translation": "ey -= 100 // Template setting value - 100",
+      "contextHash": "b44e9a98eb534706402a9aa725d54ba6d0599acb792faf731a5f983b04aa75be"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "rotation *= 2 // テンプレートの設定値 * 2",
+      "sourceHash": "34cd4db7e0b67ca3f27c4dcde612ea35f879b7d536b281eee3eb398d7070e75d",
+      "translation": "rotation *= 2 // Template setting value * 2",
+      "contextHash": "34cd4db7e0b67ca3f27c4dcde612ea35f879b7d536b281eee3eb398d7070e75d"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "arcY /= 2 // テンプレートの設定値 / 2",
+      "sourceHash": "0060a8ad49f839e20ca9ea1e5e98babeb6f03cc06d4b0186953bf37bbbdd2f52",
+      "translation": "arcY /= 2 // Template setting value / 2",
+      "contextHash": "0060a8ad49f839e20ca9ea1e5e98babeb6f03cc06d4b0186953bf37bbbdd2f52"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "なお、これらの演算はJavaScriptの式に対して、『文字列連結』しているだけであることにご注意ください。",
+      "sourceHash": "7c8de3130c07c48aa606683fe1ab56f4c1b22667f6312cec5d187af3c1c026a0",
+      "translation": "Note that these calculations simply concatenate strings to the JavaScript expression.",
+      "contextHash": "7c8de3130c07c48aa606683fe1ab56f4c1b22667f6312cec5d187af3c1c026a0"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "どういうことかというと、テンプレートの設定値が「ex = b.x + 100」だったとします。",
+      "sourceHash": "9d97a345164ecca591b81096425919a9cb019757a2fd96214ad85053a8677698",
+      "translation": "What this means is, suppose the template's setting value is “ex = b.x + 100”.",
+      "contextHash": "9d97a345164ecca591b81096425919a9cb019757a2fd96214ad85053a8677698"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "メモ欄の入力が以下の通りだった場合……",
+      "sourceHash": "92136a8462c61d4a87ec46042418032e6720495b89c3c9649157989868a6beb4",
+      "translation": "If the note field contains the following...",
+      "contextHash": "92136a8462c61d4a87ec46042418032e6720495b89c3c9649157989868a6beb4"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "連結後の内容は「ex = b.x + 100 * 2」となります。",
+      "sourceHash": "fff802c6b3c907b213a5654187b46d88b7aba927552b20d7ceddf836a3ea1b9c",
+      "translation": "The resulting concatenated expression is “ex = b.x + 100 * 2”.",
+      "contextHash": "fff802c6b3c907b213a5654187b46d88b7aba927552b20d7ceddf836a3ea1b9c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "つまり、かけ算がかかるのは末尾の100の部分だけってことです。",
+      "sourceHash": "820e356ad180c9e74f8552c7e4902e9a72871aafde8483e2d20fc17635658795",
+      "translation": "In other words, the multiplication applies only to the final 100.",
+      "contextHash": "820e356ad180c9e74f8552c7e4902e9a72871aafde8483e2d20fc17635658795"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "全体にかけるにはプラグインの設定値を「ex = (b.x + 100)」のようにしておけばＯＫです。",
+      "sourceHash": "a84cdef979387d0e87dd3d60fbec29c52a2fd9b3e86cedbd1f1868c1865876cc",
+      "translation": "To apply it to the entire expression, set the plugin parameter to “ex = (b.x + 100)”.",
+      "contextHash": "a84cdef979387d0e87dd3d60fbec29c52a2fd9b3e86cedbd1f1868c1865876cc"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "足し算、引き算なら支障ありませんが、かけ算、わり算の場合はご注意を。",
+      "sourceHash": "ef209dcee74c7aeabcc9d5d5cd1eed8ea1127bfd6cee3ee3287c9db351840582",
+      "translation": "Addition and subtraction cause no problems, but be careful when using multiplication and division.",
+      "contextHash": "ef209dcee74c7aeabcc9d5d5cd1eed8ea1127bfd6cee3ee3287c9db351840582"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "&融合",
+      "sourceHash": "fde033b82191d22c70f96b5c47b56cc556a37ce55965827a0b135ddab875c5b0",
+      "translation": "& Fusion",
+      "contextHash": "fde033b82191d22c70f96b5c47b56cc556a37ce55965827a0b135ddab875c5b0"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "＆記号によりテンプレートの融合が可能です。",
+      "sourceHash": "1913d1f865004840eb06d0f8fd9e45c5103e4ccb85cf81bb3921a8dd6c28996d",
+      "translation": "The & symbol allows you to fuse templates.",
+      "contextHash": "1913d1f865004840eb06d0f8fd9e45c5103e4ccb85cf81bb3921a8dd6c28996d"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "例えば……",
+      "sourceHash": "c1cd6579a35677239f7e66be3ad6d39b458355337e2575625f7f4c8f7a4d56dd",
+      "translation": "For example...",
+      "contextHash": "c1cd6579a35677239f7e66be3ad6d39b458355337e2575625f7f4c8f7a4d56dd"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "と、接近（near）型とジャンプ（jump）型のテンプレートを『&』でつなげることで定義を融合します。ジャンプしながら対象へ向かって接近します。",
+      "sourceHash": "c484e34364c1b93331cb9b8041ba4a6ddad9f4c55881faa8694d707de56e28f8",
+      "translation": "You can fuse the definitions by joining a near-type template and a jump-type template with “&”. The battler approaches the target while jumping.",
+      "contextHash": "c484e34364c1b93331cb9b8041ba4a6ddad9f4c55881faa8694d707de56e28f8"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "実際には、プラグインに登録されたテンプレート定義の値を融合しています。",
+      "sourceHash": "09d74e499db729ff3bde40f434bc0a97f114fbdee0e47ff317687845a5d250ff",
+      "translation": "In practice, this fuses the values of the template definitions registered in the plugin.",
+      "contextHash": "09d74e499db729ff3bde40f434bc0a97f114fbdee0e47ff317687845a5d250ff"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "注意点として、パラメータが競合する場合は後ろの定義が優先されます。",
+      "sourceHash": "dabd929cd9177f7d8c88554acc715914b63eeb22f1c6c08a4a5c567de1e8c68e",
+      "translation": "Note that when parameters conflict, the later definition takes priority.",
+      "contextHash": "dabd929cd9177f7d8c88554acc715914b63eeb22f1c6c08a4a5c567de1e8c68e"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "どういうことかというと、まずnear型の定義は以下のようになっています。",
+      "sourceHash": "4d15735b334455ce6251fa83a04a320ba6cbee335c786e589f795453ee93d5e8",
+      "translation": "Specifically, the near-type definition is as follows.",
+      "contextHash": "4d15735b334455ce6251fa83a04a320ba6cbee335c786e589f795453ee93d5e8"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "motion = walk // 歩行モーション",
+      "sourceHash": "c17210a5d90752b5b5f2f240849cd0869eb5354688b19720f6e43fa740c58772",
+      "translation": "motion = walk // Walking motion",
+      "contextHash": "c17210a5d90752b5b5f2f240849cd0869eb5354688b19720f6e43fa740c58772"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "対するjump型の定義は以下のようになっています。",
+      "sourceHash": "78400ae43679daa19c478c22175d8bdd7cd305bebd2d35e798d06a6b42a7f908",
+      "translation": "The jump-type definition, on the other hand, is as follows.",
+      "contextHash": "78400ae43679daa19c478c22175d8bdd7cd305bebd2d35e798d06a6b42a7f908"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "両者を融合した結果は以下のようになります。",
+      "sourceHash": "9fa859aa02239cb910a2050f6bcb963baf53255da0bfb43f3eedb8ef712375fe",
+      "translation": "The result of fusing the two is as follows.",
+      "contextHash": "9fa859aa02239cb910a2050f6bcb963baf53255da0bfb43f3eedb8ef712375fe"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "motion = wait // 待機モーション",
+      "sourceHash": "d8ae3219ee29ad1779073275a82f16b589e837da53805a2a342c62f9b71253b3",
+      "translation": "motion = wait // Idle motion",
+      "contextHash": "d8ae3219ee29ad1779073275a82f16b589e837da53805a2a342c62f9b71253b3"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "near型にあった『motion = walk』の定義が『motion = wait 』で上書きされました。同時に二つのモーションを取れないので当たり前ではありますが、ご注意ください。",
+      "sourceHash": "c97eb89de0888d92b6ecb8a7cd4e123b8f9bb7a5c4a44cdd73e558f51e32b279",
+      "translation": "The “motion = walk” definition in the near type was overwritten by “motion = wait ”. Since two motions cannot be performed simultaneously, this is to be expected, but please be careful.",
+      "contextHash": "c97eb89de0888d92b6ecb8a7cd4e123b8f9bb7a5c4a44cdd73e558f51e32b279"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "なお、融合できる数に制限はなく、３つ以上も可能です。",
+      "sourceHash": "a2b70d60631c8ae0aba81356eb8a17bf0bb0b17762b94202df6a98eda719b602",
+      "translation": "There is no limit to the number of templates that can be fused; three or more are also possible.",
+      "contextHash": "a2b70d60631c8ae0aba81356eb8a17bf0bb0b17762b94202df6a98eda719b602"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "D-Setting機能",
+      "sourceHash": "4372144f85255c95501ba23af1a575ee6f50f828b2003613259611b891bf3b34",
+      "translation": "D-Setting Function",
+      "contextHash": "4372144f85255c95501ba23af1a575ee6f50f828b2003613259611b891bf3b34"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "メモ欄に記入することで以下の機能を実行できます。",
+      "sourceHash": "3978d0b7e55c4bb6ed6fd62a22766f9fc338e2d2c904f72bd7ee71f3da42ff21",
+      "translation": "You can execute the following functions by entering them in the note field.",
+      "contextHash": "3978d0b7e55c4bb6ed6fd62a22766f9fc338e2d2c904f72bd7ee71f3da42ff21"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "なお、複数の機能を設定する場合は以下のように記載してください。",
+      "sourceHash": "76b0143a10d1824159a4f043fb0c5945a00a4251f3f3802050e41cf70e11fc88",
+      "translation": "When setting multiple functions, enter them as follows.",
+      "contextHash": "76b0143a10d1824159a4f043fb0c5945a00a4251f3f3802050e41cf70e11fc88"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "自動前進無効（NoStep）",
+      "sourceHash": "7e92cd4986ff1cb0d7dc6f726ea9481d51aa6ab7296226613fa5a5b63dec7372",
+      "translation": "Disable Automatic Advance (NoStep)",
+      "contextHash": "7e92cd4986ff1cb0d7dc6f726ea9481d51aa6ab7296226613fa5a5b63dec7372"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "スキル（アイテム）実行時の一歩前進をなくします。",
+      "sourceHash": "a79733b98ec6611915084ce60d7b7b604822889edc765c909a1c9698af164a56",
+      "translation": "Removes the one-step advance when using a skill (item).",
+      "contextHash": "a79733b98ec6611915084ce60d7b7b604822889edc765c909a1c9698af164a56"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "並列実行（Sync）",
+      "sourceHash": "34ff2322d65f111186eba0ede58d10f71ee38d1c42fc5a87a722cf57cc8f4f34",
+      "translation": "Synchronized Execution (Sync)",
+      "contextHash": "34ff2322d65f111186eba0ede58d10f71ee38d1c42fc5a87a722cf57cc8f4f34"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "テンプレートに初期設定されたウェイトおよびディレイ命令を無効化します。",
+      "sourceHash": "28454f9792645bba6130e5456684cf9b0ac4008b15fcc37faa2540de4eb952e1",
+      "translation": "Disables the wait and delay commands initially configured in the template.",
+      "contextHash": "28454f9792645bba6130e5456684cf9b0ac4008b15fcc37faa2540de4eb952e1"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "合体技など複雑なタイミング調整を行いたい場合に使用する想定です。",
+      "sourceHash": "f3cd89bb8ff2f59e16d231114e0da5eb1e2545a96e6de047948eacd14da04219",
+      "translation": "This is intended for situations requiring complex timing adjustments, such as combination Techs.",
+      "contextHash": "f3cd89bb8ff2f59e16d231114e0da5eb1e2545a96e6de047948eacd14da04219"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "もっとも、必ずしも無理に使う必要はありません。『noWait』『noDelay』などのテンプレートを活用すれば、これを使わずとも合体技の作成は可能です。使いやすい方でどうぞ。",
+      "sourceHash": "cc54b052576e538d6b0e330531067e5b6b1338b9e737d2936b5c853318aef9a7",
+      "translation": "However, you do not necessarily need to use it. By using templates such as “noWait” and “noDelay”, you can create combination Techs without this feature. Use whichever is easier for you.",
+      "contextHash": "cc54b052576e538d6b0e330531067e5b6b1338b9e737d2936b5c853318aef9a7"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "不死身制御（Immortal） ver1.04",
+      "sourceHash": "f7ccafa0b06c05dc2853d8c38ce6c704a742c03cba5d6682fc59d7b7ae5a3834",
+      "translation": "Immortality Control (Immortal) ver1.04",
+      "contextHash": "f7ccafa0b06c05dc2853d8c38ce6c704a742c03cba5d6682fc59d7b7ae5a3834"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "これにより、スキルの演出が終わるまで死亡判定がされなくなります。連続ヒット技の最中に相手が死亡して、演出が空振りになることを防げます。",
+      "sourceHash": "0bf2d4375e62eddd22afd065aa8b8bfbf2c4fa907e19dfb47b6b3cba29c265f4",
+      "translation": "This prevents death checks from being performed until the skill's effects have finished. It prevents the target from dying during a multi-hit Tech and causing the remaining effects to miss.",
+      "contextHash": "0bf2d4375e62eddd22afd065aa8b8bfbf2c4fa907e19dfb47b6b3cba29c265f4"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicMotionプラグイン（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）の解説の一部です。",
+      "sourceHash": "804bb7c2ca68ae421e8b972c45f35c4ffd4bcf78578bd07ad4dd97297b5e689d",
+      "parts": [
+        {
+          "source": "このページはDynamicMotionプラグイン（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）の解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the DynamicMotion plugin guide ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]).",
+      "contextHash": "804bb7c2ca68ae421e8b972c45f35c4ffd4bcf78578bd07ad4dd97297b5e689d"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimation その他機能など[[/LINK_1]]",
+      "sourceHash": "5c9f1375843ae21a24a6113f9685d42ea5098b8c893a4bb9427a1bff12fff90f",
+      "parts": [
+        {
+          "source": "＞DynamicAnimation その他機能など",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>DynamicAnimation: Other Features, etc.[[/LINK_1]]",
+      "contextHash": "5c9f1375843ae21a24a6113f9685d42ea5098b8c893a4bb9427a1bff12fff90f"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]ミラーリング（mirroring）[[/LINK_1]]",
+      "sourceHash": "54612cd192e089046062178e868b8786c674873087fa0a0711db7e1f879e4253",
+      "parts": [
+        {
+          "source": "ミラーリング（mirroring）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Mirroring (mirroring)[[/LINK_1]]",
+      "contextHash": "54612cd192e089046062178e868b8786c674873087fa0a0711db7e1f879e4253"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]直接演算[[/LINK_1]]",
+      "sourceHash": "3729ae933b3ecd47a29f13be3a3ab64266602fa956ef1934cfefee8ca9360c40",
+      "parts": [
+        {
+          "source": "直接演算",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Direct Calculation[[/LINK_1]]",
+      "contextHash": "3729ae933b3ecd47a29f13be3a3ab64266602fa956ef1934cfefee8ca9360c40"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]&連結[[/LINK_1]]",
+      "sourceHash": "c34e78ad3ccd6cd0ad1420b33822a36d433f8edd85356661ec7820dd864d91f9",
+      "parts": [
+        {
+          "source": "&連結",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]& Concatenation[[/LINK_1]]",
+      "contextHash": "c34e78ad3ccd6cd0ad1420b33822a36d433f8edd85356661ec7820dd864d91f9"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]D-Setting機能[[/LINK_1]]",
+      "sourceHash": "5c627a605e4728997daa41d01fd8b60f6589eea9e9043d488020aee23e3c5dc0",
+      "parts": [
+        {
+          "source": "D-Setting機能",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]D-Setting Feature[[/LINK_1]]",
+      "contextHash": "5c627a605e4728997daa41d01fd8b60f6589eea9e9043d488020aee23e3c5dc0"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]自動前進無効（NoStep）[[/LINK_1]]",
+      "sourceHash": "b8c4427cd84cfee1b2d9798b60f056cde769b9c159d9bf682ca48b91c2c85d5b",
+      "parts": [
+        {
+          "source": "自動前進無効（NoStep）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Automatic Advance (NoStep)[[/LINK_1]]",
+      "contextHash": "b8c4427cd84cfee1b2d9798b60f056cde769b9c159d9bf682ca48b91c2c85d5b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]並列実行（Sync）[[/LINK_1]]",
+      "sourceHash": "499aa3fd05615f3478a31abbb044982aabbd91a638d9cf5faa99e29a1ef41b20",
+      "parts": [
+        {
+          "source": "並列実行（Sync）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parallel Execution (Sync)[[/LINK_1]]",
+      "contextHash": "499aa3fd05615f3478a31abbb044982aabbd91a638d9cf5faa99e29a1ef41b20"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]不死身制御（Immortal）[[/LINK_1]]ver1.04",
+      "sourceHash": "e9dac40d6e7fb66367714e184a49c1abe90ed6cd7a05273c9c918fe977845c25",
+      "parts": [
+        {
+          "source": "不死身制御（Immortal）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Immortal Control (Immortal)[[/LINK_1]] ver1.04",
+      "contextHash": "e9dac40d6e7fb66367714e184a49c1abe90ed6cd7a05273c9c918fe977845c25"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "ミラーリングについては、[[LINK_1]]DynamicAnimation側の解説[[/LINK_1]]もご確認ください。",
+      "sourceHash": "5645cbfff8000f0e2ddf1914fe06fe944699236b5ad270f4bcee83761ef2b8e5",
+      "parts": [
+        {
+          "source": "ミラーリングについては、",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation側の解説",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "もご確認ください。",
+          "link": false
+        }
+      ],
+      "translation": "For information on mirroring, please also see the [[LINK_1]]DynamicAnimation guide[[/LINK_1]].",
+      "contextHash": "5645cbfff8000f0e2ddf1914fe06fe944699236b5ad270f4bcee83761ef2b8e5"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "不死身ステートを使用することで、演出制御を行います。使用するステートはあらかじめ[[LINK_1]]プラグインパラメータ[[/LINK_1]]へ設定してください。",
+      "sourceHash": "afcba2eb3f7ba4fa11f803f6b502ddc2ac8eda9155b2c97f81fe1ba7b42f3bdf",
+      "parts": [
+        {
+          "source": "不死身ステートを使用することで、演出制御を行います。使用するステートはあらかじめ",
+          "link": false
+        },
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "へ設定してください。",
+          "link": false
+        }
+      ],
+      "translation": "The effects are controlled by using the Immortal state. Set the state to be used in the [[LINK_1]]plugin parameter[[/LINK_1]] in advance.",
+      "contextHash": "afcba2eb3f7ba4fa11f803f6b502ddc2ac8eda9155b2c97f81fe1ba7b42f3bdf"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicMotion plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "補足的な機能解説です。いくつかの機能はDynamicAnimationと同一です。": "This section provides supplementary explanations of the features. Some features are the same as those in DynamicAnimation.",
+    "こちらもご参照ください。": "Please refer to this as well.",
+    "目次": "Table of Contents",
+    "ミラーリング（mirroring）": "Mirroring (mirroring)",
+    "例えば、以下のような定義があるとします。": "For example, suppose you have a definition like the following.",
+    "ex = b.x + 200 // 終点Ｘ座標": "ex = b.x + 200 // Ending X coordinate",
+    "対象の右２００ピクセルへ移動するというものです。": "It moves 200 pixels to the right of the target.",
+    "ところが一つ問題があります。": "However, there is one problem.",
+    "アクターが使用した場合は問題なく対象の正面である右側へ移動します。……が、これを敵が使うと今度はアクターの背中へと移動してしまいます。": "When used by an actor, it moves correctly to the right side, directly in front of the target. However, when an enemy uses it, it moves to the actor's back instead.",
+    "となると、味方なら『b.x + 200』、敵なら『b.x - 200』に定義を切り替えたい。": "In that case, I want to switch the definition to “b.x + 200” for allies and “b.x - 200” for enemies.",
+    "そこで、以下の機能を用意しました。": "To address this, I added the following feature.",
+    "// 終点Ｘ座標": "// Ending X coordinate",
+    "この『mirroring』という変数は対象がアクターの場合に値が-1になります。これをかけることで必要な部分だけを左右反転させられます。": "The variable “mirroring” has a value of -1 when the target is an actor. Multiplying by this value lets you mirror only the necessary parts horizontally.",
+    "また、フロントビューなどで上下座標を反転させたいなら、Ｙ座標側に同様の操作をしてください。": "Similarly, if you want to invert the vertical coordinates, such as in front-view battles, apply the same operation to the Y coordinate.",
+    "この通り、対象の左へと移動するようになりました。": "As you can see, it now moves to the left of the target.",
+    "直接演算": "Direct Calculations",
+    "以下のように指定すれば、テンプレートの設定値に対して直接演算できます。元の値が分からなくとも設定できるので便利です。": "By specifying it as shown below, you can perform calculations directly on the template's setting values. This is convenient because you can configure them without knowing the original values.",
+    "ex += 100 // テンプレートの設定値 + 100": "ex += 100 // Template setting value + 100",
+    "ey -= 100 // テンプレートの設定値 - 100": "ey -= 100 // Template setting value - 100",
+    "rotation *= 2 // テンプレートの設定値 * 2": "rotation *= 2 // Template setting value * 2",
+    "arcY /= 2 // テンプレートの設定値 / 2": "arcY /= 2 // Template setting value / 2",
+    "なお、これらの演算はJavaScriptの式に対して、『文字列連結』しているだけであることにご注意ください。": "Note that these calculations simply concatenate strings to the JavaScript expression.",
+    "どういうことかというと、テンプレートの設定値が「ex = b.x + 100」だったとします。": "What this means is, suppose the template's setting value is “ex = b.x + 100”.",
+    "メモ欄の入力が以下の通りだった場合……": "If the note field contains the following...",
+    "連結後の内容は「ex = b.x + 100 * 2」となります。": "The resulting concatenated expression is “ex = b.x + 100 * 2”.",
+    "つまり、かけ算がかかるのは末尾の100の部分だけってことです。": "In other words, the multiplication applies only to the final 100.",
+    "全体にかけるにはプラグインの設定値を「ex = (b.x + 100)」のようにしておけばＯＫです。": "To apply it to the entire expression, set the plugin parameter to “ex = (b.x + 100)”.",
+    "足し算、引き算なら支障ありませんが、かけ算、わり算の場合はご注意を。": "Addition and subtraction cause no problems, but be careful when using multiplication and division.",
+    "&融合": "& Fusion",
+    "＆記号によりテンプレートの融合が可能です。": "The & symbol allows you to fuse templates.",
+    "例えば……": "For example...",
+    "と、接近（near）型とジャンプ（jump）型のテンプレートを『&』でつなげることで定義を融合します。ジャンプしながら対象へ向かって接近します。": "You can fuse the definitions by joining a near-type template and a jump-type template with “&”. The battler approaches the target while jumping.",
+    "実際には、プラグインに登録されたテンプレート定義の値を融合しています。": "In practice, this fuses the values of the template definitions registered in the plugin.",
+    "注意点として、パラメータが競合する場合は後ろの定義が優先されます。": "Note that when parameters conflict, the later definition takes priority.",
+    "どういうことかというと、まずnear型の定義は以下のようになっています。": "Specifically, the near-type definition is as follows.",
+    "motion = walk // 歩行モーション": "motion = walk // Walking motion",
+    "対するjump型の定義は以下のようになっています。": "The jump-type definition, on the other hand, is as follows.",
+    "両者を融合した結果は以下のようになります。": "The result of fusing the two is as follows.",
+    "motion = wait // 待機モーション": "motion = wait // Idle motion",
+    "near型にあった『motion = walk』の定義が『motion = wait 』で上書きされました。同時に二つのモーションを取れないので当たり前ではありますが、ご注意ください。": "The “motion = walk” definition in the near type was overwritten by “motion = wait ”. Since two motions cannot be performed simultaneously, this is to be expected, but please be careful.",
+    "なお、融合できる数に制限はなく、３つ以上も可能です。": "There is no limit to the number of templates that can be fused; three or more are also possible.",
+    "D-Setting機能": "D-Setting Function",
+    "メモ欄に記入することで以下の機能を実行できます。": "You can execute the following functions by entering them in the note field.",
+    "なお、複数の機能を設定する場合は以下のように記載してください。": "When setting multiple functions, enter them as follows.",
+    "自動前進無効（NoStep）": "Disable Automatic Advance (NoStep)",
+    "スキル（アイテム）実行時の一歩前進をなくします。": "Removes the one-step advance when using a skill (item).",
+    "並列実行（Sync）": "Synchronized Execution (Sync)",
+    "テンプレートに初期設定されたウェイトおよびディレイ命令を無効化します。": "Disables the wait and delay commands initially configured in the template.",
+    "合体技など複雑なタイミング調整を行いたい場合に使用する想定です。": "This is intended for situations requiring complex timing adjustments, such as combination Techs.",
+    "もっとも、必ずしも無理に使う必要はありません。『noWait』『noDelay』などのテンプレートを活用すれば、これを使わずとも合体技の作成は可能です。使いやすい方でどうぞ。": "However, you do not necessarily need to use it. By using templates such as “noWait” and “noDelay”, you can create combination Techs without this feature. Use whichever is easier for you.",
+    "不死身制御（Immortal） ver1.04": "Immortality Control (Immortal) ver1.04",
+    "これにより、スキルの演出が終わるまで死亡判定がされなくなります。連続ヒット技の最中に相手が死亡して、演出が空振りになることを防げます。": "This prevents death checks from being performed until the skill's effects have finished. It prevents the target from dying during a multi-hit Tech and causing the remaining effects to miss."
+  }
+}

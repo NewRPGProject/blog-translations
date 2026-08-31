@@ -1,0 +1,534 @@
+{
+  "articleId": "480883215",
+  "sourceUrl": "https://newrpg.seesaa.net/article/480883215.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "733096ee86225208c04c042c272c0d0636db1f0f83e3fc1bd52c14e9660041a3",
+  "translatedAt": "2026-08-31T02:46:14.138Z",
+  "title": "Ignore Passage Checks for Specific Tiles [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "特定タイルの通行判定を無視【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "9bca1a2e9764d49266d41b429c012c8cc35c593a5b9e960edefe8be433f50372",
+      "translation": "Ignore Passage Checks for Specific Tiles [RPG Maker MZ & MV Plugin]",
+      "contextHash": "9bca1a2e9764d49266d41b429c012c8cc35c593a5b9e960edefe8be433f50372"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ゲームロード時に機能しない重大な不具合を修正。（2021/10/04 ver1.02）",
+      "sourceHash": "b9121d79dc2024cb429dcee8927fac1cbef031d2cb36cec251471574adf2c3e5",
+      "translation": "Fixed a serious bug that prevented the feature from working when loading a game. (2021/10/04 ver1.02)",
+      "contextHash": "b9121d79dc2024cb429dcee8927fac1cbef031d2cb36cec251471574adf2c3e5"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "上の修正の副作用で、ニューゲーム時にエラーとなる重大な不具合を修正しました。再三すみません。（2021/10/04 ver1.021）",
+      "sourceHash": "4b9280d0675e305db0e491673f15346f8234a4a8cfde9da74ebe5d3aef3edb16",
+      "translation": "Fixed a serious bug that caused an error when starting a new game as a side effect of the above fix. Sorry again. (2021/10/04 ver1.021)",
+      "contextHash": "4b9280d0675e305db0e491673f15346f8234a4a8cfde9da74ebe5d3aef3edb16"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "通常、ツクールＭＶ～ＭＺでは、複数のタイルを重ねて配置すると、上のレイヤーの通行判定が優先される仕様になっています。",
+      "sourceHash": "054b704a98961ffb54e0f2ddf0d7b4c0b8420881d453b1b0c1466026d385cfa6",
+      "translation": "Normally, in RPG Maker MV and MZ, when multiple tiles are placed on top of one another, the passage check of the upper layer takes priority.",
+      "contextHash": "054b704a98961ffb54e0f2ddf0d7b4c0b8420881d453b1b0c1466026d385cfa6"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "例えば以下のように、『通行（４方向）』で制限した段差の上に、○のタイル（花）を置くとすり抜けできてしまいます。",
+      "sourceHash": "ca6bf761545553be77894b815f09cd9c3b0a379e7d33aa4294ebe17ad2b305c9",
+      "translation": "For example, placing a ○ tile (flower) on a ledge restricted with “Passage (4 directions)” allows the player to pass through it.",
+      "contextHash": "ca6bf761545553be77894b815f09cd9c3b0a379e7d33aa4294ebe17ad2b305c9"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "これは地味に厄介な問題で、マップ作成にこだわる制作者には悩みの種です。",
+      "sourceHash": "d8643ee4467843f592f08e3aae9e26c83a7cf671bf15bcf40576a954146a31bf",
+      "translation": "This is a deceptively troublesome problem and a source of frustration for developers who care about creating their maps.",
+      "contextHash": "d8643ee4467843f592f08e3aae9e26c83a7cf671bf15bcf40576a954146a31bf"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "そこでこのプラグインでは特定のタイルに対して、通行判定を無視するように設定できます。つまり、☆タイルのように下のレイヤーの通行判定を生かしたままにすることができます。",
+      "sourceHash": "69c183ec6e2296e88c19dc072e0b9cdf705f26987c7235df7dda25e98844d6f2",
+      "translation": "This plugin allows you to configure specific tiles to ignore passage checks. In other words, like ☆ tiles, they can retain the passage check of the layer below.",
+      "contextHash": "69c183ec6e2296e88c19dc072e0b9cdf705f26987c7235df7dda25e98844d6f2"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※タイルの指定は地形タグで行います。",
+      "sourceHash": "d80054878ea38c10bc4cfd34a706439c8028300ad01a1ec5ab2b699559eca5eb",
+      "translation": "※Tiles are specified using terrain tags.",
+      "contextHash": "d80054878ea38c10bc4cfd34a706439c8028300ad01a1ec5ab2b699559eca5eb"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "その他の使用例",
+      "sourceHash": "f6a0d8a9a9637f52146c748f69dc6f00361ae1eb9117bbe537514727060c8f77",
+      "translation": "Other Usage Examples",
+      "contextHash": "f6a0d8a9a9637f52146c748f69dc6f00361ae1eb9117bbe537514727060c8f77"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "半透明の水",
+      "sourceHash": "47b0bf004c74112474aa8909fe1568726c452f254c4b86a2841e756ccbbec533",
+      "translation": "Semi-Transparent Water",
+      "contextHash": "47b0bf004c74112474aa8909fe1568726c452f254c4b86a2841e756ccbbec533"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "上記の例では、レイヤ１～２に地面＆小物、レイヤー３に半透明の水面を配置することで、水場を表現しています。",
+      "sourceHash": "62badf1581f0d24737bf982bba3496e3d56e7167b902e03a3e5468d61c9d9f9e",
+      "translation": "In the example above, a body of water is represented by placing ground and objects on layers 1–2 and a semi-transparent water surface on layer 3.",
+      "contextHash": "62badf1581f0d24737bf982bba3496e3d56e7167b902e03a3e5468d61c9d9f9e"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※レイヤー切替はＭＺの機能なので、ＭＶでは困難です。",
+      "sourceHash": "88acfa78336512c1f68db11b35e50899d4022bc9925c962c0a66d71f65684637",
+      "translation": "※Layer switching is an RPG Maker MZ feature, so this is difficult in MV.",
+      "contextHash": "88acfa78336512c1f68db11b35e50899d4022bc9925c962c0a66d71f65684637"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "この場合、通常はレイヤー３の水の通行判定が優先されてしまいます。そのため、水面下の地形によって通行判定を変化させるといった調整が困難です。",
+      "sourceHash": "1cd47917f30ca27eb4dac9dd00d7213c20634b80fd566c9c9b2ca9480a9de5f9",
+      "translation": "In this case, the passage check for the water on layer 3 normally takes priority. Therefore, it is difficult to adjust passage based on the terrain beneath the water's surface.",
+      "contextHash": "1cd47917f30ca27eb4dac9dd00d7213c20634b80fd566c9c9b2ca9480a9de5f9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ですが、このプラグインによって水面の通行判定を無視するように設定すれば、水面下の地形の判定も機能させられます。",
+      "sourceHash": "5a57f026100ff8c16c1bea27ed9cee6a71109522c5057900033f79a2edd1c86f",
+      "translation": "However, configuring this plugin to ignore the passage check for the water surface allows the passage check for the terrain beneath it to function as well.",
+      "contextHash": "5a57f026100ff8c16c1bea27ed9cee6a71109522c5057900033f79a2edd1c86f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "海岸線",
+      "sourceHash": "ab78b2e0f40d802bd4f374d096e09faf2de1bc00111db485f88c93bc6f73010f",
+      "translation": "Coastline",
+      "contextHash": "ab78b2e0f40d802bd4f374d096e09faf2de1bc00111db485f88c93bc6f73010f"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "独自の海岸線をＢタイルで作成した例です。複雑な海岸線を作りたい場合など、Ａ１タイルだけでは物足りない場合に使えます。",
+      "sourceHash": "49d4d12f5b8d6bf7792c25b27074118d92ffbda7566449dd4689f37eb61d919c",
+      "translation": "This is an example of creating a custom coastline using B tiles. It can be used when A1 tiles alone are insufficient, such as when creating a complex coastline.",
+      "contextHash": "49d4d12f5b8d6bf7792c25b27074118d92ffbda7566449dd4689f37eb61d919c"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "通常、&times;のタイルを海上に配置すると船からも移動不可になってしまいます。かといって、○にすると今度は陸地からも移動可能になってしまいます。",
+      "sourceHash": "3d67264ed4ec0d6575d4b0e23b98dca10e600cd5ee3b9ccd204ca701b2c5a3f9",
+      "translation": "Normally, placing a &times; tile in the ocean makes it impassable even for ships. On the other hand, using a ○ makes it passable from land as well.",
+      "contextHash": "3d67264ed4ec0d6575d4b0e23b98dca10e600cd5ee3b9ccd204ca701b2c5a3f9"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "そこで海岸線の通行判定を無視させることで、海と通行判定を同一にしています。",
+      "sourceHash": "a33e2be7832866e7e1b64068f344cac4c83c16ded814dbb89ac4f672e1caeddb",
+      "translation": "By making the coastline ignore its passage check, its passage becomes the same as that of the ocean.",
+      "contextHash": "a33e2be7832866e7e1b64068f344cac4c83c16ded814dbb89ac4f672e1caeddb"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_PassageIgnoreTile.js",
+      "sourceHash": "16cbe99d5ee121402f4dfef5fd7e9b160f02d24bd97b02e3e5daa67d32f94d32",
+      "translation": "NRP_PassageIgnoreTile.js ",
+      "contextHash": "5cce4d1351e6a9a035da7141cf398e25ece4f2904d7d7ead5a42e80c7ac5d5aa"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ver1.021（2021/10/04）",
+      "sourceHash": "245f218552aa75716b11ac113deb16e2ecb1745bf185fa335f0dadf3dba533be",
+      "translation": "ver1.021 (2021/10/04) ",
+      "contextHash": "5cce4d1351e6a9a035da7141cf398e25ece4f2904d7d7ead5a42e80c7ac5d5aa"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/10/04（ver1.02 -> 1.021）",
+      "sourceHash": "ae9e88bdbb2dfdc70fa14c97129e75c1d40472d7c202e1b8e5904192fe509b28",
+      "translation": "2021/10/04 (ver1.02 -> 1.021) ",
+      "contextHash": "ae9e88bdbb2dfdc70fa14c97129e75c1d40472d7c202e1b8e5904192fe509b28"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ゲームロード時に機能しない重大な不具合を修正。",
+      "sourceHash": "6885fee663b69d2fbcb94a7be326506549a73f5fad97657fe4b263f7120b7b18",
+      "translation": "Fixed a serious bug that prevented the feature from working when loading a game.",
+      "contextHash": "6885fee663b69d2fbcb94a7be326506549a73f5fad97657fe4b263f7120b7b18"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "上の修正の副作用で、ニューゲーム時にエラーとなる重大な不具合修正。（ver1.021）",
+      "sourceHash": "678afd8dc8a0d7f4c80991666d3994aa36f763bda6a42a95d10512424a2b01ef",
+      "translation": "Fixed a serious bug that caused an error when starting a new game as a side effect of the above fix. (ver1.021)",
+      "contextHash": "678afd8dc8a0d7f4c80991666d3994aa36f763bda6a42a95d10512424a2b01ef"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/07/12（ver1.01）",
+      "sourceHash": "3b3cf9ab98ef8d2691f058b177e695a7e00b224a616211fa3e8a315cc378cac1",
+      "translation": "2021/07/12 (ver1.01) ",
+      "contextHash": "3b3cf9ab98ef8d2691f058b177e695a7e00b224a616211fa3e8a315cc378cac1"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "同一のマス内での機能の併用は無効ですが、それ以外は大丈夫なはずです。",
+      "sourceHash": "ba0da3eebb1c1ad2ddab35a76b2399264466d47076c2325cbc085bce1869aa52",
+      "translation": "Using multiple features on the same tile is not supported, but everything else should work.",
+      "contextHash": "ba0da3eebb1c1ad2ddab35a76b2399264466d47076c2325cbc085bce1869aa52"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "また、その他のプラグインとの競合も軽減しています。",
+      "sourceHash": "6f5f4e34f8cb0b039911f4beff066434827e32d026aa8c72f7a03aa0e9d824ba",
+      "translation": "Conflicts with other plugins have also been reduced.",
+      "contextHash": "6f5f4e34f8cb0b039911f4beff066434827e32d026aa8c72f7a03aa0e9d824ba"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2021/04/08（ver1.00）",
+      "sourceHash": "6ffaff247d12fecc8b6998111ef37f037e46fa3880d215ab6acd418944d8e4ce",
+      "translation": "2021/04/08 (ver1.00) ",
+      "contextHash": "6ffaff247d12fecc8b6998111ef37f037e46fa3880d215ab6acd418944d8e4ce"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "プラグインパラメータで対象とする地形タグを設定してください。",
+      "sourceHash": "ae74e980e8b559e0336bdffde3a78c9fa2b49ea67d996abc6cc0231ed83fc966",
+      "translation": "Set the terrain tags to target in the plugin parameter.",
+      "contextHash": "ae74e980e8b559e0336bdffde3a78c9fa2b49ea67d996abc6cc0231ed83fc966"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "タイルセットで該当の地形タグを設定すればＯＫです。",
+      "sourceHash": "0e381fdd94c907e6ae504c8f104ff5cb7e8ef454826eb2ea51d82d33a46f73c5",
+      "translation": "Simply set the corresponding terrain tags in the tileset.",
+      "contextHash": "0e381fdd94c907e6ae504c8f104ff5cb7e8ef454826eb2ea51d82d33a46f73c5"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "メモ欄の指定（Note）",
+      "sourceHash": "41fcd6a24941d054db39943eb737e0d32d43a6379948a80192ce7aea277a983b",
+      "translation": "Specifying the Note Field (Note)",
+      "contextHash": "41fcd6a24941d054db39943eb737e0d32d43a6379948a80192ce7aea277a983b"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "タイルセットのメモ欄に指定する方法も可能です。",
+      "sourceHash": "ac0fbfdd0eea69ee724dae76e5c418b6836e7d7ea64c7f4c0ee11043e9b7ce8d",
+      "translation": "You can also specify them in the tileset's note field.",
+      "contextHash": "ac0fbfdd0eea69ee724dae76e5c418b6836e7d7ea64c7f4c0ee11043e9b7ce8d"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "以下は設定例です。",
+      "sourceHash": "c1adfd1d020bc5ce5d0c7a9ee3139a891c2e81b2398794ce73ec5ae3ca0c2474",
+      "translation": "The following is an example configuration.",
+      "contextHash": "c1adfd1d020bc5ce5d0c7a9ee3139a891c2e81b2398794ce73ec5ae3ca0c2474"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "地形タグ1,2,5を設定したタイルを対象とします。",
+      "sourceHash": "fc00f8302000063b6910e7a1d1b926556f584a85cee2c44e9e767674c670b514",
+      "translation": "Tiles with terrain tags 1, 2, and 5 are targeted.",
+      "contextHash": "fc00f8302000063b6910e7a1d1b926556f584a85cee2c44e9e767674c670b514"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "対象とする地形タグ（PassageIgnoreTerrain）",
+      "sourceHash": "48ec3649877e7a474319f53163513ee159ab1792cbc2bd14f2790fc0fe6f4078",
+      "translation": "Target Terrain Tags (PassageIgnoreTerrain)",
+      "contextHash": "48ec3649877e7a474319f53163513ee159ab1792cbc2bd14f2790fc0fe6f4078"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "通行判定を無視する地形タグ（1~7）を指定します。",
+      "sourceHash": "dafcdbb5f116e19e29b5c13718d7e2cdd638caefa1c200edbc7edba27ee7a6cc",
+      "translation": "Specifies the terrain tags (1~7) whose passage checks will be ignored.",
+      "contextHash": "dafcdbb5f116e19e29b5c13718d7e2cdd638caefa1c200edbc7edba27ee7a6cc"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3）",
+      "sourceHash": "f685929ae7eef41250b1750ca8a93211ffdb2d557ab9a04f65d455f72999ffdd",
+      "translation": "Multiple tags can be specified. (Example: 1,3)",
+      "contextHash": "f685929ae7eef41250b1750ca8a93211ffdb2d557ab9a04f65d455f72999ffdd"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]メモ欄の指定（Note）[[/LINK_1]]",
+      "sourceHash": "943888042e22e7a819fb89c08e35819b72e2e85bfd35a633656c9dc0c29f139e",
+      "parts": [
+        {
+          "source": "メモ欄の指定（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Note Field Specification (Note)[[/LINK_1]]",
+      "contextHash": "943888042e22e7a819fb89c08e35819b72e2e85bfd35a633656c9dc0c29f139e"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]対象とする地形タグ（PassageIgnoreTerrain）[[/LINK_1]]",
+      "sourceHash": "bf6e2ca4447f9bf7f69c56db2c970b334f8c1e0ecafb43cdd82081b8f886881f",
+      "parts": [
+        {
+          "source": "対象とする地形タグ（PassageIgnoreTerrain）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Terrain Tags (PassageIgnoreTerrain)[[/LINK_1]]",
+      "contextHash": "bf6e2ca4447f9bf7f69c56db2c970b334f8c1e0ecafb43cdd82081b8f886881f"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]TF_Billboard.js[[/LINK_1]]との競合に対処。",
+      "sourceHash": "bf631a8e4b351e320231307bdbfe7e96b5a7fda84d34290b4afc6257e1cc3abf",
+      "parts": [
+        {
+          "source": "TF_Billboard.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との競合に対処。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]TF_Billboard.js[[/LINK_1]] conflict.",
+      "contextHash": "bf631a8e4b351e320231307bdbfe7e96b5a7fda84d34290b4afc6257e1cc3abf"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ゲームロード時に機能しない重大な不具合を修正。（2021/10/04 ver1.02）": "Fixed a serious bug that prevented the feature from working when loading a game. (2021/10/04 ver1.02)",
+    "上の修正の副作用で、ニューゲーム時にエラーとなる重大な不具合を修正しました。再三すみません。（2021/10/04 ver1.021）": "Fixed a serious bug that caused an error when starting a new game as a side effect of the above fix. Sorry again. (2021/10/04 ver1.021)",
+    "通常、ツクールＭＶ～ＭＺでは、複数のタイルを重ねて配置すると、上のレイヤーの通行判定が優先される仕様になっています。": "Normally, in RPG Maker MV and MZ, when multiple tiles are placed on top of one another, the passage check of the upper layer takes priority.",
+    "例えば以下のように、『通行（４方向）』で制限した段差の上に、○のタイル（花）を置くとすり抜けできてしまいます。": "For example, placing a ○ tile (flower) on a ledge restricted with “Passage (4 directions)” allows the player to pass through it.",
+    "これは地味に厄介な問題で、マップ作成にこだわる制作者には悩みの種です。": "This is a deceptively troublesome problem and a source of frustration for developers who care about creating their maps.",
+    "そこでこのプラグインでは特定のタイルに対して、通行判定を無視するように設定できます。つまり、☆タイルのように下のレイヤーの通行判定を生かしたままにすることができます。": "This plugin allows you to configure specific tiles to ignore passage checks. In other words, like ☆ tiles, they can retain the passage check of the layer below.",
+    "※タイルの指定は地形タグで行います。": "※Tiles are specified using terrain tags.",
+    "その他の使用例": "Other Usage Examples",
+    "半透明の水": "Semi-Transparent Water",
+    "上記の例では、レイヤ１～２に地面＆小物、レイヤー３に半透明の水面を配置することで、水場を表現しています。": "In the example above, a body of water is represented by placing ground and objects on layers 1–2 and a semi-transparent water surface on layer 3.",
+    "※レイヤー切替はＭＺの機能なので、ＭＶでは困難です。": "※Layer switching is an RPG Maker MZ feature, so this is difficult in MV.",
+    "この場合、通常はレイヤー３の水の通行判定が優先されてしまいます。そのため、水面下の地形によって通行判定を変化させるといった調整が困難です。": "In this case, the passage check for the water on layer 3 normally takes priority. Therefore, it is difficult to adjust passage based on the terrain beneath the water's surface.",
+    "ですが、このプラグインによって水面の通行判定を無視するように設定すれば、水面下の地形の判定も機能させられます。": "However, configuring this plugin to ignore the passage check for the water surface allows the passage check for the terrain beneath it to function as well.",
+    "海岸線": "Coastline",
+    "独自の海岸線をＢタイルで作成した例です。複雑な海岸線を作りたい場合など、Ａ１タイルだけでは物足りない場合に使えます。": "This is an example of creating a custom coastline using B tiles. It can be used when A1 tiles alone are insufficient, such as when creating a complex coastline.",
+    "通常、&times;のタイルを海上に配置すると船からも移動不可になってしまいます。かといって、○にすると今度は陸地からも移動可能になってしまいます。": "Normally, placing a &times; tile in the ocean makes it impassable even for ships. On the other hand, using a ○ makes it passable from land as well.",
+    "そこで海岸線の通行判定を無視させることで、海と通行判定を同一にしています。": "By making the coastline ignore its passage check, its passage becomes the same as that of the ocean.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_PassageIgnoreTile.js": "NRP_PassageIgnoreTile.js ",
+    "ver1.021（2021/10/04）": "ver1.021 (2021/10/04) ",
+    "更新履歴（History）": "Update History (History)",
+    "2021/10/04（ver1.02 -> 1.021）": "2021/10/04 (ver1.02 -> 1.021) ",
+    "ゲームロード時に機能しない重大な不具合を修正。": "Fixed a serious bug that prevented the feature from working when loading a game.",
+    "上の修正の副作用で、ニューゲーム時にエラーとなる重大な不具合修正。（ver1.021）": "Fixed a serious bug that caused an error when starting a new game as a side effect of the above fix. (ver1.021)",
+    "2021/07/12（ver1.01）": "2021/07/12 (ver1.01) ",
+    "同一のマス内での機能の併用は無効ですが、それ以外は大丈夫なはずです。": "Using multiple features on the same tile is not supported, but everything else should work.",
+    "また、その他のプラグインとの競合も軽減しています。": "Conflicts with other plugins have also been reduced.",
+    "2021/04/08（ver1.00）": "2021/04/08 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータで対象とする地形タグを設定してください。": "Set the terrain tags to target in the plugin parameter.",
+    "タイルセットで該当の地形タグを設定すればＯＫです。": "Simply set the corresponding terrain tags in the tileset.",
+    "メモ欄の指定（Note）": "Specifying the Note Field (Note)",
+    "タイルセットのメモ欄に指定する方法も可能です。": "You can also specify them in the tileset's note field.",
+    "以下は設定例です。": "The following is an example configuration.",
+    "地形タグ1,2,5を設定したタイルを対象とします。": "Tiles with terrain tags 1, 2, and 5 are targeted.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "対象とする地形タグ（PassageIgnoreTerrain）": "Target Terrain Tags (PassageIgnoreTerrain)",
+    "通行判定を無視する地形タグ（1~7）を指定します。": "Specifies the terrain tags (1~7) whose passage checks will be ignored.",
+    "複数指定も可能です。（例：1,3）": "Multiple tags can be specified. (Example: 1,3)"
+  }
+}

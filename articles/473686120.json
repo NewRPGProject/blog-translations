@@ -1,0 +1,1811 @@
+{
+  "articleId": "473686120",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473686120.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "91af760aeae1c9e345f102d3a749b354e924a48e6ad2e26cee52cf33705b91d6",
+  "translatedAt": "2026-08-31T02:51:09.381Z",
+  "title": "DynamicAnimation Basic Usage [RPG Maker MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation 基本的な使用法【RPGツクールMVプラグイン】",
+      "sourceHash": "4eb80db0d888bbd66c51ff39775e7d6fd993560c2d2c1f4084180cbcfad07769",
+      "translation": "DynamicAnimation Basic Usage [RPG Maker MV Plugin]",
+      "contextHash": "4eb80db0d888bbd66c51ff39775e7d6fd993560c2d2c1f4084180cbcfad07769"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "当プラグインの基本的な使用法、パラメータの指定方法を紹介していきます。",
+      "sourceHash": "43c9d104516c56c750454f6247129379de7134ddd28ad76c2e1b8c2b43cebb59",
+      "translation": "This guide introduces the basic usage of this plugin and how to specify its parameters.",
+      "contextHash": "43c9d104516c56c750454f6247129379de7134ddd28ad76c2e1b8c2b43cebb59"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "そのままコピペもできるのでご活用ください。",
+      "sourceHash": "bb21e3955d5d8452de05829d7584b74b244341eeaa647a1c206d0feda1182c10",
+      "translation": "You can also copy and paste the examples as-is, so please make use of them.",
+      "contextHash": "bb21e3955d5d8452de05829d7584b74b244341eeaa647a1c206d0feda1182c10"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "使用法",
+      "sourceHash": "a4f38a995052f4b45a0a30611cef450ae38b570ea5b686c17c14bcbf6c893d09",
+      "translation": "Usage",
+      "contextHash": "a4f38a995052f4b45a0a30611cef450ae38b570ea5b686c17c14bcbf6c893d09"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "まずは射撃（shot）型のテンプレートを使って説明していきます。",
+      "sourceHash": "6fd3db9dfe8a0000f0b7a38aedd2844355c0ca5bfa1a472096738b1435fa1bca",
+      "translation": "I’ll start by explaining the shot type using its template.",
+      "contextHash": "6fd3db9dfe8a0000f0b7a38aedd2844355c0ca5bfa1a472096738b1435fa1bca"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "例として、デフォルトにある『水/単体2（id = 82）』のアニメーションをスキルに設定してみてください。",
+      "sourceHash": "a6388026888d64801cdd539513109b6d765a970459c6a039d4ed2ba90b782e08",
+      "translation": "As an example, try setting the default “Water/Single 2 (id = 82)” animation for a skill.",
+      "contextHash": "a6388026888d64801cdd539513109b6d765a970459c6a039d4ed2ba90b782e08"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※なお、画面フラッシュが見辛いので以降の例では消しています。",
+      "sourceHash": "55240008edb10c4fb8fe16c1a79995d4be7313f7d74ea4de3c88e9df3d9fe40c",
+      "translation": "※The screen flash is hard to see, so it has been removed from the examples below.",
+      "contextHash": "55240008edb10c4fb8fe16c1a79995d4be7313f7d74ea4de3c88e9df3d9fe40c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "そして、メモ欄へ以下を記述します。",
+      "sourceHash": "b96873b861c2aa5122ded399da74e6983b07ee5b6764f8916ca5bb4735e11b98",
+      "translation": "Then, write the following in the note field.",
+      "contextHash": "b96873b861c2aa5122ded399da74e6983b07ee5b6764f8916ca5bb4735e11b98"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "末尾の『/』に注意してください。一行で完結する場合はこのように記述します。",
+      "sourceHash": "b184476dba302038e3cf8437794fa7ca909963a20cbec82a0a466acbb9081cdf",
+      "translation": "Be careful with the “/” at the end. If everything fits on one line, write it like this.",
+      "contextHash": "b184476dba302038e3cf8437794fa7ca909963a20cbec82a0a466acbb9081cdf"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "見ての通り、射撃型では行動主体から対象へ向かって、まっすぐにアニメーションを飛ばします。",
+      "sourceHash": "60ff59ee9f76b1eef28cced7d010d4fc5bf826544e8c2ab2c4636e67045841a6",
+      "translation": "As you can see, with the shot type, the animation flies straight from the user toward the target.",
+      "contextHash": "60ff59ee9f76b1eef28cced7d010d4fc5bf826544e8c2ab2c4636e67045841a6"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "……が、これだけでは色々物足りません。",
+      "sourceHash": "8279bdce7132db985c3637b3a25c616313c8fa799ad2884ef2a133c2dbdb192c",
+      "translation": "...But this alone leaves a lot to be desired.",
+      "contextHash": "8279bdce7132db985c3637b3a25c616313c8fa799ad2884ef2a133c2dbdb192c"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "到達フレーム（arrival）",
+      "sourceHash": "186186584fe8f861b5ec94d42087335c59683cc4f200bfb75f1605757886b2ec",
+      "translation": "Arrival Frame (arrival)",
+      "contextHash": "186186584fe8f861b5ec94d42087335c59683cc4f200bfb75f1605757886b2ec"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "このアニメーションのフレーム数は合計１５です。特に設定がない場合は、１５フレームで対象に到達します。",
+      "sourceHash": "8c4401233ffd0c34831b6978a570f7f9fef9c13c67a4818556ca0eec127a592b",
+      "translation": "This animation has a total of 15 frames. If nothing is specified, it reaches the target in 15 frames.",
+      "contextHash": "8c4401233ffd0c34831b6978a570f7f9fef9c13c67a4818556ca0eec127a592b"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ですが、このアニメは８フレーム目に泡が弾けるような内容になっています。できればその直前（７フレーム目）に到達し、そこで弾けるようにしたい。",
+      "sourceHash": "0395516d4cf146fa5d45f13e6305cf87d9e2fdb1d849c4eea30935d9b0463bc8",
+      "translation": "However, this animation is designed so that the bubble bursts on frame 8. Ideally, I want it to reach the target just before that (on frame 7) and burst there.",
+      "contextHash": "0395516d4cf146fa5d45f13e6305cf87d9e2fdb1d849c4eea30935d9b0463bc8"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "というわけで、到達フレーム数を指定します。",
+      "sourceHash": "bc7872bd01b2551c104489a2b279a562c5cf8a39288325a8d78d4cfd85c29b5f",
+      "translation": "So, let’s specify the number of frames until arrival.",
+      "contextHash": "bc7872bd01b2551c104489a2b279a562c5cf8a39288325a8d78d4cfd85c29b5f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "以下のように射撃型に対して、パラメータを追加します。",
+      "sourceHash": "6fb2bbe15e326b3d559e021a927c6366ffe54328ab457fbf37db28782f865263",
+      "translation": "Add the parameter to the shot type as shown below.",
+      "contextHash": "6fb2bbe15e326b3d559e021a927c6366ffe54328ab457fbf37db28782f865263"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "いい感じになりました。",
+      "sourceHash": "6b92ab48555fc185e5d8aca37558a47bc5f03473e304634df374e07fa1435a5e",
+      "translation": "That looks pretty good.",
+      "contextHash": "6b92ab48555fc185e5d8aca37558a47bc5f03473e304634df374e07fa1435a5e"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "敵にぶつかって炸裂するファイアボールとかも同じ要領で作れます。",
+      "sourceHash": "38519d2c3423e9e777490076809e19e99f47e18beca9e182c56d45f5ebd02ef5",
+      "translation": "You can create a fireball that bursts when it hits an enemy in the same way.",
+      "contextHash": "38519d2c3423e9e777490076809e19e99f47e18beca9e182c56d45f5ebd02ef5"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ちなみに『//』より右は注釈ですが、そのままコピペしても問題なく動きます。",
+      "sourceHash": "446d13b0412d21b9d4ba1eef1329a08d1081572d2cf0b42658f02c656e6af29d",
+      "translation": "Incidentally, everything to the right of “//” is a comment, but it will work correctly even if you copy and paste it as-is.",
+      "contextHash": "446d13b0412d21b9d4ba1eef1329a08d1081572d2cf0b42658f02c656e6af29d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "繰り返し（repeat, interval）",
+      "sourceHash": "50bddcdbbd4b284011d5129f858d91ffb700457e0c0a693c0d90f057df5cd48f",
+      "translation": "Repeat (repeat, interval)",
+      "contextHash": "50bddcdbbd4b284011d5129f858d91ffb700457e0c0a693c0d90f057df5cd48f"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "次は連射にしてみましょう。",
+      "sourceHash": "e24c8a8a419f10330755763169b26ac7542913ed38299929940e3556a9abf084",
+      "translation": "Next, let’s make it fire continuously.",
+      "contextHash": "e24c8a8a419f10330755763169b26ac7542913ed38299929940e3556a9abf084"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "繰返回数（リピート）とその間隔を指定します。",
+      "sourceHash": "98f6cd9eabace72762134d4be248f9df57533460b12e1b2ac9a3ec8958bee65a",
+      "translation": "Specify the number of repetitions and the interval between them.",
+      "contextHash": "98f6cd9eabace72762134d4be248f9df57533460b12e1b2ac9a3ec8958bee65a"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "repeat = 5 // 繰返回数",
+      "sourceHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562",
+      "translation": "repeat = 5 // Number of repetitions",
+      "contextHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "intervalは指定なしなら1が適用されます。この数値はアニメーションのフレーム時間（標準で4/60秒）に対応します。整数だけでなく1/4とか1/2といった値も入れられます。",
+      "sourceHash": "a32fe465f19b56cca2604049d2e4a6274a77b88f2806d755cbb8b2b1d63e1692",
+      "translation": "If interval is not specified, 1 is applied. This value corresponds to the animation’s frame duration (normally 4/60 seconds). You can enter values such as 1/4 or 1/2, not just integers.",
+      "contextHash": "a32fe465f19b56cca2604049d2e4a6274a77b88f2806d755cbb8b2b1d63e1692"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ただし、間隔が短すぎるとそれだけ大量のアニメーションを同時に呼び出されます。動作が重くなるので注意です。",
+      "sourceHash": "5cf6643e503015bddbdfea16d318622910dd6dced697e5dc5fc9c99136b2a2fc",
+      "translation": "However, if the interval is too short, a large number of animations will be called simultaneously. Be careful, as this can make the game run more slowly.",
+      "contextHash": "5cf6643e503015bddbdfea16d318622910dd6dced697e5dc5fc9c99136b2a2fc"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "また、現在の繰返回数は『r』で数式として参照できます（0始まり）。",
+      "sourceHash": "8f9fee444b43fe046ad7c00cb52f2ece998116e7d309f06e0ce9abadcd8d943b",
+      "translation": "You can also reference the current repetition count as a formula using “r” (starting from 0).",
+      "contextHash": "8f9fee444b43fe046ad7c00cb52f2ece998116e7d309f06e0ce9abadcd8d943b"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "さらに『repeat』で全体の繰返回数も参照できます。",
+      "sourceHash": "a63f1b171bfce4fc9b98a03569901b4020a4923cbfdccfe4a095bfaee8dfde32",
+      "translation": "You can also reference the total number of repetitions using “repeat”.",
+      "contextHash": "a63f1b171bfce4fc9b98a03569901b4020a4923cbfdccfe4a095bfaee8dfde32"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "例えば、以下のように記述するとinterval=5から開始し、繰り返すごとに連射間隔が狭まるアニメーションとなります。",
+      "sourceHash": "96a9037d848c886d0f7d1be472cae65e44152f255b291fc04b9bd89caea7ff8b",
+      "translation": "For example, if you write it as follows, the animation starts with interval=5, and the firing interval becomes shorter with each repetition.",
+      "contextHash": "96a9037d848c886d0f7d1be472cae65e44152f255b291fc04b9bd89caea7ff8b"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "repeat = 5 // 繰返回数",
+      "sourceHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562",
+      "translation": "repeat = 5 // Number of repetitions",
+      "contextHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "interval = repeat - r // 間隔",
+      "sourceHash": "dfaf59332b1d2f26f1506c6b3a5f471c5f059b9c0eb7feedd7d8e7b97cd9a522",
+      "translation": "interval = repeat - r // Interval",
+      "contextHash": "dfaf59332b1d2f26f1506c6b3a5f471c5f059b9c0eb7feedd7d8e7b97cd9a522"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "※上記はver1.001以上でないとエラーになります。ご注意ください。",
+      "sourceHash": "9f199b3a1217df46685b555bf43192553e454bb33e742fc28899e7a34c9c4d4d",
+      "translation": "※The above will result in an error unless you are using ver1.001 or later. Please be careful.",
+      "contextHash": "9f199b3a1217df46685b555bf43192553e454bb33e742fc28899e7a34c9c4d4d"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "大きさ（scaleX, scaleY）",
+      "sourceHash": "49429026deb3144f9ed76cefc043ef826be18d16ca41b8c93c02e16c29fed9a2",
+      "translation": "Size (scaleX, scaleY)",
+      "contextHash": "49429026deb3144f9ed76cefc043ef826be18d16ca41b8c93c02e16c29fed9a2"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "ところでちょっと泡がデカすぎませんか？ 小さくしてみましょう。",
+      "sourceHash": "c47d1c45145c8cbca15a6d836dc7facc4ae5a1d0eda3fff9ad1784fdfe6320ca",
+      "translation": "By the way, aren’t the bubbles a little too large? Let’s make them smaller.",
+      "contextHash": "c47d1c45145c8cbca15a6d836dc7facc4ae5a1d0eda3fff9ad1784fdfe6320ca"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "repeat = 5 // 繰返回数",
+      "sourceHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562",
+      "translation": "repeat = 5 // Number of repetitions",
+      "contextHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "scaleX = 0.5 // 横幅",
+      "sourceHash": "57ee45769a0fab690d2aae8cc1aec0bc66dfbea08dafe3fb9c4e181bafdf0e1a",
+      "translation": "scaleX = 0.5 // Width",
+      "contextHash": "57ee45769a0fab690d2aae8cc1aec0bc66dfbea08dafe3fb9c4e181bafdf0e1a"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "scaleY = 0.5 // 縦幅",
+      "sourceHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078",
+      "translation": "scaleY = 0.5 // Height",
+      "contextHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "横幅（scaleX）と縦幅（scaleY）を0.5に指定しました。1.0が元の大きさに相当します。",
+      "sourceHash": "b49deb41536fe21c890bf37fb7b3856fb76e0faff77d4d49969c15dbf6531121",
+      "translation": "I set the width (scaleX) and height (scaleY) to 0.5. 1.0 corresponds to the original size.",
+      "contextHash": "b49deb41536fe21c890bf37fb7b3856fb76e0faff77d4d49969c15dbf6531121"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "もちろんサイズの変更はアニメーション編集画面でも可能です。ただし、こちらでは横幅と縦幅を別々に指定できます。せっかくなので、やってみましょう。",
+      "sourceHash": "317a5d0a03c36e87d94b1f5013c4a400d24a38c30660369147cc3936eb175a75",
+      "translation": "Of course, you can also change the size in the animation editor. However, there you can specify the width and height separately. Since we’re here, let’s give it a try.",
+      "contextHash": "317a5d0a03c36e87d94b1f5013c4a400d24a38c30660369147cc3936eb175a75"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "repeat = 5 // 繰返回数",
+      "sourceHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562",
+      "translation": "repeat = 5 // Number of repetitions",
+      "contextHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "scaleX = 1.0 // 横幅",
+      "sourceHash": "aac907a6c44092df7c38f88f043a5a53c1172392f101d965aa41d95fcc71336b",
+      "translation": "scaleX = 1.0 // Width",
+      "contextHash": "aac907a6c44092df7c38f88f043a5a53c1172392f101d965aa41d95fcc71336b"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "scaleY = 0.5 // 縦幅",
+      "sourceHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078",
+      "translation": "scaleY = 0.5 // Height",
+      "contextHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "結構、雰囲気が変わりますよね。",
+      "sourceHash": "4d4c38893b0af88657c7b9a26d88fb0e715a65e3e2dc6f6e1f128465eaae5999",
+      "translation": "It changes the overall feel quite a bit, doesn’t it?",
+      "contextHash": "4d4c38893b0af88657c7b9a26d88fb0e715a65e3e2dc6f6e1f128465eaae5999"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "うまくすれば、水の弾丸なんかも作れるかもしれません。",
+      "sourceHash": "e33e55240e1c9fd00d3881b8e47dc26143fc724d97e392a751f724334ab9d532",
+      "translation": "If done well, you might even be able to create water bullets.",
+      "contextHash": "e33e55240e1c9fd00d3881b8e47dc26143fc724d97e392a751f724334ab9d532"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "始点座標（sx, sy）",
+      "sourceHash": "29cba07aa0c732cb16ead36f04b26dd4190d9e2c83d5ffcdfd695cdfd21f8801",
+      "translation": "Starting Coordinates (sx, sy)",
+      "contextHash": "29cba07aa0c732cb16ead36f04b26dd4190d9e2c83d5ffcdfd695cdfd21f8801"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "泡がキャラクターの胴体から出てるのが気になる。……ってなわけで、始点座標を調整してみましょう。",
+      "sourceHash": "2c0ec62059ce5d2907e333d017e51d5ababaeae4a7b71de31899cb961874f3b8",
+      "translation": "It bothers me that the bubbles come out of the character’s torso. ...So, let’s adjust the starting coordinates.",
+      "contextHash": "2c0ec62059ce5d2907e333d017e51d5ababaeae4a7b71de31899cb961874f3b8"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "始点座標は『sx』と『sy』２つのパラメータからなります。ちなみに、sはstartの略です。",
+      "sourceHash": "af0fb1e5dc8e8b486fada33457af42be5c7c0d3ff9c2e9943ae5054fad259eb4",
+      "translation": "The starting coordinates consist of two parameters, “sx” and “sy.” Incidentally, s is short for start.",
+      "contextHash": "af0fb1e5dc8e8b486fada33457af42be5c7c0d3ff9c2e9943ae5054fad259eb4"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "shot型の場合、最初から行動主体の座標が設定されていますが、それを変更します。",
+      "sourceHash": "f282dbd37b07afd65cdf16a5bb90ca458097680e26435daf91cd268381bc4406",
+      "translation": "With the shot type, the user’s coordinates are set from the beginning, but we’ll change them.",
+      "contextHash": "f282dbd37b07afd65cdf16a5bb90ca458097680e26435daf91cd268381bc4406"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "sx = a.x - 48 * mirroring // 始点Ｘ座標",
+      "sourceHash": "a08daf057fd9c69ee99765ea565026a65afcdc88991cf184be54dcd7211ec186",
+      "translation": "sx = a.x - 48 * mirroring // Start X coordinate",
+      "contextHash": "a08daf057fd9c69ee99765ea565026a65afcdc88991cf184be54dcd7211ec186"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "sy = a.y - a.height - 48 // 始点Ｙ座標",
+      "sourceHash": "107acb4e9adc5c029434937fed9e5f9abbacf8c47cdf38ca524cf6e4dd3571be",
+      "translation": "sy = a.y - a.height - 48 // Start Y coordinate",
+      "contextHash": "107acb4e9adc5c029434937fed9e5f9abbacf8c47cdf38ca524cf6e4dd3571be"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "頭上左から泡が出るようになりました。ちょっと数式っぽいものが出てきて嫌かもしれませんが、お付き合いください。",
+      "sourceHash": "e69a2909d032d1e7152e1f6a34428cdafedcf26d870795e320164aa07ea12d8a",
+      "translation": "Now the bubbles come out from above and to the left of the character’s head. You may dislike the somewhat formula-like expressions, but please bear with me.",
+      "contextHash": "e69a2909d032d1e7152e1f6a34428cdafedcf26d870795e320164aa07ea12d8a"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "『a』が行動主体の画像情報（スプライト）を意味しています。",
+      "sourceHash": "1590663746aa2ec463101ee471c0343d44445ee30548b6ce6a8220161253dea3",
+      "translation": " \"a” represents the user’s image information (sprite).",
+      "contextHash": "1590663746aa2ec463101ee471c0343d44445ee30548b6ce6a8220161253dea3"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "『a.x』『a.y』がそれぞれＸ座標とＹ座標です。",
+      "sourceHash": "a353a9acaf239174725eb469b242f9dd6d9851ddcde57403149de37768e96556",
+      "translation": " \"a.x” and “a.y” are the X and Y coordinates, respectively.",
+      "contextHash": "a353a9acaf239174725eb469b242f9dd6d9851ddcde57403149de37768e96556"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "※中身が違うため、『a.atk』など普段の計算式に使用する項目は参照できません。その場合、『a._battler.atk』のように書く必要があります。",
+      "sourceHash": "9eef1a994458065031cfaab9502896743c6738b6eeb01fe6021e02b49c94e7f7",
+      "translation": "※Because their contents are different, items normally used in formulas, such as “a.atk,” cannot be referenced. In that case, you need to write them as “a._battler.atk,” for example.",
+      "contextHash": "9eef1a994458065031cfaab9502896743c6738b6eeb01fe6021e02b49c94e7f7"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "※現在のバージョンでは標準で『a.atk』などの記述も使用可能です。",
+      "sourceHash": "846ba0857b77262f2c4127c6534c0b40417afb9d50fc4daed2fc0f07a62077f5",
+      "translation": "※In the current version, entries such as “a.atk” can also be used by default.",
+      "contextHash": "846ba0857b77262f2c4127c6534c0b40417afb9d50fc4daed2fc0f07a62077f5"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "『a.height』はキャラクターの高さになります。『a.y - a.height』で行動主体の頭上。そこからさらに-48ということは、頭上48ピクセルを始点Ｙ座標とするという意味です。",
+      "sourceHash": "0b4979ab923fb52a7b617bc6ecb13cda247608de5eb9f826c5e5e47edb789102",
+      "translation": " \"a.height” is the character’s height. “a.y - a.height” indicates the area above the user’s head. Subtracting an additional -48 means that the starting Y coordinate is 48 pixels above the head.",
+      "contextHash": "0b4979ab923fb52a7b617bc6ecb13cda247608de5eb9f826c5e5e47edb789102"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "ツクールＭＶの基本的な操作レベルの話なので今更かもしれませんが、Ｙ座標はマイナスが上になるんですよね。",
+      "sourceHash": "4e6dad7609e9b90ed6c319f5cba69d5d9723e292f1f16e514fa0c8efae57ecfe",
+      "translation": "This may be basic RPG Maker MV operation, and perhaps obvious by now, but negative Y coordinates are upward.",
+      "contextHash": "4e6dad7609e9b90ed6c319f5cba69d5d9723e292f1f16e514fa0c8efae57ecfe"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "『a.x - 48』もそのまま、行動主体の左48ピクセルを始点とするという意味です。",
+      "sourceHash": "186fc15b906a02c8b2d0157e299dd4e66224a576fef1f697ab660ab35cc5eaff",
+      "translation": " \"a.x - 48” likewise means that the starting point is 48 pixels to the left of the user.",
+      "contextHash": "186fc15b906a02c8b2d0157e299dd4e66224a576fef1f697ab660ab35cc5eaff"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "終点座標（ex, ey）",
+      "sourceHash": "4890017fb2eaf1dec5adf215585333e671a26b82867f403734858a8cf092e960",
+      "translation": "Ending Coordinates (ex, ey)",
+      "contextHash": "4890017fb2eaf1dec5adf215585333e671a26b82867f403734858a8cf092e960"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "始点と来れば、次は終点（対象に到達する座標）のほうもいじってみましょう。",
+      "sourceHash": "c20b529f36f922a9096dd5f6dfd83386d274139cda61701fcdf0af70c4e22734",
+      "translation": "Now that we’ve covered the starting point, let’s also adjust the ending point (the coordinates where the animation reaches the target).",
+      "contextHash": "c20b529f36f922a9096dd5f6dfd83386d274139cda61701fcdf0af70c4e22734"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "終点座標は『ex』と『ey』２つのパラメータからなります。もちろん、eはendの略です。",
+      "sourceHash": "3bc1ff637ba5fa73f1d753d67ac094ba04371ac929091cf3733ef0bf179dbf68",
+      "translation": "The ending coordinates consist of two parameters, “ex” and “ey.” Of course, e is short for end.",
+      "contextHash": "3bc1ff637ba5fa73f1d753d67ac094ba04371ac929091cf3733ef0bf179dbf68"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "ex = defaultX + 100 * mirroring // 終点Ｘ座標",
+      "sourceHash": "e48ef11da30f44f96d102fc5c7072f9b035812180bbd56a78bb0be14bb82dfc0",
+      "translation": "ex = defaultX + 100 * mirroring // End X coordinate",
+      "contextHash": "e48ef11da30f44f96d102fc5c7072f9b035812180bbd56a78bb0be14bb82dfc0"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "ey = defaultY + 100 // 終点Ｘ座標",
+      "sourceHash": "ae05691f3247cc0f20526f7f9d743bdd004a1e165b632256f50a4be881706f41",
+      "translation": "ey = defaultY + 100 // End X coordinate",
+      "contextHash": "ae05691f3247cc0f20526f7f9d743bdd004a1e165b632256f50a4be881706f41"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "特に意味はありませんが、敵の右下辺りで炸裂するようになりました。",
+      "sourceHash": "04ea8bd472133232097736d07320579ef1ae403590b4e2741c7fc736055c296b",
+      "translation": "It doesn't have any particular significance, but it now explodes around the enemy's lower right.",
+      "contextHash": "04ea8bd472133232097736d07320579ef1ae403590b4e2741c7fc736055c296b"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "それより、謎の変数が出てきましたね。",
+      "sourceHash": "e376dcf5a0f8f32420a47c4afdc41dabc585157fe8ac0ea0f6d066fc0757af0d",
+      "translation": "More importantly, a mysterious variable has appeared.",
+      "contextHash": "e376dcf5a0f8f32420a47c4afdc41dabc585157fe8ac0ea0f6d066fc0757af0d"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "『defaultX』『defaultY』には、アニメーションの位置設定（頭上、中心、足元、画面）を考慮した対象（b）の座標が入っています。",
+      "sourceHash": "0d2bb3ea187948bec6ee31c161e44e9acff76fd089aa0b78af0668040f54ff66",
+      "translation": " \"defaultX』 and 『defaultY』 contain the coordinates of the target (b), taking the animation's position setting (above head, center, feet, or screen) into account.",
+      "contextHash": "0d2bb3ea187948bec6ee31c161e44e9acff76fd089aa0b78af0668040f54ff66"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "頭上：defaultX = b.x, defaultY = b.y - b.height",
+      "sourceHash": "810b6568e0c25bac1daca290a5e9c8d5873b15a7479bd102803fc3721214bc85",
+      "translation": "Above head: defaultX = b.x, defaultY = b.y - b.height",
+      "contextHash": "810b6568e0c25bac1daca290a5e9c8d5873b15a7479bd102803fc3721214bc85"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "中央：defaultX = b.x, defaultY = b.y - b.height / 2",
+      "sourceHash": "f3b7afa3e553c5e747930f19d0e1d2e02e25cd4d7ed40fe0d72b294cdb36e609",
+      "translation": "Center: defaultX = b.x, defaultY = b.y - b.height / 2",
+      "contextHash": "f3b7afa3e553c5e747930f19d0e1d2e02e25cd4d7ed40fe0d72b294cdb36e609"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "足元：defaultX = b.x, defaultY = b.y",
+      "sourceHash": "21e074d259f0de2eaa97b95e8c68c634ba61107ac0c44e839f1fb8e824c77cd7",
+      "translation": "Feet: defaultX = b.x, defaultY = b.y",
+      "contextHash": "21e074d259f0de2eaa97b95e8c68c634ba61107ac0c44e839f1fb8e824c77cd7"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "画面：defaultX, defaultY共にプラグインパラメータの設定値",
+      "sourceHash": "55452e7761eede4184763ab44f05bf6564a30e4ae9d62bf2dcda044c68449e55",
+      "translation": "Screen: Both defaultX and defaultY use the values set in the plugin parameter",
+      "contextHash": "55452e7761eede4184763ab44f05bf6564a30e4ae9d62bf2dcda044c68449e55"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "詳細は上記の通りです。",
+      "sourceHash": "adaa4a3c8aa947023c01788427c33474558ea6c55ba682d7fd4b27bd36b938e5",
+      "translation": "The details are as described above.",
+      "contextHash": "adaa4a3c8aa947023c01788427c33474558ea6c55ba682d7fd4b27bd36b938e5"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "いちいち『b.y - b.height / 2』とか入力するのも面倒なので、こちらを使っていくと便利です。",
+      "sourceHash": "bbc7e17162fd2560df59123e7f13b10dfba3ccc3a9af82854dfce1a2b3c29bfd",
+      "translation": "It would be tedious to enter 『b.y - b.height / 2』 every time, so using these is convenient.",
+      "contextHash": "bbc7e17162fd2560df59123e7f13b10dfba3ccc3a9af82854dfce1a2b3c29bfd"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "座標分散（sxRandom, syRandom, exRandom, eyRandom）",
+      "sourceHash": "2fdc89491eb1e9aa350a976b40ceebc46790f29a56cb6902da702e5f22ae56d2",
+      "translation": "Coordinate Dispersion (sxRandom, syRandom, exRandom, eyRandom)",
+      "contextHash": "2fdc89491eb1e9aa350a976b40ceebc46790f29a56cb6902da702e5f22ae56d2"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "では、対象に命中する座標を分散させたい場合はどうでしょうか？ 連射技などはランダムでバラつかせたほうが自然ですよね。",
+      "sourceHash": "dd952fb825a380fa8f02fd373210258b3860d0dcb5820101f3c6ae2e2904dea3",
+      "translation": "What if you want to disperse the coordinates that hit the target? It feels more natural to add some random variation to rapid-fire Techs and the like.",
+      "contextHash": "dd952fb825a380fa8f02fd373210258b3860d0dcb5820101f3c6ae2e2904dea3"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "sxRandom = 50 // 始点Ｘ座標分散",
+      "sourceHash": "b238fae8e398846630423bc2a352f6b99c790436ddeb34f93c07dde6da6a90ec",
+      "translation": "sxRandom = 50 // Start X coordinate variance",
+      "contextHash": "b238fae8e398846630423bc2a352f6b99c790436ddeb34f93c07dde6da6a90ec"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "syRandom = 50 // 始点Ｙ座標分散",
+      "sourceHash": "8aadbfcd1bb130569c205706fbe8cd5f2f54c2e74ac10f757009c73f5b299381",
+      "translation": "syRandom = 50 // Start Y coordinate variance",
+      "contextHash": "8aadbfcd1bb130569c205706fbe8cd5f2f54c2e74ac10f757009c73f5b299381"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "exRandom = 50 // 終点Ｘ座標分散",
+      "sourceHash": "f8ad2044dfc6dc686aebd6fa64521528362177df874ce485785fcb7539221c58",
+      "translation": "exRandom = 50 // End X coordinate variance",
+      "contextHash": "f8ad2044dfc6dc686aebd6fa64521528362177df874ce485785fcb7539221c58"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "eyRandom = 50 // 終点Ｙ座標分散",
+      "sourceHash": "56170a92c45da266ce4b7adf80848cbb11bb80a62bf631204db840beedfe2d65",
+      "translation": "eyRandom = 50 // End Y coordinate variance",
+      "contextHash": "56170a92c45da266ce4b7adf80848cbb11bb80a62bf631204db840beedfe2d65"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "repeat = 5 // 繰返回数",
+      "sourceHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562",
+      "translation": "repeat = 5 // Number of repetitions",
+      "contextHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "scaleX = 0.5 // 横幅",
+      "sourceHash": "57ee45769a0fab690d2aae8cc1aec0bc66dfbea08dafe3fb9c4e181bafdf0e1a",
+      "translation": "scaleX = 0.5 // Width",
+      "contextHash": "57ee45769a0fab690d2aae8cc1aec0bc66dfbea08dafe3fb9c4e181bafdf0e1a"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "scaleY = 0.5 // 縦幅",
+      "sourceHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078",
+      "translation": "scaleY = 0.5 // Height",
+      "contextHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "上記のように始点・終点のＸ・Ｙ座標をそれぞれ５０ピクセルほど分散させてみました。",
+      "sourceHash": "46cfe2543b47bc531ff51e99b0ae50dc5ada1a475e48a2138a978297a8512f82",
+      "translation": "As shown above, I dispersed each of the X and Y coordinates of the starting and ending points by about 50 pixels.",
+      "contextHash": "46cfe2543b47bc531ff51e99b0ae50dc5ada1a475e48a2138a978297a8512f82"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "演出上、終点だけのほうが自然な気もしますが、始点もついでです。",
+      "sourceHash": "b487a5243eb324d1c0cade7b77545c96f0991fec2cb99c6b2eebc660d8cc267f",
+      "translation": "For the effect, using only the ending point may seem more natural, but I included the starting point as well.",
+      "contextHash": "b487a5243eb324d1c0cade7b77545c96f0991fec2cb99c6b2eebc660d8cc267f"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "なお、上下左右にそれぞれ５０ピクセルという意味なので、分散の幅は１００ピクセルになります。",
+      "sourceHash": "9be0823a4028ef732d2d1efe19c93dca644f02949268907e446ccf4f3813f6a8",
+      "translation": "Note that this means 50 pixels in each direction—up, down, left, and right—so the dispersion range is 100 pixels.",
+      "contextHash": "9be0823a4028ef732d2d1efe19c93dca644f02949268907e446ccf4f3813f6a8"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "また、以下のような指定も一つの方法です。",
+      "sourceHash": "0c07a1e7e9a69f84f2f8ee9e6d5b00b89f6b4444f24549f0d4912ac1dcda9479",
+      "translation": "The following is another way to specify it.",
+      "contextHash": "0c07a1e7e9a69f84f2f8ee9e6d5b00b89f6b4444f24549f0d4912ac1dcda9479"
+    },
+    {
+      "id": "code-032",
+      "type": "code",
+      "source": "exRandom = b.width / 3 // 対象の横幅÷３",
+      "sourceHash": "37514b5534779da061def5532179fe82b4641a1469aa9f5ae01592bd4d037f2f",
+      "translation": "exRandom = b.width / 3 // Target width ÷ 3",
+      "contextHash": "37514b5534779da061def5532179fe82b4641a1469aa9f5ae01592bd4d037f2f"
+    },
+    {
+      "id": "code-033",
+      "type": "code",
+      "source": "eyRandom = b.height / 3 // 対象の縦幅÷３",
+      "sourceHash": "b8e69da2bb2ae74ddd213ee6e7b038acb30688288b77f73d42db1c7d622a6f8d",
+      "translation": "eyRandom = b.height / 3 // Target height ÷ 3",
+      "contextHash": "b8e69da2bb2ae74ddd213ee6e7b038acb30688288b77f73d42db1c7d622a6f8d"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "これは対象の画像サイズを見て、その範囲で分散させています。",
+      "sourceHash": "551d9a694103a0e364cc40a876e4e833fe303306855210f53c05007c21e0f3b6",
+      "translation": "This looks at the target image's size and disperses the coordinates within that range.",
+      "contextHash": "551d9a694103a0e364cc40a876e4e833fe303306855210f53c05007c21e0f3b6"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "÷２ではなく÷３なのは大抵の場合、画像の端のほうが空白になっているためです。多少小さめに設定したほうが自然かなと。",
+      "sourceHash": "93f9b07de75ddbdb453ced99d1f285fc184d0514e51f83fbf638b994efd97801",
+      "translation": "The reason for dividing by 3 instead of 2 is that the edges of the image are usually blank. I thought setting it somewhat smaller would look more natural.",
+      "contextHash": "93f9b07de75ddbdb453ced99d1f285fc184d0514e51f83fbf638b994efd97801"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "放物線（arcX, arcY）",
+      "sourceHash": "5916b9e482413f3e6562ef56926353fa21341aeb43116df60bd3248bb3993b20",
+      "translation": "Parabola (arcX, arcY)",
+      "contextHash": "5916b9e482413f3e6562ef56926353fa21341aeb43116df60bd3248bb3993b20"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "投擲といえば放物線。もちろん機能を用意しています。",
+      "sourceHash": "185e99cf695959532672fae9e41a331d9613b3f06804f3e47aa2b52d476a847e",
+      "translation": "When it comes to throwing, a parabola is a must. Of course, this function is included.",
+      "contextHash": "185e99cf695959532672fae9e41a331d9613b3f06804f3e47aa2b52d476a847e"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "放物線の高さとなるピクセル数を指定します。例によって、マイナスが上方向になります。",
+      "sourceHash": "aca9c6f1483425f454e9eab6e48d3592077579a3f28e656795ebe9ef0a0a9b71",
+      "translation": "Specify the number of pixels representing the height of the parabola. As usual, negative values indicate the upward direction.",
+      "contextHash": "aca9c6f1483425f454e9eab6e48d3592077579a3f28e656795ebe9ef0a0a9b71"
+    },
+    {
+      "id": "code-034",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-035",
+      "type": "code",
+      "source": "arcY = -100 // 放物線のＹ座標成分",
+      "sourceHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a",
+      "translation": "arcY = -100 // Parabolic Y-coordinate component",
+      "contextHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "泡はこういう動きのほうが似合いますよね。",
+      "sourceHash": "823cf6d81231fe81ab7e859b0a92d87889a719fced5e3c324a50f3c40dfd938d",
+      "translation": "This kind of movement suits bubbles better, doesn't it?",
+      "contextHash": "823cf6d81231fe81ab7e859b0a92d87889a719fced5e3c324a50f3c40dfd938d"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "また『arcX』で横方向の放物線も指定可能です。サイドビューでは使いにくいかもしれませんが、独特の加速になるので何かに使えるかもしれません。",
+      "sourceHash": "ba19b2890c316852048de55532bcfbfb1db0e5adb7c622e334a8e60cbd3c19b6",
+      "translation": "You can also specify a horizontal parabola with 『arcX』. It may be difficult to use in side-view battles, but its unique acceleration might make it useful for something.",
+      "contextHash": "ba19b2890c316852048de55532bcfbfb1db0e5adb7c622e334a8e60cbd3c19b6"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "複数アニメーションの呼び出し（id）",
+      "sourceHash": "452124350434eaf8e5b361c50aa7e1cdf7701a064c71bf587a9607f8136613cc",
+      "translation": "Calling Multiple Animations (id)",
+      "contextHash": "452124350434eaf8e5b361c50aa7e1cdf7701a064c71bf587a9607f8136613cc"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "当プラグインでは複数のアニメーションを１つのスキルから自由に呼び出せます。",
+      "sourceHash": "9a1111e4ba93f81d7de2232672ae321456e6ed461d1d08e6d12ea5223b111f0d",
+      "translation": "With this plugin, you can freely call multiple animations from a single skill.",
+      "contextHash": "9a1111e4ba93f81d7de2232672ae321456e6ed461d1d08e6d12ea5223b111f0d"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "やり方は単純に記述を追加するだけです。",
+      "sourceHash": "be25e8ae5f407ef11f19dcc28076caab276ec4ab6a69127a27b7be913367e09c",
+      "translation": "The method is simply to add another entry.",
+      "contextHash": "be25e8ae5f407ef11f19dcc28076caab276ec4ab6a69127a27b7be913367e09c"
+    },
+    {
+      "id": "code-036",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-037",
+      "type": "code",
+      "source": "id = 81 // 水/単体1",
+      "sourceHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d",
+      "translation": "id = 81 // Water/Single 1",
+      "contextHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "『id』にアニメーションＩＤを指定すれば、スキルに設定されている以外のアニメーションを呼び出せます。",
+      "sourceHash": "aa8f2d9bf33c5be11690e356304f569150a788eaec4c3a1e9962af371019f6a0",
+      "translation": "By specifying an animation ID in 『id』, you can call an animation other than the one configured for the skill.",
+      "contextHash": "aa8f2d9bf33c5be11690e356304f569150a788eaec4c3a1e9962af371019f6a0"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "ちなみに『<D-Animation/>』とだけ記述すれば、ごく普通にアニメーションを実行します。",
+      "sourceHash": "c78ca857847191a01a194835e14f47c0faf2ed0b8495898b782baa797964c404",
+      "translation": "Incidentally, if you write only 『<D-Animation/>』, the animation will play normally.",
+      "contextHash": "c78ca857847191a01a194835e14f47c0faf2ed0b8495898b782baa797964c404"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "時間差（delay）",
+      "sourceHash": "3f622fde7072651d9a97d40d847bb86c4b2940a8b7f907e750d86ec2861ba1da",
+      "translation": "Delay (delay)",
+      "contextHash": "3f622fde7072651d9a97d40d847bb86c4b2940a8b7f907e750d86ec2861ba1da"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "ただし、上記の方法ではタイミングも何もなく全く同時にアニメーションを再生してしまいます。そこで時間差を指定します。",
+      "sourceHash": "998d093126a684ee59bd7e92778992a0c90a5a0e57248384bfa134ac5983a5e2",
+      "translation": "However, with the method above, the animations will play at exactly the same time, without any timing offset. This is where you specify a delay.",
+      "contextHash": "998d093126a684ee59bd7e92778992a0c90a5a0e57248384bfa134ac5983a5e2"
+    },
+    {
+      "id": "code-038",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-039",
+      "type": "code",
+      "source": "delay = 7 // 7フレーム待つ",
+      "sourceHash": "19ad0e74bcc86fe9c54600ab2d327dddc46b9a995418dba2f7227f92b9b62982",
+      "translation": "delay = 7 // Wait 7 frames",
+      "contextHash": "19ad0e74bcc86fe9c54600ab2d327dddc46b9a995418dba2f7227f92b9b62982"
+    },
+    {
+      "id": "code-040",
+      "type": "code",
+      "source": "id = 81 // 水/単体1",
+      "sourceHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d",
+      "translation": "id = 81 // Water/Single 1",
+      "contextHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "これで到達フレームに合わせて、次のアニメーションを再生するようにできました。",
+      "sourceHash": "fee87659325d85e41ae91a900f8554f1b875c3c3eb59a81ac2b92abab9a00465",
+      "translation": "Now the next animation can be played in sync with the arrival frame.",
+      "contextHash": "fee87659325d85e41ae91a900f8554f1b875c3c3eb59a81ac2b92abab9a00465"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "終了タイミングに合わせたい場合は『auto』と指定すれば、自動的に待ってくれます。repeatやintervalも考慮して終了タイミングを計算してくれるので便利です。",
+      "sourceHash": "7428dfe56b4bea4e728eb7b74dfa05441048a54841d686e57eb61ee6f58c8720",
+      "translation": "If you want to synchronize it with the end timing, specify 『auto』 and it will wait automatically. This is convenient because it calculates the end timing while also taking repeat and interval into account.",
+      "contextHash": "7428dfe56b4bea4e728eb7b74dfa05441048a54841d686e57eb61ee6f58c8720"
+    },
+    {
+      "id": "code-041",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-042",
+      "type": "code",
+      "source": "id = 81 // 水/単体1",
+      "sourceHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d",
+      "translation": "id = 81 // Water/Single 1",
+      "contextHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "ウェイト（wait）",
+      "sourceHash": "a1f0a52584e15b0212284c3a7f70bc0a83ffe2df2af44ef2309f162e5aae1f00",
+      "translation": "Wait (wait)",
+      "contextHash": "a1f0a52584e15b0212284c3a7f70bc0a83ffe2df2af44ef2309f162e5aae1f00"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "前の<D-Animation:shot>にウェイト（wait）を指定する方法でもタイミング調整できます。",
+      "sourceHash": "cc0fc718bebfd75787c788067d2cd128eb430aaad57f86e1abc5f8e3cabe8002",
+      "translation": "You can also adjust the timing by specifying a wait (wait) on the preceding <D-Animation:shot>.",
+      "contextHash": "cc0fc718bebfd75787c788067d2cd128eb430aaad57f86e1abc5f8e3cabe8002"
+    },
+    {
+      "id": "code-043",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-044",
+      "type": "code",
+      "source": "id = 81 // 水/単体1",
+      "sourceHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d",
+      "translation": "id = 81 // Water/Single 1",
+      "contextHash": "589f242eba0aff77d1b16296e18dfaaab8ebe8290822f6e27658c4b22886789d"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "指定する箇所が違うだけで『時間差（delay）』とやることは全く同じです。お好きなほうでどうぞ。",
+      "sourceHash": "7adcda3e7c3e9ba1e7852540721bb1678ec228e93c980971f9df7071069a3903",
+      "translation": "Aside from where it is specified, it does exactly the same thing as 『Delay (delay)』. Use whichever you prefer.",
+      "contextHash": "7adcda3e7c3e9ba1e7852540721bb1678ec228e93c980971f9df7071069a3903"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "残像（afterimage , afterimageInterval ）",
+      "sourceHash": "53a560d2f23afe557aacb6e4351bd472566e0923dc4e0f02d7ba78be0a3cfbda",
+      "translation": "Afterimage (afterimage , afterimageInterval )",
+      "contextHash": "53a560d2f23afe557aacb6e4351bd472566e0923dc4e0f02d7ba78be0a3cfbda"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "おまけに残像機能です。",
+      "sourceHash": "d8ba921607fa7e4b4e0dec53afed25516939f575285aa779a28ee47bad9bebca",
+      "translation": "As a bonus, there is an afterimage function.",
+      "contextHash": "d8ba921607fa7e4b4e0dec53afed25516939f575285aa779a28ee47bad9bebca"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "残像の数と間隔を指定します。",
+      "sourceHash": "1c02c32efb81ec2e873aa9a58634c502c57e75ebeed1002083bdf8a694222585",
+      "translation": "Specify the number and spacing of the afterimages.",
+      "contextHash": "1c02c32efb81ec2e873aa9a58634c502c57e75ebeed1002083bdf8a694222585"
+    },
+    {
+      "id": "code-045",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-046",
+      "type": "code",
+      "source": "arcY = -100 // 放物線のＹ座標成分",
+      "sourceHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a",
+      "translation": "arcY = -100 // Parabolic Y-coordinate component",
+      "contextHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a"
+    },
+    {
+      "id": "code-047",
+      "type": "code",
+      "source": "afterimage = 5 // 残像数",
+      "sourceHash": "3a3a8c747388048f8c6a6f0a5e57a31942bd4618590c5dc9219ce5bef3a508e8",
+      "translation": "afterimage = 5 // Number of afterimages",
+      "contextHash": "3a3a8c747388048f8c6a6f0a5e57a31942bd4618590c5dc9219ce5bef3a508e8"
+    },
+    {
+      "id": "code-048",
+      "type": "code",
+      "source": "afterimageInterval = 1 // 残像間隔",
+      "sourceHash": "89996cd7a42f0466f702ed07b4531ade2cadcb8e50a7fc646852d7159d7bfedc",
+      "translation": "afterimageInterval = 1 // Afterimage interval",
+      "contextHash": "89996cd7a42f0466f702ed07b4531ade2cadcb8e50a7fc646852d7159d7bfedc"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "残像間隔も仕様は通常の間隔（interval）と同じです。1がアニメーションの1フレームに対応します。",
+      "sourceHash": "0d9130cc15a36091141ec933af4e23697d4451c7e9afac4b0ea39e512a5e9e8a",
+      "translation": "The afterimage interval works the same way as the normal interval (interval). A value of 1 corresponds to one animation frame.",
+      "contextHash": "0d9130cc15a36091141ec933af4e23697d4451c7e9afac4b0ea39e512a5e9e8a"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "※『afterImage』ではなく『afterimage』です。大文字小文字の指定を誤ると動きません。",
+      "sourceHash": "499a02bfba2a1c2ac5dd0f249b6e8143565bd1d35370adca2d90e18ea3ad8ab4",
+      "translation": "※It is 『afterimage』, not 『afterImage』. It will not work if you use the wrong capitalization.",
+      "contextHash": "499a02bfba2a1c2ac5dd0f249b6e8143565bd1d35370adca2d90e18ea3ad8ab4"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "この機能はカッコいいのですが、重いので注意が必要です。普通にrepeatを指定して表示数を増やすのと、負荷は同じだと思ってください。",
+      "sourceHash": "310e76a8908e3eb118915cf2e25a7255da5c3b2b37c2eb3f1e49a677f6419c57",
+      "translation": "This function looks cool, but it is resource-intensive, so be careful. Think of the load as being the same as simply specifying repeat to increase the number of displayed images.",
+      "contextHash": "310e76a8908e3eb118915cf2e25a7255da5c3b2b37c2eb3f1e49a677f6419c57"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "回転（rotation）",
+      "sourceHash": "94dfad80b4c24ea207c6f24e154bec538851830706630b5aa4dc13a4cb921530",
+      "translation": "Rotation (rotation)",
+      "contextHash": "94dfad80b4c24ea207c6f24e154bec538851830706630b5aa4dc13a4cb921530"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "少し上級になりますが、回転も足してみましょう。",
+      "sourceHash": "587a116b7fee03b5e2253d46a278a1088fd127067ae6727e860de1a0b104f0cf",
+      "translation": "This is a little more advanced, but let's try adding rotation as well.",
+      "contextHash": "587a116b7fee03b5e2253d46a278a1088fd127067ae6727e860de1a0b104f0cf"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "実のところ、回転はアニメーションの編集画面でも可能なので、必ずしもここで設定する必要はありません。ただまあ、こういうのも可能だということで。",
+      "sourceHash": "8f5280579cdaed995028ca9310cf979b294c5ffcb02faab64ea4768f48d29c4c",
+      "translation": "In fact, rotation can also be configured in the animation editor, so it is not necessarily necessary to set it here. Still, this shows that it is possible.",
+      "contextHash": "8f5280579cdaed995028ca9310cf979b294c5ffcb02faab64ea4768f48d29c4c"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "回転率はラジアンといって２π（パイ）を360度として指定します。高校数学で習う範囲です。……が、たぶんみんな忘れていることでしょう。",
+      "sourceHash": "c4ca5879b5a65f6481da5246911f676c53847d1d5de49cac1b36602df10e32b6",
+      "translation": "The rotation rate is specified in radians, with 2π (pi) representing 360 degrees. This is within the scope of high school mathematics. ...Although everyone has probably forgotten it by now.",
+      "contextHash": "c4ca5879b5a65f6481da5246911f676c53847d1d5de49cac1b36602df10e32b6"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "そんなわけで、とりあえずコピペで結構です。",
+      "sourceHash": "6a4e1939a79373455dfe173683ad0e44361ec8ce6125ecc6134575fab45a6bbb",
+      "translation": "So for now, simply copying and pasting it is fine.",
+      "contextHash": "6a4e1939a79373455dfe173683ad0e44361ec8ce6125ecc6134575fab45a6bbb"
+    },
+    {
+      "id": "code-049",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Frames to reach",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-050",
+      "type": "code",
+      "source": "arcY = -100 // 放物線のＹ座標成分",
+      "sourceHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a",
+      "translation": "arcY = -100 // Parabolic Y-coordinate component",
+      "contextHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a"
+    },
+    {
+      "id": "code-051",
+      "type": "code",
+      "source": "scaleY = 0.5 // 縦幅",
+      "sourceHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078",
+      "translation": "scaleY = 0.5 // Vertical height",
+      "contextHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078"
+    },
+    {
+      "id": "code-052",
+      "type": "code",
+      "source": "rotation = t/et * Math.PI * 2 // 回転率",
+      "sourceHash": "dc5555b1b332319f94b0d2d254c34146f5e2b5ba1a078a895beb4e04664c98c0",
+      "translation": "rotation = t/et * Math.PI * 2 // Rotation rate",
+      "contextHash": "dc5555b1b332319f94b0d2d254c34146f5e2b5ba1a078a895beb4e04664c98c0"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "※回転を分かりやすくするため細長くしています。",
+      "sourceHash": "a6af95ce7367a04717cfc67c887ca6151e2bfd7ad244e2c7b4015892b2b9de08",
+      "translation": "※It has been made long and thin to make the rotation easier to see.",
+      "contextHash": "a6af95ce7367a04717cfc67c887ca6151e2bfd7ad244e2c7b4015892b2b9de08"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "『Math.PI * 2』が２πなのは分かると思うんですが、他にも『t』だの『et』だの新しい変数が出てきました。",
+      "sourceHash": "5cdac7a3f147f2ae5267c5c936f1503971416a6afcc52d7d928543a11a382f24",
+      "translation": "You probably understand that 『Math.PI * 2』 is 2π, but some other new variables, such as 『t』 and 『et』, have appeared as well.",
+      "contextHash": "5cdac7a3f147f2ae5267c5c936f1503971416a6afcc52d7d928543a11a382f24"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "『rotation』はアニメーションの再生中、1/60ごとにリアルタイム演算を行う項目であり、これはその時間変化を計算する式です。",
+      "sourceHash": "7af3e9fbfcd0a5124982ebc50fb5674fd4e608c5ea11cd65333df3b2ca1906fa",
+      "translation": " \"rotation』 is an item that performs real-time calculations every 1/60th of a second while the animation is playing, and this is the formula used to calculate its change over time.",
+      "contextHash": "7af3e9fbfcd0a5124982ebc50fb5674fd4e608c5ea11cd65333df3b2ca1906fa"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "t：アニメーション開始からの経過時間（1/60秒単位）",
+      "sourceHash": "bb1432974d381d730bcb80388131b210f2be463426cab75c57ad6b47ad92b93b",
+      "translation": "t: Elapsed time since the animation started (in 1/60-second units)",
+      "contextHash": "bb1432974d381d730bcb80388131b210f2be463426cab75c57ad6b47ad92b93b"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "et：アニメーションの終了時間（1/60秒単位）",
+      "sourceHash": "863d9d9d49518251a67b5c02c4e3bfaa01f28ca868f8da737a4467991128d700",
+      "translation": "et: Animation end time (in 1/60-second units)",
+      "contextHash": "863d9d9d49518251a67b5c02c4e3bfaa01f28ca868f8da737a4467991128d700"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "『t』は0から始まり、終了時間になると『et』に等しくなります。ということは『t/et』の値は0→1へと変化していきます。",
+      "sourceHash": "04111504fa95ff3b77af364f731dff50c63e17c18649d8f60f92ef1aa88e73d8",
+      "translation": " \"t』 starts at 0 and becomes equal to 『et』 when the end time is reached. This means that the value of 『t/et』 changes from 0 to 1.",
+      "contextHash": "04111504fa95ff3b77af364f731dff50c63e17c18649d8f60f92ef1aa88e73d8"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "つまり上の数式全体は0～2πへ変化します。これはアニメーションの再生中にちょうど一周するという意味です。",
+      "sourceHash": "fec696d978b6ecdc7037088b5d551a1aad3c55fc8bf61c049c698b1178db9fc0",
+      "translation": "In other words, the entire formula above changes from 0 to 2π. This means it makes exactly one full rotation while the animation is playing.",
+      "contextHash": "fec696d978b6ecdc7037088b5d551a1aad3c55fc8bf61c049c698b1178db9fc0"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "説明が意味不明でも一周することさえ分かればＯＫです。",
+      "sourceHash": "7f2189cbe9c6c2dad94da067d152abbe906a819124e07ad5976a507ba8358c43",
+      "translation": "Even if the explanation makes no sense, it is enough to understand that it makes one full rotation.",
+      "contextHash": "7f2189cbe9c6c2dad94da067d152abbe906a819124e07ad5976a507ba8358c43"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "ところで、上のアニメーションは違和感ありますよね。",
+      "sourceHash": "a5eb6c5df1ac138c9affa8ce09302c3e36375884e7abb7b59dc191bd534b4d59",
+      "translation": "By the way, the animation above feels a little unnatural, doesn't it?",
+      "contextHash": "a5eb6c5df1ac138c9affa8ce09302c3e36375884e7abb7b59dc191bd534b4d59"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "泡がぶつかってからも、回転を続けているのがしっくり来ません。",
+      "sourceHash": "2dfc5601aa8c0a2a37ac1b0e43063602d7ee20c8298ebd1d35b2bbdc338f4525",
+      "translation": "It doesn't seem quite right for the rotation to continue even after the bubbles collide.",
+      "contextHash": "2dfc5601aa8c0a2a37ac1b0e43063602d7ee20c8298ebd1d35b2bbdc338f4525"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "というわけで、到達すると回転を止める式も紹介します。",
+      "sourceHash": "84077fbb141c5ec2e3138eb3f59903c5213a636690b78c703ad5724bc4fcf4f4",
+      "translation": "So, I will also introduce a formula that stops the rotation when the destination is reached.",
+      "contextHash": "84077fbb141c5ec2e3138eb3f59903c5213a636690b78c703ad5724bc4fcf4f4"
+    },
+    {
+      "id": "code-053",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Arrival frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-054",
+      "type": "code",
+      "source": "arcY = -100 // 放物線のＹ座標成分",
+      "sourceHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a",
+      "translation": "arcY = -100 // Parabola's Y-coordinate component",
+      "contextHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a"
+    },
+    {
+      "id": "code-055",
+      "type": "code",
+      "source": "scaleY = 0.5 // 縦幅",
+      "sourceHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078",
+      "translation": "scaleY = 0.5 // Vertical height",
+      "contextHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078"
+    },
+    {
+      "id": "code-056",
+      "type": "code",
+      "source": "* Math.PI * 2 // 回転率",
+      "sourceHash": "696ebef400de5939ed89be77b64a43eb0732b136c2ddbff989ad506a925c5447",
+      "translation": "* Math.PI * 2 // Rotation rate",
+      "contextHash": "8c49a9fdff0f0370d83b07b8bd5dae627c68b49d3a179e13e8246486f4cd6b7b"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "ここで登場する『arrival』は既に登場した『到達フレーム』と同じ名称ですが、微妙に中身が違います。アニメーションのフレーム単位ではなく、1/60秒単位になっています。",
+      "sourceHash": "ae0156a19c10848240a488900437c0076b36e25553e1e1eb69827e301d6b508f",
+      "translation": "『arrival』 that appears here has the same name as the previously introduced 『arrival frame』, but its actual meaning is slightly different. It is measured in 1/60-second units rather than animation frame units.",
+      "contextHash": "ae0156a19c10848240a488900437c0076b36e25553e1e1eb69827e301d6b508f"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "……が、特に違いを意識しなくとも通常は支障ありません。到達タイミングであることは同じです。",
+      "sourceHash": "8daadcd2b7cb9218ff21e81c6c4ea6339cde0683e7fa4a0072aecc5ac43cf701",
+      "translation": "...However, there is usually no problem even if you do not pay particular attention to the difference. Both indicate the timing at which the destination is reached.",
+      "contextHash": "8daadcd2b7cb9218ff21e81c6c4ea6339cde0683e7fa4a0072aecc5ac43cf701"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "『Math.min(t, arrival)』とは『t』と『arrival』の小さなほうを取るという意味です。",
+      "sourceHash": "fd9eeaf0e499af4ab8c434e579b71f2792c72dd25cb2a8c0e6f3cc2fe0fd9b9a",
+      "translation": " \"Math.min(t, arrival)』 means taking the smaller of 『t』 and 『arrival』.",
+      "contextHash": "fd9eeaf0e499af4ab8c434e579b71f2792c72dd25cb2a8c0e6f3cc2fe0fd9b9a"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "要するに、tが到達時間に達した時点から式の結果が固定されます。それによって、そこで回転が止まります。",
+      "sourceHash": "ad2daf8147a0c4a11d2f13adf44ee1ae1a8d24675df93d0877c4fb68a0fc9636",
+      "translation": "In short, the result of the formula is fixed from the point when t reaches the arrival time. This causes the rotation to stop there.",
+      "contextHash": "ad2daf8147a0c4a11d2f13adf44ee1ae1a8d24675df93d0877c4fb68a0fc9636"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "これで到達時点で回転が止まるようになりました。",
+      "sourceHash": "cb3694710d12b6450d5120241b14f856051e9a20fe38a8d3294eb98b3f6acd92",
+      "translation": "The rotation now stops when the destination is reached.",
+      "contextHash": "cb3694710d12b6450d5120241b14f856051e9a20fe38a8d3294eb98b3f6acd92"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "さらに、２回転３回転させたい場合はどうでしょう？",
+      "sourceHash": "bf42f3faa83e477a74607f244b69b5703539993c64017ee522525c4ad0c7cafa",
+      "translation": "What if you want to make it rotate two or three times?",
+      "contextHash": "bf42f3faa83e477a74607f244b69b5703539993c64017ee522525c4ad0c7cafa"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "こちらは簡単。数式全体に対して値をかけるだけです。",
+      "sourceHash": "91d81a630ef3608e6062ebcbd069150ca8a2b81cb6156168fdf0a332ea37ca21",
+      "translation": "This is easy. Simply multiply the entire formula by a value.",
+      "contextHash": "91d81a630ef3608e6062ebcbd069150ca8a2b81cb6156168fdf0a332ea37ca21"
+    },
+    {
+      "id": "code-057",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Arrival frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "code-058",
+      "type": "code",
+      "source": "arcY = -100 // 放物線のＹ座標成分",
+      "sourceHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a",
+      "translation": "arcY = -100 // Parabola's Y-coordinate component",
+      "contextHash": "98dfc9a303abcd404975df335ea1c53217a0436a7612d42d8dae27236a4ea40a"
+    },
+    {
+      "id": "code-059",
+      "type": "code",
+      "source": "scaleY = 0.5 // 縦幅",
+      "sourceHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078",
+      "translation": "scaleY = 0.5 // Vertical height",
+      "contextHash": "51f694501438a91b0740b0d56951fd722a06500d06e25fd55c62ca148454e078"
+    },
+    {
+      "id": "code-060",
+      "type": "code",
+      "source": "Math.min(t, arrival) / arrival * Math.PI * 2 // 回転率",
+      "sourceHash": "b5a3b02779a8054cbe1d843d90e899beae3d62e14a337a1e311ad9a447ccffd5",
+      "translation": "Math.min(t, arrival) / arrival * Math.PI * 2 // Rotation rate",
+      "contextHash": "5f848ff8c9b3f9f3257bfbbe34a4c184c450241f2398f8c4ee63e4378e521f85"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "３回転にしてみました。",
+      "sourceHash": "09ef0667e27576b36d97315f9ec3e62fd31a0ad0da8776d403be7c45c6ccc6fa",
+      "translation": "I changed it to three rotations.",
+      "contextHash": "09ef0667e27576b36d97315f9ec3e62fd31a0ad0da8776d403be7c45c6ccc6fa"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "当プラグインの基本的な使用方法については以上です。",
+      "sourceHash": "5423df6d1ad0afcb7c2ef1b04dd244e2731f2c3e3eec8beedb48f665f263cad6",
+      "translation": "That covers the basic usage of this plugin.",
+      "contextHash": "5423df6d1ad0afcb7c2ef1b04dd244e2731f2c3e3eec8beedb48f665f263cad6"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "テンプレートは射撃型以外にも大量にありますし、パラメータも盛り沢山です。それについては、他のページをご覧ください。",
+      "sourceHash": "3dc27d4e4e791f28a8f1ca8cc1c3bc458c56048398db151e6e8c6918b0a5a318",
+      "translation": "There are many templates besides the shooting type, and plenty of parameters as well. Please see the other pages for more information.",
+      "contextHash": "3dc27d4e4e791f28a8f1ca8cc1c3bc458c56048398db151e6e8c6918b0a5a318"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページは[[LINK_1]]DynamicAnimationプラグイン[[/LINK_1]]の解説の一部です。",
+      "sourceHash": "60ffd69b35f5c034623e5c737e6ca3dc8a95b3021ffad445883f276f39b707e9",
+      "parts": [
+        {
+          "source": "このページは",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the explanation of the [[LINK_1]]DynamicAnimation plugin[[/LINK_1]].",
+      "contextHash": "60ffd69b35f5c034623e5c737e6ca3dc8a95b3021ffad445883f276f39b707e9"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]到達フレーム（arrival）[[/LINK_1]]",
+      "sourceHash": "04837420632bf1ed0a7b4c442b18ce4736a78ab4eb142ecbfc66852b94dd8bbf",
+      "parts": [
+        {
+          "source": "到達フレーム（arrival）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Arrival Frame (arrival)[[/LINK_1]]",
+      "contextHash": "04837420632bf1ed0a7b4c442b18ce4736a78ab4eb142ecbfc66852b94dd8bbf"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]繰り返し（repeat, interval）[[/LINK_1]]",
+      "sourceHash": "0973c90185ee863108ad5c8e12125c85ca065ece33cbded2c62aeaa3a5bee2ec",
+      "parts": [
+        {
+          "source": "繰り返し（repeat, interval）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Repeat (repeat, interval)[[/LINK_1]]",
+      "contextHash": "0973c90185ee863108ad5c8e12125c85ca065ece33cbded2c62aeaa3a5bee2ec"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]大きさ（scaleX, scaleY）[[/LINK_1]]",
+      "sourceHash": "8997e5bea2f7a3e7dc43ceb651322f8fdc9de69d15b1e19e597bf86b866db748",
+      "parts": [
+        {
+          "source": "大きさ（scaleX, scaleY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Size (scaleX, scaleY)[[/LINK_1]]",
+      "contextHash": "8997e5bea2f7a3e7dc43ceb651322f8fdc9de69d15b1e19e597bf86b866db748"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]始点座標（sx, sy）[[/LINK_1]]",
+      "sourceHash": "d2f211c041810471016d728a554347cf34f8d02e2b273371749c9dfbb4ec4b14",
+      "parts": [
+        {
+          "source": "始点座標（sx, sy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting Coordinates (sx, sy)[[/LINK_1]]",
+      "contextHash": "d2f211c041810471016d728a554347cf34f8d02e2b273371749c9dfbb4ec4b14"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]終点座標（ex, ey）[[/LINK_1]]",
+      "sourceHash": "d7e096b6f674fd9b5614b3114c188e6768ac4d6c430036dceb80a7da3e22de85",
+      "parts": [
+        {
+          "source": "終点座標（ex, ey）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Ending Coordinates (ex, ey)[[/LINK_1]]",
+      "contextHash": "d7e096b6f674fd9b5614b3114c188e6768ac4d6c430036dceb80a7da3e22de85"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]座標分散（sxRandom, syRandom, exRandom, eyRandom）[[/LINK_1]]",
+      "sourceHash": "07c2dc3d60e73d24e2b70803e541c80a5791105edec87506ce81e3de1d364e7a",
+      "parts": [
+        {
+          "source": "座標分散（sxRandom, syRandom, exRandom, eyRandom）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Coordinate Randomization (sxRandom, syRandom, exRandom, eyRandom)[[/LINK_1]]",
+      "contextHash": "07c2dc3d60e73d24e2b70803e541c80a5791105edec87506ce81e3de1d364e7a"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]放物線（arcX, arcY）[[/LINK_1]]",
+      "sourceHash": "824e2044fc5bcf10b012cb5018ef2d815df3c4de91dccb11d1f138d9a365fa86",
+      "parts": [
+        {
+          "source": "放物線（arcX, arcY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parabola (arcX, arcY)[[/LINK_1]]",
+      "contextHash": "824e2044fc5bcf10b012cb5018ef2d815df3c4de91dccb11d1f138d9a365fa86"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]複数アニメーションの呼び出し（id）[[/LINK_1]]",
+      "sourceHash": "666614d692c8cbb14d91524070965a32c3e14162af2973c9325b8cb8c6d33bc4",
+      "parts": [
+        {
+          "source": "複数アニメーションの呼び出し（id）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Calling Multiple Animations (id)[[/LINK_1]]",
+      "contextHash": "666614d692c8cbb14d91524070965a32c3e14162af2973c9325b8cb8c6d33bc4"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]時間差（delay）[[/LINK_1]]",
+      "sourceHash": "9cf5946664a01ea5a5bab46fbba18154b48a87258111599434586c83703f69a2",
+      "parts": [
+        {
+          "source": "時間差（delay）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Delay (delay)[[/LINK_1]]",
+      "contextHash": "9cf5946664a01ea5a5bab46fbba18154b48a87258111599434586c83703f69a2"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]ウェイト（wait）[[/LINK_1]]",
+      "sourceHash": "323616f21e11160f46d54b22593dd93e8ff058b948bce67fc308d4eedf8d7348",
+      "parts": [
+        {
+          "source": "ウェイト（wait）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Wait (wait)[[/LINK_1]]",
+      "contextHash": "323616f21e11160f46d54b22593dd93e8ff058b948bce67fc308d4eedf8d7348"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]残像（afterimage , afterimageInterval ）[[/LINK_1]]",
+      "sourceHash": "c13489efc06e2829f06354e1c9037292c911ff63f227d3cd9aed2e934d4c7ce8",
+      "parts": [
+        {
+          "source": "残像（afterimage , afterimageInterval ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Afterimage (afterimage, afterimageInterval)[[/LINK_1]]",
+      "contextHash": "c13489efc06e2829f06354e1c9037292c911ff63f227d3cd9aed2e934d4c7ce8"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]回転（rotation）[[/LINK_1]]",
+      "sourceHash": "1d3d86302f7216856ba68c00a1e47e27658829113ab3340564e571f1ee8d75f2",
+      "parts": [
+        {
+          "source": "回転（rotation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Rotation (rotation)[[/LINK_1]]",
+      "contextHash": "1d3d86302f7216856ba68c00a1e47e27658829113ab3340564e571f1ee8d75f2"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]『mirroring』は対象がアクターになった際に、座標を左右反転させるための変数です。（詳細）[[/LINK_1]]",
+      "sourceHash": "86d06accdc538b7176bb64cfec611d94313238243b28319310037ed9801499c3",
+      "parts": [
+        {
+          "source": "『mirroring』は対象がアクターになった際に、座標を左右反転させるための変数です。（詳細）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]The 『mirroring』 variable flips the coordinates horizontally when the target becomes an actor. (Details)[[/LINK_1]]",
+      "contextHash": "86d06accdc538b7176bb64cfec611d94313238243b28319310037ed9801499c3"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMV目次に戻る[[/LINK_1]]",
+      "sourceHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8",
+      "parts": [
+        {
+          "source": "＞RPGツクールMV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MV Table of Contents[[/LINK_1]]",
+      "contextHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8"
+    }
+  ],
+  "texts": {
+    "当プラグインの基本的な使用法、パラメータの指定方法を紹介していきます。": "This guide introduces the basic usage of this plugin and how to specify its parameters.",
+    "そのままコピペもできるのでご活用ください。": "You can also copy and paste the examples as-is, so please make use of them.",
+    "目次": "Table of Contents",
+    "使用法": "Usage",
+    "まずは射撃（shot）型のテンプレートを使って説明していきます。": "I’ll start by explaining the shot type using its template.",
+    "例として、デフォルトにある『水/単体2（id = 82）』のアニメーションをスキルに設定してみてください。": "As an example, try setting the default “Water/Single 2 (id = 82)” animation for a skill.",
+    "※なお、画面フラッシュが見辛いので以降の例では消しています。": "※The screen flash is hard to see, so it has been removed from the examples below.",
+    "そして、メモ欄へ以下を記述します。": "Then, write the following in the note field.",
+    "末尾の『/』に注意してください。一行で完結する場合はこのように記述します。": "Be careful with the “/” at the end. If everything fits on one line, write it like this.",
+    "見ての通り、射撃型では行動主体から対象へ向かって、まっすぐにアニメーションを飛ばします。": "As you can see, with the shot type, the animation flies straight from the user toward the target.",
+    "……が、これだけでは色々物足りません。": "...But this alone leaves a lot to be desired.",
+    "到達フレーム（arrival）": "Arrival Frame (arrival)",
+    "このアニメーションのフレーム数は合計１５です。特に設定がない場合は、１５フレームで対象に到達します。": "This animation has a total of 15 frames. If nothing is specified, it reaches the target in 15 frames.",
+    "ですが、このアニメは８フレーム目に泡が弾けるような内容になっています。できればその直前（７フレーム目）に到達し、そこで弾けるようにしたい。": "However, this animation is designed so that the bubble bursts on frame 8. Ideally, I want it to reach the target just before that (on frame 7) and burst there.",
+    "というわけで、到達フレーム数を指定します。": "So, let’s specify the number of frames until arrival.",
+    "以下のように射撃型に対して、パラメータを追加します。": "Add the parameter to the shot type as shown below.",
+    "arrival = 7 // 到達フレーム": "arrival = 7 // Arrival frame",
+    "いい感じになりました。": "That looks pretty good.",
+    "敵にぶつかって炸裂するファイアボールとかも同じ要領で作れます。": "You can create a fireball that bursts when it hits an enemy in the same way.",
+    "ちなみに『//』より右は注釈ですが、そのままコピペしても問題なく動きます。": "Incidentally, everything to the right of “//” is a comment, but it will work correctly even if you copy and paste it as-is.",
+    "繰り返し（repeat, interval）": "Repeat (repeat, interval)",
+    "次は連射にしてみましょう。": "Next, let’s make it fire continuously.",
+    "繰返回数（リピート）とその間隔を指定します。": "Specify the number of repetitions and the interval between them.",
+    "repeat = 5 // 繰返回数": "repeat = 5 // Number of repetitions",
+    "interval = 2 // 間隔": "interval = 2 // Interval",
+    "intervalは指定なしなら1が適用されます。この数値はアニメーションのフレーム時間（標準で4/60秒）に対応します。整数だけでなく1/4とか1/2といった値も入れられます。": "If interval is not specified, 1 is applied. This value corresponds to the animation’s frame duration (normally 4/60 seconds). You can enter values such as 1/4 or 1/2, not just integers.",
+    "ただし、間隔が短すぎるとそれだけ大量のアニメーションを同時に呼び出されます。動作が重くなるので注意です。": "However, if the interval is too short, a large number of animations will be called simultaneously. Be careful, as this can make the game run more slowly.",
+    "また、現在の繰返回数は『r』で数式として参照できます（0始まり）。": "You can also reference the current repetition count as a formula using “r” (starting from 0).",
+    "さらに『repeat』で全体の繰返回数も参照できます。": "You can also reference the total number of repetitions using “repeat”.",
+    "例えば、以下のように記述するとinterval=5から開始し、繰り返すごとに連射間隔が狭まるアニメーションとなります。": "For example, if you write it as follows, the animation starts with interval=5, and the firing interval becomes shorter with each repetition.",
+    "interval = repeat - r // 間隔": "interval = repeat - r // Interval",
+    "※上記はver1.001以上でないとエラーになります。ご注意ください。": "※The above will result in an error unless you are using ver1.001 or later. Please be careful.",
+    "大きさ（scaleX, scaleY）": "Size (scaleX, scaleY)",
+    "ところでちょっと泡がデカすぎませんか？ 小さくしてみましょう。": "By the way, aren’t the bubbles a little too large? Let’s make them smaller.",
+    "scaleX = 0.5 // 横幅": "scaleX = 0.5 // Width",
+    "scaleY = 0.5 // 縦幅": "scaleY = 0.5 // Vertical height",
+    "横幅（scaleX）と縦幅（scaleY）を0.5に指定しました。1.0が元の大きさに相当します。": "I set the width (scaleX) and height (scaleY) to 0.5. 1.0 corresponds to the original size.",
+    "もちろんサイズの変更はアニメーション編集画面でも可能です。ただし、こちらでは横幅と縦幅を別々に指定できます。せっかくなので、やってみましょう。": "Of course, you can also change the size in the animation editor. However, there you can specify the width and height separately. Since we’re here, let’s give it a try.",
+    "scaleX = 1.0 // 横幅": "scaleX = 1.0 // Width",
+    "結構、雰囲気が変わりますよね。": "It changes the overall feel quite a bit, doesn’t it?",
+    "うまくすれば、水の弾丸なんかも作れるかもしれません。": "If done well, you might even be able to create water bullets.",
+    "始点座標（sx, sy）": "Starting Coordinates (sx, sy)",
+    "泡がキャラクターの胴体から出てるのが気になる。……ってなわけで、始点座標を調整してみましょう。": "It bothers me that the bubbles come out of the character’s torso. ...So, let’s adjust the starting coordinates.",
+    "始点座標は『sx』と『sy』２つのパラメータからなります。ちなみに、sはstartの略です。": "The starting coordinates consist of two parameters, “sx” and “sy.” Incidentally, s is short for start.",
+    "shot型の場合、最初から行動主体の座標が設定されていますが、それを変更します。": "With the shot type, the user’s coordinates are set from the beginning, but we’ll change them.",
+    "sx = a.x - 48 * mirroring // 始点Ｘ座標": "sx = a.x - 48 * mirroring // Start X coordinate",
+    "sy = a.y - a.height - 48 // 始点Ｙ座標": "sy = a.y - a.height - 48 // Start Y coordinate",
+    "頭上左から泡が出るようになりました。ちょっと数式っぽいものが出てきて嫌かもしれませんが、お付き合いください。": "Now the bubbles come out from above and to the left of the character’s head. You may dislike the somewhat formula-like expressions, but please bear with me.",
+    "『a』が行動主体の画像情報（スプライト）を意味しています。": " \"a” represents the user’s image information (sprite).",
+    "『a.x』『a.y』がそれぞれＸ座標とＹ座標です。": " \"a.x” and “a.y” are the X and Y coordinates, respectively.",
+    "※中身が違うため、『a.atk』など普段の計算式に使用する項目は参照できません。その場合、『a._battler.atk』のように書く必要があります。": "※Because their contents are different, items normally used in formulas, such as “a.atk,” cannot be referenced. In that case, you need to write them as “a._battler.atk,” for example.",
+    "※現在のバージョンでは標準で『a.atk』などの記述も使用可能です。": "※In the current version, entries such as “a.atk” can also be used by default.",
+    "『a.height』はキャラクターの高さになります。『a.y - a.height』で行動主体の頭上。そこからさらに-48ということは、頭上48ピクセルを始点Ｙ座標とするという意味です。": " \"a.height” is the character’s height. “a.y - a.height” indicates the area above the user’s head. Subtracting an additional -48 means that the starting Y coordinate is 48 pixels above the head.",
+    "ツクールＭＶの基本的な操作レベルの話なので今更かもしれませんが、Ｙ座標はマイナスが上になるんですよね。": "This may be basic RPG Maker MV operation, and perhaps obvious by now, but negative Y coordinates are upward.",
+    "『a.x - 48』もそのまま、行動主体の左48ピクセルを始点とするという意味です。": " \"a.x - 48” likewise means that the starting point is 48 pixels to the left of the user.",
+    "終点座標（ex, ey）": "Ending Coordinates (ex, ey)",
+    "始点と来れば、次は終点（対象に到達する座標）のほうもいじってみましょう。": "Now that we’ve covered the starting point, let’s also adjust the ending point (the coordinates where the animation reaches the target).",
+    "終点座標は『ex』と『ey』２つのパラメータからなります。もちろん、eはendの略です。": "The ending coordinates consist of two parameters, “ex” and “ey.” Of course, e is short for end.",
+    "ex = defaultX + 100 * mirroring // 終点Ｘ座標": "ex = defaultX + 100 * mirroring // End X coordinate",
+    "ey = defaultY + 100 // 終点Ｘ座標": "ey = defaultY + 100 // End X coordinate",
+    "特に意味はありませんが、敵の右下辺りで炸裂するようになりました。": "It doesn't have any particular significance, but it now explodes around the enemy's lower right.",
+    "それより、謎の変数が出てきましたね。": "More importantly, a mysterious variable has appeared.",
+    "『defaultX』『defaultY』には、アニメーションの位置設定（頭上、中心、足元、画面）を考慮した対象（b）の座標が入っています。": " \"defaultX』 and 『defaultY』 contain the coordinates of the target (b), taking the animation's position setting (above head, center, feet, or screen) into account.",
+    "頭上：defaultX = b.x, defaultY = b.y - b.height": "Above head: defaultX = b.x, defaultY = b.y - b.height",
+    "中央：defaultX = b.x, defaultY = b.y - b.height / 2": "Center: defaultX = b.x, defaultY = b.y - b.height / 2",
+    "足元：defaultX = b.x, defaultY = b.y": "Feet: defaultX = b.x, defaultY = b.y",
+    "画面：defaultX, defaultY共にプラグインパラメータの設定値": "Screen: Both defaultX and defaultY use the values set in the plugin parameter",
+    "詳細は上記の通りです。": "The details are as described above.",
+    "いちいち『b.y - b.height / 2』とか入力するのも面倒なので、こちらを使っていくと便利です。": "It would be tedious to enter 『b.y - b.height / 2』 every time, so using these is convenient.",
+    "座標分散（sxRandom, syRandom, exRandom, eyRandom）": "Coordinate Dispersion (sxRandom, syRandom, exRandom, eyRandom)",
+    "では、対象に命中する座標を分散させたい場合はどうでしょうか？ 連射技などはランダムでバラつかせたほうが自然ですよね。": "What if you want to disperse the coordinates that hit the target? It feels more natural to add some random variation to rapid-fire Techs and the like.",
+    "sxRandom = 50 // 始点Ｘ座標分散": "sxRandom = 50 // Start X coordinate variance",
+    "syRandom = 50 // 始点Ｙ座標分散": "syRandom = 50 // Start Y coordinate variance",
+    "exRandom = 50 // 終点Ｘ座標分散": "exRandom = 50 // End X coordinate variance",
+    "eyRandom = 50 // 終点Ｙ座標分散": "eyRandom = 50 // End Y coordinate variance",
+    "上記のように始点・終点のＸ・Ｙ座標をそれぞれ５０ピクセルほど分散させてみました。": "As shown above, I dispersed each of the X and Y coordinates of the starting and ending points by about 50 pixels.",
+    "演出上、終点だけのほうが自然な気もしますが、始点もついでです。": "For the effect, using only the ending point may seem more natural, but I included the starting point as well.",
+    "なお、上下左右にそれぞれ５０ピクセルという意味なので、分散の幅は１００ピクセルになります。": "Note that this means 50 pixels in each direction—up, down, left, and right—so the dispersion range is 100 pixels.",
+    "また、以下のような指定も一つの方法です。": "The following is another way to specify it.",
+    "exRandom = b.width / 3 // 対象の横幅÷３": "exRandom = b.width / 3 // Target width ÷ 3",
+    "eyRandom = b.height / 3 // 対象の縦幅÷３": "eyRandom = b.height / 3 // Target height ÷ 3",
+    "これは対象の画像サイズを見て、その範囲で分散させています。": "This looks at the target image's size and disperses the coordinates within that range.",
+    "÷２ではなく÷３なのは大抵の場合、画像の端のほうが空白になっているためです。多少小さめに設定したほうが自然かなと。": "The reason for dividing by 3 instead of 2 is that the edges of the image are usually blank. I thought setting it somewhat smaller would look more natural.",
+    "放物線（arcX, arcY）": "Parabola (arcX, arcY)",
+    "投擲といえば放物線。もちろん機能を用意しています。": "When it comes to throwing, a parabola is a must. Of course, this function is included.",
+    "放物線の高さとなるピクセル数を指定します。例によって、マイナスが上方向になります。": "Specify the number of pixels representing the height of the parabola. As usual, negative values indicate the upward direction.",
+    "arcY = -100 // 放物線のＹ座標成分": "arcY = -100 // Parabola's Y-coordinate component",
+    "泡はこういう動きのほうが似合いますよね。": "This kind of movement suits bubbles better, doesn't it?",
+    "また『arcX』で横方向の放物線も指定可能です。サイドビューでは使いにくいかもしれませんが、独特の加速になるので何かに使えるかもしれません。": "You can also specify a horizontal parabola with 『arcX』. It may be difficult to use in side-view battles, but its unique acceleration might make it useful for something.",
+    "複数アニメーションの呼び出し（id）": "Calling Multiple Animations (id)",
+    "当プラグインでは複数のアニメーションを１つのスキルから自由に呼び出せます。": "With this plugin, you can freely call multiple animations from a single skill.",
+    "やり方は単純に記述を追加するだけです。": "The method is simply to add another entry.",
+    "id = 81 // 水/単体1": "id = 81 // Water/Single 1",
+    "『id』にアニメーションＩＤを指定すれば、スキルに設定されている以外のアニメーションを呼び出せます。": "By specifying an animation ID in 『id』, you can call an animation other than the one configured for the skill.",
+    "ちなみに『<D-Animation/>』とだけ記述すれば、ごく普通にアニメーションを実行します。": "Incidentally, if you write only 『<D-Animation/>』, the animation will play normally.",
+    "時間差（delay）": "Delay (delay)",
+    "ただし、上記の方法ではタイミングも何もなく全く同時にアニメーションを再生してしまいます。そこで時間差を指定します。": "However, with the method above, the animations will play at exactly the same time, without any timing offset. This is where you specify a delay.",
+    "delay = 7 // 7フレーム待つ": "delay = 7 // Wait 7 frames",
+    "これで到達フレームに合わせて、次のアニメーションを再生するようにできました。": "Now the next animation can be played in sync with the arrival frame.",
+    "終了タイミングに合わせたい場合は『auto』と指定すれば、自動的に待ってくれます。repeatやintervalも考慮して終了タイミングを計算してくれるので便利です。": "If you want to synchronize it with the end timing, specify 『auto』 and it will wait automatically. This is convenient because it calculates the end timing while also taking repeat and interval into account.",
+    "ウェイト（wait）": "Wait (wait)",
+    "前の<D-Animation:shot>にウェイト（wait）を指定する方法でもタイミング調整できます。": "You can also adjust the timing by specifying a wait (wait) on the preceding <D-Animation:shot>.",
+    "指定する箇所が違うだけで『時間差（delay）』とやることは全く同じです。お好きなほうでどうぞ。": "Aside from where it is specified, it does exactly the same thing as 『Delay (delay)』. Use whichever you prefer.",
+    "残像（afterimage , afterimageInterval ）": "Afterimage (afterimage , afterimageInterval )",
+    "おまけに残像機能です。": "As a bonus, there is an afterimage function.",
+    "残像の数と間隔を指定します。": "Specify the number and spacing of the afterimages.",
+    "afterimage = 5 // 残像数": "afterimage = 5 // Number of afterimages",
+    "afterimageInterval = 1 // 残像間隔": "afterimageInterval = 1 // Afterimage interval",
+    "残像間隔も仕様は通常の間隔（interval）と同じです。1がアニメーションの1フレームに対応します。": "The afterimage interval works the same way as the normal interval (interval). A value of 1 corresponds to one animation frame.",
+    "※『afterImage』ではなく『afterimage』です。大文字小文字の指定を誤ると動きません。": "※It is 『afterimage』, not 『afterImage』. It will not work if you use the wrong capitalization.",
+    "この機能はカッコいいのですが、重いので注意が必要です。普通にrepeatを指定して表示数を増やすのと、負荷は同じだと思ってください。": "This function looks cool, but it is resource-intensive, so be careful. Think of the load as being the same as simply specifying repeat to increase the number of displayed images.",
+    "回転（rotation）": "Rotation (rotation)",
+    "少し上級になりますが、回転も足してみましょう。": "This is a little more advanced, but let's try adding rotation as well.",
+    "実のところ、回転はアニメーションの編集画面でも可能なので、必ずしもここで設定する必要はありません。ただまあ、こういうのも可能だということで。": "In fact, rotation can also be configured in the animation editor, so it is not necessarily necessary to set it here. Still, this shows that it is possible.",
+    "回転率はラジアンといって２π（パイ）を360度として指定します。高校数学で習う範囲です。……が、たぶんみんな忘れていることでしょう。": "The rotation rate is specified in radians, with 2π (pi) representing 360 degrees. This is within the scope of high school mathematics. ...Although everyone has probably forgotten it by now.",
+    "そんなわけで、とりあえずコピペで結構です。": "So for now, simply copying and pasting it is fine.",
+    "rotation = t/et * Math.PI * 2 // 回転率": "rotation = t/et * Math.PI * 2 // Rotation rate",
+    "※回転を分かりやすくするため細長くしています。": "※It has been made long and thin to make the rotation easier to see.",
+    "『Math.PI * 2』が２πなのは分かると思うんですが、他にも『t』だの『et』だの新しい変数が出てきました。": "You probably understand that 『Math.PI * 2』 is 2π, but some other new variables, such as 『t』 and 『et』, have appeared as well.",
+    "『rotation』はアニメーションの再生中、1/60ごとにリアルタイム演算を行う項目であり、これはその時間変化を計算する式です。": " \"rotation』 is an item that performs real-time calculations every 1/60th of a second while the animation is playing, and this is the formula used to calculate its change over time.",
+    "t：アニメーション開始からの経過時間（1/60秒単位）": "t: Elapsed time since the animation started (in 1/60-second units)",
+    "et：アニメーションの終了時間（1/60秒単位）": "et: Animation end time (in 1/60-second units)",
+    "『t』は0から始まり、終了時間になると『et』に等しくなります。ということは『t/et』の値は0→1へと変化していきます。": " \"t』 starts at 0 and becomes equal to 『et』 when the end time is reached. This means that the value of 『t/et』 changes from 0 to 1.",
+    "つまり上の数式全体は0～2πへ変化します。これはアニメーションの再生中にちょうど一周するという意味です。": "In other words, the entire formula above changes from 0 to 2π. This means it makes exactly one full rotation while the animation is playing.",
+    "説明が意味不明でも一周することさえ分かればＯＫです。": "Even if the explanation makes no sense, it is enough to understand that it makes one full rotation.",
+    "ところで、上のアニメーションは違和感ありますよね。": "By the way, the animation above feels a little unnatural, doesn't it?",
+    "泡がぶつかってからも、回転を続けているのがしっくり来ません。": "It doesn't seem quite right for the rotation to continue even after the bubbles collide.",
+    "というわけで、到達すると回転を止める式も紹介します。": "So, I will also introduce a formula that stops the rotation when the destination is reached.",
+    "* Math.PI * 2 // 回転率": "* Math.PI * 2 // Rotation rate",
+    "ここで登場する『arrival』は既に登場した『到達フレーム』と同じ名称ですが、微妙に中身が違います。アニメーションのフレーム単位ではなく、1/60秒単位になっています。": "『arrival』 that appears here has the same name as the previously introduced 『arrival frame』, but its actual meaning is slightly different. It is measured in 1/60-second units rather than animation frame units.",
+    "……が、特に違いを意識しなくとも通常は支障ありません。到達タイミングであることは同じです。": "...However, there is usually no problem even if you do not pay particular attention to the difference. Both indicate the timing at which the destination is reached.",
+    "『Math.min(t, arrival)』とは『t』と『arrival』の小さなほうを取るという意味です。": " \"Math.min(t, arrival)』 means taking the smaller of 『t』 and 『arrival』.",
+    "要するに、tが到達時間に達した時点から式の結果が固定されます。それによって、そこで回転が止まります。": "In short, the result of the formula is fixed from the point when t reaches the arrival time. This causes the rotation to stop there.",
+    "これで到達時点で回転が止まるようになりました。": "The rotation now stops when the destination is reached.",
+    "さらに、２回転３回転させたい場合はどうでしょう？": "What if you want to make it rotate two or three times?",
+    "こちらは簡単。数式全体に対して値をかけるだけです。": "This is easy. Simply multiply the entire formula by a value.",
+    "Math.min(t, arrival) / arrival * Math.PI * 2 // 回転率": "Math.min(t, arrival) / arrival * Math.PI * 2 // Rotation rate",
+    "３回転にしてみました。": "I changed it to three rotations.",
+    "当プラグインの基本的な使用方法については以上です。": "That covers the basic usage of this plugin.",
+    "テンプレートは射撃型以外にも大量にありますし、パラメータも盛り沢山です。それについては、他のページをご覧ください。": "There are many templates besides the shooting type, and plenty of parameters as well. Please see the other pages for more information."
+  }
+}

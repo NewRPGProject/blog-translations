@@ -1,0 +1,452 @@
+{
+  "articleId": "473570548",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473570548.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "a970ee737f5bdf469dc29438791d2882c5ee29acb8865d9c5d4c02ab2c1568b7",
+  "translatedAt": "2026-08-31T02:49:09.234Z",
+  "title": "DynamicAnimation Shooting Template [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation 射撃系テンプレート【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "bff45560e941f814642355e93d9f0c44fec9d57aeafbba8e4e58255ed89738aa",
+      "translation": "DynamicAnimation Shooting Template [RPG Maker MZ & MV Plugin]",
+      "contextHash": "bff45560e941f814642355e93d9f0c44fec9d57aeafbba8e4e58255ed89738aa"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "射撃系（投擲系）のテンプレートの使用例を紹介していきます。",
+      "sourceHash": "92b19a43c97e20b6d24c284fc441c42296da33107678783ce2770b2888c36ddd",
+      "translation": "I will introduce examples of using shooting (throwing) templates.",
+      "contextHash": "92b19a43c97e20b6d24c284fc441c42296da33107678783ce2770b2888c36ddd"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "射撃（shot）",
+      "sourceHash": "0633a15601446a07d932496d8df6afc3c04a4635c4971ab9dee56b9cb68b8481",
+      "translation": "Shooting (shot)",
+      "contextHash": "0633a15601446a07d932496d8df6afc3c04a4635c4971ab9dee56b9cb68b8481"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "行動主体から対象へ向かって、まっすぐにアニメーションが飛んでいきます。",
+      "sourceHash": "00ce9a70892b54004d7921b2623ab5618ca9977fb2cbdd7f5c2d6ba74559165c",
+      "translation": "The animation flies straight from the action subject toward the target.",
+      "contextHash": "00ce9a70892b54004d7921b2623ab5618ca9977fb2cbdd7f5c2d6ba74559165c"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "射撃系の最も基本的な処理です。",
+      "sourceHash": "b5f9ed231cc3090f0a9575ea89f0c51151d8152a801472a4f5931a120000229a",
+      "translation": "This is the most basic shooting-type process.",
+      "contextHash": "b5f9ed231cc3090f0a9575ea89f0c51151d8152a801472a4f5931a120000229a"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "乱射（shotRandom）",
+      "sourceHash": "35ee46656c4a703a78fab61d6c75cef6c085a79d0c5b06d5c409cdc546d68881",
+      "translation": "Random Barrage (shotRandom)",
+      "contextHash": "35ee46656c4a703a78fab61d6c75cef6c085a79d0c5b06d5c409cdc546d68881"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "対象へ向かってアニメーションを乱れ撃ちします。",
+      "sourceHash": "47ada894020af7b21d279befa7d617f50cafdc48e7297ca008955f713e2d3b5c",
+      "translation": "It fires a barrage of animations toward the target.",
+      "contextHash": "47ada894020af7b21d279befa7d617f50cafdc48e7297ca008955f713e2d3b5c"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Target frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "shotに対して、既に説明した内容を組合わせたものです。以下と違いは一切ありません。",
+      "sourceHash": "07dc8a00ed30b3ca100632e2917621a84b55f1fe0caeb6eb1f1e72a83ccf5916",
+      "translation": "This is simply a combination of the features already explained for shot. There is absolutely no difference from the following.",
+      "contextHash": "07dc8a00ed30b3ca100632e2917621a84b55f1fe0caeb6eb1f1e72a83ccf5916"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "repeat = 5 // 繰返回数",
+      "sourceHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562",
+      "translation": "repeat = 5 // Repeat count",
+      "contextHash": "923b80c3fa5dbf3ad48b4d83319f60b56262f24e5a9811c60254387e5e1a1562"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "exRandom = b.width / 3 // 終点Ｘ座標分散",
+      "sourceHash": "e46e42a19047aee59462f16a81d48573f58a9803b5b0495ecf13e489a570a1f2",
+      "translation": "exRandom = b.width / 3 // Endpoint X-coordinate variance",
+      "contextHash": "e46e42a19047aee59462f16a81d48573f58a9803b5b0495ecf13e489a570a1f2"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "eyRandom = b.height / 3 // 終点Ｙ座標分散",
+      "sourceHash": "f49c04786df3c7445fd301d71dc2f4388e3e16d03ea56c89ca0ad9920122a3ef",
+      "translation": "eyRandom = b.height / 3 // Endpoint Y-coordinate variance",
+      "contextHash": "f49c04786df3c7445fd301d71dc2f4388e3e16d03ea56c89ca0ad9920122a3ef"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "repeatやintervalの値を好きなように変えて使っていただければと思います。",
+      "sourceHash": "f7795fe480cbf0bbf5ff5ce1f297a88cde660706dab08b698206f46c8ee0d43d",
+      "translation": "You can change the values of repeat and interval as you like before using it.",
+      "contextHash": "f7795fe480cbf0bbf5ff5ce1f297a88cde660706dab08b698206f46c8ee0d43d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "全乱射（shotRandomAll）",
+      "sourceHash": "023e097c4bac9416849a9b18a100b36c983b11fe3010918630e76034d1f7b059",
+      "translation": "All-Target Random Barrage (shotRandomAll)",
+      "contextHash": "023e097c4bac9416849a9b18a100b36c983b11fe3010918630e76034d1f7b059"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "対象全体に対して、乱射します。",
+      "sourceHash": "6234221ef788582ccbbed3f57f90a4b54087dd37e37af87cdb2dc83135e6045c",
+      "translation": "It fires a barrage at all targets.",
+      "contextHash": "6234221ef788582ccbbed3f57f90a4b54087dd37e37af87cdb2dc83135e6045c"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Target frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "大量のアニメーションを呼び出すため、重くなりやすいです。その辺りの注意点については『ランダム系テンプレート』のページで説明するため、こちらでは割愛します。",
+      "sourceHash": "d677413e0aedbe11f8aae6eccf2ee4c09cf56a0d0b9d4d616115971a18344b25",
+      "translation": "Because it calls a large number of animations, it tends to become heavy. I will explain the relevant points to keep in mind on the “Random Templates” page, so I will omit them here.",
+      "contextHash": "d677413e0aedbe11f8aae6eccf2ee4c09cf56a0d0b9d4d616115971a18344b25"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "投射（arc）",
+      "sourceHash": "d13b7aec9eda8051b1534f40838fd9490c5d5a25add8e25b3c212133f959e511",
+      "translation": "Arc Projectile (arc)",
+      "contextHash": "d13b7aec9eda8051b1534f40838fd9490c5d5a25add8e25b3c212133f959e511"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "放物線を描きながら、対象へアニメーションを投げつけます。",
+      "sourceHash": "767387815df591f424cacb1ab45dd12b32af8c9a77fb4ec86176deb5994e480f",
+      "translation": "It throws an animation at the target while drawing a parabola.",
+      "contextHash": "767387815df591f424cacb1ab45dd12b32af8c9a77fb4ec86176deb5994e480f"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Target frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "はい、これも上で紹介したものと全く同じですね。『arcY = -100』をshot型に対して追加しただけです。",
+      "sourceHash": "9a271bfeef432626c08194fe5ccd3dbc17d039eff419c967bec3d2e627b14a04",
+      "translation": "Yes, this is exactly the same as the one introduced above. I simply added “arcY = -100” to the shot type.",
+      "contextHash": "9a271bfeef432626c08194fe5ccd3dbc17d039eff419c967bec3d2e627b14a04"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "乱投射（arcRandom）",
+      "sourceHash": "6d3418f5f1da39ab197cc359c9e06f00ec8f3f9c4364b812ddc2b914fcfafd0c",
+      "translation": "Random Arc Projectile (arcRandom)",
+      "contextHash": "6d3418f5f1da39ab197cc359c9e06f00ec8f3f9c4364b812ddc2b914fcfafd0c"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Target frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "arcとshotRandomを組み合わせただけですね。",
+      "sourceHash": "cf9a0cc247f2ea58a33b277b07653da8ef2c4d8dbd479624c4273e5cb6515e49",
+      "translation": "It simply combines arc and shotRandom.",
+      "contextHash": "cf9a0cc247f2ea58a33b277b07653da8ef2c4d8dbd479624c4273e5cb6515e49"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "全乱投射（arcRandomAll）",
+      "sourceHash": "694bdcde8b5c50e5c6ac7e4461728345dc8fd7bb643d5e0ca56f6a981f281ca9",
+      "translation": "All-Target Random Arc Projectile (arcRandomAll)",
+      "contextHash": "694bdcde8b5c50e5c6ac7e4461728345dc8fd7bb643d5e0ca56f6a981f281ca9"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "arrival = 7 // 到達フレーム",
+      "sourceHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af",
+      "translation": "arrival = 7 // Target frame",
+      "contextHash": "4eb91bab97c4e37e494394e0fe599813647ea6b449a87e2d1e7f38e87a4878af"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "全乱射の放物線バージョンです。",
+      "sourceHash": "b3ffc85c8078234f619fcc7eada2b601b761a8ca6af8453fb8ba049a925c867b",
+      "translation": "This is the parabolic version of the all-target random barrage.",
+      "contextHash": "b3ffc85c8078234f619fcc7eada2b601b761a8ca6af8453fb8ba049a925c867b"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicAnimationプラグイン（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）の解説の一部です。",
+      "sourceHash": "54084ec2ca1464f621e61b39b490a57996c318eb858855ef6feccd06b0ba43dc",
+      "parts": [
+        {
+          "source": "このページはDynamicAnimationプラグイン（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）の解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the explanation of the DynamicAnimation plugin ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]).",
+      "contextHash": "54084ec2ca1464f621e61b39b490a57996c318eb858855ef6feccd06b0ba43dc"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]射撃（shot）[[/LINK_1]]",
+      "sourceHash": "4bb82021a46dcc8ddc7ec46753bf86136f2e07d790bdbd7595591d0a76069f2b",
+      "parts": [
+        {
+          "source": "射撃（shot）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Shot (shot)[[/LINK_1]]",
+      "contextHash": "4bb82021a46dcc8ddc7ec46753bf86136f2e07d790bdbd7595591d0a76069f2b"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]乱射（shotRandom）[[/LINK_1]]",
+      "sourceHash": "fd7129f359465f75e63dc0f08534feebeb682ebb99a3da0b69266ac2ba063a81",
+      "parts": [
+        {
+          "source": "乱射（shotRandom）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Random Shot (shotRandom)[[/LINK_1]]",
+      "contextHash": "fd7129f359465f75e63dc0f08534feebeb682ebb99a3da0b69266ac2ba063a81"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]全乱射（shotRandomAll）[[/LINK_1]]",
+      "sourceHash": "6c4e2d121d78103f6a0dad30f677df4996b7b713f08d02472c76880e112a3815",
+      "parts": [
+        {
+          "source": "全乱射（shotRandomAll）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]All Random Shot (shotRandomAll)[[/LINK_1]]",
+      "contextHash": "6c4e2d121d78103f6a0dad30f677df4996b7b713f08d02472c76880e112a3815"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]投射（arc）[[/LINK_1]]",
+      "sourceHash": "315d816d433bb5bd02989391cef6894cf912b63b11d013600ac02c22fa7331af",
+      "parts": [
+        {
+          "source": "投射（arc）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Arc (arc)[[/LINK_1]]",
+      "contextHash": "315d816d433bb5bd02989391cef6894cf912b63b11d013600ac02c22fa7331af"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]乱投射（arcRandom）[[/LINK_1]]",
+      "sourceHash": "ac591c29e07f24d999ced68dd67e87933e86a858857a2a0091e40994d7f539dc",
+      "parts": [
+        {
+          "source": "乱投射（arcRandom）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Random Arc (arcRandom)[[/LINK_1]]",
+      "contextHash": "ac591c29e07f24d999ced68dd67e87933e86a858857a2a0091e40994d7f539dc"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]全乱投射（arcRandomAll）[[/LINK_1]]",
+      "sourceHash": "b040d04b8fa35c9389a0bbbcd164893465c3758d97d9cb08748a59ae24893225",
+      "parts": [
+        {
+          "source": "全乱投射（arcRandomAll）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]All Random Arc (arcRandomAll)[[/LINK_1]]",
+      "contextHash": "b040d04b8fa35c9389a0bbbcd164893465c3758d97d9cb08748a59ae24893225"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "パラメータの指定方法は『[[LINK_1]]基本的な使用法[[/LINK_1]]』のページに詳細を書いたのでそちらをご覧ください。",
+      "sourceHash": "619add80ede92c70b8fe6e10b6149dca6f8d3ebf1badf7e320f910f48e34b54e",
+      "parts": [
+        {
+          "source": "パラメータの指定方法は『",
+          "link": false
+        },
+        {
+          "source": "基本的な使用法",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』のページに詳細を書いたのでそちらをご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "Detailed instructions on how to specify parameters are provided on the page 『[[LINK_1]]Basic Usage[[/LINK_1]]』, so please refer to it.",
+      "contextHash": "619add80ede92c70b8fe6e10b6149dca6f8d3ebf1badf7e320f910f48e34b54e"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "射撃系（投擲系）のテンプレートの使用例を紹介していきます。": "I will introduce examples of using shooting (throwing) templates.",
+    "目次": "Table of Contents",
+    "射撃（shot）": "Shooting (shot)",
+    "行動主体から対象へ向かって、まっすぐにアニメーションが飛んでいきます。": "The animation flies straight from the action subject toward the target.",
+    "射撃系の最も基本的な処理です。": "This is the most basic shooting-type process.",
+    "乱射（shotRandom）": "Random Barrage (shotRandom)",
+    "対象へ向かってアニメーションを乱れ撃ちします。": "It fires a barrage of animations toward the target.",
+    "arrival = 7 // 到達フレーム": "arrival = 7 // Target frame",
+    "shotに対して、既に説明した内容を組合わせたものです。以下と違いは一切ありません。": "This is simply a combination of the features already explained for shot. There is absolutely no difference from the following.",
+    "repeat = 5 // 繰返回数": "repeat = 5 // Repeat count",
+    "exRandom = b.width / 3 // 終点Ｘ座標分散": "exRandom = b.width / 3 // Endpoint X-coordinate variance",
+    "eyRandom = b.height / 3 // 終点Ｙ座標分散": "eyRandom = b.height / 3 // Endpoint Y-coordinate variance",
+    "repeatやintervalの値を好きなように変えて使っていただければと思います。": "You can change the values of repeat and interval as you like before using it.",
+    "全乱射（shotRandomAll）": "All-Target Random Barrage (shotRandomAll)",
+    "対象全体に対して、乱射します。": "It fires a barrage at all targets.",
+    "大量のアニメーションを呼び出すため、重くなりやすいです。その辺りの注意点については『ランダム系テンプレート』のページで説明するため、こちらでは割愛します。": "Because it calls a large number of animations, it tends to become heavy. I will explain the relevant points to keep in mind on the “Random Templates” page, so I will omit them here.",
+    "投射（arc）": "Arc Projectile (arc)",
+    "放物線を描きながら、対象へアニメーションを投げつけます。": "It throws an animation at the target while drawing a parabola.",
+    "はい、これも上で紹介したものと全く同じですね。『arcY = -100』をshot型に対して追加しただけです。": "Yes, this is exactly the same as the one introduced above. I simply added “arcY = -100” to the shot type.",
+    "乱投射（arcRandom）": "Random Arc Projectile (arcRandom)",
+    "arcとshotRandomを組み合わせただけですね。": "It simply combines arc and shotRandom.",
+    "全乱投射（arcRandomAll）": "All-Target Random Arc Projectile (arcRandomAll)",
+    "全乱射の放物線バージョンです。": "This is the parabolic version of the all-target random barrage."
+  }
+}
