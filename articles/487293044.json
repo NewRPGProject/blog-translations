@@ -1,0 +1,1358 @@
+{
+  "articleId": "487293044",
+  "sourceUrl": "https://newrpg.seesaa.net/article/487293044.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "10d8f838e06eb8e28d5ab84f79e5ad4d5cfd49a7b233d7c333807c7654194a6c",
+  "translatedAt": "2026-08-31T05:24:37.836Z",
+  "title": "DynamicAnimation&Motion Sample Techniques (Partial Cell Rendering) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技（セルの部分描画）【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "612f06ecdf6b9a503a923bfbc4271057191692e16f81c7d5880af2b70fb9d547",
+      "translation": "DynamicAnimation&Motion Sample Techniques (Partial Cell Rendering) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "612f06ecdf6b9a503a923bfbc4271057191692e16f81c7d5880af2b70fb9d547"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "NRP_DynamicAnimationMZ.js（ver1.19）およびNRP_DynamicAnimation.js（ver1.261）で実装したセルの部分描画機能を使ったサンプルです。",
+      "sourceHash": "02b704090fccf4b268bb0a0c6fa8961c249732e93102c5fb20fa753e2fe2acfd",
+      "translation": "This is a sample using the partial cell rendering feature implemented in NRP_DynamicAnimationMZ.js (ver1.19) and NRP_DynamicAnimation.js (ver1.261).",
+      "contextHash": "02b704090fccf4b268bb0a0c6fa8961c249732e93102c5fb20fa753e2fe2acfd"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "少し扱いが難しい機能なので、順序立てて説明しています。",
+      "sourceHash": "2e738624b890de9440308e93b992bbcfd37538bb3519eb662fbaf29e24bf5550",
+      "translation": "Because this feature is somewhat difficult to use, I explain it step by step.",
+      "contextHash": "2e738624b890de9440308e93b992bbcfd37538bb3519eb662fbaf29e24bf5550"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "地面から突き出す槍１（2022/04/28）",
+      "sourceHash": "ad88391b9c4098108bf49450ca74bc09250b3293a358c96602c1bdf6ad6243e0",
+      "translation": "Spear Thrusting Up from the Ground 1 (2022/04/28)",
+      "contextHash": "ad88391b9c4098108bf49450ca74bc09250b3293a358c96602c1bdf6ad6243e0"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "セルを上側から徐々に描画することで地面から突き出す槍のような演出を行います。",
+      "sourceHash": "359bf06eb8acaffa715088ef478f84a1c5a2e90055fa01dd81d8042c05d88f34",
+      "translation": "A spear thrusting up from the ground is depicted by gradually rendering the cell from the top.",
+      "contextHash": "359bf06eb8acaffa715088ef478f84a1c5a2e90055fa01dd81d8042c05d88f34"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "まず前提として突き出す槍のアニメーションが必要です。",
+      "sourceHash": "ae5f605cd3d2b41abcce931432415b8349bc873f809553d8d32fda307d436160",
+      "translation": "First, you need an animation of a spear thrusting up.",
+      "contextHash": "ae5f605cd3d2b41abcce931432415b8349bc873f809553d8d32fda307d436160"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "縦長の槍のような画像なら何でも構いませんが、この例では『Ice2』の１０番目のパターンを５フレームほど貼りつけています。合成方法は『通常』のほうがいいかも。",
+      "sourceHash": "79a7b47467fd9a876e85c5c5d6724c5036e1c6cfa1c702d5dbab128e992d81cb",
+      "translation": "Any tall, spear-like image will work, but in this example, I placed the tenth pattern from “Ice2” for about five frames. “Normal” may be the better blend mode.",
+      "contextHash": "79a7b47467fd9a876e85c5c5d6724c5036e1c6cfa1c702d5dbab128e992d81cb"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "作成したアニメをスキルに設定してください。",
+      "sourceHash": "c1b5421475c11082c8e4d8275c3a04522d18fda7ff1c64385889230332fbcc3f",
+      "translation": "Set the animation you created to a skill.",
+      "contextHash": "c1b5421475c11082c8e4d8275c3a04522d18fda7ff1c64385889230332fbcc3f"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "repeat = 5 // 繰り返し回数",
+      "sourceHash": "f59e989024e84ca1f7a06e8d4744e794c4d423ea9bc79f818de35c34257b2467",
+      "translation": "repeat = 5 // Repeat count",
+      "contextHash": "f59e989024e84ca1f7a06e8d4744e794c4d423ea9bc79f818de35c34257b2467"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "sy = b.y // 対象の足元座標",
+      "sourceHash": "edfb9c482b931d26ce59ce0ff8d5cd9ff389d5ce818bfbc77b4e29001c5a1ae8",
+      "translation": "sy = b.y // Target's feet coordinates",
+      "contextHash": "edfb9c482b931d26ce59ce0ff8d5cd9ff389d5ce818bfbc77b4e29001c5a1ae8"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "ey = sy - (192 / 2) // 終点",
+      "sourceHash": "a35feb2da9c2da6e499350a5c02d8c28611e3900bb9a8be6169bfc4e334010c3",
+      "translation": "ey = sy - (192 / 2) // Endpoint",
+      "contextHash": "a35feb2da9c2da6e499350a5c02d8c28611e3900bb9a8be6169bfc4e334010c3"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "cellEndY = t/et // 終了部位（時間経過で0->1に変化）",
+      "sourceHash": "3e7c1446d962c16125eb90cc1dc696e9fa8ba871c5c096c20677fb85f6c46899",
+      "translation": "cellEndY = t/et // End segment (changes from 0->1 over time)",
+      "contextHash": "3e7c1446d962c16125eb90cc1dc696e9fa8ba871c5c096c20677fb85f6c46899"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "sxRandom = 100 // Ｘ座標のバラツキ",
+      "sourceHash": "ce3131c474de57706c42b959580c08bbdedd73fd70e37b366c6b7c42a99cad38",
+      "translation": "sxRandom = 100 // X-coordinate variation",
+      "contextHash": "ce3131c474de57706c42b959580c08bbdedd73fd70e37b366c6b7c42a99cad38"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "syRandom = 20 // Ｙ座標のバラツキ",
+      "sourceHash": "9fb033973cd88da374a5d4db05e4647dd11a8660b143d49a9224ad599871528a",
+      "translation": "syRandom = 20 // Y-coordinate variation",
+      "contextHash": "9fb033973cd88da374a5d4db05e4647dd11a8660b143d49a9224ad599871528a"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "// 座標を保持",
+      "sourceHash": "6bb61b0edd7518ab45dc0e109b839336a43fd65c07862273287294a24e45c54d",
+      "translation": "// Preserve coordinates",
+      "contextHash": "6bb61b0edd7518ab45dc0e109b839336a43fd65c07862273287294a24e45c54d"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "opacity = 255 * (1 - t/et) // 徐々に透明化",
+      "sourceHash": "cb371f71c6c3e4b5a4662363528bc3e5746e47e2e409e9a74c81261d85cac5de",
+      "translation": "opacity = 255 * (1 - t/et) // Gradually fade out",
+      "contextHash": "cb371f71c6c3e4b5a4662363528bc3e5746e47e2e409e9a74c81261d85cac5de"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "『cellEndY』がセルの描画範囲（縦）の終点です。",
+      "sourceHash": "e479afa4f828ec222d0afebdfff11e8e05deec29ef17baf5eda5525972b1476e",
+      "translation": " \"cellEndY” is the endpoint of the cell’s vertical rendering range.",
+      "contextHash": "e479afa4f828ec222d0afebdfff11e8e05deec29ef17baf5eda5525972b1476e"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "例えば、値が『0.5』ならば、セルの上端から半分までの範囲を描画します。",
+      "sourceHash": "634cb0b9b28decef242a23ad191fd7cb25944d2abe63c6c21497534d1312bbca",
+      "translation": "For example, if the value is “0.5,” the area from the top edge of the cell to halfway down is rendered.",
+      "contextHash": "634cb0b9b28decef242a23ad191fd7cb25944d2abe63c6c21497534d1312bbca"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "この値が最初は『0』から始まり、最後は『1』になるという数式が『cellEndY = t/et』です。これにより、セルを上側から徐々に描画しています。",
+      "sourceHash": "252479f485f90e49e71eb23f8f9586cd60778a8e1dd9591d6a0b5b679e6095c9",
+      "translation": "The formula “cellEndY = t/et” starts at “0” and ends at “1.” This gradually renders the cell from the top.",
+      "contextHash": "252479f485f90e49e71eb23f8f9586cd60778a8e1dd9591d6a0b5b679e6095c9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "『ey = sy - (192 / 2)』は槍が突き出す位置を調整するための数式です。",
+      "sourceHash": "0c4732874cbfddb258166a2997a52cc237298617a5661922f956a886362e8277",
+      "translation": " \"ey = sy - (192 / 2)” is a formula for adjusting the spear’s thrusting position.",
+      "contextHash": "0c4732874cbfddb258166a2997a52cc237298617a5661922f956a886362e8277"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "『192』はセルの縦幅を意味する固定値です。",
+      "sourceHash": "4d386f46f923608eeed0c7395842223645921c0702a2a18496ccc9b176cf1b50",
+      "translation": " \"192” is a fixed value representing the cell’s height.",
+      "contextHash": "4d386f46f923608eeed0c7395842223645921c0702a2a18496ccc9b176cf1b50"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "通常、セルの描画範囲が伸びるに従って、セルの下端も下へと移動していってしまいます。そこでアニメーションを逆方向へ移動させることで下端が移動しないように調整しています。",
+      "sourceHash": "ac92da2eaa61eb9aec4d76c4015b9a3a2c6ef26049648cb3e2dde09e8b089efe",
+      "translation": "Normally, as the cell’s rendering range expands, its bottom edge also moves downward. Therefore, the animation is moved in the opposite direction so that the bottom edge does not move.",
+      "contextHash": "ac92da2eaa61eb9aec4d76c4015b9a3a2c6ef26049648cb3e2dde09e8b089efe"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "なお、効果音やフレーム長などの演出を別々にしたい場合は、上と下の<D-Animation>で別のアニメを指定してください。これは説明用のサンプルなので手抜きです。",
+      "sourceHash": "5520ff15c4752bb51a0972cbca60c23b8d6fa3d079e1cf188647138c3ab1bd78",
+      "translation": "If you want effects such as sound effects and frame lengths to differ, specify different animations in the upper and lower <D-Animation> tags. This is only a sample for explanatory purposes, so I took a shortcut.",
+      "contextHash": "5520ff15c4752bb51a0972cbca60c23b8d6fa3d079e1cf188647138c3ab1bd78"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "地面から突き出す槍２（2022/04/28）",
+      "sourceHash": "2c8d8da7bc95c33712dec65857c4cef59ffb7b4df94ee19b580be1d380c081a0",
+      "translation": "Spear Thrusting Up from the Ground 2 (2022/04/28)",
+      "contextHash": "2c8d8da7bc95c33712dec65857c4cef59ffb7b4df94ee19b580be1d380c081a0"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "しかしながら、上のサンプルには若干の問題があります。",
+      "sourceHash": "750742b66e15612f87101db2b5674c0928e8a3bf762c1cc3f3eb918848680ea1",
+      "translation": "However, the sample above has a slight problem.",
+      "contextHash": "750742b66e15612f87101db2b5674c0928e8a3bf762c1cc3f3eb918848680ea1"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "地面から氷の槍全体が突き出た後、さらに少し上に移動してから停止します。全体が表示された段階で停止して欲しいところですが、若干のズレがあります。",
+      "sourceHash": "d072dc625166c5f5fd9a10c59785220df545fe7e59fdd1f4d9ea6656c5b54cd9",
+      "translation": "After the entire ice spear thrusts out of the ground, it moves a little farther upward before stopping. Ideally, it would stop once the entire spear is displayed, but there is a slight discrepancy.",
+      "contextHash": "d072dc625166c5f5fd9a10c59785220df545fe7e59fdd1f4d9ea6656c5b54cd9"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "なぜ、そうなるかというとセルの大きさが192ピクセルだからです。",
+      "sourceHash": "21d44430d1dfc87969c1669030c55d432e99187000c7f1354de9bb29ad501212",
+      "translation": "This happens because the cell is 192 pixels in size.",
+      "contextHash": "21d44430d1dfc87969c1669030c55d432e99187000c7f1354de9bb29ad501212"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "上記の画像の通り、赤線部分の空白が実際には存在します。上のサンプルでは空白部分を含めた192ピクセル全体が表示されるまで、処理が続いていたというわけですね。",
+      "sourceHash": "296a7845f92307cc4092785ac8a384e91061a05bd13edf0e06561e0c880bbebe",
+      "translation": "As shown in the image above, the blank area indicated by the red line actually exists. In the sample above, processing continued until the entire 192-pixel area, including the blank space, was displayed.",
+      "contextHash": "296a7845f92307cc4092785ac8a384e91061a05bd13edf0e06561e0c880bbebe"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "192ピクセル全体が埋まるような画像なら問題ないのですが、現実には空白がある場合がほとんどです。そんなわけで、その空白を考慮したサンプルが次になります。",
+      "sourceHash": "06abcfbbe4403848e01762aa81c9df3178c826240f291dc7af6562727bb17c3b",
+      "translation": "There is no problem if the image fills all 192 pixels, but in reality, it usually contains blank space. The next sample therefore takes that blank space into account.",
+      "contextHash": "06abcfbbe4403848e01762aa81c9df3178c826240f291dc7af6562727bb17c3b"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "repeat = 5 // 繰り返し回数",
+      "sourceHash": "f59e989024e84ca1f7a06e8d4744e794c4d423ea9bc79f818de35c34257b2467",
+      "translation": "repeat = 5 // Repeat count",
+      "contextHash": "f59e989024e84ca1f7a06e8d4744e794c4d423ea9bc79f818de35c34257b2467"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "sy = b.y // 対象の足元座標",
+      "sourceHash": "edfb9c482b931d26ce59ce0ff8d5cd9ff389d5ce818bfbc77b4e29001c5a1ae8",
+      "translation": "sy = b.y // Target's feet coordinates",
+      "contextHash": "edfb9c482b931d26ce59ce0ff8d5cd9ff389d5ce818bfbc77b4e29001c5a1ae8"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "ey = sy - (192 * 0.7 / 2) // 描画Ｙ座標の調整",
+      "sourceHash": "78428d218d2e3a9e823cd7e5b61fe84d17ae02cf3400644751b8b4e1f306cdee",
+      "translation": "ey = sy - (192 * 0.7 / 2) // Adjust drawing Y-coordinate",
+      "contextHash": "78428d218d2e3a9e823cd7e5b61fe84d17ae02cf3400644751b8b4e1f306cdee"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "cellStartY = 0.15 // 開始部位",
+      "sourceHash": "1e414b3e3b8c72e88a56fca64cc8c2fbb8e61ca35004ba9f4960871be80d807c",
+      "translation": "cellStartY = 0.15 // Start segment",
+      "contextHash": "1e414b3e3b8c72e88a56fca64cc8c2fbb8e61ca35004ba9f4960871be80d807c"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "cellEndY = 0.15 + 0.7 * t/et // 終了部位（0.15->0.85に変化）",
+      "sourceHash": "136acdf850610d46b525d45ec4bc6d5d68526a84d3e35de59db41eaa0b14d9b0",
+      "translation": "cellEndY = 0.15 + 0.7 * t/et // End segment (changes from 0.15->0.85)",
+      "contextHash": "136acdf850610d46b525d45ec4bc6d5d68526a84d3e35de59db41eaa0b14d9b0"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "sxRandom = 100 // Ｘ座標のバラツキ",
+      "sourceHash": "ce3131c474de57706c42b959580c08bbdedd73fd70e37b366c6b7c42a99cad38",
+      "translation": "sxRandom = 100 // X-coordinate variation",
+      "contextHash": "ce3131c474de57706c42b959580c08bbdedd73fd70e37b366c6b7c42a99cad38"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "syRandom = 20 // Ｙ座標のバラツキ",
+      "sourceHash": "9fb033973cd88da374a5d4db05e4647dd11a8660b143d49a9224ad599871528a",
+      "translation": "syRandom = 20 // Y-coordinate variation",
+      "contextHash": "9fb033973cd88da374a5d4db05e4647dd11a8660b143d49a9224ad599871528a"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "// 座標を保持",
+      "sourceHash": "6bb61b0edd7518ab45dc0e109b839336a43fd65c07862273287294a24e45c54d",
+      "translation": "// Preserve coordinates",
+      "contextHash": "6bb61b0edd7518ab45dc0e109b839336a43fd65c07862273287294a24e45c54d"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "opacity = 255 * (1 - t/et) // 徐々に透明化",
+      "sourceHash": "cb371f71c6c3e4b5a4662363528bc3e5746e47e2e409e9a74c81261d85cac5de",
+      "translation": "opacity = 255 * (1 - t/et) // Gradually fade out",
+      "contextHash": "cb371f71c6c3e4b5a4662363528bc3e5746e47e2e409e9a74c81261d85cac5de"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "まず空白部分を除いた描画範囲を決める必要があります。",
+      "sourceHash": "16355c5c575151a385a96a78b1156c0aef37f767e018f6f42d6124600e35f7ca",
+      "translation": "First, you need to determine the rendering range excluding the blank space.",
+      "contextHash": "16355c5c575151a385a96a78b1156c0aef37f767e018f6f42d6124600e35f7ca"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "今回の氷画像については、上下それぞれ１５％をカットします。従って描画範囲は１５～８５％としました。",
+      "sourceHash": "595f314f3a4419a68cabfc2f9c224f2dd9365274aea0d45772a87e7c5f658c10",
+      "translation": "For this ice image, I cut off 15% from both the top and bottom. Therefore, I set the rendering range to 15–85%.",
+      "contextHash": "595f314f3a4419a68cabfc2f9c224f2dd9365274aea0d45772a87e7c5f658c10"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※試してみておかしかったら、描画範囲は適当に調整してください。",
+      "sourceHash": "e92c93af94483ec5e3b38b7679d05c784c33827ed428dd54263a94b2d281cc3e",
+      "translation": "※If it looks strange when you try it, adjust the rendering range as appropriate.",
+      "contextHash": "e92c93af94483ec5e3b38b7679d05c784c33827ed428dd54263a94b2d281cc3e"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "『cellStartY = 0.15』『cellEndY = 0.85』という記述が描画範囲の開始～終了です。これにより余計な部分を除去しています。",
+      "sourceHash": "697ef4448be451e90b4df18b120d74ec444c595dc4ab0bef42670d25bf80685f",
+      "translation": " \"cellStartY = 0.15” and “cellEndY = 0.85” specify the start and end of the rendering range. This removes the unnecessary portions.",
+      "contextHash": "697ef4448be451e90b4df18b120d74ec444c595dc4ab0bef42670d25bf80685f"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "最初の<D-Animation>については、上のサンプルと同様に時間変化を取り入れる必要があります。それが『cellEndY = 0.15 + 0.7 * t/et』の記述に相当します。１５～８５％に変化するため、その差分の0.7（７０％）ですね。",
+      "sourceHash": "c7db8cfab03200396318f18384262fec8aacc37a9a6de732b5d374da0e7f5e7e",
+      "translation": "For the first <D-Animation>, you need to incorporate changes over time, just as in the sample above. This corresponds to “cellEndY = 0.15 + 0.7 * t/et.” Since it changes from 15% to 85%, the difference is 0.7 (70%).",
+      "contextHash": "c7db8cfab03200396318f18384262fec8aacc37a9a6de732b5d374da0e7f5e7e"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "忘れてはいけないのが『ey = sy - (192",
+      "sourceHash": "7cbbf1018963d17e873cdea0564be98f30efbad96336100027fafdcc7b678d2e",
+      "translation": "One thing not to forget is “ey = sy - (192",
+      "contextHash": "56bd9c1e662be6e92834bd03d9476abd33e11b9543e8407de0ee69820ee2f8ca"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "/ 2)』の部分です。",
+      "sourceHash": "18ecedf739eb5d11d62d24c01d627ea30a11b73d8359b6b0fc790894cdfc6d8e",
+      "translation": "/ 2)”.",
+      "contextHash": "56bd9c1e662be6e92834bd03d9476abd33e11b9543e8407de0ee69820ee2f8ca"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "全体の７０％だけを切り取ったため、移動の変化量も元の７０％になります。",
+      "sourceHash": "a195aed25b4b1b08e07a42b73dcbb40fab4e144059c8a8aced1c8179a61d38f1",
+      "translation": "Since only 70% of the whole area was cut out, the amount of movement is also 70% of the original.",
+      "contextHash": "a195aed25b4b1b08e07a42b73dcbb40fab4e144059c8a8aced1c8179a61d38f1"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "地面から射出する槍（2022/04/29）",
+      "sourceHash": "445891512ba3893b2a3c66c7159199948781523d71a3ba62e81df4249ff35f74",
+      "translation": "Spear Launched from the Ground (2022/04/29)",
+      "contextHash": "445891512ba3893b2a3c66c7159199948781523d71a3ba62e81df4249ff35f74"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "今度は突き出すだけでなく発射します。",
+      "sourceHash": "14645e0a8a4934ee425ff35dc3b557afc0f6ac1f68e1af1420a4b92beab5a8c3",
+      "translation": "This time, the spear is not only thrust upward but also launched.",
+      "contextHash": "14645e0a8a4934ee425ff35dc3b557afc0f6ac1f68e1af1420a4b92beab5a8c3"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "さらには煙を付加しました。セルを切り取った断面を目立たなくする効果もあるのでオススメです。",
+      "sourceHash": "14e24c463a58a76e5ca79d000d6d58d6975c2c27c51a900c3ed59dbb5e0a546c",
+      "translation": "I also added smoke. I recommend it because it helps make the cut surface of the cell less noticeable.",
+      "contextHash": "14e24c463a58a76e5ca79d000d6d58d6975c2c27c51a900c3ed59dbb5e0a546c"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "煙についてはなんでもよいですが、今回は『Ice1』のパターンで作っています。岩の槍なら『Earth1~3』とかも使えますしお好みで。",
+      "sourceHash": "c18c750cd1152c15e8d69ccce953070588f9ea6ac14cccbf47379c5ab6eb0cc1",
+      "translation": "You can use anything for the smoke, but this time I used a pattern from “Ice1.” “Earth1~3” can also be used for a rock spear, so choose whatever you like.",
+      "contextHash": "c18c750cd1152c15e8d69ccce953070588f9ea6ac14cccbf47379c5ab6eb0cc1"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "// 煙",
+      "sourceHash": "ab1eaf5759957cd81ff26633602f5f78671eff2f52c7453afb30ea3bde1aeec4",
+      "translation": "// Smoke",
+      "contextHash": "ab1eaf5759957cd81ff26633602f5f78671eff2f52c7453afb30ea3bde1aeec4"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "id = 1 // 煙のアニメーション番号",
+      "sourceHash": "10cfed32888577305c80de486c596cbeafc00b9ddf7ea46a1036157131517e03",
+      "translation": "id = 1 // Smoke animation number",
+      "contextHash": "10cfed32888577305c80de486c596cbeafc00b9ddf7ea46a1036157131517e03"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "repeat = 10 // 繰り返し回数",
+      "sourceHash": "9e6ebcb158a9f0847affb743f848aee5d19564d49c284567301569400bd0cdbd",
+      "translation": "repeat = 10 // Repeat count",
+      "contextHash": "9e6ebcb158a9f0847affb743f848aee5d19564d49c284567301569400bd0cdbd"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "sy = b.y // 対象の足元座標",
+      "sourceHash": "edfb9c482b931d26ce59ce0ff8d5cd9ff389d5ce818bfbc77b4e29001c5a1ae8",
+      "translation": "sy = b.y // Target's feet coordinates",
+      "contextHash": "edfb9c482b931d26ce59ce0ff8d5cd9ff389d5ce818bfbc77b4e29001c5a1ae8"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "sxRandom = 100 // Ｘ座標のバラツキ",
+      "sourceHash": "ce3131c474de57706c42b959580c08bbdedd73fd70e37b366c6b7c42a99cad38",
+      "translation": "sxRandom = 100 // X-coordinate variation",
+      "contextHash": "ce3131c474de57706c42b959580c08bbdedd73fd70e37b366c6b7c42a99cad38"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "syRandom = 20 // Ｙ座標のバラツキ",
+      "sourceHash": "9fb033973cd88da374a5d4db05e4647dd11a8660b143d49a9224ad599871528a",
+      "translation": "syRandom = 20 // Y-coordinate variation",
+      "contextHash": "9fb033973cd88da374a5d4db05e4647dd11a8660b143d49a9224ad599871528a"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "// 煙の位置を引き継いで氷槍登場",
+      "sourceHash": "adfda74c86b7f5cb083422973e72599e1fc3c30732118297f673771b67fb5e31",
+      "translation": "// Ice spear appears, inheriting the smoke's position",
+      "contextHash": "adfda74c86b7f5cb083422973e72599e1fc3c30732118297f673771b67fb5e31"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "id = 2 // 槍のアニメーション番号",
+      "sourceHash": "7eb45018819eac178639d78fbbd1a28fcb78f554a26e453695ebc9b2a6f3b3ce",
+      "translation": "id = 2 // Spear animation number",
+      "contextHash": "7eb45018819eac178639d78fbbd1a28fcb78f554a26e453695ebc9b2a6f3b3ce"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "delay = 1 // 時間差",
+      "sourceHash": "ac0560a842c7f415ca7a3d266d220a113e5e8d9ed438b4e577ef3ca25b923939",
+      "translation": "delay = 1 // Time delay",
+      "contextHash": "ac0560a842c7f415ca7a3d266d220a113e5e8d9ed438b4e577ef3ca25b923939"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "ey = sy - (192 * 0.7 / 2) // 描画Ｙ座標の調整",
+      "sourceHash": "78428d218d2e3a9e823cd7e5b61fe84d17ae02cf3400644751b8b4e1f306cdee",
+      "translation": "ey = sy - (192 * 0.7 / 2) // Adjust drawing Y-coordinate",
+      "contextHash": "78428d218d2e3a9e823cd7e5b61fe84d17ae02cf3400644751b8b4e1f306cdee"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "cellStartY = 0.15 // 開始部位",
+      "sourceHash": "1e414b3e3b8c72e88a56fca64cc8c2fbb8e61ca35004ba9f4960871be80d807c",
+      "translation": "cellStartY = 0.15 // Start segment",
+      "contextHash": "1e414b3e3b8c72e88a56fca64cc8c2fbb8e61ca35004ba9f4960871be80d807c"
+    },
+    {
+      "id": "code-032",
+      "type": "code",
+      "source": "cellEndY = 0.15 + 0.7 * t/et // 終了部位（0.15->0.85に変化）",
+      "sourceHash": "136acdf850610d46b525d45ec4bc6d5d68526a84d3e35de59db41eaa0b14d9b0",
+      "translation": "cellEndY = 0.15 + 0.7 * t/et // End segment (changes from 0.15->0.85)",
+      "contextHash": "136acdf850610d46b525d45ec4bc6d5d68526a84d3e35de59db41eaa0b14d9b0"
+    },
+    {
+      "id": "code-033",
+      "type": "code",
+      "source": "// 氷槍を上に移動",
+      "sourceHash": "9d77346e556d7a09d4956804d59a68ece58230625d04c806da40cd2268bb8b65",
+      "translation": "// Move the ice spear upward",
+      "contextHash": "9d77346e556d7a09d4956804d59a68ece58230625d04c806da40cd2268bb8b65"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "idの部分には自分で作成したアニメーションを設定してください。",
+      "sourceHash": "d83bc8779c86c1d99b4b5cd35e5551ca84b8414c41b6423baee4973a272111e6",
+      "translation": "Set the animation you created yourself in the id section.",
+      "contextHash": "d83bc8779c86c1d99b4b5cd35e5551ca84b8414c41b6423baee4973a272111e6"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "先に煙のアニメーションから入って、その位置を槍に継承したほうがスムーズです。",
+      "sourceHash": "7f18b7ce7b3137c6945157a577fb2fd42d1cd37df94efe3c0175ce65b43ea3f9",
+      "translation": "It is smoother to start with the smoke animation and then have the spear inherit its position.",
+      "contextHash": "7f18b7ce7b3137c6945157a577fb2fd42d1cd37df94efe3c0175ce65b43ea3f9"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "突き刺さる槍（2022/04/30）",
+      "sourceHash": "405d75eb2568b336d77a4f1ea6c03a722b9d4e157dfcb62b17ff13170e00a4d3",
+      "translation": "Spear Impaling the Target (2022/04/30)",
+      "contextHash": "405d75eb2568b336d77a4f1ea6c03a722b9d4e157dfcb62b17ff13170e00a4d3"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "発射した槍が対象に突き刺さります。",
+      "sourceHash": "451a70f8808399e57ae2c82bf41be31e699f08bb34e3273c48fec9703f3b8d58",
+      "translation": "The launched spear impales the target.",
+      "contextHash": "451a70f8808399e57ae2c82bf41be31e699f08bb34e3273c48fec9703f3b8d58"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "槍についてはこれまでと同じ『Ice2』の固定パターンですが、今回はさらにアニメーションエディタ上で－９０度回転させて左向きにしています。",
+      "sourceHash": "6cfa1e540d36b23a2b548eff85821ffeef32e1945551dbd4a7edb0e020d7c312",
+      "translation": "The spear uses the same fixed pattern from “Ice2” as before, but this time I also rotated it −90 degrees in the Animation Editor so that it faces left.",
+      "contextHash": "6cfa1e540d36b23a2b548eff85821ffeef32e1945551dbd4a7edb0e020d7c312"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "ただし、セルの切り取りは、あくまで元の素材の向きが基準であることに注意してください。この例では元の素材が上向きなので、やはり上から下に向かって切り取っています。",
+      "sourceHash": "635780cb0806c7948dc3002806d07f584aaf8214e8d222c578f033fd1717c141",
+      "translation": "However, note that cell cropping is based on the orientation of the original material. In this example, the original material faces upward, so it is still cropped from top to bottom.",
+      "contextHash": "635780cb0806c7948dc3002806d07f584aaf8214e8d222c578f033fd1717c141"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "※左向きの素材を用いる場合は項目名が『cellStartX』『cellEndX』となります。",
+      "sourceHash": "50923bec128d5ca87b36024e159dfe647c124c4208bbe3f49ed25f3439659d1b",
+      "translation": "※When using a left-facing material, the parameter names are “cellStartX” and “cellEndX”.",
+      "contextHash": "50923bec128d5ca87b36024e159dfe647c124c4208bbe3f49ed25f3439659d1b"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "着弾については上で使用した煙をそのまま流用しています。",
+      "sourceHash": "fd8f45ce4911f5eafed73d826017613ae73603a81f6c37df80c5b368ea5d93ad",
+      "translation": "For the impact, I reused the smoke from above as-is.",
+      "contextHash": "fd8f45ce4911f5eafed73d826017613ae73603a81f6c37df80c5b368ea5d93ad"
+    },
+    {
+      "id": "code-034",
+      "type": "code",
+      "source": "// 槍（投げる）",
+      "sourceHash": "7da422a007f0d8cc8e2a532336898421a66eacf9a96966dcdc21063648555c54",
+      "translation": "// Spear (thrown)",
+      "contextHash": "7da422a007f0d8cc8e2a532336898421a66eacf9a96966dcdc21063648555c54"
+    },
+    {
+      "id": "code-035",
+      "type": "code",
+      "source": "id = 1// 槍のアニメーション番号",
+      "sourceHash": "b398ed89f91f744c9b6df2130293ca6aa02d887f6750c1d9ace09c102bd8539d",
+      "translation": "id = 1// Spear animation number",
+      "contextHash": "b398ed89f91f744c9b6df2130293ca6aa02d887f6750c1d9ace09c102bd8539d"
+    },
+    {
+      "id": "code-036",
+      "type": "code",
+      "source": "// 槍（刺さった状態）",
+      "sourceHash": "400a19f506f8884f28e1a3ce1e6728d604e5478bd646d81f0b2c6b98e388bb6c",
+      "translation": "// Spear (embedded)",
+      "contextHash": "400a19f506f8884f28e1a3ce1e6728d604e5478bd646d81f0b2c6b98e388bb6c"
+    },
+    {
+      "id": "code-037",
+      "type": "code",
+      "source": "addX = 192 * 0.35 / 2 // Ｘ座標微調整",
+      "sourceHash": "b7df7202ab60aa1daa5518a88530b632a7d1572602a28b2af602544260eaa4d6",
+      "translation": "addX = 192 * 0.35 / 2 // Fine-tune X-coordinate",
+      "contextHash": "b7df7202ab60aa1daa5518a88530b632a7d1572602a28b2af602544260eaa4d6"
+    },
+    {
+      "id": "code-038",
+      "type": "code",
+      "source": "cellStartY = 0.5 // 開始部位",
+      "sourceHash": "1a704a0c3ca504803fbc6ec7e2be74a032354d5ba7a3829fdbc7b66798445ac7",
+      "translation": "cellStartY = 0.5 // Start segment",
+      "contextHash": "1a704a0c3ca504803fbc6ec7e2be74a032354d5ba7a3829fdbc7b66798445ac7"
+    },
+    {
+      "id": "code-039",
+      "type": "code",
+      "source": "cellEndY = 0.85 // 終了部位",
+      "sourceHash": "716e627450930d71d335f0c4652b3b30f33b07f1fc52588969450a8b3e7f4c01",
+      "translation": "cellEndY = 0.85 // End segment",
+      "contextHash": "716e627450930d71d335f0c4652b3b30f33b07f1fc52588969450a8b3e7f4c01"
+    },
+    {
+      "id": "code-040",
+      "type": "code",
+      "source": "opacity = 255 * (1 - t/et) // 徐々に透明化",
+      "sourceHash": "cb371f71c6c3e4b5a4662363528bc3e5746e47e2e409e9a74c81261d85cac5de",
+      "translation": "opacity = 255 * (1 - t/et) // Gradually fade out",
+      "contextHash": "cb371f71c6c3e4b5a4662363528bc3e5746e47e2e409e9a74c81261d85cac5de"
+    },
+    {
+      "id": "code-041",
+      "type": "code",
+      "source": "// 着弾アニメ",
+      "sourceHash": "6d6a55384070aee5860d45594ccc116bd074091831a07b7d8c1f930c3ccae82f",
+      "translation": "// Impact animation",
+      "contextHash": "6d6a55384070aee5860d45594ccc116bd074091831a07b7d8c1f930c3ccae82f"
+    },
+    {
+      "id": "code-042",
+      "type": "code",
+      "source": "id = 2 // 着弾のアニメーション",
+      "sourceHash": "cb9c9264c23c28ab88329c06b8939bafc6a1cfece80bce86b889b4547104b186",
+      "translation": "id = 2 // Impact animation",
+      "contextHash": "cb9c9264c23c28ab88329c06b8939bafc6a1cfece80bce86b889b4547104b186"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "idの部分には自分で作成したアニメーションを設定してください。",
+      "sourceHash": "d83bc8779c86c1d99b4b5cd35e5551ca84b8414c41b6423baee4973a272111e6",
+      "translation": "Set the animation you created yourself in the id section.",
+      "contextHash": "d83bc8779c86c1d99b4b5cd35e5551ca84b8414c41b6423baee4973a272111e6"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "『cellStartY = 0.5』は刺さった状態を表現するため、セルを半分だけ表示しているという意味です。",
+      "sourceHash": "5203addf0f5617a7da2d74e79df7fa155185879dd5b238293284d8c2b1c1e22a",
+      "translation": " \"cellStartY = 0.5” means that only half of the cell is displayed to depict the impaled state.",
+      "contextHash": "5203addf0f5617a7da2d74e79df7fa155185879dd5b238293284d8c2b1c1e22a"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "セルを削ったことによってＸ座標がズレるので『addX = 192 * 0.35 / 2』で調整しています。この『0.35』はcellStartY同士（0.5 - 0.15）の差分です。",
+      "sourceHash": "5007014d0e78c116cf4a4d8ea908b2e126202654b8e7507551ef1cfef07208b5",
+      "translation": "Cropping the cell shifts the X coordinate, so I adjust it with “addX = 192 * 0.35 / 2.” This “0.35” is the difference between the cellStartY values (0.5 - 0.15).",
+      "contextHash": "5007014d0e78c116cf4a4d8ea908b2e126202654b8e7507551ef1cfef07208b5"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "横穴から射出する槍（2022/04/30）",
+      "sourceHash": "e3a28fd7a7fec794a1e45f1aa9279fb62ea51d620749f5371db3090d6086e7a1",
+      "translation": "Spear Launched from a Side Opening (2022/04/30)",
+      "contextHash": "e3a28fd7a7fec794a1e45f1aa9279fb62ea51d620749f5371db3090d6086e7a1"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "横穴から現れた槍を発射します。",
+      "sourceHash": "5d49020d3ad6b7f4264979016ac69bf9d70cfc4a5d252f23f07e75ae1366070b",
+      "translation": "A spear emerging from a side opening is launched.",
+      "contextHash": "5d49020d3ad6b7f4264979016ac69bf9d70cfc4a5d252f23f07e75ae1366070b"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "『槍』の他にも『穴』と『着弾』のアニメーションが必要です。",
+      "sourceHash": "779fa6caa79b070573240138edde1ffe3e773cb3fd5be37211db429f74eb06c6",
+      "translation": "In addition to the “Spear,” you also need “Opening” and “Impact” animations.",
+      "contextHash": "779fa6caa79b070573240138edde1ffe3e773cb3fd5be37211db429f74eb06c6"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "槍については『Darkness2』の固定パターンを使用し、さらにアニメーションエディタ上で－９０度回転させて左向きにしています。今回は比較的大きな素材画像だったため、cellStartY は指定していません。",
+      "sourceHash": "a995a92083fbacc2ec8704ab0d282da4d29aaa832349fa8699ac910443063a73",
+      "translation": "For the spear, I used a fixed pattern from “Darkness2,” then rotated it −90 degrees in the Animation Editor so that it faces left. Since the source image was relatively large this time, I did not specify cellStartY.",
+      "contextHash": "a995a92083fbacc2ec8704ab0d282da4d29aaa832349fa8699ac910443063a73"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "穴については『Darkness4』の固定パターンを使用していますが、黒い丸なら何でもＯＫです。DynamicAnimation側で縦に引き伸ばしています。開始時の拡大および終了時の縮小については、普通にアニメーションエディタ側で設定しています。",
+      "sourceHash": "e3030c96ae1fc92a5f515effd9904f0b10860acca7c6f4872a9a6f2ffc05bcd3",
+      "translation": "For the opening, I used a fixed pattern from “Darkness4,” but any black circle will work. I stretched it vertically in DynamicAnimation. The enlargement at the start and reduction at the end were set normally in the Animation Editor.",
+      "contextHash": "e3030c96ae1fc92a5f515effd9904f0b10860acca7c6f4872a9a6f2ffc05bcd3"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "着弾についても『Darkness4』で作成していますが、爆発っぽいアニメーションなら何でも構いません。手っ取り早くやりたいなら『107: 無属性/単体2』をそのまんま指定してもＯＫ。",
+      "sourceHash": "39b3b6b607a0ba1ea337a3c58c94584b60d966060e0f5bf668b915bc1934dd53",
+      "translation": "I also created the impact effect using “Darkness4,” but any explosion-like animation will do. If you want to do this quickly, you can simply specify “107: Non-Elemental/Single 2” as is.",
+      "contextHash": "39b3b6b607a0ba1ea337a3c58c94584b60d966060e0f5bf668b915bc1934dd53"
+    },
+    {
+      "id": "code-043",
+      "type": "code",
+      "source": "// 横列攻撃",
+      "sourceHash": "442c2ce120fb36b604d8b6f00cd6d49e1b4892f65fcac85633de4d6b4c6b0512",
+      "translation": "// Horizontal row attack",
+      "contextHash": "442c2ce120fb36b604d8b6f00cd6d49e1b4892f65fcac85633de4d6b4c6b0512"
+    },
+    {
+      "id": "code-044",
+      "type": "code",
+      "source": "// 穴",
+      "sourceHash": "7a462cb9d9ee908462e998138dae2f3fcc3811370a3a9a1a71c332b03d89e7ad",
+      "translation": "// Hole",
+      "contextHash": "7a462cb9d9ee908462e998138dae2f3fcc3811370a3a9a1a71c332b03d89e7ad"
+    },
+    {
+      "id": "code-045",
+      "type": "code",
+      "source": "id = 1 // 穴のアニメーション番号",
+      "sourceHash": "fa73492ba799b8c6d505f66f80512a22c929fa3619651df4f91e1bf5a822928d",
+      "translation": "id = 1 // Hole animation number",
+      "contextHash": "fa73492ba799b8c6d505f66f80512a22c929fa3619651df4f91e1bf5a822928d"
+    },
+    {
+      "id": "code-046",
+      "type": "code",
+      "source": "position = 3 // 全体表示",
+      "sourceHash": "26bf3d6009bb0c4afbc5231122bd53a1198bc38b40568874e17711899ea9804d",
+      "translation": "position = 3 // Display in full",
+      "contextHash": "26bf3d6009bb0c4afbc5231122bd53a1198bc38b40568874e17711899ea9804d"
+    },
+    {
+      "id": "code-047",
+      "type": "code",
+      "source": "sx = defaultX + 200 * mirroring // 全体表示位置より右に表示",
+      "sourceHash": "5b1a7615c070f166e2852780330d4da85980ccb32433cd82006a05d8def64728",
+      "translation": "sx = defaultX + 200 * mirroring // Display to the right of the full-display position",
+      "contextHash": "5b1a7615c070f166e2852780330d4da85980ccb32433cd82006a05d8def64728"
+    },
+    {
+      "id": "code-048",
+      "type": "code",
+      "source": "sy = b.y - b.height/2 // 縦の中央",
+      "sourceHash": "75eb9d36cfd4e066043e7ebc417a3f0f5a9ea47bc0527e710b40a6c7a716eb7f",
+      "translation": "sy = b.y - b.height/2 // Vertical center",
+      "contextHash": "75eb9d36cfd4e066043e7ebc417a3f0f5a9ea47bc0527e710b40a6c7a716eb7f"
+    },
+    {
+      "id": "code-049",
+      "type": "code",
+      "source": "scaleX = 0.5 // 横に縮める",
+      "sourceHash": "358c17f0af7d31638867c391bcd6ec5d14e7e21818256eff52968a759dbcbf54",
+      "translation": "scaleX = 0.5 // Shrink horizontally",
+      "contextHash": "358c17f0af7d31638867c391bcd6ec5d14e7e21818256eff52968a759dbcbf54"
+    },
+    {
+      "id": "code-050",
+      "type": "code",
+      "source": "scaleY = 3 // 縦に伸ばす",
+      "sourceHash": "bd6ca455b53bfe3708cf3bac03b37ba7babf642750151342c6b4a0a494327a89",
+      "translation": "scaleY = 3 // Stretch vertically",
+      "contextHash": "bd6ca455b53bfe3708cf3bac03b37ba7babf642750151342c6b4a0a494327a89"
+    },
+    {
+      "id": "code-051",
+      "type": "code",
+      "source": "z = 7 // 槍より下に表示",
+      "sourceHash": "c280f74b3baa276f6e31760002dafab9c38b8774b5d0b26ce490ef82adb6e358",
+      "translation": "z = 7 // Display below the spear",
+      "contextHash": "c280f74b3baa276f6e31760002dafab9c38b8774b5d0b26ce490ef82adb6e358"
+    },
+    {
+      "id": "code-052",
+      "type": "code",
+      "source": "// 槍（出現）",
+      "sourceHash": "bd66bc7628d64b8c3002f18de64c8c644e7f9db98a6d107a5c4b590e0130a987",
+      "translation": "// Spear (Appearance)",
+      "contextHash": "bd66bc7628d64b8c3002f18de64c8c644e7f9db98a6d107a5c4b590e0130a987"
+    },
+    {
+      "id": "code-053",
+      "type": "code",
+      "source": "id = 2 // 槍のアニメーション番号",
+      "sourceHash": "7eb45018819eac178639d78fbbd1a28fcb78f554a26e453695ebc9b2a6f3b3ce",
+      "translation": "id = 2 // Spear animation number",
+      "contextHash": "7eb45018819eac178639d78fbbd1a28fcb78f554a26e453695ebc9b2a6f3b3ce"
+    },
+    {
+      "id": "code-054",
+      "type": "code",
+      "source": "delay = 3 // 時間差",
+      "sourceHash": "acac9cc525a5ec851583b1b353f5194590847129625cd98b5e0301b73a6d3e74",
+      "translation": "delay = 3 // Time delay",
+      "contextHash": "acac9cc525a5ec851583b1b353f5194590847129625cd98b5e0301b73a6d3e74"
+    },
+    {
+      "id": "code-055",
+      "type": "code",
+      "source": "repeat = 10 // 繰り返し回数",
+      "sourceHash": "9e6ebcb158a9f0847affb743f848aee5d19564d49c284567301569400bd0cdbd",
+      "translation": "repeat = 10 // Number of repetitions",
+      "contextHash": "9e6ebcb158a9f0847affb743f848aee5d19564d49c284567301569400bd0cdbd"
+    },
+    {
+      "id": "code-056",
+      "type": "code",
+      "source": "interval = 2 // 間隔",
+      "sourceHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169",
+      "translation": "interval = 2 // Interval",
+      "contextHash": "696b4669805981e8cf3be619a49c56f3f975f12c3432de2db23214f948b04169"
+    },
+    {
+      "id": "code-057",
+      "type": "code",
+      "source": "position = 3 // 全体表示",
+      "sourceHash": "26bf3d6009bb0c4afbc5231122bd53a1198bc38b40568874e17711899ea9804d",
+      "translation": "position = 3 // Display the entire image",
+      "contextHash": "26bf3d6009bb0c4afbc5231122bd53a1198bc38b40568874e17711899ea9804d"
+    },
+    {
+      "id": "code-058",
+      "type": "code",
+      "source": "ex = sx - (192 / 2) * mirroring // 描画Ｘ座標の調整",
+      "sourceHash": "13b9af4d8efcf8d56c5c6c93095cdcaa79a439370c17d2c170bd84c5f7b8bb7f",
+      "translation": "ex = sx - (192 / 2) * mirroring // Adjust drawing X coordinate",
+      "contextHash": "13b9af4d8efcf8d56c5c6c93095cdcaa79a439370c17d2c170bd84c5f7b8bb7f"
+    },
+    {
+      "id": "code-059",
+      "type": "code",
+      "source": "syRandom = 60 // Ｙ座標のバラツキ",
+      "sourceHash": "c0d3b3ea9fc0cd51b1f005184e5864430f23c7471db728e223e128ced785ab3d",
+      "translation": "syRandom = 60 // Y-coordinate variation",
+      "contextHash": "c0d3b3ea9fc0cd51b1f005184e5864430f23c7471db728e223e128ced785ab3d"
+    },
+    {
+      "id": "code-060",
+      "type": "code",
+      "source": "cellEndY = t/et // 終了部位",
+      "sourceHash": "b2cf57b6c6cb26f1dd3af29b363bceb3619a4c42215cae122cc90a559fd26c8f",
+      "translation": "cellEndY = t/et // Ending section",
+      "contextHash": "b2cf57b6c6cb26f1dd3af29b363bceb3619a4c42215cae122cc90a559fd26c8f"
+    },
+    {
+      "id": "code-061",
+      "type": "code",
+      "source": "// 槍（発射）",
+      "sourceHash": "c4bd65c34b5f9ee83a68bdf78f3a556896cebd93f8405465fa13eef0cfb7eec4",
+      "translation": "// Spear (Launch)",
+      "contextHash": "c4bd65c34b5f9ee83a68bdf78f3a556896cebd93f8405465fa13eef0cfb7eec4"
+    },
+    {
+      "id": "code-062",
+      "type": "code",
+      "source": "// 着弾エフェクト",
+      "sourceHash": "7d481e61bc8662b678c052b9d0bafdbc7d4e2e6d24bc8222cd365a9259132d09",
+      "translation": "// Impact effect",
+      "contextHash": "7d481e61bc8662b678c052b9d0bafdbc7d4e2e6d24bc8222cd365a9259132d09"
+    },
+    {
+      "id": "code-063",
+      "type": "code",
+      "source": "id = 3 // 着弾のアニメーション番号",
+      "sourceHash": "20e74dd043443ec51335e4e0febcd741a29b0e2fb74675168ec331118f59ee42",
+      "translation": "id = 3 // Impact animation number",
+      "contextHash": "20e74dd043443ec51335e4e0febcd741a29b0e2fb74675168ec331118f59ee42"
+    },
+    {
+      "id": "code-064",
+      "type": "code",
+      "source": "delay = 7 // 時間差",
+      "sourceHash": "a19fcd4f7873e1e2caceac9c3fc2414f79502b70a79c83d5609dacfd38546e0c",
+      "translation": "delay = 7 // Time delay",
+      "contextHash": "a19fcd4f7873e1e2caceac9c3fc2414f79502b70a79c83d5609dacfd38546e0c"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "idの部分には自分で作成したアニメーションを設定してください。",
+      "sourceHash": "d83bc8779c86c1d99b4b5cd35e5551ca84b8414c41b6423baee4973a272111e6",
+      "translation": "Set the animation you created yourself in the id portion.",
+      "contextHash": "d83bc8779c86c1d99b4b5cd35e5551ca84b8414c41b6423baee4973a272111e6"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "『position = 3』を指定することによってアニメーション（穴と槍）が敵全体に対して一つだけ表示されるようになります。",
+      "sourceHash": "d22ac613fed927b8791ea7d240bd6beccee4cce88de6734f1304ef93d0d2610a",
+      "translation": "Specifying “position = 3” causes a single animation (the hole and spears) to be displayed for the entire group of enemies.",
+      "contextHash": "d22ac613fed927b8791ea7d240bd6beccee4cce88de6734f1304ef93d0d2610a"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "この際、『sx = defaultX + 200 * mirroring』にある『defaultX』という値が敵全体の中央となるＸ座標です。その200ピクセル右から、穴と槍が出現するという仕組みですね。",
+      "sourceHash": "e2ef43e99ee3bf231c1f18a400ceb1b8206f80b2b2000244132c87431dd89411",
+      "translation": "Here, the value “defaultX” in “sx = defaultX + 200 * mirroring” is the X-coordinate at the center of the entire enemy group. The hole and spears appear 200 pixels to the right of that point.",
+      "contextHash": "e2ef43e99ee3bf231c1f18a400ceb1b8206f80b2b2000244132c87431dd89411"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "一方で着弾に関しては対象毎に表示しています。",
+      "sourceHash": "41eca6a32d15f44c0a716a0652281fa3b8a906243a42fe19d022ff1d74bf18f4",
+      "translation": "On the other hand, the impact effect is displayed for each target.",
+      "contextHash": "41eca6a32d15f44c0a716a0652281fa3b8a906243a42fe19d022ff1d74bf18f4"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "なお、mirroring指定によって、敵が使用した場合も自動で左右反転されます。",
+      "sourceHash": "f29e727fc955edadef6742bfd7123fb47ce257b4e6b738369efdcceb2bf7af34",
+      "translation": "Also, specifying mirroring automatically flips the animation horizontally when it is used by an enemy.",
+      "contextHash": "f29e727fc955edadef6742bfd7123fb47ce257b4e6b738369efdcceb2bf7af34"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicAnimation（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）および、DynamicMotion（[[LINK_3]]ＭＺ[[/LINK_3]]、[[LINK_4]]ＭＶ[[/LINK_4]]）プラグインの解説の一部です。",
+      "sourceHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f",
+      "parts": [
+        {
+          "source": "このページはDynamicAnimation（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）および、DynamicMotion（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 4
+        },
+        {
+          "source": "）プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the documentation for the DynamicAnimation ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]) and DynamicMotion ([[LINK_3]]MZ[[/LINK_3]], [[LINK_4]]MV[[/LINK_4]]) plugins.",
+      "contextHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "なお、ＭＶアニメにしか対応していませんので、ＭＺの場合は[[LINK_1]]DynamicAnimationMZからMVアニメを呼び出すプラグイン[[/LINK_1]]が必要です。",
+      "sourceHash": "5974523c55fe194e8125c2b9c75bf8f55fed3f8e92466a95b308d3ac3bb48dbc",
+      "parts": [
+        {
+          "source": "なお、ＭＶアニメにしか対応していませんので、ＭＺの場合は",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationMZからMVアニメを呼び出すプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が必要です。",
+          "link": false
+        }
+      ],
+      "translation": "Note that only MV animations are supported, so for MZ, you need the [[LINK_1]]plugin that calls MV animations from DynamicAnimationMZ[[/LINK_1]].",
+      "contextHash": "5974523c55fe194e8125c2b9c75bf8f55fed3f8e92466a95b308d3ac3bb48dbc"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]地面から突き出す槍１[[/LINK_1]]（2022/04/28）",
+      "sourceHash": "457bb7011dc2559978e7ccc2c5ec98b860eaafb1fc5a49389c81f297353c63e2",
+      "parts": [
+        {
+          "source": "地面から突き出す槍１",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/28）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Spear thrusting up from the ground 1[[/LINK_1]] (2022/04/28)",
+      "contextHash": "457bb7011dc2559978e7ccc2c5ec98b860eaafb1fc5a49389c81f297353c63e2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]地面から突き出す槍２[[/LINK_1]]（2022/04/28）",
+      "sourceHash": "bda3e023d6161b7e19d7c811dd842a4e185daf3c0b2261b1db0b4a8d0dae882d",
+      "parts": [
+        {
+          "source": "地面から突き出す槍２",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/28）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Spear thrusting up from the ground 2[[/LINK_1]] (2022/04/28)",
+      "contextHash": "bda3e023d6161b7e19d7c811dd842a4e185daf3c0b2261b1db0b4a8d0dae882d"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]地面から射出する槍[[/LINK_1]]（2022/04/29）",
+      "sourceHash": "1f3703afccc9939ec24328789840f4319248f24a13c98b732eb88ef2bdb61080",
+      "parts": [
+        {
+          "source": "地面から射出する槍",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/29）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Spear launched from the ground[[/LINK_1]] (2022/04/29)",
+      "contextHash": "1f3703afccc9939ec24328789840f4319248f24a13c98b732eb88ef2bdb61080"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]突き刺さる槍[[/LINK_1]]（2022/04/30）",
+      "sourceHash": "8239831bd417fe312f1ef191a8ef27b59cef8e13fcf8890fadf48972ba64e86f",
+      "parts": [
+        {
+          "source": "突き刺さる槍",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/30）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Impaling spear[[/LINK_1]] (2022/04/30)",
+      "contextHash": "8239831bd417fe312f1ef191a8ef27b59cef8e13fcf8890fadf48972ba64e86f"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]横穴から射出する槍[[/LINK_1]]（2022/04/30）",
+      "sourceHash": "9546ae18762b2f68e039418ef38f5d2e42ccebc49dab6447a53409bd413e145a",
+      "parts": [
+        {
+          "source": "横穴から射出する槍",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/30）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Spear launched from a side opening[[/LINK_1]] (2022/04/30)",
+      "contextHash": "9546ae18762b2f68e039418ef38f5d2e42ccebc49dab6447a53409bd413e145a"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]keep型テンプレート[[/LINK_1]]はアニメーションの全体が現れた後に停止状態を表示するためのものです。keepについては説明済みなのでリンク先をご覧ください。",
+      "sourceHash": "d3d2a83e4421e161ae88267c9f72ab05ca24cedf916b1f50c91b011063a1b8e8",
+      "parts": [
+        {
+          "source": "keep型テンプレート",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "はアニメーションの全体が現れた後に停止状態を表示するためのものです。keepについては説明済みなのでリンク先をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]keep-type template[[/LINK_1]] is used to display a stationary state after the entire animation has appeared. keep has already been explained, so please see the linked page.",
+      "contextHash": "d3d2a83e4421e161ae88267c9f72ab05ca24cedf916b1f50c91b011063a1b8e8"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "さらに[[LINK_1]]スキルの範囲拡張プラグイン[[/LINK_1]]との組み合わせで横列に攻撃します。",
+      "sourceHash": "b056385df33ebe482f15d572fa69822619e9c3f917f43aac8eedb716a54edc42",
+      "parts": [
+        {
+          "source": "さらに",
+          "link": false
+        },
+        {
+          "source": "スキルの範囲拡張プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との組み合わせで横列に攻撃します。",
+          "link": false
+        }
+      ],
+      "translation": "It also attacks a horizontal row when combined with the [[LINK_1]]plugin that expands skill ranges[[/LINK_1]].",
+      "contextHash": "b056385df33ebe482f15d572fa69822619e9c3f917f43aac8eedb716a54edc42"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotion plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "NRP_DynamicAnimationMZ.js（ver1.19）およびNRP_DynamicAnimation.js（ver1.261）で実装したセルの部分描画機能を使ったサンプルです。": "This is a sample using the partial cell rendering feature implemented in NRP_DynamicAnimationMZ.js (ver1.19) and NRP_DynamicAnimation.js (ver1.261).",
+    "少し扱いが難しい機能なので、順序立てて説明しています。": "Because this feature is somewhat difficult to use, I explain it step by step.",
+    "目次": "Table of Contents",
+    "地面から突き出す槍１（2022/04/28）": "Spear Thrusting Up from the Ground 1 (2022/04/28)",
+    "セルを上側から徐々に描画することで地面から突き出す槍のような演出を行います。": "A spear thrusting up from the ground is depicted by gradually rendering the cell from the top.",
+    "まず前提として突き出す槍のアニメーションが必要です。": "First, you need an animation of a spear thrusting up.",
+    "縦長の槍のような画像なら何でも構いませんが、この例では『Ice2』の１０番目のパターンを５フレームほど貼りつけています。合成方法は『通常』のほうがいいかも。": "Any tall, spear-like image will work, but in this example, I placed the tenth pattern from “Ice2” for about five frames. “Normal” may be the better blend mode.",
+    "作成したアニメをスキルに設定してください。": "Set the animation you created to a skill.",
+    "repeat = 5 // 繰り返し回数": "repeat = 5 // Repeat count",
+    "interval = 2 // 間隔": "interval = 2 // Interval",
+    "sy = b.y // 対象の足元座標": "sy = b.y // Target's feet coordinates",
+    "ey = sy - (192 / 2) // 終点": "ey = sy - (192 / 2) // Endpoint",
+    "cellEndY = t/et // 終了部位（時間経過で0->1に変化）": "cellEndY = t/et // End segment (changes from 0->1 over time)",
+    "sxRandom = 100 // Ｘ座標のバラツキ": "sxRandom = 100 // X-coordinate variation",
+    "syRandom = 20 // Ｙ座標のバラツキ": "syRandom = 20 // Y-coordinate variation",
+    "// 座標を保持": "// Preserve coordinates",
+    "opacity = 255 * (1 - t/et) // 徐々に透明化": "opacity = 255 * (1 - t/et) // Gradually fade out",
+    "『cellEndY』がセルの描画範囲（縦）の終点です。": " \"cellEndY” is the endpoint of the cell’s vertical rendering range.",
+    "例えば、値が『0.5』ならば、セルの上端から半分までの範囲を描画します。": "For example, if the value is “0.5,” the area from the top edge of the cell to halfway down is rendered.",
+    "この値が最初は『0』から始まり、最後は『1』になるという数式が『cellEndY = t/et』です。これにより、セルを上側から徐々に描画しています。": "The formula “cellEndY = t/et” starts at “0” and ends at “1.” This gradually renders the cell from the top.",
+    "『ey = sy - (192 / 2)』は槍が突き出す位置を調整するための数式です。": " \"ey = sy - (192 / 2)” is a formula for adjusting the spear’s thrusting position.",
+    "『192』はセルの縦幅を意味する固定値です。": " \"192” is a fixed value representing the cell’s height.",
+    "通常、セルの描画範囲が伸びるに従って、セルの下端も下へと移動していってしまいます。そこでアニメーションを逆方向へ移動させることで下端が移動しないように調整しています。": "Normally, as the cell’s rendering range expands, its bottom edge also moves downward. Therefore, the animation is moved in the opposite direction so that the bottom edge does not move.",
+    "なお、効果音やフレーム長などの演出を別々にしたい場合は、上と下の<D-Animation>で別のアニメを指定してください。これは説明用のサンプルなので手抜きです。": "If you want effects such as sound effects and frame lengths to differ, specify different animations in the upper and lower <D-Animation> tags. This is only a sample for explanatory purposes, so I took a shortcut.",
+    "地面から突き出す槍２（2022/04/28）": "Spear Thrusting Up from the Ground 2 (2022/04/28)",
+    "しかしながら、上のサンプルには若干の問題があります。": "However, the sample above has a slight problem.",
+    "地面から氷の槍全体が突き出た後、さらに少し上に移動してから停止します。全体が表示された段階で停止して欲しいところですが、若干のズレがあります。": "After the entire ice spear thrusts out of the ground, it moves a little farther upward before stopping. Ideally, it would stop once the entire spear is displayed, but there is a slight discrepancy.",
+    "なぜ、そうなるかというとセルの大きさが192ピクセルだからです。": "This happens because the cell is 192 pixels in size.",
+    "上記の画像の通り、赤線部分の空白が実際には存在します。上のサンプルでは空白部分を含めた192ピクセル全体が表示されるまで、処理が続いていたというわけですね。": "As shown in the image above, the blank area indicated by the red line actually exists. In the sample above, processing continued until the entire 192-pixel area, including the blank space, was displayed.",
+    "192ピクセル全体が埋まるような画像なら問題ないのですが、現実には空白がある場合がほとんどです。そんなわけで、その空白を考慮したサンプルが次になります。": "There is no problem if the image fills all 192 pixels, but in reality, it usually contains blank space. The next sample therefore takes that blank space into account.",
+    "ey = sy - (192 * 0.7 / 2) // 描画Ｙ座標の調整": "ey = sy - (192 * 0.7 / 2) // Adjust drawing Y-coordinate",
+    "cellStartY = 0.15 // 開始部位": "cellStartY = 0.15 // Start segment",
+    "cellEndY = 0.15 + 0.7 * t/et // 終了部位（0.15->0.85に変化）": "cellEndY = 0.15 + 0.7 * t/et // End segment (changes from 0.15->0.85)",
+    "まず空白部分を除いた描画範囲を決める必要があります。": "First, you need to determine the rendering range excluding the blank space.",
+    "今回の氷画像については、上下それぞれ１５％をカットします。従って描画範囲は１５～８５％としました。": "For this ice image, I cut off 15% from both the top and bottom. Therefore, I set the rendering range to 15–85%.",
+    "※試してみておかしかったら、描画範囲は適当に調整してください。": "※If it looks strange when you try it, adjust the rendering range as appropriate.",
+    "『cellStartY = 0.15』『cellEndY = 0.85』という記述が描画範囲の開始～終了です。これにより余計な部分を除去しています。": " \"cellStartY = 0.15” and “cellEndY = 0.85” specify the start and end of the rendering range. This removes the unnecessary portions.",
+    "最初の<D-Animation>については、上のサンプルと同様に時間変化を取り入れる必要があります。それが『cellEndY = 0.15 + 0.7 * t/et』の記述に相当します。１５～８５％に変化するため、その差分の0.7（７０％）ですね。": "For the first <D-Animation>, you need to incorporate changes over time, just as in the sample above. This corresponds to “cellEndY = 0.15 + 0.7 * t/et.” Since it changes from 15% to 85%, the difference is 0.7 (70%).",
+    "忘れてはいけないのが『ey = sy - (192": "One thing not to forget is “ey = sy - (192",
+    "/ 2)』の部分です。": "/ 2)”.",
+    "全体の７０％だけを切り取ったため、移動の変化量も元の７０％になります。": "Since only 70% of the whole area was cut out, the amount of movement is also 70% of the original.",
+    "地面から射出する槍（2022/04/29）": "Spear Launched from the Ground (2022/04/29)",
+    "今度は突き出すだけでなく発射します。": "This time, the spear is not only thrust upward but also launched.",
+    "さらには煙を付加しました。セルを切り取った断面を目立たなくする効果もあるのでオススメです。": "I also added smoke. I recommend it because it helps make the cut surface of the cell less noticeable.",
+    "煙についてはなんでもよいですが、今回は『Ice1』のパターンで作っています。岩の槍なら『Earth1~3』とかも使えますしお好みで。": "You can use anything for the smoke, but this time I used a pattern from “Ice1.” “Earth1~3” can also be used for a rock spear, so choose whatever you like.",
+    "// 煙": "// Smoke",
+    "id = 1 // 煙のアニメーション番号": "id = 1 // Smoke animation number",
+    "repeat = 10 // 繰り返し回数": "repeat = 10 // Number of repetitions",
+    "// 煙の位置を引き継いで氷槍登場": "// Ice spear appears, inheriting the smoke's position",
+    "id = 2 // 槍のアニメーション番号": "id = 2 // Spear animation number",
+    "delay = 1 // 時間差": "delay = 1 // Time delay",
+    "// 氷槍を上に移動": "// Move the ice spear upward",
+    "idの部分には自分で作成したアニメーションを設定してください。": "Set the animation you created yourself in the id portion.",
+    "先に煙のアニメーションから入って、その位置を槍に継承したほうがスムーズです。": "It is smoother to start with the smoke animation and then have the spear inherit its position.",
+    "突き刺さる槍（2022/04/30）": "Spear Impaling the Target (2022/04/30)",
+    "発射した槍が対象に突き刺さります。": "The launched spear impales the target.",
+    "槍についてはこれまでと同じ『Ice2』の固定パターンですが、今回はさらにアニメーションエディタ上で－９０度回転させて左向きにしています。": "The spear uses the same fixed pattern from “Ice2” as before, but this time I also rotated it −90 degrees in the Animation Editor so that it faces left.",
+    "ただし、セルの切り取りは、あくまで元の素材の向きが基準であることに注意してください。この例では元の素材が上向きなので、やはり上から下に向かって切り取っています。": "However, note that cell cropping is based on the orientation of the original material. In this example, the original material faces upward, so it is still cropped from top to bottom.",
+    "※左向きの素材を用いる場合は項目名が『cellStartX』『cellEndX』となります。": "※When using a left-facing material, the parameter names are “cellStartX” and “cellEndX”.",
+    "着弾については上で使用した煙をそのまま流用しています。": "For the impact, I reused the smoke from above as-is.",
+    "// 槍（投げる）": "// Spear (thrown)",
+    "id = 1// 槍のアニメーション番号": "id = 1// Spear animation number",
+    "// 槍（刺さった状態）": "// Spear (embedded)",
+    "addX = 192 * 0.35 / 2 // Ｘ座標微調整": "addX = 192 * 0.35 / 2 // Fine-tune X-coordinate",
+    "cellStartY = 0.5 // 開始部位": "cellStartY = 0.5 // Start segment",
+    "cellEndY = 0.85 // 終了部位": "cellEndY = 0.85 // End segment",
+    "// 着弾アニメ": "// Impact animation",
+    "id = 2 // 着弾のアニメーション": "id = 2 // Impact animation",
+    "『cellStartY = 0.5』は刺さった状態を表現するため、セルを半分だけ表示しているという意味です。": " \"cellStartY = 0.5” means that only half of the cell is displayed to depict the impaled state.",
+    "セルを削ったことによってＸ座標がズレるので『addX = 192 * 0.35 / 2』で調整しています。この『0.35』はcellStartY同士（0.5 - 0.15）の差分です。": "Cropping the cell shifts the X coordinate, so I adjust it with “addX = 192 * 0.35 / 2.” This “0.35” is the difference between the cellStartY values (0.5 - 0.15).",
+    "横穴から射出する槍（2022/04/30）": "Spear Launched from a Side Opening (2022/04/30)",
+    "横穴から現れた槍を発射します。": "A spear emerging from a side opening is launched.",
+    "『槍』の他にも『穴』と『着弾』のアニメーションが必要です。": "In addition to the “Spear,” you also need “Opening” and “Impact” animations.",
+    "槍については『Darkness2』の固定パターンを使用し、さらにアニメーションエディタ上で－９０度回転させて左向きにしています。今回は比較的大きな素材画像だったため、cellStartY は指定していません。": "For the spear, I used a fixed pattern from “Darkness2,” then rotated it −90 degrees in the Animation Editor so that it faces left. Since the source image was relatively large this time, I did not specify cellStartY.",
+    "穴については『Darkness4』の固定パターンを使用していますが、黒い丸なら何でもＯＫです。DynamicAnimation側で縦に引き伸ばしています。開始時の拡大および終了時の縮小については、普通にアニメーションエディタ側で設定しています。": "For the opening, I used a fixed pattern from “Darkness4,” but any black circle will work. I stretched it vertically in DynamicAnimation. The enlargement at the start and reduction at the end were set normally in the Animation Editor.",
+    "着弾についても『Darkness4』で作成していますが、爆発っぽいアニメーションなら何でも構いません。手っ取り早くやりたいなら『107: 無属性/単体2』をそのまんま指定してもＯＫ。": "I also created the impact effect using “Darkness4,” but any explosion-like animation will do. If you want to do this quickly, you can simply specify “107: Non-Elemental/Single 2” as is.",
+    "// 横列攻撃": "// Horizontal row attack",
+    "// 穴": "// Hole",
+    "id = 1 // 穴のアニメーション番号": "id = 1 // Hole animation number",
+    "position = 3 // 全体表示": "position = 3 // Display the entire image",
+    "sx = defaultX + 200 * mirroring // 全体表示位置より右に表示": "sx = defaultX + 200 * mirroring // Display to the right of the full-display position",
+    "sy = b.y - b.height/2 // 縦の中央": "sy = b.y - b.height/2 // Vertical center",
+    "scaleX = 0.5 // 横に縮める": "scaleX = 0.5 // Shrink horizontally",
+    "scaleY = 3 // 縦に伸ばす": "scaleY = 3 // Stretch vertically",
+    "z = 7 // 槍より下に表示": "z = 7 // Display below the spear",
+    "// 槍（出現）": "// Spear (Appearance)",
+    "delay = 3 // 時間差": "delay = 3 // Time delay",
+    "ex = sx - (192 / 2) * mirroring // 描画Ｘ座標の調整": "ex = sx - (192 / 2) * mirroring // Adjust drawing X coordinate",
+    "syRandom = 60 // Ｙ座標のバラツキ": "syRandom = 60 // Y-coordinate variation",
+    "cellEndY = t/et // 終了部位": "cellEndY = t/et // Ending section",
+    "// 槍（発射）": "// Spear (Launch)",
+    "// 着弾エフェクト": "// Impact effect",
+    "id = 3 // 着弾のアニメーション番号": "id = 3 // Impact animation number",
+    "delay = 7 // 時間差": "delay = 7 // Time delay",
+    "『position = 3』を指定することによってアニメーション（穴と槍）が敵全体に対して一つだけ表示されるようになります。": "Specifying “position = 3” causes a single animation (the hole and spears) to be displayed for the entire group of enemies.",
+    "この際、『sx = defaultX + 200 * mirroring』にある『defaultX』という値が敵全体の中央となるＸ座標です。その200ピクセル右から、穴と槍が出現するという仕組みですね。": "Here, the value “defaultX” in “sx = defaultX + 200 * mirroring” is the X-coordinate at the center of the entire enemy group. The hole and spears appear 200 pixels to the right of that point.",
+    "一方で着弾に関しては対象毎に表示しています。": "On the other hand, the impact effect is displayed for each target.",
+    "なお、mirroring指定によって、敵が使用した場合も自動で左右反転されます。": "Also, specifying mirroring automatically flips the animation horizontally when it is used by an enemy."
+  }
+}

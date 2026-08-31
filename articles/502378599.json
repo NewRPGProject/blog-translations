@@ -1,0 +1,882 @@
+{
+  "articleId": "502378599",
+  "sourceUrl": "https://newrpg.seesaa.net/article/502378599.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "4c0898e082e284e6e4c541345064175252463221e94fc6f69817415369bdaf58",
+  "translatedAt": "2026-08-31T05:23:33.237Z",
+  "title": "Change the Menu Screen Background [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "メニュー画面の背景を変更【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "3c7838a147963a056d8e6d179c320e243090050f396803be89a5da4bb3a0ae15",
+      "translation": "Change the Menu Screen Background [RPG Maker MZ & MV Plugin]",
+      "contextHash": "3c7838a147963a056d8e6d179c320e243090050f396803be89a5da4bb3a0ae15"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "メニュー画面の背景を変更します。",
+      "sourceHash": "2804d8108800d7c54cef94f0300a035be595051a19706bf5e7bc9be65c8ec7a8",
+      "translation": "Changes the menu screen background.",
+      "contextHash": "2804d8108800d7c54cef94f0300a035be595051a19706bf5e7bc9be65c8ec7a8"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "背景をスクロールさせたり、スイッチで背景を切り替える設定も可能です。",
+      "sourceHash": "19a3779a6044c60a5eb4fdde015c8b151c37b2c9b26b2fe37798986b9c1e9811",
+      "translation": "You can also set the background to scroll or switch backgrounds using switches.",
+      "contextHash": "19a3779a6044c60a5eb4fdde015c8b151c37b2c9b26b2fe37798986b9c1e9811"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "実際にはメニューだけでなく、オプション、セーブ／ロード、ゲーム終了、店、名前入力の各シーンも対象となることにご注意ください。",
+      "sourceHash": "8f2f5ef8babbe2530cd2625eea517ba6d8ab094120f8081364bc9d37d52cf9cf",
+      "translation": "Please note that this applies not only to the menu, but also to the Options, Save/Load, Game End, Shop, and Name Input scenes.",
+      "contextHash": "8f2f5ef8babbe2530cd2625eea517ba6d8ab094120f8081364bc9d37d52cf9cf"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "（厳密には、Scene_MenuBaseを継承したシーン）",
+      "sourceHash": "f9927606de24dbe8b2d81b23da1102aea4eb9a57b8fa70385684d191a08037a5",
+      "translation": "(Strictly speaking, scenes that inherit from Scene_MenuBase)",
+      "contextHash": "f9927606de24dbe8b2d81b23da1102aea4eb9a57b8fa70385684d191a08037a5"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "各シーン毎に背景を変更することも可能です。",
+      "sourceHash": "c3cfa2adadf05b547bb4a09f5e2258c55cdf2e944d4ebe1c653cf19db2506a10",
+      "translation": "You can also change the background for each scene.",
+      "contextHash": "c3cfa2adadf05b547bb4a09f5e2258c55cdf2e944d4ebe1c653cf19db2506a10"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the function ON from the plugin manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_MenuBackground.js",
+      "sourceHash": "eb85e676a6e2360056937ad353b202b770f81cb6257ddb2f7b4e0453b49c720b",
+      "translation": "NRP_MenuBackground.js ",
+      "contextHash": "a4cc567eab05c009f2d15415051e3093177bc41ede904c7e0af7a093abba122d"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.00（2024/02/18）",
+      "sourceHash": "4298f1807d8891fdcdeabc4a7793db3508308d1ca41e31a497e70f2f5c78fb2b",
+      "translation": "ver1.00 (2024/02/18) ",
+      "contextHash": "a4cc567eab05c009f2d15415051e3093177bc41ede904c7e0af7a093abba122d"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2023/02/18（ver1.00）",
+      "sourceHash": "b18a52f2eb77424c53401c869d9d0794f50cf78fcac0419925dd44d5549a05bd",
+      "translation": "2023/02/18 (ver1.00) ",
+      "contextHash": "b18a52f2eb77424c53401c869d9d0794f50cf78fcac0419925dd44d5549a05bd"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "プラグインパラメータの共通設定に背景画像を設定すると、対象の全シーンに背景が表示されるようになります。",
+      "sourceHash": "ec5dfc46771084a043ec380e64a43b7698fe49d7827b2c2d16af1b48a8650106",
+      "translation": "Set a background image in the common settings of the plugin parameters, and the background will be displayed in all applicable scenes.",
+      "contextHash": "ec5dfc46771084a043ec380e64a43b7698fe49d7827b2c2d16af1b48a8650106"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "各シーン毎に設定を変更したい場合は『背景リスト』を選択して、詳細設定をしてください。初期状態で主なシーンはあらかじめ設定しているので、お好みで設定を変更してください。",
+      "sourceHash": "0c311d93b55b86844c1bd183aea6e5ce2328a56aa671f3208212edce97f00702",
+      "translation": "To change the settings for each scene, select “Background List” and configure the details. The main scenes are configured in advance by default, so change the settings as you like.",
+      "contextHash": "0c311d93b55b86844c1bd183aea6e5ce2328a56aa671f3208212edce97f00702"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "Scene_Menu : メニュー画面（トップ）",
+      "sourceHash": "fdf6fb87aa2218c71d989775dd795a2acac1db5901af93479c03ec33f4da76e0",
+      "translation": "Scene_Menu: Menu screen (top)",
+      "contextHash": "fdf6fb87aa2218c71d989775dd795a2acac1db5901af93479c03ec33f4da76e0"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "Scene_Item : アイテム画面",
+      "sourceHash": "a6b3c59bc2ce793143ca4987f6c1a5183eec481f0535f509a7941be25dd8d118",
+      "translation": "Scene_Item: Item screen",
+      "contextHash": "a6b3c59bc2ce793143ca4987f6c1a5183eec481f0535f509a7941be25dd8d118"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "Scene_Equip : 装備画面",
+      "sourceHash": "dd4101e3f2a457036e5fbb94fd776461e44260397042ff2c04cf75c15f751788",
+      "translation": "Scene_Equip: Equip screen",
+      "contextHash": "dd4101e3f2a457036e5fbb94fd776461e44260397042ff2c04cf75c15f751788"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "Scene_Skill : スキル画面",
+      "sourceHash": "be6b3a88ad4a3d50c0ef5379bfaba6032db736f6128d0e1de9f14fcc209a3cd9",
+      "translation": "Scene_Skill: Skill screen",
+      "contextHash": "be6b3a88ad4a3d50c0ef5379bfaba6032db736f6128d0e1de9f14fcc209a3cd9"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "Scene_Status : ステータス画面",
+      "sourceHash": "e29b4f6c1f7d72c0c388a41c31661a4b1509ce311e935113e696eafd5c2d3cef",
+      "translation": "Scene_Status: Status screen",
+      "contextHash": "e29b4f6c1f7d72c0c388a41c31661a4b1509ce311e935113e696eafd5c2d3cef"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "Scene_Options : オプション画面",
+      "sourceHash": "2bdfcfbace3d86a5111dca1091ff337fd11dc5ccc15329e3688c67ed696e957d",
+      "translation": "Scene_Options: Options screen",
+      "contextHash": "2bdfcfbace3d86a5111dca1091ff337fd11dc5ccc15329e3688c67ed696e957d"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "Scene_Save : セーブ画面",
+      "sourceHash": "65817b69ff28be7b6997690b8124cc27dfca3842944b3db119ae3f4dc634897b",
+      "translation": "Scene_Save: Save screen",
+      "contextHash": "65817b69ff28be7b6997690b8124cc27dfca3842944b3db119ae3f4dc634897b"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "Scene_Load : ロード画面",
+      "sourceHash": "63ee749fcc85a0452edb121222c0c4b6360853e9a83ffc104a4957607a7a684f",
+      "translation": "Scene_Load: Load screen",
+      "contextHash": "63ee749fcc85a0452edb121222c0c4b6360853e9a83ffc104a4957607a7a684f"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "Scene_GameEnd : ゲーム終了画面",
+      "sourceHash": "0424aae42b835ebe31cf20726cac1930122e611d462e811cf8d2fce9d11ce834",
+      "translation": "Scene_GameEnd: Game End screen",
+      "contextHash": "0424aae42b835ebe31cf20726cac1930122e611d462e811cf8d2fce9d11ce834"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "Scene_Shop : ショップ画面",
+      "sourceHash": "60dcb7dcc99e2b6b85b3f1e6921ad943e9bdb025fe3a41dc7e2d552fd11b398e",
+      "translation": "Scene_Shop: Shop screen",
+      "contextHash": "60dcb7dcc99e2b6b85b3f1e6921ad943e9bdb025fe3a41dc7e2d552fd11b398e"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "Scene_Name : 名前入力画面",
+      "sourceHash": "c7f57d4a4476d787cfbbb85f5e483e94680a21bec2a0d87190a3c8bf9124a718",
+      "translation": "Scene_Name: Name Input screen",
+      "contextHash": "c7f57d4a4476d787cfbbb85f5e483e94680a21bec2a0d87190a3c8bf9124a718"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "上記にはない外部プラグインで追加したシーン（Scene_MenuBaseを継承）も、対応するシーン名を手入力すれば変更されるはずです。",
+      "sourceHash": "5b11e2a5960d14328b90c9d06bcf79558dc9933a6aa9e982aaf92da862e76061",
+      "translation": "Scenes added by external plugins not listed above (inheriting from Scene_MenuBase) should also be changed if you manually enter the corresponding scene name.",
+      "contextHash": "5b11e2a5960d14328b90c9d06bcf79558dc9933a6aa9e982aaf92da862e76061"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "「Scene_」の文字列でプラグイン内を検索してみるとよさげです。",
+      "sourceHash": "b7030b1f9dd9b0da2efdb720d2c2e02d596deb3c7e0c315392483e92d748ef04",
+      "translation": "Searching the plugin for the string “Scene_” should help.",
+      "contextHash": "b7030b1f9dd9b0da2efdb720d2c2e02d596deb3c7e0c315392483e92d748ef04"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "背景の変更（Change Background）",
+      "sourceHash": "df7a6fa622c8cc2d2ffe683a6163bd3669d29356778c1dfedf79862fd91b4829",
+      "translation": "Changing the Background (Change Background)",
+      "contextHash": "df7a6fa622c8cc2d2ffe683a6163bd3669d29356778c1dfedf79862fd91b4829"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "当プラグインではスイッチを条件にして、各シーンの背景を変更できます。",
+      "sourceHash": "681a277358e1bcf603a4fdad385d3ab3f5b6f0dee7579c46f01fd04fad4a885e",
+      "translation": "This plugin allows you to change the background of each scene based on switches.",
+      "contextHash": "681a277358e1bcf603a4fdad385d3ab3f5b6f0dee7579c46f01fd04fad4a885e"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "シーンを『ALL』に設定し、スイッチを条件に設定すれば、条件次第で背景が変化するようにできます。",
+      "sourceHash": "2d74632129177f2169f4340f3e8ee2a62a737eb3de5d6d6bcd5641abbfc57272",
+      "translation": "By setting the scene to “ALL” and specifying a switch as a condition, you can make the background change depending on the conditions.",
+      "contextHash": "2d74632129177f2169f4340f3e8ee2a62a737eb3de5d6d6bcd5641abbfc57272"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "例えば、物語の進行や現在地、時間帯に応じて背景を変化させることができます。",
+      "sourceHash": "540c9411e1a294ac86cf7aff81fcb43a63513edc0d27ffb386f571017481bfb3",
+      "translation": "For example, you can change the background according to story progression, current location, or time of day.",
+      "contextHash": "540c9411e1a294ac86cf7aff81fcb43a63513edc0d27ffb386f571017481bfb3"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "また、オプションやセーブ／ロード画面については通常、タイトルから呼び出した場合とメニューから呼び出した場合は区別されません。",
+      "sourceHash": "87e767aeaa58cb455d0bf61b427614460858b7b80f05ee2a6f5fad634ec97fe0",
+      "translation": "Normally, the Options and Save/Load screens are not distinguished when called from the title screen or from the menu.",
+      "contextHash": "87e767aeaa58cb455d0bf61b427614460858b7b80f05ee2a6f5fad634ec97fe0"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ゲーム中は常にオンとなるスイッチを用意することで、区別する方法があります。",
+      "sourceHash": "b38c370f60f07063404d3cb09100caf69dcd6c77670018a651f999873d0d9f91",
+      "translation": "You can distinguish them by preparing a switch that is always ON during gameplay.",
+      "contextHash": "b38c370f60f07063404d3cb09100caf69dcd6c77670018a651f999873d0d9f91"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "背景リスト（BackgroundList）",
+      "sourceHash": "1a09f005dc37d4c8d0c5d0d0398d000a3c6f3b6cd55a679968ee7e684dd40738",
+      "translation": "Background List (BackgroundList)",
+      "contextHash": "1a09f005dc37d4c8d0c5d0d0398d000a3c6f3b6cd55a679968ee7e684dd40738"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "シーン毎の背景画像を管理するリストです。",
+      "sourceHash": "e4a7c8d42afd64bf1120c0678dc42a218526016d521acff05459049194451009",
+      "translation": "This is a list for managing the background image for each scene.",
+      "contextHash": "e4a7c8d42afd64bf1120c0678dc42a218526016d521acff05459049194451009"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "複数の条件が満たされた場合は上が優先されます。",
+      "sourceHash": "abbd0cffac955c46d10612c1e83314991bf238f41799d19ddfa3b8380305d2bc",
+      "translation": "If multiple conditions are met, the one higher on the list takes priority.",
+      "contextHash": "abbd0cffac955c46d10612c1e83314991bf238f41799d19ddfa3b8380305d2bc"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "背景画像（BackgroundImage）",
+      "sourceHash": "73b509154aa57a3f6fb38de2e32b51a79e12a9c52dea57f988ec720d8129ff72",
+      "translation": "Background Image (BackgroundImage)",
+      "contextHash": "73b509154aa57a3f6fb38de2e32b51a79e12a9c52dea57f988ec720d8129ff72"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "メニューに適用する背景画像です。背景リストの指定がなかった場合の既定値となります。",
+      "sourceHash": "785f878480fbff72330c4cdc09a9d7b5a19855b4c1ba774311fcbfe695447ed8",
+      "translation": "The background image applied to the menu. This is the default value when no background list entry is specified.",
+      "contextHash": "785f878480fbff72330c4cdc09a9d7b5a19855b4c1ba774311fcbfe695447ed8"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "Ｘ方向のスクロール（ScrollX）",
+      "sourceHash": "04ee7bae66b7876a61ea7578cc0cd74cde251ada856f38c3e70df6f6a4bd6c44",
+      "translation": "Scroll in the X Direction (ScrollX)",
+      "contextHash": "04ee7bae66b7876a61ea7578cc0cd74cde251ada856f38c3e70df6f6a4bd6c44"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "背景の横方向へのスクロール速度です。",
+      "sourceHash": "7a4b04d3575f461b37fa137d26c07dc0f6720fdbbd12f40b1d0b80bfbadb24cd",
+      "translation": "The horizontal scrolling speed of the background.",
+      "contextHash": "7a4b04d3575f461b37fa137d26c07dc0f6720fdbbd12f40b1d0b80bfbadb24cd"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "Ｙ方向のスクロール（ScrollY）",
+      "sourceHash": "83b12d8abbd3b091f142657810f32da67a3d48899aafaf08d33fce5d3c9c0bc8",
+      "translation": "Scroll in the Y Direction (ScrollY)",
+      "contextHash": "83b12d8abbd3b091f142657810f32da67a3d48899aafaf08d33fce5d3c9c0bc8"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "背景の縦方向へのスクロール速度です。",
+      "sourceHash": "bc191cff8aef7e49011c52a34ee022d1e02867ea237fab44e2e2bbf99a5a7540",
+      "translation": "The vertical scrolling speed of the background.",
+      "contextHash": "bc191cff8aef7e49011c52a34ee022d1e02867ea237fab44e2e2bbf99a5a7540"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "背景のパラメータ（BackgroundParameters）",
+      "sourceHash": "a5fdb25da703f03c27e1a5941330a93ac0051fd33337c30876f4eadf839a2ac9",
+      "translation": "Background Parameters (BackgroundParameters)",
+      "contextHash": "a5fdb25da703f03c27e1a5941330a93ac0051fd33337c30876f4eadf839a2ac9"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "シーン（Scene）",
+      "sourceHash": "eb43991ab0eef3b8ef46e7d6775c6d8fea55e38a90e6331b499f2d636f0f4c7f",
+      "translation": "Scene (Scene)",
+      "contextHash": "eb43991ab0eef3b8ef46e7d6775c6d8fea55e38a90e6331b499f2d636f0f4c7f"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "対象とするシーン（コンボ形式）です。",
+      "sourceHash": "941498fcfd0012c289c0d792570720e7ad2f188bc7d461a63fe1429117cf1038",
+      "translation": "The target scene (combo box format).",
+      "contextHash": "941498fcfd0012c289c0d792570720e7ad2f188bc7d461a63fe1429117cf1038"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "既存のシーンを選択する他にも、追加のシーンを手入力できます。",
+      "sourceHash": "c74b6c4b91eecf836bbad15bbfd10034579b3af8aec4fd77bd5a8b5b35f547a1",
+      "translation": "In addition to selecting an existing scene, you can manually enter an additional scene.",
+      "contextHash": "c74b6c4b91eecf836bbad15bbfd10034579b3af8aec4fd77bd5a8b5b35f547a1"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "ALLは全体の設定になります。",
+      "sourceHash": "b6978f6da6d4c58e2b43086121b3edcada6670cd6ee5b880c52f67a48ef1b089",
+      "translation": "ALL applies the settings globally.",
+      "contextHash": "b6978f6da6d4c58e2b43086121b3edcada6670cd6ee5b880c52f67a48ef1b089"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "メモ（Note）",
+      "sourceHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1",
+      "translation": "Note (Note)",
+      "contextHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "説明用のメモです。",
+      "sourceHash": "073d1992229d4f68501ca8d01cb81cfd99f03b7c0976c4bc9c0cfaf0a8f01127",
+      "translation": "This is a memo for explanation.",
+      "contextHash": "073d1992229d4f68501ca8d01cb81cfd99f03b7c0976c4bc9c0cfaf0a8f01127"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "ゲーム中には表示されません。",
+      "sourceHash": "7ae2d5d83b910ebf900ce529cd11d7cc3a00cf2a1fd6a2272dc7963ffe21e9bb",
+      "translation": "It is not displayed in-game.",
+      "contextHash": "7ae2d5d83b910ebf900ce529cd11d7cc3a00cf2a1fd6a2272dc7963ffe21e9bb"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "無効化（Disabled）",
+      "sourceHash": "ac95749d7c0b653d81693b1c8424d87dde0a34bb5aac2bd381862521ce35db0e",
+      "translation": "Disabled (Disabled)",
+      "contextHash": "ac95749d7c0b653d81693b1c8424d87dde0a34bb5aac2bd381862521ce35db0e"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "背景の適用をせず無効化します。",
+      "sourceHash": "0ed40e2821fb279832285501a33190f14f6c7f51cd29bd55e6f29e941b00492d",
+      "translation": "Disables the background without applying it.",
+      "contextHash": "0ed40e2821fb279832285501a33190f14f6c7f51cd29bd55e6f29e941b00492d"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "共通の背景も無効になります。",
+      "sourceHash": "d90be4d71caa4defa825562da54481cb3c48817c0bf088950242cb594470ea80",
+      "translation": "The common background is also disabled.",
+      "contextHash": "d90be4d71caa4defa825562da54481cb3c48817c0bf088950242cb594470ea80"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "背景画像（BackgroundImage）",
+      "sourceHash": "73b509154aa57a3f6fb38de2e32b51a79e12a9c52dea57f988ec720d8129ff72",
+      "translation": "Background Image (BackgroundImage)",
+      "contextHash": "73b509154aa57a3f6fb38de2e32b51a79e12a9c52dea57f988ec720d8129ff72"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "シーンに適用する背景画像です。",
+      "sourceHash": "3b5c3c0cafa714ce9f6cf4238dea37a0634c8a2b3dde2eab16fbb7d7ac92eb64",
+      "translation": "The background image to apply to the scene.",
+      "contextHash": "3b5c3c0cafa714ce9f6cf4238dea37a0634c8a2b3dde2eab16fbb7d7ac92eb64"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "空欄だと共通の値を使用します。",
+      "sourceHash": "6a26618a53d71197ab9e3f1f69c70099ac35bd724cda1a7b18433936ebdf49d1",
+      "translation": "If left blank, the common value is used.",
+      "contextHash": "6a26618a53d71197ab9e3f1f69c70099ac35bd724cda1a7b18433936ebdf49d1"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "Ｘ方向のスクロール（ScrollX）",
+      "sourceHash": "04ee7bae66b7876a61ea7578cc0cd74cde251ada856f38c3e70df6f6a4bd6c44",
+      "translation": "Scroll in the X Direction (ScrollX)",
+      "contextHash": "04ee7bae66b7876a61ea7578cc0cd74cde251ada856f38c3e70df6f6a4bd6c44"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "背景の横方向へのスクロール速度です。",
+      "sourceHash": "7a4b04d3575f461b37fa137d26c07dc0f6720fdbbd12f40b1d0b80bfbadb24cd",
+      "translation": "The horizontal scrolling speed of the background.",
+      "contextHash": "7a4b04d3575f461b37fa137d26c07dc0f6720fdbbd12f40b1d0b80bfbadb24cd"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "Ｙ方向のスクロール（ScrollY）",
+      "sourceHash": "83b12d8abbd3b091f142657810f32da67a3d48899aafaf08d33fce5d3c9c0bc8",
+      "translation": "Scroll in the Y Direction (ScrollY)",
+      "contextHash": "83b12d8abbd3b091f142657810f32da67a3d48899aafaf08d33fce5d3c9c0bc8"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "背景の縦方向へのスクロール速度です。",
+      "sourceHash": "bc191cff8aef7e49011c52a34ee022d1e02867ea237fab44e2e2bbf99a5a7540",
+      "translation": "The vertical scrolling speed of the background.",
+      "contextHash": "bc191cff8aef7e49011c52a34ee022d1e02867ea237fab44e2e2bbf99a5a7540"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "背景を有効にするスイッチです。",
+      "sourceHash": "f01a1cdb70eeed257d35bb570d393f56e5a4fba4f1dc2cfbebe7a35f1dd5bc83",
+      "translation": "The switch that enables the background.",
+      "contextHash": "f01a1cdb70eeed257d35bb570d393f56e5a4fba4f1dc2cfbebe7a35f1dd5bc83"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]背景の変更（Change Background）[[/LINK_1]]",
+      "sourceHash": "dd31bc45c90873db6d80cb2692e91680a4d3718eaf8d4b5576c05996f651f076",
+      "parts": [
+        {
+          "source": "背景の変更（Change Background）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Background (Change Background)[[/LINK_1]]",
+      "contextHash": "dd31bc45c90873db6d80cb2692e91680a4d3718eaf8d4b5576c05996f651f076"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]背景リスト（BackgroundList）[[/LINK_1]]",
+      "sourceHash": "5721e1136563c86d63d57b667a7b7026b2831d6a6062fe887b336c6908b77577",
+      "parts": [
+        {
+          "source": "背景リスト（BackgroundList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Background List (BackgroundList)[[/LINK_1]]",
+      "contextHash": "5721e1136563c86d63d57b667a7b7026b2831d6a6062fe887b336c6908b77577"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]背景画像（BackgroundImage）[[/LINK_1]]",
+      "sourceHash": "9a51ca37349c595d063208382f88db3091f21de2feac279e2fa9a9be02866c9b",
+      "parts": [
+        {
+          "source": "背景画像（BackgroundImage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Background Image (BackgroundImage)[[/LINK_1]]",
+      "contextHash": "9a51ca37349c595d063208382f88db3091f21de2feac279e2fa9a9be02866c9b"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]Ｘ方向のスクロール（ScrollX）[[/LINK_1]]",
+      "sourceHash": "4ecf1ebc1e91546c645c8cf1177c9288fc702f52afd439724de863f7cb3e331a",
+      "parts": [
+        {
+          "source": "Ｘ方向のスクロール（ScrollX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]X-Axis Scrolling (ScrollX)[[/LINK_1]]",
+      "contextHash": "4ecf1ebc1e91546c645c8cf1177c9288fc702f52afd439724de863f7cb3e331a"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]Ｙ方向のスクロール（ScrollY）[[/LINK_1]]",
+      "sourceHash": "8e516406eab4dad0f3b8eb82fe60e3868ec54c0b9bba9dc4bb62a4ddb522115d",
+      "parts": [
+        {
+          "source": "Ｙ方向のスクロール（ScrollY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Y-Axis Scrolling (ScrollY)[[/LINK_1]]",
+      "contextHash": "8e516406eab4dad0f3b8eb82fe60e3868ec54c0b9bba9dc4bb62a4ddb522115d"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]背景のパラメータ（BackgroundParameters）[[/LINK_1]]",
+      "sourceHash": "8090eeff3a7a6b4ffdd6fe66419bd7744cf167ebf8c4711e7029b64646bbca09",
+      "parts": [
+        {
+          "source": "背景のパラメータ（BackgroundParameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Background Parameters (BackgroundParameters)[[/LINK_1]]",
+      "contextHash": "8090eeff3a7a6b4ffdd6fe66419bd7744cf167ebf8c4711e7029b64646bbca09"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]シーン（Scene）[[/LINK_1]]",
+      "sourceHash": "f9037ff795a6895a007608de861e17942b256e4af1a8b3f31fa26440ed5bb972",
+      "parts": [
+        {
+          "source": "シーン（Scene）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Scene (Scene)[[/LINK_1]]",
+      "contextHash": "f9037ff795a6895a007608de861e17942b256e4af1a8b3f31fa26440ed5bb972"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]メモ（Note）[[/LINK_1]]",
+      "sourceHash": "aa07858377fae4da5c7d58eee76b739f8aebb5046e5b94b44d3b3fd5b5616552",
+      "parts": [
+        {
+          "source": "メモ（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Note (Note)[[/LINK_1]]",
+      "contextHash": "aa07858377fae4da5c7d58eee76b739f8aebb5046e5b94b44d3b3fd5b5616552"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]無効化（Disabled）[[/LINK_1]]",
+      "sourceHash": "d9dc49e5501a1db7853582e3de93e65a2f029bd99413ba32de62b0e9322a3534",
+      "parts": [
+        {
+          "source": "無効化（Disabled）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disabled (Disabled)[[/LINK_1]]",
+      "contextHash": "d9dc49e5501a1db7853582e3de93e65a2f029bd99413ba32de62b0e9322a3534"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]背景画像（BackgroundImage）[[/LINK_1]]",
+      "sourceHash": "9a51ca37349c595d063208382f88db3091f21de2feac279e2fa9a9be02866c9b",
+      "parts": [
+        {
+          "source": "背景画像（BackgroundImage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Background Image (BackgroundImage)[[/LINK_1]]",
+      "contextHash": "9a51ca37349c595d063208382f88db3091f21de2feac279e2fa9a9be02866c9b"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]Ｘ方向のスクロール（ScrollX）[[/LINK_1]]",
+      "sourceHash": "4ecf1ebc1e91546c645c8cf1177c9288fc702f52afd439724de863f7cb3e331a",
+      "parts": [
+        {
+          "source": "Ｘ方向のスクロール（ScrollX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]X-Axis Scrolling (ScrollX)[[/LINK_1]]",
+      "contextHash": "4ecf1ebc1e91546c645c8cf1177c9288fc702f52afd439724de863f7cb3e331a"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]Ｙ方向のスクロール（ScrollY）[[/LINK_1]]",
+      "sourceHash": "8e516406eab4dad0f3b8eb82fe60e3868ec54c0b9bba9dc4bb62a4ddb522115d",
+      "parts": [
+        {
+          "source": "Ｙ方向のスクロール（ScrollY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Y-Axis Scrolling (ScrollY)[[/LINK_1]]",
+      "contextHash": "8e516406eab4dad0f3b8eb82fe60e3868ec54c0b9bba9dc4bb62a4ddb522115d"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]スイッチ（Switch）[[/LINK_1]]",
+      "sourceHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056",
+      "parts": [
+        {
+          "source": "スイッチ（Switch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch (Switch)[[/LINK_1]]",
+      "contextHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "メニュー画面の背景を変更します。": "Changes the menu screen background.",
+    "背景をスクロールさせたり、スイッチで背景を切り替える設定も可能です。": "You can also set the background to scroll or switch backgrounds using switches.",
+    "実際にはメニューだけでなく、オプション、セーブ／ロード、ゲーム終了、店、名前入力の各シーンも対象となることにご注意ください。": "Please note that this applies not only to the menu, but also to the Options, Save/Load, Game End, Shop, and Name Input scenes.",
+    "（厳密には、Scene_MenuBaseを継承したシーン）": "(Strictly speaking, scenes that inherit from Scene_MenuBase)",
+    "各シーン毎に背景を変更することも可能です。": "You can also change the background for each scene.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the function ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_MenuBackground.js": "NRP_MenuBackground.js ",
+    "ver1.00（2024/02/18）": "ver1.00 (2024/02/18) ",
+    "更新履歴（History）": "Update History (History)",
+    "2023/02/18（ver1.00）": "2023/02/18 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータの共通設定に背景画像を設定すると、対象の全シーンに背景が表示されるようになります。": "Set a background image in the common settings of the plugin parameters, and the background will be displayed in all applicable scenes.",
+    "各シーン毎に設定を変更したい場合は『背景リスト』を選択して、詳細設定をしてください。初期状態で主なシーンはあらかじめ設定しているので、お好みで設定を変更してください。": "To change the settings for each scene, select “Background List” and configure the details. The main scenes are configured in advance by default, so change the settings as you like.",
+    "Scene_Menu : メニュー画面（トップ）": "Scene_Menu: Menu screen (top)",
+    "Scene_Item : アイテム画面": "Scene_Item: Item screen",
+    "Scene_Equip : 装備画面": "Scene_Equip: Equip screen",
+    "Scene_Skill : スキル画面": "Scene_Skill: Skill screen",
+    "Scene_Status : ステータス画面": "Scene_Status: Status screen",
+    "Scene_Options : オプション画面": "Scene_Options: Options screen",
+    "Scene_Save : セーブ画面": "Scene_Save: Save screen",
+    "Scene_Load : ロード画面": "Scene_Load: Load screen",
+    "Scene_GameEnd : ゲーム終了画面": "Scene_GameEnd: Game End screen",
+    "Scene_Shop : ショップ画面": "Scene_Shop: Shop screen",
+    "Scene_Name : 名前入力画面": "Scene_Name: Name Input screen",
+    "上記にはない外部プラグインで追加したシーン（Scene_MenuBaseを継承）も、対応するシーン名を手入力すれば変更されるはずです。": "Scenes added by external plugins not listed above (inheriting from Scene_MenuBase) should also be changed if you manually enter the corresponding scene name.",
+    "「Scene_」の文字列でプラグイン内を検索してみるとよさげです。": "Searching the plugin for the string “Scene_” should help.",
+    "背景の変更（Change Background）": "Changing the Background (Change Background)",
+    "当プラグインではスイッチを条件にして、各シーンの背景を変更できます。": "This plugin allows you to change the background of each scene based on switches.",
+    "シーンを『ALL』に設定し、スイッチを条件に設定すれば、条件次第で背景が変化するようにできます。": "By setting the scene to “ALL” and specifying a switch as a condition, you can make the background change depending on the conditions.",
+    "例えば、物語の進行や現在地、時間帯に応じて背景を変化させることができます。": "For example, you can change the background according to story progression, current location, or time of day.",
+    "また、オプションやセーブ／ロード画面については通常、タイトルから呼び出した場合とメニューから呼び出した場合は区別されません。": "Normally, the Options and Save/Load screens are not distinguished when called from the title screen or from the menu.",
+    "ゲーム中は常にオンとなるスイッチを用意することで、区別する方法があります。": "You can distinguish them by preparing a switch that is always ON during gameplay.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "背景リスト（BackgroundList）": "Background List (BackgroundList)",
+    "シーン毎の背景画像を管理するリストです。": "This is a list for managing the background image for each scene.",
+    "複数の条件が満たされた場合は上が優先されます。": "If multiple conditions are met, the one higher on the list takes priority.",
+    "背景画像（BackgroundImage）": "Background Image (BackgroundImage)",
+    "メニューに適用する背景画像です。背景リストの指定がなかった場合の既定値となります。": "The background image applied to the menu. This is the default value when no background list entry is specified.",
+    "Ｘ方向のスクロール（ScrollX）": "Scroll in the X Direction (ScrollX)",
+    "背景の横方向へのスクロール速度です。": "The horizontal scrolling speed of the background.",
+    "Ｙ方向のスクロール（ScrollY）": "Scroll in the Y Direction (ScrollY)",
+    "背景の縦方向へのスクロール速度です。": "The vertical scrolling speed of the background.",
+    "背景のパラメータ（BackgroundParameters）": "Background Parameters (BackgroundParameters)",
+    "シーン（Scene）": "Scene (Scene)",
+    "対象とするシーン（コンボ形式）です。": "The target scene (combo box format).",
+    "既存のシーンを選択する他にも、追加のシーンを手入力できます。": "In addition to selecting an existing scene, you can manually enter an additional scene.",
+    "ALLは全体の設定になります。": "ALL applies the settings globally.",
+    "メモ（Note）": "Note (Note)",
+    "説明用のメモです。": "This is a memo for explanation.",
+    "ゲーム中には表示されません。": "It is not displayed in-game.",
+    "無効化（Disabled）": "Disabled (Disabled)",
+    "背景の適用をせず無効化します。": "Disables the background without applying it.",
+    "共通の背景も無効になります。": "The common background is also disabled.",
+    "シーンに適用する背景画像です。": "The background image to apply to the scene.",
+    "空欄だと共通の値を使用します。": "If left blank, the common value is used.",
+    "スイッチ（Switch）": "Switch (Switch)",
+    "背景を有効にするスイッチです。": "The switch that enables the background."
+  }
+}

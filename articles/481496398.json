@@ -1,0 +1,1463 @@
+{
+  "articleId": "481496398",
+  "sourceUrl": "https://newrpg.seesaa.net/article/481496398.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "ddc0639a479d20eb0581183400c47d8eea3a57a501787f82e9624828302a3a84",
+  "translatedAt": "2026-08-31T05:19:09.059Z",
+  "title": "Automatically Generate Events on Tiles [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "タイル上に自動でイベントを生成【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "3d620a5c0827e656e3c3265b19dfba8db6298d97a9e03bd4e3b6ef3e1c2d4e6a",
+      "translation": "Automatically Generate Events on Tiles [RPG Maker MZ & MV Plugin]",
+      "contextHash": "3d620a5c0827e656e3c3265b19dfba8db6298d97a9e03bd4e3b6ef3e1c2d4e6a"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "タイル上に自動でイベントを生成します。",
+      "sourceHash": "a55619e7c430691d0284c38b9d726400b080f4aefdde0f81d4ef9a0ee0beebd2",
+      "translation": "Automatically generates events on tiles.",
+      "contextHash": "a55619e7c430691d0284c38b9d726400b080f4aefdde0f81d4ef9a0ee0beebd2"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "タイルＩＤ、オートタイルタイプ、地形タグ、リージョンＩＤを条件にして、その上に自動で指定のイベントを生成します。",
+      "sourceHash": "7d5a188cba6aca0652c5c14f518a3faa96adc2ee34052948245e1eb0056441fb",
+      "translation": "Automatically generates specified events on tiles based on tile IDs, autotile types, terrain tags, and region IDs.",
+      "contextHash": "7d5a188cba6aca0652c5c14f518a3faa96adc2ee34052948245e1eb0056441fb"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "また、タイルを消去してイベントに置き換えることも可能です。",
+      "sourceHash": "850db3fa1c55b6579908a53a81dc910d91fe5d62b50162ca5437f676dff8edf4",
+      "translation": "Tiles can also be erased and replaced with events.",
+      "contextHash": "850db3fa1c55b6579908a53a81dc910d91fe5d62b50162ca5437f676dff8edf4"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※タイルＩＤ、オートタイルタイプが条件の場合のみ",
+      "sourceHash": "873d6b2af0f7ea9e035d79e54a401d60e64b76cf8d63b3c724c2746c8966c8b5",
+      "translation": "※Only when the conditions are tile IDs or autotile types",
+      "contextHash": "873d6b2af0f7ea9e035d79e54a401d60e64b76cf8d63b3c724c2746c8966c8b5"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "アニメーションするタイルなど様々な使い方が可能です。",
+      "sourceHash": "679da38b610cf120978a7b521b98f70d08a68361a12b3127b73af4f356e3bcb5",
+      "translation": "This can be used in various ways, such as for animated tiles.",
+      "contextHash": "679da38b610cf120978a7b521b98f70d08a68361a12b3127b73af4f356e3bcb5"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "マップ切替時またはプラグインコマンドによって実行します。",
+      "sourceHash": "86e19b5f3f2cde6142265625262305e391530737e6121d703688f9d354830d16",
+      "translation": "Runs when changing maps or via a plugin command.",
+      "contextHash": "86e19b5f3f2cde6142265625262305e391530737e6121d703688f9d354830d16"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインは色々と不安定です。必要性が薄いなら使用しないことをオススメします。",
+      "sourceHash": "b6edae3bd3b65ceeccc91cef916754b720724c4804be133249f36965b73a7a0e",
+      "translation": "※This plugin is somewhat unstable. I recommend not using it if it is not essential.",
+      "contextHash": "b6edae3bd3b65ceeccc91cef916754b720724c4804be133249f36965b73a7a0e"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Enable it from the RPG Maker plugin manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※Both MV and MZ are supported by all of these plugins.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TileToEvent.js",
+      "sourceHash": "9d984d74c869b194999364f15f97dee74aae882247e19be5518fa71af15b9e77",
+      "translation": "NRP_TileToEvent.js ",
+      "contextHash": "74c2440439fc953b288ec89e07bdc70caae08bf54377c1a26bae6fe1658bd9e8"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ver1.06（2024/04/29）",
+      "sourceHash": "9d127f130a06337fe2bd909d8f4d14a28d04f3daf5dd8cb10ae13abe34e23fbb",
+      "translation": "ver1.06 (2024/04/29) ",
+      "contextHash": "74c2440439fc953b288ec89e07bdc70caae08bf54377c1a26bae6fe1658bd9e8"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "オプション",
+      "sourceHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5",
+      "translation": "Options",
+      "contextHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DebugTile.js",
+      "sourceHash": "d839245e2d4ad88768cbb74e24135b6d06d5363d64d3fc85797e48514859684d",
+      "translation": "NRP_DebugTile.js ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ver1.01（2021/08/15）",
+      "sourceHash": "5951f72e8493d63ef9b4ecf28b1663a47bcbcd982784edf97350cbc43b29937d",
+      "translation": "ver1.01 (2021/08/15) ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_TileToEventの補助用に使えます。",
+      "sourceHash": "e13d4f41dfac4bb243229f8802671a843122c1c1afe88070cc2005b2d40acac6",
+      "translation": "※This plugin allows you to check the autotile type and tile ID at your feet simply by pressing F2. It can be used as an aid for NRP_TileToEvent.",
+      "contextHash": "e13d4f41dfac4bb243229f8802671a843122c1c1afe88070cc2005b2d40acac6"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/04/29（ver1.06）",
+      "sourceHash": "352c464703ea3e08e40dbcc5307751f7e38d9976f16ef31af34552c7371eccca",
+      "translation": "2024/04/29 (ver1.06) ",
+      "contextHash": "352c464703ea3e08e40dbcc5307751f7e38d9976f16ef31af34552c7371eccca"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ver1.052にて「ロード時にイベント初期化」がオンの場合、ロード時にタイルイベントが重複して作成されてしまう不具合修正。",
+      "sourceHash": "029199275e6c0b686073bb09587b0828c4915eec43f48b8692f20de305938db9",
+      "translation": "Fixed a bug in ver1.052 where duplicate tile events were created when loading if “Initialize Events on Load” was enabled.",
+      "contextHash": "029199275e6c0b686073bb09587b0828c4915eec43f48b8692f20de305938db9"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/07/18 -> 2024/04/28（ver1.05 -> 1.052）",
+      "sourceHash": "1b602dd3d47c4bee591f4681fef3aecb8a5f94131375e7f2fd08003fb2d6b878",
+      "translation": "2023/07/18 -> 2024/04/28 (ver1.05 -> 1.052) ",
+      "contextHash": "1b602dd3d47c4bee591f4681fef3aecb8a5f94131375e7f2fd08003fb2d6b878"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "『ロード時にイベント初期化』の既定値をオンに変更。",
+      "sourceHash": "7126f4b6fc1765607b582a4c85ef7945abaa7aefe3797d9709cc3e9299d9fe9e",
+      "translation": "Changed the default value of “Initialize Events on Load” to enabled.",
+      "contextHash": "7126f4b6fc1765607b582a4c85ef7945abaa7aefe3797d9709cc3e9299d9fe9e"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "マップリロード時にタイル置換が適切に行われない不具合修正。",
+      "sourceHash": "ef1bb49ea34b827b3f6ab532f5c055ef9f7ff21326bebb3af8ecbbf1a9b5fef1",
+      "translation": "Fixed a bug where tile replacement was not performed correctly when reloading a map.",
+      "contextHash": "ef1bb49ea34b827b3f6ab532f5c055ef9f7ff21326bebb3af8ecbbf1a9b5fef1"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "（2023/07/23 ver1.051）",
+      "sourceHash": "5a93205f22f0fd563dfe474ad90dcdd4fd5db2d0c55cc6d8ddb788a089746db0",
+      "translation": " (2023/07/23 ver1.051) ",
+      "contextHash": "5a93205f22f0fd563dfe474ad90dcdd4fd5db2d0c55cc6d8ddb788a089746db0"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "ロード時にエラーとなる競合用に調整。（2024/04/28 ver1.052）",
+      "sourceHash": "ac01fa854bf461d4b1d82613a7318a3a09495b91acdf1f603441dc53596d79d4",
+      "translation": "Adjusted for conflicts that caused errors when loading. (2024/04/28 ver1.052)",
+      "contextHash": "ac01fa854bf461d4b1d82613a7318a3a09495b91acdf1f603441dc53596d79d4"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2022/05/21 -> 2023/05/24（ver1.04 -> 1.042）",
+      "sourceHash": "0c2feef2f0c82c0aa537a0245a64788e41784683523fc062be3db9380517cc50",
+      "translation": "2022/05/21 -> 2023/05/24 (ver1.04 -> 1.042) ",
+      "contextHash": "0c2feef2f0c82c0aa537a0245a64788e41784683523fc062be3db9380517cc50"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "『画面外のイベント描画停止』がオンの場合、稀に置換する素材画像全体がチラ見えしてしまう不具合修正。",
+      "sourceHash": "5f37bf9f6005e81415ea059c8864dcdf779063c8ff080ec1cc9fa85bbb3208ee",
+      "translation": "Fixed a bug where, when “Stop Rendering Events Outside the Screen” was enabled, the entire replacement image would occasionally briefly appear.",
+      "contextHash": "5f37bf9f6005e81415ea059c8864dcdf779063c8ff080ec1cc9fa85bbb3208ee"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "マップ内のイベントＩＤが歯抜け状態の場合、イベントが正常動作しなくなることがある不具合修正。（2022/06/07 ver1.041）",
+      "sourceHash": "29be4cdf5284d4a68c07938a74a3cdf5832b26b3a955150126643a563a5cc084",
+      "translation": "Fixed a bug where events could stop functioning properly when event IDs on a map were not consecutive. (2022/06/07 ver1.041)",
+      "contextHash": "29be4cdf5284d4a68c07938a74a3cdf5832b26b3a955150126643a563a5cc084"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "レイヤー１にタイルが存在しない場合、リージョンや地形タグを条件とした置換に失敗する不具合修正。（2023/05/24 ver1.042）",
+      "sourceHash": "d268ab50f2f2659f96f32af212516c42eaa9764c76a8589225710b727c757c61",
+      "translation": "Fixed a bug where replacement based on regions or terrain tags failed when no tile existed on Layer 1. (2023/05/24 ver1.042)",
+      "contextHash": "d268ab50f2f2659f96f32af212516c42eaa9764c76a8589225710b727c757c61"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2022/01/15（ver1.03）",
+      "sourceHash": "c475f0ea097b431bee28888b8acd022446a2546a641d0811954572d8284e1749",
+      "translation": "2022/01/15 (ver1.03) ",
+      "contextHash": "c475f0ea097b431bee28888b8acd022446a2546a641d0811954572d8284e1749"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "マップ編集後のロード時も動作するように修正。",
+      "sourceHash": "74aa09160782b98c8801803fcacd91dcde0a07d0635908bd2bc3ba0371c9d2a3",
+      "translation": "Modified it to also work when loading after editing a map.",
+      "contextHash": "74aa09160782b98c8801803fcacd91dcde0a07d0635908bd2bc3ba0371c9d2a3"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2021/12/26（ver1.02 -> 1.021）",
+      "sourceHash": "02597b22651fcf3b6946059ad8d6b8eaa38d7d682026465b948cc46e4850447f",
+      "translation": "2021/12/26 (ver1.02 -> 1.021) ",
+      "contextHash": "02597b22651fcf3b6946059ad8d6b8eaa38d7d682026465b948cc46e4850447f"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "『タイルを置換する』がオンの置換処理を行った際、場所移動時に誤ったタイルを消去してしまう不具合を修正。",
+      "sourceHash": "a4233b246c5a0bb2f880e9dee9615b4f13e91b6643f2f8ad58c696948f3a7e03",
+      "translation": "Fixed a bug where incorrect tiles were erased when changing locations after performing replacement with “Replace Tiles” enabled.",
+      "contextHash": "a4233b246c5a0bb2f880e9dee9615b4f13e91b6643f2f8ad58c696948f3a7e03"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "同一マップ内での場所移動を考慮できてなかったので修正。（ver1.021）",
+      "sourceHash": "c9b86beb455588018a62beb09e6f870dd8114172123ea6bf360a4fcf3bde1335",
+      "translation": "Fixed an issue where movement within the same map was not taken into account. (ver1.021)",
+      "contextHash": "c9b86beb455588018a62beb09e6f870dd8114172123ea6bf360a4fcf3bde1335"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2021/09/11 -> 2021/11/11（ver1.01 -> 1.011）",
+      "sourceHash": "27ab730206e583ec4b48676560ddb6f037cbe2449003f532a0d16f5398f572af",
+      "translation": "2021/09/11 -> 2021/11/11 (ver1.01 -> 1.011) ",
+      "contextHash": "27ab730206e583ec4b48676560ddb6f037cbe2449003f532a0d16f5398f572af"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "セーブ後にエディタでイベントの追加・削除を行い、ロードするとエラーになることがある不具合に対処。",
+      "sourceHash": "f842da130fbc8eeb2da925dc908a52be8941e2da0a2edb0260460e3cea863025",
+      "translation": "Addressed a bug that could cause an error when loading after adding or deleting events in the editor following a save.",
+      "contextHash": "f842da130fbc8eeb2da925dc908a52be8941e2da0a2edb0260460e3cea863025"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "※完璧を約束するものではありませんが、ある程度は緩和できると思います。",
+      "sourceHash": "f7baced66dfce11034dd67cee3e1c13e324b4faf87ff49a3cf8829cbfb44422e",
+      "translation": "※This does not guarantee perfection, but I believe it can alleviate the issue to some extent.",
+      "contextHash": "f7baced66dfce11034dd67cee3e1c13e324b4faf87ff49a3cf8829cbfb44422e"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "イベントテストでエラーになる不具合修正。（11/11 ver1.011）",
+      "sourceHash": "9a3356a4c35b65c749a7d5846940006c55db2d2201cac0bc39dac8be3290ba68",
+      "translation": "Fixed a bug that caused an error during event testing. (11/11 ver1.011)",
+      "contextHash": "9a3356a4c35b65c749a7d5846940006c55db2d2201cac0bc39dac8be3290ba68"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2021/05/15（ver1.00）",
+      "sourceHash": "c28eec8608963e4e57bab2a1e9686c4e53a9c8f76bedfef7e1a21ac0f6428ebb",
+      "translation": "2021/05/15 (ver1.00) ",
+      "contextHash": "c28eec8608963e4e57bab2a1e9686c4e53a9c8f76bedfef7e1a21ac0f6428ebb"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "まずは生成したいイベントを準備します。",
+      "sourceHash": "2eaf93e5ea5604b02aa28e0768a613be6606e7c4003fabdf4fc7b0126f2b3106",
+      "translation": "First, prepare the event you want to generate.",
+      "contextHash": "2eaf93e5ea5604b02aa28e0768a613be6606e7c4003fabdf4fc7b0126f2b3106"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "テンプレート用のマップを作成し、イベントを作成する。",
+      "sourceHash": "3fa0a23009052110a3be7447e8bdb19d6b6ee4801e723261a2eb904e7f3fec2a",
+      "translation": "Create a map for templates and create an event.",
+      "contextHash": "3fa0a23009052110a3be7447e8bdb19d6b6ee4801e723261a2eb904e7f3fec2a"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "分かりやすくイベント名を付けておく。",
+      "sourceHash": "03f086674ca084021d368bfad1ac76f5656a35069a3cbecb0baf5125cbf8fe4e",
+      "translation": "Give the event an easy-to-understand name.",
+      "contextHash": "03f086674ca084021d368bfad1ac76f5656a35069a3cbecb0baf5125cbf8fe4e"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "プラグインパラメータのテンプレートマップＩＤに",
+      "sourceHash": "a7f2d37116c147c0c7cabae1dac7a9190f411a2e5cce97e44e76145c068229e9",
+      "translation": "Enter it in the Template Map ID plugin parameter",
+      "contextHash": "a7f2d37116c147c0c7cabae1dac7a9190f411a2e5cce97e44e76145c068229e9"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "先程のマップＩＤを登録。",
+      "sourceHash": "a4ac7449b7142d0fcca2d10d8116aa7608ea99be123a6fdd9b2226bc488a7579",
+      "translation": "Register the map ID from earlier.",
+      "contextHash": "a4ac7449b7142d0fcca2d10d8116aa7608ea99be123a6fdd9b2226bc488a7579"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "要するに公式ローンチプラグインのTemplateEvent.js（トリアコンタン様）とほぼ同じです。",
+      "sourceHash": "ee08490e9fdf7d9b6914e84c956669d0942807fc21a8e9b5aca3754b0c41d591",
+      "translation": "In short, it is nearly identical to the official launch plugin TemplateEvent.js (by Triacontane).",
+      "contextHash": "ee08490e9fdf7d9b6914e84c956669d0942807fc21a8e9b5aca3754b0c41d591"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "次にプラグインパラメータの『設定リスト』に条件を指定し、生成するイベントの『イベントID／名前』を入力します。",
+      "sourceHash": "a45bcd6ef6816c1a6eee7ebe2710633bdb0bf9ac64063bddc98316f4629c3274",
+      "translation": "Next, specify the conditions in the “Configuration List” plugin parameter and enter the “Event ID/Name” of the event to generate.",
+      "contextHash": "a45bcd6ef6816c1a6eee7ebe2710633bdb0bf9ac64063bddc98316f4629c3274"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "この際、参照用に『設定ＩＤ』を設定しておきます。",
+      "sourceHash": "d263be5c901a986079689e7ea67bf438634b17ff23a564f8230ad72dd25b4951",
+      "translation": "At this point, set a “Configuration ID” for reference.",
+      "contextHash": "d263be5c901a986079689e7ea67bf438634b17ff23a564f8230ad72dd25b4951"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※タイルＩＤやオートタイルタイプを参照したい場合は、付属の『NRP_DebugTile.js』が便利です。",
+      "sourceHash": "cf201f5f6a5fb1e6ee8a8e2f32ee42fe66a3a0204f79ed145bac082b21726ced",
+      "translation": "※If you want to check tile IDs or autotile types, the included “NRP_DebugTile.js” is useful.",
+      "contextHash": "cf201f5f6a5fb1e6ee8a8e2f32ee42fe66a3a0204f79ed145bac082b21726ced"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "最後にタイルセットのメモ欄に、先程の『設定ＩＤ』を登録すれば完了です。",
+      "sourceHash": "ffe8dc6744292c6681a2010ceeb2da48d829c1f918b232d7689a6b9ef95d06ef",
+      "translation": "Finally, register the “Configuration ID” from earlier in the tileset's note field to finish.",
+      "contextHash": "ffe8dc6744292c6681a2010ceeb2da48d829c1f918b232d7689a6b9ef95d06ef"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "以下の?の部分に入力してください。",
+      "sourceHash": "d9a6d11fe4da2fa4d3ecef054980a8e0d22ed562d0a42c4966348ea1bd8f7df4",
+      "translation": "Enter it in the ? portion below.",
+      "contextHash": "d9a6d11fe4da2fa4d3ecef054980a8e0d22ed562d0a42c4966348ea1bd8f7df4"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+      "sourceHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985",
+      "translation": "MZ Plugin Command (PluginCommandMZ)",
+      "contextHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ＩＤを指定して実行",
+      "sourceHash": "f0f9cbe2a05be87fafb4580b4ae2bd1d403b3daca855b386e2b104112eb521ba",
+      "translation": "Execute by Specifying an ID",
+      "contextHash": "f0f9cbe2a05be87fafb4580b4ae2bd1d403b3daca855b386e2b104112eb521ba"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "設定ＩＤを指定すれば処理が実行されます。",
+      "sourceHash": "ac7dab6e56c8443a8fac4c8ae8ec185b6c5f40bf273807ad36a6014106cd096c",
+      "translation": "The process will run when you specify a Configuration ID.",
+      "contextHash": "ac7dab6e56c8443a8fac4c8ae8ec185b6c5f40bf273807ad36a6014106cd096c"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "内容は上記の使用方法にて、タイルセットに設定ＩＤを登録した場合と同様です。",
+      "sourceHash": "33abab6e01d682c2200020fd014565552935cf522dfb26e66fcb67929b1fcd0e",
+      "translation": "The operation is the same as when a Configuration ID is registered in the tileset as described in the Usage section above.",
+      "contextHash": "33abab6e01d682c2200020fd014565552935cf522dfb26e66fcb67929b1fcd0e"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（PluginCommandMV）",
+      "sourceHash": "6ca0f5c392df82c64b4ef7deb797c246265beb8f4cf38134205b69706e8136a7",
+      "translation": "MV Plugin Command (PluginCommandMV)",
+      "contextHash": "6ca0f5c392df82c64b4ef7deb797c246265beb8f4cf38134205b69706e8136a7"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "NRP.TileToEvent.CallId [設定ＩＤ]",
+      "sourceHash": "c4640a9820761f25eb7944c92817a91f7362c4df63949b91101d3a1b3a97dae5",
+      "translation": "NRP.TileToEvent.CallId [Settings ID]",
+      "contextHash": "c4640a9820761f25eb7944c92817a91f7362c4df63949b91101d3a1b3a97dae5"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "処理内容はＭＺ版と同じです。",
+      "sourceHash": "81a587f1d6073f17654ea8f85e25e5f70c241329b2e3fa2a458aa10e9d5847ee",
+      "translation": "The operation is the same as in the MZ version.",
+      "contextHash": "81a587f1d6073f17654ea8f85e25e5f70c241329b2e3fa2a458aa10e9d5847ee"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※大文字小文字は不問。[]は含めないでください。",
+      "sourceHash": "b2225ab29fae281b7f7ba0158d2d4f1edb24fbd238c3d9859b40c20b5c468e99",
+      "translation": "※Case does not matter. Do not include [].",
+      "contextHash": "b2225ab29fae281b7f7ba0158d2d4f1edb24fbd238c3d9859b40c20b5c468e99"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "注意点（Notice）",
+      "sourceHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0",
+      "translation": "Notice (Notice)",
+      "contextHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ツクールの仕様上、イベントが存在するだけで、少しずつマップ上での負荷が上昇します。例えば、千を超えるような大量のイベントを生成すると、動作が重くなる可能性があります。",
+      "sourceHash": "51556eb7964f72574be81a9b136509e78c20d825377932d552b54825a6308ee2",
+      "translation": "Due to RPG Maker's specifications, the map load gradually increases simply when events exist. For example, generating a large number of events, such as more than one thousand, may cause the game to run slowly.",
+      "contextHash": "51556eb7964f72574be81a9b136509e78c20d825377932d552b54825a6308ee2"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "当プラグインには生成したイベントが画面範囲外の場合に、描画を停止する処理が含まれています。これによってある程度負荷を軽減できます。",
+      "sourceHash": "ab3ac33d1bfe0121552b57c0e827c2ef6588a7c10a5637d686e3d449df80b553",
+      "translation": "This plugin includes processing that stops rendering when generated events are outside the screen area. This can reduce the processing load to some extent.",
+      "contextHash": "ab3ac33d1bfe0121552b57c0e827c2ef6588a7c10a5637d686e3d449df80b553"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "また、１マスずつタイルを確認＆処理する仕様上、大きなマップに大量のイベントを生成すると少しだけ時間がかかります。",
+      "sourceHash": "4f11e9dbc56fec6f11c1ed62878e5ebac20b772dab77b512df0ccf10361921e7",
+      "translation": "Also, because tiles are checked and processed one at a time, generating a large number of events on a large map takes a little time.",
+      "contextHash": "4f11e9dbc56fec6f11c1ed62878e5ebac20b772dab77b512df0ccf10361921e7"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "※とはいえ、よほどの処理をしない限り一瞬で終わりますが。",
+      "sourceHash": "a126174e0373a2b6a6a293f022c0269a90bec6f44cb6eceb629f1f05b8f56111",
+      "translation": "※That said, it finishes instantly unless you perform some extremely intensive processing.",
+      "contextHash": "a126174e0373a2b6a6a293f022c0269a90bec6f44cb6eceb629f1f05b8f56111"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "イベントを生成したマップでプレイヤーがセーブをした後、マップイベントの追加や削除などが行われるとデータが不整合になる可能性があります。なるべく影響が出ないように考慮したつもりですが、他プラグインとの相性などもあって完璧ではありません。",
+      "sourceHash": "8d0144ee8dc23e71a1011df98336fd7f6cbde7aa1c39c83cfb5717421b7390f9",
+      "translation": "If events are added or deleted after the player saves on a map where events have been generated, the data may become inconsistent. I have tried to minimize the impact, but it is not perfect due to compatibility with other plugins and similar factors.",
+      "contextHash": "8d0144ee8dc23e71a1011df98336fd7f6cbde7aa1c39c83cfb5717421b7390f9"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "『ロード時にイベント初期化』をオンにしたほうが安定するかもしれません。",
+      "sourceHash": "dc60849045b4d0e348dd8db56cd53b57b8de0aba25ee9ad3ce651e40a54cbefe",
+      "translation": "It may be more stable to turn on “Initialize Events on Load.”",
+      "contextHash": "dc60849045b4d0e348dd8db56cd53b57b8de0aba25ee9ad3ce651e40a54cbefe"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "テンプレートマップＩＤ（TemplateMapId）",
+      "sourceHash": "a4e200499773a4567ac160c27a0e9d3fe7afcdd436e2d4bd1edbc3ee026448e9",
+      "translation": "Template Map ID (TemplateMapId)",
+      "contextHash": "a4e200499773a4567ac160c27a0e9d3fe7afcdd436e2d4bd1edbc3ee026448e9"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "タイルを置き換えるイベントを配置するマップＩＤです。",
+      "sourceHash": "448705d08af1b2fc679efaf5c1c2e205373c9248bad1e21e90089af9c3aed0f4",
+      "translation": "The map ID where the events that replace tiles are placed.",
+      "contextHash": "448705d08af1b2fc679efaf5c1c2e205373c9248bad1e21e90089af9c3aed0f4"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "設定リスト（SettingList）",
+      "sourceHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287",
+      "translation": "Setting List (SettingList)",
+      "contextHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "設定内容の一覧です。",
+      "sourceHash": "e25401d8900aa1878670baee44c922a92d32b4dd927fa930282458a3d098dca1",
+      "translation": "A list of the settings.",
+      "contextHash": "e25401d8900aa1878670baee44c922a92d32b4dd927fa930282458a3d098dca1"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "詳細は下の『プラグインパラメータ（設定リスト）』を参照してください。",
+      "sourceHash": "a32b138d0d995cb279189fe37fee2670f25b3a54b1f2c81d606d01ffe9a501c4",
+      "translation": "For details, see “Plugin Parameters (Setting List)” below.",
+      "contextHash": "a32b138d0d995cb279189fe37fee2670f25b3a54b1f2c81d606d01ffe9a501c4"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "ロード時にイベント初期化（InitEventOnLoad）",
+      "sourceHash": "ba48e775b1eb00b95d1a34a8c0418bd43eed832f1e7d3b3e94be8900dba08082",
+      "translation": "Initialize Events on Load (InitEventOnLoad)",
+      "contextHash": "ba48e775b1eb00b95d1a34a8c0418bd43eed832f1e7d3b3e94be8900dba08082"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "ゲームロード時にイベントを初期化します。",
+      "sourceHash": "4e17a11aedaa7b8fdee057df5f0ab0041038a98ed4d9ca20849c1ae95fffb948",
+      "translation": "Initializes events when the game is loaded.",
+      "contextHash": "4e17a11aedaa7b8fdee057df5f0ab0041038a98ed4d9ca20849c1ae95fffb948"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "オンにするとイベントの位置が保存されなくなります。",
+      "sourceHash": "11591ac565d6b6384ec7993413632d8416bebfb7027e320921d03e84b631813b",
+      "translation": "When enabled, event positions are no longer saved.",
+      "contextHash": "11591ac565d6b6384ec7993413632d8416bebfb7027e320921d03e84b631813b"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "タイルセット変更時も処理（ApplyChangeTileset）",
+      "sourceHash": "adeff7fa505361fff97ce1bc893e664171ddb68e594848b9c00bd601481e9d26",
+      "translation": "Process on Tileset Changes (ApplyChangeTileset)",
+      "contextHash": "adeff7fa505361fff97ce1bc893e664171ddb68e594848b9c00bd601481e9d26"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "タイルセットの変更時も処理を実行します。",
+      "sourceHash": "a0376ca120cd081ac3fe03893a67987a0b1e2be231cc0e9b46771497188d27e4",
+      "translation": "Executes the process when the tileset is changed as well.",
+      "contextHash": "a0376ca120cd081ac3fe03893a67987a0b1e2be231cc0e9b46771497188d27e4"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "画面外のイベント描画停止（StopOutOfRange）",
+      "sourceHash": "be7dd4474233a531093a28de216be75e53aa74434fa563409a3ea26695c0c6e7",
+      "translation": "Stop Rendering Events Outside the Screen (StopOutOfRange)",
+      "contextHash": "be7dd4474233a531093a28de216be75e53aa74434fa563409a3ea26695c0c6e7"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "画面範囲外のイベントの描画を停止します。これにより、大幅な処理の軽量化が見込めます。",
+      "sourceHash": "4804c20ce46cb43e2407ff3cf876580201607d08a7af9109e510b67b01eb9a17",
+      "translation": "Stops rendering events outside the screen area. This can significantly reduce the processing load.",
+      "contextHash": "4804c20ce46cb43e2407ff3cf876580201607d08a7af9109e510b67b01eb9a17"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "競合などの問題が起きそうな場合はオフにしてください。",
+      "sourceHash": "5ad879e090ec9642b02917a7a095dff2962abd1e574fd298cd2a4db79287fc67",
+      "translation": "Turn this off if it may cause conflicts or other problems.",
+      "contextHash": "5ad879e090ec9642b02917a7a095dff2962abd1e574fd298cd2a4db79287fc67"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "範囲外の余裕幅（OutOfRangeMargin）",
+      "sourceHash": "ff1964eff1b0f0f2cb94922db5ad5794d030c3636d156ce3716567b4fb01cb4e",
+      "translation": "Out-of-Range Margin (OutOfRangeMargin)",
+      "contextHash": "ff1964eff1b0f0f2cb94922db5ad5794d030c3636d156ce3716567b4fb01cb4e"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "『画面外のイベント描画停止』について範囲外と見なす余裕の幅です。",
+      "sourceHash": "4e5e90e966864edb987f4a4b079b4a0818a279e216f70763ccdc20b5a40b9153",
+      "translation": "The margin used when determining whether an event is outside the screen for “Stop Rendering Events Outside the Screen.”",
+      "contextHash": "4e5e90e966864edb987f4a4b079b4a0818a279e216f70763ccdc20b5a40b9153"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "数値分だけ画面外にはみ出していても停止しません。",
+      "sourceHash": "13884a6a235acf057182d38c7cc03ace5ef21c148102392fa91b3c7ae03e11c3",
+      "translation": "Rendering will not stop even if the event extends beyond the screen by the specified number of pixels.",
+      "contextHash": "13884a6a235acf057182d38c7cc03ace5ef21c148102392fa91b3c7ae03e11c3"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト）",
+      "sourceHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb",
+      "translation": "Plugin Parameters (Setting List)",
+      "contextHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "設定ＩＤ（SettingId）",
+      "sourceHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d",
+      "translation": "Setting ID (SettingId)",
+      "contextHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "タイルセットのメモ欄（あるいはプラグインコマンド）からの呼び出しに使う識別子です。",
+      "sourceHash": "b63e5a9a95be5b73c22446af63ea177ac3e3707e18b92bad5761907585b66624",
+      "translation": "An identifier used to call the setting from a tileset’s note field (or a plugin command).",
+      "contextHash": "b63e5a9a95be5b73c22446af63ea177ac3e3707e18b92bad5761907585b66624"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "『全タイルセットで有効』がオンの場合は不要です。",
+      "sourceHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6",
+      "translation": "This is unnecessary when “Valid for All Tilesets” is enabled.",
+      "contextHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "全タイルセットで有効（ValidAllTilesets）",
+      "sourceHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280",
+      "translation": "Valid for All Tilesets (ValidAllTilesets)",
+      "contextHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "設定を全てのタイルセットで有効にします。",
+      "sourceHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e",
+      "translation": "Enables the setting for all tilesets.",
+      "contextHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "オフにした場合は、個別のタイルセットに設定できます。",
+      "sourceHash": "0e39e01e05b1314bfe9a68abe50fd81a2c2b05d9c5cfcc8fa8149152c7a5b62e",
+      "translation": "When disabled, the setting can be configured for individual tilesets.",
+      "contextHash": "0e39e01e05b1314bfe9a68abe50fd81a2c2b05d9c5cfcc8fa8149152c7a5b62e"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "タイルＩＤ（TileId）",
+      "sourceHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e",
+      "translation": "Tile ID (TileId)",
+      "contextHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "対象とするタイルＩＤを指定します。複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "c5696a365f5abc9f87b5cebb5274d164c84889a7d51ab433b0c5a6c5f3c20cf4",
+      "translation": "Specifies the target tile IDs. Multiple IDs can be specified. (Example: 1,3~5)",
+      "contextHash": "c5696a365f5abc9f87b5cebb5274d164c84889a7d51ab433b0c5a6c5f3c20cf4"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "オートタイルタイプ（AutotileType）",
+      "sourceHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e",
+      "translation": "Autotile Type (AutotileType)",
+      "contextHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "対象とするオートタイルタイプを指定します。複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "0870af1571b3b612e3d08ca8a094f32ad49362240e1be9e59a9818159069eddb",
+      "translation": "Specifies the target autotile types. Multiple types can be specified. (Example: 1,3~5)",
+      "contextHash": "0870af1571b3b612e3d08ca8a094f32ad49362240e1be9e59a9818159069eddb"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "地形タグ（TerrainTag）",
+      "sourceHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061",
+      "translation": "Terrain Tag (TerrainTag)",
+      "contextHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "対象とする地形タグ（1~7）を指定します。複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "4a3fddc39b4fddab6d4001e1e31c345776f566b8a21d271bfa11aa412b1fee41",
+      "translation": "Specifies the target terrain tags (1~7). Multiple tags can be specified. (Example: 1,3~5)",
+      "contextHash": "4a3fddc39b4fddab6d4001e1e31c345776f566b8a21d271bfa11aa412b1fee41"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "リージョンＩＤ（RegionId）",
+      "sourceHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78",
+      "translation": "Region ID (RegionId)",
+      "contextHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "対象とするリージョン（1~255）を指定します。複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "a828834d90374042681181830df4deda7544a4d7e0dbd4817268fa23cede72ed",
+      "translation": "Specifies the target regions (1~255). Multiple regions can be specified. (Example: 1,3~5)",
+      "contextHash": "a828834d90374042681181830df4deda7544a4d7e0dbd4817268fa23cede72ed"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "イベントID／名前（EventId）",
+      "sourceHash": "3aac83a215dc5b8da4f5dd56d02c06d7903293a41d8ae59e459bc47b5abeb087",
+      "translation": "Event ID/Name (EventId)",
+      "contextHash": "3aac83a215dc5b8da4f5dd56d02c06d7903293a41d8ae59e459bc47b5abeb087"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "置換先のイベントです。",
+      "sourceHash": "393d9dd6ce69ad18ee5502df33a03403a15e960e0337f736346d670c57e67521",
+      "translation": "The event to be used as the replacement.",
+      "contextHash": "393d9dd6ce69ad18ee5502df33a03403a15e960e0337f736346d670c57e67521"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "イベントは指定したテンプレートマップにあらかじめ配置してください。",
+      "sourceHash": "c1675cf404fabc15d99d64ae35a6faed2a419bb5f1447d1bc4116cfeb540638e",
+      "translation": "Place the event in advance on the specified template map.",
+      "contextHash": "c1675cf404fabc15d99d64ae35a6faed2a419bb5f1447d1bc4116cfeb540638e"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "ＩＤ／名前の両方が有効です。",
+      "sourceHash": "4a62a0c507a7e2f8431330bb27c3f593d6ce7f2c2b54834a06a1669461b4e69e",
+      "translation": "Both the ID and name can be used.",
+      "contextHash": "4a62a0c507a7e2f8431330bb27c3f593d6ce7f2c2b54834a06a1669461b4e69e"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "タイルを置換する（Replace）",
+      "sourceHash": "e4ca31748c7a72cc2993d11ca453295fa4319707bc1ae7833880240706a5f1b2",
+      "translation": "Replace Tiles (Replace)",
+      "contextHash": "e4ca31748c7a72cc2993d11ca453295fa4319707bc1ae7833880240706a5f1b2"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "元々のタイルを消去します。",
+      "sourceHash": "1d2daf934b0a6cbae72ab5d2e218d794bea9d75e02a9360d16fe6bf22d8fdfaf",
+      "translation": "Erases the original tile.",
+      "contextHash": "1d2daf934b0a6cbae72ab5d2e218d794bea9d75e02a9360d16fe6bf22d8fdfaf"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "タイルＩＤまたはオートタイルタイプが条件の場合のみ有効です。",
+      "sourceHash": "dbc2d8023e4a2186ec627cf42ddec876175c57aa32ccea4a804e5a0f5e138b2d",
+      "translation": "This is only effective when the condition is a tile ID or autotile type.",
+      "contextHash": "dbc2d8023e4a2186ec627cf42ddec876175c57aa32ccea4a804e5a0f5e138b2d"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "Ｘ座標補正（AdjustX）",
+      "sourceHash": "dcfc08d6da2067f3bac9df8ab569ab14bcad5e8f3001faf2e5d040a9241edc22",
+      "translation": "X Coordinate Adjustment (AdjustX)",
+      "contextHash": "dcfc08d6da2067f3bac9df8ab569ab14bcad5e8f3001faf2e5d040a9241edc22"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "Ｙ座標補正（AdjustY）",
+      "sourceHash": "4bf807a717d1d7895fc85e091711954140d72451defa384742ab2c4a6f1cae9e",
+      "translation": "Y Coordinate Adjustment (AdjustY)",
+      "contextHash": "4bf807a717d1d7895fc85e091711954140d72451defa384742ab2c4a6f1cae9e"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "イベントを生成するＸ座標、Ｙ座標を補正します。",
+      "sourceHash": "f8461b6c8e4c36b78eb2c7a2ac8f8535d43b38ecbd206d40b3d131139f60e1c0",
+      "translation": "Adjusts the X and Y coordinates where the event is generated.",
+      "contextHash": "f8461b6c8e4c36b78eb2c7a2ac8f8535d43b38ecbd206d40b3d131139f60e1c0"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "元のタイルから少しずらして配置したいという場合にどうぞ。",
+      "sourceHash": "89d17fb992db7c3784687e390bfa5e7510ef9d256ba8f37d4b4b094a7d78a6d2",
+      "translation": "Use this when you want to place the event slightly offset from the original tile.",
+      "contextHash": "89d17fb992db7c3784687e390bfa5e7510ef9d256ba8f37d4b4b094a7d78a6d2"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "謝辞（Acknowledgment）",
+      "sourceHash": "b7d50eb6b7f9b734acf98b652414fd4c20b0e84867db2afe5fbc8801b3321f69",
+      "translation": "Acknowledgment (Acknowledgment)",
+      "contextHash": "b7d50eb6b7f9b734acf98b652414fd4c20b0e84867db2afe5fbc8801b3321f69"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "このプラグインは、トリアコンタン様の以下のプラグインの処理を参照＆流用させていただきました。",
+      "sourceHash": "a1027edcd6e14fe88def008c1c4151bea07679351cd1131dd7177c577ef9ef8b",
+      "translation": "This plugin references and reuses processing from the following plugin by Triacontane.",
+      "contextHash": "a1027edcd6e14fe88def008c1c4151bea07679351cd1131dd7177c577ef9ef8b"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（PluginCommandMZ）[[/LINK_1]]",
+      "sourceHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (PluginCommandMZ)[[/LINK_1]]",
+      "contextHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用プラグインコマンド（PluginCommandMV）[[/LINK_1]]",
+      "sourceHash": "3a84c96d2126b2c6069bd0d1675927b3f22daea42eb25ec886b52aa4c4a69be0",
+      "parts": [
+        {
+          "source": "ＭＶ用プラグインコマンド（PluginCommandMV）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MV (PluginCommandMV)[[/LINK_1]]",
+      "contextHash": "3a84c96d2126b2c6069bd0d1675927b3f22daea42eb25ec886b52aa4c4a69be0"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]注意点（Notice）[[/LINK_1]]",
+      "sourceHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e",
+      "parts": [
+        {
+          "source": "注意点（Notice）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Notes (Notice)[[/LINK_1]]",
+      "contextHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]テンプレートマップＩＤ（TemplateMapId）[[/LINK_1]]",
+      "sourceHash": "1584838b4c24389b572e2865734a6880a6ca5086ef8f70d0fc07568deba5fe10",
+      "parts": [
+        {
+          "source": "テンプレートマップＩＤ（TemplateMapId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Template Map ID (TemplateMapId)[[/LINK_1]]",
+      "contextHash": "1584838b4c24389b572e2865734a6880a6ca5086ef8f70d0fc07568deba5fe10"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]設定リスト（SettingList）[[/LINK_1]]",
+      "sourceHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a",
+      "parts": [
+        {
+          "source": "設定リスト（SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Settings List (SettingList)[[/LINK_1]]",
+      "contextHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ロード時にイベント初期化（InitEventOnLoad）[[/LINK_1]]",
+      "sourceHash": "a6129f7a6fa62c7f8c4da00ef5345d0d0339d5e2f5a83bafc5740221870f8a3b",
+      "parts": [
+        {
+          "source": "ロード時にイベント初期化（InitEventOnLoad）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Initialize Events on Load (InitEventOnLoad)[[/LINK_1]]",
+      "contextHash": "a6129f7a6fa62c7f8c4da00ef5345d0d0339d5e2f5a83bafc5740221870f8a3b"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]タイルセット変更時も処理（ApplyChangeTileset）[[/LINK_1]]",
+      "sourceHash": "cfa13114984841bd2a8b4628d8e1a02af2815ea8047003c57203da2b0c0d6b0d",
+      "parts": [
+        {
+          "source": "タイルセット変更時も処理（ApplyChangeTileset）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply Processing on Tileset Changes (ApplyChangeTileset)[[/LINK_1]]",
+      "contextHash": "cfa13114984841bd2a8b4628d8e1a02af2815ea8047003c57203da2b0c0d6b0d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]画面外のイベント描画停止（StopOutOfRange）[[/LINK_1]]",
+      "sourceHash": "1bb812d0af5778d7f678b9df815bef0e1d37ebd177d13ac315dda882b357040a",
+      "parts": [
+        {
+          "source": "画面外のイベント描画停止（StopOutOfRange）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Stop Rendering Events Outside the Screen (StopOutOfRange)[[/LINK_1]]",
+      "contextHash": "1bb812d0af5778d7f678b9df815bef0e1d37ebd177d13ac315dda882b357040a"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]範囲外の余裕幅（OutOfRangeMargin）[[/LINK_1]]",
+      "sourceHash": "39e74c5ceee08aec2fcbbb80906cbfa2170665fc54723c32cdf03f9f3027b285",
+      "parts": [
+        {
+          "source": "範囲外の余裕幅（OutOfRangeMargin）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Out-of-Range Margin (OutOfRangeMargin)[[/LINK_1]]",
+      "contextHash": "39e74c5ceee08aec2fcbbb80906cbfa2170665fc54723c32cdf03f9f3027b285"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト）[[/LINK_1]]",
+      "sourceHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Settings List)[[/LINK_1]]",
+      "contextHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]設定ＩＤ（SettingId）[[/LINK_1]]",
+      "sourceHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165",
+      "parts": [
+        {
+          "source": "設定ＩＤ（SettingId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting ID (SettingId)[[/LINK_1]]",
+      "contextHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]全タイルセットで有効（ValidAllTilesets）[[/LINK_1]]",
+      "sourceHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58",
+      "parts": [
+        {
+          "source": "全タイルセットで有効（ValidAllTilesets）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Valid for All Tilesets (ValidAllTilesets)[[/LINK_1]]",
+      "contextHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]タイルＩＤ（TileId）[[/LINK_1]]",
+      "sourceHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065",
+      "parts": [
+        {
+          "source": "タイルＩＤ（TileId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tile ID (TileId)[[/LINK_1]]",
+      "contextHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]オートタイルタイプ（AutotileType）[[/LINK_1]]",
+      "sourceHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6",
+      "parts": [
+        {
+          "source": "オートタイルタイプ（AutotileType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Autotile Type (AutotileType)[[/LINK_1]]",
+      "contextHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]地形タグ（TerrainTag）[[/LINK_1]]",
+      "sourceHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0",
+      "parts": [
+        {
+          "source": "地形タグ（TerrainTag）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Terrain Tag (TerrainTag)[[/LINK_1]]",
+      "contextHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]リージョンＩＤ（RegionId）[[/LINK_1]]",
+      "sourceHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3",
+      "parts": [
+        {
+          "source": "リージョンＩＤ（RegionId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Region ID (RegionId)[[/LINK_1]]",
+      "contextHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]イベントID／名前（EventId）[[/LINK_1]]",
+      "sourceHash": "89bc0a1683d424d9ad339bde0de4fd502c5d9bef4044911c959c7d562d2559d7",
+      "parts": [
+        {
+          "source": "イベントID／名前（EventId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Event ID/Name (EventId)[[/LINK_1]]",
+      "contextHash": "89bc0a1683d424d9ad339bde0de4fd502c5d9bef4044911c959c7d562d2559d7"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]タイルを置換する（Replace）[[/LINK_1]]",
+      "sourceHash": "52dee55cfd9ebee5a445937595f7ddc91ae1297ce813cfded16a031d59f52226",
+      "parts": [
+        {
+          "source": "タイルを置換する（Replace）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Replace Tiles (Replace)[[/LINK_1]]",
+      "contextHash": "52dee55cfd9ebee5a445937595f7ddc91ae1297ce813cfded16a031d59f52226"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]Ｘ座標補正（AdjustX）[[/LINK_1]]",
+      "sourceHash": "285a63b7e9a393df15e09bedc551457e89d9cd4ddf876fe8117de65191dc1ace",
+      "parts": [
+        {
+          "source": "Ｘ座標補正（AdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]X Coordinate Adjustment (AdjustX)[[/LINK_1]]",
+      "contextHash": "285a63b7e9a393df15e09bedc551457e89d9cd4ddf876fe8117de65191dc1ace"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]Ｙ座標補正（AdjustY）[[/LINK_1]]",
+      "sourceHash": "7b9e11d093c405950d22daf951e3239b6dd18b4801ef36e8fe71db51f0502044",
+      "parts": [
+        {
+          "source": "Ｙ座標補正（AdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Y Coordinate Adjustment (AdjustY)[[/LINK_1]]",
+      "contextHash": "7b9e11d093c405950d22daf951e3239b6dd18b4801ef36e8fe71db51f0502044"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]謝辞（Acknowledgment）[[/LINK_1]]",
+      "sourceHash": "b1ffadaf5e089b77153d5525f74ecde5be57e90257d8ebcc08e452f7c0976b4d",
+      "parts": [
+        {
+          "source": "謝辞（Acknowledgment）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Acknowledgments (Acknowledgment)[[/LINK_1]]",
+      "contextHash": "b1ffadaf5e089b77153d5525f74ecde5be57e90257d8ebcc08e452f7c0976b4d"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "タイル情報をデバッグ表示する（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887",
+      "parts": [
+        {
+          "source": "タイル情報をデバッグ表示する（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Display tile information for debugging ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_PutRandomEvents.js[[/LINK_1]]と併用時にイベントが上書きされて消滅してしまう不具合修正。",
+      "sourceHash": "407dc580b6ea76c8d4fbdfe6553d950da6297420b9b21f1e36d2c2e0cb0dcb24",
+      "parts": [
+        {
+          "source": "NRP_PutRandomEvents.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用時にイベントが上書きされて消滅してしまう不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Bug fix for events being overwritten and disappearing when used with [[LINK_1]]NRP_PutRandomEvents.js[[/LINK_1]].",
+      "contextHash": "407dc580b6ea76c8d4fbdfe6553d950da6297420b9b21f1e36d2c2e0cb0dcb24"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "タイル上に自動でイベントを生成します。": "Automatically generates events on tiles.",
+    "タイルＩＤ、オートタイルタイプ、地形タグ、リージョンＩＤを条件にして、その上に自動で指定のイベントを生成します。": "Automatically generates specified events on tiles based on tile IDs, autotile types, terrain tags, and region IDs.",
+    "また、タイルを消去してイベントに置き換えることも可能です。": "Tiles can also be erased and replaced with events.",
+    "※タイルＩＤ、オートタイルタイプが条件の場合のみ": "※Only when the conditions are tile IDs or autotile types",
+    "アニメーションするタイルなど様々な使い方が可能です。": "This can be used in various ways, such as for animated tiles.",
+    "マップ切替時またはプラグインコマンドによって実行します。": "Runs when changing maps or via a plugin command.",
+    "※このプラグインは色々と不安定です。必要性が薄いなら使用しないことをオススメします。": "※This plugin is somewhat unstable. I recommend not using it if it is not essential.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Enable it from the RPG Maker plugin manager.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※Both MV and MZ are supported by all of these plugins.",
+    "NRP_TileToEvent.js": "NRP_TileToEvent.js ",
+    "ver1.06（2024/04/29）": "ver1.06 (2024/04/29) ",
+    "オプション": "Options",
+    "NRP_DebugTile.js": "NRP_DebugTile.js ",
+    "ver1.01（2021/08/15）": "ver1.01 (2021/08/15) ",
+    "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_TileToEventの補助用に使えます。": "※This plugin allows you to check the autotile type and tile ID at your feet simply by pressing F2. It can be used as an aid for NRP_TileToEvent.",
+    "更新履歴（History）": "Update History (History)",
+    "2024/04/29（ver1.06）": "2024/04/29 (ver1.06) ",
+    "ver1.052にて「ロード時にイベント初期化」がオンの場合、ロード時にタイルイベントが重複して作成されてしまう不具合修正。": "Fixed a bug in ver1.052 where duplicate tile events were created when loading if “Initialize Events on Load” was enabled.",
+    "2023/07/18 -> 2024/04/28（ver1.05 -> 1.052）": "2023/07/18 -> 2024/04/28 (ver1.05 -> 1.052) ",
+    "『ロード時にイベント初期化』の既定値をオンに変更。": "Changed the default value of “Initialize Events on Load” to enabled.",
+    "マップリロード時にタイル置換が適切に行われない不具合修正。": "Fixed a bug where tile replacement was not performed correctly when reloading a map.",
+    "（2023/07/23 ver1.051）": " (2023/07/23 ver1.051) ",
+    "ロード時にエラーとなる競合用に調整。（2024/04/28 ver1.052）": "Adjusted for conflicts that caused errors when loading. (2024/04/28 ver1.052)",
+    "2022/05/21 -> 2023/05/24（ver1.04 -> 1.042）": "2022/05/21 -> 2023/05/24 (ver1.04 -> 1.042) ",
+    "『画面外のイベント描画停止』がオンの場合、稀に置換する素材画像全体がチラ見えしてしまう不具合修正。": "Fixed a bug where, when “Stop Rendering Events Outside the Screen” was enabled, the entire replacement image would occasionally briefly appear.",
+    "マップ内のイベントＩＤが歯抜け状態の場合、イベントが正常動作しなくなることがある不具合修正。（2022/06/07 ver1.041）": "Fixed a bug where events could stop functioning properly when event IDs on a map were not consecutive. (2022/06/07 ver1.041)",
+    "レイヤー１にタイルが存在しない場合、リージョンや地形タグを条件とした置換に失敗する不具合修正。（2023/05/24 ver1.042）": "Fixed a bug where replacement based on regions or terrain tags failed when no tile existed on Layer 1. (2023/05/24 ver1.042)",
+    "2022/01/15（ver1.03）": "2022/01/15 (ver1.03) ",
+    "マップ編集後のロード時も動作するように修正。": "Modified it to also work when loading after editing a map.",
+    "2021/12/26（ver1.02 -> 1.021）": "2021/12/26 (ver1.02 -> 1.021) ",
+    "『タイルを置換する』がオンの置換処理を行った際、場所移動時に誤ったタイルを消去してしまう不具合を修正。": "Fixed a bug where incorrect tiles were erased when changing locations after performing replacement with “Replace Tiles” enabled.",
+    "同一マップ内での場所移動を考慮できてなかったので修正。（ver1.021）": "Fixed an issue where movement within the same map was not taken into account. (ver1.021)",
+    "2021/09/11 -> 2021/11/11（ver1.01 -> 1.011）": "2021/09/11 -> 2021/11/11 (ver1.01 -> 1.011) ",
+    "セーブ後にエディタでイベントの追加・削除を行い、ロードするとエラーになることがある不具合に対処。": "Addressed a bug that could cause an error when loading after adding or deleting events in the editor following a save.",
+    "※完璧を約束するものではありませんが、ある程度は緩和できると思います。": "※This does not guarantee perfection, but I believe it can alleviate the issue to some extent.",
+    "イベントテストでエラーになる不具合修正。（11/11 ver1.011）": "Fixed a bug that caused an error during event testing. (11/11 ver1.011)",
+    "2021/05/15（ver1.00）": "2021/05/15 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "まずは生成したいイベントを準備します。": "First, prepare the event you want to generate.",
+    "テンプレート用のマップを作成し、イベントを作成する。": "Create a map for templates and create an event.",
+    "分かりやすくイベント名を付けておく。": "Give the event an easy-to-understand name.",
+    "プラグインパラメータのテンプレートマップＩＤに": "Enter it in the Template Map ID plugin parameter",
+    "先程のマップＩＤを登録。": "Register the map ID from earlier.",
+    "要するに公式ローンチプラグインのTemplateEvent.js（トリアコンタン様）とほぼ同じです。": "In short, it is nearly identical to the official launch plugin TemplateEvent.js (by Triacontane).",
+    "次にプラグインパラメータの『設定リスト』に条件を指定し、生成するイベントの『イベントID／名前』を入力します。": "Next, specify the conditions in the “Configuration List” plugin parameter and enter the “Event ID/Name” of the event to generate.",
+    "この際、参照用に『設定ＩＤ』を設定しておきます。": "At this point, set a “Configuration ID” for reference.",
+    "※タイルＩＤやオートタイルタイプを参照したい場合は、付属の『NRP_DebugTile.js』が便利です。": "※If you want to check tile IDs or autotile types, the included “NRP_DebugTile.js” is useful.",
+    "最後にタイルセットのメモ欄に、先程の『設定ＩＤ』を登録すれば完了です。": "Finally, register the “Configuration ID” from earlier in the tileset's note field to finish.",
+    "以下の?の部分に入力してください。": "Enter it in the ? portion below.",
+    "ＭＺ用プラグインコマンド（PluginCommandMZ）": "MZ Plugin Command (PluginCommandMZ)",
+    "ＩＤを指定して実行": "Execute by Specifying an ID",
+    "設定ＩＤを指定すれば処理が実行されます。": "The process will run when you specify a Configuration ID.",
+    "内容は上記の使用方法にて、タイルセットに設定ＩＤを登録した場合と同様です。": "The operation is the same as when a Configuration ID is registered in the tileset as described in the Usage section above.",
+    "ＭＶ用プラグインコマンド（PluginCommandMV）": "MV Plugin Command (PluginCommandMV)",
+    "NRP.TileToEvent.CallId [設定ＩＤ]": "NRP.TileToEvent.CallId [Settings ID]",
+    "処理内容はＭＺ版と同じです。": "The operation is the same as in the MZ version.",
+    "※大文字小文字は不問。[]は含めないでください。": "※Case does not matter. Do not include [].",
+    "注意点（Notice）": "Notice (Notice)",
+    "ツクールの仕様上、イベントが存在するだけで、少しずつマップ上での負荷が上昇します。例えば、千を超えるような大量のイベントを生成すると、動作が重くなる可能性があります。": "Due to RPG Maker's specifications, the map load gradually increases simply when events exist. For example, generating a large number of events, such as more than one thousand, may cause the game to run slowly.",
+    "当プラグインには生成したイベントが画面範囲外の場合に、描画を停止する処理が含まれています。これによってある程度負荷を軽減できます。": "This plugin includes processing that stops rendering when generated events are outside the screen area. This can reduce the processing load to some extent.",
+    "また、１マスずつタイルを確認＆処理する仕様上、大きなマップに大量のイベントを生成すると少しだけ時間がかかります。": "Also, because tiles are checked and processed one at a time, generating a large number of events on a large map takes a little time.",
+    "※とはいえ、よほどの処理をしない限り一瞬で終わりますが。": "※That said, it finishes instantly unless you perform some extremely intensive processing.",
+    "イベントを生成したマップでプレイヤーがセーブをした後、マップイベントの追加や削除などが行われるとデータが不整合になる可能性があります。なるべく影響が出ないように考慮したつもりですが、他プラグインとの相性などもあって完璧ではありません。": "If events are added or deleted after the player saves on a map where events have been generated, the data may become inconsistent. I have tried to minimize the impact, but it is not perfect due to compatibility with other plugins and similar factors.",
+    "『ロード時にイベント初期化』をオンにしたほうが安定するかもしれません。": "It may be more stable to turn on “Initialize Events on Load.”",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "テンプレートマップＩＤ（TemplateMapId）": "Template Map ID (TemplateMapId)",
+    "タイルを置き換えるイベントを配置するマップＩＤです。": "The map ID where the events that replace tiles are placed.",
+    "設定リスト（SettingList）": "Setting List (SettingList)",
+    "設定内容の一覧です。": "A list of the settings.",
+    "詳細は下の『プラグインパラメータ（設定リスト）』を参照してください。": "For details, see “Plugin Parameters (Setting List)” below.",
+    "ロード時にイベント初期化（InitEventOnLoad）": "Initialize Events on Load (InitEventOnLoad)",
+    "ゲームロード時にイベントを初期化します。": "Initializes events when the game is loaded.",
+    "オンにするとイベントの位置が保存されなくなります。": "When enabled, event positions are no longer saved.",
+    "タイルセット変更時も処理（ApplyChangeTileset）": "Process on Tileset Changes (ApplyChangeTileset)",
+    "タイルセットの変更時も処理を実行します。": "Executes the process when the tileset is changed as well.",
+    "画面外のイベント描画停止（StopOutOfRange）": "Stop Rendering Events Outside the Screen (StopOutOfRange)",
+    "画面範囲外のイベントの描画を停止します。これにより、大幅な処理の軽量化が見込めます。": "Stops rendering events outside the screen area. This can significantly reduce the processing load.",
+    "競合などの問題が起きそうな場合はオフにしてください。": "Turn this off if it may cause conflicts or other problems.",
+    "範囲外の余裕幅（OutOfRangeMargin）": "Out-of-Range Margin (OutOfRangeMargin)",
+    "『画面外のイベント描画停止』について範囲外と見なす余裕の幅です。": "The margin used when determining whether an event is outside the screen for “Stop Rendering Events Outside the Screen.”",
+    "数値分だけ画面外にはみ出していても停止しません。": "Rendering will not stop even if the event extends beyond the screen by the specified number of pixels.",
+    "プラグインパラメータ（設定リスト）": "Plugin Parameters (Setting List)",
+    "設定ＩＤ（SettingId）": "Setting ID (SettingId)",
+    "タイルセットのメモ欄（あるいはプラグインコマンド）からの呼び出しに使う識別子です。": "An identifier used to call the setting from a tileset’s note field (or a plugin command).",
+    "『全タイルセットで有効』がオンの場合は不要です。": "This is unnecessary when “Valid for All Tilesets” is enabled.",
+    "全タイルセットで有効（ValidAllTilesets）": "Valid for All Tilesets (ValidAllTilesets)",
+    "設定を全てのタイルセットで有効にします。": "Enables the setting for all tilesets.",
+    "オフにした場合は、個別のタイルセットに設定できます。": "When disabled, the setting can be configured for individual tilesets.",
+    "タイルＩＤ（TileId）": "Tile ID (TileId)",
+    "対象とするタイルＩＤを指定します。複数指定も可能です。（例：1,3~5）": "Specifies the target tile IDs. Multiple IDs can be specified. (Example: 1,3~5)",
+    "オートタイルタイプ（AutotileType）": "Autotile Type (AutotileType)",
+    "対象とするオートタイルタイプを指定します。複数指定も可能です。（例：1,3~5）": "Specifies the target autotile types. Multiple types can be specified. (Example: 1,3~5)",
+    "地形タグ（TerrainTag）": "Terrain Tag (TerrainTag)",
+    "対象とする地形タグ（1~7）を指定します。複数指定も可能です。（例：1,3~5）": "Specifies the target terrain tags (1~7). Multiple tags can be specified. (Example: 1,3~5)",
+    "リージョンＩＤ（RegionId）": "Region ID (RegionId)",
+    "対象とするリージョン（1~255）を指定します。複数指定も可能です。（例：1,3~5）": "Specifies the target regions (1~255). Multiple regions can be specified. (Example: 1,3~5)",
+    "イベントID／名前（EventId）": "Event ID/Name (EventId)",
+    "置換先のイベントです。": "The event to be used as the replacement.",
+    "イベントは指定したテンプレートマップにあらかじめ配置してください。": "Place the event in advance on the specified template map.",
+    "ＩＤ／名前の両方が有効です。": "Both the ID and name can be used.",
+    "タイルを置換する（Replace）": "Replace Tiles (Replace)",
+    "元々のタイルを消去します。": "Erases the original tile.",
+    "タイルＩＤまたはオートタイルタイプが条件の場合のみ有効です。": "This is only effective when the condition is a tile ID or autotile type.",
+    "Ｘ座標補正（AdjustX）": "X Coordinate Adjustment (AdjustX)",
+    "Ｙ座標補正（AdjustY）": "Y Coordinate Adjustment (AdjustY)",
+    "イベントを生成するＸ座標、Ｙ座標を補正します。": "Adjusts the X and Y coordinates where the event is generated.",
+    "元のタイルから少しずらして配置したいという場合にどうぞ。": "Use this when you want to place the event slightly offset from the original tile.",
+    "謝辞（Acknowledgment）": "Acknowledgment (Acknowledgment)",
+    "このプラグインは、トリアコンタン様の以下のプラグインの処理を参照＆流用させていただきました。": "This plugin references and reuses processing from the following plugin by Triacontane."
+  }
+}

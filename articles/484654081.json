@@ -1,0 +1,460 @@
+{
+  "articleId": "484654081",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484654081.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "14f8d06ee10cbbcaa098f9878088e1b4d666746baf046b7bdbd28a66426340a4",
+  "translatedAt": "2026-08-31T05:17:22.598Z",
+  "title": "Remove Noise Occurring in Images [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "画像に発生するノイズを除去【RPGツクールMZプラグイン】",
+      "sourceHash": "78ae9c71d81b7ec10bf1876e0fc6cd57ad6ff1a709dd524734a5dd6b75802359",
+      "translation": "Remove Noise Occurring in Images [RPG Maker MZ Plugin]",
+      "contextHash": "78ae9c71d81b7ec10bf1876e0fc6cd57ad6ff1a709dd524734a5dd6b75802359"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "画像に発生するノイズを除去します。",
+      "sourceHash": "b66193940b38e196940fc0b794551c4f43b6e6f5670a8c774cb36850d1d22320",
+      "translation": "Removes noise occurring in images.",
+      "contextHash": "b66193940b38e196940fc0b794551c4f43b6e6f5670a8c774cb36850d1d22320"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＺにて、バトラーを移動させた場合、画像に線のようなノイズが入ることがあります。",
+      "sourceHash": "9acb068601a1c881defee2ccac707918c6511f14a3dbc8058ea6c63886a768aa",
+      "translation": "In RPG Maker MZ, moving a battler may cause line-like noise to appear in the image.",
+      "contextHash": "9acb068601a1c881defee2ccac707918c6511f14a3dbc8058ea6c63886a768aa"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "これは内部的な処理における小数値の計算により、画像を切り抜く位置が１ピクセルズレることによって発生します。",
+      "sourceHash": "6035dfbaa5960ff7e7369f6069fcb47daca0a8768513360cde7ffec855e96d47",
+      "translation": "This occurs when fractional value calculations in the internal processing cause the image cropping position to shift by one pixel.",
+      "contextHash": "6035dfbaa5960ff7e7369f6069fcb47daca0a8768513360cde7ffec855e96d47"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※線の正体はＳＶアクター自身やステートアイコンです。隣の画像パターンの端が表示されていると思われます。",
+      "sourceHash": "af0f924e6ddec5393e526a515aa199aff9b9946797e68782aa97b805895ad911",
+      "translation": "※The lines are actually the SV actor itself or state icons. It seems that the edge of the adjacent image pattern is being displayed.",
+      "contextHash": "af0f924e6ddec5393e526a515aa199aff9b9946797e68782aa97b805895ad911"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "画像に対する設定を切り替えることによって、この問題を解決します。",
+      "sourceHash": "821cea1e818caf684ede71eb914b23ff9e92ca3601c9fd94319ee55a7696cbba",
+      "translation": "This issue can be resolved by switching the settings for the images.",
+      "contextHash": "821cea1e818caf684ede71eb914b23ff9e92ca3601c9fd94319ee55a7696cbba"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ＭＶではそもそも現象が発生しない模様です。",
+      "sourceHash": "cbb1c5f0d6e6e31846f575e9e5040b716a448261d869b09b14a06c875f1babf8",
+      "translation": "It appears that this phenomenon does not occur in MV in the first place.",
+      "contextHash": "cbb1c5f0d6e6e31846f575e9e5040b716a448261d869b09b14a06c875f1babf8"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_BitmapSmoothOff.js",
+      "sourceHash": "c695a12c2f66a15b281b5f9c483ac046350c2ae31759f0c4bec433980d47a070",
+      "translation": "NRP_BitmapSmoothOff.js ",
+      "contextHash": "bebfe34b653419bfaf1f90346d1a2983f6b614bcf81764bf90c2e9be03b72da8"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.01（2024/06/06）",
+      "sourceHash": "465552a0bf1e8fdfe37dd6480eaf89dfd8d85cf25ecbce97ca5fede0a2502770",
+      "translation": "ver1.01 (2024/06/06) ",
+      "contextHash": "bebfe34b653419bfaf1f90346d1a2983f6b614bcf81764bf90c2e9be03b72da8"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/06/06（ver1.01）",
+      "sourceHash": "f3ab4c557a17651a2e60e0e4c1130f1e444b43a7e7ebbdcc68761f222bcc0992",
+      "translation": "2024/06/06 (ver1.01) ",
+      "contextHash": "f3ab4c557a17651a2e60e0e4c1130f1e444b43a7e7ebbdcc68761f222bcc0992"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "『アニメーションに適用』を追加。",
+      "sourceHash": "152108dc9cab674344ea72d379750cfebda85fb49c76f0b7f2eb7223c7ac4bd6",
+      "translation": "Added “Apply to Animations.”",
+      "contextHash": "152108dc9cab674344ea72d379750cfebda85fb49c76f0b7f2eb7223c7ac4bd6"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2021/12/03（ver1.00）",
+      "sourceHash": "e019e2021d478db1e97e375e2a5ed64afd80f305f767d0f2f04b4a8886734034",
+      "translation": "2021/12/03 (ver1.00) ",
+      "contextHash": "e019e2021d478db1e97e375e2a5ed64afd80f305f767d0f2f04b4a8886734034"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "適用するだけでＯＫです。",
+      "sourceHash": "bba3ea506f92d2040ff9252a9835ffb9134ffa62ec8fa227591170183b84c114",
+      "translation": "Simply applying it is sufficient.",
+      "contextHash": "bba3ea506f92d2040ff9252a9835ffb9134ffa62ec8fa227591170183b84c114"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "画像毎に切り替えられるようになっていますが、通常は初期状態でも問題ないと思います。",
+      "sourceHash": "41cd0d2b6a4fe612040322a334acc210805036efbdaf5a53a379b0065e6451ab",
+      "translation": "It can be switched for each image, but normally the default settings should work fine.",
+      "contextHash": "41cd0d2b6a4fe612040322a334acc210805036efbdaf5a53a379b0065e6451ab"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "plugin parameter",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "ＳＶアクターに適用（SvActorSmoothOff）",
+      "sourceHash": "c43302c6c05edeeb4b52f157fe1dcf5fef52a50350ff123548841fbd0998430d",
+      "translation": "Apply to SV Actors (SvActorSmoothOff)",
+      "contextHash": "c43302c6c05edeeb4b52f157fe1dcf5fef52a50350ff123548841fbd0998430d"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ＳＶアクター画像に処理を適用します。",
+      "sourceHash": "4c916bd818f09279063b83bc66e6e89c391f7acb4c777ce2d756cc68ef4011ec",
+      "translation": "Applies the processing to SV actor images.",
+      "contextHash": "4c916bd818f09279063b83bc66e6e89c391f7acb4c777ce2d756cc68ef4011ec"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ステートアイコンに適用（StateIconSmoothOff）",
+      "sourceHash": "4a3eb39c887df2ee676802fcb11184e72080928978fe950e7890051feff4fa5f",
+      "translation": "Apply to State Icons (StateIconSmoothOff)",
+      "contextHash": "4a3eb39c887df2ee676802fcb11184e72080928978fe950e7890051feff4fa5f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ステートアイコン画像に処理を適用します。",
+      "sourceHash": "84e7e79fd8997959a14eb9e789252ae3a98a7fa11849f327ae27e8c6bec2f79b",
+      "translation": "Applies the processing to state icon images.",
+      "contextHash": "84e7e79fd8997959a14eb9e789252ae3a98a7fa11849f327ae27e8c6bec2f79b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "アニメーションに適用（AnimationSmoothOff）",
+      "sourceHash": "cd424e4d1f1129a233593f6f17db29d5d0be7f2afd3c85b9b32d944b8cc6aac0",
+      "translation": "Apply to Animations (AnimationSmoothOff)",
+      "contextHash": "cd424e4d1f1129a233593f6f17db29d5d0be7f2afd3c85b9b32d944b8cc6aac0"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "アニメーション画像（ＭＶ形式）に処理を適用します。",
+      "sourceHash": "09daa141421c2afac549c44aa314ca83f76a181e4836e6587ebf399b70975207",
+      "translation": "Applies the processing to animation images (MV format).",
+      "contextHash": "09daa141421c2afac549c44aa314ca83f76a181e4836e6587ebf399b70975207"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "参考（Reference）",
+      "sourceHash": "a6bd1f3f2fcb097931d3860469431101274fa37b9b1c748e3ca2eca0555ddcfb",
+      "translation": "Reference (Reference)",
+      "contextHash": "a6bd1f3f2fcb097931d3860469431101274fa37b9b1c748e3ca2eca0555ddcfb"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "このプラグインは以下の情報を参考に作成しました。",
+      "sourceHash": "93576e6923909c21bff20a2dd380d8da38a4208b81cb298e2416a18378624ea2",
+      "translation": "This plugin was created with reference to the following information.",
+      "contextHash": "93576e6923909c21bff20a2dd380d8da38a4208b81cb298e2416a18378624ea2"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "情報提供をいただいたムノクラ様を始め、皆様方に感謝いたします。",
+      "sourceHash": "d83f4826794379ef7bb381f24247f71fc43d80a01bd6491695329c56a37a1de4",
+      "translation": "I would like to thank Munokura and everyone else who provided information.",
+      "contextHash": "d83f4826794379ef7bb381f24247f71fc43d80a01bd6491695329c56a37a1de4"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://forum.tkool.jp/index.php?threads/4504/",
+      "sourceHash": "ea7b503f40da2d95a58777a68ab96f25a9a7f252d8c7e04173154788c123325d",
+      "translation": "https://forum.tkool.jp/index.php?threads/4504/",
+      "contextHash": "821541abe81c7d65c233d9d79eb262dbc98df1ee1b216e92b196e5cadc6b6604"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※以前公開した[[LINK_1]]戦闘時のステートアイコンの表示を調整[[/LINK_1]]と内容がかぶっていますが、あちらにはＳＶアクターに対する処置が含まれていません。",
+      "sourceHash": "0b75fd4fb5dfdba83a75481c1a29e76885b121657477d49aa865f9f9dc22f783",
+      "parts": [
+        {
+          "source": "※以前公開した",
+          "link": false
+        },
+        {
+          "source": "戦闘時のステートアイコンの表示を調整",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と内容がかぶっていますが、あちらにはＳＶアクターに対する処置が含まれていません。",
+          "link": false
+        }
+      ],
+      "translation": "※The content overlaps with [[LINK_1]]Adjusting the Display of State Icons During Battle[[/LINK_1]], which was published previously, but that one does not include measures for SV actors.",
+      "contextHash": "0b75fd4fb5dfdba83a75481c1a29e76885b121657477d49aa865f9f9dc22f783"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ＳＶアクターに適用（SvActorSmoothOff）[[/LINK_1]]",
+      "sourceHash": "0001a953e56a142de278c46dd9124631d37165a3b74d5364f7615975b3877eba",
+      "parts": [
+        {
+          "source": "ＳＶアクターに適用（SvActorSmoothOff）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to SV Actors (SvActorSmoothOff)[[/LINK_1]]",
+      "contextHash": "0001a953e56a142de278c46dd9124631d37165a3b74d5364f7615975b3877eba"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]ステートアイコンに適用（StateIconSmoothOff）[[/LINK_1]]",
+      "sourceHash": "57770868f79a51f4293eca80de330ad6c6e57ff4bf4b0052a99a39a42ee33a0e",
+      "parts": [
+        {
+          "source": "ステートアイコンに適用（StateIconSmoothOff）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to State Icons (StateIconSmoothOff)[[/LINK_1]]",
+      "contextHash": "57770868f79a51f4293eca80de330ad6c6e57ff4bf4b0052a99a39a42ee33a0e"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]アニメーションに適用（AnimationSmoothOff）[[/LINK_1]]",
+      "sourceHash": "17fad2bea855830a3d18102158946d4f6b8920a2f7032ba9b250b8650349cef0",
+      "parts": [
+        {
+          "source": "アニメーションに適用（AnimationSmoothOff）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Animations (AnimationSmoothOff)[[/LINK_1]]",
+      "contextHash": "17fad2bea855830a3d18102158946d4f6b8920a2f7032ba9b250b8650349cef0"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]参考（Reference）[[/LINK_1]]",
+      "sourceHash": "d1d5b02db389813a6c31ff3eaab7cae04eab1fe388487127b15a52825d3d2968",
+      "parts": [
+        {
+          "source": "参考（Reference）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reference (Reference)[[/LINK_1]]",
+      "contextHash": "d1d5b02db389813a6c31ff3eaab7cae04eab1fe388487127b15a52825d3d2968"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "画像に発生するノイズを除去します。": "Removes noise occurring in images.",
+    "ツクールＭＺにて、バトラーを移動させた場合、画像に線のようなノイズが入ることがあります。": "In RPG Maker MZ, moving a battler may cause line-like noise to appear in the image.",
+    "これは内部的な処理における小数値の計算により、画像を切り抜く位置が１ピクセルズレることによって発生します。": "This occurs when fractional value calculations in the internal processing cause the image cropping position to shift by one pixel.",
+    "※線の正体はＳＶアクター自身やステートアイコンです。隣の画像パターンの端が表示されていると思われます。": "※The lines are actually the SV actor itself or state icons. It seems that the edge of the adjacent image pattern is being displayed.",
+    "画像に対する設定を切り替えることによって、この問題を解決します。": "This issue can be resolved by switching the settings for the images.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "ＭＶではそもそも現象が発生しない模様です。": "It appears that this phenomenon does not occur in MV in the first place.",
+    "NRP_BitmapSmoothOff.js": "NRP_BitmapSmoothOff.js ",
+    "ver1.01（2024/06/06）": "ver1.01 (2024/06/06) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/06/06（ver1.01）": "2024/06/06 (ver1.01) ",
+    "『アニメーションに適用』を追加。": "Added “Apply to Animations.”",
+    "2021/12/03（ver1.00）": "2021/12/03 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "適用するだけでＯＫです。": "Simply applying it is sufficient.",
+    "画像毎に切り替えられるようになっていますが、通常は初期状態でも問題ないと思います。": "It can be switched for each image, but normally the default settings should work fine.",
+    "プラグインパラメータ": "plugin parameter",
+    "ＳＶアクターに適用（SvActorSmoothOff）": "Apply to SV Actors (SvActorSmoothOff)",
+    "ＳＶアクター画像に処理を適用します。": "Applies the processing to SV actor images.",
+    "ステートアイコンに適用（StateIconSmoothOff）": "Apply to State Icons (StateIconSmoothOff)",
+    "ステートアイコン画像に処理を適用します。": "Applies the processing to state icon images.",
+    "アニメーションに適用（AnimationSmoothOff）": "Apply to Animations (AnimationSmoothOff)",
+    "アニメーション画像（ＭＶ形式）に処理を適用します。": "Applies the processing to animation images (MV format).",
+    "参考（Reference）": "Reference (Reference)",
+    "このプラグインは以下の情報を参考に作成しました。": "This plugin was created with reference to the following information.",
+    "情報提供をいただいたムノクラ様を始め、皆様方に感謝いたします。": "I would like to thank Munokura and everyone else who provided information.",
+    "https://forum.tkool.jp/index.php?threads/4504/": "https://forum.tkool.jp/index.php?threads/4504/"
+  }
+}

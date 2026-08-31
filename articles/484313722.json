@@ -1,0 +1,750 @@
+{
+  "articleId": "484313722",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484313722.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "c18a7228fdfb5cb6dc0d031c07c1bec4ac2abd3e1ee31753b177bdd4db91919e",
+  "translatedAt": "2026-08-31T05:18:21.854Z",
+  "title": "Extend Event Test Functionality [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "イベントテストの機能を拡張【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "a0fad688d4f20ccf64024bcc71668e15b920389ca487f78cdef7942d8bda5e6f",
+      "translation": "Extend Event Test Functionality [RPG Maker MZ & MV Plugin]",
+      "contextHash": "a0fad688d4f20ccf64024bcc71668e15b920389ca487f78cdef7942d8bda5e6f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "イベントテストの機能を拡張し、マップやイベントの表示や動作を確認できるようにします。",
+      "sourceHash": "af74b8491e3cc8ed0e0fd729b822a6dee1e5fa0d9d1d35787d979afcdca3110c",
+      "translation": "This extends the Event Test functionality, allowing you to check the display and behavior of maps and events.",
+      "contextHash": "af74b8491e3cc8ed0e0fd729b822a6dee1e5fa0d9d1d35787d979afcdca3110c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＶ～ＭＺにはイベントエディタ上で編集中のイベントのテストを行う機能があります。",
+      "sourceHash": "9ee9ef5283e27f17237a6a2341a4446113a5bacc171e8263039327ff56b196b9",
+      "translation": "RPG Maker MV–MZ includes a function for testing events currently being edited in the Event Editor.",
+      "contextHash": "9ee9ef5283e27f17237a6a2341a4446113a5bacc171e8263039327ff56b196b9"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "（範囲選択＞右クリック＞テストで実行可能です。）",
+      "sourceHash": "9a942f3cbd07365bcd9d532bf2d0ea7bb422ca25e4bc64569417e4236a220b16",
+      "translation": "(You can run it by selecting a range, right-clicking, and choosing Test.)",
+      "contextHash": "9a942f3cbd07365bcd9d532bf2d0ea7bb422ca25e4bc64569417e4236a220b16"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ただこの機能には大きな制約があって、今ひとつ使い勝手がよくありません。",
+      "sourceHash": "688c75a94e563bd39ecd0b6c495cadaf9e5dfaa6a7f2c98aaaade9ed42686cc8",
+      "translation": "However, this function has major limitations, making it somewhat inconvenient to use.",
+      "contextHash": "688c75a94e563bd39ecd0b6c495cadaf9e5dfaa6a7f2c98aaaade9ed42686cc8"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "マップデータを一切読み込まずに実行するため、マップは愚か、イベントの画像なども表示されません。そのため、メッセージのタイミングなどごく限られた要素をテストすることしかできません。",
+      "sourceHash": "ce75524314b7afff27d2a1fcf7ca13de005874ccb378901b98495225d845ec27",
+      "translation": "Because it runs without loading any map data, it displays neither the map nor event graphics. As a result, you can test only very limited elements, such as message timing.",
+      "contextHash": "ce75524314b7afff27d2a1fcf7ca13de005874ccb378901b98495225d845ec27"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "また、テストを行う際に、メンバーの加入やスイッチなどの状態を調整したいことがあるかと思いますが、それらを設定する仕組みがありません。",
+      "sourceHash": "9f5e424c7f8182a799963d72ab111e6f139a7515ac4b68ef00582b26b7b06b5a",
+      "translation": "You may also want to adjust states such as party membership and switches when testing, but there is no mechanism for configuring them.",
+      "contextHash": "9f5e424c7f8182a799963d72ab111e6f139a7515ac4b68ef00582b26b7b06b5a"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そして、マップデータを読み込まずに実行するため、その点を考慮していないプラグインは軒並みエラーになります。",
+      "sourceHash": "78569f49f957ca4dd2eb7c47731f41479c3bd56f547c821555214d70c27ac46a",
+      "translation": "Furthermore, because it runs without loading map data, virtually any plugin that does not account for this will produce errors.",
+      "contextHash": "78569f49f957ca4dd2eb7c47731f41479c3bd56f547c821555214d70c27ac46a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "そこで以下のように改善することで、マップやイベントの表示・動作を確認できるようにします。",
+      "sourceHash": "4c95a159fc09bf59531f467865f0a3988dc59aac8007ca738355ca57aeb15247",
+      "translation": "The following improvements allow you to check the display and behavior of maps and events.",
+      "contextHash": "4c95a159fc09bf59531f467865f0a3988dc59aac8007ca738355ca57aeb15247"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "適当なマップをテスト開始時に読み込むことでエラーを回避する。",
+      "sourceHash": "69a613c803b75db50387e4a95f5b61dc418fc8dcd10aa8728c6bebebe65976f0",
+      "translation": "Load an appropriate map when testing begins to avoid errors.",
+      "contextHash": "69a613c803b75db50387e4a95f5b61dc418fc8dcd10aa8728c6bebebe65976f0"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "※エラー回避用のダミーなので、本当に適当で構いません。",
+      "sourceHash": "db8c40f4aabf5d760c720217b834018cb036306ede3562b29cc78b1f893745c7",
+      "translation": "※Since this is only a dummy map for avoiding errors, any map will do.",
+      "contextHash": "db8c40f4aabf5d760c720217b834018cb036306ede3562b29cc78b1f893745c7"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "イベントテスト時のみ実行される初期設定を可能にして、メンバーやスイッチの状態を調整可能に。",
+      "sourceHash": "cd149f912701a510a78cbc43d2b3f4453c167a293b01a3b913db105be6651e67",
+      "translation": "Enable initial settings that run only during Event Tests, allowing you to adjust the states of party members and switches.",
+      "contextHash": "cd149f912701a510a78cbc43d2b3f4453c167a293b01a3b913db105be6651e67"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "初期設定時に場所移動を指定し、マップ＆イベントデータを読み込む。",
+      "sourceHash": "768e28aaa54bad12ddc72510d9142dec975744fa909b7d3a3ee2de80270cb7cd",
+      "translation": "Specify a transfer during the initial setup to load the map and event data.",
+      "contextHash": "768e28aaa54bad12ddc72510d9142dec975744fa909b7d3a3ee2de80270cb7cd"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※通常、場所移動でマップを移動すると、以降のイベントへの命令は無視される仕様ですが、命令を受けつけるように改善します。",
+      "sourceHash": "686150760e91ad3cc0202991ad781b46efdaf4df63c6b8bcbdb5c445790da2a7",
+      "translation": "※Normally, when a transfer moves you to another map, commands for subsequent events are ignored, but this is improved so that the commands are accepted.",
+      "contextHash": "686150760e91ad3cc0202991ad781b46efdaf4df63c6b8bcbdb5c445790da2a7"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the function ON from the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EventTest.js",
+      "sourceHash": "8f9bbe278f92ba77883d49c880a5add961f227583cdf7d09ece36d2681df8978",
+      "translation": "NRP_EventTest.js ",
+      "contextHash": "5ca6b9ac624835de858a7fe7338e2a88b8428b777c8ca5b73c405d1a1ee9fc20"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ver1.01（2024/05/27）",
+      "sourceHash": "f85cd27dd6afca67030701c1db1c307f0a2fb89c67c227d27b523e2007a842b3",
+      "translation": "ver1.01 (2024/05/27) ",
+      "contextHash": "5ca6b9ac624835de858a7fe7338e2a88b8428b777c8ca5b73c405d1a1ee9fc20"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/05/27（ver1.01）",
+      "sourceHash": "cd1ef7f67c5451d280e3ab4d30bb319e09e0ed467265612f1636dfd05ab7adc8",
+      "translation": "2024/05/27 (ver1.01) ",
+      "contextHash": "cd1ef7f67c5451d280e3ab4d30bb319e09e0ed467265612f1636dfd05ab7adc8"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2021/11/11（ver1.00）",
+      "sourceHash": "bea98a06a784e40e1bd8c6176497c0f73932d25ab1f55d7832db27ddaabc7c30",
+      "translation": "2021/11/11 (ver1.00) ",
+      "contextHash": "bea98a06a784e40e1bd8c6176497c0f73932d25ab1f55d7832db27ddaabc7c30"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "テストしたいイベントをエディタで開き、イベントテスト用の初期設定をしてください。",
+      "sourceHash": "a3a7be4b23b365d3a2b7577323f43e61b52ad40e55c46b56da49933106791491",
+      "translation": "Open the event you want to test in the Event Editor and configure the initial settings for the Event Test.",
+      "contextHash": "a3a7be4b23b365d3a2b7577323f43e61b52ad40e55c46b56da49933106791491"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "テスト判定用スイッチで条件分岐させれば、イベントテスト実行時専用の処理を設定できます。",
+      "sourceHash": "36aa722d3568e9351a3b14b9896dd87388ab70d1845bff39bb8b3465a81cec37",
+      "translation": "By creating a conditional branch using the test-detection switch, you can configure processing intended exclusively for Event Tests.",
+      "contextHash": "36aa722d3568e9351a3b14b9896dd87388ab70d1845bff39bb8b3465a81cec37"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※テスト判定用スイッチはプラグインパラメータで指定してください。",
+      "sourceHash": "0e2808b20ff2668c03936ab47eac4e99ba6255b1b03a1c45cf4f4e5d6945d928",
+      "translation": "※Specify the test-detection switch in the plugin parameter.",
+      "contextHash": "0e2808b20ff2668c03936ab47eac4e99ba6255b1b03a1c45cf4f4e5d6945d928"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "分岐内で場所移動を実行すれば、マップデータが読み込まれ、各画像が表示されるようになります。",
+      "sourceHash": "fedc215bdece563e193bed84ab93e5ecb7843d897838094954a29fdc9632b7f1",
+      "translation": "If you perform a transfer within the branch, the map data will be loaded and the various graphics will be displayed.",
+      "contextHash": "fedc215bdece563e193bed84ab93e5ecb7843d897838094954a29fdc9632b7f1"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※元から冒頭で場所移動を呼ぶイベントなら省略可です。",
+      "sourceHash": "5c2218d141ec663cad9f0f8c10ad337c7fec6eed106e4b282ebb0687879b04f0",
+      "translation": "※This can be omitted for events that already call a transfer at the beginning.",
+      "contextHash": "5c2218d141ec663cad9f0f8c10ad337c7fec6eed106e4b282ebb0687879b04f0"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "他にも、メンバーの加入やスイッチなどの状態を必要に応じて変更してください。",
+      "sourceHash": "dd70eea9c6ed69663a365cc972335bf569bc9e67b4202234aa004a58a06b343e",
+      "translation": "You can also change states such as party membership and switches as needed.",
+      "contextHash": "dd70eea9c6ed69663a365cc972335bf569bc9e67b4202234aa004a58a06b343e"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "また『このイベント』が対象になっているコマンド（セルフスイッチも含む）は、初期状態では無視されてしまいます。プラグインパラメータの『このイベントＩＤの変数』にＩＤを設定しておく必要があります。",
+      "sourceHash": "f379ae7d2def59a58e305f56d5052bd6704fd37345e1b3810f0b73c42bc5daad",
+      "translation": "Commands targeting “This Event” (including self switches) are ignored in the initial state. You must set the ID in the plugin parameter “This Event ID Variable.”",
+      "contextHash": "f379ae7d2def59a58e305f56d5052bd6704fd37345e1b3810f0b73c42bc5daad"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※必ず場所移動より前に設定してください。",
+      "sourceHash": "3986fe1d8d394f25bf7ed9cd3906918591eb28ee04bcb809c70a50c3a2cfa15e",
+      "translation": "※Be sure to set it before the transfer.",
+      "contextHash": "3986fe1d8d394f25bf7ed9cd3906918591eb28ee04bcb809c70a50c3a2cfa15e"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "あとはイベントエディタでコマンドを範囲選択し、右クリックでテストを実行します。",
+      "sourceHash": "5adf80bac11aa41601351f91731542d6c71b4dcc7d10e240c7533ccd3ffd648d",
+      "translation": "Finally, select the commands in the Event Editor and run Test by right-clicking.",
+      "contextHash": "5adf80bac11aa41601351f91731542d6c71b4dcc7d10e240c7533ccd3ffd648d"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "Ctrl+A, Ctrl+Rのショートカットを使うとスピーディです。",
+      "sourceHash": "de8170e7a1f5ccd2df9d42adec8cb125c8a4e2d261f8a89197b2804eaf68589f",
+      "translation": "Using the Ctrl+A and Ctrl+R shortcuts is faster.",
+      "contextHash": "de8170e7a1f5ccd2df9d42adec8cb125c8a4e2d261f8a89197b2804eaf68589f"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "想定通りにイベントが実行されれば成功です。",
+      "sourceHash": "303bff6a3feb15d89a198421492bcb636a1ee679df71575c56a584e4254005f5",
+      "translation": "It is successful if the event runs as expected.",
+      "contextHash": "303bff6a3feb15d89a198421492bcb636a1ee679df71575c56a584e4254005f5"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※ちなみにイベントエディタ上での変更を適用した時点では、イベントのページ情報などは保存されません。",
+      "sourceHash": "01a37920eb80266836271a22204d1de4bf834d0baca0cc47e582388adc10577f",
+      "translation": "※Incidentally, applying changes in the Event Editor does not save information such as the event page settings.",
+      "contextHash": "01a37920eb80266836271a22204d1de4bf834d0baca0cc47e582388adc10577f"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ファイルへの反映もされませんので、ツクールが強制終了したら苦労が水の泡です。不慮の事故に備えて、プロジェクトの保存も忘れないようにしましょう。",
+      "sourceHash": "978c1d277ae5e1d261fbccaa73a4658a2d0fee242d5b41f56fe1ded89f9a86c7",
+      "translation": "The changes are not written to the file either, so if RPG Maker is forcibly terminated, all your work will be lost. Be sure to save the project in case of an unexpected accident.",
+      "contextHash": "978c1d277ae5e1d261fbccaa73a4658a2d0fee242d5b41f56fe1ded89f9a86c7"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "初期マップＩＤ（DefaultMapId）",
+      "sourceHash": "be79cdb1f8d0071e1bd86d8b019e92f80301499cd2949cda0a8f9010c424145e",
+      "translation": "Default Map ID (DefaultMapId)",
+      "contextHash": "be79cdb1f8d0071e1bd86d8b019e92f80301499cd2949cda0a8f9010c424145e"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "イベントテスト開始時の初期マップＩＤです。",
+      "sourceHash": "4fea4df566822fc26ce5a965e11c96eaf6f6e1e3f7591ebf7eb976443d7aae23",
+      "translation": "This is the default map ID when an Event Test begins.",
+      "contextHash": "4fea4df566822fc26ce5a965e11c96eaf6f6e1e3f7591ebf7eb976443d7aae23"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "適当なマップを設定してください。",
+      "sourceHash": "2c31c39135be119dde53ae61fc99b9774241554551821744e7081c6bfbbd98f4",
+      "translation": "Set an appropriate map.",
+      "contextHash": "2c31c39135be119dde53ae61fc99b9774241554551821744e7081c6bfbbd98f4"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "テスト判定用スイッチ（TestSwitch）",
+      "sourceHash": "4c5995efc71effec4414378eb58f1135474b15444cff8982f2651f6444b475bf",
+      "translation": "Test Detection Switch (TestSwitch)",
+      "contextHash": "4c5995efc71effec4414378eb58f1135474b15444cff8982f2651f6444b475bf"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "イベントテスト時にオンになるスイッチです。",
+      "sourceHash": "40780cc5ea4abf54bc3a2c18a69382d2ff833c538ec71a8da080db30b514a288",
+      "translation": "This switch is turned on during an Event Test.",
+      "contextHash": "40780cc5ea4abf54bc3a2c18a69382d2ff833c538ec71a8da080db30b514a288"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "これを用いた条件分岐を作ることで、イベントテスト時専用の処理を作成できます。",
+      "sourceHash": "e84ce4025501ef09f86723c19c7fa15181f2fc870300f9085c291192d4a6097c",
+      "translation": "By creating a conditional branch using this switch, you can create processing intended exclusively for Event Tests.",
+      "contextHash": "e84ce4025501ef09f86723c19c7fa15181f2fc870300f9085c291192d4a6097c"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※ちなみに、スクリプトの『DataManager.isEventTest()』を使っても同じ機能を実現できます。スクリプトに抵抗がない方はそちらを使っても構いません。",
+      "sourceHash": "d281759a9b358277e126c58ae64df30fa95326bbe5b381b0ec45db34c2eaae5f",
+      "translation": "※Incidentally, you can achieve the same functionality using the script “DataManager.isEventTest()”. If you are comfortable with scripts, you can use that instead.",
+      "contextHash": "d281759a9b358277e126c58ae64df30fa95326bbe5b381b0ec45db34c2eaae5f"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "※場所移動を伴う複数のマップにまたがるイベントを作る場合、開始時にスイッチをオフにすれば最初のマップのみテスト専用処理を実行できます。",
+      "sourceHash": "789b15218c5a5138698b4c244b9077ab17fda367aca3926adf566f26118a6c46",
+      "translation": "※When creating an event spanning multiple maps with transfers between them, turning the switch off at the beginning allows the test-only processing to run only on the first map.",
+      "contextHash": "789b15218c5a5138698b4c244b9077ab17fda367aca3926adf566f26118a6c46"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "このイベントＩＤの変数（ThisEventIdVariable）",
+      "sourceHash": "fe9234140f25b0697356a01fc2a7ec5c57b751e065bd3750815100a4367acc79",
+      "translation": "This Event ID Variable (ThisEventIdVariable)",
+      "contextHash": "fe9234140f25b0697356a01fc2a7ec5c57b751e065bd3750815100a4367acc79"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "『このイベント』のイベントＩＤを設定する変数です。",
+      "sourceHash": "246fee077ac76a73b27e7f0906347f75b4f9315c7186b7496b397be6d4b8c5ac",
+      "translation": "This variable sets the event ID of “This Event”.",
+      "contextHash": "246fee077ac76a73b27e7f0906347f75b4f9315c7186b7496b397be6d4b8c5ac"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "この変数にイベントＩＤを設定しないと、『このイベント』に対する指示が機能しません。",
+      "sourceHash": "a3d3875fe3e327a5ab19c7af5b89cf951be033a26eb2f082ca5eb87bfb637c8c",
+      "translation": "Unless you set an event ID in this variable, commands targeting “This Event” will not function.",
+      "contextHash": "a3d3875fe3e327a5ab19c7af5b89cf951be033a26eb2f082ca5eb87bfb637c8c"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "開始時コモンイベント（StartCommonEvent）",
+      "sourceHash": "ae1cac7992784101f88e2eca20f14c1f7a295fccd734e193ac41a3f8288e5ad6",
+      "translation": "Start Common Event (StartCommonEvent)",
+      "contextHash": "ae1cac7992784101f88e2eca20f14c1f7a295fccd734e193ac41a3f8288e5ad6"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "イベントテスト開始時に呼び出されるコモンイベントです。",
+      "sourceHash": "771acff80f29e1b5e85af7040eaa14b896b0d96883898d61c0cc9c49e8979a19",
+      "translation": "This common event is called when an Event Test begins.",
+      "contextHash": "771acff80f29e1b5e85af7040eaa14b896b0d96883898d61c0cc9c49e8979a19"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "共通処理などを設定したい場合はどうぞ。",
+      "sourceHash": "75ba89dbc54a7890cacf7f3fe4b8eb51c244fb0c185b7daf1d5e40373a0e04b1",
+      "translation": "Use it to configure common processing and similar tasks.",
+      "contextHash": "75ba89dbc54a7890cacf7f3fe4b8eb51c244fb0c185b7daf1d5e40373a0e04b1"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "例えば、初期能力ではイベント戦闘に勝てないため、レベルをＭＡＸにするといった使い方ができます。",
+      "sourceHash": "515a164b4d8902d5e20f3aea3fd8c24458812b282ecf4871b44e377e7d8af296",
+      "translation": "For example, since the party may be unable to win an event battle with its initial abilities, you can use it to raise the level to MAX.",
+      "contextHash": "515a164b4d8902d5e20f3aea3fd8c24458812b282ecf4871b44e377e7d8af296"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "戦闘省略用スイッチ（OmitBattleSwitch）ver1.01",
+      "sourceHash": "6912696fcbaf4f84ecdf59f35de96ede527041a9a9eef671f89bb24e88d244b8",
+      "translation": "Battle Omission Switch (OmitBattleSwitch) ver1.01",
+      "contextHash": "6912696fcbaf4f84ecdf59f35de96ede527041a9a9eef671f89bb24e88d244b8"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "テスト用に戦闘を省略するためのスイッチです。",
+      "sourceHash": "72499903ea4167641ec6d052097e74386331e3a5e10bbff88ca51290b0a36071",
+      "translation": "This switch is used to omit battles for testing purposes.",
+      "contextHash": "72499903ea4167641ec6d052097e74386331e3a5e10bbff88ca51290b0a36071"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "※勝利、敗北の分岐には対応していません。",
+      "sourceHash": "a11a9fb9f48a583bcbf81b008294af2b4730daa1427394950ff6f21cc2e8a4e0",
+      "translation": "※Does not support victory or defeat branches.",
+      "contextHash": "a11a9fb9f48a583bcbf81b008294af2b4730daa1427394950ff6f21cc2e8a4e0"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "『テスト判定用スイッチ』と共通のスイッチを設定しても構いません。",
+      "sourceHash": "9cbadea44e6d963f4a958c38ec7ed316cebb7edb375c39353038131bb310944a",
+      "translation": "You may configure it to use the same switch as the “Test Evaluation Switch.”",
+      "contextHash": "9cbadea44e6d963f4a958c38ec7ed316cebb7edb375c39353038131bb310944a"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "戦闘開始演出を表示（ShowBattleEffect）ver1.01",
+      "sourceHash": "7dd6b946dd831b9cb993982d42524e51138392672488b715f38210be7a8298fa",
+      "translation": "Show Battle Start Effect (ShowBattleEffect) ver1.01",
+      "contextHash": "7dd6b946dd831b9cb993982d42524e51138392672488b715f38210be7a8298fa"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "戦闘省略時も戦闘開始演出を表示します。",
+      "sourceHash": "afd7fc16ee87838fc0fdc5a5fff29b58a8d4746ed78761d19e4effb67faf796b",
+      "translation": "The battle start effect is displayed even when the battle is omitted.",
+      "contextHash": "afd7fc16ee87838fc0fdc5a5fff29b58a8d4746ed78761d19e4effb67faf796b"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]初期マップＩＤ（DefaultMapId）[[/LINK_1]]",
+      "sourceHash": "67e101b28eb55704ecfa50cf4f5efb3b8088aa3bfee67b38b15afe53b1b01d26",
+      "parts": [
+        {
+          "source": "初期マップＩＤ（DefaultMapId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Default Map ID (DefaultMapId)[[/LINK_1]]",
+      "contextHash": "67e101b28eb55704ecfa50cf4f5efb3b8088aa3bfee67b38b15afe53b1b01d26"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]テスト判定用スイッチ（TestSwitch）[[/LINK_1]]",
+      "sourceHash": "676f73515d74a8944a8220c1609a220ce62350c5505f7726973e518bf4f675a3",
+      "parts": [
+        {
+          "source": "テスト判定用スイッチ（TestSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Test Check Switch (TestSwitch)[[/LINK_1]]",
+      "contextHash": "676f73515d74a8944a8220c1609a220ce62350c5505f7726973e518bf4f675a3"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]このイベントＩＤの変数（ThisEventIdVariable）[[/LINK_1]]",
+      "sourceHash": "776c72ad35b74b7ad998046240e30ae993d09ae8ca22b24bffbf17c1a9125a37",
+      "parts": [
+        {
+          "source": "このイベントＩＤの変数（ThisEventIdVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Variable for This Event ID (ThisEventIdVariable)[[/LINK_1]]",
+      "contextHash": "776c72ad35b74b7ad998046240e30ae993d09ae8ca22b24bffbf17c1a9125a37"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]開始時コモンイベント（StartCommonEvent）[[/LINK_1]]",
+      "sourceHash": "b610c437337df1fe4e7627ded9ae888de61514e6542be3219a214525ba028604",
+      "parts": [
+        {
+          "source": "開始時コモンイベント（StartCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Common Event at Start (StartCommonEvent)[[/LINK_1]]",
+      "contextHash": "b610c437337df1fe4e7627ded9ae888de61514e6542be3219a214525ba028604"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘省略用スイッチ（OmitBattleSwitch）[[/LINK_1]]ver1.01",
+      "sourceHash": "97309da46de4c81fa509c5378561ca69aa0186fb92cfd8fc24cc6d20cff77695",
+      "parts": [
+        {
+          "source": "戦闘省略用スイッチ（OmitBattleSwitch）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Skip Switch (OmitBattleSwitch)[[/LINK_1]] ver1.01",
+      "contextHash": "97309da46de4c81fa509c5378561ca69aa0186fb92cfd8fc24cc6d20cff77695"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘開始演出を表示（ShowBattleEffect）[[/LINK_1]]ver1.01",
+      "sourceHash": "6f96e324d3f7d51906b2404777b2bb64c903628cd30cb958a030a74fc940b64b",
+      "parts": [
+        {
+          "source": "戦闘開始演出を表示（ShowBattleEffect）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Show Battle Start Effect (ShowBattleEffect)[[/LINK_1]] ver1.01",
+      "contextHash": "6f96e324d3f7d51906b2404777b2bb64c903628cd30cb958a030a74fc940b64b"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "スイッチによる[[LINK_1]]戦闘スキップ機能[[/LINK_1]]を実装。",
+      "sourceHash": "6e582c937401f115597937c5b9a60faf95b17ad8286e3307d0c07a7b7031cddb",
+      "parts": [
+        {
+          "source": "スイッチによる",
+          "link": false
+        },
+        {
+          "source": "戦闘スキップ機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を実装。",
+          "link": false
+        }
+      ],
+      "translation": "Implement a [[LINK_1]]battle skip feature[[/LINK_1]] using a switch.",
+      "contextHash": "6e582c937401f115597937c5b9a60faf95b17ad8286e3307d0c07a7b7031cddb"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "イベントテストの機能を拡張し、マップやイベントの表示や動作を確認できるようにします。": "This extends the Event Test functionality, allowing you to check the display and behavior of maps and events.",
+    "ツクールＭＶ～ＭＺにはイベントエディタ上で編集中のイベントのテストを行う機能があります。": "RPG Maker MV–MZ includes a function for testing events currently being edited in the Event Editor.",
+    "（範囲選択＞右クリック＞テストで実行可能です。）": "(You can run it by selecting a range, right-clicking, and choosing Test.)",
+    "ただこの機能には大きな制約があって、今ひとつ使い勝手がよくありません。": "However, this function has major limitations, making it somewhat inconvenient to use.",
+    "マップデータを一切読み込まずに実行するため、マップは愚か、イベントの画像なども表示されません。そのため、メッセージのタイミングなどごく限られた要素をテストすることしかできません。": "Because it runs without loading any map data, it displays neither the map nor event graphics. As a result, you can test only very limited elements, such as message timing.",
+    "また、テストを行う際に、メンバーの加入やスイッチなどの状態を調整したいことがあるかと思いますが、それらを設定する仕組みがありません。": "You may also want to adjust states such as party membership and switches when testing, but there is no mechanism for configuring them.",
+    "そして、マップデータを読み込まずに実行するため、その点を考慮していないプラグインは軒並みエラーになります。": "Furthermore, because it runs without loading map data, virtually any plugin that does not account for this will produce errors.",
+    "そこで以下のように改善することで、マップやイベントの表示・動作を確認できるようにします。": "The following improvements allow you to check the display and behavior of maps and events.",
+    "適当なマップをテスト開始時に読み込むことでエラーを回避する。": "Load an appropriate map when testing begins to avoid errors.",
+    "※エラー回避用のダミーなので、本当に適当で構いません。": "※Since this is only a dummy map for avoiding errors, any map will do.",
+    "イベントテスト時のみ実行される初期設定を可能にして、メンバーやスイッチの状態を調整可能に。": "Enable initial settings that run only during Event Tests, allowing you to adjust the states of party members and switches.",
+    "初期設定時に場所移動を指定し、マップ＆イベントデータを読み込む。": "Specify a transfer during the initial setup to load the map and event data.",
+    "※通常、場所移動でマップを移動すると、以降のイベントへの命令は無視される仕様ですが、命令を受けつけるように改善します。": "※Normally, when a transfer moves you to another map, commands for subsequent events are ignored, but this is improved so that the commands are accepted.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the function ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EventTest.js": "NRP_EventTest.js ",
+    "ver1.01（2024/05/27）": "ver1.01 (2024/05/27) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/05/27（ver1.01）": "2024/05/27 (ver1.01) ",
+    "2021/11/11（ver1.00）": "2021/11/11 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "テストしたいイベントをエディタで開き、イベントテスト用の初期設定をしてください。": "Open the event you want to test in the Event Editor and configure the initial settings for the Event Test.",
+    "テスト判定用スイッチで条件分岐させれば、イベントテスト実行時専用の処理を設定できます。": "By creating a conditional branch using the test-detection switch, you can configure processing intended exclusively for Event Tests.",
+    "※テスト判定用スイッチはプラグインパラメータで指定してください。": "※Specify the test-detection switch in the plugin parameter.",
+    "分岐内で場所移動を実行すれば、マップデータが読み込まれ、各画像が表示されるようになります。": "If you perform a transfer within the branch, the map data will be loaded and the various graphics will be displayed.",
+    "※元から冒頭で場所移動を呼ぶイベントなら省略可です。": "※This can be omitted for events that already call a transfer at the beginning.",
+    "他にも、メンバーの加入やスイッチなどの状態を必要に応じて変更してください。": "You can also change states such as party membership and switches as needed.",
+    "また『このイベント』が対象になっているコマンド（セルフスイッチも含む）は、初期状態では無視されてしまいます。プラグインパラメータの『このイベントＩＤの変数』にＩＤを設定しておく必要があります。": "Commands targeting “This Event” (including self switches) are ignored in the initial state. You must set the ID in the plugin parameter “This Event ID Variable.”",
+    "※必ず場所移動より前に設定してください。": "※Be sure to set it before the transfer.",
+    "あとはイベントエディタでコマンドを範囲選択し、右クリックでテストを実行します。": "Finally, select the commands in the Event Editor and run Test by right-clicking.",
+    "Ctrl+A, Ctrl+Rのショートカットを使うとスピーディです。": "Using the Ctrl+A and Ctrl+R shortcuts is faster.",
+    "想定通りにイベントが実行されれば成功です。": "It is successful if the event runs as expected.",
+    "※ちなみにイベントエディタ上での変更を適用した時点では、イベントのページ情報などは保存されません。": "※Incidentally, applying changes in the Event Editor does not save information such as the event page settings.",
+    "ファイルへの反映もされませんので、ツクールが強制終了したら苦労が水の泡です。不慮の事故に備えて、プロジェクトの保存も忘れないようにしましょう。": "The changes are not written to the file either, so if RPG Maker is forcibly terminated, all your work will be lost. Be sure to save the project in case of an unexpected accident.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "初期マップＩＤ（DefaultMapId）": "Default Map ID (DefaultMapId)",
+    "イベントテスト開始時の初期マップＩＤです。": "This is the default map ID when an Event Test begins.",
+    "適当なマップを設定してください。": "Set an appropriate map.",
+    "テスト判定用スイッチ（TestSwitch）": "Test Detection Switch (TestSwitch)",
+    "イベントテスト時にオンになるスイッチです。": "This switch is turned on during an Event Test.",
+    "これを用いた条件分岐を作ることで、イベントテスト時専用の処理を作成できます。": "By creating a conditional branch using this switch, you can create processing intended exclusively for Event Tests.",
+    "※ちなみに、スクリプトの『DataManager.isEventTest()』を使っても同じ機能を実現できます。スクリプトに抵抗がない方はそちらを使っても構いません。": "※Incidentally, you can achieve the same functionality using the script “DataManager.isEventTest()”. If you are comfortable with scripts, you can use that instead.",
+    "※場所移動を伴う複数のマップにまたがるイベントを作る場合、開始時にスイッチをオフにすれば最初のマップのみテスト専用処理を実行できます。": "※When creating an event spanning multiple maps with transfers between them, turning the switch off at the beginning allows the test-only processing to run only on the first map.",
+    "このイベントＩＤの変数（ThisEventIdVariable）": "This Event ID Variable (ThisEventIdVariable)",
+    "『このイベント』のイベントＩＤを設定する変数です。": "This variable sets the event ID of “This Event”.",
+    "この変数にイベントＩＤを設定しないと、『このイベント』に対する指示が機能しません。": "Unless you set an event ID in this variable, commands targeting “This Event” will not function.",
+    "開始時コモンイベント（StartCommonEvent）": "Start Common Event (StartCommonEvent)",
+    "イベントテスト開始時に呼び出されるコモンイベントです。": "This common event is called when an Event Test begins.",
+    "共通処理などを設定したい場合はどうぞ。": "Use it to configure common processing and similar tasks.",
+    "例えば、初期能力ではイベント戦闘に勝てないため、レベルをＭＡＸにするといった使い方ができます。": "For example, since the party may be unable to win an event battle with its initial abilities, you can use it to raise the level to MAX.",
+    "戦闘省略用スイッチ（OmitBattleSwitch）ver1.01": "Battle Omission Switch (OmitBattleSwitch) ver1.01",
+    "テスト用に戦闘を省略するためのスイッチです。": "This switch is used to omit battles for testing purposes.",
+    "※勝利、敗北の分岐には対応していません。": "※Does not support victory or defeat branches.",
+    "『テスト判定用スイッチ』と共通のスイッチを設定しても構いません。": "You may configure it to use the same switch as the “Test Evaluation Switch.”",
+    "戦闘開始演出を表示（ShowBattleEffect）ver1.01": "Show Battle Start Effect (ShowBattleEffect) ver1.01",
+    "戦闘省略時も戦闘開始演出を表示します。": "The battle start effect is displayed even when the battle is omitted."
+  }
+}

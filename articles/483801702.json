@@ -1,0 +1,857 @@
+{
+  "articleId": "483801702",
+  "sourceUrl": "https://newrpg.seesaa.net/article/483801702.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "9508ad2f207ca67b204789c2951c31c9484c2fe6d058030a9081dd06a0dabf7d",
+  "translatedAt": "2026-08-31T05:23:54.424Z",
+  "title": "Extending the Event Fast-Forward Function [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "イベント高速化機能を拡張【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "df66e8d88be2a58d3ae9588920487364661f6a96c7a2afd34b1cb2ab4ef74781",
+      "translation": "Extending the Event Fast-Forward Function [RPG Maker MZ & MV Plugin]",
+      "contextHash": "df66e8d88be2a58d3ae9588920487364661f6a96c7a2afd34b1cb2ab4ef74781"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ツクールＭＶ～ＭＺにはイベント実行中に、決定キーを押しっぱなしにすると動作が倍速化する機能があります。",
+      "sourceHash": "fc0f9d1044137e664ddeaba9570f3f94801a39e2a63f26fdb8a2e956dc143f1c",
+      "translation": "In RPG Maker MV–MZ, holding down the Confirm key while an event is running speeds up its execution.",
+      "contextHash": "fc0f9d1044137e664ddeaba9570f3f94801a39e2a63f26fdb8a2e956dc143f1c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "それなりに便利ではありますが、標準で強制的に付いているため融通が利きません。",
+      "sourceHash": "287ed99ddf1020071664a2b66d0a1cdd44cf2a12af0ef0ed7ca62b302430c0fc",
+      "translation": "This is fairly convenient, but since it is forcibly enabled by default, it lacks flexibility.",
+      "contextHash": "287ed99ddf1020071664a2b66d0a1cdd44cf2a12af0ef0ed7ca62b302430c0fc"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "そこでいくつかの拡張を行います。",
+      "sourceHash": "ff319b497f21ab03d1c89a4eff83badd3ff19a0886b9918e70df8dfca17cf46d",
+      "translation": "So, I made several extensions.",
+      "contextHash": "ff319b497f21ab03d1c89a4eff83badd3ff19a0886b9918e70df8dfca17cf46d"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "上記は８倍速でイベントを実行した例です。",
+      "sourceHash": "d8a609296d1e803d9f2d1035a483f70ef71bb1d4bfb3c7b760de15e8f7102579",
+      "translation": "The example above shows an event running at eight times the normal speed.",
+      "contextHash": "d8a609296d1e803d9f2d1035a483f70ef71bb1d4bfb3c7b760de15e8f7102579"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "この機能によって、一度見たイベントをスキップできるようにしておくと親切です。開発テスト時も余計なイベントを飛ばせるので便利！",
+      "sourceHash": "00bddfb5c5487a74c005e6340c31d68e1e2849065d4bace4346a18dad9dbecff",
+      "translation": "It is helpful to use this function to allow events you have already seen to be skipped. It is also convenient during development testing, since you can skip unnecessary events!",
+      "contextHash": "00bddfb5c5487a74c005e6340c31d68e1e2849065d4bace4346a18dad9dbecff"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な機能",
+      "sourceHash": "c38e630d348b526e176f6cfd8a4c185e06c0a28dde73c13226a6074d2f726c42",
+      "translation": "Main Features",
+      "contextHash": "c38e630d348b526e176f6cfd8a4c185e06c0a28dde73c13226a6074d2f726c42"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "描画処理（アニメーション、フキダシなど）の高速化",
+      "sourceHash": "8e66ea1f9b06619ebab63a2a6011382ffcc4ed3711c71e4cb5e87a22c3b242f0",
+      "translation": "Faster rendering (animations, balloon icons, etc.)",
+      "contextHash": "8e66ea1f9b06619ebab63a2a6011382ffcc4ed3711c71e4cb5e87a22c3b242f0"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "使用するキーの変更",
+      "sourceHash": "dcca1bc777d676b703b5c926dfdaeafe04a460fea4127f66998fd4cacd04d94d",
+      "translation": "Change the key used",
+      "contextHash": "dcca1bc777d676b703b5c926dfdaeafe04a460fea4127f66998fd4cacd04d94d"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "実行速度の変更",
+      "sourceHash": "ad43a66f1a167eeec3d1f5ce63454b8517217fb674a83f40a310174690333632",
+      "translation": "Change the execution speed",
+      "contextHash": "ad43a66f1a167eeec3d1f5ce63454b8517217fb674a83f40a310174690333632"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "実行までの押しっぱなし時間の変更",
+      "sourceHash": "10f05eb3b763f80932cadfd58adc856fd033f1f0be94a738ac3d4ce8e11e8f38",
+      "translation": "Change how long the key must be held before execution begins",
+      "contextHash": "10f05eb3b763f80932cadfd58adc856fd033f1f0be94a738ac3d4ce8e11e8f38"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "タッチＵＩ側の設定も別途指定可",
+      "sourceHash": "44c3bd68b81b831dbc096acd4f39f276d79620ffb402d6f1aa5171fc2071702f",
+      "translation": "Touch UI settings can also be specified separately",
+      "contextHash": "44c3bd68b81b831dbc096acd4f39f276d79620ffb402d6f1aa5171fc2071702f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "このプラグインにはメッセージを高速化する機能はありませんが、既存のメッセージ高速化プラグインと併用できます。例えば、メッセージスキップ系のプラグインとキーを合わせることで、イベント全体を高速化することも可能です。",
+      "sourceHash": "ab79eb96c757acc0438d4c6201107c3eff4086d86930bb80282da575dd2792b8",
+      "translation": "This plugin does not include a function for speeding up messages, but it can be used together with existing message fast-forward plugins. For example, by assigning it the same key as a message-skipping plugin, you can speed up the entire event.",
+      "contextHash": "ab79eb96c757acc0438d4c6201107c3eff4086d86930bb80282da575dd2792b8"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the file below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EventFastForward.js",
+      "sourceHash": "9439702ca18a89dbc539bc1eb78678ed14426b7e6fdc341cb3c29935dc8bbf7a",
+      "translation": "NRP_EventFastForward.js ",
+      "contextHash": "90f21924696453defc360c7405718013114ff3389cf9121277b9af0e02cd0da3"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.02（2024/01/20）",
+      "sourceHash": "c4670df50019974b8e6a38ae168aee360983384d6818c2c5fc9492c08b973115",
+      "translation": "ver1.02 (2024/01/20) ",
+      "contextHash": "90f21924696453defc360c7405718013114ff3389cf9121277b9af0e02cd0da3"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/01/20（ver1.02）",
+      "sourceHash": "0961e33a00f9f61220b27deb89cb296caab82c03ed5ae14810f030f5981def7d",
+      "translation": "2024/01/20 (ver1.02) ",
+      "contextHash": "0961e33a00f9f61220b27deb89cb296caab82c03ed5ae14810f030f5981def7d"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "※ツクールMZ1.8の更新にて、高速化キーを押しっぱなしにした際にメッセージウェイトを飛ばすようになりましたが、それを無効化するための機能です。",
+      "sourceHash": "46571af19ce45772bcac936997144333e7b59e1c4457639b2027e10b7931d32d",
+      "translation": "※RPG Maker MZ1.8 introduced behavior that skips message waits when the fast-forward key is held down. This function disables that behavior.",
+      "contextHash": "46571af19ce45772bcac936997144333e7b59e1c4457639b2027e10b7931d32d"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2022/02/11（ver1.01）",
+      "sourceHash": "3f129ffeb069b3e240d6fb96f7bef1e65535b76e9489ee7251016c8aeefcec60",
+      "translation": "2022/02/11 (ver1.01) ",
+      "contextHash": "3f129ffeb069b3e240d6fb96f7bef1e65535b76e9489ee7251016c8aeefcec60"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "アニメーションやフキダシも高速化が可能になります。",
+      "sourceHash": "d62980cfcd49276dfdc6a991fa4b8a2c2c5229beaae60c4cdb83146d94cb91cd",
+      "translation": "Animations and balloon icons can now also be sped up.",
+      "contextHash": "d62980cfcd49276dfdc6a991fa4b8a2c2c5229beaae60c4cdb83146d94cb91cd"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/10/09（ver1.00）",
+      "sourceHash": "496cb415f5cc582ccd3d04409caf03d00195ae308bbac0b04d297709614cd5a0",
+      "translation": "2021/10/09 (ver1.00) ",
+      "contextHash": "496cb415f5cc582ccd3d04409caf03d00195ae308bbac0b04d297709614cd5a0"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "高速化キー（FastKey）",
+      "sourceHash": "302e5614f7d86f7b2e045b5737035891a6b3268a6bd017b95d34c4f06a3b858e",
+      "translation": "Fast-Forward Key (FastKey)",
+      "contextHash": "302e5614f7d86f7b2e045b5737035891a6b3268a6bd017b95d34c4f06a3b858e"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "イベント高速化を実行するキーです。",
+      "sourceHash": "8619723a7832081c1b9f0de48b1a416f217777937e4616463c80e508704718d1",
+      "translation": "This is the key used to activate event fast-forwarding.",
+      "contextHash": "8619723a7832081c1b9f0de48b1a416f217777937e4616463c80e508704718d1"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "候補から選択してください。",
+      "sourceHash": "fb9e55f2ddff959211592263e7e89fe34406919de14f965c5aca24c9f2dff992",
+      "translation": "Please select one from the available options.",
+      "contextHash": "fb9e55f2ddff959211592263e7e89fe34406919de14f965c5aca24c9f2dff992"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "速度倍率（SpeedMultiply）",
+      "sourceHash": "5389318dfe0a7a3d34739b8655096046c2e79b77bcf007a1994fa77648c4f0a2",
+      "translation": "Speed Multiplier (SpeedMultiply)",
+      "contextHash": "5389318dfe0a7a3d34739b8655096046c2e79b77bcf007a1994fa77648c4f0a2"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "高速化時のイベント速度の倍率です。",
+      "sourceHash": "cd089d034e87dee37774d0298e794127878d161f9b6bc55f05ca27a44728a0d4",
+      "translation": "This is the event speed multiplier when fast-forwarding.",
+      "contextHash": "cd089d034e87dee37774d0298e794127878d161f9b6bc55f05ca27a44728a0d4"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "1以下なら高速化は無効になります。",
+      "sourceHash": "a0d165fe3ad2bd72ebbf5aef2463f2a24208037141ebf89361e734fc1121b441",
+      "translation": "Fast-forwarding is disabled if the value is 1 or lower.",
+      "contextHash": "a0d165fe3ad2bd72ebbf5aef2463f2a24208037141ebf89361e734fc1121b441"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※あまり倍率が高すぎると処理落ちしたりするので、ご注意ください。",
+      "sourceHash": "b7d4d590b4d4b6b05f32324f0c8a5556ade866b082d7f79d686e81bcc5c9d307",
+      "translation": "※Please note that excessively high multipliers may cause processing slowdowns.",
+      "contextHash": "b7d4d590b4d4b6b05f32324f0c8a5556ade866b082d7f79d686e81bcc5c9d307"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "速度倍率の変数（SpeedVariableId）",
+      "sourceHash": "3d8d9a8ef15f6698dcc562213fec35e76eed371df26cf41968030bba6daa53ff",
+      "translation": "Speed Multiplier Variable (SpeedVariableId)",
+      "contextHash": "3d8d9a8ef15f6698dcc562213fec35e76eed371df26cf41968030bba6daa53ff"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "イベント高速化の倍率を設定する変数です。",
+      "sourceHash": "9147f9b31a9c82dd4e2f4e208607e489bea0cee0ab4e3b2b71a9c4f50f8e1823",
+      "translation": "This variable sets the event fast-forward multiplier.",
+      "contextHash": "9147f9b31a9c82dd4e2f4e208607e489bea0cee0ab4e3b2b71a9c4f50f8e1823"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "値が1以下なら高速化無効。速度倍率より優先されます。",
+      "sourceHash": "64041e656b0550529123ded4f507b862849cc9baac6bd847230a1843f3968820",
+      "translation": "Fast-forwarding is disabled if the value is 1 or lower. This takes priority over the speed multiplier.",
+      "contextHash": "64041e656b0550529123ded4f507b862849cc9baac6bd847230a1843f3968820"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "開始プレス時間（PressWait）",
+      "sourceHash": "8bba2ec3b409641901ed56a1e670072d0830446a1503fefa3cb5c1d1b4ff6f17",
+      "translation": "Press Start Wait (PressWait)",
+      "contextHash": "8bba2ec3b409641901ed56a1e670072d0830446a1503fefa3cb5c1d1b4ff6f17"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "キーを押し始めてから、高速化を開始するまでの所要時間です。",
+      "sourceHash": "7ee98235010daef8785e9ccb02f3bda06327f37bc2a303f508edeed05f42108b",
+      "translation": "This is the amount of time from when the key starts being pressed until fast-forwarding begins.",
+      "contextHash": "7ee98235010daef8785e9ccb02f3bda06327f37bc2a303f508edeed05f42108b"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "1/60秒単位で指定してください。",
+      "sourceHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2",
+      "translation": "Specify the value in units of 1/60 of a second.",
+      "contextHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "描画処理を高速化（FastSprite）",
+      "sourceHash": "ee85efe80c9503fc4ce9aaff7324fa522c2e0502cb8cf8fd5b23b8f50370b0e1",
+      "translation": "Speed Up Rendering (FastSprite)",
+      "contextHash": "ee85efe80c9503fc4ce9aaff7324fa522c2e0502cb8cf8fd5b23b8f50370b0e1"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "描画処理を高速化します。",
+      "sourceHash": "743215556615b6bf70353c69269646e76d3e373604d0a8f6c9122580ed48f5f7",
+      "translation": "Speeds up rendering.",
+      "contextHash": "743215556615b6bf70353c69269646e76d3e373604d0a8f6c9122580ed48f5f7"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "アニメーションやフキダシなども高速化されます。",
+      "sourceHash": "b4834c78d636ba5317f91d703a210c5b6f4702693b9b6f1c19e7bab7e22953f4",
+      "translation": "Animations and balloon icons are also sped up.",
+      "contextHash": "b4834c78d636ba5317f91d703a210c5b6f4702693b9b6f1c19e7bab7e22953f4"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "メッセージウェイトを有効化（NotCancelMessageWait）",
+      "sourceHash": "9f4b9b8c793dacc04f8cc8bc01b7acd62901f22c5d98e704d3b9168b35fd8d7f",
+      "translation": "Enable Message Waits (NotCancelMessageWait)",
+      "contextHash": "9f4b9b8c793dacc04f8cc8bc01b7acd62901f22c5d98e704d3b9168b35fd8d7f"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "高速化時にメッセージウェイトを無効化しないようにします。",
+      "sourceHash": "db2b769fcf526f675a7459404b982f86f4388ccfd1da0e179076aa98d4cc00c8",
+      "translation": "Prevents message waits from being disabled during fast-forwarding.",
+      "contextHash": "db2b769fcf526f675a7459404b982f86f4388ccfd1da0e179076aa98d4cc00c8"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "※ツクールMZ1.8の更新にて、高速化キーを押しっぱなしにした際にメッセージウェイトを飛ばすようになりました。",
+      "sourceHash": "c8b007a70fcbd3bd7860ea1fb658bd65d7e5222cf947b03184d8a32ff1bb7591",
+      "translation": "※RPG Maker MZ1.8 introduced behavior that skips message waits when the fast-forward key is held down.",
+      "contextHash": "c8b007a70fcbd3bd7860ea1fb658bd65d7e5222cf947b03184d8a32ff1bb7591"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "しかしながら、それまでのバージョンとはイベントのタイミングがズレるため、不具合が起こる可能性があります。MZ1.7までの挙動に戻すことでそれに対処できます。",
+      "sourceHash": "b3c6542d34cf6c5af69c518f08a1507b4f98ca625c5dd40a01368b80670ab806",
+      "translation": "However, this shifts event timing compared to earlier versions and may cause problems. You can address this by restoring the behavior from MZ1.7 and earlier.",
+      "contextHash": "b3c6542d34cf6c5af69c518f08a1507b4f98ca625c5dd40a01368b80670ab806"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "タッチ関連のプラグインパラメータ（Touch）",
+      "sourceHash": "1c89a8f6f8b6a6fda4d71d071200c63b24767c09fc97a30c689c82680c27d006",
+      "translation": "Touch-Related Plugin Parameters (Touch)",
+      "contextHash": "1c89a8f6f8b6a6fda4d71d071200c63b24767c09fc97a30c689c82680c27d006"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "以下はタッチ操作時のイベント高速化設定です。",
+      "sourceHash": "0063ce2d396d64c9917c00bbe3778e3dd1a9b8c5f915b15bb82a99516e844067",
+      "translation": "The following are the event fast-forward settings for touch operation.",
+      "contextHash": "0063ce2d396d64c9917c00bbe3778e3dd1a9b8c5f915b15bb82a99516e844067"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "特に指定しなければ、上記と同じ設定を使用します。",
+      "sourceHash": "a3588cacdd1e1691e47c072e8e2e12efee9371b29281b205032369f935e96286",
+      "translation": "Unless specified otherwise, the same settings as above are used.",
+      "contextHash": "a3588cacdd1e1691e47c072e8e2e12efee9371b29281b205032369f935e96286"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "速度倍率（タッチ）（TouchSpeedMultiply）",
+      "sourceHash": "4225d96597efd82db2ffd4f71c4c883b42e9b5fbd320d9ebe3d2703a93f5585c",
+      "translation": "Speed Multiplier (Touch) (TouchSpeedMultiply)",
+      "contextHash": "4225d96597efd82db2ffd4f71c4c883b42e9b5fbd320d9ebe3d2703a93f5585c"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "高速化時のイベント速度の倍率です。",
+      "sourceHash": "cd089d034e87dee37774d0298e794127878d161f9b6bc55f05ca27a44728a0d4",
+      "translation": "This is the event speed multiplier when fast-forwarding.",
+      "contextHash": "cd089d034e87dee37774d0298e794127878d161f9b6bc55f05ca27a44728a0d4"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "1以下なら高速化は無効になります。",
+      "sourceHash": "a0d165fe3ad2bd72ebbf5aef2463f2a24208037141ebf89361e734fc1121b441",
+      "translation": "Fast-forwarding is disabled if the value is 1 or lower.",
+      "contextHash": "a0d165fe3ad2bd72ebbf5aef2463f2a24208037141ebf89361e734fc1121b441"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "速度倍率の変数（タッチ）（TouchSpeedVariableId）",
+      "sourceHash": "ae7aa2f4851ad00fe970fece30beb81a60b1da341d0e8ce8256fd34d8ff6346b",
+      "translation": "Speed Multiplier Variable (Touch) (TouchSpeedVariableId)",
+      "contextHash": "ae7aa2f4851ad00fe970fece30beb81a60b1da341d0e8ce8256fd34d8ff6346b"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "イベント高速化の倍率を設定する変数です。",
+      "sourceHash": "9147f9b31a9c82dd4e2f4e208607e489bea0cee0ab4e3b2b71a9c4f50f8e1823",
+      "translation": "This variable sets the event fast-forward multiplier.",
+      "contextHash": "9147f9b31a9c82dd4e2f4e208607e489bea0cee0ab4e3b2b71a9c4f50f8e1823"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "値が1以下なら高速化無効。速度倍率より優先されます。",
+      "sourceHash": "64041e656b0550529123ded4f507b862849cc9baac6bd847230a1843f3968820",
+      "translation": "Speed-up is disabled if the value is 1 or lower. This takes priority over the speed multiplier.",
+      "contextHash": "64041e656b0550529123ded4f507b862849cc9baac6bd847230a1843f3968820"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "開始プレス時間（タッチ）（TouchPressWait）",
+      "sourceHash": "fa647d864a78db6b66b73230b4d0dd5188b557b14d015cd2af17327b30b9738e",
+      "translation": "Initial Press Duration (Touch) (TouchPressWait)",
+      "contextHash": "fa647d864a78db6b66b73230b4d0dd5188b557b14d015cd2af17327b30b9738e"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "キーを押し始めてから、高速化を開始するまでの所要時間です。",
+      "sourceHash": "7ee98235010daef8785e9ccb02f3bda06327f37bc2a303f508edeed05f42108b",
+      "translation": "The time required from when the key is first pressed until speed-up begins.",
+      "contextHash": "7ee98235010daef8785e9ccb02f3bda06327f37bc2a303f508edeed05f42108b"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "1/60秒単位で指定してください。",
+      "sourceHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2",
+      "translation": "Specify this in 1/60-second increments.",
+      "contextHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "謝辞（Acknowledgements）",
+      "sourceHash": "b861d353db7fdca6d86d712a2c622c0d6168ecd3841800dda0786e91a80e5d1a",
+      "translation": "Acknowledgements (Acknowledgements)",
+      "contextHash": "b861d353db7fdca6d86d712a2c622c0d6168ecd3841800dda0786e91a80e5d1a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※上の動画では[[LINK_1]]MessageSkip.js（トリアコンタン様）[[/LINK_1]]と併用しています。",
+      "sourceHash": "ccba07d275b7506c23c84dc63dc3571723db0996a02186ee7ef3d472e3e03c35",
+      "parts": [
+        {
+          "source": "※上の動画では",
+          "link": false
+        },
+        {
+          "source": "MessageSkip.js（トリアコンタン様）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用しています。",
+          "link": false
+        }
+      ],
+      "translation": "※The video above uses [[LINK_1]]MessageSkip.js (Triacontane)[[/LINK_1]] in conjunction with this plugin.",
+      "contextHash": "ccba07d275b7506c23c84dc63dc3571723db0996a02186ee7ef3d472e3e03c35"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]高速化キー（FastKey）[[/LINK_1]]",
+      "sourceHash": "a2fab6654339ad5976643760caead4760438cbba4f8607a2778a02ca9fae0596",
+      "parts": [
+        {
+          "source": "高速化キー（FastKey）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Speed-Up Key (FastKey)[[/LINK_1]]",
+      "contextHash": "a2fab6654339ad5976643760caead4760438cbba4f8607a2778a02ca9fae0596"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]速度倍率（SpeedMultiply）[[/LINK_1]]",
+      "sourceHash": "20e716d55c4042c60f5508c20c744fe07b4d6c7c831726c21e2cdf2ccc5e1186",
+      "parts": [
+        {
+          "source": "速度倍率（SpeedMultiply）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Speed Multiplier (SpeedMultiply)[[/LINK_1]]",
+      "contextHash": "20e716d55c4042c60f5508c20c744fe07b4d6c7c831726c21e2cdf2ccc5e1186"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]速度倍率の変数（SpeedVariableId）[[/LINK_1]]",
+      "sourceHash": "79735c17f9a66394032bcf6dfdeb060277082231d0ef01d2e7db8533a31a46b3",
+      "parts": [
+        {
+          "source": "速度倍率の変数（SpeedVariableId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Speed Multiplier Variable (SpeedVariableId)[[/LINK_1]]",
+      "contextHash": "79735c17f9a66394032bcf6dfdeb060277082231d0ef01d2e7db8533a31a46b3"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]開始プレス時間（PressWait）[[/LINK_1]]",
+      "sourceHash": "0ffe82f3cb602499547056b6c0f3ccf06609403ffeed7c28cfc2622fcfa3876c",
+      "parts": [
+        {
+          "source": "開始プレス時間（PressWait）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Initial Press Duration (PressWait)[[/LINK_1]]",
+      "contextHash": "0ffe82f3cb602499547056b6c0f3ccf06609403ffeed7c28cfc2622fcfa3876c"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]描画処理を高速化（FastSprite）[[/LINK_1]]",
+      "sourceHash": "807674fc225ae61867d4e258ef4b0e72a145e6537950bd00974e6ef7e970447b",
+      "parts": [
+        {
+          "source": "描画処理を高速化（FastSprite）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Accelerate Rendering (FastSprite)[[/LINK_1]]",
+      "contextHash": "807674fc225ae61867d4e258ef4b0e72a145e6537950bd00974e6ef7e970447b"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージウェイトを有効化（NotCancelMessageWait）[[/LINK_1]]",
+      "sourceHash": "9f68e5b857136e5950aaed6c36c13252bbd12d08c0539ad857607de1a98fed33",
+      "parts": [
+        {
+          "source": "メッセージウェイトを有効化（NotCancelMessageWait）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enable Message Wait (NotCancelMessageWait)[[/LINK_1]]",
+      "contextHash": "9f68e5b857136e5950aaed6c36c13252bbd12d08c0539ad857607de1a98fed33"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]タッチ関連のプラグインパラメータ（Touch）[[/LINK_1]]",
+      "sourceHash": "2df581a2758df28bdaa5de973ad4477bbd290dcc57ca2f389777d5f640136455",
+      "parts": [
+        {
+          "source": "タッチ関連のプラグインパラメータ（Touch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Touch-Related Plugin Parameters (Touch)[[/LINK_1]]",
+      "contextHash": "2df581a2758df28bdaa5de973ad4477bbd290dcc57ca2f389777d5f640136455"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]速度倍率（タッチ）（TouchSpeedMultiply）[[/LINK_1]]",
+      "sourceHash": "07b6646af9a198818490f55417b2947b6c20737f4dc5d06ea7390767165d5243",
+      "parts": [
+        {
+          "source": "速度倍率（タッチ）（TouchSpeedMultiply）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Speed Multiplier (Touch) (TouchSpeedMultiply)[[/LINK_1]]",
+      "contextHash": "07b6646af9a198818490f55417b2947b6c20737f4dc5d06ea7390767165d5243"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]速度倍率の変数（タッチ）（TouchSpeedVariableId）[[/LINK_1]]",
+      "sourceHash": "868b8605b9569746883052873a6006a6724e6e084fcb457f44959d792c1da8eb",
+      "parts": [
+        {
+          "source": "速度倍率の変数（タッチ）（TouchSpeedVariableId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Speed Multiplier Variable (Touch) (TouchSpeedVariableId)[[/LINK_1]]",
+      "contextHash": "868b8605b9569746883052873a6006a6724e6e084fcb457f44959d792c1da8eb"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]開始プレス時間（タッチ）（TouchPressWait）[[/LINK_1]]",
+      "sourceHash": "b80bd1768284e40ed4a8da00ff9f5a8b213ee214c49c8039b3270c5ec29af247",
+      "parts": [
+        {
+          "source": "開始プレス時間（タッチ）（TouchPressWait）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Initial Press Duration (Touch) (TouchPressWait)[[/LINK_1]]",
+      "contextHash": "b80bd1768284e40ed4a8da00ff9f5a8b213ee214c49c8039b3270c5ec29af247"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]謝辞（Acknowledgements）[[/LINK_1]]",
+      "sourceHash": "f4410c7057c1054715cdfa356dc29ec29dbfe783361ebbc2e20bd43509de5871",
+      "parts": [
+        {
+          "source": "謝辞（Acknowledgements）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Acknowledgements (Acknowledgements)[[/LINK_1]]",
+      "contextHash": "f4410c7057c1054715cdfa356dc29ec29dbfe783361ebbc2e20bd43509de5871"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージウェイトを有効化[[/LINK_1]]を追加。",
+      "sourceHash": "519a2da63b61bae6f055ba42c995c24bd0e370b617c608a5d01a0c6966ad9a03",
+      "parts": [
+        {
+          "source": "メッセージウェイトを有効化",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Enable Message Wait[[/LINK_1]] has been added.",
+      "contextHash": "519a2da63b61bae6f055ba42c995c24bd0e370b617c608a5d01a0c6966ad9a03"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]描画処理の高速化[[/LINK_1]]に対応。",
+      "sourceHash": "21481c3926ded4d8633590f7af41d6bc32d1c7abb47bd206a5f8644051dcbd06",
+      "parts": [
+        {
+          "source": "描画処理の高速化",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Support for [[LINK_1]]accelerated rendering[[/LINK_1]] has been added.",
+      "contextHash": "21481c3926ded4d8633590f7af41d6bc32d1c7abb47bd206a5f8644051dcbd06"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "当プラグインはトリアコンタン様作成の[[LINK_1]]FastForwardCustomize.js[[/LINK_1]]を参考にさせて頂きました。",
+      "sourceHash": "3068ff746b3826361bb3a35037baa17e51e8d2e53aad4d9a68156bb6c2ce8f45",
+      "parts": [
+        {
+          "source": "当プラグインはトリアコンタン様作成の",
+          "link": false
+        },
+        {
+          "source": "FastForwardCustomize.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参考にさせて頂きました。",
+          "link": false
+        }
+      ],
+      "translation": "This plugin was created with reference to [[LINK_1]]FastForwardCustomize.js[[/LINK_1]] by Triacontane.",
+      "contextHash": "3068ff746b3826361bb3a35037baa17e51e8d2e53aad4d9a68156bb6c2ce8f45"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ツクールＭＶ～ＭＺにはイベント実行中に、決定キーを押しっぱなしにすると動作が倍速化する機能があります。": "In RPG Maker MV–MZ, holding down the Confirm key while an event is running speeds up its execution.",
+    "それなりに便利ではありますが、標準で強制的に付いているため融通が利きません。": "This is fairly convenient, but since it is forcibly enabled by default, it lacks flexibility.",
+    "そこでいくつかの拡張を行います。": "So, I made several extensions.",
+    "上記は８倍速でイベントを実行した例です。": "The example above shows an event running at eight times the normal speed.",
+    "この機能によって、一度見たイベントをスキップできるようにしておくと親切です。開発テスト時も余計なイベントを飛ばせるので便利！": "It is helpful to use this function to allow events you have already seen to be skipped. It is also convenient during development testing, since you can skip unnecessary events!",
+    "主な機能": "Main Features",
+    "描画処理（アニメーション、フキダシなど）の高速化": "Faster rendering (animations, balloon icons, etc.)",
+    "使用するキーの変更": "Change the key used",
+    "実行速度の変更": "Change the execution speed",
+    "実行までの押しっぱなし時間の変更": "Change how long the key must be held before execution begins",
+    "タッチＵＩ側の設定も別途指定可": "Touch UI settings can also be specified separately",
+    "このプラグインにはメッセージを高速化する機能はありませんが、既存のメッセージ高速化プラグインと併用できます。例えば、メッセージスキップ系のプラグインとキーを合わせることで、イベント全体を高速化することも可能です。": "This plugin does not include a function for speeding up messages, but it can be used together with existing message fast-forward plugins. For example, by assigning it the same key as a message-skipping plugin, you can speed up the entire event.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the file below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EventFastForward.js": "NRP_EventFastForward.js ",
+    "ver1.02（2024/01/20）": "ver1.02 (2024/01/20) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/01/20（ver1.02）": "2024/01/20 (ver1.02) ",
+    "※ツクールMZ1.8の更新にて、高速化キーを押しっぱなしにした際にメッセージウェイトを飛ばすようになりましたが、それを無効化するための機能です。": "※RPG Maker MZ1.8 introduced behavior that skips message waits when the fast-forward key is held down. This function disables that behavior.",
+    "2022/02/11（ver1.01）": "2022/02/11 (ver1.01) ",
+    "アニメーションやフキダシも高速化が可能になります。": "Animations and balloon icons can now also be sped up.",
+    "2021/10/09（ver1.00）": "2021/10/09 (ver1.00) ",
+    "公開！": "Released!",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "高速化キー（FastKey）": "Fast-Forward Key (FastKey)",
+    "イベント高速化を実行するキーです。": "This is the key used to activate event fast-forwarding.",
+    "候補から選択してください。": "Please select one from the available options.",
+    "速度倍率（SpeedMultiply）": "Speed Multiplier (SpeedMultiply)",
+    "高速化時のイベント速度の倍率です。": "This is the event speed multiplier when fast-forwarding.",
+    "1以下なら高速化は無効になります。": "Fast-forwarding is disabled if the value is 1 or lower.",
+    "※あまり倍率が高すぎると処理落ちしたりするので、ご注意ください。": "※Please note that excessively high multipliers may cause processing slowdowns.",
+    "速度倍率の変数（SpeedVariableId）": "Speed Multiplier Variable (SpeedVariableId)",
+    "イベント高速化の倍率を設定する変数です。": "This variable sets the event fast-forward multiplier.",
+    "値が1以下なら高速化無効。速度倍率より優先されます。": "Speed-up is disabled if the value is 1 or lower. This takes priority over the speed multiplier.",
+    "開始プレス時間（PressWait）": "Press Start Wait (PressWait)",
+    "キーを押し始めてから、高速化を開始するまでの所要時間です。": "The time required from when the key is first pressed until speed-up begins.",
+    "1/60秒単位で指定してください。": "Specify this in 1/60-second increments.",
+    "描画処理を高速化（FastSprite）": "Speed Up Rendering (FastSprite)",
+    "描画処理を高速化します。": "Speeds up rendering.",
+    "アニメーションやフキダシなども高速化されます。": "Animations and balloon icons are also sped up.",
+    "メッセージウェイトを有効化（NotCancelMessageWait）": "Enable Message Waits (NotCancelMessageWait)",
+    "高速化時にメッセージウェイトを無効化しないようにします。": "Prevents message waits from being disabled during fast-forwarding.",
+    "※ツクールMZ1.8の更新にて、高速化キーを押しっぱなしにした際にメッセージウェイトを飛ばすようになりました。": "※RPG Maker MZ1.8 introduced behavior that skips message waits when the fast-forward key is held down.",
+    "しかしながら、それまでのバージョンとはイベントのタイミングがズレるため、不具合が起こる可能性があります。MZ1.7までの挙動に戻すことでそれに対処できます。": "However, this shifts event timing compared to earlier versions and may cause problems. You can address this by restoring the behavior from MZ1.7 and earlier.",
+    "タッチ関連のプラグインパラメータ（Touch）": "Touch-Related Plugin Parameters (Touch)",
+    "以下はタッチ操作時のイベント高速化設定です。": "The following are the event fast-forward settings for touch operation.",
+    "特に指定しなければ、上記と同じ設定を使用します。": "Unless specified otherwise, the same settings as above are used.",
+    "速度倍率（タッチ）（TouchSpeedMultiply）": "Speed Multiplier (Touch) (TouchSpeedMultiply)",
+    "速度倍率の変数（タッチ）（TouchSpeedVariableId）": "Speed Multiplier Variable (Touch) (TouchSpeedVariableId)",
+    "開始プレス時間（タッチ）（TouchPressWait）": "Initial Press Duration (Touch) (TouchPressWait)",
+    "謝辞（Acknowledgements）": "Acknowledgements (Acknowledgements)"
+  }
+}

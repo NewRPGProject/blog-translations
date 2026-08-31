@@ -1,0 +1,1172 @@
+{
+  "articleId": "481254085",
+  "sourceUrl": "https://newrpg.seesaa.net/article/481254085.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "b1cb3d0652d41c50b7b2c7d05e243c1c89939cc5427345a697989739b48302ae",
+  "translatedAt": "2026-08-31T05:17:54.667Z",
+  "title": "Fine-Tune Character Movement Speed [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "キャラクターの移動速度を細かく変更【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "91867bb6781384a0ee473dde598b9779beb2e5bc424555e29773ef249e0c0d20",
+      "translation": "Fine-Tune Character Movement Speed [RPG Maker MZ & MV Plugin]",
+      "contextHash": "91867bb6781384a0ee473dde598b9779beb2e5bc424555e29773ef249e0c0d20"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "キャラクターの移動速度を細かく変更できます。",
+      "sourceHash": "2cfb8aa51e53df730755ffe7f8f6ee8f0e6bf5d7263598ae5ad88e98aa2f3b2a",
+      "translation": "You can fine-tune character movement speed.",
+      "contextHash": "2cfb8aa51e53df730755ffe7f8f6ee8f0e6bf5d7263598ae5ad88e98aa2f3b2a"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "プレイヤー、イベント、各種乗り物が対象です。",
+      "sourceHash": "9d7288cd43a4a8a3c973912cb3e0ac3f571b6175a42ff8354caac1af9839b524",
+      "translation": "This applies to the player, events, and various vehicles.",
+      "contextHash": "9d7288cd43a4a8a3c973912cb3e0ac3f571b6175a42ff8354caac1af9839b524"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "例えば、「フィールドでは移動速度を遅くしたいけど、標準速では遅すぎるのでもう少しだけ速くしたい」とか、「シンボルエンカウントの速度を細かく調整したい」とか、そういう用途を想定しています。",
+      "sourceHash": "49909b21b0131b585173bb6ffa34bef7a9ada031db94f8c3f6494b18d50c2f05",
+      "translation": "For example, it is intended for uses such as “I want to slow down movement speed on the field, but the standard speed is too slow, so I want to make it just a little faster,” or “I want to fine-tune the speed of symbol encounters.”",
+      "contextHash": "49909b21b0131b585173bb6ffa34bef7a9ada031db94f8c3f6494b18d50c2f05"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な特徴",
+      "sourceHash": "c7fb76399b9568f4cfa5b95c390dc1c81d1bd16e5410cacba7db395a8d6d999e",
+      "translation": "Main Features",
+      "contextHash": "c7fb76399b9568f4cfa5b95c390dc1c81d1bd16e5410cacba7db395a8d6d999e"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "通常では指定できない速度を設定可能。",
+      "sourceHash": "085ea246a6f016ea8905e6dc5431cab7fd6432a97350bd83b140d52f3f4c1516",
+      "translation": "Set speeds that cannot normally be specified.",
+      "contextHash": "085ea246a6f016ea8905e6dc5431cab7fd6432a97350bd83b140d52f3f4c1516"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "中間の速度や限界を超えた速度など。",
+      "sourceHash": "e24fc374751c649dc57edb58a1bf3707cdfc85cfc68c2ca8cf20c84733892e85",
+      "translation": "Such as intermediate speeds or speeds exceeding the limit.",
+      "contextHash": "e24fc374751c649dc57edb58a1bf3707cdfc85cfc68c2ca8cf20c84733892e85"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "プラグインコマンドやメモ欄から設定。",
+      "sourceHash": "4171d7eeff2b1fb8cb8de9ae1bd7a0a776820aea7bed75be65edb00f4ad2f42f",
+      "translation": "Configure them using plugin commands or the note field.",
+      "contextHash": "4171d7eeff2b1fb8cb8de9ae1bd7a0a776820aea7bed75be65edb00f4ad2f42f"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "常時ダッシュの初期値をオンに変更可能。",
+      "sourceHash": "f052939c9286e89098c1618075cca44afeb67b41f132b1238649efa97c5d7f3d",
+      "translation": "Change the default value of Always Dash to on.",
+      "contextHash": "f052939c9286e89098c1618075cca44afeb67b41f132b1238649efa97c5d7f3d"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "プレイヤーや乗り物の初期速度を設定。",
+      "sourceHash": "561c735e3cbd9166bb836233e72a4ec54ea8b7a404ac0407777d5cad832aef9a",
+      "translation": "Set the default speeds for the player and vehicles.",
+      "contextHash": "561c735e3cbd9166bb836233e72a4ec54ea8b7a404ac0407777d5cad832aef9a"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ダッシュ時の速度を変更可能。",
+      "sourceHash": "7c774a43a0711ba3b0cabc93400472c501ad3b21949ea83bc307962775ec5ec4",
+      "translation": "Change the speed while dashing.",
+      "contextHash": "7c774a43a0711ba3b0cabc93400472c501ad3b21949ea83bc307962775ec5ec4"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "足踏みの速度を変更可能。",
+      "sourceHash": "070eeea1c0bcd81ed80b4d438f47998001d9d8d566060c94eab08a0d834d2dfb",
+      "translation": "Change the stepping speed.",
+      "contextHash": "070eeea1c0bcd81ed80b4d438f47998001d9d8d566060c94eab08a0d834d2dfb"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_ChangeCharacterSpeed.js",
+      "sourceHash": "f7b7def16b3249ff9baea627557abaf669632c300698cfd53af138b7590fe676",
+      "translation": "NRP_ChangeCharacterSpeed.js ",
+      "contextHash": "28536dda4fae22056c341d0b5bb328987aed4ef06bc11a47adc47f48bae3820c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.03（2024/05/28）",
+      "sourceHash": "20d246b96cc879e2e45d702a6666303dddf860d6ef5db52f0f07cc14651c635b",
+      "translation": "ver1.03 (2024/05/28) ",
+      "contextHash": "28536dda4fae22056c341d0b5bb328987aed4ef06bc11a47adc47f48bae3820c"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/05/28（ver1.03）",
+      "sourceHash": "6b304a737c2a8616a7b6152415d3bda1c982fa077bf506fd56fab0dea2274e69",
+      "translation": "2024/05/28 (ver1.03) ",
+      "contextHash": "6b304a737c2a8616a7b6152415d3bda1c982fa077bf506fd56fab0dea2274e69"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "足踏み速度の変更に対応。",
+      "sourceHash": "de6abe7829d584166236b6b05c685719fe439dbb30316699b60fa503a01bdb01",
+      "translation": "Added support for changing the stepping speed.",
+      "contextHash": "de6abe7829d584166236b6b05c685719fe439dbb30316699b60fa503a01bdb01"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "メモ欄やプラグインコマンドから足踏み速度を変更できます。",
+      "sourceHash": "89ae267316c832fa0c135b0a910e63956c5f64b909152e305804ceb3f45e7842",
+      "translation": "You can change the stepping speed from the note field or plugin commands.",
+      "contextHash": "89ae267316c832fa0c135b0a910e63956c5f64b909152e305804ceb3f45e7842"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/05/28（ver1.02）",
+      "sourceHash": "0c8796f808fd387e6c0c91fb700d9eb2e28f7d5fba894d12dfd31fb0c83386cd",
+      "translation": "2024/05/28 (ver1.02) ",
+      "contextHash": "0c8796f808fd387e6c0c91fb700d9eb2e28f7d5fba894d12dfd31fb0c83386cd"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "プラグインコマンドをマイナス値に対応。",
+      "sourceHash": "dc1b9d82de0c2422ac2f5f78d6a95f48c23c38ace93ba449346daaf2e3489546",
+      "translation": "Added support for negative values in plugin commands.",
+      "contextHash": "dc1b9d82de0c2422ac2f5f78d6a95f48c23c38ace93ba449346daaf2e3489546"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/07/07（ver1.01）",
+      "sourceHash": "3834bce89072c936e4c82b034a7ef4ef0cd723b59e1ff6bfbe7ea472c12d5481",
+      "translation": "2021/07/07 (ver1.01) ",
+      "contextHash": "3834bce89072c936e4c82b034a7ef4ef0cd723b59e1ff6bfbe7ea472c12d5481"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "『ダッシュ時の加算速度』を0にした場合、ダッシュを無効化できるように対応。",
+      "sourceHash": "31c64dd87e7c527aff22df157e79cdb144eb3281220440d7ab3688fefd523930",
+      "translation": "Added the ability to disable dashing by setting “Dash Speed Increase” to 0.",
+      "contextHash": "31c64dd87e7c527aff22df157e79cdb144eb3281220440d7ab3688fefd523930"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/04/30（ver1.00）",
+      "sourceHash": "5a9a001bcdee3cdcf843771805042cba526c61f9baedde22dbe982bd16e5dcbd",
+      "translation": "2021/04/30 (ver1.00) ",
+      "contextHash": "5a9a001bcdee3cdcf843771805042cba526c61f9baedde22dbe982bd16e5dcbd"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "プラグインパラメータより各速度を設定してください。移動速度の初期値が変更されます。",
+      "sourceHash": "bdbc94b501109aeb945d21fc0c0ff35a06c310ad8b313035fa95775786063347",
+      "translation": "Set each speed in the plugin parameters. This changes the default movement speeds.",
+      "contextHash": "bdbc94b501109aeb945d21fc0c0ff35a06c310ad8b313035fa95775786063347"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ただし、＜基本速度＞の値を変更した場合は、全ての移動速度に対して倍率がかかります。使いやすい方法をご利用ください。",
+      "sourceHash": "495bc8d954e222dcfa1843c11ce77ca21ecd8d687b67edba4634d661ce85ac89",
+      "translation": "However, changing the value of <Basic Speed> applies a multiplier to all movement speeds. Use whichever method is more convenient for you.",
+      "contextHash": "495bc8d954e222dcfa1843c11ce77ca21ecd8d687b67edba4634d661ce85ac89"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "速度の値はイベントの移動速度を参考にしてください。",
+      "sourceHash": "e6026830701ab911d2e764d2d15fbe19fa4c168ab52d04d0dd54653d5ef5569d",
+      "translation": "Use the event movement speeds as a reference for the speed values.",
+      "contextHash": "e6026830701ab911d2e764d2d15fbe19fa4c168ab52d04d0dd54653d5ef5569d"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "1: 1/8倍速",
+      "sourceHash": "72c0f84030c05d4809557e6633ef58c6909c8b14ba87e71af3ec760828289051",
+      "translation": "1: 1/8× speed",
+      "contextHash": "72c0f84030c05d4809557e6633ef58c6909c8b14ba87e71af3ec760828289051"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "2: 1/4倍速",
+      "sourceHash": "6a4c30f33152c9ed5137ef4cc32fa80f7cd8730bb5d707405cdc1cbb06230fe2",
+      "translation": "2: 1/4× speed",
+      "contextHash": "6a4c30f33152c9ed5137ef4cc32fa80f7cd8730bb5d707405cdc1cbb06230fe2"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "3: 1/2倍速",
+      "sourceHash": "6230269b3b048ccbb44f6334912285d4a082d74faf9777d6bbaa4bf38eec8a27",
+      "translation": "3: 1/2× speed",
+      "contextHash": "6230269b3b048ccbb44f6334912285d4a082d74faf9777d6bbaa4bf38eec8a27"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "4: 標準速",
+      "sourceHash": "9124dc0cb0b1a7d6facbe55bde9e96fa90546d3fe81b070efb7ddf9bd81dcba9",
+      "translation": "4: Standard speed",
+      "contextHash": "9124dc0cb0b1a7d6facbe55bde9e96fa90546d3fe81b070efb7ddf9bd81dcba9"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "5: 2倍速",
+      "sourceHash": "47e00f68794304b4ce9e7fa457c81af7b12c8878db65527b4470ad41d3cc1289",
+      "translation": "5: 2× speed",
+      "contextHash": "47e00f68794304b4ce9e7fa457c81af7b12c8878db65527b4470ad41d3cc1289"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "6: 4倍速",
+      "sourceHash": "871efec9440ee0d37c51b75208a260f454cffd223b64ae0a8b6e3aac36b1213c",
+      "translation": "6: 4× speed",
+      "contextHash": "871efec9440ee0d37c51b75208a260f454cffd223b64ae0a8b6e3aac36b1213c"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ここから外れた値も設定可能です。",
+      "sourceHash": "ec0e6b2a1b306ef58bd2bf40c72cde08cf6a610df114db47a30fb591bd3b3ef0",
+      "translation": "Values outside this range can also be set.",
+      "contextHash": "ec0e6b2a1b306ef58bd2bf40c72cde08cf6a610df114db47a30fb591bd3b3ef0"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "数値を１増やす毎に速度が２倍、１減らす毎に速度が半減します。",
+      "sourceHash": "494d66842c1fe99d9525f845e1b5c9c97d022f2e531f24a506e92388334e2ace",
+      "translation": "Each increase of 1 doubles the speed, and each decrease of 1 halves it.",
+      "contextHash": "494d66842c1fe99d9525f845e1b5c9c97d022f2e531f24a506e92388334e2ace"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "小数やマイナス値も有効です。",
+      "sourceHash": "cabd97df3e8495e275019075c61505de67179362333fcb3853b98553a4afa982",
+      "translation": "Decimals and negative values are also valid.",
+      "contextHash": "cabd97df3e8495e275019075c61505de67179362333fcb3853b98553a4afa982"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "例えば、3.5は標準速と1/2倍速の中間の速さになります。",
+      "sourceHash": "7d2b04c51e5511c0a8f65af8f1a2b824a90fef7d51ea7bb549897b4a08fdf2f1",
+      "translation": "For example, 3.5 is a speed halfway between standard speed and 1/2× speed.",
+      "contextHash": "7d2b04c51e5511c0a8f65af8f1a2b824a90fef7d51ea7bb549897b4a08fdf2f1"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "0は1/16倍速、-1は1/32倍速になります。",
+      "sourceHash": "a73979c079cc529eae3d538ae6e8a0d9302020ec1de98393555e257b9775a288",
+      "translation": "0 is 1/16× speed, and -1 is 1/32× speed.",
+      "contextHash": "a73979c079cc529eae3d538ae6e8a0d9302020ec1de98393555e257b9775a288"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "ただし、速さは『8: 16倍速』が限度です。",
+      "sourceHash": "a07f92945a53a8d79f9335185fcc96e12de85cd0a242b7313091bbd2bfc1a64a",
+      "translation": "However, the maximum speed is “8: 16× speed.”",
+      "contextHash": "a07f92945a53a8d79f9335185fcc96e12de85cd0a242b7313091bbd2bfc1a64a"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※これより速いと一瞬で２マス移動してしまい、指定のマスに止まれないため。",
+      "sourceHash": "6d4d1538ed7167d57884382ce6d103d5da6375f3060a37cea7e713861f201909",
+      "translation": "※At higher speeds, the character moves two tiles instantly and cannot stop on the specified tile.",
+      "contextHash": "6d4d1538ed7167d57884382ce6d103d5da6375f3060a37cea7e713861f201909"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "イベントのメモ欄（Note）",
+      "sourceHash": "0228473d6b9e00d2cedd8e0ab379f10c55db280ae6fba4cd06b85e73f6406196",
+      "translation": "Event Note Field (Note)",
+      "contextHash": "0228473d6b9e00d2cedd8e0ab379f10c55db280ae6fba4cd06b85e73f6406196"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "以下をイベントのメモ欄に指定できます。",
+      "sourceHash": "08ee709f9f5b85f810835d40275cabcc6f497564a599af8550c6fc37d2d3a0d1",
+      "translation": "You can specify the following in an event’s note field.",
+      "contextHash": "08ee709f9f5b85f810835d40275cabcc6f497564a599af8550c6fc37d2d3a0d1"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "この例ではイベントの速度を3.5にします。",
+      "sourceHash": "fc025f828411ef1857ce24c354180d4f926276e2a034eaedc8afd22ce9c7c63a",
+      "translation": "In this example, the event’s speed is set to 3.5.",
+      "contextHash": "fc025f828411ef1857ce24c354180d4f926276e2a034eaedc8afd22ce9c7c63a"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "つまり、標準速と1/2倍速の中間です。",
+      "sourceHash": "39adba8f539769c3b6a3c323576f2c4d1b3bd9d0962352f2770ce12a8d761c1e",
+      "translation": "In other words, it is halfway between standard speed and 1/2× speed.",
+      "contextHash": "39adba8f539769c3b6a3c323576f2c4d1b3bd9d0962352f2770ce12a8d761c1e"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+      "sourceHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985",
+      "translation": "Plugin Commands for MZ (PluginCommandMZ)",
+      "contextHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "『速度の変更』により対象と速度を指定してください。プレイヤーや各イベントを対象にできます。同時に複数のイベントを対象とすることも可能です。",
+      "sourceHash": "d61162ea35f76dae83ca203482d32e67d6aa6d3d21cf26b63390f3e07e7cc7df",
+      "translation": "Specify the target and speed using “Change Speed.” You can target the player or individual events. Multiple events can also be targeted at the same time.",
+      "contextHash": "d61162ea35f76dae83ca203482d32e67d6aa6d3d21cf26b63390f3e07e7cc7df"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "例えば、対象を\"1,2,3\"とすると一つずつ指定できます。",
+      "sourceHash": "093088f576296c27d90c55d088687407eacf603d591398182eee5d2f66f3cfc6",
+      "translation": "For example, entering \"1,2,3\" as the target specifies them individually.",
+      "contextHash": "093088f576296c27d90c55d088687407eacf603d591398182eee5d2f66f3cfc6"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "また、\"1~5\"で一括指定となります。",
+      "sourceHash": "042f22e14b5dd85ff4617dc3a8c44d3a088341d705a29761bc00acd9c57697b3",
+      "translation": "Also, \"1~5\" targets them all at once.",
+      "contextHash": "042f22e14b5dd85ff4617dc3a8c44d3a088341d705a29761bc00acd9c57697b3"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※コンボボックスに例があるのでご利用ください。",
+      "sourceHash": "6f0c7479e18d03e2cd23c29721ba38bfb8bc785fa7f4dd4ac662c9cbe8a6c010",
+      "translation": "※Examples are provided in the combo box, so please use them.",
+      "contextHash": "6f0c7479e18d03e2cd23c29721ba38bfb8bc785fa7f4dd4ac662c9cbe8a6c010"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "『足踏み速度の変更』も同様です。",
+      "sourceHash": "9908c8e779c162929777218cd078b16f838d11c069b7f1fb66d80b5d24f9e181",
+      "translation": " \"Change Stepping Speed” works the same way.",
+      "contextHash": "9908c8e779c162929777218cd078b16f838d11c069b7f1fb66d80b5d24f9e181"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（PluginCommandMV）",
+      "sourceHash": "6ca0f5c392df82c64b4ef7deb797c246265beb8f4cf38134205b69706e8136a7",
+      "translation": "Plugin Commands for MV (PluginCommandMV)",
+      "contextHash": "6ca0f5c392df82c64b4ef7deb797c246265beb8f4cf38134205b69706e8136a7"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "速度を3.5に変更します。",
+      "sourceHash": "0bb96da13f2eff95d7bcb28bfebb20b0ffb1c9f42e54273bb309076c356b99c0",
+      "translation": "Changes the speed to 3.5.",
+      "contextHash": "0bb96da13f2eff95d7bcb28bfebb20b0ffb1c9f42e54273bb309076c356b99c0"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "これだけだと対象は『このイベント』になります。対象を指定したい場合は、以下のオプションを事前に設定します。",
+      "sourceHash": "35e0bdbc67670dc8ca6744426831e5bdc69c9f87ed09c76924823437b33b6c1c",
+      "translation": "With only this setting, the target will be “this event.” To specify a target, configure the following option in advance.",
+      "contextHash": "35e0bdbc67670dc8ca6744426831e5bdc69c9f87ed09c76924823437b33b6c1c"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "イベントID=1を速度変更の対象とします。",
+      "sourceHash": "857ab42aacb2500ab1275a6ec74e26dbc37efab68672965b98ae5be3823892ea",
+      "translation": "Event ID 1 will be the target for the speed change.",
+      "contextHash": "857ab42aacb2500ab1275a6ec74e26dbc37efab68672965b98ae5be3823892ea"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "0ならばこのイベント、-1ならばプレイヤーです。",
+      "sourceHash": "c22f72c6859cdc99a90227a8bee0e8ea6b96d47a63296e889339c8a239c8d8e9",
+      "translation": "0 specifies this event, while -1 specifies the player.",
+      "contextHash": "c22f72c6859cdc99a90227a8bee0e8ea6b96d47a63296e889339c8a239c8d8e9"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "さらに複数指定も可能です。",
+      "sourceHash": "b59620189d9b057591fcb8315b0bf606a7e5f2518fd46e3a2efcb2a183448125",
+      "translation": "You can also specify multiple targets.",
+      "contextHash": "b59620189d9b057591fcb8315b0bf606a7e5f2518fd46e3a2efcb2a183448125"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "\"1,2,3\"で一つずつ指定。\"1~5\"で一括指定となります。",
+      "sourceHash": "32fb70b5ceb7fe8843415c07b68585705e0cbec07e19113ee5324e49e8877dbc",
+      "translation": "Specify targets individually with \"1,2,3\". Specify a range at once with \"1~5\".",
+      "contextHash": "32fb70b5ceb7fe8843415c07b68585705e0cbec07e19113ee5324e49e8877dbc"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "例",
+      "sourceHash": "9a4632346963d7e188fd63da51ea5fc16d9b2274b4574bf371f7cbe50a15d61b",
+      "translation": "Example",
+      "contextHash": "9a4632346963d7e188fd63da51ea5fc16d9b2274b4574bf371f7cbe50a15d61b"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "イベントＩＤが1～10までのイベントの速度を3.5に変更します。",
+      "sourceHash": "d7851538e31b839c021dfaeac95a700a6b608be40bb124498849b26e1e913184",
+      "translation": "Changes the speed of events with Event IDs from 1 to 10 to 3.5.",
+      "contextHash": "d7851538e31b839c021dfaeac95a700a6b608be40bb124498849b26e1e913184"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "足踏み速度を変更する場合は以下のようになります。",
+      "sourceHash": "3eddc295266f647c8cea97224b3190719e2c81b3d92b7a5be0dccaff0f21556a",
+      "translation": "To change the stepping speed, use the following setting.",
+      "contextHash": "3eddc295266f647c8cea97224b3190719e2c81b3d92b7a5be0dccaff0f21556a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "常時ダッシュの初期値（DefaultAlwaysDash）",
+      "sourceHash": "00cd6d78ee1c26df401af0b2bf9f7cc9263a8e7613103dcbcee429746195dbbb",
+      "translation": "Default Always Dash (DefaultAlwaysDash)",
+      "contextHash": "00cd6d78ee1c26df401af0b2bf9f7cc9263a8e7613103dcbcee429746195dbbb"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "オプションにある常時ダッシュの初期値をオンにします。",
+      "sourceHash": "60e4876e1c6e66a818728daf09f0f7f7ef1496f29061158d2d8648e5c841ccd0",
+      "translation": "Turns on the default Always Dash option.",
+      "contextHash": "60e4876e1c6e66a818728daf09f0f7f7ef1496f29061158d2d8648e5c841ccd0"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "プレイヤーの移動速度（PlayerSpeed）",
+      "sourceHash": "9ee08cedfd0d4e2dd2709d17014eb2ed44e2d2103ac7834f4494f7b3c7cf1055",
+      "translation": "Player Movement Speed (PlayerSpeed)",
+      "contextHash": "9ee08cedfd0d4e2dd2709d17014eb2ed44e2d2103ac7834f4494f7b3c7cf1055"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "プレイヤーの歩行時の移動速度です。初期値は4です。",
+      "sourceHash": "63201002dd53754c56b944fa7a1fedca27c0bf68bda9d13791aea522d25acd5f",
+      "translation": "The player's movement speed while walking. The default value is 4.",
+      "contextHash": "63201002dd53754c56b944fa7a1fedca27c0bf68bda9d13791aea522d25acd5f"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "小数も指定可能です。",
+      "sourceHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a",
+      "translation": "Decimal values can also be specified.",
+      "contextHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "通常はこれにダッシュによる加速（+1）を含めた値が移動速度になります。",
+      "sourceHash": "f36b7c7ed3c6274e94745071aea7c2cac56e22d1f2ac1f46ca263fbdf85f369a",
+      "translation": "Normally, the movement speed is this value plus the acceleration from dashing (+1).",
+      "contextHash": "f36b7c7ed3c6274e94745071aea7c2cac56e22d1f2ac1f46ca263fbdf85f369a"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "ダッシュ時の加算速度（PlusSpeedDash）",
+      "sourceHash": "5302c245620e6fb6307ae9a6619989c87f094e5431bc010154f7e29930444c52",
+      "translation": "Additional Speed While Dashing (PlusSpeedDash)",
+      "contextHash": "5302c245620e6fb6307ae9a6619989c87f094e5431bc010154f7e29930444c52"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "プレイヤーがダッシュ時に加算される速度です。初期値は1です。",
+      "sourceHash": "3d8e0a6d47dc122f6a5bea33784a0f9033d3fd09b3f91fc8b994dbd1ebca60ce",
+      "translation": "The speed added when the player dashes. The default value is 1.",
+      "contextHash": "3d8e0a6d47dc122f6a5bea33784a0f9033d3fd09b3f91fc8b994dbd1ebca60ce"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "小数も指定可能です。",
+      "sourceHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a",
+      "translation": "Decimal values can also be specified.",
+      "contextHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "0にするとダッシュが無効化されます。",
+      "sourceHash": "be95660801ff57d5aba3003140608a20203b7caad889510e7eb4213dac2c3ec1",
+      "translation": "Setting this to 0 disables dashing.",
+      "contextHash": "be95660801ff57d5aba3003140608a20203b7caad889510e7eb4213dac2c3ec1"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "足踏速度の変更を許可（UseStepSpeed）ver1.03",
+      "sourceHash": "c41d51cb2cc3655aec4f31a35e64ee770e513fc55efc5c242ed6acb061c78282",
+      "translation": "Allow Step Speed Changes (UseStepSpeed) ver1.03",
+      "contextHash": "c41d51cb2cc3655aec4f31a35e64ee770e513fc55efc5c242ed6acb061c78282"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "足踏み速度の変更機能を有効にします。",
+      "sourceHash": "fe4793616f13ea299f3a654cc2b7522578dcf0fa5b58914c63e29738d836ba73",
+      "translation": "Enables the step speed change feature.",
+      "contextHash": "fe4793616f13ea299f3a654cc2b7522578dcf0fa5b58914c63e29738d836ba73"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "他の足踏み系プラグインと競合する場合はオフにしてください。",
+      "sourceHash": "464787ff7923afaf9a203e104c88b6d63fe502595b0ee9cf799846f67ddc5fc7",
+      "translation": "Turn this off if it conflicts with another stepping-related plugin.",
+      "contextHash": "464787ff7923afaf9a203e104c88b6d63fe502595b0ee9cf799846f67ddc5fc7"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本速度）",
+      "sourceHash": "82a1c8e4091ccf087cce38b469f10a5f25d1f3a2668cd1d4bc34ef6fd21c9884",
+      "translation": "Plugin Parameters (Basic Speed)",
+      "contextHash": "82a1c8e4091ccf087cce38b469f10a5f25d1f3a2668cd1d4bc34ef6fd21c9884"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "プレイヤーの基本速度％（PlayerBasicSpeedRate）",
+      "sourceHash": "3fd545559d639a3b0e6fa95c450e5c0b600c7f95ed6a1a42ee040f67807db504",
+      "translation": "Player Basic Speed % (PlayerBasicSpeedRate)",
+      "contextHash": "3fd545559d639a3b0e6fa95c450e5c0b600c7f95ed6a1a42ee040f67807db504"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "プレイヤーの基本速度を100を標準として変更します。",
+      "sourceHash": "0466f590656e177164e76ca4a37f942df0eefc694a1805558136554ca51484e8",
+      "translation": "Changes the player's basic speed, with 100 as the standard.",
+      "contextHash": "0466f590656e177164e76ca4a37f942df0eefc694a1805558136554ca51484e8"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "こちらは全体の速度を変更します。",
+      "sourceHash": "b3f04fe38560fbf0ed98193aec6efd72dfae51f93b01afc5ac8751ac18c4726f",
+      "translation": "This changes the overall speed.",
+      "contextHash": "b3f04fe38560fbf0ed98193aec6efd72dfae51f93b01afc5ac8751ac18c4726f"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "つまり『標準速』や『1/2倍速』の速さ自体を変更してしまいます。既存のイベントで指定した動作にも影響がありますので、ご注意ください。",
+      "sourceHash": "b9e431198cb36a65950b0f2f51b4308666e9e9a177ecb7c2756abb7f9e33e9f2",
+      "translation": "In other words, it changes the actual speeds of “Normal Speed” and “1/2 Speed.” Please note that this also affects movement specified in existing events.",
+      "contextHash": "b9e431198cb36a65950b0f2f51b4308666e9e9a177ecb7c2756abb7f9e33e9f2"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "イベントの基本速度％（EventBasicSpeedRate）",
+      "sourceHash": "0bfa144fd74deb5f160a7c3a3755d4f863e5300fb0ff0f133f60566edc19498a",
+      "translation": "Event Basic Speed % (EventBasicSpeedRate)",
+      "contextHash": "0bfa144fd74deb5f160a7c3a3755d4f863e5300fb0ff0f133f60566edc19498a"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "イベントの基本速度を100を標準として変更します。",
+      "sourceHash": "b2b99b256f280893238fd81205310f0f69a817bfbd10d34c7b6d07cb0fc50147",
+      "translation": "Changes the event's basic speed, with 100 as the standard.",
+      "contextHash": "b2b99b256f280893238fd81205310f0f69a817bfbd10d34c7b6d07cb0fc50147"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "同じくこちらも全体の速度を変更します。",
+      "sourceHash": "0b06b622755fee9799d7c028579ffe7a7bff91bc05b38ce400845dbc4ada0ea1",
+      "translation": "This likewise changes the overall speed.",
+      "contextHash": "0b06b622755fee9799d7c028579ffe7a7bff91bc05b38ce400845dbc4ada0ea1"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "プラグインパラメータ（乗り物）",
+      "sourceHash": "63fa243db618a3934540db99791714e1f6afd19a0f669187cbab366907ae8055",
+      "translation": "Plugin Parameters (Vehicles)",
+      "contextHash": "63fa243db618a3934540db99791714e1f6afd19a0f669187cbab366907ae8055"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "小型船の移動速度（BoatSpeed）",
+      "sourceHash": "72fefa17f662cfa17c19ecd7fab73652bea6f1ed437aca98abf68a0e6814ebca",
+      "translation": "Boat Movement Speed (BoatSpeed)",
+      "contextHash": "72fefa17f662cfa17c19ecd7fab73652bea6f1ed437aca98abf68a0e6814ebca"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "小型船の移動速度です。初期値は4です。",
+      "sourceHash": "d50704eee89bb3342c5e5111aa9d60d341787a645dec2ce040cbd2cafbc019c2",
+      "translation": "The boat's movement speed. The default value is 4.",
+      "contextHash": "d50704eee89bb3342c5e5111aa9d60d341787a645dec2ce040cbd2cafbc019c2"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "小数も指定可能です。",
+      "sourceHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a",
+      "translation": "Decimal values can also be specified.",
+      "contextHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "大型船の移動速度（ShipSpeed）",
+      "sourceHash": "601fb22cf3cf83f2c2c7f3bd745d0841e68c7d5348110d75b4ad810643a8177a",
+      "translation": "Ship Movement Speed (ShipSpeed)",
+      "contextHash": "601fb22cf3cf83f2c2c7f3bd745d0841e68c7d5348110d75b4ad810643a8177a"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "大型船の移動速度です。初期値は5です。",
+      "sourceHash": "f13ca187d9f6266c961544461c1b50bea62792812728be03f47e035ea73f03d9",
+      "translation": "The ship's movement speed. The default value is 5.",
+      "contextHash": "f13ca187d9f6266c961544461c1b50bea62792812728be03f47e035ea73f03d9"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "小数も指定可能です。",
+      "sourceHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a",
+      "translation": "Decimal values can also be specified.",
+      "contextHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "飛行船の移動速度（AirShipSpeed）",
+      "sourceHash": "f5e3767c86962617abe1088cc529d1077a599237875505ff528a9b13902fef6b",
+      "translation": "Airship Movement Speed (AirShipSpeed)",
+      "contextHash": "f5e3767c86962617abe1088cc529d1077a599237875505ff528a9b13902fef6b"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "飛行船の移動速度です。初期値は6です。",
+      "sourceHash": "89c953c506d950ef356dd23be6ec21b5c82f8508b09d133a7b6b49a222c7c814",
+      "translation": "The airship's movement speed. The default value is 6.",
+      "contextHash": "89c953c506d950ef356dd23be6ec21b5c82f8508b09d133a7b6b49a222c7c814"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "小数も指定可能です。",
+      "sourceHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a",
+      "translation": "Decimal values can also be specified.",
+      "contextHash": "2d8e03d2774f9b7d4ccb98b3df48e921df1fd75609a9c49847d8b434b9eac61a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]イベントのメモ欄（Note）[[/LINK_1]]",
+      "sourceHash": "a7498f7804d9b619acdb84ae2f3e8d488597bca81a912ccdcad1d382890b95d2",
+      "parts": [
+        {
+          "source": "イベントのメモ欄（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Event Note Field (Note)[[/LINK_1]]",
+      "contextHash": "a7498f7804d9b619acdb84ae2f3e8d488597bca81a912ccdcad1d382890b95d2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（PluginCommandMZ）[[/LINK_1]]",
+      "sourceHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (PluginCommandMZ)[[/LINK_1]]",
+      "contextHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用プラグインコマンド（PluginCommandMV）[[/LINK_1]]",
+      "sourceHash": "3a84c96d2126b2c6069bd0d1675927b3f22daea42eb25ec886b52aa4c4a69be0",
+      "parts": [
+        {
+          "source": "ＭＶ用プラグインコマンド（PluginCommandMV）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MV (PluginCommandMV)[[/LINK_1]]",
+      "contextHash": "3a84c96d2126b2c6069bd0d1675927b3f22daea42eb25ec886b52aa4c4a69be0"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]常時ダッシュの初期値（DefaultAlwaysDash）[[/LINK_1]]",
+      "sourceHash": "abc7ed380a12bde268167bed28ec7024f270a3129d6f0afad4f2dea62c90039f",
+      "parts": [
+        {
+          "source": "常時ダッシュの初期値（DefaultAlwaysDash）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Default Always Dash (DefaultAlwaysDash)[[/LINK_1]]",
+      "contextHash": "abc7ed380a12bde268167bed28ec7024f270a3129d6f0afad4f2dea62c90039f"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プレイヤーの移動速度（PlayerSpeed）[[/LINK_1]]",
+      "sourceHash": "6dcf31e3a25290449932ba4c4d8a075da845e740ad1f07c2177d8235d895cc5a",
+      "parts": [
+        {
+          "source": "プレイヤーの移動速度（PlayerSpeed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Player Movement Speed (PlayerSpeed)[[/LINK_1]]",
+      "contextHash": "6dcf31e3a25290449932ba4c4d8a075da845e740ad1f07c2177d8235d895cc5a"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ダッシュ時の加算速度（PlusSpeedDash）[[/LINK_1]]",
+      "sourceHash": "6e02703fea598089b9d13f5a7e343fe21b57c2da1282f1ca5d9b4a39548668da",
+      "parts": [
+        {
+          "source": "ダッシュ時の加算速度（PlusSpeedDash）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additional Speed While Dashing (PlusSpeedDash)[[/LINK_1]]",
+      "contextHash": "6e02703fea598089b9d13f5a7e343fe21b57c2da1282f1ca5d9b4a39548668da"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]足踏速度の変更を許可（UseStepSpeed）[[/LINK_1]]ver1.03",
+      "sourceHash": "f102ae016c7e6b2fa754dcdf0df569f802132abea01043990dd52342d94393ca",
+      "parts": [
+        {
+          "source": "足踏速度の変更を許可（UseStepSpeed）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.03",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Allow Changing Step Speed (UseStepSpeed)[[/LINK_1]] ver1.03",
+      "contextHash": "f102ae016c7e6b2fa754dcdf0df569f802132abea01043990dd52342d94393ca"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本速度）[[/LINK_1]]",
+      "sourceHash": "47e2bc3665893db8f8178a41a6f9c7c97183a2cd996d5a7fa66f91dd285a6c3f",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本速度）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic Speed)[[/LINK_1]]",
+      "contextHash": "47e2bc3665893db8f8178a41a6f9c7c97183a2cd996d5a7fa66f91dd285a6c3f"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]プレイヤーの基本速度％（PlayerBasicSpeedRate）[[/LINK_1]]",
+      "sourceHash": "d1da946969e376c6148f587e0c1327e5170efc1a627839866dce9620d6da2bad",
+      "parts": [
+        {
+          "source": "プレイヤーの基本速度％（PlayerBasicSpeedRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Player Basic Speed % (PlayerBasicSpeedRate)[[/LINK_1]]",
+      "contextHash": "d1da946969e376c6148f587e0c1327e5170efc1a627839866dce9620d6da2bad"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの基本速度％（EventBasicSpeedRate）[[/LINK_1]]",
+      "sourceHash": "ebc3c2534d90fe592a8b987c385eb70367a1d8d50e1a92e12abffbfac23e6998",
+      "parts": [
+        {
+          "source": "イベントの基本速度％（EventBasicSpeedRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Event Basic Speed % (EventBasicSpeedRate)[[/LINK_1]]",
+      "contextHash": "ebc3c2534d90fe592a8b987c385eb70367a1d8d50e1a92e12abffbfac23e6998"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（乗り物）[[/LINK_1]]",
+      "sourceHash": "3f3dbfd2c94b291211fd6cb862da2a4ce9331d2e28a1465d461ccf10a33e8d8f",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（乗り物）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Vehicles)[[/LINK_1]]",
+      "contextHash": "3f3dbfd2c94b291211fd6cb862da2a4ce9331d2e28a1465d461ccf10a33e8d8f"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]小型船の移動速度（BoatSpeed）[[/LINK_1]]",
+      "sourceHash": "cbeaa4087288723421765d394bf75844c7f62c83bf84948c85d4b7b6d8de972e",
+      "parts": [
+        {
+          "source": "小型船の移動速度（BoatSpeed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Boat Movement Speed (BoatSpeed)[[/LINK_1]]",
+      "contextHash": "cbeaa4087288723421765d394bf75844c7f62c83bf84948c85d4b7b6d8de972e"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]大型船の移動速度（ShipSpeed）[[/LINK_1]]",
+      "sourceHash": "308f7e21e1cd392363be5073251943826f49d0131e990a51929787e84b153bea",
+      "parts": [
+        {
+          "source": "大型船の移動速度（ShipSpeed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Ship Movement Speed (ShipSpeed)[[/LINK_1]]",
+      "contextHash": "308f7e21e1cd392363be5073251943826f49d0131e990a51929787e84b153bea"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]飛行船の移動速度（AirShipSpeed）[[/LINK_1]]",
+      "sourceHash": "a379e34685f3924f95c518e875b46f14ecd6a023ab3d800e63d6973ae5b89212",
+      "parts": [
+        {
+          "source": "飛行船の移動速度（AirShipSpeed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Airship Movement Speed (AirShipSpeed)[[/LINK_1]]",
+      "contextHash": "a379e34685f3924f95c518e875b46f14ecd6a023ab3d800e63d6973ae5b89212"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "キャラクターの移動速度を細かく変更できます。": "You can fine-tune character movement speed.",
+    "プレイヤー、イベント、各種乗り物が対象です。": "This applies to the player, events, and various vehicles.",
+    "例えば、「フィールドでは移動速度を遅くしたいけど、標準速では遅すぎるのでもう少しだけ速くしたい」とか、「シンボルエンカウントの速度を細かく調整したい」とか、そういう用途を想定しています。": "For example, it is intended for uses such as “I want to slow down movement speed on the field, but the standard speed is too slow, so I want to make it just a little faster,” or “I want to fine-tune the speed of symbol encounters.”",
+    "主な特徴": "Main Features",
+    "通常では指定できない速度を設定可能。": "Set speeds that cannot normally be specified.",
+    "中間の速度や限界を超えた速度など。": "Such as intermediate speeds or speeds exceeding the limit.",
+    "プラグインコマンドやメモ欄から設定。": "Configure them using plugin commands or the note field.",
+    "常時ダッシュの初期値をオンに変更可能。": "Change the default value of Always Dash to on.",
+    "プレイヤーや乗り物の初期速度を設定。": "Set the default speeds for the player and vehicles.",
+    "ダッシュ時の速度を変更可能。": "Change the speed while dashing.",
+    "足踏みの速度を変更可能。": "Change the stepping speed.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_ChangeCharacterSpeed.js": "NRP_ChangeCharacterSpeed.js ",
+    "ver1.03（2024/05/28）": "ver1.03 (2024/05/28) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/05/28（ver1.03）": "2024/05/28 (ver1.03) ",
+    "足踏み速度の変更に対応。": "Added support for changing the stepping speed.",
+    "メモ欄やプラグインコマンドから足踏み速度を変更できます。": "You can change the stepping speed from the note field or plugin commands.",
+    "2024/05/28（ver1.02）": "2024/05/28 (ver1.02) ",
+    "プラグインコマンドをマイナス値に対応。": "Added support for negative values in plugin commands.",
+    "2021/07/07（ver1.01）": "2021/07/07 (ver1.01) ",
+    "『ダッシュ時の加算速度』を0にした場合、ダッシュを無効化できるように対応。": "Added the ability to disable dashing by setting “Dash Speed Increase” to 0.",
+    "2021/04/30（ver1.00）": "2021/04/30 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータより各速度を設定してください。移動速度の初期値が変更されます。": "Set each speed in the plugin parameters. This changes the default movement speeds.",
+    "ただし、＜基本速度＞の値を変更した場合は、全ての移動速度に対して倍率がかかります。使いやすい方法をご利用ください。": "However, changing the value of <Basic Speed> applies a multiplier to all movement speeds. Use whichever method is more convenient for you.",
+    "速度の値はイベントの移動速度を参考にしてください。": "Use the event movement speeds as a reference for the speed values.",
+    "1: 1/8倍速": "1: 1/8× speed",
+    "2: 1/4倍速": "2: 1/4× speed",
+    "3: 1/2倍速": "3: 1/2× speed",
+    "4: 標準速": "4: Standard speed",
+    "5: 2倍速": "5: 2× speed",
+    "6: 4倍速": "6: 4× speed",
+    "ここから外れた値も設定可能です。": "Values outside this range can also be set.",
+    "数値を１増やす毎に速度が２倍、１減らす毎に速度が半減します。": "Each increase of 1 doubles the speed, and each decrease of 1 halves it.",
+    "小数やマイナス値も有効です。": "Decimals and negative values are also valid.",
+    "例えば、3.5は標準速と1/2倍速の中間の速さになります。": "For example, 3.5 is a speed halfway between standard speed and 1/2× speed.",
+    "0は1/16倍速、-1は1/32倍速になります。": "0 is 1/16× speed, and -1 is 1/32× speed.",
+    "ただし、速さは『8: 16倍速』が限度です。": "However, the maximum speed is “8: 16× speed.”",
+    "※これより速いと一瞬で２マス移動してしまい、指定のマスに止まれないため。": "※At higher speeds, the character moves two tiles instantly and cannot stop on the specified tile.",
+    "イベントのメモ欄（Note）": "Event Note Field (Note)",
+    "以下をイベントのメモ欄に指定できます。": "You can specify the following in an event’s note field.",
+    "この例ではイベントの速度を3.5にします。": "In this example, the event’s speed is set to 3.5.",
+    "つまり、標準速と1/2倍速の中間です。": "In other words, it is halfway between standard speed and 1/2× speed.",
+    "ＭＺ用プラグインコマンド（PluginCommandMZ）": "Plugin Commands for MZ (PluginCommandMZ)",
+    "『速度の変更』により対象と速度を指定してください。プレイヤーや各イベントを対象にできます。同時に複数のイベントを対象とすることも可能です。": "Specify the target and speed using “Change Speed.” You can target the player or individual events. Multiple events can also be targeted at the same time.",
+    "例えば、対象を\"1,2,3\"とすると一つずつ指定できます。": "For example, entering \"1,2,3\" as the target specifies them individually.",
+    "また、\"1~5\"で一括指定となります。": "Also, \"1~5\" targets them all at once.",
+    "※コンボボックスに例があるのでご利用ください。": "※Examples are provided in the combo box, so please use them.",
+    "『足踏み速度の変更』も同様です。": " \"Change Stepping Speed” works the same way.",
+    "ＭＶ用プラグインコマンド（PluginCommandMV）": "Plugin Commands for MV (PluginCommandMV)",
+    "速度を3.5に変更します。": "Changes the speed to 3.5.",
+    "これだけだと対象は『このイベント』になります。対象を指定したい場合は、以下のオプションを事前に設定します。": "With only this setting, the target will be “this event.” To specify a target, configure the following option in advance.",
+    "イベントID=1を速度変更の対象とします。": "Event ID 1 will be the target for the speed change.",
+    "0ならばこのイベント、-1ならばプレイヤーです。": "0 specifies this event, while -1 specifies the player.",
+    "さらに複数指定も可能です。": "You can also specify multiple targets.",
+    "\"1,2,3\"で一つずつ指定。\"1~5\"で一括指定となります。": "Specify targets individually with \"1,2,3\". Specify a range at once with \"1~5\".",
+    "例": "Example",
+    "イベントＩＤが1～10までのイベントの速度を3.5に変更します。": "Changes the speed of events with Event IDs from 1 to 10 to 3.5.",
+    "足踏み速度を変更する場合は以下のようになります。": "To change the stepping speed, use the following setting.",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "常時ダッシュの初期値（DefaultAlwaysDash）": "Default Always Dash (DefaultAlwaysDash)",
+    "オプションにある常時ダッシュの初期値をオンにします。": "Turns on the default Always Dash option.",
+    "プレイヤーの移動速度（PlayerSpeed）": "Player Movement Speed (PlayerSpeed)",
+    "プレイヤーの歩行時の移動速度です。初期値は4です。": "The player's movement speed while walking. The default value is 4.",
+    "小数も指定可能です。": "Decimal values can also be specified.",
+    "通常はこれにダッシュによる加速（+1）を含めた値が移動速度になります。": "Normally, the movement speed is this value plus the acceleration from dashing (+1).",
+    "ダッシュ時の加算速度（PlusSpeedDash）": "Additional Speed While Dashing (PlusSpeedDash)",
+    "プレイヤーがダッシュ時に加算される速度です。初期値は1です。": "The speed added when the player dashes. The default value is 1.",
+    "0にするとダッシュが無効化されます。": "Setting this to 0 disables dashing.",
+    "足踏速度の変更を許可（UseStepSpeed）ver1.03": "Allow Step Speed Changes (UseStepSpeed) ver1.03",
+    "足踏み速度の変更機能を有効にします。": "Enables the step speed change feature.",
+    "他の足踏み系プラグインと競合する場合はオフにしてください。": "Turn this off if it conflicts with another stepping-related plugin.",
+    "プラグインパラメータ（基本速度）": "Plugin Parameters (Basic Speed)",
+    "プレイヤーの基本速度％（PlayerBasicSpeedRate）": "Player Basic Speed % (PlayerBasicSpeedRate)",
+    "プレイヤーの基本速度を100を標準として変更します。": "Changes the player's basic speed, with 100 as the standard.",
+    "こちらは全体の速度を変更します。": "This changes the overall speed.",
+    "つまり『標準速』や『1/2倍速』の速さ自体を変更してしまいます。既存のイベントで指定した動作にも影響がありますので、ご注意ください。": "In other words, it changes the actual speeds of “Normal Speed” and “1/2 Speed.” Please note that this also affects movement specified in existing events.",
+    "イベントの基本速度％（EventBasicSpeedRate）": "Event Basic Speed % (EventBasicSpeedRate)",
+    "イベントの基本速度を100を標準として変更します。": "Changes the event's basic speed, with 100 as the standard.",
+    "同じくこちらも全体の速度を変更します。": "This likewise changes the overall speed.",
+    "プラグインパラメータ（乗り物）": "Plugin Parameters (Vehicles)",
+    "小型船の移動速度（BoatSpeed）": "Boat Movement Speed (BoatSpeed)",
+    "小型船の移動速度です。初期値は4です。": "The boat's movement speed. The default value is 4.",
+    "大型船の移動速度（ShipSpeed）": "Ship Movement Speed (ShipSpeed)",
+    "大型船の移動速度です。初期値は5です。": "The ship's movement speed. The default value is 5.",
+    "飛行船の移動速度（AirShipSpeed）": "Airship Movement Speed (AirShipSpeed)",
+    "飛行船の移動速度です。初期値は6です。": "The airship's movement speed. The default value is 6."
+  }
+}

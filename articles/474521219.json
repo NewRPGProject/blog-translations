@@ -1,0 +1,1457 @@
+{
+  "articleId": "474521219",
+  "sourceUrl": "https://newrpg.seesaa.net/article/474521219.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "a99fc21deed1122c7f4d3ff5eecf24c823853cedde3eb132923940ae77e403e7",
+  "translatedAt": "2026-08-31T05:19:56.319Z",
+  "title": "DynamicAnimation&Motion Sample Skills (Combination Skills) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技（合体技）【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "ba65dad0eec18354bf2ff16b0fc90a8dfeb1171c262debf6d01052839c76efcf",
+      "translation": "DynamicAnimation&Motion Sample Skills (Combination Skills) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "ba65dad0eec18354bf2ff16b0fc90a8dfeb1171c262debf6d01052839c76efcf"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ロマン中のロマン――合体系のサンプル技を紹介していきます。",
+      "sourceHash": "21afaf268add9bcdb052fe4dc1a5b9551a93aec0ddaece53ea36f71bc79cbb43",
+      "translation": "The ultimate in flashy techniques—I’ll be introducing sample combination skills.",
+      "contextHash": "21afaf268add9bcdb052fe4dc1a5b9551a93aec0ddaece53ea36f71bc79cbb43"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "前提として、以下のプラグインとの併用を想定しています。",
+      "sourceHash": "e6d7f48ea955ab969557b7a9fb0bcf2e4266c82c560ba9d573e6509a5f589f44",
+      "translation": "These are intended to be used together with the following plugin.",
+      "contextHash": "e6d7f48ea955ab969557b7a9fb0bcf2e4266c82c560ba9d573e6509a5f589f44"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "これの導入により『$actor(id)』や『$cs(id)』関数で、合体技に参加するアクターを取得できるようになります。",
+      "sourceHash": "18cec38ff04920f11dec6d20bc7c598cd7219d7819c674cc6bfd935319c3c1c5",
+      "translation": "After installing this, you can use the ‘$actor(id)’ and ‘$cs(id)’ functions to obtain the actors participating in a combination skill.",
+      "contextHash": "18cec38ff04920f11dec6d20bc7c598cd7219d7819c674cc6bfd935319c3c1c5"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "また『$css(id)』関数ではスプライトを取得できます。",
+      "sourceHash": "71fcc9990e9456eb6d0a74dd4cb56127abd33dd380ec0e170d9cb18d9c8cb917",
+      "translation": "The ‘$css(id)’ function can also be used to obtain sprites.",
+      "contextHash": "71fcc9990e9456eb6d0a74dd4cb56127abd33dd380ec0e170d9cb18d9c8cb917"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※DynamicAnimation ver1.09より、$cssへの参照は不要となりました。全て$csだけで完結します。",
+      "sourceHash": "6cf90549d1503325c530ac8bdc1c2eb0736bc5dda81f2e60a6271a30fc28a673",
+      "translation": "※As of DynamicAnimation ver1.09, references to $css are no longer necessary. Everything can be done using only $cs.",
+      "contextHash": "6cf90549d1503325c530ac8bdc1c2eb0736bc5dda81f2e60a6271a30fc28a673"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ただし、<CS_Actors:1,2>などの記述まで、テキスト内に含まないように気をつけてください。あくまで合体技プラグインの記述なので、このプラグインでは処理できません。",
+      "sourceHash": "593445dbdae839bb2a634e38758ab56e9306ab3269bd5336dfe3bd98604ca81f",
+      "translation": "However, be careful not to include entries such as <CS_Actors:1,2> in the text. Those entries belong to the combination skill plugin and cannot be processed by this plugin.",
+      "contextHash": "593445dbdae839bb2a634e38758ab56e9306ab3269bd5336dfe3bd98604ca81f"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "Ｘ斬り（2020/11/29更新）",
+      "sourceHash": "0a7671ce0135adc8b5fd482474dedb5033b89e5a19eb51c2fdfd398220fcb2d0",
+      "translation": "X Slash (Updated 2020/11/29)",
+      "contextHash": "0a7671ce0135adc8b5fd482474dedb5033b89e5a19eb51c2fdfd398220fcb2d0"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "二人のアクターが交差するように敵を斬ります。",
+      "sourceHash": "dea45661e639248d3827e729e1acb32a0034e5a693f76c6649944ccf0813439c",
+      "translation": "Two actors slash the enemy while crossing paths.",
+      "contextHash": "dea45661e639248d3827e729e1acb32a0034e5a693f76c6649944ccf0813439c"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下はＩＤ＝１（アレックス）と２（ブライアン）による例です。",
+      "sourceHash": "edfb0c2920daf2a65825e861310a5df994e8150a166f63da9921ef32d2653928",
+      "translation": "The following is an example using IDs 1 (Alex) and 2 (Brian).",
+      "contextHash": "edfb0c2920daf2a65825e861310a5df994e8150a166f63da9921ef32d2653928"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "> // 並列モードで実行",
+      "sourceHash": "8a3a464cedc6527276b2455b16b009164d1138fadd3329e359544a5f3e4108fc",
+      "translation": "> // Run in parallel mode",
+      "contextHash": "3d85bd32754183ed479fb058e68e15e70921fd1e78148e896f016c56327dc028"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// アレックス：対象の中心を基準に移動",
+      "sourceHash": "353c29cddf41e976a5b51405437293bbe1df1cba70dc551150ad00a9cd470b20",
+      "translation": "// Alex: Move based on the center of the target",
+      "contextHash": "353c29cddf41e976a5b51405437293bbe1df1cba70dc551150ad00a9cd470b20"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "performer = $cs(1) // 1: アレックス",
+      "sourceHash": "3637ffab1932b76a8b7c4f2d21578e7b659e004d31a1a83fc1744c7c405ed669",
+      "translation": "performer = $cs(1) // 1: Alex",
+      "contextHash": "3637ffab1932b76a8b7c4f2d21578e7b659e004d31a1a83fc1744c7c405ed669"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "ex += 120 * mirroring // 目標から右に120",
+      "sourceHash": "48ccca6d5c664a30ba5de149711b4a58f84362702fddd575edd64b3401d26b9f",
+      "translation": "ex += 120 * mirroring // 120 to the right of the target",
+      "contextHash": "48ccca6d5c664a30ba5de149711b4a58f84362702fddd575edd64b3401d26b9f"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "ey -= 120 * mirroring // 目標から上に120",
+      "sourceHash": "b5544c5b09358b23d2a5b1ecdd5fe6fc9febcab91113232613b84404e41ebcd2",
+      "translation": "ey -= 120 * mirroring // 120 above the target",
+      "contextHash": "b5544c5b09358b23d2a5b1ecdd5fe6fc9febcab91113232613b84404e41ebcd2"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "// ブライアン：対象の中心を基準に移動",
+      "sourceHash": "637a3da8fae0639e7bcb8f62bf4cab4f8e7887d44d91e4d9d6488f5b9a88e035",
+      "translation": "// Brian: Move based on the center of the target",
+      "contextHash": "637a3da8fae0639e7bcb8f62bf4cab4f8e7887d44d91e4d9d6488f5b9a88e035"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "performer = $cs(2) // 2: ブライアン",
+      "sourceHash": "d4f0e7610d8cca38ad6de82969bf79fb9017d3cf16f1856384c4eddede5be024",
+      "translation": "performer = $cs(2) // 2: Brian",
+      "contextHash": "d4f0e7610d8cca38ad6de82969bf79fb9017d3cf16f1856384c4eddede5be024"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "ex += 120 * mirroring // 目標から右に120",
+      "sourceHash": "48ccca6d5c664a30ba5de149711b4a58f84362702fddd575edd64b3401d26b9f",
+      "translation": "ex += 120 * mirroring // 120 to the right of the target",
+      "contextHash": "48ccca6d5c664a30ba5de149711b4a58f84362702fddd575edd64b3401d26b9f"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "ey += 120 * mirroring // 目標から下に120",
+      "sourceHash": "1040a53b5abdb9a03ea78af41fff0b82b13c9195be2bebf7f57e5e5b0391fb13",
+      "translation": "ey += 120 * mirroring // 120 below the target",
+      "contextHash": "1040a53b5abdb9a03ea78af41fff0b82b13c9195be2bebf7f57e5e5b0391fb13"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "wait = 10 // 少しだけ待つ",
+      "sourceHash": "41798dd15b24a4c8aabdd0d3aad1636a4bc08fe9ed7d868eab54ccf90b7487d3",
+      "translation": "wait = 10 // Wait a moment",
+      "contextHash": "41798dd15b24a4c8aabdd0d3aad1636a4bc08fe9ed7d868eab54ccf90b7487d3"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "// 二人同時に敵の向こう側まで移動",
+      "sourceHash": "95dd45a64336694bb50226ef4fce2e7a60122ae2527eb7000bf4eae34dc31894",
+      "translation": "// Move both simultaneously to the other side of the enemy",
+      "contextHash": "95dd45a64336694bb50226ef4fce2e7a60122ae2527eb7000bf4eae34dc31894"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "performer = [$cs(1),$cs(2)] // 二人",
+      "sourceHash": "83e36c6162299ead1f77353e4bdf0e5bdf72a183a3adfb1f4083f9b9324287e8",
+      "translation": "performer = [$cs(1),$cs(2)] // Two people",
+      "contextHash": "83e36c6162299ead1f77353e4bdf0e5bdf72a183a3adfb1f4083f9b9324287e8"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "ex = defaultX - 120 * mirroring // 対象から左に120",
+      "sourceHash": "b7f36ef97c349683ca61f318a64dac3018af9ff81b17cd13ff5c155efa020029",
+      "translation": "ex = defaultX - 120 * mirroring // 120 to the left of the target",
+      "contextHash": "b7f36ef97c349683ca61f318a64dac3018af9ff81b17cd13ff5c155efa020029"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "// Ｘ字アニメーション",
+      "sourceHash": "a1b94adcbba13f87c0c93e2b463a4a53d87ba61d65de3ae0d396eb3bd7753dae",
+      "translation": "// X-shaped animation",
+      "contextHash": "a1b94adcbba13f87c0c93e2b463a4a53d87ba61d65de3ae0d396eb3bd7753dae"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "rotation = Math.PI*2 / 4 * mirroring // 90度回転",
+      "sourceHash": "9c6159aec8baead27e72aae128e0ad99a1cc70732a9c97535c3adf97dcda565a",
+      "translation": "rotation = Math.PI*2 / 4 * mirroring // Rotate 90 degrees",
+      "contextHash": "9c6159aec8baead27e72aae128e0ad99a1cc70732a9c97535c3adf97dcda565a"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "// 二人で戻る",
+      "sourceHash": "d4cc07c42f5103b9fe9644a137e03b0aff836b0f90fe7649a8c18bffc98ed4b6",
+      "translation": "// Return together",
+      "contextHash": "d4cc07c42f5103b9fe9644a137e03b0aff836b0f90fe7649a8c18bffc98ed4b6"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "performer = [$cs(1),$cs(2)] // 二人",
+      "sourceHash": "83e36c6162299ead1f77353e4bdf0e5bdf72a183a3adfb1f4083f9b9324287e8",
+      "translation": "performer = [$cs(1),$cs(2)] // Two people",
+      "contextHash": "83e36c6162299ead1f77353e4bdf0e5bdf72a183a3adfb1f4083f9b9324287e8"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "説明すべきことは多々ありますが、一つずつ取り上げていきます。",
+      "sourceHash": "ddd41cc9fc7386c7e0a60283e551da7ee9fd32355d357e9c69bd084adbf6fe9d",
+      "translation": "There are many things to explain, but I’ll go through them one at a time.",
+      "contextHash": "ddd41cc9fc7386c7e0a60283e551da7ee9fd32355d357e9c69bd084adbf6fe9d"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "通常『near』『crash』のような移動系テンプレートは、バトラーの移動を待ちます。このSyncの指定があれば待たなくなります。複数のバトラーを動かす際に便利です。",
+      "sourceHash": "9d591b71fb5a7c070fb280627b7580fac766571bca0a705362b4a14d0cf4e81a",
+      "translation": "Normally, movement templates such as ‘near’ and ‘crash’ wait for the battler to move. Specifying Sync prevents this wait. It is useful when moving multiple battlers.",
+      "contextHash": "9d591b71fb5a7c070fb280627b7580fac766571bca0a705362b4a14d0cf4e81a"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "『performer = $cs(1)』というのは一番目の参加者をモーション対象とするという意味です。事前説明で設定した関数ですね。",
+      "sourceHash": "2a85dda282324a01b52d75a94a41cb149e3dbc041ba56f3de08ce4463cf669ce",
+      "translation": "‘performer = $cs(1)’ means that the first participant is the target of the motion. This is the function set up in the preliminary explanation.",
+      "contextHash": "2a85dda282324a01b52d75a94a41cb149e3dbc041ba56f3de08ce4463cf669ce"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "『performer = [$cs(1),$cs(2)]』というように複数人を同時にモーション対象とすることも可能です。",
+      "sourceHash": "495d441ec21e5a29f63e60dae38246d08c8a064ba0ea72e42036fba71ec52ed6",
+      "translation": "You can also make multiple participants the motion targets at the same time, as in ‘performer = [$cs(1),$cs(2)]’.",
+      "contextHash": "495d441ec21e5a29f63e60dae38246d08c8a064ba0ea72e42036fba71ec52ed6"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ちなみに『pierce』型は角度を保ったまま標的の向こうまで移動します。二人まとめて命令しているのに、別地点へ移動するのはそのためです。便利。",
+      "sourceHash": "23c84335417b34097121adb7e5c3bcf901de04704406c65b043662a7a85e0c0f",
+      "translation": "Incidentally, the ‘pierce’ type moves past the target while maintaining its angle. That is why the two actors move to separate locations even though they were commanded together. Convenient.",
+      "contextHash": "23c84335417b34097121adb7e5c3bcf901de04704406c65b043662a7a85e0c0f"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "『Ｘ字アニメーション』の部分は角度を変えて『7:斬撃/エフェクト』を二つ再生しています。",
+      "sourceHash": "0148b45a49aa6e0396c1b4803b479cba111fa77a9ff66407fcfebf5eb5cd567d",
+      "translation": "In the ‘X-shaped animation’ section, I change the angles and play ‘7:Slash/Effect’ twice.",
+      "contextHash": "0148b45a49aa6e0396c1b4803b479cba111fa77a9ff66407fcfebf5eb5cd567d"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "もちろん、普通にＸ字の斬撃アニメーションを作っても構いません。",
+      "sourceHash": "be8ad7620a209116a58a432cd273ecddc5462e1e71b08cd02f11bfee1ab9bfa4",
+      "translation": "Of course, you can also simply create an X-shaped slash animation.",
+      "contextHash": "be8ad7620a209116a58a432cd273ecddc5462e1e71b08cd02f11bfee1ab9bfa4"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※2020/11/29 mirroring機能によって敵の使用にも対応しました。",
+      "sourceHash": "e8ab8652e7cecf170c1df68090f42e17fb432246da1dccb0876939c96d382699",
+      "translation": "※2020/11/29 Enemy use is now supported through the mirroring feature.",
+      "contextHash": "e8ab8652e7cecf170c1df68090f42e17fb432246da1dccb0876939c96d382699"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ただし、<CS_Actors:1,2>の記述は変更する必要があります。",
+      "sourceHash": "b5d84135ba5470e022abeb2addb07150776f83482fda82f7e655f6c804d7401a",
+      "translation": "However, you need to change the <CS_Actors:1,2> entry.",
+      "contextHash": "b5d84135ba5470e022abeb2addb07150776f83482fda82f7e655f6c804d7401a"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "合体魔法剣（2020/04/09）",
+      "sourceHash": "79e864216449b440ba897c85751f5976bc4c1c3ddf56b0f08cb4d9f69f2a9ab8",
+      "translation": "Combination Magic Sword (2020/04/09)",
+      "contextHash": "79e864216449b440ba897c85751f5976bc4c1c3ddf56b0f08cb4d9f69f2a9ab8"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "魔道士が放った魔法を身に受けて、剣士が魔法剣を放ちます。",
+      "sourceHash": "73dd9197cad67ceffe50c8886836c797c27f61d1e6476fd55d1a19c708678953",
+      "translation": "The swordsman takes the magic released by the mage and unleashes a magic sword attack.",
+      "contextHash": "73dd9197cad67ceffe50c8886836c797c27f61d1e6476fd55d1a19c708678953"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "スキルのアニメーションには適当な斬撃をセットしています。",
+      "sourceHash": "ece4e47f70d5ce74ad7046ad57f84f82e0eeb69ed9fbce54808f49b72984446d",
+      "translation": "I’ve set a suitable slash animation for the skill’s animation.",
+      "contextHash": "ece4e47f70d5ce74ad7046ad57f84f82e0eeb69ed9fbce54808f49b72984446d"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "以下はＩＤ＝１（剣士）と２（魔道士）による例です。",
+      "sourceHash": "7c97ac9ed37de24853701530a71f37262417a15490fc577ebb052bce35bfd0de",
+      "translation": "The following is an example using IDs 1 (swordsman) and 2 (mage).",
+      "contextHash": "7c97ac9ed37de24853701530a71f37262417a15490fc577ebb052bce35bfd0de"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "// 剣士：敵の前まで移動",
+      "sourceHash": "84ac781545edc63327abc1aece68bbfc86746434fe83f36b763dbedd9406c4e0",
+      "translation": "// Swordsman: Move to the front of the enemy",
+      "contextHash": "84ac781545edc63327abc1aece68bbfc86746434fe83f36b763dbedd9406c4e0"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "// 魔道士：一歩前進",
+      "sourceHash": "37383a7a9a019c40b2090c1348e68aa71bb6bed62f78d040e389c064b9963039",
+      "translation": "// Mage: Take one step forward",
+      "contextHash": "37383a7a9a019c40b2090c1348e68aa71bb6bed62f78d040e389c064b9963039"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "// 魔道士：魔法ポーズ",
+      "sourceHash": "bb3dd720cab754e9cfce04a744e8c6faa1e9dda40ad87d2cf72c16e328afb011",
+      "translation": "// Mage: Casting pose",
+      "contextHash": "bb3dd720cab754e9cfce04a744e8c6faa1e9dda40ad87d2cf72c16e328afb011"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "// 魔道士：魔法発動アニメ",
+      "sourceHash": "fa443a1f6d317f68cdbf4d016bd869549a8d2ea9ee25ba26a71b6f563e32e52f",
+      "translation": "// Mage: Spell activation animation",
+      "contextHash": "fa443a1f6d317f68cdbf4d016bd869549a8d2ea9ee25ba26a71b6f563e32e52f"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "// 剣士：手を挙げるポーズ",
+      "sourceHash": "fb26b00e182d79684fe71a14d4cc51960509ceeeb0489418eed48e90a05f5589",
+      "translation": "// Swordsman: Raise-hand pose",
+      "contextHash": "fb26b00e182d79684fe71a14d4cc51960509ceeeb0489418eed48e90a05f5589"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "// 剣士が水を受けるアニメ",
+      "sourceHash": "ca855f9d9fb0e75fcc991a55b434817330684dca3a04a16901a3c4819633dc12",
+      "translation": "// Animation of the swordsman being hit by water",
+      "contextHash": "ca855f9d9fb0e75fcc991a55b434817330684dca3a04a16901a3c4819633dc12"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "sx = $cs(2).x // 発射するＸ座標",
+      "sourceHash": "b5e2c98c70edfd33943514f1988d14639dd15886776f4d6361aba72604c4594d",
+      "translation": "sx = $cs(2).x // X coordinate to launch from",
+      "contextHash": "b5e2c98c70edfd33943514f1988d14639dd15886776f4d6361aba72604c4594d"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "sy = $cs(2).y - $cs(2).height/2 // 発射するＹ座標（中央に調整）",
+      "sourceHash": "e91c38fc8ff10240a01f2254df407b0d7c4fd0101fd5a45f69d802b8c8d3068f",
+      "translation": "sy = $cs(2).y - $cs(2).height/2 // Y coordinate to launch from (adjusted to the center)",
+      "contextHash": "e91c38fc8ff10240a01f2254df407b0d7c4fd0101fd5a45f69d802b8c8d3068f"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "// 剣士：武器を振る",
+      "sourceHash": "c1f0e96dc1c2fe91102cdd33f7f65780c9048fbe2ac4cf432347c14a8de122a0",
+      "translation": "// Swordsman: Swing weapon",
+      "contextHash": "c1f0e96dc1c2fe91102cdd33f7f65780c9048fbe2ac4cf432347c14a8de122a0"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "// 敵に攻撃アニメ",
+      "sourceHash": "06b6fb2945cd0448c2f34ba86fa8758e07be8a84b7be3a9fc217ca95ab7172ae",
+      "translation": "// Attack animation on the enemy",
+      "contextHash": "06b6fb2945cd0448c2f34ba86fa8758e07be8a84b7be3a9fc217ca95ab7172ae"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "// 魔道士：戻る",
+      "sourceHash": "abc62ec734d098b361e38a22d589393ed83a160fcac5293cf6cdebf4dcd12720",
+      "translation": "// Mage: Return",
+      "contextHash": "abc62ec734d098b361e38a22d589393ed83a160fcac5293cf6cdebf4dcd12720"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "// 剣士：戻る",
+      "sourceHash": "3af216ff55f4b0f59cf51934f215e006d5cb457c63b7729cb6b01d7df73195e8",
+      "translation": "// Swordsman: Return",
+      "contextHash": "3af216ff55f4b0f59cf51934f215e006d5cb457c63b7729cb6b01d7df73195e8"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "基本的には『Ｘ斬り』で説明したことと変わりません。",
+      "sourceHash": "0b61c0a96df148657714879589c0102aac62ce9dd943ee98348445327fb70b1c",
+      "translation": "Basically, it works the same way as explained for ‘X Slash’.",
+      "contextHash": "0b61c0a96df148657714879589c0102aac62ce9dd943ee98348445327fb70b1c"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "『target』の指定でアニメーションの対象を切り替えています。これにより、発動アニメを魔道士に表示したり、剣士に魔法を放ったりしています。",
+      "sourceHash": "ea14c5e4c24567cceec6affef705fca367c2737d065b31231aa12cb0646ebc59",
+      "translation": "The animation target is switched using the ‘target’ specification. This displays the activation animation on the mage and has the swordsman cast the magic.",
+      "contextHash": "ea14c5e4c24567cceec6affef705fca367c2737d065b31231aa12cb0646ebc59"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "また『sx = $cs(2).x』『sy = $cs(2).y - $cs(2).height/2』という記述により、魔道士を始点にして魔法を発射しています。",
+      "sourceHash": "1958ea4c48837ddb89c54f6c9002d22d3fe25eeaab2bba8e02db9dc8416b5c3a",
+      "translation": "The entries ‘sx = $cs(2).x’ and ‘sy = $cs(2).y - $cs(2).height/2’ launch the magic from the mage as its starting point.",
+      "contextHash": "1958ea4c48837ddb89c54f6c9002d22d3fe25eeaab2bba8e02db9dc8416b5c3a"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "デフォルトで作りやすかったので今回は『82:水/単体2』を使用しましたが、炎や雷などの魔法剣も同じ用に作ればＯＫです。",
+      "sourceHash": "90f74b725c091e6e3680bd9e84edb8e9c1fb6d8da5508af901d1060564012ef5",
+      "translation": "I used ‘82:Water/Single 2’ this time because it was easy to create with the default assets, but you can make magic swords of fire, lightning, and so on in the same way.",
+      "contextHash": "90f74b725c091e6e3680bd9e84edb8e9c1fb6d8da5508af901d1060564012ef5"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "総攻撃（2020/5/2）",
+      "sourceHash": "4a1f2a80bf2ab41f51501b91dfe65ceff5ac7b965c2e1142cc9880ff4e1bf8bc",
+      "translation": "All-Out Attack (2020/5/2)",
+      "contextHash": "4a1f2a80bf2ab41f51501b91dfe65ceff5ac7b965c2e1142cc9880ff4e1bf8bc"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "全員で総攻撃をしかけます。",
+      "sourceHash": "9bfe479dc695245294bd4d905c40e69ee3e7b5e98c51e65b9bd20091d1943cee",
+      "translation": "Everyone launches an all-out attack.",
+      "contextHash": "9bfe479dc695245294bd4d905c40e69ee3e7b5e98c51e65b9bd20091d1943cee"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "// 全員を合体技の対象に",
+      "sourceHash": "580aa1df7ae72f0314092504b44d03711540c386bd66bb0bd6a435b43f0278a8",
+      "translation": "// Set everyone as targets of the combo technique",
+      "contextHash": "580aa1df7ae72f0314092504b44d03711540c386bd66bb0bd6a435b43f0278a8"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "// メッセージ用（先頭の名前＋達）",
+      "sourceHash": "58b7758bf5dcef405c6089631ef46b8e65315918b26388ffda80cebddc607b3e",
+      "translation": "// For messages (leading name + and others)",
+      "contextHash": "58b7758bf5dcef405c6089631ef46b8e65315918b26388ffda80cebddc607b3e"
+    },
+    {
+      "id": "code-032",
+      "type": "code",
+      "source": "<CS_UserName:$cs(1).name() + \"達\">",
+      "sourceHash": "80f05a904ca0d47a484f5e2609d24e4423a10a97837eeb4bd1fe2b4a6574c34e",
+      "translation": "<CS_UserName:$cs(1).name() + \"And Others\">",
+      "contextHash": "80f05a904ca0d47a484f5e2609d24e4423a10a97837eeb4bd1fe2b4a6574c34e"
+    },
+    {
+      "id": "code-033",
+      "type": "code",
+      "source": "// 自動前進禁止＆非同期",
+      "sourceHash": "ed4115ff7a3755d9c10e65b9a6309383dd02f4c923af3adbbab59db3c988908f",
+      "translation": "// Disable automatic advance & asynchronous",
+      "contextHash": "ed4115ff7a3755d9c10e65b9a6309383dd02f4c923af3adbbab59db3c988908f"
+    },
+    {
+      "id": "code-034",
+      "type": "code",
+      "source": "// 接近",
+      "sourceHash": "3d8f5f8d4fdb7735312b9affa7b1f7945a1c203815f57917fd319a4b7f622b95",
+      "translation": "// Approach",
+      "contextHash": "3d8f5f8d4fdb7735312b9affa7b1f7945a1c203815f57917fd319a4b7f622b95"
+    },
+    {
+      "id": "code-035",
+      "type": "code",
+      "source": "performer = $cs() // 全員対象",
+      "sourceHash": "3daaada65beb138dc139945b888bd12ddc428e562514cf81c4c9a88071371141",
+      "translation": "performer = $cs() // Target everyone",
+      "contextHash": "3daaada65beb138dc139945b888bd12ddc428e562514cf81c4c9a88071371141"
+    },
+    {
+      "id": "code-036",
+      "type": "code",
+      "source": "ey += a.height * (-1.5 + a._battler.index()) // 縦位置調整",
+      "sourceHash": "1aff51c154f4cc5171b40e9254ed845a767d95a8fbe06df0028e5912f84268ab",
+      "translation": "ey += a.height * (-1.5 + a._battler.index()) // Adjust vertical position",
+      "contextHash": "1aff51c154f4cc5171b40e9254ed845a767d95a8fbe06df0028e5912f84268ab"
+    },
+    {
+      "id": "code-037",
+      "type": "code",
+      "source": "// 武器振り",
+      "sourceHash": "4aef4eb440547b15b2c175c9eedb3b58e155f8887c0c9c9f232aca262a774690",
+      "translation": "// Weapon swing",
+      "contextHash": "4aef4eb440547b15b2c175c9eedb3b58e155f8887c0c9c9f232aca262a774690"
+    },
+    {
+      "id": "code-038",
+      "type": "code",
+      "source": "// 通常攻撃のアニメーション",
+      "sourceHash": "ee6d33849184b1ae5949f2882941bb8744381f4f7b541766ff036f7f5410b77d",
+      "translation": "// Normal attack animation",
+      "contextHash": "ee6d33849184b1ae5949f2882941bb8744381f4f7b541766ff036f7f5410b77d"
+    },
+    {
+      "id": "code-039",
+      "type": "code",
+      "source": "id = $cs(r + 1).attackAnimationId1() // 通常攻撃アニメ",
+      "sourceHash": "2739b071c99584200a52ff1aaf2495787a72cdec1be1b88de5c6d97964bb9b5c",
+      "translation": "id = $cs(r + 1).attackAnimationId1() // Normal attack animation",
+      "contextHash": "2739b071c99584200a52ff1aaf2495787a72cdec1be1b88de5c6d97964bb9b5c"
+    },
+    {
+      "id": "code-040",
+      "type": "code",
+      "source": "// 戻る",
+      "sourceHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97",
+      "translation": "// Return",
+      "contextHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97"
+    },
+    {
+      "id": "code-041",
+      "type": "code",
+      "source": "damageAll = false // 全員が終わるまでダメージ表示禁止",
+      "sourceHash": "74ee5fff233097cddda553453a8cb8baf25ec5d808d5b8416d80c4f926978856",
+      "translation": "damageAll = false // Disable damage display until everyone finishes",
+      "contextHash": "74ee5fff233097cddda553453a8cb8baf25ec5d808d5b8416d80c4f926978856"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "『performer = $cs()』で参加者全員をモーション対象にできます。",
+      "sourceHash": "33d78f4236e2418364a974a66510aa083bef6d8e3ffe5bc601e29e23cb788ef7",
+      "translation": "‘performer = $cs()’ makes all participants motion targets.",
+      "contextHash": "33d78f4236e2418364a974a66510aa083bef6d8e3ffe5bc601e29e23cb788ef7"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "『ey += a.height * (-1.5 + a._battler.index())』はキャラクターの並び順によって、移動先を調整しています。",
+      "sourceHash": "0c8de4c88fde628c82e216391705e62fa67493b06a7ba99f758f65e2955aec73",
+      "translation": "‘ey += a.height * (-1.5 + a._battler.index())’ adjusts the destination according to the character’s position in the lineup.",
+      "contextHash": "0c8de4c88fde628c82e216391705e62fa67493b06a7ba99f758f65e2955aec73"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "『damageAll = false』はreturn型に最初から付属しているダメージ表示機能を切るためのものです。切らないと最初の一人が戻るタイミングでダメージ表示されてしまいます。",
+      "sourceHash": "683f27e22e503d2723fd2b39d3f6409b2559443d22adf2312d32373a28c885d6",
+      "translation": "‘damageAll = false’ disables the damage display that is included by default with the return type. If it is not disabled, damage is displayed when the first participant returns.",
+      "contextHash": "683f27e22e503d2723fd2b39d3f6409b2559443d22adf2312d32373a28c885d6"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "『戦闘行動の強制』辺りと組み合わせて、ペルソナっぽい何かができないかなと思ったり……。",
+      "sourceHash": "2f023e980dcadda408e960e9f5d6dfe220a406c2470f3f0548f335a5e724e922",
+      "translation": "I wonder if this could be combined with ‘Force Action’ to create something reminiscent of Persona…",
+      "contextHash": "2f023e980dcadda408e960e9f5d6dfe220a406c2470f3f0548f335a5e724e922"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "合体魔法（2020/09/07更新）",
+      "sourceHash": "2157773dd206bc4f2a3367e31ae0132dce38e7d7691e4550bb62ee4f24e1bde6",
+      "translation": "Combination Magic (Updated 2020/09/07)",
+      "contextHash": "2157773dd206bc4f2a3367e31ae0132dce38e7d7691e4550bb62ee4f24e1bde6"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "複数人で魔法を放ちます。",
+      "sourceHash": "613286ca2109148d824575ebcffda0e0d90ee913003e3e7d4f54b4c39150745b",
+      "translation": "Multiple participants cast magic together.",
+      "contextHash": "613286ca2109148d824575ebcffda0e0d90ee913003e3e7d4f54b4c39150745b"
+    },
+    {
+      "id": "code-042",
+      "type": "code",
+      "source": "// 参加者指定",
+      "sourceHash": "5b61a2091165728a419bec63ccf0f57d800ca0f8737ce7f55debf3692def632b",
+      "translation": "// Specify participants",
+      "contextHash": "5b61a2091165728a419bec63ccf0f57d800ca0f8737ce7f55debf3692def632b"
+    },
+    {
+      "id": "code-043",
+      "type": "code",
+      "source": "// 前進禁止",
+      "sourceHash": "e6de2744bf180a3d2c575054b361ed3f18d573c18025bc8993cae9228be6248c",
+      "translation": "// Disable advance",
+      "contextHash": "e6de2744bf180a3d2c575054b361ed3f18d573c18025bc8993cae9228be6248c"
+    },
+    {
+      "id": "code-044",
+      "type": "code",
+      "source": "// 全員一歩前へ",
+      "sourceHash": "e3422f71594ae4a3fa892a09c583b982b6f172ab7136e4c33f3ea6b65a148a4e",
+      "translation": "// Everyone takes one step forward",
+      "contextHash": "e3422f71594ae4a3fa892a09c583b982b6f172ab7136e4c33f3ea6b65a148a4e"
+    },
+    {
+      "id": "code-045",
+      "type": "code",
+      "source": "performerDelay = 0 // 各人時間差",
+      "sourceHash": "8d8a56ab6c1df391d1382d071de8f974705ce5d40d39acba7c806b8ea35fceed",
+      "translation": "performerDelay = 0 // Time offset for each person",
+      "contextHash": "8d8a56ab6c1df391d1382d071de8f974705ce5d40d39acba7c806b8ea35fceed"
+    },
+    {
+      "id": "code-046",
+      "type": "code",
+      "source": "// 全員魔法モーション",
+      "sourceHash": "179ded0adc57ccf61ce75c1c30e4250451fa94142517d71e90bab7130275fd87",
+      "translation": "// Everyone's spellcasting motion",
+      "contextHash": "179ded0adc57ccf61ce75c1c30e4250451fa94142517d71e90bab7130275fd87"
+    },
+    {
+      "id": "code-047",
+      "type": "code",
+      "source": "performerDelay = 0 // 各人時間差",
+      "sourceHash": "8d8a56ab6c1df391d1382d071de8f974705ce5d40d39acba7c806b8ea35fceed",
+      "translation": "performerDelay = 0 // Time offset for each person",
+      "contextHash": "8d8a56ab6c1df391d1382d071de8f974705ce5d40d39acba7c806b8ea35fceed"
+    },
+    {
+      "id": "code-048",
+      "type": "code",
+      "source": "// 全員発動アニメーション",
+      "sourceHash": "2bb51fefa22cf04dccf30808916f2513600dedda44012ecf623dfccebb2882fc",
+      "translation": "// Everyone's activation animation",
+      "contextHash": "2bb51fefa22cf04dccf30808916f2513600dedda44012ecf623dfccebb2882fc"
+    },
+    {
+      "id": "code-049",
+      "type": "code",
+      "source": "nextDelay = 0 // 各人時間差",
+      "sourceHash": "21eb5dc7ada6d761c3b8fccafe90d06b12ed48c5c4f4af6ed5945b911d79bed1",
+      "translation": "nextDelay = 0 // Time offset for each person",
+      "contextHash": "21eb5dc7ada6d761c3b8fccafe90d06b12ed48c5c4f4af6ed5945b911d79bed1"
+    },
+    {
+      "id": "code-050",
+      "type": "code",
+      "source": "// アニメーション",
+      "sourceHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86",
+      "translation": "// Animation",
+      "contextHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "上記は二人用ですが、冒頭の<CS_Actors:2,6>の値を変えるだけで、三人でも四人でもそのまま使えます。後はアニメーションを好きなように設定してください。",
+      "sourceHash": "27df78e1e7623024b613277c05eea23daa3b2fb059d32ef134df18680374d154",
+      "translation": "The example above is for two people, but simply changing the <CS_Actors:2,6> values at the beginning lets you use it with three or four people as well. After that, set the animations however you like.",
+      "contextHash": "27df78e1e7623024b613277c05eea23daa3b2fb059d32ef134df18680374d154"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "一斉射撃（2020/5/18更新）",
+      "sourceHash": "a0272aa8f47918abd698a54a942085ce4d9727d4e75bc86e77185b5aa8334b87",
+      "translation": "Volley (Updated 2020/5/18)",
+      "contextHash": "a0272aa8f47918abd698a54a942085ce4d9727d4e75bc86e77185b5aa8334b87"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "※NRP_CombinationSkill ver1.302が必要です。",
+      "sourceHash": "9bf5bd2d74eaaaa9025220114874ad25f5c3b905c8cfcf1af0480b6e844e849b",
+      "translation": "※NRP_CombinationSkill ver1.302 is required.",
+      "contextHash": "9bf5bd2d74eaaaa9025220114874ad25f5c3b905c8cfcf1af0480b6e844e849b"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "全員で一斉に射撃します。",
+      "sourceHash": "715a26bf2e1d4c8d9ded23679b19dfd7d7d44551c4827370d08eccd8a1329fe9",
+      "translation": "Everyone fires simultaneously.",
+      "contextHash": "715a26bf2e1d4c8d9ded23679b19dfd7d7d44551c4827370d08eccd8a1329fe9"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "アニメーションには『82:水/単体2』を縮小したものを設定しています。また<D-Animation:spell>による発動アニメーションも少しいじっています。",
+      "sourceHash": "1f2094235074fd2f73999478bba3a939b7bd0f57a7a64109f155ba704e6c9d92",
+      "translation": "The animation uses a scaled-down version of ‘82:Water/Single 2’. I’ve also made some adjustments to the activation animation using <D-Animation:spell>.",
+      "contextHash": "1f2094235074fd2f73999478bba3a939b7bd0f57a7a64109f155ba704e6c9d92"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "例によって、お好みのアニメーションに変更してください。着弾フレーム（arrival）の値も忘れずに。",
+      "sourceHash": "0937c1a5ffe1080f71c41176e95c52b1ca3c0c7dd3873b56f91790c81644f6a9",
+      "translation": "As usual, change it to your preferred animation. Don’t forget the arrival frame value.",
+      "contextHash": "0937c1a5ffe1080f71c41176e95c52b1ca3c0c7dd3873b56f91790c81644f6a9"
+    },
+    {
+      "id": "code-051",
+      "type": "code",
+      "source": "<CS_UserName:$cs(1).name() + \"達\">",
+      "sourceHash": "80f05a904ca0d47a484f5e2609d24e4423a10a97837eeb4bd1fe2b4a6574c34e",
+      "translation": "<CS_UserName:$cs(1).name() + \"Characters\">",
+      "contextHash": "80f05a904ca0d47a484f5e2609d24e4423a10a97837eeb4bd1fe2b4a6574c34e"
+    },
+    {
+      "id": "code-052",
+      "type": "code",
+      "source": "// 前進禁止",
+      "sourceHash": "e6de2744bf180a3d2c575054b361ed3f18d573c18025bc8993cae9228be6248c",
+      "translation": "// Prohibit advancing",
+      "contextHash": "e6de2744bf180a3d2c575054b361ed3f18d573c18025bc8993cae9228be6248c"
+    },
+    {
+      "id": "code-053",
+      "type": "code",
+      "source": "// 全員一歩前へ",
+      "sourceHash": "e3422f71594ae4a3fa892a09c583b982b6f172ab7136e4c33f3ea6b65a148a4e",
+      "translation": "// Everyone takes one step forward",
+      "contextHash": "e3422f71594ae4a3fa892a09c583b982b6f172ab7136e4c33f3ea6b65a148a4e"
+    },
+    {
+      "id": "code-054",
+      "type": "code",
+      "source": "performerDelay = 1 // 各人時間差",
+      "sourceHash": "d4ab671fad7fd36b247814f9a527f0b1507c92ba82b80c9f2a2fcd25d5a60c93",
+      "translation": "performerDelay = 1 // Time delay for each person",
+      "contextHash": "d4ab671fad7fd36b247814f9a527f0b1507c92ba82b80c9f2a2fcd25d5a60c93"
+    },
+    {
+      "id": "code-055",
+      "type": "code",
+      "source": "// 全員魔法モーション",
+      "sourceHash": "179ded0adc57ccf61ce75c1c30e4250451fa94142517d71e90bab7130275fd87",
+      "translation": "// Everyone plays a magic motion",
+      "contextHash": "179ded0adc57ccf61ce75c1c30e4250451fa94142517d71e90bab7130275fd87"
+    },
+    {
+      "id": "code-056",
+      "type": "code",
+      "source": "performerDelay = 1 // 各人時間差",
+      "sourceHash": "d4ab671fad7fd36b247814f9a527f0b1507c92ba82b80c9f2a2fcd25d5a60c93",
+      "translation": "performerDelay = 1 // Time delay for each person",
+      "contextHash": "d4ab671fad7fd36b247814f9a527f0b1507c92ba82b80c9f2a2fcd25d5a60c93"
+    },
+    {
+      "id": "code-057",
+      "type": "code",
+      "source": "// 全員発動アニメーション",
+      "sourceHash": "2bb51fefa22cf04dccf30808916f2513600dedda44012ecf623dfccebb2882fc",
+      "translation": "// Everyone activates the animation",
+      "contextHash": "2bb51fefa22cf04dccf30808916f2513600dedda44012ecf623dfccebb2882fc"
+    },
+    {
+      "id": "code-058",
+      "type": "code",
+      "source": "nextDelay = 1 // 各人時間差",
+      "sourceHash": "f7f90636029fad9a20014c6c090a40af109758f871ab3dd57521bc3ce67d4e9f",
+      "translation": "nextDelay = 1 // Time delay for each person",
+      "contextHash": "f7f90636029fad9a20014c6c090a40af109758f871ab3dd57521bc3ce67d4e9f"
+    },
+    {
+      "id": "code-059",
+      "type": "code",
+      "source": "// 一斉射撃",
+      "sourceHash": "7a311faccc72ce53c743bc423c2d445a950e1e168db2d57aecb370c8a74bd538",
+      "translation": "// All fire at once",
+      "contextHash": "7a311faccc72ce53c743bc423c2d445a950e1e168db2d57aecb370c8a74bd538"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "によって合体技の参加者の座標を参照しています。",
+      "sourceHash": "e1d90d0290e3d0b8a352f4f16e4844903d60f2225db79799ec93891b43b4de80",
+      "translation": "It references the coordinates of the participants in the combination skill.",
+      "contextHash": "36f926b83b9f058bb0aa2f1327c0dbf13d90f29e085160bd90053aa3feb1958c"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "『r%4+1』とは「リピート回数（０始まり）を４で割った余り＋１」という意味です。つまり『$cs(1)～$cs(4)』を巡回しながら参照することで、それぞれの位置からアニメーションを発射しています。",
+      "sourceHash": "cb7c3ae876098452deedcea69ec18f540e96ca294c8c5fe149e2006660fd3b97",
+      "translation": "‘r%4+1’ means “the remainder when the repeat count (starting from 0) is divided by 4, plus 1.” In other words, it cycles through ‘$cs(1)~$cs(4)’ to launch the animation from each position.",
+      "contextHash": "cb7c3ae876098452deedcea69ec18f540e96ca294c8c5fe149e2006660fd3b97"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ブライアンミサイル（2024/04/18）",
+      "sourceHash": "f001f21be6bd1510063799d7ab13ea1765d6d49462bef2063715061390dc3f26",
+      "translation": "Brian Missile (2024/04/18)",
+      "contextHash": "f001f21be6bd1510063799d7ab13ea1765d6d49462bef2063715061390dc3f26"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "麗しい友情パワーで敵を粉砕します。",
+      "sourceHash": "3a2f0be23ced7ecd4f0d0e02f58565d35d67914d09dddfd4e23780d21999fba9",
+      "translation": "They pulverize the enemy with the power of beautiful friendship.",
+      "contextHash": "3a2f0be23ced7ecd4f0d0e02f58565d35d67914d09dddfd4e23780d21999fba9"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "スキルの範囲は全体にしていますが、単体にしても問題ありません。",
+      "sourceHash": "92283e802eebc9bb35451c4a7f9339ebd9aa590f151add71d3ff9e5137c92f5a",
+      "translation": "The skill’s range is set to all enemies, but there is no problem with setting it to a single target.",
+      "contextHash": "92283e802eebc9bb35451c4a7f9339ebd9aa590f151add71d3ff9e5137c92f5a"
+    },
+    {
+      "id": "code-060",
+      "type": "code",
+      "source": "// 参加者指定",
+      "sourceHash": "5b61a2091165728a419bec63ccf0f57d800ca0f8737ce7f55debf3692def632b",
+      "translation": "// Specify participants",
+      "contextHash": "5b61a2091165728a419bec63ccf0f57d800ca0f8737ce7f55debf3692def632b"
+    },
+    {
+      "id": "code-061",
+      "type": "code",
+      "source": "// 自動前進禁止",
+      "sourceHash": "dc5873194ef66f87c2e2bd97256f6e1096729013e6227ef89ec62e098db8ce62",
+      "translation": "// Prohibit automatic advancing",
+      "contextHash": "dc5873194ef66f87c2e2bd97256f6e1096729013e6227ef89ec62e098db8ce62"
+    },
+    {
+      "id": "code-062",
+      "type": "code",
+      "source": "// １人目：２人目の元へ移動",
+      "sourceHash": "c22cdbe0b1b12122693a2c95dfc32b044e9ff3ae0069657dcfa80b729c95427d",
+      "translation": "// First person: Move to the second person's position",
+      "contextHash": "c22cdbe0b1b12122693a2c95dfc32b044e9ff3ae0069657dcfa80b729c95427d"
+    },
+    {
+      "id": "code-063",
+      "type": "code",
+      "source": "// １人目：しゃがむ",
+      "sourceHash": "ae43ff5ff09c575839378dbdeaac6fe073799ae5264cab6c2ad68cfcb0c79750",
+      "translation": "// First person: Crouch",
+      "contextHash": "ae43ff5ff09c575839378dbdeaac6fe073799ae5264cab6c2ad68cfcb0c79750"
+    },
+    {
+      "id": "code-064",
+      "type": "code",
+      "source": "// ２人目：上に投げられる",
+      "sourceHash": "47d54f4ea18dea8e8a8f90850e6d02efb40cc1e3f0b0bfbb41b71165108d7903",
+      "translation": "// Second person: Be thrown upward",
+      "contextHash": "47d54f4ea18dea8e8a8f90850e6d02efb40cc1e3f0b0bfbb41b71165108d7903"
+    },
+    {
+      "id": "code-065",
+      "type": "code",
+      "source": "rotation *= 1 // 回転数",
+      "sourceHash": "f88847641f0aec05e01dc36df2cc40b3ec649c0cd794015a60cc5fb473990c85",
+      "translation": "rotation *= 1 // Number of rotations",
+      "contextHash": "f88847641f0aec05e01dc36df2cc40b3ec649c0cd794015a60cc5fb473990c85"
+    },
+    {
+      "id": "code-066",
+      "type": "code",
+      "source": "z = 4 // 優先度上へ",
+      "sourceHash": "8a67c93f77fbaae9eb4455b6cf549e5c3876a68ae6b90653880a925c0e010374",
+      "translation": "z = 4 // Raise priority",
+      "contextHash": "8a67c93f77fbaae9eb4455b6cf549e5c3876a68ae6b90653880a925c0e010374"
+    },
+    {
+      "id": "code-067",
+      "type": "code",
+      "source": "noShadow = true // 影を削除",
+      "sourceHash": "d4bdaf2e5d1cf1d279253b3397b7da81813f21eb10aa8ae0a03429ec212ceeaf",
+      "translation": "noShadow = true // Delete shadow",
+      "contextHash": "d4bdaf2e5d1cf1d279253b3397b7da81813f21eb10aa8ae0a03429ec212ceeaf"
+    },
+    {
+      "id": "code-068",
+      "type": "code",
+      "source": "// １人目：腕を上げてキャッチ",
+      "sourceHash": "f1da2f0cfddffdc46b62c9730c1eedc6c40b18dc289e84f383c5b048bd50dd38",
+      "translation": "// First person: Raise arms and catch",
+      "contextHash": "f1da2f0cfddffdc46b62c9730c1eedc6c40b18dc289e84f383c5b048bd50dd38"
+    },
+    {
+      "id": "code-069",
+      "type": "code",
+      "source": "// ２人目：倒れ状態に",
+      "sourceHash": "ac9f23c5decd98de1899b9968b73fe6ccec507eb484b971eb584e89ec9b086e3",
+      "translation": "// Second person: Enter a knocked-down state",
+      "contextHash": "ac9f23c5decd98de1899b9968b73fe6ccec507eb484b971eb584e89ec9b086e3"
+    },
+    {
+      "id": "code-070",
+      "type": "code",
+      "source": "// １人目：手を振り下ろす",
+      "sourceHash": "c380bd5873c001dff9ff5c816fc5874761f8eea384cf0fb267b5dd393f1d7deb",
+      "translation": "// First person: Swing hand downward",
+      "contextHash": "c380bd5873c001dff9ff5c816fc5874761f8eea384cf0fb267b5dd393f1d7deb"
+    },
+    {
+      "id": "code-071",
+      "type": "code",
+      "source": "// ２人目：発射",
+      "sourceHash": "18b2cd4a88565af2f373c3f9bbcd35b7aa0adc5ea994a8062510b14c1c1e5911",
+      "translation": "// Second person: Launch",
+      "contextHash": "18b2cd4a88565af2f373c3f9bbcd35b7aa0adc5ea994a8062510b14c1c1e5911"
+    },
+    {
+      "id": "code-072",
+      "type": "code",
+      "source": "noShadow = false // 影を復活",
+      "sourceHash": "56fd9ff81bc97bf10b521d51f3e703d11bd2388978b4356ff2183dd4952a5b70",
+      "translation": "noShadow = false // Restore shadow",
+      "contextHash": "56fd9ff81bc97bf10b521d51f3e703d11bd2388978b4356ff2183dd4952a5b70"
+    },
+    {
+      "id": "code-073",
+      "type": "code",
+      "source": "// ２人目：倒れたまま",
+      "sourceHash": "b5fb98037d8caaaffe60f273a409f82ca5a099dec1e439f889a65cbd5868578e",
+      "translation": "// Second person: Remain down",
+      "contextHash": "b5fb98037d8caaaffe60f273a409f82ca5a099dec1e439f889a65cbd5868578e"
+    },
+    {
+      "id": "code-074",
+      "type": "code",
+      "source": "// 爆発",
+      "sourceHash": "5d7a649d4c67e40cb94f2e85df93f41c2fcc9d3e523fd431cd1191f29f80f96b",
+      "translation": "// Explosion",
+      "contextHash": "5d7a649d4c67e40cb94f2e85df93f41c2fcc9d3e523fd431cd1191f29f80f96b"
+    },
+    {
+      "id": "code-075",
+      "type": "code",
+      "source": "// 元の位置へ",
+      "sourceHash": "f4b327279b6ad37dd2e25ffcbf91bfd6e3e0ba461a8760606102ae6b6e281704",
+      "translation": "// Return to original position",
+      "contextHash": "f4b327279b6ad37dd2e25ffcbf91bfd6e3e0ba461a8760606102ae6b6e281704"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "abnormalでしゃがみモーション、itemで腕を上げるモーションの代わりにしています。SVアクターの素材によっては不自然に見えるかもしれません。また、itemについてはmotionStartPatternとmotionPatternを同じ値にすることでパターンを固定しています。",
+      "sourceHash": "7b724bf33c5fb9738ae01aff801c824af2bbe422ed7e115735f8670ffd2c47ef",
+      "translation": "I use abnormal in place of a crouching motion and item in place of a motion that raises the arms. Depending on the SV actor assets, this may look unnatural. For item, the pattern is fixed by setting motionStartPattern and motionPattern to the same value.",
+      "contextHash": "7b724bf33c5fb9738ae01aff801c824af2bbe422ed7e115735f8670ffd2c47ef"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "目標とする位置は「defaultY + 100」としています。つまり、本来の対象の位置より少し下を狙っています。不要な場合は+100の部分を削除してください。",
+      "sourceHash": "00d3a19b8f171cb85edfc200d94b17dd4c26b210235022abe984563c39d97a9d",
+      "translation": "The target position is set to “defaultY + 100.” In other words, it aims slightly below the target’s actual position. If this is unnecessary, delete the +100 portion.",
+      "contextHash": "00d3a19b8f171cb85edfc200d94b17dd4c26b210235022abe984563c39d97a9d"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "「delay = -2」はタイミング調整です。少し早めに腕を上げることで自然に見せています。",
+      "sourceHash": "b5f656a82a1ba309ef6eff58f97ba6c12c3a585c6ceaa3caba882f0d4dcedbed",
+      "translation": " \"delay = -2” adjusts the timing. Raising the arms slightly earlier makes it look more natural.",
+      "contextHash": "b5f656a82a1ba309ef6eff58f97ba6c12c3a585c6ceaa3caba882f0d4dcedbed"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "「z = 4」によって表示優先度を変更しています。投げられる側の優先度を高くすることで自然に見せています。",
+      "sourceHash": "5a30e47d05058b0f5e47f29f5e0998996122b1625dc3c2cd6eec15bfb01064b2",
+      "translation": " \"z = 4” changes the display priority. Setting the priority of the character being thrown higher makes it look natural.",
+      "contextHash": "5a30e47d05058b0f5e47f29f5e0998996122b1625dc3c2cd6eec15bfb01064b2"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicAnimation（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）および、DynamicMotion（[[LINK_3]]ＭＺ[[/LINK_3]]、[[LINK_4]]ＭＶ[[/LINK_4]]）プラグインの解説の一部です。",
+      "sourceHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f",
+      "parts": [
+        {
+          "source": "このページはDynamicAnimation（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）および、DynamicMotion（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 4
+        },
+        {
+          "source": "）プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the guide to the DynamicAnimation ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]) and DynamicMotion ([[LINK_3]]MZ[[/LINK_3]], [[LINK_4]]MV[[/LINK_4]]) plugins.",
+      "contextHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]合体技の実現（NRP_CombinationSkill）[[/LINK_1]]",
+      "sourceHash": "fc9c2399f2a55ca62214959455cb245dbdc1dc9607e6b045b1870c15da177aa6",
+      "parts": [
+        {
+          "source": "合体技の実現（NRP_CombinationSkill）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Implementing Combination Skills (NRP_CombinationSkill)[[/LINK_1]]",
+      "contextHash": "fc9c2399f2a55ca62214959455cb245dbdc1dc9607e6b045b1870c15da177aa6"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "どうしても記述が複雑になるので、[[LINK_1]]DynamicAnimation&Motionの定義をtxtから読み込むプラグイン[[/LINK_1]]でテキスト編集すると便利かもしれません。",
+      "sourceHash": "da786bd779a3eea6945ea6116d660f5475301aa0be7473d060deca77f811a74d",
+      "parts": [
+        {
+          "source": "どうしても記述が複雑になるので、",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation&Motionの定義をtxtから読み込むプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "でテキスト編集すると便利かもしれません。",
+          "link": false
+        }
+      ],
+      "translation": "Since the descriptions inevitably become complex, it may be convenient to edit the text using the [[LINK_1]]plugin that loads DynamicAnimation&Motion definitions from txt[[/LINK_1]].",
+      "contextHash": "da786bd779a3eea6945ea6116d660f5475301aa0be7473d060deca77f811a74d"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]Ｘ斬り[[/LINK_1]]（2020/11/29更新）",
+      "sourceHash": "75740737978e6c197ae8086b2a4b2bd7a56058b1ad2d84a854a9b3524b76acd5",
+      "parts": [
+        {
+          "source": "Ｘ斬り",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/11/29更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]X Slash[[/LINK_1]] (Updated 2020/11/29)",
+      "contextHash": "75740737978e6c197ae8086b2a4b2bd7a56058b1ad2d84a854a9b3524b76acd5"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]合体魔法剣[[/LINK_1]]（2021/04/09）",
+      "sourceHash": "349decb0095d997f807da7457c6df83b2efeb2677a5ca964df36df95e52cf1b4",
+      "parts": [
+        {
+          "source": "合体魔法剣",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2021/04/09）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Combination Magic Sword[[/LINK_1]] (2021/04/09)",
+      "contextHash": "349decb0095d997f807da7457c6df83b2efeb2677a5ca964df36df95e52cf1b4"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]総攻撃[[/LINK_1]]（2020/05/02）",
+      "sourceHash": "4432ee98b052d65d0e1768fc450e3207060109c1ad14ca07fbfbc56e5ceac9e4",
+      "parts": [
+        {
+          "source": "総攻撃",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/05/02）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Total Assault[[/LINK_1]] (2020/05/02)",
+      "contextHash": "4432ee98b052d65d0e1768fc450e3207060109c1ad14ca07fbfbc56e5ceac9e4"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]合体魔法[[/LINK_1]]（2020/09/07更新）",
+      "sourceHash": "a79d145919cef45374daa9aea27c350227fea0a4bb17bbffb4b91bd57e3c5bba",
+      "parts": [
+        {
+          "source": "合体魔法",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/09/07更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Combination Magic[[/LINK_1]] (Updated 2020/09/07)",
+      "contextHash": "a79d145919cef45374daa9aea27c350227fea0a4bb17bbffb4b91bd57e3c5bba"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]一斉射撃[[/LINK_1]]（2020/05/18更新）",
+      "sourceHash": "162b695a44daf44e6e802e022fa707f5ef5e0cf5a9169e15ac26ce17088c61a0",
+      "parts": [
+        {
+          "source": "一斉射撃",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/05/18更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Volley[[/LINK_1]] (Updated 2020/05/18)",
+      "contextHash": "162b695a44daf44e6e802e022fa707f5ef5e0cf5a9169e15ac26ce17088c61a0"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ブライアンミサイル[[/LINK_1]]（2024/04/18）",
+      "sourceHash": "461fd51e5be787076060aedc2e7382a81b8f97e3d486f229af29e69dd209a4ab",
+      "parts": [
+        {
+          "source": "ブライアンミサイル",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2024/04/18）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Brian Missile[[/LINK_1]] (2024/04/18)",
+      "contextHash": "461fd51e5be787076060aedc2e7382a81b8f97e3d486f229af29e69dd209a4ab"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "二行目にある『<D-Setting:Sync>』は並列実行モード（[[LINK_1]]解説[[/LINK_1]]）です。これにより、テンプレートに初期設定されたウェイトやディレイを無視します。",
+      "sourceHash": "64827e8b1f9bd8225274177e2132e7c67efbb7c261133f2f5a7d22f459c49b22",
+      "parts": [
+        {
+          "source": "二行目にある『<D-Setting:Sync>』は並列実行モード（",
+          "link": false
+        },
+        {
+          "source": "解説",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）です。これにより、テンプレートに初期設定されたウェイトやディレイを無視します。",
+          "link": false
+        }
+      ],
+      "translation": "『<D-Setting:Sync>』on the second line is Parallel Execution mode ([[LINK_1]]Explanation[[/LINK_1]]). This causes the initial waits and delays set in the template to be ignored.",
+      "contextHash": "64827e8b1f9bd8225274177e2132e7c67efbb7c261133f2f5a7d22f459c49b22"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_Enemys>または<CS_Battlers>[[/LINK_1]]を使用してください。",
+      "sourceHash": "c6db046fac140ce8b5129427ef7caa83eec51138e5caba68e3f11a12f9fdc0ef",
+      "parts": [
+        {
+          "source": "<CS_Enemys>または<CS_Battlers>",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を使用してください。",
+          "link": false
+        }
+      ],
+      "translation": "Please use [[LINK_1]]<CS_Enemys> or <CS_Battlers>[[/LINK_1]].",
+      "contextHash": "c6db046fac140ce8b5129427ef7caa83eec51138e5caba68e3f11a12f9fdc0ef"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the DynamicMotion plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ロマン中のロマン――合体系のサンプル技を紹介していきます。": "The ultimate in flashy techniques—I’ll be introducing sample combination skills.",
+    "前提として、以下のプラグインとの併用を想定しています。": "These are intended to be used together with the following plugin.",
+    "これの導入により『$actor(id)』や『$cs(id)』関数で、合体技に参加するアクターを取得できるようになります。": "After installing this, you can use the ‘$actor(id)’ and ‘$cs(id)’ functions to obtain the actors participating in a combination skill.",
+    "また『$css(id)』関数ではスプライトを取得できます。": "The ‘$css(id)’ function can also be used to obtain sprites.",
+    "※DynamicAnimation ver1.09より、$cssへの参照は不要となりました。全て$csだけで完結します。": "※As of DynamicAnimation ver1.09, references to $css are no longer necessary. Everything can be done using only $cs.",
+    "ただし、<CS_Actors:1,2>などの記述まで、テキスト内に含まないように気をつけてください。あくまで合体技プラグインの記述なので、このプラグインでは処理できません。": "However, be careful not to include entries such as <CS_Actors:1,2> in the text. Those entries belong to the combination skill plugin and cannot be processed by this plugin.",
+    "目次": "Table of Contents",
+    "Ｘ斬り（2020/11/29更新）": "X Slash (Updated 2020/11/29)",
+    "二人のアクターが交差するように敵を斬ります。": "Two actors slash the enemy while crossing paths.",
+    "以下はＩＤ＝１（アレックス）と２（ブライアン）による例です。": "The following is an example using IDs 1 (Alex) and 2 (Brian).",
+    "> // 並列モードで実行": "> // Run in parallel mode",
+    "// アレックス：対象の中心を基準に移動": "// Alex: Move based on the center of the target",
+    "performer = $cs(1) // 1: アレックス": "performer = $cs(1) // 1: Alex",
+    "ex += 120 * mirroring // 目標から右に120": "ex += 120 * mirroring // 120 to the right of the target",
+    "ey -= 120 * mirroring // 目標から上に120": "ey -= 120 * mirroring // 120 above the target",
+    "// ブライアン：対象の中心を基準に移動": "// Brian: Move based on the center of the target",
+    "performer = $cs(2) // 2: ブライアン": "performer = $cs(2) // 2: Brian",
+    "ey += 120 * mirroring // 目標から下に120": "ey += 120 * mirroring // 120 below the target",
+    "wait = 10 // 少しだけ待つ": "wait = 10 // Wait a moment",
+    "// 二人同時に敵の向こう側まで移動": "// Move both simultaneously to the other side of the enemy",
+    "performer = [$cs(1),$cs(2)] // 二人": "performer = [$cs(1),$cs(2)] // Two people",
+    "ex = defaultX - 120 * mirroring // 対象から左に120": "ex = defaultX - 120 * mirroring // 120 to the left of the target",
+    "// Ｘ字アニメーション": "// X-shaped animation",
+    "rotation = Math.PI*2 / 4 * mirroring // 90度回転": "rotation = Math.PI*2 / 4 * mirroring // Rotate 90 degrees",
+    "// 二人で戻る": "// Return together",
+    "説明すべきことは多々ありますが、一つずつ取り上げていきます。": "There are many things to explain, but I’ll go through them one at a time.",
+    "通常『near』『crash』のような移動系テンプレートは、バトラーの移動を待ちます。このSyncの指定があれば待たなくなります。複数のバトラーを動かす際に便利です。": "Normally, movement templates such as ‘near’ and ‘crash’ wait for the battler to move. Specifying Sync prevents this wait. It is useful when moving multiple battlers.",
+    "『performer = $cs(1)』というのは一番目の参加者をモーション対象とするという意味です。事前説明で設定した関数ですね。": "‘performer = $cs(1)’ means that the first participant is the target of the motion. This is the function set up in the preliminary explanation.",
+    "『performer = [$cs(1),$cs(2)]』というように複数人を同時にモーション対象とすることも可能です。": "You can also make multiple participants the motion targets at the same time, as in ‘performer = [$cs(1),$cs(2)]’.",
+    "ちなみに『pierce』型は角度を保ったまま標的の向こうまで移動します。二人まとめて命令しているのに、別地点へ移動するのはそのためです。便利。": "Incidentally, the ‘pierce’ type moves past the target while maintaining its angle. That is why the two actors move to separate locations even though they were commanded together. Convenient.",
+    "『Ｘ字アニメーション』の部分は角度を変えて『7:斬撃/エフェクト』を二つ再生しています。": "In the ‘X-shaped animation’ section, I change the angles and play ‘7:Slash/Effect’ twice.",
+    "もちろん、普通にＸ字の斬撃アニメーションを作っても構いません。": "Of course, you can also simply create an X-shaped slash animation.",
+    "※2020/11/29 mirroring機能によって敵の使用にも対応しました。": "※2020/11/29 Enemy use is now supported through the mirroring feature.",
+    "ただし、<CS_Actors:1,2>の記述は変更する必要があります。": "However, you need to change the <CS_Actors:1,2> entry.",
+    "合体魔法剣（2020/04/09）": "Combination Magic Sword (2020/04/09)",
+    "魔道士が放った魔法を身に受けて、剣士が魔法剣を放ちます。": "The swordsman takes the magic released by the mage and unleashes a magic sword attack.",
+    "スキルのアニメーションには適当な斬撃をセットしています。": "I’ve set a suitable slash animation for the skill’s animation.",
+    "以下はＩＤ＝１（剣士）と２（魔道士）による例です。": "The following is an example using IDs 1 (swordsman) and 2 (mage).",
+    "// 剣士：敵の前まで移動": "// Swordsman: Move to the front of the enemy",
+    "// 魔道士：一歩前進": "// Mage: Take one step forward",
+    "// 魔道士：魔法ポーズ": "// Mage: Casting pose",
+    "// 魔道士：魔法発動アニメ": "// Mage: Spell activation animation",
+    "// 剣士：手を挙げるポーズ": "// Swordsman: Raise-hand pose",
+    "// 剣士が水を受けるアニメ": "// Animation of the swordsman being hit by water",
+    "sx = $cs(2).x // 発射するＸ座標": "sx = $cs(2).x // X coordinate to launch from",
+    "sy = $cs(2).y - $cs(2).height/2 // 発射するＹ座標（中央に調整）": "sy = $cs(2).y - $cs(2).height/2 // Y coordinate to launch from (adjusted to the center)",
+    "// 剣士：武器を振る": "// Swordsman: Swing weapon",
+    "// 敵に攻撃アニメ": "// Attack animation on the enemy",
+    "// 魔道士：戻る": "// Mage: Return",
+    "// 剣士：戻る": "// Swordsman: Return",
+    "基本的には『Ｘ斬り』で説明したことと変わりません。": "Basically, it works the same way as explained for ‘X Slash’.",
+    "『target』の指定でアニメーションの対象を切り替えています。これにより、発動アニメを魔道士に表示したり、剣士に魔法を放ったりしています。": "The animation target is switched using the ‘target’ specification. This displays the activation animation on the mage and has the swordsman cast the magic.",
+    "また『sx = $cs(2).x』『sy = $cs(2).y - $cs(2).height/2』という記述により、魔道士を始点にして魔法を発射しています。": "The entries ‘sx = $cs(2).x’ and ‘sy = $cs(2).y - $cs(2).height/2’ launch the magic from the mage as its starting point.",
+    "デフォルトで作りやすかったので今回は『82:水/単体2』を使用しましたが、炎や雷などの魔法剣も同じ用に作ればＯＫです。": "I used ‘82:Water/Single 2’ this time because it was easy to create with the default assets, but you can make magic swords of fire, lightning, and so on in the same way.",
+    "総攻撃（2020/5/2）": "All-Out Attack (2020/5/2)",
+    "全員で総攻撃をしかけます。": "Everyone launches an all-out attack.",
+    "// 全員を合体技の対象に": "// Set everyone as targets of the combo technique",
+    "// メッセージ用（先頭の名前＋達）": "// For messages (leading name + and others)",
+    "<CS_UserName:$cs(1).name() + \"達\">": "<CS_UserName:$cs(1).name() + \"Characters\">",
+    "// 自動前進禁止＆非同期": "// Disable automatic advance & asynchronous",
+    "// 接近": "// Approach",
+    "performer = $cs() // 全員対象": "performer = $cs() // Target everyone",
+    "ey += a.height * (-1.5 + a._battler.index()) // 縦位置調整": "ey += a.height * (-1.5 + a._battler.index()) // Adjust vertical position",
+    "// 武器振り": "// Weapon swing",
+    "// 通常攻撃のアニメーション": "// Normal attack animation",
+    "id = $cs(r + 1).attackAnimationId1() // 通常攻撃アニメ": "id = $cs(r + 1).attackAnimationId1() // Normal attack animation",
+    "// 戻る": "// Return",
+    "damageAll = false // 全員が終わるまでダメージ表示禁止": "damageAll = false // Disable damage display until everyone finishes",
+    "『performer = $cs()』で参加者全員をモーション対象にできます。": "‘performer = $cs()’ makes all participants motion targets.",
+    "『ey += a.height * (-1.5 + a._battler.index())』はキャラクターの並び順によって、移動先を調整しています。": "‘ey += a.height * (-1.5 + a._battler.index())’ adjusts the destination according to the character’s position in the lineup.",
+    "『damageAll = false』はreturn型に最初から付属しているダメージ表示機能を切るためのものです。切らないと最初の一人が戻るタイミングでダメージ表示されてしまいます。": "‘damageAll = false’ disables the damage display that is included by default with the return type. If it is not disabled, damage is displayed when the first participant returns.",
+    "『戦闘行動の強制』辺りと組み合わせて、ペルソナっぽい何かができないかなと思ったり……。": "I wonder if this could be combined with ‘Force Action’ to create something reminiscent of Persona…",
+    "合体魔法（2020/09/07更新）": "Combination Magic (Updated 2020/09/07)",
+    "複数人で魔法を放ちます。": "Multiple participants cast magic together.",
+    "// 参加者指定": "// Specify participants",
+    "// 前進禁止": "// Prohibit advancing",
+    "// 全員一歩前へ": "// Everyone takes one step forward",
+    "performerDelay = 0 // 各人時間差": "performerDelay = 0 // Time offset for each person",
+    "// 全員魔法モーション": "// Everyone plays a magic motion",
+    "// 全員発動アニメーション": "// Everyone activates the animation",
+    "nextDelay = 0 // 各人時間差": "nextDelay = 0 // Time offset for each person",
+    "// アニメーション": "// Animation",
+    "上記は二人用ですが、冒頭の<CS_Actors:2,6>の値を変えるだけで、三人でも四人でもそのまま使えます。後はアニメーションを好きなように設定してください。": "The example above is for two people, but simply changing the <CS_Actors:2,6> values at the beginning lets you use it with three or four people as well. After that, set the animations however you like.",
+    "一斉射撃（2020/5/18更新）": "Volley (Updated 2020/5/18)",
+    "※NRP_CombinationSkill ver1.302が必要です。": "※NRP_CombinationSkill ver1.302 is required.",
+    "全員で一斉に射撃します。": "Everyone fires simultaneously.",
+    "アニメーションには『82:水/単体2』を縮小したものを設定しています。また<D-Animation:spell>による発動アニメーションも少しいじっています。": "The animation uses a scaled-down version of ‘82:Water/Single 2’. I’ve also made some adjustments to the activation animation using <D-Animation:spell>.",
+    "例によって、お好みのアニメーションに変更してください。着弾フレーム（arrival）の値も忘れずに。": "As usual, change it to your preferred animation. Don’t forget the arrival frame value.",
+    "performerDelay = 1 // 各人時間差": "performerDelay = 1 // Time delay for each person",
+    "nextDelay = 1 // 各人時間差": "nextDelay = 1 // Time delay for each person",
+    "// 一斉射撃": "// All fire at once",
+    "によって合体技の参加者の座標を参照しています。": "It references the coordinates of the participants in the combination skill.",
+    "『r%4+1』とは「リピート回数（０始まり）を４で割った余り＋１」という意味です。つまり『$cs(1)～$cs(4)』を巡回しながら参照することで、それぞれの位置からアニメーションを発射しています。": "‘r%4+1’ means “the remainder when the repeat count (starting from 0) is divided by 4, plus 1.” In other words, it cycles through ‘$cs(1)~$cs(4)’ to launch the animation from each position.",
+    "ブライアンミサイル（2024/04/18）": "Brian Missile (2024/04/18)",
+    "麗しい友情パワーで敵を粉砕します。": "They pulverize the enemy with the power of beautiful friendship.",
+    "スキルの範囲は全体にしていますが、単体にしても問題ありません。": "The skill’s range is set to all enemies, but there is no problem with setting it to a single target.",
+    "// 自動前進禁止": "// Prohibit automatic advancing",
+    "// １人目：２人目の元へ移動": "// First person: Move to the second person's position",
+    "// １人目：しゃがむ": "// First person: Crouch",
+    "// ２人目：上に投げられる": "// Second person: Be thrown upward",
+    "rotation *= 1 // 回転数": "rotation *= 1 // Number of rotations",
+    "z = 4 // 優先度上へ": "z = 4 // Raise priority",
+    "noShadow = true // 影を削除": "noShadow = true // Delete shadow",
+    "// １人目：腕を上げてキャッチ": "// First person: Raise arms and catch",
+    "// ２人目：倒れ状態に": "// Second person: Enter a knocked-down state",
+    "// １人目：手を振り下ろす": "// First person: Swing hand downward",
+    "// ２人目：発射": "// Second person: Launch",
+    "noShadow = false // 影を復活": "noShadow = false // Restore shadow",
+    "// ２人目：倒れたまま": "// Second person: Remain down",
+    "// 爆発": "// Explosion",
+    "// 元の位置へ": "// Return to original position",
+    "abnormalでしゃがみモーション、itemで腕を上げるモーションの代わりにしています。SVアクターの素材によっては不自然に見えるかもしれません。また、itemについてはmotionStartPatternとmotionPatternを同じ値にすることでパターンを固定しています。": "I use abnormal in place of a crouching motion and item in place of a motion that raises the arms. Depending on the SV actor assets, this may look unnatural. For item, the pattern is fixed by setting motionStartPattern and motionPattern to the same value.",
+    "目標とする位置は「defaultY + 100」としています。つまり、本来の対象の位置より少し下を狙っています。不要な場合は+100の部分を削除してください。": "The target position is set to “defaultY + 100.” In other words, it aims slightly below the target’s actual position. If this is unnecessary, delete the +100 portion.",
+    "「delay = -2」はタイミング調整です。少し早めに腕を上げることで自然に見せています。": " \"delay = -2” adjusts the timing. Raising the arms slightly earlier makes it look more natural.",
+    "「z = 4」によって表示優先度を変更しています。投げられる側の優先度を高くすることで自然に見せています。": " \"z = 4” changes the display priority. Setting the priority of the character being thrown higher makes it look natural."
+  }
+}
