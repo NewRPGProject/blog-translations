@@ -360,6 +360,7 @@ function parseTag(token) {
     return {
         name: match[1].toLowerCase(),
         closing,
+        keepLanguage: !closing && /(?:^|\s)keep-lang(?:\s|=|\/?>)/iu.test(token),
         selfClosing: /\/>$/u.test(token) || /^(br|hr|img|meta|link|input)$/iu.test(match[1])
     };
 }
@@ -640,9 +641,11 @@ function parseBlocks(articleHtml, title) {
     const counters = new Map();
     const linkedLines = [];
     const stack = [];
+    const keepLanguageStack = [];
     const lines = [];
     let line = [];
     let ignoredDepth = 0;
+    let keepLanguageDepth = 0;
 
     const finishLine = () => {
         if (line.length > 0) {
@@ -654,7 +657,7 @@ function parseBlocks(articleHtml, title) {
     const tokens = tokenizeHtml(articleHtml);
     for (const token of tokens) {
         if (!token.startsWith("<")) {
-            if (ignoredDepth > 0) continue;
+            if (ignoredDepth > 0 || keepLanguageDepth > 0) continue;
             const raw = decodeHtml(token).replace(/\r/gu, "");
             if (raw) {
                 line.push({
@@ -686,9 +689,14 @@ function parseBlocks(articleHtml, title) {
                 // a malformed link cannot incorrectly cover the rest of the
                 // article during extraction.
                 const closedTags = stack.splice(index);
-                for (const closedTag of closedTags) {
+                const closedKeepLanguage = keepLanguageStack.splice(index);
+                for (let closedIndex = 0; closedIndex < closedTags.length; closedIndex++) {
+                    const closedTag = closedTags[closedIndex];
                     if (IGNORED_TAGS.has(closedTag) && ignoredDepth > 0) {
                         ignoredDepth--;
+                    }
+                    if (closedKeepLanguage[closedIndex] && keepLanguageDepth > 0) {
+                        keepLanguageDepth--;
                     }
                 }
             }
@@ -697,10 +705,14 @@ function parseBlocks(articleHtml, title) {
 
         if (LINE_BOUNDARY_TAGS.has(tag.name)) finishLine();
         stack.push(tag.name);
+        keepLanguageStack.push(tag.keepLanguage);
         if (IGNORED_TAGS.has(tag.name)) ignoredDepth++;
+        if (tag.keepLanguage) keepLanguageDepth++;
         if (tag.selfClosing) {
             stack.pop();
+            keepLanguageStack.pop();
             if (IGNORED_TAGS.has(tag.name) && ignoredDepth > 0) ignoredDepth--;
+            if (tag.keepLanguage && keepLanguageDepth > 0) keepLanguageDepth--;
         }
     }
     finishLine();
