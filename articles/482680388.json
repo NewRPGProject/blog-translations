@@ -1,0 +1,584 @@
+{
+  "articleId": "482680388",
+  "sourceUrl": "https://newrpg.seesaa.net/article/482680388.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "b9418d9e8a913b36e6ab035ea48fb9416e5cc8b83deced16aff2c1328900f8f5",
+  "translatedAt": "2026-08-31T04:58:25.736Z",
+  "title": "Execute Common Events Before and After Map Transfers [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "場所移動前後にコモンイベントを実行【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "d24e594e5f8018031ecdb1cfd450f567f73bc4da5cbacec1b16d2f69639b0862",
+      "translation": "Execute Common Events Before and After Map Transfers [RPG Maker MZ & MV Plugin]",
+      "contextHash": "d24e594e5f8018031ecdb1cfd450f567f73bc4da5cbacec1b16d2f69639b0862"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "場所移動前後にコモンイベントを実行します。",
+      "sourceHash": "b642c51b6b97120247991fd3da9dcba5a76bf6f9de8a785f3c7b9c0a62aa8dbf",
+      "translation": "Executes common events before and after map transfers.",
+      "contextHash": "b642c51b6b97120247991fd3da9dcba5a76bf6f9de8a785f3c7b9c0a62aa8dbf"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "例えば、独自のフェードアウト／フェードイン処理の作成などに便利です。",
+      "sourceHash": "f4faa78c32b4f6c475914d3a9678b62ed96d652983699d8b3210430843ec2a5c",
+      "translation": "For example, it is useful for creating custom fade-out/fade-in effects.",
+      "contextHash": "f4faa78c32b4f6c475914d3a9678b62ed96d652983699d8b3210430843ec2a5c"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "もちろん、場所移動後の共通処理を設定したい場合にも有効です。",
+      "sourceHash": "d15adc574151ebf5bfa11242499b09a67b74d7526d13c8ac5f51e8c176a2731b",
+      "translation": "It is also useful for setting up common processes to run after a map transfer.",
+      "contextHash": "d15adc574151ebf5bfa11242499b09a67b74d7526d13c8ac5f51e8c176a2731b"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※Both plugins are compatible with MV and MZ.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TransferCommonEvent.js",
+      "sourceHash": "c7e3b3bf0ad4323e365cac76270ed1f9336e9b21b850dec9a7de8d175d56c044",
+      "translation": "NRP_TransferCommonEvent.js ",
+      "contextHash": "5cd871ce99acbf274c9a29610714c58d27354e324e051265c66cd142beeb855f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.01（2021/10/31）",
+      "sourceHash": "f66166f7a4ff7274c082337f4edb56f46b20c3e50c5aeac70a78934b72336040",
+      "translation": "ver1.01 (2021/10/31) ",
+      "contextHash": "5cd871ce99acbf274c9a29610714c58d27354e324e051265c66cd142beeb855f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2021/10/31（ver1.01）",
+      "sourceHash": "fd6e63c3f582d5b90db7bbfd833d47ebf7b321a761b8ee78932b488807abfb57",
+      "translation": "2021/10/31 (ver1.01) ",
+      "contextHash": "fd6e63c3f582d5b90db7bbfd833d47ebf7b321a761b8ee78932b488807abfb57"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "一時的にコモンイベントを無効化するプラグインコマンドを追加。",
+      "sourceHash": "be507861b2703d683e5fb875763e798dc91f962e564dd6f2fa7dcc06ea95e528",
+      "translation": "Added a plugin command to temporarily disable common events.",
+      "contextHash": "be507861b2703d683e5fb875763e798dc91f962e564dd6f2fa7dcc06ea95e528"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2021/07/29（ver1.00）",
+      "sourceHash": "470438494ed8f2ebe291ac860f7cf05c9a139e2093358d43af9ace429c34ef1b",
+      "translation": "2021/07/29 (ver1.00) ",
+      "contextHash": "470438494ed8f2ebe291ac860f7cf05c9a139e2093358d43af9ace429c34ef1b"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "プラグインパラメータに実行したいコモンイベントを設定してください。",
+      "sourceHash": "c0860d6906f6e37fd2c56a40c774305b196fb2852ab21132759a7790bb91769b",
+      "translation": "Set the common events you want to execute in the plugin parameters.",
+      "contextHash": "c0860d6906f6e37fd2c56a40c774305b196fb2852ab21132759a7790bb91769b"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "設定すると、あらゆる場所移動に対して有効になります。",
+      "sourceHash": "c800eaba47e6320889f14eb1710c7a9ea0f50516d761ee750d9f7bcf62cd53a3",
+      "translation": "Once configured, they will apply to all map transfers.",
+      "contextHash": "c800eaba47e6320889f14eb1710c7a9ea0f50516d761ee750d9f7bcf62cd53a3"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "また、プラグインコマンドによって、フェード方法を強制的に変更できます。",
+      "sourceHash": "1cdc92c8353a75c7c8a7957a1f84b7aa392d0e4a885e3809c4e17527a1031aee",
+      "translation": "You can also forcibly change the fade method using a plugin command.",
+      "contextHash": "1cdc92c8353a75c7c8a7957a1f84b7aa392d0e4a885e3809c4e17527a1031aee"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "例えば、制作の途中で独自のフェード処理を追加した場合、デフォルトのフェードが『黒』のままだと無駄なウェイトが発生してしまいます。",
+      "sourceHash": "c65ea3cd8bdac55a0fd324cd201eaa427b54f31c8c99d59f620eb98d337514d7",
+      "translation": "For example, if you add a custom fade effect during development, leaving the default fade set to “Black” will cause unnecessary wait time.",
+      "contextHash": "c65ea3cd8bdac55a0fd324cd201eaa427b54f31c8c99d59f620eb98d337514d7"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "そういった場合は、移動前コモンイベント内でフェードを『なし』に変更すればＯＫです。",
+      "sourceHash": "1af15df004267c43835495e3c167411fcb27be9d8279b8302b41f88e5130945a",
+      "translation": "In that case, simply change the fade to “None” in the common event that runs before the transfer.",
+      "contextHash": "1af15df004267c43835495e3c167411fcb27be9d8279b8302b41f88e5130945a"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "あるいは、通常のフェード処理に戻したいということもあるかもしれません。",
+      "sourceHash": "0751cbb31c870bd82f82431539372024a0c3252193e68087605f8fdfc2815fdd",
+      "translation": "Alternatively, you may want to return to the normal fade effect.",
+      "contextHash": "0751cbb31c870bd82f82431539372024a0c3252193e68087605f8fdfc2815fdd"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "その場合も、場所移動の直前にスイッチなどを使って、移動前コモンイベント内で切り替えればＯＫです。",
+      "sourceHash": "222ff58bbb694643d27a541072695a7b043fd6fa0f85caa129c5796e523c387e",
+      "translation": "In that case as well, you can switch it in the common event that runs before the transfer by using a switch or similar immediately before the map transfer.",
+      "contextHash": "222ff58bbb694643d27a541072695a7b043fd6fa0f85caa129c5796e523c387e"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "Plugin Commands for MZ (Plugin Command MZ)",
+      "contextHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "コモンイベントの無効化",
+      "sourceHash": "8bc0c93e3ba29653d1c711ec1d883f11073e058bf9ad01e3a9470bfbf6c102be",
+      "translation": "Disable Common Events",
+      "contextHash": "8bc0c93e3ba29653d1c711ec1d883f11073e058bf9ad01e3a9470bfbf6c102be"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "一時的に場所移動時のコモンイベントを無効化します。",
+      "sourceHash": "51eb77a418c02006a8ce532f46bd190663b6f77b5783d5c6196626b5389da7e8",
+      "translation": "Temporarily disables common events that run during map transfers.",
+      "contextHash": "51eb77a418c02006a8ce532f46bd190663b6f77b5783d5c6196626b5389da7e8"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "falseにすれば元に戻ります。",
+      "sourceHash": "37bc079a1fc4350090e0273f502609ad912ac25835893f185e2afa76e3142e23",
+      "translation": "Set it to false to restore the original setting.",
+      "contextHash": "37bc079a1fc4350090e0273f502609ad912ac25835893f185e2afa76e3142e23"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "場所移動情報の変更",
+      "sourceHash": "02ca7d47cecc6f761189444b25c2740a4fde199fad3ff616ecfcb5838b191915",
+      "translation": "Change Map Transfer Information",
+      "contextHash": "02ca7d47cecc6f761189444b25c2740a4fde199fad3ff616ecfcb5838b191915"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "フェードインの方法を変更できます。",
+      "sourceHash": "36700eae6413ffeca7b1edeb53df8bc7ab1ea8d081395ff750ba0db380309f3b",
+      "translation": "You can change the fade-in method.",
+      "contextHash": "36700eae6413ffeca7b1edeb53df8bc7ab1ea8d081395ff750ba0db380309f3b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "移動前コモンイベントなどで指定してください。",
+      "sourceHash": "badfaad31cca1b573f05c97946d2a455d8a9f8324583d25c0a32ca7e6e5de4be",
+      "translation": "Specify it in the common event that runs before the transfer, for example.",
+      "contextHash": "badfaad31cca1b573f05c97946d2a455d8a9f8324583d25c0a32ca7e6e5de4be"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "なお、一度場所移動すると設定はクリアされます。",
+      "sourceHash": "67406103084d8c438c24d1ce5356a052d82b8faad39d0bc39beb5968082ce2cc",
+      "translation": "Note that the setting is cleared once a map transfer occurs.",
+      "contextHash": "67406103084d8c438c24d1ce5356a052d82b8faad39d0bc39beb5968082ce2cc"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+      "sourceHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075",
+      "translation": "Plugin Commands for MV (Plugin Command MV)",
+      "contextHash": "5336574534838c4385e03f9b092280c7e138ed88df309a1ba709765a6dd84075"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※大文字個別は区別しません。また[]は含まないでください。",
+      "sourceHash": "d3a3d00c8fe9cf82796ffd17b04f2921c5c289b78a8a442928a008833f653462",
+      "translation": "※Uppercase and lowercase are not distinguished. Also, do not include [].",
+      "contextHash": "d3a3d00c8fe9cf82796ffd17b04f2921c5c289b78a8a442928a008833f653462"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "コモンイベントの無効化",
+      "sourceHash": "8bc0c93e3ba29653d1c711ec1d883f11073e058bf9ad01e3a9470bfbf6c102be",
+      "translation": "Disable Common Events",
+      "contextHash": "8bc0c93e3ba29653d1c711ec1d883f11073e058bf9ad01e3a9470bfbf6c102be"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "場所移動情報の変更",
+      "sourceHash": "02ca7d47cecc6f761189444b25c2740a4fde199fad3ff616ecfcb5838b191915",
+      "translation": "Change Map Transfer Information",
+      "contextHash": "02ca7d47cecc6f761189444b25c2740a4fde199fad3ff616ecfcb5838b191915"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "NRP.TransferCommonEvent.ChangeTransferInfo [フェード方法]",
+      "sourceHash": "01b4d6cee7d417dc8f00ac1f5fddcb8eb8f9e5bf42b3515dfd5101673258436b",
+      "translation": "NRP.TransferCommonEvent.ChangeTransferInfo [Fade Method]",
+      "contextHash": "01b4d6cee7d417dc8f00ac1f5fddcb8eb8f9e5bf42b3515dfd5101673258436b"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "フェード方法は数値で指定してください。",
+      "sourceHash": "f24b26931a76692a55998b1885ebfeed235446a60899ac3eb6933672f31b0b26",
+      "translation": "Specify the fade method using a number.",
+      "contextHash": "f24b26931a76692a55998b1885ebfeed235446a60899ac3eb6933672f31b0b26"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "0 = 黒, 1 = 白, 2 = なし",
+      "sourceHash": "7dde6ccc279c216f12261e65daa9f2675469c2f6b684b93c80f32bacd134ff08",
+      "translation": "0 = Black, 1 = White, 2 = None",
+      "contextHash": "7dde6ccc279c216f12261e65daa9f2675469c2f6b684b93c80f32bacd134ff08"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "となります。",
+      "sourceHash": "ed551a0f0732edc3bec983a373f519c7feb3d783741f8f50bfb82d15cb970f96",
+      "translation": "are the available options.",
+      "contextHash": "ed551a0f0732edc3bec983a373f519c7feb3d783741f8f50bfb82d15cb970f96"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "移動前コモンイベント（BeforeCommonEvent）",
+      "sourceHash": "593dbad7124043369658945e3ea5a0441ab5145e2b63dc4a9f16b7af61de19bf",
+      "translation": "Before Common Event (BeforeCommonEvent)",
+      "contextHash": "593dbad7124043369658945e3ea5a0441ab5145e2b63dc4a9f16b7af61de19bf"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "場所移動前に実行するコモンイベントです。",
+      "sourceHash": "36a4270074b4f72f4b8ccf128a97b17a45ac30bf95811b8b1d63d97e10469019",
+      "translation": "This is the common event executed before a map transfer.",
+      "contextHash": "36a4270074b4f72f4b8ccf128a97b17a45ac30bf95811b8b1d63d97e10469019"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "正確にはデフォルトのフェードアウト前に実行されます。",
+      "sourceHash": "dc03d5bfd48c3fbfdcb86863be9a8c71bfe72f52ace63dbba19b85dfc81b7f86",
+      "translation": "More precisely, it is executed before the default fade-out.",
+      "contextHash": "dc03d5bfd48c3fbfdcb86863be9a8c71bfe72f52ace63dbba19b85dfc81b7f86"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "移動後コモンイベント（AfterCommonEvent）",
+      "sourceHash": "5eda23c0d45ce1628e568d36e0559968cb0faf7ecd794d1902e56101541f70cd",
+      "translation": "After Common Event (AfterCommonEvent)",
+      "contextHash": "5eda23c0d45ce1628e568d36e0559968cb0faf7ecd794d1902e56101541f70cd"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "場所移動後に実行するコモンイベントです。",
+      "sourceHash": "d8fbecf0e0681465259eb81e7e9ef845d033cbd697b5460fea7e5b02b8787b51",
+      "translation": "This is the common event executed after a map transfer.",
+      "contextHash": "d8fbecf0e0681465259eb81e7e9ef845d033cbd697b5460fea7e5b02b8787b51"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "正確にはデフォルトのフェードイン後に実行されます。",
+      "sourceHash": "7d0f8577a742c04d5e77912ffff8240aea1dd4019ca8e0be153d4427ab5e9ce9",
+      "translation": "More precisely, it is executed after the default fade-in.",
+      "contextHash": "7d0f8577a742c04d5e77912ffff8240aea1dd4019ca8e0be153d4427ab5e9ce9"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※ちなみに、上記の演出は[[LINK_1]]FilterControllerMZ.js[[/LINK_1]]（ツキミ様）のshockwaveというエフェクトを使っています。",
+      "sourceHash": "edbc7bd5c510c51af962bbd0bcb29c180fd50b137cd8c7815b0caa5e01125cf9",
+      "parts": [
+        {
+          "source": "※ちなみに、上記の演出は",
+          "link": false
+        },
+        {
+          "source": "FilterControllerMZ.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（ツキミ様）のshockwaveというエフェクトを使っています。",
+          "link": false
+        }
+      ],
+      "translation": "※Incidentally, the effect shown above uses the shockwave effect from [[LINK_1]]FilterControllerMZ.js[[/LINK_1]] (by Tsukimi).",
+      "contextHash": "edbc7bd5c510c51af962bbd0bcb29c180fd50b137cd8c7815b0caa5e01125cf9"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（Plugin Command MZ）[[/LINK_1]]",
+      "sourceHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (Plugin Command MZ)[[/LINK_1]]",
+      "contextHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用プラグインコマンド（Plugin Command MV）[[/LINK_1]]",
+      "sourceHash": "59a9434efeeef39836941e71451372a70a8ce85928000c4dfa01d58dabbb3042",
+      "parts": [
+        {
+          "source": "ＭＶ用プラグインコマンド（Plugin Command MV）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MV (Plugin Command MV)[[/LINK_1]]",
+      "contextHash": "59a9434efeeef39836941e71451372a70a8ce85928000c4dfa01d58dabbb3042"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]移動前コモンイベント（BeforeCommonEvent）[[/LINK_1]]",
+      "sourceHash": "1665d406c36865164d49b8449783a3fb93205bc1593d73ba7de49da0585acd87",
+      "parts": [
+        {
+          "source": "移動前コモンイベント（BeforeCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Common Event Before Movement (BeforeCommonEvent)[[/LINK_1]]",
+      "contextHash": "1665d406c36865164d49b8449783a3fb93205bc1593d73ba7de49da0585acd87"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]移動後コモンイベント（AfterCommonEvent）[[/LINK_1]]",
+      "sourceHash": "1434e52dc98153e7f226cf61770186d7d8a4e9045138c8722475a52c745e05fc",
+      "parts": [
+        {
+          "source": "移動後コモンイベント（AfterCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Common Event After Movement (AfterCommonEvent)[[/LINK_1]]",
+      "contextHash": "1434e52dc98153e7f226cf61770186d7d8a4e9045138c8722475a52c745e05fc"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "場所移動前後にコモンイベントを実行します。": "Executes common events before and after map transfers.",
+    "例えば、独自のフェードアウト／フェードイン処理の作成などに便利です。": "For example, it is useful for creating custom fade-out/fade-in effects.",
+    "もちろん、場所移動後の共通処理を設定したい場合にも有効です。": "It is also useful for setting up common processes to run after a map transfer.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※Both plugins are compatible with MV and MZ.",
+    "NRP_TransferCommonEvent.js": "NRP_TransferCommonEvent.js ",
+    "ver1.01（2021/10/31）": "ver1.01 (2021/10/31) ",
+    "更新履歴（History）": "Update History (History)",
+    "2021/10/31（ver1.01）": "2021/10/31 (ver1.01) ",
+    "一時的にコモンイベントを無効化するプラグインコマンドを追加。": "Added a plugin command to temporarily disable common events.",
+    "2021/07/29（ver1.00）": "2021/07/29 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータに実行したいコモンイベントを設定してください。": "Set the common events you want to execute in the plugin parameters.",
+    "設定すると、あらゆる場所移動に対して有効になります。": "Once configured, they will apply to all map transfers.",
+    "また、プラグインコマンドによって、フェード方法を強制的に変更できます。": "You can also forcibly change the fade method using a plugin command.",
+    "例えば、制作の途中で独自のフェード処理を追加した場合、デフォルトのフェードが『黒』のままだと無駄なウェイトが発生してしまいます。": "For example, if you add a custom fade effect during development, leaving the default fade set to “Black” will cause unnecessary wait time.",
+    "そういった場合は、移動前コモンイベント内でフェードを『なし』に変更すればＯＫです。": "In that case, simply change the fade to “None” in the common event that runs before the transfer.",
+    "あるいは、通常のフェード処理に戻したいということもあるかもしれません。": "Alternatively, you may want to return to the normal fade effect.",
+    "その場合も、場所移動の直前にスイッチなどを使って、移動前コモンイベント内で切り替えればＯＫです。": "In that case as well, you can switch it in the common event that runs before the transfer by using a switch or similar immediately before the map transfer.",
+    "ＭＺ用プラグインコマンド（Plugin Command MZ）": "Plugin Commands for MZ (Plugin Command MZ)",
+    "コモンイベントの無効化": "Disable Common Events",
+    "一時的に場所移動時のコモンイベントを無効化します。": "Temporarily disables common events that run during map transfers.",
+    "falseにすれば元に戻ります。": "Set it to false to restore the original setting.",
+    "場所移動情報の変更": "Change Map Transfer Information",
+    "フェードインの方法を変更できます。": "You can change the fade-in method.",
+    "移動前コモンイベントなどで指定してください。": "Specify it in the common event that runs before the transfer, for example.",
+    "なお、一度場所移動すると設定はクリアされます。": "Note that the setting is cleared once a map transfer occurs.",
+    "ＭＶ用プラグインコマンド（Plugin Command MV）": "Plugin Commands for MV (Plugin Command MV)",
+    "※大文字個別は区別しません。また[]は含まないでください。": "※Uppercase and lowercase are not distinguished. Also, do not include [].",
+    "NRP.TransferCommonEvent.ChangeTransferInfo [フェード方法]": "NRP.TransferCommonEvent.ChangeTransferInfo [Fade Method]",
+    "フェード方法は数値で指定してください。": "Specify the fade method using a number.",
+    "0 = 黒, 1 = 白, 2 = なし": "0 = Black, 1 = White, 2 = None",
+    "となります。": "are the available options.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "移動前コモンイベント（BeforeCommonEvent）": "Before Common Event (BeforeCommonEvent)",
+    "場所移動前に実行するコモンイベントです。": "This is the common event executed before a map transfer.",
+    "正確にはデフォルトのフェードアウト前に実行されます。": "More precisely, it is executed before the default fade-out.",
+    "移動後コモンイベント（AfterCommonEvent）": "After Common Event (AfterCommonEvent)",
+    "場所移動後に実行するコモンイベントです。": "This is the common event executed after a map transfer.",
+    "正確にはデフォルトのフェードイン後に実行されます。": "More precisely, it is executed after the default fade-in."
+  }
+}

@@ -1,0 +1,864 @@
+{
+  "articleId": "487983241",
+  "sourceUrl": "https://newrpg.seesaa.net/article/487983241.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "51a9d9dd0f8e83efc7ccbaa1534e429e137052a02fe9415ab59fa92dcd9ce9b0",
+  "translatedAt": "2026-08-31T04:54:10.102Z",
+  "title": "Calling Pixi Effects from Dynamic-Type Plugins [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "PixiのエフェクトをDynamic系プラグインから呼び出す【RPGツクールMZプラグイン】",
+      "sourceHash": "ce31b47534387e0ad8b42a658bce40ecba9f17a76e036f149ce4bfe0777ef03a",
+      "translation": "Calling Pixi Effects from Dynamic-Type Plugins [RPG Maker MZ Plugin]",
+      "contextHash": "ce31b47534387e0ad8b42a658bce40ecba9f17a76e036f149ce4bfe0777ef03a"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "以下のように画面を歪ませるなどの演出が可能です。",
+      "sourceHash": "29a58855b5a09db3067ec2c70adba182812a7ec6978a09a14eb18712c8044a30",
+      "translation": "You can create effects such as distorting the screen as shown below.",
+      "contextHash": "29a58855b5a09db3067ec2c70adba182812a7ec6978a09a14eb18712c8044a30"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "※PixiとはツクールＭＶ～ＭＺの標準で使用しているライブラリのことです。",
+      "sourceHash": "0a6a2c31973c6c7e4022cfc9b36311748844f9455f1869ab5e81472f4272769b",
+      "translation": "※Pixi is the library used by default in RPG Maker MV–MZ.",
+      "contextHash": "0a6a2c31973c6c7e4022cfc9b36311748844f9455f1869ab5e81472f4272769b"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※当然ながらDynamicAnimationプラグインが必須です。（Motionは任意）",
+      "sourceHash": "ce3d55391c856e8bde3221623b30ee3789683b78e3cdbf4145b469d65356f492",
+      "translation": "※Naturally, the DynamicAnimation plugin is required. (Motion is optional.)",
+      "contextHash": "ce3d55391c856e8bde3221623b30ee3789683b78e3cdbf4145b469d65356f492"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "filterType",
+      "sourceHash": "9725d253cc7d96c338f97e43263945517f36ce7f2475a6aaa81278c36c1ddb37",
+      "translation": "filterType",
+      "contextHash": "d822ba4b19b3b18d4ca62205a0998cc7c0dba2e68e20dac234545ef38507198c"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "filterTarget",
+      "sourceHash": "176c5f9f9e90f16ee0cd830119e6938ee08a05c97cb90320a38f2f2ac3c5d16c",
+      "translation": "filterTarget",
+      "contextHash": "aa15025e6eb4735ba7f8492eed73b373e17c9a0a23b5331de57136b661e5f08d"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "filterSpeed",
+      "sourceHash": "498b42b56e6c80222ae495a378fd68a64eff5946174f2e27faf73f7f67dc7964",
+      "translation": "filterSpeed",
+      "contextHash": "5c2adf0ddc83685a4f0a5570b282f5cac002d05f2b05105ba966b348789bec1b"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "filterX",
+      "sourceHash": "25a6ff2178d7d10158a229cda93bf709b81243cacc7ab8204ff865fcdfcbdf26",
+      "translation": "filterX",
+      "contextHash": "757f56f83a730278d95cd65a1d624d25c9ea93e56d489c33804c94323912b3c0"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "filterY",
+      "sourceHash": "047b6680d4aca813b1864e4d43f551ec91f9b7ca79af02515146e0d0006c078e",
+      "translation": "filterY",
+      "contextHash": "912bc242ee4359f898d07cab879451467531e8ee07c3ab0e3dc995e6434a2221"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "filterParameter",
+      "sourceHash": "479365fc714c1f789fa4f9527255c558ed03895ca9a04efffee35cb5a1cb50d0",
+      "translation": "filterParameter",
+      "contextHash": "5f550e0e4dc387a33d5d7a3ea006bf24e5df43048695f701f35772f74a428971"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "filterId",
+      "sourceHash": "90ffa84573f64ba27f77ca6a7dccf825b7b571efdc4bd546248a4188162abc7e",
+      "translation": "filterId",
+      "contextHash": "65a7a2a1378e2b68fe2b7d913ef378a06e88d35b9c2a555353886ebc4f995f35"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "filterErase",
+      "sourceHash": "171f00dc563ff892701f42bd6773734615fb88d0e1e86ec6333aed9572ffc906",
+      "translation": "filterErase",
+      "contextHash": "cdfb70ec2277aa03d88a9f5797c772181869816f8ee3a444ce723a3fa2d7e099"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "NRP_DynamicPixiFilter.js",
+      "sourceHash": "7247dc8865414998e56829c94f293c64515dc1315c9b61f4e712f1f26dc1e48a",
+      "translation": "NRP_DynamicPixiFilter.js ",
+      "contextHash": "b06d42c4c19e21160ae40d8c02c33748a80c63b9ba4ae24b090c7c71861857a4"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.00（2022/05/13）",
+      "sourceHash": "6133e4df5095c54fc536838d3691af379cfbcc21003cd8f12c4590a77d10ca54",
+      "translation": "ver1.00 (2022/05/13) ",
+      "contextHash": "b06d42c4c19e21160ae40d8c02c33748a80c63b9ba4ae24b090c7c71861857a4"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "FilterControllerMZ.js（Tsukimi様）の機能を経由しているため、こちらのプラグインも必須となります。",
+      "sourceHash": "2f98359dd6c0c84b451ecd74c3d671f0a68cf56c5fbcb029fb189695c3f6d5e3",
+      "translation": "Since this plugin uses the functionality of FilterControllerMZ.js (by Tsukimi), that plugin is also required.",
+      "contextHash": "2f98359dd6c0c84b451ecd74c3d671f0a68cf56c5fbcb029fb189695c3f6d5e3"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "FilterControllerMZ.js",
+      "sourceHash": "50a209f7a1ef03c9fd001b9c995256bc340fd99591d3c455d0374f63cadce361",
+      "translation": "FilterControllerMZ.js",
+      "contextHash": "6f0d2b6dfd4e39416ed4eaf2c10973968c2179405798a48153399f2ab9097a69"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下に解説やサンプルプロジェクトもあります。",
+      "sourceHash": "d2d4bbeaa484a88abf88ba388d59a67770bec099498ef1aac9390b603dcba98f",
+      "translation": "Explanations and a sample project are also available below.",
+      "contextHash": "d2d4bbeaa484a88abf88ba388d59a67770bec099498ef1aac9390b603dcba98f"
+    },
+    {
+      "id": "link-011",
+      "type": "link",
+      "source": "https://forum.tkool.jp/index.php?threads/4306/",
+      "sourceHash": "c7f655afcfc5c1099b53bb50992687a218ebfa99275d127764fa990a79ee67ab",
+      "translation": "https://forum.tkool.jp/index.php?threads/4306/",
+      "contextHash": "e7e4512676c26e6e3741fd4ba7e8c4ab4bcb714ebe5601cbe5d0501e4dc9f80a"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2022/05/13（ver1.00）",
+      "sourceHash": "a3d82a82a4b82278b97edc67a2b4bed4062b0944238726057a51da73d7981cb0",
+      "translation": "2022/05/13 (ver1.00) ",
+      "contextHash": "a3d82a82a4b82278b97edc67a2b4bed4062b0944238726057a51da73d7981cb0"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "適用すれば、DynamicAnimationおよびMotionプラグインから簡単に呼び出せるようになります。",
+      "sourceHash": "3e77d9d51ec5e181dea97445dd83a37b119e5bf81bc57e9e6681fca4e545a356",
+      "translation": "Once installed, you can easily call it from the DynamicAnimation and Motion plugins.",
+      "contextHash": "3e77d9d51ec5e181dea97445dd83a37b119e5bf81bc57e9e6681fca4e545a356"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "最も扱いやすいエフェクトは『shockwave（衝撃波）』です。",
+      "sourceHash": "64f566e7bd66438c5cbfc1773955cd85639179d3ab14335aa7d4cf2045e5938a",
+      "translation": "The easiest effect to work with is “shockwave (shock wave).”",
+      "contextHash": "64f566e7bd66438c5cbfc1773955cd85639179d3ab14335aa7d4cf2045e5938a"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "……というか、それ以外を戦闘に組み込むのは難しいので、以降の解説もそれを前提にします。",
+      "sourceHash": "d021d8490be3a869b4d98b3977655c47706a25fcefcae9050000eb6411397118",
+      "translation": "…Actually, since it is difficult to incorporate anything else into battles, the explanations below will also assume its use.",
+      "contextHash": "d021d8490be3a869b4d98b3977655c47706a25fcefcae9050000eb6411397118"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※他のエフェクトも今後、使い道が見つかれば検討します。",
+      "sourceHash": "38b18cdf15036de02c65f69a6fd888f4838f87addaa4a6825b811e74bd658004",
+      "translation": "※I may consider other effects in the future if I find uses for them.",
+      "contextHash": "38b18cdf15036de02c65f69a6fd888f4838f87addaa4a6825b811e74bd658004"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "例えば、以下でアニメーションと同時に衝撃波のエフェクトが表示されます。",
+      "sourceHash": "322ed50db8f66de5b8aef83c0e5db380d2ed84ef98495a1aaacb9950c13869f0",
+      "translation": "For example, the shockwave effect is displayed simultaneously with the animation as shown below.",
+      "contextHash": "322ed50db8f66de5b8aef83c0e5db380d2ed84ef98495a1aaacb9950c13869f0"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※アニメーションが不要なら画像を設定しなければＯＫです。",
+      "sourceHash": "7329ca0a38da811af443738bed647c51e004f3c5b450c6f82f27b07c646389bf",
+      "translation": "※If you do not need an animation, you can simply omit the image setting.",
+      "contextHash": "7329ca0a38da811af443738bed647c51e004f3c5b450c6f82f27b07c646389bf"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※標準ではアニメーションの始点にエフェクトを表示します。",
+      "sourceHash": "8918500350d062efeb6b4c2f7db106f6fc69f48a5e8cb618ddc689cdc09739ed",
+      "translation": "※By default, the effect is displayed at the animation's starting point.",
+      "contextHash": "8918500350d062efeb6b4c2f7db106f6fc69f48a5e8cb618ddc689cdc09739ed"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "DynamicMotionの場合も同じです。",
+      "sourceHash": "299e842b4043468deb46305a46e7ed9b944dbe14349699fb86a133d8c8c8ba81",
+      "translation": "The same applies to DynamicMotion.",
+      "contextHash": "299e842b4043468deb46305a46e7ed9b944dbe14349699fb86a133d8c8c8ba81"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※標準ではモーション実行者側にエフェクトを表示します。",
+      "sourceHash": "df33bec66060e8a51c533e403e4e6eed5398fa0c55a6d60ccc3e1fb51e7b79cf",
+      "translation": "※By default, the effect is displayed on the battler performing the motion.",
+      "contextHash": "df33bec66060e8a51c533e403e4e6eed5398fa0c55a6d60ccc3e1fb51e7b79cf"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "パラメータ（Parameters）",
+      "sourceHash": "a94a33c28a8ec3d3021e3d920d83a1adc878914e1fe0ce23e9c53776e2f4898e",
+      "translation": "Parameters (Parameters)",
+      "contextHash": "a94a33c28a8ec3d3021e3d920d83a1adc878914e1fe0ce23e9c53776e2f4898e"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "パラメータを指定することでエフェクトを調整できます。",
+      "sourceHash": "cd1ba38adcc4a135a7991d3edc633cda52b409b61e6eae845fbca5dd3439c6a4",
+      "translation": "You can adjust the effect by specifying parameters.",
+      "contextHash": "cd1ba38adcc4a135a7991d3edc633cda52b409b61e6eae845fbca5dd3439c6a4"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "大半のパラメータはFilterControllerMZ.jsに準じますので、詳細はそちらの解説をご確認ください。",
+      "sourceHash": "42a5f711f071866fa99991e620961496ccde3ef763ff5f2c49ecb1ef02079cb1",
+      "translation": "Most parameters follow FilterControllerMZ.js, so please refer to its documentation for details.",
+      "contextHash": "42a5f711f071866fa99991e620961496ccde3ef763ff5f2c49ecb1ef02079cb1"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "パラメータは以下のように指定します。",
+      "sourceHash": "643257e064a548faaeb53ce5fae5e065b0fe2bda0a89e58039a85b518f698e21",
+      "translation": "Specify the parameters as follows.",
+      "contextHash": "643257e064a548faaeb53ce5fae5e065b0fe2bda0a89e58039a85b518f698e21"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※//から右は単なる注釈です。",
+      "sourceHash": "b2727f641fa3b65dad442d8575f6184625e98a265d88971ae00599c2041a4d66",
+      "translation": "※Anything to the right of // is merely a comment.",
+      "contextHash": "b2727f641fa3b65dad442d8575f6184625e98a265d88971ae00599c2041a4d66"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "filterType = shockwave // エフェクトの種類",
+      "sourceHash": "ddb9069eca447ddd9354129c370114556d1189ab05224da3155662d0c10fc14e",
+      "translation": "filterType = shockwave // Effect Type",
+      "contextHash": "ddb9069eca447ddd9354129c370114556d1189ab05224da3155662d0c10fc14e"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "filterTarget = Battlers // エフェクト対象",
+      "sourceHash": "f26409bc5add94e3856192c35dc67cb51f4de3822907d134d9b16cd9d7ddaecc",
+      "translation": "filterTarget = Battlers // Effect Target",
+      "contextHash": "f26409bc5add94e3856192c35dc67cb51f4de3822907d134d9b16cd9d7ddaecc"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "filterX = b.width / 2 // Ｘ座標",
+      "sourceHash": "62b6045c01108087a04009c248d0493b0b38cbc33b512f3df277c6e75695e49a",
+      "translation": "filterX = b.width / 2 // X Coordinate",
+      "contextHash": "62b6045c01108087a04009c248d0493b0b38cbc33b512f3df277c6e75695e49a"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "filterY = b.height / 2 // Ｙ座標",
+      "sourceHash": "824fce863b47d12920398abb1d03e51c3b59892441a19964e282699dfc5be301",
+      "translation": "filterY = b.height / 2 // Y Coordinate",
+      "contextHash": "824fce863b47d12920398abb1d03e51c3b59892441a19964e282699dfc5be301"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "filterParameters = [0,0,-1,30,160,1] // X,Y,半径,振幅,波長,明るさ",
+      "sourceHash": "089d608e83b39e9e76295eccd97f36ec48acf7de5fe1ae2bf06064b3c282a019",
+      "translation": "filterParameters = [0,0,-1,30,160,1] // X, Y, Radius, Amplitude, Wavelength, Brightness",
+      "contextHash": "089d608e83b39e9e76295eccd97f36ec48acf7de5fe1ae2bf06064b3c282a019"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "詳細は下をご覧ください。",
+      "sourceHash": "12be73941881a548e7f4761a4f0293d8648473017714468b746bd1c3020bf896",
+      "translation": "See below for details.",
+      "contextHash": "12be73941881a548e7f4761a4f0293d8648473017714468b746bd1c3020bf896"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "フィルターエフェクトの種類です。",
+      "sourceHash": "a8a130a57742791dff664b15ebe3136afbda9797dc3e61f06f2f5e29f36d3cd0",
+      "translation": "This is the type of filter effect.",
+      "contextHash": "a8a130a57742791dff664b15ebe3136afbda9797dc3e61f06f2f5e29f36d3cd0"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "基本的には『shockwave』を使っていけばよいと思います。",
+      "sourceHash": "645b14ad706b50b8465048e825b968b6d48a237073c4ea3c88593d46509e657f",
+      "translation": "Basically, I recommend using “shockwave.”",
+      "contextHash": "645b14ad706b50b8465048e825b968b6d48a237073c4ea3c88593d46509e657f"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "エフェクトをかける対象です。",
+      "sourceHash": "bc60e03d63180f0f22e16e185080e4eb30efade2191cffa805d3b6e110ded8cf",
+      "translation": "This is the target to which the effect is applied.",
+      "contextHash": "bc60e03d63180f0f22e16e185080e4eb30efade2191cffa805d3b6e110ded8cf"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "標準では全画面を対象としますが、その他にも以下が使用できます。",
+      "sourceHash": "c6a0dc53bb3ddb32954e1ce0d76a30f8780b66ed95d01c85311d396ce6f281a7",
+      "translation": "By default, the entire screen is targeted, but you can also use the following options.",
+      "contextHash": "c6a0dc53bb3ddb32954e1ce0d76a30f8780b66ed95d01c85311d396ce6f281a7"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "Battlers：バトラーのみ",
+      "sourceHash": "d256d9a8db33614ab61e4932cf2680a4008570d147cdfa6e968f2ce18e911575",
+      "translation": "Battlers: Battlers only",
+      "contextHash": "d256d9a8db33614ab61e4932cf2680a4008570d147cdfa6e968f2ce18e911575"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "Battleback：戦闘背景のみ",
+      "sourceHash": "84444de4f2bfefa93f1472c500c0f47606abde3f340fb953ad92e32f8835ddf5",
+      "translation": "Battleback: Battleback only",
+      "contextHash": "84444de4f2bfefa93f1472c500c0f47606abde3f340fb953ad92e32f8835ddf5"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "FullScreenWithWindow：全画面（ウィンドウ含む）",
+      "sourceHash": "26805320dc3359016fbe1f3cdb297e5ae0204c4286f91287ac23505752552dec",
+      "translation": "FullScreenWithWindow: Full screen (including windows)",
+      "contextHash": "26805320dc3359016fbe1f3cdb297e5ae0204c4286f91287ac23505752552dec"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "※BattlersおよびBattlebackの指定は、当プラグインで追加した機能です。",
+      "sourceHash": "a7c41da0519fe87be69e770619a7b64ed51a2dcd49ca2edcc668735920746770",
+      "translation": "※The Battlers and Battleback options are features added by this plugin.",
+      "contextHash": "a7c41da0519fe87be69e770619a7b64ed51a2dcd49ca2edcc668735920746770"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "※Battlersを指定した場合は原点が、バトラーの左上になります。座標を変更する場合はご注意ください。",
+      "sourceHash": "41be3a589f55ea4c333b25b41ddcf9f3d6980c90c99e126934fa451d340f1043",
+      "translation": "※When Battlers is specified, the origin is the battler's upper-left corner. Be careful when changing the coordinates.",
+      "contextHash": "41be3a589f55ea4c333b25b41ddcf9f3d6980c90c99e126934fa451d340f1043"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "エフェクトの速度です。",
+      "sourceHash": "fcdde10c0ba371be0665c3ab589ce0226c2b3eb7ebba58af54636f7dbec31fd1",
+      "translation": "This is the effect's speed.",
+      "contextHash": "fcdde10c0ba371be0665c3ab589ce0226c2b3eb7ebba58af54636f7dbec31fd1"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "shockwaveの場合は衝撃波が広がる速度になります。",
+      "sourceHash": "20b285b50b9e069923ad2af8d7efccefbac9c12029538f16aa794036c1b96cd8",
+      "translation": "For shockwave, this is the speed at which the shockwave expands.",
+      "contextHash": "20b285b50b9e069923ad2af8d7efccefbac9c12029538f16aa794036c1b96cd8"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "shockwaveの標準値は『0.01』なので、その辺りを基準にしてください。",
+      "sourceHash": "5cab1c6b068bfcc5a2cc93261d01a5ed551ad21e161fc3cfe6d097cc29131dd9",
+      "translation": "The default value for shockwave is “0.01,” so use that range as a guideline.",
+      "contextHash": "5cab1c6b068bfcc5a2cc93261d01a5ed551ad21e161fc3cfe6d097cc29131dd9"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "うっかり『1』などを入力すると、早すぎて見えなくなります。",
+      "sourceHash": "a90669267fbadfd03909caa610718110739b69f0d8ae9c326bd9b978697aa614",
+      "translation": "If you accidentally enter something like “1,” it will move too quickly to be visible.",
+      "contextHash": "a90669267fbadfd03909caa610718110739b69f0d8ae9c326bd9b978697aa614"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "また『0』にした場合はその場に残りますので、後で削除を行う必要があります。",
+      "sourceHash": "c2f8f2784c229433dbf3a533afe7b4cf71dd610c6b5adda2d8533739259397cf",
+      "translation": "If you set it to “0,” it will remain in place, so you will need to remove it later.",
+      "contextHash": "c2f8f2784c229433dbf3a533afe7b4cf71dd610c6b5adda2d8533739259397cf"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "エフェクトを表示するＸ座標、Ｙ座標です。",
+      "sourceHash": "dce30a98e9997f5bfe6593e3472cbddd84738ed5a78afcca28df890dece92c32",
+      "translation": "These are the X and Y coordinates at which the effect is displayed.",
+      "contextHash": "dce30a98e9997f5bfe6593e3472cbddd84738ed5a78afcca28df890dece92c32"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "標準ではアニメーションの始点（もしくはモーション実行者）に表示されるため省略しても構いません。",
+      "sourceHash": "088765b3245478cc614c2219216d6d2a43bdc1b49cd8bf98f13f07b34579e707",
+      "translation": "By default, it is displayed at the animation's starting point (or on the battler performing the motion), so you may omit them.",
+      "contextHash": "088765b3245478cc614c2219216d6d2a43bdc1b49cd8bf98f13f07b34579e707"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "FilterControllerMZ.jsおよびPixiに渡すパラメータですが、少し上級者向けかもしれません。",
+      "sourceHash": "623306ce7e6005b6a0fac9a5c95661fd6bf1b7bbdc552619c0b58f15ea70da98",
+      "translation": "These parameters are passed to FilterControllerMZ.js and Pixi, so they may be somewhat advanced.",
+      "contextHash": "623306ce7e6005b6a0fac9a5c95661fd6bf1b7bbdc552619c0b58f15ea70da98"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "例えば、shockwaveの場合、以下のように６つのパラメータを渡しています。",
+      "sourceHash": "fe2cca373a421ce6a363c9305ceffa99a983c014d758d1607bf79cdc00d5ec80",
+      "translation": "For example, in the case of shockwave, six parameters are passed as follows.",
+      "contextHash": "fe2cca373a421ce6a363c9305ceffa99a983c014d758d1607bf79cdc00d5ec80"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "※値はFilterControllerMZの標準値",
+      "sourceHash": "c405d3598657daefa2bc682032a2790b7ac150c4a9087ea8d961537bf3851e69",
+      "translation": "※FilterControllerMZ default values",
+      "contextHash": "c405d3598657daefa2bc682032a2790b7ac150c4a9087ea8d961537bf3851e69"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "……が、それぞれの値の意味は、FilterControllerMZ.jsの実装と、Pixiのドキュメントを照らし合わせないと分からないと思います。",
+      "sourceHash": "00644518c98b893b70b3f192885f842af52509d2e1de6d36f0f875da43f1845c",
+      "translation": "…However, I believe you will need to compare the FilterControllerMZ.js implementation with the Pixi documentation to understand what each value means.",
+      "contextHash": "00644518c98b893b70b3f192885f842af52509d2e1de6d36f0f875da43f1845c"
+    },
+    {
+      "id": "link-012",
+      "type": "link",
+      "source": "https://filters.pixijs.download/main/docs/PIXI.filters.ShockwaveFilter.html",
+      "sourceHash": "398e927e4dde1049cf2580050e4e07d17823aa144428abd3ddebccc0c0245aa1",
+      "translation": "https://filters.pixijs.download/main/docs/PIXI.filters.ShockwaveFilter.html",
+      "contextHash": "335191380619bafc29328ada9d26a9724b15b6bef781634ec12d8f79036eb205"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "実際には以下の順番で対応していますので、お好みで調整してください。",
+      "sourceHash": "f919bbcf1841b6f9a63d99d7658bca12b39a867b7ce1cb4bb3d3a3e40ec86781",
+      "translation": "They actually correspond in the following order, so adjust them as you like.",
+      "contextHash": "f919bbcf1841b6f9a63d99d7658bca12b39a867b7ce1cb4bb3d3a3e40ec86781"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "center(1)：Ｘ座標補正",
+      "sourceHash": "ef3de6b64f7bd885e65b6e360729e001c984600b69ee29de59f0a2df9c58f8cd",
+      "translation": "center(1): X-coordinate adjustment",
+      "contextHash": "ef3de6b64f7bd885e65b6e360729e001c984600b69ee29de59f0a2df9c58f8cd"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "center(2): Ｙ座標補正",
+      "sourceHash": "05fff1935fe1db291d232e272460eb53259757738892d315a59169635e482cec",
+      "translation": "center(2): Y-coordinate adjustment",
+      "contextHash": "05fff1935fe1db291d232e272460eb53259757738892d315a59169635e482cec"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "radius：最大半径（０以下で無制限）",
+      "sourceHash": "fc288b4e28cd22dc703fc015eead00a7d8b9f954e0d9d2dce06a0b55bf18d5d3",
+      "translation": "radius: Maximum radius (unlimited at 0 or below)",
+      "contextHash": "fc288b4e28cd22dc703fc015eead00a7d8b9f954e0d9d2dce06a0b55bf18d5d3"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "amplitude：振幅（揺らぎの強さ）",
+      "sourceHash": "3f9f589d3546d44d403a972e175c39b6be2b2505ec0cf0cf5f0727e74043aac4",
+      "translation": "amplitude: Amplitude (strength of fluctuation)",
+      "contextHash": "3f9f589d3546d44d403a972e175c39b6be2b2505ec0cf0cf5f0727e74043aac4"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "wavelength：波長（揺らぎの大きさ）",
+      "sourceHash": "3b705a3a2f8ff5845b130e6e884649ab501a750b5861ff76d16c45dae232cd26",
+      "translation": "wavelength: Wavelength (size of fluctuation)",
+      "contextHash": "3b705a3a2f8ff5845b130e6e884649ab501a750b5861ff76d16c45dae232cd26"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "brightness：明るさ",
+      "sourceHash": "e62c38bcf505514e255363d600b18a6c87fe3337613fc83e287c365198c9871d",
+      "translation": "brightness: Brightness",
+      "contextHash": "e62c38bcf505514e255363d600b18a6c87fe3337613fc83e287c365198c9871d"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "上２つは『filterX』『filterY』を指定すればよいので基本は変更不要です。",
+      "sourceHash": "d3680d28114650a404c59bb4ffdc2a4052c75488527aad6d173046651a2e9162",
+      "translation": "The first two only require specifying `filterX` and `filterY`, so they generally do not need to be changed.",
+      "contextHash": "d3680d28114650a404c59bb4ffdc2a4052c75488527aad6d173046651a2e9162"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "ちなみに未入力の場合も標準値が使用されるため、不要な項目は以下のように空白にしても構いません。",
+      "sourceHash": "02cfda8b912fa6c7e87361015d8bb096cea436a390f4c3e1e0a77bc7d8bf19d7",
+      "translation": "Also, since the default values are used when fields are left blank, unnecessary fields may be left blank as shown below.",
+      "contextHash": "02cfda8b912fa6c7e87361015d8bb096cea436a390f4c3e1e0a77bc7d8bf19d7"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "フィルターエフェクトを操作するためのＩＤです。",
+      "sourceHash": "40deec2d0fa9717d652b45059edd23b83a2a8651c524541bca633e13832a831e",
+      "translation": "This is the ID used to control the filter effect.",
+      "contextHash": "40deec2d0fa9717d652b45059edd23b83a2a8651c524541bca633e13832a831e"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "ＩＤは数値でも文字列でも構いませんが、文字列の場合は\"\"で囲ってください。",
+      "sourceHash": "273135b9fee7f351c3263686807810d582a97e1927828ba13d88d7f4ea48334a",
+      "translation": "The ID may be a number or a string, but strings must be enclosed in \"\".",
+      "contextHash": "273135b9fee7f351c3263686807810d582a97e1927828ba13d88d7f4ea48334a"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "なお、以下の削除（filterErase）などの操作を行わない場合は不要です。",
+      "sourceHash": "6ca7169dc7d33149e96525437a767a9dd628ddf3de3ec94cf6c312f3114995e5",
+      "translation": "However, this is not necessary if you do not perform operations such as the deletion (`filterErase`) shown below.",
+      "contextHash": "6ca7169dc7d33149e96525437a767a9dd628ddf3de3ec94cf6c312f3114995e5"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "※shockwaveなら速度が0の場合を除いて、時間経過で自動的に消滅します。",
+      "sourceHash": "9fecdc21df663697a79621417819439a0dc15db82f2fc73ba0d73be153523059",
+      "translation": "※For shockwave, it automatically disappears over time unless its speed is 0.",
+      "contextHash": "9fecdc21df663697a79621417819439a0dc15db82f2fc73ba0d73be153523059"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "指定した『filterId』のエフェクトを削除します。",
+      "sourceHash": "d9a45b470a1eb57eb88622fc8994e20c68f5abe5c0ccdd0583aefa2d6cd1383e",
+      "translation": "Deletes the effect with the specified `filterId`.",
+      "contextHash": "d9a45b470a1eb57eb88622fc8994e20c68f5abe5c0ccdd0583aefa2d6cd1383e"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "例えば、以下のような流れになります。",
+      "sourceHash": "005fd460782193301406949d0918473f031f59f3d7f3b46efb76192c37a7575f",
+      "translation": "For example, the process would be as follows.",
+      "contextHash": "005fd460782193301406949d0918473f031f59f3d7f3b46efb76192c37a7575f"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "また『filterErase = true』にすると、全てのエフェクトを削除します。",
+      "sourceHash": "5c43bd589e55521f5118d2cb2cc2b8275ff3b25c57d7df85a29192ed9be8d39c",
+      "translation": "Also, setting `filterErase = true` deletes all effects.",
+      "contextHash": "5c43bd589e55521f5118d2cb2cc2b8275ff3b25c57d7df85a29192ed9be8d39c"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "FilterControllerMZ.jsで呼び出した全てのエフェクトが対象になるので、ご注意ください。",
+      "sourceHash": "fb0d3d254acad339afb308446f5126508619c518966717618efd261f7b72f58e",
+      "translation": "Please note that this applies to all effects called by FilterControllerMZ.js.",
+      "contextHash": "fb0d3d254acad339afb308446f5126508619c518966717618efd261f7b72f58e"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicAnimation&Motionプラグイン[[/LINK_1]]から、Pixiのフィルターエフェクト機能を呼び出します。",
+      "sourceHash": "a50e9fc1e45ca4d0dbb6b8897f55565a0a3ad4160935cc34b6670bf41dc982ec",
+      "parts": [
+        {
+          "source": "DynamicAnimation&Motionプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "から、Pixiのフィルターエフェクト機能を呼び出します。",
+          "link": false
+        }
+      ],
+      "translation": "Calls Pixi's filter effect functionality from the [[LINK_1]]DynamicAnimation&Motion plugin[[/LINK_1]].",
+      "contextHash": "a50e9fc1e45ca4d0dbb6b8897f55565a0a3ad4160935cc34b6670bf41dc982ec"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータ（Parameters）[[/LINK_1]]",
+      "sourceHash": "b6eb90002ce700b06b3484cf938991935ac2daa436d9f9d6d41f167a63292156",
+      "parts": [
+        {
+          "source": "パラメータ（Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameters (Parameters)[[/LINK_1]]",
+      "contextHash": "b6eb90002ce700b06b3484cf938991935ac2daa436d9f9d6d41f167a63292156"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "以下のように画面を歪ませるなどの演出が可能です。": "You can create effects such as distorting the screen as shown below.",
+    "※PixiとはツクールＭＶ～ＭＺの標準で使用しているライブラリのことです。": "※Pixi is the library used by default in RPG Maker MV–MZ.",
+    "※当然ながらDynamicAnimationプラグインが必須です。（Motionは任意）": "※Naturally, the DynamicAnimation plugin is required. (Motion is optional.)",
+    "目次": "Table of Contents",
+    "filterType": "filterType",
+    "filterTarget": "filterTarget",
+    "filterSpeed": "filterSpeed",
+    "filterX": "filterX",
+    "filterY": "filterY",
+    "filterParameter": "filterParameter",
+    "filterId": "filterId",
+    "filterErase": "filterErase",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_DynamicPixiFilter.js": "NRP_DynamicPixiFilter.js ",
+    "ver1.00（2022/05/13）": "ver1.00 (2022/05/13) ",
+    "FilterControllerMZ.js（Tsukimi様）の機能を経由しているため、こちらのプラグインも必須となります。": "Since this plugin uses the functionality of FilterControllerMZ.js (by Tsukimi), that plugin is also required.",
+    "FilterControllerMZ.js": "FilterControllerMZ.js",
+    "以下に解説やサンプルプロジェクトもあります。": "Explanations and a sample project are also available below.",
+    "https://forum.tkool.jp/index.php?threads/4306/": "https://forum.tkool.jp/index.php?threads/4306/",
+    "更新履歴（History）": "Update History (History)",
+    "2022/05/13（ver1.00）": "2022/05/13 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "適用すれば、DynamicAnimationおよびMotionプラグインから簡単に呼び出せるようになります。": "Once installed, you can easily call it from the DynamicAnimation and Motion plugins.",
+    "最も扱いやすいエフェクトは『shockwave（衝撃波）』です。": "The easiest effect to work with is “shockwave (shock wave).”",
+    "……というか、それ以外を戦闘に組み込むのは難しいので、以降の解説もそれを前提にします。": "…Actually, since it is difficult to incorporate anything else into battles, the explanations below will also assume its use.",
+    "※他のエフェクトも今後、使い道が見つかれば検討します。": "※I may consider other effects in the future if I find uses for them.",
+    "例えば、以下でアニメーションと同時に衝撃波のエフェクトが表示されます。": "For example, the shockwave effect is displayed simultaneously with the animation as shown below.",
+    "※アニメーションが不要なら画像を設定しなければＯＫです。": "※If you do not need an animation, you can simply omit the image setting.",
+    "※標準ではアニメーションの始点にエフェクトを表示します。": "※By default, the effect is displayed at the animation's starting point.",
+    "DynamicMotionの場合も同じです。": "The same applies to DynamicMotion.",
+    "※標準ではモーション実行者側にエフェクトを表示します。": "※By default, the effect is displayed on the battler performing the motion.",
+    "パラメータ（Parameters）": "Parameters (Parameters)",
+    "パラメータを指定することでエフェクトを調整できます。": "You can adjust the effect by specifying parameters.",
+    "大半のパラメータはFilterControllerMZ.jsに準じますので、詳細はそちらの解説をご確認ください。": "Most parameters follow FilterControllerMZ.js, so please refer to its documentation for details.",
+    "パラメータは以下のように指定します。": "Specify the parameters as follows.",
+    "※//から右は単なる注釈です。": "※Anything to the right of // is merely a comment.",
+    "filterType = shockwave // エフェクトの種類": "filterType = shockwave // Effect Type",
+    "filterTarget = Battlers // エフェクト対象": "filterTarget = Battlers // Effect Target",
+    "filterX = b.width / 2 // Ｘ座標": "filterX = b.width / 2 // X Coordinate",
+    "filterY = b.height / 2 // Ｙ座標": "filterY = b.height / 2 // Y Coordinate",
+    "filterParameters = [0,0,-1,30,160,1] // X,Y,半径,振幅,波長,明るさ": "filterParameters = [0,0,-1,30,160,1] // X, Y, Radius, Amplitude, Wavelength, Brightness",
+    "詳細は下をご覧ください。": "See below for details.",
+    "フィルターエフェクトの種類です。": "This is the type of filter effect.",
+    "基本的には『shockwave』を使っていけばよいと思います。": "Basically, I recommend using “shockwave.”",
+    "エフェクトをかける対象です。": "This is the target to which the effect is applied.",
+    "標準では全画面を対象としますが、その他にも以下が使用できます。": "By default, the entire screen is targeted, but you can also use the following options.",
+    "Battlers：バトラーのみ": "Battlers: Battlers only",
+    "Battleback：戦闘背景のみ": "Battleback: Battleback only",
+    "FullScreenWithWindow：全画面（ウィンドウ含む）": "FullScreenWithWindow: Full screen (including windows)",
+    "※BattlersおよびBattlebackの指定は、当プラグインで追加した機能です。": "※The Battlers and Battleback options are features added by this plugin.",
+    "※Battlersを指定した場合は原点が、バトラーの左上になります。座標を変更する場合はご注意ください。": "※When Battlers is specified, the origin is the battler's upper-left corner. Be careful when changing the coordinates.",
+    "エフェクトの速度です。": "This is the effect's speed.",
+    "shockwaveの場合は衝撃波が広がる速度になります。": "For shockwave, this is the speed at which the shockwave expands.",
+    "shockwaveの標準値は『0.01』なので、その辺りを基準にしてください。": "The default value for shockwave is “0.01,” so use that range as a guideline.",
+    "うっかり『1』などを入力すると、早すぎて見えなくなります。": "If you accidentally enter something like “1,” it will move too quickly to be visible.",
+    "また『0』にした場合はその場に残りますので、後で削除を行う必要があります。": "If you set it to “0,” it will remain in place, so you will need to remove it later.",
+    "エフェクトを表示するＸ座標、Ｙ座標です。": "These are the X and Y coordinates at which the effect is displayed.",
+    "標準ではアニメーションの始点（もしくはモーション実行者）に表示されるため省略しても構いません。": "By default, it is displayed at the animation's starting point (or on the battler performing the motion), so you may omit them.",
+    "FilterControllerMZ.jsおよびPixiに渡すパラメータですが、少し上級者向けかもしれません。": "These parameters are passed to FilterControllerMZ.js and Pixi, so they may be somewhat advanced.",
+    "例えば、shockwaveの場合、以下のように６つのパラメータを渡しています。": "For example, in the case of shockwave, six parameters are passed as follows.",
+    "※値はFilterControllerMZの標準値": "※FilterControllerMZ default values",
+    "……が、それぞれの値の意味は、FilterControllerMZ.jsの実装と、Pixiのドキュメントを照らし合わせないと分からないと思います。": "…However, I believe you will need to compare the FilterControllerMZ.js implementation with the Pixi documentation to understand what each value means.",
+    "https://filters.pixijs.download/main/docs/PIXI.filters.ShockwaveFilter.html": "https://filters.pixijs.download/main/docs/PIXI.filters.ShockwaveFilter.html",
+    "実際には以下の順番で対応していますので、お好みで調整してください。": "They actually correspond in the following order, so adjust them as you like.",
+    "center(1)：Ｘ座標補正": "center(1): X-coordinate adjustment",
+    "center(2): Ｙ座標補正": "center(2): Y-coordinate adjustment",
+    "radius：最大半径（０以下で無制限）": "radius: Maximum radius (unlimited at 0 or below)",
+    "amplitude：振幅（揺らぎの強さ）": "amplitude: Amplitude (strength of fluctuation)",
+    "wavelength：波長（揺らぎの大きさ）": "wavelength: Wavelength (size of fluctuation)",
+    "brightness：明るさ": "brightness: Brightness",
+    "上２つは『filterX』『filterY』を指定すればよいので基本は変更不要です。": "The first two only require specifying `filterX` and `filterY`, so they generally do not need to be changed.",
+    "ちなみに未入力の場合も標準値が使用されるため、不要な項目は以下のように空白にしても構いません。": "Also, since the default values are used when fields are left blank, unnecessary fields may be left blank as shown below.",
+    "フィルターエフェクトを操作するためのＩＤです。": "This is the ID used to control the filter effect.",
+    "ＩＤは数値でも文字列でも構いませんが、文字列の場合は\"\"で囲ってください。": "The ID may be a number or a string, but strings must be enclosed in \"\".",
+    "なお、以下の削除（filterErase）などの操作を行わない場合は不要です。": "However, this is not necessary if you do not perform operations such as the deletion (`filterErase`) shown below.",
+    "※shockwaveなら速度が0の場合を除いて、時間経過で自動的に消滅します。": "※For shockwave, it automatically disappears over time unless its speed is 0.",
+    "指定した『filterId』のエフェクトを削除します。": "Deletes the effect with the specified `filterId`.",
+    "例えば、以下のような流れになります。": "For example, the process would be as follows.",
+    "また『filterErase = true』にすると、全てのエフェクトを削除します。": "Also, setting `filterErase = true` deletes all effects.",
+    "FilterControllerMZ.jsで呼び出した全てのエフェクトが対象になるので、ご注意ください。": "Please note that this applies to all effects called by FilterControllerMZ.js."
+  }
+}

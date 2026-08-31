@@ -1,0 +1,686 @@
+{
+  "articleId": "482187330",
+  "sourceUrl": "https://newrpg.seesaa.net/article/482187330.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "343b85cd1cd3fa03abb1953c12f4a01a92ba6b0151c59f3449773aff040e8690",
+  "translatedAt": "2026-08-31T04:53:24.301Z",
+  "title": "Resolve Conflict with GALV_LayerGraphicsMZ & Add Features [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "GALV_LayerGraphicsMZとの競合を解消＆機能追加【RPGツクールMZプラグイン】",
+      "sourceHash": "b6a2f6fe64d193360841a236c3e15297badad65842d2ad2daf2bcb67d7f8c19e",
+      "translation": "Resolve Conflict with GALV_LayerGraphicsMZ & Add Features [RPG Maker MZ Plugin]",
+      "contextHash": "b6a2f6fe64d193360841a236c3e15297badad65842d2ad2daf2bcb67d7f8c19e"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "当ブログのNRP系プラグインとGALV_LayerGraphicsMZとの競合を解消します。",
+      "sourceHash": "5f1b31c256604777692e6cb69862b1457a64cdcd4a36934e5d5048e1e773f75c",
+      "translation": "This resolves conflicts between this blog's NRP-series plugins and GALV_LayerGraphicsMZ.",
+      "contextHash": "5f1b31c256604777692e6cb69862b1457a64cdcd4a36934e5d5048e1e773f75c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "遠景・近景を自由に設定できるので、マップ上に浮かぶ雲やスクロールする背景などの演出が可能となります。個人的にも大変重宝しています。",
+      "sourceHash": "a08960dae86c8888b9533e7b639b1abbb6dbc3ff53965a7b769a8413ea8a21e9",
+      "translation": "Since you can freely configure distant and near backgrounds, you can create effects such as clouds floating over the map or scrolling backgrounds. I personally find it extremely useful.",
+      "contextHash": "a08960dae86c8888b9533e7b639b1abbb6dbc3ff53965a7b769a8413ea8a21e9"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "そこで競合を解消するためのプラグインを作成しました。",
+      "sourceHash": "d18d7a75c0820640fec783bc110523fcbe42a06f28c0b29501fa52bccc836a53",
+      "translation": "Therefore, I created a plugin to resolve the conflict.",
+      "contextHash": "d18d7a75c0820640fec783bc110523fcbe42a06f28c0b29501fa52bccc836a53"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ついでにループマップへの対応など、ちょっとした機能追加もしています。",
+      "sourceHash": "5126c1415ad5c81b8b87497e0de0830cc42021f135bbf6c7223de5bdb8e3a80c",
+      "translation": "I also added a few minor features, such as support for loop maps.",
+      "contextHash": "5126c1415ad5c81b8b87497e0de0830cc42021f135bbf6c7223de5bdb8e3a80c"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※GALV_LayerGraphicsMZ ver1.2で動作確認しています。",
+      "sourceHash": "6be06886953b9ba763a39937254ba13404cf90f89ba4a21916a3f22483394d5f",
+      "translation": "※Operation has been confirmed with GALV_LayerGraphicsMZ ver1.2.",
+      "contextHash": "6be06886953b9ba763a39937254ba13404cf90f89ba4a21916a3f22483394d5f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※Galv様の利用規約ではプラグイン＆スクリプトを改変して配布するのは禁止となっています。そのため、元のソースは流用しない方式でプラグインを作成しています。",
+      "sourceHash": "870b5884920cdf7aca9e771a00f1bf9899ba471cdf3dc27b55ba800bc65e2e86",
+      "translation": "※Galv's terms of use prohibit modifying and redistributing plugins and scripts. Therefore, I created this plugin without reusing the original source.",
+      "contextHash": "870b5884920cdf7aca9e771a00f1bf9899ba471cdf3dc27b55ba800bc65e2e86"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_GALV_LayerGraphicsMZ.js",
+      "sourceHash": "8941810b57171a4286badda8e637670d787172d96c9e1f62df2909a340d612a4",
+      "translation": "NRP_GALV_LayerGraphicsMZ.js ",
+      "contextHash": "2435111838ba0863ebf9acd8b30994085923c7bc983780ee70a70c244af59b6e"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.041（2022/03/12）",
+      "sourceHash": "8782a76c50f5f9ab804158d5bd6ef6ab1f787649c56419217e7ee24871bb5ce6",
+      "translation": "ver1.041 (2022/03/12) ",
+      "contextHash": "2435111838ba0863ebf9acd8b30994085923c7bc983780ee70a70c244af59b6e"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2022/02/05 -> 2022/03/12（ver1.04 -> 1.041）",
+      "sourceHash": "e9ff6b0795d9e22136f603547bca0c6bdab074e35322019c987e20a65ce0411f",
+      "translation": "2022/02/05 -> 2022/03/12 (ver1.04 -> 1.041) ",
+      "contextHash": "e9ff6b0795d9e22136f603547bca0c6bdab074e35322019c987e20a65ce0411f"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2022/01/11（ver1.03）",
+      "sourceHash": "ae7672d3e4e66f1a722c7ea2582a2add7ed998882d1a412228ea73971bf09e50",
+      "translation": "2022/01/11 (ver1.03) ",
+      "contextHash": "ae7672d3e4e66f1a722c7ea2582a2add7ed998882d1a412228ea73971bf09e50"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/10/28 -> 2021/11/11（ver1.02 -> 1.021）",
+      "sourceHash": "85a018f27b735f5d4b549d9e76415f6190a0375ac5597237a226c843d9d8fa0b",
+      "translation": "2021/10/28 -> 2021/11/11 (ver1.02 -> 1.021) ",
+      "contextHash": "85a018f27b735f5d4b549d9e76415f6190a0375ac5597237a226c843d9d8fa0b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "メニューを開閉した際、レイヤー位置が保持されない不具合修正。",
+      "sourceHash": "19144a9f38ed250bdccc2e14522f30fa33988ddb936466299df885a8aebab7f5",
+      "translation": "Fixed a bug where layer positions were not retained when opening or closing the menu.",
+      "contextHash": "19144a9f38ed250bdccc2e14522f30fa33988ddb936466299df885a8aebab7f5"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "イベントテストでエラーになる不具合修正。（11/11 ver1.021）",
+      "sourceHash": "da7583b2567d6af3ac7a1239c757bde2851f1d6f2d29863d496a4991b901fec8",
+      "translation": "Fixed a bug that caused an error during event testing. (11/11 ver1.021)",
+      "contextHash": "da7583b2567d6af3ac7a1239c757bde2851f1d6f2d29863d496a4991b901fec8"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/10/08（ver1.01）",
+      "sourceHash": "1993a3760651ed3fa0808abcdb33b65fa7f7e2c3d99d240335e7546dbcbb0629",
+      "translation": "2021/10/08 (ver1.01) ",
+      "contextHash": "1993a3760651ed3fa0808abcdb33b65fa7f7e2c3d99d240335e7546dbcbb0629"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "マップのスクロール命令が反映されない不具合修正。",
+      "sourceHash": "66edab7163243eeba682db06c20dd8d0359165455a9b6179742a76605199b42f",
+      "translation": "Fixed a bug where map scroll commands were not applied.",
+      "contextHash": "66edab7163243eeba682db06c20dd8d0359165455a9b6179742a76605199b42f"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/06/27（ver1.00）",
+      "sourceHash": "43f190e9ff95641f0202be1b198cba09d70930b35c3a09ecdb7d151ae58159cf",
+      "translation": "2021/06/27 (ver1.00) ",
+      "contextHash": "43f190e9ff95641f0202be1b198cba09d70930b35c3a09ecdb7d151ae58159cf"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "適用するだけでＯＫです。",
+      "sourceHash": "bba3ea506f92d2040ff9252a9835ffb9134ffa62ec8fa227591170183b84c114",
+      "translation": "Simply apply it.",
+      "contextHash": "bba3ea506f92d2040ff9252a9835ffb9134ffa62ec8fa227591170183b84c114"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "詳細は以下のプラグインパラメータの説明をご覧ください。",
+      "sourceHash": "e705397662361618b33d79e8649420a9c382aa262b97790c46eb6747e4b3122b",
+      "translation": "For details, see the explanations of the following plugin parameters.",
+      "contextHash": "e705397662361618b33d79e8649420a9c382aa262b97790c46eb6747e4b3122b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "ループマップに対応（SupportLoopMap）",
+      "sourceHash": "1134a57773ab862bb46915ebc42d9432c3475ae52fd35ce98cffe10b92b81c5c",
+      "translation": "Support for Loop Maps (SupportLoopMap)",
+      "contextHash": "1134a57773ab862bb46915ebc42d9432c3475ae52fd35ce98cffe10b92b81c5c"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "LayerGraphicsをループマップに対応させます。ループをまたぐ際に表示がズレないようになります。",
+      "sourceHash": "3edb6abedac206987098bbe1db69f3c66709c6beb4fa4b389cd05d491963c593",
+      "translation": "Makes LayerGraphics support loop maps. Displaying layers will no longer shift when crossing a loop boundary.",
+      "contextHash": "3edb6abedac206987098bbe1db69f3c66709c6beb4fa4b389cd05d491963c593"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "静的レイヤーの既定マップ（SupportStaticLayerDefaultMap）",
+      "sourceHash": "8c35fda3ae0b64edfb7746d6dfc7580e38499dd41a3d0390a2391458165acfbb",
+      "translation": "Default Map for Static Layers (SupportStaticLayerDefaultMap)",
+      "contextHash": "8c35fda3ae0b64edfb7746d6dfc7580e38499dd41a3d0390a2391458165acfbb"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "静的レイヤー作成時、マップＩＤの指定がない場合は現在のマップを参照するようにします。",
+      "sourceHash": "b00670c54445a77fc03b8bb2de551a4c8231b890c98d2851cf36e0040de12bcb",
+      "translation": "When creating a static layer, the current map will be referenced if no map ID is specified.",
+      "contextHash": "b00670c54445a77fc03b8bb2de551a4c8231b890c98d2851cf36e0040de12bcb"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※通常のレイヤーに関しては、最初からこの機能がある模様です。",
+      "sourceHash": "5f271aabb7bc4f18b0a8f8b80ba53f7b06c9fcaa6b4166a1f1ea3db3721ac564",
+      "translation": "※It appears that this feature is already available for regular layers.",
+      "contextHash": "5f271aabb7bc4f18b0a8f8b80ba53f7b06c9fcaa6b4166a1f1ea3db3721ac564"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "DynamicMotionとの競合解消（ForDynamicMotion）",
+      "sourceHash": "643b55deab2b5b75240d8ad53e6affc64a8250087a251883c03b28e528fd8dfa",
+      "translation": "Resolve Conflict with DynamicMotion (ForDynamicMotion)",
+      "contextHash": "643b55deab2b5b75240d8ad53e6affc64a8250087a251883c03b28e528fd8dfa"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "NRP_DynamicMotionMZ、およびNRP_TroopRandomFormationとの競合を解消します。適用すると敵のＺ座標が、GALV_LayerGraphicsMZの設定値（変更不可）から変更されます。",
+      "sourceHash": "dd8358567c9b5d8f942e45ba30dd945c0486c0aea93befba00c255b59f7144c6",
+      "translation": "Resolves conflicts with NRP_DynamicMotionMZ and NRP_TroopRandomFormation. When enabled, the enemy's Z coordinate is changed from the GALV_LayerGraphicsMZ setting (which cannot be changed).",
+      "contextHash": "dd8358567c9b5d8f942e45ba30dd945c0486c0aea93befba00c255b59f7144c6"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "GALV_LayerGraphicsMZの設定値=2 → NRP_DynamicMotionMZの既定値=3",
+      "sourceHash": "f48c2d7d65a346b2e92846a591a66f0a166110eb1f2124d4b88f501fa23436e0",
+      "translation": "GALV_LayerGraphicsMZ setting = 2 → NRP_DynamicMotionMZ default value = 3",
+      "contextHash": "f48c2d7d65a346b2e92846a591a66f0a166110eb1f2124d4b88f501fa23436e0"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "となります。",
+      "sourceHash": "ed551a0f0732edc3bec983a373f519c7feb3d783741f8f50bfb82d15cb970f96",
+      "translation": "This is the result.",
+      "contextHash": "ed551a0f0732edc3bec983a373f519c7feb3d783741f8f50bfb82d15cb970f96"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "この値はNRP_DynamicMotionMZの『バトラーのＺ座標』のプラグインパラメータを参照していますので、変更も可能です。",
+      "sourceHash": "e237b35d058e2f4975447377df586a9c9696765c5338cc1fc33826bdae6492a1",
+      "translation": "This value references the 『Battler Z Coordinate』plugin parameter of NRP_DynamicMotionMZ, so it can also be changed.",
+      "contextHash": "e237b35d058e2f4975447377df586a9c9696765c5338cc1fc33826bdae6492a1"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "なお、Ｚ座標とはGALV_LayerGraphicsMZの『zLevel』に相当します。各画像の表示優先度を調整するための値です。",
+      "sourceHash": "b39d575eacb303251073bc5a0bd22cd2dd1a646463db405466f534dfaff0e79a",
+      "translation": "The Z coordinate corresponds to 『zLevel』 in GALV_LayerGraphicsMZ. It is a value used to adjust the display priority of each image.",
+      "contextHash": "b39d575eacb303251073bc5a0bd22cd2dd1a646463db405466f534dfaff0e79a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ズームアウトに対応（SupportZoomOut）",
+      "sourceHash": "aea4528a41f70a2857b49f7a45337c39ea38bcc156e5438e3a9e206e2a33db58",
+      "translation": "Support for Zooming Out (SupportZoomOut)",
+      "contextHash": "aea4528a41f70a2857b49f7a45337c39ea38bcc156e5438e3a9e206e2a33db58"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ズームアウト処理に対応します。",
+      "sourceHash": "aed53d14c63fd9a64126ed5558fc6345ce5db865b94e0cce1d7b8f9b37405d88",
+      "translation": "Supports zoom-out processing.",
+      "contextHash": "aed53d14c63fd9a64126ed5558fc6345ce5db865b94e0cce1d7b8f9b37405d88"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※遠景周りの機能については、新たに[[LINK_1]]自在に遠景（近景）を表示するプラグイン[[/LINK_1]]を公開しています。今後は主にあちらを更新していく予定です。",
+      "sourceHash": "fa452563fea94a4f6bdf001116a107d6cc8e39ca5e6f6b2d32a0dc9420a0f54f",
+      "parts": [
+        {
+          "source": "※遠景周りの機能については、新たに",
+          "link": false
+        },
+        {
+          "source": "自在に遠景（近景）を表示するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を公開しています。今後は主にあちらを更新していく予定です。",
+          "link": false
+        }
+      ],
+      "translation": "※Regarding features related to parallax backgrounds, I have newly released a [[LINK_1]]plugin for freely displaying parallax backgrounds (foregrounds)[[/LINK_1]]. I plan to mainly update that one from now on.",
+      "contextHash": "fa452563fea94a4f6bdf001116a107d6cc8e39ca5e6f6b2d32a0dc9420a0f54f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]GALV_LayerGraphicsMZ[[/LINK_1]]（Galv様）は画像レイヤーを追加するプラグインです。",
+      "sourceHash": "cc6fc8ff1f51f6fec254f0af4aa2daf992e48f1382a9efc2143ef2c10cb720f6",
+      "parts": [
+        {
+          "source": "GALV_LayerGraphicsMZ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（Galv様）は画像レイヤーを追加するプラグインです。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]GALV_LayerGraphicsMZ[[/LINK_1]] (Galv) is a plugin that adds image layers.",
+      "contextHash": "cc6fc8ff1f51f6fec254f0af4aa2daf992e48f1382a9efc2143ef2c10cb720f6"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "※[[LINK_1]]ムノクラ様による日本語化パッチ[[/LINK_1]]もあります。",
+      "sourceHash": "b21f9ef2889e479dd310948df01840e9d0e8d2980c2e5236cc71c46fa5277f52",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "ムノクラ様による日本語化パッチ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "もあります。",
+          "link": false
+        }
+      ],
+      "translation": "※A [[LINK_1]]Japanese translation patch by Munokura[[/LINK_1]] is also available.",
+      "contextHash": "b21f9ef2889e479dd310948df01840e9d0e8d2980c2e5236cc71c46fa5277f52"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "しかしながら、[[LINK_1]]NRP_DynamicMotionMZ[[/LINK_1]]および[[LINK_2]]NRP_TroopRandomFormation（敵の自動配置）[[/LINK_2]]といったプラグインと併用すると、敵の表示が不自然な重なり方をしてしまう問題があります。",
+      "sourceHash": "055425b923c7a7c1e5f19e21eff21c8115dc2cf05308f6ae42c247e0da5ebcec",
+      "parts": [
+        {
+          "source": "しかしながら、",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicMotionMZ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "および",
+          "link": false
+        },
+        {
+          "source": "NRP_TroopRandomFormation（敵の自動配置）",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "といったプラグインと併用すると、敵の表示が不自然な重なり方をしてしまう問題があります。",
+          "link": false
+        }
+      ],
+      "translation": "However, when used together with plugins such as [[LINK_1]]NRP_DynamicMotionMZ[[/LINK_1]] and [[LINK_2]]NRP_TroopRandomFormation (automatic enemy placement)[[/LINK_2]], enemy sprites may overlap unnaturally.",
+      "contextHash": "055425b923c7a7c1e5f19e21eff21c8115dc2cf05308f6ae42c247e0da5ebcec"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Log (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ループマップに対応（SupportLoopMap）[[/LINK_1]]",
+      "sourceHash": "c07750376b5cc3ebd30b76f8c6a49a6a514aefb438fd41f2344d9dc7aed44d3d",
+      "parts": [
+        {
+          "source": "ループマップに対応（SupportLoopMap）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Support for Loop Maps (SupportLoopMap)[[/LINK_1]]",
+      "contextHash": "c07750376b5cc3ebd30b76f8c6a49a6a514aefb438fd41f2344d9dc7aed44d3d"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]静的レイヤーの既定マップ（SupportStaticLayerDefaultMap）[[/LINK_1]]",
+      "sourceHash": "43a387c6112032592905dab6f965393a501013c95bc9c458eb86df9cf955b4a2",
+      "parts": [
+        {
+          "source": "静的レイヤーの既定マップ（SupportStaticLayerDefaultMap）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Default Map for Static Layers (SupportStaticLayerDefaultMap)[[/LINK_1]]",
+      "contextHash": "43a387c6112032592905dab6f965393a501013c95bc9c458eb86df9cf955b4a2"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionとの競合解消（ForDynamicMotion）[[/LINK_1]]",
+      "sourceHash": "fa51ceb35f32565e157314a6893f04700269634ab41172368467dc62030be494",
+      "parts": [
+        {
+          "source": "DynamicMotionとの競合解消（ForDynamicMotion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Resolve Conflicts with DynamicMotion (ForDynamicMotion)[[/LINK_1]]",
+      "contextHash": "fa51ceb35f32565e157314a6893f04700269634ab41172368467dc62030be494"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]ズームアウトに対応（SupportZoomOut）[[/LINK_1]]",
+      "sourceHash": "6c6995de3df6fb87805c46c2bbd5e51618d67e250e30490f4657c93d12635075",
+      "parts": [
+        {
+          "source": "ズームアウトに対応（SupportZoomOut）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Support for Zooming Out (SupportZoomOut)[[/LINK_1]]",
+      "contextHash": "6c6995de3df6fb87805c46c2bbd5e51618d67e250e30490f4657c93d12635075"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]マップをタイトル画面として使用するプラグイン[[/LINK_1]]と併用した場合、ニューゲーム時にエラーとなる問題へ対応。",
+      "sourceHash": "226ba84fa76fb9997d75ad6e095e318a2b9cf5e0cb026013d4196dcb7a3a30af",
+      "parts": [
+        {
+          "source": "マップをタイトル画面として使用するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用した場合、ニューゲーム時にエラーとなる問題へ対応。",
+          "link": false
+        }
+      ],
+      "translation": "Addresses an issue that caused an error when starting a new game while using the [[LINK_1]]plugin that uses a map as the title screen[[/LINK_1]].",
+      "contextHash": "226ba84fa76fb9997d75ad6e095e318a2b9cf5e0cb026013d4196dcb7a3a30af"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]影プラグイン[[/LINK_1]]と併用した場合、影のＺ座標が正しく設定されない不具合を修正。（03/12 ver1.041）",
+      "sourceHash": "02fb52c5eb9387af75eb9f710e84aadc2867e47cbecd2575b6c5953a0a7a87fa",
+      "parts": [
+        {
+          "source": "影プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用した場合、影のＺ座標が正しく設定されない不具合を修正。（03/12 ver1.041）",
+          "link": false
+        }
+      ],
+      "translation": "Fixed an issue where the shadow's Z coordinate was not set correctly when used together with the [[LINK_1]]Shadow plugin[[/LINK_1]]. (03/12 ver1.041)",
+      "contextHash": "02fb52c5eb9387af75eb9f710e84aadc2867e47cbecd2575b6c5953a0a7a87fa"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ズームアウトに対応[[/LINK_1]]。",
+      "sourceHash": "1638edaf7733b27cfab0cd1a1fde441d64726ad288fdfe1ae16ddefa0ca4e0a6",
+      "parts": [
+        {
+          "source": "ズームアウトに対応",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Supports zooming out[[/LINK_1]].",
+      "contextHash": "1638edaf7733b27cfab0cd1a1fde441d64726ad288fdfe1ae16ddefa0ca4e0a6"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "外部プラグイン（[[LINK_1]]Keke_FreeCamera.js[[/LINK_1]]など）から画面のズームアウトを行った際、本来の画面外が表示されなくなる問題に対応します。",
+      "sourceHash": "7eff6e2c27b9e96fcdb1f54c052cd8da51b5467226f2d550d0837201f23a9bc0",
+      "parts": [
+        {
+          "source": "外部プラグイン（",
+          "link": false
+        },
+        {
+          "source": "Keke_FreeCamera.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "など）から画面のズームアウトを行った際、本来の画面外が表示されなくなる問題に対応します。",
+          "link": false
+        }
+      ],
+      "translation": "This addresses an issue where areas outside the original screen were not displayed when zooming out from an external plugin (such as [[LINK_1]]Keke_FreeCamera.js[[/LINK_1]]).",
+      "contextHash": "7eff6e2c27b9e96fcdb1f54c052cd8da51b5467226f2d550d0837201f23a9bc0"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "当ブログのNRP系プラグインとGALV_LayerGraphicsMZとの競合を解消します。": "This resolves conflicts between this blog's NRP-series plugins and GALV_LayerGraphicsMZ.",
+    "遠景・近景を自由に設定できるので、マップ上に浮かぶ雲やスクロールする背景などの演出が可能となります。個人的にも大変重宝しています。": "Since you can freely configure distant and near backgrounds, you can create effects such as clouds floating over the map or scrolling backgrounds. I personally find it extremely useful.",
+    "そこで競合を解消するためのプラグインを作成しました。": "Therefore, I created a plugin to resolve the conflict.",
+    "ついでにループマップへの対応など、ちょっとした機能追加もしています。": "I also added a few minor features, such as support for loop maps.",
+    "※GALV_LayerGraphicsMZ ver1.2で動作確認しています。": "※Operation has been confirmed with GALV_LayerGraphicsMZ ver1.2.",
+    "※Galv様の利用規約ではプラグイン＆スクリプトを改変して配布するのは禁止となっています。そのため、元のソースは流用しない方式でプラグインを作成しています。": "※Galv's terms of use prohibit modifying and redistributing plugins and scripts. Therefore, I created this plugin without reusing the original source.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_GALV_LayerGraphicsMZ.js": "NRP_GALV_LayerGraphicsMZ.js ",
+    "ver1.041（2022/03/12）": "ver1.041 (2022/03/12) ",
+    "更新履歴（History）": "Update History (History)",
+    "2022/02/05 -> 2022/03/12（ver1.04 -> 1.041）": "2022/02/05 -> 2022/03/12 (ver1.04 -> 1.041) ",
+    "2022/01/11（ver1.03）": "2022/01/11 (ver1.03) ",
+    "2021/10/28 -> 2021/11/11（ver1.02 -> 1.021）": "2021/10/28 -> 2021/11/11 (ver1.02 -> 1.021) ",
+    "メニューを開閉した際、レイヤー位置が保持されない不具合修正。": "Fixed a bug where layer positions were not retained when opening or closing the menu.",
+    "イベントテストでエラーになる不具合修正。（11/11 ver1.021）": "Fixed a bug that caused an error during event testing. (11/11 ver1.021)",
+    "2021/10/08（ver1.01）": "2021/10/08 (ver1.01) ",
+    "マップのスクロール命令が反映されない不具合修正。": "Fixed a bug where map scroll commands were not applied.",
+    "2021/06/27（ver1.00）": "2021/06/27 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "適用するだけでＯＫです。": "Simply apply it.",
+    "詳細は以下のプラグインパラメータの説明をご覧ください。": "For details, see the explanations of the following plugin parameters.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "ループマップに対応（SupportLoopMap）": "Support for Loop Maps (SupportLoopMap)",
+    "LayerGraphicsをループマップに対応させます。ループをまたぐ際に表示がズレないようになります。": "Makes LayerGraphics support loop maps. Displaying layers will no longer shift when crossing a loop boundary.",
+    "静的レイヤーの既定マップ（SupportStaticLayerDefaultMap）": "Default Map for Static Layers (SupportStaticLayerDefaultMap)",
+    "静的レイヤー作成時、マップＩＤの指定がない場合は現在のマップを参照するようにします。": "When creating a static layer, the current map will be referenced if no map ID is specified.",
+    "※通常のレイヤーに関しては、最初からこの機能がある模様です。": "※It appears that this feature is already available for regular layers.",
+    "DynamicMotionとの競合解消（ForDynamicMotion）": "Resolve Conflict with DynamicMotion (ForDynamicMotion)",
+    "NRP_DynamicMotionMZ、およびNRP_TroopRandomFormationとの競合を解消します。適用すると敵のＺ座標が、GALV_LayerGraphicsMZの設定値（変更不可）から変更されます。": "Resolves conflicts with NRP_DynamicMotionMZ and NRP_TroopRandomFormation. When enabled, the enemy's Z coordinate is changed from the GALV_LayerGraphicsMZ setting (which cannot be changed).",
+    "GALV_LayerGraphicsMZの設定値=2 → NRP_DynamicMotionMZの既定値=3": "GALV_LayerGraphicsMZ setting = 2 → NRP_DynamicMotionMZ default value = 3",
+    "となります。": "This is the result.",
+    "この値はNRP_DynamicMotionMZの『バトラーのＺ座標』のプラグインパラメータを参照していますので、変更も可能です。": "This value references the 『Battler Z Coordinate』plugin parameter of NRP_DynamicMotionMZ, so it can also be changed.",
+    "なお、Ｚ座標とはGALV_LayerGraphicsMZの『zLevel』に相当します。各画像の表示優先度を調整するための値です。": "The Z coordinate corresponds to 『zLevel』 in GALV_LayerGraphicsMZ. It is a value used to adjust the display priority of each image.",
+    "ズームアウトに対応（SupportZoomOut）": "Support for Zooming Out (SupportZoomOut)",
+    "ズームアウト処理に対応します。": "Supports zoom-out processing."
+  }
+}

@@ -1,0 +1,448 @@
+{
+  "articleId": "482150579",
+  "sourceUrl": "https://newrpg.seesaa.net/article/482150579.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "9bc350aa3aef4689ad55422fa34a82d6888370fc59821138580f475c2eed1dac",
+  "translatedAt": "2026-08-31T04:57:08.518Z",
+  "title": "Expanded Map Event and Common Event Calls [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "マップイベントやコモンイベントの呼び出しを拡張【RPGツクールMZプラグイン】",
+      "sourceHash": "b2d9de522b0d5605b648a24a1ab8afd5e18bf85056ecdfac701a8da58ff06587",
+      "translation": "Expanded Map Event and Common Event Calls [RPG Maker MZ Plugin]",
+      "contextHash": "b2d9de522b0d5605b648a24a1ab8afd5e18bf85056ecdfac701a8da58ff06587"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "マップイベントやコモンイベントの呼び出しを行います。",
+      "sourceHash": "e714afe8e84035ace27ebd5bf71a4dc952074203f2515cfc595b7292e3ebfb08",
+      "translation": "Calls map events and common events.",
+      "contextHash": "e714afe8e84035ace27ebd5bf71a4dc952074203f2515cfc595b7292e3ebfb08"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＺでは通常、マップイベントの呼び出しはできません。そんなわけで、かつてのツクール２０００のように呼び出せるようにします。",
+      "sourceHash": "c3c957fb9e6d3e2c199f4096a2fe64d784b633d27f0218acd6c07b5cf8c41a48",
+      "translation": "By default, RPG Maker MZ does not allow map events to be called. This plugin makes it possible to call them, like in the old RPG Maker 2000.",
+      "contextHash": "c3c957fb9e6d3e2c199f4096a2fe64d784b633d27f0218acd6c07b5cf8c41a48"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "イベント名や変数を参照するなどして、自由度の高い呼び出しができます。",
+      "sourceHash": "4d752d1f51311ec6265a81aff67e71f75b4da9e7df48eebffdcb698be05c3eb4",
+      "translation": "You can make highly flexible calls by referencing event names, variables, and more.",
+      "contextHash": "4d752d1f51311ec6265a81aff67e71f75b4da9e7df48eebffdcb698be05c3eb4"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "また呼び出したイベントから『このイベント』を対象とする操作を行った場合、通常とは異なるキャラクターを対象にできます。",
+      "sourceHash": "60a549b577fe103c15fc368b1d6ca2e2cf18e7cff80e5f167f3359133c238b74",
+      "translation": "When an operation targeting “This Event” is performed from a called event, you can target a different character than usual.",
+      "contextHash": "60a549b577fe103c15fc368b1d6ca2e2cf18e7cff80e5f167f3359133c238b74"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "例えば、通常は不可能なフォロワー（隊列歩行の仲間）を対象とすることもできます。",
+      "sourceHash": "d5db26b46b9e0be07092fc50dd5d235986f33c8e36c5991818ab3c22a5fa06d2",
+      "translation": "For example, you can target followers (party members in formation walking), which is normally impossible.",
+      "contextHash": "d5db26b46b9e0be07092fc50dd5d235986f33c8e36c5991818ab3c22a5fa06d2"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※ツクールＭＶには対応していません。",
+      "sourceHash": "88a78f83bf31857eb75841265cd786e3898ee77e108040ff59f04d2f108a5d1f",
+      "translation": "※This plugin does not support RPG Maker MV.",
+      "contextHash": "88a78f83bf31857eb75841265cd786e3898ee77e108040ff59f04d2f108a5d1f"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is exclusively for MZ.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_CallEvent.js",
+      "sourceHash": "4a1e027e22e60f888754c13bb68efc386c38f140f51873f0fe6e92976b8309b7",
+      "translation": "NRP_CallEvent.js ",
+      "contextHash": "ee0887b02407fefb2524aa960d11d4be0f845aa93db80067388fc04c6a760b73"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.011（2021/12/30）",
+      "sourceHash": "305d2ae5d389ed36a1d3d273d52743bfc16df59df8ffe342c667ebd6ea0b0090",
+      "translation": "ver1.011 (2021/12/30) ",
+      "contextHash": "ee0887b02407fefb2524aa960d11d4be0f845aa93db80067388fc04c6a760b73"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2021/10/05 -> 2021/12/30（ver1.01 -> 1.011）",
+      "sourceHash": "ef02ed8274758ff1ccad953f5b2008306757759b35e3b28058c647fc3814d49e",
+      "translation": "2021/10/05 -> 2021/12/30 (ver1.01 -> 1.011) ",
+      "contextHash": "ef02ed8274758ff1ccad953f5b2008306757759b35e3b28058c647fc3814d49e"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "イベント名を指定して呼び出した場合、現在ページが正しく取得されない不具合修正。",
+      "sourceHash": "1803b4214bd2ae8e1a8932b81bea16ec63f08efecdb60fba438748865b5c17b3",
+      "translation": "Fixed a bug where the current page was not retrieved correctly when calling an event by specifying its name.",
+      "contextHash": "1803b4214bd2ae8e1a8932b81bea16ec63f08efecdb60fba438748865b5c17b3"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "TemplateEvent.jsが存在しない場合、エラーとなる不具合修正。（2021/12/30 ver1.011）",
+      "sourceHash": "76ebc9084faed406dbb69beb212c4a3fc9d65187021b0180af718ea00bf38432",
+      "translation": "Fixed a bug that caused an error when TemplateEvent.js did not exist. (2021/12/30 ver1.011)",
+      "contextHash": "76ebc9084faed406dbb69beb212c4a3fc9d65187021b0180af718ea00bf38432"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2021/06/24（ver1.00）",
+      "sourceHash": "071c78a31895bbeb979e2469ae3a50f2974688cb6cbb3a787f9f63584ff8f4e0",
+      "translation": "2021/06/24 (ver1.00) ",
+      "contextHash": "071c78a31895bbeb979e2469ae3a50f2974688cb6cbb3a787f9f63584ff8f4e0"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "以下のプラグインコマンドを実行してください。",
+      "sourceHash": "61f4aaa1e8e1e553dcde2c403ec6f6b1cb6be5c897111b76d2642290d1da578e",
+      "translation": "Execute the following plugin commands.",
+      "contextHash": "61f4aaa1e8e1e553dcde2c403ec6f6b1cb6be5c897111b76d2642290d1da578e"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "マップイベントの呼び出し（CallMapEvent）",
+      "sourceHash": "054091cc25ca9ee4cd109042de8977717dc742579b7996cc3c7397db725451c7",
+      "translation": "Call Map Event (CallMapEvent)",
+      "contextHash": "054091cc25ca9ee4cd109042de8977717dc742579b7996cc3c7397db725451c7"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "イベントＩＤ（イベント名）とページ番号を指定して、マップイベントを呼び出します。",
+      "sourceHash": "ad15dc8ae4487bdd5d0b2974f9325495b68cb68b1840045a6fffc5237e81f911",
+      "translation": "Calls a map event by specifying the event ID (event name) and page number.",
+      "contextHash": "ad15dc8ae4487bdd5d0b2974f9325495b68cb68b1840045a6fffc5237e81f911"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "複数のイベントを同時に対象とすることも可能です。",
+      "sourceHash": "24bfb60fc3918e60dc5cb02dc6946490e9a89393620931280a458778f60b07a0",
+      "translation": "You can also target multiple events at the same time.",
+      "contextHash": "24bfb60fc3918e60dc5cb02dc6946490e9a89393620931280a458778f60b07a0"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "イベントＩＤのコンボボックスにサンプルが設定されているのでご活用ください。",
+      "sourceHash": "f3421c4b9404f7fc87bde46983590b8eaf3f7c0b6d47bde571aa5809ff1aaafa",
+      "translation": "Samples are configured in the event ID combo box, so please make use of them.",
+      "contextHash": "f3421c4b9404f7fc87bde46983590b8eaf3f7c0b6d47bde571aa5809ff1aaafa"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "コモンイベントの呼び出し（CallCommonEvent）",
+      "sourceHash": "61dc89492b6d15dffdde2a097889c6362caff06168d3e7cd61c748a3a1e58e7e",
+      "translation": "Call Common Event (CallCommonEvent)",
+      "contextHash": "61dc89492b6d15dffdde2a097889c6362caff06168d3e7cd61c748a3a1e58e7e"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "コモンイベントＩＤ（コモンイベント名）を指定して、コモンイベントを呼び出します。",
+      "sourceHash": "2d58e9ca1a05462166fc628e56e342c91f0abcb6eeaa2ed64312f6d376e28498",
+      "translation": "Calls a common event by specifying the common event ID (common event name).",
+      "contextHash": "2d58e9ca1a05462166fc628e56e342c91f0abcb6eeaa2ed64312f6d376e28498"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "要領はマップイベントとほぼ同じです。",
+      "sourceHash": "91b41cf3b68123aa7b67a03928f2771c29cfd8f0fa76d63f91645dfbbdc50a9d",
+      "translation": "The procedure is nearly the same as for map events.",
+      "contextHash": "91b41cf3b68123aa7b67a03928f2771c29cfd8f0fa76d63f91645dfbbdc50a9d"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "コモンイベントからさらにコモンイベントを呼び出す場合、『現在のコモンイベントＩＤ + 1』といった呼び出し方も可能です。",
+      "sourceHash": "211f2f31fccf23266acac384d9e7966fb0940501958e9038779f8f48109bddf7",
+      "translation": "When calling another common event from a common event, you can also use a call such as “Current Common Event ID + 1.”",
+      "contextHash": "211f2f31fccf23266acac384d9e7966fb0940501958e9038779f8f48109bddf7"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ただし、この機能は正規の手順で呼び出したコモンイベントのみに有効です。",
+      "sourceHash": "0fd87400ad2f941e4ecfa48db2fe186ab22fa35e5e422c9b7f6ac3e07070d7bf",
+      "translation": "However, this feature is only effective for common events called through the official procedure.",
+      "contextHash": "0fd87400ad2f941e4ecfa48db2fe186ab22fa35e5e422c9b7f6ac3e07070d7bf"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "外部のプラグインなどから呼び出した場合は、機能しない可能性があります。",
+      "sourceHash": "8d17af0c893f90eecfe2b15b6558b40e11886974e14713483cbb873e79cc6209",
+      "translation": "It may not work when called from an external plugin or similar.",
+      "contextHash": "8d17af0c893f90eecfe2b15b6558b40e11886974e14713483cbb873e79cc6209"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "謝辞（Acknowledgements）",
+      "sourceHash": "b861d353db7fdca6d86d712a2c622c0d6168ecd3841800dda0786e91a80e5d1a",
+      "translation": "Acknowledgements (Acknowledgements)",
+      "contextHash": "b861d353db7fdca6d86d712a2c622c0d6168ecd3841800dda0786e91a80e5d1a"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "このプラグインはＲＰＧツクールＭＺ公式のTemplateEvent.js（トリアコンタン様）を参考にさせて頂きました。",
+      "sourceHash": "2a03ca8a918fbecb44429e28361e185b8cbb4f2ec2938eec25ec8ac9c48da702",
+      "translation": "I referred to the official RPG Maker MZ TemplateEvent.js by Triacontane when creating this plugin.",
+      "contextHash": "2a03ca8a918fbecb44429e28361e185b8cbb4f2ec2938eec25ec8ac9c48da702"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "マップイベントの呼び出しについては[[LINK_1]]テンプレートイベントプラグイン[[/LINK_1]]などでも可能です。[[LINK_2]]プラグインコマンドで制御文字を有効にするプラグイン[[/LINK_2]]と組み合わせれば変数指定も可能なので、大抵の要件には足りるはずです。",
+      "sourceHash": "8db593622392045ff9665214a630dca64b90aa2bfb0b4262326cc3b608ddd942",
+      "parts": [
+        {
+          "source": "マップイベントの呼び出しについては",
+          "link": false
+        },
+        {
+          "source": "テンプレートイベントプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などでも可能です。",
+          "link": false
+        },
+        {
+          "source": "プラグインコマンドで制御文字を有効にするプラグイン",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "と組み合わせれば変数指定も可能なので、大抵の要件には足りるはずです。",
+          "link": false
+        }
+      ],
+      "translation": "Map events can also be called using plugins such as the [[LINK_1]]Template Event Plugin[[/LINK_1]]. When combined with a [[LINK_2]]plugin that enables control characters in plugin commands[[/LINK_2]], variables can also be specified, so it should meet most requirements.",
+      "contextHash": "8db593622392045ff9665214a630dca64b90aa2bfb0b4262326cc3b608ddd942"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Log (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]マップイベントの呼び出し（CallMapEvent）[[/LINK_1]]",
+      "sourceHash": "b2ef99747a4caa620acc397d9f05cea3b860b314c43a70ea34022ceb42850fd9",
+      "parts": [
+        {
+          "source": "マップイベントの呼び出し（CallMapEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Calling a Map Event (CallMapEvent)[[/LINK_1]]",
+      "contextHash": "b2ef99747a4caa620acc397d9f05cea3b860b314c43a70ea34022ceb42850fd9"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]コモンイベントの呼び出し（CallCommonEvent）[[/LINK_1]]",
+      "sourceHash": "7d433f093b064e2ff1ea70966fe3032f3b3f2b4de53f65be520d0a5ea164deeb",
+      "parts": [
+        {
+          "source": "コモンイベントの呼び出し（CallCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Calling a Common Event (CallCommonEvent)[[/LINK_1]]",
+      "contextHash": "7d433f093b064e2ff1ea70966fe3032f3b3f2b4de53f65be520d0a5ea164deeb"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]謝辞（Acknowledgements）[[/LINK_1]]",
+      "sourceHash": "f4410c7057c1054715cdfa356dc29ec29dbfe783361ebbc2e20bd43509de5871",
+      "parts": [
+        {
+          "source": "謝辞（Acknowledgements）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Acknowledgements (Acknowledgements)[[/LINK_1]]",
+      "contextHash": "f4410c7057c1054715cdfa356dc29ec29dbfe783361ebbc2e20bd43509de5871"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "マップイベントやコモンイベントの呼び出しを行います。": "Calls map events and common events.",
+    "ツクールＭＺでは通常、マップイベントの呼び出しはできません。そんなわけで、かつてのツクール２０００のように呼び出せるようにします。": "By default, RPG Maker MZ does not allow map events to be called. This plugin makes it possible to call them, like in the old RPG Maker 2000.",
+    "イベント名や変数を参照するなどして、自由度の高い呼び出しができます。": "You can make highly flexible calls by referencing event names, variables, and more.",
+    "また呼び出したイベントから『このイベント』を対象とする操作を行った場合、通常とは異なるキャラクターを対象にできます。": "When an operation targeting “This Event” is performed from a called event, you can target a different character than usual.",
+    "例えば、通常は不可能なフォロワー（隊列歩行の仲間）を対象とすることもできます。": "For example, you can target followers (party members in formation walking), which is normally impossible.",
+    "※ツクールＭＶには対応していません。": "※This plugin does not support RPG Maker MV.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker Plugin Manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is exclusively for MZ.",
+    "NRP_CallEvent.js": "NRP_CallEvent.js ",
+    "ver1.011（2021/12/30）": "ver1.011 (2021/12/30) ",
+    "更新履歴（History）": "Update History (History)",
+    "2021/10/05 -> 2021/12/30（ver1.01 -> 1.011）": "2021/10/05 -> 2021/12/30 (ver1.01 -> 1.011) ",
+    "イベント名を指定して呼び出した場合、現在ページが正しく取得されない不具合修正。": "Fixed a bug where the current page was not retrieved correctly when calling an event by specifying its name.",
+    "TemplateEvent.jsが存在しない場合、エラーとなる不具合修正。（2021/12/30 ver1.011）": "Fixed a bug that caused an error when TemplateEvent.js did not exist. (2021/12/30 ver1.011)",
+    "2021/06/24（ver1.00）": "2021/06/24 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "以下のプラグインコマンドを実行してください。": "Execute the following plugin commands.",
+    "マップイベントの呼び出し（CallMapEvent）": "Call Map Event (CallMapEvent)",
+    "イベントＩＤ（イベント名）とページ番号を指定して、マップイベントを呼び出します。": "Calls a map event by specifying the event ID (event name) and page number.",
+    "複数のイベントを同時に対象とすることも可能です。": "You can also target multiple events at the same time.",
+    "イベントＩＤのコンボボックスにサンプルが設定されているのでご活用ください。": "Samples are configured in the event ID combo box, so please make use of them.",
+    "コモンイベントの呼び出し（CallCommonEvent）": "Call Common Event (CallCommonEvent)",
+    "コモンイベントＩＤ（コモンイベント名）を指定して、コモンイベントを呼び出します。": "Calls a common event by specifying the common event ID (common event name).",
+    "要領はマップイベントとほぼ同じです。": "The procedure is nearly the same as for map events.",
+    "コモンイベントからさらにコモンイベントを呼び出す場合、『現在のコモンイベントＩＤ + 1』といった呼び出し方も可能です。": "When calling another common event from a common event, you can also use a call such as “Current Common Event ID + 1.”",
+    "ただし、この機能は正規の手順で呼び出したコモンイベントのみに有効です。": "However, this feature is only effective for common events called through the official procedure.",
+    "外部のプラグインなどから呼び出した場合は、機能しない可能性があります。": "It may not work when called from an external plugin or similar.",
+    "謝辞（Acknowledgements）": "Acknowledgements (Acknowledgements)",
+    "このプラグインはＲＰＧツクールＭＺ公式のTemplateEvent.js（トリアコンタン様）を参考にさせて頂きました。": "I referred to the official RPG Maker MZ TemplateEvent.js by Triacontane when creating this plugin."
+  }
+}

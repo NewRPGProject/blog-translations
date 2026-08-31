@@ -1,0 +1,981 @@
+{
+  "articleId": "474283411",
+  "sourceUrl": "https://newrpg.seesaa.net/article/474283411.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "49c87a27bbe59124bef3c23e957041ccef49eafc04155d695dfec8e71ecf30cb",
+  "translatedAt": "2026-08-31T04:57:35.901Z",
+  "title": "DynamicAnimation&Motion Sample Techniques (Bow) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技（弓）【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "fe22a5755a9ac4159d84901e9b98be3557a4acd834ff87bd00d54b3d17845260",
+      "translation": "DynamicAnimation&Motion Sample Techniques (Bow) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "fe22a5755a9ac4159d84901e9b98be3557a4acd834ff87bd00d54b3d17845260"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "弓系のサンプル技を紹介していきます。",
+      "sourceHash": "7003ea567236fcb000039418b5b97a1360a54f7fa48b8d68988a51e51da00744",
+      "translation": "I will introduce some sample techniques using bows.",
+      "contextHash": "7003ea567236fcb000039418b5b97a1360a54f7fa48b8d68988a51e51da00744"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "基本的にはＭＶ用アニメを使っています。ＭＶを持ってない人はごめんなさい。",
+      "sourceHash": "c6afe9f773c16ee725d8dbb00a0967254a70ec36b4d8e1476ba82a9f7ef78c28",
+      "translation": "These primarily use MV animations. Sorry to those who do not own MV.",
+      "contextHash": "c6afe9f773c16ee725d8dbb00a0967254a70ec36b4d8e1476ba82a9f7ef78c28"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "矢はツクールＭＶ／ＭＺの標準素材にはありませんが、弓の攻撃パターンに含まれています。アニメーションとして使えるように抜き出してみました。ついでに弓から矢を取り除きました。",
+      "sourceHash": "22b6aeb4431dc5798899a32ce0ff9ffe508dfae2154a081a6ac8a84b910e8965",
+      "translation": "Arrows are not included in the standard MV/MZ materials, but they are included in the bow attack patterns. I extracted them so they can be used as animations. I also removed the arrow from the bow while I was at it.",
+      "contextHash": "22b6aeb4431dc5798899a32ce0ff9ffe508dfae2154a081a6ac8a84b910e8965"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※ツクールシリーズの規約によりＭＶ／ＭＺの正規ユーザ以外は使用できません。共通の素材なので片方を所有していれば大丈夫です。",
+      "sourceHash": "18111ed8a889772217f87a5de6d567ad4b14466254567f7fab7c91f3cd2fd033",
+      "translation": "※Due to the terms of use for the RPG Maker series, these materials may only be used by legitimate MV/MZ users. Since the materials are shared, owning either one is sufficient.",
+      "contextHash": "18111ed8a889772217f87a5de6d567ad4b14466254567f7fab7c91f3cd2fd033"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "アニメーション（img/animations）",
+      "sourceHash": "6e8b45c1b8abb011e7cb152631cd1ff64e09eafb328e267c4a31c1c8fd97b438",
+      "translation": "Animation (img/animations)",
+      "contextHash": "6e8b45c1b8abb011e7cb152631cd1ff64e09eafb328e267c4a31c1c8fd97b438"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※刺さるパターンつき",
+      "sourceHash": "196d1c8d53fd168c0ed0d42eaf6b28ee706d6d12a28e24ecf30a0e7dcf99fc47",
+      "translation": "※Includes a piercing pattern",
+      "contextHash": "196d1c8d53fd168c0ed0d42eaf6b28ee706d6d12a28e24ecf30a0e7dcf99fc47"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "武器（img/system）",
+      "sourceHash": "ed4a2e5472a263c4651510298ed206a46b1c202fccabdc19df64fdf176d361f6",
+      "translation": "Weapons (img/system)",
+      "contextHash": "ed4a2e5472a263c4651510298ed206a46b1c202fccabdc19df64fdf176d361f6"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※右上の弓以外はそのまま",
+      "sourceHash": "42eafe89f9e0355ebfbf1343d692d84bd857f8172b7514fdf11e1ce0e05e4b20",
+      "translation": "※Everything except the bow in the upper right is unchanged",
+      "contextHash": "42eafe89f9e0355ebfbf1343d692d84bd857f8172b7514fdf11e1ce0e05e4b20"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "これで矢のアニメーションを作成すれば準備完了です。",
+      "sourceHash": "659840230890abe6edc48643449fc20fb1ac252227664a13acc2a09770f2bb53",
+      "translation": "Once you create the arrow animation, the preparation is complete.",
+      "contextHash": "659840230890abe6edc48643449fc20fb1ac252227664a13acc2a09770f2bb53"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "作成といっても動きはプラグインで制御するため、単に画面中央にパターンを貼りつけるだけでＯＫです。",
+      "sourceHash": "ae7389b8a721cf9c92d05a034a4cdb78f56e6392d78b9ac1b7e7bf742de04164",
+      "translation": "Since the movement is controlled by the plugin, “creating” it simply means placing the pattern in the center of the screen.",
+      "contextHash": "ae7389b8a721cf9c92d05a034a4cdb78f56e6392d78b9ac1b7e7bf742de04164"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "サイズは初期状態だと小さすぎるので、１５０％ぐらいに拡大したほうがいいかもしれません。",
+      "sourceHash": "860de416323289462733c62df38f02fb25e50fa3507502674d5ba8948947025c",
+      "translation": "The size is too small at its initial setting, so it may be better to enlarge it to around 150%.",
+      "contextHash": "860de416323289462733c62df38f02fb25e50fa3507502674d5ba8948947025c"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "例では１～４フレームは１パターン目、５～８フレーム目は２パターン目（刺さったほう）となるようにしてみました。",
+      "sourceHash": "4d8437b9c9967173670d23e86ef167ff47dbe249be9c8bc10cd6fd764417dd7c",
+      "translation": "In this example, frames 1–4 use the first pattern, while frames 5–8 use the second pattern (the one with the arrow embedded).",
+      "contextHash": "4d8437b9c9967173670d23e86ef167ff47dbe249be9c8bc10cd6fd764417dd7c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "矢",
+      "sourceHash": "5cb5dde280a773f6ee1174945376147bbd68a094d31915f1c3e62595bf341d1f",
+      "translation": "Arrow",
+      "contextHash": "5cb5dde280a773f6ee1174945376147bbd68a094d31915f1c3e62595bf341d1f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "まずは普通に矢を放ちます。",
+      "sourceHash": "fd052568b376160d4efb4d525e71c7b6ad925d1f34f6f7c4cafe050efdb5ac0b",
+      "translation": "First, we simply fire an arrow.",
+      "contextHash": "fd052568b376160d4efb4d525e71c7b6ad925d1f34f6f7c4cafe050efdb5ac0b"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "通常攻撃として使いたい場合は、公式プラグインの『WeaponSkill.js』で武器に紐付ければ可能です。",
+      "sourceHash": "88a1f5999db395f61782430c6aa929b9d3eaf42e280f99a37ca5d92ec2c92ee9",
+      "translation": "If you want to use it as a normal attack, you can assign it to a weapon with the official “WeaponSkill.js” plugin.",
+      "contextHash": "88a1f5999db395f61782430c6aa929b9d3eaf42e280f99a37ca5d92ec2c92ee9"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※ツクールＭＺでは武器の特徴に『攻撃スキル』を設定すればＯＫ。",
+      "sourceHash": "a3b61b9f927d2f9c2b8d4d9e51021c238e363e00e1ab3f877ee6b1b8e02e2a4b",
+      "translation": "※In RPG Maker MZ, simply set “Attack Skill” as a weapon trait.",
+      "contextHash": "a3b61b9f927d2f9c2b8d4d9e51021c238e363e00e1ab3f877ee6b1b8e02e2a4b"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "sx -= 10 * mirroring // 始点Ｘ座標",
+      "sourceHash": "fad8fff330db009edaa9ee8574295684e61c7f24c1c69799f60a1c5b5a3f39e4",
+      "translation": "sx -= 10 * mirroring // Start X coordinate",
+      "contextHash": "fad8fff330db009edaa9ee8574295684e61c7f24c1c69799f60a1c5b5a3f39e4"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "sy += 10 // 始点Ｙ座標",
+      "sourceHash": "2271b4b1701b7c98ece696fc7b9e5e4bd841d5d8f4e34dc3b4925c3067956032",
+      "translation": "sy += 10 // Start Y coordinate",
+      "contextHash": "2271b4b1701b7c98ece696fc7b9e5e4bd841d5d8f4e34dc3b4925c3067956032"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "arrival = 4 // 到達フレーム",
+      "sourceHash": "f1b227dd09bdea0538c9ec399c5a86c05ac691dc06c7a4203c708ba8bd48f7ee",
+      "translation": "arrival = 4 // Arrival frame",
+      "contextHash": "f1b227dd09bdea0538c9ec399c5a86c05ac691dc06c7a4203c708ba8bd48f7ee"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『lookCourse』は矢に進路を向かせるためのテンプレートです。",
+      "sourceHash": "006ef04cbd6d761d9f3b5e68ece63d502fde9e9385268d46e441ae8d89df4dd1",
+      "translation": " \"lookCourse” is a template that makes the arrow face its direction of travel.",
+      "contextHash": "006ef04cbd6d761d9f3b5e68ece63d502fde9e9385268d46e441ae8d89df4dd1"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "始点位置や到達フレームは各自の設定に合わせて変更してください。適当にヒットエフェクトもつけていますが、その辺はお好みでどうぞ。",
+      "sourceHash": "208e2bad2df2e003db1fb678733f2e8698dfc38dfb3dbe6a82f98a95de78ddd1",
+      "translation": "Change the starting position and arrival frame to match your own settings. I also added a hit effect, but feel free to customize that part as you like.",
+      "contextHash": "208e2bad2df2e003db1fb678733f2e8698dfc38dfb3dbe6a82f98a95de78ddd1"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "連射",
+      "sourceHash": "710ac08c69af23e0617f1f9bcdd968621017842dca9f5cc338b1ca146dc5c665",
+      "translation": "Rapid Fire",
+      "contextHash": "710ac08c69af23e0617f1f9bcdd968621017842dca9f5cc338b1ca146dc5c665"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "連射です。ひたすら矢を放ちます。",
+      "sourceHash": "532904c1fd4e4267bf384088085595b04676eed9fe3dd2438ca56f1b3e0a1d78",
+      "translation": "This is rapid fire. It fires arrows continuously.",
+      "contextHash": "532904c1fd4e4267bf384088085595b04676eed9fe3dd2438ca56f1b3e0a1d78"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "// １０連射（モーション）",
+      "sourceHash": "2bc60a0520ef4c56f093e34780cea2ecbf910358d70dba46c9b09293c2a2d79e",
+      "translation": "// 10-shot barrage (motion)",
+      "contextHash": "2bc60a0520ef4c56f093e34780cea2ecbf910358d70dba46c9b09293c2a2d79e"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "repeat = 10 // 繰返回数",
+      "sourceHash": "9f4511a04c39f4dedb9318b68207d8675ee1d4dd83d2cff6151d8b5c1a416931",
+      "translation": "repeat = 10 // Repeat count",
+      "contextHash": "9f4511a04c39f4dedb9318b68207d8675ee1d4dd83d2cff6151d8b5c1a416931"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "interval = 1 // 間隔",
+      "sourceHash": "196fb7c85ae7d7347836d5ede49482be2fc1f2e061b54756420c8d434ddb3517",
+      "translation": "interval = 1 // Interval",
+      "contextHash": "196fb7c85ae7d7347836d5ede49482be2fc1f2e061b54756420c8d434ddb3517"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "// 矢",
+      "sourceHash": "e4cd24556de348a62ac8dcdcdff31923535260b37041e7477c90959cd48711ca",
+      "translation": "// Arrow",
+      "contextHash": "e4cd24556de348a62ac8dcdcdff31923535260b37041e7477c90959cd48711ca"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "repeat = 10 // 繰返回数",
+      "sourceHash": "9f4511a04c39f4dedb9318b68207d8675ee1d4dd83d2cff6151d8b5c1a416931",
+      "translation": "repeat = 10 // Repeat count",
+      "contextHash": "9f4511a04c39f4dedb9318b68207d8675ee1d4dd83d2cff6151d8b5c1a416931"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "interval = 1 // 間隔",
+      "sourceHash": "196fb7c85ae7d7347836d5ede49482be2fc1f2e061b54756420c8d434ddb3517",
+      "translation": "interval = 1 // Interval",
+      "contextHash": "196fb7c85ae7d7347836d5ede49482be2fc1f2e061b54756420c8d434ddb3517"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "sx -= 10 * mirroring // 始点Ｘ座標",
+      "sourceHash": "fad8fff330db009edaa9ee8574295684e61c7f24c1c69799f60a1c5b5a3f39e4",
+      "translation": "sx -= 10 * mirroring // Start X coordinate",
+      "contextHash": "fad8fff330db009edaa9ee8574295684e61c7f24c1c69799f60a1c5b5a3f39e4"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "sy += 10 // 始点Ｙ座標",
+      "sourceHash": "2271b4b1701b7c98ece696fc7b9e5e4bd841d5d8f4e34dc3b4925c3067956032",
+      "translation": "sy += 10 // Start Y coordinate",
+      "contextHash": "2271b4b1701b7c98ece696fc7b9e5e4bd841d5d8f4e34dc3b4925c3067956032"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "arrival = 4 // 到達フレーム",
+      "sourceHash": "f1b227dd09bdea0538c9ec399c5a86c05ac691dc06c7a4203c708ba8bd48f7ee",
+      "translation": "arrival = 4 // Arrival frame",
+      "contextHash": "f1b227dd09bdea0538c9ec399c5a86c05ac691dc06c7a4203c708ba8bd48f7ee"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "ただ『矢』を繰り返しているだけですね。",
+      "sourceHash": "d1bc8464042074fe4f8e7101f7d46f73c5a9d7affbebc451f87be65b87874583",
+      "translation": "It is simply repeating “Arrow.”",
+      "contextHash": "d1bc8464042074fe4f8e7101f7d46f73c5a9d7affbebc451f87be65b87874583"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "『repeat』の値を変更すれば、矢の本数も変わります。その際、モーションとアニメーションの『repeat』と『interval』の値を一致させるようにしてください。",
+      "sourceHash": "000840a4507ee2a5f6cfeeb63d2a5ae2bc6babeae30e528d7d393f245fa0058b",
+      "translation": "Changing the value of “repeat” changes the number of arrows as well. When doing so, make sure the “repeat” and “interval” values for the motion and animation match.",
+      "contextHash": "000840a4507ee2a5f6cfeeb63d2a5ae2bc6babeae30e528d7d393f245fa0058b"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "アローレイン",
+      "sourceHash": "35d11d21396a9a04adddb250b3369acea37aa73f2380cd529b0696425521eb9a",
+      "translation": "Arrow Rain",
+      "contextHash": "35d11d21396a9a04adddb250b3369acea37aa73f2380cd529b0696425521eb9a"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "矢を上空に放ち、雨のように落下する矢で攻撃します。",
+      "sourceHash": "6e3599fb4803f99c6cf6b2632e9801fbc69e7f2c84b2a24ad76dd84c28c7a9e6",
+      "translation": "It fires arrows into the air, attacking with arrows that fall like rain.",
+      "contextHash": "6e3599fb4803f99c6cf6b2632e9801fbc69e7f2c84b2a24ad76dd84c28c7a9e6"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "矢のアニメーションは１２フレームで対象へ刺さるように変更しています。滞空時間があるため、長めにしたほうが自然となります。",
+      "sourceHash": "84a38b1bbeafa96b549cd00ec18a9b9577394632dd313605267d8408e5427961",
+      "translation": "I changed the arrow animation so that it pierces the target after 12 frames. Since there is airtime, making it longer looks more natural.",
+      "contextHash": "84a38b1bbeafa96b549cd00ec18a9b9577394632dd313605267d8408e5427961"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "// 弓を引く",
+      "sourceHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf",
+      "translation": "// Draw the bow",
+      "contextHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "// 矢連射",
+      "sourceHash": "e85dcde90f40d9bf8a8264b7911c6a77dc2224a325dead3f3c80930a373df4d0",
+      "translation": "// Rapid-fire arrows",
+      "contextHash": "e85dcde90f40d9bf8a8264b7911c6a77dc2224a325dead3f3c80930a373df4d0"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "sx -= 10 * mirroring // 弓に位置を合わせる",
+      "sourceHash": "ee210ea17beb0f62ee7b963fde4c10b4ade956087ce6b738882a0f34c1b73abe",
+      "translation": "sx -= 10 * mirroring // Align position with the bow",
+      "contextHash": "ee210ea17beb0f62ee7b963fde4c10b4ade956087ce6b738882a0f34c1b73abe"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "sy += 10 // 弓に位置を合わせる",
+      "sourceHash": "5bb55a2322d8f066b6b68675fd32a7174a6330383d319b5891bcd0854959c5d7",
+      "translation": "sy += 10 // Align position with the bow",
+      "contextHash": "5bb55a2322d8f066b6b68675fd32a7174a6330383d319b5891bcd0854959c5d7"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "eyRandom = 130 // 終点Ｙ座標ランダム幅",
+      "sourceHash": "46c9d624cb2089bf426228bc2e131f5bc849c4a202a9fe79b7091fbd6323b077",
+      "translation": "eyRandom = 130 // End Y coordinate random range",
+      "contextHash": "46c9d624cb2089bf426228bc2e131f5bc849c4a202a9fe79b7091fbd6323b077"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "arrival = 12 // 到達フレーム",
+      "sourceHash": "500a9a57ca71178ae46abf7d2076e9b287f2d40f4a852e239c7ff86d424cf38c",
+      "translation": "arrival = 12 // Arrival frame",
+      "contextHash": "500a9a57ca71178ae46abf7d2076e9b287f2d40f4a852e239c7ff86d424cf38c"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "arcY = -500 // 放物線の高さ",
+      "sourceHash": "229ec795caf06bff6cb0e0eff1c688ec9df3c78f3ae9dc6f8533d0a811e3408c",
+      "translation": "arcY = -500 // Parabola height",
+      "contextHash": "229ec795caf06bff6cb0e0eff1c688ec9df3c78f3ae9dc6f8533d0a811e3408c"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "『eyRandom = 130』は標準よりも終点Ｙ座標のランダム幅を狭めるためです。標準値だと背景上方の空間に刺さってちょっと変な感じでしたので。",
+      "sourceHash": "2264ad4e87ca320c401faf10022a607226286b46938d079347af7de90749d601",
+      "translation": " \"eyRandom = 130” narrows the random range of the ending Y coordinate compared to the default. With the default value, the arrows pierced the empty space above the background, which looked a little strange.",
+      "contextHash": "2264ad4e87ca320c401faf10022a607226286b46938d079347af7de90749d601"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "ウインドダート",
+      "sourceHash": "7c3c42c15a81907361093879f6167e19cc474e5196fef78d9e043ef921daccf1",
+      "translation": "Wind Dart",
+      "contextHash": "7c3c42c15a81907361093879f6167e19cc474e5196fef78d9e043ef921daccf1"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "風の矢を連射します。",
+      "sourceHash": "6d259c69f9e619d1226c000ad92b5ec5fed1d26c2a719cd4f064871289b1258b",
+      "translation": "It rapidly fires arrows of wind.",
+      "contextHash": "6d259c69f9e619d1226c000ad92b5ec5fed1d26c2a719cd4f064871289b1258b"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "軌道は高さランダムの放物線を取ります。",
+      "sourceHash": "2619d7979cafbaebdfdec94e3ace88d81c5c55447bdd3831cb64b9658a213aaa",
+      "translation": "Their trajectories are parabolas with randomized heights.",
+      "contextHash": "2619d7979cafbaebdfdec94e3ace88d81c5c55447bdd3831cb64b9658a213aaa"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "さらに魔力（mat）が20増加するごとに矢の本数が増えます。",
+      "sourceHash": "6abae735c6124bdc327f8e5cb58fb140fd8cd9305593d4345bf1eaedab52e959",
+      "translation": "In addition, the number of arrows increases for every 20 points of magic power (mat).",
+      "contextHash": "6abae735c6124bdc327f8e5cb58fb140fd8cd9305593d4345bf1eaedab52e959"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "ちなみに風の矢は以下のように作成しています。（クリックで拡大）",
+      "sourceHash": "da92c31d9978a71010c69fbde1759bc4ca65268d57a75a524561d6699042b70e",
+      "translation": "Incidentally, I created the arrows of wind as shown below. (Click to enlarge)",
+      "contextHash": "da92c31d9978a71010c69fbde1759bc4ca65268d57a75a524561d6699042b70e"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "８フレームで対象へ到達する想定です。",
+      "sourceHash": "69b29f55756a0a4af650f33ba226085b8578f6f3ec6815170d0d399b75b0dca2",
+      "translation": "They are designed to reach the target in 8 frames.",
+      "contextHash": "69b29f55756a0a4af650f33ba226085b8578f6f3ec6815170d0d399b75b0dca2"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "風の矢以外でも、炎の玉でも何でも構いません。",
+      "sourceHash": "fcda260b16423d53cc4633c5e98c859646269c9703d2e9a7a2a841574db3cfdb",
+      "translation": "It does not have to be arrows of wind; fireballs or anything else will work just as well.",
+      "contextHash": "fcda260b16423d53cc4633c5e98c859646269c9703d2e9a7a2a841574db3cfdb"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "// 弓を引く",
+      "sourceHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf",
+      "translation": "// Draw the bow",
+      "contextHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "// 風の矢連射",
+      "sourceHash": "3da63ab0695f5561117f6178e3f3014eb1bc5b52656da6db0a5fe914e6e94551",
+      "translation": "// Rapid-fire wind arrows",
+      "contextHash": "3da63ab0695f5561117f6178e3f3014eb1bc5b52656da6db0a5fe914e6e94551"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "sx -= 20 * mirroring // 弓に位置を合わせる",
+      "sourceHash": "c53faf6f2d349772e3e173c8df9e8e060544e2a18218ce54cb93f8f7772cdd07",
+      "translation": "sx -= 20 * mirroring // Align position with the bow",
+      "contextHash": "c53faf6f2d349772e3e173c8df9e8e060544e2a18218ce54cb93f8f7772cdd07"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "sy += 10 // 弓に位置を合わせる",
+      "sourceHash": "5bb55a2322d8f066b6b68675fd32a7174a6330383d319b5891bcd0854959c5d7",
+      "translation": "sy += 10 // Align position with the bow",
+      "contextHash": "5bb55a2322d8f066b6b68675fd32a7174a6330383d319b5891bcd0854959c5d7"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "arrival = 8 // 到達フレーム",
+      "sourceHash": "6cae37db5cad3d29d58d715a3e52e37b80a301a44a65f8765a80920f28ee4acd",
+      "translation": "arrival = 8 // Arrival frame",
+      "contextHash": "6cae37db5cad3d29d58d715a3e52e37b80a301a44a65f8765a80920f28ee4acd"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "『Math.floor(a.mat / 20)』は魔力を20で割って、切捨します。",
+      "sourceHash": "b2e27d9c64fd37c3dc9d2a1a9b249a8c905a16ee4fce259d4357ba9624b64ea5",
+      "translation": " \"Math.floor(a.mat / 20)” divides magic power by 20 and rounds down.",
+      "contextHash": "b2e27d9c64fd37c3dc9d2a1a9b249a8c905a16ee4fce259d4357ba9624b64ea5"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "『Math.random()』は0～1のランダム値を生成する関数です。",
+      "sourceHash": "f58f5cc31a28951c8eafc8300ac41a44a894e85f3ff9f3e053cc8e25bb314e77",
+      "translation": " \"Math.random()” is a function that generates a random value from 0 to 1.",
+      "contextHash": "f58f5cc31a28951c8eafc8300ac41a44a894e85f3ff9f3e053cc8e25bb314e77"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "これによって、放物線の高さをランダム化しています。",
+      "sourceHash": "1d4629a249ba534b3519ae08b0f2fcbf82dda4139713eb484e3a98c1637e572c",
+      "translation": "This randomizes the height of the parabola.",
+      "contextHash": "1d4629a249ba534b3519ae08b0f2fcbf82dda4139713eb484e3a98c1637e572c"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "針千本（2020/4/9）",
+      "sourceHash": "01a985ae3c218df34b399cfaecfc65fbbce5d80557c7c38e50770b7738d5633e",
+      "translation": "A Thousand Needles (2020/4/9)",
+      "contextHash": "01a985ae3c218df34b399cfaecfc65fbbce5d80557c7c38e50770b7738d5633e"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "敵の周囲から出現する大量の矢が突き刺さります。",
+      "sourceHash": "3e62bd02ff52e37b3057ab30c4ff1271a50e8bdc5abde05e8a03e625de129a5e",
+      "translation": "A large number of arrows appear around the enemy and pierce it.",
+      "contextHash": "3e62bd02ff52e37b3057ab30c4ff1271a50e8bdc5abde05e8a03e625de129a5e"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "// 連射（モーション）",
+      "sourceHash": "2b89406afd571afe26082002de323e13045314d45b57bdf4df469efdd44c7aee",
+      "translation": "// Rapid fire (motion)",
+      "contextHash": "2b89406afd571afe26082002de323e13045314d45b57bdf4df469efdd44c7aee"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "// 矢（収束アニメ）",
+      "sourceHash": "844aa966eed77dc2f56a082721bca3f848528d24c7eed4429d5059c2252fe32d",
+      "translation": "// Arrow (converging animation)",
+      "contextHash": "844aa966eed77dc2f56a082721bca3f848528d24c7eed4429d5059c2252fe32d"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "arrival = 4 // 到達フレーム",
+      "sourceHash": "f1b227dd09bdea0538c9ec399c5a86c05ac691dc06c7a4203c708ba8bd48f7ee",
+      "translation": "arrival = 4 // Arrival frame",
+      "contextHash": "f1b227dd09bdea0538c9ec399c5a86c05ac691dc06c7a4203c708ba8bd48f7ee"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "赤字部分で矢の縮小処理を行っています。通常の３倍から等倍へと変化していくような数式になっています。",
+      "sourceHash": "efc0506c98e78b17901572304cee591fb5b2d591fab1d9e7a030e83ee5a37d59",
+      "translation": "The red section handles the arrow-scaling process. The formula makes the arrows change from three times their normal size to their normal size.",
+      "contextHash": "efc0506c98e78b17901572304cee591fb5b2d591fab1d9e7a030e83ee5a37d59"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ジャンプショット（2020/11/18）",
+      "sourceHash": "9dd29ef26b7027ef04811fe8febcec4b5b46e4b3d2464a4ff24532bcf558c122",
+      "translation": "Jump Shot (2020/11/18)",
+      "contextHash": "9dd29ef26b7027ef04811fe8febcec4b5b46e4b3d2464a4ff24532bcf558c122"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "ジャンプして矢を放ちます。",
+      "sourceHash": "760a4808e2abc112e09e6d7949a401efba383e31173eba17d1fe4576b5f77c13",
+      "translation": "The character jumps and fires an arrow.",
+      "contextHash": "760a4808e2abc112e09e6d7949a401efba383e31173eba17d1fe4576b5f77c13"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "// 空中へ移動",
+      "sourceHash": "17bbbc76ba8030d987703c5be3956184011875e1dd9dda4aa776a0805ce38c79",
+      "translation": "// Move into the air",
+      "contextHash": "17bbbc76ba8030d987703c5be3956184011875e1dd9dda4aa776a0805ce38c79"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "airY = -200 // 高さ200へ移動",
+      "sourceHash": "e72f3ea63b45452bdd1959ebd21132f6ea216f54f9ec6a2bb05a5807f3af80e8",
+      "translation": "airY = -200 // Move to height 200",
+      "contextHash": "e72f3ea63b45452bdd1959ebd21132f6ea216f54f9ec6a2bb05a5807f3af80e8"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "// 弓を引く",
+      "sourceHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf",
+      "translation": "// Draw the bow",
+      "contextHash": "07a5d6f12ce5acbae460644daa4d1c2538abc1e6701f4d2778bcd0230dd466cf"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "// ショット",
+      "sourceHash": "18187f9728f1be6d82c97449e45632ae961f057e54c729eb79c03b8e7d3541e9",
+      "translation": "// Shot",
+      "contextHash": "18187f9728f1be6d82c97449e45632ae961f057e54c729eb79c03b8e7d3541e9"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "『airY = -200』によって空中へ移動します。『return』によって、自動的に地面へ降ります。",
+      "sourceHash": "0d8141f501fe53868499747899f083f3420a9933deec7038e73e0ca9ddc6f087",
+      "translation": " \"airY = -200” moves the character into the air. “return” automatically brings them back down to the ground.",
+      "contextHash": "0d8141f501fe53868499747899f083f3420a9933deec7038e73e0ca9ddc6f087"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "これだけだと地味なので、後は好きなようにアレンジしてください。例えば、以下は『連射』と組み合わせた例です。「弓を引く」～「ショット」の部分を入れ替えるだけなので簡単です。",
+      "sourceHash": "2bf9d41900e6856d7562a5664a1971368b34b7a98c0eca215b6b5e8715634aa8",
+      "translation": "This alone is a little plain, so feel free to arrange it however you like. For example, the following combines it with “Rapid Fire.” It is easy to do because you only need to replace the section from “Draw the Bow” to “Shot.”",
+      "contextHash": "2bf9d41900e6856d7562a5664a1971368b34b7a98c0eca215b6b5e8715634aa8"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicAnimation（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）および、DynamicMotion（[[LINK_3]]ＭＺ[[/LINK_3]]、[[LINK_4]]ＭＶ[[/LINK_4]]）プラグインの解説の一部です。",
+      "sourceHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f",
+      "parts": [
+        {
+          "source": "このページはDynamicAnimation（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）および、DynamicMotion（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 4
+        },
+        {
+          "source": "）プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the documentation for the DynamicAnimation ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]) and DynamicMotion ([[LINK_3]]MZ[[/LINK_3]], [[LINK_4]]MV[[/LINK_4]]) plugins.",
+      "contextHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "ＭＺでの利用は、[[LINK_1]]DynamicAnimationMZからMVアニメを呼び出すプラグイン[[/LINK_1]]を参照してください。",
+      "sourceHash": "971709bf512a66ca321ca3b40a4b302ce79809be70e0c7a8b9ed8c8983c592f0",
+      "parts": [
+        {
+          "source": "ＭＺでの利用は、",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationMZからMVアニメを呼び出すプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "For use with MZ, see the [[LINK_1]]plugin that calls MV animations from DynamicAnimationMZ[[/LINK_1]].",
+      "contextHash": "971709bf512a66ca321ca3b40a4b302ce79809be70e0c7a8b9ed8c8983c592f0"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "前提として、[[LINK_1]]DynamicAnimationの基本的な使用法[[/LINK_1]]を把握している想定です。そうでない場合は、リンク先の上のほう（到達フレーム（arrival）辺り）だけでも見ていただけると分かりやすいかと思います。",
+      "sourceHash": "b42f877496a410119d5cb233b26038890e650914f20a730fc13f2c615f86ef18",
+      "parts": [
+        {
+          "source": "前提として、",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationの基本的な使用法",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を把握している想定です。そうでない場合は、リンク先の上のほう（到達フレーム（arrival）辺り）だけでも見ていただけると分かりやすいかと思います。",
+          "link": false
+        }
+      ],
+      "translation": "It is assumed that you understand the [[LINK_1]]basic usage of DynamicAnimation[[/LINK_1]]. If not, I think it will be easier to understand if you at least look at the upper part of the linked page (around the arrival frame (arrival)).",
+      "contextHash": "b42f877496a410119d5cb233b26038890e650914f20a730fc13f2c615f86ef18"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]矢[[/LINK_1]]",
+      "sourceHash": "c35c8c45e76415ba5ae8cd7d018417549f56fc41811a671659741b6c7dd28c8d",
+      "parts": [
+        {
+          "source": "矢",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Arrow[[/LINK_1]]",
+      "contextHash": "c35c8c45e76415ba5ae8cd7d018417549f56fc41811a671659741b6c7dd28c8d"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]連射[[/LINK_1]]",
+      "sourceHash": "f281e91a50b38efdd9e2b26ce6c3e49bee2680f9220d0eeecd64e9a352161b54",
+      "parts": [
+        {
+          "source": "連射",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Rapid Fire[[/LINK_1]]",
+      "contextHash": "f281e91a50b38efdd9e2b26ce6c3e49bee2680f9220d0eeecd64e9a352161b54"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]アローレイン[[/LINK_1]]",
+      "sourceHash": "056c82659a60055e513ae1e47da05cb2367ae7994ed019c18bbc2f6e9698f55f",
+      "parts": [
+        {
+          "source": "アローレイン",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Arrow Rain[[/LINK_1]]",
+      "contextHash": "056c82659a60055e513ae1e47da05cb2367ae7994ed019c18bbc2f6e9698f55f"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]ウインドダート[[/LINK_1]]",
+      "sourceHash": "febf9d9810be681fce58233c598d8f98403c88a5f715898c6ff3c40d2367b12e",
+      "parts": [
+        {
+          "source": "ウインドダート",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Wind Dart[[/LINK_1]]",
+      "contextHash": "febf9d9810be681fce58233c598d8f98403c88a5f715898c6ff3c40d2367b12e"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]針千本[[/LINK_1]]（2020/4/9）",
+      "sourceHash": "4d9db3e78a1cc430857b92252d997d5a79f49a324dd4d04b90b9c7b45bceebaf",
+      "parts": [
+        {
+          "source": "針千本",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/4/9）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Thousand Needles[[/LINK_1]] (2020/4/9)",
+      "contextHash": "4d9db3e78a1cc430857b92252d997d5a79f49a324dd4d04b90b9c7b45bceebaf"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ジャンプショット[[/LINK_1]]（2020/11/18）",
+      "sourceHash": "33536ba620a4afa2bbd09f431787f09289a47e069e615ee513794e34c745c62a",
+      "parts": [
+        {
+          "source": "ジャンプショット",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/11/18）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Jump Shot[[/LINK_1]] (2020/11/18)",
+      "contextHash": "33536ba620a4afa2bbd09f431787f09289a47e069e615ee513794e34c745c62a"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "武器を持たない敵キャラは普通にスキルとして使えばＯＫです。ちなみに[[LINK_1]]このプラグイン[[/LINK_1]]でスキル名を非表示にもできます。",
+      "sourceHash": "bcd9abc455581ba3633b671e7a023fb6ba7d524463efb5e5f1c8c8772022c7c8",
+      "parts": [
+        {
+          "source": "武器を持たない敵キャラは普通にスキルとして使えばＯＫです。ちなみに",
+          "link": false
+        },
+        {
+          "source": "このプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "でスキル名を非表示にもできます。",
+          "link": false
+        }
+      ],
+      "translation": "Enemies without weapons can simply use it as a skill. Incidentally, [[LINK_1]]this plugin[[/LINK_1]] can also hide skill names.",
+      "contextHash": "bcd9abc455581ba3633b671e7a023fb6ba7d524463efb5e5f1c8c8772022c7c8"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotion plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "弓系のサンプル技を紹介していきます。": "I will introduce some sample techniques using bows.",
+    "基本的にはＭＶ用アニメを使っています。ＭＶを持ってない人はごめんなさい。": "These primarily use MV animations. Sorry to those who do not own MV.",
+    "矢はツクールＭＶ／ＭＺの標準素材にはありませんが、弓の攻撃パターンに含まれています。アニメーションとして使えるように抜き出してみました。ついでに弓から矢を取り除きました。": "Arrows are not included in the standard MV/MZ materials, but they are included in the bow attack patterns. I extracted them so they can be used as animations. I also removed the arrow from the bow while I was at it.",
+    "※ツクールシリーズの規約によりＭＶ／ＭＺの正規ユーザ以外は使用できません。共通の素材なので片方を所有していれば大丈夫です。": "※Due to the terms of use for the RPG Maker series, these materials may only be used by legitimate MV/MZ users. Since the materials are shared, owning either one is sufficient.",
+    "アニメーション（img/animations）": "Animation (img/animations)",
+    "※刺さるパターンつき": "※Includes a piercing pattern",
+    "武器（img/system）": "Weapons (img/system)",
+    "※右上の弓以外はそのまま": "※Everything except the bow in the upper right is unchanged",
+    "これで矢のアニメーションを作成すれば準備完了です。": "Once you create the arrow animation, the preparation is complete.",
+    "作成といっても動きはプラグインで制御するため、単に画面中央にパターンを貼りつけるだけでＯＫです。": "Since the movement is controlled by the plugin, “creating” it simply means placing the pattern in the center of the screen.",
+    "サイズは初期状態だと小さすぎるので、１５０％ぐらいに拡大したほうがいいかもしれません。": "The size is too small at its initial setting, so it may be better to enlarge it to around 150%.",
+    "例では１～４フレームは１パターン目、５～８フレーム目は２パターン目（刺さったほう）となるようにしてみました。": "In this example, frames 1–4 use the first pattern, while frames 5–8 use the second pattern (the one with the arrow embedded).",
+    "目次": "Table of Contents",
+    "矢": "Arrow",
+    "まずは普通に矢を放ちます。": "First, we simply fire an arrow.",
+    "通常攻撃として使いたい場合は、公式プラグインの『WeaponSkill.js』で武器に紐付ければ可能です。": "If you want to use it as a normal attack, you can assign it to a weapon with the official “WeaponSkill.js” plugin.",
+    "※ツクールＭＺでは武器の特徴に『攻撃スキル』を設定すればＯＫ。": "※In RPG Maker MZ, simply set “Attack Skill” as a weapon trait.",
+    "sx -= 10 * mirroring // 始点Ｘ座標": "sx -= 10 * mirroring // Start X coordinate",
+    "sy += 10 // 始点Ｙ座標": "sy += 10 // Start Y coordinate",
+    "arrival = 4 // 到達フレーム": "arrival = 4 // Arrival frame",
+    "『lookCourse』は矢に進路を向かせるためのテンプレートです。": " \"lookCourse” is a template that makes the arrow face its direction of travel.",
+    "始点位置や到達フレームは各自の設定に合わせて変更してください。適当にヒットエフェクトもつけていますが、その辺はお好みでどうぞ。": "Change the starting position and arrival frame to match your own settings. I also added a hit effect, but feel free to customize that part as you like.",
+    "連射": "Rapid Fire",
+    "連射です。ひたすら矢を放ちます。": "This is rapid fire. It fires arrows continuously.",
+    "// １０連射（モーション）": "// 10-shot barrage (motion)",
+    "repeat = 10 // 繰返回数": "repeat = 10 // Repeat count",
+    "interval = 1 // 間隔": "interval = 1 // Interval",
+    "// 矢": "// Arrow",
+    "ただ『矢』を繰り返しているだけですね。": "It is simply repeating “Arrow.”",
+    "『repeat』の値を変更すれば、矢の本数も変わります。その際、モーションとアニメーションの『repeat』と『interval』の値を一致させるようにしてください。": "Changing the value of “repeat” changes the number of arrows as well. When doing so, make sure the “repeat” and “interval” values for the motion and animation match.",
+    "アローレイン": "Arrow Rain",
+    "矢を上空に放ち、雨のように落下する矢で攻撃します。": "It fires arrows into the air, attacking with arrows that fall like rain.",
+    "矢のアニメーションは１２フレームで対象へ刺さるように変更しています。滞空時間があるため、長めにしたほうが自然となります。": "I changed the arrow animation so that it pierces the target after 12 frames. Since there is airtime, making it longer looks more natural.",
+    "// 弓を引く": "// Draw the bow",
+    "// 矢連射": "// Rapid-fire arrows",
+    "sx -= 10 * mirroring // 弓に位置を合わせる": "sx -= 10 * mirroring // Align position with the bow",
+    "sy += 10 // 弓に位置を合わせる": "sy += 10 // Align position with the bow",
+    "eyRandom = 130 // 終点Ｙ座標ランダム幅": "eyRandom = 130 // End Y coordinate random range",
+    "arrival = 12 // 到達フレーム": "arrival = 12 // Arrival frame",
+    "arcY = -500 // 放物線の高さ": "arcY = -500 // Parabola height",
+    "『eyRandom = 130』は標準よりも終点Ｙ座標のランダム幅を狭めるためです。標準値だと背景上方の空間に刺さってちょっと変な感じでしたので。": " \"eyRandom = 130” narrows the random range of the ending Y coordinate compared to the default. With the default value, the arrows pierced the empty space above the background, which looked a little strange.",
+    "ウインドダート": "Wind Dart",
+    "風の矢を連射します。": "It rapidly fires arrows of wind.",
+    "軌道は高さランダムの放物線を取ります。": "Their trajectories are parabolas with randomized heights.",
+    "さらに魔力（mat）が20増加するごとに矢の本数が増えます。": "In addition, the number of arrows increases for every 20 points of magic power (mat).",
+    "ちなみに風の矢は以下のように作成しています。（クリックで拡大）": "Incidentally, I created the arrows of wind as shown below. (Click to enlarge)",
+    "８フレームで対象へ到達する想定です。": "They are designed to reach the target in 8 frames.",
+    "風の矢以外でも、炎の玉でも何でも構いません。": "It does not have to be arrows of wind; fireballs or anything else will work just as well.",
+    "// 風の矢連射": "// Rapid-fire wind arrows",
+    "sx -= 20 * mirroring // 弓に位置を合わせる": "sx -= 20 * mirroring // Align position with the bow",
+    "arrival = 8 // 到達フレーム": "arrival = 8 // Arrival frame",
+    "『Math.floor(a.mat / 20)』は魔力を20で割って、切捨します。": " \"Math.floor(a.mat / 20)” divides magic power by 20 and rounds down.",
+    "『Math.random()』は0～1のランダム値を生成する関数です。": " \"Math.random()” is a function that generates a random value from 0 to 1.",
+    "これによって、放物線の高さをランダム化しています。": "This randomizes the height of the parabola.",
+    "針千本（2020/4/9）": "A Thousand Needles (2020/4/9)",
+    "敵の周囲から出現する大量の矢が突き刺さります。": "A large number of arrows appear around the enemy and pierce it.",
+    "// 連射（モーション）": "// Rapid fire (motion)",
+    "// 矢（収束アニメ）": "// Arrow (converging animation)",
+    "赤字部分で矢の縮小処理を行っています。通常の３倍から等倍へと変化していくような数式になっています。": "The red section handles the arrow-scaling process. The formula makes the arrows change from three times their normal size to their normal size.",
+    "ジャンプショット（2020/11/18）": "Jump Shot (2020/11/18)",
+    "ジャンプして矢を放ちます。": "The character jumps and fires an arrow.",
+    "// 空中へ移動": "// Move into the air",
+    "airY = -200 // 高さ200へ移動": "airY = -200 // Move to height 200",
+    "// ショット": "// Shot",
+    "『airY = -200』によって空中へ移動します。『return』によって、自動的に地面へ降ります。": " \"airY = -200” moves the character into the air. “return” automatically brings them back down to the ground.",
+    "これだけだと地味なので、後は好きなようにアレンジしてください。例えば、以下は『連射』と組み合わせた例です。「弓を引く」～「ショット」の部分を入れ替えるだけなので簡単です。": "This alone is a little plain, so feel free to arrange it however you like. For example, the following combines it with “Rapid Fire.” It is easy to do because you only need to replace the section from “Draw the Bow” to “Shot.”"
+  }
+}
