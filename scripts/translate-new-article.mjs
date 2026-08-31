@@ -17,8 +17,12 @@ const RETRY_TRANSLATION_INSTRUCTION = `
 This is a correction retry because the previous result was incomplete or included an HTML anchor tag.
 Translate every Japanese word and character in source into natural English, including isolated terms embedded in an otherwise English sentence.
 Do not copy Japanese from source or context into translation. Keep only URLs, file names, code identifiers, escape characters, and version numbers unchanged.
+Numbered, user-visible database labels such as "67:炎/単体2" are not code identifiers. Preserve their number, punctuation, and formatting, but translate their Japanese name (for example, "67: Flame / Single Target 2").
 Never output HTML tags such as <a> or </a>. Context is for understanding only, never for copying.
 Return only the replacement text for each supplied source item.
+`.trim();
+const USER_VISIBLE_LABEL_INSTRUCTION = `
+Translate Japanese in numbered, user-visible database labels such as animation names, item names, and skill names. For example, translate "67:炎/単体2" while preserving its number, colon, slash, and digits. These labels are explanatory display text, not JavaScript identifiers or fixed file names.
 `.trim();
 const LINK_CONTEXT_INSTRUCTION = `
 In context, [[link: ...]] represents the text inside an original HTML link. It is context only: never output the markers, HTML tags, or the linked text unless that text is also in source.
@@ -812,6 +816,7 @@ function outputSchema() {
 async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     const instructions = [
         rules,
+        USER_VISIBLE_LABEL_INSTRUCTION,
         SOURCE_SCOPE_INSTRUCTION,
         LINK_CONTEXT_INSTRUCTION,
         blocks.some(block => block.type === "line") ? LINK_LINE_INSTRUCTION : null,
