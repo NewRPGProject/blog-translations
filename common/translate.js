@@ -916,6 +916,10 @@ function findLineNodeMatch(nodes, startAt, line) {
 }
 
 function getOuterInlineUnit(element) {
+    if (!element) {
+        return null;
+    }
+
     let unit = element;
     while (PRESERVED_INLINE_WRAPPER_TAGS.has(unit.parentElement?.tagName.toLowerCase())) {
         unit = unit.parentElement;
@@ -1080,23 +1084,38 @@ function translateLinkedLines(root, translation, language) {
         const firstNode = replacement.nodes[0];
         const lastNode = replacement.nodes[replacement.nodes.length - 1];
         const firstUnit = firstPart.link
-            ? getOuterInlineUnit(firstNode.parentElement.closest("a"))
+            ? getOuterInlineUnit(firstNode.parentElement?.closest("a"))
             : firstNode;
         const lastUnit = lastPart.link
-            ? getOuterInlineUnit(lastNode.parentElement.closest("a"))
+            ? getOuterInlineUnit(lastNode.parentElement?.closest("a"))
             : lastNode;
+
+        // Legacy entries can contain overlapping inline structures. If an
+        // earlier replacement already removed this unit, skip only the stale
+        // match instead of aborting translation of the whole article.
+        if (!firstUnit || !lastUnit
+            || !root.contains(firstUnit)
+            || !root.contains(lastUnit)) {
+            console.warn(
+                "[NRP Language] 既に置換されたリンク行をスキップしました。",
+                replacement.line.id
+            );
+            continue;
+        }
         const range = document.createRange();
         range.setStartBefore(firstUnit);
         range.setEndAfter(lastUnit);
         const original = range.cloneContents();
-        range.deleteContents();
 
         const start = document.createComment("nrp-line-start:" + replacement.line.id);
         const end = document.createComment("nrp-line-end:" + replacement.line.id);
         const replacementFragment = document.createDocumentFragment();
         replacementFragment.append(start);
+        // Clone the inline path before removing source nodes. This preserves
+        // links decorated by nested elements in older table-based articles.
         replacementFragment.append(makeLineFragment(replacement.line, replacement.nodes));
         replacementFragment.append(end);
+        range.deleteContents();
         range.insertNode(replacementFragment);
         records.set(replacement.line.id, { start, end, original });
     }
