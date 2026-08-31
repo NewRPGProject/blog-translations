@@ -1,0 +1,1582 @@
+{
+  "articleId": "475005304",
+  "sourceUrl": "https://newrpg.seesaa.net/article/475005304.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "dc6ea76a005c9c12c9815f018523f36f7b8e7e9d9a53031b93d682af57bfaf42",
+  "translatedAt": "2026-08-31T06:58:40.433Z",
+  "title": "DynamicAnimation&Motion Sample Techniques (Magic) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技（魔法）【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "0c07cb5d1297348cffc92bcf96f9358345cc4b66e94827b19b0cc2fd569fdfd2",
+      "translation": "DynamicAnimation&Motion Sample Techniques (Magic) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "0c07cb5d1297348cffc92bcf96f9358345cc4b66e94827b19b0cc2fd569fdfd2"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "魔法系のサンプル技を紹介していきます。",
+      "sourceHash": "1172bc08ce370ea523f9097ed8c3a4f7065f5c17a7a1f99ac046b43773c69764",
+      "translation": "I will introduce some sample magic techniques.",
+      "contextHash": "1172bc08ce370ea523f9097ed8c3a4f7065f5c17a7a1f99ac046b43773c69764"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "処理負荷の現実性から、基本的にはＭＶ用アニメを使っています。ＭＶを持ってない人はごめんなさい。",
+      "sourceHash": "07d0682adb1b49262b2fef7c1f84c3a2c6c68ce7b1d40b8c01614b865eb09a85",
+      "translation": "For practical processing-load reasons, I primarily use MV animations. Sorry to those who don't own MV.",
+      "contextHash": "07d0682adb1b49262b2fef7c1f84c3a2c6c68ce7b1d40b8c01614b865eb09a85"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "召喚（2020/09/08更新）",
+      "sourceHash": "89d638fcb46a9f64ef2a7e2b690fb6a2768b370cf7680599a3280cebbf12e104",
+      "translation": "Summoning (Updated 2020/09/08)",
+      "contextHash": "89d638fcb46a9f64ef2a7e2b690fb6a2768b370cf7680599a3280cebbf12e104"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※要screen型テンプレートです。（DynamicAnimation ver1.06で追加）",
+      "sourceHash": "fd8935f68dfd131821834a5ec467cb7f2e0c239c9c0174a818de73140a574a4b",
+      "translation": "※Requires a screen-type template. (Added in DynamicAnimation ver1.06)",
+      "contextHash": "fd8935f68dfd131821834a5ec467cb7f2e0c239c9c0174a818de73140a574a4b"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "アクターを消去して全体アニメを表示します。",
+      "sourceHash": "2ab9cf37b847c6e986f1d9ffa9d5faaebc5b2663f362c1ac7988abf08eb2340f",
+      "translation": "The actor is erased and a full-party animation is displayed.",
+      "contextHash": "2ab9cf37b847c6e986f1d9ffa9d5faaebc5b2663f362c1ac7988abf08eb2340f"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "// 全員透明化",
+      "sourceHash": "cd21bf04a17a80dd35af3059b62786278daef072efb5e099252fc96ffd2541d5",
+      "translation": "// Make everyone transparent",
+      "contextHash": "cd21bf04a17a80dd35af3059b62786278daef072efb5e099252fc96ffd2541d5"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// 画面全体にアニメーション",
+      "sourceHash": "7567ef879497c973b039fe5d7255c1c92bb5444ac3a67d3e7481b15ddf71ec7f",
+      "translation": "// Animation across the entire screen",
+      "contextHash": "7567ef879497c973b039fe5d7255c1c92bb5444ac3a67d3e7481b15ddf71ec7f"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "// 透明化解除",
+      "sourceHash": "c5efe26e2a39c77a28936590f6164b07ce46a80f8e536937602af80e7fdf3b53",
+      "translation": "// Remove transparency",
+      "contextHash": "c5efe26e2a39c77a28936590f6164b07ce46a80f8e536937602af80e7fdf3b53"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "『performer = a.friendsUnit().members()』によって、アクター全体を対象にしています。",
+      "sourceHash": "ced8eb08d19d0dbacd398aadfd1b257a9eba9c7650ac96127372c157da29962f",
+      "translation": " \"performer = a.friendsUnit().members()』 targets the entire party of actors.",
+      "contextHash": "ced8eb08d19d0dbacd398aadfd1b257a9eba9c7650ac96127372c157da29962f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※『$gameParty.members()』でも有効ですが『a.friendsUnit().members()』なら、使用者がエネミーでも動作します。",
+      "sourceHash": "7ed2da8bef8798a054ec9d6d248391fffdefa9446c04acd4004c62026c5f4e93",
+      "translation": "※『$gameParty.members()』 also works, but 『a.friendsUnit().members()』 works even when the user is an enemy.",
+      "contextHash": "7ed2da8bef8798a054ec9d6d248391fffdefa9446c04acd4004c62026c5f4e93"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "炎の渦 DynamicMotion ver1.04（2020/05/09）",
+      "sourceHash": "dd23e34fe56719c00d0a46dbde8e18383321a7cbde40994405693d4c67582d34",
+      "translation": "Whirling Flames DynamicMotion ver1.04 (2020/05/09)",
+      "contextHash": "dd23e34fe56719c00d0a46dbde8e18383321a7cbde40994405693d4c67582d34"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "対象の周囲に回り込む炎を起こします。",
+      "sourceHash": "91bf4d49cac720a349c408e0442635e7433a2778daeef579ae87e57518a81716",
+      "translation": "Creates flames that circle around the target.",
+      "contextHash": "91bf4d49cac720a349c408e0442635e7433a2778daeef579ae87e57518a81716"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "DynamicMotion ver1.04（DynamicAnimation ver1.07）以降で可能な表示優先度の変更機能を用いています。",
+      "sourceHash": "1816947600ffef9ba3a848d3afa75f3265bc650ec68d2d16444e30c438aa68eb",
+      "translation": "This uses the function for changing display priority, available in DynamicMotion ver1.04 (DynamicAnimation ver1.07) and later.",
+      "contextHash": "1816947600ffef9ba3a848d3afa75f3265bc650ec68d2d16444e30c438aa68eb"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "アニメーションは『67:炎/単体2』ですが、好きなものに変えてください。",
+      "sourceHash": "235271806a6e7d55dd994dabcf429066c48ea3d36f3cdcda85218433e3ece3e1",
+      "translation": "The animation is 『67:Flame / Single Target 2』, but feel free to change it to whatever you like.",
+      "contextHash": "235271806a6e7d55dd994dabcf429066c48ea3d36f3cdcda85218433e3ece3e1"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "<D-Animation:vortex> // 渦型",
+      "sourceHash": "bcffda2cca9c3b24224f0f876263e8d9936b4b0d4c296f684c7fbe92713bd487",
+      "translation": "<D-Animation:vortex> // Vortex type",
+      "contextHash": "bcffda2cca9c3b24224f0f876263e8d9936b4b0d4c296f684c7fbe92713bd487"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "radiusX *= 2 + b.width/2 // Ｘ半径",
+      "sourceHash": "4693957dde4a402e86f9ef7585c1282c8f2caf0e34c2a4a35a18e6f46dc1d74b",
+      "translation": "radiusX *= 2 + b.width/2 // X radius",
+      "contextHash": "4693957dde4a402e86f9ef7585c1282c8f2caf0e34c2a4a35a18e6f46dc1d74b"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "radiusY *= 1 // Ｙ半径",
+      "sourceHash": "566f2efec1f53555017c430fb0c3759b1a9f7676c3f2d624b8ed6215670a57cf",
+      "translation": "radiusY *= 1 // Y radius",
+      "contextHash": "566f2efec1f53555017c430fb0c3759b1a9f7676c3f2d624b8ed6215670a57cf"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "radX *= 5 // 回転角度Ｘ",
+      "sourceHash": "e4f86390c5cbb9a6b4419ea12dbb877bc87ab8f6c19dfd448f6743522473cee8",
+      "translation": "radX *= 5 // X rotation angle",
+      "contextHash": "e4f86390c5cbb9a6b4419ea12dbb877bc87ab8f6c19dfd448f6743522473cee8"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "radY *= 5 // 回転角度Ｙ",
+      "sourceHash": "0b3db71c10571a3aa8a599070020921702d2fcbf1f60394d56208aa73e7f31cb",
+      "translation": "radY *= 5 // Y rotation angle",
+      "contextHash": "0b3db71c10571a3aa8a599070020921702d2fcbf1f60394d56208aa73e7f31cb"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "z = this.y < b.y ? b.z - 1 : this.z // Ｚ座標",
+      "sourceHash": "991c467981292f6ad88b2d2187b6650d4b2010f34aba46e9eb87dcc0c4a21e09",
+      "translation": "z = this.y < b.y ? b.z - 1 : this.z // Z coordinate",
+      "contextHash": "991c467981292f6ad88b2d2187b6650d4b2010f34aba46e9eb87dcc0c4a21e09"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "Ｘ半径（radiusX）に『b.width/2』を足しているのは、最終的な半径を対象の横幅に合わせるためです。そっちのほうが炎に包まれた感じがしてカッコいいからですが、その辺はお好みで調整してください。",
+      "sourceHash": "96314f29284e3a3498e2b307a57b62bef5baf2d97c9002832d7f003b32314727",
+      "translation": "『b.width/2』 is added to the X radius (radiusX) so that the final radius matches the target's width. It looks cooler that way, as if the target were wrapped in flames, but adjust it to your liking.",
+      "contextHash": "96314f29284e3a3498e2b307a57b62bef5baf2d97c9002832d7f003b32314727"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "『z = this.y < b.y ? b.z - 1 : this.z』はＺ座標（＝表示優先度）の変更処理です。「アニメーションの位置が対象より上の時はＺ座標－１、それ以外は元の値」を設定することで背面表示しています。",
+      "sourceHash": "b4566235e3316aa8d2a754fe69e992b5170fc04db3aa6a780487a44b0185c1bb",
+      "translation": " \"z = this.y < b.y ? b.z - 1 : this.z』 changes the Z coordinate (= display priority). It displays the animation behind the target by setting “Z coordinate - 1 when the animation's position is above the target; the original value otherwise.”",
+      "contextHash": "b4566235e3316aa8d2a754fe69e992b5170fc04db3aa6a780487a44b0185c1bb"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※『z = b.z』でよさそうな気がしますが、なぜかアニメーションの一部描画が止まるバグが発生しました。解決できそうにないのでこれを使ってください。",
+      "sourceHash": "0c6b4e1ac66a2a7a11f62fbf2daf80a920de5341566d3c9d0009d25fad6c52c8",
+      "translation": "※『z = b.z』 seems like it should work, but for some reason it caused a bug that stopped part of the animation from being drawn. I couldn't find a solution, so please use this instead.",
+      "contextHash": "0c6b4e1ac66a2a7a11f62fbf2daf80a920de5341566d3c9d0009d25fad6c52c8"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "渦潮 DynamicMotion ver1.04（2020/05/12）",
+      "sourceHash": "9ed08d05b33c0d76faa3bb5ba616cb57d73ee0a22bf2b4533dbf38024ade963c",
+      "translation": "Whirlpool DynamicMotion ver1.04 (2020/05/12)",
+      "contextHash": "9ed08d05b33c0d76faa3bb5ba616cb57d73ee0a22bf2b4533dbf38024ade963c"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "敵陣の中心を基準に敵をグルグル回します。",
+      "sourceHash": "f5562d22536b692ca9f7251b564358d56297719d49c05d7091464a76cc815b03",
+      "translation": "Makes the enemies spin around the center of the enemy formation.",
+      "contextHash": "f5562d22536b692ca9f7251b564358d56297719d49c05d7091464a76cc815b03"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "スキルのアニメーションは『Darkness2』のパターンを繰り返しているだけです。位置は『画面』にしています。",
+      "sourceHash": "23a588cfa245770ea5c20c8ddf31a78e3b2c7b16fbcd6391b2c47ad6dcfb2bc4",
+      "translation": "The skill's animation simply repeats the 『Darkness2』 pattern. Its position is set to 『Screen』.",
+      "contextHash": "23a588cfa245770ea5c20c8ddf31a78e3b2c7b16fbcd6391b2c47ad6dcfb2bc4"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "sy = defaultY + 50 // 位置を下寄りに",
+      "sourceHash": "a691e7d85f684a019aa80cd285fdd9491a0fe2f45f2a5d5b3264b97d7160c316",
+      "translation": "sy = defaultY + 50 // Position lower",
+      "contextHash": "a691e7d85f684a019aa80cd285fdd9491a0fe2f45f2a5d5b3264b97d7160c316"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "z = 0 // 対象より下に表示",
+      "sourceHash": "7461c151f11835da85a0a2b0f99fe39a78545c4cc422d9ba53c701f6a9669ddf",
+      "translation": "z = 0 // Display below the target",
+      "contextHash": "7461c151f11835da85a0a2b0f99fe39a78545c4cc422d9ba53c701f6a9669ddf"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "performerDelay = 2 // 時間差",
+      "sourceHash": "c7baa38751fc1868cde7df7090e28eeaa5e26a0ba6bb0e255cac2ecd227a9f1a",
+      "translation": "performerDelay = 2 // Delay",
+      "contextHash": "c7baa38751fc1868cde7df7090e28eeaa5e26a0ba6bb0e255cac2ecd227a9f1a"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "radiusX *= 2 // Ｘ半径",
+      "sourceHash": "e4753864a6d08d96ab90ebd63bd3b31ef56d4b77ffeaed2dfa02431ad3a13cb5",
+      "translation": "radiusX *= 2 // X radius",
+      "contextHash": "e4753864a6d08d96ab90ebd63bd3b31ef56d4b77ffeaed2dfa02431ad3a13cb5"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "radiusY *= 1 // Ｙ半径",
+      "sourceHash": "566f2efec1f53555017c430fb0c3759b1a9f7676c3f2d624b8ed6215670a57cf",
+      "translation": "radiusY *= 1 // Y radius",
+      "contextHash": "566f2efec1f53555017c430fb0c3759b1a9f7676c3f2d624b8ed6215670a57cf"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "radX *= 4 // Ｘ回転角度",
+      "sourceHash": "b0737b15b750c36e5324e751c73f7a9645a71e6d80f3e49da9c772e0ed4f6ece",
+      "translation": "radX *= 4 // X rotation angle",
+      "contextHash": "b0737b15b750c36e5324e751c73f7a9645a71e6d80f3e49da9c772e0ed4f6ece"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "radY *= 4 // Ｙ回転角度",
+      "sourceHash": "b264cd08754187c3ec5b3864d223f73f4a77a4b1372dccd3d16d94de98de8bfb",
+      "translation": "radY *= 4 // Y rotation angle",
+      "contextHash": "b264cd08754187c3ec5b3864d223f73f4a77a4b1372dccd3d16d94de98de8bfb"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "公転（revolve）型の機能によって、対象をグルグル回しています。",
+      "sourceHash": "647c47f5217df119c42046843de40272aa9ee9ef4dc2d1890d75b9ee3e2bc553",
+      "translation": "The targets are made to spin using the revolve-type function.",
+      "contextHash": "647c47f5217df119c42046843de40272aa9ee9ef4dc2d1890d75b9ee3e2bc553"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『performerDelay 』に時間差の値を指定しないと敵キャラが重なってしまいます。",
+      "sourceHash": "3c79cad8862a3fe0f663496f9f310e53f9f8960ab721f349f6b284ed0ca73ce9",
+      "translation": "If you don't specify a delay value for 『performerDelay 』, the enemies will overlap.",
+      "contextHash": "3c79cad8862a3fe0f663496f9f310e53f9f8960ab721f349f6b284ed0ca73ce9"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "最も難解なのは『dx, dy』の数式ですが……。これは敵キャラが敵陣中央に向かって移動し、また元の位置へと戻ってくるという式です。",
+      "sourceHash": "f6b69f5c9bbae23b656ef1546e70db7d79575b47624b24390f12494b4d7a8f83",
+      "translation": "The most difficult part is the formula for 『dx, dy』... It makes the enemies move toward the center of the enemy formation and then return to their original positions.",
+      "contextHash": "f6b69f5c9bbae23b656ef1546e70db7d79575b47624b24390f12494b4d7a8f83"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "sinは90度毎に値を0->1->0と変化させるので、その性質を利用して行ったり来たりさせています。",
+      "sourceHash": "6ce48fdd7731e0102ca6448755ee190a5c48f99cdae2b2d0493a1d49b699c296",
+      "translation": "Since sin changes its value from 0->1->0 every 90 degrees, this property is used to make them move back and forth.",
+      "contextHash": "6ce48fdd7731e0102ca6448755ee190a5c48f99cdae2b2d0493a1d49b699c296"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "この数式へさらに回転成分を加算することで、全体の動作を実現しています。",
+      "sourceHash": "707d89f72fd211d5e876edcf6891c7ab12350a6a16b6d73a0f2e17a5b4830551",
+      "translation": "Adding a rotational component to this formula produces the overall motion.",
+      "contextHash": "707d89f72fd211d5e876edcf6891c7ab12350a6a16b6d73a0f2e17a5b4830551"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "サイコキネシス（2020/05/25）",
+      "sourceHash": "53f80af62ea3efa98c9ceb5657f08098f0500317776ecd9cd88f155826788e22",
+      "translation": "Psychokinesis (2020/05/25)",
+      "contextHash": "53f80af62ea3efa98c9ceb5657f08098f0500317776ecd9cd88f155826788e22"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ランダム位置に出現した岩石を、さらにランダム位置に移動。そこから対象へぶつけます。",
+      "sourceHash": "c5dde4e0e140be1d3ae466abf69cedd12235b7aedf24eeba904032ea7a31d9bd",
+      "translation": "Rocks appear at random positions, then move to other random positions. From there, they are hurled at the targets.",
+      "contextHash": "c5dde4e0e140be1d3ae466abf69cedd12235b7aedf24eeba904032ea7a31d9bd"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ランダム位置を保持するためには継続（keep）型のテンプレートを用います。",
+      "sourceHash": "8606b56035634eba3ebf00f5b785b0144cee9d3eec9e71561d0fd7f545bbc447",
+      "translation": "To retain random positions, use a keep-type template.",
+      "contextHash": "8606b56035634eba3ebf00f5b785b0144cee9d3eec9e71561d0fd7f545bbc447"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "// 術者前方にランダムで砂煙",
+      "sourceHash": "0dc16299a3286dc587806cfae77d77c5aa7e4fce23d7dcc6086dd15e8f7b504f",
+      "translation": "// Random sand clouds in front of the caster",
+      "contextHash": "0dc16299a3286dc587806cfae77d77c5aa7e4fce23d7dcc6086dd15e8f7b504f"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "id = XX // 砂煙のアニメ",
+      "sourceHash": "c7fa2c666002b6af0a6dc5e13e5234df0c0b03af0e418271e555efa42a6fc427",
+      "translation": "id = XX // Sand cloud animation",
+      "contextHash": "c7fa2c666002b6af0a6dc5e13e5234df0c0b03af0e418271e555efa42a6fc427"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "// 砂煙の発生位置を引き継いで岩石登場→対象の上空へ移動",
+      "sourceHash": "914832d22643ee105a81469e0b43a1dfa09b2ff5facd6ba45109e64837b9d26b",
+      "translation": "// Rock appears at the sand cloud's origin, then moves overhead of the target",
+      "contextHash": "914832d22643ee105a81469e0b43a1dfa09b2ff5facd6ba45109e64837b9d26b"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "id = XX // 岩石の停止アニメ",
+      "sourceHash": "18ef42eb0293dc2dcc6c14b8e84da557311f2c6e2eb3a2a881e7000f47df23b0",
+      "translation": "id = XX // Rock idle animation",
+      "contextHash": "18ef42eb0293dc2dcc6c14b8e84da557311f2c6e2eb3a2a881e7000f47df23b0"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "arrival = 8 // 対空地点に到達するフレーム",
+      "sourceHash": "6db518462497ebe0558542c791373792bd91fd2a61751a44140a91d5432ab8be",
+      "translation": "arrival = 8 // Frames until reaching the overhead point",
+      "contextHash": "6db518462497ebe0558542c791373792bd91fd2a61751a44140a91d5432ab8be"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "// 対象の上空から対象へ岩石が殺到",
+      "sourceHash": "c759a347beb261613b69d965619b37596aea0b8b20a5c6f6d7457566e76b07cb",
+      "translation": "// Rocks rush from overhead down onto the target",
+      "contextHash": "c759a347beb261613b69d965619b37596aea0b8b20a5c6f6d7457566e76b07cb"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "id = XX // 岩石の衝突アニメ",
+      "sourceHash": "72c4287de3d4e1da4a1c8bd6a8c5a8e8a44e09f3e59bea0b05652d3bfacfb153",
+      "translation": "id = XX // Rock impact animation",
+      "contextHash": "72c4287de3d4e1da4a1c8bd6a8c5a8e8a44e09f3e59bea0b05652d3bfacfb153"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "継続（keep）型には、前の<D-Animation",
+      "sourceHash": "af1f7367ca6668d71cf8f4805f0780f13ed5fee3f1796ffe4d199b38e80bf67b",
+      "translation": "The keep-type template copies the previous <D-Animation",
+      "contextHash": "f3128dd0fd2c9a6355d4b38f6c291e2f4d11bde0d2612e7f7a286993852939ae"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": ">の終点座標を始点にコピーする効果があります。また、繰り返し回数などの情報も自動で引き継ぎます。",
+      "sourceHash": "e20a53435328625170028bd66a6571c1388f66a2232b6d3e6703a25b1b9677bc",
+      "translation": ">'s ending coordinates as its starting point. It also automatically carries over information such as the number of repetitions.",
+      "contextHash": "f3128dd0fd2c9a6355d4b38f6c291e2f4d11bde0d2612e7f7a286993852939ae"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ポイントは<D-Animation:shotRandom&keep>というように、&で後ろ側に結合することです。これはshotRandom自体が情報を持っているためです。この場合、後ろ側のテンプレートの設定が優先されます。",
+      "sourceHash": "cb06217251f04935fd5180596d61e3e1c49a4fc95ab7a73a3f68ec6b6b91dd33",
+      "translation": "The key is to join it to the back with &, as in <D-Animation:shotRandom&keep>. This is because shotRandom itself contains information. In this case, the settings of the template on the back take priority.",
+      "contextHash": "cb06217251f04935fd5180596d61e3e1c49a4fc95ab7a73a3f68ec6b6b91dd33"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "また、このスキルには３つのアニメーションが必要です。",
+      "sourceHash": "cbae1140eec06762a28d6866542aa054cf81c20e352ff1586c2c0e7932b88346",
+      "translation": "This skill also requires three animations.",
+      "contextHash": "cbae1140eec06762a28d6866542aa054cf81c20e352ff1586c2c0e7932b88346"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "砂煙のアニメ：Earh1で作成した単純な砂煙です。",
+      "sourceHash": "e771f83025709a5b54ee4ed53ab628709a0c134cd3b09bc5fd0701c9cc347f21",
+      "translation": "Dust cloud animation: A simple dust cloud created with Earh1.",
+      "contextHash": "e771f83025709a5b54ee4ed53ab628709a0c134cd3b09bc5fd0701c9cc347f21"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "岩石の停止アニメ：Earth3の岩石を２５フレーム分コピーしたものです。",
+      "sourceHash": "7ec20e955b8cd489a4b45348a182ea7bc1d898cf0040d8f96746b40f302b02b9",
+      "translation": "Stationary rock animation: A copy of the rock from Earth3 for 25 frames.",
+      "contextHash": "7ec20e955b8cd489a4b45348a182ea7bc1d898cf0040d8f96746b40f302b02b9"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "合成方法を『通常』にする以外は一切の変更不要です。",
+      "sourceHash": "5e3f2e3c96c3c385c594d674f0b9989b1e21c628501f60fcf607f26661aabe5c",
+      "translation": "No changes are necessary other than setting the blend mode to 『Normal』.",
+      "contextHash": "5e3f2e3c96c3c385c594d674f0b9989b1e21c628501f60fcf607f26661aabe5c"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "岩石の衝突アニメ：↑の岩石が６フレーム目から砕けるアニメです。",
+      "sourceHash": "a2b0f23e83f15b857cdfef6a06992ad2f9c127e3c3180fc1c6672ced2e4ca5e4",
+      "translation": "Rock impact animation: An animation in which the ↑ rock shatters starting from frame 6.",
+      "contextHash": "a2b0f23e83f15b857cdfef6a06992ad2f9c127e3c3180fc1c6672ced2e4ca5e4"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "炎の帯（2021/06/16）",
+      "sourceHash": "3fdad5ed19bf0c0dfe86e29c609707e13d2d05020bf96482aff507cf6dca2fd0",
+      "translation": "Trail of Fire (2021/06/16)",
+      "contextHash": "3fdad5ed19bf0c0dfe86e29c609707e13d2d05020bf96482aff507cf6dca2fd0"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "尾を引く放物線を対象に放ちます。",
+      "sourceHash": "8b95c431ef348bac0bee1b05d786556e2b99a9f661a234e9dcd1947b83b1774e",
+      "translation": "Sends a trailing parabola toward the target.",
+      "contextHash": "8b95c431ef348bac0bee1b05d786556e2b99a9f661a234e9dcd1947b83b1774e"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "必要なアニメーションは二つあります。",
+      "sourceHash": "539e4e7ab56a69c1073aee9ff3aa7300c14992151f0841296fd66f5cf63193a4",
+      "translation": "Two animations are required.",
+      "contextHash": "539e4e7ab56a69c1073aee9ff3aa7300c14992151f0841296fd66f5cf63193a4"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "一つ目は帯を構成するアニメーションです。左を向いた固定パターンのアニメーションを指定します。円形などでも構いません。",
+      "sourceHash": "c4f03df62282c7b933504725c8b7bb4b132233af10c79b570213d43b5f0d1aa5",
+      "translation": "The first is the animation that forms the trail. Specify a fixed-pattern animation facing left. A circular one is fine as well.",
+      "contextHash": "c4f03df62282c7b933504725c8b7bb4b132233af10c79b570213d43b5f0d1aa5"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "このサンプルでは『Fire2』の２パターン目を９０度回転させて配置しています。",
+      "sourceHash": "06bcb31afc4d78504ef6c7271f454d5c438febf596bdde016bb4e65b6628d1a8",
+      "translation": "In this sample, the second pattern of 『Fire2』 is rotated 90 degrees and placed.",
+      "contextHash": "06bcb31afc4d78504ef6c7271f454d5c438febf596bdde016bb4e65b6628d1a8"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "設定したフレーム数がそのまま放物線が着弾するまでの時間になります。",
+      "sourceHash": "2e51cb1c89fa979d62e25e3874cee3aa6100f57a84d61eca4bbe488c86ba77e2",
+      "translation": "The number of frames you set directly becomes the time until the parabola hits its target.",
+      "contextHash": "2e51cb1c89fa979d62e25e3874cee3aa6100f57a84d61eca4bbe488c86ba77e2"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "二つ目は着弾のアニメーションです。こちらは特筆すべき点はありません。",
+      "sourceHash": "bed5e41c7e3978e6fd2794cb604e83f7038d495cce9e6bea18a980a6c9814e1e",
+      "translation": "The second is the impact animation. There is nothing noteworthy about this one.",
+      "contextHash": "bed5e41c7e3978e6fd2794cb604e83f7038d495cce9e6bea18a980a6c9814e1e"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "このサンプルでは『Fire1』のパターンを使用していますが、そのまま『67:炎/単体2』などでもよいと思います。",
+      "sourceHash": "d0767c33d4e95272cec11d3a477d66859c2bb9f1515f31a60fc12a8986b2c3fd",
+      "translation": "This sample uses the 『Fire1』 pattern, but you could also use 『67:Flame / Single Target 2』 as is.",
+      "contextHash": "d0767c33d4e95272cec11d3a477d66859c2bb9f1515f31a60fc12a8986b2c3fd"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "// 炎の帯",
+      "sourceHash": "a996d5d20b630fb08c1c1d91662f5f18ae5e94c76df7aacfa6ba7a0c36b40a7a",
+      "translation": "// Band of fire",
+      "contextHash": "a996d5d20b630fb08c1c1d91662f5f18ae5e94c76df7aacfa6ba7a0c36b40a7a"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "position = 2 // 位置を足元に",
+      "sourceHash": "f605a6aa04cfee70ae3e7581d6fa5fd6fa9b46ef5e9b2deab7388d36db18826c",
+      "translation": "position = 2 // Position at the feet",
+      "contextHash": "f605a6aa04cfee70ae3e7581d6fa5fd6fa9b46ef5e9b2deab7388d36db18826c"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "ey -= 48 // 位置を少し上に調整",
+      "sourceHash": "5f1294fed5610c838baf9c38ad61326e162c5f4a8d24fb59449f58fc84d6ba41",
+      "translation": "ey -= 48 // Adjust position slightly upward",
+      "contextHash": "5f1294fed5610c838baf9c38ad61326e162c5f4a8d24fb59449f58fc84d6ba41"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "arcY = -150 // 放物線の高さ",
+      "sourceHash": "279a1579a580efb0463308c23d59608269a37c5328c000dc99c409a7e24e670d",
+      "translation": "arcY = -150 // Parabolic height",
+      "contextHash": "279a1579a580efb0463308c23d59608269a37c5328c000dc99c409a7e24e670d"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "scaleX = 2 // 横幅",
+      "sourceHash": "a34a7921767baf2f624f8d557e533587adf2c62ecd05f501e06e0b77bf0b753d",
+      "translation": "scaleX = 2 // Width",
+      "contextHash": "a34a7921767baf2f624f8d557e533587adf2c62ecd05f501e06e0b77bf0b753d"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "scaleY = 1 // 縦幅",
+      "sourceHash": "6b910d705976347e6cbe69c80816d0a7ec1326f4b1fb4c292dd06725af575bb1",
+      "translation": "scaleY = 1 // Height",
+      "contextHash": "6b910d705976347e6cbe69c80816d0a7ec1326f4b1fb4c292dd06725af575bb1"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "afterimage = 10 // 残像の数",
+      "sourceHash": "82ef2cfc3b6722ecd6b661055f98b5de34c159ea104e1f28a98423042c1a86d4",
+      "translation": "afterimage = 10 // Number of afterimages",
+      "contextHash": "82ef2cfc3b6722ecd6b661055f98b5de34c159ea104e1f28a98423042c1a86d4"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "afterimageInterval = 1 // 残像の間隔",
+      "sourceHash": "65641b1a51fdb586927f271ca2b8602f3955bb8740d850a875e6270e8b571865",
+      "translation": "afterimageInterval = 1 // Afterimage spacing",
+      "contextHash": "65641b1a51fdb586927f271ca2b8602f3955bb8740d850a875e6270e8b571865"
+    },
+    {
+      "id": "code-032",
+      "type": "code",
+      "source": "// 着弾",
+      "sourceHash": "c5f282684ea017ad6212805a4105ab297b331f46c18b4967ce9f18b919305892",
+      "translation": "// Impact",
+      "contextHash": "c5f282684ea017ad6212805a4105ab297b331f46c18b4967ce9f18b919305892"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "赤字部分には２つのアニメーションをそれぞれ指定してください。",
+      "sourceHash": "17ea78d2f8013a9261769e6b8babc75f68db353a3be25c1a67f050282bee1dbf",
+      "translation": "Specify each of the two animations in the sections shown in red.",
+      "contextHash": "17ea78d2f8013a9261769e6b8babc75f68db353a3be25c1a67f050282bee1dbf"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "『lookCourse』テンプレートによりアニメーションに進路を向かせています。これに残像を加えることで、尾を引く放物線のように見せています。残像の数や間隔を好きなように調整してください。",
+      "sourceHash": "938c9b1a06771b2e7888e99977bbb57146833fe2bd9b235d6c4f191ccf8b98c8",
+      "translation": "The 『lookCourse』 template makes the animation face its course. Adding afterimages makes it look like a trailing parabola. Adjust the number and spacing of the afterimages as you like.",
+      "contextHash": "938c9b1a06771b2e7888e99977bbb57146833fe2bd9b235d6c4f191ccf8b98c8"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "『scaleX = 2』によりアニメーションを横に引き伸ばしています。放物線を自然に見せるための調整です。",
+      "sourceHash": "123340860f9512f7274e34134e66b4c653c6ef0dc60246bce0a156522e68ad00",
+      "translation": " \"scaleX = 2』 stretches the animation horizontally. This is an adjustment to make the parabola look natural.",
+      "contextHash": "123340860f9512f7274e34134e66b4c653c6ef0dc60246bce0a156522e68ad00"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ブレス（2023/07/31更新）",
+      "sourceHash": "ba30a5f8528d1d9e3be5ecac30d67aa21417cadd8ac81fe8165d095bec44eb24",
+      "translation": "Breath (Updated 2023/07/31)",
+      "contextHash": "ba30a5f8528d1d9e3be5ecac30d67aa21417cadd8ac81fe8165d095bec44eb24"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "口からブレスを吐きます。",
+      "sourceHash": "e0b311060772fb0903efc8942bd25c1255420b7e3fa091a45fb6b7efc41a2107",
+      "translation": "Breath is exhaled from the mouth.",
+      "contextHash": "e0b311060772fb0903efc8942bd25c1255420b7e3fa091a45fb6b7efc41a2107"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "アニメーションは『82:水/単体2』を使用しています。必要に応じて炎などに変更してください。",
+      "sourceHash": "67dbe5ddbdbd553aabfb84cb0de4582ae4d1bfe3baaddace61214e8352fbd7d0",
+      "translation": "The animation uses 『82:Water / Single Target 2』. Change it to fire or something else as needed.",
+      "contextHash": "67dbe5ddbdbd553aabfb84cb0de4582ae4d1bfe3baaddace61214e8352fbd7d0"
+    },
+    {
+      "id": "code-033",
+      "type": "code",
+      "source": "position = 3 // 対象全体",
+      "sourceHash": "00c30e0605b1d4d5715e6f6bafdb13e103ae075b41e8e22f6df3c7cc2120a528",
+      "translation": "position = 3 // Entire target group",
+      "contextHash": "00c30e0605b1d4d5715e6f6bafdb13e103ae075b41e8e22f6df3c7cc2120a528"
+    },
+    {
+      "id": "code-034",
+      "type": "code",
+      "source": "ey = defaultY -50 + 300 * r/repeat // 上から下へ終点移動",
+      "sourceHash": "b70b2d5b62f959d967fc9b0d161f8963153f2d9007d1dae251ca5603d2b865b7",
+      "translation": "ey = defaultY -50 + 300 * r/repeat // Move the endpoint from top to bottom",
+      "contextHash": "b70b2d5b62f959d967fc9b0d161f8963153f2d9007d1dae251ca5603d2b865b7"
+    },
+    {
+      "id": "code-035",
+      "type": "code",
+      "source": "limitFlash = 0 // フラッシュ制限",
+      "sourceHash": "82caf4bfa39ce06b96823b8a6a7bb64a0b6e9d1a55b47d93536205fdc4894303",
+      "translation": "limitFlash = 0 // Flash limit",
+      "contextHash": "82caf4bfa39ce06b96823b8a6a7bb64a0b6e9d1a55b47d93536205fdc4894303"
+    },
+    {
+      "id": "code-036",
+      "type": "code",
+      "source": "limitSound = 4 // 効果音制限",
+      "sourceHash": "7e15b06e15ea4578cb52c54b31d18750ca38ae2fb567f578cdb2307279d155e2",
+      "translation": "limitSound = 4 // Sound effect limit",
+      "contextHash": "7e15b06e15ea4578cb52c54b31d18750ca38ae2fb567f578cdb2307279d155e2"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "赤字部分によってブレスの始点を調整しています。",
+      "sourceHash": "1efda7ee02eabf45aeae3f8aa08a048b76d4910acb602b41df09e7f5b3d13402",
+      "translation": "The sections shown in red adjust the starting point of the breath.",
+      "contextHash": "1efda7ee02eabf45aeae3f8aa08a048b76d4910acb602b41df09e7f5b3d13402"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "敵キャラのメモ欄に以下のように記載してください。以下の例では中央から右に50ピクセル、上に50ピクセルほど始点をずらしています。",
+      "sourceHash": "e8c99281f8153535aae3782b03b509f5f9e1ba41ccf39586351e5e3a1763dbf7",
+      "translation": "Please enter the following in the enemy's note field. In the example below, the starting point has been shifted about 50 pixels to the right and 50 pixels upward from the center.",
+      "contextHash": "e8c99281f8153535aae3782b03b509f5f9e1ba41ccf39586351e5e3a1763dbf7"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "なお、上記の赤字部分は使用者が敵キャラの場合しか想定していません。アクターも含む場合は以下に差し替えてください。",
+      "sourceHash": "114e1256f933c3126ca89036fb6bf5eac1bc5fc441f96a41ed943436dfbbf9db",
+      "translation": "Note that the red text above only assumes that the user is an enemy. If actors are also included, replace it with the following.",
+      "contextHash": "114e1256f933c3126ca89036fb6bf5eac1bc5fc441f96a41ed943436dfbbf9db"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "『BreathX』『BreathY』の文字列は好きなように変更しても構いませんし、他の文字列を追加することもできます。",
+      "sourceHash": "7bfcfd92b42320bea53227b7f757b3115fd8da7eeb2a81da0e80bc9a24422af3",
+      "translation": "You may change the strings 'BreathX' and 'BreathY' as you like, and you can also add other strings.",
+      "contextHash": "7bfcfd92b42320bea53227b7f757b3115fd8da7eeb2a81da0e80bc9a24422af3"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "例えば『EyeX』『EyeY』を追加して、目から光線を撃つ敵を作ってもいいと思います。",
+      "sourceHash": "d09a5a6bdb75b11c6571e4febfa124b84cc6a027c7166e87c843e3f6d7e9ec2d",
+      "translation": "For example, you could add 'EyeX' and 'EyeY' to create an enemy that shoots rays from its eyes.",
+      "contextHash": "d09a5a6bdb75b11c6571e4febfa124b84cc6a027c7166e87c843e3f6d7e9ec2d"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "スーパーノヴァ（2023/11/23）",
+      "sourceHash": "7f71bb8ee71fd8bc18dd6e9c0a1f95648ceebaafcd1db8deeed30e095412b130",
+      "translation": "Supernova (2023/11/23)",
+      "contextHash": "7f71bb8ee71fd8bc18dd6e9c0a1f95648ceebaafcd1db8deeed30e095412b130"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "リンク先のプラグインはver1.011～に更新してください。そうしないと、後述の不透明度の機能が使えません。",
+      "sourceHash": "a092dce0f9ea7aa081f05a926226e6ddd394405cb32badbbc1326b501e041a87",
+      "translation": "Please update the linked plugin to ver1.011 or later. Otherwise, you will not be able to use the opacity function described below.",
+      "contextHash": "a092dce0f9ea7aa081f05a926226e6ddd394405cb32badbbc1326b501e041a87"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "アニメーションは『109:無属性/全体2』を使用しています。お好きなように変更してください。",
+      "sourceHash": "acb7214f0a53fda549160eaf5c4b819838d7438724dbe0661a9ee2ba94316859",
+      "translation": "The animation used is '109: Non-elemental / All 2'. Please change it as you like.",
+      "contextHash": "acb7214f0a53fda549160eaf5c4b819838d7438724dbe0661a9ee2ba94316859"
+    },
+    {
+      "id": "code-037",
+      "type": "code",
+      "source": "// 爆発",
+      "sourceHash": "5d7a649d4c67e40cb94f2e85df93f41c2fcc9d3e523fd431cd1191f29f80f96b",
+      "translation": "// Explosion",
+      "contextHash": "5d7a649d4c67e40cb94f2e85df93f41c2fcc9d3e523fd431cd1191f29f80f96b"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "まず『commonEvent = x』によってコモンイベントを呼び出します。xの部分に番号を設定してください。",
+      "sourceHash": "ed5a7afc8914b31cc2fe641034e82920ec0ecacf845916d65091be1344646386",
+      "translation": "First, call a common event using 'commonEvent = x'. Set the number in place of x.",
+      "contextHash": "ed5a7afc8914b31cc2fe641034e82920ec0ecacf845916d65091be1344646386"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "呼び出したコモンイベント内からプラグインコマンドを呼び出し、背景を変更します。今回は以下のように設定しています。",
+      "sourceHash": "773a3f0d4ec63bac02c70a687f6a40f4b55272eee0a1498cbdd6b975e3053ec6",
+      "translation": "Call a plugin command from within the common event to change the background. This time, I have configured it as follows.",
+      "contextHash": "773a3f0d4ec63bac02c70a687f6a40f4b55272eee0a1498cbdd6b975e3053ec6"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "※画像はクリックで拡大表示できます。",
+      "sourceHash": "f4379d7c1c9036397a4134b3e58421b4f3607fbf196d831818e1851e35d460fd",
+      "translation": "※Click the image to enlarge it.",
+      "contextHash": "f4379d7c1c9036397a4134b3e58421b4f3607fbf196d831818e1851e35d460fd"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "コツとしては不透明度をテキストモードで入力し『$gameVariables.value(1)』というように変数の値を参照するように設定することです。",
+      "sourceHash": "9e176d065dc5618b0b76fb2afb3168518cc86b2e4bf5ea51a119345559151744",
+      "translation": "The trick is to enter the opacity in text mode and set it to reference the variable's value, such as '$gameVariables.value(1)'.",
+      "contextHash": "9e176d065dc5618b0b76fb2afb3168518cc86b2e4bf5ea51a119345559151744"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "以降、指定した番号の変数を変更するだけで不透明度も変化するようになります。",
+      "sourceHash": "55fb1bca61efe8021a83c43d9c3c77b5cfa9f916f888cc115cfc13e4556f3715",
+      "translation": "After that, the opacity will also change simply by changing the variable with the specified number.",
+      "contextHash": "55fb1bca61efe8021a83c43d9c3c77b5cfa9f916f888cc115cfc13e4556f3715"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "※いちいち手動で不透明度を変更してもいいですが、超面倒です。",
+      "sourceHash": "04b968527b81ab8f3a9a3cd95457afaa85e3f26ca7c5b9fa9a84ef293ac296b2",
+      "translation": "※You could change the opacity manually each time, but that would be extremely tedious.",
+      "contextHash": "04b968527b81ab8f3a9a3cd95457afaa85e3f26ca7c5b9fa9a84ef293ac296b2"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "フレア（2024/04/05）",
+      "sourceHash": "b02bc6d56a809c27d0b4bb91a37c10668819c9b4dacfc433b7fbac59a70a7542",
+      "translation": "Flare (2024/04/05)",
+      "contextHash": "b02bc6d56a809c27d0b4bb91a37c10668819c9b4dacfc433b7fbac59a70a7542"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "対象に向かって線が収束し、放射状に炎が飛び出していきます。",
+      "sourceHash": "7d7ceadc225d3ec90d02260e83c14911f0cea3e6630951e696c99e8818bc83cf",
+      "translation": "Lines converge toward the target, and flames shoot out radially.",
+      "contextHash": "7d7ceadc225d3ec90d02260e83c14911f0cea3e6630951e696c99e8818bc83cf"
+    },
+    {
+      "id": "code-038",
+      "type": "code",
+      "source": "// 背景を暗くする",
+      "sourceHash": "2bda2b3a06171b7e3bc4d785d298c50b811e585bf83ec37f8d83b6bb324fda44",
+      "translation": "// Darken the background",
+      "contextHash": "2bda2b3a06171b7e3bc4d785d298c50b811e585bf83ec37f8d83b6bb324fda44"
+    },
+    {
+      "id": "code-039",
+      "type": "code",
+      "source": "// 収束",
+      "sourceHash": "30e55ce5e95c297d065448498b74d74c7f892c298cc1dab43592b38306538006",
+      "translation": "// Convergence",
+      "contextHash": "30e55ce5e95c297d065448498b74d74c7f892c298cc1dab43592b38306538006"
+    },
+    {
+      "id": "code-040",
+      "type": "code",
+      "source": "scaleX = 2 * (1-t/et) // 徐々に縮小",
+      "sourceHash": "0e9f112fafbf71d6de64c9ff72914edbcd28a5a8a86256e844a1acf77d1b3e9b",
+      "translation": "scaleX = 2 * (1-t/et) // Gradually shrink",
+      "contextHash": "0e9f112fafbf71d6de64c9ff72914edbcd28a5a8a86256e844a1acf77d1b3e9b"
+    },
+    {
+      "id": "code-041",
+      "type": "code",
+      "source": "scaleY = 0.25 * (1-t/et) // 徐々に縮小",
+      "sourceHash": "9fbb643b277df465a2bd24521e57eda5f56918f411f9bfed87e50d3ff0aa29be",
+      "translation": "scaleY = 0.25 * (1-t/et) // Gradually shrink",
+      "contextHash": "9fbb643b277df465a2bd24521e57eda5f56918f411f9bfed87e50d3ff0aa29be"
+    },
+    {
+      "id": "code-042",
+      "type": "code",
+      "source": "opacity = 255 * t/et // 徐々に不透明",
+      "sourceHash": "52e1c8f0cd406f42b6f0420f2d628bf9055ea566bc5347fd64267dd965c50d14",
+      "translation": "opacity = 255 * t/et // Gradually become opaque",
+      "contextHash": "52e1c8f0cd406f42b6f0420f2d628bf9055ea566bc5347fd64267dd965c50d14"
+    },
+    {
+      "id": "code-043",
+      "type": "code",
+      "source": "radiusX *= 1 // 収束半径Ｘ",
+      "sourceHash": "3f25292bd0cf7fa9ddabfdc1b6c591544fd3aeb1b1b2ac46c8152cac46ea69a7",
+      "translation": "radiusX *= 1 // Convergence radius X",
+      "contextHash": "3f25292bd0cf7fa9ddabfdc1b6c591544fd3aeb1b1b2ac46c8152cac46ea69a7"
+    },
+    {
+      "id": "code-044",
+      "type": "code",
+      "source": "radiusY *= 1 // 収束半径Ｙ",
+      "sourceHash": "5e48a11584d7283c90baa7ee46d76db6571181e27a3fa57101cc3f485e9ca169",
+      "translation": "radiusY *= 1 // Convergence radius Y",
+      "contextHash": "5e48a11584d7283c90baa7ee46d76db6571181e27a3fa57101cc3f485e9ca169"
+    },
+    {
+      "id": "code-045",
+      "type": "code",
+      "source": "limitSound = 999 // 効果音制限（最初の１回のみ演奏）",
+      "sourceHash": "98203327fd43c175f6e829bada5c401a376e5152424b33dac0f1c2b3b2f2b00a",
+      "translation": "limitSound = 999 // Sound effect limit (play only once at the beginning)",
+      "contextHash": "98203327fd43c175f6e829bada5c401a376e5152424b33dac0f1c2b3b2f2b00a"
+    },
+    {
+      "id": "code-046",
+      "type": "code",
+      "source": "// フラッシュ（[赤,緑,青,強さ], 時間）",
+      "sourceHash": "ba5c837aa4114b1013c276ce53ceca2cc554ab4e36e5ba646c6e7189493be388",
+      "translation": "// Flash ([Red, Green, Blue, Intensity], Duration)",
+      "contextHash": "ba5c837aa4114b1013c276ce53ceca2cc554ab4e36e5ba646c6e7189493be388"
+    },
+    {
+      "id": "code-047",
+      "type": "code",
+      "source": "// 放射",
+      "sourceHash": "466e6eb822bfcdfff283de0dcf02e3b3adff055ce48029ebcbbde560bce87ef4",
+      "translation": "// Radiation",
+      "contextHash": "466e6eb822bfcdfff283de0dcf02e3b3adff055ce48029ebcbbde560bce87ef4"
+    },
+    {
+      "id": "code-048",
+      "type": "code",
+      "source": "scale = 2 * t/et // 徐々に巨大化",
+      "sourceHash": "bf81cfa3d8e1304e93d7e9110a83d146203ac2c8f787bba61c4b943c0edfce9b",
+      "translation": "scale = 2 * t/et // Gradually enlarge",
+      "contextHash": "bf81cfa3d8e1304e93d7e9110a83d146203ac2c8f787bba61c4b943c0edfce9b"
+    },
+    {
+      "id": "code-049",
+      "type": "code",
+      "source": "opacity = 255 * (1 - t/et) // 徐々に透明",
+      "sourceHash": "8aee5bef68c02bb802d49185599df392380656d373131acad8310f73eebaa037",
+      "translation": "opacity = 255 * (1 - t/et) // Gradually become transparent",
+      "contextHash": "8aee5bef68c02bb802d49185599df392380656d373131acad8310f73eebaa037"
+    },
+    {
+      "id": "code-050",
+      "type": "code",
+      "source": "radiusX *= 0.5 // 放射半径Ｘ",
+      "sourceHash": "23d2433245efb5fe5463e9f0709ad92ac527b8451d532d6e9b1d44c5914fb613",
+      "translation": "radiusX *= 0.5 // Radiation radius X",
+      "contextHash": "23d2433245efb5fe5463e9f0709ad92ac527b8451d532d6e9b1d44c5914fb613"
+    },
+    {
+      "id": "code-051",
+      "type": "code",
+      "source": "radiusY *= 0.5 // 放射半径Ｙ",
+      "sourceHash": "0a5827ec283c636ef77e7a05b6fb9995f718a4828141555918f0ad50d5e523a2",
+      "translation": "radiusY *= 0.5 // Radial Radius Y",
+      "contextHash": "0a5827ec283c636ef77e7a05b6fb9995f718a4828141555918f0ad50d5e523a2"
+    },
+    {
+      "id": "code-052",
+      "type": "code",
+      "source": "limitSound = 8 // 効果音制限",
+      "sourceHash": "a00e2394e080bba7c272a1c2467226d9662dab9ae79042282ecb283944b7281b",
+      "translation": "limitSound = 8 // Sound Effect Limit",
+      "contextHash": "a00e2394e080bba7c272a1c2467226d9662dab9ae79042282ecb283944b7281b"
+    },
+    {
+      "id": "code-053",
+      "type": "code",
+      "source": "limitFlash = 2 // フラッシュ制限",
+      "sourceHash": "f94baaef2be3338dee954393151827bc06be5ba88c54ab719d7c632e71dbe6c5",
+      "translation": "limitFlash = 2 // Flash Limit",
+      "contextHash": "f94baaef2be3338dee954393151827bc06be5ba88c54ab719d7c632e71dbe6c5"
+    },
+    {
+      "id": "code-054",
+      "type": "code",
+      "source": "// 背景を戻す",
+      "sourceHash": "2dc417cb0e9cc916e9a022e6bb5426adf454d18e5b8a17913c5abde2a29a5a84",
+      "translation": "// Restore Background",
+      "contextHash": "2dc417cb0e9cc916e9a022e6bb5426adf454d18e5b8a17913c5abde2a29a5a84"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "使用しているアニメーションは２つありますが、いずれもFire2の２パターン目を固定で貼り付けているだけです。",
+      "sourceHash": "7731ba538c4103c601a52615c936286f3ea667c2a2ad7203fe2391b6565b6125",
+      "translation": "There are two animations in use, but both simply have the second pattern of Fire2 pasted in place.",
+      "contextHash": "7731ba538c4103c601a52615c936286f3ea667c2a2ad7203fe2391b6565b6125"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "scaleXとscaleYの値に格差を付けることで収束側のアニメーションを細長く見せていますが、実際は全く同じパターンです。",
+      "sourceHash": "66959e0b4a4a0987d949da42a19a596c874fd6bade4d5b1117c559f83894781d",
+      "translation": "Giving scaleX and scaleY different values makes the converging animation appear elongated, but in reality, they are exactly the same pattern.",
+      "contextHash": "66959e0b4a4a0987d949da42a19a596c874fd6bade4d5b1117c559f83894781d"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "t/etという式は現在時間／終了時間という意味で0から開始し、最終的には値が1になります。つまり「scale = 2 * t/et」という式はアニメーションのサイズが0倍から始まり最終的には2倍になるということです。",
+      "sourceHash": "7e98d6b4eff64b6562fbf8265aff96cc1a4bc3bcc545a49a01fa7b6e0c5ecf5f",
+      "translation": "The expression t/et means current time / end time. It starts at 0 and eventually reaches 1. In other words, the expression \"scale = 2 * t/et\" means that the animation starts at 0 times its size and eventually becomes twice its size.",
+      "contextHash": "7e98d6b4eff64b6562fbf8265aff96cc1a4bc3bcc545a49a01fa7b6e0c5ecf5f"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "「scaleX = 2 * (1-t/et)」はその反対です。アニメーションの横幅が2倍から0倍へと変化していきます。",
+      "sourceHash": "d3945a781c641ab35d8961cd818d677ac6aaf78f7c41e588676190520f387f9c",
+      "translation": " \"scaleX = 2 * (1-t/et)\" is the opposite. The animation's width changes from twice its size to 0 times its size.",
+      "contextHash": "d3945a781c641ab35d8961cd818d677ac6aaf78f7c41e588676190520f387f9c"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "opacity（不透明度）も同様です。",
+      "sourceHash": "61be25c7dffcdd780316916156dcefeca9867acdfdbff9ebeda7fd7a9c8e1167",
+      "translation": "The same applies to opacity.",
+      "contextHash": "61be25c7dffcdd780316916156dcefeca9867acdfdbff9ebeda7fd7a9c8e1167"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "limitSound, limitFlashの値を大きくすると効果音やフラッシュの実行回数を抑制できます。repeatが多く、intervalが小さい場合は制限しないと目と耳によろしくないです。converge型、radiate型は最初から設定されているのでなくても大丈夫ですが。",
+      "sourceHash": "b2e4b7c0602725bd27e11522e70ba14c834f4c5cee5a2168c9584297d87e3bed",
+      "translation": "Increasing the values of limitSound and limitFlash suppresses the number of times sound effects and flashes are executed. When repeat is high and interval is small, failing to limit them is unpleasant for the eyes and ears. The converge and radiate types do not need to be limited, since they are configured from the start.",
+      "contextHash": "b2e4b7c0602725bd27e11522e70ba14c834f4c5cee5a2168c9584297d87e3bed"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "lookCourseによってアニメーションは進行方向を向きます。",
+      "sourceHash": "e92c21f7251aa4034cc2bf1b340ab0342921f06256b902b0c209e50b6517640e",
+      "translation": "lookCourse makes the animation face the direction of travel.",
+      "contextHash": "e92c21f7251aa4034cc2bf1b340ab0342921f06256b902b0c209e50b6517640e"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "「script = $gameScreen.startFlash([255,128,0,128], 30);」はイベントコマンドの画面のフラッシュと全く同じものを呼んでいます。",
+      "sourceHash": "21df4aaa3b47df8a9521c4597134f646c9f22f19cfbc6e9179a4bb6646367627",
+      "translation": " \"script = $gameScreen.startFlash([255,128,0,128], 30);\" calls exactly the same screen flash as the event command.",
+      "contextHash": "21df4aaa3b47df8a9521c4597134f646c9f22f19cfbc6e9179a4bb6646367627"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicAnimation（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）および、DynamicMotion（[[LINK_3]]ＭＺ[[/LINK_3]]、[[LINK_4]]ＭＶ[[/LINK_4]]）プラグインの解説の一部です。",
+      "sourceHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f",
+      "parts": [
+        {
+          "source": "このページはDynamicAnimation（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）および、DynamicMotion（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 4
+        },
+        {
+          "source": "）プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the documentation for the DynamicAnimation ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]) and DynamicMotion ([[LINK_3]]MZ[[/LINK_3]], [[LINK_4]]MV[[/LINK_4]]) plugins.",
+      "contextHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "ＭＺでの利用は、[[LINK_1]]DynamicAnimationMZからMVアニメを呼び出すプラグイン[[/LINK_1]]を参照してください。",
+      "sourceHash": "971709bf512a66ca321ca3b40a4b302ce79809be70e0c7a8b9ed8c8983c592f0",
+      "parts": [
+        {
+          "source": "ＭＺでの利用は、",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationMZからMVアニメを呼び出すプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "For using it with MZ, please refer to [[LINK_1]]the plugin that calls MV animations from DynamicAnimationMZ[[/LINK_1]].",
+      "contextHash": "971709bf512a66ca321ca3b40a4b302ce79809be70e0c7a8b9ed8c8983c592f0"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]召喚[[/LINK_1]]DynamicAnimation ver1.06（2020/09/08更新）",
+      "sourceHash": "381c2339cd82e25df60da3647a1de96afbc808b75462d849daf057ff19bc01c0",
+      "parts": [
+        {
+          "source": "召喚",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "DynamicAnimation ver1.06（2020/09/08更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Summoning[[/LINK_1]] DynamicAnimation ver1.06 (updated 2020/09/08)",
+      "contextHash": "381c2339cd82e25df60da3647a1de96afbc808b75462d849daf057ff19bc01c0"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]炎の渦[[/LINK_1]]DynamicMotion ver1.04（2020/05/09）",
+      "sourceHash": "0099124446d0cf258d901edf823287e35cfc7924aae63c805e414c95a213367c",
+      "parts": [
+        {
+          "source": "炎の渦",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "DynamicMotion ver1.04（2020/05/09）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Flame Vortex[[/LINK_1]] DynamicMotion ver1.04 (2020/05/09)",
+      "contextHash": "0099124446d0cf258d901edf823287e35cfc7924aae63c805e414c95a213367c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]渦潮[[/LINK_1]]DynamicMotion ver1.04（2020/05/12）",
+      "sourceHash": "a8dd81ee40c14f37ac30270c429b396f666d54ac374d8f1ea25c8d2bbd77eaeb",
+      "parts": [
+        {
+          "source": "渦潮",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "DynamicMotion ver1.04（2020/05/12）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Whirlpool[[/LINK_1]] DynamicMotion ver1.04 (2020/05/12)",
+      "contextHash": "a8dd81ee40c14f37ac30270c429b396f666d54ac374d8f1ea25c8d2bbd77eaeb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]サイコキネシス[[/LINK_1]]（2020/05/25）",
+      "sourceHash": "16d3d250db4488fa7e8845260ac7a6f38b3f623080b2774e8c02dd6434b4d11d",
+      "parts": [
+        {
+          "source": "サイコキネシス",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/05/25）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Psychokinesis[[/LINK_1]] (2020/05/25)",
+      "contextHash": "16d3d250db4488fa7e8845260ac7a6f38b3f623080b2774e8c02dd6434b4d11d"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]炎の帯[[/LINK_1]]（2021/06/16）",
+      "sourceHash": "bb6d28df01b4f681db0bbcbf20b33e242775422622931bd815dc4447ef59d27a",
+      "parts": [
+        {
+          "source": "炎の帯",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2021/06/16）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Flame Band[[/LINK_1]] (2021/06/16)",
+      "contextHash": "bb6d28df01b4f681db0bbcbf20b33e242775422622931bd815dc4447ef59d27a"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]ブレス[[/LINK_1]]（2023/07/31更新）",
+      "sourceHash": "f435f03a5c97e0057e74e49fab84ee0627d832ac2c3d7a26f85ac7daf3105aec",
+      "parts": [
+        {
+          "source": "ブレス",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2023/07/31更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Breath[[/LINK_1]] (updated 2023/07/31)",
+      "contextHash": "f435f03a5c97e0057e74e49fab84ee0627d832ac2c3d7a26f85ac7daf3105aec"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]スーパーノヴァ[[/LINK_1]]（2023/11/23）",
+      "sourceHash": "7a854ab6a9e307fb99c55a72b856861bce878e2a82d49c9b32b513c9bec2503a",
+      "parts": [
+        {
+          "source": "スーパーノヴァ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2023/11/23）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Supernova[[/LINK_1]] (2023/11/23)",
+      "contextHash": "7a854ab6a9e307fb99c55a72b856861bce878e2a82d49c9b32b513c9bec2503a"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]フレア[[/LINK_1]]（2024/04/05）",
+      "sourceHash": "671e1387cdb95a74106ac585ac7f2b71f24edef41ae978d2e311324fb9827dd4",
+      "parts": [
+        {
+          "source": "フレア",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2024/04/05）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Flare[[/LINK_1]] (2024/04/05)",
+      "contextHash": "671e1387cdb95a74106ac585ac7f2b71f24edef41ae978d2e311324fb9827dd4"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "単純な円周運動の[[LINK_1]]サンプル[[/LINK_1]]は既にありますが、こちらは全体攻撃向けです。",
+      "sourceHash": "e738054e5534389ae8c2ed5bcdbc2a1233325c9475e60b069e2cfa168ccc007d",
+      "parts": [
+        {
+          "source": "単純な円周運動の",
+          "link": false
+        },
+        {
+          "source": "サンプル",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "は既にありますが、こちらは全体攻撃向けです。",
+          "link": false
+        }
+      ],
+      "translation": "There is already a [[LINK_1]]sample[[/LINK_1]] of simple circular motion, but this one is intended for all-enemy attacks.",
+      "contextHash": "e738054e5534389ae8c2ed5bcdbc2a1233325c9475e60b069e2cfa168ccc007d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "なお、[[LINK_1]]継続型の定義は2020/05/09に更新[[/LINK_1]]していますので、反映していないとうまくいかない可能性があります。",
+      "sourceHash": "67f4bb079924c873f3bbeb904f4e7f61ad86b6e86afc20800d0404d8585248bd",
+      "parts": [
+        {
+          "source": "なお、",
+          "link": false
+        },
+        {
+          "source": "継続型の定義は2020/05/09に更新",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "していますので、反映していないとうまくいかない可能性があります。",
+          "link": false
+        }
+      ],
+      "translation": "Note that [[LINK_1]]the definitions for ongoing types were updated on 2020/05/09[[/LINK_1]], so it may not work correctly if the changes have not been applied.",
+      "contextHash": "67f4bb079924c873f3bbeb904f4e7f61ad86b6e86afc20800d0404d8585248bd"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]スライディング[[/LINK_1]]で使用しているものと同じです。",
+      "sourceHash": "c0e221075af345569c1539c3874c10148bd6dfdda6af75c62ddad9442c649993",
+      "parts": [
+        {
+          "source": "スライディング",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で使用しているものと同じです。",
+          "link": false
+        }
+      ],
+      "translation": "It is the same as the one used in [[LINK_1]]Sliding[[/LINK_1]].",
+      "contextHash": "c0e221075af345569c1539c3874c10148bd6dfdda6af75c62ddad9442c649993"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "※[[LINK_1]]DynamicAnimation[[/LINK_1]]を最新（2021/06/16～）へ更新してください。残像機能が正常動作しない不具合を修正しています。",
+      "sourceHash": "8ea22b43ef38530d3410f1f7cc2164780fb255d3badb5a14ee7c2cf591b4b3b2",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を最新（2021/06/16～）へ更新してください。残像機能が正常動作しない不具合を修正しています。",
+          "link": false
+        }
+      ],
+      "translation": "※Please update [[LINK_1]]DynamicAnimation[[/LINK_1]] to the latest version (2021/06/16 onward). This fixes a bug that prevented the afterimage function from working correctly.",
+      "contextHash": "8ea22b43ef38530d3410f1f7cc2164780fb255d3badb5a14ee7c2cf591b4b3b2"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]自在に遠景（近景）を表示するプラグイン[[/LINK_1]]との組み合わせによって、演出中に戦闘背景を変更しています。",
+      "sourceHash": "e9afc1c682893d3de5305698241eb69a90c2747703221022b70864d8f71b0f6b",
+      "parts": [
+        {
+          "source": "自在に遠景（近景）を表示するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との組み合わせによって、演出中に戦闘背景を変更しています。",
+          "link": false
+        }
+      ],
+      "translation": "The battle background is changed during the performance by combining it with the [[LINK_1]]plugin for freely displaying distant (nearby) backgrounds[[/LINK_1]].",
+      "contextHash": "e9afc1c682893d3de5305698241eb69a90c2747703221022b70864d8f71b0f6b"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘背景の色調を変更するプラグイン[[/LINK_1]]によって、演出中に背景を暗くしています。",
+      "sourceHash": "c44760273b37a83d83adc9d4e43bffcf7d94022069be8a9d95258ea2d021f2e7",
+      "parts": [
+        {
+          "source": "戦闘背景の色調を変更するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "によって、演出中に背景を暗くしています。",
+          "link": false
+        }
+      ],
+      "translation": "The background is darkened during the performance by the [[LINK_1]]plugin for changing the tone of the battle background[[/LINK_1]].",
+      "contextHash": "c44760273b37a83d83adc9d4e43bffcf7d94022069be8a9d95258ea2d021f2e7"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotion plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "魔法系のサンプル技を紹介していきます。": "I will introduce some sample magic techniques.",
+    "処理負荷の現実性から、基本的にはＭＶ用アニメを使っています。ＭＶを持ってない人はごめんなさい。": "For practical processing-load reasons, I primarily use MV animations. Sorry to those who don't own MV.",
+    "目次": "Table of Contents",
+    "召喚（2020/09/08更新）": "Summoning (Updated 2020/09/08)",
+    "※要screen型テンプレートです。（DynamicAnimation ver1.06で追加）": "※Requires a screen-type template. (Added in DynamicAnimation ver1.06)",
+    "アクターを消去して全体アニメを表示します。": "The actor is erased and a full-party animation is displayed.",
+    "// 全員透明化": "// Make everyone transparent",
+    "// 画面全体にアニメーション": "// Animation across the entire screen",
+    "// 透明化解除": "// Remove transparency",
+    "『performer = a.friendsUnit().members()』によって、アクター全体を対象にしています。": " \"performer = a.friendsUnit().members()』 targets the entire party of actors.",
+    "※『$gameParty.members()』でも有効ですが『a.friendsUnit().members()』なら、使用者がエネミーでも動作します。": "※『$gameParty.members()』 also works, but 『a.friendsUnit().members()』 works even when the user is an enemy.",
+    "炎の渦 DynamicMotion ver1.04（2020/05/09）": "Whirling Flames DynamicMotion ver1.04 (2020/05/09)",
+    "対象の周囲に回り込む炎を起こします。": "Creates flames that circle around the target.",
+    "DynamicMotion ver1.04（DynamicAnimation ver1.07）以降で可能な表示優先度の変更機能を用いています。": "This uses the function for changing display priority, available in DynamicMotion ver1.04 (DynamicAnimation ver1.07) and later.",
+    "アニメーションは『67:炎/単体2』ですが、好きなものに変えてください。": "The animation is 『67:Flame / Single Target 2』, but feel free to change it to whatever you like.",
+    "<D-Animation:vortex> // 渦型": "<D-Animation:vortex> // Vortex type",
+    "radiusX *= 2 + b.width/2 // Ｘ半径": "radiusX *= 2 + b.width/2 // X radius",
+    "radiusY *= 1 // Ｙ半径": "radiusY *= 1 // Y radius",
+    "radX *= 5 // 回転角度Ｘ": "radX *= 5 // X rotation angle",
+    "radY *= 5 // 回転角度Ｙ": "radY *= 5 // Y rotation angle",
+    "z = this.y < b.y ? b.z - 1 : this.z // Ｚ座標": "z = this.y < b.y ? b.z - 1 : this.z // Z coordinate",
+    "Ｘ半径（radiusX）に『b.width/2』を足しているのは、最終的な半径を対象の横幅に合わせるためです。そっちのほうが炎に包まれた感じがしてカッコいいからですが、その辺はお好みで調整してください。": "『b.width/2』 is added to the X radius (radiusX) so that the final radius matches the target's width. It looks cooler that way, as if the target were wrapped in flames, but adjust it to your liking.",
+    "『z = this.y < b.y ? b.z - 1 : this.z』はＺ座標（＝表示優先度）の変更処理です。「アニメーションの位置が対象より上の時はＺ座標－１、それ以外は元の値」を設定することで背面表示しています。": " \"z = this.y < b.y ? b.z - 1 : this.z』 changes the Z coordinate (= display priority). It displays the animation behind the target by setting “Z coordinate - 1 when the animation's position is above the target; the original value otherwise.”",
+    "※『z = b.z』でよさそうな気がしますが、なぜかアニメーションの一部描画が止まるバグが発生しました。解決できそうにないのでこれを使ってください。": "※『z = b.z』 seems like it should work, but for some reason it caused a bug that stopped part of the animation from being drawn. I couldn't find a solution, so please use this instead.",
+    "渦潮 DynamicMotion ver1.04（2020/05/12）": "Whirlpool DynamicMotion ver1.04 (2020/05/12)",
+    "敵陣の中心を基準に敵をグルグル回します。": "Makes the enemies spin around the center of the enemy formation.",
+    "スキルのアニメーションは『Darkness2』のパターンを繰り返しているだけです。位置は『画面』にしています。": "The skill's animation simply repeats the 『Darkness2』 pattern. Its position is set to 『Screen』.",
+    "sy = defaultY + 50 // 位置を下寄りに": "sy = defaultY + 50 // Position lower",
+    "z = 0 // 対象より下に表示": "z = 0 // Display below the target",
+    "performerDelay = 2 // 時間差": "performerDelay = 2 // Delay",
+    "radiusX *= 2 // Ｘ半径": "radiusX *= 2 // X radius",
+    "radX *= 4 // Ｘ回転角度": "radX *= 4 // X rotation angle",
+    "radY *= 4 // Ｙ回転角度": "radY *= 4 // Y rotation angle",
+    "公転（revolve）型の機能によって、対象をグルグル回しています。": "The targets are made to spin using the revolve-type function.",
+    "『performerDelay 』に時間差の値を指定しないと敵キャラが重なってしまいます。": "If you don't specify a delay value for 『performerDelay 』, the enemies will overlap.",
+    "最も難解なのは『dx, dy』の数式ですが……。これは敵キャラが敵陣中央に向かって移動し、また元の位置へと戻ってくるという式です。": "The most difficult part is the formula for 『dx, dy』... It makes the enemies move toward the center of the enemy formation and then return to their original positions.",
+    "sinは90度毎に値を0->1->0と変化させるので、その性質を利用して行ったり来たりさせています。": "Since sin changes its value from 0->1->0 every 90 degrees, this property is used to make them move back and forth.",
+    "この数式へさらに回転成分を加算することで、全体の動作を実現しています。": "Adding a rotational component to this formula produces the overall motion.",
+    "サイコキネシス（2020/05/25）": "Psychokinesis (2020/05/25)",
+    "ランダム位置に出現した岩石を、さらにランダム位置に移動。そこから対象へぶつけます。": "Rocks appear at random positions, then move to other random positions. From there, they are hurled at the targets.",
+    "ランダム位置を保持するためには継続（keep）型のテンプレートを用います。": "To retain random positions, use a keep-type template.",
+    "// 術者前方にランダムで砂煙": "// Random sand clouds in front of the caster",
+    "id = XX // 砂煙のアニメ": "id = XX // Sand cloud animation",
+    "// 砂煙の発生位置を引き継いで岩石登場→対象の上空へ移動": "// Rock appears at the sand cloud's origin, then moves overhead of the target",
+    "id = XX // 岩石の停止アニメ": "id = XX // Rock idle animation",
+    "arrival = 8 // 対空地点に到達するフレーム": "arrival = 8 // Frames until reaching the overhead point",
+    "// 対象の上空から対象へ岩石が殺到": "// Rocks rush from overhead down onto the target",
+    "id = XX // 岩石の衝突アニメ": "id = XX // Rock impact animation",
+    "継続（keep）型には、前の<D-Animation": "The keep-type template copies the previous <D-Animation",
+    ">の終点座標を始点にコピーする効果があります。また、繰り返し回数などの情報も自動で引き継ぎます。": ">'s ending coordinates as its starting point. It also automatically carries over information such as the number of repetitions.",
+    "ポイントは<D-Animation:shotRandom&keep>というように、&で後ろ側に結合することです。これはshotRandom自体が情報を持っているためです。この場合、後ろ側のテンプレートの設定が優先されます。": "The key is to join it to the back with &, as in <D-Animation:shotRandom&keep>. This is because shotRandom itself contains information. In this case, the settings of the template on the back take priority.",
+    "また、このスキルには３つのアニメーションが必要です。": "This skill also requires three animations.",
+    "砂煙のアニメ：Earh1で作成した単純な砂煙です。": "Dust cloud animation: A simple dust cloud created with Earh1.",
+    "岩石の停止アニメ：Earth3の岩石を２５フレーム分コピーしたものです。": "Stationary rock animation: A copy of the rock from Earth3 for 25 frames.",
+    "合成方法を『通常』にする以外は一切の変更不要です。": "No changes are necessary other than setting the blend mode to 『Normal』.",
+    "岩石の衝突アニメ：↑の岩石が６フレーム目から砕けるアニメです。": "Rock impact animation: An animation in which the ↑ rock shatters starting from frame 6.",
+    "炎の帯（2021/06/16）": "Trail of Fire (2021/06/16)",
+    "尾を引く放物線を対象に放ちます。": "Sends a trailing parabola toward the target.",
+    "必要なアニメーションは二つあります。": "Two animations are required.",
+    "一つ目は帯を構成するアニメーションです。左を向いた固定パターンのアニメーションを指定します。円形などでも構いません。": "The first is the animation that forms the trail. Specify a fixed-pattern animation facing left. A circular one is fine as well.",
+    "このサンプルでは『Fire2』の２パターン目を９０度回転させて配置しています。": "In this sample, the second pattern of 『Fire2』 is rotated 90 degrees and placed.",
+    "設定したフレーム数がそのまま放物線が着弾するまでの時間になります。": "The number of frames you set directly becomes the time until the parabola hits its target.",
+    "二つ目は着弾のアニメーションです。こちらは特筆すべき点はありません。": "The second is the impact animation. There is nothing noteworthy about this one.",
+    "このサンプルでは『Fire1』のパターンを使用していますが、そのまま『67:炎/単体2』などでもよいと思います。": "This sample uses the 『Fire1』 pattern, but you could also use 『67:Flame / Single Target 2』 as is.",
+    "// 炎の帯": "// Band of fire",
+    "position = 2 // 位置を足元に": "position = 2 // Position at the feet",
+    "ey -= 48 // 位置を少し上に調整": "ey -= 48 // Adjust position slightly upward",
+    "arcY = -150 // 放物線の高さ": "arcY = -150 // Parabolic height",
+    "scaleX = 2 // 横幅": "scaleX = 2 // Width",
+    "scaleY = 1 // 縦幅": "scaleY = 1 // Height",
+    "afterimage = 10 // 残像の数": "afterimage = 10 // Number of afterimages",
+    "afterimageInterval = 1 // 残像の間隔": "afterimageInterval = 1 // Afterimage spacing",
+    "// 着弾": "// Impact",
+    "赤字部分には２つのアニメーションをそれぞれ指定してください。": "Specify each of the two animations in the sections shown in red.",
+    "『lookCourse』テンプレートによりアニメーションに進路を向かせています。これに残像を加えることで、尾を引く放物線のように見せています。残像の数や間隔を好きなように調整してください。": "The 『lookCourse』 template makes the animation face its course. Adding afterimages makes it look like a trailing parabola. Adjust the number and spacing of the afterimages as you like.",
+    "『scaleX = 2』によりアニメーションを横に引き伸ばしています。放物線を自然に見せるための調整です。": " \"scaleX = 2』 stretches the animation horizontally. This is an adjustment to make the parabola look natural.",
+    "ブレス（2023/07/31更新）": "Breath (Updated 2023/07/31)",
+    "口からブレスを吐きます。": "Breath is exhaled from the mouth.",
+    "アニメーションは『82:水/単体2』を使用しています。必要に応じて炎などに変更してください。": "The animation uses 『82:Water / Single Target 2』. Change it to fire or something else as needed.",
+    "position = 3 // 対象全体": "position = 3 // Entire target group",
+    "ey = defaultY -50 + 300 * r/repeat // 上から下へ終点移動": "ey = defaultY -50 + 300 * r/repeat // Move the endpoint from top to bottom",
+    "limitFlash = 0 // フラッシュ制限": "limitFlash = 0 // Flash limit",
+    "limitSound = 4 // 効果音制限": "limitSound = 4 // Sound effect limit",
+    "赤字部分によってブレスの始点を調整しています。": "The sections shown in red adjust the starting point of the breath.",
+    "敵キャラのメモ欄に以下のように記載してください。以下の例では中央から右に50ピクセル、上に50ピクセルほど始点をずらしています。": "Please enter the following in the enemy's note field. In the example below, the starting point has been shifted about 50 pixels to the right and 50 pixels upward from the center.",
+    "なお、上記の赤字部分は使用者が敵キャラの場合しか想定していません。アクターも含む場合は以下に差し替えてください。": "Note that the red text above only assumes that the user is an enemy. If actors are also included, replace it with the following.",
+    "『BreathX』『BreathY』の文字列は好きなように変更しても構いませんし、他の文字列を追加することもできます。": "You may change the strings 'BreathX' and 'BreathY' as you like, and you can also add other strings.",
+    "例えば『EyeX』『EyeY』を追加して、目から光線を撃つ敵を作ってもいいと思います。": "For example, you could add 'EyeX' and 'EyeY' to create an enemy that shoots rays from its eyes.",
+    "スーパーノヴァ（2023/11/23）": "Supernova (2023/11/23)",
+    "リンク先のプラグインはver1.011～に更新してください。そうしないと、後述の不透明度の機能が使えません。": "Please update the linked plugin to ver1.011 or later. Otherwise, you will not be able to use the opacity function described below.",
+    "アニメーションは『109:無属性/全体2』を使用しています。お好きなように変更してください。": "The animation used is '109: Non-elemental / All 2'. Please change it as you like.",
+    "// 爆発": "// Explosion",
+    "まず『commonEvent = x』によってコモンイベントを呼び出します。xの部分に番号を設定してください。": "First, call a common event using 'commonEvent = x'. Set the number in place of x.",
+    "呼び出したコモンイベント内からプラグインコマンドを呼び出し、背景を変更します。今回は以下のように設定しています。": "Call a plugin command from within the common event to change the background. This time, I have configured it as follows.",
+    "※画像はクリックで拡大表示できます。": "※Click the image to enlarge it.",
+    "コツとしては不透明度をテキストモードで入力し『$gameVariables.value(1)』というように変数の値を参照するように設定することです。": "The trick is to enter the opacity in text mode and set it to reference the variable's value, such as '$gameVariables.value(1)'.",
+    "以降、指定した番号の変数を変更するだけで不透明度も変化するようになります。": "After that, the opacity will also change simply by changing the variable with the specified number.",
+    "※いちいち手動で不透明度を変更してもいいですが、超面倒です。": "※You could change the opacity manually each time, but that would be extremely tedious.",
+    "フレア（2024/04/05）": "Flare (2024/04/05)",
+    "対象に向かって線が収束し、放射状に炎が飛び出していきます。": "Lines converge toward the target, and flames shoot out radially.",
+    "// 背景を暗くする": "// Darken the background",
+    "// 収束": "// Convergence",
+    "scaleX = 2 * (1-t/et) // 徐々に縮小": "scaleX = 2 * (1-t/et) // Gradually shrink",
+    "scaleY = 0.25 * (1-t/et) // 徐々に縮小": "scaleY = 0.25 * (1-t/et) // Gradually shrink",
+    "opacity = 255 * t/et // 徐々に不透明": "opacity = 255 * t/et // Gradually become opaque",
+    "radiusX *= 1 // 収束半径Ｘ": "radiusX *= 1 // Convergence radius X",
+    "radiusY *= 1 // 収束半径Ｙ": "radiusY *= 1 // Convergence radius Y",
+    "limitSound = 999 // 効果音制限（最初の１回のみ演奏）": "limitSound = 999 // Sound effect limit (play only once at the beginning)",
+    "// フラッシュ（[赤,緑,青,強さ], 時間）": "// Flash ([Red, Green, Blue, Intensity], Duration)",
+    "// 放射": "// Radiation",
+    "scale = 2 * t/et // 徐々に巨大化": "scale = 2 * t/et // Gradually enlarge",
+    "opacity = 255 * (1 - t/et) // 徐々に透明": "opacity = 255 * (1 - t/et) // Gradually become transparent",
+    "radiusX *= 0.5 // 放射半径Ｘ": "radiusX *= 0.5 // Radiation radius X",
+    "radiusY *= 0.5 // 放射半径Ｙ": "radiusY *= 0.5 // Radial Radius Y",
+    "limitSound = 8 // 効果音制限": "limitSound = 8 // Sound Effect Limit",
+    "limitFlash = 2 // フラッシュ制限": "limitFlash = 2 // Flash Limit",
+    "// 背景を戻す": "// Restore Background",
+    "使用しているアニメーションは２つありますが、いずれもFire2の２パターン目を固定で貼り付けているだけです。": "There are two animations in use, but both simply have the second pattern of Fire2 pasted in place.",
+    "scaleXとscaleYの値に格差を付けることで収束側のアニメーションを細長く見せていますが、実際は全く同じパターンです。": "Giving scaleX and scaleY different values makes the converging animation appear elongated, but in reality, they are exactly the same pattern.",
+    "t/etという式は現在時間／終了時間という意味で0から開始し、最終的には値が1になります。つまり「scale = 2 * t/et」という式はアニメーションのサイズが0倍から始まり最終的には2倍になるということです。": "The expression t/et means current time / end time. It starts at 0 and eventually reaches 1. In other words, the expression \"scale = 2 * t/et\" means that the animation starts at 0 times its size and eventually becomes twice its size.",
+    "「scaleX = 2 * (1-t/et)」はその反対です。アニメーションの横幅が2倍から0倍へと変化していきます。": " \"scaleX = 2 * (1-t/et)\" is the opposite. The animation's width changes from twice its size to 0 times its size.",
+    "opacity（不透明度）も同様です。": "The same applies to opacity.",
+    "limitSound, limitFlashの値を大きくすると効果音やフラッシュの実行回数を抑制できます。repeatが多く、intervalが小さい場合は制限しないと目と耳によろしくないです。converge型、radiate型は最初から設定されているのでなくても大丈夫ですが。": "Increasing the values of limitSound and limitFlash suppresses the number of times sound effects and flashes are executed. When repeat is high and interval is small, failing to limit them is unpleasant for the eyes and ears. The converge and radiate types do not need to be limited, since they are configured from the start.",
+    "lookCourseによってアニメーションは進行方向を向きます。": "lookCourse makes the animation face the direction of travel.",
+    "「script = $gameScreen.startFlash([255,128,0,128], 30);」はイベントコマンドの画面のフラッシュと全く同じものを呼んでいます。": " \"script = $gameScreen.startFlash([255,128,0,128], 30);\" calls exactly the same screen flash as the event command."
+  }
+}
