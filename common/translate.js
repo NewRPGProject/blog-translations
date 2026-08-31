@@ -340,9 +340,16 @@ function decodeHtmlEntities(text) {
     // The browser has the complete HTML named-entity table. Decode here rather
     // than maintaining a growing list such as &divide;, &times;, and so on.
     // A textarea uses RCDATA parsing, so text that resembles an HTML tag is
-    // retained as text while character references are decoded.
+    // retained as text while character references are decoded. Escape every
+    // ampersand that is not part of a semicolon-terminated entity first:
+    // HTML also accepts some legacy entities without a semicolon, which turns
+    // a code token such as "near&center" into "near¢er" (&cent + er).
+    const protectedText = String(text).replace(
+        /&(?!(?:#[0-9]+|#x[0-9a-f]+|[a-z][a-z0-9]+);)/giu,
+        "&amp;"
+    );
     const textarea = document.createElement("textarea");
-    textarea.innerHTML = String(text);
+    textarea.innerHTML = protectedText;
     return textarea.value;
 }
 
