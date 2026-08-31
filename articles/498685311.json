@@ -1,0 +1,542 @@
+{
+  "articleId": "498685311",
+  "sourceUrl": "https://newrpg.seesaa.net/article/498685311.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "c047769d2d406466200222159004034bb68d5ba39fc33530f87c783a18f9d7c0",
+  "translatedAt": "2026-08-31T02:57:50.044Z",
+  "title": "Set a Custom Formula for the Experience Curve [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "経験値曲線の数式を設定する【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "8e3e760f5565bf6a4707e3498a675893145e3bc568c00f76d29532e86502d3b7",
+      "translation": "Set a Custom Formula for the Experience Curve [RPG Maker MZ & MV Plugin]",
+      "contextHash": "8e3e760f5565bf6a4707e3498a675893145e3bc568c00f76d29532e86502d3b7"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "経験値曲線に独自の数式を適用できるようにします。",
+      "sourceHash": "81c162714d6affca20810c844bd4486a7aa13a916a23412451c45e7a3395acdd",
+      "translation": "Allows you to apply a custom formula to the experience curve.",
+      "contextHash": "81c162714d6affca20810c844bd4486a7aa13a916a23412451c45e7a3395acdd"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ＲＰＧツクールＭＺおよびＭＶでは、職業の経験値曲線を調整できますが、細かい制御はできません。",
+      "sourceHash": "684bae4f337f0d8fd2e962136d9a0b87795698e0c957ae8aa26a8ab9a79b66fb",
+      "translation": "In RPG Maker MZ and MV, you can adjust the experience curve for each class, but you cannot control it in detail.",
+      "contextHash": "684bae4f337f0d8fd2e962136d9a0b87795698e0c957ae8aa26a8ab9a79b66fb"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "特に高レベル帯の曲線の上昇がゆるやかなのが悩みのタネです。",
+      "sourceHash": "a7dba997df93707908100bb65dd70e67301cee6d7012a7723a289f83fb6e35f3",
+      "translation": "In particular, the gradual increase of the curve at higher levels can be a problem.",
+      "contextHash": "a7dba997df93707908100bb65dd70e67301cee6d7012a7723a289f83fb6e35f3"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "最も急な設定にしたとしても、",
+      "sourceHash": "17e1c6511706e6d396085f623bd0c1e8f8c3f235e1ae3c39d80d01c9f4e6664f",
+      "translation": "Even with the steepest setting,",
+      "contextHash": "17e1c6511706e6d396085f623bd0c1e8f8c3f235e1ae3c39d80d01c9f4e6664f"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "レベル30 -> 31の必要経験値が30612",
+      "sourceHash": "111a817598b5cb37f352d6199a4fb58d2b81c0ba3c5e9f8f85bf0389d34f586e",
+      "translation": "The required experience from level 30 -> 31 is 30612",
+      "contextHash": "111a817598b5cb37f352d6199a4fb58d2b81c0ba3c5e9f8f85bf0389d34f586e"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "レベル40 -> 41の必要経験値が51736",
+      "sourceHash": "dc55042582b5000718c15b989d457e99e6d709026e0427d5e219b1970e11427f",
+      "translation": "The required experience from level 40 -> 41 is 51736",
+      "contextHash": "dc55042582b5000718c15b989d457e99e6d709026e0427d5e219b1970e11427f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "変化倍率は約1.69倍",
+      "sourceHash": "1c4a0c55b868d62a0837d2f7c49259341e343b51ada75d95a8c72d8c918b269a",
+      "translation": "The change is approximately 1.69 times greater",
+      "contextHash": "1c4a0c55b868d62a0837d2f7c49259341e343b51ada75d95a8c72d8c918b269a"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "……が精一杯です。",
+      "sourceHash": "7d6929f66258c8ea5e8e47442ad4956ee82877bb8082d00a0d65f6ba683a0a51",
+      "translation": "…is the best you can do.",
+      "contextHash": "7d6929f66258c8ea5e8e47442ad4956ee82877bb8082d00a0d65f6ba683a0a51"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ドラクエシリーズならこの期間で３～４倍に変化することを考えると、かなりゆるやかなのが分かると思います。",
+      "sourceHash": "4c28a183cd166d4d4b02f49d0cc030875804a497ad3d350f85ef20a84371864c",
+      "translation": "Considering that in the Dragon Quest series it increases by three to four times over this span, you can see that the increase is quite gradual.",
+      "contextHash": "4c28a183cd166d4d4b02f49d0cc030875804a497ad3d350f85ef20a84371864c"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そのため、レベルの上昇速度を一定に保とうとすると、長編の後半では「強敵と戦うよりも弱い敵をたくさん倒したほうが楽」「強敵を倒しても経験値が低く達成感がない」なんて状況になってしまいがちです。",
+      "sourceHash": "0e7d79855acae8c750eea5c0eb7cde3d5e36dba511f4e50e1615a636efdffd54",
+      "translation": "As a result, if you try to keep the leveling speed constant, the latter half of a long game can easily end up in a situation where “it is easier to defeat lots of weak enemies than to fight strong enemies” and “even when you defeat a strong enemy, the experience reward is low and it does not feel rewarding.”",
+      "contextHash": "0e7d79855acae8c750eea5c0eb7cde3d5e36dba511f4e50e1615a636efdffd54"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "このプラグインでは自由に数式を設定することで、製作者の望むバランスを実現できます。",
+      "sourceHash": "19b55a534446dbec94c33cc0eb8fc493d9226149c509b47f366ff21694cee8c8",
+      "translation": "By freely setting a formula with this plugin, you can achieve the balance you want.",
+      "contextHash": "19b55a534446dbec94c33cc0eb8fc493d9226149c509b47f366ff21694cee8c8"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "なお、基準とするのは「指定のレベルに必要な経験値」です。",
+      "sourceHash": "0c027865f6654974d94fefcaddfff08675fe2e7d78036300289752f72f68dda6",
+      "translation": "The reference point is the “experience required for the specified level.”",
+      "contextHash": "0c027865f6654974d94fefcaddfff08675fe2e7d78036300289752f72f68dda6"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "「次のレベルに必要な経験値」を基準に設定することはできません。",
+      "sourceHash": "02091bdaaf64af0df15fa4f899ba99d0691c4d2a7f0d15ed2edcc8e6bf9fae45",
+      "translation": "You cannot set it based on the “experience required for the next level.”",
+      "contextHash": "02091bdaaf64af0df15fa4f899ba99d0691c4d2a7f0d15ed2edcc8e6bf9fae45"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature on in the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_ExpCurve.js",
+      "sourceHash": "ce39a538ed09cfe77ab55493c61ab38155ffbf5974a40e0d8617f82ce3e8157e",
+      "translation": "NRP_ExpCurve.js ",
+      "contextHash": "606980a2c154847fe0e6b2facd9c3f543c974e3425aeaf2e4b35a7a14c5cf4eb"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ver1.01（2024/10/02）",
+      "sourceHash": "0fc6e0cc7877ebc40b4db0d20d06f66e5ea61326c069ff452038f259b1f2f564",
+      "translation": "ver1.01 (2024/10/02) ",
+      "contextHash": "606980a2c154847fe0e6b2facd9c3f543c974e3425aeaf2e4b35a7a14c5cf4eb"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/10/02（ver1.01）",
+      "sourceHash": "abadc54821de7d7c2b86e51606247ee4f3332ac40197850645f94316a2a66392",
+      "translation": "2024/10/02 (ver1.01) ",
+      "contextHash": "abadc54821de7d7c2b86e51606247ee4f3332ac40197850645f94316a2a66392"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "レベル１の時の経験値に初期値が設定されてしまう不具合修正。",
+      "sourceHash": "c4943cb88df5c6cf2d9146e3fda7b5f2f82132c35ec2725b5f238814e207963d",
+      "translation": "Fixed a bug that caused an initial value to be set for the experience at level 1.",
+      "contextHash": "c4943cb88df5c6cf2d9146e3fda7b5f2f82132c35ec2725b5f238814e207963d"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "経験値を引き継がずに職業を変更した場合、レベルが０になってしまう不具合修正。",
+      "sourceHash": "4d9b79163294039397f7906f0a5420443a306518c13d99f07e453dee1f6f9039",
+      "translation": "Fixed a bug that caused the level to become 0 when changing classes without carrying over experience.",
+      "contextHash": "4d9b79163294039397f7906f0a5420443a306518c13d99f07e453dee1f6f9039"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2023/03/22（ver1.00）",
+      "sourceHash": "7f10b165b84f1d5bc5e6ef6cdd2f05645e3d7005cee1791d91697c16a817671a",
+      "translation": "2023/03/22 (ver1.00) ",
+      "contextHash": "7f10b165b84f1d5bc5e6ef6cdd2f05645e3d7005cee1791d91697c16a817671a"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "職業のメモ欄に以下のように記入してください。",
+      "sourceHash": "262c251c3a69f8d209660f57ff1f098690b5b4643eb8831cf828b18c5d0083a3",
+      "translation": "Enter the following in the class's note field.",
+      "contextHash": "262c251c3a69f8d209660f57ff1f098690b5b4643eb8831cf828b18c5d0083a3"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<ExpForLevel:[数式]>",
+      "sourceHash": "0d9e9268021ca7aae7486774d5b5ffda5fb68b274a28dbe642e3ae82040fa680",
+      "translation": "<ExpForLevel:[Formula]>",
+      "contextHash": "0d9e9268021ca7aae7486774d5b5ffda5fb68b274a28dbe642e3ae82040fa680"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "例えば、以下のようになります。",
+      "sourceHash": "20a12d4ac9470b960211b068614e469a8944d8b5b27542e73142e2ea98ccfa15",
+      "translation": "For example, it would look like this.",
+      "contextHash": "20a12d4ac9470b960211b068614e469a8944d8b5b27542e73142e2ea98ccfa15"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "これはあるレベルに必要な累計経験値が「5 &times; レベルの3乗」であることを意味しています。",
+      "sourceHash": "720f7e87ef97be124c22ac153d2aad2cdab7f661cd5f5b6d77e6b6f71934b5d5",
+      "translation": "This means that the total experience required for a given level is “5 &times; the cube of the level.”",
+      "contextHash": "720f7e87ef97be124c22ac153d2aad2cdab7f661cd5f5b6d77e6b6f71934b5d5"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "いきなり数式を考えようにもイメージが湧きにくいと思うので、ＥＸＣＥＬなどの表計算ソフトで実際に試してみることをオススメします。",
+      "sourceHash": "ea1fa8d99be5d430fa18176bf48b822bd67dd1dfaae30e4e02061d725abd69fb",
+      "translation": "Since it can be difficult to visualize a formula right away, I recommend trying it out in a spreadsheet program such as EXCEL.",
+      "contextHash": "ea1fa8d99be5d430fa18176bf48b822bd67dd1dfaae30e4e02061d725abd69fb"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "自分が作成したサンプルを置いておきますので参考にどうぞ。",
+      "sourceHash": "ca2f3179e03b12cdeab3494386afe452beff83addbf3686df9119c246503e683",
+      "translation": "I have included a sample I created for your reference.",
+      "contextHash": "ca2f3179e03b12cdeab3494386afe452beff83addbf3686df9119c246503e683"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "20230322_EXP_Sample.xlsx",
+      "sourceHash": "696e450280f1fa3cb50102414935b055f39de2674eacac7305ad26fa32e18579",
+      "translation": "20230322_EXP_Sample.xlsx",
+      "contextHash": "37f910f69ec84cca6d00af9b5f790192004a0c698aacfd2832c52c2090965e20"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "なお、EXCELの数式では2の3乗は2^3と表記しますが、ツクール（JavaScript）の数式では2**3という表記になります。",
+      "sourceHash": "a2c6cf23ae36c4fb3916c927876f677b80659979ab63da0a9066ee60200e5f93",
+      "translation": "In EXCEL formulas, the cube of 2 is written as 2^3, but in RPG Maker (JavaScript) formulas, it is written as 2**3.",
+      "contextHash": "a2c6cf23ae36c4fb3916c927876f677b80659979ab63da0a9066ee60200e5f93"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "基本的には累乗を使った数式を作るといい感じになると思います。",
+      "sourceHash": "50ea6011af370654fe6b90fa22ea8c066a726f84f40fad882accaefc8661e335",
+      "translation": "In general, formulas using exponents tend to produce good results.",
+      "contextHash": "50ea6011af370654fe6b90fa22ea8c066a726f84f40fad882accaefc8661e335"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "上記のxlsxでは、４次関数の式をツクール用に変換して出力する機能があるのでオススメです。",
+      "sourceHash": "dc6e0fd49e9b45b920f8c9e061dc25c497d0e33824aaaabf2326c8df3c4d7f4e",
+      "translation": "The xlsx file mentioned above is recommended because it can convert fourth-degree function formulas into a format for RPG Maker and output them.",
+      "contextHash": "dc6e0fd49e9b45b920f8c9e061dc25c497d0e33824aaaabf2326c8df3c4d7f4e"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "全ての職業で共通で構わないという場合は、プラグインパラメータで既定値を指定することもできます。",
+      "sourceHash": "07c7eacaa10616864b914fce89aab0cc52501238edb18192f506ae327cfb6f58",
+      "translation": "If it is fine for all classes to use the same formula, you can also specify a default value in the plugin parameter.",
+      "contextHash": "07c7eacaa10616864b914fce89aab0cc52501238edb18192f506ae327cfb6f58"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "数式のサンプル",
+      "sourceHash": "13e41524651b07919c18d644c4ecc650aa97a85f8ba1e8b8d71377dc51f6a114",
+      "translation": "Formula Samples",
+      "contextHash": "13e41524651b07919c18d644c4ecc650aa97a85f8ba1e8b8d71377dc51f6a114"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "上記でも紹介した数式です。",
+      "sourceHash": "f701288ebb875d708bf40d24416d08ae081a05ce2f5e8015b3fb0b33888f0adc",
+      "translation": "This is the formula introduced above.",
+      "contextHash": "f701288ebb875d708bf40d24416d08ae081a05ce2f5e8015b3fb0b33888f0adc"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "かなりシンプルな式ですが、それっぽい経験値曲線になります。",
+      "sourceHash": "f69d18fa1859a3856244549aa015db9021d6d47dee4fa7f5488aef89ca3bccb3",
+      "translation": "It is quite a simple formula, but it produces a convincing experience curve.",
+      "contextHash": "f69d18fa1859a3856244549aa015db9021d6d47dee4fa7f5488aef89ca3bccb3"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "４乗を使った数式です。",
+      "sourceHash": "72f873b7391d290e64192f26497d0838e734f7e23a3b5fc2dc6f49dc058b7f98",
+      "translation": "This formula uses the fourth power.",
+      "contextHash": "72f873b7391d290e64192f26497d0838e734f7e23a3b5fc2dc6f49dc058b7f98"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ドラクエっぽい経験値曲線になります。",
+      "sourceHash": "77b541366ac5b5a7a1a72d94879002dfe5de4c29abf196850972eda311be1292",
+      "translation": "It produces an experience curve reminiscent of Dragon Quest.",
+      "contextHash": "77b541366ac5b5a7a1a72d94879002dfe5de4c29abf196850972eda311be1292"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "必要経験値（既定）（DefaultExpForLevel）",
+      "sourceHash": "b1ba4429d7091cb1ffc59089ab381c69b991a187695b290eb8b6e738d56d22e5",
+      "translation": "Required Experience (Default) (DefaultExpForLevel)",
+      "contextHash": "b1ba4429d7091cb1ffc59089ab381c69b991a187695b290eb8b6e738d56d22e5"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "レベルに必要な経験値の既定値です。",
+      "sourceHash": "d04e5760d3acab9c643e9c01d2874149c255d030ea628cbc48a0e9d5be30f1b7",
+      "translation": "The default experience required for each level.",
+      "contextHash": "d04e5760d3acab9c643e9c01d2874149c255d030ea628cbc48a0e9d5be30f1b7"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "例：5*level**3",
+      "sourceHash": "e056044bf80a5b5c44e605a4000af5d40bd4d5b4e1d1e4110c016a88e3101c78",
+      "translation": "Example: 5*level**3",
+      "contextHash": "e056044bf80a5b5c44e605a4000af5d40bd4d5b4e1d1e4110c016a88e3101c78"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]数式のサンプル[[/LINK_1]]",
+      "sourceHash": "3cd195e897a3b4d54d9b0b8a4723d978f5ba98ffd90dccad7a6bedac2910f54e",
+      "parts": [
+        {
+          "source": "数式のサンプル",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formula Examples[[/LINK_1]]",
+      "contextHash": "3cd195e897a3b4d54d9b0b8a4723d978f5ba98ffd90dccad7a6bedac2910f54e"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]必要経験値（既定）（DefaultExpForLevel）[[/LINK_1]]",
+      "sourceHash": "79b62aba4ff0d452f580a4cbd83554e9b5ad77b33b3bd5ef18f55dc52ba7f951",
+      "parts": [
+        {
+          "source": "必要経験値（既定）（DefaultExpForLevel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Required Experience (Default) (DefaultExpForLevel)[[/LINK_1]]",
+      "contextHash": "79b62aba4ff0d452f580a4cbd83554e9b5ad77b33b3bd5ef18f55dc52ba7f951"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "経験値曲線に独自の数式を適用できるようにします。": "Allows you to apply a custom formula to the experience curve.",
+    "ＲＰＧツクールＭＺおよびＭＶでは、職業の経験値曲線を調整できますが、細かい制御はできません。": "In RPG Maker MZ and MV, you can adjust the experience curve for each class, but you cannot control it in detail.",
+    "特に高レベル帯の曲線の上昇がゆるやかなのが悩みのタネです。": "In particular, the gradual increase of the curve at higher levels can be a problem.",
+    "最も急な設定にしたとしても、": "Even with the steepest setting,",
+    "レベル30 -> 31の必要経験値が30612": "The required experience from level 30 -> 31 is 30612",
+    "レベル40 -> 41の必要経験値が51736": "The required experience from level 40 -> 41 is 51736",
+    "変化倍率は約1.69倍": "The change is approximately 1.69 times greater",
+    "……が精一杯です。": "…is the best you can do.",
+    "ドラクエシリーズならこの期間で３～４倍に変化することを考えると、かなりゆるやかなのが分かると思います。": "Considering that in the Dragon Quest series it increases by three to four times over this span, you can see that the increase is quite gradual.",
+    "そのため、レベルの上昇速度を一定に保とうとすると、長編の後半では「強敵と戦うよりも弱い敵をたくさん倒したほうが楽」「強敵を倒しても経験値が低く達成感がない」なんて状況になってしまいがちです。": "As a result, if you try to keep the leveling speed constant, the latter half of a long game can easily end up in a situation where “it is easier to defeat lots of weak enemies than to fight strong enemies” and “even when you defeat a strong enemy, the experience reward is low and it does not feel rewarding.”",
+    "このプラグインでは自由に数式を設定することで、製作者の望むバランスを実現できます。": "By freely setting a formula with this plugin, you can achieve the balance you want.",
+    "なお、基準とするのは「指定のレベルに必要な経験値」です。": "The reference point is the “experience required for the specified level.”",
+    "「次のレベルに必要な経験値」を基準に設定することはできません。": "You cannot set it based on the “experience required for the next level.”",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature on in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_ExpCurve.js": "NRP_ExpCurve.js ",
+    "ver1.01（2024/10/02）": "ver1.01 (2024/10/02) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/10/02（ver1.01）": "2024/10/02 (ver1.01) ",
+    "レベル１の時の経験値に初期値が設定されてしまう不具合修正。": "Fixed a bug that caused an initial value to be set for the experience at level 1.",
+    "経験値を引き継がずに職業を変更した場合、レベルが０になってしまう不具合修正。": "Fixed a bug that caused the level to become 0 when changing classes without carrying over experience.",
+    "2023/03/22（ver1.00）": "2023/03/22 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "職業のメモ欄に以下のように記入してください。": "Enter the following in the class's note field.",
+    "<ExpForLevel:[数式]>": "<ExpForLevel:[Formula]>",
+    "例えば、以下のようになります。": "For example, it would look like this.",
+    "これはあるレベルに必要な累計経験値が「5 &times; レベルの3乗」であることを意味しています。": "This means that the total experience required for a given level is “5 &times; the cube of the level.”",
+    "いきなり数式を考えようにもイメージが湧きにくいと思うので、ＥＸＣＥＬなどの表計算ソフトで実際に試してみることをオススメします。": "Since it can be difficult to visualize a formula right away, I recommend trying it out in a spreadsheet program such as EXCEL.",
+    "自分が作成したサンプルを置いておきますので参考にどうぞ。": "I have included a sample I created for your reference.",
+    "20230322_EXP_Sample.xlsx": "20230322_EXP_Sample.xlsx",
+    "なお、EXCELの数式では2の3乗は2^3と表記しますが、ツクール（JavaScript）の数式では2**3という表記になります。": "In EXCEL formulas, the cube of 2 is written as 2^3, but in RPG Maker (JavaScript) formulas, it is written as 2**3.",
+    "基本的には累乗を使った数式を作るといい感じになると思います。": "In general, formulas using exponents tend to produce good results.",
+    "上記のxlsxでは、４次関数の式をツクール用に変換して出力する機能があるのでオススメです。": "The xlsx file mentioned above is recommended because it can convert fourth-degree function formulas into a format for RPG Maker and output them.",
+    "全ての職業で共通で構わないという場合は、プラグインパラメータで既定値を指定することもできます。": "If it is fine for all classes to use the same formula, you can also specify a default value in the plugin parameter.",
+    "数式のサンプル": "Formula Samples",
+    "上記でも紹介した数式です。": "This is the formula introduced above.",
+    "かなりシンプルな式ですが、それっぽい経験値曲線になります。": "It is quite a simple formula, but it produces a convincing experience curve.",
+    "４乗を使った数式です。": "This formula uses the fourth power.",
+    "ドラクエっぽい経験値曲線になります。": "It produces an experience curve reminiscent of Dragon Quest.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "必要経験値（既定）（DefaultExpForLevel）": "Required Experience (Default) (DefaultExpForLevel)",
+    "レベルに必要な経験値の既定値です。": "The default experience required for each level.",
+    "例：5*level**3": "Example: 5*level**3"
+  }
+}

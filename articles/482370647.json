@@ -1,0 +1,1937 @@
+{
+  "articleId": "482370647",
+  "sourceUrl": "https://newrpg.seesaa.net/article/482370647.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "b72680a1744ba5f16d5c94a64fa0f5be9e03debcf17b55d7def12dc4180a6229",
+  "translatedAt": "2026-08-31T02:56:26.865Z",
+  "title": "Display a Cursor Over the Selected Target During Battles [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "戦闘時、選択中の対象にカーソルを表示【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "ec8e16f15f847f76a2db6087ea62f6b5dec60bc6b9c8eb4010f1f46cfdc4cf4b",
+      "translation": "Display a Cursor Over the Selected Target During Battles [RPG Maker MZ & MV Plugin]",
+      "contextHash": "ec8e16f15f847f76a2db6087ea62f6b5dec60bc6b9c8eb4010f1f46cfdc4cf4b"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "戦闘時、選択中の対象にカーソルを表示します。",
+      "sourceHash": "9fdf4b41dcd3b82f5f4d0ffddafc4b2a988fa60f58668e69f2f9bf32dd025e74",
+      "translation": "Displays a cursor over the currently selected target during battles.",
+      "contextHash": "9fdf4b41dcd3b82f5f4d0ffddafc4b2a988fa60f58668e69f2f9bf32dd025e74"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "それに伴い、様々な調整が可能です。",
+      "sourceHash": "a87546313169b255d62ec201cfbfa0482e24f3e64efc9308dcdbeb546b7c4166",
+      "translation": "Various adjustments can be made accordingly.",
+      "contextHash": "a87546313169b255d62ec201cfbfa0482e24f3e64efc9308dcdbeb546b7c4166"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "特にサイドビューにおいて、リスト上の敵名と実際の敵の並び順が一致しない問題を軽減します。",
+      "sourceHash": "09cf79e355c5fdde9680d0ff0598ec7b823e6604c65e57e2d1152d75465abe68",
+      "translation": "This is especially useful in side-view battles, where it helps alleviate the issue of enemy names in the list not matching the actual order of the enemies.",
+      "contextHash": "09cf79e355c5fdde9680d0ff0598ec7b823e6604c65e57e2d1152d75465abe68"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "初期値ではサイドビューを想定していますが、設定を調整すれば、フロントビューでも使えます。",
+      "sourceHash": "4d56a38c70d318c845416b766e64823b571adc4f7fadfbda43eed1bbd8b40e14",
+      "translation": "The default settings assume side-view battles, but it can also be used in front-view battles by adjusting the settings.",
+      "contextHash": "4d56a38c70d318c845416b766e64823b571adc4f7fadfbda43eed1bbd8b40e14"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "方向キーを押した時に対象の位置関係を参照して、カーソルの遷移先を判定するような高度な機能はありません。",
+      "sourceHash": "2e7688b49f2e87dd451ffebeb9289757dd5de3a3daa8939546717bda4a0786f2",
+      "translation": "It does not have advanced functionality that determines the cursor's next destination by referring to the relative positions of targets when an arrow key is pressed.",
+      "contextHash": "2e7688b49f2e87dd451ffebeb9289757dd5de3a3daa8939546717bda4a0786f2"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "キーを押すと単純に前後のＩＤの対象に移るだけです。",
+      "sourceHash": "41d94d6d256d13acbf205ea4ec2ceb0bb8b24af7dde4158368837222f0a4d881",
+      "translation": "Pressing a key simply moves to the target with the preceding or following ID.",
+      "contextHash": "41d94d6d256d13acbf205ea4ec2ceb0bb8b24af7dde4158368837222f0a4d881"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_BattleTargetCursor.js",
+      "sourceHash": "38e70c347a4ec12892ae6cfc7b4e6805967e927b198d68d32062d4acc59628f6",
+      "translation": "NRP_BattleTargetCursor.js ",
+      "contextHash": "66bb8c042eb03587df878da016418075098178a115599665474b09e366cf7740"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.05（2024/12/04）",
+      "sourceHash": "02acc4f2d4d48755e15afd0d8976d4f24d583a93c3423f07669666aba2a11ef5",
+      "translation": "ver1.05 (2024/12/04) ",
+      "contextHash": "66bb8c042eb03587df878da016418075098178a115599665474b09e366cf7740"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/12/04（ver1.05）",
+      "sourceHash": "1145fb984c1049040a68223c8e1fa538c4f930f8f27d72ed155b3d3339b46474",
+      "translation": "2024/12/04 (ver1.05) ",
+      "contextHash": "1145fb984c1049040a68223c8e1fa538c4f930f8f27d72ed155b3d3339b46474"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2022/02/12 -> 2024/03/03（ver1.04 -> 1.042）",
+      "sourceHash": "01ee79bf042a9a5eff8938d6e13d248e008667dee17cad4e7d292edf57ce7af1",
+      "translation": "2022/02/12 -> 2024/03/03 (ver1.04 -> 1.042) ",
+      "contextHash": "01ee79bf042a9a5eff8938d6e13d248e008667dee17cad4e7d292edf57ce7af1"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ver1.033にて『カーソル位置を常時更新』がオンの場合、行動の決定・キャンセル時にカーソルが残ったままになる不具合を修正。",
+      "sourceHash": "3bf418d1cdc2751ad911d1c31f995c6ee435e8c6f26dd7ba8708971e617a49aa",
+      "translation": "Fixed a bug in ver1.033 where the cursor remained after confirming or canceling an action when “Always Update Cursor Position” was enabled.",
+      "contextHash": "3bf418d1cdc2751ad911d1c31f995c6ee435e8c6f26dd7ba8708971e617a49aa"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "アクター名ｳｨﾝﾄﾞｳの調整Ｘにマイナス値を入力できない不具合修正。",
+      "sourceHash": "524790552d2600f4a52acb17eb6ad15d7e30f3a909e13728e7371ccb5da6518a",
+      "translation": "Fixed a bug that prevented negative values from being entered for Actor Name Window Adjustment X.",
+      "contextHash": "524790552d2600f4a52acb17eb6ad15d7e30f3a909e13728e7371ccb5da6518a"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "（2023/05/01 ver1.041）",
+      "sourceHash": "31a8c9453afb9d01c958a7a8faf084b037d9dc05fe73f124988cb4dc93154d99",
+      "translation": " (2023/05/01 ver1.041) ",
+      "contextHash": "31a8c9453afb9d01c958a7a8faf084b037d9dc05fe73f124988cb4dc93154d99"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "スキルで敵を選択する際、ステータスウィンドウが表示されてしまう不具合修正。（2024/03/03 ver1.042）",
+      "sourceHash": "f2773197e85753cab67e70d336583fc570119d0f3624a602d0248df3866688d9",
+      "translation": "Fixed a bug where the status window was displayed when selecting an enemy with a skill. (2024/03/03 ver1.042)",
+      "contextHash": "f2773197e85753cab67e70d336583fc570119d0f3624a602d0248df3866688d9"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※標準レイアウトではステータスウィンドウはスキルウィンドウの下に完全に隠れるため影響は薄いです。",
+      "sourceHash": "813e078b63f07d64ffded65c73485ae3a96a26eb232a242ae9bd2a29e6483aa5",
+      "translation": "※With the standard layout, the status window is completely hidden behind the skill window, so the impact is minor.",
+      "contextHash": "813e078b63f07d64ffded65c73485ae3a96a26eb232a242ae9bd2a29e6483aa5"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/08/13 -> 2022/02/01（ver1.03 -> 1.033）",
+      "sourceHash": "7b100942d4eba4fe3fd8c15db33c20912c6aacbd56c78b26816b4b6d68d2d14f",
+      "translation": "2021/08/13 -> 2022/02/01 (ver1.03 -> 1.033) ",
+      "contextHash": "7b100942d4eba4fe3fd8c15db33c20912c6aacbd56c78b26816b4b6d68d2d14f"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "マウスでの対象選択ができない不具合修正。",
+      "sourceHash": "e949fc3727e539f0b5a9c9dd18228b0cb6ac0cba22f8b5538ac2231dbb1490b6",
+      "translation": "Fixed a bug that prevented targets from being selected with the mouse.",
+      "contextHash": "e949fc3727e539f0b5a9c9dd18228b0cb6ac0cba22f8b5538ac2231dbb1490b6"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "『選択中の敵名を表示』『選択中のアクター名を表示』がオフの場合、カーソルが表示されなくなる不具合修正。（09/06 ver1.031）",
+      "sourceHash": "91cd8a43fc90bb22dbec8a69ef5c2b8c15a7571427912139c09c4f9c5a9dba4f",
+      "translation": "Fixed a bug where the cursor was not displayed when “Display Selected Enemy Name” or “Display Selected Actor Name” was disabled. (09/06 ver1.031)",
+      "contextHash": "91cd8a43fc90bb22dbec8a69ef5c2b8c15a7571427912139c09c4f9c5a9dba4f"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "ＭＶにて一部のスキルがエラーになる不具合修正。（09/29 ver1.032）",
+      "sourceHash": "9af7f41154e0e29e4b7dbb079994313ce7212c204fb68fd7d4f47234ab83aa83",
+      "translation": "Fixed a bug where some skills caused errors in MV. (09/29 ver1.032)",
+      "contextHash": "9af7f41154e0e29e4b7dbb079994313ce7212c204fb68fd7d4f47234ab83aa83"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "『選択中の敵名を表示』がオフの場合、『カーソル位置を常時更新』が機能しない不具合修正。（2022/02/01 ver1.033）",
+      "sourceHash": "610327b54d5415f23a59b907fb76879bcd4f8843f703d441801ce55782f67d77",
+      "translation": "Fixed a bug where “Always Update Cursor Position” did not work when “Display Selected Enemy Name” was disabled. (2022/02/01 ver1.033)",
+      "contextHash": "610327b54d5415f23a59b907fb76879bcd4f8843f703d441801ce55782f67d77"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/08/05（ver1.02）",
+      "sourceHash": "622868b7ece51e1ae7a8164e4f720a5a658583cbd6ed5f255259a373ffe5e7e7",
+      "translation": "2021/08/05 (ver1.02) ",
+      "contextHash": "622868b7ece51e1ae7a8164e4f720a5a658583cbd6ed5f255259a373ffe5e7e7"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "ＭＶでカーソル画像を設定するとエラーになる不具合修正。",
+      "sourceHash": "87802ffb21da79caa8e04e1f0ca4c1446d0006f1a5d449599f7467768f07790a",
+      "translation": "Fixed a bug that caused an error when a cursor image was configured in MV.",
+      "contextHash": "87802ffb21da79caa8e04e1f0ca4c1446d0006f1a5d449599f7467768f07790a"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "※リンク先のプラグインも不具合修正していますのでご確認ください。",
+      "sourceHash": "241e681d14d4bd6c91bc6ad59c9b719e0a4f5cebbb34dfb97be81255840ca685",
+      "translation": "※The plugin at the linked destination has also been updated to fix bugs, so please check it.",
+      "contextHash": "241e681d14d4bd6c91bc6ad59c9b719e0a4f5cebbb34dfb97be81255840ca685"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/07/14（ver1.01）",
+      "sourceHash": "ef658a92822b036be1473b10e48244bfd9bbc1afd72057e571a612ee94d91df6",
+      "translation": "2021/07/14 (ver1.01) ",
+      "contextHash": "ef658a92822b036be1473b10e48244bfd9bbc1afd72057e571a612ee94d91df6"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "プラグインパラメータに『カーソル位置を常時更新』を追加。",
+      "sourceHash": "9946a3410b75fbc113febe03322f461b85b2851bf00629f8e2d5794fb3ec260d",
+      "translation": "Added “Always Update Cursor Position” to the plugin parameters.",
+      "contextHash": "9946a3410b75fbc113febe03322f461b85b2851bf00629f8e2d5794fb3ec260d"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2021/07/08（ver1.00）",
+      "sourceHash": "6b9c64830841096bcd9ca2d1f98cef368572aa9aec878a58878aedbab87303b0",
+      "translation": "2021/07/08 (ver1.00) ",
+      "contextHash": "6b9c64830841096bcd9ca2d1f98cef368572aa9aec878a58878aedbab87303b0"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "プラグインを導入するだけで挙動が変わります。",
+      "sourceHash": "1fbe27bbf810a7acc731e03a7e913818b99210496ac19f5d7dea913229a6d08f",
+      "translation": "The behavior changes simply by installing the plugin.",
+      "contextHash": "1fbe27bbf810a7acc731e03a7e913818b99210496ac19f5d7dea913229a6d08f"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ただし、カーソル画像は初期状態では設定されていませんので、対象の名前表示だけが行われます。",
+      "sourceHash": "b3eccdd5a66a6c0146a8ee122283db0cad5fe2cd4c33d42d49de4c925ecf3c11",
+      "translation": "However, no cursor image is configured by default, so only the target's name is displayed.",
+      "contextHash": "b3eccdd5a66a6c0146a8ee122283db0cad5fe2cd4c33d42d49de4c925ecf3c11"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "手軽にカーソル画像が欲しいという方のために、サンプルを作りました。",
+      "sourceHash": "4e0a4e9015166809e4981efee226495c459fb379d4c8495ed01528989f7d716f",
+      "translation": "I created a sample for those who want a cursor image easily.",
+      "contextHash": "4e0a4e9015166809e4981efee226495c459fb379d4c8495ed01528989f7d716f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "※ＭＶＭＺの武器画像から加工して適当に作ったものです。",
+      "sourceHash": "a9029b8c7f71997aa385544c9cfa74be2043f5afa1817b90d7a408420ba7e078",
+      "translation": "※It was made roughly by modifying weapon images from MV/MZ.",
+      "contextHash": "a9029b8c7f71997aa385544c9cfa74be2043f5afa1817b90d7a408420ba7e078"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ＭＶＭＺで兼用の画像なので、いずれかのユーザなら問題なく利用できます。",
+      "sourceHash": "a633c3de9540122d7ba0d52e7a9ea5bf8fc352d42fa99544780bb955cd0f22eb",
+      "translation": "The image can be used with both MV and MZ, so users of either can use it without any issues.",
+      "contextHash": "a633c3de9540122d7ba0d52e7a9ea5bf8fc352d42fa99544780bb955cd0f22eb"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "右クリックで好きな名前で保存し、pictureフォルダに放り込んでください。",
+      "sourceHash": "cc93252b01a08c302015fa6a61b59b4ebed48f7ca0696559f16f338ac58d3091",
+      "translation": "Right-click and save it with any name you like, then place it in the picture folder.",
+      "contextHash": "cc93252b01a08c302015fa6a61b59b4ebed48f7ca0696559f16f338ac58d3091"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『敵カーソルの画像』のプラグインパラメータに設定すればＯＫです。",
+      "sourceHash": "4ac598e46a533f999af5d675d704bfb92cb88738772163f25cacea377c6108a5",
+      "translation": "Set it in the “Enemy Cursor Image” plugin parameter, and you're good to go.",
+      "contextHash": "4ac598e46a533f999af5d675d704bfb92cb88738772163f25cacea377c6108a5"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "後はその他のプラグインパラメータを好きなように調整してください。",
+      "sourceHash": "22c9e0f1c55019d80796d872ae3ae8bd2c062ebd68607a48d9e173c0d84c9329",
+      "translation": "After that, adjust the other plugin parameters as desired.",
+      "contextHash": "22c9e0f1c55019d80796d872ae3ae8bd2c062ebd68607a48d9e173c0d84c9329"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "なお、アクター側のパラメータの大半は空白でも構いません。",
+      "sourceHash": "a8d1806a0e4a125ba74701f7e29bf6739c5beaa7d422a67f681fc56dafeadf1c",
+      "translation": "Most of the actor-side parameters can be left blank.",
+      "contextHash": "a8d1806a0e4a125ba74701f7e29bf6739c5beaa7d422a67f681fc56dafeadf1c"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "その場合は、自動的に敵側のパラメータが参照されます。",
+      "sourceHash": "d3e904a50ed3ac3217466042bb6ce28402da36c280d3599c950c703fd9841a85",
+      "translation": "In that case, the enemy-side parameters are referenced automatically.",
+      "contextHash": "d3e904a50ed3ac3217466042bb6ce28402da36c280d3599c950c703fd9841a85"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "※カーソル画像およびＸ座標の調整分は左右反転されます。",
+      "sourceHash": "2ea29be592931d592682053821fd2c040ce0d1de2f0388c9219cd130053b0587",
+      "translation": "※The cursor image and the X-coordinate adjustment are flipped horizontally.",
+      "contextHash": "2ea29be592931d592682053821fd2c040ce0d1de2f0388c9219cd130053b0587"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "プラグインパラメータ（敵）",
+      "sourceHash": "3d8acab4a9c1085f609230c9eb92b100902332274c8b758882675ef6008d71b9",
+      "translation": "Plugin Parameters (Enemy)",
+      "contextHash": "3d8acab4a9c1085f609230c9eb92b100902332274c8b758882675ef6008d71b9"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "敵名リストを非表示（HideEnemyNameList）",
+      "sourceHash": "3c419a11bb97df79a82062c4ce7ed3201623eaf21d82ee1cffbe756b7b0b3426",
+      "translation": "Hide Enemy Name List (HideEnemyNameList)",
+      "contextHash": "3c419a11bb97df79a82062c4ce7ed3201623eaf21d82ee1cffbe756b7b0b3426"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "デフォルトの敵名リストを非表示にします。",
+      "sourceHash": "008328cf52b939a26eeba356408e9a2d7e3035bbc50048d6c5ce09e1f445065c",
+      "translation": "Hides the default enemy name list.",
+      "contextHash": "008328cf52b939a26eeba356408e9a2d7e3035bbc50048d6c5ce09e1f445065c"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "初期値はオンです。",
+      "sourceHash": "fe1d8f41a232a443f4cd3b3cab09531ff770c81b37f113095dd59ffd1939d155",
+      "translation": "The default value is ON.",
+      "contextHash": "fe1d8f41a232a443f4cd3b3cab09531ff770c81b37f113095dd59ffd1939d155"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "オフにすると、ツクールの標準の動作に近くなります。",
+      "sourceHash": "040c0c6715829bf25039e9559894c1ef6fa349d7d0f640f34d9f9f8899fe5260",
+      "translation": "Turning it OFF makes the behavior closer to RPG Maker's standard behavior.",
+      "contextHash": "040c0c6715829bf25039e9559894c1ef6fa349d7d0f640f34d9f9f8899fe5260"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "下の『敵の上下切替』『敵の左右切替』が無効化され、敵名リストの判定が優先されるようになります。",
+      "sourceHash": "9082a29bd4ba7721a750c9f1532d2a343cf475dae46f1a58c5f79ab6b5594b2a",
+      "translation": "The “Switch Enemy Up/Down” and “Switch Enemy Left/Right” settings below are disabled, and the enemy name list takes priority when determining the target.",
+      "contextHash": "9082a29bd4ba7721a750c9f1532d2a343cf475dae46f1a58c5f79ab6b5594b2a"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "敵の上下切替（SwitchEnemyUpDown）",
+      "sourceHash": "e84e7be439563b3f53058c1103db04eabda51bbcd5776a6039cf8e0392f87d64",
+      "translation": "Switch Enemy Up/Down (SwitchEnemyUpDown)",
+      "contextHash": "e84e7be439563b3f53058c1103db04eabda51bbcd5776a6039cf8e0392f87d64"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "敵の選択を上下で切替できるようにします。",
+      "sourceHash": "70f6f46841deb18ed1c1dd0bc1f74f651bac80721a2792f8fc6b79efb4a8f5d9",
+      "translation": "Allows enemies to be switched between by moving up and down.",
+      "contextHash": "70f6f46841deb18ed1c1dd0bc1f74f651bac80721a2792f8fc6b79efb4a8f5d9"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "敵の左右切替（SwitchEnemyLeftRight）",
+      "sourceHash": "36cfdb4cbc852d732dccd6e1e63a3ffc0735f69ca454dec349c6a950a3963ed1",
+      "translation": "Switch Enemy Left/Right (SwitchEnemyLeftRight)",
+      "contextHash": "36cfdb4cbc852d732dccd6e1e63a3ffc0735f69ca454dec349c6a950a3963ed1"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "敵の選択を左右で切替できるようにします。",
+      "sourceHash": "0f9360e5a0cb5c79d66f3da3e9e178d5cfea21f52084e9a15708ad6c2ea5b65d",
+      "translation": "Allows enemies to be switched between by moving left and right.",
+      "contextHash": "0f9360e5a0cb5c79d66f3da3e9e178d5cfea21f52084e9a15708ad6c2ea5b65d"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "敵カーソルの画像（EnemyTargetCursor）",
+      "sourceHash": "a24544073116a361bfaa6a9ca513ef15cece0c47a75ebb620f13888f96318c47",
+      "translation": "Enemy Cursor Image (EnemyTargetCursor)",
+      "contextHash": "a24544073116a361bfaa6a9ca513ef15cece0c47a75ebb620f13888f96318c47"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "敵を対象にした際のカーソル画像を指定します。",
+      "sourceHash": "3e25c43465a409e5c44bd112c2a51e7496c00b7d205ba8c190c470cd24a06a19",
+      "translation": "Specifies the cursor image displayed when targeting an enemy.",
+      "contextHash": "3e25c43465a409e5c44bd112c2a51e7496c00b7d205ba8c190c470cd24a06a19"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "画像はピクチャーフォルダに配置してください。",
+      "sourceHash": "d8454a307b61fc2582f1fb04b758660313de74b9c83da00da05984516401e690",
+      "translation": "Place the image in the Pictures folder.",
+      "contextHash": "d8454a307b61fc2582f1fb04b758660313de74b9c83da00da05984516401e690"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "敵のカーソル基準点（EnemyCursorPosition）",
+      "sourceHash": "5fbbbb778a723b124200a6fcbb30aa806f6bb0325303689d176826ddec756620",
+      "translation": "Enemy Cursor Anchor Point (EnemyCursorPosition)",
+      "contextHash": "5fbbbb778a723b124200a6fcbb30aa806f6bb0325303689d176826ddec756620"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "敵を対象にした際のカーソル画像の上下の基準点です。",
+      "sourceHash": "85bd94321a9a6c07e39146ba19d1f37f90392d9a65d35301b9c779d2462b642c",
+      "translation": "This is the vertical reference point for the cursor image when targeting an enemy.",
+      "contextHash": "85bd94321a9a6c07e39146ba19d1f37f90392d9a65d35301b9c779d2462b642c"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "敵名ウィンドウもこれを基準にします。",
+      "sourceHash": "412d9ff4f7f604c5374ece1cf2e1a02c1ac79ecf6223b9fea446b5b806a6f4b8",
+      "translation": "The enemy name window also uses this as its reference.",
+      "contextHash": "412d9ff4f7f604c5374ece1cf2e1a02c1ac79ecf6223b9fea446b5b806a6f4b8"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "敵のカーソル調整Ｘ（EnemyCursorAdjustX）",
+      "sourceHash": "319bf3db29aba7fe54abde3890a104e070644971dd1b246976be774d419a46a6",
+      "translation": "Enemy Cursor Adjust X (EnemyCursorAdjustX)",
+      "contextHash": "319bf3db29aba7fe54abde3890a104e070644971dd1b246976be774d419a46a6"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "敵を対象にした際のカーソル画像のＸ座標を調整します。",
+      "sourceHash": "b2c1a3e68f3532707f001a48f0bbabcbc7c2d18f2b7835ab78329a3b662e430a",
+      "translation": "Adjusts the X coordinate of the cursor image when targeting an enemy.",
+      "contextHash": "b2c1a3e68f3532707f001a48f0bbabcbc7c2d18f2b7835ab78329a3b662e430a"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "敵のカーソル調整Ｙ（EnemyCursorAdjustY）",
+      "sourceHash": "9334c43006ebafa5bec510b70817a2896d95ebecc112e4243ae701028c987071",
+      "translation": "Enemy Cursor Adjust Y (EnemyCursorAdjustY)",
+      "contextHash": "9334c43006ebafa5bec510b70817a2896d95ebecc112e4243ae701028c987071"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "敵を対象にした際のカーソル画像のＹ座標を調整します。",
+      "sourceHash": "a50e127a12dcb399f5f69c7275e2152fcb1e3f85926da2dd99f373e9e7db1e30",
+      "translation": "Adjusts the Y coordinate of the cursor image when targeting an enemy.",
+      "contextHash": "a50e127a12dcb399f5f69c7275e2152fcb1e3f85926da2dd99f373e9e7db1e30"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "選択中の敵名を表示（ShowTargetEnemyName）",
+      "sourceHash": "cfd8b8338f66a3d90fb6678c4104ba31568c844cba839b0bca3b6e5e3d0e4bef",
+      "translation": "Show Target Enemy Name (ShowTargetEnemyName)",
+      "contextHash": "cfd8b8338f66a3d90fb6678c4104ba31568c844cba839b0bca3b6e5e3d0e4bef"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "選択中の敵の名前を表示します。",
+      "sourceHash": "c375ab4df7fc69a101a1277227eb713bb891fc349b776cd6fa69ef9a4d8a5813",
+      "translation": "Displays the name of the selected enemy.",
+      "contextHash": "c375ab4df7fc69a101a1277227eb713bb891fc349b776cd6fa69ef9a4d8a5813"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "敵名ウィンドウの縦幅（EnemyNameWindowHeight）",
+      "sourceHash": "d958ad9bbedf2c5248c8fd6ff1dfc2a34afd93ca4731610ca8afe6ce4545c04f",
+      "translation": "Enemy Name Window Height (EnemyNameWindowHeight)",
+      "contextHash": "d958ad9bbedf2c5248c8fd6ff1dfc2a34afd93ca4731610ca8afe6ce4545c04f"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "敵名ウィンドウの縦幅です。初期値は72です。",
+      "sourceHash": "186f8f6f1349b4f12d4e463ab0028758cfc391efc0127a14098e4ff00acb7e3c",
+      "translation": "The height of the enemy name window. The default value is 72.",
+      "contextHash": "186f8f6f1349b4f12d4e463ab0028758cfc391efc0127a14098e4ff00acb7e3c"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "敵名ウィンドウの不透明度（EnemyNameWindowOpacity）",
+      "sourceHash": "25afd51fd2faa5c62d51dc507279b22e90163ad4d5197fc4524fa6cc1d53fff2",
+      "translation": "Enemy Name Window Opacity (EnemyNameWindowOpacity)",
+      "contextHash": "25afd51fd2faa5c62d51dc507279b22e90163ad4d5197fc4524fa6cc1d53fff2"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "敵名ウィンドウの不透明度（0~255）です。",
+      "sourceHash": "fdf021ebcb2aabb707b326c4538d03184261e35ffb0e0dc3154b4e3c2b878c17",
+      "translation": "The opacity of the enemy name window (0~255).",
+      "contextHash": "fdf021ebcb2aabb707b326c4538d03184261e35ffb0e0dc3154b4e3c2b878c17"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "敵名ウィンドウの調整Ｘ（EnemyNameWindowAdjustX）",
+      "sourceHash": "00d8f83f5ab3ec817f0fb6d9581ec28f62c10cf361fd929f8365f02341111146",
+      "translation": "Enemy Name Window Adjust X (EnemyNameWindowAdjustX)",
+      "contextHash": "00d8f83f5ab3ec817f0fb6d9581ec28f62c10cf361fd929f8365f02341111146"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "敵名ウィンドウのＸ座標を調整します。",
+      "sourceHash": "e3a6e8690f305cf7c78239f9803be0bf1b814695f3236e20b13eb31258cdf855",
+      "translation": "Adjusts the X coordinate of the enemy name window.",
+      "contextHash": "e3a6e8690f305cf7c78239f9803be0bf1b814695f3236e20b13eb31258cdf855"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "敵名ウィンドウの調整Ｙ（EnemyNameWindowAdjustY）",
+      "sourceHash": "d3513b49ffc817ec82e39179ae2274b9d3f5932e3d3c75a9a3c33737020a6fad",
+      "translation": "Enemy Name Window Adjust Y (EnemyNameWindowAdjustY)",
+      "contextHash": "d3513b49ffc817ec82e39179ae2274b9d3f5932e3d3c75a9a3c33737020a6fad"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "敵名ウィンドウのＹ座標を調整します。",
+      "sourceHash": "748ee54f31ff13fd59116105a2d3a2e330f6a5839f88b6a68d4706112a5ece6d",
+      "translation": "Adjusts the Y coordinate of the enemy name window.",
+      "contextHash": "748ee54f31ff13fd59116105a2d3a2e330f6a5839f88b6a68d4706112a5ece6d"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "敵名フォントサイズ（EnemyNameFontSize）",
+      "sourceHash": "b9f3f307cdf6f889718ae0b4e2a0e80cfc8410c8b084567054a67d0eff81e9e9",
+      "translation": "Enemy Name Font Size (EnemyNameFontSize)",
+      "contextHash": "b9f3f307cdf6f889718ae0b4e2a0e80cfc8410c8b084567054a67d0eff81e9e9"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "敵名のフォントサイズです。",
+      "sourceHash": "fc6ec4a42626a80e2088a3690b8efcad2f4508aa52969453b2f4281dcc3732a1",
+      "translation": "The font size of the enemy name.",
+      "contextHash": "fc6ec4a42626a80e2088a3690b8efcad2f4508aa52969453b2f4281dcc3732a1"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "空欄ならシステム２の設定値を使用します。",
+      "sourceHash": "1b83435ed5fbe3e0b2c82d26a98ea191848398986b5755556969bcac379f0ebc",
+      "translation": "If left blank, the value configured in System 2 is used.",
+      "contextHash": "1b83435ed5fbe3e0b2c82d26a98ea191848398986b5755556969bcac379f0ebc"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "敵名テキストの調整Ｙ（EnemyNameTextAdjustY）",
+      "sourceHash": "ba50555de55ea40ae04c636b8a66bbe9af39afc5f65ffc3b7017a56787b9147d",
+      "translation": "Enemy Name Text Adjust Y (EnemyNameTextAdjustY)",
+      "contextHash": "ba50555de55ea40ae04c636b8a66bbe9af39afc5f65ffc3b7017a56787b9147d"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "敵名ウィンドウに表示されるテキストのＹ座標を調整します。",
+      "sourceHash": "d5a99ffa0de6ec0f8ae554f2ff7233afd0b5b3f0ed613ad17c8dcadcf8f6b2a8",
+      "translation": "Adjusts the Y coordinate of the text displayed in the enemy name window.",
+      "contextHash": "d5a99ffa0de6ec0f8ae554f2ff7233afd0b5b3f0ed613ad17c8dcadcf8f6b2a8"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "プラグインパラメータ（アクター）",
+      "sourceHash": "24eaa0fe97e6ff98e0ce9115ab9e740b7e5bdd39ecd89483bf2656558d9f22e3",
+      "translation": "Plugin Parameters (Actor)",
+      "contextHash": "24eaa0fe97e6ff98e0ce9115ab9e740b7e5bdd39ecd89483bf2656558d9f22e3"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "アクターの上下切替（SwitchActorUpDown）",
+      "sourceHash": "9d79651bb0216b2ee7fc65d0a0722055edfb6259cd0bb8f6968634b15c54d84b",
+      "translation": "Switch Actor Up/Down (SwitchActorUpDown)",
+      "contextHash": "9d79651bb0216b2ee7fc65d0a0722055edfb6259cd0bb8f6968634b15c54d84b"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "アクターの選択を上下で切替できるようにします。",
+      "sourceHash": "3c3c42a99db8d11d76a240e197ca7867a3f9a46a8ba7dce2903878bbdc3fce30",
+      "translation": "Allows the actor selection to be switched up and down.",
+      "contextHash": "3c3c42a99db8d11d76a240e197ca7867a3f9a46a8ba7dce2903878bbdc3fce30"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "アクターの左右切替（SwitchActorLeftRight）",
+      "sourceHash": "1f78518e9f6fe30c136b253b24595f5fef8fa74554041fef456958a003e9b38d",
+      "translation": "Switch Actor Left/Right (SwitchActorLeftRight)",
+      "contextHash": "1f78518e9f6fe30c136b253b24595f5fef8fa74554041fef456958a003e9b38d"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "アクターの選択を左右で切替できるようにします。",
+      "sourceHash": "c9ca67a221e41496a4992d4c289af8def62b85529592cd6f2307f2e556874a94",
+      "translation": "Allows the actor selection to be switched left and right.",
+      "contextHash": "c9ca67a221e41496a4992d4c289af8def62b85529592cd6f2307f2e556874a94"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "こちらはＭＺの標準動作です。",
+      "sourceHash": "9688c2bb12651b21e114a40e339bdb86fb80763bf851a1bac1086ee4f0a32587",
+      "translation": "This is the standard behavior in MZ.",
+      "contextHash": "9688c2bb12651b21e114a40e339bdb86fb80763bf851a1bac1086ee4f0a32587"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "アクターカーソルの画像（ActorTargetCursor）",
+      "sourceHash": "c7d71c2874c07aefa9be538c43ddf6183e33905a3e5c266c619b61c28c9f4980",
+      "translation": "Actor Target Cursor Image (ActorTargetCursor)",
+      "contextHash": "c7d71c2874c07aefa9be538c43ddf6183e33905a3e5c266c619b61c28c9f4980"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "アクターを対象にした際のカーソル画像を指定します。",
+      "sourceHash": "6a365f83b0b63221814d25ef25fc16c416091989a45e791e007be5e522e1dd94",
+      "translation": "Specifies the cursor image when targeting an actor.",
+      "contextHash": "6a365f83b0b63221814d25ef25fc16c416091989a45e791e007be5e522e1dd94"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "空欄なら敵のものを左右反転します。",
+      "sourceHash": "db912ad77ac6e4c2fa067b902186549848cc40ca0cb3c721ef4fd0a299c3f0c3",
+      "translation": "If left blank, the enemy cursor image is flipped horizontally.",
+      "contextHash": "db912ad77ac6e4c2fa067b902186549848cc40ca0cb3c721ef4fd0a299c3f0c3"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "アクターカーソル基準点（ActorCursorPosition）",
+      "sourceHash": "7659ce4c2c1b3e01409043fe42dda18dec13b6c061419a1d33eb4cffb9c88a2e",
+      "translation": "Actor Cursor Reference Point (ActorCursorPosition)",
+      "contextHash": "7659ce4c2c1b3e01409043fe42dda18dec13b6c061419a1d33eb4cffb9c88a2e"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "アクターを対象にした際のカーソル画像の上下の基準点です。",
+      "sourceHash": "ec43ed585ac3b9f03e9d5cabc37c134938eead8fb4f6655ab7e01185f2c1f298",
+      "translation": "This is the vertical reference point for the cursor image when targeting an actor.",
+      "contextHash": "ec43ed585ac3b9f03e9d5cabc37c134938eead8fb4f6655ab7e01185f2c1f298"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy is used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "アクターカーソル調整Ｘ（ActorCursorAdjustX）",
+      "sourceHash": "2f21fa1f0c660d6fad55d66181d47bae8e8f7270b5de091867d3a7c99159b604",
+      "translation": "Actor Cursor Adjust X (ActorCursorAdjustX)",
+      "contextHash": "2f21fa1f0c660d6fad55d66181d47bae8e8f7270b5de091867d3a7c99159b604"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "アクターを対象にした際のカーソル画像のＸ座標を調整します。",
+      "sourceHash": "69b4086543966e711d402f4107862df2fef35f5d4346026aefc95b1f67b01818",
+      "translation": "Adjusts the X coordinate of the cursor image when targeting an actor.",
+      "contextHash": "69b4086543966e711d402f4107862df2fef35f5d4346026aefc95b1f67b01818"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "空欄なら敵の値を左右反転して使用します。",
+      "sourceHash": "67eefb86ef82bca504c4256af376336990915027aefb2afce6234bf2738e33da",
+      "translation": "If left blank, the enemy's value is flipped horizontally and used.",
+      "contextHash": "67eefb86ef82bca504c4256af376336990915027aefb2afce6234bf2738e33da"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "アクターカーソル調整Ｙ（ActorCursorAdjustY）",
+      "sourceHash": "fff5b8f13b3c41687c090cc9afd3e3dd99233e3ce3e9ba3e0439f117768900c3",
+      "translation": "Actor Cursor Adjust Y (ActorCursorAdjustY)",
+      "contextHash": "fff5b8f13b3c41687c090cc9afd3e3dd99233e3ce3e9ba3e0439f117768900c3"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "アクターを対象にした際のカーソル画像のＹ座標を調整します。",
+      "sourceHash": "3eb06aa8a3d796b1e57547e6b58b40a087dcc387ade799f5add08a0ee44fcf5a",
+      "translation": "Adjusts the Y coordinate of the cursor image when targeting an actor.",
+      "contextHash": "3eb06aa8a3d796b1e57547e6b58b40a087dcc387ade799f5add08a0ee44fcf5a"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy is used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "選択中のアクター名を表示（ShowTargetActorName）",
+      "sourceHash": "1a17ac7306db9ea1abda224939bbc8da6c9a3c4b4d9735ef967b1dff6a7598d0",
+      "translation": "Show Target Actor Name (ShowTargetActorName)",
+      "contextHash": "1a17ac7306db9ea1abda224939bbc8da6c9a3c4b4d9735ef967b1dff6a7598d0"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "選択中のアクターの名前を表示します。",
+      "sourceHash": "81fb65c7f710bbb88fcf0288d884b00ce97eb63273f96a50cbac97a0c437ba24",
+      "translation": "Displays the name of the selected actor.",
+      "contextHash": "81fb65c7f710bbb88fcf0288d884b00ce97eb63273f96a50cbac97a0c437ba24"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy is used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "アクター名ｳｨﾝﾄﾞｳの縦幅（ActorNameWindowHeight）",
+      "sourceHash": "5a288e0e590807753069ef97508970570a988016988410b3989156448712e9d8",
+      "translation": "Actor Name Window Height (ActorNameWindowHeight)",
+      "contextHash": "5a288e0e590807753069ef97508970570a988016988410b3989156448712e9d8"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "アクター名ウィンドウの縦幅です。",
+      "sourceHash": "c001fad9d2c39a531bdc69a78587e2f9c94d4c823fe1308b35d9b99cd7081d48",
+      "translation": "The height of the actor name window.",
+      "contextHash": "c001fad9d2c39a531bdc69a78587e2f9c94d4c823fe1308b35d9b99cd7081d48"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy is used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "アクター名ｳｨﾝﾄﾞｳ不透明度（ActorNameWindowOpacity）",
+      "sourceHash": "7ec504edaff5b93533e306f957270e9255ba4344334e8f7ddef723479dd640d3",
+      "translation": "Actor Name Window Opacity (ActorNameWindowOpacity)",
+      "contextHash": "7ec504edaff5b93533e306f957270e9255ba4344334e8f7ddef723479dd640d3"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "アクター名ウィンドウの不透明度（0~255）です。",
+      "sourceHash": "aec24b6a8194965d96c1ff4f9b02de6f2174b69b62ca3a480a98b5d59568d64d",
+      "translation": "The opacity of the actor name window (0~255).",
+      "contextHash": "aec24b6a8194965d96c1ff4f9b02de6f2174b69b62ca3a480a98b5d59568d64d"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy is used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "アクター名ｳｨﾝﾄﾞｳの調整Ｘ（ActorNameWindowAdjustX）",
+      "sourceHash": "9681009ba123c80de5b61677f62249d9534d01e3eea4a98a80f01f2e93f53c27",
+      "translation": "Actor Name Window Adjust X (ActorNameWindowAdjustX)",
+      "contextHash": "9681009ba123c80de5b61677f62249d9534d01e3eea4a98a80f01f2e93f53c27"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "アクター名ウィンドウのＸ座標を調整します。",
+      "sourceHash": "3ab84c8c45fefaaf145b6eb0f20b6b93ae1aebd9cb1b261e5de8afb86c3dbed9",
+      "translation": "Adjusts the X coordinate of the actor name window.",
+      "contextHash": "3ab84c8c45fefaaf145b6eb0f20b6b93ae1aebd9cb1b261e5de8afb86c3dbed9"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "空欄なら敵の値を左右反転して使用します。",
+      "sourceHash": "67eefb86ef82bca504c4256af376336990915027aefb2afce6234bf2738e33da",
+      "translation": "If left blank, the enemy's value will be flipped horizontally and used.",
+      "contextHash": "67eefb86ef82bca504c4256af376336990915027aefb2afce6234bf2738e33da"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "アクター名ｳｨﾝﾄﾞｳの調整Ｙ（ActorNameWindowAdjustY）",
+      "sourceHash": "1dac22b9f53b765db5c98036e4989c122a2242203903cbb2f5f9b0eebd5987d1",
+      "translation": "Actor Name Window Adjust Y (ActorNameWindowAdjustY)",
+      "contextHash": "1dac22b9f53b765db5c98036e4989c122a2242203903cbb2f5f9b0eebd5987d1"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "アクター名ウィンドウのＹ座標を調整します。",
+      "sourceHash": "9dfe4147048acecd6e1f88c86dcbb476a234f90cbddff3198268d7fa06ce58d3",
+      "translation": "Adjusts the Y coordinate of the actor name window.",
+      "contextHash": "9dfe4147048acecd6e1f88c86dcbb476a234f90cbddff3198268d7fa06ce58d3"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy will be used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "アクター名フォントサイズ（ActorNameFontSize）",
+      "sourceHash": "17720b76ac49a7f83c1634649f6a74a468a2f4517648b8b383d75c153e8c1fd4",
+      "translation": "Actor Name Font Size (ActorNameFontSize)",
+      "contextHash": "17720b76ac49a7f83c1634649f6a74a468a2f4517648b8b383d75c153e8c1fd4"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "アクター名のフォントサイズです。",
+      "sourceHash": "1c12d5072a0f845d57342fa7cd6bdcfdd29a487fe2bf62ac58bb1b808bd3c066",
+      "translation": "The font size for actor names.",
+      "contextHash": "1c12d5072a0f845d57342fa7cd6bdcfdd29a487fe2bf62ac58bb1b808bd3c066"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy will be used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "アクター名ﾃｷｽﾄの調整Ｙ（ActorNameTextAdjustY）",
+      "sourceHash": "5859c3e228b09804226607fc7bb9266741b24e919ee0ff9c968b316d4145c910",
+      "translation": "Actor Name Text Adjust Y (ActorNameTextAdjustY)",
+      "contextHash": "5859c3e228b09804226607fc7bb9266741b24e919ee0ff9c968b316d4145c910"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "アクター名ウィンドウに表示されるテキストのＹ座標を調整します。",
+      "sourceHash": "2b461bf2a51e970588fba7e7c5a3e5cd9a3ed02790a35285e383da0609f79070",
+      "translation": "Adjusts the Y coordinate of the text displayed in the actor name window.",
+      "contextHash": "2b461bf2a51e970588fba7e7c5a3e5cd9a3ed02790a35285e383da0609f79070"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "空欄なら敵と同じ値を使用します。",
+      "sourceHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88",
+      "translation": "If left blank, the same value as the enemy will be used.",
+      "contextHash": "b99d4c002779d29125b7cef11c41e3054da023eeb09fad81ac65f8312abbef88"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "プラグインパラメータ（共通）",
+      "sourceHash": "537f26d73e76ffa972b9340c61e21bd4a629ddc59b1728cef08c6ea3b9affc70",
+      "translation": "Plugin Parameters (Common)",
+      "contextHash": "537f26d73e76ffa972b9340c61e21bd4a629ddc59b1728cef08c6ea3b9affc70"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "左の限界Ｘ座標（LeftLimitX）",
+      "sourceHash": "8dc9d911f5c2cc9e157f610edb194ebed1fad6cb45ae7705922cc85252124620",
+      "translation": "Left Limit X (LeftLimitX)",
+      "contextHash": "8dc9d911f5c2cc9e157f610edb194ebed1fad6cb45ae7705922cc85252124620"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "カーソル表示の左限界となるＸ座標です。",
+      "sourceHash": "d49709a4b70f543ebeb2e00b29ef178c31ca320fb60902e7793b2d9c354e8fdf",
+      "translation": "The X coordinate that serves as the left limit for cursor display.",
+      "contextHash": "d49709a4b70f543ebeb2e00b29ef178c31ca320fb60902e7793b2d9c354e8fdf"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "初期値は画面左端（0）",
+      "sourceHash": "2614a00a3f242cfb47ad9c9a886d9eb4c56910790b94bd2d8a0c21c452ffcec8",
+      "translation": "The default value is the left edge of the screen (0)",
+      "contextHash": "2614a00a3f242cfb47ad9c9a886d9eb4c56910790b94bd2d8a0c21c452ffcec8"
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "カーソルや敵名ウィンドウが画面外にはみ出した際に、調整するための項目です。",
+      "sourceHash": "2f6fa7edc995bfe5c438760e02ef57022dc246091bde7723b3a159fe7abb42eb",
+      "translation": "This setting is used to adjust the cursor or enemy name window when it extends beyond the screen.",
+      "contextHash": "2f6fa7edc995bfe5c438760e02ef57022dc246091bde7723b3a159fe7abb42eb"
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "右の限界Ｘ座標（RightLimitX）",
+      "sourceHash": "e49687cb9906b5a34c45ba3a16748afaa48bb1db72a51ab9718db4b6c1d3c537",
+      "translation": "Right Limit X (RightLimitX)",
+      "contextHash": "e49687cb9906b5a34c45ba3a16748afaa48bb1db72a51ab9718db4b6c1d3c537"
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "カーソル表示の右限界となるＸ座標です。",
+      "sourceHash": "17b2941c659c669ed0c0c3b2b37585d00b4d43e34cb936ca663a1ab4bb4d6dea",
+      "translation": "The X coordinate that serves as the right limit for cursor display.",
+      "contextHash": "17b2941c659c669ed0c0c3b2b37585d00b4d43e34cb936ca663a1ab4bb4d6dea"
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "初期値は画面右端（Graphics.width）",
+      "sourceHash": "8de7e01fdbeb1b04977cb136cf883c39b84cf2c8d30db088f08bd5e16f16d457",
+      "translation": "The default value is the right edge of the screen (Graphics.width)",
+      "contextHash": "8de7e01fdbeb1b04977cb136cf883c39b84cf2c8d30db088f08bd5e16f16d457"
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "上の限界Ｙ座標（UpLimitY）",
+      "sourceHash": "69fd07ab92f71656562463abc72ded8cc6fda293204ff8170c93fb5a94cb989c",
+      "translation": "Up Limit Y (UpLimitY)",
+      "contextHash": "69fd07ab92f71656562463abc72ded8cc6fda293204ff8170c93fb5a94cb989c"
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "カーソル表示の上限界となるＹ座標です。",
+      "sourceHash": "b4e9f9017c0dcddbff4fdb4ea4b32d65d745eba23833be8ddfbabc3b2e5d7e60",
+      "translation": "The Y coordinate that serves as the upper limit for cursor display.",
+      "contextHash": "b4e9f9017c0dcddbff4fdb4ea4b32d65d745eba23833be8ddfbabc3b2e5d7e60"
+    },
+    {
+      "id": "heading-075",
+      "type": "heading",
+      "source": "初期値は画面上端（0）",
+      "sourceHash": "25226f676f694d6e355f234ebdec4e7a26a59b50994b0460ed24f5be3370804f",
+      "translation": "The default value is the top edge of the screen (0)",
+      "contextHash": "25226f676f694d6e355f234ebdec4e7a26a59b50994b0460ed24f5be3370804f"
+    },
+    {
+      "id": "heading-076",
+      "type": "heading",
+      "source": "下の限界Ｙ座標（DownLimitY）",
+      "sourceHash": "9cae78a11934f190d0599915a8f1280bad8f292e8264e703ae246e2615759fd2",
+      "translation": "Down Limit Y (DownLimitY)",
+      "contextHash": "9cae78a11934f190d0599915a8f1280bad8f292e8264e703ae246e2615759fd2"
+    },
+    {
+      "id": "heading-077",
+      "type": "heading",
+      "source": "カーソル表示の下限界となるＹ座標です。",
+      "sourceHash": "0d1a8f8b0a47fe86a467cce1796b8f50ce401522ec2552f107871c0da9fb17bb",
+      "translation": "The Y coordinate that serves as the lower limit for cursor display.",
+      "contextHash": "0d1a8f8b0a47fe86a467cce1796b8f50ce401522ec2552f107871c0da9fb17bb"
+    },
+    {
+      "id": "heading-078",
+      "type": "heading",
+      "source": "初期値は画面下端（Graphics.height）",
+      "sourceHash": "a3f7b442e83c78b7211131de0990371325fab473a3a7efbe5c789967c7fe9bf8",
+      "translation": "The default value is the bottom edge of the screen (Graphics.height)",
+      "contextHash": "a3f7b442e83c78b7211131de0990371325fab473a3a7efbe5c789967c7fe9bf8"
+    },
+    {
+      "id": "heading-079",
+      "type": "heading",
+      "source": "カーソル位置を常時更新（UpdateCursorPosition） ver1.01",
+      "sourceHash": "ba6185a658b5c93739857368c5c7fbb12fc1d355f83cd4b875e5bab3bdbac010",
+      "translation": "Always Update Cursor Position (UpdateCursorPosition) ver1.01",
+      "contextHash": "ba6185a658b5c93739857368c5c7fbb12fc1d355f83cd4b875e5bab3bdbac010"
+    },
+    {
+      "id": "heading-080",
+      "type": "heading",
+      "source": "カーソル位置を毎フレーム更新します。",
+      "sourceHash": "43d116929853a31e01c45f47c440ec631116a37fd6c2229750b87655c7f16e58",
+      "translation": "Updates the cursor position every frame.",
+      "contextHash": "43d116929853a31e01c45f47c440ec631116a37fd6c2229750b87655c7f16e58"
+    },
+    {
+      "id": "heading-081",
+      "type": "heading",
+      "source": "わずかに負荷がかかるため、デフォルトではオフになっています。",
+      "sourceHash": "97b4becbbd652b7c2503efed8ab557e9476d825ac57eec9c647f20da42789572",
+      "translation": "It is turned off by default because it places a slight load on the system.",
+      "contextHash": "97b4becbbd652b7c2503efed8ab557e9476d825ac57eec9c647f20da42789572"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]敵グループの配置を自動化＆ランダム化するプラグイン[[/LINK_1]]とも相性が良いです。",
+      "sourceHash": "67e0e5f15a647f42b221417e9ca17b18cfd308169b2bfc245d26d92a0f0f9038",
+      "parts": [
+        {
+          "source": "敵グループの配置を自動化＆ランダム化するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "とも相性が良いです。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin to automate and randomize troop placement[[/LINK_1]] also works well with it.",
+      "contextHash": "67e0e5f15a647f42b221417e9ca17b18cfd308169b2bfc245d26d92a0f0f9038"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（敵）[[/LINK_1]]",
+      "sourceHash": "8287e29ecf19ca6b46fc95220b547ed746bfcfb514a68402cc8de88c24e0bca9",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（敵）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Enemy)[[/LINK_1]]",
+      "contextHash": "8287e29ecf19ca6b46fc95220b547ed746bfcfb514a68402cc8de88c24e0bca9"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]敵名リストを非表示（HideEnemyNameList）[[/LINK_1]]",
+      "sourceHash": "98be3cc41555ef87cb51fc51e2c0ee83feca669171fa33849864f5b4a3b2f2f4",
+      "parts": [
+        {
+          "source": "敵名リストを非表示（HideEnemyNameList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Hide Enemy Name List (HideEnemyNameList)[[/LINK_1]]",
+      "contextHash": "98be3cc41555ef87cb51fc51e2c0ee83feca669171fa33849864f5b4a3b2f2f4"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]敵の上下切替（SwitchEnemyUpDown）[[/LINK_1]]",
+      "sourceHash": "46f64ac87ba8ba218b342048970e8ec52721936818cf40919024bf0c94d9955a",
+      "parts": [
+        {
+          "source": "敵の上下切替（SwitchEnemyUpDown）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Enemy Up/Down (SwitchEnemyUpDown)[[/LINK_1]]",
+      "contextHash": "46f64ac87ba8ba218b342048970e8ec52721936818cf40919024bf0c94d9955a"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]敵の左右切替（SwitchEnemyLeftRight）[[/LINK_1]]",
+      "sourceHash": "46a0c30758ffe83cf7756b2615bb5d49dbd91077bbffd6880cbd19d0f2089dcc",
+      "parts": [
+        {
+          "source": "敵の左右切替（SwitchEnemyLeftRight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Enemy Left/Right (SwitchEnemyLeftRight)[[/LINK_1]]",
+      "contextHash": "46a0c30758ffe83cf7756b2615bb5d49dbd91077bbffd6880cbd19d0f2089dcc"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]敵カーソルの画像（EnemyTargetCursor）[[/LINK_1]]",
+      "sourceHash": "18183c60de12415bf9796f549050f9e13c75195f27485de051c89fae39092cc5",
+      "parts": [
+        {
+          "source": "敵カーソルの画像（EnemyTargetCursor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Cursor Image (EnemyTargetCursor)[[/LINK_1]]",
+      "contextHash": "18183c60de12415bf9796f549050f9e13c75195f27485de051c89fae39092cc5"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]敵のカーソル基準点（EnemyCursorPosition）[[/LINK_1]]",
+      "sourceHash": "3365250b9d33406d97618eee4e6065e72d2dbebd8dc66f479d2c8f76cb0ff424",
+      "parts": [
+        {
+          "source": "敵のカーソル基準点（EnemyCursorPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Cursor Reference Point (EnemyCursorPosition)[[/LINK_1]]",
+      "contextHash": "3365250b9d33406d97618eee4e6065e72d2dbebd8dc66f479d2c8f76cb0ff424"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]敵のカーソル調整Ｘ（EnemyCursorAdjustX）[[/LINK_1]]",
+      "sourceHash": "bd3056b7fbe146cc2eca247a02619a6c8a91c8b79901ab167259e9be591bc394",
+      "parts": [
+        {
+          "source": "敵のカーソル調整Ｘ（EnemyCursorAdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Cursor Adjustment X (EnemyCursorAdjustX)[[/LINK_1]]",
+      "contextHash": "bd3056b7fbe146cc2eca247a02619a6c8a91c8b79901ab167259e9be591bc394"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]敵のカーソル調整Ｙ（EnemyCursorAdjustY）[[/LINK_1]]",
+      "sourceHash": "556ee290949be222832bb47bae165d8882861dc918e17907aa38e4df8a666990",
+      "parts": [
+        {
+          "source": "敵のカーソル調整Ｙ（EnemyCursorAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Cursor Adjustment Y (EnemyCursorAdjustY)[[/LINK_1]]",
+      "contextHash": "556ee290949be222832bb47bae165d8882861dc918e17907aa38e4df8a666990"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]選択中の敵名を表示（ShowTargetEnemyName）[[/LINK_1]]",
+      "sourceHash": "c9131adba0c25ac2acdd6c75be530a6361dadc70aa61720679a43b23be2e0ff9",
+      "parts": [
+        {
+          "source": "選択中の敵名を表示（ShowTargetEnemyName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Selected Enemy Name (ShowTargetEnemyName)[[/LINK_1]]",
+      "contextHash": "c9131adba0c25ac2acdd6c75be530a6361dadc70aa61720679a43b23be2e0ff9"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]敵名ウィンドウの縦幅（EnemyNameWindowHeight）[[/LINK_1]]",
+      "sourceHash": "79d0376c95519cfae311214b6dece46f72fa0b7a9ec240ba19414e8f4a50efc2",
+      "parts": [
+        {
+          "source": "敵名ウィンドウの縦幅（EnemyNameWindowHeight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Name Window Height (EnemyNameWindowHeight)[[/LINK_1]]",
+      "contextHash": "79d0376c95519cfae311214b6dece46f72fa0b7a9ec240ba19414e8f4a50efc2"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]敵名ウィンドウの不透明度（EnemyNameWindowOpacity）[[/LINK_1]]",
+      "sourceHash": "9aa4cc22c3102c9fed509548b4465ea67849c8ff056eae4c43aaec604f3920d9",
+      "parts": [
+        {
+          "source": "敵名ウィンドウの不透明度（EnemyNameWindowOpacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Name Window Opacity (EnemyNameWindowOpacity)[[/LINK_1]]",
+      "contextHash": "9aa4cc22c3102c9fed509548b4465ea67849c8ff056eae4c43aaec604f3920d9"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]敵名ウィンドウの調整Ｘ（EnemyNameWindowAdjustX）[[/LINK_1]]",
+      "sourceHash": "47778029d24d1c98089a13e7a05e24700bb1dc74195dbafc13126a6f187efb34",
+      "parts": [
+        {
+          "source": "敵名ウィンドウの調整Ｘ（EnemyNameWindowAdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Name Window Adjustment X (EnemyNameWindowAdjustX)[[/LINK_1]]",
+      "contextHash": "47778029d24d1c98089a13e7a05e24700bb1dc74195dbafc13126a6f187efb34"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]敵名ウィンドウの調整Ｙ（EnemyNameWindowAdjustY）[[/LINK_1]]",
+      "sourceHash": "3b122a58fe7af533d14767a58b8ba192cf969f78cd1085f6d2a862ce1f99314a",
+      "parts": [
+        {
+          "source": "敵名ウィンドウの調整Ｙ（EnemyNameWindowAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Name Window Adjustment Y (EnemyNameWindowAdjustY)[[/LINK_1]]",
+      "contextHash": "3b122a58fe7af533d14767a58b8ba192cf969f78cd1085f6d2a862ce1f99314a"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]敵名フォントサイズ（EnemyNameFontSize）[[/LINK_1]]",
+      "sourceHash": "bd16555ab0f8626e5b5d110ad6254b786f3ed75f1ba95a46e5c093efd973633c",
+      "parts": [
+        {
+          "source": "敵名フォントサイズ（EnemyNameFontSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Name Font Size (EnemyNameFontSize)[[/LINK_1]]",
+      "contextHash": "bd16555ab0f8626e5b5d110ad6254b786f3ed75f1ba95a46e5c093efd973633c"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]敵名テキストの調整Ｙ（EnemyNameTextAdjustY）[[/LINK_1]]",
+      "sourceHash": "050b6a3d66cbcf5ac85db0ab9e0544dbd99c7f7c4bab3103181f61f6cfd29566",
+      "parts": [
+        {
+          "source": "敵名テキストの調整Ｙ（EnemyNameTextAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Name Text Adjustment Y (EnemyNameTextAdjustY)[[/LINK_1]]",
+      "contextHash": "050b6a3d66cbcf5ac85db0ab9e0544dbd99c7f7c4bab3103181f61f6cfd29566"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（アクター）[[/LINK_1]]",
+      "sourceHash": "8ff5b32c1bbfd2c0e6a55876feff4307b7152803100c417eee9ffd776a1eca3c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（アクター）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Actor)[[/LINK_1]]",
+      "contextHash": "8ff5b32c1bbfd2c0e6a55876feff4307b7152803100c417eee9ffd776a1eca3c"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]アクターの上下切替（SwitchActorUpDown）[[/LINK_1]]",
+      "sourceHash": "6074a55f50e0c962ea7b2580cf3c1927fc212520931329d625ab4fbc342a0bf5",
+      "parts": [
+        {
+          "source": "アクターの上下切替（SwitchActorUpDown）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Actor Up/Down (SwitchActorUpDown)[[/LINK_1]]",
+      "contextHash": "6074a55f50e0c962ea7b2580cf3c1927fc212520931329d625ab4fbc342a0bf5"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]アクターの左右切替（SwitchActorLeftRight）[[/LINK_1]]",
+      "sourceHash": "3bdc7bb4bd90395723a28534e971f1736757d841c43bdc429e49367835555761",
+      "parts": [
+        {
+          "source": "アクターの左右切替（SwitchActorLeftRight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Actor Left/Right (SwitchActorLeftRight)[[/LINK_1]]",
+      "contextHash": "3bdc7bb4bd90395723a28534e971f1736757d841c43bdc429e49367835555761"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]アクターカーソルの画像（ActorTargetCursor）[[/LINK_1]]",
+      "sourceHash": "506f9ab56323b6eff66ffb0fe183fe86d47a11a31e679e63cbad5999d72422b3",
+      "parts": [
+        {
+          "source": "アクターカーソルの画像（ActorTargetCursor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Cursor Image (ActorTargetCursor)[[/LINK_1]]",
+      "contextHash": "506f9ab56323b6eff66ffb0fe183fe86d47a11a31e679e63cbad5999d72422b3"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]アクターカーソル基準点（ActorCursorPosition）[[/LINK_1]]",
+      "sourceHash": "cd0a616c8ed0207402405a1b8a4e175fccd30a5c80866e554224bf939d562681",
+      "parts": [
+        {
+          "source": "アクターカーソル基準点（ActorCursorPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Cursor Reference Point (ActorCursorPosition)[[/LINK_1]]",
+      "contextHash": "cd0a616c8ed0207402405a1b8a4e175fccd30a5c80866e554224bf939d562681"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]アクターカーソル調整Ｘ（ActorCursorAdjustX）[[/LINK_1]]",
+      "sourceHash": "1d3179273c6c2f00fdd4adff2af944f0184fab6ed9f9927fdad6fce8265f90e1",
+      "parts": [
+        {
+          "source": "アクターカーソル調整Ｘ（ActorCursorAdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Cursor Adjustment X (ActorCursorAdjustX)[[/LINK_1]]",
+      "contextHash": "1d3179273c6c2f00fdd4adff2af944f0184fab6ed9f9927fdad6fce8265f90e1"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]アクターカーソル調整Ｙ（ActorCursorAdjustY）[[/LINK_1]]",
+      "sourceHash": "0c337b1ff4d89c598b1f95dba045dc35526f326f742a5bd64f7cd5e3d5e36798",
+      "parts": [
+        {
+          "source": "アクターカーソル調整Ｙ（ActorCursorAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Cursor Adjustment Y (ActorCursorAdjustY)[[/LINK_1]]",
+      "contextHash": "0c337b1ff4d89c598b1f95dba045dc35526f326f742a5bd64f7cd5e3d5e36798"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]選択中のアクター名を表示（ShowTargetActorName）[[/LINK_1]]",
+      "sourceHash": "4a67b83973c3d532284e05094dce841af6ea85b5ac751598fff5983fce7eee4a",
+      "parts": [
+        {
+          "source": "選択中のアクター名を表示（ShowTargetActorName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Selected Actor Name (ShowTargetActorName)[[/LINK_1]]",
+      "contextHash": "4a67b83973c3d532284e05094dce841af6ea85b5ac751598fff5983fce7eee4a"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]アクター名ｳｨﾝﾄﾞｳの縦幅（ActorNameWindowHeight）[[/LINK_1]]",
+      "sourceHash": "f7ca665e339c9dcd510b3b94b183434bbb59644f7b85c6bc19ddeb64b5a0874c",
+      "parts": [
+        {
+          "source": "アクター名ｳｨﾝﾄﾞｳの縦幅（ActorNameWindowHeight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Name Window Height (ActorNameWindowHeight)[[/LINK_1]]",
+      "contextHash": "f7ca665e339c9dcd510b3b94b183434bbb59644f7b85c6bc19ddeb64b5a0874c"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]アクター名ｳｨﾝﾄﾞｳ不透明度（ActorNameWindowOpacity）[[/LINK_1]]",
+      "sourceHash": "02d40f52b234958427fe2b799a1859cc7ffac28ec072ec98c101888128dea035",
+      "parts": [
+        {
+          "source": "アクター名ｳｨﾝﾄﾞｳ不透明度（ActorNameWindowOpacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Name Window Opacity (ActorNameWindowOpacity)[[/LINK_1]]",
+      "contextHash": "02d40f52b234958427fe2b799a1859cc7ffac28ec072ec98c101888128dea035"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]アクター名ｳｨﾝﾄﾞｳの調整Ｘ（ActorNameWindowAdjustX）[[/LINK_1]]",
+      "sourceHash": "044c3e6332c454efd88b4ffe7dfa04e67006b11a4d2ff7299ba989cdb243f853",
+      "parts": [
+        {
+          "source": "アクター名ｳｨﾝﾄﾞｳの調整Ｘ（ActorNameWindowAdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Name Window Adjustment X (ActorNameWindowAdjustX)[[/LINK_1]]",
+      "contextHash": "044c3e6332c454efd88b4ffe7dfa04e67006b11a4d2ff7299ba989cdb243f853"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]アクター名ｳｨﾝﾄﾞｳの調整Ｙ（ActorNameWindowAdjustY）[[/LINK_1]]",
+      "sourceHash": "0d5d5a89df263b790cd9121082cb399d46c1d0c4e362950e6b3e9aeba6d2f010",
+      "parts": [
+        {
+          "source": "アクター名ｳｨﾝﾄﾞｳの調整Ｙ（ActorNameWindowAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Name Window Adjustment Y (ActorNameWindowAdjustY)[[/LINK_1]]",
+      "contextHash": "0d5d5a89df263b790cd9121082cb399d46c1d0c4e362950e6b3e9aeba6d2f010"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]アクター名フォントサイズ（ActorNameFontSize）[[/LINK_1]]",
+      "sourceHash": "1997d782d39193f39dacbb8cb3d7c08c84b60c685dbe5f2a1f83fd2b5226ea7e",
+      "parts": [
+        {
+          "source": "アクター名フォントサイズ（ActorNameFontSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Name Font Size (ActorNameFontSize)[[/LINK_1]]",
+      "contextHash": "1997d782d39193f39dacbb8cb3d7c08c84b60c685dbe5f2a1f83fd2b5226ea7e"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]アクター名ﾃｷｽﾄの調整Ｙ（ActorNameTextAdjustY）[[/LINK_1]]",
+      "sourceHash": "e8fa887fd1007c5a1b4fd4f94651705504b1bf8a5a92594a722e87622c8cf380",
+      "parts": [
+        {
+          "source": "アクター名ﾃｷｽﾄの調整Ｙ（ActorNameTextAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Name Text Adjustment Y (ActorNameTextAdjustY)[[/LINK_1]]",
+      "contextHash": "e8fa887fd1007c5a1b4fd4f94651705504b1bf8a5a92594a722e87622c8cf380"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（共通）[[/LINK_1]]",
+      "sourceHash": "a658bda750bc10720b668ae79164512c4e0985baa99d79fcf408c1eef0eaea6b",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（共通）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (General)[[/LINK_1]]",
+      "contextHash": "a658bda750bc10720b668ae79164512c4e0985baa99d79fcf408c1eef0eaea6b"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]左の限界Ｘ座標（LeftLimitX）[[/LINK_1]]",
+      "sourceHash": "1b7e5a65b69b9ea576e801e1871ee3f2c7893b00dfb17d25e60d9ade4b10e320",
+      "parts": [
+        {
+          "source": "左の限界Ｘ座標（LeftLimitX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Left Limit X Coordinate (LeftLimitX)[[/LINK_1]]",
+      "contextHash": "1b7e5a65b69b9ea576e801e1871ee3f2c7893b00dfb17d25e60d9ade4b10e320"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]右の限界Ｘ座標（RightLimitX）[[/LINK_1]]",
+      "sourceHash": "8c6f86a40c07094f832f9c4f861fd43a929ce734287798e1b4a7a49a3caa7332",
+      "parts": [
+        {
+          "source": "右の限界Ｘ座標（RightLimitX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Right Limit X Coordinate (RightLimitX)[[/LINK_1]]",
+      "contextHash": "8c6f86a40c07094f832f9c4f861fd43a929ce734287798e1b4a7a49a3caa7332"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]上の限界Ｙ座標（UpLimitY）[[/LINK_1]]",
+      "sourceHash": "28560a2e9ec87f138e7479f7a17c16d4bb875743cb20ba280565311e2800985c",
+      "parts": [
+        {
+          "source": "上の限界Ｙ座標（UpLimitY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Upper Limit Y Coordinate (UpLimitY)[[/LINK_1]]",
+      "contextHash": "28560a2e9ec87f138e7479f7a17c16d4bb875743cb20ba280565311e2800985c"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]下の限界Ｙ座標（DownLimitY）[[/LINK_1]]",
+      "sourceHash": "18b4b46e9c8d96adfb414a764c516b5175baf38bb653c67103ffe30860b9d222",
+      "parts": [
+        {
+          "source": "下の限界Ｙ座標（DownLimitY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Lower Limit Y Coordinate (DownLimitY)[[/LINK_1]]",
+      "contextHash": "18b4b46e9c8d96adfb414a764c516b5175baf38bb653c67103ffe30860b9d222"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]カーソル位置を常時更新（UpdateCursorPosition）[[/LINK_1]]ver1.01",
+      "sourceHash": "c6e41caea6a8b29e89cd99a1ff91a10e01d5a427980c24a10d011051efedbda8",
+      "parts": [
+        {
+          "source": "カーソル位置を常時更新（UpdateCursorPosition）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Continuously Update Cursor Position (UpdateCursorPosition)[[/LINK_1]] ver1.01",
+      "contextHash": "c6e41caea6a8b29e89cd99a1ff91a10e01d5a427980c24a10d011051efedbda8"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]バトラー名の色を変更するプラグイン[[/LINK_1]]の公開に合わせて修正。",
+      "sourceHash": "2f0ed510ab56af842342dc7ff43eaa0b599bd98634a8e372c2cc8682d20ec480",
+      "parts": [
+        {
+          "source": "バトラー名の色を変更するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の公開に合わせて修正。",
+          "link": false
+        }
+      ],
+      "translation": "Revised for the release of the [[LINK_1]]plugin that changes battler name colors[[/LINK_1]].",
+      "contextHash": "2f0ed510ab56af842342dc7ff43eaa0b599bd98634a8e372c2cc8682d20ec480"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_PartyAttack.js[[/LINK_1]]（ver1.01）の全体選択に対応。",
+      "sourceHash": "467df91e048262c032dd580dff1eb5c2917bfdf9dceb28eed061219f0c4bc1b9",
+      "parts": [
+        {
+          "source": "NRP_PartyAttack.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（ver1.01）の全体選択に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Supports selecting all with [[LINK_1]]NRP_PartyAttack.js[[/LINK_1]] (ver1.01).",
+      "contextHash": "467df91e048262c032dd580dff1eb5c2917bfdf9dceb28eed061219f0c4bc1b9"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの効果範囲を拡張するプラグイン[[/LINK_1]]と併用した場合、カーソルが正しく表示されない不具合修正。",
+      "sourceHash": "644b05fbbba2d34ce589b4803adcb0ea561ec56f62376eb88fc22d326e0a4e59",
+      "parts": [
+        {
+          "source": "スキルの効果範囲を拡張するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用した場合、カーソルが正しく表示されない不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed an issue where the cursor was not displayed correctly when used with the [[LINK_1]]plugin that expands skill effect ranges[[/LINK_1]].",
+      "contextHash": "644b05fbbba2d34ce589b4803adcb0ea561ec56f62376eb88fc22d326e0a4e59"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "オンにすると、[[LINK_1]]MPP_Pseudo3DBattle.js[[/LINK_1]]のようなリアルタイムでバトラーの位置が変動する戦闘システムにも対応できるようになります。",
+      "sourceHash": "7fa7267eb7b73a50de65f026367afe8426d247f8860afc68c38d41506749c04a",
+      "parts": [
+        {
+          "source": "オンにすると、",
+          "link": false
+        },
+        {
+          "source": "MPP_Pseudo3DBattle.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のようなリアルタイムでバトラーの位置が変動する戦闘システムにも対応できるようになります。",
+          "link": false
+        }
+      ],
+      "translation": "When enabled, this also supports battle systems where battler positions change in real time, such as [[LINK_1]]MPP_Pseudo3DBattle.js[[/LINK_1]].",
+      "contextHash": "7fa7267eb7b73a50de65f026367afe8426d247f8860afc68c38d41506749c04a"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "[[LINK_1]]MPP_Pseudo3DBattle.js[[/LINK_1]]のようなリアルタイムでバトラーの位置が変動する戦闘システムとの併用にどうぞ。",
+      "sourceHash": "9bb6794a1026027f285fa89fef9dc6e6ee002b53ef9eb91969aacc2f25322fba",
+      "parts": [
+        {
+          "source": "MPP_Pseudo3DBattle.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のようなリアルタイムでバトラーの位置が変動する戦闘システムとの併用にどうぞ。",
+          "link": false
+        }
+      ],
+      "translation": "Use this with battle systems where battler positions change in real time, such as [[LINK_1]]MPP_Pseudo3DBattle.js[[/LINK_1]].",
+      "contextHash": "9bb6794a1026027f285fa89fef9dc6e6ee002b53ef9eb91969aacc2f25322fba"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "戦闘時、選択中の対象にカーソルを表示します。": "Displays a cursor over the currently selected target during battles.",
+    "それに伴い、様々な調整が可能です。": "Various adjustments can be made accordingly.",
+    "特にサイドビューにおいて、リスト上の敵名と実際の敵の並び順が一致しない問題を軽減します。": "This is especially useful in side-view battles, where it helps alleviate the issue of enemy names in the list not matching the actual order of the enemies.",
+    "初期値ではサイドビューを想定していますが、設定を調整すれば、フロントビューでも使えます。": "The default settings assume side-view battles, but it can also be used in front-view battles by adjusting the settings.",
+    "方向キーを押した時に対象の位置関係を参照して、カーソルの遷移先を判定するような高度な機能はありません。": "It does not have advanced functionality that determines the cursor's next destination by referring to the relative positions of targets when an arrow key is pressed.",
+    "キーを押すと単純に前後のＩＤの対象に移るだけです。": "Pressing a key simply moves to the target with the preceding or following ID.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_BattleTargetCursor.js": "NRP_BattleTargetCursor.js ",
+    "ver1.05（2024/12/04）": "ver1.05 (2024/12/04) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/12/04（ver1.05）": "2024/12/04 (ver1.05) ",
+    "2022/02/12 -> 2024/03/03（ver1.04 -> 1.042）": "2022/02/12 -> 2024/03/03 (ver1.04 -> 1.042) ",
+    "ver1.033にて『カーソル位置を常時更新』がオンの場合、行動の決定・キャンセル時にカーソルが残ったままになる不具合を修正。": "Fixed a bug in ver1.033 where the cursor remained after confirming or canceling an action when “Always Update Cursor Position” was enabled.",
+    "アクター名ｳｨﾝﾄﾞｳの調整Ｘにマイナス値を入力できない不具合修正。": "Fixed a bug that prevented negative values from being entered for Actor Name Window Adjustment X.",
+    "（2023/05/01 ver1.041）": " (2023/05/01 ver1.041) ",
+    "スキルで敵を選択する際、ステータスウィンドウが表示されてしまう不具合修正。（2024/03/03 ver1.042）": "Fixed a bug where the status window was displayed when selecting an enemy with a skill. (2024/03/03 ver1.042)",
+    "※標準レイアウトではステータスウィンドウはスキルウィンドウの下に完全に隠れるため影響は薄いです。": "※With the standard layout, the status window is completely hidden behind the skill window, so the impact is minor.",
+    "2021/08/13 -> 2022/02/01（ver1.03 -> 1.033）": "2021/08/13 -> 2022/02/01 (ver1.03 -> 1.033) ",
+    "マウスでの対象選択ができない不具合修正。": "Fixed a bug that prevented targets from being selected with the mouse.",
+    "『選択中の敵名を表示』『選択中のアクター名を表示』がオフの場合、カーソルが表示されなくなる不具合修正。（09/06 ver1.031）": "Fixed a bug where the cursor was not displayed when “Display Selected Enemy Name” or “Display Selected Actor Name” was disabled. (09/06 ver1.031)",
+    "ＭＶにて一部のスキルがエラーになる不具合修正。（09/29 ver1.032）": "Fixed a bug where some skills caused errors in MV. (09/29 ver1.032)",
+    "『選択中の敵名を表示』がオフの場合、『カーソル位置を常時更新』が機能しない不具合修正。（2022/02/01 ver1.033）": "Fixed a bug where “Always Update Cursor Position” did not work when “Display Selected Enemy Name” was disabled. (2022/02/01 ver1.033)",
+    "2021/08/05（ver1.02）": "2021/08/05 (ver1.02) ",
+    "ＭＶでカーソル画像を設定するとエラーになる不具合修正。": "Fixed a bug that caused an error when a cursor image was configured in MV.",
+    "※リンク先のプラグインも不具合修正していますのでご確認ください。": "※The plugin at the linked destination has also been updated to fix bugs, so please check it.",
+    "2021/07/14（ver1.01）": "2021/07/14 (ver1.01) ",
+    "プラグインパラメータに『カーソル位置を常時更新』を追加。": "Added “Always Update Cursor Position” to the plugin parameters.",
+    "2021/07/08（ver1.00）": "2021/07/08 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインを導入するだけで挙動が変わります。": "The behavior changes simply by installing the plugin.",
+    "ただし、カーソル画像は初期状態では設定されていませんので、対象の名前表示だけが行われます。": "However, no cursor image is configured by default, so only the target's name is displayed.",
+    "手軽にカーソル画像が欲しいという方のために、サンプルを作りました。": "I created a sample for those who want a cursor image easily.",
+    "※ＭＶＭＺの武器画像から加工して適当に作ったものです。": "※It was made roughly by modifying weapon images from MV/MZ.",
+    "ＭＶＭＺで兼用の画像なので、いずれかのユーザなら問題なく利用できます。": "The image can be used with both MV and MZ, so users of either can use it without any issues.",
+    "右クリックで好きな名前で保存し、pictureフォルダに放り込んでください。": "Right-click and save it with any name you like, then place it in the picture folder.",
+    "『敵カーソルの画像』のプラグインパラメータに設定すればＯＫです。": "Set it in the “Enemy Cursor Image” plugin parameter, and you're good to go.",
+    "後はその他のプラグインパラメータを好きなように調整してください。": "After that, adjust the other plugin parameters as desired.",
+    "なお、アクター側のパラメータの大半は空白でも構いません。": "Most of the actor-side parameters can be left blank.",
+    "その場合は、自動的に敵側のパラメータが参照されます。": "In that case, the enemy-side parameters are referenced automatically.",
+    "※カーソル画像およびＸ座標の調整分は左右反転されます。": "※The cursor image and the X-coordinate adjustment are flipped horizontally.",
+    "プラグインパラメータ（敵）": "Plugin Parameters (Enemy)",
+    "敵名リストを非表示（HideEnemyNameList）": "Hide Enemy Name List (HideEnemyNameList)",
+    "デフォルトの敵名リストを非表示にします。": "Hides the default enemy name list.",
+    "初期値はオンです。": "The default value is ON.",
+    "オフにすると、ツクールの標準の動作に近くなります。": "Turning it OFF makes the behavior closer to RPG Maker's standard behavior.",
+    "下の『敵の上下切替』『敵の左右切替』が無効化され、敵名リストの判定が優先されるようになります。": "The “Switch Enemy Up/Down” and “Switch Enemy Left/Right” settings below are disabled, and the enemy name list takes priority when determining the target.",
+    "敵の上下切替（SwitchEnemyUpDown）": "Switch Enemy Up/Down (SwitchEnemyUpDown)",
+    "敵の選択を上下で切替できるようにします。": "Allows enemies to be switched between by moving up and down.",
+    "敵の左右切替（SwitchEnemyLeftRight）": "Switch Enemy Left/Right (SwitchEnemyLeftRight)",
+    "敵の選択を左右で切替できるようにします。": "Allows enemies to be switched between by moving left and right.",
+    "敵カーソルの画像（EnemyTargetCursor）": "Enemy Cursor Image (EnemyTargetCursor)",
+    "敵を対象にした際のカーソル画像を指定します。": "Specifies the cursor image displayed when targeting an enemy.",
+    "画像はピクチャーフォルダに配置してください。": "Place the image in the Pictures folder.",
+    "敵のカーソル基準点（EnemyCursorPosition）": "Enemy Cursor Anchor Point (EnemyCursorPosition)",
+    "敵を対象にした際のカーソル画像の上下の基準点です。": "This is the vertical reference point for the cursor image when targeting an enemy.",
+    "敵名ウィンドウもこれを基準にします。": "The enemy name window also uses this as its reference.",
+    "敵のカーソル調整Ｘ（EnemyCursorAdjustX）": "Enemy Cursor Adjust X (EnemyCursorAdjustX)",
+    "敵を対象にした際のカーソル画像のＸ座標を調整します。": "Adjusts the X coordinate of the cursor image when targeting an enemy.",
+    "敵のカーソル調整Ｙ（EnemyCursorAdjustY）": "Enemy Cursor Adjust Y (EnemyCursorAdjustY)",
+    "敵を対象にした際のカーソル画像のＹ座標を調整します。": "Adjusts the Y coordinate of the cursor image when targeting an enemy.",
+    "選択中の敵名を表示（ShowTargetEnemyName）": "Show Target Enemy Name (ShowTargetEnemyName)",
+    "選択中の敵の名前を表示します。": "Displays the name of the selected enemy.",
+    "敵名ウィンドウの縦幅（EnemyNameWindowHeight）": "Enemy Name Window Height (EnemyNameWindowHeight)",
+    "敵名ウィンドウの縦幅です。初期値は72です。": "The height of the enemy name window. The default value is 72.",
+    "敵名ウィンドウの不透明度（EnemyNameWindowOpacity）": "Enemy Name Window Opacity (EnemyNameWindowOpacity)",
+    "敵名ウィンドウの不透明度（0~255）です。": "The opacity of the enemy name window (0~255).",
+    "敵名ウィンドウの調整Ｘ（EnemyNameWindowAdjustX）": "Enemy Name Window Adjust X (EnemyNameWindowAdjustX)",
+    "敵名ウィンドウのＸ座標を調整します。": "Adjusts the X coordinate of the enemy name window.",
+    "敵名ウィンドウの調整Ｙ（EnemyNameWindowAdjustY）": "Enemy Name Window Adjust Y (EnemyNameWindowAdjustY)",
+    "敵名ウィンドウのＹ座標を調整します。": "Adjusts the Y coordinate of the enemy name window.",
+    "敵名フォントサイズ（EnemyNameFontSize）": "Enemy Name Font Size (EnemyNameFontSize)",
+    "敵名のフォントサイズです。": "The font size of the enemy name.",
+    "空欄ならシステム２の設定値を使用します。": "If left blank, the value configured in System 2 is used.",
+    "敵名テキストの調整Ｙ（EnemyNameTextAdjustY）": "Enemy Name Text Adjust Y (EnemyNameTextAdjustY)",
+    "敵名ウィンドウに表示されるテキストのＹ座標を調整します。": "Adjusts the Y coordinate of the text displayed in the enemy name window.",
+    "プラグインパラメータ（アクター）": "Plugin Parameters (Actor)",
+    "アクターの上下切替（SwitchActorUpDown）": "Switch Actor Up/Down (SwitchActorUpDown)",
+    "アクターの選択を上下で切替できるようにします。": "Allows the actor selection to be switched up and down.",
+    "アクターの左右切替（SwitchActorLeftRight）": "Switch Actor Left/Right (SwitchActorLeftRight)",
+    "アクターの選択を左右で切替できるようにします。": "Allows the actor selection to be switched left and right.",
+    "こちらはＭＺの標準動作です。": "This is the standard behavior in MZ.",
+    "アクターカーソルの画像（ActorTargetCursor）": "Actor Target Cursor Image (ActorTargetCursor)",
+    "アクターを対象にした際のカーソル画像を指定します。": "Specifies the cursor image when targeting an actor.",
+    "空欄なら敵のものを左右反転します。": "If left blank, the enemy cursor image is flipped horizontally.",
+    "アクターカーソル基準点（ActorCursorPosition）": "Actor Cursor Reference Point (ActorCursorPosition)",
+    "アクターを対象にした際のカーソル画像の上下の基準点です。": "This is the vertical reference point for the cursor image when targeting an actor.",
+    "空欄なら敵と同じ値を使用します。": "If left blank, the same value as the enemy will be used.",
+    "アクターカーソル調整Ｘ（ActorCursorAdjustX）": "Actor Cursor Adjust X (ActorCursorAdjustX)",
+    "アクターを対象にした際のカーソル画像のＸ座標を調整します。": "Adjusts the X coordinate of the cursor image when targeting an actor.",
+    "空欄なら敵の値を左右反転して使用します。": "If left blank, the enemy's value will be flipped horizontally and used.",
+    "アクターカーソル調整Ｙ（ActorCursorAdjustY）": "Actor Cursor Adjust Y (ActorCursorAdjustY)",
+    "アクターを対象にした際のカーソル画像のＹ座標を調整します。": "Adjusts the Y coordinate of the cursor image when targeting an actor.",
+    "選択中のアクター名を表示（ShowTargetActorName）": "Show Target Actor Name (ShowTargetActorName)",
+    "選択中のアクターの名前を表示します。": "Displays the name of the selected actor.",
+    "アクター名ｳｨﾝﾄﾞｳの縦幅（ActorNameWindowHeight）": "Actor Name Window Height (ActorNameWindowHeight)",
+    "アクター名ウィンドウの縦幅です。": "The height of the actor name window.",
+    "アクター名ｳｨﾝﾄﾞｳ不透明度（ActorNameWindowOpacity）": "Actor Name Window Opacity (ActorNameWindowOpacity)",
+    "アクター名ウィンドウの不透明度（0~255）です。": "The opacity of the actor name window (0~255).",
+    "アクター名ｳｨﾝﾄﾞｳの調整Ｘ（ActorNameWindowAdjustX）": "Actor Name Window Adjust X (ActorNameWindowAdjustX)",
+    "アクター名ウィンドウのＸ座標を調整します。": "Adjusts the X coordinate of the actor name window.",
+    "アクター名ｳｨﾝﾄﾞｳの調整Ｙ（ActorNameWindowAdjustY）": "Actor Name Window Adjust Y (ActorNameWindowAdjustY)",
+    "アクター名ウィンドウのＹ座標を調整します。": "Adjusts the Y coordinate of the actor name window.",
+    "アクター名フォントサイズ（ActorNameFontSize）": "Actor Name Font Size (ActorNameFontSize)",
+    "アクター名のフォントサイズです。": "The font size for actor names.",
+    "アクター名ﾃｷｽﾄの調整Ｙ（ActorNameTextAdjustY）": "Actor Name Text Adjust Y (ActorNameTextAdjustY)",
+    "アクター名ウィンドウに表示されるテキストのＹ座標を調整します。": "Adjusts the Y coordinate of the text displayed in the actor name window.",
+    "プラグインパラメータ（共通）": "Plugin Parameters (Common)",
+    "左の限界Ｘ座標（LeftLimitX）": "Left Limit X (LeftLimitX)",
+    "カーソル表示の左限界となるＸ座標です。": "The X coordinate that serves as the left limit for cursor display.",
+    "初期値は画面左端（0）": "The default value is the left edge of the screen (0)",
+    "カーソルや敵名ウィンドウが画面外にはみ出した際に、調整するための項目です。": "This setting is used to adjust the cursor or enemy name window when it extends beyond the screen.",
+    "右の限界Ｘ座標（RightLimitX）": "Right Limit X (RightLimitX)",
+    "カーソル表示の右限界となるＸ座標です。": "The X coordinate that serves as the right limit for cursor display.",
+    "初期値は画面右端（Graphics.width）": "The default value is the right edge of the screen (Graphics.width)",
+    "上の限界Ｙ座標（UpLimitY）": "Up Limit Y (UpLimitY)",
+    "カーソル表示の上限界となるＹ座標です。": "The Y coordinate that serves as the upper limit for cursor display.",
+    "初期値は画面上端（0）": "The default value is the top edge of the screen (0)",
+    "下の限界Ｙ座標（DownLimitY）": "Down Limit Y (DownLimitY)",
+    "カーソル表示の下限界となるＹ座標です。": "The Y coordinate that serves as the lower limit for cursor display.",
+    "初期値は画面下端（Graphics.height）": "The default value is the bottom edge of the screen (Graphics.height)",
+    "カーソル位置を常時更新（UpdateCursorPosition） ver1.01": "Always Update Cursor Position (UpdateCursorPosition) ver1.01",
+    "カーソル位置を毎フレーム更新します。": "Updates the cursor position every frame.",
+    "わずかに負荷がかかるため、デフォルトではオフになっています。": "It is turned off by default because it places a slight load on the system."
+  }
+}

@@ -1,0 +1,787 @@
+{
+  "articleId": "498941158",
+  "sourceUrl": "https://newrpg.seesaa.net/article/498941158.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2e2793680763c838ba13362b6d5102a78807dcb3bac8b8212955a496d32f540a",
+  "translatedAt": "2026-08-31T02:53:56.837Z",
+  "title": "Add an Auto Battle Command [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "自動戦闘コマンドを追加【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "e0fea11c54a41c17a6da67447e35f5a901cf0657768c2ffb09cb6b23b5df7e78",
+      "translation": "Add an Auto Battle Command [RPG Maker MZ & MV Plugin]",
+      "contextHash": "e0fea11c54a41c17a6da67447e35f5a901cf0657768c2ffb09cb6b23b5df7e78"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "自動戦闘コマンドを追加します。",
+      "sourceHash": "989e11e2aa1aa95680393015de9c6604fc872b27f8f08ea499ddb846623e69b3",
+      "translation": "Adds an Auto Battle command.",
+      "contextHash": "989e11e2aa1aa95680393015de9c6604fc872b27f8f08ea499ddb846623e69b3"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "キャンセルキーを押すまで自動で戦闘を実行するようになります。",
+      "sourceHash": "1e047959ef5823695d1c7e2c5f60ab418f4157dc4ed27b3c9d29a0c868dcf34a",
+      "translation": "Battle will proceed automatically until the cancel key is pressed.",
+      "contextHash": "1e047959ef5823695d1c7e2c5f60ab418f4157dc4ed27b3c9d29a0c868dcf34a"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※タッチ操作でも右クリックで解除、または左クリック長押しで解除します。",
+      "sourceHash": "7a02d8c11db5eb30b90927dbec733bab655a6ff5e1c53fcad54c31f935dfbbf4",
+      "translation": "※With touch controls, right-click to cancel, or press and hold the left mouse button to cancel.",
+      "contextHash": "7a02d8c11db5eb30b90927dbec733bab655a6ff5e1c53fcad54c31f935dfbbf4"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "初期状態では特徴の『特殊フラグ』の自動戦闘と同様の挙動を取りますが、通常攻撃だけをさせることも可能です。",
+      "sourceHash": "d98459db38113dacac527e08580ec15da43193e55933f300cfebc1f15fbce4d1",
+      "translation": "By default, it behaves like the Auto Battle feature under the Special Flags trait, but it can also be configured to use normal attacks only.",
+      "contextHash": "d98459db38113dacac527e08580ec15da43193e55933f300cfebc1f15fbce4d1"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_AutoBattle.js",
+      "sourceHash": "55e53b5ccb5baf8fa226a31036193b6b043040c1ce95cc56be5b23b8f548ddc6",
+      "translation": "NRP_AutoBattle.js ",
+      "contextHash": "6f07af6ae70d47767aae3c3cf26a506b9a46b763917ccb0a41a4eae5b513a623"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ver1.031（2024/12/20）",
+      "sourceHash": "3d398c0413fc88b0e85daedfd2ad726d0542975fc02e25635ff71b22ff0967e2",
+      "translation": "ver1.031 (2024/12/20) ",
+      "contextHash": "6f07af6ae70d47767aae3c3cf26a506b9a46b763917ccb0a41a4eae5b513a623"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/07/02 -> 2024/12/20（ver1.03 -> 1.031）",
+      "sourceHash": "5242a94ebbdcaead35c4f6671d353b54eca68e92f27a468063199f3daed773fc",
+      "translation": "2024/07/02 -> 2024/12/20 (ver1.03 -> 1.031) ",
+      "contextHash": "5242a94ebbdcaead35c4f6671d353b54eca68e92f27a468063199f3daed773fc"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ショートカットキーを設定可能にした。",
+      "sourceHash": "1a090962d5bc17c49c246a9377d94638fd10dd46745c0d20c3ebb026b085cae9",
+      "translation": "Shortcut keys can now be configured.",
+      "contextHash": "1a090962d5bc17c49c246a9377d94638fd10dd46745c0d20c3ebb026b085cae9"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "※ＭＶでは正常に動作しない模様です。（2024/12/20 ver1.031で明記）",
+      "sourceHash": "5cebb351c403e29a3f40162e3342d1345bfb0640af78ed57c67d2d27c775c88d",
+      "translation": "※It apparently does not work correctly in MV. (Noted in ver1.031 on 2024/12/20)",
+      "contextHash": "5cebb351c403e29a3f40162e3342d1345bfb0640af78ed57c67d2d27c775c88d"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "自動戦闘開始時、およびキャンセル時の効果音を追加した。",
+      "sourceHash": "85373ee8f7d0d4065f1300eacfc5e52b3721ca2362d7397293aff7ed0b863ab5",
+      "translation": "Added sound effects for starting and canceling Auto Battle.",
+      "contextHash": "85373ee8f7d0d4065f1300eacfc5e52b3721ca2362d7397293aff7ed0b863ab5"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "自動戦闘時のみオンになるスイッチを追加した。",
+      "sourceHash": "d752aaae07f3eed6e8acaebc6b96a71214bb4587e9698054e235688ff8d3fbc7",
+      "translation": "Added a switch that turns on only during Auto Battle.",
+      "contextHash": "d752aaae07f3eed6e8acaebc6b96a71214bb4587e9698054e235688ff8d3fbc7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/01/04 -> 2024/03/28（ver1.02 -> 1.021）",
+      "sourceHash": "c0744d2c4077ad170ffa283519ee5aa2dc945d85e0a60e6b4dcc0db7b884f028",
+      "translation": "2024/01/04 -> 2024/03/28 (ver1.02 -> 1.021) ",
+      "contextHash": "c0744d2c4077ad170ffa283519ee5aa2dc945d85e0a60e6b4dcc0db7b884f028"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "タッチ操作でも右クリックで解除、または左クリック長押しで自動戦闘を解除するようにした。",
+      "sourceHash": "33c9c3c1e3c5611d99a30516971dc829478d03531029c52cc605156d7f9908e5",
+      "translation": "With touch controls, Auto Battle can now be canceled by right-clicking or by pressing and holding the left mouse button.",
+      "contextHash": "33c9c3c1e3c5611d99a30516971dc829478d03531029c52cc605156d7f9908e5"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ＣＴＢにて、戦闘開始時かつ敵のターン時に自動戦闘を行うとエラーになる不具合修正。（2024/03/28 ver1.021）",
+      "sourceHash": "fbddd3eb461ab0922b93d2c71aeb2e6770553db12017a752178175c1f8a1ed43",
+      "translation": "Fixed an issue in CTB where an error occurred when Auto Battle was used at the start of battle during the enemy's turn. (2024/03/28 ver1.021)",
+      "contextHash": "fbddd3eb461ab0922b93d2c71aeb2e6770553db12017a752178175c1f8a1ed43"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/07/11（ver1.01）",
+      "sourceHash": "c66e60d80092a5e725d53ca99e69f41ccffe81a6637176ffea0269d6d6a46b7e",
+      "translation": "2023/07/11 (ver1.01) ",
+      "contextHash": "c66e60d80092a5e725d53ca99e69f41ccffe81a6637176ffea0269d6d6a46b7e"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "『１ターンのみ実行』がオフの場合、次の戦闘まで自動戦闘が継続されてしまう不具合修正。",
+      "sourceHash": "781de65ce5b882d3b15682c0a52f550935dc070ed72e50b12808ac52be34d688",
+      "translation": "Fixed an issue where Auto Battle continued until the next battle when \"Execute for only 1 turn\" was off.",
+      "contextHash": "781de65ce5b882d3b15682c0a52f550935dc070ed72e50b12808ac52be34d688"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2023/04/09 -> 2023/04/10（ver1.00 -> 1.001）",
+      "sourceHash": "830df76441b07172330b7553d35bae536fed3480e9186646c7e4c065b8357da5",
+      "translation": "2023/04/09 -> 2023/04/10 (ver1.00 -> 1.001) ",
+      "contextHash": "830df76441b07172330b7553d35bae536fed3480e9186646c7e4c065b8357da5"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "ＴＰＢで詠唱開始時、詠唱ポーズを取らない不具合修正。",
+      "sourceHash": "00715291d52c25aa5129e71c95e804a9b0d15999bcf353fae0a3a652565fe2ae",
+      "translation": "Fixed an issue in TPB where the casting pose was not performed when casting began.",
+      "contextHash": "00715291d52c25aa5129e71c95e804a9b0d15999bcf353fae0a3a652565fe2ae"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "（2023/04/10 ver1.001）",
+      "sourceHash": "1c3ab91201d8adbbf82cdb131871b3ed3ca2b93ee5f8e4eafc069db5bfbf059a",
+      "translation": " (2023/04/10 ver1.001) ",
+      "contextHash": "1c3ab91201d8adbbf82cdb131871b3ed3ca2b93ee5f8e4eafc069db5bfbf059a"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "plugin parameter (Plugin Parameter) ",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "コマンド名（CommandName）",
+      "sourceHash": "9559481480bde5b6427c31f3c6f22f37f26248b37ac3ee807944a4dea14e1b5b",
+      "translation": "Command Name (CommandName)",
+      "contextHash": "9559481480bde5b6427c31f3c6f22f37f26248b37ac3ee807944a4dea14e1b5b"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "自動戦闘のコマンド名です。",
+      "sourceHash": "84713b7fe8b4fb48779a11ac8fa4c6f7c652ce75fcfbcf1628805a030445499f",
+      "translation": "The command name for Auto Battle.",
+      "contextHash": "84713b7fe8b4fb48779a11ac8fa4c6f7c652ce75fcfbcf1628805a030445499f"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "パーティコマンド挿入位置（PartyCommandPosition）",
+      "sourceHash": "e8d8e95bb6858ea54b4c8948cfd013cb4f0ebd6f5dde02aa9457f47f58f986c9",
+      "translation": "Party Command Insertion Position (PartyCommandPosition)",
+      "contextHash": "e8d8e95bb6858ea54b4c8948cfd013cb4f0ebd6f5dde02aa9457f47f58f986c9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "パーティコマンドに挿入する際の位置です。",
+      "sourceHash": "e928ab8cb074bbd90d1ab9dbe10e0fc525233a4ac2d3371293ffcce9b7884b1b",
+      "translation": "The position at which to insert it into the party commands.",
+      "contextHash": "e928ab8cb074bbd90d1ab9dbe10e0fc525233a4ac2d3371293ffcce9b7884b1b"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "0で先頭に挿入。",
+      "sourceHash": "608811a57c40f4b679e7c7d912bde617a8fedd17266c1fcc825665b15e506742",
+      "translation": "Enter 0 to insert it at the beginning.",
+      "contextHash": "608811a57c40f4b679e7c7d912bde617a8fedd17266c1fcc825665b15e506742"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "不要な場合はDELキーで削除。",
+      "sourceHash": "3e6e7eedab675a4289328c0d2ecb170708876b0cdeb7bed341126c75c7cde4c8",
+      "translation": "Press the DEL key to remove it if unnecessary.",
+      "contextHash": "3e6e7eedab675a4289328c0d2ecb170708876b0cdeb7bed341126c75c7cde4c8"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "アクターコマンド挿入位置（ActorCommandPosition）",
+      "sourceHash": "f946810e518b121d30bb4f94b7963408e991b6a5e2e3f8e60a084bb8d6603aac",
+      "translation": "Actor Command Insertion Position (ActorCommandPosition)",
+      "contextHash": "f946810e518b121d30bb4f94b7963408e991b6a5e2e3f8e60a084bb8d6603aac"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "アクターコマンドに挿入する際の位置です。",
+      "sourceHash": "4e1703feed2f9c89c51f7166a4e37234df435e7d380e88712b9e96feab168549",
+      "translation": "The position at which to insert it into the actor commands.",
+      "contextHash": "4e1703feed2f9c89c51f7166a4e37234df435e7d380e88712b9e96feab168549"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "0で先頭に挿入。",
+      "sourceHash": "608811a57c40f4b679e7c7d912bde617a8fedd17266c1fcc825665b15e506742",
+      "translation": "Enter 0 to insert it at the beginning.",
+      "contextHash": "608811a57c40f4b679e7c7d912bde617a8fedd17266c1fcc825665b15e506742"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "不要な場合はDELキーで削除。",
+      "sourceHash": "3e6e7eedab675a4289328c0d2ecb170708876b0cdeb7bed341126c75c7cde4c8",
+      "translation": "Press the DEL key to remove it if unnecessary.",
+      "contextHash": "3e6e7eedab675a4289328c0d2ecb170708876b0cdeb7bed341126c75c7cde4c8"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "通常攻撃のみ（NormalAttackOnly）",
+      "sourceHash": "950591a4ced3b3ce9d8c9e1e7de3dfe046fbfaac86c75c44689b642aacb6a45e",
+      "translation": "Normal Attacks Only (NormalAttackOnly)",
+      "contextHash": "950591a4ced3b3ce9d8c9e1e7de3dfe046fbfaac86c75c44689b642aacb6a45e"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "自動戦闘時に通常攻撃のみを行います。",
+      "sourceHash": "6a728e850d4ea8d308dd74403591755731fc7657d8e6677f3432ea38d219040d",
+      "translation": "Only normal attacks will be performed during Auto Battle.",
+      "contextHash": "6a728e850d4ea8d308dd74403591755731fc7657d8e6677f3432ea38d219040d"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "先頭のみを狙う（TargetFrontOnly）",
+      "sourceHash": "008faadf868af3ae80c0011b3f960e70e9b25466cf3707e60f13614024462d3f",
+      "translation": "Target the Front Only (TargetFrontOnly)",
+      "contextHash": "008faadf868af3ae80c0011b3f960e70e9b25466cf3707e60f13614024462d3f"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "通常攻撃のみがオンの場合、先頭の敵のみを対象とします。",
+      "sourceHash": "d6ce7b9e05768fff9deeff72b99d6e884800b7c00b553447a24796b14a02e95a",
+      "translation": "When Normal Attacks Only is on, only the front enemy will be targeted.",
+      "contextHash": "d6ce7b9e05768fff9deeff72b99d6e884800b7c00b553447a24796b14a02e95a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ショートカットキー（ShortcutKey）",
+      "sourceHash": "99acc25e68af8fe96a07f8ea5e74e101f5bfd2875c592d2145117cfb4c794818",
+      "translation": "Shortcut Key (ShortcutKey)",
+      "contextHash": "99acc25e68af8fe96a07f8ea5e74e101f5bfd2875c592d2145117cfb4c794818"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "自動戦闘を実行するショートカットキーです。",
+      "sourceHash": "57548d3f7a0f47df8fe933f711556943d06d159b13e030c2944983feed5c491b",
+      "translation": "The shortcut key used to execute Auto Battle.",
+      "contextHash": "57548d3f7a0f47df8fe933f711556943d06d159b13e030c2944983feed5c491b"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※ＭＶでは正常に動きません。",
+      "sourceHash": "cae6e454b8a00ddc213002b873f3ce0c3a6efb2b41e5a46ec6179dad99f7d27d",
+      "translation": "※It does not work correctly in MV.",
+      "contextHash": "cae6e454b8a00ddc213002b873f3ce0c3a6efb2b41e5a46ec6179dad99f7d27d"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "同じキーで解除（ReleaseSameKey）",
+      "sourceHash": "ea6e1941bd09a70e610e7d0d00d42f4bf796d2a545ea6dd090290c08b8a80b07",
+      "translation": "Release with the Same Key (ReleaseSameKey)",
+      "contextHash": "ea6e1941bd09a70e610e7d0d00d42f4bf796d2a545ea6dd090290c08b8a80b07"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "ショートカットキーと同じキーで自動戦闘を解除できるようにします。",
+      "sourceHash": "aee113a19e701c6fe31f5e2ce620828eb80dd0f577186f9e0b704d3c7821ae4c",
+      "translation": "Allows Auto Battle to be canceled using the same key as the shortcut key.",
+      "contextHash": "aee113a19e701c6fe31f5e2ce620828eb80dd0f577186f9e0b704d3c7821ae4c"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "実行時の効果音（StartSound）",
+      "sourceHash": "c3206e9361b695016be9b30793868b2a6d9644122e6bb3ada59b89ef00919090",
+      "translation": "Sound Effect on Execution (StartSound)",
+      "contextHash": "c3206e9361b695016be9b30793868b2a6d9644122e6bb3ada59b89ef00919090"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "自動戦闘実行時に鳴らす効果音です。",
+      "sourceHash": "5b7c42712a23c1a214f4c2549470c8dede5a6ad6a2f86b2e9938d70ca164249c",
+      "translation": "The sound effect played when Auto Battle is executed.",
+      "contextHash": "5b7c42712a23c1a214f4c2549470c8dede5a6ad6a2f86b2e9938d70ca164249c"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "キャンセル時の効果音（CancelSound）",
+      "sourceHash": "552545a56f84cc689d746255f9d3583e04c6b45e65e466bed734949cc87487b6",
+      "translation": "Sound Effect on Cancel (CancelSound)",
+      "contextHash": "552545a56f84cc689d746255f9d3583e04c6b45e65e466bed734949cc87487b6"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "自動戦闘キャンセル時に鳴らす効果音です。",
+      "sourceHash": "9dc184fe4ae9791f7fbbc778f464ef0b8d76b681cb1c3f8ab2f2439c6a125573",
+      "translation": "The sound effect played when Auto Battle is canceled.",
+      "contextHash": "9dc184fe4ae9791f7fbbc778f464ef0b8d76b681cb1c3f8ab2f2439c6a125573"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "空白の場合はシステムのキャンセル音を鳴らします。",
+      "sourceHash": "0fb9ebd076517a89d213c8b48b6ee910c7d3b5ccbe354e637a934c52b79c844e",
+      "translation": "If left blank, the system's cancel sound will be played.",
+      "contextHash": "0fb9ebd076517a89d213c8b48b6ee910c7d3b5ccbe354e637a934c52b79c844e"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "自動戦闘時のスイッチ（AutoBattleSwitch）",
+      "sourceHash": "525120ddf208c2a0dde137c87079c770e3b1148d5cd916d5d15bbed856aca00b",
+      "translation": "Switch During Auto Battle (AutoBattleSwitch)",
+      "contextHash": "525120ddf208c2a0dde137c87079c770e3b1148d5cd916d5d15bbed856aca00b"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "自動戦闘実行中にオンとなるスイッチです。",
+      "sourceHash": "8ff85f39bc06e98901c587ac930454a7b591b763a9d2717c074a005767d9f84d",
+      "translation": "The switch that turns on while Auto Battle is being executed.",
+      "contextHash": "8ff85f39bc06e98901c587ac930454a7b591b763a9d2717c074a005767d9f84d"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "１ターンのみ実行（Only1Turn）",
+      "sourceHash": "2590d3e10bc315de74e41c55cb93bb621f56b50224689e89087d334690a19bd7",
+      "translation": "Execute for Only 1 Turn (Only1Turn)",
+      "contextHash": "2590d3e10bc315de74e41c55cb93bb621f56b50224689e89087d334690a19bd7"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "自動戦闘を常に１ターンで解除し、キャンセルキーでの解除を不要とします。",
+      "sourceHash": "074d3b305ef7919e996a228e9a218a6b8c740822fba68babb1272f1b49459654",
+      "translation": "Always cancel Auto Battle after one turn, eliminating the need to cancel it with the cancel key.",
+      "contextHash": "074d3b305ef7919e996a228e9a218a6b8c740822fba68babb1272f1b49459654"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "この項目はターン制を想定しています。",
+      "sourceHash": "770fbd0b8b3837a789f46dcd8675508795dde13a9b33c6c68aa684b404f64576",
+      "translation": "This option is intended for turn-based systems.",
+      "contextHash": "770fbd0b8b3837a789f46dcd8675508795dde13a9b33c6c68aa684b404f64576"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "ターン制、ＴＰＢ、[[LINK_1]]ＣＴＢ[[/LINK_1]]のいずれにも対応しています。",
+      "sourceHash": "a1f078cbb3d746ec117e1ce63e180e6855eb6d9123228d36cf70f3bc398da2b5",
+      "parts": [
+        {
+          "source": "ターン制、ＴＰＢ、",
+          "link": false
+        },
+        {
+          "source": "ＣＴＢ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のいずれにも対応しています。",
+          "link": false
+        }
+      ],
+      "translation": "Supports all three: turn-based, TPB, and [[LINK_1]]CTB[[/LINK_1]].",
+      "contextHash": "a1f078cbb3d746ec117e1ce63e180e6855eb6d9123228d36cf70f3bc398da2b5"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]コマンド名（CommandName）[[/LINK_1]]",
+      "sourceHash": "1b5f036f56f8929083a4dac38205401a79b496eb3154f0a81fb80ff79bcd141e",
+      "parts": [
+        {
+          "source": "コマンド名（CommandName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Command Name (CommandName)[[/LINK_1]]",
+      "contextHash": "1b5f036f56f8929083a4dac38205401a79b496eb3154f0a81fb80ff79bcd141e"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンド挿入位置（PartyCommandPosition）[[/LINK_1]]",
+      "sourceHash": "072acb52f99d270426b297a673b3b9fd84ac872541c4ba6e157f0f5e77de7df6",
+      "parts": [
+        {
+          "source": "パーティコマンド挿入位置（PartyCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Party Command Insertion Position (PartyCommandPosition)[[/LINK_1]]",
+      "contextHash": "072acb52f99d270426b297a673b3b9fd84ac872541c4ba6e157f0f5e77de7df6"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]アクターコマンド挿入位置（ActorCommandPosition）[[/LINK_1]]",
+      "sourceHash": "e3276f5a97a215eafd474226a8d8dcaf36819d027dcda5aaf9466c65f0d565b2",
+      "parts": [
+        {
+          "source": "アクターコマンド挿入位置（ActorCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Command Insertion Position (ActorCommandPosition)[[/LINK_1]]",
+      "contextHash": "e3276f5a97a215eafd474226a8d8dcaf36819d027dcda5aaf9466c65f0d565b2"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]通常攻撃のみ（NormalAttackOnly）[[/LINK_1]]",
+      "sourceHash": "6bcc2c679740d99dd9117bce244a007fc1d0638a3302163e6503aa003f4adfa6",
+      "parts": [
+        {
+          "source": "通常攻撃のみ（NormalAttackOnly）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Normal Attack Only (NormalAttackOnly)[[/LINK_1]]",
+      "contextHash": "6bcc2c679740d99dd9117bce244a007fc1d0638a3302163e6503aa003f4adfa6"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]先頭のみを狙う（TargetFrontOnly）[[/LINK_1]]",
+      "sourceHash": "ccdd525f0cad7e701d2fa8c68ea12d06cef234aae8fa18f2777018b733099854",
+      "parts": [
+        {
+          "source": "先頭のみを狙う（TargetFrontOnly）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Front Only (TargetFrontOnly)[[/LINK_1]]",
+      "contextHash": "ccdd525f0cad7e701d2fa8c68ea12d06cef234aae8fa18f2777018b733099854"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]][MZ]ショートカットキー（ShortcutKey）[[/LINK_1]]",
+      "sourceHash": "fd4456019d628a5004c2bbf06a2c40f29371d15533cb4c1bd0d536b1db5ec7a6",
+      "parts": [
+        {
+          "source": "[MZ]ショートカットキー（ShortcutKey）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][MZ] Shortcut Key (ShortcutKey)[[/LINK_1]]",
+      "contextHash": "fd4456019d628a5004c2bbf06a2c40f29371d15533cb4c1bd0d536b1db5ec7a6"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]同じキーで解除（ReleaseSameKey）[[/LINK_1]]",
+      "sourceHash": "d53753726eb293016c713c7c4170b57235ab3b9f53327267b58ac469090f532c",
+      "parts": [
+        {
+          "source": "同じキーで解除（ReleaseSameKey）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Release with the Same Key (ReleaseSameKey)[[/LINK_1]]",
+      "contextHash": "d53753726eb293016c713c7c4170b57235ab3b9f53327267b58ac469090f532c"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]実行時の効果音（StartSound）[[/LINK_1]]",
+      "sourceHash": "cdbd8ca0dad484519ad0b7c8134cf69a879b8a999831157b9257c64a24d84bff",
+      "parts": [
+        {
+          "source": "実行時の効果音（StartSound）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect on Execution (StartSound)[[/LINK_1]]",
+      "contextHash": "cdbd8ca0dad484519ad0b7c8134cf69a879b8a999831157b9257c64a24d84bff"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]キャンセル時の効果音（CancelSound）[[/LINK_1]]",
+      "sourceHash": "440197937a5337818bd12b4babe4b0e982c8c2cb08e97032bf52d1a3428559ca",
+      "parts": [
+        {
+          "source": "キャンセル時の効果音（CancelSound）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect on Cancellation (CancelSound)[[/LINK_1]]",
+      "contextHash": "440197937a5337818bd12b4babe4b0e982c8c2cb08e97032bf52d1a3428559ca"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]自動戦闘時のスイッチ（AutoBattleSwitch）[[/LINK_1]]",
+      "sourceHash": "95e2f8a072897d05924da2f49014352288f0fa8c8188b3478369a7886cc1b428",
+      "parts": [
+        {
+          "source": "自動戦闘時のスイッチ（AutoBattleSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch During Auto Battle (AutoBattleSwitch)[[/LINK_1]]",
+      "contextHash": "95e2f8a072897d05924da2f49014352288f0fa8c8188b3478369a7886cc1b428"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]１ターンのみ実行（Only1Turn）[[/LINK_1]]",
+      "sourceHash": "3382f45f4e4dd68570a98efbe2a2df58be1f7642762d4214ef8cf93dfc4d88e1",
+      "parts": [
+        {
+          "source": "１ターンのみ実行（Only1Turn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Execute for One Turn Only (Only1Turn)[[/LINK_1]]",
+      "contextHash": "3382f45f4e4dd68570a98efbe2a2df58be1f7642762d4214ef8cf93dfc4d88e1"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "例えば、[[LINK_1]]コモンイベントの並列処理を戦闘中も有効にするプラグイン[[/LINK_1]]と組み合わせることで、実行中のみピクチャなどで表示を出すことができます。",
+      "sourceHash": "17cde9b2b6dd322d726136bfb07669d2ec3156c66b2c2edfd7236f85055f79a5",
+      "parts": [
+        {
+          "source": "例えば、",
+          "link": false
+        },
+        {
+          "source": "コモンイベントの並列処理を戦闘中も有効にするプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせることで、実行中のみピクチャなどで表示を出すことができます。",
+          "link": false
+        }
+      ],
+      "translation": "For example, by combining it with [[LINK_1]]a plugin that enables parallel processing of common events during battles[[/LINK_1]], you can display pictures or other elements only while it is running.",
+      "contextHash": "17cde9b2b6dd322d726136bfb07669d2ec3156c66b2c2edfd7236f85055f79a5"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "自動戦闘コマンドを追加します。": "Adds an Auto Battle command.",
+    "キャンセルキーを押すまで自動で戦闘を実行するようになります。": "Battle will proceed automatically until the cancel key is pressed.",
+    "※タッチ操作でも右クリックで解除、または左クリック長押しで解除します。": "※With touch controls, right-click to cancel, or press and hold the left mouse button to cancel.",
+    "初期状態では特徴の『特殊フラグ』の自動戦闘と同様の挙動を取りますが、通常攻撃だけをさせることも可能です。": "By default, it behaves like the Auto Battle feature under the Special Flags trait, but it can also be configured to use normal attacks only.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_AutoBattle.js": "NRP_AutoBattle.js ",
+    "ver1.031（2024/12/20）": "ver1.031 (2024/12/20) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/07/02 -> 2024/12/20（ver1.03 -> 1.031）": "2024/07/02 -> 2024/12/20 (ver1.03 -> 1.031) ",
+    "ショートカットキーを設定可能にした。": "Shortcut keys can now be configured.",
+    "※ＭＶでは正常に動作しない模様です。（2024/12/20 ver1.031で明記）": "※It apparently does not work correctly in MV. (Noted in ver1.031 on 2024/12/20)",
+    "自動戦闘開始時、およびキャンセル時の効果音を追加した。": "Added sound effects for starting and canceling Auto Battle.",
+    "自動戦闘時のみオンになるスイッチを追加した。": "Added a switch that turns on only during Auto Battle.",
+    "2024/01/04 -> 2024/03/28（ver1.02 -> 1.021）": "2024/01/04 -> 2024/03/28 (ver1.02 -> 1.021) ",
+    "タッチ操作でも右クリックで解除、または左クリック長押しで自動戦闘を解除するようにした。": "With touch controls, Auto Battle can now be canceled by right-clicking or by pressing and holding the left mouse button.",
+    "ＣＴＢにて、戦闘開始時かつ敵のターン時に自動戦闘を行うとエラーになる不具合修正。（2024/03/28 ver1.021）": "Fixed an issue in CTB where an error occurred when Auto Battle was used at the start of battle during the enemy's turn. (2024/03/28 ver1.021)",
+    "2023/07/11（ver1.01）": "2023/07/11 (ver1.01) ",
+    "『１ターンのみ実行』がオフの場合、次の戦闘まで自動戦闘が継続されてしまう不具合修正。": "Fixed an issue where Auto Battle continued until the next battle when \"Execute for only 1 turn\" was off.",
+    "2023/04/09 -> 2023/04/10（ver1.00 -> 1.001）": "2023/04/09 -> 2023/04/10 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "ＴＰＢで詠唱開始時、詠唱ポーズを取らない不具合修正。": "Fixed an issue in TPB where the casting pose was not performed when casting began.",
+    "（2023/04/10 ver1.001）": " (2023/04/10 ver1.001) ",
+    "プラグインパラメータ（Plugin Parameter）": "plugin parameter (Plugin Parameter) ",
+    "コマンド名（CommandName）": "Command Name (CommandName)",
+    "自動戦闘のコマンド名です。": "The command name for Auto Battle.",
+    "パーティコマンド挿入位置（PartyCommandPosition）": "Party Command Insertion Position (PartyCommandPosition)",
+    "パーティコマンドに挿入する際の位置です。": "The position at which to insert it into the party commands.",
+    "0で先頭に挿入。": "Enter 0 to insert it at the beginning.",
+    "不要な場合はDELキーで削除。": "Press the DEL key to remove it if unnecessary.",
+    "アクターコマンド挿入位置（ActorCommandPosition）": "Actor Command Insertion Position (ActorCommandPosition)",
+    "アクターコマンドに挿入する際の位置です。": "The position at which to insert it into the actor commands.",
+    "通常攻撃のみ（NormalAttackOnly）": "Normal Attacks Only (NormalAttackOnly)",
+    "自動戦闘時に通常攻撃のみを行います。": "Only normal attacks will be performed during Auto Battle.",
+    "先頭のみを狙う（TargetFrontOnly）": "Target the Front Only (TargetFrontOnly)",
+    "通常攻撃のみがオンの場合、先頭の敵のみを対象とします。": "When Normal Attacks Only is on, only the front enemy will be targeted.",
+    "ショートカットキー（ShortcutKey）": "Shortcut Key (ShortcutKey)",
+    "自動戦闘を実行するショートカットキーです。": "The shortcut key used to execute Auto Battle.",
+    "※ＭＶでは正常に動きません。": "※It does not work correctly in MV.",
+    "同じキーで解除（ReleaseSameKey）": "Release with the Same Key (ReleaseSameKey)",
+    "ショートカットキーと同じキーで自動戦闘を解除できるようにします。": "Allows Auto Battle to be canceled using the same key as the shortcut key.",
+    "実行時の効果音（StartSound）": "Sound Effect on Execution (StartSound)",
+    "自動戦闘実行時に鳴らす効果音です。": "The sound effect played when Auto Battle is executed.",
+    "キャンセル時の効果音（CancelSound）": "Sound Effect on Cancel (CancelSound)",
+    "自動戦闘キャンセル時に鳴らす効果音です。": "The sound effect played when Auto Battle is canceled.",
+    "空白の場合はシステムのキャンセル音を鳴らします。": "If left blank, the system's cancel sound will be played.",
+    "自動戦闘時のスイッチ（AutoBattleSwitch）": "Switch During Auto Battle (AutoBattleSwitch)",
+    "自動戦闘実行中にオンとなるスイッチです。": "The switch that turns on while Auto Battle is being executed.",
+    "１ターンのみ実行（Only1Turn）": "Execute for Only 1 Turn (Only1Turn)",
+    "自動戦闘を常に１ターンで解除し、キャンセルキーでの解除を不要とします。": "Always cancel Auto Battle after one turn, eliminating the need to cancel it with the cancel key.",
+    "この項目はターン制を想定しています。": "This option is intended for turn-based systems."
+  }
+}

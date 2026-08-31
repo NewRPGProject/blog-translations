@@ -1,0 +1,749 @@
+{
+  "articleId": "502501086",
+  "sourceUrl": "https://newrpg.seesaa.net/article/502501086.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "04ac3b74c31dd802b39884aca84715327b661f6142c4ac1a52e445bc47effeaf",
+  "translatedAt": "2026-08-31T02:56:42.930Z",
+  "title": "Make Battle Start Effects Seamless [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "戦闘開始演出をシームレスにする【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "11235dc445d129a359301456a8b27f168f3764c9e6d8c1833d424402e72f5006",
+      "translation": "Make Battle Start Effects Seamless [RPG Maker MZ & MV Plugin]",
+      "contextHash": "11235dc445d129a359301456a8b27f168f3764c9e6d8c1833d424402e72f5006"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "暗転を挟まないシームレスな戦闘開始演出を提供します。",
+      "sourceHash": "28a1d46509d8ae65ea99c4ebbcf8c891f45ad46f3adb7309b76f10b0c7592884",
+      "translation": "Provides a seamless battle start effect without a fade to black.",
+      "contextHash": "28a1d46509d8ae65ea99c4ebbcf8c891f45ad46f3adb7309b76f10b0c7592884"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ズームや回転などの演出も同時に可能です。",
+      "sourceHash": "bd2c0c28eb6d3d168730f5f13f079393101dd674e31098845692d0a3971fe07e",
+      "translation": "Effects such as zooming and rotation can also be applied simultaneously.",
+      "contextHash": "bd2c0c28eb6d3d168730f5f13f079393101dd674e31098845692d0a3971fe07e"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "なお、シームレスといっても最低限のロード時間は必要となります。特にゲームを開始してから初回の戦闘では、読み込むデータ量が多くなるのでローディングが発生しやすいです。",
+      "sourceHash": "bbdb5968b5b61b0af484a0037ce0d0ff23f6b80c4749c86c2b187901b91cc1b3",
+      "translation": "However, even a seamless transition requires a minimum amount of loading time. In particular, the first battle after starting the game is more likely to involve loading because a larger amount of data must be loaded.",
+      "contextHash": "bbdb5968b5b61b0af484a0037ce0d0ff23f6b80c4749c86c2b187901b91cc1b3"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "なので、初期状態ではズームおよび回転演出を入れることでごまかしています。",
+      "sourceHash": "80022e8a9384defebd9b9d3ea4b4eb151823ad7bc7b7d30598666d972a66d29a",
+      "translation": "Therefore, the default settings disguise this by adding zoom and rotation effects.",
+      "contextHash": "80022e8a9384defebd9b9d3ea4b4eb151823ad7bc7b7d30598666d972a66d29a"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_SeamlessEncounter.js",
+      "sourceHash": "d90966638e3b53411f6535b2a2f59172fb5e15beb343cd92e66ceef17ff2622d",
+      "translation": "NRP_SeamlessEncounter.js ",
+      "contextHash": "a479831ec7c66657e136102789982842edd22c2c5839ce17302b471b95463922"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ver1.03（2024/10/26）",
+      "sourceHash": "00e0c75909356a4a9638abf17cb87009bcd6a4bb194492b1a06cc04f4e2c7107",
+      "translation": "ver1.03 (2024/10/26) ",
+      "contextHash": "a479831ec7c66657e136102789982842edd22c2c5839ce17302b471b95463922"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/10/26（ver1.03）",
+      "sourceHash": "a2591813c459a92fadf3ab13c42b8c876e22ba82b099851836900cbae0457803",
+      "translation": "2024/10/26 (ver1.03) ",
+      "contextHash": "a2591813c459a92fadf3ab13c42b8c876e22ba82b099851836900cbae0457803"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ver1.02にて通常のエンカウント演出が重複して表示されてしまう不具合修正。",
+      "sourceHash": "76c6833431d9334a0f05a23bda66fe1d2ca0ded53e4c178116f9c393feec10fa",
+      "translation": "Fixed a bug in ver1.02 that caused the standard encounter effect to be displayed repeatedly.",
+      "contextHash": "76c6833431d9334a0f05a23bda66fe1d2ca0ded53e4c178116f9c393feec10fa"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/05/15（ver1.02）",
+      "sourceHash": "ca9b20f06aac845d8ae4fae7a1df085cd42b2ec5ddd2fb8af489cb124c17764f",
+      "translation": "2024/05/15 (ver1.02) ",
+      "contextHash": "ca9b20f06aac845d8ae4fae7a1df085cd42b2ec5ddd2fb8af489cb124c17764f"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "『演出なし』を設定できるようにした。",
+      "sourceHash": "4286e6edb1b3e04daa9048c18d47240e07ed83848d7a6fad84be6cbe7572c660",
+      "translation": "Added the option to set “No Effect.”",
+      "contextHash": "4286e6edb1b3e04daa9048c18d47240e07ed83848d7a6fad84be6cbe7572c660"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "※外部のエンカウント演出プラグインとの併用に使えます。",
+      "sourceHash": "c565d3dc0e644bc89470959dc9ee0ff1918a2b9b2a1360b5211795aa4fc37aeb",
+      "translation": "※Can be used together with external encounter effect plugins.",
+      "contextHash": "c565d3dc0e644bc89470959dc9ee0ff1918a2b9b2a1360b5211795aa4fc37aeb"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "演出毎に効果音を設定できるようにした。",
+      "sourceHash": "fa465c8ea93f00f7b13e3716cce50dd6bd40ffe54e94cfc6779be046913affb1",
+      "translation": "Added the ability to set a sound effect for each effect.",
+      "contextHash": "fa465c8ea93f00f7b13e3716cce50dd6bd40ffe54e94cfc6779be046913affb1"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/04/12（ver1.01）",
+      "sourceHash": "97d27491bdf54848a139f8cdafcdfac4026b9a669da226d1bb56acb3cebdb90f",
+      "translation": "2024/04/12 (ver1.01) ",
+      "contextHash": "97d27491bdf54848a139f8cdafcdfac4026b9a669da226d1bb56acb3cebdb90f"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "戦闘終了演出（フェード処理、逃げる処理）が正しく実行されなくなる不具合修正。",
+      "sourceHash": "05987ef4048d658a898155aff9e8bd518ca36879e6ce32fd2a1fea71bf73c095",
+      "translation": "Fixed a bug that prevented battle end effects (fade processing and escaping) from executing correctly.",
+      "contextHash": "05987ef4048d658a898155aff9e8bd518ca36879e6ce32fd2a1fea71bf73c095"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/02/27（ver1.00 -> 1.001）",
+      "sourceHash": "39ad2ab0bc7f31150160e74a43604985aa5cf08ee5d315b79ae631e4d5a3e857",
+      "translation": "2024/02/27 (ver1.00 -> 1.001) ",
+      "contextHash": "39ad2ab0bc7f31150160e74a43604985aa5cf08ee5d315b79ae631e4d5a3e857"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "回転速度にマイナス（逆回転）を指定可能に。（ver1.001）",
+      "sourceHash": "a8d395fd7f3f52f91791a5e463edf23eb5eff713d1f26f9a650afd719a3448df",
+      "translation": "Rotation speed can now be set to a negative value (reverse rotation). (ver1.001)",
+      "contextHash": "a8d395fd7f3f52f91791a5e463edf23eb5eff713d1f26f9a650afd719a3448df"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "戦闘開始演出リストに設定を登録してください。",
+      "sourceHash": "2a5eb6353fce8f38cc5aabd0023a470e0eb4237e26cfb6a8239637723086c53a",
+      "translation": "Register your settings in the battle start effect list.",
+      "contextHash": "2a5eb6353fce8f38cc5aabd0023a470e0eb4237e26cfb6a8239637723086c53a"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "上側にある設定が優先して使用されます。",
+      "sourceHash": "f33ff8441bc79ed2fbb1f3f921519692bd908d354803ba225b8fb64857054373",
+      "translation": "Settings higher on the list take priority.",
+      "contextHash": "f33ff8441bc79ed2fbb1f3f921519692bd908d354803ba225b8fb64857054373"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "スイッチを条件にすることで、ボス戦のみ演出を変更するといったことができます。",
+      "sourceHash": "95fffe54638047a8a9a4be16e535218b8c805c8182ee5c7fbb4da8289ec8c3ee",
+      "translation": "By using a switch as a condition, you can change the effect only for boss battles, for example.",
+      "contextHash": "95fffe54638047a8a9a4be16e535218b8c805c8182ee5c7fbb4da8289ec8c3ee"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "また、『演出なし』をオンにすると、当プラグインによる演出が実行されなくなります。他のプラグインによる演出と併用したい場合に有用です。",
+      "sourceHash": "32d37014c660b13ae89cf573537ddb502fffe741be8abe5d78d964d3d16bbc10",
+      "translation": "Also, turning on “No Effect” prevents effects from this plugin from being executed. This is useful when you want to use it together with effects from other plugins.",
+      "contextHash": "32d37014c660b13ae89cf573537ddb502fffe741be8abe5d78d964d3d16bbc10"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "戦闘開始演出リスト（EncounterList）",
+      "sourceHash": "a1d34b4b263e980cc27a38689f31ee818f8cfff44915b05e59f8d73d703458f0",
+      "translation": "Battle Start Effect List (EncounterList)",
+      "contextHash": "a1d34b4b263e980cc27a38689f31ee818f8cfff44915b05e59f8d73d703458f0"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "戦闘開始演出の一覧です。",
+      "sourceHash": "26002a278d392edceb013a5c876fbaa66d7be8eda562e6ce0bf7b413131e05d4",
+      "translation": "A list of battle start effects.",
+      "contextHash": "26002a278d392edceb013a5c876fbaa66d7be8eda562e6ce0bf7b413131e05d4"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "詳細は以下の『戦闘開始演出パラメータ』をご覧ください。",
+      "sourceHash": "903ba3d68df8c04228c2491c55ae4d2cee0aaa998e3068c92ac2fd02b6ea7b8d",
+      "translation": "For details, see the “Battle Start Effect Parameters” below.",
+      "contextHash": "903ba3d68df8c04228c2491c55ae4d2cee0aaa998e3068c92ac2fd02b6ea7b8d"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "戦闘開始演出パラメータ（Encounter Parameters）",
+      "sourceHash": "2d2995c02fa75f7145137ccd3f4f8585a19d76e7051db5b5eeff3fdcd663ee98",
+      "translation": "Battle Start Effect Parameters (Encounter Parameters)",
+      "contextHash": "2d2995c02fa75f7145137ccd3f4f8585a19d76e7051db5b5eeff3fdcd663ee98"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "メモ（Note）",
+      "sourceHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1",
+      "translation": "Note (Note)",
+      "contextHash": "7d4a70e6b8c7beec1ae6cadcdd1328c4e5bc5f9c853353730c4a72b893becde1"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "説明用のメモです。",
+      "sourceHash": "073d1992229d4f68501ca8d01cb81cfd99f03b7c0976c4bc9c0cfaf0a8f01127",
+      "translation": "A note for descriptions.",
+      "contextHash": "073d1992229d4f68501ca8d01cb81cfd99f03b7c0976c4bc9c0cfaf0a8f01127"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "処理には使用しません。",
+      "sourceHash": "e6932f5e3841ede7bdb6f5607fd9f45db8414f00bf04478ea71e5a043bb3eace",
+      "translation": "It is not used for processing.",
+      "contextHash": "e6932f5e3841ede7bdb6f5607fd9f45db8414f00bf04478ea71e5a043bb3eace"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "条件とするスイッチです。",
+      "sourceHash": "007bbf1fcfe8f22826850aefab2a501bd65e0f4a6879c9d7fdf815abaefcb229",
+      "translation": "The switch used as a condition.",
+      "contextHash": "007bbf1fcfe8f22826850aefab2a501bd65e0f4a6879c9d7fdf815abaefcb229"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "開始演出時間（BeforeDuration）",
+      "sourceHash": "6a3820a9e1efcec1e30c74b4c26df958984c6c7c01bc085715d731938fb3765a",
+      "translation": "Start Effect Time (BeforeDuration)",
+      "contextHash": "6a3820a9e1efcec1e30c74b4c26df958984c6c7c01bc085715d731938fb3765a"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "フェードイン開始までの時間（1/60秒単位）です。",
+      "sourceHash": "e575cea9fb4becfcbecea86cb442aba09957f87873b954b45dea6b3b79db3e6c",
+      "translation": "The time until the start of the fade-in, in units of 1/60 second.",
+      "contextHash": "e575cea9fb4becfcbecea86cb442aba09957f87873b954b45dea6b3b79db3e6c"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "0にしても最低限のロード時間は発生します。",
+      "sourceHash": "4a3f1dc233d74fea6c81ff2cb2edee7e82925a35a96d3ff00c2a4e540a43d2dc",
+      "translation": "Even when set to 0, a minimum amount of loading time will still occur.",
+      "contextHash": "4a3f1dc233d74fea6c81ff2cb2edee7e82925a35a96d3ff00c2a4e540a43d2dc"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ズーム速度（ZoomSpeed）",
+      "sourceHash": "dc04b11d3b0690c5e5c9301e3f9263c8e09c5ccdce7698256548429a8af2a5c8",
+      "translation": "Zoom Speed (ZoomSpeed)",
+      "contextHash": "dc04b11d3b0690c5e5c9301e3f9263c8e09c5ccdce7698256548429a8af2a5c8"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "戦闘開始演出時のズーム速度（1/60秒当たり）です。",
+      "sourceHash": "bb2215d828ae0a8f1cdbb2bae7b999e4502978c919a3a83de4935a529f9256b6",
+      "translation": "The zoom speed during the battle start effect, in units per 1/60 second.",
+      "contextHash": "bb2215d828ae0a8f1cdbb2bae7b999e4502978c919a3a83de4935a529f9256b6"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "回転速度（RotationSpeed）",
+      "sourceHash": "e15cba03fa64059be4fcd0b007a1bddcb709b4a106d11bb6469f0149cc6681a6",
+      "translation": "Rotation Speed (RotationSpeed)",
+      "contextHash": "e15cba03fa64059be4fcd0b007a1bddcb709b4a106d11bb6469f0149cc6681a6"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "戦闘開始演出時の回転速度（1/60秒当たり）です。",
+      "sourceHash": "f08bfc959e4580780a6e56ff185924aec87ce36731b3bd17857dde13b7a9d349",
+      "translation": "The rotation speed during the battle start effect, in units per 1/60 second.",
+      "contextHash": "f08bfc959e4580780a6e56ff185924aec87ce36731b3bd17857dde13b7a9d349"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "フェードイン時間（FadeInDuration）",
+      "sourceHash": "0b7e39fa21136347074a7c269fe878bede89cd6ca091372e4242532918761660",
+      "translation": "Fade-In Duration (FadeInDuration)",
+      "contextHash": "0b7e39fa21136347074a7c269fe878bede89cd6ca091372e4242532918761660"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ロード完了後に戦闘画面をフェードイン表示するまでの時間です。",
+      "sourceHash": "7232c2711dd59d71d8b4b3fb771a425e73491eb418944dc3fd11af4e9a4f7d1b",
+      "translation": "The time until the battle screen fades in after loading is complete.",
+      "contextHash": "7232c2711dd59d71d8b4b3fb771a425e73491eb418944dc3fd11af4e9a4f7d1b"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "フェードインを待つ（WaitFadeIn）",
+      "sourceHash": "55afc7f6a0ef64248178bb2000002414902995ff7b733bea6f73dbc2dc5bd82d",
+      "translation": "Wait for Fade-In (WaitFadeIn)",
+      "contextHash": "55afc7f6a0ef64248178bb2000002414902995ff7b733bea6f73dbc2dc5bd82d"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "フェードイン処理の終了を待ってから操作を有効にします。",
+      "sourceHash": "daf11b263f89c41f89d6907f67044d326f52fb3041fc27b08baed700f94425d4",
+      "translation": "Enables input after waiting for the fade-in process to finish.",
+      "contextHash": "daf11b263f89c41f89d6907f67044d326f52fb3041fc27b08baed700f94425d4"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "効果音（Se）",
+      "sourceHash": "1b305571974dc71778255a35f8af0ccf17414e6684a6e66187184c266b109fd3",
+      "translation": "Sound Effect (Se)",
+      "contextHash": "1b305571974dc71778255a35f8af0ccf17414e6684a6e66187184c266b109fd3"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "演奏する効果音です。",
+      "sourceHash": "e368e536c92be0d8a94f84bbbe1c56eaff65afa260ebf3b9d80b1cc49862fea1",
+      "translation": "The sound effect to play.",
+      "contextHash": "e368e536c92be0d8a94f84bbbe1c56eaff65afa260ebf3b9d80b1cc49862fea1"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "演出なし（NoEffect）",
+      "sourceHash": "89266d412884e6ef3063ee8385b88a80585fc4c36d3979c3d4f4f98dccf8c17b",
+      "translation": "No Effect (NoEffect)",
+      "contextHash": "89266d412884e6ef3063ee8385b88a80585fc4c36d3979c3d4f4f98dccf8c17b"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "当プラグインによる演出を実行しなくなります。",
+      "sourceHash": "b7c5b5932d8cdfb6a59b10b2d434eb2ee57b0c31e041c82252d7773e02116345",
+      "translation": "Effects from this plugin will no longer be executed.",
+      "contextHash": "b7c5b5932d8cdfb6a59b10b2d434eb2ee57b0c31e041c82252d7773e02116345"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "外部の戦闘開始演出系プラグインと併用したい場合に有効です。",
+      "sourceHash": "0a455f1ee24f47e3cf0c2d9294710ad7f8f18bbc017c6976eaa725f0f9b16890",
+      "translation": "This is useful when you want to use it together with an external battle start effect plugin.",
+      "contextHash": "0a455f1ee24f47e3cf0c2d9294710ad7f8f18bbc017c6976eaa725f0f9b16890"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ただし、効果音だけは演奏されます。",
+      "sourceHash": "f22bc93c08dcf07e07cf4d889e8cbb2d77a8350cb7cb3fe702db7736790ff5b6",
+      "translation": "However, the sound effect will still be played.",
+      "contextHash": "f22bc93c08dcf07e07cf4d889e8cbb2d77a8350cb7cb3fe702db7736790ff5b6"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Install (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Use (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘開始演出リスト（EncounterList）[[/LINK_1]]",
+      "sourceHash": "7d4edfaa18a2fe3b1f60d4d497d5d36d8d513956852de914c13b665e07836e6f",
+      "parts": [
+        {
+          "source": "戦闘開始演出リスト（EncounterList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Start Effect List (EncounterList)[[/LINK_1]]",
+      "contextHash": "7d4edfaa18a2fe3b1f60d4d497d5d36d8d513956852de914c13b665e07836e6f"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘開始演出パラメータ（Encounter Parameters）[[/LINK_1]]",
+      "sourceHash": "d33d54e73a09e6cafe107cee391d70e41ec4197d5a1826aff10e790834ab08e3",
+      "parts": [
+        {
+          "source": "戦闘開始演出パラメータ（Encounter Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Start Effect Parameters (Encounter Parameters)[[/LINK_1]]",
+      "contextHash": "d33d54e73a09e6cafe107cee391d70e41ec4197d5a1826aff10e790834ab08e3"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]メモ（Note）[[/LINK_1]]",
+      "sourceHash": "aa07858377fae4da5c7d58eee76b739f8aebb5046e5b94b44d3b3fd5b5616552",
+      "parts": [
+        {
+          "source": "メモ（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Note (Note)[[/LINK_1]]",
+      "contextHash": "aa07858377fae4da5c7d58eee76b739f8aebb5046e5b94b44d3b3fd5b5616552"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]スイッチ（Switch）[[/LINK_1]]",
+      "sourceHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056",
+      "parts": [
+        {
+          "source": "スイッチ（Switch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch (Switch)[[/LINK_1]]",
+      "contextHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]開始演出時間（BeforeDuration）[[/LINK_1]]",
+      "sourceHash": "aa2a9b5497a62c3c6114688be50ab653ca12ff8e609fb421e1f4f221a7bd01a0",
+      "parts": [
+        {
+          "source": "開始演出時間（BeforeDuration）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Effect Duration (BeforeDuration)[[/LINK_1]]",
+      "contextHash": "aa2a9b5497a62c3c6114688be50ab653ca12ff8e609fb421e1f4f221a7bd01a0"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ズーム速度（ZoomSpeed）[[/LINK_1]]",
+      "sourceHash": "e5eceafe3f27eb5ead67869cd17e0bcdfee2c321d0c3942070d8ea1bfe26d8a5",
+      "parts": [
+        {
+          "source": "ズーム速度（ZoomSpeed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Zoom Speed (ZoomSpeed)[[/LINK_1]]",
+      "contextHash": "e5eceafe3f27eb5ead67869cd17e0bcdfee2c321d0c3942070d8ea1bfe26d8a5"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]回転速度（RotationSpeed）[[/LINK_1]]",
+      "sourceHash": "62504012039da01711cf5ed673d7f6de3dfc584529ff820932b8cc5db9cf2388",
+      "parts": [
+        {
+          "source": "回転速度（RotationSpeed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Rotation Speed (RotationSpeed)[[/LINK_1]]",
+      "contextHash": "62504012039da01711cf5ed673d7f6de3dfc584529ff820932b8cc5db9cf2388"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]フェードイン時間（FadeInDuration）[[/LINK_1]]",
+      "sourceHash": "aea4e8437c89df2ab1c0cba112d432f1b860ceab4f90a4ebc57268f08b5797d7",
+      "parts": [
+        {
+          "source": "フェードイン時間（FadeInDuration）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Fade-In Duration (FadeInDuration)[[/LINK_1]]",
+      "contextHash": "aea4e8437c89df2ab1c0cba112d432f1b860ceab4f90a4ebc57268f08b5797d7"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]フェードインを待つ（WaitFadeIn）[[/LINK_1]]",
+      "sourceHash": "68318f88101e8b67b7bbdf3e1a41f0cec49b9a1f7e7bb3f71f3044438d360bcf",
+      "parts": [
+        {
+          "source": "フェードインを待つ（WaitFadeIn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Wait for Fade-In (WaitFadeIn)[[/LINK_1]]",
+      "contextHash": "68318f88101e8b67b7bbdf3e1a41f0cec49b9a1f7e7bb3f71f3044438d360bcf"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]効果音（Se）[[/LINK_1]]",
+      "sourceHash": "f5e30257e4ee4dcc72803dd2ab62e0dcf6f1ccdc35b643bb1f82c2da72ffccfd",
+      "parts": [
+        {
+          "source": "効果音（Se）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect (Se)[[/LINK_1]]",
+      "contextHash": "f5e30257e4ee4dcc72803dd2ab62e0dcf6f1ccdc35b643bb1f82c2da72ffccfd"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]演出なし（NoEffect）[[/LINK_1]]",
+      "sourceHash": "97284128f92d4b43c094a6648628d3ef1bb75635fbf9b82cff53bdcaf6837a66",
+      "parts": [
+        {
+          "source": "演出なし（NoEffect）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]No Effect (NoEffect)[[/LINK_1]]",
+      "contextHash": "97284128f92d4b43c094a6648628d3ef1bb75635fbf9b82cff53bdcaf6837a66"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "暗転を挟まないシームレスな戦闘開始演出を提供します。": "Provides a seamless battle start effect without a fade to black.",
+    "ズームや回転などの演出も同時に可能です。": "Effects such as zooming and rotation can also be applied simultaneously.",
+    "なお、シームレスといっても最低限のロード時間は必要となります。特にゲームを開始してから初回の戦闘では、読み込むデータ量が多くなるのでローディングが発生しやすいです。": "However, even a seamless transition requires a minimum amount of loading time. In particular, the first battle after starting the game is more likely to involve loading because a larger amount of data must be loaded.",
+    "なので、初期状態ではズームおよび回転演出を入れることでごまかしています。": "Therefore, the default settings disguise this by adding zoom and rotation effects.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_SeamlessEncounter.js": "NRP_SeamlessEncounter.js ",
+    "ver1.03（2024/10/26）": "ver1.03 (2024/10/26) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/10/26（ver1.03）": "2024/10/26 (ver1.03) ",
+    "ver1.02にて通常のエンカウント演出が重複して表示されてしまう不具合修正。": "Fixed a bug in ver1.02 that caused the standard encounter effect to be displayed repeatedly.",
+    "2024/05/15（ver1.02）": "2024/05/15 (ver1.02) ",
+    "『演出なし』を設定できるようにした。": "Added the option to set “No Effect.”",
+    "※外部のエンカウント演出プラグインとの併用に使えます。": "※Can be used together with external encounter effect plugins.",
+    "演出毎に効果音を設定できるようにした。": "Added the ability to set a sound effect for each effect.",
+    "2024/04/12（ver1.01）": "2024/04/12 (ver1.01) ",
+    "戦闘終了演出（フェード処理、逃げる処理）が正しく実行されなくなる不具合修正。": "Fixed a bug that prevented battle end effects (fade processing and escaping) from executing correctly.",
+    "2024/02/27（ver1.00 -> 1.001）": "2024/02/27 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "回転速度にマイナス（逆回転）を指定可能に。（ver1.001）": "Rotation speed can now be set to a negative value (reverse rotation). (ver1.001)",
+    "使用方法（Usage）": "Usage (Usage)",
+    "戦闘開始演出リストに設定を登録してください。": "Register your settings in the battle start effect list.",
+    "上側にある設定が優先して使用されます。": "Settings higher on the list take priority.",
+    "スイッチを条件にすることで、ボス戦のみ演出を変更するといったことができます。": "By using a switch as a condition, you can change the effect only for boss battles, for example.",
+    "また、『演出なし』をオンにすると、当プラグインによる演出が実行されなくなります。他のプラグインによる演出と併用したい場合に有用です。": "Also, turning on “No Effect” prevents effects from this plugin from being executed. This is useful when you want to use it together with effects from other plugins.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "戦闘開始演出リスト（EncounterList）": "Battle Start Effect List (EncounterList)",
+    "戦闘開始演出の一覧です。": "A list of battle start effects.",
+    "詳細は以下の『戦闘開始演出パラメータ』をご覧ください。": "For details, see the “Battle Start Effect Parameters” below.",
+    "戦闘開始演出パラメータ（Encounter Parameters）": "Battle Start Effect Parameters (Encounter Parameters)",
+    "メモ（Note）": "Note (Note)",
+    "説明用のメモです。": "A note for descriptions.",
+    "処理には使用しません。": "It is not used for processing.",
+    "スイッチ（Switch）": "Switch (Switch)",
+    "条件とするスイッチです。": "The switch used as a condition.",
+    "開始演出時間（BeforeDuration）": "Start Effect Time (BeforeDuration)",
+    "フェードイン開始までの時間（1/60秒単位）です。": "The time until the start of the fade-in, in units of 1/60 second.",
+    "0にしても最低限のロード時間は発生します。": "Even when set to 0, a minimum amount of loading time will still occur.",
+    "ズーム速度（ZoomSpeed）": "Zoom Speed (ZoomSpeed)",
+    "戦闘開始演出時のズーム速度（1/60秒当たり）です。": "The zoom speed during the battle start effect, in units per 1/60 second.",
+    "回転速度（RotationSpeed）": "Rotation Speed (RotationSpeed)",
+    "戦闘開始演出時の回転速度（1/60秒当たり）です。": "The rotation speed during the battle start effect, in units per 1/60 second.",
+    "フェードイン時間（FadeInDuration）": "Fade-In Duration (FadeInDuration)",
+    "ロード完了後に戦闘画面をフェードイン表示するまでの時間です。": "The time until the battle screen fades in after loading is complete.",
+    "フェードインを待つ（WaitFadeIn）": "Wait for Fade-In (WaitFadeIn)",
+    "フェードイン処理の終了を待ってから操作を有効にします。": "Enables input after waiting for the fade-in process to finish.",
+    "効果音（Se）": "Sound Effect (Se)",
+    "演奏する効果音です。": "The sound effect to play.",
+    "演出なし（NoEffect）": "No Effect (NoEffect)",
+    "当プラグインによる演出を実行しなくなります。": "Effects from this plugin will no longer be executed.",
+    "外部の戦闘開始演出系プラグインと併用したい場合に有効です。": "This is useful when you want to use it together with an external battle start effect plugin.",
+    "ただし、効果音だけは演奏されます。": "However, the sound effect will still be played."
+  }
+}

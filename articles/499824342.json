@@ -1,0 +1,731 @@
+{
+  "articleId": "499824342",
+  "sourceUrl": "https://newrpg.seesaa.net/article/499824342.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "b6698d447e15426cb25a3c372ef5e9832a84dc36723d0623ea46b978cbee2e78",
+  "translatedAt": "2026-08-31T02:58:58.209Z",
+  "title": "Execute Battle Events as Early as Possible Before Fade-In [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "バトルイベントをフェードイン前に最速実行【RPGツクールMZプラグイン】",
+      "sourceHash": "2d093b1f6504e41734cb2044d87e1b29d1f4b8f4bf393857bea61f01e1eac178",
+      "translation": "Execute Battle Events as Early as Possible Before Fade-In [RPG Maker MZ Plugin]",
+      "contextHash": "2d093b1f6504e41734cb2044d87e1b29d1f4b8f4bf393857bea61f01e1eac178"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "バトルイベントをフェードイン前に最速実行します。",
+      "sourceHash": "0943fb3b295fbcc3fd666c8e0268223dc043772d064bed2b99644a43754b7d4f",
+      "translation": "Executes battle events as early as possible before fade-in.",
+      "contextHash": "0943fb3b295fbcc3fd666c8e0268223dc043772d064bed2b99644a43754b7d4f"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "画面の色調変更など、戦闘シーンに切り替わった瞬間から演出を実行できます。",
+      "sourceHash": "00462a86206a05f3228fe4d3a82249de80f827f7d52790303d693c7497da00c4",
+      "translation": "You can perform effects such as changing the screen's tone from the moment the scene switches to battle.",
+      "contextHash": "00462a86206a05f3228fe4d3a82249de80f827f7d52790303d693c7497da00c4"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "さらにプラグインコマンドによって敵キャラの追加が可能です。",
+      "sourceHash": "2b50a38fdaeb11e283caec932a65cb28f5d4c3312cbc6faa50428447ae317a78",
+      "translation": "Additionally, enemies can be added using plugin commands.",
+      "contextHash": "2b50a38fdaeb11e283caec932a65cb28f5d4c3312cbc6faa50428447ae317a78"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※ただし、イベントコマンドの停止制御はしていないため、文章の表示やウェイトなどはうまくいきません。",
+      "sourceHash": "c066c3db8bc850ccda165786bcb8d88b825b32cde151d220e4d88cdd1de04b92",
+      "translation": "※However, since event command pausing is not controlled, displaying messages and waits will not work properly.",
+      "contextHash": "c066c3db8bc850ccda165786bcb8d88b825b32cde151d220e4d88cdd1de04b92"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "イベント内で敵キャラを追加すれば戦闘は続行されます。",
+      "sourceHash": "15ce52c2a0afaf80109724c4dcd62f73a5545a620c403e900a334efe2ce43e87",
+      "translation": "The battle will continue if an enemy is added within the event.",
+      "contextHash": "15ce52c2a0afaf80109724c4dcd62f73a5545a620c403e900a334efe2ce43e87"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_FastBattleEvent.js",
+      "sourceHash": "b0ca87769b41021a42062742d7b8cba667c413229022797379cd9ad5b01342b8",
+      "translation": "NRP_FastBattleEvent.js ",
+      "contextHash": "ed9d8a67d81486d6691e051ec7975a147ddac652426cdcff85d8c39a7055aaf0"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.013（2024/09/02）",
+      "sourceHash": "66ead3e494afda2155dd2bc1f000cec4e8c21b0712847861dd5922ecf6a8d924",
+      "translation": "ver1.013 (2024/09/02) ",
+      "contextHash": "ed9d8a67d81486d6691e051ec7975a147ddac652426cdcff85d8c39a7055aaf0"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/06/01 -> 2024/09/02（ver1.01 -> 1.013）",
+      "sourceHash": "462128bb383839a46464788417c142473ff0eccb0c51185fc8b4251c5d69bad3",
+      "translation": "2024/06/01 -> 2024/09/02 (ver1.01 -> 1.013) ",
+      "contextHash": "462128bb383839a46464788417c142473ff0eccb0c51185fc8b4251c5d69bad3"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "『敵全滅時でもイベント実行』がオンの場合、戦闘を継続する際にターン終了処理が正常に行われない不具合修正。（2024/06/01 ver1.011）",
+      "sourceHash": "b725490e46596219ef7b43645ea08a3fbba5182b7a9e529a998ca7d4c9e06900",
+      "translation": "Fixed a bug where the turn-end processing did not work properly when continuing the battle with “Execute Event Even When All Enemies Are Defeated” enabled. (2024/06/01 ver1.011)",
+      "contextHash": "b725490e46596219ef7b43645ea08a3fbba5182b7a9e529a998ca7d4c9e06900"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ver1.011の不具合が修正できていなかったので再修正。",
+      "sourceHash": "9c8c3f7be7711226b5f027be07bd7121fcb1ed3331fdf0c1e84a2e704731436d",
+      "translation": "Revised again because the bug in ver1.011 had not been fixed.",
+      "contextHash": "9c8c3f7be7711226b5f027be07bd7121fcb1ed3331fdf0c1e84a2e704731436d"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "（2024/08/29 ver1.012）",
+      "sourceHash": "8b7a98bf12404106f3c2dd9a1c954310837dd9432e8661bc7a9d07f5f5298a3d",
+      "translation": " (2024/08/29 ver1.012) ",
+      "contextHash": "8b7a98bf12404106f3c2dd9a1c954310837dd9432e8661bc7a9d07f5f5298a3d"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "イベントコマンドで敵の撃破処理を行うと、ターン終了処理が繰り返されてしまう不具合修正。（2024/09/02 ver1.013）",
+      "sourceHash": "6428de0dc7334acee7b77fb24628732ddfdb894c18f861f876baf240fa3783ed",
+      "translation": "Fixed a bug where the turn-end processing was repeated when an enemy was defeated using an event command. (2024/09/02 ver1.013)",
+      "contextHash": "6428de0dc7334acee7b77fb24628732ddfdb894c18f861f876baf240fa3783ed"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2023/06/25（ver1.00 -> 1.001）",
+      "sourceHash": "21494941071d2292acd3ae7ccfb70a72ead982e5df99911e8a384f6fcbfb9b31",
+      "translation": "2023/06/25 (ver1.00 -> 1.001) ",
+      "contextHash": "21494941071d2292acd3ae7ccfb70a72ead982e5df99911e8a384f6fcbfb9b31"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以下を満たすバトルイベントが最速実行の対象になります。",
+      "sourceHash": "119b24c83e60ef46593af55d201b06534caa6663dcfdcbac09c8e86c49e1807e",
+      "translation": "Battle events that meet the following conditions are executed as early as possible.",
+      "contextHash": "119b24c83e60ef46593af55d201b06534caa6663dcfdcbac09c8e86c49e1807e"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "１ページ目であること。",
+      "sourceHash": "515da7627616f140ddcc6ca4babf57c86f3fbe4f80764110d2eff7e767d84047",
+      "translation": "It must be the first page.",
+      "contextHash": "515da7627616f140ddcc6ca4babf57c86f3fbe4f80764110d2eff7e767d84047"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "条件が『実行しない』であること。",
+      "sourceHash": "2fea1683fa08a32268337194d27613c581b1c34a28dbce3b2647b326640000f0",
+      "translation": "The condition must be “Don't Run.”",
+      "contextHash": "2fea1683fa08a32268337194d27613c581b1c34a28dbce3b2647b326640000f0"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "スパンが『バトル』であること。",
+      "sourceHash": "19723aaef28b33786ed35abf645a102ed79ee9ff5c5bcfd4eb41f1e58d549c88",
+      "translation": "The span must be “Battle.”",
+      "contextHash": "19723aaef28b33786ed35abf645a102ed79ee9ff5c5bcfd4eb41f1e58d549c88"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "上記は設定によって、無効化できます。",
+      "sourceHash": "50b9b8ca0915bf098bfce0e636f92e209c8e96ec62b8482fa71666803b9a51c2",
+      "translation": "The above behavior can be disabled in the settings.",
+      "contextHash": "50b9b8ca0915bf098bfce0e636f92e209c8e96ec62b8482fa71666803b9a51c2"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "それ以外の場合でも、イベントコマンドの先頭の注釈に以下を記入すれば最速実行の対象になります。",
+      "sourceHash": "fa492db29b2afa8aa34cc7355ef78bcfb53bc27772898796567cdf7bb482e225",
+      "translation": "Even in other cases, you can make an event eligible for early execution by entering the following in a comment at the beginning of its event commands.",
+      "contextHash": "fa492db29b2afa8aa34cc7355ef78bcfb53bc27772898796567cdf7bb482e225"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "敵キャラを追加（AddEnemy）",
+      "sourceHash": "15264193e2f87abebcf28a0633bff213586dd21bad91faca441a928ff8818b6a",
+      "translation": "Add Enemy (AddEnemy)",
+      "contextHash": "15264193e2f87abebcf28a0633bff213586dd21bad91faca441a928ff8818b6a"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "指定した敵キャラを追加します。",
+      "sourceHash": "9073cd907eda2302527cc3925e72b9f8683b6ef294fd8ee1cc593f87ee48cc7e",
+      "translation": "Adds the specified enemy.",
+      "contextHash": "9073cd907eda2302527cc3925e72b9f8683b6ef294fd8ee1cc593f87ee48cc7e"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "複数指定すれば、ランダム選択もできます。",
+      "sourceHash": "aba29f98e8296afa620fe15ef973640391af576f17244a8f33396619888ff5a6",
+      "translation": "If multiple enemies are specified, one can be selected at random.",
+      "contextHash": "aba29f98e8296afa620fe15ef973640391af576f17244a8f33396619888ff5a6"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "例１：1~3ならば、ＩＤ１～３の敵からランダムに追加。",
+      "sourceHash": "8281fdda23f8898f85c52d40e302dafb4ccd35281fbfc44c99858d56287a866c",
+      "translation": "Example 1: With 1~3, randomly adds an enemy with an ID from 1 to 3.",
+      "contextHash": "8281fdda23f8898f85c52d40e302dafb4ccd35281fbfc44c99858d56287a866c"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "例２：1,3,5ならば、ＩＤ１、３、５の敵からランダムに追加。",
+      "sourceHash": "7c73ea55b6bc0a3fdb3cbb08bb0788fcb7057eb7831816c252290b4e77a2af0a",
+      "translation": "Example 2: With 1,3,5, randomly adds an enemy with ID 1, 3, or 5.",
+      "contextHash": "7c73ea55b6bc0a3fdb3cbb08bb0788fcb7057eb7831816c252290b4e77a2af0a"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "また、数式を使えば変数による指定も有効です。",
+      "sourceHash": "d5861a354dbcc028f8630637d93e66f0e3c86ec3a64875eee8018acf0a2404db",
+      "translation": "You can also specify an enemy using a variable by using a formula.",
+      "contextHash": "d5861a354dbcc028f8630637d93e66f0e3c86ec3a64875eee8018acf0a2404db"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "例：$gameVariables.value(1)",
+      "sourceHash": "05ca30c87cd01bdde2756438f0e0402efd3c0175503202add0fab76e5927f622",
+      "translation": "Example: $gameVariables.value(1)",
+      "contextHash": "05ca30c87cd01bdde2756438f0e0402efd3c0175503202add0fab76e5927f622"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※変数にはスクリプトによる文字列指定（\"1~3\"など）も有効です。",
+      "sourceHash": "9972486d8ade44c7119a699c1bb1c0054ecc757cd37b65db1977041751b3c165",
+      "translation": "※A string specified by a script (such as \"1~3\") can also be used in the variable.",
+      "contextHash": "9972486d8ade44c7119a699c1bb1c0054ecc757cd37b65db1977041751b3c165"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "敵キャラを追加（詳細）（AddEnemyDetail）",
+      "sourceHash": "f2124dab4524f29b712de58f832f920c8906d961ebc855ef6faee610f0343840",
+      "translation": "Add Enemy (Detailed) (AddEnemyDetail)",
+      "contextHash": "f2124dab4524f29b712de58f832f920c8906d961ebc855ef6faee610f0343840"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "要領は上の『敵キャラを追加』と同じですが、座標の指定が可能です。",
+      "sourceHash": "64fa3fb4b6e4dc8b019c9de8a568804d3714a9bac3e878ca7dc6ec4b8c92cd59",
+      "translation": "The procedure is the same as for “Add Enemy” above, but coordinates can also be specified.",
+      "contextHash": "64fa3fb4b6e4dc8b019c9de8a568804d3714a9bac3e878ca7dc6ec4b8c92cd59"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ただし、NRP_TroopRandomFormation.jsのランダム配置が有効な場合は、座標が上書きされてしまうので、ご注意ください。",
+      "sourceHash": "4c78e67fd31502315d0985b34aba31ad2ac6177af323e300adc862c719b46430",
+      "translation": "However, please note that the coordinates will be overwritten if random placement in NRP_TroopRandomFormation.js is enabled.",
+      "contextHash": "4c78e67fd31502315d0985b34aba31ad2ac6177af323e300adc862c719b46430"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "自動で最速実行（AutoFastEvent）",
+      "sourceHash": "f3b14cea938250795f313bdefb2bc54ee3f5005143968732d760362a71cc7f4e",
+      "translation": "Auto Fast Event (AutoFastEvent)",
+      "contextHash": "f3b14cea938250795f313bdefb2bc54ee3f5005143968732d760362a71cc7f4e"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "『１ページ目』かつ『実行しない』かつ『バトル』のイベントを最速実行します。",
+      "sourceHash": "e3b2804d401ed9df2eb999bf429713c6ea392f5558966732efe936f2ad143afb",
+      "translation": "Executes events as early as possible when they are on the “first page,” set to “Don't Run,” and have the span “Battle.”",
+      "contextHash": "e3b2804d401ed9df2eb999bf429713c6ea392f5558966732efe936f2ad143afb"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "共通コモンイベント（CommonCommonEvent）",
+      "sourceHash": "b91657ff25b44da50ad033bf58832978dd5a65cfa2dc75d3324e32d34713933e",
+      "translation": "Common Common Event (CommonCommonEvent)",
+      "contextHash": "b91657ff25b44da50ad033bf58832978dd5a65cfa2dc75d3324e32d34713933e"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "戦闘開始時に常に最速実行されるコモンイベントです。",
+      "sourceHash": "ad7c3afd36a014f5c272adf04e6b663fc99422ce12dbd2ec056095f3cb58a558",
+      "translation": "This common event is always executed as early as possible when battle starts.",
+      "contextHash": "ad7c3afd36a014f5c272adf04e6b663fc99422ce12dbd2ec056095f3cb58a558"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "敵グループに指定したイベントより後で実行されます。",
+      "sourceHash": "419fe74d12d73af6f21e506398b44a44cafc36352f09e9cc4909b919a3556f96",
+      "translation": "It is executed after the event specified for the troop.",
+      "contextHash": "419fe74d12d73af6f21e506398b44a44cafc36352f09e9cc4909b919a3556f96"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "敵全滅時でもイベント実行（EnemiesDefeatedEvent）ver1.01",
+      "sourceHash": "16ac69a7f5e8e16ff90e50df780efcfbd7aa2348b3d0eac8351c1d1b877bb029",
+      "translation": "Execute Event Even When All Enemies Are Defeated (EnemiesDefeatedEvent) ver1.01",
+      "contextHash": "16ac69a7f5e8e16ff90e50df780efcfbd7aa2348b3d0eac8351c1d1b877bb029"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "敵全滅時、戦闘が終わる前にバトルイベントを実行できるようにします。",
+      "sourceHash": "c402b120a4f403ed5c26810fd74d28b60283df22b7634da622d3b9e864ef1e6b",
+      "translation": "Allows battle events to be executed when all enemies are defeated, before the battle ends.",
+      "contextHash": "c402b120a4f403ed5c26810fd74d28b60283df22b7634da622d3b9e864ef1e6b"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ターン終了や敵のＨＰ０％以下などの条件と組み合わせるのがオススメです。",
+      "sourceHash": "efb48a2be94a8ad215bb62992e0066fcfb5eebd4a7b81899525dff50e14611fb",
+      "translation": "It is recommended to combine this with conditions such as turn end or an enemy's HP being 0% or lower.",
+      "contextHash": "efb48a2be94a8ad215bb62992e0066fcfb5eebd4a7b81899525dff50e14611fb"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "ちなみに『$gameTroop.isAllDead()』のスクリプト条件で敵の全滅を判定できます。",
+      "sourceHash": "33582be16d2e3775afc3179f169ec916d998da7a0aeba4b0f5a7efe4342db12a",
+      "translation": "Incidentally, you can determine whether all enemies have been defeated using the script condition “$gameTroop.isAllDead()”.",
+      "contextHash": "33582be16d2e3775afc3179f169ec916d998da7a0aeba4b0f5a7efe4342db12a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_TroopRandomFormation.js[[/LINK_1]]と組み合わせれば、敵グループをランダム生成＆配置することも可能です。",
+      "sourceHash": "d9e1f54089506c9e0a39020479fff23c4bc889500592b279d2a784e41b6554cc",
+      "parts": [
+        {
+          "source": "NRP_TroopRandomFormation.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせれば、敵グループをランダム生成＆配置することも可能です。",
+          "link": false
+        }
+      ],
+      "translation": "Combining it with [[LINK_1]]NRP_TroopRandomFormation.js[[/LINK_1]] also allows enemy troops to be randomly generated and placed.",
+      "contextHash": "d9e1f54089506c9e0a39020479fff23c4bc889500592b279d2a784e41b6554cc"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "ver1.01より、[[LINK_1]]敵を全滅させた際に戦闘が終了する前に、バトルイベントを実行[[/LINK_1]]できるようになりました。",
+      "sourceHash": "e33a6ef99b33617f1e11959267a62c0b60bde2cc5b7a7aa644615025c1107dd3",
+      "parts": [
+        {
+          "source": "ver1.01より、",
+          "link": false
+        },
+        {
+          "source": "敵を全滅させた際に戦闘が終了する前に、バトルイベントを実行",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようになりました。",
+          "link": false
+        }
+      ],
+      "translation": "As of ver1.01, you can [[LINK_1]]execute a battle event before the battle ends when all enemies are defeated[[/LINK_1]].",
+      "contextHash": "e33a6ef99b33617f1e11959267a62c0b60bde2cc5b7a7aa644615025c1107dd3"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "例えば、敵を全滅させても立て続けに増援が現れるような演出（[[LINK_1]]仲間を呼ぶプラグイン[[/LINK_1]]）が可能です。",
+      "sourceHash": "a1a29ce095323675dbb50a79b7abf5d69247a18bd0670c066f34594c9617e207",
+      "parts": [
+        {
+          "source": "例えば、敵を全滅させても立て続けに増援が現れるような演出（",
+          "link": false
+        },
+        {
+          "source": "仲間を呼ぶプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）が可能です。",
+          "link": false
+        }
+      ],
+      "translation": "For example, you can create an effect where reinforcements continue to appear even after all enemies have been defeated ([[LINK_1]]a plugin that calls allies[[/LINK_1]]).",
+      "contextHash": "a1a29ce095323675dbb50a79b7abf5d69247a18bd0670c066f34594c9617e207"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド（Plugin Commands）[[/LINK_1]]",
+      "sourceHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174",
+      "parts": [
+        {
+          "source": "プラグインコマンド（Plugin Commands）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands (Plugin Commands)[[/LINK_1]]",
+      "contextHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラを追加（AddEnemy）[[/LINK_1]]",
+      "sourceHash": "a54e5ddccb988297947a9110dd3645ceba2eca6a159c53379975391caa70a374",
+      "parts": [
+        {
+          "source": "敵キャラを追加（AddEnemy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Enemy (AddEnemy)[[/LINK_1]]",
+      "contextHash": "a54e5ddccb988297947a9110dd3645ceba2eca6a159c53379975391caa70a374"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラを追加（詳細）（AddEnemyDetail）[[/LINK_1]]",
+      "sourceHash": "e0d39e67315d4b958a3035d05b6ad9abe4adf4e7e932cd77573836302f7f52eb",
+      "parts": [
+        {
+          "source": "敵キャラを追加（詳細）（AddEnemyDetail）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Enemy (Detailed) (AddEnemyDetail)[[/LINK_1]]",
+      "contextHash": "e0d39e67315d4b958a3035d05b6ad9abe4adf4e7e932cd77573836302f7f52eb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]自動で最速実行（AutoFastEvent）[[/LINK_1]]",
+      "sourceHash": "9a5c8b47253b4a8b6d7f95f6dd7d958c524e012ecd8dce096145bea4fcae5dcf",
+      "parts": [
+        {
+          "source": "自動で最速実行（AutoFastEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Automatically Execute as Fast as Possible (AutoFastEvent)[[/LINK_1]]",
+      "contextHash": "9a5c8b47253b4a8b6d7f95f6dd7d958c524e012ecd8dce096145bea4fcae5dcf"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]共通コモンイベント（CommonCommonEvent）[[/LINK_1]]",
+      "sourceHash": "3f581575d07f19ac836c5a1f3a72120a878484d31bf140f4242d4b79a8b02c33",
+      "parts": [
+        {
+          "source": "共通コモンイベント（CommonCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Common Common Event (CommonCommonEvent)[[/LINK_1]]",
+      "contextHash": "3f581575d07f19ac836c5a1f3a72120a878484d31bf140f4242d4b79a8b02c33"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]敵全滅時でもイベント実行（EnemiesDefeatedEvent）[[/LINK_1]]ver1.01",
+      "sourceHash": "77ec7e7b9c903a771c174374604db167ab7da0d4fd6be85c288ff935844eacef",
+      "parts": [
+        {
+          "source": "敵全滅時でもイベント実行（EnemiesDefeatedEvent）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Execute Event Even When All Enemies Are Defeated (EnemiesDefeatedEvent)[[/LINK_1]] ver1.01",
+      "contextHash": "77ec7e7b9c903a771c174374604db167ab7da0d4fd6be85c288ff935844eacef"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "敵全滅時、[[LINK_1]]戦闘が終わる前にバトルイベントを実行[[/LINK_1]]できるようにした。",
+      "sourceHash": "fad28c2ff6e2cde6cc32254bd940b19c904d413994ea1bfc71fa5140b14f7f75",
+      "parts": [
+        {
+          "source": "敵全滅時、",
+          "link": false
+        },
+        {
+          "source": "戦闘が終わる前にバトルイベントを実行",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "When all enemies are defeated, [[LINK_1]]battle events can now be executed before the battle ends[[/LINK_1]].",
+      "contextHash": "fad28c2ff6e2cde6cc32254bd940b19c904d413994ea1bfc71fa5140b14f7f75"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラの追加[[/LINK_1]]を変数指定に対応。（ver1.001）",
+      "sourceHash": "b48ce6504c200361f7938b1c2347bf982e436f1fd10d27bb1726f5ab86ce7a3a",
+      "parts": [
+        {
+          "source": "敵キャラの追加",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を変数指定に対応。（ver1.001）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Adding Enemies[[/LINK_1]] now supports variable specification. (ver1.001)",
+      "contextHash": "b48ce6504c200361f7938b1c2347bf982e436f1fd10d27bb1726f5ab86ce7a3a"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "バトルイベントをフェードイン前に最速実行します。": "Executes battle events as early as possible before fade-in.",
+    "画面の色調変更など、戦闘シーンに切り替わった瞬間から演出を実行できます。": "You can perform effects such as changing the screen's tone from the moment the scene switches to battle.",
+    "さらにプラグインコマンドによって敵キャラの追加が可能です。": "Additionally, enemies can be added using plugin commands.",
+    "※ただし、イベントコマンドの停止制御はしていないため、文章の表示やウェイトなどはうまくいきません。": "※However, since event command pausing is not controlled, displaying messages and waits will not work properly.",
+    "イベント内で敵キャラを追加すれば戦闘は続行されます。": "The battle will continue if an enemy is added within the event.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_FastBattleEvent.js": "NRP_FastBattleEvent.js ",
+    "ver1.013（2024/09/02）": "ver1.013 (2024/09/02) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/06/01 -> 2024/09/02（ver1.01 -> 1.013）": "2024/06/01 -> 2024/09/02 (ver1.01 -> 1.013) ",
+    "『敵全滅時でもイベント実行』がオンの場合、戦闘を継続する際にターン終了処理が正常に行われない不具合修正。（2024/06/01 ver1.011）": "Fixed a bug where the turn-end processing did not work properly when continuing the battle with “Execute Event Even When All Enemies Are Defeated” enabled. (2024/06/01 ver1.011)",
+    "ver1.011の不具合が修正できていなかったので再修正。": "Revised again because the bug in ver1.011 had not been fixed.",
+    "（2024/08/29 ver1.012）": " (2024/08/29 ver1.012) ",
+    "イベントコマンドで敵の撃破処理を行うと、ターン終了処理が繰り返されてしまう不具合修正。（2024/09/02 ver1.013）": "Fixed a bug where the turn-end processing was repeated when an enemy was defeated using an event command. (2024/09/02 ver1.013)",
+    "2023/06/25（ver1.00 -> 1.001）": "2023/06/25 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "以下を満たすバトルイベントが最速実行の対象になります。": "Battle events that meet the following conditions are executed as early as possible.",
+    "１ページ目であること。": "It must be the first page.",
+    "条件が『実行しない』であること。": "The condition must be “Don't Run.”",
+    "スパンが『バトル』であること。": "The span must be “Battle.”",
+    "上記は設定によって、無効化できます。": "The above behavior can be disabled in the settings.",
+    "それ以外の場合でも、イベントコマンドの先頭の注釈に以下を記入すれば最速実行の対象になります。": "Even in other cases, you can make an event eligible for early execution by entering the following in a comment at the beginning of its event commands.",
+    "プラグインコマンド（Plugin Commands）": "Plugin Commands (Plugin Commands)",
+    "敵キャラを追加（AddEnemy）": "Add Enemy (AddEnemy)",
+    "指定した敵キャラを追加します。": "Adds the specified enemy.",
+    "複数指定すれば、ランダム選択もできます。": "If multiple enemies are specified, one can be selected at random.",
+    "例１：1~3ならば、ＩＤ１～３の敵からランダムに追加。": "Example 1: With 1~3, randomly adds an enemy with an ID from 1 to 3.",
+    "例２：1,3,5ならば、ＩＤ１、３、５の敵からランダムに追加。": "Example 2: With 1,3,5, randomly adds an enemy with ID 1, 3, or 5.",
+    "また、数式を使えば変数による指定も有効です。": "You can also specify an enemy using a variable by using a formula.",
+    "例：$gameVariables.value(1)": "Example: $gameVariables.value(1)",
+    "※変数にはスクリプトによる文字列指定（\"1~3\"など）も有効です。": "※A string specified by a script (such as \"1~3\") can also be used in the variable.",
+    "敵キャラを追加（詳細）（AddEnemyDetail）": "Add Enemy (Detailed) (AddEnemyDetail)",
+    "要領は上の『敵キャラを追加』と同じですが、座標の指定が可能です。": "The procedure is the same as for “Add Enemy” above, but coordinates can also be specified.",
+    "ただし、NRP_TroopRandomFormation.jsのランダム配置が有効な場合は、座標が上書きされてしまうので、ご注意ください。": "However, please note that the coordinates will be overwritten if random placement in NRP_TroopRandomFormation.js is enabled.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "自動で最速実行（AutoFastEvent）": "Auto Fast Event (AutoFastEvent)",
+    "『１ページ目』かつ『実行しない』かつ『バトル』のイベントを最速実行します。": "Executes events as early as possible when they are on the “first page,” set to “Don't Run,” and have the span “Battle.”",
+    "共通コモンイベント（CommonCommonEvent）": "Common Common Event (CommonCommonEvent)",
+    "戦闘開始時に常に最速実行されるコモンイベントです。": "This common event is always executed as early as possible when battle starts.",
+    "敵グループに指定したイベントより後で実行されます。": "It is executed after the event specified for the troop.",
+    "敵全滅時でもイベント実行（EnemiesDefeatedEvent）ver1.01": "Execute Event Even When All Enemies Are Defeated (EnemiesDefeatedEvent) ver1.01",
+    "敵全滅時、戦闘が終わる前にバトルイベントを実行できるようにします。": "Allows battle events to be executed when all enemies are defeated, before the battle ends.",
+    "ターン終了や敵のＨＰ０％以下などの条件と組み合わせるのがオススメです。": "It is recommended to combine this with conditions such as turn end or an enemy's HP being 0% or lower.",
+    "ちなみに『$gameTroop.isAllDead()』のスクリプト条件で敵の全滅を判定できます。": "Incidentally, you can determine whether all enemies have been defeated using the script condition “$gameTroop.isAllDead()”."
+  }
+}

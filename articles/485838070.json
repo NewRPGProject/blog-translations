@@ -1,0 +1,1556 @@
+{
+  "articleId": "485838070",
+  "sourceUrl": "https://newrpg.seesaa.net/article/485838070.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "6fc9b5383b1fd63e99db09ad023ac38b03a0bfb935c612934cd8a64a4f0c8d75",
+  "translatedAt": "2026-08-31T02:54:33.903Z",
+  "title": "Implementing “Call Allies” for Enemies [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵キャラの『仲間を呼ぶ』を実装【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "0fbc7609927d77f076a38c72b6e0cbe987c0b2cc78aec287eee9c998dc56a1b7",
+      "translation": "Implementing “Call Allies” for Enemies [RPG Maker MZ & MV Plugin]",
+      "contextHash": "0fbc7609927d77f076a38c72b6e0cbe987c0b2cc78aec287eee9c998dc56a1b7"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "敵キャラのスキルに『仲間を呼ぶ』機能を追加します。",
+      "sourceHash": "10230fb3bb9b88707d17bb470eb4012a77225df75cac1a595c635d68293595c6",
+      "translation": "Adds a “Call Allies” function to enemy skills.",
+      "contextHash": "10230fb3bb9b88707d17bb470eb4012a77225df75cac1a595c635d68293595c6"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な特徴",
+      "sourceHash": "c7fb76399b9568f4cfa5b95c390dc1c81d1bd16e5410cacba7db395a8d6d999e",
+      "translation": "Main Features",
+      "contextHash": "c7fb76399b9568f4cfa5b95c390dc1c81d1bd16e5410cacba7db395a8d6d999e"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "現れた敵キャラは自動で、空白のある場所に登場。",
+      "sourceHash": "2cc1bc6aa1c4ab0d03c1d0da1f70b710038ba3c9d4a78ceebe37171dfdde4a2a",
+      "translation": "Called enemies automatically appear in available positions.",
+      "contextHash": "2cc1bc6aa1c4ab0d03c1d0da1f70b710038ba3c9d4a78ceebe37171dfdde4a2a"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "プラグインコマンド（ＭＺのみ）を使えば、任意の座標に配置可能。",
+      "sourceHash": "a5a3b632229ff624bf265f2fb6da92a8fe2264d6346f1461b8a83a0ee1f9de18",
+      "translation": "They can be placed at arbitrary coordinates using plugin commands (MZ only).",
+      "contextHash": "a5a3b632229ff624bf265f2fb6da92a8fe2264d6346f1461b8a83a0ee1f9de18"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "DynamicAnimation&Motionとの連携により、登場演出も作成可能。",
+      "sourceHash": "ccb0fe620e87e4c229e5eb63472356d676bfa0bfdb62207becec7984fa9e886f",
+      "translation": "Appearances can also be created in conjunction with DynamicAnimation&Motion.",
+      "contextHash": "ccb0fe620e87e4c229e5eb63472356d676bfa0bfdb62207becec7984fa9e886f"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the Plugin Manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_CallEnemy.js",
+      "sourceHash": "b649c5de08bc9a6dcd75cad76ec4d893cea9835b171639bbc1fb336ad9e7d5c2",
+      "translation": "NRP_CallEnemy.js ",
+      "contextHash": "636c05dff87837038458526366a23c89f1f00949ff86e3577a07b4c1a0256368"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ver1.06（2024/12/18）",
+      "sourceHash": "cf3a9cc394b4d3e7cfda5cb2c4051b1f87f1aac51f1908db3d4666ea365350fc",
+      "translation": "ver1.06 (2024/12/18) ",
+      "contextHash": "636c05dff87837038458526366a23c89f1f00949ff86e3577a07b4c1a0256368"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※敵キャラの配置方法はNRP_TroopRandomFormation.jsのプラグインパラメータに依存しますので、調整はそちらで行ってください。",
+      "sourceHash": "857745f7a9c2e85a8ec64efb96ac424322af9a4e8c0a598b3d74035d5c5713d2",
+      "translation": "※Enemy placement depends on the plugin parameters of NRP_TroopRandomFormation.js, so make adjustments there.",
+      "contextHash": "857745f7a9c2e85a8ec64efb96ac424322af9a4e8c0a598b3d74035d5c5713d2"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "なお、NRP_TroopRandomFormation.jsを導入すると、グループ名が『#』から始まる敵グループが自動配置の対象となります。この機能を利用したくない場合はご注意ください。",
+      "sourceHash": "82f6ed6f22f6306640ef440acda2cc8041945d7a5c9a814f7d934036de007e36",
+      "translation": "Additionally, after installing NRP_TroopRandomFormation.js, enemy troops whose names begin with “#” become subject to automatic placement. Please be aware of this if you do not want to use this feature.",
+      "contextHash": "82f6ed6f22f6306640ef440acda2cc8041945d7a5c9a814f7d934036de007e36"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "また、以下のプラグインと併用する場合は最新化をお願いします。競合上の問題が起こらないように、不具合を解消しております。",
+      "sourceHash": "dacc1275a2b60c6da88d862b050d89e16cc11bca02de68436c789a321a537c01",
+      "translation": "Please also update the following plugins when using them together. I have fixed issues to prevent compatibility problems.",
+      "contextHash": "dacc1275a2b60c6da88d862b050d89e16cc11bca02de68436c789a321a537c01"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_CountTimeBattle.js",
+      "sourceHash": "70ee0db7970537666679887e04dc942790fbadaee2f624b6f871fe216f5d15c8",
+      "translation": "NRP_CountTimeBattle.js",
+      "contextHash": "02990d49e76c08a3156ae9a2b2fda26acc9aa653c2f0ca6b3c5687ef53278834"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/12/18（ver1.06）",
+      "sourceHash": "ffad015efd62b2d5e290bb802c74509714a53b2ea650b8f344a3d26aa8ad9599",
+      "translation": "2024/12/18 (ver1.06) ",
+      "contextHash": "ffad015efd62b2d5e290bb802c74509714a53b2ea650b8f344a3d26aa8ad9599"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/10/27（ver1.051）",
+      "sourceHash": "c43788ef88e02bef97c2225daf9a9827d90b8cef552dad964b95b3d16cd9184d",
+      "translation": "2024/10/27 (ver1.051) ",
+      "contextHash": "c43788ef88e02bef97c2225daf9a9827d90b8cef552dad964b95b3d16cd9184d"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/08/05（ver1.04）",
+      "sourceHash": "4b3720199ab1c193584ed330a6c11499011f2c55f1666bb1ee027bfe131fca09",
+      "translation": "2024/08/05 (ver1.04) ",
+      "contextHash": "4b3720199ab1c193584ed330a6c11499011f2c55f1666bb1ee027bfe131fca09"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2024/03/02 -> 2024/05/04（ver1.03）",
+      "sourceHash": "5f7df305c4e46db8cc019d25d42a75fb60b3dbb9b1ab600e80dc2f5725fb3764",
+      "translation": "2024/03/02 -> 2024/05/04 (ver1.03) ",
+      "contextHash": "5f7df305c4e46db8cc019d25d42a75fb60b3dbb9b1ab600e80dc2f5725fb3764"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "敵キャラの画像サイズをうまく計算できないことがある不具合を修正。",
+      "sourceHash": "e33942cd90b957301bc6f16606313cb73269a51c1359d8fc137dd89a7ad00636",
+      "translation": "Fixed an issue where enemy image sizes could sometimes not be calculated correctly.",
+      "contextHash": "e33942cd90b957301bc6f16606313cb73269a51c1359d8fc137dd89a7ad00636"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "連続かつ高速で仲間を呼ばれた際、配置座標が正しく計算できない問題に対処。（2024/05/04 NRP_TroopRandomFormation.js ver1.081）",
+      "sourceHash": "179409f2be3c8d1640876aa1ae4b4a3674dd20049883113f16da1a27e365a108",
+      "translation": "Addressed an issue where placement coordinates were not calculated correctly when allies were called repeatedly and rapidly. (2024/05/04 NRP_TroopRandomFormation.js ver1.081)",
+      "contextHash": "179409f2be3c8d1640876aa1ae4b4a3674dd20049883113f16da1a27e365a108"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2023/06/10（ver1.021）",
+      "sourceHash": "733b5b2875586da15bd7368ad716dab6df95cd8879fb73fca1e1490212da516a",
+      "translation": "2023/06/10 (ver1.021) ",
+      "contextHash": "733b5b2875586da15bd7368ad716dab6df95cd8879fb73fca1e1490212da516a"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2022/04/21（ver1.01 -> 1.011）",
+      "sourceHash": "8f86bf4646a40b0fb23daca402b4947d1d58f175e681da5ea6caf2eca74fd4f5",
+      "translation": "2022/04/21 (ver1.01 -> 1.011) ",
+      "contextHash": "8f86bf4646a40b0fb23daca402b4947d1d58f175e681da5ea6caf2eca74fd4f5"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "※影プラグイン側も最新化してください。",
+      "sourceHash": "c00a19b022850d210c6846b647e573e5e8ae57af61ac17b1a9bab9aa3e768a7f",
+      "translation": "※Please also update the companion plugin.",
+      "contextHash": "c00a19b022850d210c6846b647e573e5e8ae57af61ac17b1a9bab9aa3e768a7f"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "登場演出を指定しなかった場合に、敵が表示されなくなる不具合修正。（ver1.011）",
+      "sourceHash": "cb62028708320861512a4fdbf9872e727f3c9c44c2fb65c711091d42d9ba69bb",
+      "translation": "Fixed an issue where enemies would not be displayed if no appearance effect was specified. (ver1.011)",
+      "contextHash": "cb62028708320861512a4fdbf9872e727f3c9c44c2fb65c711091d42d9ba69bb"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2022/03/04 -> 2022/03/10（ver1.00 -> 1.001）",
+      "sourceHash": "3cdf9ee5497e883bca7238dc1e90ac92401f599068bed84cf5a08ae960d3b795",
+      "translation": "2022/03/04 -> 2022/03/10 (ver1.00 -> 1.001) ",
+      "contextHash": "3cdf9ee5497e883bca7238dc1e90ac92401f599068bed84cf5a08ae960d3b795"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "ＭＶにて敵キャラのサイズが考慮されない不具合を修正。",
+      "sourceHash": "0e614dda2fbf33de375d5d7570686dc75d679b8e340371f5fef424ce5de4f2d5",
+      "translation": "Fixed an issue in MV where enemy sizes were not taken into account.",
+      "contextHash": "0e614dda2fbf33de375d5d7570686dc75d679b8e340371f5fef424ce5de4f2d5"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "（2020/03/10 ver1.001）",
+      "sourceHash": "b8257b35679d77f2d7b5849093084b2abc9b52c80fcaf85f8348032f003af010",
+      "translation": " (2020/03/10 ver1.001) ",
+      "contextHash": "b8257b35679d77f2d7b5849093084b2abc9b52c80fcaf85f8348032f003af010"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "『仲間を呼ぶ』用のスキルを作成します。",
+      "sourceHash": "385a00100173648aeec7e33a8cacd690a0670f85c352232dadac360595020238",
+      "translation": "Create a skill for “Call Allies”.",
+      "contextHash": "385a00100173648aeec7e33a8cacd690a0670f85c352232dadac360595020238"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "まず、スキルの範囲は『使用者』など、単体を対象とするものにしてください。",
+      "sourceHash": "02da92ad0429c6ac8b2e9e591ccab2147486f5382ec9f652f03b242c9b82a956",
+      "translation": "First, set the skill’s scope to target a single battler, such as “User”.",
+      "contextHash": "02da92ad0429c6ac8b2e9e591ccab2147486f5382ec9f652f03b242c9b82a956"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "範囲が『なし』だと機能しませんのでご注意を。",
+      "sourceHash": "040a8525846cdc1af45f52a7f02e42f6c23aba90fda3db34093ba090ef35c4ce",
+      "translation": "Please note that this function does not work if the scope is “None”.",
+      "contextHash": "040a8525846cdc1af45f52a7f02e42f6c23aba90fda3db34093ba090ef35c4ce"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "次にスキルのメモ欄に以下を記入してください。",
+      "sourceHash": "28f65d501c2638aa43c4a97bc8b33f9b4a14842a66835eb04dc3d29b84cb9640",
+      "translation": "Next, enter the following in the skill’s note field.",
+      "contextHash": "28f65d501c2638aa43c4a97bc8b33f9b4a14842a66835eb04dc3d29b84cb9640"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "これでＩＤがx番の敵キャラを呼び出します。",
+      "sourceHash": "a2430056c703ea2a7ca047e6f055ef14c131c54da22039bade7719c05258c441",
+      "translation": "This calls the enemy with ID x.",
+      "contextHash": "a2430056c703ea2a7ca047e6f055ef14c131c54da22039bade7719c05258c441"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "また、複数指定にも対応しています。",
+      "sourceHash": "b9cc9608dde438c07814b2645cf3b813df9eacf2908aec4ce9d95c668933ad44",
+      "translation": "Multiple specifications are also supported.",
+      "contextHash": "b9cc9608dde438c07814b2645cf3b813df9eacf2908aec4ce9d95c668933ad44"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ならば、ＩＤが１～３の敵キャラをランダムで呼び出します。",
+      "sourceHash": "8c583bfe4f6d1745da8cb27fbad5022c357d209e649e71957594559224364255",
+      "translation": "This randomly calls an enemy with an ID from 1 to 3.",
+      "contextHash": "8c583bfe4f6d1745da8cb27fbad5022c357d209e649e71957594559224364255"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "ならば、ＩＤが１，３，５の敵キャラをランダムで呼び出します。",
+      "sourceHash": "4ff864d70ef3bcd1bc376df3c51f9031e7bc90e23e21942e83d1a3676c756677",
+      "translation": "This randomly calls an enemy with ID 1, 3, or 5.",
+      "contextHash": "4ff864d70ef3bcd1bc376df3c51f9031e7bc90e23e21942e83d1a3676c756677"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ちなみに連続回数を増やせば、一度に複数の仲間を呼びます。",
+      "sourceHash": "0ef8e4ba0eed04b5e590c64b1194b22bc4be38c6b788bb012300c9a0eae1747b",
+      "translation": "Incidentally, increasing the number of repetitions lets you call multiple allies at once.",
+      "contextHash": "0ef8e4ba0eed04b5e590c64b1194b22bc4be38c6b788bb012300c9a0eae1747b"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "スキルのメモ欄（オプション）（Note of Skills）",
+      "sourceHash": "743a91167f9376500ad29df7d0384d647820b250262c4e636b8ba11e0ff3a9ed",
+      "translation": "Skill Note Field (Optional) (Note of Skills)",
+      "contextHash": "743a91167f9376500ad29df7d0384d647820b250262c4e636b8ba11e0ff3a9ed"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "DynamicAnimation&Motionプラグインと連携し、x番のスキルに指定された演出で登場します。",
+      "sourceHash": "b0aef1247a935f43d2b3fbb2a2f75fe9a541af7e81adc6c6bed309380c44ef62",
+      "translation": "In conjunction with the DynamicAnimation&Motion plugin, the enemy appears using the effect specified for skill x.",
+      "contextHash": "b0aef1247a935f43d2b3fbb2a2f75fe9a541af7e81adc6c6bed309380c44ef62"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "当然ながら、該当のプラグインを導入している必要があります。",
+      "sourceHash": "5dbd9b7b5c32b0122c07ae9ab04ecfd8c7ce16a38754a0d381b8e9ebfdde5933",
+      "translation": "Naturally, the relevant plugin must be installed.",
+      "contextHash": "5dbd9b7b5c32b0122c07ae9ab04ecfd8c7ce16a38754a0d381b8e9ebfdde5933"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<CallEnemyXY:[Ｘ座標], [Ｙ座標]>",
+      "sourceHash": "221b94c75630a6a4fbc73d40c911e3ef4469b0a2b42c7425953f30000487dfd7",
+      "translation": "<CallEnemyXY:[X Coordinate], [Y Coordinate]>",
+      "contextHash": "221b94c75630a6a4fbc73d40c911e3ef4469b0a2b42c7425953f30000487dfd7"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "指定された座標に敵を出現させます。",
+      "sourceHash": "bf8d65f3e8c36f49e1cd3b685bfdfae4c9dd34e8bb2707aceecd957c821135aa",
+      "translation": "Makes the enemy appear at the specified coordinates.",
+      "contextHash": "bf8d65f3e8c36f49e1cd3b685bfdfae4c9dd34e8bb2707aceecd957c821135aa"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "例えば、以下は変数１をＸ座標、変数２をＹ座標として参照します。",
+      "sourceHash": "6ac05f8739aba815d980f0f46fe380ff553d4a39ed54413363a38e235f319687",
+      "translation": "For example, the following references Variable 1 as the X coordinate and Variable 2 as the Y coordinate.",
+      "contextHash": "6ac05f8739aba815d980f0f46fe380ff553d4a39ed54413363a38e235f319687"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "<CallEnemyCtbWt:[数値]>",
+      "sourceHash": "6f0b47cd45e445ed96e23f2f50175abc9fa376de04083922e35176e7e944928b",
+      "translation": "<CallEnemyCtbWt:[Value]>",
+      "contextHash": "6f0b47cd45e445ed96e23f2f50175abc9fa376de04083922e35176e7e944928b"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ＣＴＢにおける登場時の待ち時間を指定した値（100が標準）に変更します。",
+      "sourceHash": "60880ee021146a5d7687fee7170724547fb8379d0a1acc4e008d9854149101b5",
+      "translation": "Changes the wait time when appearing in CTB to the specified value (100 by default).",
+      "contextHash": "60880ee021146a5d7687fee7170724547fb8379d0a1acc4e008d9854149101b5"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "例えば、<CallEnemyCtbWt:0>なら即時行動します。",
+      "sourceHash": "317e913fd392cfdcee9e9ddfec1e313114e54c922e271b6ed979cfa7f9edc7ac",
+      "translation": "For example, <CallEnemyCtbWt:0> causes it to act immediately.",
+      "contextHash": "317e913fd392cfdcee9e9ddfec1e313114e54c922e271b6ed979cfa7f9edc7ac"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "<CallEnemyCtbWt:50>ならば、１／２ターンで行動開始します。",
+      "sourceHash": "bdb80e4bf3451cef1ee3dbaa18d993172c80d7c6b768695528a4df37aa5e6d4a",
+      "translation": "With <CallEnemyCtbWt:50>, it starts acting after half a turn.",
+      "contextHash": "bdb80e4bf3451cef1ee3dbaa18d993172c80d7c6b768695528a4df37aa5e6d4a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "敵キャラのメモ欄（オプション）（Note of Enemies）ver1.01",
+      "sourceHash": "a1d0d3e6c8fa122b2db3c17198be563eb4a3b8dbbf5c3bb45093eededdcef5ff",
+      "translation": "Enemy Note Field (Optional) (Note of Enemies) ver1.01",
+      "contextHash": "a1d0d3e6c8fa122b2db3c17198be563eb4a3b8dbbf5c3bb45093eededdcef5ff"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "DynamicAnimation&Motionプラグインと連携し、x番のスキルに指定された演出で登場します。",
+      "sourceHash": "b0aef1247a935f43d2b3fbb2a2f75fe9a541af7e81adc6c6bed309380c44ef62",
+      "translation": "In conjunction with the DynamicAnimation&Motion plugin, the enemy appears using the effect specified for skill x.",
+      "contextHash": "b0aef1247a935f43d2b3fbb2a2f75fe9a541af7e81adc6c6bed309380c44ef62"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "スキルか敵キャラか、好きな指定方法を選んでください。",
+      "sourceHash": "352fee1cd54a8cc35d15d066120ef764aaefecb53254913d628992295394e370",
+      "translation": "Choose whichever specification method you prefer: skill or enemy.",
+      "contextHash": "352fee1cd54a8cc35d15d066120ef764aaefecb53254913d628992295394e370"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "両方の指定がある場合はスキル側が優先されます。",
+      "sourceHash": "359a480d40615ae8eee1a59493aaf534c3c31b00907c7397220d1802dce26e56",
+      "translation": "If both are specified, the skill setting takes priority.",
+      "contextHash": "359a480d40615ae8eee1a59493aaf534c3c31b00907c7397220d1802dce26e56"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "該当の敵キャラが仲間を呼んだ場合に呼び出される敵のＩＤです。",
+      "sourceHash": "550a0b1adbda5d728bc04b133820695e2f030e2ed4e7d9f6bcba4b4861b25b35",
+      "translation": "The ID of the enemy to be called when the relevant enemy calls an ally.",
+      "contextHash": "550a0b1adbda5d728bc04b133820695e2f030e2ed4e7d9f6bcba4b4861b25b35"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "仲間を呼ぶスキルにＩＤの指定がないことが条件です。",
+      "sourceHash": "33711f97fddd1a761ec6b038a8cc09b4c0368b2c1e2ac0cdc42f1a6fb595a176",
+      "translation": "The condition is that no ID is specified in the “Call Allies” skill.",
+      "contextHash": "33711f97fddd1a761ec6b038a8cc09b4c0368b2c1e2ac0cdc42f1a6fb595a176"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "複数指定も可能です。",
+      "sourceHash": "7e8fa9d2f35649e1294430a39f98abbb386c119f787ab3c04998dd12b7332948",
+      "translation": "Multiple specifications are also possible.",
+      "contextHash": "7e8fa9d2f35649e1294430a39f98abbb386c119f787ab3c04998dd12b7332948"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "DynamicMotionによる演出の例（Sample of DynamicMotion）",
+      "sourceHash": "b7865d2dc9ac568b893fd183118c4bc38c4aa20d27c9d7a086f84426e6c0e4cf",
+      "translation": "DynamicMotion Effect Example (Sample of DynamicMotion)",
+      "contextHash": "b7865d2dc9ac568b893fd183118c4bc38c4aa20d27c9d7a086f84426e6c0e4cf"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "画面左から登場",
+      "sourceHash": "17f331494141401953a352fd4b2f1bf7e3b10ae403e3dd2bd51c7d96343cd8bf",
+      "translation": "Appearing from the Left Side of the Screen",
+      "contextHash": "17f331494141401953a352fd4b2f1bf7e3b10ae403e3dd2bd51c7d96343cd8bf"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "オーソドックスに左から登場します。",
+      "sourceHash": "988f6a82805f7361bf5a719252b7276f862603877eca19c98f997a84cb55ad23",
+      "translation": "The enemy makes a conventional entrance from the left.",
+      "contextHash": "988f6a82805f7361bf5a719252b7276f862603877eca19c98f997a84cb55ad23"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "frame = 5 // 移動時間",
+      "sourceHash": "a486c8795d44600f25d6092fad62f4784ae7c3014c2d1707e97a34fdac508819",
+      "translation": "frame = 5 // Movement Duration",
+      "contextHash": "a486c8795d44600f25d6092fad62f4784ae7c3014c2d1707e97a34fdac508819"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "sx = a._homeX -500 // 始点Ｘ座標（画面外左）",
+      "sourceHash": "3d2251608be7cde1678d92548a92b58293f476f0a7747fd9e391ae356ec0ed0d",
+      "translation": "sx = a._homeX -500 // Starting X Coordinate (Off-Screen Left)",
+      "contextHash": "3d2251608be7cde1678d92548a92b58293f476f0a7747fd9e391ae356ec0ed0d"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "sy = a._homeY // 始点Ｙ座標",
+      "sourceHash": "117143737c5b2d941dfe468b1a0d03105404acd938d0097e0387fbd335a35b56",
+      "translation": "sy = a._homeY // Starting Y Coordinate",
+      "contextHash": "117143737c5b2d941dfe468b1a0d03105404acd938d0097e0387fbd335a35b56"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "ex = a._homeX // 終点Ｘ座標",
+      "sourceHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585",
+      "translation": "ex = a._homeX // Ending X Coordinate",
+      "contextHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "ey = a._homeY // 終点Ｙ座標",
+      "sourceHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f",
+      "translation": "ey = a._homeY // Ending Y Coordinate",
+      "contextHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "『a』で呼び出された敵キャラ、『b』でスキルの使用者を参照できます。",
+      "sourceHash": "a98d3a0bec626885feb9d2f36f1006dcaff26f6fafe0262e2b78a03a0c0b1149",
+      "translation": " \"a” refers to the called enemy, and “b” refers to the user of the skill.",
+      "contextHash": "a98d3a0bec626885feb9d2f36f1006dcaff26f6fafe0262e2b78a03a0c0b1149"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "『a._homeX』『a._homeY』が配置地点となるので、最終的にそこへ移動するように実装してください。",
+      "sourceHash": "f694b4b3d26cb51f2e62eee988f00e37c68a5258e91eecaf0607a5bb6a0b4e9b",
+      "translation": " \"a._homeX” and “a._homeY” are the placement coordinates, so implement it to ultimately move there.",
+      "contextHash": "f694b4b3d26cb51f2e62eee988f00e37c68a5258e91eecaf0607a5bb6a0b4e9b"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "上空から登場（2022/04/21更新）",
+      "sourceHash": "e1718600c208d4171f011eba533829609c6cc4f37ee85f8a9f3d6aa084252bf5",
+      "translation": "Airborne Appearance (Updated 2022/04/21)",
+      "contextHash": "e1718600c208d4171f011eba533829609c6cc4f37ee85f8a9f3d6aa084252bf5"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "上空から登場します。飛行系の魔物などに最適です。",
+      "sourceHash": "e97a33632985367ab244d9198132ec108afbd318b2038dd1ae72b1ae4d00131a",
+      "translation": "Enemies appear from above. Ideal for flying monsters and the like.",
+      "contextHash": "e97a33632985367ab244d9198132ec108afbd318b2038dd1ae72b1ae4d00131a"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "airY = -500 // 空中Ｙ座標",
+      "sourceHash": "13d455c57b7cc9c543d256ab811b7262bccd7086768358f4aba6d1235b8f93ca",
+      "translation": "airY = -500 // Aerial Y Coordinate",
+      "contextHash": "13d455c57b7cc9c543d256ab811b7262bccd7086768358f4aba6d1235b8f93ca"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "ex = a._homeX // 終点Ｘ座標",
+      "sourceHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585",
+      "translation": "ex = a._homeX // Ending X Coordinate",
+      "contextHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "ey = a._homeY // 終点Ｙ座標",
+      "sourceHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f",
+      "translation": "ey = a._homeY // Ending Y Coordinate",
+      "contextHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "frame = 8 // 移動時間",
+      "sourceHash": "d9564cf8bdd445b8498c7444dc62242e642b330c90babd50474030376be64fd6",
+      "translation": "frame = 8 // Movement Duration",
+      "contextHash": "d9564cf8bdd445b8498c7444dc62242e642b330c90babd50474030376be64fd6"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "airY = 0 // 空中Ｙ座標",
+      "sourceHash": "ac27a09966c9796d5d42afb77fdad72d56a7a7b4c2d9b9221be04da91a2d983d",
+      "translation": "airY = 0 // Aerial Y Coordinate",
+      "contextHash": "ac27a09966c9796d5d42afb77fdad72d56a7a7b4c2d9b9221be04da91a2d983d"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "アニメーションと共に登場",
+      "sourceHash": "b612fc38b101c67bb4a5da55c7916aaa74def54a647f4d4fdb51a1e7d4d566a7",
+      "translation": "Appears with an Animation",
+      "contextHash": "b612fc38b101c67bb4a5da55c7916aaa74def54a647f4d4fdb51a1e7d4d566a7"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "アニメーションと共に登場します。",
+      "sourceHash": "e01118872176803eca051339410ab825a47eae63c73f110600b4d05012c9d153",
+      "translation": "The enemy appears with an animation.",
+      "contextHash": "e01118872176803eca051339410ab825a47eae63c73f110600b4d05012c9d153"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "// 目的地へ移動＆透明化",
+      "sourceHash": "0ed750249b6e1f4f64ff7be0e48f9dd1546b0936795fc4eb2ffd19e4b599ca72",
+      "translation": "// Move to Destination & Become Transparent",
+      "contextHash": "0ed750249b6e1f4f64ff7be0e48f9dd1546b0936795fc4eb2ffd19e4b599ca72"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "sx = a._homeX // 始点Ｘ座標",
+      "sourceHash": "21c495cc39fcc2204ddeb6bd1b62eea167d9edc9301b31b77abba8bee44f9801",
+      "translation": "sx = a._homeX // Starting X Coordinate",
+      "contextHash": "21c495cc39fcc2204ddeb6bd1b62eea167d9edc9301b31b77abba8bee44f9801"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "sy = a._homeY // 始点Ｙ座標",
+      "sourceHash": "117143737c5b2d941dfe468b1a0d03105404acd938d0097e0387fbd335a35b56",
+      "translation": "sy = a._homeY // Starting Y Coordinate",
+      "contextHash": "117143737c5b2d941dfe468b1a0d03105404acd938d0097e0387fbd335a35b56"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "// アニメーションを自身に表示",
+      "sourceHash": "19a5e670cc316fcdd42855318576293a753d2520873f1bf79e911eb9898b7b36",
+      "translation": "// Display Animation on Self",
+      "contextHash": "19a5e670cc316fcdd42855318576293a753d2520873f1bf79e911eb9898b7b36"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "// 透明解除",
+      "sourceHash": "62517ca86195834769b729743bd9d59c9a0b62400dd3ac23014c8d653345cffe",
+      "translation": "// Remove Transparency",
+      "contextHash": "62517ca86195834769b729743bd9d59c9a0b62400dd3ac23014c8d653345cffe"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "アニメーションの内容は自由に設定してください。",
+      "sourceHash": "61dca35efbdcd7cbbad58b749662d285db0c9a9c89b8f7b4d03108e208a163de",
+      "translation": "Set the animation's content as you like.",
+      "contextHash": "61dca35efbdcd7cbbad58b749662d285db0c9a9c89b8f7b4d03108e208a163de"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ただし、EffekseerによるＭＺアニメはdelayを入れないと表示されないようです。ＭＶアニメならdelayは不要です。",
+      "sourceHash": "22839a168b18e7d177ff7dbf88dd18805bf3a5acd3acf76922bd354a0bf3731e",
+      "translation": "However, MZ animations made with Effekseer apparently will not display unless you add a delay. A delay is not necessary for MV animations.",
+      "contextHash": "22839a168b18e7d177ff7dbf88dd18805bf3a5acd3acf76922bd354a0bf3731e"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "ポイントは<D-Animation:self/>です。",
+      "sourceHash": "52ee1b94572917e949596336811e07a3d708be0374e4981a26e505775fc65f23",
+      "translation": "The key point is <D-Animation:self/>.",
+      "contextHash": "52ee1b94572917e949596336811e07a3d708be0374e4981a26e505775fc65f23"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "単にアニメーションを表示すると、スキルの使用者側に表示されてしまうことに注意してください。self型にすることで、モーションの実行者に表示されるようになります。",
+      "sourceHash": "e4a216a2376aa1660cec873ef3a97d67d8e04816f854707b39e9ff8343c5851e",
+      "translation": "Note that simply displaying an animation will cause it to appear on the skill user's side. Setting it to the self type makes it appear on the performer of the motion.",
+      "contextHash": "e4a216a2376aa1660cec873ef3a97d67d8e04816f854707b39e9ff8343c5851e"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "Plugin Command for MZ (Plugin Command MZ)",
+      "contextHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "敵キャラを呼ぶ",
+      "sourceHash": "654cdb2c63902d54fc2d75496ab7fe9256e8867eda0b458ca6c4b55b8f51c65b",
+      "translation": "Summon an Enemy",
+      "contextHash": "654cdb2c63902d54fc2d75496ab7fe9256e8867eda0b458ca6c4b55b8f51c65b"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "バトルイベント内で自由に敵キャラを呼び出します。",
+      "sourceHash": "c188586f2c0dffb54eb7a91d088d029cab2f972c8f6a32e1adf44a1286edb967",
+      "translation": "Summon enemies freely during battle events.",
+      "contextHash": "c188586f2c0dffb54eb7a91d088d029cab2f972c8f6a32e1adf44a1286edb967"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "スキルによる呼び出しとは異なり、座標を指定することも可能です。",
+      "sourceHash": "4da395bd9f483502a9f3d4698b686f89eec5957d39a95f358e76f4d8613bace7",
+      "translation": "Unlike summoning via a skill, you can also specify the coordinates.",
+      "contextHash": "4da395bd9f483502a9f3d4698b686f89eec5957d39a95f358e76f4d8613bace7"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "敵キャラの最大数（MaxEnemyNo）",
+      "sourceHash": "fd59e7d128b28cec1ee131b60e98de851b1d246b1067c6194a661d156ac758e8",
+      "translation": "Maximum Number of Enemies (MaxEnemyNo)",
+      "contextHash": "fd59e7d128b28cec1ee131b60e98de851b1d246b1067c6194a661d156ac758e8"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "同時に出現できる敵キャラの最大数です。",
+      "sourceHash": "963e6d52fd937cb344b48b152b4904346ac720aa902084b889d11c6b7eb2b35e",
+      "translation": "The maximum number of enemies that can appear at the same time.",
+      "contextHash": "963e6d52fd937cb344b48b152b4904346ac720aa902084b889d11c6b7eb2b35e"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "それ以上呼び出そうとすると失敗します。",
+      "sourceHash": "f4dce2299599476b2d2d7abb4b46abb057ceb9e0b27e1ba510a86a2ae4e616aa",
+      "translation": "Any attempt to summon more than this will fail.",
+      "contextHash": "f4dce2299599476b2d2d7abb4b46abb057ceb9e0b27e1ba510a86a2ae4e616aa"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "成功メッセージ（SuccessMessage）",
+      "sourceHash": "fa93e0c56102cab4bfba59bce0493cd1653c0749b725a1bde88e0d4f8ddaeeac",
+      "translation": "Success Message (SuccessMessage)",
+      "contextHash": "fa93e0c56102cab4bfba59bce0493cd1653c0749b725a1bde88e0d4f8ddaeeac"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "呼び出しに成功した際に表示する文章です。",
+      "sourceHash": "6522b990b3f289f86f4c91e882a1ee355ba6a5c038435553468801342a3efa5e",
+      "translation": "The text displayed when the summon succeeds.",
+      "contextHash": "6522b990b3f289f86f4c91e882a1ee355ba6a5c038435553468801342a3efa5e"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "失敗メッセージ（FailureMessage）",
+      "sourceHash": "f4f6442793a94b39cddb205ad046055d6c284744b973a5e5295afacb1fd08e15",
+      "translation": "Failure Message (FailureMessage)",
+      "contextHash": "f4f6442793a94b39cddb205ad046055d6c284744b973a5e5295afacb1fd08e15"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "呼び出しに失敗した際に表示する文章です。",
+      "sourceHash": "1bb60cfdf6c769ae59fa1478111ee974361c2ddd9cd1867cbe4e49f9de5f5a99",
+      "translation": "The text displayed when the summon fails.",
+      "contextHash": "1bb60cfdf6c769ae59fa1478111ee974361c2ddd9cd1867cbe4e49f9de5f5a99"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "戦闘不能の敵を消す（DeleteDeadEnemy）ver1.06",
+      "sourceHash": "5b1ad6355eed9aa222e1ee5152936ebb08c52a452139df98414c089c69f5f71c",
+      "translation": "Remove Incapacitated Enemies (DeleteDeadEnemy) ver1.06",
+      "contextHash": "5b1ad6355eed9aa222e1ee5152936ebb08c52a452139df98414c089c69f5f71c"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "仲間を呼んだ際にその時点で戦闘不能になっていた敵キャラを蘇生禁止にします。",
+      "sourceHash": "d143995ec5a15e11ef917d055bce8b4f8aa47f2f87789451d28014990c9181c2",
+      "translation": "When an ally is summoned, enemies that are incapacitated at that point are prevented from being revived.",
+      "contextHash": "d143995ec5a15e11ef917d055bce8b4f8aa47f2f87789451d28014990c9181c2"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "既に仲間が呼ばれた場所へ、敵が復活してしまう問題への対策です。",
+      "sourceHash": "92e2480ce6ddf6bcb65bc9ba38319845dbed2882b7ededd3916439b50311c9b9",
+      "translation": "This addresses the issue of enemies reviving in places where allies have already been summoned.",
+      "contextHash": "92e2480ce6ddf6bcb65bc9ba38319845dbed2882b7ededd3916439b50311c9b9"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "DynamicAppearと連携（LinkDynamicAppear）ver1.01",
+      "sourceHash": "88a858ae3778021257811f8a11f9f9846b60843de779e5d2e3bdf53b99be031c",
+      "translation": "Integration with DynamicAppear (LinkDynamicAppear) ver1.01",
+      "contextHash": "88a858ae3778021257811f8a11f9f9846b60843de779e5d2e3bdf53b99be031c"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "具体的には、NRP_DynamicAppear.jsのプラグインパラメータに設定した『敵キャラの開始演出』を取得し、仲間を呼ばれた際の登場演出の既定値とします。",
+      "sourceHash": "73838ab5e743b5c806d4f8b400618349ac0e285d99d8a35bfec51364d938729f",
+      "translation": "Specifically, it retrieves the “Enemy Starting Effect” set in the plugin parameter of NRP_DynamicAppear.js and uses it as the default appearance effect when an ally is summoned.",
+      "contextHash": "73838ab5e743b5c806d4f8b400618349ac0e285d99d8a35bfec51364d938729f"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "参考（Reference）",
+      "sourceHash": "a6bd1f3f2fcb097931d3860469431101274fa37b9b1c748e3ca2eca0555ddcfb",
+      "translation": "Reference (Reference)",
+      "contextHash": "a6bd1f3f2fcb097931d3860469431101274fa37b9b1c748e3ca2eca0555ddcfb"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "このプラグインの制作に当たって、以下のプラグインを参考にさせていただきました。",
+      "sourceHash": "a892dfe8ce2ae56dfd6ee1c51cc9aadf7e6fd5df2e36e8724fdc213260b7d84d",
+      "translation": "In creating this plugin, I referred to the following plugin.",
+      "contextHash": "a892dfe8ce2ae56dfd6ee1c51cc9aadf7e6fd5df2e36e8724fdc213260b7d84d"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "EnemyCallsAlly.js（神無月サスケ様）",
+      "sourceHash": "7ab34bd11c403b74e14c0b46d8e42b0b9fa03f7c45a240fab0cc358a023eb014",
+      "translation": "EnemyCallsAlly.js (Kaminazuki Sasuke)",
+      "contextHash": "7ab34bd11c403b74e14c0b46d8e42b0b9fa03f7c45a240fab0cc358a023eb014"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "https://forum.tkool.jp/index.php?threads/4795/",
+      "sourceHash": "6f9d38dc027cebcfb641f804fc363461fb63c3b69ea616d6e50f5fb29b8b90ad",
+      "translation": "https://forum.tkool.jp/index.php?threads/4795/",
+      "contextHash": "ad8c6ebd1d36faa587ef7a916444484f331ccb00795e841ef8b1570fda479133"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※[[LINK_1]]animatedSVEnemies.js[[/LINK_1]]を適用したバトラーは呼び出せません。",
+      "sourceHash": "2379bdfa2cb3034bf5745ea78669cf87deb854a2ab4a3a514cb69a9864ab7c80",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "animatedSVEnemies.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を適用したバトラーは呼び出せません。",
+          "link": false
+        }
+      ],
+      "translation": "※Battlers with [[LINK_1]]animatedSVEnemies.js[[/LINK_1]] applied cannot be summoned.",
+      "contextHash": "2379bdfa2cb3034bf5745ea78669cf87deb854a2ab4a3a514cb69a9864ab7c80"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Use (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（オプション）（Note of Skills）[[/LINK_1]]",
+      "sourceHash": "6cce3fc1fd6fea1267ee3f05231d19d1455332f0aeb3e51aa0b6b4c29e38d34d",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（オプション）（Note of Skills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field (Optional) (Note of Skills)[[/LINK_1]]",
+      "contextHash": "6cce3fc1fd6fea1267ee3f05231d19d1455332f0aeb3e51aa0b6b4c29e38d34d"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラのメモ欄（オプション）（Note of Enemies）ver1.01[[/LINK_1]]",
+      "sourceHash": "103022b9b58fdbf34195d139cde37902ab64d8808d3c33f4dcf922fbe4c6586e",
+      "parts": [
+        {
+          "source": "敵キャラのメモ欄（オプション）（Note of Enemies）ver1.01",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Note Field (Optional) (Note of Enemies) ver1.01[[/LINK_1]]",
+      "contextHash": "103022b9b58fdbf34195d139cde37902ab64d8808d3c33f4dcf922fbe4c6586e"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionによる演出の例（Sample of DynamicMotion）[[/LINK_1]]",
+      "sourceHash": "635ec9aac8ebeeed72728e40bb48df7fac9cdaec17172e72e2f88b32478acd3f",
+      "parts": [
+        {
+          "source": "DynamicMotionによる演出の例（Sample of DynamicMotion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Example of Effects Using DynamicMotion (Sample of DynamicMotion)[[/LINK_1]]",
+      "contextHash": "635ec9aac8ebeeed72728e40bb48df7fac9cdaec17172e72e2f88b32478acd3f"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（Plugin Command MZ）[[/LINK_1]]",
+      "sourceHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (Plugin Command MZ)[[/LINK_1]]",
+      "contextHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラの最大数（MaxEnemyNo）[[/LINK_1]]",
+      "sourceHash": "f5211a5e06c41d6e3e4bd88ae6bf206d6a7f8364f0aa464ebf4a14ebdd9294d6",
+      "parts": [
+        {
+          "source": "敵キャラの最大数（MaxEnemyNo）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Maximum Number of Enemies (MaxEnemyNo)[[/LINK_1]]",
+      "contextHash": "f5211a5e06c41d6e3e4bd88ae6bf206d6a7f8364f0aa464ebf4a14ebdd9294d6"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]成功メッセージ（SuccessMessage）[[/LINK_1]]",
+      "sourceHash": "e1a5bd26d24aa8c90d85682f83a3725111c31817a55cfb6426de98cc341fd387",
+      "parts": [
+        {
+          "source": "成功メッセージ（SuccessMessage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Success Message (SuccessMessage)[[/LINK_1]]",
+      "contextHash": "e1a5bd26d24aa8c90d85682f83a3725111c31817a55cfb6426de98cc341fd387"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]失敗メッセージ（FailureMessage）[[/LINK_1]]",
+      "sourceHash": "55d5547491983f95b008961b1ecfc7f680b11d0b11ca3d5e610aaea862f9e61e",
+      "parts": [
+        {
+          "source": "失敗メッセージ（FailureMessage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Failure Message (FailureMessage)[[/LINK_1]]",
+      "contextHash": "55d5547491983f95b008961b1ecfc7f680b11d0b11ca3d5e610aaea862f9e61e"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘不能の敵を消す（DeleteDeadEnemy）[[/LINK_1]]ver1.06",
+      "sourceHash": "1a528c6c455ce9e5e9a75890e07069abf016b34c033f4e7a47a0a29196d95964",
+      "parts": [
+        {
+          "source": "戦闘不能の敵を消す（DeleteDeadEnemy）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.06",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Remove Incapacitated Enemies (DeleteDeadEnemy)[[/LINK_1]] ver1.06",
+      "contextHash": "1a528c6c455ce9e5e9a75890e07069abf016b34c033f4e7a47a0a29196d95964"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicAppearと連携（LinkDynamicAppear）[[/LINK_1]]ver1.01",
+      "sourceHash": "ec06f7e046690af2efd2888a668481c23a56b6113f1066c8b5fb0344ca256370",
+      "parts": [
+        {
+          "source": "DynamicAppearと連携（LinkDynamicAppear）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Integration with DynamicAppear (LinkDynamicAppear)[[/LINK_1]] ver1.01",
+      "contextHash": "ec06f7e046690af2efd2888a668481c23a56b6113f1066c8b5fb0344ca256370"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]参考（Reference）[[/LINK_1]]",
+      "sourceHash": "d1d5b02db389813a6c31ff3eaab7cae04eab1fe388487127b15a52825d3d2968",
+      "parts": [
+        {
+          "source": "参考（Reference）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reference (Reference)[[/LINK_1]]",
+      "contextHash": "d1d5b02db389813a6c31ff3eaab7cae04eab1fe388487127b15a52825d3d2968"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_TroopRandomFormation.js[[/LINK_1]]ver1.081（2024/05/04）（[[LINK_2]]解説[[/LINK_2]]）",
+      "sourceHash": "02d855456ddedd7c6a58a8301a0ecf572799d27aab39e0ce8a1e684cd3aadff0",
+      "parts": [
+        {
+          "source": "NRP_TroopRandomFormation.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.081（2024/05/04）（",
+          "link": false
+        },
+        {
+          "source": "解説",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_TroopRandomFormation.js[[/LINK_1]] ver1.081 (2024/05/04) ([[LINK_2]]Explanation[[/LINK_2]])",
+      "contextHash": "02d855456ddedd7c6a58a8301a0ecf572799d27aab39e0ce8a1e684cd3aadff0"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DynamicMotionMZ.js[[/LINK_1]]または[[LINK_2]]NRP_DynamicMotion.js[[/LINK_2]]",
+      "sourceHash": "a0ff150aa3ccd7304c4be8f1f4a035c5c64cbb2661899b66319dc9410cadf7aa",
+      "parts": [
+        {
+          "source": "NRP_DynamicMotionMZ.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "または",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicMotion.js",
+          "link": true,
+          "linkIndex": 2
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_DynamicMotionMZ.js[[/LINK_1]] or [[LINK_2]]NRP_DynamicMotion.js[[/LINK_2]]",
+      "contextHash": "a0ff150aa3ccd7304c4be8f1f4a035c5c64cbb2661899b66319dc9410cadf7aa"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "敵が仲間を呼んだ後に蘇生されると、配置が被ってしまう問題に対処。仲間を呼んだ時点で[[LINK_1]]戦闘不能になった敵を蘇生不可[[/LINK_1]]にできるようにした。",
+      "sourceHash": "40d94334decd9b1149277ef68c62ae55a87bafc830a0370090bfc35e99a166f1",
+      "parts": [
+        {
+          "source": "敵が仲間を呼んだ後に蘇生されると、配置が被ってしまう問題に対処。仲間を呼んだ時点で",
+          "link": false
+        },
+        {
+          "source": "戦闘不能になった敵を蘇生不可",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にできるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Addressed an issue where enemies revived after calling allies would overlap in placement. When allies are called, you can now make [[LINK_1]]enemies that became incapacitated unable to revive[[/LINK_1]].",
+      "contextHash": "40d94334decd9b1149277ef68c62ae55a87bafc830a0370090bfc35e99a166f1"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]スキルによって敵を呼び出す際の座標[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "45513aad1c4eddf1f312199568851c1b4bd90f54708481e163ad1285eb6ca724",
+      "parts": [
+        {
+          "source": "スキルによって敵を呼び出す際の座標",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]coordinates for summoning an enemy with a skill[[/LINK_1]] can now be set.",
+      "contextHash": "45513aad1c4eddf1f312199568851c1b4bd90f54708481e163ad1285eb6ca724"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]ＣＴＢ用の待ち時間の初期値[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "b7c4d806fb6a54f62fb94372ad7336d6a26010af44b3c5416743211224a37b54",
+      "parts": [
+        {
+          "source": "ＣＴＢ用の待ち時間の初期値",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]initial wait time for CTB[[/LINK_1]] can now be set.",
+      "contextHash": "b7c4d806fb6a54f62fb94372ad7336d6a26010af44b3c5416743211224a37b54"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]呼び出される敵のＩＤ[[/LINK_1]]をスキル使用者側でも設定できるようにした。",
+      "sourceHash": "c05eba5774e5f8866359151ef72540fa2a2a81306c4539200ba9d913b27d3eb7",
+      "parts": [
+        {
+          "source": "呼び出される敵のＩＤ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をスキル使用者側でも設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]ID of the summoned enemy[[/LINK_1]] can now also be set by the skill user.",
+      "contextHash": "c05eba5774e5f8866359151ef72540fa2a2a81306c4539200ba9d913b27d3eb7"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]影プラグイン[[/LINK_1]]の浮遊処理と組み合わせた際、適切に配置できない問題に対処。",
+      "sourceHash": "ffdf738b1cb39ade6d20d145fd81107ec1631cb1607937b5f0f33e3b17afcd79",
+      "parts": [
+        {
+          "source": "影プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の浮遊処理と組み合わせた際、適切に配置できない問題に対処。",
+          "link": false
+        }
+      ],
+      "translation": "Addressed an issue where enemies could not be positioned correctly when combined with the floating effect of the [[LINK_1]]Shadow Plugin[[/LINK_1]].",
+      "contextHash": "ffdf738b1cb39ade6d20d145fd81107ec1631cb1607937b5f0f33e3b17afcd79"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "敵キャラ毎に[[LINK_1]]デフォルトの登場演出[[/LINK_1]]を設定可能に。",
+      "sourceHash": "e5cf8d1a542e9f24f13f6fe9b00be699ca8610b95e59cbefedc228cb1c0378bc",
+      "parts": [
+        {
+          "source": "敵キャラ毎に",
+          "link": false
+        },
+        {
+          "source": "デフォルトの登場演出",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定可能に。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]default appearance effect[[/LINK_1]] can now be set for each enemy.",
+      "contextHash": "e5cf8d1a542e9f24f13f6fe9b00be699ca8610b95e59cbefedc228cb1c0378bc"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "それに伴い、パラメータに[[LINK_1]]DynamicAppearと連携[[/LINK_1]]を追加。",
+      "sourceHash": "7453bc923f7d194287ecc49988d7a20f9599aa037a02c47409c6e242cb23ed7f",
+      "parts": [
+        {
+          "source": "それに伴い、パラメータに",
+          "link": false
+        },
+        {
+          "source": "DynamicAppearと連携",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Accordingly, [[LINK_1]]Link with DynamicAppear[[/LINK_1]] was added to the parameters.",
+      "contextHash": "7453bc923f7d194287ecc49988d7a20f9599aa037a02c47409c6e242cb23ed7f"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]上空から登場[[/LINK_1]]のサンプルにて登場前にチラ見えする不具合修正。（2022/04/21）",
+      "sourceHash": "ab161336599f691f7dd1d16473327db7603cdc6c6b6e33cba9c004899be6d191",
+      "parts": [
+        {
+          "source": "上空から登場",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のサンプルにて登場前にチラ見えする不具合修正。（2022/04/21）",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where the enemy briefly appeared before appearing in the [[LINK_1]]Appear from Above[[/LINK_1]] sample. (2022/04/21)",
+      "contextHash": "ab161336599f691f7dd1d16473327db7603cdc6c6b6e33cba9c004899be6d191"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "省略して<CallEnemy>とだけ記入すると、スキルの使用者と同一の敵キャラを呼び出します。[[LINK_1]]スキル使用者側の敵[[/LINK_1]]に呼び出す対象を設定することも可能です。",
+      "sourceHash": "72dbe3d6f2b6aa9d4a22031b0c204648fbb30767340e103f4bf9276829cd7d91",
+      "parts": [
+        {
+          "source": "省略して<CallEnemy>とだけ記入すると、スキルの使用者と同一の敵キャラを呼び出します。",
+          "link": false
+        },
+        {
+          "source": "スキル使用者側の敵",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に呼び出す対象を設定することも可能です。",
+          "link": false
+        }
+      ],
+      "translation": "If you omit the details and enter only <CallEnemy>, the same enemy as the skill user will be summoned. You can also set the target to summon under the [[LINK_1]]enemy on the skill user's side[[/LINK_1]].",
+      "contextHash": "72dbe3d6f2b6aa9d4a22031b0c204648fbb30767340e103f4bf9276829cd7d91"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "※[[LINK_1]]NRP_CountTimeBattle.js[[/LINK_1]]との連携用",
+      "sourceHash": "b8555d18d709b32d344d0f5bf47e07251a4d128b51220610d517fc1d3061314c",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "NRP_CountTimeBattle.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との連携用",
+          "link": false
+        }
+      ],
+      "translation": "※For integration with [[LINK_1]]NRP_CountTimeBattle.js[[/LINK_1]]",
+      "contextHash": "b8555d18d709b32d344d0f5bf47e07251a4d128b51220610d517fc1d3061314c"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "なお、この設定は[[LINK_1]]NRP_DynamicAppear.js（登場演出プラグイン）[[/LINK_1]]による登場演出と共有されます。",
+      "sourceHash": "42bd670fa22e7c7ed8b44240a39b71e81bb0557728453b8b0bab9b7e72f10eeb",
+      "parts": [
+        {
+          "source": "なお、この設定は",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicAppear.js（登場演出プラグイン）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "による登場演出と共有されます。",
+          "link": false
+        }
+      ],
+      "translation": "This setting is also shared with the appearance effects provided by [[LINK_1]]NRP_DynamicAppear.js (Appearance Effect Plugin)[[/LINK_1]].",
+      "contextHash": "42bd670fa22e7c7ed8b44240a39b71e81bb0557728453b8b0bab9b7e72f10eeb"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "なお、敵キャラの影の表示については、[[LINK_1]]影プラグイン[[/LINK_1]]が必要です。",
+      "sourceHash": "02703039d395f8518056da2b6fc881bb264e4c02432d7f15b5707e142bb37742",
+      "parts": [
+        {
+          "source": "なお、敵キャラの影の表示については、",
+          "link": false
+        },
+        {
+          "source": "影プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が必要です。",
+          "link": false
+        }
+      ],
+      "translation": "As for displaying enemy shadows, the [[LINK_1]]Shadow Plugin[[/LINK_1]] is required.",
+      "contextHash": "02703039d395f8518056da2b6fc881bb264e4c02432d7f15b5707e142bb37742"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DynamicAppear.js[[/LINK_1]]と連携し、登場演出を実行します。",
+      "sourceHash": "c8b56038add7c16a5fbbb4ec3f8e90e927605054e665c16326648ecc749b310d",
+      "parts": [
+        {
+          "source": "NRP_DynamicAppear.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と連携し、登場演出を実行します。",
+          "link": false
+        }
+      ],
+      "translation": "It integrates with [[LINK_1]]NRP_DynamicAppear.js[[/LINK_1]] and executes the appearance effect.",
+      "contextHash": "c8b56038add7c16a5fbbb4ec3f8e90e927605054e665c16326648ecc749b310d"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "敵キャラのスキルに『仲間を呼ぶ』機能を追加します。": "Adds a “Call Allies” function to enemy skills.",
+    "主な特徴": "Main Features",
+    "現れた敵キャラは自動で、空白のある場所に登場。": "Called enemies automatically appear in available positions.",
+    "プラグインコマンド（ＭＺのみ）を使えば、任意の座標に配置可能。": "They can be placed at arbitrary coordinates using plugin commands (MZ only).",
+    "DynamicAnimation&Motionとの連携により、登場演出も作成可能。": "Appearances can also be created in conjunction with DynamicAnimation&Motion.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the Plugin Manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_CallEnemy.js": "NRP_CallEnemy.js ",
+    "ver1.06（2024/12/18）": "ver1.06 (2024/12/18) ",
+    "※敵キャラの配置方法はNRP_TroopRandomFormation.jsのプラグインパラメータに依存しますので、調整はそちらで行ってください。": "※Enemy placement depends on the plugin parameters of NRP_TroopRandomFormation.js, so make adjustments there.",
+    "なお、NRP_TroopRandomFormation.jsを導入すると、グループ名が『#』から始まる敵グループが自動配置の対象となります。この機能を利用したくない場合はご注意ください。": "Additionally, after installing NRP_TroopRandomFormation.js, enemy troops whose names begin with “#” become subject to automatic placement. Please be aware of this if you do not want to use this feature.",
+    "また、以下のプラグインと併用する場合は最新化をお願いします。競合上の問題が起こらないように、不具合を解消しております。": "Please also update the following plugins when using them together. I have fixed issues to prevent compatibility problems.",
+    "NRP_CountTimeBattle.js": "NRP_CountTimeBattle.js",
+    "更新履歴（History）": "Update History (History)",
+    "2024/12/18（ver1.06）": "2024/12/18 (ver1.06) ",
+    "2024/10/27（ver1.051）": "2024/10/27 (ver1.051) ",
+    "2024/08/05（ver1.04）": "2024/08/05 (ver1.04) ",
+    "2024/03/02 -> 2024/05/04（ver1.03）": "2024/03/02 -> 2024/05/04 (ver1.03) ",
+    "敵キャラの画像サイズをうまく計算できないことがある不具合を修正。": "Fixed an issue where enemy image sizes could sometimes not be calculated correctly.",
+    "連続かつ高速で仲間を呼ばれた際、配置座標が正しく計算できない問題に対処。（2024/05/04 NRP_TroopRandomFormation.js ver1.081）": "Addressed an issue where placement coordinates were not calculated correctly when allies were called repeatedly and rapidly. (2024/05/04 NRP_TroopRandomFormation.js ver1.081)",
+    "2023/06/10（ver1.021）": "2023/06/10 (ver1.021) ",
+    "2022/04/21（ver1.01 -> 1.011）": "2022/04/21 (ver1.01 -> 1.011) ",
+    "※影プラグイン側も最新化してください。": "※Please also update the companion plugin.",
+    "登場演出を指定しなかった場合に、敵が表示されなくなる不具合修正。（ver1.011）": "Fixed an issue where enemies would not be displayed if no appearance effect was specified. (ver1.011)",
+    "2022/03/04 -> 2022/03/10（ver1.00 -> 1.001）": "2022/03/04 -> 2022/03/10 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "ＭＶにて敵キャラのサイズが考慮されない不具合を修正。": "Fixed an issue in MV where enemy sizes were not taken into account.",
+    "（2020/03/10 ver1.001）": " (2020/03/10 ver1.001) ",
+    "使用方法（Usage）": "Usage (Usage)",
+    "『仲間を呼ぶ』用のスキルを作成します。": "Create a skill for “Call Allies”.",
+    "まず、スキルの範囲は『使用者』など、単体を対象とするものにしてください。": "First, set the skill’s scope to target a single battler, such as “User”.",
+    "範囲が『なし』だと機能しませんのでご注意を。": "Please note that this function does not work if the scope is “None”.",
+    "次にスキルのメモ欄に以下を記入してください。": "Next, enter the following in the skill’s note field.",
+    "これでＩＤがx番の敵キャラを呼び出します。": "This calls the enemy with ID x.",
+    "また、複数指定にも対応しています。": "Multiple specifications are also supported.",
+    "ならば、ＩＤが１～３の敵キャラをランダムで呼び出します。": "This randomly calls an enemy with an ID from 1 to 3.",
+    "ならば、ＩＤが１，３，５の敵キャラをランダムで呼び出します。": "This randomly calls an enemy with ID 1, 3, or 5.",
+    "ちなみに連続回数を増やせば、一度に複数の仲間を呼びます。": "Incidentally, increasing the number of repetitions lets you call multiple allies at once.",
+    "スキルのメモ欄（オプション）（Note of Skills）": "Skill Note Field (Optional) (Note of Skills)",
+    "DynamicAnimation&Motionプラグインと連携し、x番のスキルに指定された演出で登場します。": "In conjunction with the DynamicAnimation&Motion plugin, the enemy appears using the effect specified for skill x.",
+    "当然ながら、該当のプラグインを導入している必要があります。": "Naturally, the relevant plugin must be installed.",
+    "<CallEnemyXY:[Ｘ座標], [Ｙ座標]>": "<CallEnemyXY:[X Coordinate], [Y Coordinate]>",
+    "指定された座標に敵を出現させます。": "Makes the enemy appear at the specified coordinates.",
+    "例えば、以下は変数１をＸ座標、変数２をＹ座標として参照します。": "For example, the following references Variable 1 as the X coordinate and Variable 2 as the Y coordinate.",
+    "<CallEnemyCtbWt:[数値]>": "<CallEnemyCtbWt:[Value]>",
+    "ＣＴＢにおける登場時の待ち時間を指定した値（100が標準）に変更します。": "Changes the wait time when appearing in CTB to the specified value (100 by default).",
+    "例えば、<CallEnemyCtbWt:0>なら即時行動します。": "For example, <CallEnemyCtbWt:0> causes it to act immediately.",
+    "<CallEnemyCtbWt:50>ならば、１／２ターンで行動開始します。": "With <CallEnemyCtbWt:50>, it starts acting after half a turn.",
+    "敵キャラのメモ欄（オプション）（Note of Enemies）ver1.01": "Enemy Note Field (Optional) (Note of Enemies) ver1.01",
+    "スキルか敵キャラか、好きな指定方法を選んでください。": "Choose whichever specification method you prefer: skill or enemy.",
+    "両方の指定がある場合はスキル側が優先されます。": "If both are specified, the skill setting takes priority.",
+    "該当の敵キャラが仲間を呼んだ場合に呼び出される敵のＩＤです。": "The ID of the enemy to be called when the relevant enemy calls an ally.",
+    "仲間を呼ぶスキルにＩＤの指定がないことが条件です。": "The condition is that no ID is specified in the “Call Allies” skill.",
+    "複数指定も可能です。": "Multiple specifications are also possible.",
+    "DynamicMotionによる演出の例（Sample of DynamicMotion）": "DynamicMotion Effect Example (Sample of DynamicMotion)",
+    "画面左から登場": "Appearing from the Left Side of the Screen",
+    "オーソドックスに左から登場します。": "The enemy makes a conventional entrance from the left.",
+    "frame = 5 // 移動時間": "frame = 5 // Movement Duration",
+    "sx = a._homeX -500 // 始点Ｘ座標（画面外左）": "sx = a._homeX -500 // Starting X Coordinate (Off-Screen Left)",
+    "sy = a._homeY // 始点Ｙ座標": "sy = a._homeY // Starting Y Coordinate",
+    "ex = a._homeX // 終点Ｘ座標": "ex = a._homeX // Ending X Coordinate",
+    "ey = a._homeY // 終点Ｙ座標": "ey = a._homeY // Ending Y Coordinate",
+    "『a』で呼び出された敵キャラ、『b』でスキルの使用者を参照できます。": " \"a” refers to the called enemy, and “b” refers to the user of the skill.",
+    "『a._homeX』『a._homeY』が配置地点となるので、最終的にそこへ移動するように実装してください。": " \"a._homeX” and “a._homeY” are the placement coordinates, so implement it to ultimately move there.",
+    "上空から登場（2022/04/21更新）": "Airborne Appearance (Updated 2022/04/21)",
+    "上空から登場します。飛行系の魔物などに最適です。": "Enemies appear from above. Ideal for flying monsters and the like.",
+    "airY = -500 // 空中Ｙ座標": "airY = -500 // Aerial Y Coordinate",
+    "frame = 8 // 移動時間": "frame = 8 // Movement Duration",
+    "airY = 0 // 空中Ｙ座標": "airY = 0 // Aerial Y Coordinate",
+    "アニメーションと共に登場": "Appears with an Animation",
+    "アニメーションと共に登場します。": "The enemy appears with an animation.",
+    "// 目的地へ移動＆透明化": "// Move to Destination & Become Transparent",
+    "sx = a._homeX // 始点Ｘ座標": "sx = a._homeX // Starting X Coordinate",
+    "// アニメーションを自身に表示": "// Display Animation on Self",
+    "// 透明解除": "// Remove Transparency",
+    "アニメーションの内容は自由に設定してください。": "Set the animation's content as you like.",
+    "ただし、EffekseerによるＭＺアニメはdelayを入れないと表示されないようです。ＭＶアニメならdelayは不要です。": "However, MZ animations made with Effekseer apparently will not display unless you add a delay. A delay is not necessary for MV animations.",
+    "ポイントは<D-Animation:self/>です。": "The key point is <D-Animation:self/>.",
+    "単にアニメーションを表示すると、スキルの使用者側に表示されてしまうことに注意してください。self型にすることで、モーションの実行者に表示されるようになります。": "Note that simply displaying an animation will cause it to appear on the skill user's side. Setting it to the self type makes it appear on the performer of the motion.",
+    "ＭＺ用プラグインコマンド（Plugin Command MZ）": "Plugin Command for MZ (Plugin Command MZ)",
+    "敵キャラを呼ぶ": "Summon an Enemy",
+    "バトルイベント内で自由に敵キャラを呼び出します。": "Summon enemies freely during battle events.",
+    "スキルによる呼び出しとは異なり、座標を指定することも可能です。": "Unlike summoning via a skill, you can also specify the coordinates.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "敵キャラの最大数（MaxEnemyNo）": "Maximum Number of Enemies (MaxEnemyNo)",
+    "同時に出現できる敵キャラの最大数です。": "The maximum number of enemies that can appear at the same time.",
+    "それ以上呼び出そうとすると失敗します。": "Any attempt to summon more than this will fail.",
+    "成功メッセージ（SuccessMessage）": "Success Message (SuccessMessage)",
+    "呼び出しに成功した際に表示する文章です。": "The text displayed when the summon succeeds.",
+    "失敗メッセージ（FailureMessage）": "Failure Message (FailureMessage)",
+    "呼び出しに失敗した際に表示する文章です。": "The text displayed when the summon fails.",
+    "戦闘不能の敵を消す（DeleteDeadEnemy）ver1.06": "Remove Incapacitated Enemies (DeleteDeadEnemy) ver1.06",
+    "仲間を呼んだ際にその時点で戦闘不能になっていた敵キャラを蘇生禁止にします。": "When an ally is summoned, enemies that are incapacitated at that point are prevented from being revived.",
+    "既に仲間が呼ばれた場所へ、敵が復活してしまう問題への対策です。": "This addresses the issue of enemies reviving in places where allies have already been summoned.",
+    "DynamicAppearと連携（LinkDynamicAppear）ver1.01": "Integration with DynamicAppear (LinkDynamicAppear) ver1.01",
+    "具体的には、NRP_DynamicAppear.jsのプラグインパラメータに設定した『敵キャラの開始演出』を取得し、仲間を呼ばれた際の登場演出の既定値とします。": "Specifically, it retrieves the “Enemy Starting Effect” set in the plugin parameter of NRP_DynamicAppear.js and uses it as the default appearance effect when an ally is summoned.",
+    "参考（Reference）": "Reference (Reference)",
+    "このプラグインの制作に当たって、以下のプラグインを参考にさせていただきました。": "In creating this plugin, I referred to the following plugin.",
+    "EnemyCallsAlly.js（神無月サスケ様）": "EnemyCallsAlly.js (Kaminazuki Sasuke)",
+    "https://forum.tkool.jp/index.php?threads/4795/": "https://forum.tkool.jp/index.php?threads/4795/"
+  }
+}

@@ -1,0 +1,685 @@
+{
+  "articleId": "505945545",
+  "sourceUrl": "https://newrpg.seesaa.net/article/505945545.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "7f4ffbaccbc23a84d1f1c6511a5e13cd6040d7366d3d172f600d0a7c7cca7596",
+  "translatedAt": "2026-08-31T02:55:21.991Z",
+  "title": "Change Battler Name Colors Based on Conditions [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "バトラー名の色を条件によって変更【RPGツクールMZプラグイン】",
+      "sourceHash": "6a60abec60976d64759b2edda485158ce0db016f011ef04e2775a1d1bc95b629",
+      "translation": "Change Battler Name Colors Based on Conditions [RPG Maker MZ Plugin]",
+      "contextHash": "6a60abec60976d64759b2edda485158ce0db016f011ef04e2775a1d1bc95b629"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "バトラー名の色を条件によって変更します。",
+      "sourceHash": "19777fb8016bf19ff1a99dbf429f37ab86377d2db7e62def8f04d8637d472e11",
+      "translation": "Changes battler name colors based on conditions.",
+      "contextHash": "19777fb8016bf19ff1a99dbf429f37ab86377d2db7e62def8f04d8637d472e11"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "基本的には、敵のＨＰが減った際に変更することを想定しています。",
+      "sourceHash": "d1b3ab7c083e0edbb7e2b406a2c7e9f3a8ca79f9ce3f660ea077bd64c111c70b",
+      "translation": "It is primarily intended for changing the color when an enemy's HP decreases.",
+      "contextHash": "d1b3ab7c083e0edbb7e2b406a2c7e9f3a8ca79f9ce3f660ea077bd64c111c70b"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "要するにドラゴンクエストやオクトパストラベラーなどにある機能です。",
+      "sourceHash": "d124babb57afdef1f184c0a2df183d56fb743eb7469911b07b6c69e199413170",
+      "translation": "In short, this is a feature found in games such as Dragon Quest and Octopath Traveler.",
+      "contextHash": "d124babb57afdef1f184c0a2df183d56fb743eb7469911b07b6c69e199413170"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ＨＰ以外を条件にしたり、アクターにも適用したりできます。",
+      "sourceHash": "18ad963470122818abad02cf77c984ed41e214ca9d24f52cc1d058d1156bb116",
+      "translation": "You can use conditions other than HP and apply it to actors as well.",
+      "contextHash": "18ad963470122818abad02cf77c984ed41e214ca9d24f52cc1d058d1156bb116"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "初期設定は以下のようにしています。",
+      "sourceHash": "a24adb22d54af5cc1593cdeb85ee2d52457a54dc5da1d83f54bfcf192ed5cb3d",
+      "translation": "The default settings are as follows.",
+      "contextHash": "a24adb22d54af5cc1593cdeb85ee2d52457a54dc5da1d83f54bfcf192ed5cb3d"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "戦闘不能で赤色に変更",
+      "sourceHash": "67949cc1faa548c103dcb4312fd358ba79da715abd319d6456aab33bc73b9635",
+      "translation": "Change to red when dead",
+      "contextHash": "67949cc1faa548c103dcb4312fd358ba79da715abd319d6456aab33bc73b9635"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "瀕死（ＨＰ２５％未満）で黄色に変更",
+      "sourceHash": "edc8e1415c3fbd5786e2e5c54c92bdf98db9af70168bd65b9e16eb17550a3648",
+      "translation": "Change to yellow when dying (HP below 25%)",
+      "contextHash": "edc8e1415c3fbd5786e2e5c54c92bdf98db9af70168bd65b9e16eb17550a3648"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ＨＰ５０％未満で水色に変更",
+      "sourceHash": "23da9bd39bb8f4ffe711c9b3a17e082f6b7505d6366c9cb9224700aa28ff01a6",
+      "translation": "Change to cyan when HP is below 50%",
+      "contextHash": "23da9bd39bb8f4ffe711c9b3a17e082f6b7505d6366c9cb9224700aa28ff01a6"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※戦闘不能と瀕死はツクールの仕様（アクター）に合わせています。",
+      "sourceHash": "f870ac330ee084877b1690cbdb429cfd53ef4640b119f167398435af49c236fe",
+      "translation": "※Death and dying follow RPG Maker's specifications (for actors).",
+      "contextHash": "f870ac330ee084877b1690cbdb429cfd53ef4640b119f167398435af49c236fe"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※以下ではなく未満であることに注意してください。",
+      "sourceHash": "1c4059caaedb3fce386bfc6a3ea9d3970213df93b0aa6d25ce7923b08d58672a",
+      "translation": "※Note that the conditions are \"below,\" not \"at or below.\"",
+      "contextHash": "1c4059caaedb3fce386bfc6a3ea9d3970213df93b0aa6d25ce7923b08d58672a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※戦闘不能はアクター専用です。",
+      "sourceHash": "bcaa06f6a48d4e464b4cfe83b5095a9e1ed1507a6d2bf7899eec687399282697",
+      "translation": "※Death is available only for actors.",
+      "contextHash": "bcaa06f6a48d4e464b4cfe83b5095a9e1ed1507a6d2bf7899eec687399282697"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※当プラグインでは瀕死条件を変更することも可能です。",
+      "sourceHash": "c9718dbd3ccb80ae78bc0b5fcd740189ddfcae1db37f43b2911d4cb58692575d",
+      "translation": "※This plugin also allows you to change the dying condition.",
+      "contextHash": "c9718dbd3ccb80ae78bc0b5fcd740189ddfcae1db37f43b2911d4cb58692575d"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ちなみに、ドラクエとオクトラはＨＰ５０％以下で黄色、２５％以下で赤色のようです。そのまま真似すると、アクターの表示とズレる点には注意です！",
+      "sourceHash": "d5e2f7af00fec3d5bd68397a6169128d39b19ca1f497d826f7d873a65839311b",
+      "translation": "By the way, Dragon Quest and Octopath Traveler apparently use yellow at 50% HP or below and red at 25% HP or below. Be careful, because copying this directly will cause the display to differ from that for actors!",
+      "contextHash": "d5e2f7af00fec3d5bd68397a6169128d39b19ca1f497d826f7d873a65839311b"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Turn the feature ON in RPG Maker's Plugin Manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_BattlerNameColor.js",
+      "sourceHash": "7a82e2511b0d13285eeaba905b97921889b3c5bf8aa48c78be3f750125cf4fa1",
+      "translation": "NRP_BattlerNameColor.js ",
+      "contextHash": "569c49b6dc014ab476a48b1240464bc9a025a4a7248b34322db56a724803f48f"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ver1.00（2024/12/04）",
+      "sourceHash": "8dfedf48ec8a451538a1b1cb06b9879f1ad2b18df29e180747fb7383381a4f62",
+      "translation": "ver1.00 (2024/12/04) ",
+      "contextHash": "569c49b6dc014ab476a48b1240464bc9a025a4a7248b34322db56a724803f48f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/12/04（ver1.00）",
+      "sourceHash": "e63aa99cf99c588c162d11ab86135b4e2fe3243b2564814ea05613dff56f6e6c",
+      "translation": "2024/12/04 (ver1.00) ",
+      "contextHash": "e63aa99cf99c588c162d11ab86135b4e2fe3243b2564814ea05613dff56f6e6c"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Published!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "文字色リストに設定を登録してください。",
+      "sourceHash": "84b862d771fb02aa410fd4c555e1c9d022a0a3eeb3fe6da50e059d89c7c7ab8a",
+      "translation": "Register the settings in the name color list.",
+      "contextHash": "84b862d771fb02aa410fd4c555e1c9d022a0a3eeb3fe6da50e059d89c7c7ab8a"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "初期設定は以下のようになっていますので、問題なければ、そのままでも良いと思います。",
+      "sourceHash": "18764783d8ee2ad15477a534461b9a74f2c1093f14fe027578ef61b03169f953",
+      "translation": "The default settings are as follows, so if there are no problems, you can leave them as they are.",
+      "contextHash": "18764783d8ee2ad15477a534461b9a74f2c1093f14fe027578ef61b03169f953"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "戦闘不能（a.isDead()）で赤色（システムカラー18）",
+      "sourceHash": "a616ae8197a10f10d3db95e11296ec08941064e38b991528375f207f124ead32",
+      "translation": "Dead (a.isDead()) → red (system color 18)",
+      "contextHash": "a616ae8197a10f10d3db95e11296ec08941064e38b991528375f207f124ead32"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "瀕死（a.dying()）で黄色（システムカラー17）",
+      "sourceHash": "29cab9177a9ae08810101bd3b06b9222bcc4c5b9164ecda9a506337462ab43c7",
+      "translation": "Dying (a.dying()) → yellow (system color 17)",
+      "contextHash": "29cab9177a9ae08810101bd3b06b9222bcc4c5b9164ecda9a506337462ab43c7"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "ＨＰ５０％未満（a.hpRate() < 0.5）で水色（システムカラー4）",
+      "sourceHash": "7e400bf2eaf6f20e82d46db627fef4681f65be3d7b7a31904ecb3dfa2ec1f269",
+      "translation": "HP below 50% (a.hpRate() < 0.5) → cyan (system color 4)",
+      "contextHash": "7e400bf2eaf6f20e82d46db627fef4681f65be3d7b7a31904ecb3dfa2ec1f269"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "上にある設定のほうが優先される仕様です。",
+      "sourceHash": "491814e6a47ef9b1e03b961a2a7943dc4b298ac65f83f16be9b3db24b03a6574",
+      "translation": "Settings higher up in the list take priority.",
+      "contextHash": "491814e6a47ef9b1e03b961a2a7943dc4b298ac65f83f16be9b3db24b03a6574"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "初期設定ではアクターには反映されませんので、必要なら切り替えてください。",
+      "sourceHash": "34925dc85fbc91f69d8fd80fa59ea8f19846075059ce58b33ffe875aeb63b4b3",
+      "translation": "The default settings do not apply to actors, so switch this on if necessary.",
+      "contextHash": "34925dc85fbc91f69d8fd80fa59ea8f19846075059ce58b33ffe875aeb63b4b3"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "なお、アクターの名前の色とＨＰの色は連動する仕様です。",
+      "sourceHash": "05a7368fca0dc3863c904814fbc8a87060248156820b3dd61cbb2433a814be42",
+      "translation": "The actor's name color and HP color are linked.",
+      "contextHash": "05a7368fca0dc3863c904814fbc8a87060248156820b3dd61cbb2433a814be42"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "文字色リスト（NameColorList）",
+      "sourceHash": "5eb6e3f79c06a9aa15c68cf830c93a855d8c8d6df0b150514af3e2a0904e6f2e",
+      "translation": "Name Color List (NameColorList)",
+      "contextHash": "5eb6e3f79c06a9aa15c68cf830c93a855d8c8d6df0b150514af3e2a0904e6f2e"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "文字色の条件と色調を定義します。",
+      "sourceHash": "9fc7e3e1a1ea9c84473bc8c5b29e1ec9945dbd021fe9bd642f6c71b8c1f9305a",
+      "translation": "Defines the conditions and colors for changing text colors.",
+      "contextHash": "9fc7e3e1a1ea9c84473bc8c5b29e1ec9945dbd021fe9bd642f6c71b8c1f9305a"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "敵キャラに反映（ApplyEnemy）",
+      "sourceHash": "567b2219e8cf01b66033c591159410f98c9bf49e1349c11aa7650c3e880e1da9",
+      "translation": "Apply to Enemies (ApplyEnemy)",
+      "contextHash": "567b2219e8cf01b66033c591159410f98c9bf49e1349c11aa7650c3e880e1da9"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "敵キャラ名に色の変更を反映します。",
+      "sourceHash": "3601ed065ee17c4a30fc16bff12591359a1298dad2e422dc2312fb04736f8db2",
+      "translation": "Applies color changes to enemy names.",
+      "contextHash": "3601ed065ee17c4a30fc16bff12591359a1298dad2e422dc2312fb04736f8db2"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "アクターに反映（ApplyActor）",
+      "sourceHash": "1c3682241b6911848ab31dd36744fee6a0ac0a99cd679efd7ff2e03bcb8855b7",
+      "translation": "Apply to Actors (ApplyActor)",
+      "contextHash": "1c3682241b6911848ab31dd36744fee6a0ac0a99cd679efd7ff2e03bcb8855b7"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "アクター名に色の変更を反映します。",
+      "sourceHash": "e2fa0fbc66de1bc13b7419b223b9014290b3f162a2ce1c85e33158dd1089dd78",
+      "translation": "Applies color changes to actor names.",
+      "contextHash": "e2fa0fbc66de1bc13b7419b223b9014290b3f162a2ce1c85e33158dd1089dd78"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ＨＰ表示にも反映されるので注意！",
+      "sourceHash": "b67ee9f80a2ddf783ea96d82bf7481157cd70db5d6e749033a6e04b6db377b80",
+      "translation": "Be careful: this also affects the HP display!",
+      "contextHash": "b67ee9f80a2ddf783ea96d82bf7481157cd70db5d6e749033a6e04b6db377b80"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "瀕死条件（DyingCondition）",
+      "sourceHash": "ecd8385b1f835c6b290e7d65d7573d72c919dde4eb8555f5f67765b233bd8be1",
+      "translation": "Dying Condition (DyingCondition)",
+      "contextHash": "ecd8385b1f835c6b290e7d65d7573d72c919dde4eb8555f5f67765b233bd8be1"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "システム上、瀕死として扱われる条件です。",
+      "sourceHash": "5b31eea3ea2d7b8d8acee109d47a4300e963303a0bfeca9726ea25920bb5f56b",
+      "translation": "The condition under which a battler is treated as dying by the system.",
+      "contextHash": "5b31eea3ea2d7b8d8acee109d47a4300e963303a0bfeca9726ea25920bb5f56b"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "初期値：a.hpRate() < 0.25（ＨＰが２５％以下）",
+      "sourceHash": "b6500d8c263d7714b13eceb9052aba77411a05c202576f80458ec5512ff4cc03",
+      "translation": "Default value: a.hpRate() < 0.25 (HP is 25% or below)",
+      "contextHash": "b6500d8c263d7714b13eceb9052aba77411a05c202576f80458ec5512ff4cc03"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "文字色リストのパラメータ（NameColorList Parameters）",
+      "sourceHash": "668bb6c076e48c4849842976bace90b0458743fce90bf78ffd38b1c7893e0249",
+      "translation": "Name Color List Parameters (NameColorList Parameters)",
+      "contextHash": "668bb6c076e48c4849842976bace90b0458743fce90bf78ffd38b1c7893e0249"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "条件（Condition）",
+      "sourceHash": "936548c672380b2765cd2f5ee5b15e5cdff654c2caa97500e568e86bddc87c3a",
+      "translation": "Condition (Condition)",
+      "contextHash": "936548c672380b2765cd2f5ee5b15e5cdff654c2caa97500e568e86bddc87c3a"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "文字色を変更する条件です。",
+      "sourceHash": "04b441093cd9be9f3ec05dbfed4d413f57e91bf83f740ab5ecbd4220a69871d1",
+      "translation": "The condition for changing the text color.",
+      "contextHash": "04b441093cd9be9f3ec05dbfed4d413f57e91bf83f740ab5ecbd4220a69871d1"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "例：a.hpRate() <= 0.5（ＨＰが５０％以下）",
+      "sourceHash": "a3c2951453016a5b42e71f086c23cae0c680f352ea386a359f934217ec93a478",
+      "translation": "Example: a.hpRate() <= 0.5 (HP is 50% or below)",
+      "contextHash": "a3c2951453016a5b42e71f086c23cae0c680f352ea386a359f934217ec93a478"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "文字色（Color）",
+      "sourceHash": "566de62f58b1c46b30e40edb22b852dbfa9d20f4ef1e2a6637711c65147859f8",
+      "translation": "Color (Color)",
+      "contextHash": "566de62f58b1c46b30e40edb22b852dbfa9d20f4ef1e2a6637711c65147859f8"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "文字に適用する色です。",
+      "sourceHash": "4016b211d513cb3be6236d2da75d76924c7c21150758fdbf2228e2d117ac3cea",
+      "translation": "The color applied to the text.",
+      "contextHash": "4016b211d513cb3be6236d2da75d76924c7c21150758fdbf2228e2d117ac3cea"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "システムカラーの番号を指定してください。",
+      "sourceHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf",
+      "translation": "Specify a system color number.",
+      "contextHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※システムカラーとはWindow.pngに設定されている色（0始まり）のことです。",
+      "sourceHash": "ce48d13b5215676ac58ab1c82cf0b8a424e217e86c56203acf1c6fe2a4032ce0",
+      "translation": "※A system color is a color set in Window.png (numbered from 0).",
+      "contextHash": "ce48d13b5215676ac58ab1c82cf0b8a424e217e86c56203acf1c6fe2a4032ce0"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "参考までに、17がアクターが瀕死時の色（黄色）、18がアクター戦闘不能時の色（赤色）です。",
+      "sourceHash": "267d88a2cd4090247244ff65820a9a9282969f30a418400fd33e40b4af7c13b4",
+      "translation": "For reference, 17 is the color used when an actor is dying (yellow), and 18 is the color used when an actor is dead (red).",
+      "contextHash": "267d88a2cd4090247244ff65820a9a9282969f30a418400fd33e40b4af7c13b4"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]文字色リスト（NameColorList）[[/LINK_1]]",
+      "sourceHash": "6af5e3274e9a880acb39bfa847d4698cfebe52308ddb4c70dea46a09b19ff391",
+      "parts": [
+        {
+          "source": "文字色リスト（NameColorList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Name Color List (NameColorList)[[/LINK_1]]",
+      "contextHash": "6af5e3274e9a880acb39bfa847d4698cfebe52308ddb4c70dea46a09b19ff391"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラに反映（ApplyEnemy）[[/LINK_1]]",
+      "sourceHash": "e232ac4cdeafaf73b36daaf4af1e324321baa3f3adfc006053c2a976940d67f1",
+      "parts": [
+        {
+          "source": "敵キャラに反映（ApplyEnemy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Enemies (ApplyEnemy)[[/LINK_1]]",
+      "contextHash": "e232ac4cdeafaf73b36daaf4af1e324321baa3f3adfc006053c2a976940d67f1"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]アクターに反映（ApplyActor）[[/LINK_1]]",
+      "sourceHash": "2ea38d7dcf80f4d6734d4a8a97683e7c243ef859fcb3a501f55d8f911c65f380",
+      "parts": [
+        {
+          "source": "アクターに反映（ApplyActor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Actors (ApplyActor)[[/LINK_1]]",
+      "contextHash": "2ea38d7dcf80f4d6734d4a8a97683e7c243ef859fcb3a501f55d8f911c65f380"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]瀕死条件（DyingCondition）[[/LINK_1]]",
+      "sourceHash": "c2e0c82b20c094fa858c7b978ac7fe1c18181785f468c8ad48c259eda92de94e",
+      "parts": [
+        {
+          "source": "瀕死条件（DyingCondition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Dying Condition (DyingCondition)[[/LINK_1]]",
+      "contextHash": "c2e0c82b20c094fa858c7b978ac7fe1c18181785f468c8ad48c259eda92de94e"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]文字色リストのパラメータ（NameColorList Parameters）[[/LINK_1]]",
+      "sourceHash": "34b2557ebfcab9ba7c386ca1f602cf3accb3f5c7bb73e4d13e6b86ea6974e712",
+      "parts": [
+        {
+          "source": "文字色リストのパラメータ（NameColorList Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Name Color List Parameters (NameColorList Parameters)[[/LINK_1]]",
+      "contextHash": "34b2557ebfcab9ba7c386ca1f602cf3accb3f5c7bb73e4d13e6b86ea6974e712"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]条件（Condition）[[/LINK_1]]",
+      "sourceHash": "dbfa081692bf15140d34a5155695b96a45c2f20e79421a7397555138779ecac5",
+      "parts": [
+        {
+          "source": "条件（Condition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Condition (Condition)[[/LINK_1]]",
+      "contextHash": "dbfa081692bf15140d34a5155695b96a45c2f20e79421a7397555138779ecac5"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]文字色（Color）[[/LINK_1]]",
+      "sourceHash": "895286080b02d38e4abf28119006e9af25a598bc8e852515d446c7c5fcbf1704",
+      "parts": [
+        {
+          "source": "文字色（Color）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Text Color (Color)[[/LINK_1]]",
+      "contextHash": "895286080b02d38e4abf28119006e9af25a598bc8e852515d446c7c5fcbf1704"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "※[[LINK_1]]NRP_BattleTargetCursor.js[[/LINK_1]]と併用する場合はあちらを最新化（ver1.05）してください。",
+      "sourceHash": "df94c10ec2cd88455f1cdcdc4fe80d63db26149d2697f5ad959bf522c8ee4eab",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "NRP_BattleTargetCursor.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用する場合はあちらを最新化（ver1.05）してください。",
+          "link": false
+        }
+      ],
+      "translation": "※When using it together with [[LINK_1]]NRP_BattleTargetCursor.js[[/LINK_1]], please update that plugin to the latest version (ver1.05).",
+      "contextHash": "df94c10ec2cd88455f1cdcdc4fe80d63db26149d2697f5ad959bf522c8ee4eab"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "バトラー名の色を条件によって変更します。": "Changes battler name colors based on conditions.",
+    "基本的には、敵のＨＰが減った際に変更することを想定しています。": "It is primarily intended for changing the color when an enemy's HP decreases.",
+    "要するにドラゴンクエストやオクトパストラベラーなどにある機能です。": "In short, this is a feature found in games such as Dragon Quest and Octopath Traveler.",
+    "ＨＰ以外を条件にしたり、アクターにも適用したりできます。": "You can use conditions other than HP and apply it to actors as well.",
+    "初期設定は以下のようにしています。": "The default settings are as follows.",
+    "戦闘不能で赤色に変更": "Change to red when dead",
+    "瀕死（ＨＰ２５％未満）で黄色に変更": "Change to yellow when dying (HP below 25%)",
+    "ＨＰ５０％未満で水色に変更": "Change to cyan when HP is below 50%",
+    "※戦闘不能と瀕死はツクールの仕様（アクター）に合わせています。": "※Death and dying follow RPG Maker's specifications (for actors).",
+    "※以下ではなく未満であることに注意してください。": "※Note that the conditions are \"below,\" not \"at or below.\"",
+    "※戦闘不能はアクター専用です。": "※Death is available only for actors.",
+    "※当プラグインでは瀕死条件を変更することも可能です。": "※This plugin also allows you to change the dying condition.",
+    "ちなみに、ドラクエとオクトラはＨＰ５０％以下で黄色、２５％以下で赤色のようです。そのまま真似すると、アクターの表示とズレる点には注意です！": "By the way, Dragon Quest and Octopath Traveler apparently use yellow at 50% HP or below and red at 25% HP or below. Be careful, because copying this directly will cause the display to differ from that for actors!",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Turn the feature ON in RPG Maker's Plugin Manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_BattlerNameColor.js": "NRP_BattlerNameColor.js ",
+    "ver1.00（2024/12/04）": "ver1.00 (2024/12/04) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/12/04（ver1.00）": "2024/12/04 (ver1.00) ",
+    "公開！": "Published!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "文字色リストに設定を登録してください。": "Register the settings in the name color list.",
+    "初期設定は以下のようになっていますので、問題なければ、そのままでも良いと思います。": "The default settings are as follows, so if there are no problems, you can leave them as they are.",
+    "戦闘不能（a.isDead()）で赤色（システムカラー18）": "Dead (a.isDead()) → red (system color 18)",
+    "瀕死（a.dying()）で黄色（システムカラー17）": "Dying (a.dying()) → yellow (system color 17)",
+    "ＨＰ５０％未満（a.hpRate() < 0.5）で水色（システムカラー4）": "HP below 50% (a.hpRate() < 0.5) → cyan (system color 4)",
+    "上にある設定のほうが優先される仕様です。": "Settings higher up in the list take priority.",
+    "初期設定ではアクターには反映されませんので、必要なら切り替えてください。": "The default settings do not apply to actors, so switch this on if necessary.",
+    "なお、アクターの名前の色とＨＰの色は連動する仕様です。": "The actor's name color and HP color are linked.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "文字色リスト（NameColorList）": "Name Color List (NameColorList)",
+    "文字色の条件と色調を定義します。": "Defines the conditions and colors for changing text colors.",
+    "敵キャラに反映（ApplyEnemy）": "Apply to Enemies (ApplyEnemy)",
+    "敵キャラ名に色の変更を反映します。": "Applies color changes to enemy names.",
+    "アクターに反映（ApplyActor）": "Apply to Actors (ApplyActor)",
+    "アクター名に色の変更を反映します。": "Applies color changes to actor names.",
+    "ＨＰ表示にも反映されるので注意！": "Be careful: this also affects the HP display!",
+    "瀕死条件（DyingCondition）": "Dying Condition (DyingCondition)",
+    "システム上、瀕死として扱われる条件です。": "The condition under which a battler is treated as dying by the system.",
+    "初期値：a.hpRate() < 0.25（ＨＰが２５％以下）": "Default value: a.hpRate() < 0.25 (HP is 25% or below)",
+    "文字色リストのパラメータ（NameColorList Parameters）": "Name Color List Parameters (NameColorList Parameters)",
+    "条件（Condition）": "Condition (Condition)",
+    "文字色を変更する条件です。": "The condition for changing the text color.",
+    "例：a.hpRate() <= 0.5（ＨＰが５０％以下）": "Example: a.hpRate() <= 0.5 (HP is 50% or below)",
+    "文字色（Color）": "Color (Color)",
+    "文字に適用する色です。": "The color applied to the text.",
+    "システムカラーの番号を指定してください。": "Specify a system color number.",
+    "※システムカラーとはWindow.pngに設定されている色（0始まり）のことです。": "※A system color is a color set in Window.png (numbered from 0).",
+    "参考までに、17がアクターが瀕死時の色（黄色）、18がアクター戦闘不能時の色（赤色）です。": "For reference, 17 is the color used when an actor is dying (yellow), and 18 is the color used when an actor is dead (red)."
+  }
+}

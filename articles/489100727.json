@@ -1,0 +1,595 @@
+{
+  "articleId": "489100727",
+  "sourceUrl": "https://newrpg.seesaa.net/article/489100727.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "9e9df2fb5c6ad10dff495a1f79616df56fbba14e68377c822919d96a499af474",
+  "translatedAt": "2026-08-31T02:53:40.832Z",
+  "title": "Freely Change Actor Equipment [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "アクターの装備を自由に変更【RPGツクールMZプラグイン】",
+      "sourceHash": "d2b3ec8242d04096a09a36fbc3b3eb2700890c6b3735a7f604236542455a82ac",
+      "translation": "Freely Change Actor Equipment [RPG Maker MZ Plugin]",
+      "contextHash": "d2b3ec8242d04096a09a36fbc3b3eb2700890c6b3735a7f604236542455a82ac"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "アクターの装備を自由に変更します。",
+      "sourceHash": "78f4ee78416e8653b567abec482bc31f13da9916e97cb74dcc56009905172d12",
+      "translation": "Freely changes an actor's equipment.",
+      "contextHash": "78f4ee78416e8653b567abec482bc31f13da9916e97cb74dcc56009905172d12"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "通常のイベントコマンドの『装備の変更』は、アクター自身および初期職業が可能な装備しか選択できません。",
+      "sourceHash": "b3a7ed0ffdfa88e82ed0b8eced5ce9087e9cd1f9c3ed934ed7317ec36972dfab",
+      "translation": "The standard “Change Equipment” event command only allows you to select equipment that the actor and their starting class can equip.",
+      "contextHash": "b3a7ed0ffdfa88e82ed0b8eced5ce9087e9cd1f9c3ed934ed7317ec36972dfab"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "つまり、途中でアクターが転職した場合や、何らかのプラグインによって装備が拡張された場合は、有効な装備が選択できなくなってしまいます。",
+      "sourceHash": "8edda798773190628ac72995b9c606bf2f6429db08bf0e6ea61c843605a5ebd7",
+      "translation": "In other words, if an actor changes class midway through the game or their equipment is expanded by a plugin, valid equipment can no longer be selected.",
+      "contextHash": "8edda798773190628ac72995b9c606bf2f6429db08bf0e6ea61c843605a5ebd7"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "このプラグインを使えば、それらの制約を受けずに装備を変更できます。",
+      "sourceHash": "9d461edde45741f283ea1684c5dbb6231cfef1aa80a29fa0514f2dac98e1e8a7",
+      "translation": "With this plugin, you can change equipment without being subject to these restrictions.",
+      "contextHash": "9d461edde45741f283ea1684c5dbb6231cfef1aa80a29fa0514f2dac98e1e8a7"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※なお、ツクールＭＶには対応していません。必要な場合は以下のスクリプトを参考にしてください。",
+      "sourceHash": "1cb58338ce4888d8ae5dc2497513d164ad716138a825fd75bab1a0af8368d045",
+      "translation": "※This plugin is not compatible with RPG Maker MV. If necessary, refer to the following script.",
+      "contextHash": "1cb58338ce4888d8ae5dc2497513d164ad716138a825fd75bab1a0af8368d045"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "ツクールMVのスクリプトで装備の変更を行う方法（村人A様）",
+      "sourceHash": "5d45eb48a571bf68c32ef659958e830a9ded5be35bbacf12707225bdba4c5ebf",
+      "translation": "How to Change Equipment Using an RPG Maker MV Script (by Villager A)",
+      "contextHash": "5d45eb48a571bf68c32ef659958e830a9ded5be35bbacf12707225bdba4c5ebf"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "http://rpgmaker-script-wiki.xyz/equip_mv.php",
+      "sourceHash": "b480f32617809d7ef974d1ce4745bab8a21000b8803a7683fbf09bdb0a847ce4",
+      "translation": "http://rpgmaker-script-wiki.xyz/equip_mv.php",
+      "contextHash": "b03289da67853b3c90fdefcc6d0f7276625f5e1948fc973e0b89f69204a6b6f1"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＺでのみ有効です。",
+      "sourceHash": "ca2026acc467d0938a6717d31b701f71765d9fb8791604dccdffc8a23ddaf206",
+      "translation": "※This plugin is only effective in RPG Maker MZ.",
+      "contextHash": "ca2026acc467d0938a6717d31b701f71765d9fb8791604dccdffc8a23ddaf206"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_ChangeEquipment.js",
+      "sourceHash": "99ea503c0ae84db10e73476a544ca649674c9dc9463d137189d9a3bc38e9e8c0",
+      "translation": "NRP_ChangeEquipment.js ",
+      "contextHash": "65d32dcb0dd58967c2db20e5480b2673a4d981cf67e9f6f2c2a6cf31b541693c"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.03（2025/01/20）",
+      "sourceHash": "5782e282caff7ec757275d1f8759f172376f49acf77fbceafb9002770ed84e91",
+      "translation": "ver1.03 (2025/01/20) ",
+      "contextHash": "65d32dcb0dd58967c2db20e5480b2673a4d981cf67e9f6f2c2a6cf31b541693c"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2025/01/20（ver1.03）",
+      "sourceHash": "ea0d167eaae701ba1087b56e10fb58260ca8558959a435db5ac11ff5b3f9e599",
+      "translation": "2025/01/20 (ver1.03) ",
+      "contextHash": "ea0d167eaae701ba1087b56e10fb58260ca8558959a435db5ac11ff5b3f9e599"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2022/07/09 -> 2022/07/11（ver1.02 -> 1.021）",
+      "sourceHash": "e860e63ad8ad5d8e60d65c9aef41210320710c762b45cf76a90c4ce9aa6affa1",
+      "translation": "2022/07/09 -> 2022/07/11 (ver1.02 -> 1.021) ",
+      "contextHash": "e860e63ad8ad5d8e60d65c9aef41210320710c762b45cf76a90c4ce9aa6affa1"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "スロットが存在しない場合もエラーにならないよう修正。",
+      "sourceHash": "6ea837db6ae228ca37e213714fa4e2066834f1687c90075f31bc81b497d4c43c",
+      "translation": "Fixed an issue so that no error occurs when a slot does not exist.",
+      "contextHash": "6ea837db6ae228ca37e213714fa4e2066834f1687c90075f31bc81b497d4c43c"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "（2022/07/11 ver1.021）",
+      "sourceHash": "09647bbb47a92d846890f0da0d333298698e0567094ffb0aa90391b4c77307a3",
+      "translation": " (2022/07/11 ver1.021) ",
+      "contextHash": "09647bbb47a92d846890f0da0d333298698e0567094ffb0aa90391b4c77307a3"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2022/07/07（ver1.01）",
+      "sourceHash": "17769cd4cf98785b648db45a2ab02230dbf2ae089b9a011e09d3e5aa796b2efd",
+      "translation": "2022/07/07 (ver1.01) ",
+      "contextHash": "17769cd4cf98785b648db45a2ab02230dbf2ae089b9a011e09d3e5aa796b2efd"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2022/06/25（ver1.00）",
+      "sourceHash": "ef49b12da85076cf91a09fcb15119d5519ac882dd6d95a2df7e14035ae6d2fae",
+      "translation": "2022/06/25 (ver1.00) ",
+      "contextHash": "ef49b12da85076cf91a09fcb15119d5519ac882dd6d95a2df7e14035ae6d2fae"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+      "sourceHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985",
+      "translation": "Plugin Commands for MZ (PluginCommandMZ)",
+      "contextHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "装備の変更（自動）",
+      "sourceHash": "196d13bb1912052c562c951a051a877341240f9e72fe14324ebfb75a5f1870fd",
+      "translation": "Change Equipment (Automatic)",
+      "contextHash": "196d13bb1912052c562c951a051a877341240f9e72fe14324ebfb75a5f1870fd"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "アクターの装備を変更します。",
+      "sourceHash": "1b18a355881a7eda9527c8abeff8c7a8d05a4eeaad287fed5a19cbff05c5ede2",
+      "translation": "Changes an actor's equipment.",
+      "contextHash": "1b18a355881a7eda9527c8abeff8c7a8d05a4eeaad287fed5a19cbff05c5ede2"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "武器／防具／アイテムは一つだけ指定すればＯＫです。",
+      "sourceHash": "14c9d14e24f73e824190bb7134e7c48a6b9ccd3c8082cbf8adad59c249dc5bf3",
+      "translation": "You only need to specify one weapon, armor, or item.",
+      "contextHash": "14c9d14e24f73e824190bb7134e7c48a6b9ccd3c8082cbf8adad59c249dc5bf3"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "装備するスロットはアイテム情報から自動的に取得します。",
+      "sourceHash": "88e1a5881ef5fe229583626c30e60e5e6edc814b554a28a9fd20e13815b9aef6",
+      "translation": "The slot to equip is obtained automatically from the item information.",
+      "contextHash": "88e1a5881ef5fe229583626c30e60e5e6edc814b554a28a9fd20e13815b9aef6"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "二刀流など同一の装備タイプが複数存在する場合は、順序番号で装備箇所を選択できます。",
+      "sourceHash": "598c3a351f954839394b8a662362d6c13a8d26213e7e84f89ad56dec07ca8945",
+      "translation": "When multiple slots have the same equipment type, such as with dual wielding, you can select the equipment slot using the order number.",
+      "contextHash": "598c3a351f954839394b8a662362d6c13a8d26213e7e84f89ad56dec07ca8945"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "いずれの項目もテキストモードに変更すれば、数式可です。",
+      "sourceHash": "2d590cd1c594d201720136db31bfcd72b4aef24062b50557250b8fa572f727ac",
+      "translation": "All fields support formulas when switched to text mode.",
+      "contextHash": "2d590cd1c594d201720136db31bfcd72b4aef24062b50557250b8fa572f727ac"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "例：『$gameVariables.value(1)』で変数１の値。",
+      "sourceHash": "212d9b9308eff3ed0c0f6e21d378762fcc16d18a38adae86ce11dc2de6241f86",
+      "translation": "Example: “$gameVariables.value(1)” returns the value of Variable 1.",
+      "contextHash": "212d9b9308eff3ed0c0f6e21d378762fcc16d18a38adae86ce11dc2de6241f86"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "装備を外す",
+      "sourceHash": "c6c1276f9674b9e71b097efb7ed01c40eda4e5798523df59b2f8ece901962f47",
+      "translation": "Remove Equipment",
+      "contextHash": "c6c1276f9674b9e71b097efb7ed01c40eda4e5798523df59b2f8ece901962f47"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "アクターの装備を外します。",
+      "sourceHash": "8a25c57edc46617c08e9a5054e5dcaa1645e342720db0fdc27f7e80a4a6aa537",
+      "translation": "Removes an actor's equipment.",
+      "contextHash": "8a25c57edc46617c08e9a5054e5dcaa1645e342720db0fdc27f7e80a4a6aa537"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "装備タイプ、順序番号が未指定なら全ての装備を外します。",
+      "sourceHash": "1a2f5e34839016ec0110f8e5f27739747a823a95f672ea14bcc9f3e31be8d73f",
+      "translation": "If the equipment type and order number are unspecified, all equipment is removed.",
+      "contextHash": "1a2f5e34839016ec0110f8e5f27739747a823a95f672ea14bcc9f3e31be8d73f"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※装備タイプはデータベースの登録値に対応します。",
+      "sourceHash": "fff59728d721f1c0217429d1b7aaf239654679f91272fce901d0381ff0be0b1b",
+      "translation": "※The equipment type corresponds to the registered values in the database.",
+      "contextHash": "fff59728d721f1c0217429d1b7aaf239654679f91272fce901d0381ff0be0b1b"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "（デフォルト：1:武器, 2:盾, 3:頭, 4:身体, 5:装飾品）",
+      "sourceHash": "d40e50989d228599680f5c5c25eff30ecbf3f86e9d182ed057b61a9e8beeca3e",
+      "translation": " (Default: 1:Weapon, 2:Shield, 3:Head, 4:Body, 5:Accessory) ",
+      "contextHash": "d40e50989d228599680f5c5c25eff30ecbf3f86e9d182ed057b61a9e8beeca3e"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "装備の変更（旧）",
+      "sourceHash": "d8bb1f3c20c0e7c48ebf90390627a4fea45e17a815fc66368fd848a61e9875a8",
+      "translation": "Change Equipment (Legacy)",
+      "contextHash": "d8bb1f3c20c0e7c48ebf90390627a4fea45e17a815fc66368fd848a61e9875a8"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "こちらは装備タイプの指定が必須です。",
+      "sourceHash": "b1b45cf001628e02c0dc6011b977534953f52a2d8e06138be3063889f891d252",
+      "translation": "Here, specifying the equipment type is required.",
+      "contextHash": "b1b45cf001628e02c0dc6011b977534953f52a2d8e06138be3063889f891d252"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "※装備タイプはデータベースの登録値に対応します。",
+      "sourceHash": "fff59728d721f1c0217429d1b7aaf239654679f91272fce901d0381ff0be0b1b",
+      "translation": "※The equipment type corresponds to the registered values in the database.",
+      "contextHash": "fff59728d721f1c0217429d1b7aaf239654679f91272fce901d0381ff0be0b1b"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "（デフォルト：1:武器, 2:盾, 3:頭, 4:身体, 5:装飾品）",
+      "sourceHash": "d40e50989d228599680f5c5c25eff30ecbf3f86e9d182ed057b61a9e8beeca3e",
+      "translation": " (Default: 1:Weapon, 2:Shield, 3:Head, 4:Body, 5:Accessory) ",
+      "contextHash": "d40e50989d228599680f5c5c25eff30ecbf3f86e9d182ed057b61a9e8beeca3e"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "外部プラグインで装備スロットが変更されていた場合、うまく装備変更できない問題があるため推奨しません。",
+      "sourceHash": "af56adaa2c0100b4e8f2e81e5d1376f90da27881a47e8a2660fd8cc7a338fb83",
+      "translation": "This is not recommended because equipment changes may not work correctly if the equipment slots have been changed by an external plugin.",
+      "contextHash": "af56adaa2c0100b4e8f2e81e5d1376f90da27881a47e8a2660fd8cc7a338fb83"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "注意点（Notice）",
+      "sourceHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0",
+      "translation": "Important Notes (Notice)",
+      "contextHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "通常の装備の変更と同じく、所有していないものは装備できません。",
+      "sourceHash": "08dd1afcf216e5ab91c57e2b401f4dfc95124689a526941b5b619ba177d7104a",
+      "translation": "As with the standard Change Equipment command, you cannot equip items you do not own.",
+      "contextHash": "08dd1afcf216e5ab91c57e2b401f4dfc95124689a526941b5b619ba177d7104a"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "必要なら先に武器、防具の増減を忘れないようにしてください。",
+      "sourceHash": "bd6c52a6fa4e474147f280c243897221045570041b7acc3e87a5d44cb1387e90",
+      "translation": "If necessary, remember to increase the number of weapons and armor beforehand.",
+      "contextHash": "bd6c52a6fa4e474147f280c243897221045570041b7acc3e87a5d44cb1387e90"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "また、現在装備できないものを無理やり装備することはできません。",
+      "sourceHash": "6ad636f6af6b8a4a7e804f2fc85f593c4034bcfe1cb353863b8e9fa1e02e809c",
+      "translation": "You also cannot forcibly equip something that cannot currently be equipped.",
+      "contextHash": "6ad636f6af6b8a4a7e804f2fc85f593c4034bcfe1cb353863b8e9fa1e02e809c"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※例えば、[[LINK_1]]多重職業プラグイン[[/LINK_1]]や[[LINK_2]]アイテム装備プラグイン[[/LINK_2]]がそれに該当します。",
+      "sourceHash": "37ce2c933e8735b0e16b9ec8b766b54e5f1226146f0eddb68bb23dfec2782e7f",
+      "parts": [
+        {
+          "source": "※例えば、",
+          "link": false
+        },
+        {
+          "source": "多重職業プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "や",
+          "link": false
+        },
+        {
+          "source": "アイテム装備プラグイン",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "がそれに該当します。",
+          "link": false
+        }
+      ],
+      "translation": "※For example, [[LINK_1]]Multi-Class Plugin[[/LINK_1]] and [[LINK_2]]Item Equip Plugin[[/LINK_2]] fall under this category.",
+      "contextHash": "37ce2c933e8735b0e16b9ec8b766b54e5f1226146f0eddb68bb23dfec2782e7f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "また、[[LINK_1]]スロット変更プラグイン[[/LINK_1]]などでスロットの並びが標準から変更されている場合、適切に装備できなくなる問題がありますが、そちらにも対応が可能です。",
+      "sourceHash": "cf0547b3bceb2830d3c763085be943f9b486d18777e2e909a925b26c2ca971e2",
+      "parts": [
+        {
+          "source": "また、",
+          "link": false
+        },
+        {
+          "source": "スロット変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などでスロットの並びが標準から変更されている場合、適切に装備できなくなる問題がありますが、そちらにも対応が可能です。",
+          "link": false
+        }
+      ],
+      "translation": "In addition, when the slot order has been changed from the default using something like the [[LINK_1]]Slot Change Plugin[[/LINK_1]], there is an issue where equipment can no longer be equipped properly, but this can also be supported.",
+      "contextHash": "cf0547b3bceb2830d3c763085be943f9b486d18777e2e909a925b26c2ca971e2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（PluginCommandMZ）[[/LINK_1]]",
+      "sourceHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (PluginCommandMZ)[[/LINK_1]]",
+      "contextHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]注意点（Notice）[[/LINK_1]]",
+      "sourceHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e",
+      "parts": [
+        {
+          "source": "注意点（Notice）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Notes (Notice)[[/LINK_1]]",
+      "contextHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]装備を外す[[/LINK_1]]機能を追加した。",
+      "sourceHash": "1bf420fa013074b355565e615618d62f8d4bd9f87b768efbf4e613aee4bc43dd",
+      "parts": [
+        {
+          "source": "装備を外す",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]Remove Equipment[[/LINK_1]] function.",
+      "contextHash": "1bf420fa013074b355565e615618d62f8d4bd9f87b768efbf4e613aee4bc43dd"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]スロット変更プラグイン[[/LINK_1]]に対応。装備タイプを自動で取得するようにした。",
+      "sourceHash": "392dbe738230ca3e7b4683758f6d6597072b1d9de15b36cbe3d38b28c719b149",
+      "parts": [
+        {
+          "source": "スロット変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。装備タイプを自動で取得するようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Supports the [[LINK_1]]Slot Change Plugin[[/LINK_1]]. Equipment types are now retrieved automatically.",
+      "contextHash": "392dbe738230ca3e7b4683758f6d6597072b1d9de15b36cbe3d38b28c719b149"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム装備プラグイン[[/LINK_1]]に対応して、アイテムを装備できるようにした。",
+      "sourceHash": "e42d16e3455f66df48d7b2b6d68a6aec4dbaea658b461220b6b15bf7873c7d71",
+      "parts": [
+        {
+          "source": "アイテム装備プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応して、アイテムを装備できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Supports the [[LINK_1]]Item Equip Plugin[[/LINK_1]], allowing items to be equipped.",
+      "contextHash": "e42d16e3455f66df48d7b2b6d68a6aec4dbaea658b461220b6b15bf7873c7d71"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "アクターの装備を自由に変更します。": "Freely changes an actor's equipment.",
+    "通常のイベントコマンドの『装備の変更』は、アクター自身および初期職業が可能な装備しか選択できません。": "The standard “Change Equipment” event command only allows you to select equipment that the actor and their starting class can equip.",
+    "つまり、途中でアクターが転職した場合や、何らかのプラグインによって装備が拡張された場合は、有効な装備が選択できなくなってしまいます。": "In other words, if an actor changes class midway through the game or their equipment is expanded by a plugin, valid equipment can no longer be selected.",
+    "このプラグインを使えば、それらの制約を受けずに装備を変更できます。": "With this plugin, you can change equipment without being subject to these restrictions.",
+    "※なお、ツクールＭＶには対応していません。必要な場合は以下のスクリプトを参考にしてください。": "※This plugin is not compatible with RPG Maker MV. If necessary, refer to the following script.",
+    "ツクールMVのスクリプトで装備の変更を行う方法（村人A様）": "How to Change Equipment Using an RPG Maker MV Script (by Villager A)",
+    "http://rpgmaker-script-wiki.xyz/equip_mv.php": "http://rpgmaker-script-wiki.xyz/equip_mv.php",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the RPG Maker Plugin Manager.",
+    "※このプラグインはＭＺでのみ有効です。": "※This plugin is only effective in RPG Maker MZ.",
+    "NRP_ChangeEquipment.js": "NRP_ChangeEquipment.js ",
+    "ver1.03（2025/01/20）": "ver1.03 (2025/01/20) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/01/20（ver1.03）": "2025/01/20 (ver1.03) ",
+    "2022/07/09 -> 2022/07/11（ver1.02 -> 1.021）": "2022/07/09 -> 2022/07/11 (ver1.02 -> 1.021) ",
+    "スロットが存在しない場合もエラーにならないよう修正。": "Fixed an issue so that no error occurs when a slot does not exist.",
+    "（2022/07/11 ver1.021）": " (2022/07/11 ver1.021) ",
+    "2022/07/07（ver1.01）": "2022/07/07 (ver1.01) ",
+    "2022/06/25（ver1.00）": "2022/06/25 (ver1.00) ",
+    "公開！": "Released!",
+    "ＭＺ用プラグインコマンド（PluginCommandMZ）": "Plugin Commands for MZ (PluginCommandMZ)",
+    "装備の変更（自動）": "Change Equipment (Automatic)",
+    "アクターの装備を変更します。": "Changes an actor's equipment.",
+    "武器／防具／アイテムは一つだけ指定すればＯＫです。": "You only need to specify one weapon, armor, or item.",
+    "装備するスロットはアイテム情報から自動的に取得します。": "The slot to equip is obtained automatically from the item information.",
+    "二刀流など同一の装備タイプが複数存在する場合は、順序番号で装備箇所を選択できます。": "When multiple slots have the same equipment type, such as with dual wielding, you can select the equipment slot using the order number.",
+    "いずれの項目もテキストモードに変更すれば、数式可です。": "All fields support formulas when switched to text mode.",
+    "例：『$gameVariables.value(1)』で変数１の値。": "Example: “$gameVariables.value(1)” returns the value of Variable 1.",
+    "装備を外す": "Remove Equipment",
+    "アクターの装備を外します。": "Removes an actor's equipment.",
+    "装備タイプ、順序番号が未指定なら全ての装備を外します。": "If the equipment type and order number are unspecified, all equipment is removed.",
+    "※装備タイプはデータベースの登録値に対応します。": "※The equipment type corresponds to the registered values in the database.",
+    "（デフォルト：1:武器, 2:盾, 3:頭, 4:身体, 5:装飾品）": " (Default: 1:Weapon, 2:Shield, 3:Head, 4:Body, 5:Accessory) ",
+    "装備の変更（旧）": "Change Equipment (Legacy)",
+    "こちらは装備タイプの指定が必須です。": "Here, specifying the equipment type is required.",
+    "外部プラグインで装備スロットが変更されていた場合、うまく装備変更できない問題があるため推奨しません。": "This is not recommended because equipment changes may not work correctly if the equipment slots have been changed by an external plugin.",
+    "注意点（Notice）": "Important Notes (Notice)",
+    "通常の装備の変更と同じく、所有していないものは装備できません。": "As with the standard Change Equipment command, you cannot equip items you do not own.",
+    "必要なら先に武器、防具の増減を忘れないようにしてください。": "If necessary, remember to increase the number of weapons and armor beforehand.",
+    "また、現在装備できないものを無理やり装備することはできません。": "You also cannot forcibly equip something that cannot currently be equipped."
+  }
+}
