@@ -146,7 +146,16 @@ function getArticleId() {
 
 function getLinkedArticleId(link) {
     try {
-        const url = new URL(link.href, location.href);
+        // Named anchors such as <a name="more"></a> do not have an href.
+        // Reading the DOM `href` property on those elements can resolve to the
+        // current page URL, which would make them look like an article link.
+        // Only an explicitly written href is eligible for title unification.
+        const href = link.getAttribute?.("href")?.trim();
+        if (!href) {
+            return null;
+        }
+
+        const url = new URL(href, location.href);
         if (!/^(?:www\.)?newrpg\.seesaa\.net$/iu.test(url.hostname)) {
             return null;
         }
@@ -162,7 +171,12 @@ function normalizeTitleMatch(value) {
 
 function isUrlOnlyArticleLabel(label, articleId) {
     try {
-        const url = new URL(label, location.href);
+        const value = String(label || "").trim();
+        if (!value) {
+            return false;
+        }
+
+        const url = new URL(value, location.href);
         return /^(?:www\.)?newrpg\.seesaa\.net$/iu.test(url.hostname)
             && /\/article\/(\d+)\.html$/u.exec(url.pathname)?.[1] === articleId;
     } catch {
