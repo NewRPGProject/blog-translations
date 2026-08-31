@@ -1,0 +1,2152 @@
+{
+  "articleId": "473084057",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473084057.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "0d69ff0d938778314bb34f81a2fca9629f9219fbe53e2b8c8b8fbe5867367bae",
+  "translatedAt": "2026-08-31T01:23:07.378Z",
+  "title": "Control Enemy Actions Freely ② Practical Guide [RPG Maker MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵の行動を自在に制御する ②実践編【RPGツクールMVプラグイン】",
+      "sourceHash": "cb92602956505abc90d6f454d2d466f4516599d3fc25f075378f417899e08d1b",
+      "translation": "Control Enemy Actions Freely ② Practical Guide [RPG Maker MV Plugin]",
+      "contextHash": "cb92602956505abc90d6f454d2d466f4516599d3fc25f075378f417899e08d1b"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "基本から上級まで、使えそうなものを全部載せてみました。",
+      "sourceHash": "77a118f142ea92a39abd307e711edaba888c48f5996653717e3fa0d31c4019fa",
+      "translation": "I've included everything from basic to advanced techniques that may be useful.",
+      "contextHash": "77a118f142ea92a39abd307e711edaba888c48f5996653717e3fa0d31c4019fa"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "必要なものを探してコピペなりしてください。",
+      "sourceHash": "edd436e8c77fe730a26af1f30e89d6b519111f8c499cc6bfe17621019f897358",
+      "translation": "Find what you need and copy and paste it.",
+      "contextHash": "edd436e8c77fe730a26af1f30e89d6b519111f8c499cc6bfe17621019f897358"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "基本編",
+      "sourceHash": "3c0217f9aebbe913b06398c925aad52e8ed30e36b1a7c75168659fb1fe3e3067",
+      "translation": "Basics",
+      "contextHash": "3c0217f9aebbe913b06398c925aad52e8ed30e36b1a7c75168659fb1fe3e3067"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "スキルを使う",
+      "sourceHash": "316c82665ab73d97256f6901555e4856c8619548914d8015ffaf7dd53a433456",
+      "translation": "Using Skills",
+      "contextHash": "316c82665ab73d97256f6901555e4856c8619548914d8015ffaf7dd53a433456"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "まずは基本形。普通にスキルを使わせる方法から。",
+      "sourceHash": "ceb379b0bf333130b9f3b44febb61daf507189dedafb4e249b12641a4926a188",
+      "translation": "Let's start with the basics: how to make an enemy use a skill normally.",
+      "contextHash": "ceb379b0bf333130b9f3b44febb61daf507189dedafb4e249b12641a4926a188"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "難しいことは何もなく、『戦闘行動の強制』で行動主体とスキルと対象を選択するだけです。",
+      "sourceHash": "ae96cb45c171b79c56cdece451fcca03d36c4422787ef0363063d179e2d006c9",
+      "translation": "There's nothing difficult about it—simply select the subject, skill, and target in Force Action.",
+      "contextHash": "ae96cb45c171b79c56cdece451fcca03d36c4422787ef0363063d179e2d006c9"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "集中攻撃などの特徴を出したい場合を除き、対象は『ランダム』で構いません。",
+      "sourceHash": "ff2350c1cd5963ff2c1deabcde05ca3bdca2db7424ce253ee8ea45ef4260bbb3",
+      "translation": "Unless you want features such as focused attacks, Random is fine for the target.",
+      "contextHash": "ff2350c1cd5963ff2c1deabcde05ca3bdca2db7424ce253ee8ea45ef4260bbb3"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "また、この例では行動主体を固定で先頭の敵に指定しています。ボス戦など行動主体が確実に分かる場合はこれで十分です。",
+      "sourceHash": "6da651fad66e3777d3f37042a94a31bda886a0263949274e2f38f8b21af9c727",
+      "translation": "In this example, the subject is fixed as the enemy at the front. This is sufficient when the subject is obvious, such as in a boss battle.",
+      "contextHash": "6da651fad66e3777d3f37042a94a31bda886a0263949274e2f38f8b21af9c727"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "しかしながら、いつも行動主体が先頭だとは限りません。",
+      "sourceHash": "36aec408815207f867735a52909ab429c3a7e88eede174e842fd93598ee3b7e0",
+      "translation": "However, the subject is not always the enemy at the front.",
+      "contextHash": "36aec408815207f867735a52909ab429c3a7e88eede174e842fd93598ee3b7e0"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "行動主体を可変にしたい場合は、スクリプトを使用します。",
+      "sourceHash": "a2dffeb06dcce7e618e821a0a09fbc65545078f6df81cf141c322869d481d0f9",
+      "translation": "If you want to make the subject variable, use a script.",
+      "contextHash": "a2dffeb06dcce7e618e821a0a09fbc65545078f6df81cf141c322869d481d0f9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "このプラグインでは以下のように呼び出せるようにしました。",
+      "sourceHash": "98649d58a82e3bf9b716796735e01582da5605d36ad9084921efbb5a3b0df2a1",
+      "translation": "This plugin allows you to call it as follows.",
+      "contextHash": "98649d58a82e3bf9b716796735e01582da5605d36ad9084921efbb5a3b0df2a1"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "10と書いてあるのがスキルIDです。",
+      "sourceHash": "03ac5ac17c2f64ac29a0b0a5828b1547ce4a54995b7c4b8433e3c759f69b325b",
+      "translation": "The 10 is the skill ID.",
+      "contextHash": "03ac5ac17c2f64ac29a0b0a5828b1547ce4a54995b7c4b8433e3c759f69b325b"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "-1とあるのが対象です。0が先頭、以降1,2,3...と増えていきます。",
+      "sourceHash": "e18039902c25799745dbc5c5fb8695557eb507256fcb1733b898b946a9f2af0e",
+      "translation": "The -1 is the target. 0 is the first enemy, followed by 1, 2, 3, and so on.",
+      "contextHash": "e18039902c25799745dbc5c5fb8695557eb507256fcb1733b898b946a9f2af0e"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "-1の場合はランダムの意味になります。",
+      "sourceHash": "916257f0c3a0d3b2c5174416e44f1e07c70c804853b2d070872ab261bc1a9f21",
+      "translation": "-1 means Random.",
+      "contextHash": "916257f0c3a0d3b2c5174416e44f1e07c70c804853b2d070872ab261bc1a9f21"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "……分かりにくいですね。",
+      "sourceHash": "fbd65a1167c6128b093ebc839a4633843001ebc1cf7eeb20bd749006edcc726a",
+      "translation": "…That's not very easy to understand.",
+      "contextHash": "fbd65a1167c6128b093ebc839a4633843001ebc1cf7eeb20bd749006edcc726a"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "というわけで「極力スクリプトは嫌だ！」という方のためにプラグインコマンドを用意しています。",
+      "sourceHash": "7ba6454234f3db7518125d1f68c1d1af8969ee46424a6a9abbe5fbeca1fa2d9c",
+      "translation": "So, for those of you who really don't want to use scripts, I've provided plugin commands.",
+      "contextHash": "7ba6454234f3db7518125d1f68c1d1af8969ee46424a6a9abbe5fbeca1fa2d9c"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※スクリプトではなくプラグインコマンドです。混同に注意！",
+      "sourceHash": "9210d56d7f46bf87b65da5349b143b02a40ddf8b7dec018c9d4c3fb6ced8ab14",
+      "translation": "※This is a plugin command, not a script. Be careful not to confuse them!",
+      "contextHash": "9210d56d7f46bf87b65da5349b143b02a40ddf8b7dec018c9d4c3fb6ced8ab14"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "これは『戦闘行動の強制』の行動主体を書き換えてしまう機能です。エディタ上で何を選ぼうが、バトルイベントを実行中の行動主体へと強制変換します。",
+      "sourceHash": "ce79cda72b3a96e912ed75f8d86c7d280209dd18719041b4156e6c36adc4a428",
+      "translation": "This function rewrites the subject of Force Action. Regardless of what you select in the editor, it forcibly changes the subject to the one currently executing the battle event.",
+      "contextHash": "ce79cda72b3a96e912ed75f8d86c7d280209dd18719041b4156e6c36adc4a428"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "あらかじめこれを一行挟んでおくと、全ての行動が終了するまでその状態が保持されます。",
+      "sourceHash": "6d6eb5b08ad486f4bed8405125b01c5fa7b300e3c660ede611452680eb5825db",
+      "translation": "If you insert this line beforehand, that state will be maintained until all actions are complete.",
+      "contextHash": "6d6eb5b08ad486f4bed8405125b01c5fa7b300e3c660ede611452680eb5825db"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "こんな感じになります。",
+      "sourceHash": "f7a47ba208836296a26393d90d6caae8affc7e4b0272f111119e34f21f9dae42",
+      "translation": "It will look like this.",
+      "contextHash": "f7a47ba208836296a26393d90d6caae8affc7e4b0272f111119e34f21f9dae42"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "この方法だとスキル名が見えるので、多少管理が楽ですね。お好きな方法をお使いください。",
+      "sourceHash": "a90f6f7b27517abdec06016cc2054a54aa8fbe21608660f720785b167a4ebc44",
+      "translation": "This method displays the skill name, making it somewhat easier to manage. Use whichever method you prefer.",
+      "contextHash": "a90f6f7b27517abdec06016cc2054a54aa8fbe21608660f720785b167a4ebc44"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "NRP.forceTarget [対象バトラー]",
+      "sourceHash": "b362cb954d6b96a2a6a00319b4ce686c5c79ec6bd4c000e7c0a398aa314cf5da",
+      "translation": "NRP.forceTarget [Target Battler]",
+      "contextHash": "b362cb954d6b96a2a6a00319b4ce686c5c79ec6bd4c000e7c0a398aa314cf5da"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "同様に『戦闘行動の強制』の対象を書き換えるプラグインコマンドもあります。これについても後で使います。",
+      "sourceHash": "790b7780262a2c90a6185d0b6df3b517a2c510b5331f59c73ecf672ae131e16e",
+      "translation": "There is also a plugin command that similarly rewrites the target of Force Action. I'll use this later as well.",
+      "contextHash": "790b7780262a2c90a6185d0b6df3b517a2c510b5331f59c73ecf672ae131e16e"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "いずれも、クリアしたい時はパラメータなしで呼び出せばＯＫです。",
+      "sourceHash": "0a6016b03e91dfe2805a2cb666925c3f344454e3c44fc8d250427f405911fd7b",
+      "translation": "In either case, call it without any parameters when you want to clear it.",
+      "contextHash": "0a6016b03e91dfe2805a2cb666925c3f344454e3c44fc8d250427f405911fd7b"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "確率でスキルを使う",
+      "sourceHash": "51ed1a93ea4202f61a6e177c0f154b322378e25ac1e7a9956d497b918b45ad6e",
+      "translation": "Using Skills Based on Probability",
+      "contextHash": "51ed1a93ea4202f61a6e177c0f154b322378e25ac1e7a9956d497b918b45ad6e"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "次行きましょう。",
+      "sourceHash": "dc4e7ef38c819ef5f6225644904bc72561b3a7f5260d29a29ab239bba9dba8fd",
+      "translation": "Let's move on.",
+      "contextHash": "dc4e7ef38c819ef5f6225644904bc72561b3a7f5260d29a29ab239bba9dba8fd"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "これも特に難しくはありません。",
+      "sourceHash": "60a0a4dd221880ba20d516d5e34de19765326d9d1636ff9dd41a2b12d630c9c9",
+      "translation": "This isn't particularly difficult either.",
+      "contextHash": "60a0a4dd221880ba20d516d5e34de19765326d9d1636ff9dd41a2b12d630c9c9"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "普通に乱数を使って確率分岐させるだけです。",
+      "sourceHash": "97fa284030ef7a719bf0f3d2f295eb0d50327cf77ec39f53d31bae475f0001d6",
+      "translation": "You simply use a random number to branch based on probability.",
+      "contextHash": "97fa284030ef7a719bf0f3d2f295eb0d50327cf77ec39f53d31bae475f0001d6"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "この例では適当な一時変数を使って、１～４の乱数を生成しています。",
+      "sourceHash": "ba40cb84433c2d6f874ca1bab6d76b32e8097d3974f5eb842bd26d8061c0eecd",
+      "translation": "In this example, a temporary variable is used to generate a random number from 1 to 4.",
+      "contextHash": "ba40cb84433c2d6f874ca1bab6d76b32e8097d3974f5eb842bd26d8061c0eecd"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "一時変数<=２の時は攻撃、３の時はファイア、４の時はスパークって感じですね。",
+      "sourceHash": "f5400cf7d503e5540fb2775f26267c37d171fbc896e985d2a196444de090a0d6",
+      "translation": "When temporary variable <= 2, use Attack; when it's 3, use Fire; and when it's 4, use Spark.",
+      "contextHash": "f5400cf7d503e5540fb2775f26267c37d171fbc896e985d2a196444de090a0d6"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "凝ったスキルを作った際、その処理内で同一の変数を使わないように注意です。それをやると無茶苦茶になります。",
+      "sourceHash": "75408b169bd57548edc81b61f6e790cd54e28bda0b57a7d2bbd4c9ec3602f6b4",
+      "translation": "When creating an elaborate skill, be careful not to use the same variable within its processing. Doing so will cause chaos.",
+      "contextHash": "75408b169bd57548edc81b61f6e790cd54e28bda0b57a7d2bbd4c9ec3602f6b4"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "心配なら各分岐内に『イベント処理の中断』を入れるのもよいと思います。",
+      "sourceHash": "2bf7dc34c428a31c3fb801c6fc8b9fc5cfdf8e198f8418f729ffbd1ca56e6a8e",
+      "translation": "If you're concerned, you could insert Abort Event Processing into each branch.",
+      "contextHash": "2bf7dc34c428a31c3fb801c6fc8b9fc5cfdf8e198f8418f729ffbd1ca56e6a8e"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "ターンによってスキルを使う",
+      "sourceHash": "5641efd91277070380f64a0f0de5a6d8e24faf919822107d79512f80a74c85d4",
+      "translation": "Using Skills Based on the Turn",
+      "contextHash": "5641efd91277070380f64a0f0de5a6d8e24faf919822107d79512f80a74c85d4"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "この辺まではまだデフォルトで可能な機能ですね。",
+      "sourceHash": "ad87c98fa60e75e504bbac5a150da15126f53da9bb8b3f46fe74fd38262c14b4",
+      "translation": "Up to this point, these are still features available by default.",
+      "contextHash": "ad87c98fa60e75e504bbac5a150da15126f53da9bb8b3f46fe74fd38262c14b4"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "通常のターン制と当サイトにあるＣＴＢ（またはＣＴＴＢ）では、ターンの参照方法が変わります。",
+      "sourceHash": "c765f2eb3135f2d7e7b2dbc8c088156aca533f8c4d45a35ba5791a9114db378d",
+      "translation": "The way you reference the turn differs between the normal turn-based system and the CTB (or CTTB) used on this site.",
+      "contextHash": "c765f2eb3135f2d7e7b2dbc8c088156aca533f8c4d45a35ba5791a9114db378d"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ターン制の場合",
+      "sourceHash": "93b2e2eb66a0b0a9d0eb9f5be9bd185c1f242aed967deffe146c9c9030da0783",
+      "translation": "For the Turn-Based System",
+      "contextHash": "93b2e2eb66a0b0a9d0eb9f5be9bd185c1f242aed967deffe146c9c9030da0783"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "にて、敵グループが保有する現在ターンを取得できます。",
+      "sourceHash": "76a1e7ef4231613925ce2848ed3963063a12093386dc73cca269314c78546ddd",
+      "translation": "You can retrieve the current turn held by the troop with it.",
+      "contextHash": "76a1e7ef4231613925ce2848ed3963063a12093386dc73cca269314c78546ddd"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "これは敵グループのバトルイベントと同じで1ターンから始まります。",
+      "sourceHash": "a29a4df1de2b8062ab56190fb67176a571659f758cdb006a1ed7b25e7719efe8",
+      "translation": "Like the troop's battle event, this starts at turn 1.",
+      "contextHash": "a29a4df1de2b8062ab56190fb67176a571659f758cdb006a1ed7b25e7719efe8"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "※敵の戦闘行動の設定画面では0ターンから始まります。挙動が違うのでご注意！",
+      "sourceHash": "2a49373c3b1dda503c6d65461e71f4fad997f83a6a7162162f0cf83f7a5b2841",
+      "translation": "※The enemy action settings screen starts at turn 0. Be careful, as the behavior differs!",
+      "contextHash": "2a49373c3b1dda503c6d65461e71f4fad997f83a6a7162162f0cf83f7a5b2841"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "『$gameTroop.turnCount() == 1』は見たまんま１ターン目なので、説明は不要でしょう。",
+      "sourceHash": "5ac0f6fcf0edd588270d061478a056ad13512b27a43083a0be2d94aed6403318",
+      "translation": " \"$gameTroop.turnCount() == 1』 plainly means the first turn, so it probably needs no explanation.",
+      "contextHash": "5ac0f6fcf0edd588270d061478a056ad13512b27a43083a0be2d94aed6403318"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "少し難しいのは『$gameTroop.turnCount() % 2 == 0』という記述です。",
+      "sourceHash": "32e2e6204dd1989ed4ea2aaa6d1ecb8713655d01b112db49bb69b6628e3dbe1f",
+      "translation": "A slightly more difficult expression is 『$gameTroop.turnCount() % 2 == 0』.",
+      "contextHash": "32e2e6204dd1989ed4ea2aaa6d1ecb8713655d01b112db49bb69b6628e3dbe1f"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "これは２で割った余りが０。つまり偶数ターンを意味しています。",
+      "sourceHash": "b91fa3cdaef71bb41e9eb2ccbd4b5889febd58d7ac43b9aa01ba255feb461c6b",
+      "translation": "This means the remainder after division by 2 is 0—in other words, an even-numbered turn.",
+      "contextHash": "b91fa3cdaef71bb41e9eb2ccbd4b5889febd58d7ac43b9aa01ba255feb461c6b"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "もちろん『$gameTroop.turnCount() % 2 == 1』は奇数ターンになります。",
+      "sourceHash": "5f2951fd04a81a25f3b091768d742d8a73c131ec6f6f5827893c38e1342008d1",
+      "translation": "Of course, 『$gameTroop.turnCount() % 2 == 1』 means an odd-numbered turn.",
+      "contextHash": "5f2951fd04a81a25f3b091768d742d8a73c131ec6f6f5827893c38e1342008d1"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "ローテーション行動を取らせたい場合は、こういう余りを使った演算が有効です。",
+      "sourceHash": "a9cbff40c62c238e82d684775b0c17b2177f6b96db10e44a1519f79b6f09a784",
+      "translation": "This kind of calculation using remainders is effective for making an enemy take actions in rotation.",
+      "contextHash": "a9cbff40c62c238e82d684775b0c17b2177f6b96db10e44a1519f79b6f09a784"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "ちなみに、３ターンローテーションを取らせたい場合……",
+      "sourceHash": "580c4bf118fdcf566fad9066874423be833eb9534c7c6109b5cbc22b6ab34859",
+      "translation": "Incidentally, if you want a three-turn rotation…",
+      "contextHash": "580c4bf118fdcf566fad9066874423be833eb9534c7c6109b5cbc22b6ab34859"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "条件分岐：スクリプト：$gameTroop.turnCount() % 3 == 1",
+      "sourceHash": "075c7fa9b1a816985107de74141b26b904945d7e26b935cad10625d5c4d59c27",
+      "translation": "Conditional Branch: Script: $gameTroop.turnCount() % 3 == 1",
+      "contextHash": "075c7fa9b1a816985107de74141b26b904945d7e26b935cad10625d5c4d59c27"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "条件分岐：スクリプト：$gameTroop.turnCount() % 3 == 2",
+      "sourceHash": "ce55e29b1a48d1d9535e41ddeb6479deb271556ce5a9c3686e2da1973c22e9fc",
+      "translation": "Conditional Branch: Script: $gameTroop.turnCount() % 3 == 2",
+      "contextHash": "ce55e29b1a48d1d9535e41ddeb6479deb271556ce5a9c3686e2da1973c22e9fc"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "条件分岐：スクリプト：$gameTroop.turnCount() % 3 == 0",
+      "sourceHash": "54ed096e3d4ce4b51a849a5753a23caeaee7b34526ec25c9eeb3ae80b79aaab2",
+      "translation": "Conditional Branch: Script: $gameTroop.turnCount() % 3 == 0",
+      "contextHash": "54ed096e3d4ce4b51a849a5753a23caeaee7b34526ec25c9eeb3ae80b79aaab2"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "という順番で回ってきます。",
+      "sourceHash": "b8975f68f888b7af441c7e64731dda4640aee08f81b0d05595575ffe3885c9d9",
+      "translation": "They cycle in that order.",
+      "contextHash": "b8975f68f888b7af441c7e64731dda4640aee08f81b0d05595575ffe3885c9d9"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "直感的に0,1,2とやりたくなりますが、ご注意ください。",
+      "sourceHash": "7ddb6b4834abb54b4383d11b449b51e2ba3587a7906e44e521fbc5c8fcc3fc56",
+      "translation": "You may intuitively want to use 0, 1, and 2, but be careful.",
+      "contextHash": "7ddb6b4834abb54b4383d11b449b51e2ba3587a7906e44e521fbc5c8fcc3fc56"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ＣＴＢまたはＣＴＴＢの場合",
+      "sourceHash": "3452cf6764291bd1f0fe5352c4ee43a60177a766736927db6be43897bc9b8fcf",
+      "translation": "For CTB or CTTB",
+      "contextHash": "3452cf6764291bd1f0fe5352c4ee43a60177a766736927db6be43897bc9b8fcf"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "個々人がバラバラに動くＣＴＢでは、グループのターンはほとんど意味を持ちません。",
+      "sourceHash": "1bb7d57a1c087c8629831b8f30cbfa28461141a3114a2e3dfb1a79a344b117d2",
+      "translation": "In CTB, where individuals act independently, the troop's turn has little meaning.",
+      "contextHash": "1bb7d57a1c087c8629831b8f30cbfa28461141a3114a2e3dfb1a79a344b117d2"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "というわけで、上記のように行動主体が保有するターンを参照します。",
+      "sourceHash": "4b691ba75048d2898d3698fbbaa4665959275125cb4ab44917ed1357012d79be",
+      "translation": "Therefore, as shown above, we refer to the turns held by the action subject.",
+      "contextHash": "4b691ba75048d2898d3698fbbaa4665959275125cb4ab44917ed1357012d79be"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "$gameTroopがBattleManager._subjectに置き換わっただけですね。",
+      "sourceHash": "9a0832d86077f2761dd70412f4235af653662e6ab1faaae7e86ee654a5e7a405",
+      "translation": "It has simply been replaced with $gameTroop in BattleManager._subject.",
+      "contextHash": "9a0832d86077f2761dd70412f4235af653662e6ab1faaae7e86ee654a5e7a405"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "※NRP_CountTimeBattle.js ver1.041またはNRP_CountTimeTurnBattle.js ver1.01以降が対象です。変数名を変更していますのでご注意ください！",
+      "sourceHash": "533f99eb773642a7cd6e819a09ddec20cb78fd886288df79cffc51102a9eaca5",
+      "translation": "※This applies to NRP_CountTimeBattle.js ver1.041 or NRP_CountTimeTurnBattle.js ver1.01 and later. Please note that the variable names have been changed!",
+      "contextHash": "533f99eb773642a7cd6e819a09ddec20cb78fd886288df79cffc51102a9eaca5"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "複数回行動",
+      "sourceHash": "13fef9a052de25c0bdb3243bbd49968e01b241693a9d4bea6a0cbfa5d02bf03a",
+      "translation": "Multiple Actions",
+      "contextHash": "13fef9a052de25c0bdb3243bbd49968e01b241693a9d4bea6a0cbfa5d02bf03a"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "これはデフォルトでは難しい機能です。",
+      "sourceHash": "1ad5ea0d37ad6e766f14056ec2c8f2de8126fbe950d65abc90ae6deea5a48ab3",
+      "translation": "This is difficult to implement by default.",
+      "contextHash": "1ad5ea0d37ad6e766f14056ec2c8f2de8126fbe950d65abc90ae6deea5a48ab3"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "とはいっても、『戦闘行動の強制』を複数行入力するだけです。デフォルトとは違って、順番を自由に決められます。",
+      "sourceHash": "32324ecd1fee1029f9267f423322581d986aa912cdbd046d1de403588c1b7bda",
+      "translation": "That said, all you have to do is enter multiple lines of \"Force Action.\" Unlike the default behavior, you can freely determine the order.",
+      "contextHash": "32324ecd1fee1029f9267f423322581d986aa912cdbd046d1de403588c1b7bda"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "画像の例では、奇数ターンに１回行動の全体攻撃、偶数ターンに２回攻撃するようにしてみました。",
+      "sourceHash": "b874cfb5779cbe14126dda1de8dd35384e863bd397081793e030c62965e17946",
+      "translation": "In the example image, I set it to perform one all-target attack on odd-numbered turns and two attacks on even-numbered turns.",
+      "contextHash": "b874cfb5779cbe14126dda1de8dd35384e863bd397081793e030c62965e17946"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "強力な攻撃をする時だけ１回攻撃にすると、バランスを取りやすくていい感じです。",
+      "sourceHash": "712c91aba66e7a61c9ef385ca8bb2abb8d51b9ad2105f1c00b7b1734e7f9a167",
+      "translation": "Having it attack only once when using a powerful attack makes it easier to balance and works quite well.",
+      "contextHash": "712c91aba66e7a61c9ef385ca8bb2abb8d51b9ad2105f1c00b7b1734e7f9a167"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "一回ずつランダムに行動を決めたい場合は、以下のように書きます。",
+      "sourceHash": "379d3036ef3b1afe95cad309654f9da3e04e335386172b2f2cd3f2d31a6db568",
+      "translation": "If you want to randomly determine each action one at a time, write it as follows.",
+      "contextHash": "379d3036ef3b1afe95cad309654f9da3e04e335386172b2f2cd3f2d31a6db568"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "攻撃とファイアのランダム２回行動です。",
+      "sourceHash": "5290dc9d394ed0d92061968d8d9ebff01a21c259b3e21a811eba920516837c73",
+      "translation": "These are two random actions consisting of Attack and Fire.",
+      "contextHash": "5290dc9d394ed0d92061968d8d9ebff01a21c259b3e21a811eba920516837c73"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "ややこしく見えるかもしれませんが、単に行動した回数をカウントしながらループさせているだけです。",
+      "sourceHash": "7ebd513192ad81b27061337678eda0719b6f798a86af6abf751ad09918ed1642",
+      "translation": "It may look complicated, but it is simply looping while counting the number of actions performed.",
+      "contextHash": "7ebd513192ad81b27061337678eda0719b6f798a86af6abf751ad09918ed1642"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "ちなみに、一撃目で対象が全滅した場合、二撃目で落ちるバグが元々ありました。このプラグインで修正済みです。",
+      "sourceHash": "a72d81d8253b2b85487cb2edb49819f1c05290cc7f961a55f329ab8ada18c69a",
+      "translation": "Incidentally, there was originally a bug where the game would crash on the second attack if all targets were defeated by the first one. This plugin fixes it.",
+      "contextHash": "a72d81d8253b2b85487cb2edb49819f1c05290cc7f961a55f329ab8ada18c69a"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "自分の状態を参照する",
+      "sourceHash": "78a817f1ee2c6a0f738a138f750b962a2f48a33da02bfba8c802e1e2e5a3b94a",
+      "translation": "Referencing Your Own State",
+      "contextHash": "78a817f1ee2c6a0f738a138f750b962a2f48a33da02bfba8c802e1e2e5a3b94a"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "自分のHPが50%以下の時",
+      "sourceHash": "6563da99471c3924bb7de77d4c1cf67201e36bf32d50b4fd7cafaa67698ef49f",
+      "translation": "When Your HP Is 50% or Lower",
+      "contextHash": "6563da99471c3924bb7de77d4c1cf67201e36bf32d50b4fd7cafaa67698ef49f"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "困ったことにバトルイベントの通常の条件分岐ではＨＰを参照できません。",
+      "sourceHash": "5148f95605e9b15a048f2777c11ae34d197f1f406092681825c85a26f509cef0",
+      "translation": "Unfortunately, HP cannot be referenced using the normal conditional branches in battle events.",
+      "contextHash": "5148f95605e9b15a048f2777c11ae34d197f1f406092681825c85a26f509cef0"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "というわけで、スクリプトを使います。",
+      "sourceHash": "1b838e04042afe9e8875bddf70a94bfec1bd079613274ba099e64eaa9f88d2a0",
+      "translation": "Therefore, we use a script.",
+      "contextHash": "1b838e04042afe9e8875bddf70a94bfec1bd079613274ba099e64eaa9f88d2a0"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "条件分岐：スクリプト：BattleManager._subject.hpRate() <= 0.5",
+      "sourceHash": "94d1df639e73ac26bceb79a3b0ea52534c11c6e27f4e6cc28ce17e0b2651410c",
+      "translation": "Conditional Branch: Script: BattleManager._subject.hpRate() <= 0.5",
+      "contextHash": "94d1df639e73ac26bceb79a3b0ea52534c11c6e27f4e6cc28ce17e0b2651410c"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "hpRate()というのが、現在ＨＰの割合です。１００％が1.0です。",
+      "sourceHash": "f2af6b0d6a0aa9735618ecd671be9c938bbfd3e7d23bd5a27aaa58f50fba5648",
+      "translation": "hpRate() represents the current HP ratio. 100% is 1.0.",
+      "contextHash": "f2af6b0d6a0aa9735618ecd671be9c938bbfd3e7d23bd5a27aaa58f50fba5648"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "自分のMPが100以下の時",
+      "sourceHash": "56bd61fb8bbacb084baa3c9acf29ff7828185dfa45a84b740fe0914cdc1eeaaa",
+      "translation": "When Your MP Is 100 or Lower",
+      "contextHash": "56bd61fb8bbacb084baa3c9acf29ff7828185dfa45a84b740fe0914cdc1eeaaa"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "条件分岐：スクリプト：BattleManager._subject.mp <= 100",
+      "sourceHash": "c0b910ec80cdc3cc70c9b22d727b7336299648ec686000d67d829a7513b695ef",
+      "translation": "Conditional Branch: Script: BattleManager._subject.mp <= 100",
+      "contextHash": "c0b910ec80cdc3cc70c9b22d727b7336299648ec686000d67d829a7513b695ef"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "というように、あらゆるパラメータを参照できます。",
+      "sourceHash": "8f0b43605cf048604f2788f22ca0fd169f1bfa3cbc923b91f14275440980d050",
+      "translation": "In this way, you can reference all kinds of parameters.",
+      "contextHash": "8f0b43605cf048604f2788f22ca0fd169f1bfa3cbc923b91f14275440980d050"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "一体になると行動が激化する",
+      "sourceHash": "143b3f9963c2dbbc689b6bb7bf050533e249919a1f0fc7e87d912b58b80837be",
+      "translation": "Actions Intensify When Only One Remains",
+      "contextHash": "143b3f9963c2dbbc689b6bb7bf050533e249919a1f0fc7e87d912b58b80837be"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "以下を条件にして、行動を変更します。",
+      "sourceHash": "311d9ed59e8028ce726d3c346fed06a937ce2f970cb224cf7e31fe7937162250",
+      "translation": "Change the action based on the following condition.",
+      "contextHash": "311d9ed59e8028ce726d3c346fed06a937ce2f970cb224cf7e31fe7937162250"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "条件分岐：スクリプト：$gameTroop.aliveMembers().length == 1",
+      "sourceHash": "1c37509ec04be061892b30658ac0b74e8f9ddfd03a7d372ec07a4d46521ecf6d",
+      "translation": "Conditional Branch: Script: $gameTroop.aliveMembers().length == 1",
+      "contextHash": "1c37509ec04be061892b30658ac0b74e8f9ddfd03a7d372ec07a4d46521ecf6d"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "自分にステートがかかっているか",
+      "sourceHash": "042c3e6097d5345c1309e492ef99234b635641337297fbf3e89200610bb8d2bf",
+      "translation": "Whether You Have a State Applied",
+      "contextHash": "042c3e6097d5345c1309e492ef99234b635641337297fbf3e89200610bb8d2bf"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "行動主体が固定なら普通に条件分岐が使えます。",
+      "sourceHash": "b08d146dec903bf87a0ea8dedb6ef371d194455351ff1e6906773be5c0869afc",
+      "translation": "If the action subject is fixed, you can use a normal conditional branch.",
+      "contextHash": "b08d146dec903bf87a0ea8dedb6ef371d194455351ff1e6906773be5c0869afc"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "以下はそうでない場合も判定できるスクリプトです。",
+      "sourceHash": "59c80b2f706b3b207b9c7c4a1251bfae09197da49ac0ae76cbc103ef7fac6f61",
+      "translation": "The following script can also check when it is not fixed.",
+      "contextHash": "59c80b2f706b3b207b9c7c4a1251bfae09197da49ac0ae76cbc103ef7fac6f61"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "条件分岐：スクリプト：BattleManager._subject.isStateAffected(4)",
+      "sourceHash": "531c042e22ade943c2719078965f03cfc34b0668d96f80c0d9c8026a328b1539",
+      "translation": "Conditional Branch: Script: BattleManager._subject.isStateAffected(4)",
+      "contextHash": "531c042e22ade943c2719078965f03cfc34b0668d96f80c0d9c8026a328b1539"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "上はステートＩＤ＝４（初期では毒）にかかっているかどうかを判定しています。",
+      "sourceHash": "076c344142d3909d3376859401af0040ee8e72f3d767e294be303c629bf2e6fe",
+      "translation": "The one above checks whether the subject is affected by state ID 4 (Poison by default).",
+      "contextHash": "076c344142d3909d3376859401af0040ee8e72f3d767e294be303c629bf2e6fe"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "例えば、治療魔法を使うかどうかの判定に使えます。",
+      "sourceHash": "29c2abbbb602423b92d216049fd3dad559b28e9255c87b14c5c3d487d711455c",
+      "translation": "For example, it can be used to determine whether to use a healing spell.",
+      "contextHash": "29c2abbbb602423b92d216049fd3dad559b28e9255c87b14c5c3d487d711455c"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "条件分岐：スクリプト：!BattleManager._subject.isStateAffected(4)",
+      "sourceHash": "c526a914caf060475fecf941b7e11fce9c18adbbd5b3fe1a40a35d5f99cd5dc6",
+      "translation": "Conditional Branch: Script: !BattleManager._subject.isStateAffected(4)",
+      "contextHash": "c526a914caf060475fecf941b7e11fce9c18adbbd5b3fe1a40a35d5f99cd5dc6"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "かかっていない時を知りたいなら、先頭に『!』をつけて条件を反転します。",
+      "sourceHash": "c68c4731ef38fdecb63d24aa49eb6f7082e7fa80528ed12c9cb693d2042f84fd",
+      "translation": "If you want to check when the state is not applied, add \"!\" at the beginning to invert the condition.",
+      "contextHash": "c68c4731ef38fdecb63d24aa49eb6f7082e7fa80528ed12c9cb693d2042f84fd"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "補助ステートの重複防止はこれで。",
+      "sourceHash": "45c47186631cf0c224f3835711694e27b2b590f059f140ef3ccde831825c3a48",
+      "translation": "Use this to prevent duplicate support states.",
+      "contextHash": "45c47186631cf0c224f3835711694e27b2b590f059f140ef3ccde831825c3a48"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "眠っている時に使用するスキル（ＣＴＢ限定）",
+      "sourceHash": "b330554950cdaf7c14f9ef7ca6c0ffba7dd456d06ed979074ac7af4331fa4e0d",
+      "translation": "Skills Used While Asleep (CTB Only)",
+      "contextHash": "b330554950cdaf7c14f9ef7ca6c0ffba7dd456d06ed979074ac7af4331fa4e0d"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "※コモンイベントから呼び出す方法だと、先に行動異常の判定が行われるため呼び出せません。",
+      "sourceHash": "86f0e245a41ac2cccbe463845f2731cf60aa653fed84b9934864fb53b77c4f7c",
+      "translation": "※When called from a common event, it cannot be called because the action restriction check is performed first.",
+      "contextHash": "86f0e245a41ac2cccbe463845f2731cf60aa653fed84b9934864fb53b77c4f7c"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "上で紹介済の方法を使用し、眠っている時を判定します。",
+      "sourceHash": "8abf1726bfd8d54c098dd006be7604f4f95c9260143894d3ebb0f34cf86a7688",
+      "translation": "Use the method introduced above to check whether the subject is asleep.",
+      "contextHash": "8abf1726bfd8d54c098dd006be7604f4f95c9260143894d3ebb0f34cf86a7688"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "さらに以下のプラグインコマンドを指定することで、行動異常時も行動を実行できるようになります。",
+      "sourceHash": "84dee3acc29b186a63238c64902ebd37f9a661034b69d6d1bd62b34c437ffa06",
+      "translation": "Furthermore, by specifying the following plugin command, you can execute actions even when the subject has an action restriction.",
+      "contextHash": "84dee3acc29b186a63238c64902ebd37f9a661034b69d6d1bd62b34c437ffa06"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "※ターン制でも行動実行前にコモンイベントを呼び出すようなプラグインを使えば、同様の技も可能かもしれません。今はまだ研究中です。",
+      "sourceHash": "08f473aee3fe39d6bb48c18e3750d6cb3333cd8a6f06676875863a10b929227e",
+      "translation": "※Even in turn-based battles, a similar technique may be possible by using a plugin that calls a common event before executing an action. I am still investigating this.",
+      "contextHash": "08f473aee3fe39d6bb48c18e3750d6cb3333cd8a6f06676875863a10b929227e"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "対象を参照・変更する",
+      "sourceHash": "5db084af48c2f6552c867371ce077149087ec4bd8012b7ac984d582338f8c08c",
+      "translation": "Referencing and Changing the Target",
+      "contextHash": "5db084af48c2f6552c867371ce077149087ec4bd8012b7ac984d582338f8c08c"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "特定のアクターを狙う",
+      "sourceHash": "763492bea29ab571a44913cd488603d1558eb949b0c5cc8ef8e41e8571632dbf",
+      "translation": "Targeting a Specific Actor",
+      "contextHash": "763492bea29ab571a44913cd488603d1558eb949b0c5cc8ef8e41e8571632dbf"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "少しずつ難しいヤツいきます。もっとも、難しく感じても０から書く必要はありません。",
+      "sourceHash": "f71c26132c595e01037a21d03ea4189c9ce735b3fece1b24d97a538a0b5e8304",
+      "translation": "Let's move on to some slightly more difficult examples. However, even if they seem difficult, you do not need to write them from scratch.",
+      "contextHash": "f71c26132c595e01037a21d03ea4189c9ce735b3fece1b24d97a538a0b5e8304"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "自分が使いたいものに似た処理を探して、コピペしてください。",
+      "sourceHash": "964d7dcbebbeb05d95251901f33f2fb29f91fb87707c2e2e7eb0a529d12b3e97",
+      "translation": "Find a process similar to what you want to use and copy and paste it.",
+      "contextHash": "964d7dcbebbeb05d95251901f33f2fb29f91fb87707c2e2e7eb0a529d12b3e97"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "※アローファンクション（=>）を使ったJavaScriptの記法はツクールMVの本体バージョンが1.6以降でないと使えないようです。ご注意ください。",
+      "sourceHash": "5b0e8b24674dd4586085b9af94406c8e6aa9709e4fc90095fcddbb1f61ab5025",
+      "translation": "※The JavaScript syntax using arrow functions (=>) apparently cannot be used unless the RPG Maker MV core version is 1.6 or later. Please be careful.",
+      "contextHash": "5b0e8b24674dd4586085b9af94406c8e6aa9709e4fc90095fcddbb1f61ab5025"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "これはアクターＩＤ＝４のキャラを生存者の中から探して取得するスクリプトです。",
+      "sourceHash": "3c7d39a424514d85e459e898910bf7a0c14bc958c7bb81d4e09400fd9d21ef1d",
+      "translation": "This script searches among the surviving members for the character with actor ID 4 and retrieves them.",
+      "contextHash": "3c7d39a424514d85e459e898910bf7a0c14bc958c7bb81d4e09400fd9d21ef1d"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "『$gameParty.aliveMembers()』がパーティの生存者リスト。その中で『m.actorId() == 4』に一致する対象を探しているわけですね。",
+      "sourceHash": "f0be6b69d571d10064058357587a2d52b6e5c37a4dbb88a47a90b33462371204",
+      "translation": " \"$gameParty.aliveMembers()\" is the party's list of surviving members. It searches that list for a target matching \"m.actorId() == 4\".",
+      "contextHash": "f0be6b69d571d10064058357587a2d52b6e5c37a4dbb88a47a90b33462371204"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "でもって、取得した『target』のインデックスを取ってスクリプトから『戦闘行動の強制』を呼び出せばよいわけですが……。",
+      "sourceHash": "87065a300b84e7d644b0521f92d8a30fa8fed65d74c43b3df187d0deae747c87",
+      "translation": "Then, you can obtain the index of the retrieved \"target\" and call \"Force Action\" from a script, but...",
+      "contextHash": "87065a300b84e7d644b0521f92d8a30fa8fed65d74c43b3df187d0deae747c87"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "ここでさっきのプラグインコマンドを使います。これで『戦闘行動の強制』の対象を強制変換しました。『target =』の部分は省略し、一行で書いてしまいます。",
+      "sourceHash": "8add3ff859956a337ec6e41683db1c4d1e7e351e2fa5465febf71daba8b91bd8",
+      "translation": "Here, we use the plugin command from earlier. This forcibly converts the target of \"Force Action.\" We omit the \"target =\" portion and write it all on one line.",
+      "contextHash": "8add3ff859956a337ec6e41683db1c4d1e7e351e2fa5465febf71daba8b91bd8"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "※しつこいようですが『スクリプト』ではなく『プラグインコマンド』です。",
+      "sourceHash": "bb24a17bc4fe1ee6431a98410c311bff4c34b0935bf429749d21256c9424b2db",
+      "translation": "※I know I am repeating myself, but it is a \"plugin command,\" not a \"script.\"",
+      "contextHash": "bb24a17bc4fe1ee6431a98410c311bff4c34b0935bf429749d21256c9424b2db"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "自分もたまに間違えます。",
+      "sourceHash": "937151735b6551fa47bb22b33a0256f36935bbef5747df51ba7fd8ab7a514ce2",
+      "translation": "I occasionally make that mistake too.",
+      "contextHash": "937151735b6551fa47bb22b33a0256f36935bbef5747df51ba7fd8ab7a514ce2"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "対象がいなかったり戦闘不能になった場合は、他の相手を狙ってくれます。",
+      "sourceHash": "36b4d0fe1e0821fe68df5ec6013f9438f090a73ab2fc3f8edea5a5a8c2df0e6f",
+      "translation": "If the target does not exist or becomes incapacitated, it will target another opponent.",
+      "contextHash": "36b4d0fe1e0821fe68df5ec6013f9438f090a73ab2fc3f8edea5a5a8c2df0e6f"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "なお、ここで使用している『find』という関数は、リストの中から最初に見つけた要素を返します。",
+      "sourceHash": "b333ed6f06e829e3fc9d08c377983c2593e8ee36b1961f9d8d99ff317bf9965b",
+      "translation": "The \"find\" function used here returns the first element it finds in the list.",
+      "contextHash": "b333ed6f06e829e3fc9d08c377983c2593e8ee36b1961f9d8d99ff317bf9965b"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "条件を満たす対象が複数いても、対象になるのは最初の一人だけです。",
+      "sourceHash": "e0d70315d2a82c17330130f8891bee68b08f46ff28791b2924bb340568feb7af",
+      "translation": "Even if multiple targets meet the conditions, only the first one will be targeted.",
+      "contextHash": "e0d70315d2a82c17330130f8891bee68b08f46ff28791b2924bb340568feb7af"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "最も弱っているアクターを狙う",
+      "sourceHash": "fd832f80eceeabb3b5739a6d658133092abce3efa618e5d9c44bcced08143738",
+      "translation": "Targeting the Actor in the Weakest Condition",
+      "contextHash": "fd832f80eceeabb3b5739a6d658133092abce3efa618e5d9c44bcced08143738"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "前回と同じ要領で可能です。",
+      "sourceHash": "4d606ed8df2f4c98eac3da3a3cbbb5931f6b0a1dc65d573264ddc0bf4fba7e59",
+      "translation": "It can be done in the same way as before.",
+      "contextHash": "4d606ed8df2f4c98eac3da3a3cbbb5931f6b0a1dc65d573264ddc0bf4fba7e59"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "今回は『reduce』という関数を使用しています。",
+      "sourceHash": "d00e27ab67fdc62bd70d0f98bd0ad69d448fc07cbb2de16b31c88f7dd230e170",
+      "translation": "This time, I’m using a function called “reduce.”",
+      "contextHash": "d00e27ab67fdc62bd70d0f98bd0ad69d448fc07cbb2de16b31c88f7dd230e170"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "これは生存者リストの中から、ＨＰ％（hpRate()）を繰り返し比較しあって一番小さな対象を得ているわけです。",
+      "sourceHash": "5118675bada3edd8387ca5ea0d36896f475ec9b3ee9f02c7512c2a4b51d7b0da",
+      "translation": "It repeatedly compares the HP percentage (hpRate()) of the survivors to obtain the one with the lowest value.",
+      "contextHash": "5118675bada3edd8387ca5ea0d36896f475ec9b3ee9f02c7512c2a4b51d7b0da"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "……が、一つ落とし穴。",
+      "sourceHash": "0373c351c220295f9512e9e7bad8ccd16a1bfcf7525a845cfaafd6087bc718f0",
+      "translation": "……But there’s one catch.",
+      "contextHash": "0373c351c220295f9512e9e7bad8ccd16a1bfcf7525a845cfaafd6087bc718f0"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "この『reduce』という関数、比較する対象がないとエラーで落ちます。",
+      "sourceHash": "9b05ed7a133a994b4029ab0e7cc4b91c5dd8f1efe972af708fb4b7a636856738",
+      "translation": "The “reduce” function throws an error if there is nothing to compare.",
+      "contextHash": "9b05ed7a133a994b4029ab0e7cc4b91c5dd8f1efe972af708fb4b7a636856738"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "$gameParty.aliveMembers()が空の時、つまり全アクターが死んでいると落ちます。",
+      "sourceHash": "b70cf2245bb0a891d9bdfde62dfe41d37754f03e257450698cc815d6d750f477",
+      "translation": "$gameParty.aliveMembers()When  is empty—in other words, when all actors are dead—it crashes.",
+      "contextHash": "b70cf2245bb0a891d9bdfde62dfe41d37754f03e257450698cc815d6d750f477"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "１回目の行動ならそんな状況にはなりません。対象の取得は１回目の行動時しかやらないというなら、問題はありません。",
+      "sourceHash": "8e84de59fdddeaaba3a9a734d5abee6abb1051cef0f858e1bc944227ad4a0ec7",
+      "translation": "1On the  turn, that situation won’t occur. If you only obtain the target during the first action, there’s no problem.",
+      "contextHash": "8e84de59fdddeaaba3a9a734d5abee6abb1051cef0f858e1bc944227ad4a0ec7"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "ただ２回目以降の行動では注意が必要です。",
+      "sourceHash": "5585e4003fde3e41b677bf58f55abd7a26cf4af2346c74d3b57de76a21e6e3c0",
+      "translation": "However, you need to be careful with actions from the second onward.",
+      "contextHash": "5585e4003fde3e41b677bf58f55abd7a26cf4af2346c74d3b57de76a21e6e3c0"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "条件分岐：スクリプト：!$gameParty.isAllDead()",
+      "sourceHash": "834cbbdd92d97c0312c0fac098750ec3f076c46672f36e5eca7bf2a17fb999ec",
+      "translation": "Conditional Branch: Script: !$gameParty.isAllDead()",
+      "contextHash": "834cbbdd92d97c0312c0fac098750ec3f076c46672f36e5eca7bf2a17fb999ec"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "そこで上の条件（全滅時でない）を満たす時のみ処理するようにします。",
+      "sourceHash": "6678b716e52443af21ddd8d116848a848f30b9977f7e9f081fb93114aa2df4d5",
+      "translation": "So, we’ll only process it when the condition above (the party is not completely defeated) is met.",
+      "contextHash": "6678b716e52443af21ddd8d116848a848f30b9977f7e9f081fb93114aa2df4d5"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "こんな感じになります。",
+      "sourceHash": "f7a47ba208836296a26393d90d6caae8affc7e4b0272f111119e34f21f9dae42",
+      "translation": "It will look like this.",
+      "contextHash": "f7a47ba208836296a26393d90d6caae8affc7e4b0272f111119e34f21f9dae42"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "なお、よく使う場合は分かりやすい名前でコモンイベント化することをオススメします。",
+      "sourceHash": "92a5d394bdcbd3e5702a838ec70ae689555db958e1f4aefa47e816efae64efa2",
+      "translation": "If you use it often, I recommend turning it into a common event with an easy-to-understand name.",
+      "contextHash": "92a5d394bdcbd3e5702a838ec70ae689555db958e1f4aefa47e816efae64efa2"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "ていうか、こんなパッと見で分かりにくい処理を毎回打ち込むのは耐えられません。",
+      "sourceHash": "bcdcc646d83cfdcbb316c6b3991302baed27f43e78963348e9bbfbddedd9e305",
+      "translation": "I mean, I can’t stand having to enter a process like this every time when it’s so hard to understand at a glance.",
+      "contextHash": "bcdcc646d83cfdcbb316c6b3991302baed27f43e78963348e9bbfbddedd9e305"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "分かりやすいですね。これなら我慢できそうです。",
+      "sourceHash": "8145e93c571d990da3a92d40a129504ac0a1faab24dd75d69f2bc4273e0d776d",
+      "translation": "That’s much easier to understand. I think I can live with this.",
+      "contextHash": "8145e93c571d990da3a92d40a129504ac0a1faab24dd75d69f2bc4273e0d776d"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "今回はＨＰ％でやりましたが、比較する値を変えれば色んな相手を対象にできます。",
+      "sourceHash": "b2283a237e23d43b3b6ce574aeeb2447455b34d21b3b530f32e47606f038cc98",
+      "translation": "This time, I used the HP percentage, but you can target different opponents by changing the value being compared.",
+      "contextHash": "b2283a237e23d43b3b6ce574aeeb2447455b34d21b3b530f32e47606f038cc98"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "これは現在ＨＰの一番多いアクターです。多いほうを取るため、不等号を大なりにしています。",
+      "sourceHash": "236785c0a59b10fdb5dcf7ff5c3a6c54a0e021afe5406ff52e5ba6b5c0e7a51a",
+      "translation": "This targets the actor with the highest current HP. The greater-than sign is used to select the higher value.",
+      "contextHash": "236785c0a59b10fdb5dcf7ff5c3a6c54a0e021afe5406ff52e5ba6b5c0e7a51a"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "ＨＰ＋ＭＰの合計で比較してみました。複数の要素を合わせた比較も可能です。",
+      "sourceHash": "6cbed28f0a5a30be96f08546fd809c71d9d0e51d733c04e326920eb7a982873e",
+      "translation": "HP+MPI tried comparing the totals of . Comparisons combining multiple elements are also possible.",
+      "contextHash": "6cbed28f0a5a30be96f08546fd809c71d9d0e51d733c04e326920eb7a982873e"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "【追記】",
+      "sourceHash": "0d1c5c8ab01726f55aa0435ebedac06ed5ad51445e834dfe14ef97805c781330",
+      "translation": "【Addendum】",
+      "contextHash": "0d1c5c8ab01726f55aa0435ebedac06ed5ad51445e834dfe14ef97805c781330"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "ならば、落ちることなく同じ効果（最小の対象）が得られます。",
+      "sourceHash": "080d4e7b1bab826735f408a1ee172ad09d5c374a8a613bbe7b2ae503aa0dddc8",
+      "translation": "then you can get the same effect (the target with the lowest value) without it crashing.",
+      "contextHash": "080d4e7b1bab826735f408a1ee172ad09d5c374a8a613bbe7b2ae503aa0dddc8"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "『b.hpRate() - a.hpRate()』にすれば、最大の対象も得られます。どっちがどっちか分かりにくいのが難点ですが……。",
+      "sourceHash": "f6498b1b7c34db1274465af3ffbfd9ee7013b8662287b5d727cdcaa91cfbd769",
+      "translation": " \"b.hpRate() - a.hpRate()』you can get the target with the highest value. The drawback is that it’s hard to remember which is which…",
+      "contextHash": "f6498b1b7c34db1274465af3ffbfd9ee7013b8662287b5d727cdcaa91cfbd769"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "最もＨＰが減っている仲間を選択して回復",
+      "sourceHash": "effa1a4713e5dcb8a4d27741b2192d46f8b6479a77f5a8436fb1d78113e87747",
+      "translation": "Selecting and Healing the Ally with the Most HP Lost",
+      "contextHash": "effa1a4713e5dcb8a4d27741b2192d46f8b6479a77f5a8436fb1d78113e87747"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "実用的っぽいヤツをいきましょう。",
+      "sourceHash": "d712dfdb631bda3f47da3434ebb97265171e637b7cbc80bfa9aff112465ec82e",
+      "translation": "Let’s try something that seems more practical.",
+      "contextHash": "d712dfdb631bda3f47da3434ebb97265171e637b7cbc80bfa9aff112465ec82e"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "上とほぼ同じ考えですが、プラグインコマンドの一行で可能です。",
+      "sourceHash": "1dccecccfe25c1d7ed70a8df9ae0dc85bc6b5b52cf6c444b254e5f320e5fc5bf",
+      "translation": "The idea is almost the same as above, but this can be done with a single line in a plugin command.",
+      "contextHash": "1dccecccfe25c1d7ed70a8df9ae0dc85bc6b5b52cf6c444b254e5f320e5fc5bf"
+    },
+    {
+      "id": "code-032",
+      "type": "code",
+      "source": "対象が味方から敵。$gamePartyが$gameTroopに変わっただけですね。",
+      "sourceHash": "b5e5594f3bb410e2752f84bc11111376a4e86ce966f958aeb8cf26a85817f9e9",
+      "translation": "The targets changed from allies to enemies. $gameParty was simply changed to $gameTroop.",
+      "contextHash": "b5e5594f3bb410e2752f84bc11111376a4e86ce966f958aeb8cf26a85817f9e9"
+    },
+    {
+      "id": "code-033",
+      "type": "code",
+      "source": "範囲が味方のスキルを使えば、勝手に自軍が対象となります。",
+      "sourceHash": "92c0b8d766e91c855f261fb1e1bca671a6a3e6dde1ccb455738856c22020547f",
+      "translation": "If you use a skill whose scope is allies, your own party will automatically become the targets.",
+      "contextHash": "92c0b8d766e91c855f261fb1e1bca671a6a3e6dde1ccb455738856c22020547f"
+    },
+    {
+      "id": "code-034",
+      "type": "code",
+      "source": "ちなみに全滅判定は不要です。全滅してたらそもそも回復できませんので。",
+      "sourceHash": "64b64011257900da2783d2f6a78eeb4309b7bb584c7e9be33ba21465211519c3",
+      "translation": "By the way, there’s no need to check for total defeat. If everyone is defeated, you can’t heal them in the first place.",
+      "contextHash": "64b64011257900da2783d2f6a78eeb4309b7bb584c7e9be33ba21465211519c3"
+    },
+    {
+      "id": "code-035",
+      "type": "code",
+      "source": "……というかこの処理、バトルイベントじゃなくて最初から全体に組み込んだほうがいい気がしないでもない。他にプラグインがないなら検討しておきます。",
+      "sourceHash": "529a27aacac8be8df21de0190a82e29000d6c996aad542519afe8ee9fc70570f",
+      "translation": "……Actually, I can’t help but feel that this process should be built into everything from the start rather than being a battle event. If there isn’t another plugin, I’ll consider it.",
+      "contextHash": "529a27aacac8be8df21de0190a82e29000d6c996aad542519afe8ee9fc70570f"
+    },
+    {
+      "id": "code-036",
+      "type": "code",
+      "source": "→作りました。",
+      "sourceHash": "13af0d5e07cbaf30cd7f7c940193bfac85e042b04a4d183dd7aefc6617a51088",
+      "translation": "→I made it.",
+      "contextHash": "13af0d5e07cbaf30cd7f7c940193bfac85e042b04a4d183dd7aefc6617a51088"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/473218336.html",
+      "sourceHash": "25f354cc6efa7a2289ffa0b1f1038159872ac5a3df91af6ebe19ac09f63d4e98",
+      "translation": "http://newrpg.seesaa.net/article/473218336.html",
+      "contextHash": "31cb498e67b98bb154b0d9c9d73d837c0f7b736002d87fadfd1828fcf822d6f2"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "ＨＰが50%以下の仲間がいる時のみ回復を行う",
+      "sourceHash": "325d85b573196f1ffa68865ce3b27e7d42b3d390ed754c582aa6ed16951f32c4",
+      "translation": "Heal Only When There Is an Ally with 50% HP or Less",
+      "contextHash": "325d85b573196f1ffa68865ce3b27e7d42b3d390ed754c582aa6ed16951f32c4"
+    },
+    {
+      "id": "code-037",
+      "type": "code",
+      "source": "上と併せて役立ちそうなものも置いておきます。",
+      "sourceHash": "1081d26fa4357e5a755500f37270bcb9b095056b29dd38c9d9a732de62141a43",
+      "translation": "I’ll also leave something here that may be useful together with the above.",
+      "contextHash": "1081d26fa4357e5a755500f37270bcb9b095056b29dd38c9d9a732de62141a43"
+    },
+    {
+      "id": "code-038",
+      "type": "code",
+      "source": "以下を条件にして、回復行動を実行すれば可能です。",
+      "sourceHash": "89b8dcb8e1f61a1363e9119d4448d3f09b6f09dd3db2a772936cdc9a49b2dc49",
+      "translation": "You can do this by setting the following as the condition and executing a healing action.",
+      "contextHash": "89b8dcb8e1f61a1363e9119d4448d3f09b6f09dd3db2a772936cdc9a49b2dc49"
+    },
+    {
+      "id": "code-039",
+      "type": "code",
+      "source": "条件分岐：スクリプト：$gameTroop.aliveMembers().find(m => m.hpRate() <= 0.5)",
+      "sourceHash": "b59e9567d2a89d9fe1e678223174bc0f167d69f58029d54d7aad0513895825ea",
+      "translation": "Conditional Branch: Script: $gameTroop.aliveMembers().find(m => m.hpRate() <= 0.5)",
+      "contextHash": "b59e9567d2a89d9fe1e678223174bc0f167d69f58029d54d7aad0513895825ea"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "戦闘不能の仲間がいる時のみ蘇生を行う",
+      "sourceHash": "43c7f12776eecc86ed86c5c8d81971926f2162d40c8f7b612430e2dfd4ccfb50",
+      "translation": "Only Revive When There Are Incapacitated Allies",
+      "contextHash": "43c7f12776eecc86ed86c5c8d81971926f2162d40c8f7b612430e2dfd4ccfb50"
+    },
+    {
+      "id": "code-040",
+      "type": "code",
+      "source": "以下を条件にします。",
+      "sourceHash": "84d309ec23e882fdd7b7c1bc2c98ffa98bc3f70a90d76bccdd936d749800609e",
+      "translation": "Use the following as the condition.",
+      "contextHash": "84d309ec23e882fdd7b7c1bc2c98ffa98bc3f70a90d76bccdd936d749800609e"
+    },
+    {
+      "id": "code-041",
+      "type": "code",
+      "source": "条件分岐：スクリプト：$gameTroop.members().find(m => m.isDead())",
+      "sourceHash": "783f40848205a50028dff1522da082856a4aa5a2af3a9c0fd0d70e8d8728739e",
+      "translation": "Conditional Branch: Script: $gameTroop.members().find(m => m.isDead())",
+      "contextHash": "783f40848205a50028dff1522da082856a4aa5a2af3a9c0fd0d70e8d8728739e"
+    },
+    {
+      "id": "code-042",
+      "type": "code",
+      "source": "対象はランダムでも問題ありません。戦闘不能者がいれば、勝手に優先してくれるようです。",
+      "sourceHash": "f1123686de3f8f37f0dc7fd97eb647b00a8dd04b656dff6fbf0e312da3261d8b",
+      "translation": "The target can be random. If there is a dead battler, it seems to prioritize them automatically.",
+      "contextHash": "f1123686de3f8f37f0dc7fd97eb647b00a8dd04b656dff6fbf0e312da3261d8b"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "ステートにかかった相手を対象とする",
+      "sourceHash": "967354b3e3e664a7921e269a0ac52e249d2f0e0ea33e0b9481a973e902ddc77b",
+      "translation": "Target Those Affected by a State",
+      "contextHash": "967354b3e3e664a7921e269a0ac52e249d2f0e0ea33e0b9481a973e902ddc77b"
+    },
+    {
+      "id": "code-043",
+      "type": "code",
+      "source": "ステートＩＤ＝１０（初期では睡眠）にかかった相手を対象にします。デフォの睡眠は回避率の減少効果があるので、命中の低い大振り攻撃で狙ってくる敵など嫌らしいかもしれません。",
+      "sourceHash": "2bcb8ba10b3c7caac647a7c121e11bf1dc6d33eb84003f196c73ea1c4b7c457c",
+      "translation": "This targets an opponent affected by State ID = 10 (Sleep by default). Sleep reduces evasion rate by default, so enemies that target them with slow, inaccurate heavy attacks might be rather nasty.",
+      "contextHash": "2bcb8ba10b3c7caac647a7c121e11bf1dc6d33eb84003f196c73ea1c4b7c457c"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "ステートにかかっていない相手を対象とする",
+      "sourceHash": "f10bdad3e10f604f1d1bd399c6548719e4b1ae435b028a47936b6353ef61c5da",
+      "translation": "Target Those Not Affected by a State",
+      "contextHash": "f10bdad3e10f604f1d1bd399c6548719e4b1ae435b028a47936b6353ef61c5da"
+    },
+    {
+      "id": "code-044",
+      "type": "code",
+      "source": "『!』を頭につけることで反転。眠っていない相手を対象とします。まだ眠っていない相手を一人ずつ眠らせてくる敵なども作れます。",
+      "sourceHash": "6b96d707dc33274453454a64e6ad32cba2f25e28e078b25aa24ed1e2a3e54ecf",
+      "translation": " \"!』Adding  to the beginning reverses the condition. This targets opponents who are not asleep. You can also create an enemy that puts opponents to sleep one by one.",
+      "contextHash": "6b96d707dc33274453454a64e6ad32cba2f25e28e078b25aa24ed1e2a3e54ecf"
+    },
+    {
+      "id": "code-045",
+      "type": "code",
+      "source": "せっかくなので、もう一段階行きましょう。",
+      "sourceHash": "1cfccff8225874523098438c2a854a6ab59bfd3a5f8e9d63f4954bd5c2de6550",
+      "translation": "Since we’re here, let’s take it one step further.",
+      "contextHash": "1cfccff8225874523098438c2a854a6ab59bfd3a5f8e9d63f4954bd5c2de6550"
+    },
+    {
+      "id": "code-046",
+      "type": "code",
+      "source": "『!m.isStateResist(10)』という条件を追加しました。『&&』は『かつ』の意味です。",
+      "sourceHash": "1bb2448e0fa01b0adbd8a58b04f1ef9b443cbfaf675498dde8073db64d2e30fa",
+      "translation": " \"!m.isStateResist(10)』I added this condition. “&&” means “and.”",
+      "contextHash": "1bb2448e0fa01b0adbd8a58b04f1ef9b443cbfaf675498dde8073db64d2e30fa"
+    },
+    {
+      "id": "code-047",
+      "type": "code",
+      "source": "『isStateResist(10)』とはステート無効化を持っているかの判定です。",
+      "sourceHash": "07e9b78309481938394f7f84e6ddcd8211a9c5f53b9690688c896fa489a150a3",
+      "translation": " \"isStateResist(10)』determines whether the target has State Resist.",
+      "contextHash": "07e9b78309481938394f7f84e6ddcd8211a9c5f53b9690688c896fa489a150a3"
+    },
+    {
+      "id": "code-048",
+      "type": "code",
+      "source": "！でその反対ということは、「眠っておらず、かつ無効化を持たない相手」を対象とするという意味になります。",
+      "sourceHash": "5b7638c387fac1c55ac78c7867a8df4cadc0b5a66d64365e76b08a284c064901",
+      "translation": "!and its opposite means that it targets an opponent who is “not asleep and does not have State Resist.”",
+      "contextHash": "5b7638c387fac1c55ac78c7867a8df4cadc0b5a66d64365e76b08a284c064901"
+    },
+    {
+      "id": "code-049",
+      "type": "code",
+      "source": "賢い敵を作りたい時はどうぞ。",
+      "sourceHash": "b2bb9a243b0f1d20899b465e765e3d1340e63d6558e2ce40af362a5d23c1ba4c",
+      "translation": "Give it a try when you want to create a clever enemy.",
+      "contextHash": "b2bb9a243b0f1d20899b465e765e3d1340e63d6558e2ce40af362a5d23c1ba4c"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "対象を絞る（ver1.01）",
+      "sourceHash": "405684cb70512842983168f43a6e1fc8002715c442fae2b1507e0dd1eb9baedf",
+      "translation": "Narrowing Down Targets (ver1.01)",
+      "contextHash": "405684cb70512842983168f43a6e1fc8002715c442fae2b1507e0dd1eb9baedf"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "女を優先して狙う",
+      "sourceHash": "91c4998c8354023ef78d48c4c8aeb1522fea8e078f27f235fd47209e11fecbc1",
+      "translation": "Prioritize Targeting Women",
+      "contextHash": "91c4998c8354023ef78d48c4c8aeb1522fea8e078f27f235fd47209e11fecbc1"
+    },
+    {
+      "id": "code-050",
+      "type": "code",
+      "source": "女ばかりを狙うむっつりモンスターを作ってみましょう。",
+      "sourceHash": "5c741c1356cbbcd29567ed4eb61631b576128a354a1165024858ee812264b2b6",
+      "translation": "Let’s create a lecherous monster that only targets women.",
+      "contextHash": "5c741c1356cbbcd29567ed4eb61631b576128a354a1165024858ee812264b2b6"
+    },
+    {
+      "id": "code-051",
+      "type": "code",
+      "source": "といっても、ツクールMVのアクターデータベースには性別欄なんてありません。そこで女性アクターのメモ欄に<lady>と記入します。",
+      "sourceHash": "44170447814ef2198426e29a27a7d129e2dd0bd4b3b435adbc4a57228bcaf5ca",
+      "translation": "However, the RPG Maker MV actor database doesn't have a gender field. So, in the note field of female actors, enter<lady>and enter it.",
+      "contextHash": "44170447814ef2198426e29a27a7d129e2dd0bd4b3b435adbc4a57228bcaf5ca"
+    },
+    {
+      "id": "code-052",
+      "type": "code",
+      "source": "これにて『m.actor().meta.lady』で女性かどうかを判定できるようになります。",
+      "sourceHash": "966c6e891070b7a7b666eb8e3eaeab5503ec243dd4b84704f1cc0e811d6382cd",
+      "translation": "This makes it possible to determine whether an actor is female using m.actor().meta.lady.",
+      "contextHash": "966c6e891070b7a7b666eb8e3eaeab5503ec243dd4b84704f1cc0e811d6382cd"
+    },
+    {
+      "id": "code-053",
+      "type": "code",
+      "source": "ちなみに対象が敵の場合は『m.enemy().meta.lady』になるので注意です。",
+      "sourceHash": "6c57ee9db832979234bbe6d838314ffb1e4c14d822771abd27f24e341a108a07",
+      "translation": "Note that if the target is an enemy, it becomes m.enemy().meta.lady.",
+      "contextHash": "6c57ee9db832979234bbe6d838314ffb1e4c14d822771abd27f24e341a108a07"
+    },
+    {
+      "id": "code-054",
+      "type": "code",
+      "source": "※別にwomanでもfemaleでも何でもいいですが、参考先の",
+      "sourceHash": "ff90f3100298abe31a667104304d46bda6176d686c63f17fbbb5322d684eca05",
+      "translation": "※It could be woman, female, or anything else, but I followed the example of",
+      "contextHash": "985c6d04264d3be49950f81105adeffd519ec2278970f0f20df51d6cad1689f7"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "こちら",
+      "sourceHash": "1c956b12c2ad6690e41ff6f99bc1776322367c001df5508d8a3420330af8784d",
+      "translation": "here",
+      "contextHash": "985c6d04264d3be49950f81105adeffd519ec2278970f0f20df51d6cad1689f7"
+    },
+    {
+      "id": "code-055",
+      "type": "code",
+      "source": "に習ってます。",
+      "sourceHash": "325ed13ba09c6816f66a6b492dcc24a602ba311f2a11f03ba5eb498ead4e101e",
+      "translation": "this.",
+      "contextHash": "985c6d04264d3be49950f81105adeffd519ec2278970f0f20df51d6cad1689f7"
+    },
+    {
+      "id": "code-056",
+      "type": "code",
+      "source": "さて、上と同じようにfindを使ってもいいのですが問題があります。findはあくまで、条件に合う先頭の者を取得するだけです。メンバーに複数の女性がいる場合、その中の先頭ばかりが狙われてしまいます。",
+      "sourceHash": "17e61edb6ea8dd8ba0d053bdbd59766649460f0cf760402eaa39f406e1315db4",
+      "translation": "Now, you could use find as above, but there's a problem. find only retrieves the first one that meets the conditions. If there are multiple female members, the first one among them will always be targeted.",
+      "contextHash": "17e61edb6ea8dd8ba0d053bdbd59766649460f0cf760402eaa39f406e1315db4"
+    },
+    {
+      "id": "code-057",
+      "type": "code",
+      "source": "というわけで、今回はfilter関数を使いましょう。これで条件に合う全ての対象を取得できます。",
+      "sourceHash": "516453596a31708b9d4aa2d2138fa8d3c4aacb7eb373e8024e426e134f6f4691",
+      "translation": "Therefore, this time, let's use the filter function. This retrieves all targets that meet the conditions.",
+      "contextHash": "516453596a31708b9d4aa2d2138fa8d3c4aacb7eb373e8024e426e134f6f4691"
+    },
+    {
+      "id": "code-058",
+      "type": "code",
+      "source": "これによって、女性という条件を満たす範囲で、かつランダム（狙われ率も考慮）に狙ってくれるようになります。",
+      "sourceHash": "bbe05e185d07eabe5b46470f107d2160332f8179465bc32c2c5f3d82199cc95b",
+      "translation": "This causes it to target a random valid target who meets the female condition, while also taking target rates into account.",
+      "contextHash": "bbe05e185d07eabe5b46470f107d2160332f8179465bc32c2c5f3d82199cc95b"
+    },
+    {
+      "id": "code-059",
+      "type": "code",
+      "source": "この場合、既に全ての女性キャラが戦闘不能状態だと、男性キャラ（および性別不詳）も狙うようになります。",
+      "sourceHash": "7c4b606a135b91cf44d9e78834e3f6077ede671360e081de798cf8cd44c1abdc",
+      "translation": "In this case, if all female characters are already incapacitated, it will also target male characters (as well as those of unknown gender).",
+      "contextHash": "7c4b606a135b91cf44d9e78834e3f6077ede671360e081de798cf8cd44c1abdc"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "対象を限定して狙う",
+      "sourceHash": "a76ea0696a87274888def00b798873ac598dc65541b7dbf9757f5358c58b52dc",
+      "translation": "Target Specific Targets",
+      "contextHash": "a76ea0696a87274888def00b798873ac598dc65541b7dbf9757f5358c58b52dc"
+    },
+    {
+      "id": "code-060",
+      "type": "code",
+      "source": "では、女しか狙わない敵を作りたい場合はどうするか？",
+      "sourceHash": "ba914f37c9753dad0ba2dbe931a983a6759447174ef7c43415f99a0d2629c8f9",
+      "translation": "So, how can you create an enemy that only targets women?",
+      "contextHash": "ba914f37c9753dad0ba2dbe931a983a6759447174ef7c43415f99a0d2629c8f9"
+    },
+    {
+      "id": "code-061",
+      "type": "code",
+      "source": "そんな時のために『NRP.forceTargetLimit』というプラグインコマンドを用意しました。",
+      "sourceHash": "fe1379a75771404db317cde038f510b11ddff83776feb318d9f5732bbbd3400f",
+      "translation": "For situations like that, I prepared a plugin command called NRP.forceTargetLimit.",
+      "contextHash": "fe1379a75771404db317cde038f510b11ddff83776feb318d9f5732bbbd3400f"
+    },
+    {
+      "id": "code-062",
+      "type": "code",
+      "source": "これで女しか狙わなくなります。条件を満たす相手が一人もいなければ、行動自体をスキップします。",
+      "sourceHash": "226439b3b59deb47825d1fc7b846ff15d2087053849ad1858227d7098263aa7a",
+      "translation": "With this, it will only target women. If there isn't a single target that meets the conditions, it skips the action itself.",
+      "contextHash": "226439b3b59deb47825d1fc7b846ff15d2087053849ad1858227d7098263aa7a"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "まとめ",
+      "sourceHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72",
+      "translation": "Summary",
+      "contextHash": "7f7ad40ba94a2507fb7fe55ea8aff92c6ece28879685607e5eb7cc261a4ecd72"
+    },
+    {
+      "id": "code-063",
+      "type": "code",
+      "source": "敵の行動の制御については以上です。",
+      "sourceHash": "409f02da19f33b67a79b9a3ba8af0ce64beb137c0103a63315892ded2c038886",
+      "translation": "That covers controlling enemy actions.",
+      "contextHash": "409f02da19f33b67a79b9a3ba8af0ce64beb137c0103a63315892ded2c038886"
+    },
+    {
+      "id": "code-064",
+      "type": "code",
+      "source": "これでバトルイベントの強力さが伝わったならば幸いです。",
+      "sourceHash": "04d03d8e10ac4b369c21fb7937cea6724297fb756d281d1ac35cd24689366d67",
+      "translation": "I hope this has conveyed how powerful battle events can be.",
+      "contextHash": "04d03d8e10ac4b369c21fb7937cea6724297fb756d281d1ac35cd24689366d67"
+    },
+    {
+      "id": "code-065",
+      "type": "code",
+      "source": "基本的にあらゆるものを参照できるため、大抵のことができてしまいます。",
+      "sourceHash": "957fc2253d6764414ee04cb065ca66336d7ed933ff5c23af75078f1f5458373f",
+      "translation": "Since you can basically reference anything, you can do most things.",
+      "contextHash": "957fc2253d6764414ee04cb065ca66336d7ed933ff5c23af75078f1f5458373f"
+    },
+    {
+      "id": "code-066",
+      "type": "code",
+      "source": "ここでは紹介していませんが『戦闘行動の強制』以外のコマンドも使えるため、演出なども自由自在です。",
+      "sourceHash": "3b534326741db906e6b19a53d09c782668834e8b26ce0ee642472744e90f08e6",
+      "translation": "Although I haven't covered them here, you can also use commands other than Force Action, allowing you to freely create effects and presentations.",
+      "contextHash": "3b534326741db906e6b19a53d09c782668834e8b26ce0ee642472744e90f08e6"
+    },
+    {
+      "id": "code-067",
+      "type": "code",
+      "source": "例えば、音楽を止めるなどの演出と組み合わせて複数回行動をさせれば、時間停止っぽい技も作れてしまいます。",
+      "sourceHash": "f245e0130063cfe98980f706fef63d500b223cd4101d7a11f62a546a0a1a629a",
+      "translation": "For example, by combining multiple actions with effects such as stopping the music, you can even create a time-stopping-like technique.",
+      "contextHash": "f245e0130063cfe98980f706fef63d500b223cd4101d7a11f62a546a0a1a629a"
+    },
+    {
+      "id": "code-068",
+      "type": "code",
+      "source": "今後はスキルなどの作成にも活用できないか研究しようと思います。",
+      "sourceHash": "2ad899ad9e078c741c86cb786cf90e69671379581d075e71ef3a32db4fa14179",
+      "translation": "Going forward, I plan to research whether this can also be used to create skills and the like.",
+      "contextHash": "2ad899ad9e078c741c86cb786cf90e69671379581d075e71ef3a32db4fa14179"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "参考リンク",
+      "sourceHash": "4c94a5a278c63cd880d3c8b55f179e7de3f9e26735fbe948efbf15dadeb94bfa",
+      "translation": "Reference Links",
+      "contextHash": "4c94a5a278c63cd880d3c8b55f179e7de3f9e26735fbe948efbf15dadeb94bfa"
+    },
+    {
+      "id": "code-069",
+      "type": "code",
+      "source": "有志がまとめて下さった各クラスの情報です。どんなパラメータを参照できるかはこちらから確認できます。",
+      "sourceHash": "73be628ad95514c486f7d2ee22968fa368eb076ee6593d670ffce04e9c5879f1",
+      "translation": "Here is information on each class compiled by volunteers. You can check here what parameters can be referenced.",
+      "contextHash": "73be628ad95514c486f7d2ee22968fa368eb076ee6593d670ffce04e9c5879f1"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "Game_Enemy（敵のみの項目）",
+      "sourceHash": "1997d4ff9d63a2181ca03cee435ab5e7b0abc13f5e3150553fe48105a06c2073",
+      "translation": "Game_Enemy (Enemy-Only Entries)",
+      "contextHash": "d4a053f1b87cbbfc92c7b612854280da9f0a62c54963a24b5ceaa47c58c327ff"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "Game_Actor（味方のみの項目）",
+      "sourceHash": "9f470289374379200b8f4f23d59ba9da9a970f53d0da48dac73ebaac8baab8ad",
+      "translation": "Game_Actor (Ally-Only Entries)",
+      "contextHash": "ce110a39d9457b6f117dd15321f5c990f0412e048ee1db3b62fdcdb464bc56fd"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "Game_Battler（敵味方の共通項目）",
+      "sourceHash": "940087424e96fff38fc3bb41f97b04f0327ec797ceb6fe5a6d4ca8b86c8c3283",
+      "translation": "Game_Battler (Common Enemy and Ally Entries)",
+      "contextHash": "d4885c0d05cee4faa779866a5e1997a978d2778e5aa3d4c92770de91c63dc2dd"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "Game_BattlerBase（敵味方の基本共通項目）",
+      "sourceHash": "f7a686e1fffba1611b2345d9a7399e805c075df166389bb9a6a672d2d35070fd",
+      "translation": "Game_BattlerBase (Basic Common Enemy and Ally Entries) ",
+      "contextHash": "0c1ac3bd06220cef7130cd7af28f5d710af99c5228a0bab3e8709e74de5beb0e"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "Game_BattlerBase（敵味方の基本共通項目）",
+      "sourceHash": "f7a686e1fffba1611b2345d9a7399e805c075df166389bb9a6a672d2d35070fd",
+      "translation": "Game_BattlerBase (Basic Common Enemy and Ally Entries)",
+      "contextHash": "0c1ac3bd06220cef7130cd7af28f5d710af99c5228a0bab3e8709e74de5beb0e"
+    },
+    {
+      "id": "link-008",
+      "type": "link",
+      "source": "Game_Troop（敵集団の共通項目）",
+      "sourceHash": "af6bee920f1bbe3511bf1dbe4df47830e7eb3200c8b587395ad7d2ebf402414e",
+      "translation": "Game_Troop (Common Enemy Group Entries)",
+      "contextHash": "80f75161deb880df99d5452a3f93046e4ae5216f40d13b0908b26482c0dc1c89"
+    },
+    {
+      "id": "link-009",
+      "type": "link",
+      "source": "Game_Unit（敵味方集団の共通項目）",
+      "sourceHash": "8ed98800a699d62aaa4c30fe5c571db8d06f94d142042a67d11a34dffe0a1030",
+      "translation": "Game_Unit (Common Enemy and Ally Group Entries)",
+      "contextHash": "52595b03cd030b0a127ef20636831f644f1f90862a65b342ad01f651dd05aa7b"
+    },
+    {
+      "id": "code-070",
+      "type": "code",
+      "source": "末尾に()を付ける必要があるもの（関数）と()のいらないもの（変数）が混在しているので注意です。間違えると機能しません。",
+      "sourceHash": "8ee54db16524263ecd24a145f86458bcbacba905c359c84aba086ce3cffcc5e0",
+      "translation": "Be careful, as things that require () at the end (functions) and things that don't require () (variables) are mixed together. They won't work if used incorrectly.",
+      "contextHash": "8ee54db16524263ecd24a145f86458bcbacba905c359c84aba086ce3cffcc5e0"
+    },
+    {
+      "id": "code-071",
+      "type": "code",
+      "source": "その他、参考にさせていただいた記事など。",
+      "sourceHash": "9e9207016ff79567a803884b7d18821c78622aff18edcc9fdfcb1f9c40f1aea4",
+      "translation": "Here are some other articles I referred to.",
+      "contextHash": "9e9207016ff79567a803884b7d18821c78622aff18edcc9fdfcb1f9c40f1aea4"
+    },
+    {
+      "id": "link-010",
+      "type": "link",
+      "source": "https://punipunion.hatenablog.com/entry/2018/12/01/154554",
+      "sourceHash": "b75b60d9f4be2889d0162b8c58b4e30569772890e7b5949c61f7717675e5dff2",
+      "translation": "https://punipunion.hatenablog.com/entry/2018/12/01/154554",
+      "contextHash": "9b8f486e6fecade9545744ea0f4ec02405235f6c7376fad9142cfd6407efa915"
+    },
+    {
+      "id": "link-011",
+      "type": "link",
+      "source": "http://rpgmaker-script-wiki.xyz/battleaction_mv.php",
+      "sourceHash": "141fcc32aef10a00210d6e1308925dd93a7e7c0eb49a0526afcd942930caf43c",
+      "translation": "http://rpgmaker-script-wiki.xyz/battleaction_mv.php",
+      "contextHash": "eeae0e8e6650c7bb6285a16baa7929f9ca708e6ce6e94ea43ce743e39c12223f"
+    },
+    {
+      "id": "link-012",
+      "type": "link",
+      "source": "＞RPGツクールMV目次に戻る",
+      "sourceHash": "3168fec182bef604e7c3300f830023edb80f0a2d94c715a1bee81fbde8408bd0",
+      "translation": "Back to the RPG Maker MV Table of Contents",
+      "contextHash": "a5ab5b2381285eafc0d7806f24a3811588b6c6c239bc350d69b318e5bf54f7a4"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]敵の行動を自在に制御する ①導入編[[/LINK_1]]から続きます。",
+      "sourceHash": "5b5d72fe916a4915bd9dc02a788e858bb69adce658ab2a1eb16d00939a02ef8f",
+      "parts": [
+        {
+          "source": "敵の行動を自在に制御する ①導入編",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "から続きます。",
+          "link": false
+        }
+      ],
+      "translation": "This continues from [[LINK_1]]Controlling Enemy Actions Freely ① Introduction[[/LINK_1]].",
+      "contextHash": "5b5d72fe916a4915bd9dc02a788e858bb69adce658ab2a1eb16d00939a02ef8f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]基本編[[/LINK_1]]",
+      "sourceHash": "b6c210278b74b208e6b1237e7f0f3d84a18461ed1d1e4538e204fb110ab63938",
+      "parts": [
+        {
+          "source": "基本編",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Basics[[/LINK_1]]",
+      "contextHash": "b6c210278b74b208e6b1237e7f0f3d84a18461ed1d1e4538e204fb110ab63938"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]スキルを使う[[/LINK_1]]",
+      "sourceHash": "f3c154bf62803b5f1c619179178b5ad83a125bf6ea6a6afeac32c22d326d4183",
+      "parts": [
+        {
+          "source": "スキルを使う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Use a Skill[[/LINK_1]]",
+      "contextHash": "f3c154bf62803b5f1c619179178b5ad83a125bf6ea6a6afeac32c22d326d4183"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]確率でスキルを使う[[/LINK_1]]",
+      "sourceHash": "89100ea260004e35fe546708cf28893ae90a4453342668d914aba80eebcec71c",
+      "parts": [
+        {
+          "source": "確率でスキルを使う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Use a Skill by Chance[[/LINK_1]]",
+      "contextHash": "89100ea260004e35fe546708cf28893ae90a4453342668d914aba80eebcec71c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ターンによってスキルを使う[[/LINK_1]]",
+      "sourceHash": "bbed11a91365f6b0745ae59c0ea4b7fbb1f45a2b341addd93ac65f16b181893d",
+      "parts": [
+        {
+          "source": "ターンによってスキルを使う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Use a Skill Based on the Turn[[/LINK_1]]",
+      "contextHash": "bbed11a91365f6b0745ae59c0ea4b7fbb1f45a2b341addd93ac65f16b181893d"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]複数回行動[[/LINK_1]]",
+      "sourceHash": "64fa36e917b2760f375ae2555d3634478d41749fdc583a25b4a89fd778b60cea",
+      "parts": [
+        {
+          "source": "複数回行動",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Multiple Actions[[/LINK_1]]",
+      "contextHash": "64fa36e917b2760f375ae2555d3634478d41749fdc583a25b4a89fd778b60cea"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]自分の状態を参照する[[/LINK_1]]",
+      "sourceHash": "f4e337443f81c07c643ea9dfc1a3a3cdbcf03d33f0e723d94b15b641569f9084",
+      "parts": [
+        {
+          "source": "自分の状態を参照する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Check Your Own State[[/LINK_1]]",
+      "contextHash": "f4e337443f81c07c643ea9dfc1a3a3cdbcf03d33f0e723d94b15b641569f9084"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]自分のHPが50%以下の時[[/LINK_1]]",
+      "sourceHash": "65371867bf3e6bbddb0974863a8e82a1c88e99dfb7b21da1d2a7dfb056c247a8",
+      "parts": [
+        {
+          "source": "自分のHPが50%以下の時",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]When Your Own HP Is 50% or Lower[[/LINK_1]]",
+      "contextHash": "65371867bf3e6bbddb0974863a8e82a1c88e99dfb7b21da1d2a7dfb056c247a8"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]自分のMPが100以下の時[[/LINK_1]]",
+      "sourceHash": "64049013644760621b2ea0a9bd9a309f3e34c5b219d205614b2c654363478969",
+      "parts": [
+        {
+          "source": "自分のMPが100以下の時",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]When Your Own MP Is 100 or Lower[[/LINK_1]]",
+      "contextHash": "64049013644760621b2ea0a9bd9a309f3e34c5b219d205614b2c654363478969"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]一体になると行動が激化する[[/LINK_1]]",
+      "sourceHash": "1a8d17721760f1b4b8a4d36883452ea9f772f65a2187318c2f469815c3a889f0",
+      "parts": [
+        {
+          "source": "一体になると行動が激化する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actions Intensify When Alone[[/LINK_1]]",
+      "contextHash": "1a8d17721760f1b4b8a4d36883452ea9f772f65a2187318c2f469815c3a889f0"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]自分にステートがかかっているか[[/LINK_1]]",
+      "sourceHash": "ba39bcab4b2fa52902b284adbd07baac5e6f434a7566d89079c8c1f9c1efef8a",
+      "parts": [
+        {
+          "source": "自分にステートがかかっているか",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Whether You Have a State Applied[[/LINK_1]]",
+      "contextHash": "ba39bcab4b2fa52902b284adbd07baac5e6f434a7566d89079c8c1f9c1efef8a"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]眠っている時に使用するスキル（ＣＴＢ限定）[[/LINK_1]]",
+      "sourceHash": "3fe054dc4abb2508a024d0c5cc2303606e9a7a7ffcf096dba0c5a7d2ea12ff86",
+      "parts": [
+        {
+          "source": "眠っている時に使用するスキル（ＣＴＢ限定）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skills Used While Asleep (CTB Only)[[/LINK_1]]",
+      "contextHash": "3fe054dc4abb2508a024d0c5cc2303606e9a7a7ffcf096dba0c5a7d2ea12ff86"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]対象を参照・変更する[[/LINK_1]]",
+      "sourceHash": "5d484005247ff3f7421a11e0a8abddd26b1ddf903a77ac2d9af302874623d236",
+      "parts": [
+        {
+          "source": "対象を参照・変更する",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Check or Change the Target[[/LINK_1]]",
+      "contextHash": "5d484005247ff3f7421a11e0a8abddd26b1ddf903a77ac2d9af302874623d236"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]特定のアクターを狙う[[/LINK_1]]",
+      "sourceHash": "8abba74e2df851a05a6c68a3a246dbe0c590f02b94dc9f583ee221288129b55e",
+      "parts": [
+        {
+          "source": "特定のアクターを狙う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target a Specific Actor[[/LINK_1]]",
+      "contextHash": "8abba74e2df851a05a6c68a3a246dbe0c590f02b94dc9f583ee221288129b55e"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]最も弱っているアクターを狙う[[/LINK_1]]",
+      "sourceHash": "6f4880b2cb8a689c6ead61cac2432c3ff3072f3adfbe988e1d05d9a030281db2",
+      "parts": [
+        {
+          "source": "最も弱っているアクターを狙う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target the Most Weakened Actor[[/LINK_1]]",
+      "contextHash": "6f4880b2cb8a689c6ead61cac2432c3ff3072f3adfbe988e1d05d9a030281db2"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]最もＨＰが減っている仲間を選択して回復[[/LINK_1]]",
+      "sourceHash": "7eb6a471a56ac69a607f622be1418aabfe4de2cfe93d75f086791e627a30eb9e",
+      "parts": [
+        {
+          "source": "最もＨＰが減っている仲間を選択して回復",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Select and Heal the Ally with the Lowest HP[[/LINK_1]]",
+      "contextHash": "7eb6a471a56ac69a607f622be1418aabfe4de2cfe93d75f086791e627a30eb9e"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰが50%以下の仲間がいる時のみ回復を行う[[/LINK_1]]",
+      "sourceHash": "b6bfc76a20a192d6edeaae403a3638a7277aa2e17efa66b7259400708433709e",
+      "parts": [
+        {
+          "source": "ＨＰが50%以下の仲間がいる時のみ回復を行う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Heal Only When an Ally Has 50% HP or Less[[/LINK_1]]",
+      "contextHash": "b6bfc76a20a192d6edeaae403a3638a7277aa2e17efa66b7259400708433709e"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘不能の仲間がいる時のみ蘇生を行う[[/LINK_1]]",
+      "sourceHash": "cbb7bcae81d78a7c2e1324add14fb42a16d71e32d5f2d033410fbe5f64e87291",
+      "parts": [
+        {
+          "source": "戦闘不能の仲間がいる時のみ蘇生を行う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Revive Only When There Is a Knocked-Out Ally[[/LINK_1]]",
+      "contextHash": "cbb7bcae81d78a7c2e1324add14fb42a16d71e32d5f2d033410fbe5f64e87291"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]ステートにかかった相手を対象とする[[/LINK_1]]",
+      "sourceHash": "4771cec70d0b06058089ed6e8aa283980a4feb41ca9eb2899c8e03c7291732a9",
+      "parts": [
+        {
+          "source": "ステートにかかった相手を対象とする",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target an Opponent Afflicted with a State[[/LINK_1]]",
+      "contextHash": "4771cec70d0b06058089ed6e8aa283980a4feb41ca9eb2899c8e03c7291732a9"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]ステートにかかっていない相手を対象とする[[/LINK_1]]",
+      "sourceHash": "629922884df89a83f0c1e3d6363b8eb2a8119a1fa206af4ca3dd961153447738",
+      "parts": [
+        {
+          "source": "ステートにかかっていない相手を対象とする",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target an Opponent Not Afflicted with a State[[/LINK_1]]",
+      "contextHash": "629922884df89a83f0c1e3d6363b8eb2a8119a1fa206af4ca3dd961153447738"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]対象を絞る（ver1.01）[[/LINK_1]]",
+      "sourceHash": "2e88d92fe6cb3de3bd40fe65bc4e5276a6d8f914ccbb8ae2cb91983f5f1af7fe",
+      "parts": [
+        {
+          "source": "対象を絞る（ver1.01）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Narrow Down Targets (ver1.01)[[/LINK_1]]",
+      "contextHash": "2e88d92fe6cb3de3bd40fe65bc4e5276a6d8f914ccbb8ae2cb91983f5f1af7fe"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]女を優先して狙う[[/LINK_1]]",
+      "sourceHash": "681c8790970af6d7184beefaba498508a91917c144f164d24e8dffa0b129adb3",
+      "parts": [
+        {
+          "source": "女を優先して狙う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Prioritize Targeting Females[[/LINK_1]]",
+      "contextHash": "681c8790970af6d7184beefaba498508a91917c144f164d24e8dffa0b129adb3"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]対象を限定して狙う[[/LINK_1]]",
+      "sourceHash": "bbaa287202456e66a61a1c2bc206531ad62a48208efb4ce3a02ab7f60cc8b40c",
+      "parts": [
+        {
+          "source": "対象を限定して狙う",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Only Specific Targets[[/LINK_1]]",
+      "contextHash": "bbaa287202456e66a61a1c2bc206531ad62a48208efb4ce3a02ab7f60cc8b40c"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]まとめ[[/LINK_1]]",
+      "sourceHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de",
+      "parts": [
+        {
+          "source": "まとめ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Summary[[/LINK_1]]",
+      "contextHash": "f4d80ef0e80573b2726656f9f50bb270d4051b42ad2971f58595696bcb1241de"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]参考リンク[[/LINK_1]]",
+      "sourceHash": "bb65392a82ed63f62b85de52d291195c65889420ae383dccfbe1aa72c4e362cc",
+      "parts": [
+        {
+          "source": "参考リンク",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reference Links[[/LINK_1]]",
+      "contextHash": "bb65392a82ed63f62b85de52d291195c65889420ae383dccfbe1aa72c4e362cc"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "どんなパラメータがあるかは[[LINK_1]]末尾に参考リンク[[/LINK_1]]を置いておきますので、そちらをご確認ください。",
+      "sourceHash": "1752617e79e12fd3851836c4b164c6d4ef12bdc3808dc650b59e4642c9b818f7",
+      "parts": [
+        {
+          "source": "どんなパラメータがあるかは",
+          "link": false
+        },
+        {
+          "source": "末尾に参考リンク",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を置いておきますので、そちらをご確認ください。",
+          "link": false
+        }
+      ],
+      "translation": "For information on what parameters are available, I have placed [[LINK_1]]reference links at the end[[/LINK_1]], so please check them.",
+      "contextHash": "1752617e79e12fd3851836c4b164c6d4ef12bdc3808dc650b59e4642c9b818f7"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]ＣＴＢ限定で毎ターン実行されるバトルイベント[[/LINK_1]]に書いてください。",
+      "sourceHash": "9f4a87f67f552494e80f734b917216b4e633f7a4e361b11aaed362d4d0cba3e1",
+      "parts": [
+        {
+          "source": "ＣＴＢ限定で毎ターン実行されるバトルイベント",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に書いてください。",
+          "link": false
+        }
+      ],
+      "translation": "Please write it in the [[LINK_1]]battle event that runs every turn in CTB mode only[[/LINK_1]].",
+      "contextHash": "9f4a87f67f552494e80f734b917216b4e633f7a4e361b11aaed362d4d0cba3e1"
+    }
+  ],
+  "texts": {
+    "基本から上級まで、使えそうなものを全部載せてみました。": "I've included everything from basic to advanced techniques that may be useful.",
+    "必要なものを探してコピペなりしてください。": "Find what you need and copy and paste it.",
+    "目次": "Table of Contents",
+    "基本編": "Basics",
+    "スキルを使う": "Using Skills",
+    "まずは基本形。普通にスキルを使わせる方法から。": "Let's start with the basics: how to make an enemy use a skill normally.",
+    "難しいことは何もなく、『戦闘行動の強制』で行動主体とスキルと対象を選択するだけです。": "There's nothing difficult about it—simply select the subject, skill, and target in Force Action.",
+    "集中攻撃などの特徴を出したい場合を除き、対象は『ランダム』で構いません。": "Unless you want features such as focused attacks, Random is fine for the target.",
+    "また、この例では行動主体を固定で先頭の敵に指定しています。ボス戦など行動主体が確実に分かる場合はこれで十分です。": "In this example, the subject is fixed as the enemy at the front. This is sufficient when the subject is obvious, such as in a boss battle.",
+    "しかしながら、いつも行動主体が先頭だとは限りません。": "However, the subject is not always the enemy at the front.",
+    "行動主体を可変にしたい場合は、スクリプトを使用します。": "If you want to make the subject variable, use a script.",
+    "このプラグインでは以下のように呼び出せるようにしました。": "This plugin allows you to call it as follows.",
+    "10と書いてあるのがスキルIDです。": "The 10 is the skill ID.",
+    "-1とあるのが対象です。0が先頭、以降1,2,3...と増えていきます。": "The -1 is the target. 0 is the first enemy, followed by 1, 2, 3, and so on.",
+    "-1の場合はランダムの意味になります。": "-1 means Random.",
+    "……分かりにくいですね。": "…That's not very easy to understand.",
+    "というわけで「極力スクリプトは嫌だ！」という方のためにプラグインコマンドを用意しています。": "So, for those of you who really don't want to use scripts, I've provided plugin commands.",
+    "※スクリプトではなくプラグインコマンドです。混同に注意！": "※This is a plugin command, not a script. Be careful not to confuse them!",
+    "これは『戦闘行動の強制』の行動主体を書き換えてしまう機能です。エディタ上で何を選ぼうが、バトルイベントを実行中の行動主体へと強制変換します。": "This function rewrites the subject of Force Action. Regardless of what you select in the editor, it forcibly changes the subject to the one currently executing the battle event.",
+    "あらかじめこれを一行挟んでおくと、全ての行動が終了するまでその状態が保持されます。": "If you insert this line beforehand, that state will be maintained until all actions are complete.",
+    "こんな感じになります。": "It will look like this.",
+    "この方法だとスキル名が見えるので、多少管理が楽ですね。お好きな方法をお使いください。": "This method displays the skill name, making it somewhat easier to manage. Use whichever method you prefer.",
+    "NRP.forceTarget [対象バトラー]": "NRP.forceTarget [Target Battler]",
+    "同様に『戦闘行動の強制』の対象を書き換えるプラグインコマンドもあります。これについても後で使います。": "There is also a plugin command that similarly rewrites the target of Force Action. I'll use this later as well.",
+    "いずれも、クリアしたい時はパラメータなしで呼び出せばＯＫです。": "In either case, call it without any parameters when you want to clear it.",
+    "確率でスキルを使う": "Using Skills Based on Probability",
+    "次行きましょう。": "Let's move on.",
+    "これも特に難しくはありません。": "This isn't particularly difficult either.",
+    "普通に乱数を使って確率分岐させるだけです。": "You simply use a random number to branch based on probability.",
+    "この例では適当な一時変数を使って、１～４の乱数を生成しています。": "In this example, a temporary variable is used to generate a random number from 1 to 4.",
+    "一時変数<=２の時は攻撃、３の時はファイア、４の時はスパークって感じですね。": "When temporary variable <= 2, use Attack; when it's 3, use Fire; and when it's 4, use Spark.",
+    "凝ったスキルを作った際、その処理内で同一の変数を使わないように注意です。それをやると無茶苦茶になります。": "When creating an elaborate skill, be careful not to use the same variable within its processing. Doing so will cause chaos.",
+    "心配なら各分岐内に『イベント処理の中断』を入れるのもよいと思います。": "If you're concerned, you could insert Abort Event Processing into each branch.",
+    "ターンによってスキルを使う": "Using Skills Based on the Turn",
+    "この辺まではまだデフォルトで可能な機能ですね。": "Up to this point, these are still features available by default.",
+    "通常のターン制と当サイトにあるＣＴＢ（またはＣＴＴＢ）では、ターンの参照方法が変わります。": "The way you reference the turn differs between the normal turn-based system and the CTB (or CTTB) used on this site.",
+    "ターン制の場合": "For the Turn-Based System",
+    "にて、敵グループが保有する現在ターンを取得できます。": "You can retrieve the current turn held by the troop with it.",
+    "これは敵グループのバトルイベントと同じで1ターンから始まります。": "Like the troop's battle event, this starts at turn 1.",
+    "※敵の戦闘行動の設定画面では0ターンから始まります。挙動が違うのでご注意！": "※The enemy action settings screen starts at turn 0. Be careful, as the behavior differs!",
+    "『$gameTroop.turnCount() == 1』は見たまんま１ターン目なので、説明は不要でしょう。": " \"$gameTroop.turnCount() == 1』 plainly means the first turn, so it probably needs no explanation.",
+    "少し難しいのは『$gameTroop.turnCount() % 2 == 0』という記述です。": "A slightly more difficult expression is 『$gameTroop.turnCount() % 2 == 0』.",
+    "これは２で割った余りが０。つまり偶数ターンを意味しています。": "This means the remainder after division by 2 is 0—in other words, an even-numbered turn.",
+    "もちろん『$gameTroop.turnCount() % 2 == 1』は奇数ターンになります。": "Of course, 『$gameTroop.turnCount() % 2 == 1』 means an odd-numbered turn.",
+    "ローテーション行動を取らせたい場合は、こういう余りを使った演算が有効です。": "This kind of calculation using remainders is effective for making an enemy take actions in rotation.",
+    "ちなみに、３ターンローテーションを取らせたい場合……": "Incidentally, if you want a three-turn rotation…",
+    "条件分岐：スクリプト：$gameTroop.turnCount() % 3 == 1": "Conditional Branch: Script: $gameTroop.turnCount() % 3 == 1",
+    "条件分岐：スクリプト：$gameTroop.turnCount() % 3 == 2": "Conditional Branch: Script: $gameTroop.turnCount() % 3 == 2",
+    "条件分岐：スクリプト：$gameTroop.turnCount() % 3 == 0": "Conditional Branch: Script: $gameTroop.turnCount() % 3 == 0",
+    "という順番で回ってきます。": "They cycle in that order.",
+    "直感的に0,1,2とやりたくなりますが、ご注意ください。": "You may intuitively want to use 0, 1, and 2, but be careful.",
+    "ＣＴＢまたはＣＴＴＢの場合": "For CTB or CTTB",
+    "個々人がバラバラに動くＣＴＢでは、グループのターンはほとんど意味を持ちません。": "In CTB, where individuals act independently, the troop's turn has little meaning.",
+    "というわけで、上記のように行動主体が保有するターンを参照します。": "Therefore, as shown above, we refer to the turns held by the action subject.",
+    "$gameTroopがBattleManager._subjectに置き換わっただけですね。": "It has simply been replaced with $gameTroop in BattleManager._subject.",
+    "※NRP_CountTimeBattle.js ver1.041またはNRP_CountTimeTurnBattle.js ver1.01以降が対象です。変数名を変更していますのでご注意ください！": "※This applies to NRP_CountTimeBattle.js ver1.041 or NRP_CountTimeTurnBattle.js ver1.01 and later. Please note that the variable names have been changed!",
+    "複数回行動": "Multiple Actions",
+    "これはデフォルトでは難しい機能です。": "This is difficult to implement by default.",
+    "とはいっても、『戦闘行動の強制』を複数行入力するだけです。デフォルトとは違って、順番を自由に決められます。": "That said, all you have to do is enter multiple lines of \"Force Action.\" Unlike the default behavior, you can freely determine the order.",
+    "画像の例では、奇数ターンに１回行動の全体攻撃、偶数ターンに２回攻撃するようにしてみました。": "In the example image, I set it to perform one all-target attack on odd-numbered turns and two attacks on even-numbered turns.",
+    "強力な攻撃をする時だけ１回攻撃にすると、バランスを取りやすくていい感じです。": "Having it attack only once when using a powerful attack makes it easier to balance and works quite well.",
+    "一回ずつランダムに行動を決めたい場合は、以下のように書きます。": "If you want to randomly determine each action one at a time, write it as follows.",
+    "攻撃とファイアのランダム２回行動です。": "These are two random actions consisting of Attack and Fire.",
+    "ややこしく見えるかもしれませんが、単に行動した回数をカウントしながらループさせているだけです。": "It may look complicated, but it is simply looping while counting the number of actions performed.",
+    "ちなみに、一撃目で対象が全滅した場合、二撃目で落ちるバグが元々ありました。このプラグインで修正済みです。": "Incidentally, there was originally a bug where the game would crash on the second attack if all targets were defeated by the first one. This plugin fixes it.",
+    "自分の状態を参照する": "Referencing Your Own State",
+    "自分のHPが50%以下の時": "When Your HP Is 50% or Lower",
+    "困ったことにバトルイベントの通常の条件分岐ではＨＰを参照できません。": "Unfortunately, HP cannot be referenced using the normal conditional branches in battle events.",
+    "というわけで、スクリプトを使います。": "Therefore, we use a script.",
+    "条件分岐：スクリプト：BattleManager._subject.hpRate() <= 0.5": "Conditional Branch: Script: BattleManager._subject.hpRate() <= 0.5",
+    "hpRate()というのが、現在ＨＰの割合です。１００％が1.0です。": "hpRate() represents the current HP ratio. 100% is 1.0.",
+    "自分のMPが100以下の時": "When Your MP Is 100 or Lower",
+    "条件分岐：スクリプト：BattleManager._subject.mp <= 100": "Conditional Branch: Script: BattleManager._subject.mp <= 100",
+    "というように、あらゆるパラメータを参照できます。": "In this way, you can reference all kinds of parameters.",
+    "一体になると行動が激化する": "Actions Intensify When Only One Remains",
+    "以下を条件にして、行動を変更します。": "Change the action based on the following condition.",
+    "条件分岐：スクリプト：$gameTroop.aliveMembers().length == 1": "Conditional Branch: Script: $gameTroop.aliveMembers().length == 1",
+    "自分にステートがかかっているか": "Whether You Have a State Applied",
+    "行動主体が固定なら普通に条件分岐が使えます。": "If the action subject is fixed, you can use a normal conditional branch.",
+    "以下はそうでない場合も判定できるスクリプトです。": "The following script can also check when it is not fixed.",
+    "条件分岐：スクリプト：BattleManager._subject.isStateAffected(4)": "Conditional Branch: Script: BattleManager._subject.isStateAffected(4)",
+    "上はステートＩＤ＝４（初期では毒）にかかっているかどうかを判定しています。": "The one above checks whether the subject is affected by state ID 4 (Poison by default).",
+    "例えば、治療魔法を使うかどうかの判定に使えます。": "For example, it can be used to determine whether to use a healing spell.",
+    "条件分岐：スクリプト：!BattleManager._subject.isStateAffected(4)": "Conditional Branch: Script: !BattleManager._subject.isStateAffected(4)",
+    "かかっていない時を知りたいなら、先頭に『!』をつけて条件を反転します。": "If you want to check when the state is not applied, add \"!\" at the beginning to invert the condition.",
+    "補助ステートの重複防止はこれで。": "Use this to prevent duplicate support states.",
+    "眠っている時に使用するスキル（ＣＴＢ限定）": "Skills Used While Asleep (CTB Only)",
+    "※コモンイベントから呼び出す方法だと、先に行動異常の判定が行われるため呼び出せません。": "※When called from a common event, it cannot be called because the action restriction check is performed first.",
+    "上で紹介済の方法を使用し、眠っている時を判定します。": "Use the method introduced above to check whether the subject is asleep.",
+    "さらに以下のプラグインコマンドを指定することで、行動異常時も行動を実行できるようになります。": "Furthermore, by specifying the following plugin command, you can execute actions even when the subject has an action restriction.",
+    "※ターン制でも行動実行前にコモンイベントを呼び出すようなプラグインを使えば、同様の技も可能かもしれません。今はまだ研究中です。": "※Even in turn-based battles, a similar technique may be possible by using a plugin that calls a common event before executing an action. I am still investigating this.",
+    "対象を参照・変更する": "Referencing and Changing the Target",
+    "特定のアクターを狙う": "Targeting a Specific Actor",
+    "少しずつ難しいヤツいきます。もっとも、難しく感じても０から書く必要はありません。": "Let's move on to some slightly more difficult examples. However, even if they seem difficult, you do not need to write them from scratch.",
+    "自分が使いたいものに似た処理を探して、コピペしてください。": "Find a process similar to what you want to use and copy and paste it.",
+    "※アローファンクション（=>）を使ったJavaScriptの記法はツクールMVの本体バージョンが1.6以降でないと使えないようです。ご注意ください。": "※The JavaScript syntax using arrow functions (=>) apparently cannot be used unless the RPG Maker MV core version is 1.6 or later. Please be careful.",
+    "これはアクターＩＤ＝４のキャラを生存者の中から探して取得するスクリプトです。": "This script searches among the surviving members for the character with actor ID 4 and retrieves them.",
+    "『$gameParty.aliveMembers()』がパーティの生存者リスト。その中で『m.actorId() == 4』に一致する対象を探しているわけですね。": " \"$gameParty.aliveMembers()\" is the party's list of surviving members. It searches that list for a target matching \"m.actorId() == 4\".",
+    "でもって、取得した『target』のインデックスを取ってスクリプトから『戦闘行動の強制』を呼び出せばよいわけですが……。": "Then, you can obtain the index of the retrieved \"target\" and call \"Force Action\" from a script, but...",
+    "ここでさっきのプラグインコマンドを使います。これで『戦闘行動の強制』の対象を強制変換しました。『target =』の部分は省略し、一行で書いてしまいます。": "Here, we use the plugin command from earlier. This forcibly converts the target of \"Force Action.\" We omit the \"target =\" portion and write it all on one line.",
+    "※しつこいようですが『スクリプト』ではなく『プラグインコマンド』です。": "※I know I am repeating myself, but it is a \"plugin command,\" not a \"script.\"",
+    "自分もたまに間違えます。": "I occasionally make that mistake too.",
+    "対象がいなかったり戦闘不能になった場合は、他の相手を狙ってくれます。": "If the target does not exist or becomes incapacitated, it will target another opponent.",
+    "なお、ここで使用している『find』という関数は、リストの中から最初に見つけた要素を返します。": "The \"find\" function used here returns the first element it finds in the list.",
+    "条件を満たす対象が複数いても、対象になるのは最初の一人だけです。": "Even if multiple targets meet the conditions, only the first one will be targeted.",
+    "最も弱っているアクターを狙う": "Targeting the Actor in the Weakest Condition",
+    "前回と同じ要領で可能です。": "It can be done in the same way as before.",
+    "今回は『reduce』という関数を使用しています。": "This time, I’m using a function called “reduce.”",
+    "これは生存者リストの中から、ＨＰ％（hpRate()）を繰り返し比較しあって一番小さな対象を得ているわけです。": "It repeatedly compares the HP percentage (hpRate()) of the survivors to obtain the one with the lowest value.",
+    "……が、一つ落とし穴。": "……But there’s one catch.",
+    "この『reduce』という関数、比較する対象がないとエラーで落ちます。": "The “reduce” function throws an error if there is nothing to compare.",
+    "$gameParty.aliveMembers()が空の時、つまり全アクターが死んでいると落ちます。": "$gameParty.aliveMembers()When  is empty—in other words, when all actors are dead—it crashes.",
+    "１回目の行動ならそんな状況にはなりません。対象の取得は１回目の行動時しかやらないというなら、問題はありません。": "1On the  turn, that situation won’t occur. If you only obtain the target during the first action, there’s no problem.",
+    "ただ２回目以降の行動では注意が必要です。": "However, you need to be careful with actions from the second onward.",
+    "条件分岐：スクリプト：!$gameParty.isAllDead()": "Conditional Branch: Script: !$gameParty.isAllDead()",
+    "そこで上の条件（全滅時でない）を満たす時のみ処理するようにします。": "So, we’ll only process it when the condition above (the party is not completely defeated) is met.",
+    "なお、よく使う場合は分かりやすい名前でコモンイベント化することをオススメします。": "If you use it often, I recommend turning it into a common event with an easy-to-understand name.",
+    "ていうか、こんなパッと見で分かりにくい処理を毎回打ち込むのは耐えられません。": "I mean, I can’t stand having to enter a process like this every time when it’s so hard to understand at a glance.",
+    "分かりやすいですね。これなら我慢できそうです。": "That’s much easier to understand. I think I can live with this.",
+    "今回はＨＰ％でやりましたが、比較する値を変えれば色んな相手を対象にできます。": "This time, I used the HP percentage, but you can target different opponents by changing the value being compared.",
+    "これは現在ＨＰの一番多いアクターです。多いほうを取るため、不等号を大なりにしています。": "This targets the actor with the highest current HP. The greater-than sign is used to select the higher value.",
+    "ＨＰ＋ＭＰの合計で比較してみました。複数の要素を合わせた比較も可能です。": "HP+MPI tried comparing the totals of . Comparisons combining multiple elements are also possible.",
+    "【追記】": "【Addendum】",
+    "ならば、落ちることなく同じ効果（最小の対象）が得られます。": "then you can get the same effect (the target with the lowest value) without it crashing.",
+    "『b.hpRate() - a.hpRate()』にすれば、最大の対象も得られます。どっちがどっちか分かりにくいのが難点ですが……。": " \"b.hpRate() - a.hpRate()』you can get the target with the highest value. The drawback is that it’s hard to remember which is which…",
+    "最もＨＰが減っている仲間を選択して回復": "Selecting and Healing the Ally with the Most HP Lost",
+    "実用的っぽいヤツをいきましょう。": "Let’s try something that seems more practical.",
+    "上とほぼ同じ考えですが、プラグインコマンドの一行で可能です。": "The idea is almost the same as above, but this can be done with a single line in a plugin command.",
+    "対象が味方から敵。$gamePartyが$gameTroopに変わっただけですね。": "The targets changed from allies to enemies. $gameParty was simply changed to $gameTroop.",
+    "範囲が味方のスキルを使えば、勝手に自軍が対象となります。": "If you use a skill whose scope is allies, your own party will automatically become the targets.",
+    "ちなみに全滅判定は不要です。全滅してたらそもそも回復できませんので。": "By the way, there’s no need to check for total defeat. If everyone is defeated, you can’t heal them in the first place.",
+    "……というかこの処理、バトルイベントじゃなくて最初から全体に組み込んだほうがいい気がしないでもない。他にプラグインがないなら検討しておきます。": "……Actually, I can’t help but feel that this process should be built into everything from the start rather than being a battle event. If there isn’t another plugin, I’ll consider it.",
+    "→作りました。": "→I made it.",
+    "http://newrpg.seesaa.net/article/473218336.html": "http://newrpg.seesaa.net/article/473218336.html",
+    "ＨＰが50%以下の仲間がいる時のみ回復を行う": "Heal Only When There Is an Ally with 50% HP or Less",
+    "上と併せて役立ちそうなものも置いておきます。": "I’ll also leave something here that may be useful together with the above.",
+    "以下を条件にして、回復行動を実行すれば可能です。": "You can do this by setting the following as the condition and executing a healing action.",
+    "条件分岐：スクリプト：$gameTroop.aliveMembers().find(m => m.hpRate() <= 0.5)": "Conditional Branch: Script: $gameTroop.aliveMembers().find(m => m.hpRate() <= 0.5)",
+    "戦闘不能の仲間がいる時のみ蘇生を行う": "Only Revive When There Are Incapacitated Allies",
+    "以下を条件にします。": "Use the following as the condition.",
+    "条件分岐：スクリプト：$gameTroop.members().find(m => m.isDead())": "Conditional Branch: Script: $gameTroop.members().find(m => m.isDead())",
+    "対象はランダムでも問題ありません。戦闘不能者がいれば、勝手に優先してくれるようです。": "The target can be random. If there is a dead battler, it seems to prioritize them automatically.",
+    "ステートにかかった相手を対象とする": "Target Those Affected by a State",
+    "ステートＩＤ＝１０（初期では睡眠）にかかった相手を対象にします。デフォの睡眠は回避率の減少効果があるので、命中の低い大振り攻撃で狙ってくる敵など嫌らしいかもしれません。": "This targets an opponent affected by State ID = 10 (Sleep by default). Sleep reduces evasion rate by default, so enemies that target them with slow, inaccurate heavy attacks might be rather nasty.",
+    "ステートにかかっていない相手を対象とする": "Target Those Not Affected by a State",
+    "『!』を頭につけることで反転。眠っていない相手を対象とします。まだ眠っていない相手を一人ずつ眠らせてくる敵なども作れます。": " \"!』Adding  to the beginning reverses the condition. This targets opponents who are not asleep. You can also create an enemy that puts opponents to sleep one by one.",
+    "せっかくなので、もう一段階行きましょう。": "Since we’re here, let’s take it one step further.",
+    "『!m.isStateResist(10)』という条件を追加しました。『&&』は『かつ』の意味です。": " \"!m.isStateResist(10)』I added this condition. “&&” means “and.”",
+    "『isStateResist(10)』とはステート無効化を持っているかの判定です。": " \"isStateResist(10)』determines whether the target has State Resist.",
+    "！でその反対ということは、「眠っておらず、かつ無効化を持たない相手」を対象とするという意味になります。": "!and its opposite means that it targets an opponent who is “not asleep and does not have State Resist.”",
+    "賢い敵を作りたい時はどうぞ。": "Give it a try when you want to create a clever enemy.",
+    "対象を絞る（ver1.01）": "Narrowing Down Targets (ver1.01)",
+    "女を優先して狙う": "Prioritize Targeting Women",
+    "女ばかりを狙うむっつりモンスターを作ってみましょう。": "Let’s create a lecherous monster that only targets women.",
+    "といっても、ツクールMVのアクターデータベースには性別欄なんてありません。そこで女性アクターのメモ欄に<lady>と記入します。": "However, the RPG Maker MV actor database doesn't have a gender field. So, in the note field of female actors, enter<lady>and enter it.",
+    "これにて『m.actor().meta.lady』で女性かどうかを判定できるようになります。": "This makes it possible to determine whether an actor is female using m.actor().meta.lady.",
+    "ちなみに対象が敵の場合は『m.enemy().meta.lady』になるので注意です。": "Note that if the target is an enemy, it becomes m.enemy().meta.lady.",
+    "※別にwomanでもfemaleでも何でもいいですが、参考先の": "※It could be woman, female, or anything else, but I followed the example of",
+    "こちら": "here",
+    "に習ってます。": "this.",
+    "さて、上と同じようにfindを使ってもいいのですが問題があります。findはあくまで、条件に合う先頭の者を取得するだけです。メンバーに複数の女性がいる場合、その中の先頭ばかりが狙われてしまいます。": "Now, you could use find as above, but there's a problem. find only retrieves the first one that meets the conditions. If there are multiple female members, the first one among them will always be targeted.",
+    "というわけで、今回はfilter関数を使いましょう。これで条件に合う全ての対象を取得できます。": "Therefore, this time, let's use the filter function. This retrieves all targets that meet the conditions.",
+    "これによって、女性という条件を満たす範囲で、かつランダム（狙われ率も考慮）に狙ってくれるようになります。": "This causes it to target a random valid target who meets the female condition, while also taking target rates into account.",
+    "この場合、既に全ての女性キャラが戦闘不能状態だと、男性キャラ（および性別不詳）も狙うようになります。": "In this case, if all female characters are already incapacitated, it will also target male characters (as well as those of unknown gender).",
+    "対象を限定して狙う": "Target Specific Targets",
+    "では、女しか狙わない敵を作りたい場合はどうするか？": "So, how can you create an enemy that only targets women?",
+    "そんな時のために『NRP.forceTargetLimit』というプラグインコマンドを用意しました。": "For situations like that, I prepared a plugin command called NRP.forceTargetLimit.",
+    "これで女しか狙わなくなります。条件を満たす相手が一人もいなければ、行動自体をスキップします。": "With this, it will only target women. If there isn't a single target that meets the conditions, it skips the action itself.",
+    "まとめ": "Summary",
+    "敵の行動の制御については以上です。": "That covers controlling enemy actions.",
+    "これでバトルイベントの強力さが伝わったならば幸いです。": "I hope this has conveyed how powerful battle events can be.",
+    "基本的にあらゆるものを参照できるため、大抵のことができてしまいます。": "Since you can basically reference anything, you can do most things.",
+    "ここでは紹介していませんが『戦闘行動の強制』以外のコマンドも使えるため、演出なども自由自在です。": "Although I haven't covered them here, you can also use commands other than Force Action, allowing you to freely create effects and presentations.",
+    "例えば、音楽を止めるなどの演出と組み合わせて複数回行動をさせれば、時間停止っぽい技も作れてしまいます。": "For example, by combining multiple actions with effects such as stopping the music, you can even create a time-stopping-like technique.",
+    "今後はスキルなどの作成にも活用できないか研究しようと思います。": "Going forward, I plan to research whether this can also be used to create skills and the like.",
+    "参考リンク": "Reference Links",
+    "有志がまとめて下さった各クラスの情報です。どんなパラメータを参照できるかはこちらから確認できます。": "Here is information on each class compiled by volunteers. You can check here what parameters can be referenced.",
+    "Game_Enemy（敵のみの項目）": "Game_Enemy (Enemy-Only Entries)",
+    "Game_Actor（味方のみの項目）": "Game_Actor (Ally-Only Entries)",
+    "Game_Battler（敵味方の共通項目）": "Game_Battler (Common Enemy and Ally Entries)",
+    "Game_BattlerBase（敵味方の基本共通項目）": "Game_BattlerBase (Basic Common Enemy and Ally Entries)",
+    "Game_Troop（敵集団の共通項目）": "Game_Troop (Common Enemy Group Entries)",
+    "Game_Unit（敵味方集団の共通項目）": "Game_Unit (Common Enemy and Ally Group Entries)",
+    "末尾に()を付ける必要があるもの（関数）と()のいらないもの（変数）が混在しているので注意です。間違えると機能しません。": "Be careful, as things that require () at the end (functions) and things that don't require () (variables) are mixed together. They won't work if used incorrectly.",
+    "その他、参考にさせていただいた記事など。": "Here are some other articles I referred to.",
+    "https://punipunion.hatenablog.com/entry/2018/12/01/154554": "https://punipunion.hatenablog.com/entry/2018/12/01/154554",
+    "http://rpgmaker-script-wiki.xyz/battleaction_mv.php": "http://rpgmaker-script-wiki.xyz/battleaction_mv.php",
+    "＞RPGツクールMV目次に戻る": "Back to the RPG Maker MV Table of Contents"
+  }
+}

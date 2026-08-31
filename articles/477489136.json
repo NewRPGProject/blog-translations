@@ -1,0 +1,603 @@
+{
+  "articleId": "477489136",
+  "sourceUrl": "https://newrpg.seesaa.net/article/477489136.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "e715348cab336674bdac5b9100abfa80223ce736fea5be8bf779392aa73025c5",
+  "translatedAt": "2026-08-31T01:21:42.240Z",
+  "title": "Freely Control Enemy Actions ① Introduction [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵の行動を自在に制御する ①導入編【RPGツクールMZプラグイン】",
+      "sourceHash": "b00ec79a68f9dea36d321cdc84025a54bf6b7b44898ba8340ea71b5b2d8d48bf",
+      "translation": "Freely Control Enemy Actions ① Introduction [RPG Maker MZ Plugin]",
+      "contextHash": "b00ec79a68f9dea36d321cdc84025a54bf6b7b44898ba8340ea71b5b2d8d48bf"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "実施には該当のプラグインが必要となります。",
+      "sourceHash": "de1384da5549b3feec64683bffd97b0d3ea945c94c58bf545938993b828f1485",
+      "translation": "The applicable plugin is required to use this feature.",
+      "contextHash": "de1384da5549b3feec64683bffd97b0d3ea945c94c58bf545938993b828f1485"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "初めに",
+      "sourceHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870",
+      "translation": "Introduction",
+      "contextHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＺの敵の行動パターンははっきりいって貧弱です。",
+      "sourceHash": "d69c9e216e5931c25b3472aa577988a45e27ce087489ef4eed6f8d90687c613c",
+      "translation": "To put it bluntly, RPG Maker MZ's enemy action patterns are rather limited.",
+      "contextHash": "d69c9e216e5931c25b3472aa577988a45e27ce087489ef4eed6f8d90687c613c"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ターンごとに行動回数を変えられない。",
+      "sourceHash": "086061207284e886ff34b7d840789355c888235f2602b57222bd302f8a081815",
+      "translation": "You cannot change the number of actions on a turn-by-turn basis.",
+      "contextHash": "086061207284e886ff34b7d840789355c888235f2602b57222bd302f8a081815"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "また１回目の行動で攻撃力アップ、２回目で攻撃といった制御もできない。",
+      "sourceHash": "bea06bd8f0fb1acbe50181b2f690b3e4506a0310a9d0ddd1a4ea7a10594f1c64",
+      "translation": "You also cannot control actions so that the enemy boosts its attack power on the first action and attacks on the second.",
+      "contextHash": "bea06bd8f0fb1acbe50181b2f690b3e4506a0310a9d0ddd1a4ea7a10594f1c64"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "回復魔法は対象が完全ランダム。ＨＰの減った相手を狙ってくれない。",
+      "sourceHash": "fea821f5bdaf76aa0c768bee27bbca39b593d1e9466e4c2537967de1c99eb443",
+      "translation": "Healing spells select their targets completely at random. They will not target an ally with low HP.",
+      "contextHash": "fea821f5bdaf76aa0c768bee27bbca39b593d1e9466e4c2537967de1c99eb443"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "蘇生魔法は死亡者がいなくとも空振りする。",
+      "sourceHash": "41b609dead525ae6c40a31eb8760aacfc0e7b31cf496a0f586ebf55483060cca",
+      "translation": "Revival spells are wasted even when there are no dead allies.",
+      "contextHash": "41b609dead525ae6c40a31eb8760aacfc0e7b31cf496a0f586ebf55483060cca"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "条件にステートもあるが、対象は自分のみ。",
+      "sourceHash": "d7f217f4b89ff2990dff002eb5fa1a52a55ab3636600b4e465e7b3c395be0730",
+      "translation": "States are available as conditions, but the target can only be the enemy itself.",
+      "contextHash": "d7f217f4b89ff2990dff002eb5fa1a52a55ab3636600b4e465e7b3c395be0730"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "つまり仲間が戦闘不能の時という条件は指定できない。",
+      "sourceHash": "e33e732bf941b54ee94d3d6d4b00ff8930a807a39b0b63b5113a00a90bf40207",
+      "translation": "In other words, you cannot specify the condition that an ally is incapacitated.",
+      "contextHash": "e33e732bf941b54ee94d3d6d4b00ff8930a807a39b0b63b5113a00a90bf40207"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "また、ステートの条件は「かかっている時」限定である。",
+      "sourceHash": "f1b1b1379b580030e7eabefd816d838e8a321eaff8a3115bb0bdf9ca85053eaf",
+      "translation": "In addition, state conditions are limited to when the state is applied.",
+      "contextHash": "f1b1b1379b580030e7eabefd816d838e8a321eaff8a3115bb0bdf9ca85053eaf"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "「自分がステートでない時に使用」というように重ねがけを避けるのが困難。",
+      "sourceHash": "c1c9ae18d7a5b6cbd36bb3466e9a0f3aa07dbefc93c2a953d5773b278df4d0b3",
+      "translation": "It is difficult to prevent repeated application with a condition such as “Use when the enemy does not have the state.”",
+      "contextHash": "c1c9ae18d7a5b6cbd36bb3466e9a0f3aa07dbefc93c2a953d5773b278df4d0b3"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "スイッチが条件にあるがＯＮの場合だけ。ＯＦＦがなく融通が利かない。",
+      "sourceHash": "ae05a8ab22ee099911919497636cc0c3e1b8004da585f1acb5b808f9f6b6fdcf",
+      "translation": "Switches are available as conditions, but only when ON. There is no OFF condition, making them inflexible.",
+      "contextHash": "ae05a8ab22ee099911919497636cc0c3e1b8004da585f1acb5b808f9f6b6fdcf"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "変数が条件にない。",
+      "sourceHash": "8bbeac84f91d3ab23f64db7098a53d7a5748012273e512c06c135582004507f8",
+      "translation": "Variables are not available as conditions.",
+      "contextHash": "8bbeac84f91d3ab23f64db7098a53d7a5748012273e512c06c135582004507f8"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "生存数が条件にない。",
+      "sourceHash": "d5825de9bff42f6f36a3dd73e5f06fc8394586f4c8900f439763f473b7ca0ea0",
+      "translation": "The number of living members is not available as a condition.",
+      "contextHash": "d5825de9bff42f6f36a3dd73e5f06fc8394586f4c8900f439763f473b7ca0ea0"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "行動後のスイッチ操作がない。２０００にはあったので、なぜか劣化。",
+      "sourceHash": "25673b07749ad7104d34e88c79c0a10561b8b9b759d4d7e3bcbcd5752f6222c5",
+      "translation": "There is no switch operation after an action. RPG Maker 2000 had one, so this feature has somehow gotten worse.",
+      "contextHash": "25673b07749ad7104d34e88c79c0a10561b8b9b759d4d7e3bcbcd5752f6222c5"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "そもそも、パーティLV以外の味方側の情報を一切参照できない。",
+      "sourceHash": "ebe4588b96f0548c23c8e95067ce8b59d787b54e4bc227c713b269065785bc8b",
+      "translation": "To begin with, you cannot reference any information about the allies other than the party level.",
+      "contextHash": "ebe4588b96f0548c23c8e95067ce8b59d787b54e4bc227c713b269065785bc8b"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "……などなど、多すぎて書ききれません。",
+      "sourceHash": "b9dfe9842f81ded3507042c3b4f49743f414ecf0d7438f3ed050ee21b83c0cb5",
+      "translation": "…and so on. There are too many problems to list them all.",
+      "contextHash": "b9dfe9842f81ded3507042c3b4f49743f414ecf0d7438f3ed050ee21b83c0cb5"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "イベントコマンドで敵を制御することによって、そういった諸々の問題を一挙に解決します。",
+      "sourceHash": "b0484901e0831360918fff9e0287a31af8d7d27e654c8644c8b171c50ad59572",
+      "translation": "By controlling enemies with event commands, you can solve all of these problems at once.",
+      "contextHash": "b0484901e0831360918fff9e0287a31af8d7d27e654c8644c8b171c50ad59572"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "また、その際には当然ながら全てのイベントコマンドが使い放題です。文章の表示もピクチャーもアニメーションもスクリプトも自由自在に挟めます。",
+      "sourceHash": "8a214be6b5fe21409cf74427c1fdc612d360fd1e2b47bbe99ce1b8e5a4db812a",
+      "translation": "Naturally, you can also use all event commands freely, inserting text displays, pictures, animations, scripts, and more wherever you like.",
+      "contextHash": "8a214be6b5fe21409cf74427c1fdc612d360fd1e2b47bbe99ce1b8e5a4db812a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "若干手間がかかることもあって、主にボス敵の行動を想定しています。……が、もちろん雑魚でも使えます。",
+      "sourceHash": "6a7ef5136f4028d8fec781addb715c1d547be8489e7e90b0dd63918207734e93",
+      "translation": "Since this requires a little extra work, it is mainly intended for boss enemies. …But of course, it can also be used for regular enemies.",
+      "contextHash": "6a7ef5136f4028d8fec781addb715c1d547be8489e7e90b0dd63918207734e93"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "手間がかかるといっても、敵の行動パターン画面で複雑な制御を行うよりは遥かに楽です。",
+      "sourceHash": "f5c43827a61583dcb6a2946f44b991295f36a03fb0c4a3d281f57550159edd77",
+      "translation": "Even though it takes some work, it is far easier than performing complex control in the enemy action pattern window.",
+      "contextHash": "f5c43827a61583dcb6a2946f44b991295f36a03fb0c4a3d281f57550159edd77"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "設定方法",
+      "sourceHash": "80cdaf2a04c184f2eb2d8bc0ba11750d1a6cb5fd9627ec18e248e43eda9e19c3",
+      "translation": "How to Set It Up",
+      "contextHash": "80cdaf2a04c184f2eb2d8bc0ba11750d1a6cb5fd9627ec18e248e43eda9e19c3"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "まず、戦闘中にバトルイベント（コモンイベント）を呼び出す方法からです。",
+      "sourceHash": "c77652e41828f1fa61cfbf3830d9fed09953dabef1637d506c510a53200c2842",
+      "translation": "First, here is how to call a battle event (common event) during battle.",
+      "contextHash": "c77652e41828f1fa61cfbf3830d9fed09953dabef1637d506c510a53200c2842"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "各戦闘システム共通の方法",
+      "sourceHash": "6ce9cb9a08156518c30559eb97c8fc9d77b2557ba6d55765329cae9711bf2516",
+      "translation": "Method Common to All Battle Systems",
+      "contextHash": "6ce9cb9a08156518c30559eb97c8fc9d77b2557ba6d55765329cae9711bf2516"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "デフォルトのターン制でも、当サイトにあるＣＴＢ（およびＣＴＴＢ）でも使える方法です。また、ＭＺのタイムプログレスバトルでも有効です。",
+      "sourceHash": "b1f48eb2666311f47742e54f1e69fae5fdb38530e82848ea4927ac51d5ec5d04",
+      "translation": "This method works with the default turn-based system, the CTB (and CTTB) system available on this site, and MZ's Time Progress Battle system.",
+      "contextHash": "b1f48eb2666311f47742e54f1e69fae5fdb38530e82848ea4927ac51d5ec5d04"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "コモンイベントを呼び出すスキルを作成します。",
+      "sourceHash": "f6dbf079d6cffec341e925a45633912d3fd67efe042eb0798d193fe66bb4f0dc",
+      "translation": "Create a skill that calls a common event.",
+      "contextHash": "f6dbf079d6cffec341e925a45633912d3fd67efe042eb0798d193fe66bb4f0dc"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "メモ欄に<NoStartAction>と記述すると、スキルの開始演出を省略できます。",
+      "sourceHash": "967302b52461b7be01c631d84fdda30a116da1df571c510802c863d6b5fc413a",
+      "translation": "Enter <NoStartAction> in the note field to skip the skill's starting animation.",
+      "contextHash": "967302b52461b7be01c631d84fdda30a116da1df571c510802c863d6b5fc413a"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "範囲はなしに設定してください。でないと余計なメッセージが表示されます。",
+      "sourceHash": "eb3efb63964da6178d5ca1d1f9416486d794b7d72245882fa4ee44f4206f507e",
+      "translation": "Set the scope to None. Otherwise, an unnecessary message will be displayed.",
+      "contextHash": "eb3efb63964da6178d5ca1d1f9416486d794b7d72245882fa4ee44f4206f507e"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "敵の行動パターンにこのスキルを設定してください。",
+      "sourceHash": "937779571a44022c7245eb19d38df2b9d49b7ab1837881285f5baae7ae354c84",
+      "translation": "Set this skill in the enemy's action pattern.",
+      "contextHash": "937779571a44022c7245eb19d38df2b9d49b7ab1837881285f5baae7ae354c84"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "敵がこのスキルを実行したタイミングでコモンイベントが呼び出されます。",
+      "sourceHash": "9bc79429efd5b7fde663a43d95c7b137cd2095c71c68a19501d3bb896f9810ba",
+      "translation": "The common event will be called when the enemy uses this skill.",
+      "contextHash": "9bc79429efd5b7fde663a43d95c7b137cd2095c71c68a19501d3bb896f9810ba"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "そのままコモンイベントに処理を記述してもよいですし、スイッチを起動して敵グループのバトルイベントを呼び出すのも自由です。例えば、ボスの行動制御などはその敵グループ内に書いたほうが、管理しやすいかもしれません。",
+      "sourceHash": "dec9c86b5734d3a631b491fedc193d5c337c2050d5ffe16de8428652afe916fc",
+      "translation": "You can either write the processing directly in the common event or turn on a switch to call a troop battle event. For example, it may be easier to manage boss action control if you write it within the troop.",
+      "contextHash": "dec9c86b5734d3a631b491fedc193d5c337c2050d5ffe16de8428652afe916fc"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※敵グループのバトルイベントを使う場合、スパンはモーメントにしてください。",
+      "sourceHash": "a7ebf2b960c88e3191aace9489c06e4b9f4c82fe74acfe4ae50bf6588f699928",
+      "translation": "※When using a troop battle event, set the span to Moment.",
+      "contextHash": "a7ebf2b960c88e3191aace9489c06e4b9f4c82fe74acfe4ae50bf6588f699928"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "どこかでスイッチをオフにしないとオンのままなので注意！",
+      "sourceHash": "888756b72bdd8d77da62bf2411debcb4685052e29c8dfbd1ac7d41bc965b569b",
+      "translation": "Be careful: unless you turn the switch off somewhere, it will remain on!",
+      "contextHash": "888756b72bdd8d77da62bf2411debcb4685052e29c8dfbd1ac7d41bc965b569b"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "なお、敵ごとに呼び出し用のスキルやコモンイベントを必ずしも増やす必要はありません。",
+      "sourceHash": "b66cc54bd9accd716cc3aa2ff8a2152313fe1f80632c66e1429ca480bdfdfd42",
+      "translation": "Incidentally, you do not necessarily need to create additional skills or common events for calling them for each enemy.",
+      "contextHash": "b66cc54bd9accd716cc3aa2ff8a2152313fe1f80632c66e1429ca480bdfdfd42"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "コモンイベント内で、敵ＩＤを使って分岐させる。",
+      "sourceHash": "ad6036032cb95dcee0d689793c7a55310a476fcf0255e29000c1ef601da0b4fc",
+      "translation": "Branch within the common event using the enemy ID.",
+      "contextHash": "ad6036032cb95dcee0d689793c7a55310a476fcf0255e29000c1ef601da0b4fc"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "スイッチで敵グループを呼び出し、別々の処理を記述する。",
+      "sourceHash": "42e3a7c44f886fd0dd9465072b8fe0f4517273407ddf0adb42d09a0203539073",
+      "translation": "Call the troop with a switch and write separate processing for each one.",
+      "contextHash": "42e3a7c44f886fd0dd9465072b8fe0f4517273407ddf0adb42d09a0203539073"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "といった方法でも対応できます。やりやすい方法でどうぞ。",
+      "sourceHash": "caf8b1f3f76b396bd8d0e97f278193cccca38941f4187d227a4813dd2eec0e37",
+      "translation": "These methods work as well. Use whichever is easiest for you.",
+      "contextHash": "caf8b1f3f76b396bd8d0e97f278193cccca38941f4187d227a4813dd2eec0e37"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "以下はコモンイベント内で分岐させた例です。",
+      "sourceHash": "11ae30ef56be37034805075a62e5d411d997f1b6a70ef759fcdc974cd7a6da5c",
+      "translation": "The following is an example of branching within a common event.",
+      "contextHash": "11ae30ef56be37034805075a62e5d411d997f1b6a70ef759fcdc974cd7a6da5c"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "条件分岐：スクリプト：a._enemyId == 2",
+      "sourceHash": "b5e2807d9ceb5d6e9ef147ea3baa09ce6295516ff6d1f6cddf591e728ea10a9c",
+      "translation": "Conditional Branch: Script: a._enemyId == 2",
+      "contextHash": "b5e2807d9ceb5d6e9ef147ea3baa09ce6295516ff6d1f6cddf591e728ea10a9c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "というように、敵ＩＤを取得して分岐させています。",
+      "sourceHash": "a931608dfbadede8b4f203488dc8a7a980155ba385fed1d0ffdbf1fbc60ef82c",
+      "translation": "As shown here, the enemy ID is obtained and used for branching.",
+      "contextHash": "a931608dfbadede8b4f203488dc8a7a980155ba385fed1d0ffdbf1fbc60ef82c"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "スクリプトを使うので、ちょっと戸惑うかもしれませんが、コピペで数字だけ変えればＯＫです。",
+      "sourceHash": "c738ab9c051cf1bea7289897aea1bc31e49725bfa4d4ac331ff36e6d522427c3",
+      "translation": "Since this uses a script, it may seem a little confusing, but you can simply copy and paste it and change only the number.",
+      "contextHash": "c738ab9c051cf1bea7289897aea1bc31e49725bfa4d4ac331ff36e6d522427c3"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "また『=』ではなく『==』であることに注意です。",
+      "sourceHash": "3cf02e604565a981bee9b46af0950845c5c2d8927340de6e2832fca6404ac2d8",
+      "translation": "Also note that it uses “==” rather than “=”.",
+      "contextHash": "3cf02e604565a981bee9b46af0950845c5c2d8927340de6e2832fca6404ac2d8"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "aというのはスキルの計算式（例：a.atk * 4 - b.def * 2）でも使っているものと全く同じです。スキルの使用者（ＭＺでは行動主体という）の情報が色々と詰まっています。",
+      "sourceHash": "4d041b3b2ede14e1179f2d9107ff31f62110de5dd2c9cd99d1dd96ce133a1864",
+      "translation": "a is exactly the same thing used in skill formulas (for example: a.atk * 4 - b.def * 2). It contains various information about the skill user (called the action subject in MZ).",
+      "contextHash": "4d041b3b2ede14e1179f2d9107ff31f62110de5dd2c9cd99d1dd96ce133a1864"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "※本来、バトルイベント上では参照できませんが、このプラグインの機能で無理やり参照できるようにしています。プラグインパラメータの『aで行動主体を参照』というのがそれです。",
+      "sourceHash": "ef62df4e3209d32f65f9108d068cef5251de10e09e53f4ffe39e0aaf908bbbef",
+      "translation": "※Normally, this cannot be referenced in a battle event, but this plugin's functionality makes it possible to reference it anyway. This is what the plugin parameter “Reference the action subject with a” does.",
+      "contextHash": "ef62df4e3209d32f65f9108d068cef5251de10e09e53f4ffe39e0aaf908bbbef"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "※『a._enemyId』の他にも『a.enemyId()』でも同じ値を参照できます。ただし『a.enemyId()』はaがアクターだとエラーになるので注意です。",
+      "sourceHash": "d736762983e6be5b520442859d2adc4f7f464aa2098ff43197d14900dd48f241",
+      "translation": "※In addition to “a._enemyId”, you can reference the same value with “a.enemyId()”. However, be careful: “a.enemyId()” will cause an error if a is an actor.",
+      "contextHash": "d736762983e6be5b520442859d2adc4f7f464aa2098ff43197d14900dd48f241"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ＣＴＢ専用",
+      "sourceHash": "3fcb7b6599654d34097ab0e3ab0b50f1f637376d0cad011483d4f1a2ab1d484a",
+      "translation": "CTB Only",
+      "contextHash": "3fcb7b6599654d34097ab0e3ab0b50f1f637376d0cad011483d4f1a2ab1d484a"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "当サイトにあるＣＴＢ用プラグインを導入している場合、コモンイベントを使用しない方法も可能です。",
+      "sourceHash": "8756710eb9e3aa8f2db472c6accd647c83ca0ba4902b23dca07b7172dac7c83e",
+      "translation": "If you have installed the CTB plugin available on this site, you can also use a method that does not require a common event.",
+      "contextHash": "8756710eb9e3aa8f2db472c6accd647c83ca0ba4902b23dca07b7172dac7c83e"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "条件を毎ターン（スパン＝ターン、ターン＝0+1*X）にしたバトルイベントのページを作成します。",
+      "sourceHash": "85c754d4c9390c933845391752b8462004f8a54de244ec43a7737489493cd0a4",
+      "translation": "Create a battle event page with the condition set to Every Turn (Span = Turn, Turn = 0+1*X).",
+      "contextHash": "85c754d4c9390c933845391752b8462004f8a54de244ec43a7737489493cd0a4"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "その先頭で敵ＩＤなどを条件にして、目当ての行動主体の時だけ処理を行うようにします。",
+      "sourceHash": "3fef4c80fee74ea5ed36aa2588ddd9a03d859aadedd23d797990eae0252cb2b8",
+      "translation": "At the beginning of that page, use the enemy ID or another condition so that the processing runs only when the intended action subject is acting.",
+      "contextHash": "3fef4c80fee74ea5ed36aa2588ddd9a03d859aadedd23d797990eae0252cb2b8"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ＣＴＢではターン＝１行動なので、こういう使い方もできるというわけですね。",
+      "sourceHash": "492aca90fcadab60e46c2135070ddc685876d22da9c1c0545cae296af3655abe",
+      "translation": "In CTB, one turn equals one action, so this is another way you can use it.",
+      "contextHash": "492aca90fcadab60e46c2135070ddc685876d22da9c1c0545cae296af3655abe"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "条件分岐：スクリプト：a._enemyId != 8",
+      "sourceHash": "d8d08270cecb3ad4d84d3eb155a2dca0bad3280c538bf03da38e2f156ef7cecf",
+      "translation": "Conditional Branch: Script: a._enemyId != 8",
+      "contextHash": "d8d08270cecb3ad4d84d3eb155a2dca0bad3280c538bf03da38e2f156ef7cecf"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "にある『!=』というのは『==』の反対であり『≠』と同じ意味です。JavaScriptにおいて、『!』は否定を意味します。",
+      "sourceHash": "5cda0e12da7468114732467da2315705cbfaa8a3fe8af7c86c48829f2d3219b3",
+      "translation": "The “!=” here is the opposite of “==” and has the same meaning as “≠”. In JavaScript, “!” means negation.",
+      "contextHash": "5cda0e12da7468114732467da2315705cbfaa8a3fe8af7c86c48829f2d3219b3"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "※ここはアクターも通るため、a.enemyId()だとエラーになるので注意です。",
+      "sourceHash": "2d627ae96c3e706e7c48c180c6aacf7836133b56a5034fe17e23253c5363525d",
+      "translation": "※Be careful, as actors also pass through here, so a.enemyId() will cause an error.",
+      "contextHash": "2d627ae96c3e706e7c48c180c6aacf7836133b56a5034fe17e23253c5363525d"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "後は上と同じです。",
+      "sourceHash": "4bbf0daf8bea2d6396588420b833f6f3f6741f4e06acfeb689858d8cd8b1ca08",
+      "translation": "The rest is the same as above.",
+      "contextHash": "4bbf0daf8bea2d6396588420b833f6f3f6741f4e06acfeb689858d8cd8b1ca08"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "既に準備段階で結構長くなってしまいましたが、基本はコピペするだけなので大して時間はかかりません。",
+      "sourceHash": "b6ad26560ffd6e64174cf3fbcd266b1064a6b128e2c815dc750f61903b0e2b53",
+      "translation": "This preparation stage has already gotten quite long, but since it basically just involves copying and pasting, it will not take much time.",
+      "contextHash": "b6ad26560ffd6e64174cf3fbcd266b1064a6b128e2c815dc750f61903b0e2b53"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "それでは実際に、次の記事から敵の行動制御を記述していきましょう。",
+      "sourceHash": "d55dc787b8502e7fc8d145b0099164f930fe067c41b696fb27cfad059981cbe3",
+      "translation": "Now, starting with the next article, let’s actually write the enemy action control.",
+      "contextHash": "d55dc787b8502e7fc8d145b0099164f930fe067c41b696fb27cfad059981cbe3"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "この記事は[[LINK_1]][MZ版]バトルイベント拡張プラグイン[[/LINK_1]]の解説です。",
+      "sourceHash": "8adbe0646cb9c16b34dc8e00a748719a2a28a28ecfc338aadb9ed4882f6d339c",
+      "parts": [
+        {
+          "source": "この記事は",
+          "link": false
+        },
+        {
+          "source": "[MZ版]バトルイベント拡張プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の解説です。",
+          "link": false
+        }
+      ],
+      "translation": "This article explains the [[LINK_1]][MZ Version] Battle Event Expansion Plugin[[/LINK_1]].",
+      "contextHash": "8adbe0646cb9c16b34dc8e00a748719a2a28a28ecfc338aadb9ed4882f6d339c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "※なお、列挙した問題の一部は[[LINK_1]]敵行動ルーチンの改善[[/LINK_1]]プラグインによっても解決できます。簡単なので超オススメ！",
+      "sourceHash": "f4d8e8ed510188a38ddbe3ab4363866ca25ba13c66a20910ed8dd9f10775cf80",
+      "parts": [
+        {
+          "source": "※なお、列挙した問題の一部は",
+          "link": false
+        },
+        {
+          "source": "敵行動ルーチンの改善",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "プラグインによっても解決できます。簡単なので超オススメ！",
+          "link": false
+        }
+      ],
+      "translation": "※Some of the issues listed can also be resolved with the [[LINK_1]]Improved Enemy Action Routine[[/LINK_1]] plugin. It's simple, so I highly recommend it!",
+      "contextHash": "f4d8e8ed510188a38ddbe3ab4363866ca25ba13c66a20910ed8dd9f10775cf80"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]＞敵の行動を自在に制御する ②実践編[[/LINK_1]]",
+      "sourceHash": "ebb26f8ca4859f0475d35b33fc430a4fae2223fc17ec477f238adb1138b9a7e7",
+      "parts": [
+        {
+          "source": "＞敵の行動を自在に制御する ②実践編",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Controlling Enemy Actions Freely ② Practical Guide[[/LINK_1]]",
+      "contextHash": "ebb26f8ca4859f0475d35b33fc430a4fae2223fc17ec477f238adb1138b9a7e7"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "実施には該当のプラグインが必要となります。": "The applicable plugin is required to use this feature.",
+    "初めに": "Introduction",
+    "ツクールＭＺの敵の行動パターンははっきりいって貧弱です。": "To put it bluntly, RPG Maker MZ's enemy action patterns are rather limited.",
+    "ターンごとに行動回数を変えられない。": "You cannot change the number of actions on a turn-by-turn basis.",
+    "また１回目の行動で攻撃力アップ、２回目で攻撃といった制御もできない。": "You also cannot control actions so that the enemy boosts its attack power on the first action and attacks on the second.",
+    "回復魔法は対象が完全ランダム。ＨＰの減った相手を狙ってくれない。": "Healing spells select their targets completely at random. They will not target an ally with low HP.",
+    "蘇生魔法は死亡者がいなくとも空振りする。": "Revival spells are wasted even when there are no dead allies.",
+    "条件にステートもあるが、対象は自分のみ。": "States are available as conditions, but the target can only be the enemy itself.",
+    "つまり仲間が戦闘不能の時という条件は指定できない。": "In other words, you cannot specify the condition that an ally is incapacitated.",
+    "また、ステートの条件は「かかっている時」限定である。": "In addition, state conditions are limited to when the state is applied.",
+    "「自分がステートでない時に使用」というように重ねがけを避けるのが困難。": "It is difficult to prevent repeated application with a condition such as “Use when the enemy does not have the state.”",
+    "スイッチが条件にあるがＯＮの場合だけ。ＯＦＦがなく融通が利かない。": "Switches are available as conditions, but only when ON. There is no OFF condition, making them inflexible.",
+    "変数が条件にない。": "Variables are not available as conditions.",
+    "生存数が条件にない。": "The number of living members is not available as a condition.",
+    "行動後のスイッチ操作がない。２０００にはあったので、なぜか劣化。": "There is no switch operation after an action. RPG Maker 2000 had one, so this feature has somehow gotten worse.",
+    "そもそも、パーティLV以外の味方側の情報を一切参照できない。": "To begin with, you cannot reference any information about the allies other than the party level.",
+    "……などなど、多すぎて書ききれません。": "…and so on. There are too many problems to list them all.",
+    "イベントコマンドで敵を制御することによって、そういった諸々の問題を一挙に解決します。": "By controlling enemies with event commands, you can solve all of these problems at once.",
+    "また、その際には当然ながら全てのイベントコマンドが使い放題です。文章の表示もピクチャーもアニメーションもスクリプトも自由自在に挟めます。": "Naturally, you can also use all event commands freely, inserting text displays, pictures, animations, scripts, and more wherever you like.",
+    "若干手間がかかることもあって、主にボス敵の行動を想定しています。……が、もちろん雑魚でも使えます。": "Since this requires a little extra work, it is mainly intended for boss enemies. …But of course, it can also be used for regular enemies.",
+    "手間がかかるといっても、敵の行動パターン画面で複雑な制御を行うよりは遥かに楽です。": "Even though it takes some work, it is far easier than performing complex control in the enemy action pattern window.",
+    "設定方法": "How to Set It Up",
+    "まず、戦闘中にバトルイベント（コモンイベント）を呼び出す方法からです。": "First, here is how to call a battle event (common event) during battle.",
+    "各戦闘システム共通の方法": "Method Common to All Battle Systems",
+    "デフォルトのターン制でも、当サイトにあるＣＴＢ（およびＣＴＴＢ）でも使える方法です。また、ＭＺのタイムプログレスバトルでも有効です。": "This method works with the default turn-based system, the CTB (and CTTB) system available on this site, and MZ's Time Progress Battle system.",
+    "コモンイベントを呼び出すスキルを作成します。": "Create a skill that calls a common event.",
+    "メモ欄に<NoStartAction>と記述すると、スキルの開始演出を省略できます。": "Enter <NoStartAction> in the note field to skip the skill's starting animation.",
+    "範囲はなしに設定してください。でないと余計なメッセージが表示されます。": "Set the scope to None. Otherwise, an unnecessary message will be displayed.",
+    "敵の行動パターンにこのスキルを設定してください。": "Set this skill in the enemy's action pattern.",
+    "敵がこのスキルを実行したタイミングでコモンイベントが呼び出されます。": "The common event will be called when the enemy uses this skill.",
+    "そのままコモンイベントに処理を記述してもよいですし、スイッチを起動して敵グループのバトルイベントを呼び出すのも自由です。例えば、ボスの行動制御などはその敵グループ内に書いたほうが、管理しやすいかもしれません。": "You can either write the processing directly in the common event or turn on a switch to call a troop battle event. For example, it may be easier to manage boss action control if you write it within the troop.",
+    "※敵グループのバトルイベントを使う場合、スパンはモーメントにしてください。": "※When using a troop battle event, set the span to Moment.",
+    "どこかでスイッチをオフにしないとオンのままなので注意！": "Be careful: unless you turn the switch off somewhere, it will remain on!",
+    "なお、敵ごとに呼び出し用のスキルやコモンイベントを必ずしも増やす必要はありません。": "Incidentally, you do not necessarily need to create additional skills or common events for calling them for each enemy.",
+    "コモンイベント内で、敵ＩＤを使って分岐させる。": "Branch within the common event using the enemy ID.",
+    "スイッチで敵グループを呼び出し、別々の処理を記述する。": "Call the troop with a switch and write separate processing for each one.",
+    "といった方法でも対応できます。やりやすい方法でどうぞ。": "These methods work as well. Use whichever is easiest for you.",
+    "以下はコモンイベント内で分岐させた例です。": "The following is an example of branching within a common event.",
+    "条件分岐：スクリプト：a._enemyId == 2": "Conditional Branch: Script: a._enemyId == 2",
+    "というように、敵ＩＤを取得して分岐させています。": "As shown here, the enemy ID is obtained and used for branching.",
+    "スクリプトを使うので、ちょっと戸惑うかもしれませんが、コピペで数字だけ変えればＯＫです。": "Since this uses a script, it may seem a little confusing, but you can simply copy and paste it and change only the number.",
+    "また『=』ではなく『==』であることに注意です。": "Also note that it uses “==” rather than “=”.",
+    "aというのはスキルの計算式（例：a.atk * 4 - b.def * 2）でも使っているものと全く同じです。スキルの使用者（ＭＺでは行動主体という）の情報が色々と詰まっています。": "a is exactly the same thing used in skill formulas (for example: a.atk * 4 - b.def * 2). It contains various information about the skill user (called the action subject in MZ).",
+    "※本来、バトルイベント上では参照できませんが、このプラグインの機能で無理やり参照できるようにしています。プラグインパラメータの『aで行動主体を参照』というのがそれです。": "※Normally, this cannot be referenced in a battle event, but this plugin's functionality makes it possible to reference it anyway. This is what the plugin parameter “Reference the action subject with a” does.",
+    "※『a._enemyId』の他にも『a.enemyId()』でも同じ値を参照できます。ただし『a.enemyId()』はaがアクターだとエラーになるので注意です。": "※In addition to “a._enemyId”, you can reference the same value with “a.enemyId()”. However, be careful: “a.enemyId()” will cause an error if a is an actor.",
+    "ＣＴＢ専用": "CTB Only",
+    "当サイトにあるＣＴＢ用プラグインを導入している場合、コモンイベントを使用しない方法も可能です。": "If you have installed the CTB plugin available on this site, you can also use a method that does not require a common event.",
+    "条件を毎ターン（スパン＝ターン、ターン＝0+1*X）にしたバトルイベントのページを作成します。": "Create a battle event page with the condition set to Every Turn (Span = Turn, Turn = 0+1*X).",
+    "その先頭で敵ＩＤなどを条件にして、目当ての行動主体の時だけ処理を行うようにします。": "At the beginning of that page, use the enemy ID or another condition so that the processing runs only when the intended action subject is acting.",
+    "ＣＴＢではターン＝１行動なので、こういう使い方もできるというわけですね。": "In CTB, one turn equals one action, so this is another way you can use it.",
+    "条件分岐：スクリプト：a._enemyId != 8": "Conditional Branch: Script: a._enemyId != 8",
+    "にある『!=』というのは『==』の反対であり『≠』と同じ意味です。JavaScriptにおいて、『!』は否定を意味します。": "The “!=” here is the opposite of “==” and has the same meaning as “≠”. In JavaScript, “!” means negation.",
+    "※ここはアクターも通るため、a.enemyId()だとエラーになるので注意です。": "※Be careful, as actors also pass through here, so a.enemyId() will cause an error.",
+    "後は上と同じです。": "The rest is the same as above.",
+    "既に準備段階で結構長くなってしまいましたが、基本はコピペするだけなので大して時間はかかりません。": "This preparation stage has already gotten quite long, but since it basically just involves copying and pasting, it will not take much time.",
+    "それでは実際に、次の記事から敵の行動制御を記述していきましょう。": "Now, starting with the next article, let’s actually write the enemy action control."
+  }
+}

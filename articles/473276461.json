@@ -1,0 +1,622 @@
+{
+  "articleId": "473276461",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473276461.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "6049853891c0a5892694e5307b4cb3e5a8ab76ed93d321579ba9feedd5d79b54",
+  "translatedAt": "2026-08-31T01:23:37.051Z",
+  "title": "Adjusting Various Motion Durations (+ Walking Duration) [RPG Maker MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "各種モーション時間（＋歩行時間）の調整【RPGツクールMVプラグイン】",
+      "sourceHash": "0f0da6937b115d1ca674a8bb098600f037a91b510d56822389af1e2a45113e1d",
+      "translation": "Adjusting Various Motion Durations (+ Walking Duration) [RPG Maker MV Plugin]",
+      "contextHash": "0f0da6937b115d1ca674a8bb098600f037a91b510d56822389af1e2a45113e1d"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "このプラグインは以下のプラグインに統合されました。",
+      "sourceHash": "eb2fc2e12e33b44e0d2c81655bfd5192fa5b9e99b5e061a01d3e325e02559727",
+      "translation": "This plugin has been integrated into the following plugin.",
+      "contextHash": "eb2fc2e12e33b44e0d2c81655bfd5192fa5b9e99b5e061a01d3e325e02559727"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "今後はこちらをお使いください。",
+      "sourceHash": "1e17d416a82636ecad5f9600dec6423e1137edd34958fb25dfab7aff26c5ca0b",
+      "translation": "Please use that plugin from now on.",
+      "contextHash": "1e17d416a82636ecad5f9600dec6423e1137edd34958fb25dfab7aff26c5ca0b"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/475560242.html",
+      "sourceHash": "d9d4941bf8848477eeab9691939c4550621e2763af343637b5cfc0c6c4cc1431",
+      "translation": "http://newrpg.seesaa.net/article/475560242.html",
+      "contextHash": "ea7da442c4b63d29bad81d0b33855dcb2a1b094450f053e3a7460e526ae0d2f3"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "サイドビュー戦闘における各種モーション時間を調整するプラグインです。",
+      "sourceHash": "a06570eb2ddc82a32b39c208dc962b1607060f1dddac6754a74afe8c47732ca2",
+      "translation": "This plugin adjusts the durations of various motions in side-view battles.",
+      "contextHash": "a06570eb2ddc82a32b39c208dc962b1607060f1dddac6754a74afe8c47732ca2"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ついでに前進・後退時間も調整可能です。",
+      "sourceHash": "57c91c185ad65ce4832d4bf2064a35445292a995193288ec41fe5f049e559f7a",
+      "translation": "It also allows you to adjust the duration of advancing and retreating.",
+      "contextHash": "57c91c185ad65ce4832d4bf2064a35445292a995193288ec41fe5f049e559f7a"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "初めに",
+      "sourceHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870",
+      "translation": "Introduction",
+      "contextHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "RPGツクールMVの初期状態では、前進・武器振りなどのモーション時間が１パターン全て12/60秒（＝0.2秒）に設定されています。３パターンあるので一巡までに36/60秒（0.6秒）です。",
+      "sourceHash": "41b107d6d97a91026c6f2553f85a7a2110fe0f07b84a31aaeb51df9a4c86f456",
+      "translation": "In the default state of RPG Maker MV, motions such as advancing and swinging a weapon are all set to 12/60 seconds (= 0.2 seconds) per pattern. Since there are three patterns, one complete cycle takes 36/60 seconds (0.6 seconds).",
+      "contextHash": "41b107d6d97a91026c6f2553f85a7a2110fe0f07b84a31aaeb51df9a4c86f456"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "対するデフォルトの斬撃のアニメーション20/60秒。わずかに武器を振り遅れた感があります。",
+      "sourceHash": "26a5c2721559ba74858037b42656ef8cd86fd2a69151830556225d6a01a978f5",
+      "translation": "By comparison, the default slashing animation lasts 20/60 seconds. This makes it feel like the weapon swings slightly late.",
+      "contextHash": "26a5c2721559ba74858037b42656ef8cd86fd2a69151830556225d6a01a978f5"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "その程度なら気にならないと思いますが、これが10/60秒などの短いアニメだったら、はっきりと振り遅れが分かるかと思います。",
+      "sourceHash": "adda5337cbcdf7e3b678a5d7ba721b630d32a84f8b363382484c1a71eda9d7be",
+      "translation": "You probably won't notice it to that extent, but if this were a short animation lasting 10/60 seconds, for example, the delay in the weapon swing would likely be obvious.",
+      "contextHash": "adda5337cbcdf7e3b678a5d7ba721b630d32a84f8b363382484c1a71eda9d7be"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "しかしながら、モーション時間は全て１パターン12/60秒に固定。そのため、武器振りだけ速くしたいといった調整が困難です。",
+      "sourceHash": "4d559d6aacc15c049da025564df3d5d382725f46ce5f26946158059c3086919b",
+      "translation": "However, all motion durations are fixed at 12/60 seconds per pattern. This makes it difficult to adjust only the weapon swing to be faster, for example.",
+      "contextHash": "4d559d6aacc15c049da025564df3d5d382725f46ce5f26946158059c3086919b"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "そこで１８あるモーションそれぞれに対して、個別にモーション時間を調整できるようにしたのがこのプラグインです。",
+      "sourceHash": "6a814f161c2eb01f63fab3e7a189e139333d6933bd5eabd57051e9e950f54891",
+      "translation": "This plugin was created to allow you to individually adjust the motion duration for each of the 18 motions.",
+      "contextHash": "6a814f161c2eb01f63fab3e7a189e139333d6933bd5eabd57051e9e950f54891"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ついでに行動時の前進・後退動作の時間も調整できるようにしました。",
+      "sourceHash": "85e0f6755bf3793b0eedd3865b6b82539b7e07c25bde8e6a91c0327ab0845a91",
+      "translation": "I also made it possible to adjust the duration of advancing and retreating when performing an action.",
+      "contextHash": "85e0f6755bf3793b0eedd3865b6b82539b7e07c25bde8e6a91c0327ab0845a91"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "デフォルトだとやや遅い感じを受けるので、初期値の12から8ぐらいまで短縮するのが個人的にはオススメです。",
+      "sourceHash": "7eb4286c807938aeb0aa218a89e2bb006bbd172543c1f1bdc6f8651e93c69cee",
+      "translation": "The default value feels somewhat slow, so I personally recommend reducing it from the initial value of 12 to around 8.",
+      "contextHash": "7eb4286c807938aeb0aa218a89e2bb006bbd172543c1f1bdc6f8651e93c69cee"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "歩行時間もモーションも、いずれも1/60秒単位でかかる時間を設定します。",
+      "sourceHash": "7af19345a1ce324565eb118a9dbbe59b0392a072e87d1cde4c306b490a4e8651",
+      "translation": "Both walking and motion durations are set in units of 1/60 second.",
+      "contextHash": "7af19345a1ce324565eb118a9dbbe59b0392a072e87d1cde4c306b490a4e8651"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法",
+      "sourceHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4",
+      "translation": "Installation",
+      "contextHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールＭＶのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "e909c498632685a8aa8d1433371dbbaa7135d2f439ae54c912f9d76d31276dbc",
+      "translation": "Download the following file and place it in [Project]\\\\js\\\\plugins. Turn the feature ON from RPG Maker MV's Plugin Manager.",
+      "contextHash": "e909c498632685a8aa8d1433371dbbaa7135d2f439ae54c912f9d76d31276dbc"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_MotionTime.js",
+      "sourceHash": "cb76ac1187ef34ec46c9d9a3609bd14b4b6baf9d9414724359f720e03d8d162f",
+      "translation": "NRP_MotionTime.js ",
+      "contextHash": "9f7d637dbfdb1ad70f78ff439138b47403eb498b9b2671a880d4606d70bb7cf7"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ver1.001（2020/03/07）",
+      "sourceHash": "a5283ba5aaf7a1bc7fb6837dfc715ec952985427ddfd1c880dcb93f84c578af2",
+      "translation": "ver1.001 (2020/03/07) ",
+      "contextHash": "9f7d637dbfdb1ad70f78ff439138b47403eb498b9b2671a880d4606d70bb7cf7"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴",
+      "sourceHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d",
+      "translation": "Update History",
+      "contextHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2020/03/07（ver1.001）",
+      "sourceHash": "ee3cfb34d1c541dcb3dbb691fbce75a971f5871ced6fde87bb67a5eb84c183ae",
+      "translation": "2020/03/07 (ver1.001) ",
+      "contextHash": "ee3cfb34d1c541dcb3dbb691fbce75a971f5871ced6fde87bb67a5eb84c183ae"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "説明の誤り修正。",
+      "sourceHash": "7ca0c6d889da78f7936d8b6e3d8b18005ce739f0134eaa9b0f6b3df3bbd223a7",
+      "translation": "Corrected an error in the description.",
+      "contextHash": "7ca0c6d889da78f7936d8b6e3d8b18005ce739f0134eaa9b0f6b3df3bbd223a7"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "なぜか1/30秒単位と勘違いしていましたが、正しくは1/60単位です。",
+      "sourceHash": "30c7b2dce0f8534a5c4d0f1c8eb6f127caf10dee5b773adc3ef599023dbd5791",
+      "translation": "For some reason, I had mistakenly thought it was in units of 1/30 second, but it is correctly in units of 1/60 second.",
+      "contextHash": "30c7b2dce0f8534a5c4d0f1c8eb6f127caf10dee5b773adc3ef599023dbd5791"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2020/01/26（ver1.00）",
+      "sourceHash": "7a4d89f229c961453afbeb6a5117f1538ba004fe80afa2ea74eb7ae39d435561",
+      "translation": "2020/01/26 (ver1.00) ",
+      "contextHash": "7a4d89f229c961453afbeb6a5117f1538ba004fe80afa2ea74eb7ae39d435561"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開開始！",
+      "sourceHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5",
+      "translation": "Initial release!",
+      "contextHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "パラメータ（基本設定）",
+      "sourceHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704",
+      "translation": "Parameters (Basic Settings)",
+      "contextHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "モーション時間の初期値（defaultTime）",
+      "sourceHash": "997d38a2ffbf82e323c9aeaa25da500556817a7f63d199ecca41c0bfe9db2887",
+      "translation": "Default Motion Duration (defaultTime)",
+      "contextHash": "997d38a2ffbf82e323c9aeaa25da500556817a7f63d199ecca41c0bfe9db2887"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "指定がない場合に適用される時間の初期値です。",
+      "sourceHash": "f3b727a0eb47271cd65f3708e890f6593b43d681a38df4bc288fac5abc4b16e6",
+      "translation": "This is the default duration applied when no value is specified.",
+      "contextHash": "f3b727a0eb47271cd65f3708e890f6593b43d681a38df4bc288fac5abc4b16e6"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "各モーション項目をブランクにすると、この値が適用されます。",
+      "sourceHash": "fe7eb6c7dc80d5ebb042bfa54c7184791e1f4efa3259104920914de9b4c2d8e0",
+      "translation": "When each motion item is left blank, this value is applied.",
+      "contextHash": "fe7eb6c7dc80d5ebb042bfa54c7184791e1f4efa3259104920914de9b4c2d8e0"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "パラメータ（各種モーション時間）",
+      "sourceHash": "212549af2f39fca162c5c3bbb7b8dbe0f4d79e17cba6d1454ddbec01f9cfe94c",
+      "translation": "Parameters (Various Motion Durations)",
+      "contextHash": "212549af2f39fca162c5c3bbb7b8dbe0f4d79e17cba6d1454ddbec01f9cfe94c"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "前進（コマンド待ち）（walk）",
+      "sourceHash": "876247fd89c11efe3faeac6bfbe1e30ebb91dba147d9462e0e9f8cd8918ef7c5",
+      "translation": "Advance (Command Wait) (walk)",
+      "contextHash": "876247fd89c11efe3faeac6bfbe1e30ebb91dba147d9462e0e9f8cd8918ef7c5"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "前進時のモーション時間です。",
+      "sourceHash": "eca97d9f291002c9a21c62a68d263bb66fbe3e2e856fb2e25eb079d306ae3078",
+      "translation": "This is the motion duration while advancing.",
+      "contextHash": "eca97d9f291002c9a21c62a68d263bb66fbe3e2e856fb2e25eb079d306ae3078"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "MVのヘルプでは『前進』となっていますが、実際にはコマンド待ちや後退時もこのモーションのようです。",
+      "sourceHash": "b8201444dfdbc0350b8b84cd677c518b3e1f4c0d60a3b46c549c407c9b37adaf",
+      "translation": "The MV help calls it “Advance,” but in practice this motion also appears to be used while waiting for commands and while retreating.",
+      "contextHash": "b8201444dfdbc0350b8b84cd677c518b3e1f4c0d60a3b46c549c407c9b37adaf"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "通常待機（wait）",
+      "sourceHash": "ff726447e8a55ef7d099b4f424ec4a4aaa8e8618e726047953a01b472f34ea0e",
+      "translation": "Normal Wait (wait)",
+      "contextHash": "ff726447e8a55ef7d099b4f424ec4a4aaa8e8618e726047953a01b472f34ea0e"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "通常待機時のモーション時間です。",
+      "sourceHash": "9c475b46da4ed116d7781b29d95ba8a3ceb0c13776ac737fe3cf0f08b15a569f",
+      "translation": "This is the motion duration during a normal wait.",
+      "contextHash": "9c475b46da4ed116d7781b29d95ba8a3ceb0c13776ac737fe3cf0f08b15a569f"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "正確にはコマンド入力後の待機状態を指します。",
+      "sourceHash": "1cd63483f7581f54d5918ac71b23a721190b9c215fbf7c446d1522a342e84873",
+      "translation": "More precisely, it refers to the waiting state after command input.",
+      "contextHash": "1cd63483f7581f54d5918ac71b23a721190b9c215fbf7c446d1522a342e84873"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "……後は大体そのまんまなので、解説を省略します。",
+      "sourceHash": "a2487ff004cc805561c2cf36bf32cff8fa1bc2566bb0f9e727bed7611477a92a",
+      "translation": "…The rest are more or less self-explanatory, so I’ll omit the explanations.",
+      "contextHash": "a2487ff004cc805561c2cf36bf32cff8fa1bc2566bb0f9e727bed7611477a92a"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "（すみません、面倒臭くなりました。）",
+      "sourceHash": "bbf68c6a555cb23b8a40810005d8fbe81651c499d61c6f71a3fe3831a935af48",
+      "translation": "(Sorry, I got lazy.)",
+      "contextHash": "bbf68c6a555cb23b8a40810005d8fbe81651c499d61c6f71a3fe3831a935af48"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "詠唱待機（chant）",
+      "sourceHash": "d22fb711c4efb727d210e1415c404262943dfa34ae72a9efe226ed9602417412",
+      "translation": "Chant Wait (chant)",
+      "contextHash": "d22fb711c4efb727d210e1415c404262943dfa34ae72a9efe226ed9602417412"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "防御（guard）",
+      "sourceHash": "ace6c11ea85ed1f82d086de960482e726c8aae78bbaebfb4a014fae0c71ee807",
+      "translation": "Guard (guard)",
+      "contextHash": "ace6c11ea85ed1f82d086de960482e726c8aae78bbaebfb4a014fae0c71ee807"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "ダメージ（damage）",
+      "sourceHash": "7f5ee94a8ba7f95a6d5879784b4e25c0e74576de73a996a402b82dff88ca8562",
+      "translation": "Damage (damage)",
+      "contextHash": "7f5ee94a8ba7f95a6d5879784b4e25c0e74576de73a996a402b82dff88ca8562"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "回避（evade）",
+      "sourceHash": "6034d6a8fc8e67a2cd2c831d2a30a64fa9af614df3845da43c31c6ca08f03593",
+      "translation": "Evade (evade)",
+      "contextHash": "6034d6a8fc8e67a2cd2c831d2a30a64fa9af614df3845da43c31c6ca08f03593"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "突き（thrust）",
+      "sourceHash": "57cafa1591d643f85a19e8770a16a709eb475506b9106f104a2d1a171eb15077",
+      "translation": "Thrust (thrust)",
+      "contextHash": "57cafa1591d643f85a19e8770a16a709eb475506b9106f104a2d1a171eb15077"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "振り（swing）",
+      "sourceHash": "6a9cc04569cd65c1304b87ba54bcde224171dd9afeab8292c9c79c54c4d1f63d",
+      "translation": "Swing (swing)",
+      "contextHash": "6a9cc04569cd65c1304b87ba54bcde224171dd9afeab8292c9c79c54c4d1f63d"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "飛び道具（missile）",
+      "sourceHash": "c8aa3b3c59c4d250f5e4ab42c32033453bb62fc176f3b4541da62ac1b430b312",
+      "translation": "Missile (missile)",
+      "contextHash": "c8aa3b3c59c4d250f5e4ab42c32033453bb62fc176f3b4541da62ac1b430b312"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "汎用スキル（skill）",
+      "sourceHash": "1ad1582b8a1db4a91ae5fb181d6310f37fdd786ae5af2c91b6536fb18a140c8c",
+      "translation": "Generic Skill (skill)",
+      "contextHash": "1ad1582b8a1db4a91ae5fb181d6310f37fdd786ae5af2c91b6536fb18a140c8c"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "魔法（spell）",
+      "sourceHash": "a0d6a8fe7682967074451d28599b0dbad68f44b167c3cc5e7e80e23d00c470ea",
+      "translation": "Spell (spell)",
+      "contextHash": "a0d6a8fe7682967074451d28599b0dbad68f44b167c3cc5e7e80e23d00c470ea"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "アイテム（item）",
+      "sourceHash": "1e187814ff1a30dd793d43f81cb7037611ad5df593370c3864aac865d2eecd39",
+      "translation": "Item (item)",
+      "contextHash": "1e187814ff1a30dd793d43f81cb7037611ad5df593370c3864aac865d2eecd39"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "逃げる（escape）",
+      "sourceHash": "f0defa91fef0d44641d50db083b415f453b8ccaf2c45552df552ed242c02d5f8",
+      "translation": "Escape (escape)",
+      "contextHash": "f0defa91fef0d44641d50db083b415f453b8ccaf2c45552df552ed242c02d5f8"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "勝利（victory）",
+      "sourceHash": "045ed5f6d1910c0c9a64c6b78bcba5bec3c47a6d5980eb2d505b6b5c4623ecfc",
+      "translation": "Victory (victory)",
+      "contextHash": "045ed5f6d1910c0c9a64c6b78bcba5bec3c47a6d5980eb2d505b6b5c4623ecfc"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "瀕死（dying）",
+      "sourceHash": "e4094efa86047663ed28485692a039cdba187c5c3262a5d8b75e77256287960f",
+      "translation": "Dying (dying)",
+      "contextHash": "e4094efa86047663ed28485692a039cdba187c5c3262a5d8b75e77256287960f"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "状態異常（abnormal）",
+      "sourceHash": "a46181fb373a04d57284ceaf70d09d41e99fc59800d40bfb6276768bb965636b",
+      "translation": "Abnormal State (abnormal)",
+      "contextHash": "a46181fb373a04d57284ceaf70d09d41e99fc59800d40bfb6276768bb965636b"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "睡眠（sleep）",
+      "sourceHash": "d7ba47e10942067dbbe7b243a4b7743b0fe0e87c080b78b2bf0f7b371b3f9baf",
+      "translation": "Sleep (sleep)",
+      "contextHash": "d7ba47e10942067dbbe7b243a4b7743b0fe0e87c080b78b2bf0f7b371b3f9baf"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "戦闘不能（dead）",
+      "sourceHash": "ba29af2ace4a15f42012ab73bd487a944b0b67935598fcc7a32c35ed43aa9f62",
+      "translation": "Dead (dead)",
+      "contextHash": "ba29af2ace4a15f42012ab73bd487a944b0b67935598fcc7a32c35ed43aa9f62"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "パラメータ（移動時間）",
+      "sourceHash": "c67e3d72e796f1d8ab07d27583f232d5b1a1807bd66cf31fbcef3dc5ffebf369",
+      "translation": "Parameters (Movement Durations)",
+      "contextHash": "c67e3d72e796f1d8ab07d27583f232d5b1a1807bd66cf31fbcef3dc5ffebf369"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "前進時間（stepForward）",
+      "sourceHash": "84558d1b4c6b30cf91ac359c3a2aabe131b9dbd7cb6cc785e2c015ce68cde237",
+      "translation": "Advance Time (stepForward)",
+      "contextHash": "84558d1b4c6b30cf91ac359c3a2aabe131b9dbd7cb6cc785e2c015ce68cde237"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "行動時に一歩前へ出る際の所要時間です。",
+      "sourceHash": "5da92bb290e3fc3cb4af130826a3304d83c640e0524ac7fc297889d06095ee8a",
+      "translation": "The time required to step forward when taking action.",
+      "contextHash": "5da92bb290e3fc3cb4af130826a3304d83c640e0524ac7fc297889d06095ee8a"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "MVの初期値は12です。8ぐらいにしておくとオススメ。",
+      "sourceHash": "6f7b0861261074b604487bcb29651cc63b2367c39889f44eaca9c1b34ccf0e68",
+      "translation": "The default value in MV is 12. Setting it to around 8 is recommended.",
+      "contextHash": "6f7b0861261074b604487bcb29651cc63b2367c39889f44eaca9c1b34ccf0e68"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "後退時間（stepBack）",
+      "sourceHash": "612b65ac49eb304721dc465422c11485fadf39f26b30f6d4623755186db966f1",
+      "translation": "Retreat Time (stepBack)",
+      "contextHash": "612b65ac49eb304721dc465422c11485fadf39f26b30f6d4623755186db966f1"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "行動終了時に後ろへ戻る際の所要時間です。",
+      "sourceHash": "b88d10db4622b65c1807ea2743e37be7ce78a7d1a229db7c2cbc43b75afbde96",
+      "translation": "The time required to move back when an action ends.",
+      "contextHash": "b88d10db4622b65c1807ea2743e37be7ce78a7d1a229db7c2cbc43b75afbde96"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "MVの初期値は12です。8ぐらいにしておくとオススメ。",
+      "sourceHash": "6f7b0861261074b604487bcb29651cc63b2367c39889f44eaca9c1b34ccf0e68",
+      "translation": "The default value in MV is 12. Setting it to around 8 is recommended.",
+      "contextHash": "6f7b0861261074b604487bcb29651cc63b2367c39889f44eaca9c1b34ccf0e68"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法[[/LINK_1]]",
+      "sourceHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05",
+      "parts": [
+        {
+          "source": "導入方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation[[/LINK_1]]",
+      "contextHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴[[/LINK_1]]",
+      "sourceHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036",
+      "parts": [
+        {
+          "source": "更新履歴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History[[/LINK_1]]",
+      "contextHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータ[[/LINK_1]]",
+      "sourceHash": "7ce6adb2dbab813fe5b009b042294e128ccdb772ce51675c77702b7756ef8452",
+      "parts": [
+        {
+          "source": "パラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameters[[/LINK_1]]",
+      "contextHash": "7ce6adb2dbab813fe5b009b042294e128ccdb772ce51675c77702b7756ef8452"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMV目次に戻る[[/LINK_1]]",
+      "sourceHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8",
+      "parts": [
+        {
+          "source": "＞RPGツクールMV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MV Table of Contents[[/LINK_1]]",
+      "contextHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8"
+    }
+  ],
+  "texts": {
+    "このプラグインは以下のプラグインに統合されました。": "This plugin has been integrated into the following plugin.",
+    "今後はこちらをお使いください。": "Please use that plugin from now on.",
+    "http://newrpg.seesaa.net/article/475560242.html": "http://newrpg.seesaa.net/article/475560242.html",
+    "サイドビュー戦闘における各種モーション時間を調整するプラグインです。": "This plugin adjusts the durations of various motions in side-view battles.",
+    "ついでに前進・後退時間も調整可能です。": "It also allows you to adjust the duration of advancing and retreating.",
+    "初めに": "Introduction",
+    "RPGツクールMVの初期状態では、前進・武器振りなどのモーション時間が１パターン全て12/60秒（＝0.2秒）に設定されています。３パターンあるので一巡までに36/60秒（0.6秒）です。": "In the default state of RPG Maker MV, motions such as advancing and swinging a weapon are all set to 12/60 seconds (= 0.2 seconds) per pattern. Since there are three patterns, one complete cycle takes 36/60 seconds (0.6 seconds).",
+    "対するデフォルトの斬撃のアニメーション20/60秒。わずかに武器を振り遅れた感があります。": "By comparison, the default slashing animation lasts 20/60 seconds. This makes it feel like the weapon swings slightly late.",
+    "その程度なら気にならないと思いますが、これが10/60秒などの短いアニメだったら、はっきりと振り遅れが分かるかと思います。": "You probably won't notice it to that extent, but if this were a short animation lasting 10/60 seconds, for example, the delay in the weapon swing would likely be obvious.",
+    "しかしながら、モーション時間は全て１パターン12/60秒に固定。そのため、武器振りだけ速くしたいといった調整が困難です。": "However, all motion durations are fixed at 12/60 seconds per pattern. This makes it difficult to adjust only the weapon swing to be faster, for example.",
+    "そこで１８あるモーションそれぞれに対して、個別にモーション時間を調整できるようにしたのがこのプラグインです。": "This plugin was created to allow you to individually adjust the motion duration for each of the 18 motions.",
+    "ついでに行動時の前進・後退動作の時間も調整できるようにしました。": "I also made it possible to adjust the duration of advancing and retreating when performing an action.",
+    "デフォルトだとやや遅い感じを受けるので、初期値の12から8ぐらいまで短縮するのが個人的にはオススメです。": "The default value feels somewhat slow, so I personally recommend reducing it from the initial value of 12 to around 8.",
+    "歩行時間もモーションも、いずれも1/60秒単位でかかる時間を設定します。": "Both walking and motion durations are set in units of 1/60 second.",
+    "導入方法": "Installation",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールＭＶのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\\\js\\\\plugins. Turn the feature ON from RPG Maker MV's Plugin Manager.",
+    "NRP_MotionTime.js": "NRP_MotionTime.js ",
+    "ver1.001（2020/03/07）": "ver1.001 (2020/03/07) ",
+    "更新履歴": "Update History",
+    "2020/03/07（ver1.001）": "2020/03/07 (ver1.001) ",
+    "説明の誤り修正。": "Corrected an error in the description.",
+    "なぜか1/30秒単位と勘違いしていましたが、正しくは1/60単位です。": "For some reason, I had mistakenly thought it was in units of 1/30 second, but it is correctly in units of 1/60 second.",
+    "2020/01/26（ver1.00）": "2020/01/26 (ver1.00) ",
+    "公開開始！": "Initial release!",
+    "パラメータ（基本設定）": "Parameters (Basic Settings)",
+    "モーション時間の初期値（defaultTime）": "Default Motion Duration (defaultTime)",
+    "指定がない場合に適用される時間の初期値です。": "This is the default duration applied when no value is specified.",
+    "各モーション項目をブランクにすると、この値が適用されます。": "When each motion item is left blank, this value is applied.",
+    "パラメータ（各種モーション時間）": "Parameters (Various Motion Durations)",
+    "前進（コマンド待ち）（walk）": "Advance (Command Wait) (walk)",
+    "前進時のモーション時間です。": "This is the motion duration while advancing.",
+    "MVのヘルプでは『前進』となっていますが、実際にはコマンド待ちや後退時もこのモーションのようです。": "The MV help calls it “Advance,” but in practice this motion also appears to be used while waiting for commands and while retreating.",
+    "通常待機（wait）": "Normal Wait (wait)",
+    "通常待機時のモーション時間です。": "This is the motion duration during a normal wait.",
+    "正確にはコマンド入力後の待機状態を指します。": "More precisely, it refers to the waiting state after command input.",
+    "……後は大体そのまんまなので、解説を省略します。": "…The rest are more or less self-explanatory, so I’ll omit the explanations.",
+    "（すみません、面倒臭くなりました。）": "(Sorry, I got lazy.)",
+    "詠唱待機（chant）": "Chant Wait (chant)",
+    "防御（guard）": "Guard (guard)",
+    "ダメージ（damage）": "Damage (damage)",
+    "回避（evade）": "Evade (evade)",
+    "突き（thrust）": "Thrust (thrust)",
+    "振り（swing）": "Swing (swing)",
+    "飛び道具（missile）": "Missile (missile)",
+    "汎用スキル（skill）": "Generic Skill (skill)",
+    "魔法（spell）": "Spell (spell)",
+    "アイテム（item）": "Item (item)",
+    "逃げる（escape）": "Escape (escape)",
+    "勝利（victory）": "Victory (victory)",
+    "瀕死（dying）": "Dying (dying)",
+    "状態異常（abnormal）": "Abnormal State (abnormal)",
+    "睡眠（sleep）": "Sleep (sleep)",
+    "戦闘不能（dead）": "Dead (dead)",
+    "パラメータ（移動時間）": "Parameters (Movement Durations)",
+    "前進時間（stepForward）": "Advance Time (stepForward)",
+    "行動時に一歩前へ出る際の所要時間です。": "The time required to step forward when taking action.",
+    "MVの初期値は12です。8ぐらいにしておくとオススメ。": "The default value in MV is 12. Setting it to around 8 is recommended.",
+    "後退時間（stepBack）": "Retreat Time (stepBack)",
+    "行動終了時に後ろへ戻る際の所要時間です。": "The time required to move back when an action ends."
+  }
+}

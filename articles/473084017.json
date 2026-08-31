@@ -1,0 +1,598 @@
+{
+  "articleId": "473084017",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473084017.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "e3318f91047ab7558787bbea2b5de15ae368662d4f43cddb0a3ee768cb8d420a",
+  "translatedAt": "2026-08-31T01:22:07.045Z",
+  "title": "Controlling Enemy Actions Freely ① Introduction [RPG Maker MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵の行動を自在に制御する ①導入編【RPGツクールMVプラグイン】",
+      "sourceHash": "c6f60789912efd0b193b813bf2f9acf8d4bab2fef498cf92f84c937a997603f4",
+      "translation": "Controlling Enemy Actions Freely ① Introduction [RPG Maker MV Plugin]",
+      "contextHash": "c6f60789912efd0b193b813bf2f9acf8d4bab2fef498cf92f84c937a997603f4"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "実施には該当のプラグインが必要となります。",
+      "sourceHash": "de1384da5549b3feec64683bffd97b0d3ea945c94c58bf545938993b828f1485",
+      "translation": "The relevant plugin is required to implement this.",
+      "contextHash": "de1384da5549b3feec64683bffd97b0d3ea945c94c58bf545938993b828f1485"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "初めに",
+      "sourceHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870",
+      "translation": "Introduction",
+      "contextHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＶの敵の行動パターンははっきりいって貧弱です。",
+      "sourceHash": "c13c483f9f3764aade895ef6dcddeb036ea2f08082efb019e54b3a3f951d375b",
+      "translation": "Frankly speaking, RPG Maker MV's enemy action patterns are rather limited.",
+      "contextHash": "c13c483f9f3764aade895ef6dcddeb036ea2f08082efb019e54b3a3f951d375b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ターンごとに行動回数を変えられない。",
+      "sourceHash": "086061207284e886ff34b7d840789355c888235f2602b57222bd302f8a081815",
+      "translation": "You cannot change the number of actions per turn.",
+      "contextHash": "086061207284e886ff34b7d840789355c888235f2602b57222bd302f8a081815"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "また１回目の行動で攻撃力アップ、２回目で攻撃といった制御もできない。",
+      "sourceHash": "bea06bd8f0fb1acbe50181b2f690b3e4506a0310a9d0ddd1a4ea7a10594f1c64",
+      "translation": "You also cannot make the enemy power up on its first action and attack on its second.",
+      "contextHash": "bea06bd8f0fb1acbe50181b2f690b3e4506a0310a9d0ddd1a4ea7a10594f1c64"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "回復魔法は対象が完全ランダム。ＨＰの減った相手を狙ってくれない。",
+      "sourceHash": "fea821f5bdaf76aa0c768bee27bbca39b593d1e9466e4c2537967de1c99eb443",
+      "translation": "The target of healing magic is completely random. It will not target an ally with reduced HP.",
+      "contextHash": "fea821f5bdaf76aa0c768bee27bbca39b593d1e9466e4c2537967de1c99eb443"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "蘇生魔法は死亡者がいなくとも空振りする。",
+      "sourceHash": "41b609dead525ae6c40a31eb8760aacfc0e7b31cf496a0f586ebf55483060cca",
+      "translation": "Revival magic is wasted even when there are no dead allies.",
+      "contextHash": "41b609dead525ae6c40a31eb8760aacfc0e7b31cf496a0f586ebf55483060cca"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "条件にステートもあるが、対象は自分のみ。",
+      "sourceHash": "d7f217f4b89ff2990dff002eb5fa1a52a55ab3636600b4e465e7b3c395be0730",
+      "translation": "States are available as conditions, but the target can only be the enemy itself.",
+      "contextHash": "d7f217f4b89ff2990dff002eb5fa1a52a55ab3636600b4e465e7b3c395be0730"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "つまり仲間が戦闘不能の時という条件は指定できない。",
+      "sourceHash": "e33e732bf941b54ee94d3d6d4b00ff8930a807a39b0b63b5113a00a90bf40207",
+      "translation": "In other words, you cannot specify a condition such as when an ally is incapacitated.",
+      "contextHash": "e33e732bf941b54ee94d3d6d4b00ff8930a807a39b0b63b5113a00a90bf40207"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "また、ステートの条件は「かかっている時」限定である。",
+      "sourceHash": "f1b1b1379b580030e7eabefd816d838e8a321eaff8a3115bb0bdf9ca85053eaf",
+      "translation": "Also, state conditions are limited to when the state is inflicted.",
+      "contextHash": "f1b1b1379b580030e7eabefd816d838e8a321eaff8a3115bb0bdf9ca85053eaf"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "「自分がステートでない時に使用」というように重ねがけを避けるのが困難。",
+      "sourceHash": "c1c9ae18d7a5b6cbd36bb3466e9a0f3aa07dbefc93c2a953d5773b278df4d0b3",
+      "translation": "It is difficult to prevent repeated use with conditions such as “Use when I do not have a state.”",
+      "contextHash": "c1c9ae18d7a5b6cbd36bb3466e9a0f3aa07dbefc93c2a953d5773b278df4d0b3"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "スイッチが条件にあるがＯＮの場合だけ。ＯＦＦがなく融通が利かない。",
+      "sourceHash": "ae05a8ab22ee099911919497636cc0c3e1b8004da585f1acb5b808f9f6b6fdcf",
+      "translation": "Switches are available as conditions, but only when they are ON. There is no OFF condition, making them inflexible.",
+      "contextHash": "ae05a8ab22ee099911919497636cc0c3e1b8004da585f1acb5b808f9f6b6fdcf"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "変数が条件にない。",
+      "sourceHash": "8bbeac84f91d3ab23f64db7098a53d7a5748012273e512c06c135582004507f8",
+      "translation": "Variables are not available as conditions.",
+      "contextHash": "8bbeac84f91d3ab23f64db7098a53d7a5748012273e512c06c135582004507f8"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "生存数が条件にない。",
+      "sourceHash": "d5825de9bff42f6f36a3dd73e5f06fc8394586f4c8900f439763f473b7ca0ea0",
+      "translation": "The number of living allies is not available as a condition.",
+      "contextHash": "d5825de9bff42f6f36a3dd73e5f06fc8394586f4c8900f439763f473b7ca0ea0"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "行動後のスイッチ操作がない。２０００にはあったので、なぜか劣化。",
+      "sourceHash": "25673b07749ad7104d34e88c79c0a10561b8b9b759d4d7e3bcbcd5752f6222c5",
+      "translation": "There is no switch operation after an action. RPG Maker 2000 had one, so this is inexplicably a downgrade.",
+      "contextHash": "25673b07749ad7104d34e88c79c0a10561b8b9b759d4d7e3bcbcd5752f6222c5"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "そもそも、パーティLV以外の味方側の情報を一切参照できない。",
+      "sourceHash": "ebe4588b96f0548c23c8e95067ce8b59d787b54e4bc227c713b269065785bc8b",
+      "translation": "To begin with, you cannot reference any information about the player's side other than the party's level.",
+      "contextHash": "ebe4588b96f0548c23c8e95067ce8b59d787b54e4bc227c713b269065785bc8b"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "……などなど、多すぎて書ききれません。",
+      "sourceHash": "b9dfe9842f81ded3507042c3b4f49743f414ecf0d7438f3ed050ee21b83c0cb5",
+      "translation": "……and so on. There are simply too many issues to list them all.",
+      "contextHash": "b9dfe9842f81ded3507042c3b4f49743f414ecf0d7438f3ed050ee21b83c0cb5"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "イベントコマンドで敵を制御することによって、そういった諸々の問題を一挙に解決します。",
+      "sourceHash": "b0484901e0831360918fff9e0287a31af8d7d27e654c8644c8b171c50ad59572",
+      "translation": "By controlling enemies with event commands, you can solve all of these problems at once.",
+      "contextHash": "b0484901e0831360918fff9e0287a31af8d7d27e654c8644c8b171c50ad59572"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "また、その際には当然ながら全てのイベントコマンドが使い放題です。文章の表示もピクチャーもアニメーションもスクリプトも自由自在に挟めます。",
+      "sourceHash": "8a214be6b5fe21409cf74427c1fdc612d360fd1e2b47bbe99ce1b8e5a4db812a",
+      "translation": "Furthermore, naturally, you can use all event commands freely. You can insert messages, pictures, animations, scripts, and more as you please.",
+      "contextHash": "8a214be6b5fe21409cf74427c1fdc612d360fd1e2b47bbe99ce1b8e5a4db812a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "若干手間がかかることもあって、主にボス敵の行動を想定しています。……が、もちろん雑魚でも使えます。",
+      "sourceHash": "6a7ef5136f4028d8fec781addb715c1d547be8489e7e90b0dd63918207734e93",
+      "translation": "Since this may require a little extra work, it is primarily intended for boss enemy actions. ……However, it can of course be used for regular enemies as well.",
+      "contextHash": "6a7ef5136f4028d8fec781addb715c1d547be8489e7e90b0dd63918207734e93"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "手間がかかるといっても、敵の行動パターン画面で複雑な制御を行うよりは遥かに楽です。",
+      "sourceHash": "f5c43827a61583dcb6a2946f44b991295f36a03fb0c4a3d281f57550159edd77",
+      "translation": "Even though it requires some work, it is far easier than implementing complex controls on the enemy action pattern screen.",
+      "contextHash": "f5c43827a61583dcb6a2946f44b991295f36a03fb0c4a3d281f57550159edd77"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "設定方法",
+      "sourceHash": "80cdaf2a04c184f2eb2d8bc0ba11750d1a6cb5fd9627ec18e248e43eda9e19c3",
+      "translation": "How to Set It Up",
+      "contextHash": "80cdaf2a04c184f2eb2d8bc0ba11750d1a6cb5fd9627ec18e248e43eda9e19c3"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "まず、戦闘中にバトルイベント（コモンイベント）を呼び出す方法からです。",
+      "sourceHash": "c77652e41828f1fa61cfbf3830d9fed09953dabef1637d506c510a53200c2842",
+      "translation": "First, I will explain how to call a battle event (common event) during battle.",
+      "contextHash": "c77652e41828f1fa61cfbf3830d9fed09953dabef1637d506c510a53200c2842"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ターン制、ＣＴＢ共通の方法",
+      "sourceHash": "2a8c516a9c267c1719f54334d7a3043a90cda7b7d0ec6c475f72058da5b148ef",
+      "translation": "Method Common to Turn-Based Battles and CTB",
+      "contextHash": "2a8c516a9c267c1719f54334d7a3043a90cda7b7d0ec6c475f72058da5b148ef"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "デフォルトのターン制でも、当サイトにあるＣＴＢ（およびＣＴＴＢ）でも使える方法です。",
+      "sourceHash": "5021f31dfb43cd184a52da32dfdcea4a34c3fd22f5ed31c247ab7e139bb6f446",
+      "translation": "This method works with both the default turn-based system and the CTB (and CTTB) systems available on this site.",
+      "contextHash": "5021f31dfb43cd184a52da32dfdcea4a34c3fd22f5ed31c247ab7e139bb6f446"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "コモンイベントを呼び出すスキルを作成します。",
+      "sourceHash": "f6dbf079d6cffec341e925a45633912d3fd67efe042eb0798d193fe66bb4f0dc",
+      "translation": "Create a skill that calls a common event.",
+      "contextHash": "f6dbf079d6cffec341e925a45633912d3fd67efe042eb0798d193fe66bb4f0dc"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "メモ欄に<NoStartAction>と記述すると、スキルの開始演出を省略できます。",
+      "sourceHash": "967302b52461b7be01c631d84fdda30a116da1df571c510802c863d6b5fc413a",
+      "translation": "Writing <NoStartAction> in the note field skips the skill's starting animation.",
+      "contextHash": "967302b52461b7be01c631d84fdda30a116da1df571c510802c863d6b5fc413a"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "範囲はなしに設定してください。でないと余計なメッセージが表示されます。",
+      "sourceHash": "eb3efb63964da6178d5ca1d1f9416486d794b7d72245882fa4ee44f4206f507e",
+      "translation": "Set the scope to None. Otherwise, an unnecessary message will be displayed.",
+      "contextHash": "eb3efb63964da6178d5ca1d1f9416486d794b7d72245882fa4ee44f4206f507e"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "敵の行動パターンにこのスキルを設定してください。",
+      "sourceHash": "937779571a44022c7245eb19d38df2b9d49b7ab1837881285f5baae7ae354c84",
+      "translation": "Set this skill in the enemy's action pattern.",
+      "contextHash": "937779571a44022c7245eb19d38df2b9d49b7ab1837881285f5baae7ae354c84"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "敵がこのスキルを実行したタイミングでコモンイベントが呼び出されます。",
+      "sourceHash": "9bc79429efd5b7fde663a43d95c7b137cd2095c71c68a19501d3bb896f9810ba",
+      "translation": "The common event is called when the enemy executes this skill.",
+      "contextHash": "9bc79429efd5b7fde663a43d95c7b137cd2095c71c68a19501d3bb896f9810ba"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "そのままコモンイベントに処理を記述してもよいですし、スイッチを起動して敵グループのバトルイベントを呼び出すのも自由です。例えば、ボスの行動制御などはその敵グループ内に書いたほうが、管理しやすいかもしれません。",
+      "sourceHash": "dec9c86b5734d3a631b491fedc193d5c337c2050d5ffe16de8428652afe916fc",
+      "translation": "You can write the processing directly in the common event, or turn on a switch to call the troop's battle event. For example, it may be easier to manage boss action controls if you write them within the relevant troop.",
+      "contextHash": "dec9c86b5734d3a631b491fedc193d5c337c2050d5ffe16de8428652afe916fc"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※敵グループのバトルイベントを使う場合、スパンはモーメントにしてください。",
+      "sourceHash": "a7ebf2b960c88e3191aace9489c06e4b9f4c82fe74acfe4ae50bf6588f699928",
+      "translation": "※When using a troop battle event, set its span to Moment.",
+      "contextHash": "a7ebf2b960c88e3191aace9489c06e4b9f4c82fe74acfe4ae50bf6588f699928"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "どこかでスイッチをオフにしないとオンのままなので注意！",
+      "sourceHash": "888756b72bdd8d77da62bf2411debcb4685052e29c8dfbd1ac7d41bc965b569b",
+      "translation": "Be careful, because the switch will remain ON unless you turn it OFF somewhere!",
+      "contextHash": "888756b72bdd8d77da62bf2411debcb4685052e29c8dfbd1ac7d41bc965b569b"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "なお、敵ごとに呼び出し用のスキルやコモンイベントを増やす必要はありません。",
+      "sourceHash": "1dbfe8f0a9c978665d6699ef76cfd4e7ffd2460b9a749829815750f8cbac839a",
+      "translation": "Incidentally, you do not need to create additional calling skills or common events for each enemy.",
+      "contextHash": "1dbfe8f0a9c978665d6699ef76cfd4e7ffd2460b9a749829815750f8cbac839a"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "コモンイベント内で、敵ＩＤを使って分岐させる。",
+      "sourceHash": "ad6036032cb95dcee0d689793c7a55310a476fcf0255e29000c1ef601da0b4fc",
+      "translation": "Branch within the common event using the enemy ID.",
+      "contextHash": "ad6036032cb95dcee0d689793c7a55310a476fcf0255e29000c1ef601da0b4fc"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "スイッチで敵グループを呼び出し、別々の処理を記述する。",
+      "sourceHash": "42e3a7c44f886fd0dd9465072b8fe0f4517273407ddf0adb42d09a0203539073",
+      "translation": "Call the troop with a switch and write separate processing for each one.",
+      "contextHash": "42e3a7c44f886fd0dd9465072b8fe0f4517273407ddf0adb42d09a0203539073"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "といった方法でも対応できます。やりやすい方法でどうぞ。",
+      "sourceHash": "caf8b1f3f76b396bd8d0e97f278193cccca38941f4187d227a4813dd2eec0e37",
+      "translation": "These methods work as well. Use whichever is easiest for you.",
+      "contextHash": "caf8b1f3f76b396bd8d0e97f278193cccca38941f4187d227a4813dd2eec0e37"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "以下はコモンイベント内で分岐させた例です。",
+      "sourceHash": "11ae30ef56be37034805075a62e5d411d997f1b6a70ef759fcdc974cd7a6da5c",
+      "translation": "The following is an example of branching within a common event.",
+      "contextHash": "11ae30ef56be37034805075a62e5d411d997f1b6a70ef759fcdc974cd7a6da5c"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "条件分岐：スクリプト：BattleManager._subject._enemyId == 4",
+      "sourceHash": "c5b5a2f341e4d973bf09a58b25881b6de1cd20eaee753b01e230f02afe9ee00c",
+      "translation": "Conditional Branch: Script: BattleManager._subject._enemyId == 4",
+      "contextHash": "c5b5a2f341e4d973bf09a58b25881b6de1cd20eaee753b01e230f02afe9ee00c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "というように、敵ＩＤを取得して分岐させています。",
+      "sourceHash": "a931608dfbadede8b4f203488dc8a7a980155ba385fed1d0ffdbf1fbc60ef82c",
+      "translation": "As shown here, it retrieves the enemy ID and branches accordingly.",
+      "contextHash": "a931608dfbadede8b4f203488dc8a7a980155ba385fed1d0ffdbf1fbc60ef82c"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "スクリプトを使うので、ちょっと戸惑うかもしれませんが、コピペで数字だけ変えればＯＫです。",
+      "sourceHash": "c738ab9c051cf1bea7289897aea1bc31e49725bfa4d4ac331ff36e6d522427c3",
+      "translation": "Since this uses a script, it may be a little confusing, but you can simply copy and paste it and change only the numbers.",
+      "contextHash": "c738ab9c051cf1bea7289897aea1bc31e49725bfa4d4ac331ff36e6d522427c3"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "また『=』ではなく『==』であることに注意です。",
+      "sourceHash": "3cf02e604565a981bee9b46af0950845c5c2d8927340de6e2832fca6404ac2d8",
+      "translation": "Also note that it uses “==” rather than “=”.",
+      "contextHash": "3cf02e604565a981bee9b46af0950845c5c2d8927340de6e2832fca6404ac2d8"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "このBattleManager._subjectというのに、行動者（ＭＶでは行動主体という）の情報が詰まっています。この先、何度も出てきます。",
+      "sourceHash": "5ff4243f77d1a9fe489464ad8fe14f061033f243eae9af7312cf62e1774fb905",
+      "translation": "BattleManager._subject contains information about the acting battler (called the action subject in MV). It will appear many more times from here on.",
+      "contextHash": "5ff4243f77d1a9fe489464ad8fe14f061033f243eae9af7312cf62e1774fb905"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "「長ったらしいんだよ！」という方はスクリプトで、",
+      "sourceHash": "9f36f2312308c2a4967fe9bb0b494325d5a6ef6a9a6237d071a59f8c48af752d",
+      "translation": "If you're thinking, “That's too long!”, use a script to",
+      "contextHash": "9f36f2312308c2a4967fe9bb0b494325d5a6ef6a9a6237d071a59f8c48af752d"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "と、一度書いておけば以降はaと書くだけで省略できます。",
+      "sourceHash": "11e4d2b46c851d28d71edee86542020ff9ba7ca5c8b1a10172b8427ad6998e46",
+      "translation": "and once you write it once, you can abbreviate it by simply writing a thereafter.",
+      "contextHash": "11e4d2b46c851d28d71edee86542020ff9ba7ca5c8b1a10172b8427ad6998e46"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "aというのはスキルの計算式（例：a.atk * 4 - b.def * 2）でも使っていますが、あれと全く同じです。",
+      "sourceHash": "09c4f76b0860069f9abeee8e197244c25f3f7451174f028de7478ab1fb3ce9ed",
+      "translation": "a is also used in skill formulas (for example: a.atk * 4 - b.def * 2), and it is exactly the same thing.",
+      "contextHash": "09c4f76b0860069f9abeee8e197244c25f3f7451174f028de7478ab1fb3ce9ed"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "a.atkでもBattleManager._subject.atkでも、行動主体の攻撃力を取得できます。",
+      "sourceHash": "bff13095b292bda818b262672f26cbe6790b3ffd4eecea3cad507de1235f94cd",
+      "translation": "You can retrieve the acting battler's attack power with either a.atk or BattleManager._subject.atk.",
+      "contextHash": "bff13095b292bda818b262672f26cbe6790b3ffd4eecea3cad507de1235f94cd"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "他にもスキルの計算式にa._enemyIdと記入すれば、敵ＩＤと同じダメージを与えるスキルを作成できます。使い道は皆無ですが。",
+      "sourceHash": "a0dc3fb694be80bb63d3a2ff70a84e35000d29ecae6be2746707531d49d5ae30",
+      "translation": "You can also create a skill that deals damage equal to the enemy ID by entering a._enemyId in the skill formula. It has absolutely no practical use, though.",
+      "contextHash": "a0dc3fb694be80bb63d3a2ff70a84e35000d29ecae6be2746707531d49d5ae30"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ＣＴＢ専用",
+      "sourceHash": "3fcb7b6599654d34097ab0e3ab0b50f1f637376d0cad011483d4f1a2ab1d484a",
+      "translation": "CTB Only",
+      "contextHash": "3fcb7b6599654d34097ab0e3ab0b50f1f637376d0cad011483d4f1a2ab1d484a"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "当サイトにあるＣＴＢ用プラグインを導入している場合、コモンイベントを使用しない方法も可能です。",
+      "sourceHash": "8756710eb9e3aa8f2db472c6accd647c83ca0ba4902b23dca07b7172dac7c83e",
+      "translation": "If you have installed the CTB plugin available on this site, it is also possible to use a method that does not require common events.",
+      "contextHash": "8756710eb9e3aa8f2db472c6accd647c83ca0ba4902b23dca07b7172dac7c83e"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "条件を毎ターン（スパン＝ターン、ターン＝0+1*X）にしたバトルイベントのページを作成します。",
+      "sourceHash": "85c754d4c9390c933845391752b8462004f8a54de244ec43a7737489493cd0a4",
+      "translation": "Create a battle event page with the condition set to Every Turn (Span = Turn, Turn = 0 + 1 * X).",
+      "contextHash": "85c754d4c9390c933845391752b8462004f8a54de244ec43a7737489493cd0a4"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "その先頭で敵ＩＤなどを条件にして、目当ての行動主体の時だけ処理を行うようにします。",
+      "sourceHash": "3fef4c80fee74ea5ed36aa2588ddd9a03d859aadedd23d797990eae0252cb2b8",
+      "translation": "At the beginning, set conditions such as the enemy ID so that the processing runs only when it is the desired acting entity's turn.",
+      "contextHash": "3fef4c80fee74ea5ed36aa2588ddd9a03d859aadedd23d797990eae0252cb2b8"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "ＣＴＢではターン＝１行動なので、こういう使い方もできるというわけですね。",
+      "sourceHash": "492aca90fcadab60e46c2135070ddc685876d22da9c1c0545cae296af3655abe",
+      "translation": "Since in CTB, one turn equals one action, this means it can also be used in this way.",
+      "contextHash": "492aca90fcadab60e46c2135070ddc685876d22da9c1c0545cae296af3655abe"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "条件分岐：スクリプト：BattleManager._subject._enemyId != 4",
+      "sourceHash": "4fcc84a5d9b34dc106fc7f76adb9f0780009ba606dab251ff3b7cb89834847c9",
+      "translation": "Conditional Branch: Script: BattleManager._subject._enemyId != 4",
+      "contextHash": "4fcc84a5d9b34dc106fc7f76adb9f0780009ba606dab251ff3b7cb89834847c9"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "にある『!=』というのは『==』の反対であり『≠』と同じ意味です。JavaScriptにおいて、『!』は否定を意味します。",
+      "sourceHash": "5cda0e12da7468114732467da2315705cbfaa8a3fe8af7c86c48829f2d3219b3",
+      "translation": "The “!=” here is the opposite of “==” and has the same meaning as “≠”. In JavaScript, “!” means negation.",
+      "contextHash": "5cda0e12da7468114732467da2315705cbfaa8a3fe8af7c86c48829f2d3219b3"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "後は上と同じです。",
+      "sourceHash": "4bbf0daf8bea2d6396588420b833f6f3f6741f4e06acfeb689858d8cd8b1ca08",
+      "translation": "The rest is the same as above.",
+      "contextHash": "4bbf0daf8bea2d6396588420b833f6f3f6741f4e06acfeb689858d8cd8b1ca08"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "既に準備段階で結構長くなってしまいましたが、基本はコピペするだけなので大して時間はかかりません。",
+      "sourceHash": "b6ad26560ffd6e64174cf3fbcd266b1064a6b128e2c815dc750f61903b0e2b53",
+      "translation": "The preparation stage has already become fairly lengthy, but since it basically only requires copying and pasting, it will not take much time.",
+      "contextHash": "b6ad26560ffd6e64174cf3fbcd266b1064a6b128e2c815dc750f61903b0e2b53"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "それでは実際に、次の記事から敵の行動制御を記述していきましょう。",
+      "sourceHash": "d55dc787b8502e7fc8d145b0099164f930fe067c41b696fb27cfad059981cbe3",
+      "translation": "Now, in the next article, I will describe the enemy behavior control.",
+      "contextHash": "d55dc787b8502e7fc8d145b0099164f930fe067c41b696fb27cfad059981cbe3"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "この記事は[[LINK_1]]バトルイベント拡張プラグイン[[/LINK_1]]の解説です。",
+      "sourceHash": "baee92de81796e61925dcc7ea2a4a2f3d6f7d1e6f93946e76f960387491a9650",
+      "parts": [
+        {
+          "source": "この記事は",
+          "link": false
+        },
+        {
+          "source": "バトルイベント拡張プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の解説です。",
+          "link": false
+        }
+      ],
+      "translation": "This article explains the [[LINK_1]]Battle Event Expansion Plugin[[/LINK_1]].",
+      "contextHash": "baee92de81796e61925dcc7ea2a4a2f3d6f7d1e6f93946e76f960387491a9650"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]＞敵の行動を自在に制御する ②実践編[[/LINK_1]]",
+      "sourceHash": "ebb26f8ca4859f0475d35b33fc430a4fae2223fc17ec477f238adb1138b9a7e7",
+      "parts": [
+        {
+          "source": "＞敵の行動を自在に制御する ②実践編",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Controlling Enemy Actions at Will ②Practical Guide[[/LINK_1]]",
+      "contextHash": "ebb26f8ca4859f0475d35b33fc430a4fae2223fc17ec477f238adb1138b9a7e7"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMV目次に戻る[[/LINK_1]]",
+      "sourceHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8",
+      "parts": [
+        {
+          "source": "＞RPGツクールMV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MV Table of Contents[[/LINK_1]]",
+      "contextHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8"
+    }
+  ],
+  "texts": {
+    "実施には該当のプラグインが必要となります。": "The relevant plugin is required to implement this.",
+    "初めに": "Introduction",
+    "ツクールＭＶの敵の行動パターンははっきりいって貧弱です。": "Frankly speaking, RPG Maker MV's enemy action patterns are rather limited.",
+    "ターンごとに行動回数を変えられない。": "You cannot change the number of actions per turn.",
+    "また１回目の行動で攻撃力アップ、２回目で攻撃といった制御もできない。": "You also cannot make the enemy power up on its first action and attack on its second.",
+    "回復魔法は対象が完全ランダム。ＨＰの減った相手を狙ってくれない。": "The target of healing magic is completely random. It will not target an ally with reduced HP.",
+    "蘇生魔法は死亡者がいなくとも空振りする。": "Revival magic is wasted even when there are no dead allies.",
+    "条件にステートもあるが、対象は自分のみ。": "States are available as conditions, but the target can only be the enemy itself.",
+    "つまり仲間が戦闘不能の時という条件は指定できない。": "In other words, you cannot specify a condition such as when an ally is incapacitated.",
+    "また、ステートの条件は「かかっている時」限定である。": "Also, state conditions are limited to when the state is inflicted.",
+    "「自分がステートでない時に使用」というように重ねがけを避けるのが困難。": "It is difficult to prevent repeated use with conditions such as “Use when I do not have a state.”",
+    "スイッチが条件にあるがＯＮの場合だけ。ＯＦＦがなく融通が利かない。": "Switches are available as conditions, but only when they are ON. There is no OFF condition, making them inflexible.",
+    "変数が条件にない。": "Variables are not available as conditions.",
+    "生存数が条件にない。": "The number of living allies is not available as a condition.",
+    "行動後のスイッチ操作がない。２０００にはあったので、なぜか劣化。": "There is no switch operation after an action. RPG Maker 2000 had one, so this is inexplicably a downgrade.",
+    "そもそも、パーティLV以外の味方側の情報を一切参照できない。": "To begin with, you cannot reference any information about the player's side other than the party's level.",
+    "……などなど、多すぎて書ききれません。": "……and so on. There are simply too many issues to list them all.",
+    "イベントコマンドで敵を制御することによって、そういった諸々の問題を一挙に解決します。": "By controlling enemies with event commands, you can solve all of these problems at once.",
+    "また、その際には当然ながら全てのイベントコマンドが使い放題です。文章の表示もピクチャーもアニメーションもスクリプトも自由自在に挟めます。": "Furthermore, naturally, you can use all event commands freely. You can insert messages, pictures, animations, scripts, and more as you please.",
+    "若干手間がかかることもあって、主にボス敵の行動を想定しています。……が、もちろん雑魚でも使えます。": "Since this may require a little extra work, it is primarily intended for boss enemy actions. ……However, it can of course be used for regular enemies as well.",
+    "手間がかかるといっても、敵の行動パターン画面で複雑な制御を行うよりは遥かに楽です。": "Even though it requires some work, it is far easier than implementing complex controls on the enemy action pattern screen.",
+    "設定方法": "How to Set It Up",
+    "まず、戦闘中にバトルイベント（コモンイベント）を呼び出す方法からです。": "First, I will explain how to call a battle event (common event) during battle.",
+    "ターン制、ＣＴＢ共通の方法": "Method Common to Turn-Based Battles and CTB",
+    "デフォルトのターン制でも、当サイトにあるＣＴＢ（およびＣＴＴＢ）でも使える方法です。": "This method works with both the default turn-based system and the CTB (and CTTB) systems available on this site.",
+    "コモンイベントを呼び出すスキルを作成します。": "Create a skill that calls a common event.",
+    "メモ欄に<NoStartAction>と記述すると、スキルの開始演出を省略できます。": "Writing <NoStartAction> in the note field skips the skill's starting animation.",
+    "範囲はなしに設定してください。でないと余計なメッセージが表示されます。": "Set the scope to None. Otherwise, an unnecessary message will be displayed.",
+    "敵の行動パターンにこのスキルを設定してください。": "Set this skill in the enemy's action pattern.",
+    "敵がこのスキルを実行したタイミングでコモンイベントが呼び出されます。": "The common event is called when the enemy executes this skill.",
+    "そのままコモンイベントに処理を記述してもよいですし、スイッチを起動して敵グループのバトルイベントを呼び出すのも自由です。例えば、ボスの行動制御などはその敵グループ内に書いたほうが、管理しやすいかもしれません。": "You can write the processing directly in the common event, or turn on a switch to call the troop's battle event. For example, it may be easier to manage boss action controls if you write them within the relevant troop.",
+    "※敵グループのバトルイベントを使う場合、スパンはモーメントにしてください。": "※When using a troop battle event, set its span to Moment.",
+    "どこかでスイッチをオフにしないとオンのままなので注意！": "Be careful, because the switch will remain ON unless you turn it OFF somewhere!",
+    "なお、敵ごとに呼び出し用のスキルやコモンイベントを増やす必要はありません。": "Incidentally, you do not need to create additional calling skills or common events for each enemy.",
+    "コモンイベント内で、敵ＩＤを使って分岐させる。": "Branch within the common event using the enemy ID.",
+    "スイッチで敵グループを呼び出し、別々の処理を記述する。": "Call the troop with a switch and write separate processing for each one.",
+    "といった方法でも対応できます。やりやすい方法でどうぞ。": "These methods work as well. Use whichever is easiest for you.",
+    "以下はコモンイベント内で分岐させた例です。": "The following is an example of branching within a common event.",
+    "条件分岐：スクリプト：BattleManager._subject._enemyId == 4": "Conditional Branch: Script: BattleManager._subject._enemyId == 4",
+    "というように、敵ＩＤを取得して分岐させています。": "As shown here, it retrieves the enemy ID and branches accordingly.",
+    "スクリプトを使うので、ちょっと戸惑うかもしれませんが、コピペで数字だけ変えればＯＫです。": "Since this uses a script, it may be a little confusing, but you can simply copy and paste it and change only the numbers.",
+    "また『=』ではなく『==』であることに注意です。": "Also note that it uses “==” rather than “=”.",
+    "このBattleManager._subjectというのに、行動者（ＭＶでは行動主体という）の情報が詰まっています。この先、何度も出てきます。": "BattleManager._subject contains information about the acting battler (called the action subject in MV). It will appear many more times from here on.",
+    "「長ったらしいんだよ！」という方はスクリプトで、": "If you're thinking, “That's too long!”, use a script to",
+    "と、一度書いておけば以降はaと書くだけで省略できます。": "and once you write it once, you can abbreviate it by simply writing a thereafter.",
+    "aというのはスキルの計算式（例：a.atk * 4 - b.def * 2）でも使っていますが、あれと全く同じです。": "a is also used in skill formulas (for example: a.atk * 4 - b.def * 2), and it is exactly the same thing.",
+    "a.atkでもBattleManager._subject.atkでも、行動主体の攻撃力を取得できます。": "You can retrieve the acting battler's attack power with either a.atk or BattleManager._subject.atk.",
+    "他にもスキルの計算式にa._enemyIdと記入すれば、敵ＩＤと同じダメージを与えるスキルを作成できます。使い道は皆無ですが。": "You can also create a skill that deals damage equal to the enemy ID by entering a._enemyId in the skill formula. It has absolutely no practical use, though.",
+    "ＣＴＢ専用": "CTB Only",
+    "当サイトにあるＣＴＢ用プラグインを導入している場合、コモンイベントを使用しない方法も可能です。": "If you have installed the CTB plugin available on this site, it is also possible to use a method that does not require common events.",
+    "条件を毎ターン（スパン＝ターン、ターン＝0+1*X）にしたバトルイベントのページを作成します。": "Create a battle event page with the condition set to Every Turn (Span = Turn, Turn = 0 + 1 * X).",
+    "その先頭で敵ＩＤなどを条件にして、目当ての行動主体の時だけ処理を行うようにします。": "At the beginning, set conditions such as the enemy ID so that the processing runs only when it is the desired acting entity's turn.",
+    "ＣＴＢではターン＝１行動なので、こういう使い方もできるというわけですね。": "Since in CTB, one turn equals one action, this means it can also be used in this way.",
+    "条件分岐：スクリプト：BattleManager._subject._enemyId != 4": "Conditional Branch: Script: BattleManager._subject._enemyId != 4",
+    "にある『!=』というのは『==』の反対であり『≠』と同じ意味です。JavaScriptにおいて、『!』は否定を意味します。": "The “!=” here is the opposite of “==” and has the same meaning as “≠”. In JavaScript, “!” means negation.",
+    "後は上と同じです。": "The rest is the same as above.",
+    "既に準備段階で結構長くなってしまいましたが、基本はコピペするだけなので大して時間はかかりません。": "The preparation stage has already become fairly lengthy, but since it basically only requires copying and pasting, it will not take much time.",
+    "それでは実際に、次の記事から敵の行動制御を記述していきましょう。": "Now, in the next article, I will describe the enemy behavior control."
+  }
+}

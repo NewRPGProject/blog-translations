@@ -1,0 +1,566 @@
+{
+  "articleId": "473282816",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473282816.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "7b59f18384906019ecbfeb13b4ec084f8bdc55ffc5bea563a81b5e9b0cfcc2ab",
+  "translatedAt": "2026-08-31T01:23:21.659Z",
+  "title": "Set Enemy Normal Attack Battle Animations [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵キャラの通常攻撃の戦闘アニメを設定する【RPGツクールMV&MZプラグイン】",
+      "sourceHash": "98f2acae94f7413ca4042f10de94bbd841da11321d87a4a51b62e5febc5bc503",
+      "translation": "Set Enemy Normal Attack Battle Animations [RPG Maker MZ & MV Plugin]",
+      "contextHash": "98f2acae94f7413ca4042f10de94bbd841da11321d87a4a51b62e5febc5bc503"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "サイドビューにおける敵キャラの通常攻撃の戦闘アニメを設定するプラグインです。",
+      "sourceHash": "3ac5334dd78d7a5207a7abd8a299ca358794aa7691750b2dd647adb38bfa7923",
+      "translation": "This plugin allows you to set battle animations for enemy normal attacks in side-view battles.",
+      "contextHash": "3ac5334dd78d7a5207a7abd8a299ca358794aa7691750b2dd647adb38bfa7923"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "設定には特徴の『武器タイプ装備』を使います。",
+      "sourceHash": "1310838324e1325a0d6181246257b5d5c7e42fd6f213e8205fec2ef90a6c13a0",
+      "translation": "It uses the Feature “Equip Weapon Type” for configuration.",
+      "contextHash": "1310838324e1325a0d6181246257b5d5c7e42fd6f213e8205fec2ef90a6c13a0"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "初めに",
+      "sourceHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870",
+      "translation": "Introduction",
+      "contextHash": "0bf8118e1399970823ff882d8489877590b08baf62c3e06e9a69adbbdaa2c870"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "RPGツクールMVの初期状態（サイドビュー）では、敵の通常攻撃の戦闘アニメがありません。",
+      "sourceHash": "f5fc34877b5a2faf80b7bfc42e6d3130d9da54d5d007ed228e6ffc7b0973db70",
+      "translation": "In the default state of RPG Maker MV (side-view), enemy normal attacks do not have battle animations.",
+      "contextHash": "f5fc34877b5a2faf80b7bfc42e6d3130d9da54d5d007ed228e6ffc7b0973db70"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "設定するには通常攻撃っぽく見せかけた個別のスキルを作ったり、YEP_BattleEngineCoreなど特定のプラグインを導入する必要があります。",
+      "sourceHash": "879fe8540d65c67a7ebdd7414f82f7fbbfe903b3e272cbd55c3dffec0470ef38",
+      "translation": "To configure them, you need to create individual skills that look like normal attacks or install a specific plugin such as YEP_BattleEngineCore.",
+      "contextHash": "879fe8540d65c67a7ebdd7414f82f7fbbfe903b3e272cbd55c3dffec0470ef38"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "前者は打撃、斬撃など戦闘アニメ分のスキルが必要です。また、技名を非表示にしたければ、そのためのプラグインも必要となります。YEP_BattleEngineCoreは影響の大きいプラグインのため、必ずしも全てのユーザが使える方法ではありません。",
+      "sourceHash": "5c2c914fabb0b35ad4ae86b18941816a1ed2f9fbb18b680150970a6b9f62ee5f",
+      "translation": "The former requires separate skills for each battle animation, such as blunt attacks and slashing attacks. Also, if you want to hide skill names, you need another plugin for that. Since YEP_BattleEngineCore has a significant impact, it is not necessarily a method available to every user.",
+      "contextHash": "5c2c914fabb0b35ad4ae86b18941816a1ed2f9fbb18b680150970a6b9f62ee5f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "……などなど、意外と初心者には敷居が高く、中上級者にとっても面倒です。",
+      "sourceHash": "261a44f82b5aca6faafc8f95cf585f07a2b0b9e903b4f42bf2bd8af520f2ddc0",
+      "translation": "And so on—in ways that are surprisingly difficult for beginners and troublesome even for intermediate and advanced users.",
+      "contextHash": "261a44f82b5aca6faafc8f95cf585f07a2b0b9e903b4f42bf2bd8af520f2ddc0"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そんなわけで、特徴の『武器タイプ装備』によって通常攻撃の戦闘アニメを判定させるのが、このプラグインです。",
+      "sourceHash": "689c89cccc21a655bd51db333449644ce56d722b111b897f0ad77753bdf0af5f",
+      "translation": "That is why this plugin determines the normal attack battle animation based on the “Equip Weapon Type” Feature.",
+      "contextHash": "689c89cccc21a655bd51db333449644ce56d722b111b897f0ad77753bdf0af5f"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "敵の『武器タイプ装備』はデフォルトだと全く無意味な項目ですが、このプラグインを導入すれば剣なら剣、槍なら槍というように戦闘アニメを設定できるようになります。",
+      "sourceHash": "7992554e33f81379bd778ffc274a47c94ccd07267d445a827957752fd999a2f8",
+      "translation": "By default, an enemy’s “Equip Weapon Type” setting is completely meaningless, but with this plugin installed, you can set battle animations such as a sword animation for swords and a spear animation for spears.",
+      "contextHash": "7992554e33f81379bd778ffc274a47c94ccd07267d445a827957752fd999a2f8"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法",
+      "sourceHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4",
+      "translation": "Installation",
+      "contextHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the plugin ON in the Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EnemyAttackAnimation.js",
+      "sourceHash": "5aeb63c65f3f5c1aa1d47b55e8afab0fba1fe677f8b1cc9d45663eb40af10a9c",
+      "translation": "NRP_EnemyAttackAnimation.js ",
+      "contextHash": "4fa5bbf4789d73867984c1e52ad972fbeadf7951409957ccb84581a95572d1f6"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ver1.03（2020/08/22）",
+      "sourceHash": "19aa9726f7f9c9f9a74660877afafeda6b13bdce43da9f66183a4370d9847ded",
+      "translation": "ver1.03 (2020/08/22) ",
+      "contextHash": "4fa5bbf4789d73867984c1e52ad972fbeadf7951409957ccb84581a95572d1f6"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "プラグインパラメータに『武器タイプ装備』に対応するアニメーションを設定します。初期状態ではデフォルトの武器タイプに対応するそれっぽいアニメーションを設定しています。ただし、元が元なのでパターンが少ないです。",
+      "sourceHash": "31c41afb527b43415fcc1db47a4b0143640591deed9c0ec579df3e202dc87d3c",
+      "translation": "Set the animations corresponding to “Equip Weapon Type” in the plugin parameters. Initially, animations resembling the default weapon types are configured. However, there are only a few patterns because the original selection is limited.",
+      "contextHash": "31c41afb527b43415fcc1db47a4b0143640591deed9c0ec579df3e202dc87d3c"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "打撃、斬撃、刺突、爪、銃撃の５種類しかないって少なすぎませんかね？ 武器タイプは無駄に１２種類もあるのに……。",
+      "sourceHash": "cd07549afe807e8fa0bbf0bc145d77fd21305831bba02c0e2ff743409d2a60fb",
+      "translation": "Isn’t having only five types—blunt, slashing, piercing, claws, and gunfire—far too few? Even though there are twelve unnecessarily many weapon types…",
+      "contextHash": "cd07549afe807e8fa0bbf0bc145d77fd21305831bba02c0e2ff743409d2a60fb"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "詳細は下記のパラメータを参照してください。",
+      "sourceHash": "3c66424dc819fd37dc5c772d5850f96b0b3cdc8693eadb70fe071cb08ccd4c5b",
+      "translation": "See the parameters below for details.",
+      "contextHash": "3c66424dc819fd37dc5c772d5850f96b0b3cdc8693eadb70fe071cb08ccd4c5b"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "こんな感じで敵の特徴欄に『武器タイプ装備』を設定すれば、通常攻撃にアニメーションが表示されるようになります。",
+      "sourceHash": "be6ec2c7f455799f8393b2d0422e82dc74734a07771442d0cf0b921f1f9c1f33",
+      "translation": "If you set “Equip Weapon Type” in an enemy’s Features section like this, an animation will be displayed for normal attacks.",
+      "contextHash": "be6ec2c7f455799f8393b2d0422e82dc74734a07771442d0cf0b921f1f9c1f33"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "元々、アクター用の項目であるため、イメージに合うものがない可能性もあります。その場合はクチバシなら槍、触手ならムチというように近いものを使うか、追加で定義を増やすとよいでしょう。一応、個別に設定する機能（下参照）もあります。",
+      "sourceHash": "c2a8dc0f0a3b67cf2d88eac37cb29aa20a9c101c163f642560b16a7b6524906c",
+      "translation": "Since this feature was originally intended for actors, there may not be an option that fits the image you have in mind. In that case, use a similar one, such as spears for beaks or whips for tentacles, or add more definitions. There is also a function for setting them individually (see below).",
+      "contextHash": "c2a8dc0f0a3b67cf2d88eac37cb29aa20a9c101c163f642560b16a7b6524906c"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "ちなみに武器タイプはデータベースのタイプで設定できます。",
+      "sourceHash": "167509a9c30f309225ff57476aa9633f70f7e68ab353c4d70e069e4efa356895",
+      "translation": "Incidentally, weapon types can be configured under Types in the database.",
+      "contextHash": "167509a9c30f309225ff57476aa9633f70f7e68ab353c4d70e069e4efa356895"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴",
+      "sourceHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d",
+      "translation": "Update History",
+      "contextHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2020/08/22（ver1.03）",
+      "sourceHash": "4d57fad5b1b55e00fb4c318d09d54b2c619e1e36a1f2e31526d99fed4f937744",
+      "translation": "2020/08/22 (ver1.03) ",
+      "contextHash": "4d57fad5b1b55e00fb4c318d09d54b2c619e1e36a1f2e31526d99fed4f937744"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "ツクールＭＺ向けにヘルプを修正。",
+      "sourceHash": "e33356abe9c537841860530dc7440bc724b30e965817a3a4032dc3db95ef99a1",
+      "translation": "Updated the help for RPG Maker MZ.",
+      "contextHash": "e33356abe9c537841860530dc7440bc724b30e965817a3a4032dc3db95ef99a1"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2020/06/18（ver1.02）",
+      "sourceHash": "6bbf78e6047de0eeb5f83c0b5f74609dc755e2c8b38efbe2aca58e2995294155",
+      "translation": "2020/06/18 (ver1.02) ",
+      "contextHash": "6bbf78e6047de0eeb5f83c0b5f74609dc755e2c8b38efbe2aca58e2995294155"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "英語対応。",
+      "sourceHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978",
+      "translation": "Added English support.",
+      "contextHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2020/03/10（ver1.01）",
+      "sourceHash": "d7c30e1d35862eb586b3efd2e525ea9215cadc24ddf0f4376317bf97c4cb0259",
+      "translation": "2020/03/10 (ver1.01) ",
+      "contextHash": "d7c30e1d35862eb586b3efd2e525ea9215cadc24ddf0f4376317bf97c4cb0259"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "作成中のモーションプラグイン用に処理修正。",
+      "sourceHash": "1caee3bd2e31905c7d3894e656f484e259def394b96b94d1411fada859ea87ce",
+      "translation": "Modified the processing for the motion plugin currently in development.",
+      "contextHash": "1caee3bd2e31905c7d3894e656f484e259def394b96b94d1411fada859ea87ce"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "上に伴い再反転（reMirror）を削除。",
+      "sourceHash": "ec28d549805947d13a9f4bae34fbcced2d9d136c78cbc40579972f79cc62adb1",
+      "translation": "Along with this, removed re-mirroring (reMirror).",
+      "contextHash": "ec28d549805947d13a9f4bae34fbcced2d9d136c78cbc40579972f79cc62adb1"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2020/01/27（ver1.00）",
+      "sourceHash": "46ca70002f885c800a6f7ab3815129525beb0488e4a605e1897db313044befc4",
+      "translation": "2020/01/27 (ver1.00) ",
+      "contextHash": "46ca70002f885c800a6f7ab3815129525beb0488e4a605e1897db313044befc4"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "公開開始！",
+      "sourceHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5",
+      "translation": "Now available!",
+      "contextHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "パラメータ",
+      "sourceHash": "f580915e8fc9803629d3273268f8ae265135f1c45f5f8cba60ffc64fb601fba2",
+      "translation": "Parameters",
+      "contextHash": "f580915e8fc9803629d3273268f8ae265135f1c45f5f8cba60ffc64fb601fba2"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "各武器タイプ装備の設定（weapons）",
+      "sourceHash": "3a1de1ae22c54998347f26cc225f7f3fbc4532945cc21fd9adb66ab32d8b7535",
+      "translation": "Settings for Each Equip Weapon Type (weapons)",
+      "contextHash": "3a1de1ae22c54998347f26cc225f7f3fbc4532945cc21fd9adb66ab32d8b7535"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "各武器タイプ装備ごとにアニメーションの設定を行います。",
+      "sourceHash": "cd45a1c467ef9ecd913279af88d7ea8c31219a5752286ebecf3f77045021a295",
+      "translation": "Configure the animation for each Equip Weapon Type.",
+      "contextHash": "cd45a1c467ef9ecd913279af88d7ea8c31219a5752286ebecf3f77045021a295"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "リスト形式になっており、ダブルクリックで内容が表示されます。",
+      "sourceHash": "dcd00c1bd46ac8db31a90b3dcc858e9dd3f074f621d67e4558b8ce5c5255c24f",
+      "translation": "The settings are in list format, and the contents are displayed by double-clicking.",
+      "contextHash": "dcd00c1bd46ac8db31a90b3dcc858e9dd3f074f621d67e4558b8ce5c5255c24f"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "なお、敵の武器タイプ装備が未設定なら、リスト先頭のものが使用されます。（素手のアニメーションを想定）",
+      "sourceHash": "570b1ae0a69cfa012a31ca298bac2b392879d3a5c734fc9ecfc2c81dcc58a360",
+      "translation": "If an enemy’s Equip Weapon Type is not configured, the first item in the list is used. (This is intended for an unarmed animation.)",
+      "contextHash": "570b1ae0a69cfa012a31ca298bac2b392879d3a5c734fc9ecfc2c81dcc58a360"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "不要なら先頭のアニメーションは『0:なし』に設定してください。",
+      "sourceHash": "2086301f1a3a9751ca2a4be2c951482f2176dceedcfdff7c729f2b7c6fd269bf",
+      "translation": "If this is not needed, set the first animation to “0: None”.",
+      "contextHash": "2086301f1a3a9751ca2a4be2c951482f2176dceedcfdff7c729f2b7c6fd269bf"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "以下、リスト項目の内容です。",
+      "sourceHash": "d0431b1858e53657eed2b7092dd0abba788e67f7e64aa96b720c487e643ec7da",
+      "translation": "The contents of the list items are described below.",
+      "contextHash": "d0431b1858e53657eed2b7092dd0abba788e67f7e64aa96b720c487e643ec7da"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "リストに新しい項目を追加することも可能です。パターンを増やしたい場合はどうぞ。",
+      "sourceHash": "0d775784d2c162eb800ccf83729cfc02ba697aa6b996b11c266922a6fd82a7f1",
+      "translation": "You can also add new items to the list. Use this if you want to add more patterns.",
+      "contextHash": "0d775784d2c162eb800ccf83729cfc02ba697aa6b996b11c266922a6fd82a7f1"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "武器タイプ名（name）",
+      "sourceHash": "2204aadf8f716bca6d1433d5be3b1e2b01bbbc4968798c6b8b18d0114fdc9d9d",
+      "translation": "Weapon Type Name (name)",
+      "contextHash": "2204aadf8f716bca6d1433d5be3b1e2b01bbbc4968798c6b8b18d0114fdc9d9d"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "武器タイプ名です。",
+      "sourceHash": "b718d529c8139700fce8b0834e57f6216c5820b5dc19c353bb37b13df96b96bc",
+      "translation": "The weapon type name.",
+      "contextHash": "b718d529c8139700fce8b0834e57f6216c5820b5dc19c353bb37b13df96b96bc"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "プラグイン画面用のただのメモです。分かりやすいように名前をつけてください。",
+      "sourceHash": "e43af94b338b9701a5b0e1557fd1c5e48d506140794e94fd1aa3551be9c1c87e",
+      "translation": "This is only a note for the plugin screen. Give it a descriptive name.",
+      "contextHash": "e43af94b338b9701a5b0e1557fd1c5e48d506140794e94fd1aa3551be9c1c87e"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "アニメーションID（animationId）",
+      "sourceHash": "16d70ad845122cf5166e983e864becbfa09327c21f1b97ffa625b3809cc85930",
+      "translation": "Animation ID (animationId)",
+      "contextHash": "16d70ad845122cf5166e983e864becbfa09327c21f1b97ffa625b3809cc85930"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "武器タイプに対応するアニメーションを指定します。",
+      "sourceHash": "d56c7b88babdb9323640e5cafb597150f0546b509eec945c25c6bd54d35ec776",
+      "translation": "Specifies the animation corresponding to the weapon type.",
+      "contextHash": "d56c7b88babdb9323640e5cafb597150f0546b509eec945c25c6bd54d35ec776"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "再反転（reMirror）",
+      "sourceHash": "fbb932a0044987d2a37a9eb0a33d7047f5d4aaeb27f189ff13a2672fa6dd32f4",
+      "translation": "Re-mirroring (reMirror) ",
+      "contextHash": "d4c845d5ec3b7ff309d68ab75e47b35b659ecf6cba8cf3aa2ed9128b798da644"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "ver1.01で削除",
+      "sourceHash": "5b50121b2b443afe3e6f7b4a005b5533060751b7bf4978c4025ddfafc47baeb5",
+      "translation": "Removed in ver1.01",
+      "contextHash": "d4c845d5ec3b7ff309d68ab75e47b35b659ecf6cba8cf3aa2ed9128b798da644"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "アニメーションをさらに左右反転するかどうかの設定です。",
+      "sourceHash": "374e4448dcff2bbaa9b7b2ba0188ac02439aba0eb3893099cc2560e16ec7afcc",
+      "translation": "This setting determines whether to mirror the animation horizontally again.",
+      "contextHash": "374e4448dcff2bbaa9b7b2ba0188ac02439aba0eb3893099cc2560e16ec7afcc"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "※敵のアニメは元々反転される仕様です。ONにするとさらに反転して、元の向きに戻ります。基本はOFFで問題ありません。",
+      "sourceHash": "67bea568165a4248b35a4c723050a2c2847a0bbf95c6ca7c0390921f240b324a",
+      "translation": "※Enemy animations are originally mirrored by design. Turning this ON mirrors them again, restoring their original orientation. OFF is generally fine.",
+      "contextHash": "67bea568165a4248b35a4c723050a2c2847a0bbf95c6ca7c0390921f240b324a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "個別設定",
+      "sourceHash": "064dfecc361730aca417ecd7513bc3874a5ebac2eae984579ff151577e846862",
+      "translation": "Individual Settings",
+      "contextHash": "064dfecc361730aca417ecd7513bc3874a5ebac2eae984579ff151577e846862"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "以下のタグを敵キャラのメモ欄に記入すれば、個別設定も可能です。",
+      "sourceHash": "83150b02966a62fed96cadaa9e00a79c3e76c3a0a78b4b58af1f39ce044e4d02",
+      "translation": "You can also configure these individually by entering the following tag in an enemy’s note field.",
+      "contextHash": "83150b02966a62fed96cadaa9e00a79c3e76c3a0a78b4b58af1f39ce044e4d02"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "イメージの合う武器タイプがない。あるいはボス敵など固有の戦闘アニメを使いたいという場合はどうぞ。",
+      "sourceHash": "24b3bee9d074ec14ac5b7823087efdc000338724eed772ef31e9942ce56b9710",
+      "translation": "Use this if there is no weapon type that fits the image you have in mind, or if you want to use a unique battle animation for a boss enemy, for example.",
+      "contextHash": "24b3bee9d074ec14ac5b7823087efdc000338724eed772ef31e9942ce56b9710"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "<AttackAnimation:[アニメーションID]>",
+      "sourceHash": "94c03ac6067a6d65dbd51280129134e4c8d9436d8bb310d4b1ed80ea748dfc59",
+      "translation": "<AttackAnimation:[Animation ID]>",
+      "contextHash": "94c03ac6067a6d65dbd51280129134e4c8d9436d8bb310d4b1ed80ea748dfc59"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "例：<AttackAnimation:10>で、10番のアニメーションを再生します。",
+      "sourceHash": "283d2451d22a1eb8c5ee447b230b9d7a790b9d08fe3fe80d281c79b00e97cc09",
+      "translation": "Example: <AttackAnimation:10> plays animation number 10.",
+      "contextHash": "283d2451d22a1eb8c5ee447b230b9d7a790b9d08fe3fe80d281c79b00e97cc09"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法[[/LINK_1]]",
+      "sourceHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05",
+      "parts": [
+        {
+          "source": "導入方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation Instructions[[/LINK_1]]",
+      "contextHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴[[/LINK_1]]",
+      "sourceHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036",
+      "parts": [
+        {
+          "source": "更新履歴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History[[/LINK_1]]",
+      "contextHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータ[[/LINK_1]]",
+      "sourceHash": "7ce6adb2dbab813fe5b009b042294e128ccdb772ce51675c77702b7756ef8452",
+      "parts": [
+        {
+          "source": "パラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameters[[/LINK_1]]",
+      "contextHash": "7ce6adb2dbab813fe5b009b042294e128ccdb772ce51675c77702b7756ef8452"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]個別設定[[/LINK_1]]",
+      "sourceHash": "c126ee09007c6a08ba10ba2aef40d237d518c7758ae59a23dc43cd1e948ca7c2",
+      "parts": [
+        {
+          "source": "個別設定",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Individual Settings[[/LINK_1]]",
+      "contextHash": "c126ee09007c6a08ba10ba2aef40d237d518c7758ae59a23dc43cd1e948ca7c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMV目次に戻る[[/LINK_1]]",
+      "sourceHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8",
+      "parts": [
+        {
+          "source": "＞RPGツクールMV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MV Table of Contents[[/LINK_1]]",
+      "contextHash": "de4b33c66cb5cc651ed66acce2cf207da5eced64d19563c2511be7f9680e33f8"
+    }
+  ],
+  "texts": {
+    "サイドビューにおける敵キャラの通常攻撃の戦闘アニメを設定するプラグインです。": "This plugin allows you to set battle animations for enemy normal attacks in side-view battles.",
+    "設定には特徴の『武器タイプ装備』を使います。": "It uses the Feature “Equip Weapon Type” for configuration.",
+    "初めに": "Introduction",
+    "RPGツクールMVの初期状態（サイドビュー）では、敵の通常攻撃の戦闘アニメがありません。": "In the default state of RPG Maker MV (side-view), enemy normal attacks do not have battle animations.",
+    "設定するには通常攻撃っぽく見せかけた個別のスキルを作ったり、YEP_BattleEngineCoreなど特定のプラグインを導入する必要があります。": "To configure them, you need to create individual skills that look like normal attacks or install a specific plugin such as YEP_BattleEngineCore.",
+    "前者は打撃、斬撃など戦闘アニメ分のスキルが必要です。また、技名を非表示にしたければ、そのためのプラグインも必要となります。YEP_BattleEngineCoreは影響の大きいプラグインのため、必ずしも全てのユーザが使える方法ではありません。": "The former requires separate skills for each battle animation, such as blunt attacks and slashing attacks. Also, if you want to hide skill names, you need another plugin for that. Since YEP_BattleEngineCore has a significant impact, it is not necessarily a method available to every user.",
+    "……などなど、意外と初心者には敷居が高く、中上級者にとっても面倒です。": "And so on—in ways that are surprisingly difficult for beginners and troublesome even for intermediate and advanced users.",
+    "そんなわけで、特徴の『武器タイプ装備』によって通常攻撃の戦闘アニメを判定させるのが、このプラグインです。": "That is why this plugin determines the normal attack battle animation based on the “Equip Weapon Type” Feature.",
+    "敵の『武器タイプ装備』はデフォルトだと全く無意味な項目ですが、このプラグインを導入すれば剣なら剣、槍なら槍というように戦闘アニメを設定できるようになります。": "By default, an enemy’s “Equip Weapon Type” setting is completely meaningless, but with this plugin installed, you can set battle animations such as a sword animation for swords and a spear animation for spears.",
+    "導入方法": "Installation",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the plugin ON in the Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EnemyAttackAnimation.js": "NRP_EnemyAttackAnimation.js ",
+    "ver1.03（2020/08/22）": "ver1.03 (2020/08/22) ",
+    "プラグインパラメータに『武器タイプ装備』に対応するアニメーションを設定します。初期状態ではデフォルトの武器タイプに対応するそれっぽいアニメーションを設定しています。ただし、元が元なのでパターンが少ないです。": "Set the animations corresponding to “Equip Weapon Type” in the plugin parameters. Initially, animations resembling the default weapon types are configured. However, there are only a few patterns because the original selection is limited.",
+    "打撃、斬撃、刺突、爪、銃撃の５種類しかないって少なすぎませんかね？ 武器タイプは無駄に１２種類もあるのに……。": "Isn’t having only five types—blunt, slashing, piercing, claws, and gunfire—far too few? Even though there are twelve unnecessarily many weapon types…",
+    "詳細は下記のパラメータを参照してください。": "See the parameters below for details.",
+    "こんな感じで敵の特徴欄に『武器タイプ装備』を設定すれば、通常攻撃にアニメーションが表示されるようになります。": "If you set “Equip Weapon Type” in an enemy’s Features section like this, an animation will be displayed for normal attacks.",
+    "元々、アクター用の項目であるため、イメージに合うものがない可能性もあります。その場合はクチバシなら槍、触手ならムチというように近いものを使うか、追加で定義を増やすとよいでしょう。一応、個別に設定する機能（下参照）もあります。": "Since this feature was originally intended for actors, there may not be an option that fits the image you have in mind. In that case, use a similar one, such as spears for beaks or whips for tentacles, or add more definitions. There is also a function for setting them individually (see below).",
+    "ちなみに武器タイプはデータベースのタイプで設定できます。": "Incidentally, weapon types can be configured under Types in the database.",
+    "更新履歴": "Update History",
+    "2020/08/22（ver1.03）": "2020/08/22 (ver1.03) ",
+    "ツクールＭＺ向けにヘルプを修正。": "Updated the help for RPG Maker MZ.",
+    "2020/06/18（ver1.02）": "2020/06/18 (ver1.02) ",
+    "英語対応。": "Added English support.",
+    "2020/03/10（ver1.01）": "2020/03/10 (ver1.01) ",
+    "作成中のモーションプラグイン用に処理修正。": "Modified the processing for the motion plugin currently in development.",
+    "上に伴い再反転（reMirror）を削除。": "Along with this, removed re-mirroring (reMirror).",
+    "2020/01/27（ver1.00）": "2020/01/27 (ver1.00) ",
+    "公開開始！": "Now available!",
+    "パラメータ": "Parameters",
+    "各武器タイプ装備の設定（weapons）": "Settings for Each Equip Weapon Type (weapons)",
+    "各武器タイプ装備ごとにアニメーションの設定を行います。": "Configure the animation for each Equip Weapon Type.",
+    "リスト形式になっており、ダブルクリックで内容が表示されます。": "The settings are in list format, and the contents are displayed by double-clicking.",
+    "なお、敵の武器タイプ装備が未設定なら、リスト先頭のものが使用されます。（素手のアニメーションを想定）": "If an enemy’s Equip Weapon Type is not configured, the first item in the list is used. (This is intended for an unarmed animation.)",
+    "不要なら先頭のアニメーションは『0:なし』に設定してください。": "If this is not needed, set the first animation to “0: None”.",
+    "以下、リスト項目の内容です。": "The contents of the list items are described below.",
+    "リストに新しい項目を追加することも可能です。パターンを増やしたい場合はどうぞ。": "You can also add new items to the list. Use this if you want to add more patterns.",
+    "武器タイプ名（name）": "Weapon Type Name (name)",
+    "武器タイプ名です。": "The weapon type name.",
+    "プラグイン画面用のただのメモです。分かりやすいように名前をつけてください。": "This is only a note for the plugin screen. Give it a descriptive name.",
+    "アニメーションID（animationId）": "Animation ID (animationId)",
+    "武器タイプに対応するアニメーションを指定します。": "Specifies the animation corresponding to the weapon type.",
+    "再反転（reMirror）": "Re-mirroring (reMirror) ",
+    "ver1.01で削除": "Removed in ver1.01",
+    "アニメーションをさらに左右反転するかどうかの設定です。": "This setting determines whether to mirror the animation horizontally again.",
+    "※敵のアニメは元々反転される仕様です。ONにするとさらに反転して、元の向きに戻ります。基本はOFFで問題ありません。": "※Enemy animations are originally mirrored by design. Turning this ON mirrors them again, restoring their original orientation. OFF is generally fine.",
+    "個別設定": "Individual Settings",
+    "以下のタグを敵キャラのメモ欄に記入すれば、個別設定も可能です。": "You can also configure these individually by entering the following tag in an enemy’s note field.",
+    "イメージの合う武器タイプがない。あるいはボス敵など固有の戦闘アニメを使いたいという場合はどうぞ。": "Use this if there is no weapon type that fits the image you have in mind, or if you want to use a unique battle animation for a boss enemy, for example.",
+    "<AttackAnimation:[アニメーションID]>": "<AttackAnimation:[Animation ID]>",
+    "例：<AttackAnimation:10>で、10番のアニメーションを再生します。": "Example: <AttackAnimation:10> plays animation number 10."
+  }
+}
