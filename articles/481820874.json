@@ -1,0 +1,1398 @@
+{
+  "articleId": "481820874",
+  "sourceUrl": "https://newrpg.seesaa.net/article/481820874.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "62c41cc23576846086268b0414ef77793127b5bdb5418b3b2b670be6206d1205",
+  "translatedAt": "2026-08-31T04:45:53.694Z",
+  "title": "Detailed Battle Background and Encounter Rate Settings [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "戦闘背景やエンカウント率を詳細設定【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "c6e8dc5d80a4fccbac94ffc168a0c9b3aaef12c27d9390aab9c9a91eb15c7a4b",
+      "translation": "Detailed Battle Background and Encounter Rate Settings [RPG Maker MZ & MV Plugin]",
+      "contextHash": "c6e8dc5d80a4fccbac94ffc168a0c9b3aaef12c27d9390aab9c9a91eb15c7a4b"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "戦闘背景やエンカウント率を詳細な条件で設定します。",
+      "sourceHash": "52f849ccc15e3b3dd56ffe92276b95b98449bbf4f981b31d122cb766ff1f7c6c",
+      "translation": "Set battle backgrounds and encounter rates according to detailed conditions.",
+      "contextHash": "52f849ccc15e3b3dd56ffe92276b95b98449bbf4f981b31d122cb766ff1f7c6c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "上記は橋の上の戦闘背景を変更した例です。",
+      "sourceHash": "860ff506d267c0d64cf0c18aa30341010580606c4cf8e65f33996e77f9d9fb61",
+      "translation": "The above is an example of changing the battle background on a bridge.",
+      "contextHash": "860ff506d267c0d64cf0c18aa30341010580606c4cf8e65f33996e77f9d9fb61"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ちなみにデフォルトでは平原になるという残念っぷり……。",
+      "sourceHash": "36bb6a6aeb2570733c573db64207f7da24c18e21e2e9d0993757ccba3bef4124",
+      "translation": "Incidentally, the default is an unfortunate plain…….",
+      "contextHash": "36bb6a6aeb2570733c573db64207f7da24c18e21e2e9d0993757ccba3bef4124"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "条件にできるのは『地形タグ』『リージョンＩＤ』『タイルＩＤ』『オートタイルタイプ』の四種類です。",
+      "sourceHash": "8ab8f8f0d4e68fa375ca1b507203a2cb9d93ae5d0d6616c1b0536329ff3ffd40",
+      "translation": "The four types of conditions available are “terrain tag,” “region ID,” “tile ID,” and “auto-tile type.”",
+      "contextHash": "8ab8f8f0d4e68fa375ca1b507203a2cb9d93ae5d0d6616c1b0536329ff3ffd40"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "もっとも、地形タグは数が限られているし、リージョンは設定が大変です。そこでオートタイルタイプやタイルＩＤを使った設定をオススメします。",
+      "sourceHash": "5659a6f9ee2d471e329ce732832bbfb3056f90617d6349861b65fff2d2b0b2f1",
+      "translation": "However, terrain tags are limited in number, and setting regions is difficult. Therefore, I recommend using auto-tile types or tile IDs for your settings.",
+      "contextHash": "5659a6f9ee2d471e329ce732832bbfb3056f90617d6349861b65fff2d2b0b2f1"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※オートタイルタイプとはオートタイル毎に保有する識別番号のことです。",
+      "sourceHash": "69a895ff103753c396658ccad9795faaa3d28417be722aef14cda97f84b4ad04",
+      "translation": "※An auto-tile type is an identification number assigned to each auto-tile.",
+      "contextHash": "69a895ff103753c396658ccad9795faaa3d28417be722aef14cda97f84b4ad04"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "付属のNRP_DebugTile.jsで確認できます。",
+      "sourceHash": "5fe84f2011e586db814911dacd714f827c1f229fbecb80e018eab4342b154266",
+      "translation": "You can check them using the included NRP_DebugTile.js.",
+      "contextHash": "5fe84f2011e586db814911dacd714f827c1f229fbecb80e018eab4342b154266"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※戦闘背景の変更はフィールドタイプのタイルセットのみ有効です。",
+      "sourceHash": "8641c63f564078c6c6af7c446928d880a9c65c9243069d532d7789982a7d250f",
+      "translation": "※Battle background changes are only effective for field-type tilesets.",
+      "contextHash": "8641c63f564078c6c6af7c446928d880a9c65c9243069d532d7789982a7d250f"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "また、ツクールＭＶ～ＭＺにはデフォルトで以下の隠し仕様が含まれています。",
+      "sourceHash": "105ea822f9a5d4b43dc29b21a56f2772d1438ecb22d59f116ca2a99ca658de10",
+      "translation": "RPG Maker MV–MZ also includes the following hidden specifications by default.",
+      "contextHash": "105ea822f9a5d4b43dc29b21a56f2772d1438ecb22d59f116ca2a99ca658de10"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "茂み属性のエンカウント率は二倍",
+      "sourceHash": "05edaec99beae5632210d5452ae50b21a69ff4edd87613bea17a96fc8b100c41",
+      "translation": "The encounter rate on bush terrain is doubled",
+      "contextHash": "05edaec99beae5632210d5452ae50b21a69ff4edd87613bea17a96fc8b100c41"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "乗船（大型船）中のエンカウント率は半減",
+      "sourceHash": "e5d52f5d0deb3ed1dbc0c5e75842142014ebafbeafa8f5db4c2c369c39b92f6e",
+      "translation": "The encounter rate while aboard a large ship is halved",
+      "contextHash": "e5d52f5d0deb3ed1dbc0c5e75842142014ebafbeafa8f5db4c2c369c39b92f6e"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "場合によっては、ありがた迷惑になりかねません。これらの仕様を変更することも可能です。",
+      "sourceHash": "3bdfea6711fadf6f6dc6525d9db1575f2466b696ad003d5bf6221baf5d9f77b8",
+      "translation": "Depending on the situation, these may be more troublesome than helpful. You can also change these specifications.",
+      "contextHash": "3bdfea6711fadf6f6dc6525d9db1575f2466b696ad003d5bf6221baf5d9f77b8"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on from RPG Maker’s Plugin Manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※Both plugins work with MV and MZ.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_TerrainInfo.js",
+      "sourceHash": "e7f4dc9e4213f457b018b06487939e57bb643759da66a63398d8431393f9f8e2",
+      "translation": "NRP_TerrainInfo.js ",
+      "contextHash": "c3d687959ff029f2243d3f37272f09e4c336fd7f0395454591e57da07cc3a13e"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ver1.04（2024/07/24）",
+      "sourceHash": "66e33199ca53317f726f840c0f528c3b5843d529b20ae4189e357f5c9a8c31e6",
+      "translation": "ver1.04 (2024/07/24) ",
+      "contextHash": "c3d687959ff029f2243d3f37272f09e4c336fd7f0395454591e57da07cc3a13e"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "オプション",
+      "sourceHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5",
+      "translation": "Options",
+      "contextHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DebugTile.js",
+      "sourceHash": "d839245e2d4ad88768cbb74e24135b6d06d5363d64d3fc85797e48514859684d",
+      "translation": "NRP_DebugTile.js ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ver1.01（2021/08/15）",
+      "sourceHash": "5951f72e8493d63ef9b4ecf28b1663a47bcbcd982784edf97350cbc43b29937d",
+      "translation": "ver1.01 (2021/08/15) ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_TerrainInfoの補助用に使えます。",
+      "sourceHash": "a527429d05714db4f44df212cde364cc6363875772b864fd1e631ca53bbd94f0",
+      "translation": "※This plugin lets you check the auto-tile type and tile ID beneath you simply by pressing F2. It can be used to assist NRP_TerrainInfo.",
+      "contextHash": "a527429d05714db4f44df212cde364cc6363875772b864fd1e631ca53bbd94f0"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/07/24（ver1.04）",
+      "sourceHash": "a64cdd60816ae06732001a128959ed8495fe303d38510275ba4c40190470d62e",
+      "translation": "2024/07/24 (ver1.04) ",
+      "contextHash": "a64cdd60816ae06732001a128959ed8495fe303d38510275ba4c40190470d62e"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/10/26 -> 2024/05/29（ver1.03 -> 1.031）",
+      "sourceHash": "36a3194572f0b3668dc8f70493af1b766f8adbecc8d098e1d2aeec764299077b",
+      "translation": "2023/10/26 -> 2024/05/29 (ver1.03 -> 1.031) ",
+      "contextHash": "36a3194572f0b3668dc8f70493af1b766f8adbecc8d098e1d2aeec764299077b"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ゲームロード直後に場所移動するまで設定情報が反映されない不具合修正。",
+      "sourceHash": "29815faf5b5e08c82c38271576c316e759180256c9e6377f2550b7c5bf3243c4",
+      "translation": "Fixed a bug where the settings were not applied until transferring to another location after loading a game.",
+      "contextHash": "29815faf5b5e08c82c38271576c316e759180256c9e6377f2550b7c5bf3243c4"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "戦闘背景の片方だけが空白の場合、初期背景が設定されてしまう不具合修正。",
+      "sourceHash": "6b774f97dd3cd5efb3e3b4d2ad70629cf74d693d12a4461f67fc8925c7365926",
+      "translation": "Fixed a bug where the default background was set if either battle background was blank.",
+      "contextHash": "6b774f97dd3cd5efb3e3b4d2ad70629cf74d693d12a4461f67fc8925c7365926"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "（2024/05/29 ver1.031）",
+      "sourceHash": "8edb8659ed8337f8a3c0b594ac51635887d613c3c0a66e1304b3f69b0a8c4b3c",
+      "translation": " (2024/05/29 ver1.031) ",
+      "contextHash": "8edb8659ed8337f8a3c0b594ac51635887d613c3c0a66e1304b3f69b0a8c4b3c"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2023/05/01（ver1.02）",
+      "sourceHash": "dda7f29d1395a99a5b79e68bbbbc2dcb5bb5535a0671d0ffe29a67c8e7b07990",
+      "translation": "2023/05/01 (ver1.02) ",
+      "contextHash": "dda7f29d1395a99a5b79e68bbbbc2dcb5bb5535a0671d0ffe29a67c8e7b07990"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ＭＶで動作しない不具合修正。",
+      "sourceHash": "441031b9a6a1da85cb90325f0cbf02900cc71390f3393081721f777ae66f79b1",
+      "translation": "Fixed a bug that prevented the plugin from working in MV.",
+      "contextHash": "441031b9a6a1da85cb90325f0cbf02900cc71390f3393081721f777ae66f79b1"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2023/01/04（ver1.01）",
+      "sourceHash": "33e384d683ab96d304199a3414412b9288f3f4bc50116629d0a50f1ddd87a328",
+      "translation": "2023/01/04 (ver1.01) ",
+      "contextHash": "33e384d683ab96d304199a3414412b9288f3f4bc50116629d0a50f1ddd87a328"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2021/06/04 -> 2021/11/11（ver1.00 -> 1.001）",
+      "sourceHash": "27f04bb5d7d5f1c60b8233ccbc77fd4dd5b05aaa492a2d050363a268f4ed90d2",
+      "translation": "2021/06/04 -> 2021/11/11 (ver1.00 -> 1.001) ",
+      "contextHash": "27f04bb5d7d5f1c60b8233ccbc77fd4dd5b05aaa492a2d050363a268f4ed90d2"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "イベントテストでエラーになる不具合修正。（11/11 ver1.001）",
+      "sourceHash": "fc97a444161bf7d1177469e3ef30c3ea7c90ba700dbe81059f2de39adb777c8d",
+      "translation": "Fixed a bug that caused an error during event testing. (11/11 ver1.001)",
+      "contextHash": "fc97a444161bf7d1177469e3ef30c3ea7c90ba700dbe81059f2de39adb777c8d"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "プラグインパラメータの設定リストに、条件、エンカウント率、戦闘背景を入力してください。",
+      "sourceHash": "18558fed6f64fb606ee99f9ad6612294855ceaec0d07dc410a53b1311c52ff56",
+      "translation": "Enter the conditions, encounter rate, and battle background in the plugin parameter settings list.",
+      "contextHash": "18558fed6f64fb606ee99f9ad6612294855ceaec0d07dc410a53b1311c52ff56"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "登録した『設定ＩＤ』をタイルセットのメモ欄に設定すればＯＫです。",
+      "sourceHash": "32359670a34bcf8dff217a73d297655e3772c1bb6c49aaa4ebf6313977f422bf",
+      "translation": "Then set the registered “Setting ID” in the tileset’s note field.",
+      "contextHash": "32359670a34bcf8dff217a73d297655e3772c1bb6c49aaa4ebf6313977f422bf"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "?の部分が設定リストに登録した『設定ＩＤ』となります。",
+      "sourceHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005",
+      "translation": "The ? portion is the “Setting ID” registered in the settings list.",
+      "contextHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "また、カンマ区切りによって複数指定も可能です。",
+      "sourceHash": "a6cd6ded998b27d622a05705fb2bab73d3884e0fcf671b8aefdf41dd04d323ed",
+      "translation": "You can also specify multiple IDs by separating them with commas.",
+      "contextHash": "a6cd6ded998b27d622a05705fb2bab73d3884e0fcf671b8aefdf41dd04d323ed"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "設定リストには最初からサンプルが登録されています。",
+      "sourceHash": "598f3c56cb1ad9a99950daefba80323826182e54bd08ed05b9af0a7d9d70bfc9",
+      "translation": "Sample entries are registered in the settings list from the beginning.",
+      "contextHash": "598f3c56cb1ad9a99950daefba80323826182e54bd08ed05b9af0a7d9d70bfc9"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ツクールのデフォルトのフィールドに合わせた内容になっているので、参考にしてください。",
+      "sourceHash": "354ff99e5b65e8880da52e6cc0833969b7219c390551382d0b15860198c382cd",
+      "translation": "They are based on RPG Maker’s default fields, so use them as a reference.",
+      "contextHash": "354ff99e5b65e8880da52e6cc0833969b7219c390551382d0b15860198c382cd"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "細かい仕様（Detail）",
+      "sourceHash": "9d4e6edbb349981023a3ef949bd1dff66f0d54de5bb2b23d3490ce1d9bc5a566",
+      "translation": "Detailed Specifications (Detail)",
+      "contextHash": "9d4e6edbb349981023a3ef949bd1dff66f0d54de5bb2b23d3490ce1d9bc5a566"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "タイルＩＤやオートタイルタイプは、上のレイヤーから順番に判定されます。",
+      "sourceHash": "7e61f99b26c43f8d8e0541daca6b7be141223306895abc85d77bcbe797666cc0",
+      "translation": "Tile IDs and auto-tile types are checked in order, starting with the uppermost layer.",
+      "contextHash": "7e61f99b26c43f8d8e0541daca6b7be141223306895abc85d77bcbe797666cc0"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "設定がないレイヤーのタイルは無視される仕様です。",
+      "sourceHash": "5e638a23ad59f1a27e1450c26e51d12000d6387143d784cde5d462b7223c03db",
+      "translation": "Tiles on layers without settings are ignored.",
+      "contextHash": "5e638a23ad59f1a27e1450c26e51d12000d6387143d784cde5d462b7223c03db"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "例えば、以下のように設定した場合、",
+      "sourceHash": "cc8c65d3508deca911361a2a12fa12d326c92622febbb7bf0987fb9ac04badc2",
+      "translation": "For example, if you set things up as follows,",
+      "contextHash": "cc8c65d3508deca911361a2a12fa12d326c92622febbb7bf0987fb9ac04badc2"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "レイヤー１の平原：エンカウント率１００％",
+      "sourceHash": "478065eea9b79961cf7fcf43b5777a6db062edf7b6e89c7fe8a6f0740175043d",
+      "translation": "Plain on Layer 1: Encounter rate 100%",
+      "contextHash": "478065eea9b79961cf7fcf43b5777a6db062edf7b6e89c7fe8a6f0740175043d"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "レイヤー２の森 ：エンカウント率２００％",
+      "sourceHash": "be6a07c94eff763983a700448541c2d567fd539f87db47f0c8d07d71c560c16b",
+      "translation": "Forest on Layer 2: Encounter rate 200%",
+      "contextHash": "be6a07c94eff763983a700448541c2d567fd539f87db47f0c8d07d71c560c16b"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "レイヤー３の町 ：設定なし",
+      "sourceHash": "e71d870f2c84b7527bbc7d1ae48fa98e8ac13e0724974a91a320b08d53bc6513",
+      "translation": "Town on Layer 3: No setting",
+      "contextHash": "e71d870f2c84b7527bbc7d1ae48fa98e8ac13e0724974a91a320b08d53bc6513"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "レイヤー２の森のエンカウント率（２００％）が有効になります。これは戦闘背景についても同様です。",
+      "sourceHash": "4c576ec8e137e84e6f91882f61cd28de8e2b106856abdfe1ec0a333257cdf9ec",
+      "translation": "The encounter rate for the forest on Layer 2 (200%) will be applied. The same applies to battle backgrounds.",
+      "contextHash": "4c576ec8e137e84e6f91882f61cd28de8e2b106856abdfe1ec0a333257cdf9ec"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "茂みのエンカウント率（BushEncounterRate）",
+      "sourceHash": "677b8bc33176ce912d8b749390d5bd47c18851fc055d708b153d0c3d5eab30e7",
+      "translation": "Bush Encounter Rate (BushEncounterRate)",
+      "contextHash": "677b8bc33176ce912d8b749390d5bd47c18851fc055d708b153d0c3d5eab30e7"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "茂み上でのエンカウント率です。100を基準に設定してください。",
+      "sourceHash": "0b9e442f0c89a4e956e0f6e825031f257eb7c75e00b79da092adf15a98179ff4",
+      "translation": "The encounter rate while on bushes. Set it with 100 as the baseline.",
+      "contextHash": "0b9e442f0c89a4e956e0f6e825031f257eb7c75e00b79da092adf15a98179ff4"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "初期値は200です。",
+      "sourceHash": "33dfe614c415ffb2aa3417f984cefdb4c57e47e3ad9378d1704664d048d8d618",
+      "translation": "The default value is 200.",
+      "contextHash": "33dfe614c415ffb2aa3417f984cefdb4c57e47e3ad9378d1704664d048d8d618"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "これは設定リストの内容と重複するので注意してください。",
+      "sourceHash": "0c80ac259d8970a2166e770a3c35385a084175db7137738a4fee6cda0b2511c3",
+      "translation": "Note that this overlaps with the contents of the settings list.",
+      "contextHash": "0c80ac259d8970a2166e770a3c35385a084175db7137738a4fee6cda0b2511c3"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "例えば、森に茂み属性を付加してエンカウント率を200にした場合、さらに茂み属性の影響で計４倍になってしまいます。",
+      "sourceHash": "58e37bbf1607f7406065b8b327ba86bdc6c4b3b8dbc9136108f9e4e9a3358c1a",
+      "translation": "For example, if you add bush terrain to a forest and set its encounter rate to 200, the bush effect will increase the total to four times the normal rate.",
+      "contextHash": "58e37bbf1607f7406065b8b327ba86bdc6c4b3b8dbc9136108f9e4e9a3358c1a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "大型船のエンカウント率（ShipEncounterRate）",
+      "sourceHash": "60ebadbcf5dd5d17d99380c238206a9d984165e67a0ffee7ed1f753635664f0f",
+      "translation": "Large Ship Encounter Rate (ShipEncounterRate)",
+      "contextHash": "60ebadbcf5dd5d17d99380c238206a9d984165e67a0ffee7ed1f753635664f0f"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "大型船に乗っている時のエンカウント率です。100を基準に設定してください。",
+      "sourceHash": "6da919eda1a5718749d293a1d8c840220f8250b0f0f1c084887f4fba10f462b6",
+      "translation": "The encounter rate while aboard a large ship. Set it with 100 as the baseline.",
+      "contextHash": "6da919eda1a5718749d293a1d8c840220f8250b0f0f1c084887f4fba10f462b6"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "初期値は50です。",
+      "sourceHash": "d414b5bac480f5f3f129a0f4aab8544bdd1e50bf98ab782595876195d4d1d580",
+      "translation": "The default value is 50.",
+      "contextHash": "d414b5bac480f5f3f129a0f4aab8544bdd1e50bf98ab782595876195d4d1d580"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "こちらも設定リストの内容と重複します。",
+      "sourceHash": "cb71aa97db34c19f008ee3485db84e80858787bec94d758679f30d587250ea24",
+      "translation": "This also overlaps with the contents of the settings list.",
+      "contextHash": "cb71aa97db34c19f008ee3485db84e80858787bec94d758679f30d587250ea24"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "設定リスト（SettingList）",
+      "sourceHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287",
+      "translation": "Settings List (SettingList)",
+      "contextHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "エンカウント率の設定の一覧です。",
+      "sourceHash": "9ae0b635e386e3833e387dcc5c79b7b46eb6417d5e20cae8b341ed7045151076",
+      "translation": "A list of encounter rate settings.",
+      "contextHash": "9ae0b635e386e3833e387dcc5c79b7b46eb6417d5e20cae8b341ed7045151076"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "以下、その詳細設定のパラメータです。",
+      "sourceHash": "b27c3a353986983e8798706b83c3b4c6dbf015e796fa8add9713ef8b4646af34",
+      "translation": "The detailed setting parameters are provided below.",
+      "contextHash": "b27c3a353986983e8798706b83c3b4c6dbf015e796fa8add9713ef8b4646af34"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト）",
+      "sourceHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb",
+      "translation": "Plugin Parameters (Settings List)",
+      "contextHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "設定ＩＤ（Id）",
+      "sourceHash": "483b2bb5a898f18b1f3544bce5b2573b7e750e47cd9994ea6981e16cd34cfb4a",
+      "translation": "Setting ID (Id)",
+      "contextHash": "483b2bb5a898f18b1f3544bce5b2573b7e750e47cd9994ea6981e16cd34cfb4a"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "タイルセットのメモ欄からの呼び出しに使う識別子です。",
+      "sourceHash": "d9260bb02a09c2fbcf3b8e476cc5533e0c4828ae2b41257fe06d88cc7b217daa",
+      "translation": "The identifier used to call the setting from a tileset's note field.",
+      "contextHash": "d9260bb02a09c2fbcf3b8e476cc5533e0c4828ae2b41257fe06d88cc7b217daa"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "『全タイルセットで有効』がオンの場合は不要です。",
+      "sourceHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6",
+      "translation": "This is unnecessary when \"Valid for All Tilesets\" is enabled.",
+      "contextHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "メモ（Memo）",
+      "sourceHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8",
+      "translation": "Memo (Memo)",
+      "contextHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "判別用のメモです。",
+      "sourceHash": "ac9951beae559fbdd4f2d7110807b72fd5bf1830ed139e028a1e0bb31f4631f6",
+      "translation": "A memo for identification.",
+      "contextHash": "ac9951beae559fbdd4f2d7110807b72fd5bf1830ed139e028a1e0bb31f4631f6"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "処理には使用しませんので、分かりやすい名前を付けてください。",
+      "sourceHash": "3039783313b85e2a03756b76ce679952cfeed0af6cbc0008ff3e4b1d4c30fe97",
+      "translation": "This is not used for processing, so please give it an easy-to-understand name.",
+      "contextHash": "3039783313b85e2a03756b76ce679952cfeed0af6cbc0008ff3e4b1d4c30fe97"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "全タイルセットで有効（ValidAllTilesets）",
+      "sourceHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280",
+      "translation": "Valid for All Tilesets (ValidAllTilesets)",
+      "contextHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "設定を全てのタイルセットで有効にします。",
+      "sourceHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e",
+      "translation": "Makes the setting valid for all tilesets.",
+      "contextHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "特定のタイルセットにのみ設定を反映したい場合は、オフにしてください。",
+      "sourceHash": "dd012eabb25dfb7aad6083af2188c9c32f06b7f2c8eb988efac77c101666968d",
+      "translation": "Turn this off if you want the setting to apply only to specific tilesets.",
+      "contextHash": "dd012eabb25dfb7aad6083af2188c9c32f06b7f2c8eb988efac77c101666968d"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：条件）",
+      "sourceHash": "2b09a5c11b4ae90e9e4d9db6506e85eeec491a71f1d5836a2cb940a92c553b11",
+      "translation": "Plugin Parameters (Settings List: Conditions)",
+      "contextHash": "2b09a5c11b4ae90e9e4d9db6506e85eeec491a71f1d5836a2cb940a92c553b11"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "地形タグ（TerrainTag）",
+      "sourceHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061",
+      "translation": "Terrain Tag (TerrainTag)",
+      "contextHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "対象とする地形タグ（1~7）を指定します。",
+      "sourceHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6",
+      "translation": "Specifies the target terrain tags (1~7).",
+      "contextHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "７つまでしか設定できないのでご利用は計画的に。",
+      "sourceHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620",
+      "translation": "Only up to seven can be configured, so use them wisely.",
+      "contextHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "リージョンＩＤ（RegionId）",
+      "sourceHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78",
+      "translation": "Region ID (RegionId)",
+      "contextHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "対象とするリージョン（1~255）を指定します。",
+      "sourceHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644",
+      "translation": "Specifies the target regions (1~255).",
+      "contextHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "オートタイルタイプ（AutotileType）",
+      "sourceHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e",
+      "translation": "Autotile Type (AutotileType)",
+      "contextHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "対象とするオートタイルタイプを指定します。",
+      "sourceHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b",
+      "translation": "Specifies the target autotile types.",
+      "contextHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。",
+      "sourceHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8",
+      "translation": "An autotile type is a number assigned to each autotile. By default, it is used to determine the battle background.",
+      "contextHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "地形タグと異なり数の制限がないため、自由に設定が可能です。",
+      "sourceHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61",
+      "translation": "Unlike terrain tags, there is no limit to the number of values, so they can be configured freely.",
+      "contextHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "ただし、この値は通常確認できません。",
+      "sourceHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1",
+      "translation": "However, this value cannot normally be checked.",
+      "contextHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "オプションにある「タイル情報をデバッグ表示する」プラグインで確認ができます。",
+      "sourceHash": "a46cb84c60ff214ebce3c51036d5cccdfd5d0d955b04e443d0a7b9a2bffb08d5",
+      "translation": "You can check it with the \"Display Tile Information in Debug Mode\" plugin found under Options.",
+      "contextHash": "a46cb84c60ff214ebce3c51036d5cccdfd5d0d955b04e443d0a7b9a2bffb08d5"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "タイルＩＤ（TileId）",
+      "sourceHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e",
+      "translation": "Tile ID (TileId)",
+      "contextHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "対象とするタイルＩＤを指定します。",
+      "sourceHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf",
+      "translation": "Specifies the target tile IDs.",
+      "contextHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "こちらはエディタの機能で普通に取得できますが、面倒です。",
+      "sourceHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4",
+      "translation": "This can be obtained normally using the editor's functions, but doing so is tedious.",
+      "contextHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "こちらも「タイル情報をデバッグ表示する」プラグインでの確認をオススメします。",
+      "sourceHash": "eff68a8e6e250dced0b450620df1e235036f410e59117ef23b87e17e39cdab34",
+      "translation": "Here too, I recommend checking it with the \"Display Tile Information in Debug Mode\" plugin.",
+      "contextHash": "eff68a8e6e250dced0b450620df1e235036f410e59117ef23b87e17e39cdab34"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "乗物タイプ（VehicleType）",
+      "sourceHash": "6f25268ba1848b4a6ae845ae7e1aa99d6bf3e98747ce7fea44a2b7e57b06af57",
+      "translation": "Vehicle Type (VehicleType)",
+      "contextHash": "6f25268ba1848b4a6ae845ae7e1aa99d6bf3e98747ce7fea44a2b7e57b06af57"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "対象とする乗物のタイプを指定します。",
+      "sourceHash": "66946282f380acbd85e74415710ec090fd4eefbd8f11239c90d51f22b95d35e0",
+      "translation": "Specifies the type of vehicle targeted.",
+      "contextHash": "66946282f380acbd85e74415710ec090fd4eefbd8f11239c90d51f22b95d35e0"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script (Script)",
+      "contextHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "対象とするスクリプト条件です。",
+      "sourceHash": "2cf11ea4caf4cacdde213076eded0eac29f315ff1b803186f48fc8c7e2210fcb",
+      "translation": "The script condition to be checked.",
+      "contextHash": "2cf11ea4caf4cacdde213076eded0eac29f315ff1b803186f48fc8c7e2210fcb"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "例えば、以下はスイッチ１番がオンの場合の条件となります。",
+      "sourceHash": "32bba4cf05c55f38db97a2cb2016ce753f3c3904c607e98e9b9f02c8abe7ab95",
+      "translation": "For example, the following is the condition for switch 1 to be on.",
+      "contextHash": "32bba4cf05c55f38db97a2cb2016ce753f3c3904c607e98e9b9f02c8abe7ab95"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：内容）",
+      "sourceHash": "a55b246309817381749f8b974f15c7f0ab1d0dcf97f3482f2bfa10aa038bf92e",
+      "translation": "Plugin Parameters (Settings List: Contents)",
+      "contextHash": "a55b246309817381749f8b974f15c7f0ab1d0dcf97f3482f2bfa10aa038bf92e"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "エンカウント率（EncounterRate）",
+      "sourceHash": "4031781e763242d5f6eb505b0a8be82acf30b06a223d625a861645b5e3eb40ef",
+      "translation": "Encounter Rate (EncounterRate)",
+      "contextHash": "4031781e763242d5f6eb505b0a8be82acf30b06a223d625a861645b5e3eb40ef"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "条件を満たした場合のエンカウント率です。100を基準に設定してください。",
+      "sourceHash": "2bae72f1feb0579662829c190fc98519f1576c1f359e10cf7d0914468a994165",
+      "translation": "The encounter rate when the conditions are met. Set it with 100 as the baseline.",
+      "contextHash": "2bae72f1feb0579662829c190fc98519f1576c1f359e10cf7d0914468a994165"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "戦闘背景１（Battleback1）",
+      "sourceHash": "f71fe6e9836e65751581ff0f96da56f0685f4e3320d40a1cb3c826fddf13cbf9",
+      "translation": "Battleback 1 (Battleback1)",
+      "contextHash": "f71fe6e9836e65751581ff0f96da56f0685f4e3320d40a1cb3c826fddf13cbf9"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "条件を満たした場合の戦闘背景（下）です。",
+      "sourceHash": "da4096031c269c75bda9e82741718b4c2e33e1d83c043c1213613cf2f1f91ffc",
+      "translation": "The lower battle background when the conditions are met.",
+      "contextHash": "da4096031c269c75bda9e82741718b4c2e33e1d83c043c1213613cf2f1f91ffc"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "タイルセットがフィールドタイプの場合のみ有効です。",
+      "sourceHash": "e88a17261278b7b70680a19ae0885c9f7e405c5dc7152d637d739da01680cced",
+      "translation": "This is valid only when the tileset is a field type.",
+      "contextHash": "e88a17261278b7b70680a19ae0885c9f7e405c5dc7152d637d739da01680cced"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "戦闘背景２（Battleback2）",
+      "sourceHash": "6a59248fb2ce18203914fa5c7db368795943735078c1c40a0935c9dd31f859ec",
+      "translation": "Battleback 2 (Battleback2)",
+      "contextHash": "6a59248fb2ce18203914fa5c7db368795943735078c1c40a0935c9dd31f859ec"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "条件を満たした場合の戦闘背景（上）です。",
+      "sourceHash": "63cfd86612c5cda159dbdda53bddfd08f148f1fd3ff34793065995936f92601f",
+      "translation": "The upper battle background when the conditions are met.",
+      "contextHash": "63cfd86612c5cda159dbdda53bddfd08f148f1fd3ff34793065995936f92601f"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "タイルセットがフィールドタイプの場合のみ有効です。",
+      "sourceHash": "e88a17261278b7b70680a19ae0885c9f7e405c5dc7152d637d739da01680cced",
+      "translation": "This is valid only when the tileset is a field type.",
+      "contextHash": "e88a17261278b7b70680a19ae0885c9f7e405c5dc7152d637d739da01680cced"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]細かい仕様（Detail）[[/LINK_1]]",
+      "sourceHash": "df089a7638a15c33a476d9d9f3cd34316c7b67f4f550b364156e0680c8aca3ad",
+      "parts": [
+        {
+          "source": "細かい仕様（Detail）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Detailed Specifications (Detail)[[/LINK_1]]",
+      "contextHash": "df089a7638a15c33a476d9d9f3cd34316c7b67f4f550b364156e0680c8aca3ad"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]茂みのエンカウント率（BushEncounterRate）[[/LINK_1]]",
+      "sourceHash": "cb749b58c97fc7af3cfeb99593f5c4715ddbfa046f420fb7623ef81b3023af8b",
+      "parts": [
+        {
+          "source": "茂みのエンカウント率（BushEncounterRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Encounter Rate (BushEncounterRate)[[/LINK_1]]",
+      "contextHash": "cb749b58c97fc7af3cfeb99593f5c4715ddbfa046f420fb7623ef81b3023af8b"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]大型船のエンカウント率（ShipEncounterRate）[[/LINK_1]]",
+      "sourceHash": "dacecd56b40039ed2be3061540e019d7979ee74fe1fab1d52ba0784a58da6ede",
+      "parts": [
+        {
+          "source": "大型船のエンカウント率（ShipEncounterRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Large Ship Encounter Rate (ShipEncounterRate)[[/LINK_1]]",
+      "contextHash": "dacecd56b40039ed2be3061540e019d7979ee74fe1fab1d52ba0784a58da6ede"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]設定リスト（SettingList）[[/LINK_1]]",
+      "sourceHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a",
+      "parts": [
+        {
+          "source": "設定リスト（SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Settings List (SettingList)[[/LINK_1]]",
+      "contextHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト）[[/LINK_1]]",
+      "sourceHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Settings List)[[/LINK_1]]",
+      "contextHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]設定ＩＤ（Id）[[/LINK_1]]",
+      "sourceHash": "aff10333f546754b09e8c0b7b5cda0dbe83e3f1b5b31548ff8f0a0dce663d6ce",
+      "parts": [
+        {
+          "source": "設定ＩＤ（Id）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting ID (Id)[[/LINK_1]]",
+      "contextHash": "aff10333f546754b09e8c0b7b5cda0dbe83e3f1b5b31548ff8f0a0dce663d6ce"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]メモ（Memo）[[/LINK_1]]",
+      "sourceHash": "e6a4240e809eb471ecd4c12c0d1a5548fe8b272f3936e05c201c5a51321ad0bc",
+      "parts": [
+        {
+          "source": "メモ（Memo）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Memo (Memo)[[/LINK_1]]",
+      "contextHash": "e6a4240e809eb471ecd4c12c0d1a5548fe8b272f3936e05c201c5a51321ad0bc"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]全タイルセットで有効（ValidAllTilesets）[[/LINK_1]]",
+      "sourceHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58",
+      "parts": [
+        {
+          "source": "全タイルセットで有効（ValidAllTilesets）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Valid for All Tilesets (ValidAllTilesets)[[/LINK_1]]",
+      "contextHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：条件）[[/LINK_1]]",
+      "sourceHash": "b40654d723344ac5a0c7887773b3614f8582027ddb6aa288c59023e459749b8b",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：条件）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Settings List: Conditions)[[/LINK_1]]",
+      "contextHash": "b40654d723344ac5a0c7887773b3614f8582027ddb6aa288c59023e459749b8b"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]地形タグ（TerrainTag）[[/LINK_1]]",
+      "sourceHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0",
+      "parts": [
+        {
+          "source": "地形タグ（TerrainTag）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Terrain Tag (TerrainTag)[[/LINK_1]]",
+      "contextHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]リージョンＩＤ（RegionId）[[/LINK_1]]",
+      "sourceHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3",
+      "parts": [
+        {
+          "source": "リージョンＩＤ（RegionId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Region ID (RegionId)[[/LINK_1]]",
+      "contextHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]オートタイルタイプ（AutotileType）[[/LINK_1]]",
+      "sourceHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6",
+      "parts": [
+        {
+          "source": "オートタイルタイプ（AutotileType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Autotile Type (AutotileType)[[/LINK_1]]",
+      "contextHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]タイルＩＤ（TileId）[[/LINK_1]]",
+      "sourceHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065",
+      "parts": [
+        {
+          "source": "タイルＩＤ（TileId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tile ID (TileId)[[/LINK_1]]",
+      "contextHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]乗物タイプ（VehicleType）[[/LINK_1]]",
+      "sourceHash": "7c154ccdf46ac29cecbc3ab50ed4ca84626aa15d6483e179b13751925b9a50a1",
+      "parts": [
+        {
+          "source": "乗物タイプ（VehicleType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Vehicle Type (VehicleType)[[/LINK_1]]",
+      "contextHash": "7c154ccdf46ac29cecbc3ab50ed4ca84626aa15d6483e179b13751925b9a50a1"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]スクリプト（Script）[[/LINK_1]]",
+      "sourceHash": "5d2b31d8e691d3e03af02d6a49cf93329510ad46316bcab2ab41b548ce182aa4",
+      "parts": [
+        {
+          "source": "スクリプト（Script）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Script (Script)[[/LINK_1]]",
+      "contextHash": "5d2b31d8e691d3e03af02d6a49cf93329510ad46316bcab2ab41b548ce182aa4"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：内容）[[/LINK_1]]",
+      "sourceHash": "d52df4714d8e13794b7e7b18c276c652413170d80fc33d5d5e9bca3cbc24a97d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：内容）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Settings List: Contents)[[/LINK_1]]",
+      "contextHash": "d52df4714d8e13794b7e7b18c276c652413170d80fc33d5d5e9bca3cbc24a97d"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]エンカウント率（EncounterRate）[[/LINK_1]]",
+      "sourceHash": "f35ae4f5fd6f56271622a4aac7f88442a3cdee8915a18acbb2c23074e5e67cca",
+      "parts": [
+        {
+          "source": "エンカウント率（EncounterRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Encounter Rate (EncounterRate)[[/LINK_1]]",
+      "contextHash": "f35ae4f5fd6f56271622a4aac7f88442a3cdee8915a18acbb2c23074e5e67cca"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘背景１（Battleback1）[[/LINK_1]]",
+      "sourceHash": "5f55ab87f5a87e5a71a72a26f5e6755d7ccb46530aa10821e6281b15de97ad7b",
+      "parts": [
+        {
+          "source": "戦闘背景１（Battleback1）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Background 1 (Battleback1)[[/LINK_1]]",
+      "contextHash": "5f55ab87f5a87e5a71a72a26f5e6755d7ccb46530aa10821e6281b15de97ad7b"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘背景２（Battleback2）[[/LINK_1]]",
+      "sourceHash": "c5881fddf4205c2387f3ecefe16a8a0798af6ab119bbec231223f394c919aa41",
+      "parts": [
+        {
+          "source": "戦闘背景２（Battleback2）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Background 2 (Battleback2)[[/LINK_1]]",
+      "contextHash": "c5881fddf4205c2387f3ecefe16a8a0798af6ab119bbec231223f394c919aa41"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "タイル情報をデバッグ表示する（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887",
+      "parts": [
+        {
+          "source": "タイル情報をデバッグ表示する（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Display tile information in debug mode ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "条件に[[LINK_1]]スクリプト[[/LINK_1]]を使用できるようにした。",
+      "sourceHash": "aa5f3aea44c8e5aefee9525e2b48e4952e64f12af8a5fd3d31873bfe006771bf",
+      "parts": [
+        {
+          "source": "条件に",
+          "link": false
+        },
+        {
+          "source": "スクリプト",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を使用できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Made it possible to use [[LINK_1]]scripts[[/LINK_1]] for conditions.",
+      "contextHash": "aa5f3aea44c8e5aefee9525e2b48e4952e64f12af8a5fd3d31873bfe006771bf"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]乗物タイプ[[/LINK_1]]を条件に追加。",
+      "sourceHash": "27c55a8dd7164f2c1320cf43c43efba0d41bfdb19d629855885584502e02f9df",
+      "parts": [
+        {
+          "source": "乗物タイプ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を条件に追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]vehicle type[[/LINK_1]] as a condition.",
+      "contextHash": "27c55a8dd7164f2c1320cf43c43efba0d41bfdb19d629855885584502e02f9df"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "戦闘背景やエンカウント率を詳細な条件で設定します。": "Set battle backgrounds and encounter rates according to detailed conditions.",
+    "上記は橋の上の戦闘背景を変更した例です。": "The above is an example of changing the battle background on a bridge.",
+    "ちなみにデフォルトでは平原になるという残念っぷり……。": "Incidentally, the default is an unfortunate plain…….",
+    "条件にできるのは『地形タグ』『リージョンＩＤ』『タイルＩＤ』『オートタイルタイプ』の四種類です。": "The four types of conditions available are “terrain tag,” “region ID,” “tile ID,” and “auto-tile type.”",
+    "もっとも、地形タグは数が限られているし、リージョンは設定が大変です。そこでオートタイルタイプやタイルＩＤを使った設定をオススメします。": "However, terrain tags are limited in number, and setting regions is difficult. Therefore, I recommend using auto-tile types or tile IDs for your settings.",
+    "※オートタイルタイプとはオートタイル毎に保有する識別番号のことです。": "※An auto-tile type is an identification number assigned to each auto-tile.",
+    "付属のNRP_DebugTile.jsで確認できます。": "You can check them using the included NRP_DebugTile.js.",
+    "※戦闘背景の変更はフィールドタイプのタイルセットのみ有効です。": "※Battle background changes are only effective for field-type tilesets.",
+    "また、ツクールＭＶ～ＭＺにはデフォルトで以下の隠し仕様が含まれています。": "RPG Maker MV–MZ also includes the following hidden specifications by default.",
+    "茂み属性のエンカウント率は二倍": "The encounter rate on bush terrain is doubled",
+    "乗船（大型船）中のエンカウント率は半減": "The encounter rate while aboard a large ship is halved",
+    "場合によっては、ありがた迷惑になりかねません。これらの仕様を変更することも可能です。": "Depending on the situation, these may be more troublesome than helpful. You can also change these specifications.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on from RPG Maker’s Plugin Manager.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※Both plugins work with MV and MZ.",
+    "NRP_TerrainInfo.js": "NRP_TerrainInfo.js ",
+    "ver1.04（2024/07/24）": "ver1.04 (2024/07/24) ",
+    "オプション": "Options",
+    "NRP_DebugTile.js": "NRP_DebugTile.js ",
+    "ver1.01（2021/08/15）": "ver1.01 (2021/08/15) ",
+    "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_TerrainInfoの補助用に使えます。": "※This plugin lets you check the auto-tile type and tile ID beneath you simply by pressing F2. It can be used to assist NRP_TerrainInfo.",
+    "更新履歴（History）": "Update History (History)",
+    "2024/07/24（ver1.04）": "2024/07/24 (ver1.04) ",
+    "2023/10/26 -> 2024/05/29（ver1.03 -> 1.031）": "2023/10/26 -> 2024/05/29 (ver1.03 -> 1.031) ",
+    "ゲームロード直後に場所移動するまで設定情報が反映されない不具合修正。": "Fixed a bug where the settings were not applied until transferring to another location after loading a game.",
+    "戦闘背景の片方だけが空白の場合、初期背景が設定されてしまう不具合修正。": "Fixed a bug where the default background was set if either battle background was blank.",
+    "（2024/05/29 ver1.031）": " (2024/05/29 ver1.031) ",
+    "2023/05/01（ver1.02）": "2023/05/01 (ver1.02) ",
+    "ＭＶで動作しない不具合修正。": "Fixed a bug that prevented the plugin from working in MV.",
+    "2023/01/04（ver1.01）": "2023/01/04 (ver1.01) ",
+    "2021/06/04 -> 2021/11/11（ver1.00 -> 1.001）": "2021/06/04 -> 2021/11/11 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "イベントテストでエラーになる不具合修正。（11/11 ver1.001）": "Fixed a bug that caused an error during event testing. (11/11 ver1.001)",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータの設定リストに、条件、エンカウント率、戦闘背景を入力してください。": "Enter the conditions, encounter rate, and battle background in the plugin parameter settings list.",
+    "登録した『設定ＩＤ』をタイルセットのメモ欄に設定すればＯＫです。": "Then set the registered “Setting ID” in the tileset’s note field.",
+    "?の部分が設定リストに登録した『設定ＩＤ』となります。": "The ? portion is the “Setting ID” registered in the settings list.",
+    "また、カンマ区切りによって複数指定も可能です。": "You can also specify multiple IDs by separating them with commas.",
+    "設定リストには最初からサンプルが登録されています。": "Sample entries are registered in the settings list from the beginning.",
+    "ツクールのデフォルトのフィールドに合わせた内容になっているので、参考にしてください。": "They are based on RPG Maker’s default fields, so use them as a reference.",
+    "細かい仕様（Detail）": "Detailed Specifications (Detail)",
+    "タイルＩＤやオートタイルタイプは、上のレイヤーから順番に判定されます。": "Tile IDs and auto-tile types are checked in order, starting with the uppermost layer.",
+    "設定がないレイヤーのタイルは無視される仕様です。": "Tiles on layers without settings are ignored.",
+    "例えば、以下のように設定した場合、": "For example, if you set things up as follows,",
+    "レイヤー１の平原：エンカウント率１００％": "Plain on Layer 1: Encounter rate 100%",
+    "レイヤー２の森 ：エンカウント率２００％": "Forest on Layer 2: Encounter rate 200%",
+    "レイヤー３の町 ：設定なし": "Town on Layer 3: No setting",
+    "レイヤー２の森のエンカウント率（２００％）が有効になります。これは戦闘背景についても同様です。": "The encounter rate for the forest on Layer 2 (200%) will be applied. The same applies to battle backgrounds.",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "茂みのエンカウント率（BushEncounterRate）": "Bush Encounter Rate (BushEncounterRate)",
+    "茂み上でのエンカウント率です。100を基準に設定してください。": "The encounter rate while on bushes. Set it with 100 as the baseline.",
+    "初期値は200です。": "The default value is 200.",
+    "これは設定リストの内容と重複するので注意してください。": "Note that this overlaps with the contents of the settings list.",
+    "例えば、森に茂み属性を付加してエンカウント率を200にした場合、さらに茂み属性の影響で計４倍になってしまいます。": "For example, if you add bush terrain to a forest and set its encounter rate to 200, the bush effect will increase the total to four times the normal rate.",
+    "大型船のエンカウント率（ShipEncounterRate）": "Large Ship Encounter Rate (ShipEncounterRate)",
+    "大型船に乗っている時のエンカウント率です。100を基準に設定してください。": "The encounter rate while aboard a large ship. Set it with 100 as the baseline.",
+    "初期値は50です。": "The default value is 50.",
+    "こちらも設定リストの内容と重複します。": "This also overlaps with the contents of the settings list.",
+    "設定リスト（SettingList）": "Settings List (SettingList)",
+    "エンカウント率の設定の一覧です。": "A list of encounter rate settings.",
+    "以下、その詳細設定のパラメータです。": "The detailed setting parameters are provided below.",
+    "プラグインパラメータ（設定リスト）": "Plugin Parameters (Settings List)",
+    "設定ＩＤ（Id）": "Setting ID (Id)",
+    "タイルセットのメモ欄からの呼び出しに使う識別子です。": "The identifier used to call the setting from a tileset's note field.",
+    "『全タイルセットで有効』がオンの場合は不要です。": "This is unnecessary when \"Valid for All Tilesets\" is enabled.",
+    "メモ（Memo）": "Memo (Memo)",
+    "判別用のメモです。": "A memo for identification.",
+    "処理には使用しませんので、分かりやすい名前を付けてください。": "This is not used for processing, so please give it an easy-to-understand name.",
+    "全タイルセットで有効（ValidAllTilesets）": "Valid for All Tilesets (ValidAllTilesets)",
+    "設定を全てのタイルセットで有効にします。": "Makes the setting valid for all tilesets.",
+    "特定のタイルセットにのみ設定を反映したい場合は、オフにしてください。": "Turn this off if you want the setting to apply only to specific tilesets.",
+    "プラグインパラメータ（設定リスト：条件）": "Plugin Parameters (Settings List: Conditions)",
+    "地形タグ（TerrainTag）": "Terrain Tag (TerrainTag)",
+    "対象とする地形タグ（1~7）を指定します。": "Specifies the target terrain tags (1~7).",
+    "複数指定も可能です。（例：1,3~5）": "Multiple values can be specified. (Example: 1,3~5)",
+    "７つまでしか設定できないのでご利用は計画的に。": "Only up to seven can be configured, so use them wisely.",
+    "リージョンＩＤ（RegionId）": "Region ID (RegionId)",
+    "対象とするリージョン（1~255）を指定します。": "Specifies the target regions (1~255).",
+    "オートタイルタイプ（AutotileType）": "Autotile Type (AutotileType)",
+    "対象とするオートタイルタイプを指定します。": "Specifies the target autotile types.",
+    "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。": "An autotile type is a number assigned to each autotile. By default, it is used to determine the battle background.",
+    "地形タグと異なり数の制限がないため、自由に設定が可能です。": "Unlike terrain tags, there is no limit to the number of values, so they can be configured freely.",
+    "ただし、この値は通常確認できません。": "However, this value cannot normally be checked.",
+    "オプションにある「タイル情報をデバッグ表示する」プラグインで確認ができます。": "You can check it with the \"Display Tile Information in Debug Mode\" plugin found under Options.",
+    "タイルＩＤ（TileId）": "Tile ID (TileId)",
+    "対象とするタイルＩＤを指定します。": "Specifies the target tile IDs.",
+    "こちらはエディタの機能で普通に取得できますが、面倒です。": "This can be obtained normally using the editor's functions, but doing so is tedious.",
+    "こちらも「タイル情報をデバッグ表示する」プラグインでの確認をオススメします。": "Here too, I recommend checking it with the \"Display Tile Information in Debug Mode\" plugin.",
+    "乗物タイプ（VehicleType）": "Vehicle Type (VehicleType)",
+    "対象とする乗物のタイプを指定します。": "Specifies the type of vehicle targeted.",
+    "スクリプト（Script）": "Script (Script)",
+    "対象とするスクリプト条件です。": "The script condition to be checked.",
+    "例えば、以下はスイッチ１番がオンの場合の条件となります。": "For example, the following is the condition for switch 1 to be on.",
+    "プラグインパラメータ（設定リスト：内容）": "Plugin Parameters (Settings List: Contents)",
+    "エンカウント率（EncounterRate）": "Encounter Rate (EncounterRate)",
+    "条件を満たした場合のエンカウント率です。100を基準に設定してください。": "The encounter rate when the conditions are met. Set it with 100 as the baseline.",
+    "戦闘背景１（Battleback1）": "Battleback 1 (Battleback1)",
+    "条件を満たした場合の戦闘背景（下）です。": "The lower battle background when the conditions are met.",
+    "タイルセットがフィールドタイプの場合のみ有効です。": "This is valid only when the tileset is a field type.",
+    "戦闘背景２（Battleback2）": "Battleback 2 (Battleback2)",
+    "条件を満たした場合の戦闘背景（上）です。": "The upper battle background when the conditions are met."
+  }
+}

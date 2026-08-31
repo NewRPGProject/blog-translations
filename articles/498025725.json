@@ -1,0 +1,1248 @@
+{
+  "articleId": "498025725",
+  "sourceUrl": "https://newrpg.seesaa.net/article/498025725.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "4aa45815bafdc6193693619fab53f245143f31610b213709ba5d7c8b51087d9f",
+  "translatedAt": "2026-08-31T04:51:22.277Z",
+  "title": "Change Skill Parameters [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "スキルの性能を変化させる【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "11ee37de4bf9b17ef4b058ba24634e6c13a53d9982741e835b2eef1b6297cb02",
+      "translation": "Change Skill Parameters [RPG Maker MZ & MV Plugin]",
+      "contextHash": "11ee37de4bf9b17ef4b058ba24634e6c13a53d9982741e835b2eef1b6297cb02"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "アクター、エネミー、職業、装備、ステート、スキルを条件にして、スキルの性能（ダメージ、消費、成功率、ステート付加率）を変更できます。",
+      "sourceHash": "8102dd9db23af9e132f22b5bfdb44ce7c3f17c125b9df207ac09baf504eb1f40",
+      "translation": "You can change skill parameters (damage, costs, success rate, and state application rate) based on actors, enemies, classes, equipment, states, and skills.",
+      "contextHash": "8102dd9db23af9e132f22b5bfdb44ce7c3f17c125b9df207ac09baf504eb1f40"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "例えば、以下のようなものが作成できます。",
+      "sourceHash": "545f2a3be39d597c74d0821531e78e1a60a1606c8e3f47d305835d57e0ca15e3",
+      "translation": "For example, you can create the following:",
+      "contextHash": "545f2a3be39d597c74d0821531e78e1a60a1606c8e3f47d305835d57e0ca15e3"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "炎の魔法が得意なアクター",
+      "sourceHash": "ffa15976b135423b30ababeef204669fc2c38207b7f28e44c0be7b3a9b44337b",
+      "translation": "An actor who excels at fire magic",
+      "contextHash": "ffa15976b135423b30ababeef204669fc2c38207b7f28e44c0be7b3a9b44337b"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "氷のスキルの成功率が低い職業",
+      "sourceHash": "363793da057ec4dc666451d8e75000c216885d54c325dc3775a3b72710b59d3f",
+      "translation": "A class with a low success rate for ice skills",
+      "contextHash": "363793da057ec4dc666451d8e75000c216885d54c325dc3775a3b72710b59d3f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "全スキルのステート付加率を上昇させる装備",
+      "sourceHash": "6b11e2171f7cfee23d722b4ddf7ddce578d9459d6687f96c0ccd7ebfaf324b63",
+      "translation": "Equipment that increases the state application rate of all skills",
+      "contextHash": "6b11e2171f7cfee23d722b4ddf7ddce578d9459d6687f96c0ccd7ebfaf324b63"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "特定スキルの消費ＴＰを０にするパッシブスキル",
+      "sourceHash": "b66b8aaff806fe4797306a7d1e16e29bf43683f6d282eb9d2c93df38791d486c",
+      "translation": "A passive skill that reduces the TP cost of a specific skill to 0",
+      "contextHash": "b66b8aaff806fe4797306a7d1e16e29bf43683f6d282eb9d2c93df38791d486c"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "基本的には属性やスキルタイプ単位での設定を想定していますが、工夫次第で様々な使い方が可能です。",
+      "sourceHash": "19396568f93eb8b826aa87639d3f8588e56f84997f02e44ce4b90ae838f45eaf",
+      "translation": "The basic premise is to configure settings by element or skill type, but various applications are possible with a little ingenuity.",
+      "contextHash": "19396568f93eb8b826aa87639d3f8588e56f84997f02e44ce4b90ae838f45eaf"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the function ON from the RPG Maker Plugin Manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EnhanceSkill.js",
+      "sourceHash": "9555fefcb9c8861095f2eabdc3442ed9eb16cd90b09846d17a1122b4093da7dc",
+      "translation": "NRP_EnhanceSkill.js ",
+      "contextHash": "106d48fd5fce72638189157b90591810824cd96c5477459ec469073be7eb824d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.04（2024/06/23）",
+      "sourceHash": "a1aa97a27f8f5dbb1184db77b874221d9fe0f57298fc725672558c48e7a20e09",
+      "translation": "ver1.04 (2024/06/23) ",
+      "contextHash": "106d48fd5fce72638189157b90591810824cd96c5477459ec469073be7eb824d"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/06/23（ver1.04）",
+      "sourceHash": "645c6bdaa980dfd1351644fe152fc65fe3a8a95e174e5645dd17dbdff9358167",
+      "translation": "2024/06/23 (ver1.04) ",
+      "contextHash": "645c6bdaa980dfd1351644fe152fc65fe3a8a95e174e5645dd17dbdff9358167"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※要するに四捨五入、切り捨て、切り上げのことです。",
+      "sourceHash": "c3cb383e90bdc5024ad7c8f364a61ac2ac78d39fbb29cd604b3df0a01e5932e8",
+      "translation": "※In short, rounding, rounding down, and rounding up.",
+      "contextHash": "c3cb383e90bdc5024ad7c8f364a61ac2ac78d39fbb29cd604b3df0a01e5932e8"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/06/08（ver1.03）",
+      "sourceHash": "f2d9092cc4fb91d6e039507af665ca574cb4e9db4ff4aa4cb9f341074a3bf7a3",
+      "translation": "2024/06/08 (ver1.03) ",
+      "contextHash": "f2d9092cc4fb91d6e039507af665ca574cb4e9db4ff4aa4cb9f341074a3bf7a3"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/05/24（ver1.02）",
+      "sourceHash": "6f820871bc6ea571c3aff726a1f707bc1e8e546ade18524cf12c3e5a4e08c03e",
+      "translation": "2023/05/24 (ver1.02) ",
+      "contextHash": "6f820871bc6ea571c3aff726a1f707bc1e8e546ade18524cf12c3e5a4e08c03e"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "属性が『通常攻撃』だと強化対象にならない不具合修正。",
+      "sourceHash": "310e3f34fe51738f69ca75877c63e05d5788443459fdb1d77ebaa938a3b2427d",
+      "translation": "Fixed a bug where skills were not enhanced when their element was “Normal Attack.”",
+      "contextHash": "310e3f34fe51738f69ca75877c63e05d5788443459fdb1d77ebaa938a3b2427d"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2023/04/05（ver1.01）",
+      "sourceHash": "d3673c4c2dae984ee28a19494f3e64d96bc629e6b2db51d25a743ca24ef3c80d",
+      "translation": "2023/04/05 (ver1.01) ",
+      "contextHash": "d3673c4c2dae984ee28a19494f3e64d96bc629e6b2db51d25a743ca24ef3c80d"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2023/02/05（ver1.00）",
+      "sourceHash": "dfbce31419119a24182d3b9b4242c04bead6c5c2054d04d381950b0439b1497d",
+      "translation": "2023/02/05 (ver1.00) ",
+      "contextHash": "dfbce31419119a24182d3b9b4242c04bead6c5c2054d04d381950b0439b1497d"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "強化条件のメモ欄（Note Of Conditions）",
+      "sourceHash": "f84af3c1750e4fb2a804b7b99fa318a67ade2de976d511bd7ab1b3946b84c6f8",
+      "translation": "Enhancement Conditions Note Field (Note Of Conditions)",
+      "contextHash": "f84af3c1750e4fb2a804b7b99fa318a67ade2de976d511bd7ab1b3946b84c6f8"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "アクター、エネミー、職業、装備、ステート、スキルのメモ欄に、スキルの強化条件を入力できます。",
+      "sourceHash": "0b9fe751d92989c74ddeabeda2dd657dcece9806592cc0534886123e62949fda",
+      "translation": "You can enter skill enhancement conditions in the note fields of actors, enemies, classes, equipment, states, and skills.",
+      "contextHash": "0b9fe751d92989c74ddeabeda2dd657dcece9806592cc0534886123e62949fda"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "対象スキルの範囲を指定",
+      "sourceHash": "f10189e243ef0a48c7abe869d0fa7243775a7dca860f3ae17df2bb22153a96e7",
+      "translation": "Specify the Target Skill Range",
+      "contextHash": "f10189e243ef0a48c7abe869d0fa7243775a7dca860f3ae17df2bb22153a96e7"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下のいずれかをメモ欄に指定すれば、強化するスキルの範囲を指定できます。",
+      "sourceHash": "2bd996ac9564fec1551e3a8740856119481fb4a3fdf250d149338a4199b3fea4",
+      "translation": "You can specify the range of skills to enhance by entering one of the following in the note field.",
+      "contextHash": "2bd996ac9564fec1551e3a8740856119481fb4a3fdf250d149338a4199b3fea4"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※省略して強化内容だけを指定することも可能です。",
+      "sourceHash": "2fb62648bddacd75d1fbc043b77d7942672cf62b2cb390d09fe92430c8d744ff",
+      "translation": "※You can also omit this and specify only the enhancement details.",
+      "contextHash": "2fb62648bddacd75d1fbc043b77d7942672cf62b2cb390d09fe92430c8d744ff"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※設定はデータベースのタイプに依存します。",
+      "sourceHash": "27e90d5e9adb2bf92a9f047e26c50f3e6416cc70adf700135e174cf076826171",
+      "translation": "※The settings depend on the database type.",
+      "contextHash": "27e90d5e9adb2bf92a9f047e26c50f3e6416cc70adf700135e174cf076826171"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※複数指定可（例：<EnhanceTargetElement:2,3,4>",
+      "sourceHash": "879e44fe88d83b6ab97f0bba4ff5cc454e2f9024631ca734d3efe4c24dc398d9",
+      "translation": "※Multiple entries allowed (e.g., <EnhanceTargetElement:2,3,4>",
+      "contextHash": "879e44fe88d83b6ab97f0bba4ff5cc454e2f9024631ca734d3efe4c24dc398d9"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "または<EnhanceTargetSkillType:2~4>）",
+      "sourceHash": "395b2602cc71547fbaf9cb0616d069ce318e687fedaba4f6d894c004c485d343",
+      "translation": "or <EnhanceTargetSkillType:2~4>)",
+      "contextHash": "395b2602cc71547fbaf9cb0616d069ce318e687fedaba4f6d894c004c485d343"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "属性02（炎）を強化の対象とします。",
+      "sourceHash": "8463c3f34010f7b2a8ea3b93cf097fc129133c31acdd14d2bc49bdf88edd076d",
+      "translation": "Element 02 (Fire) is targeted for enhancement.",
+      "contextHash": "8463c3f34010f7b2a8ea3b93cf097fc129133c31acdd14d2bc49bdf88edd076d"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※省略時は「なし」なども含めた全ての属性が対象となります。",
+      "sourceHash": "6c7aac8108f756a172ed3634e6e8567fdd7f05e6297a61c60e6f34f4a857c2ad",
+      "translation": "※If omitted, all elements, including “None,” are targeted.",
+      "contextHash": "6c7aac8108f756a172ed3634e6e8567fdd7f05e6297a61c60e6f34f4a857c2ad"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "スキルタイプ01（魔法）を強化の対象とします。",
+      "sourceHash": "109bfe5f67290e2cf19a0c2f9ec024a789879844e23791d044789e158fc9f20c",
+      "translation": "Skill Type 01 (Magic) is targeted for enhancement.",
+      "contextHash": "109bfe5f67290e2cf19a0c2f9ec024a789879844e23791d044789e158fc9f20c"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "※省略時はプラグインパラメータで設定したスキルタイプが対象となります。",
+      "sourceHash": "edbcb0e34f2130867d87cbaa5822bf36e28ab894e2ad6b2e3cf6e7a817a69d1b",
+      "translation": "※If omitted, the skill types configured in the plugin parameters are targeted.",
+      "contextHash": "edbcb0e34f2130867d87cbaa5822bf36e28ab894e2ad6b2e3cf6e7a817a69d1b"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "強化内容を指定",
+      "sourceHash": "ded59d0d091e6c2c3f32615ef6a80964db753da31073d7d162ab16a82cbc6bef",
+      "translation": "Specify Enhancement Details",
+      "contextHash": "ded59d0d091e6c2c3f32615ef6a80964db753da31073d7d162ab16a82cbc6bef"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "以下で強化内容を個別に指定できます。",
+      "sourceHash": "f0bbd2525ccc781abf67258592e0efda4749653a1fbac61149ca28215f6452cf",
+      "translation": "You can specify enhancement details individually as follows.",
+      "contextHash": "f0bbd2525ccc781abf67258592e0efda4749653a1fbac61149ca28215f6452cf"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "省略した場合は、プラグインパラメータの初期値が適用されます。",
+      "sourceHash": "be2180e61deee928c831330871e81fe762ff0eeed1d9a69d6fbd213c8669fdd4",
+      "translation": "If omitted, the initial values of the plugin parameters are applied.",
+      "contextHash": "be2180e61deee928c831330871e81fe762ff0eeed1d9a69d6fbd213c8669fdd4"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "一つでも入力すると初期値は適用されなくなります。",
+      "sourceHash": "90d50f78f10ae3eabb75d14a91e9805eb52432ef9d993173ca9bc51f3f529608",
+      "translation": "If even one value is entered, the initial values will no longer be applied.",
+      "contextHash": "90d50f78f10ae3eabb75d14a91e9805eb52432ef9d993173ca9bc51f3f529608"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "強化時のダメージを１．５倍にします。",
+      "sourceHash": "a0db2a8fe37e8adb552a878390ba4180e01b937074e86e14731061433ec26a02",
+      "translation": "Multiplies damage during enhancement by 1.5.",
+      "contextHash": "a0db2a8fe37e8adb552a878390ba4180e01b937074e86e14731061433ec26a02"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "強化時の消費ＭＰを０．５倍にします。",
+      "sourceHash": "6f6dbf9ebd4e09454dfcf4df1f11d9994dde8519e891782dd57982c35587aeae",
+      "translation": "Multiplies MP cost during enhancement by 0.5.",
+      "contextHash": "6f6dbf9ebd4e09454dfcf4df1f11d9994dde8519e891782dd57982c35587aeae"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "強化時の消費ＴＰを０．５倍にします。",
+      "sourceHash": "01f510b4e66a2c12eadf4eaf63f45fb760f69cfafcb36147f34c7c4a1a3934a1",
+      "translation": "Multiplies TP cost during enhancement by 0.5.",
+      "contextHash": "01f510b4e66a2c12eadf4eaf63f45fb760f69cfafcb36147f34c7c4a1a3934a1"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "強化時の成功率を１．５倍にします。",
+      "sourceHash": "6bb9a1803c120ce94182195650894410daefbceca15a6e1094b5c0cbb3ee0894",
+      "translation": "Multiplies success rate during enhancement by 1.5.",
+      "contextHash": "6bb9a1803c120ce94182195650894410daefbceca15a6e1094b5c0cbb3ee0894"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "強化時のステート付加率を１．５倍にします。",
+      "sourceHash": "46258a275ef1f4001e838dd6046d89b44e80b4136d4a674867523531e442b2f0",
+      "translation": "Multiplies state application rate during enhancement by 1.5.",
+      "contextHash": "46258a275ef1f4001e838dd6046d89b44e80b4136d4a674867523531e442b2f0"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "スキルのメモ欄（Note Of Skills）",
+      "sourceHash": "b16b0692f360efbb6ef8fb6cc881d17071405f749aab1a1c62c639b2c0b6dbf9",
+      "translation": "Skill Note Field (Note Of Skills)",
+      "contextHash": "b16b0692f360efbb6ef8fb6cc881d17071405f749aab1a1c62c639b2c0b6dbf9"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "強化する側のスキルのメモ欄に以下を入力できます。",
+      "sourceHash": "e32fff9e0fa8afffe74d7951015a557c3ed544deec4faadc81300e64b13154bc",
+      "translation": "You can enter the following in the note field of the skill providing the enhancement.",
+      "contextHash": "e32fff9e0fa8afffe74d7951015a557c3ed544deec4faadc81300e64b13154bc"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "なお、プラグインパラメータの設定次第ではアイテムを対象にすることも可能です。",
+      "sourceHash": "b3516e83372806ee1f58d83ef6996f09cf98bb2ca7c509df6375826d653207e2",
+      "translation": "Depending on the plugin parameter settings, items can also be targeted.",
+      "contextHash": "b3516e83372806ee1f58d83ef6996f09cf98bb2ca7c509df6375826d653207e2"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "スキルを属性02（炎）として判定します。",
+      "sourceHash": "61bc2dab9587da2e330822a51bb38891bb22d293902e9560207a74603f71bdce",
+      "translation": "The skill is treated as Element 02 (Fire).",
+      "contextHash": "61bc2dab9587da2e330822a51bb38891bb22d293902e9560207a74603f71bdce"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "これによって、ダメージタイプ「なし」のスキルも強化対象にできます。",
+      "sourceHash": "6048dd5f913f5fc7fd0c4520e4d58286a78ff8d29829d775406e5f34abc501ea",
+      "translation": "This allows skills with a damage type of “None” to also be targeted for enhancement.",
+      "contextHash": "6048dd5f913f5fc7fd0c4520e4d58286a78ff8d29829d775406e5f34abc501ea"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※複数指定可（例：<EnhanceElement:2,3,4>または<EnhanceElement:2~4>）",
+      "sourceHash": "c0e05fcc929fcc9d3ded1bfc22526d0d2a0e874698fb8fd48ca88b752ce63f4b",
+      "translation": "※Multiple entries allowed (e.g., <EnhanceElement:2,3,4> or <EnhanceElement:2~4>)",
+      "contextHash": "c0e05fcc929fcc9d3ded1bfc22526d0d2a0e874698fb8fd48ca88b752ce63f4b"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "上述の<EnhanceElement:2>と値が一つでも一致すれば機能します。",
+      "sourceHash": "2c8f2daf2972d6190a292b104d0b0399d57e640be5bd56f52a52444962aa85b7",
+      "translation": "This works if even one value matches the aforementioned <EnhanceElement:2>.",
+      "contextHash": "2c8f2daf2972d6190a292b104d0b0399d57e640be5bd56f52a52444962aa85b7"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "値には数値だけではなく、文字列も有効です。",
+      "sourceHash": "c9d2d9f888628c683c601aaaa9359da89bec545fa51673dde7f365b993238fe7",
+      "translation": "Values can be not only numbers but also strings.",
+      "contextHash": "c9d2d9f888628c683c601aaaa9359da89bec545fa51673dde7f365b993238fe7"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "独自の値を設定すれば、属性以外を条件にすることもできます。",
+      "sourceHash": "9148004100cc248b220bf984b355c6ab33c018a3c1aa6a83f6d2303d1291de4b",
+      "translation": "By setting custom values, you can use conditions other than elements.",
+      "contextHash": "9148004100cc248b220bf984b355c6ab33c018a3c1aa6a83f6d2303d1291de4b"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "例えば、以下のようにすれば、特定のスキルだけを強化する装備が作成できます。",
+      "sourceHash": "920e36d85bdc7b52e86c506604d234492c34637481208431aa0465fbadf73cbe",
+      "translation": "For example, you can create equipment that enhances only specific skills as follows.",
+      "contextHash": "920e36d85bdc7b52e86c506604d234492c34637481208431aa0465fbadf73cbe"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "スキルのメモ欄に<EnhanceElement:A>を記入",
+      "sourceHash": "04250661aaf7bdeb2c2f886d897abea650ad5a82775db0036c9235a15e83cfae",
+      "translation": "Enter <EnhanceElement:A> in the skill's note field",
+      "contextHash": "04250661aaf7bdeb2c2f886d897abea650ad5a82775db0036c9235a15e83cfae"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "装備のメモ欄に<EnhanceTargetElement:A>を記入",
+      "sourceHash": "5460b632365e63ba2d3a3e5b63be5c2ff8aa978442f27ce3842a4bd925a2df23",
+      "translation": "Enter <EnhanceTargetElement:A> in the equipment's note field",
+      "contextHash": "5460b632365e63ba2d3a3e5b63be5c2ff8aa978442f27ce3842a4bd925a2df23"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "スキルの強化を無効にします。",
+      "sourceHash": "93c7b71ff64d9a1c03c290b850b5b0e18f2171f285f86036af2c40fb0aa478b0",
+      "translation": "Disables skill enhancement.",
+      "contextHash": "93c7b71ff64d9a1c03c290b850b5b0e18f2171f285f86036af2c40fb0aa478b0"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "スキルのダメージ強化のみを無効にします。",
+      "sourceHash": "5311f63913802656f761238a82b073bbfebdde87b0ffb179fc7098e93037e8ac",
+      "translation": "Only skill damage enhancement is disabled.",
+      "contextHash": "5311f63913802656f761238a82b073bbfebdde87b0ffb179fc7098e93037e8ac"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "消費や成功率は通常通り強化されます。",
+      "sourceHash": "396e10c1a98bd0055ecf5ab964ca78c3879bd0688f2bfb4c1834ba782b281f5c",
+      "translation": "Costs and success rates are enhanced as usual.",
+      "contextHash": "396e10c1a98bd0055ecf5ab964ca78c3879bd0688f2bfb4c1834ba782b281f5c"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "その他詳細（Other Details）",
+      "sourceHash": "5fa56b72a375439453d51ccd9929273ff6d8acb3082bbed23ac439cb220af993",
+      "translation": "Other Details (Other Details)",
+      "contextHash": "5fa56b72a375439453d51ccd9929273ff6d8acb3082bbed23ac439cb220af993"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "当プラグインはパッシブスキルに対応しています。",
+      "sourceHash": "fb92a4c89f8d9378e18c449ea162a0b1af70311e04c9c632ac0642fbe46b2794",
+      "translation": "This plugin supports passive skills.",
+      "contextHash": "fb92a4c89f8d9378e18c449ea162a0b1af70311e04c9c632ac0642fbe46b2794"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "他と同じようにメモ欄に記入したスキルを、アクターに習得させるだけでＯＫです。",
+      "sourceHash": "68179f40affa2bd48a19fb83a5be0ce019f28cb0ddf8c57a8750a286271e784c",
+      "translation": "Simply have the actor learn the skill with the note field entry, just like any other skill.",
+      "contextHash": "68179f40affa2bd48a19fb83a5be0ce019f28cb0ddf8c57a8750a286271e784c"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "使用する側のスキルとメモ欄の設定を混同しないようにご注意ください。",
+      "sourceHash": "6e631a095904b3e9107a6a8efd0f246d95ef0d75af7c21161255ea1994d6a973",
+      "translation": "Be careful not to confuse the settings in the skill being used with those in the note field.",
+      "contextHash": "6e631a095904b3e9107a6a8efd0f246d95ef0d75af7c21161255ea1994d6a973"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "一つのオブジェクト（アクター、エネミー、職業、装備、ステート、スキル）に複数の異なる効果を付けることはできません。",
+      "sourceHash": "5e98c9a8b6a9d11d1e404346d26dcf30ae72c9fb8b86e7d38c682cd9d40f9245",
+      "translation": "You cannot add multiple different effects to a single object (actor, enemy, class, equipment, state, or skill).",
+      "contextHash": "5e98c9a8b6a9d11d1e404346d26dcf30ae72c9fb8b86e7d38c682cd9d40f9245"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "（例えば、炎魔法は得意だが氷魔法は苦手なアクターなど。）",
+      "sourceHash": "805b1f8ec2d16d9748991a5506f6dacac52f45db7082a20c93ba34fdc3136703",
+      "translation": "(For example, an actor who is skilled with fire magic but weak with ice magic.)",
+      "contextHash": "805b1f8ec2d16d9748991a5506f6dacac52f45db7082a20c93ba34fdc3136703"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "そのような場合も、パッシブスキルやステートを活用して効果を分割すればＯＫです。",
+      "sourceHash": "af33b744c66cb23ff59be2626b51fb5f11218cc2ef282835c6e623664b727484",
+      "translation": "In such cases, you can split the effects by using passive skills and states.",
+      "contextHash": "af33b744c66cb23ff59be2626b51fb5f11218cc2ef282835c6e623664b727484"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "スキルの属性が『通常攻撃』の場合、属性による強化はできません。",
+      "sourceHash": "cff1319b486de0886c92669078530fe1b796cfa524deaeab61cca6e285bd881d",
+      "translation": "If the skill's element is “Normal Attack,” it cannot be enhanced by element.",
+      "contextHash": "cff1319b486de0886c92669078530fe1b796cfa524deaeab61cca6e285bd881d"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "ツクールの仕様では装備の『攻撃時属性』がスキルに反映されるのですが、<EnhanceTargetElement>で強化する属性を指定しても有効にはなりません。",
+      "sourceHash": "12380b0f3c468fbbf8f196741f954edddd112407aae4b28abc7114cf6af40d02",
+      "translation": "By default, the equipment's “Attack Element” is reflected in the skill, but specifying an element to enhance with <EnhanceTargetElement> will not work.",
+      "contextHash": "12380b0f3c468fbbf8f196741f954edddd112407aae4b28abc7114cf6af40d02"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "使用効果の『HP回復』『MP回復』には対応していません。",
+      "sourceHash": "a62e2d1973c981f79b9175bd9676ca8caa03ee04bf666680b01c2e49dde8d3a3",
+      "translation": "The “HP Recovery” and “MP Recovery” effects are not supported.",
+      "contextHash": "a62e2d1973c981f79b9175bd9676ca8caa03ee04bf666680b01c2e49dde8d3a3"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "回復を対象にしたい場合は計算式を使用してください。",
+      "sourceHash": "63b23f45d551546b2da95c90de1d35427103e8e5d23b44ace20b9a252a4a3cb3",
+      "translation": "Use a formula if you want to affect recovery.",
+      "contextHash": "63b23f45d551546b2da95c90de1d35427103e8e5d23b44ace20b9a252a4a3cb3"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "対象スキルタイプ（EnhanceSkillType）",
+      "sourceHash": "6829531d988e741a0f85048657785f11b411252f1173269ae1fa149186169e5c",
+      "translation": "Target Skill Type (EnhanceSkillType)",
+      "contextHash": "6829531d988e741a0f85048657785f11b411252f1173269ae1fa149186169e5c"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "対象とするスキルタイプを数値で入力してください。",
+      "sourceHash": "54ae8c73e5aa66392b1ba56892ce8d0d762668f4a48c8ece0f00c056216dfc2f",
+      "translation": "Enter the skill types to target as numbers.",
+      "contextHash": "54ae8c73e5aa66392b1ba56892ce8d0d762668f4a48c8ece0f00c056216dfc2f"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "カンマ区切りで複数指定（例：1,2,3）。",
+      "sourceHash": "80022587d8f3f8c534914b363ab1d262d68d1078300ed2c07358a6f78be3603f",
+      "translation": "Specify multiple types separated by commas (Example: 1,2,3).",
+      "contextHash": "80022587d8f3f8c534914b363ab1d262d68d1078300ed2c07358a6f78be3603f"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "空欄で全て有効となります。",
+      "sourceHash": "5c5a932c8256d8f0954672dd705d5a3f5f4ad62d59dab199c80eaf0948951d5d",
+      "translation": "Leave blank to enable all types.",
+      "contextHash": "5c5a932c8256d8f0954672dd705d5a3f5f4ad62d59dab199c80eaf0948951d5d"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "アイテムも対象（EnhanceItem）",
+      "sourceHash": "f1d9660030779ba8633aeeb42b7c9e2ab0dca102fa3041f3ba0f6451ad8fd33e",
+      "translation": "Include Items (EnhanceItem)",
+      "contextHash": "f1d9660030779ba8633aeeb42b7c9e2ab0dca102fa3041f3ba0f6451ad8fd33e"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "アイテムも強化の対象にします。",
+      "sourceHash": "2298c643934c454b74c45438d4147919845175c7a052c5ee237e9c09d5585b18",
+      "translation": "Items are also subject to enhancement.",
+      "contextHash": "2298c643934c454b74c45438d4147919845175c7a052c5ee237e9c09d5585b18"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "重複時の設定（OverlaySettings）",
+      "sourceHash": "4593d25f9ba0e530856601ee6989e6924a093579c6e360a6bc9e9ce118f4935b",
+      "translation": "Overlay Settings (OverlaySettings)",
+      "contextHash": "4593d25f9ba0e530856601ee6989e6924a093579c6e360a6bc9e9ce118f4935b"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "強化を重ねた場合の挙動です。",
+      "sourceHash": "8ca4d554af2af4b97debbe9523a42575f41c4fb09230453f5d5d26255600f24b",
+      "translation": "This determines the behavior when enhancements are stacked.",
+      "contextHash": "8ca4d554af2af4b97debbe9523a42575f41c4fb09230453f5d5d26255600f24b"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "重複無効の場合はダメージ倍率の最大値が優先されます。",
+      "sourceHash": "2840fbb0853c89319d4dfb3b34bdd08298ce36b9b8792ab5b8de0c63e301b17e",
+      "translation": "When overlap is disabled, the highest damage multiplier takes priority.",
+      "contextHash": "2840fbb0853c89319d4dfb3b34bdd08298ce36b9b8792ab5b8de0c63e301b17e"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "加算方式を使用（UsePlusStyle）",
+      "sourceHash": "1c9a3f83271ec97d433a3f41fd6c5f43e7b49d66a633846f973c35652f01200d",
+      "translation": "Use Additive Method (UsePlusStyle)",
+      "contextHash": "1c9a3f83271ec97d433a3f41fd6c5f43e7b49d66a633846f973c35652f01200d"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "強化の計算式を加算方式に変更します。",
+      "sourceHash": "5ce47b8d5fb9bf2eea980546c36d6b6b00bcee98f5893b09ea15b22e39611ac6",
+      "translation": "Changes the enhancement formula to an additive method.",
+      "contextHash": "5ce47b8d5fb9bf2eea980546c36d6b6b00bcee98f5893b09ea15b22e39611ac6"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "オフの場合は乗算方式が使用されます。",
+      "sourceHash": "a1526454dfb3baef440604dd0746c2cb3118fc2bbc36619dd7024ad9ff9b40f1",
+      "translation": "When off, a multiplicative method is used.",
+      "contextHash": "a1526454dfb3baef440604dd0746c2cb3118fc2bbc36619dd7024ad9ff9b40f1"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "加算方式については、以下のプラグインと同様の仕様になっています。",
+      "sourceHash": "ad2a16cf4d855d6ee529b4fe91965c7e546e500359bcd769b0f7b541bfd39a16",
+      "translation": "The additive method follows the same specifications as the plugin below.",
+      "contextHash": "ad2a16cf4d855d6ee529b4fe91965c7e546e500359bcd769b0f7b541bfd39a16"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/483215411.html",
+      "sourceHash": "d7b949d899298c115234fabcc72d9a86bc39f1d871e2b666b45fd4614e4c9381",
+      "translation": "https://newrpg.seesaa.net/article/483215411.html",
+      "contextHash": "4702ab2f60084f82368994e911ca6bc8c86ad64877ad2a31a00733a74c074ea7"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "丸め方式（RoundingStyle）",
+      "sourceHash": "7291327607d31f716e2ac3a3169e47e499ffc89c72f7d6220a86cbadfa933b52",
+      "translation": "Rounding Method (RoundingStyle)",
+      "contextHash": "7291327607d31f716e2ac3a3169e47e499ffc89c72f7d6220a86cbadfa933b52"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "強化後の値の丸め方式です。",
+      "sourceHash": "cf3fd07c6d12c639ba62f4c0bdfeea16b543a790bc9d08f74197df9992852f04",
+      "translation": "This is the rounding method for values after enhancement.",
+      "contextHash": "cf3fd07c6d12c639ba62f4c0bdfeea16b543a790bc9d08f74197df9992852f04"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "※要するに四捨五入、切り捨て、切り上げのことです。",
+      "sourceHash": "c3cb383e90bdc5024ad7c8f364a61ac2ac78d39fbb29cd604b3df0a01e5932e8",
+      "translation": "※In short, rounding, rounding down, or rounding up.",
+      "contextHash": "c3cb383e90bdc5024ad7c8f364a61ac2ac78d39fbb29cd604b3df0a01e5932e8"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "ダメージ、消費ＭＰ、消費ＴＰが対象です。",
+      "sourceHash": "b8dd07be1b4e642585070da12fea8bd5c9eb14ec08009d5b35b0d34b2f0bd7c1",
+      "translation": "This applies to damage, MP costs, and TP costs.",
+      "contextHash": "b8dd07be1b4e642585070da12fea8bd5c9eb14ec08009d5b35b0d34b2f0bd7c1"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "＜強化の初期値＞（MessageWindow）",
+      "sourceHash": "1da09d18d2ce38d66e778f9994305415786180dae88ead02a73bb6d92f0076b9",
+      "translation": "<Initial Enhancement Values> (MessageWindow)",
+      "contextHash": "1da09d18d2ce38d66e778f9994305415786180dae88ead02a73bb6d92f0076b9"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "ダメージ倍率（EnhanceDamageRate）",
+      "sourceHash": "ee2a502e3a5fba27e49acb3d670ca9314ec7e0aee5ed4d3cc9a2253847c352b5",
+      "translation": "Damage Multiplier (EnhanceDamageRate)",
+      "contextHash": "ee2a502e3a5fba27e49acb3d670ca9314ec7e0aee5ed4d3cc9a2253847c352b5"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "強化時のダメージ倍率です。150なら1.5倍。",
+      "sourceHash": "bbe357de8092f62773e79f3efe66345ba8604c09363740d0ce9b56e3b41d8ce0",
+      "translation": "The damage multiplier during enhancement. 150 means 1.5 times.",
+      "contextHash": "bbe357de8092f62773e79f3efe66345ba8604c09363740d0ce9b56e3b41d8ce0"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "消費ＭＰ倍率（EnhanceMpCostRate）",
+      "sourceHash": "b18d6214df49c0c563db5e4e002a37f61dd6e59e9dc34260b7e82f2b9976ee40",
+      "translation": "MP Cost Multiplier (EnhanceMpCostRate)",
+      "contextHash": "b18d6214df49c0c563db5e4e002a37f61dd6e59e9dc34260b7e82f2b9976ee40"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "強化時の消費ＭＰ倍率です。50なら0.5倍。",
+      "sourceHash": "097a7e730709773960e1f28b60c8fa18405acee3b36cd163019d2be8e3d39d56",
+      "translation": "The MP cost multiplier during enhancement. 50 means 0.5 times.",
+      "contextHash": "097a7e730709773960e1f28b60c8fa18405acee3b36cd163019d2be8e3d39d56"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "消費ＴＰ倍率（EnhanceTpCostRate）",
+      "sourceHash": "ae2e4a130f6cfbea6623bfe1e38332792e80c6ffc482f6411619304321ce4207",
+      "translation": "TP Cost Multiplier (EnhanceTpCostRate)",
+      "contextHash": "ae2e4a130f6cfbea6623bfe1e38332792e80c6ffc482f6411619304321ce4207"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "強化時の消費ＴＰ倍率です。50なら0.5倍。",
+      "sourceHash": "9012e681bccaef65ebb2b3226fabb82aedc922c09bd42d052e86c841f81cd9f9",
+      "translation": "The TP cost multiplier during enhancement. 50 means 0.5 times.",
+      "contextHash": "9012e681bccaef65ebb2b3226fabb82aedc922c09bd42d052e86c841f81cd9f9"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "成功率倍率（EnhanceSuccessRate）",
+      "sourceHash": "061ec84b871f75d393bd6cd6042f89689a98ae2b39aa2badb63a9f605d40742c",
+      "translation": "Success Rate Multiplier (EnhanceSuccessRate)",
+      "contextHash": "061ec84b871f75d393bd6cd6042f89689a98ae2b39aa2badb63a9f605d40742c"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "強化時の成功率倍率です。150なら1.5倍。",
+      "sourceHash": "28b4fba05ac28060ee327920b7ab1b9596ecf46ba20eeeaf1ef5cf9b3fa699b5",
+      "translation": "The success rate multiplier during enhancement. 150 means 1.5 times.",
+      "contextHash": "28b4fba05ac28060ee327920b7ab1b9596ecf46ba20eeeaf1ef5cf9b3fa699b5"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "ステート付加率倍率（EnhanceStateRate）",
+      "sourceHash": "877ef1ad952b54d671f97fe655d1d6e35b21176949189ecfd698258fb20731b2",
+      "translation": "State Application Rate Multiplier (EnhanceStateRate)",
+      "contextHash": "877ef1ad952b54d671f97fe655d1d6e35b21176949189ecfd698258fb20731b2"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "強化時のステート付加率倍率です。150なら1.5倍。",
+      "sourceHash": "eff47e3a2237ebd89ef5e0ea49c62a5875b10724e54110b45ea9893b179c1e9c",
+      "translation": "The state application rate multiplier during enhancement. 150 means 1.5 times.",
+      "contextHash": "eff47e3a2237ebd89ef5e0ea49c62a5875b10724e54110b45ea9893b179c1e9c"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]強化条件のメモ欄（Note Of Conditions）[[/LINK_1]]",
+      "sourceHash": "88faf3b2bfc666998b5118342236dd8e7e44401a935971933592f9cfaedf0c78",
+      "parts": [
+        {
+          "source": "強化条件のメモ欄（Note Of Conditions）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Note Field for Enhancement Conditions (Note Of Conditions)[[/LINK_1]]",
+      "contextHash": "88faf3b2bfc666998b5118342236dd8e7e44401a935971933592f9cfaedf0c78"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（Note Of Skills）[[/LINK_1]]",
+      "sourceHash": "5c2424b47c620924da2816a6c2036cd463fef33dbe91e6fc90250d34f47683e4",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（Note Of Skills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field (Note Of Skills)[[/LINK_1]]",
+      "contextHash": "5c2424b47c620924da2816a6c2036cd463fef33dbe91e6fc90250d34f47683e4"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]その他詳細（Other Details）[[/LINK_1]]",
+      "sourceHash": "12fced2e930bb3e740b48b571c10168660415ba514aca90cfad86bbbff3d4156",
+      "parts": [
+        {
+          "source": "その他詳細（Other Details）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Other Details (Other Details)[[/LINK_1]]",
+      "contextHash": "12fced2e930bb3e740b48b571c10168660415ba514aca90cfad86bbbff3d4156"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]対象スキルタイプ（EnhanceSkillType）[[/LINK_1]]",
+      "sourceHash": "4129077934be7504af6216d63263f8e04ac0cf1268313791762f2e6cfa6a114f",
+      "parts": [
+        {
+          "source": "対象スキルタイプ（EnhanceSkillType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target Skill Type (EnhanceSkillType)[[/LINK_1]]",
+      "contextHash": "4129077934be7504af6216d63263f8e04ac0cf1268313791762f2e6cfa6a114f"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]アイテムも対象（EnhanceItem）[[/LINK_1]]",
+      "sourceHash": "0bf28a7b543ea998f7a414610fdbff5f7ed0e2a9239c358bb6c5a88ad3b99702",
+      "parts": [
+        {
+          "source": "アイテムも対象（EnhanceItem）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Items Included (EnhanceItem)[[/LINK_1]]",
+      "contextHash": "0bf28a7b543ea998f7a414610fdbff5f7ed0e2a9239c358bb6c5a88ad3b99702"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]重複時の設定（OverlaySettings）[[/LINK_1]]",
+      "sourceHash": "7f053914602a95411e37e61594c0676760235a7559a5ae3bbeb96da172ea8c61",
+      "parts": [
+        {
+          "source": "重複時の設定（OverlaySettings）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Overlay Settings (OverlaySettings)[[/LINK_1]]",
+      "contextHash": "7f053914602a95411e37e61594c0676760235a7559a5ae3bbeb96da172ea8c61"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]加算方式を使用（UsePlusStyle）[[/LINK_1]]",
+      "sourceHash": "8816ef6a0dec4d6d295fd8447c09d2dd5111b4aaeefdc3ffb0ed4ae67c1a03dc",
+      "parts": [
+        {
+          "source": "加算方式を使用（UsePlusStyle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Use Plus Style (UsePlusStyle)[[/LINK_1]]",
+      "contextHash": "8816ef6a0dec4d6d295fd8447c09d2dd5111b4aaeefdc3ffb0ed4ae67c1a03dc"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]丸め方式（RoundingStyle）[[/LINK_1]]",
+      "sourceHash": "4b7b479f5c30285f5b9b1a9b73d0d671491b48d70d20dbb007f8ee1905d36570",
+      "parts": [
+        {
+          "source": "丸め方式（RoundingStyle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Rounding Method (RoundingStyle)[[/LINK_1]]",
+      "contextHash": "4b7b479f5c30285f5b9b1a9b73d0d671491b48d70d20dbb007f8ee1905d36570"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＜強化の初期値＞（MessageWindow）[[/LINK_1]]",
+      "sourceHash": "3a9d9e138bf41382248c304485e4d557e90dd0870709a827f69dd05471a96f40",
+      "parts": [
+        {
+          "source": "＜強化の初期値＞（MessageWindow）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<Initial Enhancement Values> (MessageWindow)[[/LINK_1]]",
+      "contextHash": "3a9d9e138bf41382248c304485e4d557e90dd0870709a827f69dd05471a96f40"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージ倍率（EnhanceDamageRate）[[/LINK_1]]",
+      "sourceHash": "0d09c0d7f6fe4e6256a7bf67368a8bf54d79e5b7a76c5ac7f4ca38c9e97caec2",
+      "parts": [
+        {
+          "source": "ダメージ倍率（EnhanceDamageRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Damage Multiplier (EnhanceDamageRate)[[/LINK_1]]",
+      "contextHash": "0d09c0d7f6fe4e6256a7bf67368a8bf54d79e5b7a76c5ac7f4ca38c9e97caec2"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]消費ＭＰ倍率（EnhanceMpCostRate）[[/LINK_1]]",
+      "sourceHash": "993f5febc3d7141da34c28244ab0efe8dbcb23479c1cf6bac4debe1e23684b1b",
+      "parts": [
+        {
+          "source": "消費ＭＰ倍率（EnhanceMpCostRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MP Cost Multiplier (EnhanceMpCostRate)[[/LINK_1]]",
+      "contextHash": "993f5febc3d7141da34c28244ab0efe8dbcb23479c1cf6bac4debe1e23684b1b"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]消費ＴＰ倍率（EnhanceTpCostRate）[[/LINK_1]]",
+      "sourceHash": "1a1396a0d7999c3f92605ac7d5228d342b52d72b7eda13c7abf66fac4dbe457f",
+      "parts": [
+        {
+          "source": "消費ＴＰ倍率（EnhanceTpCostRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]TP Cost Multiplier (EnhanceTpCostRate)[[/LINK_1]]",
+      "contextHash": "1a1396a0d7999c3f92605ac7d5228d342b52d72b7eda13c7abf66fac4dbe457f"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]成功率倍率（EnhanceSuccessRate）[[/LINK_1]]",
+      "sourceHash": "bcf4515f3ad8c9ce14ba195241dccdce3ef883696b68ba0cf52157b9a8fb1096",
+      "parts": [
+        {
+          "source": "成功率倍率（EnhanceSuccessRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Success Rate Multiplier (EnhanceSuccessRate)[[/LINK_1]]",
+      "contextHash": "bcf4515f3ad8c9ce14ba195241dccdce3ef883696b68ba0cf52157b9a8fb1096"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]ステート付加率倍率（EnhanceStateRate）[[/LINK_1]]",
+      "sourceHash": "5ef4b5af0a73898c184de18aaaf4fd7bfe13b89954da38fd7cc808d6144e9f60",
+      "parts": [
+        {
+          "source": "ステート付加率倍率（EnhanceStateRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Infliction Rate Multiplier (EnhanceStateRate)[[/LINK_1]]",
+      "contextHash": "5ef4b5af0a73898c184de18aaaf4fd7bfe13b89954da38fd7cc808d6144e9f60"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "強化後の値の[[LINK_1]]丸め方式[[/LINK_1]]を選択できるようにした。",
+      "sourceHash": "124c2981a5416c821978609cc476592017aed87b0e87f78ca29a9a47b08be7ab",
+      "parts": [
+        {
+          "source": "強化後の値の",
+          "link": false
+        },
+        {
+          "source": "丸め方式",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を選択できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]rounding method[[/LINK_1]] for values after enhancement can now be selected.",
+      "contextHash": "124c2981a5416c821978609cc476592017aed87b0e87f78ca29a9a47b08be7ab"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]強化の影響を受けないスキル[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "2607b4b632c3a0a0f84f8fac3de7806a535060aedebf51b30b57615fcc35178e",
+      "parts": [
+        {
+          "source": "強化の影響を受けないスキル",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to set [[LINK_1]]skills unaffected by enhancements[[/LINK_1]].",
+      "contextHash": "2607b4b632c3a0a0f84f8fac3de7806a535060aedebf51b30b57615fcc35178e"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "強化の計算式に[[LINK_1]]加算方式[[/LINK_1]]を選択できるようにした。",
+      "sourceHash": "1182765819b934c0d186f52b12cba17b00219069022113581abf0e19b556e1d6",
+      "parts": [
+        {
+          "source": "強化の計算式に",
+          "link": false
+        },
+        {
+          "source": "加算方式",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を選択できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]plus style[[/LINK_1]] can now be selected for the enhancement formula.",
+      "contextHash": "1182765819b934c0d186f52b12cba17b00219069022113581abf0e19b556e1d6"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "アクター、エネミー、職業、装備、ステート、スキルを条件にして、スキルの性能（ダメージ、消費、成功率、ステート付加率）を変更できます。": "You can change skill parameters (damage, costs, success rate, and state application rate) based on actors, enemies, classes, equipment, states, and skills.",
+    "例えば、以下のようなものが作成できます。": "For example, you can create the following:",
+    "炎の魔法が得意なアクター": "An actor who excels at fire magic",
+    "氷のスキルの成功率が低い職業": "A class with a low success rate for ice skills",
+    "全スキルのステート付加率を上昇させる装備": "Equipment that increases the state application rate of all skills",
+    "特定スキルの消費ＴＰを０にするパッシブスキル": "A passive skill that reduces the TP cost of a specific skill to 0",
+    "基本的には属性やスキルタイプ単位での設定を想定していますが、工夫次第で様々な使い方が可能です。": "The basic premise is to configure settings by element or skill type, but various applications are possible with a little ingenuity.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the function ON from the RPG Maker Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EnhanceSkill.js": "NRP_EnhanceSkill.js ",
+    "ver1.04（2024/06/23）": "ver1.04 (2024/06/23) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/06/23（ver1.04）": "2024/06/23 (ver1.04) ",
+    "※要するに四捨五入、切り捨て、切り上げのことです。": "※In short, rounding, rounding down, or rounding up.",
+    "2024/06/08（ver1.03）": "2024/06/08 (ver1.03) ",
+    "2023/05/24（ver1.02）": "2023/05/24 (ver1.02) ",
+    "属性が『通常攻撃』だと強化対象にならない不具合修正。": "Fixed a bug where skills were not enhanced when their element was “Normal Attack.”",
+    "2023/04/05（ver1.01）": "2023/04/05 (ver1.01) ",
+    "2023/02/05（ver1.00）": "2023/02/05 (ver1.00) ",
+    "公開！": "Released!",
+    "強化条件のメモ欄（Note Of Conditions）": "Enhancement Conditions Note Field (Note Of Conditions)",
+    "アクター、エネミー、職業、装備、ステート、スキルのメモ欄に、スキルの強化条件を入力できます。": "You can enter skill enhancement conditions in the note fields of actors, enemies, classes, equipment, states, and skills.",
+    "対象スキルの範囲を指定": "Specify the Target Skill Range",
+    "以下のいずれかをメモ欄に指定すれば、強化するスキルの範囲を指定できます。": "You can specify the range of skills to enhance by entering one of the following in the note field.",
+    "※省略して強化内容だけを指定することも可能です。": "※You can also omit this and specify only the enhancement details.",
+    "※設定はデータベースのタイプに依存します。": "※The settings depend on the database type.",
+    "※複数指定可（例：<EnhanceTargetElement:2,3,4>": "※Multiple entries allowed (e.g., <EnhanceTargetElement:2,3,4>",
+    "または<EnhanceTargetSkillType:2~4>）": "or <EnhanceTargetSkillType:2~4>)",
+    "属性02（炎）を強化の対象とします。": "Element 02 (Fire) is targeted for enhancement.",
+    "※省略時は「なし」なども含めた全ての属性が対象となります。": "※If omitted, all elements, including “None,” are targeted.",
+    "スキルタイプ01（魔法）を強化の対象とします。": "Skill Type 01 (Magic) is targeted for enhancement.",
+    "※省略時はプラグインパラメータで設定したスキルタイプが対象となります。": "※If omitted, the skill types configured in the plugin parameters are targeted.",
+    "強化内容を指定": "Specify Enhancement Details",
+    "以下で強化内容を個別に指定できます。": "You can specify enhancement details individually as follows.",
+    "省略した場合は、プラグインパラメータの初期値が適用されます。": "If omitted, the initial values of the plugin parameters are applied.",
+    "一つでも入力すると初期値は適用されなくなります。": "If even one value is entered, the initial values will no longer be applied.",
+    "強化時のダメージを１．５倍にします。": "Multiplies damage during enhancement by 1.5.",
+    "強化時の消費ＭＰを０．５倍にします。": "Multiplies MP cost during enhancement by 0.5.",
+    "強化時の消費ＴＰを０．５倍にします。": "Multiplies TP cost during enhancement by 0.5.",
+    "強化時の成功率を１．５倍にします。": "Multiplies success rate during enhancement by 1.5.",
+    "強化時のステート付加率を１．５倍にします。": "Multiplies state application rate during enhancement by 1.5.",
+    "スキルのメモ欄（Note Of Skills）": "Skill Note Field (Note Of Skills)",
+    "強化する側のスキルのメモ欄に以下を入力できます。": "You can enter the following in the note field of the skill providing the enhancement.",
+    "なお、プラグインパラメータの設定次第ではアイテムを対象にすることも可能です。": "Depending on the plugin parameter settings, items can also be targeted.",
+    "スキルを属性02（炎）として判定します。": "The skill is treated as Element 02 (Fire).",
+    "これによって、ダメージタイプ「なし」のスキルも強化対象にできます。": "This allows skills with a damage type of “None” to also be targeted for enhancement.",
+    "※複数指定可（例：<EnhanceElement:2,3,4>または<EnhanceElement:2~4>）": "※Multiple entries allowed (e.g., <EnhanceElement:2,3,4> or <EnhanceElement:2~4>)",
+    "上述の<EnhanceElement:2>と値が一つでも一致すれば機能します。": "This works if even one value matches the aforementioned <EnhanceElement:2>.",
+    "値には数値だけではなく、文字列も有効です。": "Values can be not only numbers but also strings.",
+    "独自の値を設定すれば、属性以外を条件にすることもできます。": "By setting custom values, you can use conditions other than elements.",
+    "例えば、以下のようにすれば、特定のスキルだけを強化する装備が作成できます。": "For example, you can create equipment that enhances only specific skills as follows.",
+    "スキルのメモ欄に<EnhanceElement:A>を記入": "Enter <EnhanceElement:A> in the skill's note field",
+    "装備のメモ欄に<EnhanceTargetElement:A>を記入": "Enter <EnhanceTargetElement:A> in the equipment's note field",
+    "スキルの強化を無効にします。": "Disables skill enhancement.",
+    "スキルのダメージ強化のみを無効にします。": "Only skill damage enhancement is disabled.",
+    "消費や成功率は通常通り強化されます。": "Costs and success rates are enhanced as usual.",
+    "その他詳細（Other Details）": "Other Details (Other Details)",
+    "当プラグインはパッシブスキルに対応しています。": "This plugin supports passive skills.",
+    "他と同じようにメモ欄に記入したスキルを、アクターに習得させるだけでＯＫです。": "Simply have the actor learn the skill with the note field entry, just like any other skill.",
+    "使用する側のスキルとメモ欄の設定を混同しないようにご注意ください。": "Be careful not to confuse the settings in the skill being used with those in the note field.",
+    "一つのオブジェクト（アクター、エネミー、職業、装備、ステート、スキル）に複数の異なる効果を付けることはできません。": "You cannot add multiple different effects to a single object (actor, enemy, class, equipment, state, or skill).",
+    "（例えば、炎魔法は得意だが氷魔法は苦手なアクターなど。）": "(For example, an actor who is skilled with fire magic but weak with ice magic.)",
+    "そのような場合も、パッシブスキルやステートを活用して効果を分割すればＯＫです。": "In such cases, you can split the effects by using passive skills and states.",
+    "スキルの属性が『通常攻撃』の場合、属性による強化はできません。": "If the skill's element is “Normal Attack,” it cannot be enhanced by element.",
+    "ツクールの仕様では装備の『攻撃時属性』がスキルに反映されるのですが、<EnhanceTargetElement>で強化する属性を指定しても有効にはなりません。": "By default, the equipment's “Attack Element” is reflected in the skill, but specifying an element to enhance with <EnhanceTargetElement> will not work.",
+    "使用効果の『HP回復』『MP回復』には対応していません。": "The “HP Recovery” and “MP Recovery” effects are not supported.",
+    "回復を対象にしたい場合は計算式を使用してください。": "Use a formula if you want to affect recovery.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "対象スキルタイプ（EnhanceSkillType）": "Target Skill Type (EnhanceSkillType)",
+    "対象とするスキルタイプを数値で入力してください。": "Enter the skill types to target as numbers.",
+    "カンマ区切りで複数指定（例：1,2,3）。": "Specify multiple types separated by commas (Example: 1,2,3).",
+    "空欄で全て有効となります。": "Leave blank to enable all types.",
+    "アイテムも対象（EnhanceItem）": "Include Items (EnhanceItem)",
+    "アイテムも強化の対象にします。": "Items are also subject to enhancement.",
+    "重複時の設定（OverlaySettings）": "Overlay Settings (OverlaySettings)",
+    "強化を重ねた場合の挙動です。": "This determines the behavior when enhancements are stacked.",
+    "重複無効の場合はダメージ倍率の最大値が優先されます。": "When overlap is disabled, the highest damage multiplier takes priority.",
+    "加算方式を使用（UsePlusStyle）": "Use Additive Method (UsePlusStyle)",
+    "強化の計算式を加算方式に変更します。": "Changes the enhancement formula to an additive method.",
+    "オフの場合は乗算方式が使用されます。": "When off, a multiplicative method is used.",
+    "加算方式については、以下のプラグインと同様の仕様になっています。": "The additive method follows the same specifications as the plugin below.",
+    "https://newrpg.seesaa.net/article/483215411.html": "https://newrpg.seesaa.net/article/483215411.html",
+    "丸め方式（RoundingStyle）": "Rounding Method (RoundingStyle)",
+    "強化後の値の丸め方式です。": "This is the rounding method for values after enhancement.",
+    "ダメージ、消費ＭＰ、消費ＴＰが対象です。": "This applies to damage, MP costs, and TP costs.",
+    "＜強化の初期値＞（MessageWindow）": "<Initial Enhancement Values> (MessageWindow)",
+    "ダメージ倍率（EnhanceDamageRate）": "Damage Multiplier (EnhanceDamageRate)",
+    "強化時のダメージ倍率です。150なら1.5倍。": "The damage multiplier during enhancement. 150 means 1.5 times.",
+    "消費ＭＰ倍率（EnhanceMpCostRate）": "MP Cost Multiplier (EnhanceMpCostRate)",
+    "強化時の消費ＭＰ倍率です。50なら0.5倍。": "The MP cost multiplier during enhancement. 50 means 0.5 times.",
+    "消費ＴＰ倍率（EnhanceTpCostRate）": "TP Cost Multiplier (EnhanceTpCostRate)",
+    "強化時の消費ＴＰ倍率です。50なら0.5倍。": "The TP cost multiplier during enhancement. 50 means 0.5 times.",
+    "成功率倍率（EnhanceSuccessRate）": "Success Rate Multiplier (EnhanceSuccessRate)",
+    "強化時の成功率倍率です。150なら1.5倍。": "The success rate multiplier during enhancement. 150 means 1.5 times.",
+    "ステート付加率倍率（EnhanceStateRate）": "State Application Rate Multiplier (EnhanceStateRate)",
+    "強化時のステート付加率倍率です。150なら1.5倍。": "The state application rate multiplier during enhancement. 150 means 1.5 times."
+  }
+}

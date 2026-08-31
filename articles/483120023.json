@@ -1,0 +1,1047 @@
+{
+  "articleId": "483120023",
+  "sourceUrl": "https://newrpg.seesaa.net/article/483120023.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "9352153c1ffe82b798273d09b82879e04c0f43039326a2ba582abe51d25a76c4",
+  "translatedAt": "2026-08-31T04:50:53.606Z",
+  "title": "Apply Afterimage Effects to Battlers & Characters [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "バトラー＆キャラクターに残像効果を付与【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "b808b9167c45b5f004e4dff9b29280f780df95416f97485921352ec31352de9c",
+      "translation": "Apply Afterimage Effects to Battlers & Characters [RPG Maker MZ & MV Plugin]",
+      "contextHash": "b808b9167c45b5f004e4dff9b29280f780df95416f97485921352ec31352de9c"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "バトラーまたはキャラクターに対して残像効果を付与します。",
+      "sourceHash": "f79a14afb59a59211ed649cf5d38b7d1b0ddac5722365144345ea26428e5d134",
+      "translation": "Applies an afterimage effect to a battler or character.",
+      "contextHash": "f79a14afb59a59211ed649cf5d38b7d1b0ddac5722365144345ea26428e5d134"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "残像の表示時間、間隔、色調などをプラグインパラメータで調整可能です。",
+      "sourceHash": "5e4a3c120438541f0de5e1eb9b85464157416a54bb0b1144d4c40d7d207f35d4",
+      "translation": "The afterimage display duration, interval, tone, and other settings can be adjusted using plugin parameters.",
+      "contextHash": "5e4a3c120438541f0de5e1eb9b85464157416a54bb0b1144d4c40d7d207f35d4"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※ＭＶでは色調および合成方法の変更がうまく機能しないようです。",
+      "sourceHash": "9be51ed46c67d0b9868e2384f9751faca23e101b6edff2d00802cf2adde4feee",
+      "translation": "※In MV, changing the tone and blend mode does not appear to work correctly.",
+      "contextHash": "9be51ed46c67d0b9868e2384f9751faca23e101b6edff2d00802cf2adde4feee"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "戦闘時については、DynamicMotionから呼び出すことを想定しています。",
+      "sourceHash": "0f4dc1c93a1662ae4df080984ec19129b3f542de8a9bacdf621c13c744fb9d2a",
+      "translation": "For battles, it is intended to be called from DynamicMotion.",
+      "contextHash": "0f4dc1c93a1662ae4df080984ec19129b3f542de8a9bacdf621c13c744fb9d2a"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ver2.00よりマップ上での使用にも対応しました。",
+      "sourceHash": "ed4019a10dfa676db7ca34e17477b9e35988f00921739da318da3cc9957fd872",
+      "translation": "Map usage is supported as of ver2.00.",
+      "contextHash": "ed4019a10dfa676db7ca34e17477b9e35988f00921739da318da3cc9957fd872"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "マップ版DynamicMotionでの使用はもちろん、スクリプトから直接実行することも可能です。",
+      "sourceHash": "8cde91b224a464bb7322559458f9d0b0d741cae5cca4b2dae91248303a9d9b41",
+      "translation": "In addition to using it with the map version of DynamicMotion, it can also be executed directly from a script.",
+      "contextHash": "8cde91b224a464bb7322559458f9d0b0d741cae5cca4b2dae91248303a9d9b41"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin is compatible with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_Afterimage.js",
+      "sourceHash": "687d1ff870d71f078014994dc2bf3cb6822eaf701e093293c108fd6966f12986",
+      "translation": "NRP_Afterimage.js ",
+      "contextHash": "b2f844efa1d7c13b99d6a2d22a8070b9068839cbd45733565e9773b1a64ff520"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver2.05（2024/07/05）",
+      "sourceHash": "66cc6bdd4cdfeb5bacad6c5d7677fdff47a0c12d849b7d8b02a5a463bbb50a8b",
+      "translation": "ver2.05 (2024/07/05) ",
+      "contextHash": "b2f844efa1d7c13b99d6a2d22a8070b9068839cbd45733565e9773b1a64ff520"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/07/05（ver2.05）",
+      "sourceHash": "6c0f144ea08ac4eb700e154270d5c6fe1bf67c55590a684edbe97c7f29876fc3",
+      "translation": "2024/07/05 (ver2.05) ",
+      "contextHash": "6c0f144ea08ac4eb700e154270d5c6fe1bf67c55590a684edbe97c7f29876fc3"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "意図しない競合を引き起こす不具合を修正。",
+      "sourceHash": "3f74a6b56838eedbf4b0b06ae77ae56533e4244ceb07a1db590d99bf3bf02cd9",
+      "translation": "Fixed a bug that caused unintended conflicts.",
+      "contextHash": "3f74a6b56838eedbf4b0b06ae77ae56533e4244ceb07a1db590d99bf3bf02cd9"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "マップ版DynamicAnimationにて戦闘時の並列アニメを使用した場合、不正なデータ状態になってエラー落ちしてしまうなど。",
+      "sourceHash": "c15c0c9151e0643bea56c16e08740e8eb807dfa4d1ed417548df9be61393c892",
+      "translation": "For example, using parallel animations during battle with the map version of DynamicAnimation could result in an invalid data state and cause an error crash.",
+      "contextHash": "c15c0c9151e0643bea56c16e08740e8eb807dfa4d1ed417548df9be61393c892"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2023/08/14（ver2.04）",
+      "sourceHash": "dd8440c1e7c55e9fefceb006a7814fbc60b11180001d368a48261450f8b6c66f",
+      "translation": "2023/08/14 (ver2.04) ",
+      "contextHash": "dd8440c1e7c55e9fefceb006a7814fbc60b11180001d368a48261450f8b6c66f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "DynamicMotionでバトラーを回転させた場合、残像の位置がズレる不具合修正。",
+      "sourceHash": "0ab065d37fe0479804077e67d68a9125d732dd62bdc372bc002dd64e52730b53",
+      "translation": "Fixed a bug where the afterimage position shifted when rotating a battler with DynamicMotion.",
+      "contextHash": "0ab065d37fe0479804077e67d68a9125d732dd62bdc372bc002dd64e52730b53"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/04/22 -> 2023/04/23（ver2.03 -> 2.031）",
+      "sourceHash": "dc83a618394297a7b9942d18515e7567284ec2f00ff84c386b75a335a4a97f92",
+      "translation": "2023/04/22 -> 2023/04/23 (ver2.03 -> 2.031) ",
+      "contextHash": "dc83a618394297a7b9942d18515e7567284ec2f00ff84c386b75a335a4a97f92"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ver2.03において、残像の左右反転や回転が効かなくなる不具合修正。（2023/04/23 ver2.031）",
+      "sourceHash": "fc209f78d588a9130fc75f1a18bfe128179050dba55aa5a1d3f5aea45a4d7a56",
+      "translation": "Fixed a bug in ver2.03 that prevented afterimages from being flipped horizontally or rotated. (2023/04/23 ver2.031)",
+      "contextHash": "fc209f78d588a9130fc75f1a18bfe128179050dba55aa5a1d3f5aea45a4d7a56"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※なお、animatedSVEnemies.jsの『Static Enemies Breathe』がオンの場合は残像の反転が効きませんが、こちらは未対応です。",
+      "sourceHash": "587fd8d7966a23edd10a64b89ced516f35731a09288b94261c2de392aaf53dd2",
+      "translation": "※When “Static Enemies Breathe” in animatedSVEnemies.js is enabled, afterimages cannot be flipped. This issue is not supported.",
+      "contextHash": "587fd8d7966a23edd10a64b89ced516f35731a09288b94261c2de392aaf53dd2"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2023/01/03（ver2.02）",
+      "sourceHash": "abeb729d9e09a71888f63bbe49f287158a841bbf874c63f13422a3041beab7bb",
+      "translation": "2023/01/03 (ver2.02) ",
+      "contextHash": "abeb729d9e09a71888f63bbe49f287158a841bbf874c63f13422a3041beab7bb"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "戦闘開始直後に残像処理を実行するとエラーになる不具合修正。",
+      "sourceHash": "4dd9a4cba3f85844b5cb248e5ca4d81a294257ee14a982a9caa80ccce8bba7d0",
+      "translation": "Fixed a bug that caused an error when afterimage processing was executed immediately after battle started.",
+      "contextHash": "4dd9a4cba3f85844b5cb248e5ca4d81a294257ee14a982a9caa80ccce8bba7d0"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2022/04/17（ver2.01）",
+      "sourceHash": "865bb8a1c7360038d0c0680de541c0c4e84be85a089fb82849457e47cc0d1cdf",
+      "translation": "2022/04/17 (ver2.01) ",
+      "contextHash": "865bb8a1c7360038d0c0680de541c0c4e84be85a089fb82849457e47cc0d1cdf"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "マップのスクロール時に残像位置がズレる不具合修正。",
+      "sourceHash": "ec8a45abe114e4bc5d1e2f6c2498f8deffdf1b2d64ca97ccda06e3d2b4183f82",
+      "translation": "Fixed a bug where afterimage positions shifted when scrolling the map.",
+      "contextHash": "ec8a45abe114e4bc5d1e2f6c2498f8deffdf1b2d64ca97ccda06e3d2b4183f82"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2022/02/19 -> 2022/03/31（ver2.00 -> 2.004）",
+      "sourceHash": "9d2bd2eea0e2f39a4ad1d682be7eae940d5860d6b47fd3de92ba62d8debd2c5b",
+      "translation": "2022/02/19 -> 2022/03/31 (ver2.00 -> 2.004) ",
+      "contextHash": "9d2bd2eea0e2f39a4ad1d682be7eae940d5860d6b47fd3de92ba62d8debd2c5b"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "マップ上でのキャラクターにも対応。",
+      "sourceHash": "2ef539ea3512958444c19bd09361f5173fc9773cbf838e18d45f62f3b230f735",
+      "translation": "Added support for characters on the map.",
+      "contextHash": "2ef539ea3512958444c19bd09361f5173fc9773cbf838e18d45f62f3b230f735"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "処理を見直して軽量化。",
+      "sourceHash": "24f164a9efc39f83807c9d96f6b74cccbb4b9d5d6dcbe26fcfaa888eb6711b8e",
+      "translation": "Reviewed the processing and improved performance.",
+      "contextHash": "24f164a9efc39f83807c9d96f6b74cccbb4b9d5d6dcbe26fcfaa888eb6711b8e"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "残像消去時に、キャラの描画が乱れる不具合修正。",
+      "sourceHash": "8429dc40ad2031361b44fefeeae3d469edbd8b11c14a707cd567048b4f0df655",
+      "translation": "Fixed a bug that caused character rendering to become corrupted when afterimages were removed.",
+      "contextHash": "8429dc40ad2031361b44fefeeae3d469edbd8b11c14a707cd567048b4f0df655"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "回転時に残像の位置がズレる不具合修正。（ver2.001）",
+      "sourceHash": "f06cc36394f6435e8d4a5d7543b7bff01faf6011fd1a6af08f2879daa62f1378",
+      "translation": "Fixed a bug where afterimage positions shifted during rotation. (ver2.001)",
+      "contextHash": "f06cc36394f6435e8d4a5d7543b7bff01faf6011fd1a6af08f2879daa62f1378"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "マップ版DynamicAnimationを導入していないと動作しない不具合修正。",
+      "sourceHash": "6c904a84a5446abe5324cf0bf28947f0d8365ae3edd243fcae5ccf8aafbccae4",
+      "translation": "Fixed a bug that prevented the plugin from working unless the map version of DynamicAnimation was installed.",
+      "contextHash": "6c904a84a5446abe5324cf0bf28947f0d8365ae3edd243fcae5ccf8aafbccae4"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "（2022/02/24 ver2.002）",
+      "sourceHash": "82bd6bb9b9fa0cebe9b290e580577a6b268eeab3dcb9273494f466de461c5d8c",
+      "translation": " (2022/02/24 ver2.002) ",
+      "contextHash": "82bd6bb9b9fa0cebe9b290e580577a6b268eeab3dcb9273494f466de461c5d8c"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "DynamicMotionの空中処理用に微調整。（2022/03/04 ver2.003）",
+      "sourceHash": "668c0f030373b80faac213122c44cf5ee1ec0b00e04e0270d70b440a9238c641",
+      "translation": "Minor adjustments for DynamicMotion's aerial processing. (2022/03/04 ver2.003)",
+      "contextHash": "668c0f030373b80faac213122c44cf5ee1ec0b00e04e0270d70b440a9238c641"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "ChangeEquipOnBattleMZ.jsによって戦闘中の装備変更を行うと、無限循環エラーとなる問題に対応。（2022/03/31 ver2.004）",
+      "sourceHash": "6e104c182a06cd305c146cc55141528a5457b6f57cabb6f8c5358644a8cc0697",
+      "translation": "Addressed an issue where changing equipment during battle using ChangeEquipOnBattleMZ.js caused an infinite loop error. (2022/03/31 ver2.004)",
+      "contextHash": "6e104c182a06cd305c146cc55141528a5457b6f57cabb6f8c5358644a8cc0697"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2021/11/13（ver1.01）",
+      "sourceHash": "900499423a06445f07a310dc733f63360c023296c833744de7b7dcc37d045067",
+      "translation": "2021/11/13 (ver1.01) ",
+      "contextHash": "900499423a06445f07a310dc733f63360c023296c833744de7b7dcc37d045067"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2021/08/27（ver1.00 -> 1.001）",
+      "sourceHash": "2959d5695e98313549c3c33cb307fe86ce556adf959bf0fd123b14417ce9f4f2",
+      "translation": "2021/08/27 (ver1.00 -> 1.001) ",
+      "contextHash": "2959d5695e98313549c3c33cb307fe86ce556adf959bf0fd123b14417ce9f4f2"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "戦闘終了後に再度戦闘すると残像処理でエラーになる不具合修正。（08/27 ver1.001）",
+      "sourceHash": "f6fca7beeba94b17df27b9cac538f5b9c16a83d5825ff2d05786b3237f0fdef9",
+      "translation": "Fixed a bug that caused an error in afterimage processing when battling again after a battle had ended. (08/27 ver1.001)",
+      "contextHash": "f6fca7beeba94b17df27b9cac538f5b9c16a83d5825ff2d05786b3237f0fdef9"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "基本的な使用法（Basic Usage）",
+      "sourceHash": "868142b64581cecbd7d925b1df8b5760b3729642f8ee1ef17d3dc33802a2342b",
+      "translation": "Basic Usage (Basic Usage)",
+      "contextHash": "868142b64581cecbd7d925b1df8b5760b3729642f8ee1ef17d3dc33802a2342b"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "バトラーまたはキャラクターを指定して、以下のスクリプトを呼び出せば実行できます。",
+      "sourceHash": "0ef48abad9a28f3e0e32a7f77013ac8341fab30d8f3046973e51f810887a7768",
+      "translation": "Specify a battler or character and call the following script to execute it.",
+      "contextHash": "0ef48abad9a28f3e0e32a7f77013ac8341fab30d8f3046973e51f810887a7768"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※aはバトラー（アクター／敵）またはキャラクターです。",
+      "sourceHash": "e9e0f5e376c7e681a65e03db4c5ae714cdd50f3f85f7908d3ba25f7c8f130d11",
+      "translation": "※a is a battler (actor/enemy) or character.",
+      "contextHash": "e9e0f5e376c7e681a65e03db4c5ae714cdd50f3f85f7908d3ba25f7c8f130d11"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "残像を開始する。",
+      "sourceHash": "f878c68f1f4df6db497bda05ba7ca9dba585875929ffa44d3de6c7f10e7da47b",
+      "translation": "Start the afterimage effect.",
+      "contextHash": "f878c68f1f4df6db497bda05ba7ca9dba585875929ffa44d3de6c7f10e7da47b"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "残像を終了する。",
+      "sourceHash": "f2aeb4637c806ac625ba8a1dd9c2f0ea93ab873ac9df609bd329a9275be4a4e8",
+      "translation": "End the afterimage effect.",
+      "contextHash": "f2aeb4637c806ac625ba8a1dd9c2f0ea93ab873ac9df609bd329a9275be4a4e8"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※省略した場合、アクション終了時に自動で終了します。",
+      "sourceHash": "e3952a8d8657b0df7f696d2a7c317b07d5c116fc0bb3938be138c9f5385716dc",
+      "translation": "※If omitted, it will automatically end when the action ends.",
+      "contextHash": "e3952a8d8657b0df7f696d2a7c317b07d5c116fc0bb3938be138c9f5385716dc"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※マップ上では自動終了しないので注意してください。",
+      "sourceHash": "1f6616bad40d52ee77fac3e1ee9321301e5c60023fd8dfe39e280a5c3352e89c",
+      "translation": "※Please note that it does not end automatically on the map.",
+      "contextHash": "1f6616bad40d52ee77fac3e1ee9321301e5c60023fd8dfe39e280a5c3352e89c"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "DynamicMotionのサンプル",
+      "sourceHash": "8e0ecdb9a1defaf70b947182f3e6696e080760d9f770383ba13d88adf2d04679",
+      "translation": "DynamicMotion Example",
+      "contextHash": "8e0ecdb9a1defaf70b947182f3e6696e080760d9f770383ba13d88adf2d04679"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "移動ルートの設定の記述例",
+      "sourceHash": "5006eb4b5535fa1f78f4e27ddc95cf808cb227162a70f344793de3ab6b4ea002",
+      "translation": "Example of Move Route Settings",
+      "contextHash": "5006eb4b5535fa1f78f4e27ddc95cf808cb227162a70f344793de3ab6b4ea002"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "マップ上で使用したい場合は『移動ルートの設定』のスクリプトで以下のように記述すればＯＫです。",
+      "sourceHash": "698fc7f1ed0f27bd1473c6dfe979c9df634291d2dfccebf055098ec5f62ab12a",
+      "translation": "To use it on the map, enter the following in the script field of “Set Movement Route”.",
+      "contextHash": "698fc7f1ed0f27bd1473c6dfe979c9df634291d2dfccebf055098ec5f62ab12a"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "終了時は以下のようになります。",
+      "sourceHash": "b00b478044452be4c35e21d2cbfa64128523548642fbd93f4f1b31ad9b236547",
+      "translation": "When ending it, use the following.",
+      "contextHash": "b00b478044452be4c35e21d2cbfa64128523548642fbd93f4f1b31ad9b236547"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "aではなくthisを対象にする以外は全く同じです。",
+      "sourceHash": "52ec12ab337bdd37f94f002e86fe53fc9dbf6dcd2358c37764cb11c33ff88332",
+      "translation": "It is exactly the same, except that the target is this instead of a.",
+      "contextHash": "52ec12ab337bdd37f94f002e86fe53fc9dbf6dcd2358c37764cb11c33ff88332"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "下記のオプションも同じ要領で使用できます。",
+      "sourceHash": "144c24af1e4cf5638f19f136bd6ecda22ce6b8b55330efffdec21c91367fa734",
+      "translation": "The options below can be used in the same way.",
+      "contextHash": "144c24af1e4cf5638f19f136bd6ecda22ce6b8b55330efffdec21c91367fa734"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "オプション（Option）",
+      "sourceHash": "da08f75ac552b406bed08aa8f9fa3fe06783a519a9e67645b75b775eaf898899",
+      "translation": "Option (Option)",
+      "contextHash": "da08f75ac552b406bed08aa8f9fa3fe06783a519a9e67645b75b775eaf898899"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "通常はプラグインパラメータの設定値を使用しますが、スキル毎に設定を変更することもできます。",
+      "sourceHash": "9e98c286d0abde2721283b5e999ec1ed7231e8026d707e3e97048a2cd97b690d",
+      "translation": "Normally, the values configured in the plugin parameters are used, but the settings can also be changed for each skill.",
+      "contextHash": "9e98c286d0abde2721283b5e999ec1ed7231e8026d707e3e97048a2cd97b690d"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "残像の表示間隔を4フレーム（4/60秒）に設定する。",
+      "sourceHash": "93582068d0ff0f2e7d4d23dcd4abd3fbd226cbd231efdcb20af4ea2e880d5fd7",
+      "translation": "Set the afterimage display interval to 4 frames (4/60 seconds).",
+      "contextHash": "93582068d0ff0f2e7d4d23dcd4abd3fbd226cbd231efdcb20af4ea2e880d5fd7"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "残像の表示時間を30フレーム（30/60秒）に設定する。",
+      "sourceHash": "ad5839cd2878ad47f170eb0f07a0493b80d661d2b97ae08497b5b7bb87f5292e",
+      "translation": "Set the afterimage display duration to 30 frames (30/60 seconds).",
+      "contextHash": "ad5839cd2878ad47f170eb0f07a0493b80d661d2b97ae08497b5b7bb87f5292e"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "残像の初期不透明度を128/255に設定する。",
+      "sourceHash": "e94fed57378b3eeacda79feeaad87433b67bc07d7b5c6a016fcef73415a9542c",
+      "translation": "Set the afterimage's initial opacity to 128/255.",
+      "contextHash": "e94fed57378b3eeacda79feeaad87433b67bc07d7b5c6a016fcef73415a9542c"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "残像の色調を[255, 255, 255, 255]に設定する。",
+      "sourceHash": "56159c582ebd3cbe41cf477f69810ac914408369a69d1a1cb77f8479a02d3d4a",
+      "translation": "Set the afterimage tone to [255, 255, 255, 255].",
+      "contextHash": "56159c582ebd3cbe41cf477f69810ac914408369a69d1a1cb77f8479a02d3d4a"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "※赤、緑、青、強さの順番",
+      "sourceHash": "a156f52c0237e38f0b5afeec2f3be6b1a6f7a572f43bfcc92221858b854ef192",
+      "translation": "※In the order of red, green, blue, and strength",
+      "contextHash": "a156f52c0237e38f0b5afeec2f3be6b1a6f7a572f43bfcc92221858b854ef192"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "残像の合成方法を1:加算に変更する。",
+      "sourceHash": "f5d63165e55d2ff48c4a2dd26f91d5e3d0882a42a414be6f06f8294dd52d2530",
+      "translation": "Change the afterimage blend mode to 1: Additive.",
+      "contextHash": "f5d63165e55d2ff48c4a2dd26f91d5e3d0882a42a414be6f06f8294dd52d2530"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "※0:通常, 1:加算, 2:乗算, 3:スクリーン",
+      "sourceHash": "5e171dfc2508c61df411681a3164528245e7fc98c60097b46d9d4b0789d7fc46",
+      "translation": "※0: Normal, 1: Additive, 2: Multiply, 3: Screen",
+      "contextHash": "5e171dfc2508c61df411681a3164528245e7fc98c60097b46d9d4b0789d7fc46"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "DynamicMotionのサンプル",
+      "sourceHash": "8e0ecdb9a1defaf70b947182f3e6696e080760d9f770383ba13d88adf2d04679",
+      "translation": "DynamicMotion Sample",
+      "contextHash": "8e0ecdb9a1defaf70b947182f3e6696e080760d9f770383ba13d88adf2d04679"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "以下のように開始処理の後でオプションを設定してください。",
+      "sourceHash": "f5f1083fa722543d768f078566f3db62e3471cae4aff7fbe092c469aa8891b4c",
+      "translation": "Set the options after the initialization process as shown below.",
+      "contextHash": "f5f1083fa722543d768f078566f3db62e3471cae4aff7fbe092c469aa8891b4c"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※改行すると動作しませんのでご注意を。",
+      "sourceHash": "4adcbb85e2ab7bb88bf42d1e92ce2c51a43d8285c1afca4f9278ac7b60de5ed4",
+      "translation": "※Please note that it will not work if you insert a line break.",
+      "contextHash": "4adcbb85e2ab7bb88bf42d1e92ce2c51a43d8285c1afca4f9278ac7b60de5ed4"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "表示時間（Duration）",
+      "sourceHash": "2f473a31c88f2313ff8b889cd425e1feffeeed3b4fd9058bbeccabaaa3b58109",
+      "translation": "Duration",
+      "contextHash": "2f473a31c88f2313ff8b889cd425e1feffeeed3b4fd9058bbeccabaaa3b58109"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "残像が消滅するまでの時間です。",
+      "sourceHash": "bb45fccd9c85e361b564fa927d5b26d8f437fe3b84e462d9164705aa8702da7f",
+      "translation": "The amount of time until the afterimage disappears.",
+      "contextHash": "bb45fccd9c85e361b564fa927d5b26d8f437fe3b84e462d9164705aa8702da7f"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "間隔（Interval）",
+      "sourceHash": "c4683d75613cad584b49b0e71fe6320254f00a89fbc300a422fe3ae29accbac5",
+      "translation": "Interval",
+      "contextHash": "c4683d75613cad584b49b0e71fe6320254f00a89fbc300a422fe3ae29accbac5"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "残像を生成する間隔です。1/60秒単位で設定してください。",
+      "sourceHash": "4924dda2fc577a0338886309f67c4be7f45ef452978e81995804c2dbb28cbf88",
+      "translation": "The interval at which afterimages are generated. Set it in 1/60-second increments.",
+      "contextHash": "4924dda2fc577a0338886309f67c4be7f45ef452978e81995804c2dbb28cbf88"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "不透明度（Opacity）",
+      "sourceHash": "16e0b19c4c61b542e2d50b47302f2445273363cb1e951a39f613b4c900a41853",
+      "translation": "Opacity",
+      "contextHash": "16e0b19c4c61b542e2d50b47302f2445273363cb1e951a39f613b4c900a41853"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "残像を生成する際の不透明度です。",
+      "sourceHash": "dc88ce0d3d637fa6b6b8e1c2ad6fb80a815867a0c79a4f777ed60783a9c26e9d",
+      "translation": "The opacity used when generating afterimages.",
+      "contextHash": "dc88ce0d3d637fa6b6b8e1c2ad6fb80a815867a0c79a4f777ed60783a9c26e9d"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "残像はこの不透明度で生成された後、徐々に薄くなっていきます。",
+      "sourceHash": "bd7ca7ede74c969f5de5c227e6258f3c3945b4194b1d6dd848286c6f2f16cfae",
+      "translation": "Afterimages are generated at this opacity and then gradually fade.",
+      "contextHash": "bd7ca7ede74c969f5de5c227e6258f3c3945b4194b1d6dd848286c6f2f16cfae"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "色調（Color）",
+      "sourceHash": "02795c39ccbde9646db2593ed617677379cd194ca69789b3dd3f15534de65666",
+      "translation": "Color",
+      "contextHash": "02795c39ccbde9646db2593ed617677379cd194ca69789b3dd3f15534de65666"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "残像の色調です。例：[128, 128, 255, 255]",
+      "sourceHash": "6ded3c2af35078c8462b8c5eed6cb5ff617bc253b9ba1ff29ccf8cf2db6d803c",
+      "translation": "The color tone of the afterimage. Example: [128, 128, 255, 255]",
+      "contextHash": "6ded3c2af35078c8462b8c5eed6cb5ff617bc253b9ba1ff29ccf8cf2db6d803c"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "合成方法（BlendMode）",
+      "sourceHash": "67e93318c9dec5b057ee0d50c50d8b783adc96920537aff8fe86ea4e29e8edc9",
+      "translation": "BlendMode",
+      "contextHash": "67e93318c9dec5b057ee0d50c50d8b783adc96920537aff8fe86ea4e29e8edc9"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "残像の合成方法です。",
+      "sourceHash": "bfdc9809232567c9e47f7f22ec3e806bd4f86d9bef6ff07f1735857ab592115f",
+      "translation": "The blend mode for the afterimage.",
+      "contextHash": "bfdc9809232567c9e47f7f22ec3e806bd4f86d9bef6ff07f1735857ab592115f"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "参考（Reference）",
+      "sourceHash": "a6bd1f3f2fcb097931d3860469431101274fa37b9b1c748e3ca2eca0555ddcfb",
+      "translation": "Reference",
+      "contextHash": "a6bd1f3f2fcb097931d3860469431101274fa37b9b1c748e3ca2eca0555ddcfb"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "このプラグインの制作に当たり、以下のプラグインを参考にさせていただきました。",
+      "sourceHash": "3abb45b9cb8aa41c6df9a237016aed16583db414eb77dbc078a5c386c75bfb5d",
+      "translation": "The following plugin was referenced in the creation of this plugin.",
+      "contextHash": "3abb45b9cb8aa41c6df9a237016aed16583db414eb77dbc078a5c386c75bfb5d"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "SAN_ResidualSprites.js（サンシロ様）",
+      "sourceHash": "9fe67733d76d5a1364a49917fd54a05c5bf50838353f3abc368c833840c1e310",
+      "translation": "SAN_ResidualSprites.js (Sanshiro)",
+      "contextHash": "9fe67733d76d5a1364a49917fd54a05c5bf50838353f3abc368c833840c1e310"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://github.com/rev2nym/SAN_ResidualSprites",
+      "sourceHash": "408d5d15aecd57257fecb131feec1b574bfb0211c8137b526103db74ec6c1e4a",
+      "translation": "https://github.com/rev2nym/SAN_ResidualSprites",
+      "contextHash": "bc5c2e4e51f5bd379849e6a595938623df16fbeaf47f365677db07bb8cb26b5e"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotion[[/LINK_1]]との連携によって、スキルの演出が可能です。",
+      "sourceHash": "0fdca20b18b7f28b152aa6fba31d14ad86922b24eed3ff95afe8185aff7f6768",
+      "parts": [
+        {
+          "source": "DynamicMotion",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との連携によって、スキルの演出が可能です。",
+          "link": false
+        }
+      ],
+      "translation": "By integrating with [[LINK_1]]DynamicMotion[[/LINK_1]], you can create skill effects.",
+      "contextHash": "0fdca20b18b7f28b152aa6fba31d14ad86922b24eed3ff95afe8185aff7f6768"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]基本的な使用法（Basic Usage）[[/LINK_1]]",
+      "sourceHash": "e089374b725f7b221f46f8b48b6708f6c54800386f0114b67d16342124531c8d",
+      "parts": [
+        {
+          "source": "基本的な使用法（Basic Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Basic Usage (Basic Usage)[[/LINK_1]]",
+      "contextHash": "e089374b725f7b221f46f8b48b6708f6c54800386f0114b67d16342124531c8d"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionのサンプル（Sample）[[/LINK_1]]",
+      "sourceHash": "d855ddee3e576b1c8faa8061789d4ccaa160747621ea02f0461228c17f3a1cb8",
+      "parts": [
+        {
+          "source": "DynamicMotionのサンプル（Sample）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]DynamicMotion Sample (Sample)[[/LINK_1]]",
+      "contextHash": "d855ddee3e576b1c8faa8061789d4ccaa160747621ea02f0461228c17f3a1cb8"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]移動ルートの設定の記述例（Sample2）[[/LINK_1]]",
+      "sourceHash": "176efc73c87633ecb0db8a576e8acc145e16eb5ef3c69defb42ae9130a664fbe",
+      "parts": [
+        {
+          "source": "移動ルートの設定の記述例（Sample2）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Example of Writing Movement Route Settings (Sample2)[[/LINK_1]]",
+      "contextHash": "176efc73c87633ecb0db8a576e8acc145e16eb5ef3c69defb42ae9130a664fbe"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]オプション（Option）[[/LINK_1]]",
+      "sourceHash": "aa5bbe2b6514a6dc2bcea721177dc896d94b080870bf826739540923c4affcf2",
+      "parts": [
+        {
+          "source": "オプション（Option）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Options (Option)[[/LINK_1]]",
+      "contextHash": "aa5bbe2b6514a6dc2bcea721177dc896d94b080870bf826739540923c4affcf2"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionのサンプル（Sample）[[/LINK_1]]",
+      "sourceHash": "d855ddee3e576b1c8faa8061789d4ccaa160747621ea02f0461228c17f3a1cb8",
+      "parts": [
+        {
+          "source": "DynamicMotionのサンプル（Sample）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]DynamicMotion Sample (Sample)[[/LINK_1]]",
+      "contextHash": "d855ddee3e576b1c8faa8061789d4ccaa160747621ea02f0461228c17f3a1cb8"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]表示時間（Duration）[[/LINK_1]]",
+      "sourceHash": "53769c17f7d0005c5a286c589b93b74da7da2d89d9a4e0e490c273c96d3a2068",
+      "parts": [
+        {
+          "source": "表示時間（Duration）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Duration (Duration)[[/LINK_1]]",
+      "contextHash": "53769c17f7d0005c5a286c589b93b74da7da2d89d9a4e0e490c273c96d3a2068"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]間隔（Interval）[[/LINK_1]]",
+      "sourceHash": "9c53263d520c899a4b213c52ff05b108b3fe3da2aa81766d70b474460322836a",
+      "parts": [
+        {
+          "source": "間隔（Interval）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Interval (Interval)[[/LINK_1]]",
+      "contextHash": "9c53263d520c899a4b213c52ff05b108b3fe3da2aa81766d70b474460322836a"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]不透明度（Opacity）[[/LINK_1]]",
+      "sourceHash": "81e06b09a7470a22aa3bc04d2b0fc8b92d74004c3bbabcbf4dcc7ec242220ba5",
+      "parts": [
+        {
+          "source": "不透明度（Opacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Opacity (Opacity)[[/LINK_1]]",
+      "contextHash": "81e06b09a7470a22aa3bc04d2b0fc8b92d74004c3bbabcbf4dcc7ec242220ba5"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]色調（Color）[[/LINK_1]]",
+      "sourceHash": "b0c0698af6f3c35a9d7820fb863735cda1ea463acc020db2d0cd60330ce9be5f",
+      "parts": [
+        {
+          "source": "色調（Color）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Color Tone (Color)[[/LINK_1]]",
+      "contextHash": "b0c0698af6f3c35a9d7820fb863735cda1ea463acc020db2d0cd60330ce9be5f"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]合成方法（BlendMode）[[/LINK_1]]",
+      "sourceHash": "53246a832f60c7d07bc004b8449f3ec032cef01338f4e45b72d6af16862978f4",
+      "parts": [
+        {
+          "source": "合成方法（BlendMode）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Blend Mode (BlendMode)[[/LINK_1]]",
+      "contextHash": "53246a832f60c7d07bc004b8449f3ec032cef01338f4e45b72d6af16862978f4"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]参考（Reference）[[/LINK_1]]",
+      "sourceHash": "d1d5b02db389813a6c31ff3eaab7cae04eab1fe388487127b15a52825d3d2968",
+      "parts": [
+        {
+          "source": "参考（Reference）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reference (Reference)[[/LINK_1]]",
+      "contextHash": "d1d5b02db389813a6c31ff3eaab7cae04eab1fe388487127b15a52825d3d2968"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "※[[LINK_1]]DynamicAnimation[[/LINK_1]]および[[LINK_2]]DynamicMotion[[/LINK_2]]を使用している場合はそちらも更新してください。",
+      "sourceHash": "2ad3665f6e837e82ae4da96bc82b779b71e7b4e619db9fa354bb8bc0371ef46c",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "および",
+          "link": false
+        },
+        {
+          "source": "DynamicMotion",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "を使用している場合はそちらも更新してください。",
+          "link": false
+        }
+      ],
+      "translation": "※If you are using [[LINK_1]]DynamicAnimation[[/LINK_1]] or [[LINK_2]]DynamicMotion[[/LINK_2]], please update those as well.",
+      "contextHash": "2ad3665f6e837e82ae4da96bc82b779b71e7b4e619db9fa354bb8bc0371ef46c"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]animatedSVEnemies.js[[/LINK_1]]と組み合わせた際に、残像の向きが逆になる問題に対応。",
+      "sourceHash": "f6bd9a9def11f05dc68bb589853465ac48f7377ccc26188ce8019d2efc3ef901",
+      "parts": [
+        {
+          "source": "animatedSVEnemies.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせた際に、残像の向きが逆になる問題に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed an issue where the afterimage faced the opposite direction when combined with [[LINK_1]]animatedSVEnemies.js[[/LINK_1]].",
+      "contextHash": "f6bd9a9def11f05dc68bb589853465ac48f7377ccc26188ce8019d2efc3ef901"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]EnemyCallsAlly.js[[/LINK_1]]などの外部プラグインで敵キャラを追加した場合、エラーになる競合に対処。",
+      "sourceHash": "ceae6101a3a592e33356206e68e5f298c295a50b77d64b261580be53e76bf321",
+      "parts": [
+        {
+          "source": "EnemyCallsAlly.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "などの外部プラグインで敵キャラを追加した場合、エラーになる競合に対処。",
+          "link": false
+        }
+      ],
+      "translation": "Addressed a conflict that caused errors when enemies were added using external plugins such as [[LINK_1]]EnemyCallsAlly.js[[/LINK_1]].",
+      "contextHash": "ceae6101a3a592e33356206e68e5f298c295a50b77d64b261580be53e76bf321"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "バトラーまたはキャラクターに対して残像効果を付与します。": "Applies an afterimage effect to a battler or character.",
+    "残像の表示時間、間隔、色調などをプラグインパラメータで調整可能です。": "The afterimage display duration, interval, tone, and other settings can be adjusted using plugin parameters.",
+    "※ＭＶでは色調および合成方法の変更がうまく機能しないようです。": "※In MV, changing the tone and blend mode does not appear to work correctly.",
+    "戦闘時については、DynamicMotionから呼び出すことを想定しています。": "For battles, it is intended to be called from DynamicMotion.",
+    "ver2.00よりマップ上での使用にも対応しました。": "Map usage is supported as of ver2.00.",
+    "マップ版DynamicMotionでの使用はもちろん、スクリプトから直接実行することも可能です。": "In addition to using it with the map version of DynamicMotion, it can also be executed directly from a script.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin is compatible with both MV and MZ.",
+    "NRP_Afterimage.js": "NRP_Afterimage.js ",
+    "ver2.05（2024/07/05）": "ver2.05 (2024/07/05) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/07/05（ver2.05）": "2024/07/05 (ver2.05) ",
+    "意図しない競合を引き起こす不具合を修正。": "Fixed a bug that caused unintended conflicts.",
+    "マップ版DynamicAnimationにて戦闘時の並列アニメを使用した場合、不正なデータ状態になってエラー落ちしてしまうなど。": "For example, using parallel animations during battle with the map version of DynamicAnimation could result in an invalid data state and cause an error crash.",
+    "2023/08/14（ver2.04）": "2023/08/14 (ver2.04) ",
+    "DynamicMotionでバトラーを回転させた場合、残像の位置がズレる不具合修正。": "Fixed a bug where the afterimage position shifted when rotating a battler with DynamicMotion.",
+    "2023/04/22 -> 2023/04/23（ver2.03 -> 2.031）": "2023/04/22 -> 2023/04/23 (ver2.03 -> 2.031) ",
+    "ver2.03において、残像の左右反転や回転が効かなくなる不具合修正。（2023/04/23 ver2.031）": "Fixed a bug in ver2.03 that prevented afterimages from being flipped horizontally or rotated. (2023/04/23 ver2.031)",
+    "※なお、animatedSVEnemies.jsの『Static Enemies Breathe』がオンの場合は残像の反転が効きませんが、こちらは未対応です。": "※When “Static Enemies Breathe” in animatedSVEnemies.js is enabled, afterimages cannot be flipped. This issue is not supported.",
+    "2023/01/03（ver2.02）": "2023/01/03 (ver2.02) ",
+    "戦闘開始直後に残像処理を実行するとエラーになる不具合修正。": "Fixed a bug that caused an error when afterimage processing was executed immediately after battle started.",
+    "2022/04/17（ver2.01）": "2022/04/17 (ver2.01) ",
+    "マップのスクロール時に残像位置がズレる不具合修正。": "Fixed a bug where afterimage positions shifted when scrolling the map.",
+    "2022/02/19 -> 2022/03/31（ver2.00 -> 2.004）": "2022/02/19 -> 2022/03/31 (ver2.00 -> 2.004) ",
+    "マップ上でのキャラクターにも対応。": "Added support for characters on the map.",
+    "処理を見直して軽量化。": "Reviewed the processing and improved performance.",
+    "残像消去時に、キャラの描画が乱れる不具合修正。": "Fixed a bug that caused character rendering to become corrupted when afterimages were removed.",
+    "回転時に残像の位置がズレる不具合修正。（ver2.001）": "Fixed a bug where afterimage positions shifted during rotation. (ver2.001)",
+    "マップ版DynamicAnimationを導入していないと動作しない不具合修正。": "Fixed a bug that prevented the plugin from working unless the map version of DynamicAnimation was installed.",
+    "（2022/02/24 ver2.002）": " (2022/02/24 ver2.002) ",
+    "DynamicMotionの空中処理用に微調整。（2022/03/04 ver2.003）": "Minor adjustments for DynamicMotion's aerial processing. (2022/03/04 ver2.003)",
+    "ChangeEquipOnBattleMZ.jsによって戦闘中の装備変更を行うと、無限循環エラーとなる問題に対応。（2022/03/31 ver2.004）": "Addressed an issue where changing equipment during battle using ChangeEquipOnBattleMZ.js caused an infinite loop error. (2022/03/31 ver2.004)",
+    "2021/11/13（ver1.01）": "2021/11/13 (ver1.01) ",
+    "2021/08/27（ver1.00 -> 1.001）": "2021/08/27 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "戦闘終了後に再度戦闘すると残像処理でエラーになる不具合修正。（08/27 ver1.001）": "Fixed a bug that caused an error in afterimage processing when battling again after a battle had ended. (08/27 ver1.001)",
+    "基本的な使用法（Basic Usage）": "Basic Usage (Basic Usage)",
+    "バトラーまたはキャラクターを指定して、以下のスクリプトを呼び出せば実行できます。": "Specify a battler or character and call the following script to execute it.",
+    "※aはバトラー（アクター／敵）またはキャラクターです。": "※a is a battler (actor/enemy) or character.",
+    "残像を開始する。": "Start the afterimage effect.",
+    "残像を終了する。": "End the afterimage effect.",
+    "※省略した場合、アクション終了時に自動で終了します。": "※If omitted, it will automatically end when the action ends.",
+    "※マップ上では自動終了しないので注意してください。": "※Please note that it does not end automatically on the map.",
+    "DynamicMotionのサンプル": "DynamicMotion Sample",
+    "移動ルートの設定の記述例": "Example of Move Route Settings",
+    "マップ上で使用したい場合は『移動ルートの設定』のスクリプトで以下のように記述すればＯＫです。": "To use it on the map, enter the following in the script field of “Set Movement Route”.",
+    "終了時は以下のようになります。": "When ending it, use the following.",
+    "aではなくthisを対象にする以外は全く同じです。": "It is exactly the same, except that the target is this instead of a.",
+    "下記のオプションも同じ要領で使用できます。": "The options below can be used in the same way.",
+    "オプション（Option）": "Option (Option)",
+    "通常はプラグインパラメータの設定値を使用しますが、スキル毎に設定を変更することもできます。": "Normally, the values configured in the plugin parameters are used, but the settings can also be changed for each skill.",
+    "残像の表示間隔を4フレーム（4/60秒）に設定する。": "Set the afterimage display interval to 4 frames (4/60 seconds).",
+    "残像の表示時間を30フレーム（30/60秒）に設定する。": "Set the afterimage display duration to 30 frames (30/60 seconds).",
+    "残像の初期不透明度を128/255に設定する。": "Set the afterimage's initial opacity to 128/255.",
+    "残像の色調を[255, 255, 255, 255]に設定する。": "Set the afterimage tone to [255, 255, 255, 255].",
+    "※赤、緑、青、強さの順番": "※In the order of red, green, blue, and strength",
+    "残像の合成方法を1:加算に変更する。": "Change the afterimage blend mode to 1: Additive.",
+    "※0:通常, 1:加算, 2:乗算, 3:スクリーン": "※0: Normal, 1: Additive, 2: Multiply, 3: Screen",
+    "以下のように開始処理の後でオプションを設定してください。": "Set the options after the initialization process as shown below.",
+    "※改行すると動作しませんのでご注意を。": "※Please note that it will not work if you insert a line break.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter",
+    "表示時間（Duration）": "Duration",
+    "残像が消滅するまでの時間です。": "The amount of time until the afterimage disappears.",
+    "間隔（Interval）": "Interval",
+    "残像を生成する間隔です。1/60秒単位で設定してください。": "The interval at which afterimages are generated. Set it in 1/60-second increments.",
+    "不透明度（Opacity）": "Opacity",
+    "残像を生成する際の不透明度です。": "The opacity used when generating afterimages.",
+    "残像はこの不透明度で生成された後、徐々に薄くなっていきます。": "Afterimages are generated at this opacity and then gradually fade.",
+    "色調（Color）": "Color",
+    "残像の色調です。例：[128, 128, 255, 255]": "The color tone of the afterimage. Example: [128, 128, 255, 255]",
+    "合成方法（BlendMode）": "BlendMode",
+    "残像の合成方法です。": "The blend mode for the afterimage.",
+    "参考（Reference）": "Reference",
+    "このプラグインの制作に当たり、以下のプラグインを参考にさせていただきました。": "The following plugin was referenced in the creation of this plugin.",
+    "SAN_ResidualSprites.js（サンシロ様）": "SAN_ResidualSprites.js (Sanshiro)",
+    "https://github.com/rev2nym/SAN_ResidualSprites": "https://github.com/rev2nym/SAN_ResidualSprites"
+  }
+}

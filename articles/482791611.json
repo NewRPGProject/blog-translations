@@ -1,0 +1,1102 @@
+{
+  "articleId": "482791611",
+  "sourceUrl": "https://newrpg.seesaa.net/article/482791611.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "d3efe1ea023cb5b94215045f7945bdd603375c2c0694efe5a380621406b8c702",
+  "translatedAt": "2026-08-31T04:47:38.763Z",
+  "title": "Changing the Target Side (Party Attacks, etc.)【RPG Maker MZ & MV Plugin】",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "対象サイドの変更（パーティアタックなど）を実現【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "8b97db25522433eef86c4d3782e16f919ddde46f3790af9c40a6201cef2c84f4",
+      "translation": "Changing the Target Side (Party Attacks, etc.)【RPG Maker MZ & MV Plugin】",
+      "contextHash": "8b97db25522433eef86c4d3782e16f919ddde46f3790af9c40a6201cef2c84f4"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "戦闘時、通常とは異なる対象サイドへ、攻撃やスキル、アイテムを使用できるようにします。",
+      "sourceHash": "cee039a2d5b8bd7784ca4a8a5b5490717ab19dcabfaa0621d58554fe81e69a1c",
+      "translation": "During battles, you can use attacks, skills, and items on a target side other than the usual one.",
+      "contextHash": "cee039a2d5b8bd7784ca4a8a5b5490717ab19dcabfaa0621d58554fe81e69a1c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "例えば、味方を攻撃したり、敵を回復したりできます。",
+      "sourceHash": "444306306b33744dd90900365a9cdd5b373d5621999afeebeb180ad645f0bad9",
+      "translation": "For example, you can attack allies or heal enemies.",
+      "contextHash": "444306306b33744dd90900365a9cdd5b373d5621999afeebeb180ad645f0bad9"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "眠った仲間を叩き起こしたり、アンデッドに回復魔法をかけてダメージを与えたり、あるいはＦＦシリーズのバーサクのように、味方にかけても敵にかけてもメリット・デメリットのある異常を作成したりと様々な工夫が考えられます。",
+      "sourceHash": "b4547bb2a66f1721f941f8d347ea8fdffd58fedfe2b4fab6623026da06816fbe",
+      "translation": "You can devise various mechanics, such as waking up a sleeping ally by hitting them, dealing damage to an undead with healing magic, or creating an effect with both benefits and drawbacks when used on either allies or enemies, like Berserk in the FF series.",
+      "contextHash": "b4547bb2a66f1721f941f8d347ea8fdffd58fedfe2b4fab6623026da06816fbe"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "通常、範囲が全体などのスキルは対象選択が表示されませんが、プラグインパラメータによって対象選択を表示できます。",
+      "sourceHash": "819a6a14668d78fb63355feb0586437ea3ae9217d6276dfcccb9a5d93ea37ce6",
+      "translation": "Normally, skills with an all-target scope, for example, do not display target selection, but you can display it using a plugin parameter.",
+      "contextHash": "819a6a14668d78fb63355feb0586437ea3ae9217d6276dfcccb9a5d93ea37ce6"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "他の機能を無効化すれば、それ専用のプラグインとしても活用できます。",
+      "sourceHash": "5b41bde3e70de0b7e8b5b0d66acda07e1867b7049c06c921656302dc493a2799",
+      "translation": "By disabling the other features, you can also use this as a dedicated plugin for that purpose.",
+      "contextHash": "5b41bde3e70de0b7e8b5b0d66acda07e1867b7049c06c921656302dc493a2799"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the feature ON through the RPG Maker Plugin Manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_PartyAttack.js",
+      "sourceHash": "ab53e31c060b5ae8d0e3d1a84a795a09fcd81f93b8c84581e3c61b55bfed69bf",
+      "translation": "NRP_PartyAttack.js ",
+      "contextHash": "0931b7e5a0626e59b3abfa6667c71bae4c5ab4f6b09862c3ada2723c02fb296a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.021（2024/07/08）",
+      "sourceHash": "5eb36f4117ffe43073c745c98a2d1880170d0a5827f85233a6183e779c3d3dcb",
+      "translation": "ver1.021 (2024/07/08) ",
+      "contextHash": "0931b7e5a0626e59b3abfa6667c71bae4c5ab4f6b09862c3ada2723c02fb296a"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※このプラグインに合わせて以下のプラグインを修正しています。",
+      "sourceHash": "dfb0ba5c11f6f6b0bb492afd7128981416b3e962019818e3661d0764b39143bd",
+      "translation": "※The following plugin has been modified to work with this plugin.",
+      "contextHash": "dfb0ba5c11f6f6b0bb492afd7128981416b3e962019818e3661d0764b39143bd"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "併用される場合は更新をお願いします。",
+      "sourceHash": "69ef1eaa0d90f394744baa8d245ec17a9e2ab6a672a2b3cf6ed3f57ef42ca14e",
+      "translation": "Please update it if you use them together.",
+      "contextHash": "69ef1eaa0d90f394744baa8d245ec17a9e2ab6a672a2b3cf6ed3f57ef42ca14e"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DynamicAnimationMZ.js",
+      "sourceHash": "fa0e68b187fc9e909dcdfd5b9e1eb27abf2d72d3865a7bd24988dc71d6430eca",
+      "translation": "NRP_DynamicAnimationMZ.js",
+      "contextHash": "79ebab7372a313054bf44519fb8887490b9f8e4f4f18b767d59d18dc685a09cb"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "NRP_DynamicAnimation.js",
+      "sourceHash": "facb36459ea7d9229eac2351d47da4b7f4ca2dcb31cdfa61ce1fa606d456e521",
+      "translation": "NRP_DynamicAnimation.js",
+      "contextHash": "6d89e527d938f09272af88af26baf38863487e746b018f60e8534883da0ede11"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "※MZ/MV共にDynamicMotion側もリンク先から更新してください。",
+      "sourceHash": "b6f80bf931c6ec848ed91b94857b24cb33d5cb800a0f47e8bd104dd4488c9224",
+      "translation": "※For both MZ and MV, please also update DynamicMotion from the linked page.",
+      "contextHash": "b6f80bf931c6ec848ed91b94857b24cb33d5cb800a0f47e8bd104dd4488c9224"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "NRP_BattleTargetCursor.js",
+      "sourceHash": "38e70c347a4ec12892ae6cfc7b4e6805967e927b198d68d32062d4acc59628f6",
+      "translation": "NRP_BattleTargetCursor.js",
+      "contextHash": "19bc2fba9764a4a22bf69e8addc3d48d92d34495ea51bc3d1e8a2b080c29b88f"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "NRP_SkillRangeEX.js",
+      "sourceHash": "3af8c744d3596b0dbd325adac53da7d424a528c2e303bf457f5b9123323232b8",
+      "translation": "NRP_SkillRangeEX.js",
+      "contextHash": "0855660538f05f768ec9818b2f3c225103c5df28bf2d806e3439d04bbcc82a28"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "以下のプラグインと併用する場合は登録順に注意してください。",
+      "sourceHash": "573b9dd50918e5392602f67cb720d575de06889be0707722fecfec508ebca532",
+      "translation": "When using this together with the following plugins, pay attention to the registration order.",
+      "contextHash": "573b9dd50918e5392602f67cb720d575de06889be0707722fecfec508ebca532"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "NRP_BattleTargetCursor.js：当プラグインよりも上に配置",
+      "sourceHash": "2c018889864d07418adb76d6bb27d56bed74f8984ca216ac02d1348fffa5dbf2",
+      "translation": "NRP_BattleTargetCursor.js: Place it above this plugin",
+      "contextHash": "2c018889864d07418adb76d6bb27d56bed74f8984ca216ac02d1348fffa5dbf2"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "NRP_VisualTurn.js：当プラグインよりも下に配置",
+      "sourceHash": "e3ffd3a0fe97e138ce59aa6e09398ea61cd421676f6b803d0d4ac334be18556f",
+      "translation": "NRP_VisualTurn.js: Place it below this plugin",
+      "contextHash": "e3ffd3a0fe97e138ce59aa6e09398ea61cd421676f6b803d0d4ac334be18556f"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2023/11/22 -> 2024/07/08（ver1.02 -> 1.021）",
+      "sourceHash": "a3e58f9c6a3174063415cf8a8393578f8101134472ef762bcb1521eabece10e8",
+      "translation": "2023/11/22 -> 2024/07/08 (ver1.02 -> 1.021) ",
+      "contextHash": "a3e58f9c6a3174063415cf8a8393578f8101134472ef762bcb1521eabece10e8"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "タッチ操作でもパーティアタックできるように対応。",
+      "sourceHash": "4d5daececef9069ab0ff9ded79b95473f5710d5523fef1d4e2eba24648d28ec5",
+      "translation": "Added support for party attacks using touch controls.",
+      "contextHash": "4d5daececef9069ab0ff9ded79b95473f5710d5523fef1d4e2eba24648d28ec5"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "（2024/07/08 ver1.021）",
+      "sourceHash": "30ec65f19e115420dca2ae46d030329baa292f9676312c373121000e7a5268f0",
+      "translation": " (2024/07/08 ver1.021) ",
+      "contextHash": "30ec65f19e115420dca2ae46d030329baa292f9676312c373121000e7a5268f0"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/08/13 -> 08/21（ver1.01 -> 1.011）",
+      "sourceHash": "798035d7b188aad0f55e5f46dd77f6a422357ff1a4ea9732e8fd07d6d8d26c74",
+      "translation": "2021/08/13 -> 08/21 (ver1.01 -> 1.011) ",
+      "contextHash": "798035d7b188aad0f55e5f46dd77f6a422357ff1a4ea9732e8fd07d6d8d26c74"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "範囲が全体、ランダムのスキルでも対象選択＆サイド切替できるよう対応。",
+      "sourceHash": "9cf0e0d4e7e38ca4102cfd47923f461fadf359ed12fd0fbc796e9c2aadb2ce0c",
+      "translation": "Added support for selecting targets and switching sides even for skills with an all-target or random scope.",
+      "contextHash": "9cf0e0d4e7e38ca4102cfd47923f461fadf359ed12fd0fbc796e9c2aadb2ce0c"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "それに伴い、以下のプラグインも修正しているので、更新をお願いします。",
+      "sourceHash": "9c7271f84e395c693c54c5a421fecd62a55b7ba031887bd0ce34d2e62e25d71d",
+      "translation": "The following plugins have also been modified accordingly, so please update them.",
+      "contextHash": "9c7271f84e395c693c54c5a421fecd62a55b7ba031887bd0ce34d2e62e25d71d"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "NRP_BattleTargetCursor.js",
+      "sourceHash": "38e70c347a4ec12892ae6cfc7b4e6805967e927b198d68d32062d4acc59628f6",
+      "translation": "NRP_BattleTargetCursor.js",
+      "contextHash": "19bc2fba9764a4a22bf69e8addc3d48d92d34495ea51bc3d1e8a2b080c29b88f"
+    },
+    {
+      "id": "link-007",
+      "type": "link",
+      "source": "NRP_SkillRangeEX.js",
+      "sourceHash": "3af8c744d3596b0dbd325adac53da7d424a528c2e303bf457f5b9123323232b8",
+      "translation": "NRP_SkillRangeEX.js",
+      "contextHash": "0855660538f05f768ec9818b2f3c225103c5df28bf2d806e3439d04bbcc82a28"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "範囲が『敵にランダム』のスキルでパーティアタックすると、範囲が全体に変化してしまう不具合修正。（08/21 ver1.011）",
+      "sourceHash": "9e4e28ce56692f9befde7c0b0ba4213fa47d81399364f2b31fe456182e859c35",
+      "translation": "Fixed a bug where using a party attack with a skill whose scope was “Random Enemy” changed its scope to All. (08/21 ver1.011)",
+      "contextHash": "9e4e28ce56692f9befde7c0b0ba4213fa47d81399364f2b31fe456182e859c35"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/08/06 -> 08/07（ver1.00 -> 1.001）",
+      "sourceHash": "c042253d3eb3b0cf8db31005d8d73918c76b4cc72d2e7de23e388c94d27c9564",
+      "translation": "2021/08/06 -> 08/07 (ver1.00 -> 1.001) ",
+      "contextHash": "c042253d3eb3b0cf8db31005d8d73918c76b4cc72d2e7de23e388c94d27c9564"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "コマンドをキャンセルした際、対象サイドの反転が残ってしまう不具合修正。（ver1.001）",
+      "sourceHash": "6484956798361debabc38384983a105da3bf7bea4a8245f0feae209e24b2993d",
+      "translation": "Fixed a bug where the target side remained reversed after canceling a command. (ver1.001)",
+      "contextHash": "6484956798361debabc38384983a105da3bf7bea4a8245f0feae209e24b2993d"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "動作対象を変更した場合、ミラーリングが逆方向に動作する不具合修正。",
+      "sourceHash": "2df6407446bea34b7720ae0af428ff47eda477827081f58fa880d62b68059232",
+      "translation": "Fixed a bug where mirroring moved in the opposite direction when the action target was changed.",
+      "contextHash": "2df6407446bea34b7720ae0af428ff47eda477827081f58fa880d62b68059232"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "※DynamicMotion側の修正です。",
+      "sourceHash": "09f33ccaedb58de4de331bb2c7dce3c3a446713d91488679abdbf27d08c377f7",
+      "translation": "※This is a fix for DynamicMotion.",
+      "contextHash": "dd7e50a7b17f9f99967ef53442bfd4ad6815f21969100519cd3aeaea5c1c8a83"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "（08/07）",
+      "sourceHash": "f412fdb13f1103acba7de734c418c89ecc727170e470de98335484b8835df531",
+      "translation": " (08/07) ",
+      "contextHash": "dd7e50a7b17f9f99967ef53442bfd4ad6815f21969100519cd3aeaea5c1c8a83"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "導入するだけで対象サイドの切替が有効となります。",
+      "sourceHash": "86e9a6419717ef3049fa889743abc17a086ef5f735af90d4a2987b9c3b679a06",
+      "translation": "Target-side switching is enabled simply by installing the plugin.",
+      "contextHash": "86e9a6419717ef3049fa889743abc17a086ef5f735af90d4a2987b9c3b679a06"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "初期状態ではPageUp/Downで対象サイドを切り替えられます。",
+      "sourceHash": "d87a266127dcf74ffba1d42f08b11cf018f50fe9c6ce1259eb4c1eb3469a0e4a",
+      "translation": "By default, you can switch the target side with PageUp/PageDown.",
+      "contextHash": "d87a266127dcf74ffba1d42f08b11cf018f50fe9c6ce1259eb4c1eb3469a0e4a"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "（ゲームパッドではいわゆるＬＲボタンに相当）",
+      "sourceHash": "9a9395517ffb475db2f5be70d3b0fa875dcfccd1e21613de3e2e60adc9e82af4",
+      "translation": "(These correspond to the so-called L/R buttons on a gamepad.)",
+      "contextHash": "9a9395517ffb475db2f5be70d3b0fa875dcfccd1e21613de3e2e60adc9e82af4"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "初期状態では範囲が全体やランダムのスキルは、対象選択が表示されないため、サイドを変更できません。",
+      "sourceHash": "ad1297c861666e0be841a7ea447149003c0f2e69c27d1ab07e8c6b5ca6f8a1c4",
+      "translation": "By default, skills with an all-target or random scope cannot switch target sides because target selection is not displayed.",
+      "contextHash": "ad1297c861666e0be841a7ea447149003c0f2e69c27d1ab07e8c6b5ca6f8a1c4"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『常に選択を表示』のパラメータをオンにすることで、それらのスキルも対象サイドを切り替えられるようにできます。",
+      "sourceHash": "a0c0399b5863ddb786304d61bc865e1e2650a54cc4aad4e938d9855e33bfd9b7",
+      "translation": "By turning on the “Always Display Selection” parameter, you can also switch the target side for those skills.",
+      "contextHash": "a0c0399b5863ddb786304d61bc865e1e2650a54cc4aad4e938d9855e33bfd9b7"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "さらにプラグインパラメータによって、左右キー（サイドビューを想定）や上下キー（フロントビューを想定）で、対象サイドを切り替えられるように設定できます。",
+      "sourceHash": "83642aa0c1db214bbe25938224fb58d2806f34df56f7cdf362d74ad1f60d9c10",
+      "translation": "In addition, plugin parameters let you configure the left and right keys (intended for side-view battles) or up and down keys (intended for front-view battles) to switch the target side.",
+      "contextHash": "83642aa0c1db214bbe25938224fb58d2806f34df56f7cdf362d74ad1f60d9c10"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ただし『左右でサイド切替』および『上下でサイド切替』をオンにしても、それだけでは違和感のある挙動になります。",
+      "sourceHash": "9f00c141dac88947039e2d3b8e5ba5e8e78c17ccb03cc9dc9f3d4a95b195a5a2",
+      "translation": "However, even if you turn on “Switch Sides with Left/Right” or “Switch Sides with Up/Down,” the behavior will feel unnatural on its own.",
+      "contextHash": "9f00c141dac88947039e2d3b8e5ba5e8e78c17ccb03cc9dc9f3d4a95b195a5a2"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "これはNRP_BattleTargetCursorとの組み合わせを想定しているためです。",
+      "sourceHash": "49afda8d6ec8ae89ba67c822c8c6776bece0fcb66a53901691cca36672fca904",
+      "translation": "This is because it is intended to be used together with NRP_BattleTargetCursor.",
+      "contextHash": "49afda8d6ec8ae89ba67c822c8c6776bece0fcb66a53901691cca36672fca904"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "例えば『左右でサイド切替』をオンにする場合は、上下で対象を切り替えられるようにしてください。",
+      "sourceHash": "b32252e25e50998a354630426b663586661193d78ee4868a6bb4bd274d97f39d",
+      "translation": "For example, if you turn on “Switch Sides with Left/Right,” configure the controls so that targets can be switched with up and down.",
+      "contextHash": "b32252e25e50998a354630426b663586661193d78ee4868a6bb4bd274d97f39d"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "『上下でサイド切替』をオンにする場合はその逆です。",
+      "sourceHash": "7a5af0248b3ec1f500d190cdf762e113f24025c01442fe4742ca73c024bd7a97",
+      "translation": "If you turn on “Switch Sides with Up/Down,” do the opposite.",
+      "contextHash": "7a5af0248b3ec1f500d190cdf762e113f24025c01442fe4742ca73c024bd7a97"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "スキル（アイテム）のメモ欄（Note）",
+      "sourceHash": "bd5ad7e244d4598357f7ef6062c041ee6638088b5db3d412c5a2ef2dd79d3701",
+      "translation": "Skill (Item) Note Field (Note)",
+      "contextHash": "bd5ad7e244d4598357f7ef6062c041ee6638088b5db3d412c5a2ef2dd79d3701"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "スキル毎に対象サイドの変更を無効化または有効化できます。",
+      "sourceHash": "3907b17dfa94985d2de36053a6fd8645b03bb872dd4bd1184e4d2e0f6f5a62f7",
+      "translation": "You can enable or disable target-side switching for each skill.",
+      "contextHash": "3907b17dfa94985d2de36053a6fd8645b03bb872dd4bd1184e4d2e0f6f5a62f7"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "スキルのメモ欄に以下を指定してください。",
+      "sourceHash": "844866c9676205b5770e62d382b49aa7cfab0c1f846de5b8544ad5db06c2329d",
+      "translation": "Specify the following in the skill's note field.",
+      "contextHash": "844866c9676205b5770e62d382b49aa7cfab0c1f846de5b8544ad5db06c2329d"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "対象サイドの変更を有効化します。（trueは省略可）",
+      "sourceHash": "2812c9458f9224d42d3932183c02f1a3ad336745db1a0c3d6f88a93102c2fa7f",
+      "translation": "Enables target-side switching. (true may be omitted.)",
+      "contextHash": "2812c9458f9224d42d3932183c02f1a3ad336745db1a0c3d6f88a93102c2fa7f"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "対象サイドの変更を無効化します。",
+      "sourceHash": "93296f8139aa274f26ba31635588aadb9e355fa8e899f235e41afb46a272d068",
+      "translation": "Disables target-side switching.",
+      "contextHash": "93296f8139aa274f26ba31635588aadb9e355fa8e899f235e41afb46a272d068"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "指定がない場合はプラグインパラメータにある『全スキルを有効化』の設定に従います。",
+      "sourceHash": "12bffaf9fdc2fc86b88a29701e08e4a265b85280bdc23190d421984d2111b33d",
+      "translation": "If unspecified, the setting follows “EnableAllSkills” in the plugin parameters.",
+      "contextHash": "12bffaf9fdc2fc86b88a29701e08e4a265b85280bdc23190d421984d2111b33d"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "演出や効果の都合で味方にかけられると不都合のあるスキルがある場合は、これらの方法で切り替えてください。",
+      "sourceHash": "dfe91577bb57d0b239c9a62b85d131168cfb2a5f1babe09b835724a87d4fb3aa",
+      "translation": "If a skill would cause problems when used on allies due to its presentation or effects, switch it using one of these methods.",
+      "contextHash": "dfe91577bb57d0b239c9a62b85d131168cfb2a5f1babe09b835724a87d4fb3aa"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "全スキルを有効化（EnableAllSkills）",
+      "sourceHash": "5a33470a741ecca8063864383c5b20e5c7d134ffbcc8c32a6a4d2226037e6e71",
+      "translation": "Enable All Skills (EnableAllSkills)",
+      "contextHash": "5a33470a741ecca8063864383c5b20e5c7d134ffbcc8c32a6a4d2226037e6e71"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "全てのスキルで対象サイドの変更を有効とします。",
+      "sourceHash": "f09651a20e8ade66c12ca03824aa573ffd203c3a862dfc2bfa5132c712a01c6d",
+      "translation": "Enables target-side switching for all skills.",
+      "contextHash": "f09651a20e8ade66c12ca03824aa573ffd203c3a862dfc2bfa5132c712a01c6d"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "オフにすると全てのスキルで無効となります。",
+      "sourceHash": "25ecc1459cbf683427ab01a0c98fee9edcf0d88d46f68f9828007c1d37bafa0a",
+      "translation": "When turned off, it is disabled for all skills.",
+      "contextHash": "25ecc1459cbf683427ab01a0c98fee9edcf0d88d46f68f9828007c1d37bafa0a"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "※アイテムも含みます。",
+      "sourceHash": "a9f1d00b3a4e231482815d92284a464f1c855edf72a64fd8ba2f72e6c039d858",
+      "translation": "※This also includes items.",
+      "contextHash": "a9f1d00b3a4e231482815d92284a464f1c855edf72a64fd8ba2f72e6c039d858"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "その上で、さらにメモ欄で例外を指定する想定です。",
+      "sourceHash": "1930fec53aefbf57898b651e0d711fee53c483445b18aed0a181b69e4b896460",
+      "translation": "Then, exceptions can be specified in the note field.",
+      "contextHash": "1930fec53aefbf57898b651e0d711fee53c483445b18aed0a181b69e4b896460"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "タッチ操作を有効化（EnableTouch）ver1.02",
+      "sourceHash": "bb214e473fca592e81d41f7870ff209d2276245a05d0ed73234dfad4eb1bd09f",
+      "translation": "Enable Touch Controls (EnableTouch) ver1.02",
+      "contextHash": "bb214e473fca592e81d41f7870ff209d2276245a05d0ed73234dfad4eb1bd09f"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "タッチ操作による対象サイドの変更を有効とします。",
+      "sourceHash": "d2dcc6a77a99d068b15d5e7f19183cc29fb960e19d5f5b1cc00d3fc9593103f7",
+      "translation": "Enables changing the target side via touch controls.",
+      "contextHash": "d2dcc6a77a99d068b15d5e7f19183cc29fb960e19d5f5b1cc00d3fc9593103f7"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "常に選択を表示（AlwaysSelection）ver1.01",
+      "sourceHash": "dea79321bb48e4f8fae71cc8307a6eb58c2e6526f5bbcf49b0e3bccbeb256029",
+      "translation": "Always Display Selection (AlwaysSelection) ver1.01",
+      "contextHash": "dea79321bb48e4f8fae71cc8307a6eb58c2e6526f5bbcf49b0e3bccbeb256029"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "範囲が全体などのスキルにおいても、対象の選択を表示します。",
+      "sourceHash": "aa6b33e86401f7fe3687b4cf69646270f67ca55ed4c43a5fdb1d1db193c63bb3",
+      "translation": "Displays target selection even for skills that target the entire group, etc.",
+      "contextHash": "aa6b33e86401f7fe3687b4cf69646270f67ca55ed4c43a5fdb1d1db193c63bb3"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "これにより、対象サイドの切替を有効とします。",
+      "sourceHash": "2a09b1de7b4402acd2525a443bcf2876ddd7f7192c2a79d3ca80925122e10f8a",
+      "translation": "This enables switching the target side.",
+      "contextHash": "2a09b1de7b4402acd2525a443bcf2876ddd7f7192c2a79d3ca80925122e10f8a"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "使用者も選択を表示（UserSelection）ver1.01",
+      "sourceHash": "7d651cc2b2eb388556074297b879791709b04734cabfcbef31c90fc0e1a34d67",
+      "translation": "Also Display User Selection (UserSelection) ver1.01",
+      "contextHash": "7d651cc2b2eb388556074297b879791709b04734cabfcbef31c90fc0e1a34d67"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "範囲が使用者のスキルにおいても、対象の選択を表示します。",
+      "sourceHash": "3cb8a2f8f5705453b6c71e3f2a9927e7ad9d4700933c01a3c27b077a6d736eba",
+      "translation": "Displays target selection even for skills that target the user.",
+      "contextHash": "3cb8a2f8f5705453b6c71e3f2a9927e7ad9d4700933c01a3c27b077a6d736eba"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "敵味方全体も選択を表示（EveryoneSelection）ver1.01",
+      "sourceHash": "c46868049b0c5c4881fdee1e76cbfdd1f09c738453e47459eff123245a860ec6",
+      "translation": "Also Display Selection for All Enemies and Allies (EveryoneSelection) ver1.01",
+      "contextHash": "c46868049b0c5c4881fdee1e76cbfdd1f09c738453e47459eff123245a860ec6"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "範囲が敵味方全体のスキルにおいても、対象の選択を表示します。",
+      "sourceHash": "e92fb5db689976d299f69df63d38eaaefbabf8813289efafb14f578fa7632557",
+      "translation": "Displays target selection even for skills that target all enemies and allies.",
+      "contextHash": "e92fb5db689976d299f69df63d38eaaefbabf8813289efafb14f578fa7632557"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "PageUp/Downでサイド切替（ChangeSideByPageUpDown）",
+      "sourceHash": "b85211b44dca91d6d594911e93a83cf2936bf7ab205d0fdca0a8c57b832f9bcf",
+      "translation": "Switch Sides with PageUp/Down (ChangeSideByPageUpDown)",
+      "contextHash": "b85211b44dca91d6d594911e93a83cf2936bf7ab205d0fdca0a8c57b832f9bcf"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "PageUp/Downによって対象サイドの切り替えを行います。",
+      "sourceHash": "412ec0d83c7455b217d6acb7185640b46793d8015743f0a18691559adcfefb6c",
+      "translation": "Switches the target side using PageUp/Down.",
+      "contextHash": "412ec0d83c7455b217d6acb7185640b46793d8015743f0a18691559adcfefb6c"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "ゲームパッドではＬＲボタンに該当します。",
+      "sourceHash": "8b6febb38695e92313597f1a4dbbf04cbc490e614bef7cba83692dd5ae3d644c",
+      "translation": "On a gamepad, these correspond to the L/R buttons.",
+      "contextHash": "8b6febb38695e92313597f1a4dbbf04cbc490e614bef7cba83692dd5ae3d644c"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "左右でサイド切替（ChangeSideByLeftRight）",
+      "sourceHash": "21ca6cf3ded8e117c5a1d9382b8dfefbf60701546aa82c91a05e091f51df24d0",
+      "translation": "Switch Sides with Left/Right (ChangeSideByLeftRight)",
+      "contextHash": "21ca6cf3ded8e117c5a1d9382b8dfefbf60701546aa82c91a05e091f51df24d0"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "左右キーによって対象サイドの切り替えを行います。",
+      "sourceHash": "205624a18413162104e345e59a44533ec48af1f4c35f1e986886c3ae0a2e39ef",
+      "translation": "Switches the target side using the left and right keys.",
+      "contextHash": "205624a18413162104e345e59a44533ec48af1f4c35f1e986886c3ae0a2e39ef"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "NRP_BattleTargetCursorとの組み合わせによって、上下で対象を切り替えられるようにすることを想定しています。",
+      "sourceHash": "353b1e059ed2d4e91e941c3da8155da2aeffd5038cd96cba81f6a972fbdbcc2b",
+      "translation": "In combination with NRP_BattleTargetCursor, this is intended to allow targets to be switched using up and down.",
+      "contextHash": "353b1e059ed2d4e91e941c3da8155da2aeffd5038cd96cba81f6a972fbdbcc2b"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "上下でサイド切替（ChangeSideByUpDown）",
+      "sourceHash": "de2f7ed53effe28c6aa136e9a22933c60ed5bda72bfe5282cdc787806d1c765f",
+      "translation": "Switch Sides with Up/Down (ChangeSideByUpDown)",
+      "contextHash": "de2f7ed53effe28c6aa136e9a22933c60ed5bda72bfe5282cdc787806d1c765f"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "上下キーによって対象サイドの切り替えを行います。",
+      "sourceHash": "ca2c1e6074045808c1032148d1dea7511b323d5d4be49afe704fd2198885e721",
+      "translation": "Switches the target side using the up and down keys.",
+      "contextHash": "ca2c1e6074045808c1032148d1dea7511b323d5d4be49afe704fd2198885e721"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "NRP_BattleTargetCursorとの組み合わせによって、左右で対象を切り替えられるようにすることを想定しています。",
+      "sourceHash": "4930083b0f4514f491ca3a8957264d444ca3a9120e7c344e5a2a9ee0084b7e3d",
+      "translation": "In combination with NRP_BattleTargetCursor, this is intended to allow targets to be switched using left and right.",
+      "contextHash": "4930083b0f4514f491ca3a8957264d444ca3a9120e7c344e5a2a9ee0084b7e3d"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "ウィンドウ表示を維持（KeepWindow）",
+      "sourceHash": "06559ab4aa4bc047d43b3999d24369c30fb750e56d006088d505dc2693669aeb",
+      "translation": "Keep Windows Displayed (KeepWindow)",
+      "contextHash": "06559ab4aa4bc047d43b3999d24369c30fb750e56d006088d505dc2693669aeb"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "ウィンドウの表示を維持します。",
+      "sourceHash": "a48e68d957be7dbeda8e1f84e0e95f0311e4438b4ad59ec10c31244a9c6d7ed7",
+      "translation": "Keeps the windows displayed.",
+      "contextHash": "a48e68d957be7dbeda8e1f84e0e95f0311e4438b4ad59ec10c31244a9c6d7ed7"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "つまり、アクター・エネミーウィンドウの表示を切り替えないようにします。",
+      "sourceHash": "769f4b18aa140fc5b252cd56be6bf17c96ebc6ef4c6203bfdce1afa5ca2d90b7",
+      "translation": "In other words, it prevents the actor and enemy windows from switching.",
+      "contextHash": "769f4b18aa140fc5b252cd56be6bf17c96ebc6ef4c6203bfdce1afa5ca2d90b7"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "こちらもNRP_BattleTargetCursorとの組み合わせを推奨します。",
+      "sourceHash": "503cdfee02b0e1ecd87eec469bbe916b053d2493df64b2fe69751004acfee457",
+      "translation": "Combining this with NRP_BattleTargetCursor is also recommended.",
+      "contextHash": "503cdfee02b0e1ecd87eec469bbe916b053d2493df64b2fe69751004acfee457"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "また、[[LINK_1]]対象カーソルプラグイン（NRP_BattleTargetCursor）[[/LINK_1]]との併用によって、対象サイドの切替方法をカスタマイズできます。",
+      "sourceHash": "54a42478b10677fe222769e0060fe692494b718a27569154bf2d54952e89eb61",
+      "parts": [
+        {
+          "source": "また、",
+          "link": false
+        },
+        {
+          "source": "対象カーソルプラグイン（NRP_BattleTargetCursor）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との併用によって、対象サイドの切替方法をカスタマイズできます。",
+          "link": false
+        }
+      ],
+      "translation": "You can also customize how to switch between target sides by using it together with the [[LINK_1]]Target Cursor Plugin (NRP_BattleTargetCursor)[[/LINK_1]].",
+      "contextHash": "54a42478b10677fe222769e0060fe692494b718a27569154bf2d54952e89eb61"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Install (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]スキル（アイテム）のメモ欄（Note）[[/LINK_1]]",
+      "sourceHash": "2b2c5f2ced1395a2dea5a17f15c5c1ccce5828f4c6650ab9c7eb2c3668d26456",
+      "parts": [
+        {
+          "source": "スキル（アイテム）のメモ欄（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill (Item) Note Field (Note)[[/LINK_1]]",
+      "contextHash": "2b2c5f2ced1395a2dea5a17f15c5c1ccce5828f4c6650ab9c7eb2c3668d26456"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]全スキルを有効化（EnableAllSkills）[[/LINK_1]]",
+      "sourceHash": "a95bce15ea05e526ff9fe95fb1a3d8076328917cda1e4c1a3328f9a4f6379538",
+      "parts": [
+        {
+          "source": "全スキルを有効化（EnableAllSkills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enable All Skills (EnableAllSkills)[[/LINK_1]]",
+      "contextHash": "a95bce15ea05e526ff9fe95fb1a3d8076328917cda1e4c1a3328f9a4f6379538"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]タッチ操作を有効化（EnableTouch）[[/LINK_1]]ver1.02",
+      "sourceHash": "6d6284e9a87ac588fef70fa1ca001c94f4f231dc1769fcd7a2b21b4ac541eebc",
+      "parts": [
+        {
+          "source": "タッチ操作を有効化（EnableTouch）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Enable Touch Controls (EnableTouch)[[/LINK_1]] ver1.02",
+      "contextHash": "6d6284e9a87ac588fef70fa1ca001c94f4f231dc1769fcd7a2b21b4ac541eebc"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]常に選択を表示（AlwaysSelection）[[/LINK_1]]ver1.01",
+      "sourceHash": "f9f8c571ac286412e54b163cca14bf6ef511d69215b3df644853cc7365e80c94",
+      "parts": [
+        {
+          "source": "常に選択を表示（AlwaysSelection）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Always Show Selection (AlwaysSelection)[[/LINK_1]] ver1.01",
+      "contextHash": "f9f8c571ac286412e54b163cca14bf6ef511d69215b3df644853cc7365e80c94"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]使用者も選択を表示（UserSelection）[[/LINK_1]]ver1.01",
+      "sourceHash": "54b8d5dd1c50482bbe6953910e021ae634cfdcd55316fbebe191e4e05736bc60",
+      "parts": [
+        {
+          "source": "使用者も選択を表示（UserSelection）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Also Show Selection for the User (UserSelection)[[/LINK_1]] ver1.01",
+      "contextHash": "54b8d5dd1c50482bbe6953910e021ae634cfdcd55316fbebe191e4e05736bc60"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]敵味方全体も選択を表示（EveryoneSelection）[[/LINK_1]]ver1.01",
+      "sourceHash": "aa12db67e56fb96613866c346fce58e4f3582a58f733c20cf42352a333781533",
+      "parts": [
+        {
+          "source": "敵味方全体も選択を表示（EveryoneSelection）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Also Show Selection for All Allies and Enemies (EveryoneSelection)[[/LINK_1]] ver1.01",
+      "contextHash": "aa12db67e56fb96613866c346fce58e4f3582a58f733c20cf42352a333781533"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]PageUp/Downでサイド切替（ChangeSideByPageUpDown）[[/LINK_1]]",
+      "sourceHash": "02011683ae6ceefd412f51adc7020cee7427f68438ae51b3951d0f5119cd2047",
+      "parts": [
+        {
+          "source": "PageUp/Downでサイド切替（ChangeSideByPageUpDown）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Sides with PageUp/PageDown (ChangeSideByPageUpDown)[[/LINK_1]]",
+      "contextHash": "02011683ae6ceefd412f51adc7020cee7427f68438ae51b3951d0f5119cd2047"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]左右でサイド切替（ChangeSideByLeftRight）[[/LINK_1]]",
+      "sourceHash": "bec1562c1529a4628c6837dbecdae9b762d92645e7c51638db44d5711ed8dedb",
+      "parts": [
+        {
+          "source": "左右でサイド切替（ChangeSideByLeftRight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Sides with Left/Right (ChangeSideByLeftRight)[[/LINK_1]]",
+      "contextHash": "bec1562c1529a4628c6837dbecdae9b762d92645e7c51638db44d5711ed8dedb"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]上下でサイド切替（ChangeSideByUpDown）[[/LINK_1]]",
+      "sourceHash": "7ee77842ecab1940e59f1cc34976b0ec531b9bca96b8d218103e8992d841e997",
+      "parts": [
+        {
+          "source": "上下でサイド切替（ChangeSideByUpDown）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Sides with Up/Down (ChangeSideByUpDown)[[/LINK_1]]",
+      "contextHash": "7ee77842ecab1940e59f1cc34976b0ec531b9bca96b8d218103e8992d841e997"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ウィンドウ表示を維持（KeepWindow）[[/LINK_1]]",
+      "sourceHash": "7990e1730bf83b94918c58b2109138aff56b863bd73dfaac2ebb718b9b6a6ac7",
+      "parts": [
+        {
+          "source": "ウィンドウ表示を維持（KeepWindow）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Keep Window Displayed (KeepWindow)[[/LINK_1]]",
+      "contextHash": "7990e1730bf83b94918c58b2109138aff56b863bd73dfaac2ebb718b9b6a6ac7"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]タッチ操作を有効化（EnableTouch）[[/LINK_1]]で切替可能です。",
+      "sourceHash": "87f7214bd15897e103ee9a9846a9569530338d6e665883e16f1929453c187fe7",
+      "parts": [
+        {
+          "source": "タッチ操作を有効化（EnableTouch）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で切替可能です。",
+          "link": false
+        }
+      ],
+      "translation": "You can switch sides using [[LINK_1]]Enable Touch Controls (EnableTouch)[[/LINK_1]].",
+      "contextHash": "87f7214bd15897e103ee9a9846a9569530338d6e665883e16f1929453c187fe7"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_SkillRangeEX.js[[/LINK_1]]との連携時、『全体時の主対象条件（要するに前列攻撃など）』によるターゲット表示が正しくない不具合修正。",
+      "sourceHash": "6673b6949449553016ea80ad8d316fcc3a6302c7b74f8684466f20ec0fd36238",
+      "parts": [
+        {
+          "source": "NRP_SkillRangeEX.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との連携時、『全体時の主対象条件（要するに前列攻撃など）』によるターゲット表示が正しくない不具合修正。",
+          "link": false
+        }
+      ],
+      "translation": "Fixed an issue where target display was incorrect when used with [[LINK_1]]NRP_SkillRangeEX.js[[/LINK_1]] due to the “primary target conditions for all-target skills (in other words, front-row attacks and so on).”",
+      "contextHash": "6673b6949449553016ea80ad8d316fcc3a6302c7b74f8684466f20ec0fd36238"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "『[[LINK_1]]常に選択を表示[[/LINK_1]]』のパラメータをオンにすると有効になります。",
+      "sourceHash": "97109412970d909f6a541bca8c6a1b108e22dc4b0027c08240bcde1665373f5e",
+      "parts": [
+        {
+          "source": "『",
+          "link": false
+        },
+        {
+          "source": "常に選択を表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』のパラメータをオンにすると有効になります。",
+          "link": false
+        }
+      ],
+      "translation": "This is enabled by turning on the [[LINK_1]]Always Show Selection[[/LINK_1]] parameter.",
+      "contextHash": "97109412970d909f6a541bca8c6a1b108e22dc4b0027c08240bcde1665373f5e"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "戦闘時、通常とは異なる対象サイドへ、攻撃やスキル、アイテムを使用できるようにします。": "During battles, you can use attacks, skills, and items on a target side other than the usual one.",
+    "例えば、味方を攻撃したり、敵を回復したりできます。": "For example, you can attack allies or heal enemies.",
+    "眠った仲間を叩き起こしたり、アンデッドに回復魔法をかけてダメージを与えたり、あるいはＦＦシリーズのバーサクのように、味方にかけても敵にかけてもメリット・デメリットのある異常を作成したりと様々な工夫が考えられます。": "You can devise various mechanics, such as waking up a sleeping ally by hitting them, dealing damage to an undead with healing magic, or creating an effect with both benefits and drawbacks when used on either allies or enemies, like Berserk in the FF series.",
+    "通常、範囲が全体などのスキルは対象選択が表示されませんが、プラグインパラメータによって対象選択を表示できます。": "Normally, skills with an all-target scope, for example, do not display target selection, but you can display it using a plugin parameter.",
+    "他の機能を無効化すれば、それ専用のプラグインとしても活用できます。": "By disabling the other features, you can also use this as a dedicated plugin for that purpose.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the feature ON through the RPG Maker Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_PartyAttack.js": "NRP_PartyAttack.js ",
+    "ver1.021（2024/07/08）": "ver1.021 (2024/07/08) ",
+    "※このプラグインに合わせて以下のプラグインを修正しています。": "※The following plugin has been modified to work with this plugin.",
+    "併用される場合は更新をお願いします。": "Please update it if you use them together.",
+    "NRP_DynamicAnimationMZ.js": "NRP_DynamicAnimationMZ.js",
+    "NRP_DynamicAnimation.js": "NRP_DynamicAnimation.js",
+    "※MZ/MV共にDynamicMotion側もリンク先から更新してください。": "※For both MZ and MV, please also update DynamicMotion from the linked page.",
+    "NRP_BattleTargetCursor.js": "NRP_BattleTargetCursor.js",
+    "NRP_SkillRangeEX.js": "NRP_SkillRangeEX.js",
+    "注意点": "Notes",
+    "以下のプラグインと併用する場合は登録順に注意してください。": "When using this together with the following plugins, pay attention to the registration order.",
+    "NRP_BattleTargetCursor.js：当プラグインよりも上に配置": "NRP_BattleTargetCursor.js: Place it above this plugin",
+    "NRP_VisualTurn.js：当プラグインよりも下に配置": "NRP_VisualTurn.js: Place it below this plugin",
+    "更新履歴（History）": "Update History (History)",
+    "2023/11/22 -> 2024/07/08（ver1.02 -> 1.021）": "2023/11/22 -> 2024/07/08 (ver1.02 -> 1.021) ",
+    "タッチ操作でもパーティアタックできるように対応。": "Added support for party attacks using touch controls.",
+    "（2024/07/08 ver1.021）": " (2024/07/08 ver1.021) ",
+    "2021/08/13 -> 08/21（ver1.01 -> 1.011）": "2021/08/13 -> 08/21 (ver1.01 -> 1.011) ",
+    "範囲が全体、ランダムのスキルでも対象選択＆サイド切替できるよう対応。": "Added support for selecting targets and switching sides even for skills with an all-target or random scope.",
+    "それに伴い、以下のプラグインも修正しているので、更新をお願いします。": "The following plugins have also been modified accordingly, so please update them.",
+    "範囲が『敵にランダム』のスキルでパーティアタックすると、範囲が全体に変化してしまう不具合修正。（08/21 ver1.011）": "Fixed a bug where using a party attack with a skill whose scope was “Random Enemy” changed its scope to All. (08/21 ver1.011)",
+    "2021/08/06 -> 08/07（ver1.00 -> 1.001）": "2021/08/06 -> 08/07 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "コマンドをキャンセルした際、対象サイドの反転が残ってしまう不具合修正。（ver1.001）": "Fixed a bug where the target side remained reversed after canceling a command. (ver1.001)",
+    "動作対象を変更した場合、ミラーリングが逆方向に動作する不具合修正。": "Fixed a bug where mirroring moved in the opposite direction when the action target was changed.",
+    "※DynamicMotion側の修正です。": "※This is a fix for DynamicMotion.",
+    "（08/07）": " (08/07) ",
+    "使用方法（Usage）": "Usage (Usage)",
+    "導入するだけで対象サイドの切替が有効となります。": "Target-side switching is enabled simply by installing the plugin.",
+    "初期状態ではPageUp/Downで対象サイドを切り替えられます。": "By default, you can switch the target side with PageUp/PageDown.",
+    "（ゲームパッドではいわゆるＬＲボタンに相当）": "(These correspond to the so-called L/R buttons on a gamepad.)",
+    "初期状態では範囲が全体やランダムのスキルは、対象選択が表示されないため、サイドを変更できません。": "By default, skills with an all-target or random scope cannot switch target sides because target selection is not displayed.",
+    "『常に選択を表示』のパラメータをオンにすることで、それらのスキルも対象サイドを切り替えられるようにできます。": "By turning on the “Always Display Selection” parameter, you can also switch the target side for those skills.",
+    "さらにプラグインパラメータによって、左右キー（サイドビューを想定）や上下キー（フロントビューを想定）で、対象サイドを切り替えられるように設定できます。": "In addition, plugin parameters let you configure the left and right keys (intended for side-view battles) or up and down keys (intended for front-view battles) to switch the target side.",
+    "ただし『左右でサイド切替』および『上下でサイド切替』をオンにしても、それだけでは違和感のある挙動になります。": "However, even if you turn on “Switch Sides with Left/Right” or “Switch Sides with Up/Down,” the behavior will feel unnatural on its own.",
+    "これはNRP_BattleTargetCursorとの組み合わせを想定しているためです。": "This is because it is intended to be used together with NRP_BattleTargetCursor.",
+    "例えば『左右でサイド切替』をオンにする場合は、上下で対象を切り替えられるようにしてください。": "For example, if you turn on “Switch Sides with Left/Right,” configure the controls so that targets can be switched with up and down.",
+    "『上下でサイド切替』をオンにする場合はその逆です。": "If you turn on “Switch Sides with Up/Down,” do the opposite.",
+    "スキル（アイテム）のメモ欄（Note）": "Skill (Item) Note Field (Note)",
+    "スキル毎に対象サイドの変更を無効化または有効化できます。": "You can enable or disable target-side switching for each skill.",
+    "スキルのメモ欄に以下を指定してください。": "Specify the following in the skill's note field.",
+    "対象サイドの変更を有効化します。（trueは省略可）": "Enables target-side switching. (true may be omitted.)",
+    "対象サイドの変更を無効化します。": "Disables target-side switching.",
+    "指定がない場合はプラグインパラメータにある『全スキルを有効化』の設定に従います。": "If unspecified, the setting follows “EnableAllSkills” in the plugin parameters.",
+    "演出や効果の都合で味方にかけられると不都合のあるスキルがある場合は、これらの方法で切り替えてください。": "If a skill would cause problems when used on allies due to its presentation or effects, switch it using one of these methods.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "全スキルを有効化（EnableAllSkills）": "Enable All Skills (EnableAllSkills)",
+    "全てのスキルで対象サイドの変更を有効とします。": "Enables target-side switching for all skills.",
+    "オフにすると全てのスキルで無効となります。": "When turned off, it is disabled for all skills.",
+    "※アイテムも含みます。": "※This also includes items.",
+    "その上で、さらにメモ欄で例外を指定する想定です。": "Then, exceptions can be specified in the note field.",
+    "タッチ操作を有効化（EnableTouch）ver1.02": "Enable Touch Controls (EnableTouch) ver1.02",
+    "タッチ操作による対象サイドの変更を有効とします。": "Enables changing the target side via touch controls.",
+    "常に選択を表示（AlwaysSelection）ver1.01": "Always Display Selection (AlwaysSelection) ver1.01",
+    "範囲が全体などのスキルにおいても、対象の選択を表示します。": "Displays target selection even for skills that target the entire group, etc.",
+    "これにより、対象サイドの切替を有効とします。": "This enables switching the target side.",
+    "使用者も選択を表示（UserSelection）ver1.01": "Also Display User Selection (UserSelection) ver1.01",
+    "範囲が使用者のスキルにおいても、対象の選択を表示します。": "Displays target selection even for skills that target the user.",
+    "敵味方全体も選択を表示（EveryoneSelection）ver1.01": "Also Display Selection for All Enemies and Allies (EveryoneSelection) ver1.01",
+    "範囲が敵味方全体のスキルにおいても、対象の選択を表示します。": "Displays target selection even for skills that target all enemies and allies.",
+    "PageUp/Downでサイド切替（ChangeSideByPageUpDown）": "Switch Sides with PageUp/Down (ChangeSideByPageUpDown)",
+    "PageUp/Downによって対象サイドの切り替えを行います。": "Switches the target side using PageUp/Down.",
+    "ゲームパッドではＬＲボタンに該当します。": "On a gamepad, these correspond to the L/R buttons.",
+    "左右でサイド切替（ChangeSideByLeftRight）": "Switch Sides with Left/Right (ChangeSideByLeftRight)",
+    "左右キーによって対象サイドの切り替えを行います。": "Switches the target side using the left and right keys.",
+    "NRP_BattleTargetCursorとの組み合わせによって、上下で対象を切り替えられるようにすることを想定しています。": "In combination with NRP_BattleTargetCursor, this is intended to allow targets to be switched using up and down.",
+    "上下でサイド切替（ChangeSideByUpDown）": "Switch Sides with Up/Down (ChangeSideByUpDown)",
+    "上下キーによって対象サイドの切り替えを行います。": "Switches the target side using the up and down keys.",
+    "NRP_BattleTargetCursorとの組み合わせによって、左右で対象を切り替えられるようにすることを想定しています。": "In combination with NRP_BattleTargetCursor, this is intended to allow targets to be switched using left and right.",
+    "ウィンドウ表示を維持（KeepWindow）": "Keep Windows Displayed (KeepWindow)",
+    "ウィンドウの表示を維持します。": "Keeps the windows displayed.",
+    "つまり、アクター・エネミーウィンドウの表示を切り替えないようにします。": "In other words, it prevents the actor and enemy windows from switching.",
+    "こちらもNRP_BattleTargetCursorとの組み合わせを推奨します。": "Combining this with NRP_BattleTargetCursor is also recommended."
+  }
+}

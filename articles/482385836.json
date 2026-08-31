@@ -1,0 +1,1319 @@
+{
+  "articleId": "482385836",
+  "sourceUrl": "https://newrpg.seesaa.net/article/482385836.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "0dc433bc1f837ce6937cab196c58883008c81e46d5a3fa30c5780c1f1a2b3f95",
+  "translatedAt": "2026-08-31T04:44:21.022Z",
+  "title": "Expanded Vehicle Passage and Boarding/Disembarking Checks [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "乗物の通行＆乗降判定を拡張【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "9b038759b40989a8381db9b84b567d8f47e09c2f317209cc15c8d2a50def7fc4",
+      "translation": "Expanded Vehicle Passage and Boarding/Disembarking Checks [RPG Maker MZ & MV Plugin]",
+      "contextHash": "9b038759b40989a8381db9b84b567d8f47e09c2f317209cc15c8d2a50def7fc4"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "乗物の通行＆乗降判定を拡張します。",
+      "sourceHash": "5b9bb4a4c42d4e9015fc934c3ae0dc1d50bbf73d71040ff6eff1f2b016fe268f",
+      "translation": "Expands vehicle passage and boarding/disembarking checks.",
+      "contextHash": "5b9bb4a4c42d4e9015fc934c3ae0dc1d50bbf73d71040ff6eff1f2b016fe268f"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "地形タグやリージョンＩＤ、タイルＩＤやオートタイルタイプを条件にして細かく設定できます。",
+      "sourceHash": "45cd364f077743cd19b7fb4df146b34832e0fc1ffb9b47298524c784830f4886",
+      "translation": "You can configure them in detail using terrain tags, region IDs, tile IDs, and autotile types as conditions.",
+      "contextHash": "45cd364f077743cd19b7fb4df146b34832e0fc1ffb9b47298524c784830f4886"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "作成した設定に『設定ＩＤ』を付加すれば、タイルセット毎に設定を呼び出すことも可能です。",
+      "sourceHash": "0e3f05d4b5a3f6be446b1081f7631c4f295287d2f474850c7fb3691e9ab11384",
+      "translation": "By adding a “Setting ID” to the configurations you create, you can also call different configurations for each tileset.",
+      "contextHash": "0e3f05d4b5a3f6be446b1081f7631c4f295287d2f474850c7fb3691e9ab11384"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "プラグインパラメータによって、乗降を原則禁止にすることもできます。",
+      "sourceHash": "35526d6e6bbde5c01d384f91e3df88123eb9181862de33c47427273dffbb4f15",
+      "translation": "You can also use plugin parameters to prohibit boarding and disembarking by default.",
+      "contextHash": "35526d6e6bbde5c01d384f91e3df88123eb9181862de33c47427273dffbb4f15"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "「桟橋でのみ発着できる船」や「森のみ着陸できる黒い馬鳥」など、特定の地形でのみ乗降できるようにしたい場合は便利です。",
+      "sourceHash": "3f9bd2d3797db678d2c0822c6cdffbfc09268e520d1fd773259468cd8bf7fc4c",
+      "translation": "This is useful when you want vehicles to allow boarding and disembarking only on specific terrain, such as “a ship that can dock only at piers” or “a black chocobo that can land only in forests.”",
+      "contextHash": "3f9bd2d3797db678d2c0822c6cdffbfc09268e520d1fd773259468cd8bf7fc4c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ついでに飛行船の高度も設定可能です。",
+      "sourceHash": "b7bca46482db796d46824eaae39990ac88b419be3292d46b6506e29d4360f21a",
+      "translation": "You can also configure the airship’s altitude.",
+      "contextHash": "b7bca46482db796d46824eaae39990ac88b419be3292d46b6506e29d4360f21a"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "山岳地帯を通れない低空飛行の乗物などが実現できます。",
+      "sourceHash": "76c4a9e4a50cf4a49d371c542605c82f0449f0d8509eaa0e5d37b15786f4be1e",
+      "translation": "This allows you to create low-flying vehicles that cannot pass through mountainous areas.",
+      "contextHash": "76c4a9e4a50cf4a49d371c542605c82f0449f0d8509eaa0e5d37b15786f4be1e"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※Both MV and MZ are supported by all of these plugins.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_VehiclePassage.js",
+      "sourceHash": "784a89629fde6a65869830a3c87e31bded1f7ea0ee78bc63153ee3dcbba099ea",
+      "translation": "NRP_VehiclePassage.js ",
+      "contextHash": "f05fe13df4b87bb05eff7e28e352ff94f7c2e2b8ae382ba0de28b23cf20c39e4"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ver1.03（2024/08/08）",
+      "sourceHash": "fa3b4ec8da614b34dd5dc06f15c7669df18c5ddba68adb10ba5422a8394d4225",
+      "translation": "ver1.03 (2024/08/08) ",
+      "contextHash": "f05fe13df4b87bb05eff7e28e352ff94f7c2e2b8ae382ba0de28b23cf20c39e4"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "オプション",
+      "sourceHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5",
+      "translation": "Options",
+      "contextHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DebugTile.js",
+      "sourceHash": "d839245e2d4ad88768cbb74e24135b6d06d5363d64d3fc85797e48514859684d",
+      "translation": "NRP_DebugTile.js ",
+      "contextHash": "f953500f3c5b2b1f77d07a748c28d2b47192d5b4a50a43cbcfcf0f84fb9bc8d9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ver1.011（2021/11/11）",
+      "sourceHash": "89c83b270b31597e68f1ccef330d0d02332f66ab1cf8956e1c15c989d46c62d7",
+      "translation": "ver1.011 (2021/11/11) ",
+      "contextHash": "f953500f3c5b2b1f77d07a748c28d2b47192d5b4a50a43cbcfcf0f84fb9bc8d9"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_VehiclePassageの補助用に使えます。",
+      "sourceHash": "50273eb2079012029b9cd76501ec34ca0c048083ee72ce6b9288a392541de7ec",
+      "translation": "※This plugin allows you to check the autotile type and tile ID beneath your feet simply by pressing F2. It can be used as an aid for NRP_VehiclePassage.",
+      "contextHash": "50273eb2079012029b9cd76501ec34ca0c048083ee72ce6b9288a392541de7ec"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/08/08（ver1.03）",
+      "sourceHash": "3b6c2a0803c9e1ccc9d4e34cfe82f36dcae2482816a4428772b505ecbeb2f5ba",
+      "translation": "2024/08/08 (ver1.03) ",
+      "contextHash": "3b6c2a0803c9e1ccc9d4e34cfe82f36dcae2482816a4428772b505ecbeb2f5ba"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2022/01/08（ver1.02）",
+      "sourceHash": "57f79110c7acca037d0f22716d59d64e5dd574390498c528e24323a364ca6fa8",
+      "translation": "2022/01/08 (ver1.02) ",
+      "contextHash": "57f79110c7acca037d0f22716d59d64e5dd574390498c528e24323a364ca6fa8"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ゲームロード時に通行情報が反映されない不具合修正。",
+      "sourceHash": "85239bdfaf08e0350c119d73c05a5875c38f65315082c8541104f501f3d2db5a",
+      "translation": "Fixed a bug where passage information was not applied when loading a game.",
+      "contextHash": "85239bdfaf08e0350c119d73c05a5875c38f65315082c8541104f501f3d2db5a"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/07/23 -> 2021/11/11（ver1.01 -> 1.011）",
+      "sourceHash": "504143daf9432f54632407715a1df83d5abb8877474e6303eb2c59c840a53e77",
+      "translation": "2021/07/23 -> 2021/11/11 (ver1.01 -> 1.011) ",
+      "contextHash": "504143daf9432f54632407715a1df83d5abb8877474e6303eb2c59c840a53e77"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "イベントテストでエラーになる不具合修正。（11/11 ver1.011）",
+      "sourceHash": "9a3356a4c35b65c749a7d5846940006c55db2d2201cac0bc39dac8be3290ba68",
+      "translation": "Fixed a bug that caused an error during event testing. (11/11 ver1.011)",
+      "contextHash": "9a3356a4c35b65c749a7d5846940006c55db2d2201cac0bc39dac8be3290ba68"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/07/15（ver1.00）",
+      "sourceHash": "503f9e5b900522caa52bce3a8724f9593f758bb3f0f5fe66c44082fb4c674db3",
+      "translation": "2021/07/15 (ver1.00) ",
+      "contextHash": "503f9e5b900522caa52bce3a8724f9593f758bb3f0f5fe66c44082fb4c674db3"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "プラグインパラメータの各設定リストに、通行＆乗降判定を設定してください。",
+      "sourceHash": "2bd9edcdf6cc6505251290c6eb930b0485b4229bd9d949918fa79c82986c41a2",
+      "translation": "Configure the passage and boarding/disembarking checks in each plugin parameter settings list.",
+      "contextHash": "2bd9edcdf6cc6505251290c6eb930b0485b4229bd9d949918fa79c82986c41a2"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "全タイルセットで有効とするか、タイルセット毎に呼び出すかをリスト内のパラメータによって切り替え可能です。",
+      "sourceHash": "c0edd40bccba6298ac9cdb0f15efc658f148fc0b191ca6f5ea2f129a3e2c72c3",
+      "translation": "You can use the parameters in the list to switch between making the settings active for all tilesets and calling them separately for each tileset.",
+      "contextHash": "c0edd40bccba6298ac9cdb0f15efc658f148fc0b191ca6f5ea2f129a3e2c72c3"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "タイルセットのメモ欄（Note）",
+      "sourceHash": "633b516b02a20171ef23a33955ecb9b93eee2e5117daa9e9b87055e0c34ed87c",
+      "translation": "Tileset Note Field (Note)",
+      "contextHash": "633b516b02a20171ef23a33955ecb9b93eee2e5117daa9e9b87055e0c34ed87c"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "タイルセット毎に設定する場合はメモ欄に以下を指定してください。",
+      "sourceHash": "be3ef53da2e9a738a579843ea1eb70f29ce6233459ea149e3f6fe667cb2346ac",
+      "translation": "To configure the settings for each tileset, specify the following in its note field.",
+      "contextHash": "be3ef53da2e9a738a579843ea1eb70f29ce6233459ea149e3f6fe667cb2346ac"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "?の部分が設定リストに登録した『設定ＩＤ』となります。",
+      "sourceHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005",
+      "translation": "The ? portion is the “Setting ID” registered in the settings list.",
+      "contextHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "また、カンマ区切りによって複数指定も可能です。",
+      "sourceHash": "a6cd6ded998b27d622a05705fb2bab73d3884e0fcf671b8aefdf41dd04d323ed",
+      "translation": "You can also specify multiple IDs by separating them with commas.",
+      "contextHash": "a6cd6ded998b27d622a05705fb2bab73d3884e0fcf671b8aefdf41dd04d323ed"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "小型船の設定リスト（BoatSettingList）",
+      "sourceHash": "e119bd7ac15f407b19042043bc7b71fbbac232a4f98134345b19b7907f8d9b99",
+      "translation": "Boat Settings List (BoatSettingList)",
+      "contextHash": "e119bd7ac15f407b19042043bc7b71fbbac232a4f98134345b19b7907f8d9b99"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "小型船の通行＆乗降設定の一覧です。",
+      "sourceHash": "c51d91ea2877aaf2df6d054618d91a09df34be7d7da085878b1600fb2141a3f8",
+      "translation": "A list of passage and boarding/disembarking settings for boats.",
+      "contextHash": "c51d91ea2877aaf2df6d054618d91a09df34be7d7da085878b1600fb2141a3f8"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "大型船の設定リスト（ShipSettingList）",
+      "sourceHash": "313aabce3fd53fd0b86af2b920d177f8d522f2a753c26f8d316be185d139982d",
+      "translation": "Ship Settings List (ShipSettingList)",
+      "contextHash": "313aabce3fd53fd0b86af2b920d177f8d522f2a753c26f8d316be185d139982d"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "大型船の通行＆乗降設定の一覧です。",
+      "sourceHash": "1d28c30d7b6ae9f9865122323043b0cfaece26161fff346e5abeb6b090636626",
+      "translation": "A list of passage and boarding/disembarking settings for ships.",
+      "contextHash": "1d28c30d7b6ae9f9865122323043b0cfaece26161fff346e5abeb6b090636626"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "飛行船の設定リスト（AirshipSettingList）",
+      "sourceHash": "4608e52dcb6c621b365efff37421b92e6318be03045339846e2c9bbbf0813779",
+      "translation": "Airship Settings List (AirshipSettingList)",
+      "contextHash": "4608e52dcb6c621b365efff37421b92e6318be03045339846e2c9bbbf0813779"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "飛行船の通行＆乗降設定の一覧です。",
+      "sourceHash": "1986ecaca79ed8bd2665fce6eeaf0b2cb2867dea42e751898cb523b0ecac6b38",
+      "translation": "A list of passage and boarding/disembarking settings for airships.",
+      "contextHash": "1986ecaca79ed8bd2665fce6eeaf0b2cb2867dea42e751898cb523b0ecac6b38"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "小型船の原則乗降禁止（BoatNoGetOff）",
+      "sourceHash": "570b342edc4eb39f9eaec7b99cd53f0a6e085dab7a00105de7c7398d5b0d60ca",
+      "translation": "Prohibit Boarding/Disembarking from Boats by Default (BoatNoGetOff)",
+      "contextHash": "570b342edc4eb39f9eaec7b99cd53f0a6e085dab7a00105de7c7398d5b0d60ca"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "小型船の乗降を原則禁止します。",
+      "sourceHash": "ebfc1e393d4139782412b497a5096ac597675b5c7fa1bb8fe735764ce3336d2f",
+      "translation": "Prohibits boarding and disembarking from boats by default.",
+      "contextHash": "ebfc1e393d4139782412b497a5096ac597675b5c7fa1bb8fe735764ce3336d2f"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "設定リストに定義した地形のみ乗降できます。",
+      "sourceHash": "8e8b5b992fc6d3b44e798be9d3d1e7295a3b592482efd86d1b1ebe3a49b22e9b",
+      "translation": "Boarding and disembarking are allowed only on terrain defined in the settings list.",
+      "contextHash": "8e8b5b992fc6d3b44e798be9d3d1e7295a3b592482efd86d1b1ebe3a49b22e9b"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※乗降と書いていますが、正確には降りる時しか判定しない仕様のようです。これは全ての乗物で共通しています",
+      "sourceHash": "04c6a4b6df982746f5c186de0561c60f60800ab0144787470fe327af76f1a7d7",
+      "translation": "※Although this says boarding and disembarking, it appears that the check is actually performed only when disembarking. This is common to all vehicles.",
+      "contextHash": "04c6a4b6df982746f5c186de0561c60f60800ab0144787470fe327af76f1a7d7"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "大型船の原則乗降禁止（ShipNoGetOff）",
+      "sourceHash": "bff4b2baefb2acf2e0e5927d26049855070e5038694d6a1eb992083652a17f43",
+      "translation": "Prohibit Boarding/Disembarking from Ships by Default (ShipNoGetOff)",
+      "contextHash": "bff4b2baefb2acf2e0e5927d26049855070e5038694d6a1eb992083652a17f43"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "大型船の乗降を原則禁止します。",
+      "sourceHash": "0e41e73095b11d932319dfe73dfc48f054f3c13b1ec7edff63564081291e936b",
+      "translation": "Prohibits boarding and disembarking from ships by default.",
+      "contextHash": "0e41e73095b11d932319dfe73dfc48f054f3c13b1ec7edff63564081291e936b"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "設定リストに定義した地形のみ乗降できます。",
+      "sourceHash": "8e8b5b992fc6d3b44e798be9d3d1e7295a3b592482efd86d1b1ebe3a49b22e9b",
+      "translation": "Boarding and disembarking are allowed only on terrain defined in the settings list.",
+      "contextHash": "8e8b5b992fc6d3b44e798be9d3d1e7295a3b592482efd86d1b1ebe3a49b22e9b"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "飛行船の原則乗降禁止（AirshipNoGetOff）",
+      "sourceHash": "b0a7a37e63b89a15a00d92be4d7f50de3299e49c61fb610339b1376386772f9e",
+      "translation": "Prohibit Boarding/Disembarking from Airships by Default (AirshipNoGetOff)",
+      "contextHash": "b0a7a37e63b89a15a00d92be4d7f50de3299e49c61fb610339b1376386772f9e"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "飛行船の乗降を原則禁止します。",
+      "sourceHash": "faacda20ece8d55c7c403eaef4efd88a53abaa4384df979f533c09ef53756ab7",
+      "translation": "Prohibits boarding and disembarking from airships by default.",
+      "contextHash": "faacda20ece8d55c7c403eaef4efd88a53abaa4384df979f533c09ef53756ab7"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "設定リストに定義した地形のみ乗降できます。",
+      "sourceHash": "8e8b5b992fc6d3b44e798be9d3d1e7295a3b592482efd86d1b1ebe3a49b22e9b",
+      "translation": "Boarding and disembarking are allowed only on terrain defined in the settings list.",
+      "contextHash": "8e8b5b992fc6d3b44e798be9d3d1e7295a3b592482efd86d1b1ebe3a49b22e9b"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "飛行船の高度（AirshipAltitude）",
+      "sourceHash": "408a97d0fdc77110f1dceaee2b9fde10470afe2aeae0d05cef1495bf9f011c22",
+      "translation": "Airship Altitude (AirshipAltitude)",
+      "contextHash": "408a97d0fdc77110f1dceaee2b9fde10470afe2aeae0d05cef1495bf9f011c22"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "飛行船の高度です。デフォルトは48となります。",
+      "sourceHash": "2a02d84a0af4bb29b3763dc3e21cf67b045c9fa1551215b6c87254c59ce01c1f",
+      "translation": "The airship’s altitude. The default is 48.",
+      "contextHash": "2a02d84a0af4bb29b3763dc3e21cf67b045c9fa1551215b6c87254c59ce01c1f"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "飛行船を通常キャラと同じに（AirshipSameAsCharacters） ver1.01",
+      "sourceHash": "93413c91ca776b712d08f622f31d1e4357b590e68a821ea3ccea9bc6db0dc87d",
+      "translation": "Make Airships the Same as Normal Characters (AirshipSameAsCharacters) ver1.01",
+      "contextHash": "93413c91ca776b712d08f622f31d1e4357b590e68a821ea3ccea9bc6db0dc87d"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "飛行船のプライオリティタイプを『通常キャラと同じ』に変更します。",
+      "sourceHash": "606256331fef7b70a5a53fcf51d170ab9c12a78d9ae74108e945568d060ce344",
+      "translation": "Changes the airship’s priority type to “Same as Normal Characters.”",
+      "contextHash": "606256331fef7b70a5a53fcf51d170ab9c12a78d9ae74108e945568d060ce344"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "デフォルトだと飛行船は『通常キャラの下』として表示されますが、背の高い乗物などの場合は非常に不自然です。それを修正するための項目です。",
+      "sourceHash": "15a9f4e7e8b1ac6cad75593b0553c0c8703906a9ebe2290830dfa53a774c6c91",
+      "translation": "By default, airships are displayed “Below Normal Characters,” which looks very unnatural for tall vehicles and the like. This setting corrects that issue.",
+      "contextHash": "15a9f4e7e8b1ac6cad75593b0553c0c8703906a9ebe2290830dfa53a774c6c91"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "タイルイベントを考慮（ConsiderTileEvent）",
+      "sourceHash": "ca7c56b79df2fe59d4235ebf02c38cab09786850f9f15836c428c61f92ab6262",
+      "translation": "Consider Tile Events (ConsiderTileEvent)",
+      "contextHash": "ca7c56b79df2fe59d4235ebf02c38cab09786850f9f15836c428c61f92ab6262"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "タイルイベントが配置されている場合、そのイベントのタイルＩＤで判定します。",
+      "sourceHash": "d672b6f428e6d4103a4e794157b3ff0f65213aa5b05a5ee98df159901db19117",
+      "translation": "When a tile event is placed, the check uses that event’s tile ID.",
+      "contextHash": "d672b6f428e6d4103a4e794157b3ff0f65213aa5b05a5ee98df159901db19117"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト）",
+      "sourceHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb",
+      "translation": "Plugin Parameters (Settings List)",
+      "contextHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "設定ＩＤ（SettingId）",
+      "sourceHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d",
+      "translation": "Setting ID (SettingId)",
+      "contextHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "タイルセットのメモ欄からの呼び出しに使う識別子です。",
+      "sourceHash": "d9260bb02a09c2fbcf3b8e476cc5533e0c4828ae2b41257fe06d88cc7b217daa",
+      "translation": "This is the identifier used to call it from a tileset's note field.",
+      "contextHash": "d9260bb02a09c2fbcf3b8e476cc5533e0c4828ae2b41257fe06d88cc7b217daa"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "『全タイルセットで有効』がオンの場合は不要です。",
+      "sourceHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6",
+      "translation": "This is not required when “Valid for All Tilesets” is enabled.",
+      "contextHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "メモ（Memo）",
+      "sourceHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8",
+      "translation": "Memo (Memo)",
+      "contextHash": "ecf79de284259bef8059ddc96657d8c07c1147c1d8f17aac032912211a157fc8"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "判別用のメモです。分かりやすい名前を付けてください。",
+      "sourceHash": "b3aaf3202c3af0390586ba43dde7def0c4b6307918586dc4cd9358751702864f",
+      "translation": "This memo is used for identification. Please give it an easily recognizable name.",
+      "contextHash": "b3aaf3202c3af0390586ba43dde7def0c4b6307918586dc4cd9358751702864f"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "全タイルセットで有効（ValidAllTilesets）",
+      "sourceHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280",
+      "translation": "Valid for All Tilesets (ValidAllTilesets)",
+      "contextHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "設定を全てのタイルセットで有効にします。",
+      "sourceHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e",
+      "translation": "Makes the setting valid for all tilesets.",
+      "contextHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "オフにした場合は、個別のタイルセット毎に設定できます。",
+      "sourceHash": "f5a14525949bd5d0dfbf596853dfb8236a47c2c9db08a905b7ead46bd151f928",
+      "translation": "When disabled, you can configure it separately for each tileset.",
+      "contextHash": "f5a14525949bd5d0dfbf596853dfb8236a47c2c9db08a905b7ead46bd151f928"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：条件）",
+      "sourceHash": "2b09a5c11b4ae90e9e4d9db6506e85eeec491a71f1d5836a2cb940a92c553b11",
+      "translation": "Plugin Parameters (Settings List: Conditions)",
+      "contextHash": "2b09a5c11b4ae90e9e4d9db6506e85eeec491a71f1d5836a2cb940a92c553b11"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "地形タグ（TerrainTag）",
+      "sourceHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061",
+      "translation": "Terrain Tag (TerrainTag)",
+      "contextHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "対象とする地形タグ（1~7）を指定します。",
+      "sourceHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6",
+      "translation": "Specify the target terrain tags (1~7).",
+      "contextHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "７つまでしか設定できないのでご利用は計画的に。",
+      "sourceHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620",
+      "translation": "Since you can only configure up to seven, use them strategically.",
+      "contextHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "リージョンＩＤ（RegionId）",
+      "sourceHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78",
+      "translation": "Region ID (RegionId)",
+      "contextHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "対象とするリージョン（1~255）を指定します。",
+      "sourceHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644",
+      "translation": "Specify the target regions (1~255).",
+      "contextHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "オートタイルタイプ（AutotileType）",
+      "sourceHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e",
+      "translation": "Autotile Type (AutotileType)",
+      "contextHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "対象とするオートタイルタイプを指定します。",
+      "sourceHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b",
+      "translation": "Specify the target autotile types.",
+      "contextHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。",
+      "sourceHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8",
+      "translation": "An autotile type is a number assigned to each autotile. By default, it is used to determine battle backgrounds.",
+      "contextHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "地形タグと異なり数の制限がないため、自由に設定が可能です。",
+      "sourceHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61",
+      "translation": "Unlike terrain tags, there is no limit on the number of these, so you can configure them freely.",
+      "contextHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "ただし、この値は通常確認できません。",
+      "sourceHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1",
+      "translation": "However, this value cannot normally be checked.",
+      "contextHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "オプションにある「タイル情報をデバッグ表示する」プラグインで確認ができます。",
+      "sourceHash": "a46cb84c60ff214ebce3c51036d5cccdfd5d0d955b04e443d0a7b9a2bffb08d5",
+      "translation": "You can check it using the “Display Tile Information for Debugging” plugin found under Options.",
+      "contextHash": "a46cb84c60ff214ebce3c51036d5cccdfd5d0d955b04e443d0a7b9a2bffb08d5"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "タイルＩＤ（TileId）",
+      "sourceHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e",
+      "translation": "Tile ID (TileId)",
+      "contextHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "対象とするタイルＩＤを指定します。",
+      "sourceHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf",
+      "translation": "Specify the target tile IDs.",
+      "contextHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple values can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "こちらはエディタの機能で普通に取得できますが、面倒です。",
+      "sourceHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4",
+      "translation": "You can obtain this normally using the editor's features, but it is cumbersome.",
+      "contextHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "こちらも「タイル情報をデバッグ表示する」プラグインでの確認をオススメします。",
+      "sourceHash": "eff68a8e6e250dced0b450620df1e235036f410e59117ef23b87e17e39cdab34",
+      "translation": "Here too, I recommend checking it using the “Display Tile Information for Debugging” plugin.",
+      "contextHash": "eff68a8e6e250dced0b450620df1e235036f410e59117ef23b87e17e39cdab34"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：通行設定）",
+      "sourceHash": "56713ff0db9a15f03e18362c0a7a44dffa825489504fdf8325de0ca33f37772b",
+      "translation": "Plugin Parameters (Settings List: Passage Settings)",
+      "contextHash": "56713ff0db9a15f03e18362c0a7a44dffa825489504fdf8325de0ca33f37772b"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "通行可能（CanPass）",
+      "sourceHash": "acadaa03b57e6e1e069893d285d29544fc6fdf49528e5cf58c570c10917af542",
+      "translation": "Can Pass (CanPass)",
+      "contextHash": "acadaa03b57e6e1e069893d285d29544fc6fdf49528e5cf58c570c10917af542"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "通行可能かどうか？",
+      "sourceHash": "3b2e554e170f8154f2ad146b4265da1c9766226fc40969e9d5023f7106bfb531",
+      "translation": "Can the tile be traversed?",
+      "contextHash": "3b2e554e170f8154f2ad146b4265da1c9766226fc40969e9d5023f7106bfb531"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "特に変更したくない場合は空欄にしておいてください",
+      "sourceHash": "cddf610c43e60addda72f9a4c92bd7dff852e7501d314539e19f093f663ef06d",
+      "translation": "Leave this blank if you do not want to make any particular changes.",
+      "contextHash": "cddf610c43e60addda72f9a4c92bd7dff852e7501d314539e19f093f663ef06d"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "乗降可能（CanGetOn）",
+      "sourceHash": "3252203d9a0451e7588ab594d8941f693db72ae9aaeeefdbab05ae6db1da9be7",
+      "translation": "Can Get On (CanGetOn)",
+      "contextHash": "3252203d9a0451e7588ab594d8941f693db72ae9aaeeefdbab05ae6db1da9be7"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "乗降可能かどうか？",
+      "sourceHash": "253ab69a729c94e39e96a332b9c20b39e9cfc894d20bb24f2b8f4ad274fdec2a",
+      "translation": "Can the player board or disembark?",
+      "contextHash": "253ab69a729c94e39e96a332b9c20b39e9cfc894d20bb24f2b8f4ad274fdec2a"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "特に変更したくない場合は空欄にしておいてください",
+      "sourceHash": "cddf610c43e60addda72f9a4c92bd7dff852e7501d314539e19f093f663ef06d",
+      "translation": "Leave this blank if you do not want to make any particular changes.",
+      "contextHash": "cddf610c43e60addda72f9a4c92bd7dff852e7501d314539e19f093f663ef06d"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]タイルセットのメモ欄（Note）[[/LINK_1]]",
+      "sourceHash": "d0e3c7e382e4ecd1a32218624c24a38fff07f1794410eaa9d7828bf519399f95",
+      "parts": [
+        {
+          "source": "タイルセットのメモ欄（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tile Set Note Field (Note)[[/LINK_1]]",
+      "contextHash": "d0e3c7e382e4ecd1a32218624c24a38fff07f1794410eaa9d7828bf519399f95"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]小型船の設定リスト（BoatSettingList）[[/LINK_1]]",
+      "sourceHash": "de80bf73ea8b8b8e82307ae76efd975433b647b67d258fcf6bec81b9d5fd9b11",
+      "parts": [
+        {
+          "source": "小型船の設定リスト（BoatSettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Small Boat Setting List (BoatSettingList)[[/LINK_1]]",
+      "contextHash": "de80bf73ea8b8b8e82307ae76efd975433b647b67d258fcf6bec81b9d5fd9b11"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]大型船の設定リスト（ShipSettingList）[[/LINK_1]]",
+      "sourceHash": "fbbb3b81d7f91101381886b57996517236202037c1278d0ac899dd7828c4743e",
+      "parts": [
+        {
+          "source": "大型船の設定リスト（ShipSettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Large Ship Setting List (ShipSettingList)[[/LINK_1]]",
+      "contextHash": "fbbb3b81d7f91101381886b57996517236202037c1278d0ac899dd7828c4743e"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]飛行船の設定リスト（AirshipSettingList）[[/LINK_1]]",
+      "sourceHash": "66c4ade4f6f980fd3a106f3d056fc2d28911614d8efbd564d0c1887dc3a5b7fe",
+      "parts": [
+        {
+          "source": "飛行船の設定リスト（AirshipSettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Airship Setting List (AirshipSettingList)[[/LINK_1]]",
+      "contextHash": "66c4ade4f6f980fd3a106f3d056fc2d28911614d8efbd564d0c1887dc3a5b7fe"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]小型船の原則乗降禁止（BoatNoGetOff）[[/LINK_1]]",
+      "sourceHash": "571bd70236b537cff93fe3990fd7ef893b17270d83675a1682fa4523d3af28af",
+      "parts": [
+        {
+          "source": "小型船の原則乗降禁止（BoatNoGetOff）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Generally Prohibit Boarding and Disembarking from Small Boats (BoatNoGetOff)[[/LINK_1]]",
+      "contextHash": "571bd70236b537cff93fe3990fd7ef893b17270d83675a1682fa4523d3af28af"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]大型船の原則乗降禁止（ShipNoGetOff）[[/LINK_1]]",
+      "sourceHash": "725c989339f0c0145fa46c9cb5c4429966fa512115f33603cc0fffef7605daf8",
+      "parts": [
+        {
+          "source": "大型船の原則乗降禁止（ShipNoGetOff）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Generally Prohibit Boarding and Disembarking from Large Ships (ShipNoGetOff)[[/LINK_1]]",
+      "contextHash": "725c989339f0c0145fa46c9cb5c4429966fa512115f33603cc0fffef7605daf8"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]飛行船の原則乗降禁止（AirshipNoGetOff）[[/LINK_1]]",
+      "sourceHash": "d8811a94d359594472a123f8f419bb3a3343f3f18f507985e0cb79e176b5e076",
+      "parts": [
+        {
+          "source": "飛行船の原則乗降禁止（AirshipNoGetOff）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Generally Prohibit Boarding and Disembarking from Airships (AirshipNoGetOff)[[/LINK_1]]",
+      "contextHash": "d8811a94d359594472a123f8f419bb3a3343f3f18f507985e0cb79e176b5e076"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]飛行船の高度（AirshipAltitude）[[/LINK_1]]",
+      "sourceHash": "656e94ad32df1d384bb8d33e4cb983a7a731f404fa7aa8ebd7324b40395bc6d1",
+      "parts": [
+        {
+          "source": "飛行船の高度（AirshipAltitude）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Airship Altitude (AirshipAltitude)[[/LINK_1]]",
+      "contextHash": "656e94ad32df1d384bb8d33e4cb983a7a731f404fa7aa8ebd7324b40395bc6d1"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]飛行船を通常キャラと同じに（AirshipSameAsCharacters）[[/LINK_1]]ver1.01",
+      "sourceHash": "5e2e5fd3acb14254ce09b3aab8f8b77a806eff655596d8d59ab14cd53cf4cdd4",
+      "parts": [
+        {
+          "source": "飛行船を通常キャラと同じに（AirshipSameAsCharacters）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Make Airships the Same as Regular Characters (AirshipSameAsCharacters)[[/LINK_1]] ver1.01",
+      "contextHash": "5e2e5fd3acb14254ce09b3aab8f8b77a806eff655596d8d59ab14cd53cf4cdd4"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]タイルイベントを考慮（ConsiderTileEvent）[[/LINK_1]]",
+      "sourceHash": "db2f3755469d9839bb03f72af2ab6d03a794e37df1e74d4467e8409178dc7c3d",
+      "parts": [
+        {
+          "source": "タイルイベントを考慮（ConsiderTileEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Consider Tile Events (ConsiderTileEvent)[[/LINK_1]]",
+      "contextHash": "db2f3755469d9839bb03f72af2ab6d03a794e37df1e74d4467e8409178dc7c3d"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト）[[/LINK_1]]",
+      "sourceHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List)[[/LINK_1]]",
+      "contextHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]設定ＩＤ（SettingId）[[/LINK_1]]",
+      "sourceHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165",
+      "parts": [
+        {
+          "source": "設定ＩＤ（SettingId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting ID (SettingId)[[/LINK_1]]",
+      "contextHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]メモ（Memo）[[/LINK_1]]",
+      "sourceHash": "e6a4240e809eb471ecd4c12c0d1a5548fe8b272f3936e05c201c5a51321ad0bc",
+      "parts": [
+        {
+          "source": "メモ（Memo）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Memo (Memo)[[/LINK_1]]",
+      "contextHash": "e6a4240e809eb471ecd4c12c0d1a5548fe8b272f3936e05c201c5a51321ad0bc"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]全タイルセットで有効（ValidAllTilesets）[[/LINK_1]]",
+      "sourceHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58",
+      "parts": [
+        {
+          "source": "全タイルセットで有効（ValidAllTilesets）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Valid for All Tilesets (ValidAllTilesets)[[/LINK_1]]",
+      "contextHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：条件）[[/LINK_1]]",
+      "sourceHash": "b40654d723344ac5a0c7887773b3614f8582027ddb6aa288c59023e459749b8b",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：条件）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List: Conditions)[[/LINK_1]]",
+      "contextHash": "b40654d723344ac5a0c7887773b3614f8582027ddb6aa288c59023e459749b8b"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]地形タグ（TerrainTag）[[/LINK_1]]",
+      "sourceHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0",
+      "parts": [
+        {
+          "source": "地形タグ（TerrainTag）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Terrain Tag (TerrainTag)[[/LINK_1]]",
+      "contextHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]リージョンＩＤ（RegionId）[[/LINK_1]]",
+      "sourceHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3",
+      "parts": [
+        {
+          "source": "リージョンＩＤ（RegionId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Region ID (RegionId)[[/LINK_1]]",
+      "contextHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]オートタイルタイプ（AutotileType）[[/LINK_1]]",
+      "sourceHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6",
+      "parts": [
+        {
+          "source": "オートタイルタイプ（AutotileType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Autotile Type (AutotileType)[[/LINK_1]]",
+      "contextHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]タイルＩＤ（TileId）[[/LINK_1]]",
+      "sourceHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065",
+      "parts": [
+        {
+          "source": "タイルＩＤ（TileId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tile ID (TileId)[[/LINK_1]]",
+      "contextHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：通行設定）[[/LINK_1]]",
+      "sourceHash": "e34e8f9a2b16de383409c8e07550bb8c3c5ce7924ec7dfa565c68a395d2d66aa",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：通行設定）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List: Passage Settings)[[/LINK_1]]",
+      "contextHash": "e34e8f9a2b16de383409c8e07550bb8c3c5ce7924ec7dfa565c68a395d2d66aa"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]通行可能（CanPass）[[/LINK_1]]",
+      "sourceHash": "eed27b19da357033d206d7024761bab90455f4a7645675b8b6d33bd8d88f8c39",
+      "parts": [
+        {
+          "source": "通行可能（CanPass）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Passable (CanPass)[[/LINK_1]]",
+      "contextHash": "eed27b19da357033d206d7024761bab90455f4a7645675b8b6d33bd8d88f8c39"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]乗降可能（CanGetOn）[[/LINK_1]]",
+      "sourceHash": "d7f637ce45fecd201dd27276b6c2b63675be69056b88288dbadd7052dcc8d58b",
+      "parts": [
+        {
+          "source": "乗降可能（CanGetOn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Can Board and Disembark (CanGetOn)[[/LINK_1]]",
+      "contextHash": "d7f637ce45fecd201dd27276b6c2b63675be69056b88288dbadd7052dcc8d58b"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "タイル情報をデバッグ表示する（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887",
+      "parts": [
+        {
+          "source": "タイル情報をデバッグ表示する（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Display Tile Information for Debugging ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]タイルイベントの通行＆乗降[[/LINK_1]]に対応した。",
+      "sourceHash": "05c4f90239e42feb99e2c455a4caf79be11ec3f21371aa7bf3221164cd18fc60",
+      "parts": [
+        {
+          "source": "タイルイベントの通行＆乗降",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応した。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Tile Event Passage and Boarding/Disembarking[[/LINK_1]] support has been added.",
+      "contextHash": "05c4f90239e42feb99e2c455a4caf79be11ec3f21371aa7bf3221164cd18fc60"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "『[[LINK_1]]飛行船を通常キャラと同じに[[/LINK_1]]』のプラグインパラメータを追加。",
+      "sourceHash": "c1686285b95c708d4e31cdef92384d2508e623be3f36a2e1b352009cdd3621c0",
+      "parts": [
+        {
+          "source": "『",
+          "link": false
+        },
+        {
+          "source": "飛行船を通常キャラと同じに",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "』のプラグインパラメータを追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a plugin parameter for “[[LINK_1]]Make Airships the Same as Regular Characters[[/LINK_1]]”.",
+      "contextHash": "c1686285b95c708d4e31cdef92384d2508e623be3f36a2e1b352009cdd3621c0"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "乗物の通行＆乗降判定を拡張します。": "Expands vehicle passage and boarding/disembarking checks.",
+    "地形タグやリージョンＩＤ、タイルＩＤやオートタイルタイプを条件にして細かく設定できます。": "You can configure them in detail using terrain tags, region IDs, tile IDs, and autotile types as conditions.",
+    "作成した設定に『設定ＩＤ』を付加すれば、タイルセット毎に設定を呼び出すことも可能です。": "By adding a “Setting ID” to the configurations you create, you can also call different configurations for each tileset.",
+    "プラグインパラメータによって、乗降を原則禁止にすることもできます。": "You can also use plugin parameters to prohibit boarding and disembarking by default.",
+    "「桟橋でのみ発着できる船」や「森のみ着陸できる黒い馬鳥」など、特定の地形でのみ乗降できるようにしたい場合は便利です。": "This is useful when you want vehicles to allow boarding and disembarking only on specific terrain, such as “a ship that can dock only at piers” or “a black chocobo that can land only in forests.”",
+    "ついでに飛行船の高度も設定可能です。": "You can also configure the airship’s altitude.",
+    "山岳地帯を通れない低空飛行の乗物などが実現できます。": "This allows you to create low-flying vehicles that cannot pass through mountainous areas.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※Both MV and MZ are supported by all of these plugins.",
+    "NRP_VehiclePassage.js": "NRP_VehiclePassage.js ",
+    "ver1.03（2024/08/08）": "ver1.03 (2024/08/08) ",
+    "オプション": "Options",
+    "NRP_DebugTile.js": "NRP_DebugTile.js ",
+    "ver1.011（2021/11/11）": "ver1.011 (2021/11/11) ",
+    "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_VehiclePassageの補助用に使えます。": "※This plugin allows you to check the autotile type and tile ID beneath your feet simply by pressing F2. It can be used as an aid for NRP_VehiclePassage.",
+    "更新履歴（History）": "Update History (History)",
+    "2024/08/08（ver1.03）": "2024/08/08 (ver1.03) ",
+    "2022/01/08（ver1.02）": "2022/01/08 (ver1.02) ",
+    "ゲームロード時に通行情報が反映されない不具合修正。": "Fixed a bug where passage information was not applied when loading a game.",
+    "2021/07/23 -> 2021/11/11（ver1.01 -> 1.011）": "2021/07/23 -> 2021/11/11 (ver1.01 -> 1.011) ",
+    "イベントテストでエラーになる不具合修正。（11/11 ver1.011）": "Fixed a bug that caused an error during event testing. (11/11 ver1.011)",
+    "2021/07/15（ver1.00）": "2021/07/15 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータの各設定リストに、通行＆乗降判定を設定してください。": "Configure the passage and boarding/disembarking checks in each plugin parameter settings list.",
+    "全タイルセットで有効とするか、タイルセット毎に呼び出すかをリスト内のパラメータによって切り替え可能です。": "You can use the parameters in the list to switch between making the settings active for all tilesets and calling them separately for each tileset.",
+    "タイルセットのメモ欄（Note）": "Tileset Note Field (Note)",
+    "タイルセット毎に設定する場合はメモ欄に以下を指定してください。": "To configure the settings for each tileset, specify the following in its note field.",
+    "?の部分が設定リストに登録した『設定ＩＤ』となります。": "The ? portion is the “Setting ID” registered in the settings list.",
+    "また、カンマ区切りによって複数指定も可能です。": "You can also specify multiple IDs by separating them with commas.",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "小型船の設定リスト（BoatSettingList）": "Boat Settings List (BoatSettingList)",
+    "小型船の通行＆乗降設定の一覧です。": "A list of passage and boarding/disembarking settings for boats.",
+    "大型船の設定リスト（ShipSettingList）": "Ship Settings List (ShipSettingList)",
+    "大型船の通行＆乗降設定の一覧です。": "A list of passage and boarding/disembarking settings for ships.",
+    "飛行船の設定リスト（AirshipSettingList）": "Airship Settings List (AirshipSettingList)",
+    "飛行船の通行＆乗降設定の一覧です。": "A list of passage and boarding/disembarking settings for airships.",
+    "小型船の原則乗降禁止（BoatNoGetOff）": "Prohibit Boarding/Disembarking from Boats by Default (BoatNoGetOff)",
+    "小型船の乗降を原則禁止します。": "Prohibits boarding and disembarking from boats by default.",
+    "設定リストに定義した地形のみ乗降できます。": "Boarding and disembarking are allowed only on terrain defined in the settings list.",
+    "※乗降と書いていますが、正確には降りる時しか判定しない仕様のようです。これは全ての乗物で共通しています": "※Although this says boarding and disembarking, it appears that the check is actually performed only when disembarking. This is common to all vehicles.",
+    "大型船の原則乗降禁止（ShipNoGetOff）": "Prohibit Boarding/Disembarking from Ships by Default (ShipNoGetOff)",
+    "大型船の乗降を原則禁止します。": "Prohibits boarding and disembarking from ships by default.",
+    "飛行船の原則乗降禁止（AirshipNoGetOff）": "Prohibit Boarding/Disembarking from Airships by Default (AirshipNoGetOff)",
+    "飛行船の乗降を原則禁止します。": "Prohibits boarding and disembarking from airships by default.",
+    "飛行船の高度（AirshipAltitude）": "Airship Altitude (AirshipAltitude)",
+    "飛行船の高度です。デフォルトは48となります。": "The airship’s altitude. The default is 48.",
+    "飛行船を通常キャラと同じに（AirshipSameAsCharacters） ver1.01": "Make Airships the Same as Normal Characters (AirshipSameAsCharacters) ver1.01",
+    "飛行船のプライオリティタイプを『通常キャラと同じ』に変更します。": "Changes the airship’s priority type to “Same as Normal Characters.”",
+    "デフォルトだと飛行船は『通常キャラの下』として表示されますが、背の高い乗物などの場合は非常に不自然です。それを修正するための項目です。": "By default, airships are displayed “Below Normal Characters,” which looks very unnatural for tall vehicles and the like. This setting corrects that issue.",
+    "タイルイベントを考慮（ConsiderTileEvent）": "Consider Tile Events (ConsiderTileEvent)",
+    "タイルイベントが配置されている場合、そのイベントのタイルＩＤで判定します。": "When a tile event is placed, the check uses that event’s tile ID.",
+    "プラグインパラメータ（設定リスト）": "Plugin Parameters (Settings List)",
+    "設定ＩＤ（SettingId）": "Setting ID (SettingId)",
+    "タイルセットのメモ欄からの呼び出しに使う識別子です。": "This is the identifier used to call it from a tileset's note field.",
+    "『全タイルセットで有効』がオンの場合は不要です。": "This is not required when “Valid for All Tilesets” is enabled.",
+    "メモ（Memo）": "Memo (Memo)",
+    "判別用のメモです。分かりやすい名前を付けてください。": "This memo is used for identification. Please give it an easily recognizable name.",
+    "全タイルセットで有効（ValidAllTilesets）": "Valid for All Tilesets (ValidAllTilesets)",
+    "設定を全てのタイルセットで有効にします。": "Makes the setting valid for all tilesets.",
+    "オフにした場合は、個別のタイルセット毎に設定できます。": "When disabled, you can configure it separately for each tileset.",
+    "プラグインパラメータ（設定リスト：条件）": "Plugin Parameters (Settings List: Conditions)",
+    "地形タグ（TerrainTag）": "Terrain Tag (TerrainTag)",
+    "対象とする地形タグ（1~7）を指定します。": "Specify the target terrain tags (1~7).",
+    "複数指定も可能です。（例：1,3~5）": "Multiple values can be specified. (Example: 1,3~5)",
+    "７つまでしか設定できないのでご利用は計画的に。": "Since you can only configure up to seven, use them strategically.",
+    "リージョンＩＤ（RegionId）": "Region ID (RegionId)",
+    "対象とするリージョン（1~255）を指定します。": "Specify the target regions (1~255).",
+    "オートタイルタイプ（AutotileType）": "Autotile Type (AutotileType)",
+    "対象とするオートタイルタイプを指定します。": "Specify the target autotile types.",
+    "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。": "An autotile type is a number assigned to each autotile. By default, it is used to determine battle backgrounds.",
+    "地形タグと異なり数の制限がないため、自由に設定が可能です。": "Unlike terrain tags, there is no limit on the number of these, so you can configure them freely.",
+    "ただし、この値は通常確認できません。": "However, this value cannot normally be checked.",
+    "オプションにある「タイル情報をデバッグ表示する」プラグインで確認ができます。": "You can check it using the “Display Tile Information for Debugging” plugin found under Options.",
+    "タイルＩＤ（TileId）": "Tile ID (TileId)",
+    "対象とするタイルＩＤを指定します。": "Specify the target tile IDs.",
+    "こちらはエディタの機能で普通に取得できますが、面倒です。": "You can obtain this normally using the editor's features, but it is cumbersome.",
+    "こちらも「タイル情報をデバッグ表示する」プラグインでの確認をオススメします。": "Here too, I recommend checking it using the “Display Tile Information for Debugging” plugin.",
+    "プラグインパラメータ（設定リスト：通行設定）": "Plugin Parameters (Settings List: Passage Settings)",
+    "通行可能（CanPass）": "Can Pass (CanPass)",
+    "通行可能かどうか？": "Can the tile be traversed?",
+    "特に変更したくない場合は空欄にしておいてください": "Leave this blank if you do not want to make any particular changes.",
+    "乗降可能（CanGetOn）": "Can Get On (CanGetOn)",
+    "乗降可能かどうか？": "Can the player board or disembark?"
+  }
+}

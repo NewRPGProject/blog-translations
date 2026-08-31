@@ -1,0 +1,2161 @@
+{
+  "articleId": "474188581",
+  "sourceUrl": "https://newrpg.seesaa.net/article/474188581.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "fcbd0214fce7d70171c8eda1922c43f0893bb401d3c13f98716f231d0a439ca0",
+  "translatedAt": "2026-08-31T04:52:34.005Z",
+  "title": "DynamicAnimation&Motion Sample Moves ② [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技②【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "414def77a98d0f9e2e595cf2a6b79570565fb6e4f3ea5324089aecd98a616411",
+      "translation": "DynamicAnimation&Motion Sample Moves ② [RPG Maker MZ & MV Plugin]",
+      "contextHash": "414def77a98d0f9e2e595cf2a6b79570565fb6e4f3ea5324089aecd98a616411"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "サンプル技を紹介していきます。少し複雑なものをいきます。",
+      "sourceHash": "6d19c350ec5703fa3f1f9c3825454036325c8b547564eb8dcd6abfea35e78de3",
+      "translation": "I’ll be introducing some sample moves. Let’s look at something a little more complex.",
+      "contextHash": "6d19c350ec5703fa3f1f9c3825454036325c8b547564eb8dcd6abfea35e78de3"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "コピペしてスキル（アイテム）のメモ欄に貼り付けできます。そのまま使うも改造するも自由です。",
+      "sourceHash": "abf78c34c19aa90a8c9e7632d73d669991b257ac5cff66c4298a15921ee9fe15",
+      "translation": "You can copy and paste these into a skill (item)’s note field. Feel free to use them as-is or modify them.",
+      "contextHash": "abf78c34c19aa90a8c9e7632d73d669991b257ac5cff66c4298a15921ee9fe15"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "爆裂脚",
+      "sourceHash": "3d1982f395eaf6942054165117d9a059569b9f2b4d75e07cd36db15b1d215c35",
+      "translation": "Explosive Kick",
+      "contextHash": "3d1982f395eaf6942054165117d9a059569b9f2b4d75e07cd36db15b1d215c35"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ライダーキック的な挙動で敵に衝突します。",
+      "sourceHash": "08cad49669616e59961f6dcbb839de91bc03263b30507592d9b72813fcb1d219",
+      "translation": "The user crashes into the enemy in a Rider Kick-like motion.",
+      "contextHash": "08cad49669616e59961f6dcbb839de91bc03263b30507592d9b72813fcb1d219"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "アニメーションには『id=107（無属性/単体2）』を使っていますが、そこはお好みでどうぞ。",
+      "sourceHash": "f393cf2cd2b70a7204880cd3504f37be09bc378b7e0a5418f2139f2b5f245a0b",
+      "translation": "The animation uses “id=107 (Non-elemental/Single 2),” but feel free to use whichever one you prefer.",
+      "contextHash": "f393cf2cd2b70a7204880cd3504f37be09bc378b7e0a5418f2139f2b5f245a0b"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "// 自動前進しない",
+      "sourceHash": "c72a9b848e7df16ac6b029546ef05eaee6b0769c8c62d9bf951291c1e9b03f9d",
+      "translation": "// No automatic forward movement",
+      "contextHash": "c72a9b848e7df16ac6b029546ef05eaee6b0769c8c62d9bf951291c1e9b03f9d"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// 回転しながら浮上",
+      "sourceHash": "e90448792391c57c8eb98d5246979536bd772c3b200140666d10a092c90261c5",
+      "translation": "// Rise while spinning",
+      "contextHash": "e90448792391c57c8eb98d5246979536bd772c3b200140666d10a092c90261c5"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "airY = -200 // 空中Ｙ座標",
+      "sourceHash": "a12eacb654e3162d97440ed942b5a4a45a9628f26a7175ca4c218634ced1ef5e",
+      "translation": "airY = -200 // Y-coordinate in the air",
+      "contextHash": "a12eacb654e3162d97440ed942b5a4a45a9628f26a7175ca4c218634ced1ef5e"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "// 体を傾けて衝突",
+      "sourceHash": "700758d2bcb18ee9d34e4bbed5f6d5d253c20f95b4c836583e12c5d8c3edef6e",
+      "translation": "// Tilt the body and collide",
+      "contextHash": "700758d2bcb18ee9d34e4bbed5f6d5d253c20f95b4c836583e12c5d8c3edef6e"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "rotation = (Math.PI * 2) / 6 // 360/6度",
+      "sourceHash": "55c1cf9ee83e530f4ae6e4bca24775829e422cd43659d42b92f9f2b0cff34c77",
+      "translation": "rotation = (Math.PI * 2) / 6 // 360/6 degrees",
+      "contextHash": "55c1cf9ee83e530f4ae6e4bca24775829e422cd43659d42b92f9f2b0cff34c77"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "// 角度を戻す＆しゃがむ",
+      "sourceHash": "2e16abb3c9c93c7d3bb003ffb73934d9068321a4ce3569ab6dd2bcf8d6ba52dc",
+      "translation": "// Restore the angle & crouch",
+      "contextHash": "2e16abb3c9c93c7d3bb003ffb73934d9068321a4ce3569ab6dd2bcf8d6ba52dc"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "motion = abnormal // 瀕死ポーズ",
+      "sourceHash": "761c9e0651c8c7660e9695c22d40abac94e57cce09ed77979874294022f94b34",
+      "translation": "motion = abnormal // Near-death pose",
+      "contextHash": "761c9e0651c8c7660e9695c22d40abac94e57cce09ed77979874294022f94b34"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "// アニメーション",
+      "sourceHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86",
+      "translation": "// Animation",
+      "contextHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "// 対象が吹っ飛ぶ",
+      "sourceHash": "b397d853b04ddd1da65127f4784acd7f671538a7616d8015b629406d01c56b56",
+      "translation": "// Target is blown away",
+      "contextHash": "b397d853b04ddd1da65127f4784acd7f671538a7616d8015b629406d01c56b56"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "// 対象元の位置へ",
+      "sourceHash": "8701c5fcbdb64faf27353b203d485c4284e354c328c5f46f192c7426b799f0f6",
+      "translation": "// To the target's original position",
+      "contextHash": "8701c5fcbdb64faf27353b203d485c4284e354c328c5f46f192c7426b799f0f6"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "// 戻る",
+      "sourceHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97",
+      "translation": "// Return",
+      "contextHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ズームアタック（2020/03/29）",
+      "sourceHash": "4efb106b2cf8140b32157ebbf2e4d1021e088b8d65258456e6edf1ba9b9d70d9",
+      "translation": "Zoom Attack (2020/03/29)",
+      "contextHash": "4efb106b2cf8140b32157ebbf2e4d1021e088b8d65258456e6edf1ba9b9d70d9"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "攻撃しながら徐々に対象へ向かってズーム処理をかけます。",
+      "sourceHash": "2ad013660ba2157250908dbef8b4f8dab2a4a9bbf4ac0d6c557b6b4a9b643d7c",
+      "translation": "The camera gradually zooms toward the target while attacking.",
+      "contextHash": "2ad013660ba2157250908dbef8b4f8dab2a4a9bbf4ac0d6c557b6b4a9b643d7c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※ズーム処理のテンプレート化に伴い記述を簡略化しました。（2020/03/29）",
+      "sourceHash": "64999cb711f164f921d1bfed1cbc7f36eeaed639ae46b08e5eb2453f7bc0a48d",
+      "translation": "※The description has been simplified following the conversion of the zoom process into a template. (2020/03/29)",
+      "contextHash": "64999cb711f164f921d1bfed1cbc7f36eeaed639ae46b08e5eb2453f7bc0a48d"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "/> // 対象にズーム",
+      "sourceHash": "9222dd76ba51b28f0e3305cb6cf2e0dd3185d82dc7c90e9435d1aaa256d9a2e6",
+      "translation": "/> // Zoom in on the target",
+      "contextHash": "f11da4bb51361557aae918b8f2562ea4f43450a0652515d7126fcbc6482809b2"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "<D-Motion:attack/> // 武器振り",
+      "sourceHash": "a8304627f0702d55a4fc9699a5fbfbe47148fc255006bd2ecae2a9dac17cd6b9",
+      "translation": "<D-Motion:attack/> // Swing weapon",
+      "contextHash": "a8304627f0702d55a4fc9699a5fbfbe47148fc255006bd2ecae2a9dac17cd6b9"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "<D-Animation/> // アニメーション",
+      "sourceHash": "9802d743a907fc00058dbb5f86576dc1a630c049e1bf1207540d96cd574e974e",
+      "translation": "<D-Animation/> // Animation",
+      "contextHash": "9802d743a907fc00058dbb5f86576dc1a630c049e1bf1207540d96cd574e974e"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "/> // ズーム解除",
+      "sourceHash": "44e5e6f081c563c968a4a32c91ed32c3c4a66e9b77d65d390c4f487024d5f6be",
+      "translation": "/> // Cancel zoom",
+      "contextHash": "fbba095f9507ecd4ac15a3bcd59b76539c068b7e42590266252ccf65e65834fb"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "行動主体にズームしたい場合『zoomA』を使用してください。",
+      "sourceHash": "da79438ee75ed50a06148b2e00b7d197016149817d27f6a5ee346de2e7172bfe",
+      "translation": "If you want to zoom in on the acting battler, use “zoomA.”",
+      "contextHash": "da79438ee75ed50a06148b2e00b7d197016149817d27f6a5ee346de2e7172bfe"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "なお、これらの処理はズーム対象が移動していても自動で追尾します。",
+      "sourceHash": "1d055fcaa15ee8fa5da89d8852265df57ceab40f329a4bda75b0cca9c3317b26",
+      "translation": "These processes also automatically track the zoom target, even when it is moving.",
+      "contextHash": "1d055fcaa15ee8fa5da89d8852265df57ceab40f329a4bda75b0cca9c3317b26"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "スライディング（2020/03/24）",
+      "sourceHash": "e957831921eba04a80c6fb2e5d5806df7850a73bb32c96a3685f082a38b1a65e",
+      "translation": "Sliding (2020/03/24)",
+      "contextHash": "e957831921eba04a80c6fb2e5d5806df7850a73bb32c96a3685f082a38b1a65e"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "スライディングで敵をスピンさせます。",
+      "sourceHash": "1fb2bfb65cde811d2db10a7559919033a3618fee6078fc7244c01c6bc732db9e",
+      "translation": "The user slides and spins the enemy.",
+      "contextHash": "1fb2bfb65cde811d2db10a7559919033a3618fee6078fc7244c01c6bc732db9e"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "スキルに設定するアニメーションの位置は『足元』にしてください。",
+      "sourceHash": "e98142911165a244c51a868d08a99948c0f88ee34ba97fe01b1d1d794737197a",
+      "translation": "Set the animation position for the skill to “Feet.”",
+      "contextHash": "e98142911165a244c51a868d08a99948c0f88ee34ba97fe01b1d1d794737197a"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "また砂煙用のアニメーションが別途必要です。下の例では『Earth1』のパターンを使っています。位置は『足元』。合成方法は『通常』に設定すると自然です。",
+      "sourceHash": "3daab8b18772e2015b75a940b4c9879d6699982f5a533c557657f94672fbd127",
+      "translation": "You also need a separate animation for the dust cloud. In the example below, the “Earth1” pattern is used. Set its position to “Feet.” Setting the blend mode to “Normal” produces a natural effect.",
+      "contextHash": "3daab8b18772e2015b75a940b4c9879d6699982f5a533c557657f94672fbd127"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "// 90度回転して体を地面へ",
+      "sourceHash": "ba3fd7569c0c2436148a7f2478476f571b60911ea2822b171ac7afd3255bbf02",
+      "translation": "// Rotate 90 degrees and bring the body to the ground",
+      "contextHash": "ba3fd7569c0c2436148a7f2478476f571b60911ea2822b171ac7afd3255bbf02"
+    },
+    {
+      "id": "code-017",
+      "type": "code",
+      "source": "// 砂煙のアニメーション",
+      "sourceHash": "460580d81970edaea0ebb5ff3d4931f3f06692eb1d4fcbd6ab15090610819ac1",
+      "translation": "// Dust cloud animation",
+      "contextHash": "460580d81970edaea0ebb5ff3d4931f3f06692eb1d4fcbd6ab15090610819ac1"
+    },
+    {
+      "id": "code-018",
+      "type": "code",
+      "source": "id = XXX // ←ここに砂煙用のIDを指定",
+      "sourceHash": "2daac9d972886c1dc18b1c19b6dcdb684f7ff53d360e4ffc4acc3e3dae6f1575",
+      "translation": "id = XXX // ← Specify the ID for the dust cloud here",
+      "contextHash": "2daac9d972886c1dc18b1c19b6dcdb684f7ff53d360e4ffc4acc3e3dae6f1575"
+    },
+    {
+      "id": "code-019",
+      "type": "code",
+      "source": "// 対象の左へ",
+      "sourceHash": "16946cdef7ea0d405ec135b52184d5e8c40a0ff52d8787e289f79cdcfd85f21f",
+      "translation": "// To the left of the target",
+      "contextHash": "16946cdef7ea0d405ec135b52184d5e8c40a0ff52d8787e289f79cdcfd85f21f"
+    },
+    {
+      "id": "code-020",
+      "type": "code",
+      "source": "<D-Animation/> // アニメーション",
+      "sourceHash": "9802d743a907fc00058dbb5f86576dc1a630c049e1bf1207540d96cd574e974e",
+      "translation": "<D-Animation/> // Animation",
+      "contextHash": "9802d743a907fc00058dbb5f86576dc1a630c049e1bf1207540d96cd574e974e"
+    },
+    {
+      "id": "code-021",
+      "type": "code",
+      "source": "// 敵がスピン",
+      "sourceHash": "7fce4307f4f25bce72371e366ba0f5532423c6f94c9f0f9324715d8e86227dd9",
+      "translation": "// Enemy spins",
+      "contextHash": "7fce4307f4f25bce72371e366ba0f5532423c6f94c9f0f9324715d8e86227dd9"
+    },
+    {
+      "id": "code-022",
+      "type": "code",
+      "source": "// 角度と位置を戻す",
+      "sourceHash": "89f661868044f68b97fcf2fb1e1511e346ff6af810147748ecf4832b3f69614e",
+      "translation": "// Restore the angle and position",
+      "contextHash": "89f661868044f68b97fcf2fb1e1511e346ff6af810147748ecf4832b3f69614e"
+    },
+    {
+      "id": "code-023",
+      "type": "code",
+      "source": "// しゃがんで待つ",
+      "sourceHash": "c06f0b1e770a8c1e0cd338ef50d6df32cdbfd6efb29bc7299486eb2de343d8ea",
+      "translation": "// Crouch and wait",
+      "contextHash": "c06f0b1e770a8c1e0cd338ef50d6df32cdbfd6efb29bc7299486eb2de343d8ea"
+    },
+    {
+      "id": "code-024",
+      "type": "code",
+      "source": "motion = abnormal // 瀕死ポーズ",
+      "sourceHash": "761c9e0651c8c7660e9695c22d40abac94e57cce09ed77979874294022f94b34",
+      "translation": "motion = abnormal // Near-death pose",
+      "contextHash": "761c9e0651c8c7660e9695c22d40abac94e57cce09ed77979874294022f94b34"
+    },
+    {
+      "id": "code-025",
+      "type": "code",
+      "source": "<D-Motion:return/> // 戻る",
+      "sourceHash": "7f77ad63a3571415d6633e4cb0e448eb7b1086778df4ed4c31a04796120bd082",
+      "translation": "<D-Motion:return/> // Return",
+      "contextHash": "7f77ad63a3571415d6633e4cb0e448eb7b1086778df4ed4c31a04796120bd082"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "ウルトラジャンプ（2020/08/30修正）",
+      "sourceHash": "08e6c997da24ee96c0d5ed72df825895db0071600b78212589fcdb3739fbb447",
+      "translation": "Ultra Jump (Revised 2020/08/30)",
+      "contextHash": "08e6c997da24ee96c0d5ed72df825895db0071600b78212589fcdb3739fbb447"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ランダムで敵を踏みつけます。",
+      "sourceHash": "30d385027fe6e0e7f2d4df9942b8414390310465188ac5dbe1891fe94e2e1a75",
+      "translation": "The user randomly stomps on enemies.",
+      "contextHash": "30d385027fe6e0e7f2d4df9942b8414390310465188ac5dbe1891fe94e2e1a75"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "例では範囲を『敵４体ランダム』にしていますが、『敵全体』などにしても問題なく機能します。",
+      "sourceHash": "98d3930f96d31a1705876525196a8bd19b4d81d173c218cf0a774dc81745e817",
+      "translation": "The example uses “4 Random Enemies” as the scope, but it will also work properly with options such as “All Enemies.”",
+      "contextHash": "98d3930f96d31a1705876525196a8bd19b4d81d173c218cf0a774dc81745e817"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "スキルに設定するアニメーションを『頭上』に設定することで頭を狙います。",
+      "sourceHash": "1ced008ed07e93c68ac632c016d1550e71e44e123010f12e7579202f6abeb1a7",
+      "translation": "Set the skill’s animation position to “Above Head” to aim for the enemy’s head.",
+      "contextHash": "1ced008ed07e93c68ac632c016d1550e71e44e123010f12e7579202f6abeb1a7"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "例では『2:打撃/エフェクト』を頭上に変更したものを使用しています。",
+      "sourceHash": "369d16d7bd457a10769c380f4d124279b000906c102ef34d26eef985fea83b13",
+      "translation": "In the example, I use “2: Hit/Effect” with its position changed to above the head.",
+      "contextHash": "369d16d7bd457a10769c380f4d124279b000906c102ef34d26eef985fea83b13"
+    },
+    {
+      "id": "code-026",
+      "type": "code",
+      "source": "<D-Setting:NoStep> // 自動前進禁止",
+      "sourceHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a",
+      "translation": "<D-Setting:NoStep> // Disable automatic forward movement",
+      "contextHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a"
+    },
+    {
+      "id": "code-027",
+      "type": "code",
+      "source": "// 着地に合わせてアニメーション表示",
+      "sourceHash": "8edf60f1a34f8c96fa635758893a605974608f557d661e794b8735a3cb0def68",
+      "translation": "// Display the animation upon landing",
+      "contextHash": "8edf60f1a34f8c96fa635758893a605974608f557d661e794b8735a3cb0def68"
+    },
+    {
+      "id": "code-028",
+      "type": "code",
+      "source": "delay = 7 // 最初の着地までのフレーム",
+      "sourceHash": "7fc1868e3905dca6552f1792f257f762d5a4306f8fcc4d267cda09e195c56bbd",
+      "translation": "delay = 7 // Frames until the first landing",
+      "contextHash": "7fc1868e3905dca6552f1792f257f762d5a4306f8fcc4d267cda09e195c56bbd"
+    },
+    {
+      "id": "code-029",
+      "type": "code",
+      "source": "nextDelay = 7 // 滞空時間に間隔を合わせる",
+      "sourceHash": "cd1255048f18866744ca83b65c970d3f2c2b39a34c83d84dab1e02bf5479c23b",
+      "translation": "nextDelay = 7 // Adjust the interval to the time spent airborne",
+      "contextHash": "cd1255048f18866744ca83b65c970d3f2c2b39a34c83d84dab1e02bf5479c23b"
+    },
+    {
+      "id": "code-030",
+      "type": "code",
+      "source": "// 対象ごとにジャンプで踏む",
+      "sourceHash": "d0b88790dff6dd0192ba93828d060b6d9338d300743e6c76ed41bbbd2bbe4950",
+      "translation": "// Jump on each target",
+      "contextHash": "d0b88790dff6dd0192ba93828d060b6d9338d300743e6c76ed41bbbd2bbe4950"
+    },
+    {
+      "id": "code-031",
+      "type": "code",
+      "source": "ey += b.height/8 // 少し下を狙う",
+      "sourceHash": "ae1111bce502b477008dca1e82095c3f04d50d6690dbf8d48c80c883b6e800b6",
+      "translation": "ey += b.height/8 // Aim slightly lower",
+      "contextHash": "ae1111bce502b477008dca1e82095c3f04d50d6690dbf8d48c80c883b6e800b6"
+    },
+    {
+      "id": "code-032",
+      "type": "code",
+      "source": "motion = victory // 勝利ポーズ",
+      "sourceHash": "f9c344668cc7476419d046164c3ec556fbc0f386031e4758e85833d382c1181b",
+      "translation": "motion = victory // Victory pose",
+      "contextHash": "f9c344668cc7476419d046164c3ec556fbc0f386031e4758e85833d382c1181b"
+    },
+    {
+      "id": "code-033",
+      "type": "code",
+      "source": "frame = 7 // 移動（滞空）時間",
+      "sourceHash": "564670d7bc773b5827e147b8acd3a9a2c7902180f1eee864876fa2cbe57cff3f",
+      "translation": "frame = 7 // Movement (airborne) time",
+      "contextHash": "564670d7bc773b5827e147b8acd3a9a2c7902180f1eee864876fa2cbe57cff3f"
+    },
+    {
+      "id": "code-034",
+      "type": "code",
+      "source": "nextDelay = 7 // ７フレーム間隔",
+      "sourceHash": "345933cc90cf690705b62c47c24326377ff18d644d298b94169554ced45b655c",
+      "translation": "nextDelay = 7 // 7-frame interval",
+      "contextHash": "345933cc90cf690705b62c47c24326377ff18d644d298b94169554ced45b655c"
+    },
+    {
+      "id": "code-035",
+      "type": "code",
+      "source": "// ジャンプの効果音",
+      "sourceHash": "4120027f7d3ca6e3cfde26e4280a9da680251a7fd4bb31a53434c0d0c4654c09",
+      "translation": "// Jump sound effect",
+      "contextHash": "4120027f7d3ca6e3cfde26e4280a9da680251a7fd4bb31a53434c0d0c4654c09"
+    },
+    {
+      "id": "code-036",
+      "type": "code",
+      "source": "// 戻る",
+      "sourceHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97",
+      "translation": "// Return",
+      "contextHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97"
+    },
+    {
+      "id": "code-037",
+      "type": "code",
+      "source": "damageAll = false // ダメージ表示は個別に任せる",
+      "sourceHash": "1873991078d88ee2e454bec10a2b92cbf4d9aeefcf03a47f4a148c067692d362",
+      "translation": "damageAll = false // Leave damage display to each individual",
+      "contextHash": "1873991078d88ee2e454bec10a2b92cbf4d9aeefcf03a47f4a148c067692d362"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "これを応用すれば、順番に体当りしていく技なども作成できます。",
+      "sourceHash": "7ba431b756cd76c74403259280f85a9be3b233ac6bbcfa7b7e1ffda2ddf32bcc",
+      "translation": "By adapting this, you can also create moves where the user charges into each target in sequence.",
+      "contextHash": "7ba431b756cd76c74403259280f85a9be3b233ac6bbcfa7b7e1ffda2ddf32bcc"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "タイミング調整が少し難しいので注意です。赤字部分に気をつけてください。",
+      "sourceHash": "d18c1217e0ffbd28587fe86da3358af90badbc775e4e9143a5a318b2ac90b98e",
+      "translation": "Be careful, as adjusting the timing is somewhat difficult. Pay attention to the parts shown in red.",
+      "contextHash": "d18c1217e0ffbd28587fe86da3358af90badbc775e4e9143a5a318b2ac90b98e"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "払い抜け（2020/03/31）",
+      "sourceHash": "90f64f9c85b4200a19738331ad1d69be02b0443e312a7194fc6e04a06dffdde2",
+      "translation": "Slash Past (2020/03/31)",
+      "contextHash": "90f64f9c85b4200a19738331ad1d69be02b0443e312a7194fc6e04a06dffdde2"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "対象とすれ違いながら、斬撃を放ちます。",
+      "sourceHash": "c1c5c9524c4a53ef57b7d4a1392c329639286fd03d5f7f25a9332a175a63391d",
+      "translation": "The user delivers a slash while passing by the target.",
+      "contextHash": "c1c5c9524c4a53ef57b7d4a1392c329639286fd03d5f7f25a9332a175a63391d"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "対象との角度によって斬撃の角度も変化します。",
+      "sourceHash": "daaec9cf080c2b665bade0b0e021b8cac8b4a756ff78c3699bae6cbfcb68125f",
+      "translation": "The angle of the slash also changes depending on the angle relative to the target.",
+      "contextHash": "daaec9cf080c2b665bade0b0e021b8cac8b4a756ff78c3699bae6cbfcb68125f"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "以下のように左向きの斬撃を作ります。",
+      "sourceHash": "e66f34fcc33ef049edfd59f1bb20ea11321afec6e96bb0ac3c4c4183a65894a2",
+      "translation": "Create a left-facing slash as shown below.",
+      "contextHash": "e66f34fcc33ef049edfd59f1bb20ea11321afec6e96bb0ac3c4c4183a65894a2"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "「6:斬撃/物理」を一括設定で45度回転させるなどすれば可能です。",
+      "sourceHash": "34aa3f553a45eec367887987fe4d513b6982e8901215fd3ee4ec7c5de6f5cbfb",
+      "translation": "This is possible by, for example, rotating “6: Slash/Physical” 45 degrees using the batch settings.",
+      "contextHash": "34aa3f553a45eec367887987fe4d513b6982e8901215fd3ee4ec7c5de6f5cbfb"
+    },
+    {
+      "id": "code-038",
+      "type": "code",
+      "source": "<D-Setting:NoStep> // 自動前進禁止",
+      "sourceHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a",
+      "translation": "<D-Setting:NoStep> // Disable automatic forward movement",
+      "contextHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a"
+    },
+    {
+      "id": "code-039",
+      "type": "code",
+      "source": "// 対象の向こうまで移動",
+      "sourceHash": "7ffd67378309a35210e60004542f6fb3ff172b88f0450b942a9b27e4ab0c2c10",
+      "translation": "// Move beyond the target",
+      "contextHash": "7ffd67378309a35210e60004542f6fb3ff172b88f0450b942a9b27e4ab0c2c10"
+    },
+    {
+      "id": "code-040",
+      "type": "code",
+      "source": "// Ｘ座標だけ指定すれば、Ｙ座標も自動計算",
+      "sourceHash": "6c00e4350b36f075712ee543d2442681c0f50192ab3bcf720cae1a669dd1ab1c",
+      "translation": "// Specify only the X-coordinate, and the Y-coordinate will be calculated automatically",
+      "contextHash": "6c00e4350b36f075712ee543d2442681c0f50192ab3bcf720cae1a669dd1ab1c"
+    },
+    {
+      "id": "code-041",
+      "type": "code",
+      "source": "ex = defaultX - 150 * mirroring // 対象の左150pxまで移動",
+      "sourceHash": "2d89f280dd4ccd6fbe6aa1b9b3482dadf7d9e62cacd56c801a5445cc6e649ccb",
+      "translation": "ex = defaultX - 150 * mirroring // Move to 150 px to the left of the target",
+      "contextHash": "2d89f280dd4ccd6fbe6aa1b9b3482dadf7d9e62cacd56c801a5445cc6e649ccb"
+    },
+    {
+      "id": "code-042",
+      "type": "code",
+      "source": "// 対象との位置関係でアニメーション角度変更",
+      "sourceHash": "b39ddfc9991de0ec0333dd17707a2d78868ea98be8dbcdca89d1d79a29865ddf",
+      "translation": "// Change the animation angle based on the positional relationship with the target",
+      "contextHash": "b39ddfc9991de0ec0333dd17707a2d78868ea98be8dbcdca89d1d79a29865ddf"
+    },
+    {
+      "id": "code-043",
+      "type": "code",
+      "source": "<D-Motion:return/> // 戻る",
+      "sourceHash": "7f77ad63a3571415d6633e4cb0e448eb7b1086778df4ed4c31a04796120bd082",
+      "translation": "<D-Motion:return/> // Return",
+      "contextHash": "7f77ad63a3571415d6633e4cb0e448eb7b1086778df4ed4c31a04796120bd082"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "赤字部分で、色々と細かい細工をしています。",
+      "sourceHash": "ecd7c84e3ee827654c0ab55168d5be92e966cfc19546c81e104525c5cfb2e68b",
+      "translation": "The parts shown in red contain various small adjustments.",
+      "contextHash": "ecd7c84e3ee827654c0ab55168d5be92e966cfc19546c81e104525c5cfb2e68b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "da.startRotation()は開始時点の角度を保持する作者の独自関数です。",
+      "sourceHash": "b9f42be07f38827c9a230821bc50310b209aff1cf6891f37c7879490fdbb96a7",
+      "translation": "da.startRotation() is a custom function created by the author that retains the angle at the starting point.",
+      "contextHash": "b9f42be07f38827c9a230821bc50310b209aff1cf6891f37c7879490fdbb96a7"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "Math.atan2()は行動主体（a）と対象（defaultX, Y）の角度を求めます。",
+      "sourceHash": "e30c3239a5547942453c732f7cd8111b36477d171ed11f95e7019f7e16c1c189",
+      "translation": "Math.atan2() calculates the angle between the acting battler (a) and the target (defaultX, Y).",
+      "contextHash": "e30c3239a5547942453c732f7cd8111b36477d171ed11f95e7019f7e16c1c189"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "こちらはJavaScriptの標準機能です。",
+      "sourceHash": "ebac700e09e1c95455a0a5f60ae581d84c6264fa9dd1a075fe63380bca522447",
+      "translation": "This is a standard JavaScript function.",
+      "contextHash": "ebac700e09e1c95455a0a5f60ae581d84c6264fa9dd1a075fe63380bca522447"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※若干、意味不明かもしれませんが、コピペで大丈夫なのであまり気にしないでください。",
+      "sourceHash": "27824c2bdfe7250c80f0c66bf2ba3120fd9617c2030f5e796b8b6ce57a8d78cb",
+      "translation": "※It may be slightly difficult to understand, but you can simply copy and paste it, so don’t worry about it too much.",
+      "contextHash": "27824c2bdfe7250c80f0c66bf2ba3120fd9617c2030f5e796b8b6ce57a8d78cb"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "疾風剣（2020/04/03）",
+      "sourceHash": "e92aeaf31ce58a002bd3d34f91323304ff27e7ea8acf4ebd6b6b54851c76be40",
+      "translation": "Gale Sword (2020/04/03)",
+      "contextHash": "e92aeaf31ce58a002bd3d34f91323304ff27e7ea8acf4ebd6b6b54851c76be40"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "対象とすれ違いながら切り刻みます。",
+      "sourceHash": "86ab1d7274a36abef342f6681d24e2f3cf9cd1c24f31faaa057a1d5136e222ee",
+      "translation": "The user slices the target to pieces while passing by it.",
+      "contextHash": "86ab1d7274a36abef342f6681d24e2f3cf9cd1c24f31faaa057a1d5136e222ee"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "角度を変えながらランダムで斬撃を再生しています。",
+      "sourceHash": "ae92826477a13ef8dd15c54a9efeaff2168737a880e96e7078bc140e1aa7355d",
+      "translation": "Slashes are played at random while changing their angles.",
+      "contextHash": "ae92826477a13ef8dd15c54a9efeaff2168737a880e96e7078bc140e1aa7355d"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "スキルに設定したアニメーションは「6:斬撃/物理」の色調を変えたものです。",
+      "sourceHash": "89023ef815959e90146c888fe8c3e1fab8c852985bdda74ccab21d4cf0ebbc56",
+      "translation": "The animation set for the skill is “6: Slash/Physical” with its color tone changed.",
+      "contextHash": "89023ef815959e90146c888fe8c3e1fab8c852985bdda74ccab21d4cf0ebbc56"
+    },
+    {
+      "id": "code-044",
+      "type": "code",
+      "source": "<D-Setting:NoStep> // 自動前進禁止",
+      "sourceHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a",
+      "translation": "<D-Setting:NoStep> // Disable automatic forward movement",
+      "contextHash": "f3d03aa9df7580f3cf4d9d7b1fb1688306f2a6ac657f1073c860aca9d6fdbe9a"
+    },
+    {
+      "id": "code-045",
+      "type": "code",
+      "source": "// 対象とすれ違いながら武器振り",
+      "sourceHash": "7914a5c0155826457cfee4e70ca4b7acb42518369d9970a671209d83c85df0d3",
+      "translation": "// Swing the weapon while passing the target",
+      "contextHash": "7914a5c0155826457cfee4e70ca4b7acb42518369d9970a671209d83c85df0d3"
+    },
+    {
+      "id": "code-046",
+      "type": "code",
+      "source": "// 武器の止めポーズ",
+      "sourceHash": "500250169157b2183ccd8c1ea8c171ceff52aa9a5469141bf2d1f05403330ec3",
+      "translation": "// Weapon finishing pose",
+      "contextHash": "500250169157b2183ccd8c1ea8c171ceff52aa9a5469141bf2d1f05403330ec3"
+    },
+    {
+      "id": "code-047",
+      "type": "code",
+      "source": "// 角度を変えながら斬撃リピート",
+      "sourceHash": "7ea8133d171be9862040a77437516e44cc48e7385b0681250db1a21758749c2a",
+      "translation": "// Repeat slashes while changing the angle",
+      "contextHash": "7ea8133d171be9862040a77437516e44cc48e7385b0681250db1a21758749c2a"
+    },
+    {
+      "id": "code-048",
+      "type": "code",
+      "source": "<D-Motion:return/> // 戻る",
+      "sourceHash": "7f77ad63a3571415d6633e4cb0e448eb7b1086778df4ed4c31a04796120bd082",
+      "translation": "<D-Motion:return/> // Return",
+      "contextHash": "7f77ad63a3571415d6633e4cb0e448eb7b1086778df4ed4c31a04796120bd082"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "基本的には『払い抜け』の流用です。",
+      "sourceHash": "45b9a7d05be9208aa21c7ffe10b0837dd2d3a059f9ea23ccfb2205d3ff0b84ac",
+      "translation": "It is basically a reuse of “Slash Past.”",
+      "contextHash": "45b9a7d05be9208aa21c7ffe10b0837dd2d3a059f9ea23ccfb2205d3ff0b84ac"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "『rotation（回転角度）』をランダムに変化させることで、様々な角度から斬撃を繰り出すようにしています。",
+      "sourceHash": "4b020a24d4b255c7b56467ae9c358d9410ddb29c71ee02cf6b3436b204550b87",
+      "translation": "By varying “rotation (rotation angle)” randomly, the slashes are launched from various angles.",
+      "contextHash": "4b020a24d4b255c7b56467ae9c358d9410ddb29c71ee02cf6b3436b204550b87"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "『Math.PI * 2』は360度の意味、『da.random()』は0～1未満の値を取る関数です。つまり、0～359度という意味ですね。",
+      "sourceHash": "1b212e24d85c1b5248e174a261614ca15cb3b93a9e9b1e783648568a196e3996",
+      "translation": " \"Math.PI * 2” means 360 degrees, while “da.random()” is a function that returns a value from 0 up to, but not including, 1. In other words, this represents 0 to 359 degrees.",
+      "contextHash": "1b212e24d85c1b5248e174a261614ca15cb3b93a9e9b1e783648568a196e3996"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "練気拳（単）（2020/04/06）",
+      "sourceHash": "92a9852b0a3d15ddfb442982c3a689da5dda504c09801085b8af1fe3ddf3a9b5",
+      "translation": "Energy Fist (Single) (2020/04/06)",
+      "contextHash": "92a9852b0a3d15ddfb442982c3a689da5dda504c09801085b8af1fe3ddf3a9b5"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "敵を引きつけながら殴ります。",
+      "sourceHash": "54016af2dd066368def3401f23c24e4c461d70a9f91ca44acb6d28c89c3593d0",
+      "translation": "The user punches while pulling the enemy toward them.",
+      "contextHash": "54016af2dd066368def3401f23c24e4c461d70a9f91ca44acb6d28c89c3593d0"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "スキルには単なる打撃アニメを設定しています。",
+      "sourceHash": "be79245a4e5f43277a99c853c157efd28f0702659ce2759f8250ec40eed5f32c",
+      "translation": "The skill uses a simple impact animation.",
+      "contextHash": "be79245a4e5f43277a99c853c157efd28f0702659ce2759f8250ec40eed5f32c"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "さらに吸引用のアニメが必要です。例では『102:闇/単体2』を元に、合成方法を一括設定で『加算』に変更しています。",
+      "sourceHash": "c8f49a810279c7ad34164805200d66bc13489602bb8697f52f1337e82136b81c",
+      "translation": "An additional animation for absorption is required. In the example, I use “102: Dark/Single 2” as the base and change its blend mode to “Additive” using the batch settings.",
+      "contextHash": "c8f49a810279c7ad34164805200d66bc13489602bb8697f52f1337e82136b81c"
+    },
+    {
+      "id": "code-049",
+      "type": "code",
+      "source": "// 自身に吸引アニメを表示",
+      "sourceHash": "0e84f511436fbc94e4992eadec42ea07948c0b562e9c2b828b7b0f8ee3eb9f95",
+      "translation": "// Display a suction animation on self",
+      "contextHash": "0e84f511436fbc94e4992eadec42ea07948c0b562e9c2b828b7b0f8ee3eb9f95"
+    },
+    {
+      "id": "code-050",
+      "type": "code",
+      "source": "id = 102 // ←ここに吸引アニメのIDを指定",
+      "sourceHash": "f8bc6bf3e31277c629791df00740a837382cb184040acbbc817d644f71441eec",
+      "translation": "id = 102 // ← Specify the suction animation ID here",
+      "contextHash": "f8bc6bf3e31277c629791df00740a837382cb184040acbbc817d644f71441eec"
+    },
+    {
+      "id": "code-051",
+      "type": "code",
+      "source": "// 対象を引き寄せる",
+      "sourceHash": "36d49713df2ed947c75a4e1b93df71ff1bc43f3bc9c195f43ae8e2f2cffcc203",
+      "translation": "// Pull the target in",
+      "contextHash": "36d49713df2ed947c75a4e1b93df71ff1bc43f3bc9c195f43ae8e2f2cffcc203"
+    },
+    {
+      "id": "code-052",
+      "type": "code",
+      "source": "frame = 5 // 引き寄せ時間",
+      "sourceHash": "b61b270af6bf9a5437ef994723d00d308d0ead09c39d8659243013c51ce6f07a",
+      "translation": "frame = 5 // Pull-in duration",
+      "contextHash": "b61b270af6bf9a5437ef994723d00d308d0ead09c39d8659243013c51ce6f07a"
+    },
+    {
+      "id": "code-053",
+      "type": "code",
+      "source": "// 殴るアニメとモーション",
+      "sourceHash": "cfbb0769f4cb60956c8e71df882bb84cc01e52941b81953438e3b61f401cceb5",
+      "translation": "// Punch animation and motion",
+      "contextHash": "cfbb0769f4cb60956c8e71df882bb84cc01e52941b81953438e3b61f401cceb5"
+    },
+    {
+      "id": "code-054",
+      "type": "code",
+      "source": "// 対象をhomeへ戻す",
+      "sourceHash": "a5ec2e4ca9b787399def6a64a29b8b749b5392b54644cfad20bcb116ed1812f4",
+      "translation": "// Return the target to home",
+      "contextHash": "a5ec2e4ca9b787399def6a64a29b8b749b5392b54644cfad20bcb116ed1812f4"
+    },
+    {
+      "id": "code-055",
+      "type": "code",
+      "source": "delay = 1 // 殴り初めから吹っ飛ぶまでの時間差",
+      "sourceHash": "b1e25f703d8d03d56cc3a6b3124af935be9ac93d6199c4076d511b5c89aae137",
+      "translation": "delay = 1 // Delay from the start of the punch until being knocked back",
+      "contextHash": "b1e25f703d8d03d56cc3a6b3124af935be9ac93d6199c4076d511b5c89aae137"
+    },
+    {
+      "id": "code-056",
+      "type": "code",
+      "source": "frame = 2 // 吹っ飛び時間",
+      "sourceHash": "1878477516b5cf162fb6ed45c4d4571890bf09aa159fb3ef8c1e9b544e4cd0c9",
+      "translation": "frame = 2 // Knockback duration",
+      "contextHash": "1878477516b5cf162fb6ed45c4d4571890bf09aa159fb3ef8c1e9b544e4cd0c9"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "『subject』は常にスキルの行動主体を意味します。まぎらわしいですがモーション対象を変更した場合、『a』はモーション対象者となります。",
+      "sourceHash": "1e493d8bb5d522ffa033cb03c4d2837527f7eabf1e71ab730ec9711a19fc14aa",
+      "translation": " \"subject” always refers to the skill’s acting battler. This can be confusing, but when the motion target is changed, “a” refers to the motion target.",
+      "contextHash": "1e493d8bb5d522ffa033cb03c4d2837527f7eabf1e71ab730ec9711a19fc14aa"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "練気拳（全）（2020/04/06）",
+      "sourceHash": "210b6cbef7b9114d74dd947820d3f854c010fbb0f1e0bf152fa5907817301cd0",
+      "translation": "Energy Fist (All) (2020/04/06)",
+      "contextHash": "210b6cbef7b9114d74dd947820d3f854c010fbb0f1e0bf152fa5907817301cd0"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "練気拳と言えば、そもそも全体技です。もちろんちゃんと用意しています。",
+      "sourceHash": "1ffe13b585fa18f1d88b5ac84a668929274e555a85be711f6594d9e61d426a39",
+      "translation": "Speaking of Energy Fist, it is originally an area-of-effect move. Of course, I’ve prepared one as well.",
+      "contextHash": "1ffe13b585fa18f1d88b5ac84a668929274e555a85be711f6594d9e61d426a39"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "※元ネタはロマサガ３です。",
+      "sourceHash": "dc082ab4cae8a358190043e821af0332957134cd6fa299b59a030a15c0c071da",
+      "translation": "※The original inspiration is Romancing SaGa 3.",
+      "contextHash": "dc082ab4cae8a358190043e821af0332957134cd6fa299b59a030a15c0c071da"
+    },
+    {
+      "id": "code-057",
+      "type": "code",
+      "source": "// 自身に吸引アニメを表示",
+      "sourceHash": "0e84f511436fbc94e4992eadec42ea07948c0b562e9c2b828b7b0f8ee3eb9f95",
+      "translation": "// Display a suction animation on self",
+      "contextHash": "0e84f511436fbc94e4992eadec42ea07948c0b562e9c2b828b7b0f8ee3eb9f95"
+    },
+    {
+      "id": "code-058",
+      "type": "code",
+      "source": "id = 102 // ←ここに吸引アニメのIDを指定",
+      "sourceHash": "f8bc6bf3e31277c629791df00740a837382cb184040acbbc817d644f71441eec",
+      "translation": "id = 102 // ← Specify the suction animation ID here",
+      "contextHash": "f8bc6bf3e31277c629791df00740a837382cb184040acbbc817d644f71441eec"
+    },
+    {
+      "id": "code-059",
+      "type": "code",
+      "source": "// 対象を引き寄せる",
+      "sourceHash": "36d49713df2ed947c75a4e1b93df71ff1bc43f3bc9c195f43ae8e2f2cffcc203",
+      "translation": "// Pull the target in",
+      "contextHash": "36d49713df2ed947c75a4e1b93df71ff1bc43f3bc9c195f43ae8e2f2cffcc203"
+    },
+    {
+      "id": "code-060",
+      "type": "code",
+      "source": "// 殴るアニメ（対象を追尾）",
+      "sourceHash": "cd8f63877397d37800c5d64799307b5129f6c25bbf555bca6d17a0400905c3d8",
+      "translation": "// Punch animation (tracks the target)",
+      "contextHash": "cd8f63877397d37800c5d64799307b5129f6c25bbf555bca6d17a0400905c3d8"
+    },
+    {
+      "id": "code-061",
+      "type": "code",
+      "source": "// 殴るモーション（対象毎）",
+      "sourceHash": "ed0a3638c7a209451989500c6826c71796bc60c5979aded7768abcfd17419908",
+      "translation": "// Punch motion (per target)",
+      "contextHash": "ed0a3638c7a209451989500c6826c71796bc60c5979aded7768abcfd17419908"
+    },
+    {
+      "id": "code-062",
+      "type": "code",
+      "source": "// 対象をhomeへ戻す",
+      "sourceHash": "a5ec2e4ca9b787399def6a64a29b8b749b5392b54644cfad20bcb116ed1812f4",
+      "translation": "// Return the target to home",
+      "contextHash": "a5ec2e4ca9b787399def6a64a29b8b749b5392b54644cfad20bcb116ed1812f4"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ポイントは『performerDelay』と『nextDelay』の値を一致させることです。これが対象一体毎の処理に対する時間差となります。",
+      "sourceHash": "572cd41ff654163fa48e24efd22813aa618e43b0bdb01bfb20930f10d7a5025f",
+      "translation": "The key is to make the values of “performerDelay” and “nextDelay” match. This creates the time difference between processing each target.",
+      "contextHash": "572cd41ff654163fa48e24efd22813aa618e43b0bdb01bfb20930f10d7a5025f"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "ちょっとややこしいですが『performerDelay』はモーション対象が複数いる場合の時間差です。",
+      "sourceHash": "75a13e491b1696b4bb8f36125b65f7ce13f0c939e4c7876dc575eccbd215a07c",
+      "translation": "It is a little complicated, but “performerDelay” is the time difference when there are multiple motion targets.",
+      "contextHash": "75a13e491b1696b4bb8f36125b65f7ce13f0c939e4c7876dc575eccbd215a07c"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "『nextDelay』は「対象毎にアニメーションを表示する時間差」および「対象毎に行動主体がモーションを実行する時間差」です。",
+      "sourceHash": "bc517df2857da8216db27eecb381ec265c5e6802760f0c801be97878c60b1ef7",
+      "translation": " \"nextDelay』is the \"time difference for displaying the animation for each target\" and the \"time difference for the battler performing the motion for each target.\"",
+      "contextHash": "bc517df2857da8216db27eecb381ec265c5e6802760f0c801be97878c60b1ef7"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "分身剣（2022/04/14更新）",
+      "sourceHash": "035811ae2777c4a95d4b73c66bcf8e974d3ca9a746d5863a988d1d59d98f3e1d",
+      "translation": "Doppelganger Sword (Updated 2022/04/14)",
+      "contextHash": "035811ae2777c4a95d4b73c66bcf8e974d3ca9a746d5863a988d1d59d98f3e1d"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "※DynamicMotion ver1.03以降が必要です。",
+      "sourceHash": "370850958090c4d525e10abb4b8c553fd3587436918189a0a888439ca03bf48d",
+      "translation": "※Requires DynamicMotion ver1.03 or later.",
+      "contextHash": "370850958090c4d525e10abb4b8c553fd3587436918189a0a888439ca03bf48d"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "分身しながら切り刻みます。",
+      "sourceHash": "70f34f9e7f8b063563d226a3afc9f00a099e033fac96b5a4751dd2c9960757da",
+      "translation": "Slashes the enemy repeatedly while creating duplicates.",
+      "contextHash": "70f34f9e7f8b063563d226a3afc9f00a099e033fac96b5a4751dd2c9960757da"
+    },
+    {
+      "id": "code-063",
+      "type": "code",
+      "source": "// 右から攻撃アニメ",
+      "sourceHash": "763bf9d1e926fa94aaff878b8ed5f626d660a9f3666b1f5497c35f0af1461edc",
+      "translation": "// Attack animation from the right",
+      "contextHash": "763bf9d1e926fa94aaff878b8ed5f626d660a9f3666b1f5497c35f0af1461edc"
+    },
+    {
+      "id": "code-064",
+      "type": "code",
+      "source": "// 左から攻撃アニメ",
+      "sourceHash": "bf803c9f7642440ef2705fd26c1b4d604f3a1d83bd626c185eb59a32a224a4a6",
+      "translation": "// Attack animation from the left",
+      "contextHash": "bf803c9f7642440ef2705fd26c1b4d604f3a1d83bd626c185eb59a32a224a4a6"
+    },
+    {
+      "id": "code-065",
+      "type": "code",
+      "source": "delay = 1 // １フレームずらす",
+      "sourceHash": "d8041c7baae72aa5b4033a09f9a5043fe232c84259594506a39989cef3810379",
+      "translation": "delay = 1 // Shift by one frame",
+      "contextHash": "d8041c7baae72aa5b4033a09f9a5043fe232c84259594506a39989cef3810379"
+    },
+    {
+      "id": "code-066",
+      "type": "code",
+      "source": "rotation = -Math.PI/2 // 90度回転",
+      "sourceHash": "e9f3f32a5850b1754502b2de7d1d7dced637c7c0f95005facbfb149018c5159e",
+      "translation": "rotation = -Math.PI/2 // Rotate 90 degrees",
+      "contextHash": "e9f3f32a5850b1754502b2de7d1d7dced637c7c0f95005facbfb149018c5159e"
+    },
+    {
+      "id": "code-067",
+      "type": "code",
+      "source": "// 左右に分身しながら武器振り",
+      "sourceHash": "cc25da815008e38b1675ded5577aadd7424b8daa303ca179f85dac652c47a5dd",
+      "translation": "// Swing the weapon while creating clones to the left and right",
+      "contextHash": "cc25da815008e38b1675ded5577aadd7424b8daa303ca179f85dac652c47a5dd"
+    },
+    {
+      "id": "code-068",
+      "type": "code",
+      "source": "scaleX = (t % 4 < 2) ? -1 : 1 // 左右反転",
+      "sourceHash": "7398fea880a839d0ea4eac4f270162fad93077421abb1aa011dab42ea6f6d126",
+      "translation": "scaleX = (t % 4 < 2) ? -1 : 1 // Flip horizontally",
+      "contextHash": "7398fea880a839d0ea4eac4f270162fad93077421abb1aa011dab42ea6f6d126"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "赤字部分で2/60秒毎に瞬間的に位置を変えています。",
+      "sourceHash": "19f160c791e798821fb08e0b216eef825369d6e0c326f765db07ffb207c9481f",
+      "translation": "The position is changed instantaneously every 2/60 seconds in the red text.",
+      "contextHash": "19f160c791e798821fb08e0b216eef825369d6e0c326f765db07ffb207c9481f"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "『scaleX』はバトラーの横幅を意味する値ですが、値を『-1』にすると左右反転になります。反転は『mirror = true』でも可能ですが、リアルタイムで変更したい場合は『scaleX』が使えます。",
+      "sourceHash": "0ecf3275e35f2246443bb8ba6b735109ffe433467ba20523fa200e2caec0eb72",
+      "translation": " \"scaleX』is a value representing the battler's width, but setting it to『-1』flips it horizontally. Flipping is also possible with『mirror = true』, but『scaleX』can be used when you want to change it in real time.",
+      "contextHash": "0ecf3275e35f2246443bb8ba6b735109ffe433467ba20523fa200e2caec0eb72"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "変身（2020/11/15更新）",
+      "sourceHash": "5a867d2be5fb8689ef3235fdeb1911a6d236ba97ab5780beb34658fd23f668ff",
+      "translation": "Transformation (Updated 2020/11/15)",
+      "contextHash": "5a867d2be5fb8689ef3235fdeb1911a6d236ba97ab5780beb34658fd23f668ff"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "バトラーの画像を変更します。",
+      "sourceHash": "69494fd6cd037e951bc0e732488495661f81f87ed94146f3d5e6d8ff2b93b4be",
+      "translation": "Changes the battler's image.",
+      "contextHash": "69494fd6cd037e951bc0e732488495661f81f87ed94146f3d5e6d8ff2b93b4be"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "文字通りの変身技にも使えますが、それ以外にもモーションパターンの追加などへ利用可能です。",
+      "sourceHash": "7063d693d06e17add81df8cb1ec803549b16856b5676b83320e5a2be7f34760a",
+      "translation": "It can be used for literal transformation techniques, as well as for adding motion patterns and more.",
+      "contextHash": "7063d693d06e17add81df8cb1ec803549b16856b5676b83320e5a2be7f34760a"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "また、敵も同じ要領で画像を変えられます。",
+      "sourceHash": "b66535fb325bf1bbffa53c212e3bc6cce9c480dd9a365ee3a1f0ff5aa34d652d",
+      "translation": "Enemies can also have their images changed in the same way.",
+      "contextHash": "b66535fb325bf1bbffa53c212e3bc6cce9c480dd9a365ee3a1f0ff5aa34d652d"
+    },
+    {
+      "id": "code-069",
+      "type": "code",
+      "source": "// グラフィックを変更して接近",
+      "sourceHash": "f7e6e89a175b53d88fdb279757e28ea71f6df4b868be019604e7dce028eebd95",
+      "translation": "// Change the graphic and approach",
+      "contextHash": "f7e6e89a175b53d88fdb279757e28ea71f6df4b868be019604e7dce028eebd95"
+    },
+    {
+      "id": "code-070",
+      "type": "code",
+      "source": "// グラフィックを戻して元の位置へ",
+      "sourceHash": "98b2e9c7719b3244a4730dfc4ae531f550ffe1403e0c0e894c6012efe2eccfd9",
+      "translation": "// Restore the graphic and return to the original position",
+      "contextHash": "98b2e9c7719b3244a4730dfc4ae531f550ffe1403e0c0e894c6012efe2eccfd9"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "『image = Actor1_1』というように指定した画像へとキャラを変更します。",
+      "sourceHash": "3bf23b849f88ba4c7e1e4c2c466af05a03f057d46714d25f355d9c8710f734be",
+      "translation": "Changes the character to the specified image, such as『image = Actor1_1』.",
+      "contextHash": "3bf23b849f88ba4c7e1e4c2c466af05a03f057d46714d25f355d9c8710f734be"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "戻す時は『image = \"\"』というように空白文字を入力すればＯＫです。",
+      "sourceHash": "b1fa60f65b93c216aff6fe93e108c1a40d7f652344ab16c3d10ff3326328e72e",
+      "translation": "To restore it, simply enter a blank string, such as『image = \"\"』.",
+      "contextHash": "b1fa60f65b93c216aff6fe93e108c1a40d7f652344ab16c3d10ff3326328e72e"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "以下のように数式を記述すれば、可変にもできます。",
+      "sourceHash": "08d6cdebaf92c0f0300af3711ac7fbe02fd47f5dc04d325517478e057b751fbe",
+      "translation": "You can also make it variable by writing a formula as follows.",
+      "contextHash": "08d6cdebaf92c0f0300af3711ac7fbe02fd47f5dc04d325517478e057b751fbe"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "例えば、アクターＩＤが４ならば『Test4_2』に変更されます。",
+      "sourceHash": "93191af3e6c2bd50c758eaeda2aa71ff77ed5b9c061c2d18fe396418ec92bb61",
+      "translation": "For example, if the actor ID is 4, it changes to『Test4_2』.",
+      "contextHash": "93191af3e6c2bd50c758eaeda2aa71ff77ed5b9c061c2d18fe396418ec92bb61"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "ちなみに、この画像変更は戦闘中のみの一時的な効果となります。",
+      "sourceHash": "c111251bf46d7a5bf1da5fa916f93ca194838fdfe35f18a37f35a5d66b6d1942",
+      "translation": "Incidentally, this image change is only a temporary effect during battle.",
+      "contextHash": "c111251bf46d7a5bf1da5fa916f93ca194838fdfe35f18a37f35a5d66b6d1942"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "奥義演出（対象以外消去）（2021/01/20）",
+      "sourceHash": "121c4927f2ed3b77ea3b8ed847db366135bd157f3b8cf7e9d255b06a579a45ae",
+      "translation": "Arts Effect (Hide Everyone Except the Target) (2021/01/20)",
+      "contextHash": "121c4927f2ed3b77ea3b8ed847db366135bd157f3b8cf7e9d255b06a579a45ae"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "行動主体と対象以外を消去して奥義っぽい演出を行います。",
+      "sourceHash": "a8fa26abf0270257f0b2dcf79f171e30f6ed45dc0a20bb5728ef6df6630d2ea7",
+      "translation": "Hides everyone except the acting battler and the target to create an Arts-like effect.",
+      "contextHash": "a8fa26abf0270257f0b2dcf79f171e30f6ed45dc0a20bb5728ef6df6630d2ea7"
+    },
+    {
+      "id": "code-071",
+      "type": "code",
+      "source": "// 自動前進禁止",
+      "sourceHash": "dc5873194ef66f87c2e2bd97256f6e1096729013e6227ef89ec62e098db8ce62",
+      "translation": "// Disable automatic advance",
+      "contextHash": "dc5873194ef66f87c2e2bd97256f6e1096729013e6227ef89ec62e098db8ce62"
+    },
+    {
+      "id": "code-072",
+      "type": "code",
+      "source": "// 行動主体と対象以外を透明化",
+      "sourceHash": "e1f464bdb81f362922b8f0c935d1ac7a2e1e07e4f76b68b1ff827e801a4be1c6",
+      "translation": "// Make everyone except the subject and target transparent",
+      "contextHash": "e1f464bdb81f362922b8f0c935d1ac7a2e1e07e4f76b68b1ff827e801a4be1c6"
+    },
+    {
+      "id": "code-073",
+      "type": "code",
+      "source": "// 接近",
+      "sourceHash": "3d8f5f8d4fdb7735312b9affa7b1f7945a1c203815f57917fd319a4b7f622b95",
+      "translation": "// Approach",
+      "contextHash": "3d8f5f8d4fdb7735312b9affa7b1f7945a1c203815f57917fd319a4b7f622b95"
+    },
+    {
+      "id": "code-074",
+      "type": "code",
+      "source": "// 武器振り",
+      "sourceHash": "4aef4eb440547b15b2c175c9eedb3b58e155f8887c0c9c9f232aca262a774690",
+      "translation": "// Swing the weapon",
+      "contextHash": "4aef4eb440547b15b2c175c9eedb3b58e155f8887c0c9c9f232aca262a774690"
+    },
+    {
+      "id": "code-075",
+      "type": "code",
+      "source": "// アニメーション＆ウェイト",
+      "sourceHash": "529c89edf45b8be79ec99e9532469545d767cda8f3baf2e30f338669967942c8",
+      "translation": "// Animation and wait",
+      "contextHash": "529c89edf45b8be79ec99e9532469545d767cda8f3baf2e30f338669967942c8"
+    },
+    {
+      "id": "code-076",
+      "type": "code",
+      "source": "// 戻る",
+      "sourceHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97",
+      "translation": "// Return",
+      "contextHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97"
+    },
+    {
+      "id": "code-077",
+      "type": "code",
+      "source": "// 透明化解除",
+      "sourceHash": "c5efe26e2a39c77a28936590f6164b07ce46a80f8e536937602af80e7fdf3b53",
+      "translation": "// Disable transparency",
+      "contextHash": "c5efe26e2a39c77a28936590f6164b07ce46a80f8e536937602af80e7fdf3b53"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "重要なのは赤字部分です。ここで透明化の制御を行います。",
+      "sourceHash": "e82afd01b643e2ea3d7bc61b36a81289f5c19e78937c79e3f915f1b4fa22f9a7",
+      "translation": "The important part is the red text. This is where transparency is controlled.",
+      "contextHash": "e82afd01b643e2ea3d7bc61b36a81289f5c19e78937c79e3f915f1b4fa22f9a7"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "間の部分は好きなように変更してください。ただし、アニメーションにはwaitも必要なことに注意です。これがないとアニメーションの終了を待たず、透明化が解除されてしまいます。",
+      "sourceHash": "60462985ad6d1eaae59ea9bf9fb95d4defce9e6cb85847ae03e85bc37175e876",
+      "translation": "Change the middle section as you like. However, note that you also need to use wait for animations. Without it, the transparency will be removed without waiting for the animation to finish.",
+      "contextHash": "60462985ad6d1eaae59ea9bf9fb95d4defce9e6cb85847ae03e85bc37175e876"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "また、暗転演出は上の記述に含まれていません。必要なら以下をご覧ください。",
+      "sourceHash": "afcbc39bb4e0297a1651542a5e70f01c2aa56e299e4e98a5feca263baebe2b93",
+      "translation": "Also, the blackout effect is not included in the above description. See below if necessary.",
+      "contextHash": "afcbc39bb4e0297a1651542a5e70f01c2aa56e299e4e98a5feca263baebe2b93"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/475496918.html#darkness",
+      "sourceHash": "9914d359979219ab68ed6df95f4231a1c393010787d7910a6b6e5faa4a51bf17",
+      "translation": "http://newrpg.seesaa.net/article/475496918.html#darkness",
+      "contextHash": "1622def98062213340ecd2c266cd7906547fb0745352f35ee75b62e597c1859c"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "詳細",
+      "sourceHash": "9652e7b5f69922bdce983e3534b7b370bd965dce40e4f7ec2f39a443eed006d6",
+      "translation": "Details",
+      "contextHash": "9652e7b5f69922bdce983e3534b7b370bd965dce40e4f7ec2f39a443eed006d6"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "によって、『全アクター』と『生存している敵』を透明化の対象としています。",
+      "sourceHash": "a4c7e180f0201edf9cfebc0acae3fec5a132bfaa06048029bce4103020cbbfb9",
+      "translation": "This makes『All Actors』and『Living Enemies』targets for transparency.",
+      "contextHash": "a4c7e180f0201edf9cfebc0acae3fec5a132bfaa06048029bce4103020cbbfb9"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "なぜ、敵だけ生存者に絞っているかというと、そうしないと死んだ敵の表示まで透明化の解除時に復活してしまうからです。",
+      "sourceHash": "b11af485c8ba652b337012565be2f142cb8a1adaa565aaa0e81861b15b336f8c",
+      "translation": "The reason only living enemies are selected is that otherwise the displays of dead enemies would also reappear when transparency is removed.",
+      "contextHash": "b11af485c8ba652b337012565be2f142cb8a1adaa565aaa0e81861b15b336f8c"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "それに加えて",
+      "sourceHash": "bd7313e26f8e28382e165f1645b20113976e62a7adcc0306b13d373820c87660",
+      "translation": "In addition,",
+      "contextHash": "bd7313e26f8e28382e165f1645b20113976e62a7adcc0306b13d373820c87660"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "によって、スキルの使用者と対象を透明化の対象から除外しています。",
+      "sourceHash": "db2707c2a59c550b0b4621f46fb0369ff957c377b452b52fb26ab3c5b7d88089",
+      "translation": "this excludes the skill user and target from the transparency targets.",
+      "contextHash": "db2707c2a59c550b0b4621f46fb0369ff957c377b452b52fb26ab3c5b7d88089"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "分身剣（残像版）（2022/04/14更新）",
+      "sourceHash": "d5fdda582c57a400a737fd2873c12c6503e9ce6ae282ae30935526899ee8cd78",
+      "translation": "Doppelganger Sword (Afterimage Version) (Updated 2022/04/14)",
+      "contextHash": "d5fdda582c57a400a737fd2873c12c6503e9ce6ae282ae30935526899ee8cd78"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "残像を引き連れながら敵の周囲を回り、斬撃を繰り返します。",
+      "sourceHash": "d45a7115be00b3a03e0e6476944e7b38ce3c8390bacf292e3ba9f680f695ccc6",
+      "translation": "Circles around the enemy while accompanied by afterimages, repeatedly slashing.",
+      "contextHash": "d45a7115be00b3a03e0e6476944e7b38ce3c8390bacf292e3ba9f680f695ccc6"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "スキルに設定するアニメーションは普通の斬撃でよいと思います。他にも『通常攻撃』にしておくと武器によってアニメーションが変わるので面白いです。",
+      "sourceHash": "7e312b36cf48dda09de93dfe10d56ff454a4debc5ad2852402b03d2449502186",
+      "translation": "I think a normal slashing animation is suitable for the animation set for the skill. Alternatively, setting it to『Normal Attack』can be interesting, as the animation will change depending on the weapon.",
+      "contextHash": "7e312b36cf48dda09de93dfe10d56ff454a4debc5ad2852402b03d2449502186"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "※DynamicMotionが2021/09/11以降のバージョン（sx, syの指定に対応）である必要があります。",
+      "sourceHash": "176c2d7f22e2b0726df0573aeca99374c0645f97b80867029e544438222b7d67",
+      "translation": "※DynamicMotion must be version 2021/09/11 or later (supporting the specification of sx and sy).",
+      "contextHash": "176c2d7f22e2b0726df0573aeca99374c0645f97b80867029e544438222b7d67"
+    },
+    {
+      "id": "code-078",
+      "type": "code",
+      "source": "// 対象の中心より半径分右へ移動",
+      "sourceHash": "dd1cf80c1629b1c584d954f0b054bb29bacd0644dc3a965fd801d9fac46b0d0b",
+      "translation": "// Move right by the radius from the target's center",
+      "contextHash": "dd1cf80c1629b1c584d954f0b054bb29bacd0644dc3a965fd801d9fac46b0d0b"
+    },
+    {
+      "id": "code-079",
+      "type": "code",
+      "source": "// ランダムな角度で斬撃",
+      "sourceHash": "67770962b8a0caedff8dd5ebd7123c5690bb330057ddcbe53943692bb41556f5",
+      "translation": "// Slash at a random angle",
+      "contextHash": "67770962b8a0caedff8dd5ebd7123c5690bb330057ddcbe53943692bb41556f5"
+    },
+    {
+      "id": "code-080",
+      "type": "code",
+      "source": "// 武器を振る",
+      "sourceHash": "55993f94ecf57ed3bfd323c2014cee45cb377ec6f7123e29c9be44fe05fe69f8",
+      "translation": "// Swing the weapon",
+      "contextHash": "55993f94ecf57ed3bfd323c2014cee45cb377ec6f7123e29c9be44fe05fe69f8"
+    },
+    {
+      "id": "code-081",
+      "type": "code",
+      "source": "// 対象を中心に円運動",
+      "sourceHash": "3a864e8343225868d364186778d935e3d4577b664abe4f40a444ce187232a731",
+      "translation": "// Move in a circle around the target",
+      "contextHash": "3a864e8343225868d364186778d935e3d4577b664abe4f40a444ce187232a731"
+    },
+    {
+      "id": "code-082",
+      "type": "code",
+      "source": "radiusX = (15 + b.width/2) // Ｘ半径",
+      "sourceHash": "e121231f91aebf007ac7cbe49560deeb2d8e778447575e82dbadb6796d32f24a",
+      "translation": "radiusX = (15 + b.width/2) // X radius",
+      "contextHash": "e121231f91aebf007ac7cbe49560deeb2d8e778447575e82dbadb6796d32f24a"
+    },
+    {
+      "id": "code-083",
+      "type": "code",
+      "source": "radiusY = (15 + b.width/2) / 2 // Ｙ半径",
+      "sourceHash": "f78ae31a53aa85b3467949ea4c30d9964938b0bb45b34e70d13f5c6d297b944a",
+      "translation": "radiusY = (15 + b.width/2) / 2 // Y radius",
+      "contextHash": "f78ae31a53aa85b3467949ea4c30d9964938b0bb45b34e70d13f5c6d297b944a"
+    },
+    {
+      "id": "code-084",
+      "type": "code",
+      "source": "radX *= 3 // Ｘ方向に３周",
+      "sourceHash": "f3e9b910c629e220f3e956bd2b5abb4e9e410b9c536dabab83b8fa07791fdcdc",
+      "translation": "radX *= 3 // Three revolutions in the X direction",
+      "contextHash": "f3e9b910c629e220f3e956bd2b5abb4e9e410b9c536dabab83b8fa07791fdcdc"
+    },
+    {
+      "id": "code-085",
+      "type": "code",
+      "source": "radY *= 3 // Ｙ方向に３周",
+      "sourceHash": "07b6cf605820699bdf28dab36093fe8989856108a2c36156cd01ae1ce7d4a1bb",
+      "translation": "radY *= 3 // Three revolutions in the Y direction",
+      "contextHash": "07b6cf605820699bdf28dab36093fe8989856108a2c36156cd01ae1ce7d4a1bb"
+    },
+    {
+      "id": "code-086",
+      "type": "code",
+      "source": "// 半径分右から開始して元の位置へ",
+      "sourceHash": "416f1feae3ec091b78b83dce1e19d1bcb3f42d9cd9221dc3d223c62039fd993b",
+      "translation": "// Start one radius to the right and return to the original position",
+      "contextHash": "416f1feae3ec091b78b83dce1e19d1bcb3f42d9cd9221dc3d223c62039fd993b"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "残像機能については残像プラグイン自体の説明をご覧ください。",
+      "sourceHash": "a04ce2ef500a1192e4e05bb60d71ec44358bebfdcfd8bd7d3ba8e8f3f6e92f90",
+      "translation": "For information about the afterimage function, see the description of the afterimage plugin itself.",
+      "contextHash": "a04ce2ef500a1192e4e05bb60d71ec44358bebfdcfd8bd7d3ba8e8f3f6e92f90"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "『15 + b.width/2』の部分が円運動の半径です。『15 + 対象の横幅÷２』の意味となります。",
+      "sourceHash": "043d86a7d5bdabe3e5e1ba08f2735e774610b8409058c390cd6d0e6d729c1a02",
+      "translation": "The『15 + b.width/2』part is the radius of the circular motion. It means『15 + target width ÷ 2』.",
+      "contextHash": "043d86a7d5bdabe3e5e1ba08f2735e774610b8409058c390cd6d0e6d729c1a02"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "性質上、対象の横幅が小さすぎると円周が小さすぎてショボくなる難点があります。こだわるなら最小値を保証する数式にするといいかもしれません。",
+      "sourceHash": "573d6b87fa0f738c8120b60b96e36df96a026f3add4c0baf6ed9d0bf5ab1d8e1",
+      "translation": "By its nature, if the target is too narrow, the circumference becomes too small and the effect looks unimpressive. If you want to be particular about it, you may want to use a formula that guarantees a minimum value.",
+      "contextHash": "573d6b87fa0f738c8120b60b96e36df96a026f3add4c0baf6ed9d0bf5ab1d8e1"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "例：『Math.max(50, 15 + b.width/2)』。",
+      "sourceHash": "d499392b428c89b0d4c3ca857686e173b70eee1b04c0e545eacf37223858b42f",
+      "translation": "Example:『Math.max(50, 15 + b.width/2)』.",
+      "contextHash": "d499392b428c89b0d4c3ca857686e173b70eee1b04c0e545eacf37223858b42f"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "最も難解なのは『z = a.y + (b.height - a.height)/2 > b.y ? b.z+1 : b.z-1』『scaleX = (a.y + (b.height - a.height)/2 > b.y ? 1 : -1) * mirroring』といった赤字部分の数式だと思います。",
+      "sourceHash": "b32561f0877f3d62b974f1fd4d95ca608b8e7090b8779ba68c43bd9c4cd57b94",
+      "translation": "I think the most difficult parts are the formulas in red, such as『z = a.y + (b.height - a.height)/2 > b.y ? b.z+1 : b.z-1』and『scaleX = (a.y + (b.height - a.height)/2 > b.y ? 1 : -1) * mirroring』.",
+      "contextHash": "b32561f0877f3d62b974f1fd4d95ca608b8e7090b8779ba68c43bd9c4cd57b94"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "前者は敵との位置関係によって、アクターを前面に表示するか背面に表示するかを調整するためのものです。Ｙ座標（画像縦幅も考慮）を比較し、アクターが下側にいる時は前面、上側にいる時は背面に表示させています。",
+      "sourceHash": "16339e1b2708350da152337aaf22a7d172571159f646c2f3658e762560aa2074",
+      "translation": "The former adjusts whether the actor is displayed in front of or behind the enemy based on their positional relationship. It compares the Y coordinates (also taking the image heights into account), displaying the actor in front when they are lower and behind when they are higher.",
+      "contextHash": "16339e1b2708350da152337aaf22a7d172571159f646c2f3658e762560aa2074"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "後者もＹ座標を比較しているのは同じですが、こちらはアクターを左右反転させるために使っています。同じくアクターが下側にいる時は左向き、上側にいる時は左右反転させて右向きに表示させています。",
+      "sourceHash": "69e0472a20405200014759456a3a023cdfffd1724d4171821ea58742e264b610",
+      "translation": "The latter also compares the Y coordinates, but it is used to flip the actor horizontally. Similarly, when the actor is lower, they are displayed facing left; when higher, they are flipped horizontally and displayed facing right.",
+      "contextHash": "69e0472a20405200014759456a3a023cdfffd1724d4171821ea58742e264b610"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "これはscaleXの値を-1にすると、バトラーが左右反転する性質を利用しています。さらに敵側が使った場合は左右反転（mirroring）されるよう考慮しています。",
+      "sourceHash": "a835ac57585dcea06c8b2682afdb6cd4c6192aa602cd6be1e0166282a9ae7b77",
+      "translation": "This uses the property that setting scaleX to -1 flips the battler horizontally. It also accounts for horizontal flipping (mirroring) when used by an enemy.",
+      "contextHash": "a835ac57585dcea06c8b2682afdb6cd4c6192aa602cd6be1e0166282a9ae7b77"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "暗転（2023/03/21）",
+      "sourceHash": "794d5bb122d5b2ec2a7d1fe9cc7f3123d50560a4558952455528f317bfd4da1d",
+      "translation": "Blackout (2023/03/21)",
+      "contextHash": "794d5bb122d5b2ec2a7d1fe9cc7f3123d50560a4558952455528f317bfd4da1d"
+    },
+    {
+      "id": "code-087",
+      "type": "code",
+      "source": "// 好きなように定義",
+      "sourceHash": "97c49c6a0aa256fb1196a509f9692ac4f35fccf8fda285393335f12490091f45",
+      "translation": "// Define as desired",
+      "contextHash": "97c49c6a0aa256fb1196a509f9692ac4f35fccf8fda285393335f12490091f45"
+    },
+    {
+      "id": "code-088",
+      "type": "code",
+      "source": "// アニメーション終了を待って実行",
+      "sourceHash": "eb68bd6b1c55e1a8905bbf98762921b6bda108bc43f0743ea4aeb93f2a80fb04",
+      "translation": "// Execute after waiting for the animation to finish",
+      "contextHash": "eb68bd6b1c55e1a8905bbf98762921b6bda108bc43f0743ea4aeb93f2a80fb04"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "簡単に言うと、最初の３つの数値は背景の赤緑青の順になっています。",
+      "sourceHash": "f7f11157a57ca8493617f2acb70b28ac572bf8928968dd16e2a84780988d024b",
+      "translation": "Simply put, the first three values represent the background's red, green, and blue values, in that order.",
+      "contextHash": "f7f11157a57ca8493617f2acb70b28ac572bf8928968dd16e2a84780988d024b"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "0だと黒、255だと変化なしですね。",
+      "sourceHash": "33437e0709f13aa95a241ce342e7039734644338a0ba4594e77e7a4c61335ca9",
+      "translation": "0 produces black, while 255 produces no change.",
+      "contextHash": "33437e0709f13aa95a241ce342e7039734644338a0ba4594e77e7a4c61335ca9"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "最後の15は変化にかかる時間です。60で１秒となります。",
+      "sourceHash": "12bacdaf9d4b7a09af80c8a0f56d5f22ed4228e977a3e402915f4e2fc7c78a2d",
+      "translation": "The final 15 is the time required for the change. 60 equals one second.",
+      "contextHash": "12bacdaf9d4b7a09af80c8a0f56d5f22ed4228e977a3e402915f4e2fc7c78a2d"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "※サンプルの記述はあくまで暗転部分だけです。中身はご自由にどうぞ。",
+      "sourceHash": "abacada3aaf2a29685ed0486fd4f3b0b31263ee6783d4f2f423484bf63cd1b2c",
+      "translation": "※The sample description only covers the blackout portion. Feel free to customize the contents as you like.",
+      "contextHash": "abacada3aaf2a29685ed0486fd4f3b0b31263ee6783d4f2f423484bf63cd1b2c"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページはDynamicAnimation（[[LINK_1]]ＭＺ[[/LINK_1]]、[[LINK_2]]ＭＶ[[/LINK_2]]）および、DynamicMotion（[[LINK_3]]ＭＺ[[/LINK_3]]、[[LINK_4]]ＭＶ[[/LINK_4]]）プラグインの解説の一部です。",
+      "sourceHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f",
+      "parts": [
+        {
+          "source": "このページはDynamicAnimation（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）および、DynamicMotion（",
+          "link": false
+        },
+        {
+          "source": "ＭＺ",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "ＭＶ",
+          "link": true,
+          "linkIndex": 4
+        },
+        {
+          "source": "）プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the documentation for the DynamicAnimation ([[LINK_1]]MZ[[/LINK_1]], [[LINK_2]]MV[[/LINK_2]]) and DynamicMotion ([[LINK_3]]MZ[[/LINK_3]], [[LINK_4]]MV[[/LINK_4]]) plugins.",
+      "contextHash": "b74f63ef2f94da136adbd71c6a193f68c88c5b44b87c8b7e804c790778a3b20f"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]爆裂脚[[/LINK_1]]",
+      "sourceHash": "4ac5a6b8c4c34d4be75580c59bb5a387377c77cab96948b283c76ffcf9c70f5d",
+      "parts": [
+        {
+          "source": "爆裂脚",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Explosive Leg[[/LINK_1]]",
+      "contextHash": "4ac5a6b8c4c34d4be75580c59bb5a387377c77cab96948b283c76ffcf9c70f5d"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]ズームアタック[[/LINK_1]]（2020/03/29更新）",
+      "sourceHash": "7d0012e666a0b6ddc06b5acf802171ab2898ae3c545b1133c8e373e18d26abe7",
+      "parts": [
+        {
+          "source": "ズームアタック",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/03/29更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Zoom Attack[[/LINK_1]] (updated 2020/03/29)",
+      "contextHash": "7d0012e666a0b6ddc06b5acf802171ab2898ae3c545b1133c8e373e18d26abe7"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]スライディング[[/LINK_1]]（2020/03/24）",
+      "sourceHash": "61bcec84aad3e23d0a218b966bcbeaa64db527c13baaef2cd32268ee4eae592e",
+      "parts": [
+        {
+          "source": "スライディング",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/03/24）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Sliding[[/LINK_1]] (2020/03/24)",
+      "contextHash": "61bcec84aad3e23d0a218b966bcbeaa64db527c13baaef2cd32268ee4eae592e"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ウルトラジャンプ[[/LINK_1]]（2020/08/30修正）",
+      "sourceHash": "79179c301c6e94cb1600520e063e76d60c4c328c979b6a6c2949dd78e3336418",
+      "parts": [
+        {
+          "source": "ウルトラジャンプ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/08/30修正）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Ultra Jump[[/LINK_1]] (revised 2020/08/30)",
+      "contextHash": "79179c301c6e94cb1600520e063e76d60c4c328c979b6a6c2949dd78e3336418"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]払い抜け[[/LINK_1]]（2020/03/31）",
+      "sourceHash": "82cff5e11e04eac04887fe23c7c6557247b19476d152fa96cd9332ee6a9e9f10",
+      "parts": [
+        {
+          "source": "払い抜け",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/03/31）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Slash Through[[/LINK_1]] (2020/03/31)",
+      "contextHash": "82cff5e11e04eac04887fe23c7c6557247b19476d152fa96cd9332ee6a9e9f10"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]疾風剣[[/LINK_1]]（2020/04/03）",
+      "sourceHash": "5d4f18c7f4cb56242ec6c365d8a4119d91f540d7b3c5c496934f2e8c78a9f724",
+      "parts": [
+        {
+          "source": "疾風剣",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/04/03）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Gale Sword[[/LINK_1]] (2020/04/03)",
+      "contextHash": "5d4f18c7f4cb56242ec6c365d8a4119d91f540d7b3c5c496934f2e8c78a9f724"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]練気拳（単）[[/LINK_1]]（2020/04/06）",
+      "sourceHash": "3f411bc071740c1f84f335d242d26b16abc6f9e66164bc5a905c76ae3b3e20dd",
+      "parts": [
+        {
+          "source": "練気拳（単）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/04/06）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Ki Fist (Single) [[/LINK_1]](2020/04/06)",
+      "contextHash": "3f411bc071740c1f84f335d242d26b16abc6f9e66164bc5a905c76ae3b3e20dd"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]練気拳（全）[[/LINK_1]]（2020/04/06）",
+      "sourceHash": "ebe193ac5dab60629739e8f16de8faa15d017cda7cef97f6908b2722ccc5e5fb",
+      "parts": [
+        {
+          "source": "練気拳（全）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/04/06）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Ki Fist (All) [[/LINK_1]](2020/04/06)",
+      "contextHash": "ebe193ac5dab60629739e8f16de8faa15d017cda7cef97f6908b2722ccc5e5fb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]分身剣[[/LINK_1]]（2022/04/14更新）",
+      "sourceHash": "4e5843da2bd6317bcfbafb9673ae15fac117a86bbb23597f68063bd9e7874632",
+      "parts": [
+        {
+          "source": "分身剣",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/14更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Phantom Sword[[/LINK_1]] (updated 2022/04/14)",
+      "contextHash": "4e5843da2bd6317bcfbafb9673ae15fac117a86bbb23597f68063bd9e7874632"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]変身[[/LINK_1]]（2020/11/15）",
+      "sourceHash": "b854f8a7761c0b241a4628a3f2ae0e34bd372f39baf4d405415321fab65dcab6",
+      "parts": [
+        {
+          "source": "変身",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2020/11/15）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Transformation[[/LINK_1]] (2020/11/15)",
+      "contextHash": "b854f8a7761c0b241a4628a3f2ae0e34bd372f39baf4d405415321fab65dcab6"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]奥義演出（対象以外消去）[[/LINK_1]]（2021/01/20）",
+      "sourceHash": "7ae0ff977cd02342bd9f095809cb44779bf2b61b42e16305f0b59d19d94c6013",
+      "parts": [
+        {
+          "source": "奥義演出（対象以外消去）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2021/01/20）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Arts Effect (Erase Everything Except Target)[[/LINK_1]] (2021/01/20)",
+      "contextHash": "7ae0ff977cd02342bd9f095809cb44779bf2b61b42e16305f0b59d19d94c6013"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]分身剣（残像版）[[/LINK_1]]（2022/04/14更新）",
+      "sourceHash": "d9f25ad96dc89f068afd1b65ab66af9372f58eb94f0ecb64d3b8fc101701131f",
+      "parts": [
+        {
+          "source": "分身剣（残像版）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2022/04/14更新）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Phantom Sword (Afterimage Version)[[/LINK_1]] (updated 2022/04/14)",
+      "contextHash": "d9f25ad96dc89f068afd1b65ab66af9372f58eb94f0ecb64d3b8fc101701131f"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]暗転[[/LINK_1]]（2023/03/21）",
+      "sourceHash": "dce57803ed3f2ec2286ff2c7eb98cfa865803ab05b1c01368441ffba6e739733",
+      "parts": [
+        {
+          "source": "暗転",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（2023/03/21）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Fade to Black[[/LINK_1]] (2023/03/21)",
+      "contextHash": "dce57803ed3f2ec2286ff2c7eb98cfa865803ab05b1c01368441ffba6e739733"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "※[[LINK_1]]DynamicMotion[[/LINK_1]]（および[[LINK_2]]MZ版[[/LINK_2]]）を2021/01/20以降のバージョンに更新する必要があります。",
+      "sourceHash": "a68a02db6c077c7adf0f00f7bf432d5285e49a5137f22b367e8a0bfc465e5198",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "DynamicMotion",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（および",
+          "link": false
+        },
+        {
+          "source": "MZ版",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）を2021/01/20以降のバージョンに更新する必要があります。",
+          "link": false
+        }
+      ],
+      "translation": "※You need to update [[LINK_1]]DynamicMotion[[/LINK_1]] (and its [[LINK_2]]MZ version[[/LINK_2]]) to a version released on or after 2021/01/20.",
+      "contextHash": "a68a02db6c077c7adf0f00f7bf432d5285e49a5137f22b367e8a0bfc465e5198"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]残像プラグイン[[/LINK_1]]の機能を使っているため、導入されていることが前提です。",
+      "sourceHash": "f76386a2f3b673dfea8415da74af0524fed5d9b643fca8cdfa6d08661f212112",
+      "parts": [
+        {
+          "source": "残像プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の機能を使っているため、導入されていることが前提です。",
+          "link": false
+        }
+      ],
+      "translation": "Because it uses the features of the [[LINK_1]]Afterimage Plugin[[/LINK_1]], that plugin must be installed beforehand.",
+      "contextHash": "f76386a2f3b673dfea8415da74af0524fed5d9b643fca8cdfa6d08661f212112"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "※[[LINK_1]]モーション設定プラグイン[[/LINK_1]]の旧バージョンが入っているとうまく動作しない模様なので、導入している場合は要更新です。",
+      "sourceHash": "a17eecb195d391ee0b93c584d2f92ed3e05f89413ae581e7d0baf31ef9de02a5",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "モーション設定プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の旧バージョンが入っているとうまく動作しない模様なので、導入している場合は要更新です。",
+          "link": false
+        }
+      ],
+      "translation": "※It appears that the plugin will not work properly if an old version of the [[LINK_1]]Motion Settings Plugin[[/LINK_1]] is installed, so update it if you have it installed.",
+      "contextHash": "a17eecb195d391ee0b93c584d2f92ed3e05f89413ae581e7d0baf31ef9de02a5"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "基本的には[[LINK_1]]revolve型[[/LINK_1]]を利用して敵の周囲を回らせています。",
+      "sourceHash": "2e470322a8bfc8f5a40a9459547b5de8bd8831dc1343a59e2c54708870d1e8f5",
+      "parts": [
+        {
+          "source": "基本的には",
+          "link": false
+        },
+        {
+          "source": "revolve型",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を利用して敵の周囲を回らせています。",
+          "link": false
+        }
+      ],
+      "translation": "Basically, I use the [[LINK_1]]revolve type[[/LINK_1]] to make it circle around the enemy.",
+      "contextHash": "2e470322a8bfc8f5a40a9459547b5de8bd8831dc1343a59e2c54708870d1e8f5"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘画面背景の色調を変更するプラグイン[[/LINK_1]]によって、背景の暗転演出を行います。通常の色調変更とは異なり、バトラーやアニメーションの色調を維持します。",
+      "sourceHash": "d5baa3e63fb31f9a4bc34737d7f8820c127ca4ab06e2805c9c65d585eaf7c150",
+      "parts": [
+        {
+          "source": "戦闘画面背景の色調を変更するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "によって、背景の暗転演出を行います。通常の色調変更とは異なり、バトラーやアニメーションの色調を維持します。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]plugin that changes the tone of the battle screen background[[/LINK_1]] is used to create the background fade-to-black effect. Unlike a normal tone adjustment, the tones of battlers and animations are preserved.",
+      "contextHash": "d5baa3e63fb31f9a4bc34737d7f8820c127ca4ab06e2805c9c65d585eaf7c150"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "プラグインの使用方法は[[LINK_1]]リンク先[[/LINK_1]]を参照してください。",
+      "sourceHash": "97c187de84ecdd1c20b6999ced38de89ffec551d76d30c406df3884efaf03062",
+      "parts": [
+        {
+          "source": "プラグインの使用方法は",
+          "link": false
+        },
+        {
+          "source": "リンク先",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "For instructions on using the plugin, see the [[LINK_1]]linked page[[/LINK_1]].",
+      "contextHash": "97c187de84ecdd1c20b6999ced38de89ffec551d76d30c406df3884efaf03062"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "※２０２０年にも暗転のサンプルは作成していましたが、こちらは[[LINK_1]]NRP_ParallaxesPlus.js[[/LINK_1]]で作成した遠景にも対応している点と、時間を指定できる点が異なります。",
+      "sourceHash": "52f61a71adf0a7eccc4642153afa97d48f0e4e9c27713c2c16336c3bfbb7d54a",
+      "parts": [
+        {
+          "source": "※２０２０年にも暗転のサンプルは作成していましたが、こちらは",
+          "link": false
+        },
+        {
+          "source": "NRP_ParallaxesPlus.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で作成した遠景にも対応している点と、時間を指定できる点が異なります。",
+          "link": false
+        }
+      ],
+      "translation": "※I also created a fade-to-black sample in 2020, but this version differs in that it also supports parallaxes created with [[LINK_1]]NRP_ParallaxesPlus.js[[/LINK_1]] and allows you to specify the duration.",
+      "contextHash": "52f61a71adf0a7eccc4642153afa97d48f0e4e9c27713c2c16336c3bfbb7d54a"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimationMZ Plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimation Plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotionMZ Plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotion Plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "サンプル技を紹介していきます。少し複雑なものをいきます。": "I’ll be introducing some sample moves. Let’s look at something a little more complex.",
+    "コピペしてスキル（アイテム）のメモ欄に貼り付けできます。そのまま使うも改造するも自由です。": "You can copy and paste these into a skill (item)’s note field. Feel free to use them as-is or modify them.",
+    "目次": "Table of Contents",
+    "爆裂脚": "Explosive Kick",
+    "ライダーキック的な挙動で敵に衝突します。": "The user crashes into the enemy in a Rider Kick-like motion.",
+    "アニメーションには『id=107（無属性/単体2）』を使っていますが、そこはお好みでどうぞ。": "The animation uses “id=107 (Non-elemental/Single 2),” but feel free to use whichever one you prefer.",
+    "// 自動前進しない": "// No automatic forward movement",
+    "// 回転しながら浮上": "// Rise while spinning",
+    "airY = -200 // 空中Ｙ座標": "airY = -200 // Y-coordinate in the air",
+    "// 体を傾けて衝突": "// Tilt the body and collide",
+    "rotation = (Math.PI * 2) / 6 // 360/6度": "rotation = (Math.PI * 2) / 6 // 360/6 degrees",
+    "// 角度を戻す＆しゃがむ": "// Restore the angle & crouch",
+    "motion = abnormal // 瀕死ポーズ": "motion = abnormal // Near-death pose",
+    "// アニメーション": "// Animation",
+    "// 対象が吹っ飛ぶ": "// Target is blown away",
+    "// 対象元の位置へ": "// To the target's original position",
+    "// 戻る": "// Return",
+    "ズームアタック（2020/03/29）": "Zoom Attack (2020/03/29)",
+    "攻撃しながら徐々に対象へ向かってズーム処理をかけます。": "The camera gradually zooms toward the target while attacking.",
+    "※ズーム処理のテンプレート化に伴い記述を簡略化しました。（2020/03/29）": "※The description has been simplified following the conversion of the zoom process into a template. (2020/03/29)",
+    "/> // 対象にズーム": "/> // Zoom in on the target",
+    "<D-Motion:attack/> // 武器振り": "<D-Motion:attack/> // Swing weapon",
+    "<D-Animation/> // アニメーション": "<D-Animation/> // Animation",
+    "/> // ズーム解除": "/> // Cancel zoom",
+    "行動主体にズームしたい場合『zoomA』を使用してください。": "If you want to zoom in on the acting battler, use “zoomA.”",
+    "なお、これらの処理はズーム対象が移動していても自動で追尾します。": "These processes also automatically track the zoom target, even when it is moving.",
+    "スライディング（2020/03/24）": "Sliding (2020/03/24)",
+    "スライディングで敵をスピンさせます。": "The user slides and spins the enemy.",
+    "スキルに設定するアニメーションの位置は『足元』にしてください。": "Set the animation position for the skill to “Feet.”",
+    "また砂煙用のアニメーションが別途必要です。下の例では『Earth1』のパターンを使っています。位置は『足元』。合成方法は『通常』に設定すると自然です。": "You also need a separate animation for the dust cloud. In the example below, the “Earth1” pattern is used. Set its position to “Feet.” Setting the blend mode to “Normal” produces a natural effect.",
+    "// 90度回転して体を地面へ": "// Rotate 90 degrees and bring the body to the ground",
+    "// 砂煙のアニメーション": "// Dust cloud animation",
+    "id = XXX // ←ここに砂煙用のIDを指定": "id = XXX // ← Specify the ID for the dust cloud here",
+    "// 対象の左へ": "// To the left of the target",
+    "// 敵がスピン": "// Enemy spins",
+    "// 角度と位置を戻す": "// Restore the angle and position",
+    "// しゃがんで待つ": "// Crouch and wait",
+    "<D-Motion:return/> // 戻る": "<D-Motion:return/> // Return",
+    "ウルトラジャンプ（2020/08/30修正）": "Ultra Jump (Revised 2020/08/30)",
+    "ランダムで敵を踏みつけます。": "The user randomly stomps on enemies.",
+    "例では範囲を『敵４体ランダム』にしていますが、『敵全体』などにしても問題なく機能します。": "The example uses “4 Random Enemies” as the scope, but it will also work properly with options such as “All Enemies.”",
+    "スキルに設定するアニメーションを『頭上』に設定することで頭を狙います。": "Set the skill’s animation position to “Above Head” to aim for the enemy’s head.",
+    "例では『2:打撃/エフェクト』を頭上に変更したものを使用しています。": "In the example, I use “2: Hit/Effect” with its position changed to above the head.",
+    "<D-Setting:NoStep> // 自動前進禁止": "<D-Setting:NoStep> // Disable automatic forward movement",
+    "// 着地に合わせてアニメーション表示": "// Display the animation upon landing",
+    "delay = 7 // 最初の着地までのフレーム": "delay = 7 // Frames until the first landing",
+    "nextDelay = 7 // 滞空時間に間隔を合わせる": "nextDelay = 7 // Adjust the interval to the time spent airborne",
+    "// 対象ごとにジャンプで踏む": "// Jump on each target",
+    "ey += b.height/8 // 少し下を狙う": "ey += b.height/8 // Aim slightly lower",
+    "motion = victory // 勝利ポーズ": "motion = victory // Victory pose",
+    "frame = 7 // 移動（滞空）時間": "frame = 7 // Movement (airborne) time",
+    "nextDelay = 7 // ７フレーム間隔": "nextDelay = 7 // 7-frame interval",
+    "// ジャンプの効果音": "// Jump sound effect",
+    "damageAll = false // ダメージ表示は個別に任せる": "damageAll = false // Leave damage display to each individual",
+    "これを応用すれば、順番に体当りしていく技なども作成できます。": "By adapting this, you can also create moves where the user charges into each target in sequence.",
+    "タイミング調整が少し難しいので注意です。赤字部分に気をつけてください。": "Be careful, as adjusting the timing is somewhat difficult. Pay attention to the parts shown in red.",
+    "払い抜け（2020/03/31）": "Slash Past (2020/03/31)",
+    "対象とすれ違いながら、斬撃を放ちます。": "The user delivers a slash while passing by the target.",
+    "対象との角度によって斬撃の角度も変化します。": "The angle of the slash also changes depending on the angle relative to the target.",
+    "以下のように左向きの斬撃を作ります。": "Create a left-facing slash as shown below.",
+    "「6:斬撃/物理」を一括設定で45度回転させるなどすれば可能です。": "This is possible by, for example, rotating “6: Slash/Physical” 45 degrees using the batch settings.",
+    "// 対象の向こうまで移動": "// Move beyond the target",
+    "// Ｘ座標だけ指定すれば、Ｙ座標も自動計算": "// Specify only the X-coordinate, and the Y-coordinate will be calculated automatically",
+    "ex = defaultX - 150 * mirroring // 対象の左150pxまで移動": "ex = defaultX - 150 * mirroring // Move to 150 px to the left of the target",
+    "// 対象との位置関係でアニメーション角度変更": "// Change the animation angle based on the positional relationship with the target",
+    "赤字部分で、色々と細かい細工をしています。": "The parts shown in red contain various small adjustments.",
+    "da.startRotation()は開始時点の角度を保持する作者の独自関数です。": "da.startRotation() is a custom function created by the author that retains the angle at the starting point.",
+    "Math.atan2()は行動主体（a）と対象（defaultX, Y）の角度を求めます。": "Math.atan2() calculates the angle between the acting battler (a) and the target (defaultX, Y).",
+    "こちらはJavaScriptの標準機能です。": "This is a standard JavaScript function.",
+    "※若干、意味不明かもしれませんが、コピペで大丈夫なのであまり気にしないでください。": "※It may be slightly difficult to understand, but you can simply copy and paste it, so don’t worry about it too much.",
+    "疾風剣（2020/04/03）": "Gale Sword (2020/04/03)",
+    "対象とすれ違いながら切り刻みます。": "The user slices the target to pieces while passing by it.",
+    "角度を変えながらランダムで斬撃を再生しています。": "Slashes are played at random while changing their angles.",
+    "スキルに設定したアニメーションは「6:斬撃/物理」の色調を変えたものです。": "The animation set for the skill is “6: Slash/Physical” with its color tone changed.",
+    "// 対象とすれ違いながら武器振り": "// Swing the weapon while passing the target",
+    "// 武器の止めポーズ": "// Weapon finishing pose",
+    "// 角度を変えながら斬撃リピート": "// Repeat slashes while changing the angle",
+    "基本的には『払い抜け』の流用です。": "It is basically a reuse of “Slash Past.”",
+    "『rotation（回転角度）』をランダムに変化させることで、様々な角度から斬撃を繰り出すようにしています。": "By varying “rotation (rotation angle)” randomly, the slashes are launched from various angles.",
+    "『Math.PI * 2』は360度の意味、『da.random()』は0～1未満の値を取る関数です。つまり、0～359度という意味ですね。": " \"Math.PI * 2” means 360 degrees, while “da.random()” is a function that returns a value from 0 up to, but not including, 1. In other words, this represents 0 to 359 degrees.",
+    "練気拳（単）（2020/04/06）": "Energy Fist (Single) (2020/04/06)",
+    "敵を引きつけながら殴ります。": "The user punches while pulling the enemy toward them.",
+    "スキルには単なる打撃アニメを設定しています。": "The skill uses a simple impact animation.",
+    "さらに吸引用のアニメが必要です。例では『102:闇/単体2』を元に、合成方法を一括設定で『加算』に変更しています。": "An additional animation for absorption is required. In the example, I use “102: Dark/Single 2” as the base and change its blend mode to “Additive” using the batch settings.",
+    "// 自身に吸引アニメを表示": "// Display a suction animation on self",
+    "id = 102 // ←ここに吸引アニメのIDを指定": "id = 102 // ← Specify the suction animation ID here",
+    "// 対象を引き寄せる": "// Pull the target in",
+    "frame = 5 // 引き寄せ時間": "frame = 5 // Pull-in duration",
+    "// 殴るアニメとモーション": "// Punch animation and motion",
+    "// 対象をhomeへ戻す": "// Return the target to home",
+    "delay = 1 // 殴り初めから吹っ飛ぶまでの時間差": "delay = 1 // Delay from the start of the punch until being knocked back",
+    "frame = 2 // 吹っ飛び時間": "frame = 2 // Knockback duration",
+    "『subject』は常にスキルの行動主体を意味します。まぎらわしいですがモーション対象を変更した場合、『a』はモーション対象者となります。": " \"subject” always refers to the skill’s acting battler. This can be confusing, but when the motion target is changed, “a” refers to the motion target.",
+    "練気拳（全）（2020/04/06）": "Energy Fist (All) (2020/04/06)",
+    "練気拳と言えば、そもそも全体技です。もちろんちゃんと用意しています。": "Speaking of Energy Fist, it is originally an area-of-effect move. Of course, I’ve prepared one as well.",
+    "※元ネタはロマサガ３です。": "※The original inspiration is Romancing SaGa 3.",
+    "// 殴るアニメ（対象を追尾）": "// Punch animation (tracks the target)",
+    "// 殴るモーション（対象毎）": "// Punch motion (per target)",
+    "ポイントは『performerDelay』と『nextDelay』の値を一致させることです。これが対象一体毎の処理に対する時間差となります。": "The key is to make the values of “performerDelay” and “nextDelay” match. This creates the time difference between processing each target.",
+    "ちょっとややこしいですが『performerDelay』はモーション対象が複数いる場合の時間差です。": "It is a little complicated, but “performerDelay” is the time difference when there are multiple motion targets.",
+    "『nextDelay』は「対象毎にアニメーションを表示する時間差」および「対象毎に行動主体がモーションを実行する時間差」です。": " \"nextDelay』is the \"time difference for displaying the animation for each target\" and the \"time difference for the battler performing the motion for each target.\"",
+    "分身剣（2022/04/14更新）": "Doppelganger Sword (Updated 2022/04/14)",
+    "※DynamicMotion ver1.03以降が必要です。": "※Requires DynamicMotion ver1.03 or later.",
+    "分身しながら切り刻みます。": "Slashes the enemy repeatedly while creating duplicates.",
+    "// 右から攻撃アニメ": "// Attack animation from the right",
+    "// 左から攻撃アニメ": "// Attack animation from the left",
+    "delay = 1 // １フレームずらす": "delay = 1 // Shift by one frame",
+    "rotation = -Math.PI/2 // 90度回転": "rotation = -Math.PI/2 // Rotate 90 degrees",
+    "// 左右に分身しながら武器振り": "// Swing the weapon while creating clones to the left and right",
+    "scaleX = (t % 4 < 2) ? -1 : 1 // 左右反転": "scaleX = (t % 4 < 2) ? -1 : 1 // Flip horizontally",
+    "赤字部分で2/60秒毎に瞬間的に位置を変えています。": "The position is changed instantaneously every 2/60 seconds in the red text.",
+    "『scaleX』はバトラーの横幅を意味する値ですが、値を『-1』にすると左右反転になります。反転は『mirror = true』でも可能ですが、リアルタイムで変更したい場合は『scaleX』が使えます。": " \"scaleX』is a value representing the battler's width, but setting it to『-1』flips it horizontally. Flipping is also possible with『mirror = true』, but『scaleX』can be used when you want to change it in real time.",
+    "変身（2020/11/15更新）": "Transformation (Updated 2020/11/15)",
+    "バトラーの画像を変更します。": "Changes the battler's image.",
+    "文字通りの変身技にも使えますが、それ以外にもモーションパターンの追加などへ利用可能です。": "It can be used for literal transformation techniques, as well as for adding motion patterns and more.",
+    "また、敵も同じ要領で画像を変えられます。": "Enemies can also have their images changed in the same way.",
+    "// グラフィックを変更して接近": "// Change the graphic and approach",
+    "// グラフィックを戻して元の位置へ": "// Restore the graphic and return to the original position",
+    "『image = Actor1_1』というように指定した画像へとキャラを変更します。": "Changes the character to the specified image, such as『image = Actor1_1』.",
+    "戻す時は『image = \"\"』というように空白文字を入力すればＯＫです。": "To restore it, simply enter a blank string, such as『image = \"\"』.",
+    "以下のように数式を記述すれば、可変にもできます。": "You can also make it variable by writing a formula as follows.",
+    "例えば、アクターＩＤが４ならば『Test4_2』に変更されます。": "For example, if the actor ID is 4, it changes to『Test4_2』.",
+    "ちなみに、この画像変更は戦闘中のみの一時的な効果となります。": "Incidentally, this image change is only a temporary effect during battle.",
+    "奥義演出（対象以外消去）（2021/01/20）": "Arts Effect (Hide Everyone Except the Target) (2021/01/20)",
+    "行動主体と対象以外を消去して奥義っぽい演出を行います。": "Hides everyone except the acting battler and the target to create an Arts-like effect.",
+    "// 自動前進禁止": "// Disable automatic advance",
+    "// 行動主体と対象以外を透明化": "// Make everyone except the subject and target transparent",
+    "// 接近": "// Approach",
+    "// 武器振り": "// Swing the weapon",
+    "// アニメーション＆ウェイト": "// Animation and wait",
+    "// 透明化解除": "// Disable transparency",
+    "重要なのは赤字部分です。ここで透明化の制御を行います。": "The important part is the red text. This is where transparency is controlled.",
+    "間の部分は好きなように変更してください。ただし、アニメーションにはwaitも必要なことに注意です。これがないとアニメーションの終了を待たず、透明化が解除されてしまいます。": "Change the middle section as you like. However, note that you also need to use wait for animations. Without it, the transparency will be removed without waiting for the animation to finish.",
+    "また、暗転演出は上の記述に含まれていません。必要なら以下をご覧ください。": "Also, the blackout effect is not included in the above description. See below if necessary.",
+    "http://newrpg.seesaa.net/article/475496918.html#darkness": "http://newrpg.seesaa.net/article/475496918.html#darkness",
+    "詳細": "Details",
+    "によって、『全アクター』と『生存している敵』を透明化の対象としています。": "This makes『All Actors』and『Living Enemies』targets for transparency.",
+    "なぜ、敵だけ生存者に絞っているかというと、そうしないと死んだ敵の表示まで透明化の解除時に復活してしまうからです。": "The reason only living enemies are selected is that otherwise the displays of dead enemies would also reappear when transparency is removed.",
+    "それに加えて": "In addition,",
+    "によって、スキルの使用者と対象を透明化の対象から除外しています。": "this excludes the skill user and target from the transparency targets.",
+    "分身剣（残像版）（2022/04/14更新）": "Doppelganger Sword (Afterimage Version) (Updated 2022/04/14)",
+    "残像を引き連れながら敵の周囲を回り、斬撃を繰り返します。": "Circles around the enemy while accompanied by afterimages, repeatedly slashing.",
+    "スキルに設定するアニメーションは普通の斬撃でよいと思います。他にも『通常攻撃』にしておくと武器によってアニメーションが変わるので面白いです。": "I think a normal slashing animation is suitable for the animation set for the skill. Alternatively, setting it to『Normal Attack』can be interesting, as the animation will change depending on the weapon.",
+    "※DynamicMotionが2021/09/11以降のバージョン（sx, syの指定に対応）である必要があります。": "※DynamicMotion must be version 2021/09/11 or later (supporting the specification of sx and sy).",
+    "// 対象の中心より半径分右へ移動": "// Move right by the radius from the target's center",
+    "// ランダムな角度で斬撃": "// Slash at a random angle",
+    "// 武器を振る": "// Swing the weapon",
+    "// 対象を中心に円運動": "// Move in a circle around the target",
+    "radiusX = (15 + b.width/2) // Ｘ半径": "radiusX = (15 + b.width/2) // X radius",
+    "radiusY = (15 + b.width/2) / 2 // Ｙ半径": "radiusY = (15 + b.width/2) / 2 // Y radius",
+    "radX *= 3 // Ｘ方向に３周": "radX *= 3 // Three revolutions in the X direction",
+    "radY *= 3 // Ｙ方向に３周": "radY *= 3 // Three revolutions in the Y direction",
+    "// 半径分右から開始して元の位置へ": "// Start one radius to the right and return to the original position",
+    "残像機能については残像プラグイン自体の説明をご覧ください。": "For information about the afterimage function, see the description of the afterimage plugin itself.",
+    "『15 + b.width/2』の部分が円運動の半径です。『15 + 対象の横幅÷２』の意味となります。": "The『15 + b.width/2』part is the radius of the circular motion. It means『15 + target width ÷ 2』.",
+    "性質上、対象の横幅が小さすぎると円周が小さすぎてショボくなる難点があります。こだわるなら最小値を保証する数式にするといいかもしれません。": "By its nature, if the target is too narrow, the circumference becomes too small and the effect looks unimpressive. If you want to be particular about it, you may want to use a formula that guarantees a minimum value.",
+    "例：『Math.max(50, 15 + b.width/2)』。": "Example:『Math.max(50, 15 + b.width/2)』.",
+    "最も難解なのは『z = a.y + (b.height - a.height)/2 > b.y ? b.z+1 : b.z-1』『scaleX = (a.y + (b.height - a.height)/2 > b.y ? 1 : -1) * mirroring』といった赤字部分の数式だと思います。": "I think the most difficult parts are the formulas in red, such as『z = a.y + (b.height - a.height)/2 > b.y ? b.z+1 : b.z-1』and『scaleX = (a.y + (b.height - a.height)/2 > b.y ? 1 : -1) * mirroring』.",
+    "前者は敵との位置関係によって、アクターを前面に表示するか背面に表示するかを調整するためのものです。Ｙ座標（画像縦幅も考慮）を比較し、アクターが下側にいる時は前面、上側にいる時は背面に表示させています。": "The former adjusts whether the actor is displayed in front of or behind the enemy based on their positional relationship. It compares the Y coordinates (also taking the image heights into account), displaying the actor in front when they are lower and behind when they are higher.",
+    "後者もＹ座標を比較しているのは同じですが、こちらはアクターを左右反転させるために使っています。同じくアクターが下側にいる時は左向き、上側にいる時は左右反転させて右向きに表示させています。": "The latter also compares the Y coordinates, but it is used to flip the actor horizontally. Similarly, when the actor is lower, they are displayed facing left; when higher, they are flipped horizontally and displayed facing right.",
+    "これはscaleXの値を-1にすると、バトラーが左右反転する性質を利用しています。さらに敵側が使った場合は左右反転（mirroring）されるよう考慮しています。": "This uses the property that setting scaleX to -1 flips the battler horizontally. It also accounts for horizontal flipping (mirroring) when used by an enemy.",
+    "暗転（2023/03/21）": "Blackout (2023/03/21)",
+    "// 好きなように定義": "// Define as desired",
+    "// アニメーション終了を待って実行": "// Execute after waiting for the animation to finish",
+    "簡単に言うと、最初の３つの数値は背景の赤緑青の順になっています。": "Simply put, the first three values represent the background's red, green, and blue values, in that order.",
+    "0だと黒、255だと変化なしですね。": "0 produces black, while 255 produces no change.",
+    "最後の15は変化にかかる時間です。60で１秒となります。": "The final 15 is the time required for the change. 60 equals one second.",
+    "※サンプルの記述はあくまで暗転部分だけです。中身はご自由にどうぞ。": "※The sample description only covers the blackout portion. Feel free to customize the contents as you like."
+  }
+}
