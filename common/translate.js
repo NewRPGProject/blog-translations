@@ -188,6 +188,10 @@ function getLinkedArticleId(link) {
     }
 }
 
+function isInsideKeepLanguageElement(node) {
+    return Boolean(node?.parentElement?.closest("[keep-lang]"));
+}
+
 function normalizeTitleMatch(value) {
     return normalizeText(value).replace(/\s+/gu, " ").trim();
 }
@@ -225,6 +229,9 @@ function findPrecedingTitleNode(root, link, entry) {
     const candidates = [];
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
         acceptNode(node) {
+            if (isInsideKeepLanguageElement(node)) {
+                return NodeFilter.FILTER_REJECT;
+            }
             if (link.contains(node)) return NodeFilter.FILTER_ACCEPT;
             if (node.parentElement?.closest("a")) return NodeFilter.FILTER_REJECT;
             return normalizeTitleMatch(originalText.get(node) || node.nodeValue)
@@ -257,6 +264,10 @@ function applyCanonicalArticleLinkTitles(root, titleIndex) {
     if (!root || !titleIndex?.titles) return;
 
     for (const link of root.querySelectorAll("a")) {
+        if (link.closest("[keep-lang]")) {
+            continue;
+        }
+
         const articleId = getLinkedArticleId(link);
         const entry = articleId ? titleIndex.titles[articleId] : null;
         if (!entry?.source || !entry?.sourceShort || !entry?.title || !entry?.titleShort) {
@@ -418,7 +429,7 @@ function findArticleBody(translation = null) {
             acceptNode(node) {
                 const parent = node.parentElement;
 
-                if (!parent) {
+                if (!parent || isInsideKeepLanguageElement(node)) {
                     return NodeFilter.FILTER_REJECT;
                 }
 
@@ -793,7 +804,7 @@ function translateTextNodes(
             acceptNode(node) {
                 const parent = node.parentElement;
 
-                if (!parent) {
+                if (!parent || isInsideKeepLanguageElement(node)) {
                     return NodeFilter.FILTER_REJECT;
                 }
 
@@ -865,7 +876,7 @@ function getLineTextNodes(root) {
         {
             acceptNode(node) {
                 const parent = node.parentElement;
-                if (!parent || parent.closest(
+                if (!parent || isInsideKeepLanguageElement(node) || parent.closest(
                     "script, style, pre, code, textarea, .nrp-language-switch"
                 )) {
                     return NodeFilter.FILTER_REJECT;
@@ -1188,7 +1199,7 @@ function translateCommonTextNodes(
             acceptNode(node) {
                 const parent = node.parentElement;
 
-                if (!parent) {
+                if (!parent || isInsideKeepLanguageElement(node)) {
                     return NodeFilter.FILTER_REJECT;
                 }
 
