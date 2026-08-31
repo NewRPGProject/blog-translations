@@ -1,0 +1,1288 @@
+{
+  "articleId": "453573404",
+  "sourceUrl": "https://newrpg.seesaa.net/article/453573404.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "13c5b678f1e8ebe69940f9bab99cf2fab9804749e881de72fac5a92c674ec391",
+  "translatedAt": "2026-08-31T08:07:19.904Z",
+  "title": "[Programming] How to Implement CTB",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【プログラミング】ＣＴＢの実装方法",
+      "sourceHash": "df3054cf28a824155e1a21abc2c7e04ccb1daba20f3e0db3daa883434e5314b7",
+      "translation": "[Programming] How to Implement CTB",
+      "contextHash": "df3054cf28a824155e1a21abc2c7e04ccb1daba20f3e0db3daa883434e5314b7"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "微妙に需要がありそうなので、経験者としてＣＴＢ（カウントタイムバトル）の実装方法を解説してみます。",
+      "sourceHash": "10a2e12eaaf83d1bf05034e833f4c0551e75b436d933470d945caafdc2b74bd7",
+      "translation": "Since there seems to be some demand for it, I’ll explain how to implement CTB (Count Time Battle) as someone with experience in the area.",
+      "contextHash": "10a2e12eaaf83d1bf05034e833f4c0551e75b436d933470d945caafdc2b74bd7"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "内容はもろにプログラマ向けです。プログラムを組んだり、ツクールで自作システムを組んだりした人以外はピンとこないかもしれませんので、あらかじめお断りしておきます。",
+      "sourceHash": "373b1d22a4c0fa158d449202125df0c70c5d6813432e602a4af641f9d12c99c4",
+      "translation": "This content is aimed squarely at programmers. Those who have never written programs or built custom systems in RPG Maker may not find it very intuitive, so I wanted to make that clear in advance.",
+      "contextHash": "373b1d22a4c0fa158d449202125df0c70c5d6813432e602a4af641f9d12c99c4"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "なお、拙作ミスティックスターのＣＴＢは、ツクール２０００で実装していますが、アルゴリズム（処理手順）自体は汎用的に使えるはずです。ある程度の自由度がある開発環境ならば、流用可能です。",
+      "sourceHash": "74b7a22c0bf25353d7f12d8c94692ef2292733643864a78fd79606c54d20e005",
+      "translation": "My CTB system in Mystic Star was implemented in RPG Maker 2000, but the algorithm (processing procedure) itself should be generally applicable. It should be possible to adapt it to any development environment with a certain degree of flexibility.",
+      "contextHash": "74b7a22c0bf25353d7f12d8c94692ef2292733643864a78fd79606c54d20e005"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "作り方はいくつかありますが、まずは最も簡単な『素早さ加算方式』の実装方法から紹介します。",
+      "sourceHash": "609903953d70649022d3037d1c7a2ac9b8d58e878c2c602afb6efd5f6a7cc378",
+      "translation": "There are several ways to create one, but I’ll start by introducing the simplest implementation method: the “Agility Addition Method.”",
+      "contextHash": "609903953d70649022d3037d1c7a2ac9b8d58e878c2c602afb6efd5f6a7cc378"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "素早さ加算方式",
+      "sourceHash": "492793b48f3067e9ca58c5f652f8a3da150da8d5cd755564f002a7a575b002ec",
+      "translation": "Agility Addition Method",
+      "contextHash": "492793b48f3067e9ca58c5f652f8a3da150da8d5cd755564f002a7a575b002ec"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "イメージとしては、ＦＦ７～９のＡＴＢを思い浮かべてみれば、分かりやすいと思います。",
+      "sourceHash": "2ab6e0ce9f5f59a76345e97b8d39275beeef4c38e31f688e54de8ad58808c0b7",
+      "translation": "For an illustration, it may be easiest to imagine the ATB systems from FFVII–IX.",
+      "contextHash": "2ab6e0ce9f5f59a76345e97b8d39275beeef4c38e31f688e54de8ad58808c0b7"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ＡＴＢゲージが満タンになったキャラが行動できるようになるアレですね。素早いキャラほど、ゲージが溜まる速度が上昇します。あれのリアルタイム性をなくしたものと思って頂ければ。",
+      "sourceHash": "730f1f74353ffecb2c3b9f216708c7959f2aa4f8e2e6c63ec996914726b7cc5c",
+      "translation": "You know, the one where a character can act once their ATB gauge is full. The faster a character is, the faster their gauge fills. You can think of it as that system without the real-time aspect.",
+      "contextHash": "730f1f74353ffecb2c3b9f216708c7959f2aa4f8e2e6c63ec996914726b7cc5c"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※ＦＦ４～６は仕様が異なるので除外しています。興味がある人は調べてみてください。",
+      "sourceHash": "41ca8cc69ecaeec7a26939dcccf399c29b12d2eda0b75e3809ddebf731cea287",
+      "translation": "※FFIV–VI are excluded because their specifications differ. If you’re interested, look them up.",
+      "contextHash": "41ca8cc69ecaeec7a26939dcccf399c29b12d2eda0b75e3809ddebf731cea287"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "素早さ４０のキャラ１",
+      "sourceHash": "5e953686b43383ffa2fc7dae493cfe51a134a8d683efb2923e362852e6a8daaa",
+      "translation": "Character 1: Agility 40",
+      "contextHash": "5e953686b43383ffa2fc7dae493cfe51a134a8d683efb2923e362852e6a8daaa"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "素早さ５０のキャラ２",
+      "sourceHash": "ab3f3cf1ad3e91a8ec336a68ed5b3f2947b3f886a62c3b57c452e5574936799f",
+      "translation": "Character 2: Agility 50",
+      "contextHash": "ab3f3cf1ad3e91a8ec336a68ed5b3f2947b3f886a62c3b57c452e5574936799f"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "の二人がいた場合を想定すると……",
+      "sourceHash": "4422e048278458cdace5569059a3a144bae7c5fcc4e7d474ebe1382b698bfe7d",
+      "translation": "Suppose we have these two characters…",
+      "contextHash": "4422e048278458cdace5569059a3a144bae7c5fcc4e7d474ebe1382b698bfe7d"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "キャラ１：４０→ ８０→１２０→１６０→……→ ８００",
+      "sourceHash": "854569c4afb8c2a9a5fe0b2dbff5d21be1710a96b63e80f5441a8dcff5228fb3",
+      "translation": "Character 1: 40→ 80→120→160→……→ 800",
+      "contextHash": "854569c4afb8c2a9a5fe0b2dbff5d21be1710a96b63e80f5441a8dcff5228fb3"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "キャラ２：５０→１００→１５０→２００→……→１０００",
+      "sourceHash": "ad7eba65f70ada61cbdc19cab476f3b99ac00fc0daa5805f5636b49e53bbbb05",
+      "translation": "Character 2: 50→100→150→200→……→1000",
+      "contextHash": "ad7eba65f70ada61cbdc19cab476f3b99ac00fc0daa5805f5636b49e53bbbb05"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "というように、時間が立つごとに素早さ分だけゲージが増えていきます。",
+      "sourceHash": "ea30ccbdad28b7d1d66214ae352c6726c5b5a615de5864e8f2a71242af50f5be",
+      "translation": "As shown, the gauge increases by an amount equal to the character’s Agility as time passes.",
+      "contextHash": "ea30ccbdad28b7d1d66214ae352c6726c5b5a615de5864e8f2a71242af50f5be"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ゲージ値が１０００以上になったキャラがいれば、ターンが回ってきます。この場合はキャラ２の行動ターンが先に来ますね。",
+      "sourceHash": "1a4382b73f8c74334aba2d405a72496be4803f5bd7677a8455b18b0756384461",
+      "translation": "Whenever a character’s gauge value reaches 1000 or more, their turn comes up. In this case, Character 2 gets to act first.",
+      "contextHash": "1a4382b73f8c74334aba2d405a72496be4803f5bd7677a8455b18b0756384461"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※もちろん、条件となるゲージ値は１０００でも１００００でも何でもいいです。ただし、あまり小さすぎると計算誤差が出るので注意です。",
+      "sourceHash": "11ec30592c77ac2ed0ba056dd46b494ae4e1ea7d9912a95dd7296c2fa7b42c52",
+      "translation": "※Of course, the gauge value used as the threshold can be 1000, 10000, or anything else. However, be careful, because making it too small can cause calculation errors.",
+      "contextHash": "11ec30592c77ac2ed0ba056dd46b494ae4e1ea7d9912a95dd7296c2fa7b42c52"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "キャラ２の行動が終われば、ゲージ値を－１０００します。０にリセットしないのは、１０００を超えた値が無駄にならないようにするため。毎回、ピッタリ１０００になるわけではありませんので。",
+      "sourceHash": "8c5d5c653c26f3351a1ce4301ede57fcddfe93d95afab2dfa1d8009cd9baf354",
+      "translation": "Once Character 2 finishes acting, subtract 1000 from their gauge value. It is not reset to 0 so that any amount exceeding 1000 is not wasted. The gauge does not reach exactly 1000 every time.",
+      "contextHash": "8c5d5c653c26f3351a1ce4301ede57fcddfe93d95afab2dfa1d8009cd9baf354"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "キャラ１：８００→８４０→８８０→９２０→９６０→１０００",
+      "sourceHash": "c77c8fa8caa193561bdbf242fe4d74f45b68241a7ae6da390f614a82381b2637",
+      "translation": "Character 1: 800→840→880→920→960→1000",
+      "contextHash": "c77c8fa8caa193561bdbf242fe4d74f45b68241a7ae6da390f614a82381b2637"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "キャラ２： ０→ ５０→１００→１５０→２００→ ２５０",
+      "sourceHash": "f14d60dca36bb004b2d9d0b91231085e3e39f29da3bd609c165b092b6a9f8b4d",
+      "translation": "Character 2:  0→ 50→100→150→200→ 250",
+      "contextHash": "f14d60dca36bb004b2d9d0b91231085e3e39f29da3bd609c165b092b6a9f8b4d"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "後はこれの繰り返しです。",
+      "sourceHash": "08e6934412fcd88f57fcd583607b8fd1ab2b7c6c6795abc8e49045d895fd83fe",
+      "translation": "The rest is simply a repetition of this process.",
+      "contextHash": "08e6934412fcd88f57fcd583607b8fd1ab2b7c6c6795abc8e49045d895fd83fe"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "その内に、素早さで勝るキャラ２が連続で行動するターンが発生します。それこそが、ＣＴＢの特色です。",
+      "sourceHash": "5d8c81617b051fa704f405421ee1ce22c6eee2fc3a9b3c2583fbf332a3f4ac73",
+      "translation": "Eventually, Character 2, who has higher Agility, will get turns in a row. That is the defining feature of CTB.",
+      "contextHash": "5d8c81617b051fa704f405421ee1ce22c6eee2fc3a9b3c2583fbf332a3f4ac73"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "走る速さがバラバラな選手達が、何度もゴールを目指し、到達する度に最初から走り直すようなイメージでしょうか。",
+      "sourceHash": "57dad7858f9d1df2fbd2154b31a3b4b062cab58c6e5bb0110c8b130c5a7656f8",
+      "translation": "Perhaps you could imagine runners with different running speeds repeatedly aiming for the finish line and starting over from the beginning each time they reach it.",
+      "contextHash": "57dad7858f9d1df2fbd2154b31a3b4b062cab58c6e5bb0110c8b130c5a7656f8"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ここで終わるなら、実のところＣＴＢの実装は簡単です。一人ずつキャラの順番を処理すればよいという点では、ターン制よりも容易だと言えます。",
+      "sourceHash": "a18e7f898db9448074145443a2bcac1b259452e8fe8a24b3ab357cf2749624ea",
+      "translation": "If that were all there was to it, implementing CTB would actually be easy. Since you only need to process each character’s turn one at a time, you could even say it is easier than a turn-based system.",
+      "contextHash": "a18e7f898db9448074145443a2bcac1b259452e8fe8a24b3ab357cf2749624ea"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ところが、この『素早さ加算方式』には欠点があります。それは行動順序の予想が難しいことです。",
+      "sourceHash": "216de3a88d30d6d4200aedaf172c224822c312cf885b142f57b0119fd1ed5223",
+      "translation": "However, this “Agility Addition Method” has a drawback: it is difficult to predict the action order.",
+      "contextHash": "216de3a88d30d6d4200aedaf172c224822c312cf885b142f57b0119fd1ed5223"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "先程は計算が簡単な例で挙げましたが、これはどうでしょう？",
+      "sourceHash": "3c9c8a3e00317b75ab40019370fde328c41b08bf2071ca4ec15faaf080f42464",
+      "translation": "The previous example used simple calculations, but what about this one?",
+      "contextHash": "3c9c8a3e00317b75ab40019370fde328c41b08bf2071ca4ec15faaf080f42464"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "素早さ３２のキャラ１ 現在のゲージ値は３００",
+      "sourceHash": "0a213baf16a8fdd5ac21b81c3eb3ed7d0402c784460fd68d763a78e9e23eda6f",
+      "translation": "Character 1: Agility 32, current gauge value 300",
+      "contextHash": "0a213baf16a8fdd5ac21b81c3eb3ed7d0402c784460fd68d763a78e9e23eda6f"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "素早さ４１のキャラ２ 現在のゲージ値は１５０",
+      "sourceHash": "e8007f5fdad12d7ba864a1b1cad9b94c3f95c8b7f8b68fdd96e08fb0b72516f0",
+      "translation": "Character 2: Agility 41, current gauge value 150",
+      "contextHash": "e8007f5fdad12d7ba864a1b1cad9b94c3f95c8b7f8b68fdd96e08fb0b72516f0"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "キャラ１：３００→３３２→３６４→……",
+      "sourceHash": "0c99ff21c9577e0cedb18370085af0e9a5f300a03af52b138f96c64920bcc088",
+      "translation": "Character 1: 300→332→364→……",
+      "contextHash": "0c99ff21c9577e0cedb18370085af0e9a5f300a03af52b138f96c64920bcc088"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "キャラ２：１５０→１９１→２３２→……",
+      "sourceHash": "d4a21c5b8160e04834dfbf79759ad57f370f2f2e63e1e57c00c0999d7578a095",
+      "translation": "Character 2: 150→191→232→……",
+      "contextHash": "d4a21c5b8160e04834dfbf79759ad57f370f2f2e63e1e57c00c0999d7578a095"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "どちらが先にターンが回るか、即答できる人は少ないはずです。",
+      "sourceHash": "f2e446ad66a3a2647e7136f33b7caabbbc4c385cce61a1d6f7be0cdcf41d570b",
+      "translation": "Few people could immediately say which one gets their turn first.",
+      "contextHash": "f2e446ad66a3a2647e7136f33b7caabbbc4c385cce61a1d6f7be0cdcf41d570b"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "これが５人１０人と増えていくと、もっと大変になります。",
+      "sourceHash": "ecef7de8d354607e83b2a9212b552dc16caae741f99f07beedcc12c289525d2d",
+      "translation": "As the number of characters increases to five or ten, it becomes even more difficult.",
+      "contextHash": "ecef7de8d354607e83b2a9212b552dc16caae741f99f07beedcc12c289525d2d"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ＣＴＢの実装に挫折する第一の関門はここでしょう。",
+      "sourceHash": "cd844a4c2943e1c83aeba5e534865b57ccda26b4e3058e6e74dfafa293df226b",
+      "translation": "This is probably the first major hurdle where people give up on implementing CTB.",
+      "contextHash": "cd844a4c2943e1c83aeba5e534865b57ccda26b4e3058e6e74dfafa293df226b"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "そんなわけで、『素早さ加算方式』では行動順序の表示が困難となります。",
+      "sourceHash": "7bfa867c32fd1386f451ff52017de60cd2dd9451e18902e64142de69647e456c",
+      "translation": "For this reason, displaying the action order is difficult with the “Agility Addition Method.”",
+      "contextHash": "7bfa867c32fd1386f451ff52017de60cd2dd9451e18902e64142de69647e456c"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "そもそも、ＣＴＢとはＦＦ１０が呼称した方式であり、それに則れば順序表示がないものは厳密にＣＴＢとは言えません。",
+      "sourceHash": "c761f26b8544d266c20405b2f959f94eac8073fa8fae7215dc0d2f5d890f1e17",
+      "translation": "To begin with, CTB is the name given to this system by FFX, and strictly speaking, a system without an order display cannot be called CTB according to that standard.",
+      "contextHash": "c761f26b8544d266c20405b2f959f94eac8073fa8fae7215dc0d2f5d890f1e17"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "真のＣＴＢを実装するためには、行動順序を把握できるような処理を考える必要があります。",
+      "sourceHash": "54c562aa6ea44b64d4bb03dfd00057950f3509481821294f56ef97b7ab56be39",
+      "translation": "To implement true CTB, you need to devise a process that lets you determine the action order.",
+      "contextHash": "54c562aa6ea44b64d4bb03dfd00057950f3509481821294f56ef97b7ab56be39"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ＷＴ減算方式",
+      "sourceHash": "ff7806ead6b07d24b9b00c17aad1bcdededd6047117f8c794191bf65e804755d",
+      "translation": "WT Subtraction Method",
+      "contextHash": "ff7806ead6b07d24b9b00c17aad1bcdededd6047117f8c794191bf65e804755d"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "ではどうするか――というと、もっと計算の簡単な形に変えてしまいます。",
+      "sourceHash": "1128ed8c8c6e7c2c1a3df25f4fade9569dbe92d51b97fe7cbc5348ac846735ed",
+      "translation": "So what should you do? Change it into a form that is easier to calculate.",
+      "contextHash": "1128ed8c8c6e7c2c1a3df25f4fade9569dbe92d51b97fe7cbc5348ac846735ed"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "『ゲージが溜まる速度』を比較するのではなく、『ゲージが溜まる時間』を比較すればよいのです。",
+      "sourceHash": "1f80ac56b514eeb324519adad57f04ac80a034c06234469715cfeaff58bb73dc",
+      "translation": "Rather than comparing the “speed at which the gauge fills,” compare the “amount of time it takes for the gauge to fill.”",
+      "contextHash": "1f80ac56b514eeb324519adad57f04ac80a034c06234469715cfeaff58bb73dc"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "これは小学校レベルの知識で十分可能ですが、すんなりと思いつく人は意外と少ないと思います。自分も当初はここで詰まっていて、ある日ふと解決法を思いつきました。",
+      "sourceHash": "915a809ad15d98696befac084bf0af3fbdd03b9594f57e7ae1cd6ee76be60582",
+      "translation": "This is easily possible with elementary-school-level knowledge, but surprisingly few people think of it right away. I was stuck here at first as well, until I suddenly thought of a solution one day.",
+      "contextHash": "915a809ad15d98696befac084bf0af3fbdd03b9594f57e7ae1cd6ee76be60582"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "距離÷速さ＝時間",
+      "sourceHash": "859d8cf0244f1b078dcfe6e63fe17102db26b0e0503f2f40401bb4a3a1f638c4",
+      "translation": "Distance ÷ Speed = Time",
+      "contextHash": "859d8cf0244f1b078dcfe6e63fe17102db26b0e0503f2f40401bb4a3a1f638c4"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "つまり……",
+      "sourceHash": "31713799b5e33cc26a39cf4c965fd90d23a6f47e8797b56aeca7d4a16019f2ae",
+      "translation": "In other words…",
+      "contextHash": "31713799b5e33cc26a39cf4c965fd90d23a6f47e8797b56aeca7d4a16019f2ae"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ゲージの長さ÷ゲージが溜まる速さ＝ゲージが溜まる待ち時間（ＷＴ）",
+      "sourceHash": "b8eec63be60ca81cda190c67a3d21f6f340115bd85eb66bf995b12c2ed204514",
+      "translation": "Gauge length ÷ gauge-filling speed = gauge-filling wait time (WT)",
+      "contextHash": "b8eec63be60ca81cda190c67a3d21f6f340115bd85eb66bf995b12c2ed204514"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "となります。",
+      "sourceHash": "ed551a0f0732edc3bec983a373f519c7feb3d783741f8f50bfb82d15cb970f96",
+      "translation": "That is the result.",
+      "contextHash": "ed551a0f0732edc3bec983a373f519c7feb3d783741f8f50bfb82d15cb970f96"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "素早さ３２のキャラ１： １０００÷３２＝３１ＷＴでゲージ満タン",
+      "sourceHash": "b0c95c68187fc21534897055be33f126aa1521d2d8638d2a388b01a625709e9f",
+      "translation": "Character 1: Agility 32: 1000÷32=31 WT to fill the gauge",
+      "contextHash": "b0c95c68187fc21534897055be33f126aa1521d2d8638d2a388b01a625709e9f"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "素早さ４１のキャラ２： １０００÷４１＝２４ＷＴでゲージ満タン",
+      "sourceHash": "fecd186a9976fbfb00f7c523c7f08c13e255b6cc86064ebe6f0bfb36ffdcdfce",
+      "translation": "Character 2: Agility 41: 1000÷41=24 WT to fill the gauge",
+      "contextHash": "fecd186a9976fbfb00f7c523c7f08c13e255b6cc86064ebe6f0bfb36ffdcdfce"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "素早さ５０のキャラ３： １０００÷５０＝２０ＷＴでゲージ満タン",
+      "sourceHash": "2a45815e523c05260f5340675b08e1f4e40f37b3b048956afcd71374daa758db",
+      "translation": "Character 3: Agility 50: 1000÷50=20 WT to fill the gauge",
+      "contextHash": "2a45815e523c05260f5340675b08e1f4e40f37b3b048956afcd71374daa758db"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "待ち時間（ＷＴ）が０になる度にターンが回ります。行動が終われば、再び元の待ち時間にリセットします。",
+      "sourceHash": "b8e1b0393e20b49d7d38a154706986fca450ed39e57482648041313d816911fe",
+      "translation": "A turn comes up whenever the wait time (WT) reaches 0. Once the action is finished, it resets to the original wait time.",
+      "contextHash": "b8e1b0393e20b49d7d38a154706986fca450ed39e57482648041313d816911fe"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "※以降、待ち時間をＷＴと表記します。",
+      "sourceHash": "e5091f5a20c9a7224b094005185942ecd92c96e8b804a7d4a1b5e7cd4b5475f8",
+      "translation": "※From this point onward, wait time will be written as WT.",
+      "contextHash": "e5091f5a20c9a7224b094005185942ecd92c96e8b804a7d4a1b5e7cd4b5475f8"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "次の表は下に向かって時間が経過していくイメージです。",
+      "sourceHash": "0895979be2b89a261688c28c17672a48c331b55c65c04300290291202fd40353",
+      "translation": "The following table is meant to illustrate time passing as you move downward.",
+      "contextHash": "0895979be2b89a261688c28c17672a48c331b55c65c04300290291202fd40353"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "キャラ１ キャラ２ キャラ３",
+      "sourceHash": "a4acd3ae466e76b0cedd691e6cf76ff91eb6f49c64c13bb3ac412cb341e2c9ef",
+      "translation": "Character 1 Character 2 Character 3",
+      "contextHash": "a4acd3ae466e76b0cedd691e6cf76ff91eb6f49c64c13bb3ac412cb341e2c9ef"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "↓ ３１ ２４ ２０",
+      "sourceHash": "1bf5a0a2bd2d2f4038de7dda81cc3d7f8b790d5467579eb001225c1de7551211",
+      "translation": "↓ 31 24 20",
+      "contextHash": "1bf5a0a2bd2d2f4038de7dda81cc3d7f8b790d5467579eb001225c1de7551211"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "↓ １１ ０４",
+      "sourceHash": "8779cc922ed6788a920c744ae698cf40a50e29949ce0da7da5d3fe1c8f2599d2",
+      "translation": "↓ 11 04 ",
+      "contextHash": "8b9e0f3b69ff631b74b33fef67f0d3f016bbe83233c2ffcd83402fbc61776447"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "００",
+      "sourceHash": "2f5b817a524783edb1f9c60675331d7f29809b660491db9e2bfde0b4fe6f5205",
+      "translation": "00",
+      "contextHash": "8b9e0f3b69ff631b74b33fef67f0d3f016bbe83233c2ffcd83402fbc61776447"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "↓ ０７",
+      "sourceHash": "0da9b233029e5aabfac912c51cc7e05e5fd14f04ff00f2ffff3cbd920a4f71db",
+      "translation": "↓ 07 ",
+      "contextHash": "a839b07f215e2ac1dc3a6780db2fc2c432cc69e53ecacdf3fc4ebb39b43730b6"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "００",
+      "sourceHash": "2f5b817a524783edb1f9c60675331d7f29809b660491db9e2bfde0b4fe6f5205",
+      "translation": "00 ",
+      "contextHash": "a839b07f215e2ac1dc3a6780db2fc2c432cc69e53ecacdf3fc4ebb39b43730b6"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "１６",
+      "sourceHash": "ac60809db1c95b4c76d276b4b0384088ddc83926d4956b354ea72718e8b912e3",
+      "translation": "16",
+      "contextHash": "a839b07f215e2ac1dc3a6780db2fc2c432cc69e53ecacdf3fc4ebb39b43730b6"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "００",
+      "sourceHash": "2f5b817a524783edb1f9c60675331d7f29809b660491db9e2bfde0b4fe6f5205",
+      "translation": "00 ",
+      "contextHash": "60a36866eede42f2f78fde89de9db274ad273438617d5e7acbcc58466ba28545"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "１７ ０９",
+      "sourceHash": "180ea1b3629eec3b92fa156f4ae0e2b01c5a9614fac5ae54bdad7931dd519dbd",
+      "translation": "17 09",
+      "contextHash": "60a36866eede42f2f78fde89de9db274ad273438617d5e7acbcc58466ba28545"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "↓ ２２ ０８",
+      "sourceHash": "9ce1531cf7468830b3b283ca7f9a2da798e5bd98189a13fc9c974813d4f5695b",
+      "translation": "↓ 22 08 ",
+      "contextHash": "e5c7a048cb726341fa29c0da6183913ca3040471e2197451265041fdc2bcda37"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "００",
+      "sourceHash": "2f5b817a524783edb1f9c60675331d7f29809b660491db9e2bfde0b4fe6f5205",
+      "translation": "00",
+      "contextHash": "e5c7a048cb726341fa29c0da6183913ca3040471e2197451265041fdc2bcda37"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "上記のように、各キャラのＷＴが遷移していきます。",
+      "sourceHash": "9e7442ad7cc6e3c7dd5a65e9e41103b19cd76067d06bcaf2e46a0f22dd6f97ff",
+      "translation": "As shown above, each character's WT changes over time.",
+      "contextHash": "9e7442ad7cc6e3c7dd5a65e9e41103b19cd76067d06bcaf2e46a0f22dd6f97ff"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "当然ながら、次に動くのはＷＴが最も小さなキャラです。どこを切り取っても、次に誰が行動するかは一目瞭然ですね。",
+      "sourceHash": "09daaa8cf6ce4af4619ab4cdd1c39360c7624aae3b6ba746308480cc759de86b",
+      "translation": "Naturally, the character with the lowest WT acts next. No matter which point you look at, it's immediately clear who will act next.",
+      "contextHash": "09daaa8cf6ce4af4619ab4cdd1c39360c7624aae3b6ba746308480cc759de86b"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "※実際にＣＴＢを実装する際には、『ゲージの長さ＝１０００』の部分にはもっと大きな値を設定することを勧めます。やはり小さすぎると計算誤差が出るためです。",
+      "sourceHash": "038c809f4cc3dbd683913c59f28157c8cde6e0aca3dade55e9191bd1ff066e55",
+      "translation": "※When actually implementing CTB, I recommend setting a much larger value than 1000 for “Gauge Length = 1000.” If the value is too small, calculation errors will occur.",
+      "contextHash": "038c809f4cc3dbd683913c59f28157c8cde6e0aca3dade55e9191bd1ff066e55"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "何のことはありません。既にタクティクスオウガなどでやっている手法です。",
+      "sourceHash": "bd1571c1d7c8e3aaa8dd39761245ae6c6f07010afb6f5d4d76a1ce40a1888ad4",
+      "translation": "There's nothing particularly complicated about it. This is a method already used in games such as Tactics Ogre.",
+      "contextHash": "bd1571c1d7c8e3aaa8dd39761245ae6c6f07010afb6f5d4d76a1ce40a1888ad4"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "タクティクスオウガではターンが回るまでの待ち時間（ＷＴ）をキャラが保有しており、レベルが上がる度に減少するようになっています。",
+      "sourceHash": "8d13e5abcc02b4c6b843c38c98e6fd3c807281a33c9dd2e83e7516e7c8dde2bc",
+      "translation": "In Tactics Ogre, each character has a waiting time (WT) until their turn comes around, and it decreases as their level increases.",
+      "contextHash": "8d13e5abcc02b4c6b843c38c98e6fd3c807281a33c9dd2e83e7516e7c8dde2bc"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "つまり、この方式は従来の素早さ方式をＷＴ方式に変換しているだけとも言えます。",
+      "sourceHash": "3fc3df33aa05d68416e8783b095b77e7171e3ebcac7ab99817f72b9b42cdad40",
+      "translation": "In other words, this method can also be said to simply convert the conventional Agility-based system into a WT-based system.",
+      "contextHash": "3fc3df33aa05d68416e8783b095b77e7171e3ebcac7ab99817f72b9b42cdad40"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "※タクティクスオウガのように最初からＷＴを使う方法でもよいのですが、プレイヤーには分かりにくいのが難点となります。また、ツールによっては実装自体が困難です。なんせ、レベルと共に減少するステータスなんてあまり見ませんので。",
+      "sourceHash": "fd7550b0ee0ca3490a05ae2ace6a28f07bec3355a61d93eafc31bea486b239f6",
+      "translation": "※It would also be possible to use WT from the outset, as in Tactics Ogre, but the drawback is that it is difficult for players to understand. Depending on the tool, implementation itself may also be difficult. After all, you don't often see a stat that decreases as the level increases.",
+      "contextHash": "fd7550b0ee0ca3490a05ae2ace6a28f07bec3355a61d93eafc31bea486b239f6"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "ここで終わりたいところですが、そうはいきません。",
+      "sourceHash": "d7af79bf3f6a8c975183aa41c7ef7df583f2d4594f4773fbc8f8918d904746aa",
+      "translation": "I would like to end things here, but unfortunately, I can't.",
+      "contextHash": "d7af79bf3f6a8c975183aa41c7ef7df583f2d4594f4773fbc8f8918d904746aa"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "ＣＴＢの実装には第二の関門があります。",
+      "sourceHash": "dcbccd5f14959bf72f7c7dc62a866841acbd0b4f2fed0946781eaa44760d70ec",
+      "translation": "Implementing CTB presents a second hurdle.",
+      "contextHash": "dcbccd5f14959bf72f7c7dc62a866841acbd0b4f2fed0946781eaa44760d70ec"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "今までの方法では、キャラ１とキャラ２のどちらが次に動くかが分かるようになりました。ですが、これではまだ二人の行動回数の差を表現することはできません。",
+      "sourceHash": "c41301f64e755e6b02e204da7c05faae7cc2e1c95afd8915a621038f26325f3f",
+      "translation": "With the method we've used so far, we can tell whether Character 1 or Character 2 will act next. However, this still doesn't express the difference in the number of actions the two characters can take.",
+      "contextHash": "c41301f64e755e6b02e204da7c05faae7cc2e1c95afd8915a621038f26325f3f"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "例：上の画像では、素早いキャラの順番が何度も表示されるようになっています。",
+      "sourceHash": "806a93b74a433342baa1044d411ea9750208de16edff224827079e19163cc651",
+      "translation": "Example: In the image above, the faster character's turn appears repeatedly.",
+      "contextHash": "806a93b74a433342baa1044d411ea9750208de16edff224827079e19163cc651"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "キャラ１の素早さは２５",
+      "sourceHash": "493abd869a7fc1c73ba25742452dc45b00212dc328b2e11df22ec21d1bee9364",
+      "translation": "Character 1's Agility is 25",
+      "contextHash": "493abd869a7fc1c73ba25742452dc45b00212dc328b2e11df22ec21d1bee9364"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "キャラ２の素早さは２０",
+      "sourceHash": "d55e0c66564bc610e7b479f2dd83f19934acc4078607c6d9a967117fafc32dc5",
+      "translation": "Character 2's Agility is 20",
+      "contextHash": "d55e0c66564bc610e7b479f2dd83f19934acc4078607c6d9a967117fafc32dc5"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "キャラ１が４回行動する間に、キャラ２は５回行動できる――ということは、何となく予想がつくと思います。",
+      "sourceHash": "cf9257d4913a1707493ea0854d6dc7f932bbf74ce28358597051d794d93d2efe",
+      "translation": "You can probably intuitively predict that Character 2 can act five times while Character 1 acts four times.",
+      "contextHash": "cf9257d4913a1707493ea0854d6dc7f932bbf74ce28358597051d794d93d2efe"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "しかしながら、その行動回数の差を画面上へ表示するにはどうすればよいでしょうか？",
+      "sourceHash": "c48fbd1f272bbc0dc14a03493365011810d76d83298d1e3736863cf36d758aad",
+      "translation": "However, how can we display the difference in the number of actions on the screen?",
+      "contextHash": "c48fbd1f272bbc0dc14a03493365011810d76d83298d1e3736863cf36d758aad"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "例によって、まずは素早さをＷＴに変換します。",
+      "sourceHash": "6c1c1eb3a1414fb0b9cc14b3153c7083f273fe6d3508b751fd3caebcd9dd22a7",
+      "translation": "As before, let's first convert Agility into WT.",
+      "contextHash": "6c1c1eb3a1414fb0b9cc14b3153c7083f273fe6d3508b751fd3caebcd9dd22a7"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "キャラ１：１００ ÷ ２５ ＝ ４ＷＴ",
+      "sourceHash": "ba62536963d4151871acd7ba93501164b215ad2327826413d0e18d9e8de0a55f",
+      "translation": "Character 1: 100 ÷ 25 = 4 WT",
+      "contextHash": "ba62536963d4151871acd7ba93501164b215ad2327826413d0e18d9e8de0a55f"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "キャラ２：１００ ÷ ２０ ＝ ５ＷＴ",
+      "sourceHash": "e0e051759ba5ae13374f6f990b97206812d6c7f87bbb390fa5154c1ea7e86972",
+      "translation": "Character 2: 100 ÷ 20 = 5 WT",
+      "contextHash": "e0e051759ba5ae13374f6f990b97206812d6c7f87bbb390fa5154c1ea7e86972"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "これらが各キャラの基本ＷＴとなります。",
+      "sourceHash": "836fc7767033ba5cce1bce889e843cc37c5d70f7847c84ce84677d9ec55afe86",
+      "translation": "These become each character's basic WT.",
+      "contextHash": "836fc7767033ba5cce1bce889e843cc37c5d70f7847c84ce84677d9ec55afe86"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "これが減って０になれば行動。",
+      "sourceHash": "9e21b600412a07af9e095a7f2c498bc42f1a6049cf3908b96ac221b3ee36dfaa",
+      "translation": "When it decreases to 0, the character acts.",
+      "contextHash": "9e21b600412a07af9e095a7f2c498bc42f1a6049cf3908b96ac221b3ee36dfaa"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "行動が終われば、またこの値にＷＴが戻ります。",
+      "sourceHash": "2e10bf0b2af574e50a6bb245d5987bc1975f5800b5c374cfd27506e0d0c1bad1",
+      "translation": "When the action ends, the WT returns to this value.",
+      "contextHash": "2e10bf0b2af574e50a6bb245d5987bc1975f5800b5c374cfd27506e0d0c1bad1"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "試しに、まずは人力で計算してみましょう。",
+      "sourceHash": "5f5cdcfbbd080814570beae4fb9587a5f74caf53ebeaad3b8ea4215d2bd386b9",
+      "translation": "For now, let's try calculating it manually.",
+      "contextHash": "5f5cdcfbbd080814570beae4fb9587a5f74caf53ebeaad3b8ea4215d2bd386b9"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "４ＷＴ後 → キャラ１のターン",
+      "sourceHash": "766e124f783e327deee46df8b99163bc8b1cf06bb66003382565104b9acea428",
+      "translation": "After 4 WT → Character 1's turn",
+      "contextHash": "766e124f783e327deee46df8b99163bc8b1cf06bb66003382565104b9acea428"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "まずは最も早いキャラ１が動きます。これは簡単ですね。",
+      "sourceHash": "68aa4de69356fab667bf7f0fcbeadbe725b036ff47fd2083f1daa1f1fe678906",
+      "translation": "First, the fastest character, Character 1, acts. This is simple enough.",
+      "contextHash": "68aa4de69356fab667bf7f0fcbeadbe725b036ff47fd2083f1daa1f1fe678906"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "次に来るのはキャラ２か、あるいはキャラ１の二回目の行動か？",
+      "sourceHash": "072a90fd620df9a2bb90df03fdcfe2d51c515a5fcba2b2cdb664232ee0735b66",
+      "translation": "Will Character 2 come next, or will it be Character 1's second action?",
+      "contextHash": "072a90fd620df9a2bb90df03fdcfe2d51c515a5fcba2b2cdb664232ee0735b66"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "人間なら直感的にキャラ２だと判断できますが、コンピュータはそうではありません。",
+      "sourceHash": "c74ccedb5a8ed6de88999acdd865a40738bcd2b555fa290e198775035079f7f0",
+      "translation": "A person can intuitively determine that it is Character 2, but a computer cannot.",
+      "contextHash": "c74ccedb5a8ed6de88999acdd865a40738bcd2b555fa290e198775035079f7f0"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "キャラ１の２回目の行動ＷＴ８ ＞ キャラ２の１回目の行動ＷＴ５",
+      "sourceHash": "54713f6aeacd37cbfd3a210bd4c80b5f19e395efc3052cd2634f6962dfff46d8",
+      "translation": "Character 1's second action WT 8 > Character 2's first action WT 5",
+      "contextHash": "54713f6aeacd37cbfd3a210bd4c80b5f19e395efc3052cd2634f6962dfff46d8"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "従って、キャラ２の１回目の行動のほうが早い。",
+      "sourceHash": "9a8889cadf7e6ce5a760738a9ce70a1d0dcd83e813e15538ff21967aa88b59e7",
+      "translation": "Therefore, Character 2's first action comes sooner.",
+      "contextHash": "9a8889cadf7e6ce5a760738a9ce70a1d0dcd83e813e15538ff21967aa88b59e7"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "というように、きちんと比較するよう指示せねばなりません。",
+      "sourceHash": "c94bcee7e528d976fc912eb5c60a5f98acf811621f57e13e0d4de09b16626153",
+      "translation": "We must therefore instruct it to make a proper comparison, as shown above.",
+      "contextHash": "c94bcee7e528d976fc912eb5c60a5f98acf811621f57e13e0d4de09b16626153"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "人数が増えてくると、それだけ手間も増えていきます。頭が痛くなるので考えたくもありません。",
+      "sourceHash": "43cdb4f61eb26de40b4c6eb539cad3c998f7cd2b6969afae7f3c0aa5c969df80",
+      "translation": "As the number of characters increases, so does the amount of work. It makes my head hurt, so I don't even want to think about it.",
+      "contextHash": "43cdb4f61eb26de40b4c6eb539cad3c998f7cd2b6969afae7f3c0aa5c969df80"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "もう少し、簡単な方法はないものか。",
+      "sourceHash": "1a043e7db83fd1ad762e7958d9ae1d7c0bcf0e68999f4be8730aac192f8f1f26",
+      "translation": "Isn't there a somewhat simpler way?",
+      "contextHash": "1a043e7db83fd1ad762e7958d9ae1d7c0bcf0e68999f4be8730aac192f8f1f26"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "というわけで、まずはキャラ１のターンだけを考えてみましょう。",
+      "sourceHash": "c4e8acaf0d2b8e728ccb2617e298eaeac71ce3247093dcc652a6a6b555601e61",
+      "translation": "So, let's first consider only Character 1's turns.",
+      "contextHash": "c4e8acaf0d2b8e728ccb2617e298eaeac71ce3247093dcc652a6a6b555601e61"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "１０回まで行動順序を表示するシステムならば、１０回分の行動を計算します。",
+      "sourceHash": "181e151b6dbe21416086432fb4b07a64eadfd3c3353db4b03ec14ea9d8f2d8ff",
+      "translation": "If the system displays the action order up to ten actions ahead, calculate ten actions.",
+      "contextHash": "181e151b6dbe21416086432fb4b07a64eadfd3c3353db4b03ec14ea9d8f2d8ff"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "４ＷＴ後 → キャラ１のターン",
+      "sourceHash": "766e124f783e327deee46df8b99163bc8b1cf06bb66003382565104b9acea428",
+      "translation": "After 4 WT → Character 1's turn",
+      "contextHash": "766e124f783e327deee46df8b99163bc8b1cf06bb66003382565104b9acea428"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "８ＷＴ後 → キャラ１のターン",
+      "sourceHash": "032179fbe0fd8c5d0f16115800ff8e9548a42778e8848a205c26eb2c57459cab",
+      "translation": "After 8 WT → Character 1's turn",
+      "contextHash": "032179fbe0fd8c5d0f16115800ff8e9548a42778e8848a205c26eb2c57459cab"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "１２ＷＴ後 → キャラ１のターン",
+      "sourceHash": "e9f80434be75d38d5098c5eb42004ee1863cecfb3a2f9de87b73249a92640415",
+      "translation": "After 12 WT → Character 1's turn",
+      "contextHash": "e9f80434be75d38d5098c5eb42004ee1863cecfb3a2f9de87b73249a92640415"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "１６ＷＴ後 → キャラ１のターン",
+      "sourceHash": "c9cc3090afa898fdd8d62bc2656b7a2a92c804610c0027aa7e8570af0b8733c7",
+      "translation": "After 16 WT → Character 1's turn",
+      "contextHash": "c9cc3090afa898fdd8d62bc2656b7a2a92c804610c0027aa7e8570af0b8733c7"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "２０ＷＴ後 → キャラ１のターン",
+      "sourceHash": "f14cb97c7eada7b2bbde60f7d6e23d4f04fc424c3718e34504fb562b3965df87",
+      "translation": "After 20 WT → Character 1's turn",
+      "contextHash": "f14cb97c7eada7b2bbde60f7d6e23d4f04fc424c3718e34504fb562b3965df87"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "２４ＷＴ後 → キャラ１のターン",
+      "sourceHash": "0939a38f4634a646483326199e9e5c8fd8d30e52b3fbc4aff213cea45dd41bdd",
+      "translation": "After 24 WT → Character 1's turn",
+      "contextHash": "0939a38f4634a646483326199e9e5c8fd8d30e52b3fbc4aff213cea45dd41bdd"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "２８ＷＴ後 → キャラ１のターン",
+      "sourceHash": "4f888c77e4d07f208acf295aeb66c2d2423065437b870535a2593fbdd37efd45",
+      "translation": "After 28 WT → Character 1's turn",
+      "contextHash": "4f888c77e4d07f208acf295aeb66c2d2423065437b870535a2593fbdd37efd45"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "３２ＷＴ後 → キャラ１のターン",
+      "sourceHash": "14414e463df779487ece7295f74e7a39b0d50d078fbd618219e0aa272f748e2a",
+      "translation": "After 32 WT → Character 1's turn",
+      "contextHash": "14414e463df779487ece7295f74e7a39b0d50d078fbd618219e0aa272f748e2a"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "３６ＷＴ後 → キャラ１のターン",
+      "sourceHash": "0ff94fb495a934821ad8831f6f6cb911cbbaf6eb70d50e2dabd0201bbd4589e7",
+      "translation": "After 36 WT → Character 1's turn",
+      "contextHash": "0ff94fb495a934821ad8831f6f6cb911cbbaf6eb70d50e2dabd0201bbd4589e7"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "４０ＷＴ後 → キャラ１のターン",
+      "sourceHash": "13234e0a9bf36276ff30828f3f9276beb3ba8387af48612e6a07800d9c5e8bb8",
+      "translation": "After 40 WT → Character 1's turn",
+      "contextHash": "13234e0a9bf36276ff30828f3f9276beb3ba8387af48612e6a07800d9c5e8bb8"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "単なる掛け算なので、難しいことは何もありません。",
+      "sourceHash": "84723815846d1f3a9ef5af8f91e726ebb3097de474452e84da15a667ec8f617b",
+      "translation": "It's just multiplication, so there's nothing difficult about it.",
+      "contextHash": "84723815846d1f3a9ef5af8f91e726ebb3097de474452e84da15a667ec8f617b"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "次にキャラ２がキャラ１のターンにどう割り込めるかを考えていきます。",
+      "sourceHash": "3086da0514ed844756be8a51aac2554bc7f9abc279e958592a2f64413a24a122",
+      "translation": "Next, let's consider how Character 2 can cut in among Character 1's turns.",
+      "contextHash": "3086da0514ed844756be8a51aac2554bc7f9abc279e958592a2f64413a24a122"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "キャラ２のターンを同じように求めると……",
+      "sourceHash": "a08fe329244180a90b1ed52c9aba43e5f54e5a5a4c0068eb1427bacf88d0d739",
+      "translation": "If we calculate Character 2's turns in the same way…",
+      "contextHash": "a08fe329244180a90b1ed52c9aba43e5f54e5a5a4c0068eb1427bacf88d0d739"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "５ＷＴ後 → キャラ２のターン",
+      "sourceHash": "10124a9cee4143ac3374ee4b85db4e8bbf8eb6b4154af7ee21cbf12968b6b684",
+      "translation": "After 5 WT → Character 2's turn",
+      "contextHash": "10124a9cee4143ac3374ee4b85db4e8bbf8eb6b4154af7ee21cbf12968b6b684"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "１０ＷＴ後 → キャラ２のターン",
+      "sourceHash": "62e40095bd1234004b42c54bc103ceaae7d9578820dbc6b8b76899a79994f1c0",
+      "translation": "After 10 WT → Character 2's turn",
+      "contextHash": "62e40095bd1234004b42c54bc103ceaae7d9578820dbc6b8b76899a79994f1c0"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "１５ＷＴ後 → キャラ２のターン",
+      "sourceHash": "a1ea58b79f434119c3f7198f3a887e64df08f0d7d398e28d58b4fa0e60d45601",
+      "translation": "After 15 WT → Character 2's turn",
+      "contextHash": "a1ea58b79f434119c3f7198f3a887e64df08f0d7d398e28d58b4fa0e60d45601"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "２０ＷＴ後 → キャラ２のターン",
+      "sourceHash": "743e2a06778febb0b232b3bb366928ed5974e97b4a4b632f5fa8e543b53c00e0",
+      "translation": "After 20 WT → Character 2's turn",
+      "contextHash": "743e2a06778febb0b232b3bb366928ed5974e97b4a4b632f5fa8e543b53c00e0"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "２５ＷＴ後 → キャラ２のターン",
+      "sourceHash": "976a61d9effcc8258a2d05b25538f10968f6b6f6753a9c0bf88bcd5a23010c5b",
+      "translation": "After 25 WT → Character 2's turn",
+      "contextHash": "976a61d9effcc8258a2d05b25538f10968f6b6f6753a9c0bf88bcd5a23010c5b"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "３０ＷＴ後 → キャラ２のターン",
+      "sourceHash": "0c7e70927c8d371ccd44b95c32bdd2495c96648ede32cb41ed890eca97b07fd4",
+      "translation": "After 30 WT → Character 2's turn",
+      "contextHash": "0c7e70927c8d371ccd44b95c32bdd2495c96648ede32cb41ed890eca97b07fd4"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "３５ＷＴ後 → キャラ２のターン",
+      "sourceHash": "1c5bb1bb253523341ab289c4e130483630781c55e0f51cdfe0cdc7662f05d8a3",
+      "translation": "After 35 WT → Character 2's turn",
+      "contextHash": "1c5bb1bb253523341ab289c4e130483630781c55e0f51cdfe0cdc7662f05d8a3"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "ちなみに４０ＷＴ以降はどうあっても割り込めないので計算不要です。",
+      "sourceHash": "5648536027a170478cf2ce6c67e59ab44f81e6698683ec8c55e78b04efc4f399",
+      "translation": "Incidentally, from 40 WT onward, nothing can be inserted no matter what, so there is no need to calculate it.",
+      "contextHash": "5648536027a170478cf2ce6c67e59ab44f81e6698683ec8c55e78b04efc4f399"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "ここまでやれば後一歩。",
+      "sourceHash": "cda12cd319e34dc0496ae3dd53dc7fe84807eb590546c24b2e66af59e2863773",
+      "translation": "Once you've gotten this far, you're just one step away.",
+      "contextHash": "cda12cd319e34dc0496ae3dd53dc7fe84807eb590546c24b2e66af59e2863773"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "キャラ１のターンの隙間に、キャラ２のターンを挟んでいきます。",
+      "sourceHash": "ad79804e21356823fed02b7f9c67e0684704caad47aa87593567c086150eaf22",
+      "translation": "Insert Character 2's turns between Character 1's turns.",
+      "contextHash": "ad79804e21356823fed02b7f9c67e0684704caad47aa87593567c086150eaf22"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "具体的には、この二つをＷＴ順でソート（並び替え）して合体させればよいでしょう。ソート後は表示に必要な１０件までを保持します。",
+      "sourceHash": "6f32fa5ef80c5146d9c95cbf0c3899fdc777e945d0dbed9e318b1b61f3ef3775",
+      "translation": "Specifically, sort these two by WT order, then combine them. After sorting, retain only the 10 entries needed for display.",
+      "contextHash": "6f32fa5ef80c5146d9c95cbf0c3899fdc777e945d0dbed9e318b1b61f3ef3775"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "より正確に書けば、",
+      "sourceHash": "a7ab3dd542abba2ccbb643daab60513cd20ede5f37d53590326c929d7b2d1403",
+      "translation": "To put it more precisely,",
+      "contextHash": "a7ab3dd542abba2ccbb643daab60513cd20ede5f37d53590326c929d7b2d1403"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "『キャラクターＩＤ』と『ＷＴ』の組を構造体として保持し、『ＷＴ』をキーとして昇順でソートを行う。",
+      "sourceHash": "ec42d53c88bff155f355dc6ccb58531c9d9b6bdd490076c7257b14bca3a8c3ba",
+      "translation": "Keep pairs of Character IDs and WTs as structures, and sort them in ascending order using WT as the key.",
+      "contextHash": "ec42d53c88bff155f355dc6ccb58531c9d9b6bdd490076c7257b14bca3a8c3ba"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "という感じになります。",
+      "sourceHash": "09d7a299fb7eb745d602b261b6d9fe49c8530e463a766ef436ef1807681e47a3",
+      "translation": "That's essentially how it works.",
+      "contextHash": "09d7a299fb7eb745d602b261b6d9fe49c8530e463a766ef436ef1807681e47a3"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "プログラム経験者以外にはわけわからんことを書いてる感じがしますが、そこはすみません。",
+      "sourceHash": "da4ee35ad5bb375bbb670d112d412d0e5758cbb2d992ce8bf2b2c86d01f1e80c",
+      "translation": "I realize this probably seems completely incomprehensible to anyone without programming experience, and I'm sorry about that.",
+      "contextHash": "da4ee35ad5bb375bbb670d112d412d0e5758cbb2d992ce8bf2b2c86d01f1e80c"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "ただソート処理というのは、非常にありふれたものです。どの言語にせよ、ググればやり方はすぐに見つかるので、適当にパクってください。",
+      "sourceHash": "c7de44cfd761a672c6dd55cd7c1cc20e7c409f56c191adac1fcdb7da67acb1e8",
+      "translation": "However, sorting is an extremely common operation. Whatever language you're using, you can quickly find how to do it by Googling, so feel free to copy an example.",
+      "contextHash": "c7de44cfd761a672c6dd55cd7c1cc20e7c409f56c191adac1fcdb7da67acb1e8"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "ツクールＸＰ以降ではＲｕｂｙ、ツクールＭＶではＪａｖａＳｃｒｉｐｔなども使えるらしいので、問題ないかと思います。",
+      "sourceHash": "107badd719f65a6176b7292918f66ed8c2c284ebf0c6d0069d4e1402f4385288",
+      "translation": "Apparently, Ruby is available in RPG Maker XP and later, and JavaScript in RPG Maker MV, so I don't think this should be a problem.",
+      "contextHash": "107badd719f65a6176b7292918f66ed8c2c284ebf0c6d0069d4e1402f4385288"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "なお、ツクール２０００でやるのは、それなりに大変でした。なんせ構造体も配列も何もない直接番地指定です。作者的にはもう二度と見たくないスパゲッティです。",
+      "sourceHash": "1624f9d81ae9ea4cf1df7b85e03707e4978e03c43ba0c21704203b2936837249",
+      "translation": "Incidentally, doing this in RPG Maker 2000 was quite difficult. After all, there were no structures, arrays, or anything else—just direct address specification. From my perspective as the author, it's spaghetti code I never want to look at again.",
+      "contextHash": "1624f9d81ae9ea4cf1df7b85e03707e4978e03c43ba0c21704203b2936837249"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "以下がソート結果です。",
+      "sourceHash": "6ff19ddbf450d6b0331c990a5a2e67c5a994de81eb3eab626697f905d03a995f",
+      "translation": "The sorting results are shown below.",
+      "contextHash": "6ff19ddbf450d6b0331c990a5a2e67c5a994de81eb3eab626697f905d03a995f"
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "４ＷＴ後 → キャラ１のターン",
+      "sourceHash": "766e124f783e327deee46df8b99163bc8b1cf06bb66003382565104b9acea428",
+      "translation": "After 4 WT → Character 1's turn",
+      "contextHash": "766e124f783e327deee46df8b99163bc8b1cf06bb66003382565104b9acea428"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "５ＷＴ後 → キャラ２のターン",
+      "sourceHash": "10124a9cee4143ac3374ee4b85db4e8bbf8eb6b4154af7ee21cbf12968b6b684",
+      "translation": "After 5 WT → Character 2's turn",
+      "contextHash": "10124a9cee4143ac3374ee4b85db4e8bbf8eb6b4154af7ee21cbf12968b6b684"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "８ＷＴ後 → キャラ１のターン",
+      "sourceHash": "032179fbe0fd8c5d0f16115800ff8e9548a42778e8848a205c26eb2c57459cab",
+      "translation": "After 8 WT → Character 1's turn",
+      "contextHash": "032179fbe0fd8c5d0f16115800ff8e9548a42778e8848a205c26eb2c57459cab"
+    },
+    {
+      "id": "list-041",
+      "type": "list",
+      "source": "１０ＷＴ後 → キャラ２のターン",
+      "sourceHash": "62e40095bd1234004b42c54bc103ceaae7d9578820dbc6b8b76899a79994f1c0",
+      "translation": "After 10 WT → Character 2's turn",
+      "contextHash": "62e40095bd1234004b42c54bc103ceaae7d9578820dbc6b8b76899a79994f1c0"
+    },
+    {
+      "id": "list-042",
+      "type": "list",
+      "source": "１２ＷＴ後 → キャラ１のターン",
+      "sourceHash": "e9f80434be75d38d5098c5eb42004ee1863cecfb3a2f9de87b73249a92640415",
+      "translation": "After 12 WT → Character 1's turn",
+      "contextHash": "e9f80434be75d38d5098c5eb42004ee1863cecfb3a2f9de87b73249a92640415"
+    },
+    {
+      "id": "list-043",
+      "type": "list",
+      "source": "１５ＷＴ後 → キャラ２のターン",
+      "sourceHash": "a1ea58b79f434119c3f7198f3a887e64df08f0d7d398e28d58b4fa0e60d45601",
+      "translation": "After 15 WT → Character 2's turn",
+      "contextHash": "a1ea58b79f434119c3f7198f3a887e64df08f0d7d398e28d58b4fa0e60d45601"
+    },
+    {
+      "id": "list-044",
+      "type": "list",
+      "source": "１６ＷＴ後 → キャラ１のターン",
+      "sourceHash": "c9cc3090afa898fdd8d62bc2656b7a2a92c804610c0027aa7e8570af0b8733c7",
+      "translation": "After 16 WT → Character 1's turn",
+      "contextHash": "c9cc3090afa898fdd8d62bc2656b7a2a92c804610c0027aa7e8570af0b8733c7"
+    },
+    {
+      "id": "list-045",
+      "type": "list",
+      "source": "２０ＷＴ後 → キャラ１のターン",
+      "sourceHash": "f14cb97c7eada7b2bbde60f7d6e23d4f04fc424c3718e34504fb562b3965df87",
+      "translation": "After 20 WT → Character 1's turn",
+      "contextHash": "f14cb97c7eada7b2bbde60f7d6e23d4f04fc424c3718e34504fb562b3965df87"
+    },
+    {
+      "id": "list-046",
+      "type": "list",
+      "source": "２０ＷＴ後 → キャラ２のターン",
+      "sourceHash": "743e2a06778febb0b232b3bb366928ed5974e97b4a4b632f5fa8e543b53c00e0",
+      "translation": "After 20 WT → Character 2's turn",
+      "contextHash": "743e2a06778febb0b232b3bb366928ed5974e97b4a4b632f5fa8e543b53c00e0"
+    },
+    {
+      "id": "list-047",
+      "type": "list",
+      "source": "２４ＷＴ後 → キャラ１のターン",
+      "sourceHash": "0939a38f4634a646483326199e9e5c8fd8d30e52b3fbc4aff213cea45dd41bdd",
+      "translation": "After 24 WT → Character 1's turn",
+      "contextHash": "0939a38f4634a646483326199e9e5c8fd8d30e52b3fbc4aff213cea45dd41bdd"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "※２０ＷＴの時に、二人の行動がかぶっていますが、適当に優先順位をつけてください。普通にソートすれば、番号が若いキャラが優先されるはずです。",
+      "sourceHash": "91707b4d4ab2b2765e8480db1945dc7ec7d4197daf937563516006cf4254b78a",
+      "translation": "※At 20 WT, the two characters' actions overlap, but assign them an arbitrary priority. If you simply sort them, the character with the lower number should take priority.",
+      "contextHash": "91707b4d4ab2b2765e8480db1945dc7ec7d4197daf937563516006cf4254b78a"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "これにて完了です。後はこの順番でキャラのアイコンなり名前なりを画面に出力するだけ。",
+      "sourceHash": "1bc681f97683c2ee677c2ae097370c2f8eb7f9ba0d842b6e2948e71938244bfe",
+      "translation": "That completes the process. All that's left is to display each character's icon, name, or whatever on the screen in this order.",
+      "contextHash": "1bc681f97683c2ee677c2ae097370c2f8eb7f9ba0d842b6e2948e71938244bfe"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "キャラ３以降が増えた場合も、同じように合体ソートすればよいだけなので問題ないでしょう。",
+      "sourceHash": "da525818a2c9ddfe27998eb8a1ce0b1a4b45d7506d38e96c1635454edf27baa7",
+      "translation": "If the number of characters increases beyond Character 3, there should be no problem, since you only need to combine and sort them in the same way.",
+      "contextHash": "da525818a2c9ddfe27998eb8a1ce0b1a4b45d7506d38e96c1635454edf27baa7"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "以上で解説終わりです。",
+      "sourceHash": "50e093c3a5d46fc2c0bf52ca221bece3b1640ea5431fd50641c3c8f9c5f36432",
+      "translation": "That concludes the explanation.",
+      "contextHash": "50e093c3a5d46fc2c0bf52ca221bece3b1640ea5431fd50641c3c8f9c5f36432"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "次はＣＴＢを改造した新しい行動順序システムを発表したいと考えています。できれば、もう少し一般的に分かる内容で……。",
+      "sourceHash": "ef04fdb890adfb6086885483922e43eb2ec7dae88586254186a338fc79531e35",
+      "translation": "Next, I would like to present a new action order system based on a modified CTB. If possible, I hope to make it something that is a little easier for people in general to understand...",
+      "contextHash": "ef04fdb890adfb6086885483922e43eb2ec7dae88586254186a338fc79531e35"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "参考：[[LINK_1]]戦闘システム① 行動順序システム[[/LINK_1]]",
+      "sourceHash": "72dc519644846f37119b3d364e061a82323124df1878f6159cff1ce7504bfe86",
+      "parts": [
+        {
+          "source": "参考：",
+          "link": false
+        },
+        {
+          "source": "戦闘システム① 行動順序システム",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "Reference: [[LINK_1]]Battle System ① Action Order System[[/LINK_1]]",
+      "contextHash": "72dc519644846f37119b3d364e061a82323124df1878f6159cff1ce7504bfe86"
+    }
+  ],
+  "texts": {
+    "微妙に需要がありそうなので、経験者としてＣＴＢ（カウントタイムバトル）の実装方法を解説してみます。": "Since there seems to be some demand for it, I’ll explain how to implement CTB (Count Time Battle) as someone with experience in the area.",
+    "内容はもろにプログラマ向けです。プログラムを組んだり、ツクールで自作システムを組んだりした人以外はピンとこないかもしれませんので、あらかじめお断りしておきます。": "This content is aimed squarely at programmers. Those who have never written programs or built custom systems in RPG Maker may not find it very intuitive, so I wanted to make that clear in advance.",
+    "なお、拙作ミスティックスターのＣＴＢは、ツクール２０００で実装していますが、アルゴリズム（処理手順）自体は汎用的に使えるはずです。ある程度の自由度がある開発環境ならば、流用可能です。": "My CTB system in Mystic Star was implemented in RPG Maker 2000, but the algorithm (processing procedure) itself should be generally applicable. It should be possible to adapt it to any development environment with a certain degree of flexibility.",
+    "作り方はいくつかありますが、まずは最も簡単な『素早さ加算方式』の実装方法から紹介します。": "There are several ways to create one, but I’ll start by introducing the simplest implementation method: the “Agility Addition Method.”",
+    "素早さ加算方式": "Agility Addition Method",
+    "イメージとしては、ＦＦ７～９のＡＴＢを思い浮かべてみれば、分かりやすいと思います。": "For an illustration, it may be easiest to imagine the ATB systems from FFVII–IX.",
+    "ＡＴＢゲージが満タンになったキャラが行動できるようになるアレですね。素早いキャラほど、ゲージが溜まる速度が上昇します。あれのリアルタイム性をなくしたものと思って頂ければ。": "You know, the one where a character can act once their ATB gauge is full. The faster a character is, the faster their gauge fills. You can think of it as that system without the real-time aspect.",
+    "※ＦＦ４～６は仕様が異なるので除外しています。興味がある人は調べてみてください。": "※FFIV–VI are excluded because their specifications differ. If you’re interested, look them up.",
+    "素早さ４０のキャラ１": "Character 1: Agility 40",
+    "素早さ５０のキャラ２": "Character 2: Agility 50",
+    "の二人がいた場合を想定すると……": "Suppose we have these two characters…",
+    "キャラ１：４０→ ８０→１２０→１６０→……→ ８００": "Character 1: 40→ 80→120→160→……→ 800",
+    "キャラ２：５０→１００→１５０→２００→……→１０００": "Character 2: 50→100→150→200→……→1000",
+    "というように、時間が立つごとに素早さ分だけゲージが増えていきます。": "As shown, the gauge increases by an amount equal to the character’s Agility as time passes.",
+    "ゲージ値が１０００以上になったキャラがいれば、ターンが回ってきます。この場合はキャラ２の行動ターンが先に来ますね。": "Whenever a character’s gauge value reaches 1000 or more, their turn comes up. In this case, Character 2 gets to act first.",
+    "※もちろん、条件となるゲージ値は１０００でも１００００でも何でもいいです。ただし、あまり小さすぎると計算誤差が出るので注意です。": "※Of course, the gauge value used as the threshold can be 1000, 10000, or anything else. However, be careful, because making it too small can cause calculation errors.",
+    "キャラ２の行動が終われば、ゲージ値を－１０００します。０にリセットしないのは、１０００を超えた値が無駄にならないようにするため。毎回、ピッタリ１０００になるわけではありませんので。": "Once Character 2 finishes acting, subtract 1000 from their gauge value. It is not reset to 0 so that any amount exceeding 1000 is not wasted. The gauge does not reach exactly 1000 every time.",
+    "キャラ１：８００→８４０→８８０→９２０→９６０→１０００": "Character 1: 800→840→880→920→960→1000",
+    "キャラ２： ０→ ５０→１００→１５０→２００→ ２５０": "Character 2:  0→ 50→100→150→200→ 250",
+    "後はこれの繰り返しです。": "The rest is simply a repetition of this process.",
+    "その内に、素早さで勝るキャラ２が連続で行動するターンが発生します。それこそが、ＣＴＢの特色です。": "Eventually, Character 2, who has higher Agility, will get turns in a row. That is the defining feature of CTB.",
+    "走る速さがバラバラな選手達が、何度もゴールを目指し、到達する度に最初から走り直すようなイメージでしょうか。": "Perhaps you could imagine runners with different running speeds repeatedly aiming for the finish line and starting over from the beginning each time they reach it.",
+    "ここで終わるなら、実のところＣＴＢの実装は簡単です。一人ずつキャラの順番を処理すればよいという点では、ターン制よりも容易だと言えます。": "If that were all there was to it, implementing CTB would actually be easy. Since you only need to process each character’s turn one at a time, you could even say it is easier than a turn-based system.",
+    "ところが、この『素早さ加算方式』には欠点があります。それは行動順序の予想が難しいことです。": "However, this “Agility Addition Method” has a drawback: it is difficult to predict the action order.",
+    "先程は計算が簡単な例で挙げましたが、これはどうでしょう？": "The previous example used simple calculations, but what about this one?",
+    "素早さ３２のキャラ１ 現在のゲージ値は３００": "Character 1: Agility 32, current gauge value 300",
+    "素早さ４１のキャラ２ 現在のゲージ値は１５０": "Character 2: Agility 41, current gauge value 150",
+    "キャラ１：３００→３３２→３６４→……": "Character 1: 300→332→364→……",
+    "キャラ２：１５０→１９１→２３２→……": "Character 2: 150→191→232→……",
+    "どちらが先にターンが回るか、即答できる人は少ないはずです。": "Few people could immediately say which one gets their turn first.",
+    "これが５人１０人と増えていくと、もっと大変になります。": "As the number of characters increases to five or ten, it becomes even more difficult.",
+    "ＣＴＢの実装に挫折する第一の関門はここでしょう。": "This is probably the first major hurdle where people give up on implementing CTB.",
+    "そんなわけで、『素早さ加算方式』では行動順序の表示が困難となります。": "For this reason, displaying the action order is difficult with the “Agility Addition Method.”",
+    "そもそも、ＣＴＢとはＦＦ１０が呼称した方式であり、それに則れば順序表示がないものは厳密にＣＴＢとは言えません。": "To begin with, CTB is the name given to this system by FFX, and strictly speaking, a system without an order display cannot be called CTB according to that standard.",
+    "真のＣＴＢを実装するためには、行動順序を把握できるような処理を考える必要があります。": "To implement true CTB, you need to devise a process that lets you determine the action order.",
+    "ＷＴ減算方式": "WT Subtraction Method",
+    "ではどうするか――というと、もっと計算の簡単な形に変えてしまいます。": "So what should you do? Change it into a form that is easier to calculate.",
+    "『ゲージが溜まる速度』を比較するのではなく、『ゲージが溜まる時間』を比較すればよいのです。": "Rather than comparing the “speed at which the gauge fills,” compare the “amount of time it takes for the gauge to fill.”",
+    "これは小学校レベルの知識で十分可能ですが、すんなりと思いつく人は意外と少ないと思います。自分も当初はここで詰まっていて、ある日ふと解決法を思いつきました。": "This is easily possible with elementary-school-level knowledge, but surprisingly few people think of it right away. I was stuck here at first as well, until I suddenly thought of a solution one day.",
+    "距離÷速さ＝時間": "Distance ÷ Speed = Time",
+    "つまり……": "In other words…",
+    "ゲージの長さ÷ゲージが溜まる速さ＝ゲージが溜まる待ち時間（ＷＴ）": "Gauge length ÷ gauge-filling speed = gauge-filling wait time (WT)",
+    "となります。": "That is the result.",
+    "素早さ３２のキャラ１： １０００÷３２＝３１ＷＴでゲージ満タン": "Character 1: Agility 32: 1000÷32=31 WT to fill the gauge",
+    "素早さ４１のキャラ２： １０００÷４１＝２４ＷＴでゲージ満タン": "Character 2: Agility 41: 1000÷41=24 WT to fill the gauge",
+    "素早さ５０のキャラ３： １０００÷５０＝２０ＷＴでゲージ満タン": "Character 3: Agility 50: 1000÷50=20 WT to fill the gauge",
+    "待ち時間（ＷＴ）が０になる度にターンが回ります。行動が終われば、再び元の待ち時間にリセットします。": "A turn comes up whenever the wait time (WT) reaches 0. Once the action is finished, it resets to the original wait time.",
+    "※以降、待ち時間をＷＴと表記します。": "※From this point onward, wait time will be written as WT.",
+    "次の表は下に向かって時間が経過していくイメージです。": "The following table is meant to illustrate time passing as you move downward.",
+    "キャラ１ キャラ２ キャラ３": "Character 1 Character 2 Character 3",
+    "↓ ３１ ２４ ２０": "↓ 31 24 20",
+    "↓ １１ ０４": "↓ 11 04 ",
+    "００": "00",
+    "↓ ０７": "↓ 07 ",
+    "１６": "16",
+    "１７ ０９": "17 09",
+    "↓ ２２ ０８": "↓ 22 08 ",
+    "上記のように、各キャラのＷＴが遷移していきます。": "As shown above, each character's WT changes over time.",
+    "当然ながら、次に動くのはＷＴが最も小さなキャラです。どこを切り取っても、次に誰が行動するかは一目瞭然ですね。": "Naturally, the character with the lowest WT acts next. No matter which point you look at, it's immediately clear who will act next.",
+    "※実際にＣＴＢを実装する際には、『ゲージの長さ＝１０００』の部分にはもっと大きな値を設定することを勧めます。やはり小さすぎると計算誤差が出るためです。": "※When actually implementing CTB, I recommend setting a much larger value than 1000 for “Gauge Length = 1000.” If the value is too small, calculation errors will occur.",
+    "何のことはありません。既にタクティクスオウガなどでやっている手法です。": "There's nothing particularly complicated about it. This is a method already used in games such as Tactics Ogre.",
+    "タクティクスオウガではターンが回るまでの待ち時間（ＷＴ）をキャラが保有しており、レベルが上がる度に減少するようになっています。": "In Tactics Ogre, each character has a waiting time (WT) until their turn comes around, and it decreases as their level increases.",
+    "つまり、この方式は従来の素早さ方式をＷＴ方式に変換しているだけとも言えます。": "In other words, this method can also be said to simply convert the conventional Agility-based system into a WT-based system.",
+    "※タクティクスオウガのように最初からＷＴを使う方法でもよいのですが、プレイヤーには分かりにくいのが難点となります。また、ツールによっては実装自体が困難です。なんせ、レベルと共に減少するステータスなんてあまり見ませんので。": "※It would also be possible to use WT from the outset, as in Tactics Ogre, but the drawback is that it is difficult for players to understand. Depending on the tool, implementation itself may also be difficult. After all, you don't often see a stat that decreases as the level increases.",
+    "ここで終わりたいところですが、そうはいきません。": "I would like to end things here, but unfortunately, I can't.",
+    "ＣＴＢの実装には第二の関門があります。": "Implementing CTB presents a second hurdle.",
+    "今までの方法では、キャラ１とキャラ２のどちらが次に動くかが分かるようになりました。ですが、これではまだ二人の行動回数の差を表現することはできません。": "With the method we've used so far, we can tell whether Character 1 or Character 2 will act next. However, this still doesn't express the difference in the number of actions the two characters can take.",
+    "例：上の画像では、素早いキャラの順番が何度も表示されるようになっています。": "Example: In the image above, the faster character's turn appears repeatedly.",
+    "キャラ１の素早さは２５": "Character 1's Agility is 25",
+    "キャラ２の素早さは２０": "Character 2's Agility is 20",
+    "キャラ１が４回行動する間に、キャラ２は５回行動できる――ということは、何となく予想がつくと思います。": "You can probably intuitively predict that Character 2 can act five times while Character 1 acts four times.",
+    "しかしながら、その行動回数の差を画面上へ表示するにはどうすればよいでしょうか？": "However, how can we display the difference in the number of actions on the screen?",
+    "例によって、まずは素早さをＷＴに変換します。": "As before, let's first convert Agility into WT.",
+    "キャラ１：１００ ÷ ２５ ＝ ４ＷＴ": "Character 1: 100 ÷ 25 = 4 WT",
+    "キャラ２：１００ ÷ ２０ ＝ ５ＷＴ": "Character 2: 100 ÷ 20 = 5 WT",
+    "これらが各キャラの基本ＷＴとなります。": "These become each character's basic WT.",
+    "これが減って０になれば行動。": "When it decreases to 0, the character acts.",
+    "行動が終われば、またこの値にＷＴが戻ります。": "When the action ends, the WT returns to this value.",
+    "試しに、まずは人力で計算してみましょう。": "For now, let's try calculating it manually.",
+    "４ＷＴ後 → キャラ１のターン": "After 4 WT → Character 1's turn",
+    "まずは最も早いキャラ１が動きます。これは簡単ですね。": "First, the fastest character, Character 1, acts. This is simple enough.",
+    "次に来るのはキャラ２か、あるいはキャラ１の二回目の行動か？": "Will Character 2 come next, or will it be Character 1's second action?",
+    "人間なら直感的にキャラ２だと判断できますが、コンピュータはそうではありません。": "A person can intuitively determine that it is Character 2, but a computer cannot.",
+    "キャラ１の２回目の行動ＷＴ８ ＞ キャラ２の１回目の行動ＷＴ５": "Character 1's second action WT 8 > Character 2's first action WT 5",
+    "従って、キャラ２の１回目の行動のほうが早い。": "Therefore, Character 2's first action comes sooner.",
+    "というように、きちんと比較するよう指示せねばなりません。": "We must therefore instruct it to make a proper comparison, as shown above.",
+    "人数が増えてくると、それだけ手間も増えていきます。頭が痛くなるので考えたくもありません。": "As the number of characters increases, so does the amount of work. It makes my head hurt, so I don't even want to think about it.",
+    "もう少し、簡単な方法はないものか。": "Isn't there a somewhat simpler way?",
+    "というわけで、まずはキャラ１のターンだけを考えてみましょう。": "So, let's first consider only Character 1's turns.",
+    "１０回まで行動順序を表示するシステムならば、１０回分の行動を計算します。": "If the system displays the action order up to ten actions ahead, calculate ten actions.",
+    "８ＷＴ後 → キャラ１のターン": "After 8 WT → Character 1's turn",
+    "１２ＷＴ後 → キャラ１のターン": "After 12 WT → Character 1's turn",
+    "１６ＷＴ後 → キャラ１のターン": "After 16 WT → Character 1's turn",
+    "２０ＷＴ後 → キャラ１のターン": "After 20 WT → Character 1's turn",
+    "２４ＷＴ後 → キャラ１のターン": "After 24 WT → Character 1's turn",
+    "２８ＷＴ後 → キャラ１のターン": "After 28 WT → Character 1's turn",
+    "３２ＷＴ後 → キャラ１のターン": "After 32 WT → Character 1's turn",
+    "３６ＷＴ後 → キャラ１のターン": "After 36 WT → Character 1's turn",
+    "４０ＷＴ後 → キャラ１のターン": "After 40 WT → Character 1's turn",
+    "単なる掛け算なので、難しいことは何もありません。": "It's just multiplication, so there's nothing difficult about it.",
+    "次にキャラ２がキャラ１のターンにどう割り込めるかを考えていきます。": "Next, let's consider how Character 2 can cut in among Character 1's turns.",
+    "キャラ２のターンを同じように求めると……": "If we calculate Character 2's turns in the same way…",
+    "５ＷＴ後 → キャラ２のターン": "After 5 WT → Character 2's turn",
+    "１０ＷＴ後 → キャラ２のターン": "After 10 WT → Character 2's turn",
+    "１５ＷＴ後 → キャラ２のターン": "After 15 WT → Character 2's turn",
+    "２０ＷＴ後 → キャラ２のターン": "After 20 WT → Character 2's turn",
+    "２５ＷＴ後 → キャラ２のターン": "After 25 WT → Character 2's turn",
+    "３０ＷＴ後 → キャラ２のターン": "After 30 WT → Character 2's turn",
+    "３５ＷＴ後 → キャラ２のターン": "After 35 WT → Character 2's turn",
+    "ちなみに４０ＷＴ以降はどうあっても割り込めないので計算不要です。": "Incidentally, from 40 WT onward, nothing can be inserted no matter what, so there is no need to calculate it.",
+    "ここまでやれば後一歩。": "Once you've gotten this far, you're just one step away.",
+    "キャラ１のターンの隙間に、キャラ２のターンを挟んでいきます。": "Insert Character 2's turns between Character 1's turns.",
+    "具体的には、この二つをＷＴ順でソート（並び替え）して合体させればよいでしょう。ソート後は表示に必要な１０件までを保持します。": "Specifically, sort these two by WT order, then combine them. After sorting, retain only the 10 entries needed for display.",
+    "より正確に書けば、": "To put it more precisely,",
+    "『キャラクターＩＤ』と『ＷＴ』の組を構造体として保持し、『ＷＴ』をキーとして昇順でソートを行う。": "Keep pairs of Character IDs and WTs as structures, and sort them in ascending order using WT as the key.",
+    "という感じになります。": "That's essentially how it works.",
+    "プログラム経験者以外にはわけわからんことを書いてる感じがしますが、そこはすみません。": "I realize this probably seems completely incomprehensible to anyone without programming experience, and I'm sorry about that.",
+    "ただソート処理というのは、非常にありふれたものです。どの言語にせよ、ググればやり方はすぐに見つかるので、適当にパクってください。": "However, sorting is an extremely common operation. Whatever language you're using, you can quickly find how to do it by Googling, so feel free to copy an example.",
+    "ツクールＸＰ以降ではＲｕｂｙ、ツクールＭＶではＪａｖａＳｃｒｉｐｔなども使えるらしいので、問題ないかと思います。": "Apparently, Ruby is available in RPG Maker XP and later, and JavaScript in RPG Maker MV, so I don't think this should be a problem.",
+    "なお、ツクール２０００でやるのは、それなりに大変でした。なんせ構造体も配列も何もない直接番地指定です。作者的にはもう二度と見たくないスパゲッティです。": "Incidentally, doing this in RPG Maker 2000 was quite difficult. After all, there were no structures, arrays, or anything else—just direct address specification. From my perspective as the author, it's spaghetti code I never want to look at again.",
+    "以下がソート結果です。": "The sorting results are shown below.",
+    "※２０ＷＴの時に、二人の行動がかぶっていますが、適当に優先順位をつけてください。普通にソートすれば、番号が若いキャラが優先されるはずです。": "※At 20 WT, the two characters' actions overlap, but assign them an arbitrary priority. If you simply sort them, the character with the lower number should take priority.",
+    "これにて完了です。後はこの順番でキャラのアイコンなり名前なりを画面に出力するだけ。": "That completes the process. All that's left is to display each character's icon, name, or whatever on the screen in this order.",
+    "キャラ３以降が増えた場合も、同じように合体ソートすればよいだけなので問題ないでしょう。": "If the number of characters increases beyond Character 3, there should be no problem, since you only need to combine and sort them in the same way.",
+    "以上で解説終わりです。": "That concludes the explanation.",
+    "次はＣＴＢを改造した新しい行動順序システムを発表したいと考えています。できれば、もう少し一般的に分かる内容で……。": "Next, I would like to present a new action order system based on a modified CTB. If possible, I hope to make it something that is a little easier for people in general to understand..."
+  }
+}
