@@ -1,0 +1,313 @@
+{
+  "articleId": "475496918",
+  "sourceUrl": "https://newrpg.seesaa.net/article/475496918.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "515bdc51bf04ca4a71032765de95f1331585371e8c3a0f770e3e7c01dedba8e4",
+  "translatedAt": "2026-08-31T05:36:32.721Z",
+  "title": "DynamicAnimation&Motion Sample Techniques (External Integration) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "DynamicAnimation&Motion サンプル技（外部連携）【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "e77d1072599c328fd934d2dfa9087f81ad70a071dde46c798f2d9e4263e43520",
+      "translation": "DynamicAnimation&Motion Sample Techniques (External Integration) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "e77d1072599c328fd934d2dfa9087f81ad70a071dde46c798f2d9e4263e43520"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "※ツクールＭＺでの動作も確認済みです。",
+      "sourceHash": "a6575f3b44071a03dee6d757b0b8686a1f8cf43fd12c157cbfa4cdf56d47dd3c",
+      "translation": "※Operation with RPG Maker MZ has also been confirmed.",
+      "contextHash": "a6575f3b44071a03dee6d757b0b8686a1f8cf43fd12c157cbfa4cdf56d47dd3c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "外部のプラグインとの連携によるサンプル技を紹介していきます。",
+      "sourceHash": "45663edb75b1613d4f2aeb24bd2cc84b81dee4d32fa7387cd551658af8273390",
+      "translation": "I will introduce sample techniques that integrate with external plugins.",
+      "contextHash": "45663edb75b1613d4f2aeb24bd2cc84b81dee4d32fa7387cd551658af8273390"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "当たり前ですが、紹介先のプラグインをＤＬかつ適用しないと機能しません。",
+      "sourceHash": "efe2c6d8d8aca9b138f83c636fde0a026c3e68425dfa0bcc55f7f3071881ce11",
+      "translation": "Needless to say, they will not work unless you download and apply the plugins being introduced.",
+      "contextHash": "efe2c6d8d8aca9b138f83c636fde0a026c3e68425dfa0bcc55f7f3071881ce11"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "暗転 DynamicMotion ver1.07（2020/06/07）",
+      "sourceHash": "d4253e4263f6037e2a4a4c7900219a2b84be77b3d67f15bba2c7fa9341957104",
+      "translation": "Fade to Black DynamicMotion ver1.07 (2020/06/07)",
+      "contextHash": "d4253e4263f6037e2a4a4c7900219a2b84be77b3d67f15bba2c7fa9341957104"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "// 好きなように定義",
+      "sourceHash": "97c49c6a0aa256fb1196a509f9692ac4f35fccf8fda285393335f12490091f45",
+      "translation": "// Define as desired",
+      "contextHash": "97c49c6a0aa256fb1196a509f9692ac4f35fccf8fda285393335f12490091f45"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// アニメーション終了を待って実行",
+      "sourceHash": "eb68bd6b1c55e1a8905bbf98762921b6bda108bc43f0743ea4aeb93f2a80fb04",
+      "translation": "// Execute after waiting for the animation to finish",
+      "contextHash": "eb68bd6b1c55e1a8905bbf98762921b6bda108bc43f0743ea4aeb93f2a80fb04"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "プラグインの使用方法はリンク先を参照してください。",
+      "sourceHash": "6c55884b5b5d523d7ff91893ec84a0aada5b30f965bd2e400a883edbe2f15ee0",
+      "translation": "Please refer to the linked page for instructions on using the plugin.",
+      "contextHash": "6c55884b5b5d523d7ff91893ec84a0aada5b30f965bd2e400a883edbe2f15ee0"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "簡単に言うと、６つの数値は背景（下）の赤緑青、背景（上）の赤緑青の順になっています。",
+      "sourceHash": "c98e5c76755e6cfaa6447a4513de32c8067a27e50fa10eccd4f6ad518a0ad340",
+      "translation": "Simply put, the six values are the RGB values for the background (bottom), followed by the RGB values for the background (top).",
+      "contextHash": "c98e5c76755e6cfaa6447a4513de32c8067a27e50fa10eccd4f6ad518a0ad340"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "0だと黒、255だと変化なしですね。",
+      "sourceHash": "33437e0709f13aa95a241ce342e7039734644338a0ba4594e77e7a4c61335ca9",
+      "translation": "0 produces black, while 255 causes no change.",
+      "contextHash": "33437e0709f13aa95a241ce342e7039734644338a0ba4594e77e7a4c61335ca9"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※サンプルの記述はあくまで暗転部分だけです。中身は好きなように実装してください。",
+      "sourceHash": "d8be54d7a790dfec8626623feb5f8648545d16c6768fee3fa483ff7a8b47e8b8",
+      "translation": "※The sample code only covers the fade-to-black portion. Implement the rest however you like.",
+      "contextHash": "d8be54d7a790dfec8626623feb5f8648545d16c6768fee3fa483ff7a8b47e8b8"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "このページは[[LINK_1]]DynamicAnimation[[/LINK_1]]および[[LINK_2]]DynamicMotion[[/LINK_2]]プラグインの解説の一部です。",
+      "sourceHash": "d324b11043ca48cb9421137ed2e5aebc6c4b89f9906dee6b00306a1ec03ae2e6",
+      "parts": [
+        {
+          "source": "このページは",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "および",
+          "link": false
+        },
+        {
+          "source": "DynamicMotion",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "プラグインの解説の一部です。",
+          "link": false
+        }
+      ],
+      "translation": "This page is part of the documentation for the [[LINK_1]]DynamicAnimation[[/LINK_1]] and [[LINK_2]]DynamicMotion[[/LINK_2]] plugins.",
+      "contextHash": "d324b11043ca48cb9421137ed2e5aebc6c4b89f9906dee6b00306a1ec03ae2e6"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]暗転[[/LINK_1]]DynamicMotion ver1.07（2020/06/07）",
+      "sourceHash": "917b67f438b8410e07435f60f89e73faf2d4e27a238a7d8296df76593cf6d0f5",
+      "parts": [
+        {
+          "source": "暗転",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "DynamicMotion ver1.07（2020/06/07）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Screen Darkening[[/LINK_1]] DynamicMotion ver1.07 (2020/06/07)",
+      "contextHash": "917b67f438b8410e07435f60f89e73faf2d4e27a238a7d8296df76593cf6d0f5"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "村人Ａ様の[[LINK_1]]戦闘画面背景の色調変更プラグイン[[/LINK_1]]と連携し、背景の暗転演出を行います。通常の色調変更とは異なり、キャラやアニメーションの色調を維持します。",
+      "sourceHash": "ce048a56ef8c6e0a803a79a9bc1476a3df1df4837a5d91391c59a69eb0993fe2",
+      "parts": [
+        {
+          "source": "村人Ａ様の",
+          "link": false
+        },
+        {
+          "source": "戦闘画面背景の色調変更プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と連携し、背景の暗転演出を行います。通常の色調変更とは異なり、キャラやアニメーションの色調を維持します。",
+          "link": false
+        }
+      ],
+      "translation": "This works with Villager A's [[LINK_1]]Battle Screen Background Tone Change Plugin[[/LINK_1]] to create a screen-darkening effect for the background. Unlike ordinary tone changes, the tones of characters and animations are preserved.",
+      "contextHash": "ce048a56ef8c6e0a803a79a9bc1476a3df1df4837a5d91391c59a69eb0993fe2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "※当サンプルでは[[LINK_1]]NRP_ParallaxesPlus.js[[/LINK_1]]で作成した遠景には対応していません。また時間の指定もできないため、瞬時に色調が変更されます。",
+      "sourceHash": "0ff9fccfdc52b2f0f143182fdd35d68bba8916de4679dcc71700e6580b6dc4b7",
+      "parts": [
+        {
+          "source": "※当サンプルでは",
+          "link": false
+        },
+        {
+          "source": "NRP_ParallaxesPlus.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で作成した遠景には対応していません。また時間の指定もできないため、瞬時に色調が変更されます。",
+          "link": false
+        }
+      ],
+      "translation": "※This sample does not support distant backgrounds created with [[LINK_1]]NRP_ParallaxesPlus.js[[/LINK_1]]. In addition, since no duration can be specified, the tone changes instantly.",
+      "contextHash": "0ff9fccfdc52b2f0f143182fdd35d68bba8916de4679dcc71700e6580b6dc4b7"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]改良版[[/LINK_1]]を作成しましたので、必要ならそちらのサンプルをご覧ください。",
+      "sourceHash": "aed55b90dcb97679a3e041e7d3056e5c4b30e4e5402c5243a8f1c3e5eaf62c7f",
+      "parts": [
+        {
+          "source": "改良版",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を作成しましたので、必要ならそちらのサンプルをご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "I have created an [[LINK_1]]improved version[[/LINK_1]], so please see that sample if needed.",
+      "contextHash": "aed55b90dcb97679a3e041e7d3056e5c4b30e4e5402c5243a8f1c3e5eaf62c7f"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimation plugin[[/LINK_1]]",
+      "contextHash": "62360fd5dd4b1df6a6e984df9063ee348421547fe2df460ce3f39c7838d01043"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicAnimationMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9",
+      "parts": [
+        {
+          "source": "＞DynamicAnimationMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicAnimationMZ plugin[[/LINK_1]]",
+      "contextHash": "e97d1770b8f5ef3a8a2b8d49f91aaa4bb9a6f492196126a9b9129ffa3387fac9"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2",
+      "parts": [
+        {
+          "source": "＞DynamicMotionプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotion plugin[[/LINK_1]]",
+      "contextHash": "86fb9fadb342f0ecfb0548ebf09ff6443860ab0f9abfc32266df0e1c6b16b6e2"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]＞DynamicMotionMZプラグインに戻る[[/LINK_1]]",
+      "sourceHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272",
+      "parts": [
+        {
+          "source": "＞DynamicMotionMZプラグインに戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the DynamicMotionMZ plugin[[/LINK_1]]",
+      "contextHash": "80b7b077f521ff4d1606dd491f03dd22f5f112d81036e77f93bf7a8373404272"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "※ツクールＭＺでの動作も確認済みです。": "※Operation with RPG Maker MZ has also been confirmed.",
+    "外部のプラグインとの連携によるサンプル技を紹介していきます。": "I will introduce sample techniques that integrate with external plugins.",
+    "当たり前ですが、紹介先のプラグインをＤＬかつ適用しないと機能しません。": "Needless to say, they will not work unless you download and apply the plugins being introduced.",
+    "目次": "Table of Contents",
+    "暗転 DynamicMotion ver1.07（2020/06/07）": "Fade to Black DynamicMotion ver1.07 (2020/06/07)",
+    "// 好きなように定義": "// Define as desired",
+    "// アニメーション終了を待って実行": "// Execute after waiting for the animation to finish",
+    "プラグインの使用方法はリンク先を参照してください。": "Please refer to the linked page for instructions on using the plugin.",
+    "簡単に言うと、６つの数値は背景（下）の赤緑青、背景（上）の赤緑青の順になっています。": "Simply put, the six values are the RGB values for the background (bottom), followed by the RGB values for the background (top).",
+    "0だと黒、255だと変化なしですね。": "0 produces black, while 255 causes no change.",
+    "※サンプルの記述はあくまで暗転部分だけです。中身は好きなように実装してください。": "※The sample code only covers the fade-to-black portion. Implement the rest however you like."
+  }
+}

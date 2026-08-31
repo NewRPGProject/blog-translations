@@ -1,0 +1,377 @@
+{
+  "articleId": "499543048",
+  "sourceUrl": "https://newrpg.seesaa.net/article/499543048.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "d3de42b49562fa534cd5dd0ef2673300103269773f9392fa75cd0dcc00cb627a",
+  "translatedAt": "2026-08-31T05:34:24.557Z",
+  "title": "Lightening Event Processing [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "イベントの処理を軽量化【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "4fa506780f035543576558599f897f356932f768d4d496f9952765ca4deda7b1",
+      "translation": "Lightening Event Processing [RPG Maker MZ & MV Plugin]",
+      "contextHash": "4fa506780f035543576558599f897f356932f768d4d496f9952765ca4deda7b1"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "以下の対応によってイベントの処理を軽量化します。",
+      "sourceHash": "0cdd20e4a7bd86bb11feb9369e3b9bd3153eaed239fabc6d4103b3856efc7958",
+      "translation": "The following measures reduce the processing load of events.",
+      "contextHash": "0cdd20e4a7bd86bb11feb9369e3b9bd3153eaed239fabc6d4103b3856efc7958"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "大量のイベントが配置されたマップ上で効果的です。",
+      "sourceHash": "97a9ca460b3718a79f7e9da510adff4449c91a89afd491f5c811edd0037fb527",
+      "translation": "This is effective on maps with a large number of events.",
+      "contextHash": "97a9ca460b3718a79f7e9da510adff4449c91a89afd491f5c811edd0037fb527"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "１．画面外のイベント描画停止",
+      "sourceHash": "9bd9051a7b1642e37db568378ce5e520fd9cf7181e1c8b702a95f945520c4d05",
+      "translation": "1. Stop Drawing Events Outside the Screen",
+      "contextHash": "9bd9051a7b1642e37db568378ce5e520fd9cf7181e1c8b702a95f945520c4d05"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "画面外のイベントに対する不要な描画処理を停止することで負荷を軽減します。",
+      "sourceHash": "a8cf9d1a8f3ced751cd94b170171bba22814ece766dc251553704549539a96bd",
+      "translation": "The processing load is reduced by stopping unnecessary drawing operations for events outside the screen.",
+      "contextHash": "a8cf9d1a8f3ced751cd94b170171bba22814ece766dc251553704549539a96bd"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "２．起動状況をキャッシュ",
+      "sourceHash": "da104d68a4a321e1adf4ccb2944dbaf431a1dbd6d8e2f1466410632c4dc56499",
+      "translation": "2. Cache Running Status",
+      "contextHash": "da104d68a4a321e1adf4ccb2944dbaf431a1dbd6d8e2f1466410632c4dc56499"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "イベントの起動状況の確認処理をキャッシュし、1/60秒に一度のみに限定して実行するようにします。",
+      "sourceHash": "751131f09a528d32c1f7cf8bfd9347ee70b15137637bdfeb021006bacb42c1f3",
+      "translation": "The event running status check is cached and limited to running only once every 1/60 second.",
+      "contextHash": "751131f09a528d32c1f7cf8bfd9347ee70b15137637bdfeb021006bacb42c1f3"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "特にStopSelfMovementWithPlayer.jsなどとの併用時は大きな効果が見込めます。",
+      "sourceHash": "66018c9d1d9d3f1558ed11651563adf1046c55c1351218dfa89bd54809aa0f07",
+      "translation": "A particularly significant effect can be expected when used together with StopSelfMovementWithPlayer.js and similar plugins.",
+      "contextHash": "66018c9d1d9d3f1558ed11651563adf1046c55c1351218dfa89bd54809aa0f07"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Enable the function through the RPG Maker plugin manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EventLightLoad.js",
+      "sourceHash": "3233f08327fe3030029393fc30a553b5734684bcafc2b49633b06ec14a294464",
+      "translation": "NRP_EventLightLoad.js ",
+      "contextHash": "30c9bc62d7232b3621133585a71bd8c1a2c9aaf1e79f6b48dab56528558357a4"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.00（2023/06/01）",
+      "sourceHash": "33e01760c492cdd4e8c1a04aa1a9f1ececdfb937a7a8f9df455a3f7f7aee5b85",
+      "translation": "ver1.00 (2023/06/01) ",
+      "contextHash": "30c9bc62d7232b3621133585a71bd8c1a2c9aaf1e79f6b48dab56528558357a4"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/06/01（ver1.00）",
+      "sourceHash": "51edf089dc4ab369da072e00a1d736d7fb10d8f318138b751f28e28bb8cca302",
+      "translation": "2023/06/01 (ver1.00) ",
+      "contextHash": "51edf089dc4ab369da072e00a1d736d7fb10d8f318138b751f28e28bb8cca302"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "適用するだけで有効になります。",
+      "sourceHash": "0dbd3cc36c524cf36fdcd04202ad590747f3dee22f046f2e7b63e7828b83d5fe",
+      "translation": "It becomes effective simply by applying it.",
+      "contextHash": "0dbd3cc36c524cf36fdcd04202ad590747f3dee22f046f2e7b63e7828b83d5fe"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "各機能は作者環境で問題が起きないことを確認していますが、問題が起きた時のためにオンオフできるようにしています。",
+      "sourceHash": "e279288f0ae21d7f6911dbc5c5127e39ecbea3dfc51819ae56ccfc64c9b421a4",
+      "translation": "I have confirmed that each function causes no problems in my development environment, but they can be turned on or off in case any problems occur.",
+      "contextHash": "e279288f0ae21d7f6911dbc5c5127e39ecbea3dfc51819ae56ccfc64c9b421a4"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "画面外のイベント描画停止（StopDrawOutOfScreen）",
+      "sourceHash": "a96677ad1febdcbd48a9a0fb93006f79cafa6121e308b30d0f6ba7a862a6480f",
+      "translation": "Stop Drawing Events Outside the Screen (StopDrawOutOfScreen)",
+      "contextHash": "a96677ad1febdcbd48a9a0fb93006f79cafa6121e308b30d0f6ba7a862a6480f"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "画面外のイベントの描画処理を停止します。",
+      "sourceHash": "bae69c7de13a9fdc4c468f2a336dfe12c69fe07ac6feb740dbe3df2a83e5b6f8",
+      "translation": "Stops drawing events outside the screen.",
+      "contextHash": "bae69c7de13a9fdc4c468f2a336dfe12c69fe07ac6feb740dbe3df2a83e5b6f8"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "画面外の余裕幅（OutOfScreenMargin）",
+      "sourceHash": "5b46d76583c57556c5a560451c103982469c83f556a192c7f5909c1354d368bf",
+      "translation": "Out-of-Screen Margin (OutOfScreenMargin)",
+      "contextHash": "5b46d76583c57556c5a560451c103982469c83f556a192c7f5909c1354d368bf"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "画面外と見なす余裕の幅（ピクセル）です。数値分だけ画面外にはみ出していても停止しません。",
+      "sourceHash": "4d53083a15703733b9409ef7a950cd97a9ca6d3313a9590a78697f35cabcbba4",
+      "translation": "The margin width (in pixels) used to determine whether something is outside the screen. Drawing will not be stopped even if the object extends beyond the screen by this number of pixels.",
+      "contextHash": "4d53083a15703733b9409ef7a950cd97a9ca6d3313a9590a78697f35cabcbba4"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "起動状況をキャッシュ（CacheEventRunning）",
+      "sourceHash": "8f94589d0cc4f9912b6ac470be81b9a8959cb817ee07c6ef86bff2bf69a5e0ae",
+      "translation": "Cache Running Status (CacheEventRunning)",
+      "contextHash": "8f94589d0cc4f9912b6ac470be81b9a8959cb817ee07c6ef86bff2bf69a5e0ae"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "イベントの起動状況をキャッシュし、不要な再取得処理を抑制します。",
+      "sourceHash": "93c2b6414784284efce909e998a9b3c756e85ac1c951abb2c7d4f7d6749e62f5",
+      "translation": "Caches the event running status to suppress unnecessary re-checking.",
+      "contextHash": "93c2b6414784284efce909e998a9b3c756e85ac1c951abb2c7d4f7d6749e62f5"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]画面外のイベント描画停止（StopDrawOutOfScreen）[[/LINK_1]]",
+      "sourceHash": "139896c04816aace1e7bd8210b95e991742b6f7ab78121d857717ff9dfd71692",
+      "parts": [
+        {
+          "source": "画面外のイベント描画停止（StopDrawOutOfScreen）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Stop Drawing Events Outside the Screen (StopDrawOutOfScreen)[[/LINK_1]]",
+      "contextHash": "139896c04816aace1e7bd8210b95e991742b6f7ab78121d857717ff9dfd71692"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]画面外の余裕幅（OutOfScreenMargin）[[/LINK_1]]",
+      "sourceHash": "ba11eb442b47ce41b39b1524d82f471a503b8b19e136061435efcd00ef5b0e03",
+      "parts": [
+        {
+          "source": "画面外の余裕幅（OutOfScreenMargin）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Out-of-Screen Margin (OutOfScreenMargin)[[/LINK_1]]",
+      "contextHash": "ba11eb442b47ce41b39b1524d82f471a503b8b19e136061435efcd00ef5b0e03"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]起動状況をキャッシュ（CacheEventRunning）[[/LINK_1]]",
+      "sourceHash": "5cd59af08eca330aa3b86233afcbb9b8de6a1f228e53b18e48cac67dc3d2b9b0",
+      "parts": [
+        {
+          "source": "起動状況をキャッシュ（CacheEventRunning）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Cache Event Running Status (CacheEventRunning)[[/LINK_1]]",
+      "contextHash": "5cd59af08eca330aa3b86233afcbb9b8de6a1f228e53b18e48cac67dc3d2b9b0"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "以下の対応によってイベントの処理を軽量化します。": "The following measures reduce the processing load of events.",
+    "大量のイベントが配置されたマップ上で効果的です。": "This is effective on maps with a large number of events.",
+    "１．画面外のイベント描画停止": "1. Stop Drawing Events Outside the Screen",
+    "画面外のイベントに対する不要な描画処理を停止することで負荷を軽減します。": "The processing load is reduced by stopping unnecessary drawing operations for events outside the screen.",
+    "２．起動状況をキャッシュ": "2. Cache Running Status",
+    "イベントの起動状況の確認処理をキャッシュし、1/60秒に一度のみに限定して実行するようにします。": "The event running status check is cached and limited to running only once every 1/60 second.",
+    "特にStopSelfMovementWithPlayer.jsなどとの併用時は大きな効果が見込めます。": "A particularly significant effect can be expected when used together with StopSelfMovementWithPlayer.js and similar plugins.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Enable the function through the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EventLightLoad.js": "NRP_EventLightLoad.js ",
+    "ver1.00（2023/06/01）": "ver1.00 (2023/06/01) ",
+    "更新履歴（History）": "Update History (History)",
+    "2023/06/01（ver1.00）": "2023/06/01 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "適用するだけで有効になります。": "It becomes effective simply by applying it.",
+    "各機能は作者環境で問題が起きないことを確認していますが、問題が起きた時のためにオンオフできるようにしています。": "I have confirmed that each function causes no problems in my development environment, but they can be turned on or off in case any problems occur.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "画面外のイベント描画停止（StopDrawOutOfScreen）": "Stop Drawing Events Outside the Screen (StopDrawOutOfScreen)",
+    "画面外のイベントの描画処理を停止します。": "Stops drawing events outside the screen.",
+    "画面外の余裕幅（OutOfScreenMargin）": "Out-of-Screen Margin (OutOfScreenMargin)",
+    "画面外と見なす余裕の幅（ピクセル）です。数値分だけ画面外にはみ出していても停止しません。": "The margin width (in pixels) used to determine whether something is outside the screen. Drawing will not be stopped even if the object extends beyond the screen by this number of pixels.",
+    "起動状況をキャッシュ（CacheEventRunning）": "Cache Running Status (CacheEventRunning)",
+    "イベントの起動状況をキャッシュし、不要な再取得処理を抑制します。": "Caches the event running status to suppress unnecessary re-checking."
+  }
+}

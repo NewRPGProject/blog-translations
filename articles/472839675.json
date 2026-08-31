@@ -1,0 +1,1200 @@
+{
+  "articleId": "472839675",
+  "sourceUrl": "https://newrpg.seesaa.net/article/472839675.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "ca7105b9c469568d598d49aed017491ac0ad94f37f5a1f0174f3db6b8cf39bd9",
+  "translatedAt": "2026-08-31T05:38:34.746Z",
+  "title": "A Battle System Combining CTB and Turn-Based Combat (CTTB) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "ＣＴＢとターン制を融合させた戦闘システム（ＣＴＴＢ）【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "4c00b8d3a1fd78a3c4ec4f7f20af00ec4d3430242d5e002a55f12a8e0837be3d",
+      "translation": "A Battle System Combining CTB and Turn-Based Combat (CTTB) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "4c00b8d3a1fd78a3c4ec4f7f20af00ec4d3430242d5e002a55f12a8e0837be3d"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ツクールＭＶ＆ＭＺ向けＣＴＴＢ（カウントタイムターンバトル）を実現するプラグインを公開しました。",
+      "sourceHash": "2207ee8d8946c59c2dac872dbc5aebba81d801adb942a1b7052fb596d2d5965c",
+      "translation": "I have released a plugin for RPG Maker MV & MZ that implements CTTB (Count Time Turn Battle).",
+      "contextHash": "2207ee8d8946c59c2dac872dbc5aebba81d801adb942a1b7052fb596d2d5965c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "正直、冗談半分だったのですが、せっかくなのでマジで作りました。",
+      "sourceHash": "b9cef704ac568f516c244ef57565830cff3f3a98f37d41a626ec54bff5ab2d94",
+      "translation": "Honestly, it started half as a joke, but I decided to make it for real while I was at it.",
+      "contextHash": "b9cef704ac568f516c244ef57565830cff3f3a98f37d41a626ec54bff5ab2d94"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ツクールＭＶ＆ＭＺユーザで興味がある人は試してみてください。カスタマイズも可能ですが、デフォルトの素材だけでも即動きます。作りかけのゲームに気分転換で放り込んでみると面白いかも。",
+      "sourceHash": "28460599446b3333a4360a571523c62cb9bfb8da15837cc95774e0bbba07c069",
+      "translation": "If you're an RPG Maker MV & MZ user interested in this, please give it a try. It can be customized, but it works right away with just the default assets. It might be fun to drop it into a game you're working on for a change of pace.",
+      "contextHash": "28460599446b3333a4360a571523c62cb9bfb8da15837cc95774e0bbba07c069"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "仕様の詳細は上のリンク先に書いてますが、ざっくり言うとＣＴＢをターン制っぽく区切った戦闘システムです。敏捷性（素早さ）の比率に応じて、遅いキャラは動けないターンが発生します。",
+      "sourceHash": "012fd4bfc2dcb56d8cbd5c49a675fe65b82237466df5f99c6d21211ecc70311f",
+      "translation": "The detailed specifications are described at the link above, but broadly speaking, this is a battle system that divides CTB into turn-based segments. Depending on the ratio of agility (speed), slower characters will have turns during which they cannot act.",
+      "contextHash": "012fd4bfc2dcb56d8cbd5c49a675fe65b82237466df5f99c6d21211ecc70311f"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "上の画面では顔グラで表示していますが、キャラグラを出したり名前を文字表示したりもできます。色々と頑張ってレイアウトの自由度を上げてみました。",
+      "sourceHash": "40a82e9ef88a9fce41612e7ec02455736aab75f729408d43f61ae2c7ec24da2f",
+      "translation": "The screenshot above displays face graphics, but you can also display character graphics or names as text. I put a lot of effort into increasing the freedom of the layout.",
+      "contextHash": "40a82e9ef88a9fce41612e7ec02455736aab75f729408d43f61ae2c7ec24da2f"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "フロントビューでもサイドビューでも問題なく機能します。",
+      "sourceHash": "2faea7d839ff0c6ee920f5ee6a45b733142f58a808d11229a7a2bcead4408aea",
+      "translation": "It works properly with both front-view and side-view battles.",
+      "contextHash": "2faea7d839ff0c6ee920f5ee6a45b733142f58a808d11229a7a2bcead4408aea"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "導入方法",
+      "sourceHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4",
+      "translation": "Installation",
+      "contextHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下２つのファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "fa8a8cf5448b0b18c110e24902d75eb54adaff8ffd96587dfc08418712ed35a5",
+      "translation": "Download the following two files and place them in [Project]\\js\\plugins. Turn the features ON in the plugin manager in RPG Maker.",
+      "contextHash": "fa8a8cf5448b0b18c110e24902d75eb54adaff8ffd96587dfc08418712ed35a5"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_CountTimeTurnBattle.js",
+      "sourceHash": "344551b097651351df6ba282339a7db2d8cac1927d82f4f4409a757efcdb7ce0",
+      "translation": "NRP_CountTimeTurnBattle.js ",
+      "contextHash": "6c3f0c0ee3d1338bc22ac2758ec3b19fd1e939cd6d229eeb9ccdbdfbf404716a"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.051（2022/08/05）",
+      "sourceHash": "f9369091b6fd0cf34d3aac8f331b7a6cab5debab9dd9277a924a3a40f8277806",
+      "translation": "ver1.051 (2022/08/05) ",
+      "contextHash": "6c3f0c0ee3d1338bc22ac2758ec3b19fd1e939cd6d229eeb9ccdbdfbf404716a"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_VisualTurn.js",
+      "sourceHash": "c92d40c2be2427e6efd567f73d1f2b22826c76bf9dfba326b81d4255293e145e",
+      "translation": "NRP_VisualTurn.js ",
+      "contextHash": "03f883857c8e9af1427bf75fa3fdbc932b47be4b8d44ed6d18584dc4ede021e8"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ver1.161（2022/08/17）",
+      "sourceHash": "4b6d9e0e50c68d6158574dfde547ccf6fc7b2302b6a6ca5af96dee55a7c5c473",
+      "translation": "ver1.161 (2022/08/17) ",
+      "contextHash": "03f883857c8e9af1427bf75fa3fdbc932b47be4b8d44ed6d18584dc4ede021e8"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "上から順番に取り込む必要があるので注意です。",
+      "sourceHash": "db8f0952db990ddf43aac2a0fe4d3bff5c018f81798879cb10d8ede3882e8467",
+      "translation": "Note that they must be imported in order from the top down.",
+      "contextHash": "db8f0952db990ddf43aac2a0fe4d3bff5c018f81798879cb10d8ede3882e8467"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ファイルが２つあるのは、制御系と表示系で分割したためです。",
+      "sourceHash": "6a92fe02c6e9fb9cc842219cd48626380f681a730fc64a6ef13034a3c1decdbf",
+      "translation": "There are two files because the control and display functions have been separated.",
+      "contextHash": "6a92fe02c6e9fb9cc842219cd48626380f681a730fc64a6ef13034a3c1decdbf"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "表示系のほうは、ＣＴＢ用プラグインと共通になります。",
+      "sourceHash": "4587b4c8384ce3db2c7573c1168aae482a7cef091d36b5c63ff51f1ca895e97e",
+      "translation": "The display component is shared with the CTB plugin.",
+      "contextHash": "4587b4c8384ce3db2c7573c1168aae482a7cef091d36b5c63ff51f1ca895e97e"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "更新履歴",
+      "sourceHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d",
+      "translation": "Update History",
+      "contextHash": "d168c7aa55f3ea22e084c369d4f49bb4079060cab90168a605262ff4c10d0a7d"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "敏捷性が０の際に何度も行動できてしまう不具合修正。",
+      "sourceHash": "b586d15c5840694148710d3df8dbf4cb923beb1998ea348fe31425ebdfd973ab",
+      "translation": "Fixed a bug that allowed repeated actions when agility was 0.",
+      "contextHash": "b586d15c5840694148710d3df8dbf4cb923beb1998ea348fe31425ebdfd973ab"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "（2022/08/05 ver1.051）",
+      "sourceHash": "cce01a287fba2b095eb46f8cb0728badd1624772b4997b7bc355b2b507215b9c",
+      "translation": " (2022/08/05 ver1.051) ",
+      "contextHash": "cce01a287fba2b095eb46f8cb0728badd1624772b4997b7bc355b2b507215b9c"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "選択中のバトラーシンボルについて画像のみを白く強調表示するように変更。",
+      "sourceHash": "20e580dc8b71d1aee33096f5940878c563d1a7ce0f6454db5b211bc0d106300d",
+      "translation": "Changed the selected battler symbol so that only its image is highlighted in white.",
+      "contextHash": "20e580dc8b71d1aee33096f5940878c563d1a7ce0f6454db5b211bc0d106300d"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ＵＩエリアの幅が一部ウィンドウに反映されていない不具合修正。",
+      "sourceHash": "c29650e9fc89b216ee45620ecb9aaf63c7bfa4d8dd2861eeb32dd6353c5d67f4",
+      "translation": "Fixed a bug where the UI area's width was not reflected in some windows.",
+      "contextHash": "c29650e9fc89b216ee45620ecb9aaf63c7bfa4d8dd2861eeb32dd6353c5d67f4"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "ＭＺかつＣＴＴＢにて自動戦闘を組み合わせた場合にエラーとなる不具合修正。",
+      "sourceHash": "68c5d8e701744203039161f4c4e29c288ea9608aa960af5ff226821e18d6b1cc",
+      "translation": "Fixed an error that occurred when automatic battle was combined with CTTB in MZ.",
+      "contextHash": "68c5d8e701744203039161f4c4e29c288ea9608aa960af5ff226821e18d6b1cc"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ウィンドウを重ねて表示できるように改良。",
+      "sourceHash": "4f070790aa1412e84ba039f641094e15200822f3d275cf9e3331a35ee52f8e99",
+      "translation": "Improved the system so that windows can be displayed overlapping one another.",
+      "contextHash": "4f070790aa1412e84ba039f641094e15200822f3d275cf9e3331a35ee52f8e99"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "それに伴い初期状態では行動順序を右寄せ＆上寄せするように変更。",
+      "sourceHash": "077e72151eb7979918d2338da0fd89154fb628a82937f21ab4fed4328edcb263",
+      "translation": "Accordingly, the default action order alignment was changed to right-aligned and top-aligned.",
+      "contextHash": "077e72151eb7979918d2338da0fd89154fb628a82937f21ab4fed4328edcb263"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "また、ウィンドウ表示系のパラメータを追加（細分化）＆整理。",
+      "sourceHash": "3430ef11726a10b6522f0c3d04001adf4a14f6e8220d885de6f2179d957bc21b",
+      "translation": "Added (subdivided) and reorganized the window display parameters.",
+      "contextHash": "3430ef11726a10b6522f0c3d04001adf4a14f6e8220d885de6f2179d957bc21b"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "ツクールＭＺに対応。",
+      "sourceHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9",
+      "translation": "Added support for RPG Maker MZ.",
+      "contextHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "英語対応。",
+      "sourceHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978",
+      "translation": "Added English support.",
+      "contextHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "バトルイベントでアクターの個別ターンが正常に取得できない不具合修正。",
+      "sourceHash": "3fd481604a95e2d9ffd657d44bfb9f8ad2e8a093f07db012c07c65847a53e9df",
+      "translation": "Fixed a bug where an actor's individual turn could not be retrieved correctly in battle events.",
+      "contextHash": "3fd481604a95e2d9ffd657d44bfb9f8ad2e8a093f07db012c07c65847a53e9df"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "全体的に処理を見直して競合に対応。",
+      "sourceHash": "48377458893cb3d4806eff9a359bc08e40c60fa28c5e9603d3a2d371842aef44",
+      "translation": "Reviewed the processing throughout and added compatibility with conflicts.",
+      "contextHash": "48377458893cb3d4806eff9a359bc08e40c60fa28c5e9603d3a2d371842aef44"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "戦闘行動の強制で複数回行動すると、ターンが複数経過する不具合修正。",
+      "sourceHash": "ad514543560bdea51a8551670780b470b1439b67ea62d040af3b7cca28682ff7",
+      "translation": "Fixed a bug where multiple turns elapsed when multiple actions were performed using Force Action.",
+      "contextHash": "ad514543560bdea51a8551670780b470b1439b67ea62d040af3b7cca28682ff7"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "スキルのメモ欄に<FastTrick>で先制行動を可能に。",
+      "sourceHash": "6e4c7c82db9af8046eca14c87d0ab3b1dee98ae8dff899c720d95c5133ca8043",
+      "translation": "Enabled preemptive actions with <FastTrick> in a skill's note field.",
+      "contextHash": "6e4c7c82db9af8046eca14c87d0ab3b1dee98ae8dff899c720d95c5133ca8043"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "ＣＴＢ用プラグインの各種修正を取り込み。",
+      "sourceHash": "eb276b8bb35dbb357a23cd57c423fdc8d248e652c82294d0fe081422af01e09d",
+      "translation": "Incorporated various fixes from the CTB plugin.",
+      "contextHash": "eb276b8bb35dbb357a23cd57c423fdc8d248e652c82294d0fe081422af01e09d"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "（プラグインパラメータの追加、ＷＴ操作の実装など）",
+      "sourceHash": "6dbb6c67453d1b9e167e5ac9cbac6c13ed5a384ac066dafedd1840e2dd619528",
+      "translation": "(Adding plugin parameters, implementing WT controls, etc.)",
+      "contextHash": "6dbb6c67453d1b9e167e5ac9cbac6c13ed5a384ac066dafedd1840e2dd619528"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "公開開始！",
+      "sourceHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5",
+      "translation": "Now available!",
+      "contextHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "パラメータ（基本設定）",
+      "sourceHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704",
+      "translation": "Parameters (Basic Settings)",
+      "contextHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ターン順序の計算を行う人数。これがそのまま画面に表示する人数となります。指定なしなら9人です。",
+      "sourceHash": "5b1c852690e108e8b295e01a807c57b96301a8d17afa48279a02642f2a1fa84e",
+      "translation": "The number of battlers whose turn order is calculated. This is also the number displayed on the screen. The default is 9.",
+      "contextHash": "5b1c852690e108e8b295e01a807c57b96301a8d17afa48279a02642f2a1fa84e"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "パラメータ（戦闘開始関連）",
+      "sourceHash": "bcd6a5ef7906e089ca993f27e0040cbe27f7d36fa241f78109c373d31de64192",
+      "translation": "Parameters (Battle Start Settings)",
+      "contextHash": "bcd6a5ef7906e089ca993f27e0040cbe27f7d36fa241f78109c373d31de64192"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "actorStartRandomWt（ver1.01）",
+      "sourceHash": "1d289bc698db3c23c42e6cfda8696793e959f9c833a10436bf13a3c844d6429c",
+      "translation": "actorStartRandomWt (ver1.01) ",
+      "contextHash": "1d289bc698db3c23c42e6cfda8696793e959f9c833a10436bf13a3c844d6429c"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "戦闘開始時の味方の敏捷性を数値％分だけ分散させます。",
+      "sourceHash": "32b7f7869fb8ec99a1079280b33f6bfdf362e1dadaedd5c882e4cc470934dece",
+      "translation": "Randomizes the allies' agility at the start of battle by the specified percentage.",
+      "contextHash": "32b7f7869fb8ec99a1079280b33f6bfdf362e1dadaedd5c882e4cc470934dece"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "例：20ならば、90～110%に分散。指定なしは0。",
+      "sourceHash": "38e72c02f156e2f39aa93b185f796ac468804698fe8e3ad71ed42f9c6f7add2c",
+      "translation": "Example: 20 randomizes it between 90% and 110%. The default is 0.",
+      "contextHash": "38e72c02f156e2f39aa93b185f796ac468804698fe8e3ad71ed42f9c6f7add2c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "要するに戦闘開始時の行動順序をバラけさせるか否かということです。初期値0のままだと毎戦闘、同じ順番で動きます。",
+      "sourceHash": "20ecc319f7a1a9a0e45419f2203d7691a77a6ee6f94e137c504e6437723287c9",
+      "translation": "In short, this determines whether to vary the action order at the start of battle. If the default value remains at 0, the characters will act in the same order in every battle.",
+      "contextHash": "20ecc319f7a1a9a0e45419f2203d7691a77a6ee6f94e137c504e6437723287c9"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "enemyStartRandomWt（ver1.01）",
+      "sourceHash": "0f4f49beaae0bb63cb4aa10103187c837091a698428e74743f5de06948ed8f51",
+      "translation": "enemyStartRandomWt (ver1.01) ",
+      "contextHash": "0f4f49beaae0bb63cb4aa10103187c837091a698428e74743f5de06948ed8f51"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "戦闘開始時の敵の敏捷性を数値％分だけ分散させます。",
+      "sourceHash": "e5f2c15403514608c928a01af62370a5a5019630c3ce2219d20e15eeca226fd9",
+      "translation": "Randomizes the enemies' agility at the start of battle by the specified percentage.",
+      "contextHash": "e5f2c15403514608c928a01af62370a5a5019630c3ce2219d20e15eeca226fd9"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "例：20ならば、90～110%に分散。指定なしは20。",
+      "sourceHash": "e521378348d717b456e611b928c6f09bb757f7ef75982a3913399bf0f13f2960",
+      "translation": "Example: 20 randomizes it between 90% and 110%. The default is 20.",
+      "contextHash": "e521378348d717b456e611b928c6f09bb757f7ef75982a3913399bf0f13f2960"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "0にすると同種の敵が一斉に行動してきます。それを避けるために20ほど初期値を分散させています。",
+      "sourceHash": "d22338c844f9542ab8fe2eb724cf6bb78d5e579485407d40974453049b8deeb5",
+      "translation": "When set to 0, enemies of the same type will all act at once. To avoid this, the default value is set to 20 to randomize their initial values.",
+      "contextHash": "d22338c844f9542ab8fe2eb724cf6bb78d5e579485407d40974453049b8deeb5"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "preemptiveAdvantage（ver1.01）",
+      "sourceHash": "08809634d4088869b2492fddcfc8917fd010ee65f6e2f54a25b2d24fe7514135",
+      "translation": "preemptiveAdvantage (ver1.01) ",
+      "contextHash": "08809634d4088869b2492fddcfc8917fd010ee65f6e2f54a25b2d24fe7514135"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "先制攻撃時に、指定した数値の％分だけ味方のターンを早めます。",
+      "sourceHash": "c1c9138e46e8a3cb2d9365c139dd04fe92a76ea148be9853ecd76b5d698b5c95",
+      "translation": "During a preemptive attack, advances the allies' turns by the specified percentage.",
+      "contextHash": "c1c9138e46e8a3cb2d9365c139dd04fe92a76ea148be9853ecd76b5d698b5c95"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "初期値は50%です。つまり1/2ターンほど通常より早く行動します。",
+      "sourceHash": "7c7a1316f5179d7e5e10ff0527e39d8ebf06c805ab38fb5bb61bc2340d791470",
+      "translation": "The default is 50%. In other words, they act about half a turn earlier than usual.",
+      "contextHash": "7c7a1316f5179d7e5e10ff0527e39d8ebf06c805ab38fb5bb61bc2340d791470"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "surpriseAdvantage（ver1.01）",
+      "sourceHash": "881f9a2eadfd5e3dfcd75fe625fec6db3158da1d736852c752dcd9f45030bbf6",
+      "translation": "surpriseAdvantage (ver1.01) ",
+      "contextHash": "881f9a2eadfd5e3dfcd75fe625fec6db3158da1d736852c752dcd9f45030bbf6"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "敵の奇襲時に、指定した数値の％分だけ敵のターンを早めます。",
+      "sourceHash": "1ee5f01fdd8377276b9d1eeeab2b2360c98f22b7a0a1b008994e7fcab58e195f",
+      "translation": "During an enemy ambush, advances the enemies' turns by the specified percentage.",
+      "contextHash": "1ee5f01fdd8377276b9d1eeeab2b2360c98f22b7a0a1b008994e7fcab58e195f"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "初期値は50%です。",
+      "sourceHash": "7df939f1b78299e320c0dafa1ecaea5d638fad227645d9b48853dab11cbc882c",
+      "translation": "The default is 50%.",
+      "contextHash": "7df939f1b78299e320c0dafa1ecaea5d638fad227645d9b48853dab11cbc882c"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "startTurn（ver1.01）",
+      "sourceHash": "b5c7f833c404cc1512c1efb143253b1a30c2378e079909b118cb3de3ef8b719c",
+      "translation": "startTurn (ver1.01) ",
+      "contextHash": "b5c7f833c404cc1512c1efb143253b1a30c2378e079909b118cb3de3ef8b719c"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "戦闘開始時のターン数を設定します。",
+      "sourceHash": "c26b83dacdb61976975184dea8573a47c0ba34ebc53d83f8e888660035474380",
+      "translation": "Sets the turn number at the start of battle.",
+      "contextHash": "c26b83dacdb61976975184dea8573a47c0ba34ebc53d83f8e888660035474380"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "これは主に敵の行動パターンの判定に使用されます。",
+      "sourceHash": "ebf17657751ea892bb609172461c20baf59fa9e63536ca826bfc7c1db66162bf",
+      "translation": "This is mainly used to determine enemy action patterns.",
+      "contextHash": "ebf17657751ea892bb609172461c20baf59fa9e63536ca826bfc7c1db66162bf"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "初期値は1です。",
+      "sourceHash": "6f896d6a98355fd171fa207ba209975832c9c1d0e2eaed207944643e62171195",
+      "translation": "The default is 1.",
+      "contextHash": "6f896d6a98355fd171fa207ba209975832c9c1d0e2eaed207944643e62171195"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "MVのデフォルトの仕様では、0ターンから開始します。これは公式の説明とも食い違っているので、バグっぽい気がしますが……。一応、元の通り0ターン開始も選択できるようにしています。",
+      "sourceHash": "c465e68594f1afe928db4b62e4977e5ed2ebb15e72e146144d022ff1a57e7def",
+      "translation": "With MV's default specifications, battles start on turn 0. This also contradicts the official explanation, so it seems like a bug, but... For the time being, I have also made it possible to choose to start on turn 0, as in the original.",
+      "contextHash": "c465e68594f1afe928db4b62e4977e5ed2ebb15e72e146144d022ff1a57e7def"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "NRP_VisualTurn.jsのパラメータ",
+      "sourceHash": "54185fb99c56961325d96af2fa851570288b8589a3a278b78d2e6d5331fc4969",
+      "translation": "NRP_VisualTurn.js Parameters",
+      "contextHash": "54185fb99c56961325d96af2fa851570288b8589a3a278b78d2e6d5331fc4969"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "画面表示については、主にこちらで設定します。",
+      "sourceHash": "b4496c480ab22063b0253d0d186308a9868b0a448cf8b5789bc0b689d8e1cfc1",
+      "translation": "The settings for the on-screen display are mainly configured here.",
+      "contextHash": "b4496c480ab22063b0253d0d186308a9868b0a448cf8b5789bc0b689d8e1cfc1"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "色々とカスタマイズが可能ですが、長くなったので別記事に分割しました。",
+      "sourceHash": "05c11cee5f09400f0cdc54a08b7b0b166d397c74c9649c4b9f95386f8c6df443",
+      "translation": "It can be customized in many ways, but the article became too long, so I split this section into a separate article.",
+      "contextHash": "05c11cee5f09400f0cdc54a08b7b0b166d397c74c9649c4b9f95386f8c6df443"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "仕様・注意点",
+      "sourceHash": "deddd9fcdcbe5974b4924525db539b5d869973b717c39496ec66ac53e393f8d3",
+      "translation": "Specifications and Notes",
+      "contextHash": "deddd9fcdcbe5974b4924525db539b5d869973b717c39496ec66ac53e393f8d3"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "ターンは各自が個別に保有するようになります。",
+      "sourceHash": "60d4ba17f32383c723d33ebc4047a5c7dca52705db28b5a0d5528f9fc40ffa1d",
+      "translation": "Each battler will have their own individual turn.",
+      "contextHash": "60d4ba17f32383c723d33ebc4047a5c7dca52705db28b5a0d5528f9fc40ffa1d"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "毒などの効果は行動したターンのみ受けますし、睡眠などが切れるターンも行動したターン数が基準です。",
+      "sourceHash": "c69d5541214c9245af4d59fb689064ed80000b706a17f4068013c1b6ca20beeb",
+      "translation": "Effects such as poison are only applied on the turns when the battler acts, and the number of turns taken by the battler also determines when effects such as sleep wear off.",
+      "contextHash": "c69d5541214c9245af4d59fb689064ed80000b706a17f4068013c1b6ca20beeb"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "また、敵はターンを飛ばされても自分のローテーションを守ります。",
+      "sourceHash": "aac6fe48e19a478032aa4cd9382bf36d8c7480e24f54c6f2d9302432359710bf",
+      "translation": "Also, enemies maintain their own rotations even if their turns are skipped.",
+      "contextHash": "aac6fe48e19a478032aa4cd9382bf36d8c7480e24f54c6f2d9302432359710bf"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "速度補正技を使用しても、先手を打ったりはできません。",
+      "sourceHash": "a3860cf1e932f2c055ab1e36d67a8f54847c2ac7a6af3ee15c63c348a6f3c072",
+      "translation": "Using a speed-modifying skill will not allow you to act first.",
+      "contextHash": "a3860cf1e932f2c055ab1e36d67a8f54847c2ac7a6af3ee15c63c348a6f3c072"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "代わりに次のターンの行動順が早くなります。",
+      "sourceHash": "52a818efe56a1d75291ce0d2ad5d0deaef58c4cdedb00648c84e70378b023428",
+      "translation": "Instead, your action order will be earlier on the next turn.",
+      "contextHash": "52a818efe56a1d75291ce0d2ad5d0deaef58c4cdedb00648c84e70378b023428"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "通常のターン制のように先手を打って発動する技は、下の『追加機能』にある『先制行動』で可能です。",
+      "sourceHash": "d4933f09c6226b6a534dd09dc00d75a7305543aae63d8d0aa7426b61bc4f8189",
+      "translation": "Skills that activate before the opponent, as in a normal turn-based system, can be implemented using “Preemptive Action” under “Additional Features” below.",
+      "contextHash": "d4933f09c6226b6a534dd09dc00d75a7305543aae63d8d0aa7426b61bc4f8189"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "エディタ上から入力する速度補正の値は％にしています。",
+      "sourceHash": "212eda19dee1fb7608578d1b957649e7d4e3d30334c29cb9abe80e960aaa0515",
+      "translation": "The speed modifier values entered in the editor are percentages.",
+      "contextHash": "212eda19dee1fb7608578d1b957649e7d4e3d30334c29cb9abe80e960aaa0515"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "速度補正100の技は+100%。つまり二倍速ということです。",
+      "sourceHash": "f90befe72a1ebbb76e2faedeb3b5706ac4c40ad9bddc2852c78f9c9fe5744c65",
+      "translation": "A skill with a speed modifier of 100 has a +100% modifier—in other words, it acts twice as fast.",
+      "contextHash": "f90befe72a1ebbb76e2faedeb3b5706ac4c40ad9bddc2852c78f9c9fe5744c65"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "ちなみに、デフォルトのターン制にある『防御』は2000という速度補正によって、先制で発動する仕様になっています。",
+      "sourceHash": "f60806e83f0a1e10bc04a7609a5ec773af3ef6c800661f1abb933d8da8a2fa7f",
+      "translation": "Incidentally, “Guard” in the default turn-based system is designed to activate first due to its speed modifier of 2000.",
+      "contextHash": "f60806e83f0a1e10bc04a7609a5ec773af3ef6c800661f1abb933d8da8a2fa7f"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "当然、そのままだとＣＴＴＢではまともに使えません。",
+      "sourceHash": "fbe804cf3e1d8c889c07e9f72eae966081852c7cc422005331fd944b19f51bbc",
+      "translation": "Naturally, it cannot be used properly in CTTB as-is.",
+      "contextHash": "fbe804cf3e1d8c889c07e9f72eae966081852c7cc422005331fd944b19f51bbc"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "戦闘の流れを根本的に変えているため、その辺に触れるプラグインとは競合しまくります。",
+      "sourceHash": "940aee0f49e1d5deb4c7559449adbae673413eb7119418d534b1189033a939ae",
+      "translation": "Since it fundamentally changes the flow of battle, it will conflict extensively with plugins that affect those aspects.",
+      "contextHash": "940aee0f49e1d5deb4c7559449adbae673413eb7119418d534b1189033a939ae"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "参考までにこういった影響の大きなプラグインほど上側に配置したほうが、動きやすい傾向にあります。※あくまで傾向です。確実ではありません。",
+      "sourceHash": "b97b6d9aa4c04e4de98358b72a500d8c368df0649de4fdbc5651127d8470bc78",
+      "translation": "For reference, plugins with this kind of major impact tend to work better when placed higher in the plugin list.※This is only a general tendency and is not guaranteed.",
+      "contextHash": "b97b6d9aa4c04e4de98358b72a500d8c368df0649de4fdbc5651127d8470bc78"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "追加機能",
+      "sourceHash": "e9f29c7549be10bbc2c3d66911c0fa9b2ee35cd5b26321b8da3accb555c595c9",
+      "translation": "Additional Features",
+      "contextHash": "e9f29c7549be10bbc2c3d66911c0fa9b2ee35cd5b26321b8da3accb555c595c9"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "先制行動（ver1.02）",
+      "sourceHash": "06d9e1e84543c005ba156b47bfc3266ab1b25e24919d9a213ebfbf6ca4c3453d",
+      "translation": "Preemptive Action (ver1.02)",
+      "contextHash": "06d9e1e84543c005ba156b47bfc3266ab1b25e24919d9a213ebfbf6ca4c3453d"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "スキルのメモ欄に以下を記入することで、先制行動できます。",
+      "sourceHash": "1517fec0582d74f5111f01047ce24ad4a616242de82d54d42637cbc8fc2a97cd",
+      "translation": "You can perform a preemptive action by entering the following in a skill's note field.",
+      "contextHash": "1517fec0582d74f5111f01047ce24ad4a616242de82d54d42637cbc8fc2a97cd"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "防御などにご活用ください。",
+      "sourceHash": "47c3d6fda210d32af934670318da8a54e8078ef85ef53f027d88824fc2497ff1",
+      "translation": "Use this for Guard and similar actions.",
+      "contextHash": "47c3d6fda210d32af934670318da8a54e8078ef85ef53f027d88824fc2497ff1"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "なお、この効果は次ターンの行動順序に影響を与えません。",
+      "sourceHash": "bb9121cca9a1b33105591da41a5908dfbddb35defde40ce2396c02903ee10edf",
+      "translation": "Note that this effect does not affect the action order on the next turn.",
+      "contextHash": "bb9121cca9a1b33105591da41a5908dfbddb35defde40ce2396c02903ee10edf"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ＷＴ（待ち時間）を変更する技（ver1.01）",
+      "sourceHash": "90f1d1a6f173f905e93cca5f876cacc021e4de793473e3f9aa6159044f406619",
+      "translation": "Skills That Change WT (Waiting Time) (ver1.01)",
+      "contextHash": "90f1d1a6f173f905e93cca5f876cacc021e4de793473e3f9aa6159044f406619"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "ステート欄のメモに以下を記入することで、対象の待ち時間を変更できます。",
+      "sourceHash": "ae311297118b1f49987331c4e133d7848b003796e5cd63e137ed57a2f1d2ebc9",
+      "translation": "You can change the target's waiting time by entering the following in the state's note field.",
+      "contextHash": "ae311297118b1f49987331c4e133d7848b003796e5cd63e137ed57a2f1d2ebc9"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "数値は100で対象の１ターン分の待ち時間となります。マイナス値も可能です。",
+      "sourceHash": "700c8c8d59f2c9b5a8ac2d657f75cc732849f4258ca8bf0f427b69d498a8033a",
+      "translation": "A value of 100 corresponds to one turn of the target's waiting time. Negative values are also possible.",
+      "contextHash": "700c8c8d59f2c9b5a8ac2d657f75cc732849f4258ca8bf0f427b69d498a8033a"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "<SetWt:[数値]>",
+      "sourceHash": "0252ef4763562b142861d9dfe04ec318d4b6f6e0be4cbcccdae2b982cd79ab86",
+      "translation": "<SetWt:[value]>",
+      "contextHash": "0252ef4763562b142861d9dfe04ec318d4b6f6e0be4cbcccdae2b982cd79ab86"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "対象の待ち時間を変更します。",
+      "sourceHash": "e33c0dd13211b6113c1f479d10e84fa740a0220b48819ecbb6f41c7081362561",
+      "translation": "Changes the target's waiting time.",
+      "contextHash": "e33c0dd13211b6113c1f479d10e84fa740a0220b48819ecbb6f41c7081362561"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "……が仕様上、ＣＴＴＢではこの機能は使いづらいです。",
+      "sourceHash": "34408102d421e3715efaa81ce1a442b75c734e617830e18dab075fe9e423e223",
+      "translation": "…However, due to the specifications, this feature is difficult to use in CTTB.",
+      "contextHash": "34408102d421e3715efaa81ce1a442b75c734e617830e18dab075fe9e423e223"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "<AddWt:[数値]>",
+      "sourceHash": "e51a81a7561973ed8ab90340a5dd681d84c9dd968a24de8b77f785d057cd8999",
+      "translation": "<AddWt:[value]>",
+      "contextHash": "e51a81a7561973ed8ab90340a5dd681d84c9dd968a24de8b77f785d057cd8999"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "対象の待ち時間を加算します。",
+      "sourceHash": "89e9491c7d4760911f97b612d8ded1e524951216f49d1109f50b5a39bbaca934",
+      "translation": "Adds to the target's waiting time.",
+      "contextHash": "89e9491c7d4760911f97b612d8ded1e524951216f49d1109f50b5a39bbaca934"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "ＣＴＴＢではこちらを主に使ったほうが無難です。",
+      "sourceHash": "04a8783c00ffb7346beca3751bcb76212dcadee89d3ae8599feaea0787ef7149",
+      "translation": "In CTTB, it is safer to primarily use this one.",
+      "contextHash": "04a8783c00ffb7346beca3751bcb76212dcadee89d3ae8599feaea0787ef7149"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "例",
+      "sourceHash": "9a4632346963d7e188fd63da51ea5fc16d9b2274b4574bf371f7cbe50a15d61b",
+      "translation": "Examples",
+      "contextHash": "9a4632346963d7e188fd63da51ea5fc16d9b2274b4574bf371f7cbe50a15d61b"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "1/2ターン分、相手の行動を遅らせます。いわゆるディレイアタックですね。",
+      "sourceHash": "2505084123c04ac72170e91ba653191ad62dcd7d2a38009ae6abff34dd2d089d",
+      "translation": "Delays the opponent's action by 1/2 turn. In other words, it's a delay attack.",
+      "contextHash": "2505084123c04ac72170e91ba653191ad62dcd7d2a38009ae6abff34dd2d089d"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "対象の待ち時間を０にし、即時行動させます。",
+      "sourceHash": "6b3ad195250ae6a3656a2a9a38d1d0be11d31fdc4419da8b426122547cb52534",
+      "translation": "Sets the target's waiting time to 0, allowing it to act immediately.",
+      "contextHash": "6b3ad195250ae6a3656a2a9a38d1d0be11d31fdc4419da8b426122547cb52534"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "全体にかければ、サガのクイックタイムっぽくなって最強です。",
+      "sourceHash": "ee4bb926594228541e34e63090ace51d640a4945d1829c3ca543d956c8dbe2d6",
+      "translation": "If applied to all targets, it becomes something like SaGa's Quick Time, making it incredibly powerful.",
+      "contextHash": "ee4bb926594228541e34e63090ace51d640a4945d1829c3ca543d956c8dbe2d6"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "※ＣＴＴＢでは<AddWt>を推奨します。",
+      "sourceHash": "395800d47bafe56569abae650bce4b5b328bec660293ff225fa6910d469bb686",
+      "translation": "※<AddWt> is recommended for CTTB.",
+      "contextHash": "395800d47bafe56569abae650bce4b5b328bec660293ff225fa6910d469bb686"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "……ただし、ＣＴＴＢでは効果を発揮するのが次のターンになってからです。",
+      "sourceHash": "15437c825f3023b3120a9d9e5308e0ac796d4d7b5ff078c7374ebab05f921d99",
+      "translation": "…However, in CTTB, the effect does not take place until the following turn.",
+      "contextHash": "15437c825f3023b3120a9d9e5308e0ac796d4d7b5ff078c7374ebab05f921d99"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "対象の待ち時間を５ターン引き算します。",
+      "sourceHash": "9e6fa70aed9b574eb33d7eca0e6677654285b7f090e5c5ee7f07b722c3ed5d0c",
+      "translation": "Subtracts five turns from the target's waiting time.",
+      "contextHash": "9e6fa70aed9b574eb33d7eca0e6677654285b7f090e5c5ee7f07b722c3ed5d0c"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "つまり、一方的に５回程度動けるようになります。",
+      "sourceHash": "edeb2ff155ee41b86448c4de7e1883a138ceef8c0c9daf9033e5b9142a1527aa",
+      "translation": "In other words, you can act unilaterally about five times.",
+      "contextHash": "edeb2ff155ee41b86448c4de7e1883a138ceef8c0c9daf9033e5b9142a1527aa"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "自分にかければ、同じくサガのオーヴァドライブっぽくなって最強です。",
+      "sourceHash": "fe0a6198c54d85ddee284804da5d17bbb3f57c4acd16a2abff3fe9a6b2436c39",
+      "translation": "If applied to yourself, it becomes something like SaGa's Overdrive, making it incredibly powerful.",
+      "contextHash": "fe0a6198c54d85ddee284804da5d17bbb3f57c4acd16a2abff3fe9a6b2436c39"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "なお、これらはステートがかかった際にのみ発生する効果となります。",
+      "sourceHash": "2c1d74b9c79ebc3df4ea148018e40f6148211216e74609533ce1b41614b326d8",
+      "translation": "These effects only occur when the state is applied.",
+      "contextHash": "2c1d74b9c79ebc3df4ea148018e40f6148211216e74609533ce1b41614b326d8"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "そのため、同一のステートがかかったままだと重ねがけできません。",
+      "sourceHash": "f124b5a518821cb5550087a710577589ddbe1afb421670c6ce411c40573a7fb8",
+      "translation": "Therefore, they cannot be stacked while the same state remains active.",
+      "contextHash": "f124b5a518821cb5550087a710577589ddbe1afb421670c6ce411c40573a7fb8"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "連続行動技（ver1.01）",
+      "sourceHash": "1ea6673ccbd231a6875f47d48cc9edb0c0788d4f39c1157dd5080a1061e84d92",
+      "translation": "Consecutive Action Skills (ver1.01)",
+      "contextHash": "1ea6673ccbd231a6875f47d48cc9edb0c0788d4f39c1157dd5080a1061e84d92"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "スキルの速度補正を2000（MAX）にしておくと、時間経過なしで連続行動を行います。",
+      "sourceHash": "b241fa11d7f852be3306e30b92051566adeaaba95be231d97c7d07af780cadd2",
+      "translation": "Setting a skill's speed modifier to 2000 (MAX) allows consecutive actions without any time passing.",
+      "contextHash": "b241fa11d7f852be3306e30b92051566adeaaba95be231d97c7d07af780cadd2"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "ただし、ＣＴＢとは違ってそのターン内での行動順序には影響しません。",
+      "sourceHash": "3d6baae1123e9634a32a932d4866aeddd69c8f187e519b612c558e62b2b944c0",
+      "translation": "However, unlike CTB, this does not affect the action order within that turn.",
+      "contextHash": "3d6baae1123e9634a32a932d4866aeddd69c8f187e519b612c558e62b2b944c0"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "雑感",
+      "sourceHash": "39c645c86f672e17fe2e1d7b7954a751482696afed30bc0583888075bd01cc5f",
+      "translation": "Impressions",
+      "contextHash": "39c645c86f672e17fe2e1d7b7954a751482696afed30bc0583888075bd01cc5f"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "作者の狙いは、素早さの価値が高いターン制といういいとこ取りです。",
+      "sourceHash": "04f8711325998717b0dceef3b062bc872862972e10adca62f2174a6ce426444e",
+      "translation": "The author's goal is to combine the best aspects of a turn-based system with the high value of agility.",
+      "contextHash": "04f8711325998717b0dceef3b062bc872862972e10adca62f2174a6ce426444e"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "その狙いがうまくいくかは、実際にゲームを作ってみないと分かりません。作者としても、今後採用するかどうかは実際の感触次第でしょう。",
+      "sourceHash": "2c9a8f4ee538d28033f15cda3ba94c3fa2b3c4b029eae8e3958b7212cccd73c5",
+      "translation": "I won't know whether that goal works until I actually make a game. As the author, whether I adopt it in the future will likely depend on how it feels in practice.",
+      "contextHash": "2c9a8f4ee538d28033f15cda3ba94c3fa2b3c4b029eae8e3958b7212cccd73c5"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "今のところ感じている欠点は、コマンド入力するキャラの順序が毎ターン変動することです。",
+      "sourceHash": "00b84c4b30fda7869dc737ed31b32f3c8e344d93147375a9ce84e18fa6f21c41",
+      "translation": "The drawback I have noticed so far is that the order in which characters enter commands changes every turn.",
+      "contextHash": "00b84c4b30fda7869dc737ed31b32f3c8e344d93147375a9ce84e18fa6f21c41"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "ターン制のゲームでパーティの並び順を変えた直後、コマンドの入力順序が変わって困惑した経験はないでしょうか？",
+      "sourceHash": "d0ccc2ca25b411e179579bc55748703f10ba03ab882dc803dab5a1a19df25f9d",
+      "translation": "Have you ever changed your party's formation in a turn-based game and then been confused when the command input order changed immediately afterward?",
+      "contextHash": "d0ccc2ca25b411e179579bc55748703f10ba03ab882dc803dab5a1a19df25f9d"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "ＣＴＴＢはあれが頻繁にあるような感じです。",
+      "sourceHash": "d4f6acb7170a435903bf5f1754e4958dd10195436688bbf4a6a115783acb638c",
+      "translation": "CTTB feels like that happens frequently.",
+      "contextHash": "d4f6acb7170a435903bf5f1754e4958dd10195436688bbf4a6a115783acb638c"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "こう考えてみると、ターン制における入力順序が一定という仕様にも一種のメリットがあったことに気づかされますね。",
+      "sourceHash": "b182124f9b2587befa788d2593ee447eab396d134fa510ba9cc8599fa6371e98",
+      "translation": "Thinking about it this way makes you realize that having a fixed input order in a turn-based system had its own advantages.",
+      "contextHash": "b182124f9b2587befa788d2593ee447eab396d134fa510ba9cc8599fa6371e98"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "……せっかくの新システムの記事で「ターン制を持ち上げてどうすんだ」ってツッコミはともかくとして。",
+      "sourceHash": "2486e96e10152b932d7462cefdf64c64f75a6e5fb2a92318dea197c68bca95e0",
+      "translation": "…Leaving aside the objection of, “Why are you praising turn-based systems in an article about a brand-new system?”",
+      "contextHash": "2486e96e10152b932d7462cefdf64c64f75a6e5fb2a92318dea197c68bca95e0"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "ＣＴＴＢとは以前、仕様だけ考えていた「[[LINK_1]]ＣＴＢとターン制を無理やり融合した夢の新戦闘システム[[/LINK_1]]」です。",
+      "sourceHash": "729f0795696290fd10d0aa588cc12104b01ba397783a8a2c21b8b8da7ee99837",
+      "parts": [
+        {
+          "source": "ＣＴＴＢとは以前、仕様だけ考えていた「",
+          "link": false
+        },
+        {
+          "source": "ＣＴＢとターン制を無理やり融合した夢の新戦闘システム",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "」です。",
+          "link": false
+        }
+      ],
+      "translation": "CTTB refers to the “[[LINK_1]]dream new battle system that forcibly merges CTB with turn-based combat[[/LINK_1]],” whose specifications I had previously only worked out.",
+      "contextHash": "729f0795696290fd10d0aa588cc12104b01ba397783a8a2c21b8b8da7ee99837"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法[[/LINK_1]]",
+      "sourceHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05",
+      "parts": [
+        {
+          "source": "導入方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation Method[[/LINK_1]]",
+      "contextHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴[[/LINK_1]]",
+      "sourceHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036",
+      "parts": [
+        {
+          "source": "更新履歴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History[[/LINK_1]]",
+      "contextHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]制御系パラメータ（NRP_CountTimeTurnBattle.js）[[/LINK_1]]",
+      "sourceHash": "c4f51b7e01a05bc7139526cdbffe0b818eb62c8a142addef5cdcf4b5b0f219dd",
+      "parts": [
+        {
+          "source": "制御系パラメータ（NRP_CountTimeTurnBattle.js）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Control Parameters (NRP_CountTimeTurnBattle.js)[[/LINK_1]]",
+      "contextHash": "c4f51b7e01a05bc7139526cdbffe0b818eb62c8a142addef5cdcf4b5b0f219dd"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]表示系パラメータ（NRP_VisualTurn.js）※別記事[[/LINK_1]]",
+      "sourceHash": "160bd02893d8b22172a8090684f7bcb96a789b1a4cac81afb562a37b7aadcf0c",
+      "parts": [
+        {
+          "source": "表示系パラメータ（NRP_VisualTurn.js）※別記事",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Parameters (NRP_VisualTurn.js) ※Separate article[[/LINK_1]]",
+      "contextHash": "160bd02893d8b22172a8090684f7bcb96a789b1a4cac81afb562a37b7aadcf0c"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]仕様・注意点[[/LINK_1]]",
+      "sourceHash": "e7e89253f612aafeca1960d4624224b445b6e38c0bbe2362341661efed48818a",
+      "parts": [
+        {
+          "source": "仕様・注意点",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Specifications and Notes[[/LINK_1]]",
+      "contextHash": "e7e89253f612aafeca1960d4624224b445b6e38c0bbe2362341661efed48818a"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]追加機能[[/LINK_1]]",
+      "sourceHash": "ad2d550be04a50ff23f2ebfa14440a4bc886caf1b48f23255d6f97a19cce7902",
+      "parts": [
+        {
+          "source": "追加機能",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additional Features[[/LINK_1]]",
+      "contextHash": "ad2d550be04a50ff23f2ebfa14440a4bc886caf1b48f23255d6f97a19cce7902"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]雑感[[/LINK_1]]",
+      "sourceHash": "2d0dacecc1c68f1fadbff93e092f2f5df7cf51daf196c1c0e9332cfa32623a64",
+      "parts": [
+        {
+          "source": "雑感",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Impressions[[/LINK_1]]",
+      "contextHash": "2d0dacecc1c68f1fadbff93e092f2f5df7cf51daf196c1c0e9332cfa32623a64"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "※プラグイン更新時に少しだけ挙動が変わる可能性があります。変更箇所は[[LINK_1]]パラメータ（各ウィンドウの表示）[[/LINK_1]]だけなので見直しをお願いします。",
+      "sourceHash": "b28d84e05d1e88ffa5274c2df99d1c1fade2f48f388783e0b2d5bbc1348da04b",
+      "parts": [
+        {
+          "source": "※プラグイン更新時に少しだけ挙動が変わる可能性があります。変更箇所は",
+          "link": false
+        },
+        {
+          "source": "パラメータ（各ウィンドウの表示）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "だけなので見直しをお願いします。",
+          "link": false
+        }
+      ],
+      "translation": "※The behavior may change slightly when the plugin is updated. Since the only changes are to the [[LINK_1]]parameters (window display)[[/LINK_1]], please review them.",
+      "contextHash": "b28d84e05d1e88ffa5274c2df99d1c1fade2f48f388783e0b2d5bbc1348da04b"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]※NRP_VisualTurn.jsのほうは随時修正しているので、そちらをご覧ください。[[/LINK_1]]",
+      "sourceHash": "efb8962df049ecbace3fc61731acba2008b8671014c62f06a82718507a001ddc",
+      "parts": [
+        {
+          "source": "※NRP_VisualTurn.jsのほうは随時修正しているので、そちらをご覧ください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]※NRP_VisualTurn.js is being revised as needed, so please refer to that instead.[[/LINK_1]]",
+      "contextHash": "efb8962df049ecbace3fc61731acba2008b8671014c62f06a82718507a001ddc"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]こちらをご参照ください。[[/LINK_1]]",
+      "sourceHash": "efc0a3287c3f8f11c7960f272bd3409f9132cead37edf175016b49d92319612e",
+      "parts": [
+        {
+          "source": "こちらをご参照ください。",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Please refer to this.[[/LINK_1]]",
+      "contextHash": "efc0a3287c3f8f11c7960f272bd3409f9132cead37edf175016b49d92319612e"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ツクールＭＶ＆ＭＺ向けＣＴＴＢ（カウントタイムターンバトル）を実現するプラグインを公開しました。": "I have released a plugin for RPG Maker MV & MZ that implements CTTB (Count Time Turn Battle).",
+    "正直、冗談半分だったのですが、せっかくなのでマジで作りました。": "Honestly, it started half as a joke, but I decided to make it for real while I was at it.",
+    "ツクールＭＶ＆ＭＺユーザで興味がある人は試してみてください。カスタマイズも可能ですが、デフォルトの素材だけでも即動きます。作りかけのゲームに気分転換で放り込んでみると面白いかも。": "If you're an RPG Maker MV & MZ user interested in this, please give it a try. It can be customized, but it works right away with just the default assets. It might be fun to drop it into a game you're working on for a change of pace.",
+    "仕様の詳細は上のリンク先に書いてますが、ざっくり言うとＣＴＢをターン制っぽく区切った戦闘システムです。敏捷性（素早さ）の比率に応じて、遅いキャラは動けないターンが発生します。": "The detailed specifications are described at the link above, but broadly speaking, this is a battle system that divides CTB into turn-based segments. Depending on the ratio of agility (speed), slower characters will have turns during which they cannot act.",
+    "上の画面では顔グラで表示していますが、キャラグラを出したり名前を文字表示したりもできます。色々と頑張ってレイアウトの自由度を上げてみました。": "The screenshot above displays face graphics, but you can also display character graphics or names as text. I put a lot of effort into increasing the freedom of the layout.",
+    "フロントビューでもサイドビューでも問題なく機能します。": "It works properly with both front-view and side-view battles.",
+    "導入方法": "Installation",
+    "以下２つのファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following two files and place them in [Project]\\js\\plugins. Turn the features ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_CountTimeTurnBattle.js": "NRP_CountTimeTurnBattle.js ",
+    "ver1.051（2022/08/05）": "ver1.051 (2022/08/05) ",
+    "NRP_VisualTurn.js": "NRP_VisualTurn.js ",
+    "ver1.161（2022/08/17）": "ver1.161 (2022/08/17) ",
+    "上から順番に取り込む必要があるので注意です。": "Note that they must be imported in order from the top down.",
+    "ファイルが２つあるのは、制御系と表示系で分割したためです。": "There are two files because the control and display functions have been separated.",
+    "表示系のほうは、ＣＴＢ用プラグインと共通になります。": "The display component is shared with the CTB plugin.",
+    "更新履歴": "Update History",
+    "敏捷性が０の際に何度も行動できてしまう不具合修正。": "Fixed a bug that allowed repeated actions when agility was 0.",
+    "（2022/08/05 ver1.051）": " (2022/08/05 ver1.051) ",
+    "選択中のバトラーシンボルについて画像のみを白く強調表示するように変更。": "Changed the selected battler symbol so that only its image is highlighted in white.",
+    "ＵＩエリアの幅が一部ウィンドウに反映されていない不具合修正。": "Fixed a bug where the UI area's width was not reflected in some windows.",
+    "ＭＺかつＣＴＴＢにて自動戦闘を組み合わせた場合にエラーとなる不具合修正。": "Fixed an error that occurred when automatic battle was combined with CTTB in MZ.",
+    "ウィンドウを重ねて表示できるように改良。": "Improved the system so that windows can be displayed overlapping one another.",
+    "それに伴い初期状態では行動順序を右寄せ＆上寄せするように変更。": "Accordingly, the default action order alignment was changed to right-aligned and top-aligned.",
+    "また、ウィンドウ表示系のパラメータを追加（細分化）＆整理。": "Added (subdivided) and reorganized the window display parameters.",
+    "ツクールＭＺに対応。": "Added support for RPG Maker MZ.",
+    "英語対応。": "Added English support.",
+    "バトルイベントでアクターの個別ターンが正常に取得できない不具合修正。": "Fixed a bug where an actor's individual turn could not be retrieved correctly in battle events.",
+    "全体的に処理を見直して競合に対応。": "Reviewed the processing throughout and added compatibility with conflicts.",
+    "戦闘行動の強制で複数回行動すると、ターンが複数経過する不具合修正。": "Fixed a bug where multiple turns elapsed when multiple actions were performed using Force Action.",
+    "スキルのメモ欄に<FastTrick>で先制行動を可能に。": "Enabled preemptive actions with <FastTrick> in a skill's note field.",
+    "ＣＴＢ用プラグインの各種修正を取り込み。": "Incorporated various fixes from the CTB plugin.",
+    "（プラグインパラメータの追加、ＷＴ操作の実装など）": "(Adding plugin parameters, implementing WT controls, etc.)",
+    "公開開始！": "Now available!",
+    "パラメータ（基本設定）": "Parameters (Basic Settings)",
+    "ターン順序の計算を行う人数。これがそのまま画面に表示する人数となります。指定なしなら9人です。": "The number of battlers whose turn order is calculated. This is also the number displayed on the screen. The default is 9.",
+    "パラメータ（戦闘開始関連）": "Parameters (Battle Start Settings)",
+    "actorStartRandomWt（ver1.01）": "actorStartRandomWt (ver1.01) ",
+    "戦闘開始時の味方の敏捷性を数値％分だけ分散させます。": "Randomizes the allies' agility at the start of battle by the specified percentage.",
+    "例：20ならば、90～110%に分散。指定なしは0。": "Example: 20 randomizes it between 90% and 110%. The default is 0.",
+    "要するに戦闘開始時の行動順序をバラけさせるか否かということです。初期値0のままだと毎戦闘、同じ順番で動きます。": "In short, this determines whether to vary the action order at the start of battle. If the default value remains at 0, the characters will act in the same order in every battle.",
+    "enemyStartRandomWt（ver1.01）": "enemyStartRandomWt (ver1.01) ",
+    "戦闘開始時の敵の敏捷性を数値％分だけ分散させます。": "Randomizes the enemies' agility at the start of battle by the specified percentage.",
+    "例：20ならば、90～110%に分散。指定なしは20。": "Example: 20 randomizes it between 90% and 110%. The default is 20.",
+    "0にすると同種の敵が一斉に行動してきます。それを避けるために20ほど初期値を分散させています。": "When set to 0, enemies of the same type will all act at once. To avoid this, the default value is set to 20 to randomize their initial values.",
+    "preemptiveAdvantage（ver1.01）": "preemptiveAdvantage (ver1.01) ",
+    "先制攻撃時に、指定した数値の％分だけ味方のターンを早めます。": "During a preemptive attack, advances the allies' turns by the specified percentage.",
+    "初期値は50%です。つまり1/2ターンほど通常より早く行動します。": "The default is 50%. In other words, they act about half a turn earlier than usual.",
+    "surpriseAdvantage（ver1.01）": "surpriseAdvantage (ver1.01) ",
+    "敵の奇襲時に、指定した数値の％分だけ敵のターンを早めます。": "During an enemy ambush, advances the enemies' turns by the specified percentage.",
+    "初期値は50%です。": "The default is 50%.",
+    "startTurn（ver1.01）": "startTurn (ver1.01) ",
+    "戦闘開始時のターン数を設定します。": "Sets the turn number at the start of battle.",
+    "これは主に敵の行動パターンの判定に使用されます。": "This is mainly used to determine enemy action patterns.",
+    "初期値は1です。": "The default is 1.",
+    "MVのデフォルトの仕様では、0ターンから開始します。これは公式の説明とも食い違っているので、バグっぽい気がしますが……。一応、元の通り0ターン開始も選択できるようにしています。": "With MV's default specifications, battles start on turn 0. This also contradicts the official explanation, so it seems like a bug, but... For the time being, I have also made it possible to choose to start on turn 0, as in the original.",
+    "NRP_VisualTurn.jsのパラメータ": "NRP_VisualTurn.js Parameters",
+    "画面表示については、主にこちらで設定します。": "The settings for the on-screen display are mainly configured here.",
+    "色々とカスタマイズが可能ですが、長くなったので別記事に分割しました。": "It can be customized in many ways, but the article became too long, so I split this section into a separate article.",
+    "仕様・注意点": "Specifications and Notes",
+    "ターンは各自が個別に保有するようになります。": "Each battler will have their own individual turn.",
+    "毒などの効果は行動したターンのみ受けますし、睡眠などが切れるターンも行動したターン数が基準です。": "Effects such as poison are only applied on the turns when the battler acts, and the number of turns taken by the battler also determines when effects such as sleep wear off.",
+    "また、敵はターンを飛ばされても自分のローテーションを守ります。": "Also, enemies maintain their own rotations even if their turns are skipped.",
+    "速度補正技を使用しても、先手を打ったりはできません。": "Using a speed-modifying skill will not allow you to act first.",
+    "代わりに次のターンの行動順が早くなります。": "Instead, your action order will be earlier on the next turn.",
+    "通常のターン制のように先手を打って発動する技は、下の『追加機能』にある『先制行動』で可能です。": "Skills that activate before the opponent, as in a normal turn-based system, can be implemented using “Preemptive Action” under “Additional Features” below.",
+    "エディタ上から入力する速度補正の値は％にしています。": "The speed modifier values entered in the editor are percentages.",
+    "速度補正100の技は+100%。つまり二倍速ということです。": "A skill with a speed modifier of 100 has a +100% modifier—in other words, it acts twice as fast.",
+    "ちなみに、デフォルトのターン制にある『防御』は2000という速度補正によって、先制で発動する仕様になっています。": "Incidentally, “Guard” in the default turn-based system is designed to activate first due to its speed modifier of 2000.",
+    "当然、そのままだとＣＴＴＢではまともに使えません。": "Naturally, it cannot be used properly in CTTB as-is.",
+    "戦闘の流れを根本的に変えているため、その辺に触れるプラグインとは競合しまくります。": "Since it fundamentally changes the flow of battle, it will conflict extensively with plugins that affect those aspects.",
+    "参考までにこういった影響の大きなプラグインほど上側に配置したほうが、動きやすい傾向にあります。※あくまで傾向です。確実ではありません。": "For reference, plugins with this kind of major impact tend to work better when placed higher in the plugin list.※This is only a general tendency and is not guaranteed.",
+    "追加機能": "Additional Features",
+    "先制行動（ver1.02）": "Preemptive Action (ver1.02)",
+    "スキルのメモ欄に以下を記入することで、先制行動できます。": "You can perform a preemptive action by entering the following in a skill's note field.",
+    "防御などにご活用ください。": "Use this for Guard and similar actions.",
+    "なお、この効果は次ターンの行動順序に影響を与えません。": "Note that this effect does not affect the action order on the next turn.",
+    "ＷＴ（待ち時間）を変更する技（ver1.01）": "Skills That Change WT (Waiting Time) (ver1.01)",
+    "ステート欄のメモに以下を記入することで、対象の待ち時間を変更できます。": "You can change the target's waiting time by entering the following in the state's note field.",
+    "数値は100で対象の１ターン分の待ち時間となります。マイナス値も可能です。": "A value of 100 corresponds to one turn of the target's waiting time. Negative values are also possible.",
+    "<SetWt:[数値]>": "<SetWt:[value]>",
+    "対象の待ち時間を変更します。": "Changes the target's waiting time.",
+    "……が仕様上、ＣＴＴＢではこの機能は使いづらいです。": "…However, due to the specifications, this feature is difficult to use in CTTB.",
+    "<AddWt:[数値]>": "<AddWt:[value]>",
+    "対象の待ち時間を加算します。": "Adds to the target's waiting time.",
+    "ＣＴＴＢではこちらを主に使ったほうが無難です。": "In CTTB, it is safer to primarily use this one.",
+    "例": "Examples",
+    "1/2ターン分、相手の行動を遅らせます。いわゆるディレイアタックですね。": "Delays the opponent's action by 1/2 turn. In other words, it's a delay attack.",
+    "対象の待ち時間を０にし、即時行動させます。": "Sets the target's waiting time to 0, allowing it to act immediately.",
+    "全体にかければ、サガのクイックタイムっぽくなって最強です。": "If applied to all targets, it becomes something like SaGa's Quick Time, making it incredibly powerful.",
+    "※ＣＴＴＢでは<AddWt>を推奨します。": "※<AddWt> is recommended for CTTB.",
+    "……ただし、ＣＴＴＢでは効果を発揮するのが次のターンになってからです。": "…However, in CTTB, the effect does not take place until the following turn.",
+    "対象の待ち時間を５ターン引き算します。": "Subtracts five turns from the target's waiting time.",
+    "つまり、一方的に５回程度動けるようになります。": "In other words, you can act unilaterally about five times.",
+    "自分にかければ、同じくサガのオーヴァドライブっぽくなって最強です。": "If applied to yourself, it becomes something like SaGa's Overdrive, making it incredibly powerful.",
+    "注意点": "Notes",
+    "なお、これらはステートがかかった際にのみ発生する効果となります。": "These effects only occur when the state is applied.",
+    "そのため、同一のステートがかかったままだと重ねがけできません。": "Therefore, they cannot be stacked while the same state remains active.",
+    "連続行動技（ver1.01）": "Consecutive Action Skills (ver1.01)",
+    "スキルの速度補正を2000（MAX）にしておくと、時間経過なしで連続行動を行います。": "Setting a skill's speed modifier to 2000 (MAX) allows consecutive actions without any time passing.",
+    "ただし、ＣＴＢとは違ってそのターン内での行動順序には影響しません。": "However, unlike CTB, this does not affect the action order within that turn.",
+    "雑感": "Impressions",
+    "作者の狙いは、素早さの価値が高いターン制といういいとこ取りです。": "The author's goal is to combine the best aspects of a turn-based system with the high value of agility.",
+    "その狙いがうまくいくかは、実際にゲームを作ってみないと分かりません。作者としても、今後採用するかどうかは実際の感触次第でしょう。": "I won't know whether that goal works until I actually make a game. As the author, whether I adopt it in the future will likely depend on how it feels in practice.",
+    "今のところ感じている欠点は、コマンド入力するキャラの順序が毎ターン変動することです。": "The drawback I have noticed so far is that the order in which characters enter commands changes every turn.",
+    "ターン制のゲームでパーティの並び順を変えた直後、コマンドの入力順序が変わって困惑した経験はないでしょうか？": "Have you ever changed your party's formation in a turn-based game and then been confused when the command input order changed immediately afterward?",
+    "ＣＴＴＢはあれが頻繁にあるような感じです。": "CTTB feels like that happens frequently.",
+    "こう考えてみると、ターン制における入力順序が一定という仕様にも一種のメリットがあったことに気づかされますね。": "Thinking about it this way makes you realize that having a fixed input order in a turn-based system had its own advantages.",
+    "……せっかくの新システムの記事で「ターン制を持ち上げてどうすんだ」ってツッコミはともかくとして。": "…Leaving aside the objection of, “Why are you praising turn-based systems in an article about a brand-new system?”"
+  }
+}

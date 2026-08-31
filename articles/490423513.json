@@ -1,0 +1,1027 @@
+{
+  "articleId": "490423513",
+  "sourceUrl": "https://newrpg.seesaa.net/article/490423513.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2b50158312fc58e0ec8e7d437485f3f2a6d155e67afb3fb7884c54844420b623",
+  "translatedAt": "2026-08-31T05:38:55.552Z",
+  "title": "Add a Reservation Function to the Skill Tree [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "スキルツリーに予約機能を追加【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "008ea87de5e9ea98c528c1f6f2300a55cf16474cf0e5c2c09b6eccdc0e88910b",
+      "translation": "Add a Reservation Function to the Skill Tree [RPG Maker MZ & MV Plugin]",
+      "contextHash": "008ea87de5e9ea98c528c1f6f2300a55cf16474cf0e5c2c09b6eccdc0e88910b"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "スキルツリー画面でＳＰが足りないスキルを選択すると、予約できます。",
+      "sourceHash": "520ba14761e00baa743405e7c942bfaa0881c5c0225161d7ecd9056b2e58ea62",
+      "translation": "When you select a skill that you do not have enough SP to learn on the skill tree screen, you can reserve it.",
+      "contextHash": "520ba14761e00baa743405e7c942bfaa0881c5c0225161d7ecd9056b2e58ea62"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "予約したスキルはＳＰが条件を満たした時点で、自動的に習得されます。",
+      "sourceHash": "658224b4c5df8f5e90c265aab7806f24ac78971153ab2e9408337602194699f2",
+      "translation": "Reserved skills are automatically learned once you have enough SP.",
+      "contextHash": "658224b4c5df8f5e90c265aab7806f24ac78971153ab2e9408337602194699f2"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "さらにスキルツリー画面が自動で開かれます。",
+      "sourceHash": "8bfba9091cb12021daae9ad348202af6333eaf7a55e813706e0a637aee3ca66c",
+      "translation": "The skill tree screen will also open automatically.",
+      "contextHash": "8bfba9091cb12021daae9ad348202af6333eaf7a55e813706e0a637aee3ca66c"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※スキルツリーが開くタイミングは戦闘終了後またはイベント終了後です。イベント途中でもプラグインコマンド（ＭＺのみ）で強制的に呼び出すこともできます。",
+      "sourceHash": "999f525ab4fbc5cff231e7a6f41696b427c74552aff4a4a52a25bbc3e0e7942f",
+      "translation": "※The skill tree opens after a battle or event ends. You can also force it to open during an event using a plugin command (MZ only).",
+      "contextHash": "999f525ab4fbc5cff231e7a6f41696b427c74552aff4a4a52a25bbc3e0e7942f"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※同時に複数のアクターがスキルを習得した場合は、最も先頭に近いアクターのスキルツリーが開かれます。",
+      "sourceHash": "6771ec9a5c68a80dafcba46fc1d698329f354c9b599eca8b7452f51b313dd3d5",
+      "translation": "※If multiple actors learn skills at the same time, the skill tree of the actor closest to the front of the party will open.",
+      "contextHash": "6771ec9a5c68a80dafcba46fc1d698329f354c9b599eca8b7452f51b313dd3d5"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "【その他】",
+      "sourceHash": "787515813b933a0eb49ff942dd5f8b19cfb94bd9ca63c171826139c4ab57dca8",
+      "translation": "[Other]",
+      "contextHash": "787515813b933a0eb49ff942dd5f8b19cfb94bd9ca63c171826139c4ab57dca8"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_U_SkillTreeReserve.js",
+      "sourceHash": "bd1b063f4b775fe817052ad5360ecfa8243259dd64134d70fd538f1185ec6907",
+      "translation": "NRP_U_SkillTreeReserve.js ",
+      "contextHash": "d7205abfcba280d436ba0d8cce4b028541b386a81f82453644cc1037d32e85c4"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.001（2022/08/12）",
+      "sourceHash": "dc45a6a6d62dd11c6b15527e21c9b0bbf9033e21019e1ab8ec3b433488828e85",
+      "translation": "ver1.001 (2022/08/12) ",
+      "contextHash": "d7205abfcba280d436ba0d8cce4b028541b386a81f82453644cc1037d32e85c4"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "上記の三つが必須です。",
+      "sourceHash": "08f1f018386d9260860d1c0cf52f19dc3f6008cdbf2c163637e62d27c4082dec",
+      "translation": "The three items above are required.",
+      "contextHash": "08f1f018386d9260860d1c0cf52f19dc3f6008cdbf2c163637e62d27c4082dec"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "さらに当プラグインを上記プラグインの下に配置してください。",
+      "sourceHash": "9dfbaef5bce84bfe6784a9f2ae08122cafbaf1bad19a1702c423c4d2f1bf9f07",
+      "translation": "Also, place this plugin below the plugins listed above.",
+      "contextHash": "9dfbaef5bce84bfe6784a9f2ae08122cafbaf1bad19a1702c423c4d2f1bf9f07"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2022/08/07 -> 2022/08/12（ver1.00 -> 1.001）",
+      "sourceHash": "7fce22acb3373614cf2934a45b367b7869cc08ee7859eef3be299ab1d112da74",
+      "translation": "2022/08/07 -> 2022/08/12 (ver1.00 -> 1.001) ",
+      "contextHash": "7fce22acb3373614cf2934a45b367b7869cc08ee7859eef3be299ab1d112da74"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "NRP_VisualTurn.jsがないとエラーになる不具合修正。",
+      "sourceHash": "664d4154bc840bfef0af04a5c5f79c297ae537c9252f84583a2a5229947df067",
+      "translation": "Fixed a bug that caused an error when NRP_VisualTurn.js was missing.",
+      "contextHash": "664d4154bc840bfef0af04a5c5f79c297ae537c9252f84583a2a5229947df067"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "（2022/08/12 ver1.001）",
+      "sourceHash": "be5788c9cfbc8bc8ad747fdf9a4d5c84757e2a19ece5fffb4849e306e9933685",
+      "translation": " (2022/08/12 ver1.001) ",
+      "contextHash": "be5788c9cfbc8bc8ad747fdf9a4d5c84757e2a19ece5fffb4849e306e9933685"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "利用規約（Terms）",
+      "sourceHash": "fa7a7dc11783e0100a079d356ced352128c9fd5ee88694de366250268719f229",
+      "translation": "Terms of Use (Terms)",
+      "contextHash": "fa7a7dc11783e0100a079d356ced352128c9fd5ee88694de366250268719f229"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "元のプラグインの処理を流用しているため、ライセンスも同じく、ＭＩＴライセンスとなります。",
+      "sourceHash": "5ae48211e11d0de8f8bbee772678b5d260f503ced0d592cbfee48fa0bd1be996",
+      "translation": "Because this plugin reuses code from the original plugin, it is also released under the MIT License.",
+      "contextHash": "5ae48211e11d0de8f8bbee772678b5d260f503ced0d592cbfee48fa0bd1be996"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "元の作者様とは関係なく、あくまで砂川赳が独自に作った代物であることにご注意ください。",
+      "sourceHash": "8b30097e71ea5402f7e86fc43bec43246f1513b5d70b0710d565a368b5d1ec35",
+      "translation": "Please note that this plugin is an original creation by Takeshi Sunagawa and is unrelated to the original author.",
+      "contextHash": "8b30097e71ea5402f7e86fc43bec43246f1513b5d70b0710d565a368b5d1ec35"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+      "sourceHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f",
+      "translation": "Plugin Commands for MZ (Plugin Command MZ)",
+      "contextHash": "3ecbf070d1c519906fb9bf0d794fb6fe121a2aefbbd41bc58f0d7a149a9a981f"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "予約スキル習得後ツリー呼出",
+      "sourceHash": "1d050ed370701b4d37b0547ca60ca8ac5e1bdb139b9f14d5f1e22a9bec6bbc20",
+      "translation": "Open Tree After Learning a Reserved Skill",
+      "contextHash": "1d050ed370701b4d37b0547ca60ca8ac5e1bdb139b9f14d5f1e22a9bec6bbc20"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "予約スキル習得後にこのコマンドを実行すると、スキルツリーを呼び出します。",
+      "sourceHash": "0d19d8dbe2e94dcb1e5b7b913109f74372298358b7218db687ada51a896c6fa8",
+      "translation": "Running this command after learning a reserved skill opens the skill tree.",
+      "contextHash": "0d19d8dbe2e94dcb1e5b7b913109f74372298358b7218db687ada51a896c6fa8"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "該当スキルがない場合は無視されます。",
+      "sourceHash": "e0b4b19b6b0bba5271ed178d8466810f3dd7a9d125a0934210beecc92566f121",
+      "translation": "It is ignored if there is no applicable skill.",
+      "contextHash": "e0b4b19b6b0bba5271ed178d8466810f3dd7a9d125a0934210beecc92566f121"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "なお、ＳＰ獲得処理の直後にコマンドを実行すると、スキル習得メッセージより先にスキルツリーが呼び出されてしまう模様です。",
+      "sourceHash": "aff2e6a8358948ff6c3d5d883da871ccf335063466c3058534b3457cc987808c",
+      "translation": "If you run the command immediately after processing SP acquisition, the skill tree may open before the skill-learning message.",
+      "contextHash": "aff2e6a8358948ff6c3d5d883da871ccf335063466c3058534b3457cc987808c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ウェイト（１フレームでＯＫ）を入れると解決できます。",
+      "sourceHash": "941627d4669c1da50b4206a6e4426072d301e6587b4744d0cb56f3eb94353e41",
+      "translation": "You can resolve this by adding a wait (one frame is sufficient).",
+      "contextHash": "941627d4669c1da50b4206a6e4426072d301e6587b4744d0cb56f3eb94353e41"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "戦闘時に習得（LearnTimingBattle）",
+      "sourceHash": "fde11f119ba73ff1758cd6f885dd7e03f14c128f018605c374f566eab11aec6a",
+      "translation": "Learn During Battle (LearnTimingBattle)",
+      "contextHash": "fde11f119ba73ff1758cd6f885dd7e03f14c128f018605c374f566eab11aec6a"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "戦闘時に予約スキルの習得処理を行います。",
+      "sourceHash": "b6e3bd744d28d9d22dbf41d1c8e21ad1bbb6e8aaed8870febe11d7d55e9ca462",
+      "translation": "Performs the learning process for reserved skills during battle.",
+      "contextHash": "b6e3bd744d28d9d22dbf41d1c8e21ad1bbb6e8aaed8870febe11d7d55e9ca462"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "主に戦闘終了後にＳＰを獲得した場合を想定しています。",
+      "sourceHash": "dad94ad53278599801e0735c1f79de29f741d500cda7bc9c4cdffa8882cb342d",
+      "translation": "This is mainly intended for cases where SP is acquired after a battle ends.",
+      "contextHash": "dad94ad53278599801e0735c1f79de29f741d500cda7bc9c4cdffa8882cb342d"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "非戦闘時に習得（LearnTimingNotBattle）",
+      "sourceHash": "8b528fc81536d22ae92b07d60a1f0d140c70549af9bed12f24e82e921ab7efaf",
+      "translation": "Learn Outside of Battle (LearnTimingNotBattle)",
+      "contextHash": "8b528fc81536d22ae92b07d60a1f0d140c70549af9bed12f24e82e921ab7efaf"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "非戦闘時に予約スキルの習得処理を行います。",
+      "sourceHash": "0b9fe70135fdaee119082df734da182fc09ea44c7826b2c49bf83cfaaf666744",
+      "translation": "Performs the learning process for reserved skills outside of battle.",
+      "contextHash": "0b9fe70135fdaee119082df734da182fc09ea44c7826b2c49bf83cfaaf666744"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "スクリプトなどによって、戦闘以外でＳＰを獲得した場合を想定しています。",
+      "sourceHash": "944610c47373d8502654573a913fe0d53aaffa2454b3f3d742c12f073b589b37",
+      "translation": "This is intended for cases where SP is acquired outside of battle through a script or similar means.",
+      "contextHash": "944610c47373d8502654573a913fe0d53aaffa2454b3f3d742c12f073b589b37"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "予約スキルの枠線色（ReserveRectColor）",
+      "sourceHash": "2e5cd36ce9fd4b5b709509a15bcaa0a6f387ec6988ded867ad1d7e600313f739",
+      "translation": "Reserved Skill Border Color (ReserveRectColor)",
+      "contextHash": "2e5cd36ce9fd4b5b709509a15bcaa0a6f387ec6988ded867ad1d7e600313f739"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "予約中のスキルのアイコンを囲む枠線の色を指定します。",
+      "sourceHash": "c0843943cb36fe86e32f5afde1ff5d976a3db20cc3e887c332835bdc71423af5",
+      "translation": "Specifies the color of the border surrounding the icon of a reserved skill.",
+      "contextHash": "c0843943cb36fe86e32f5afde1ff5d976a3db20cc3e887c332835bdc71423af5"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "スキル予約時の効果音名（ReserveSkillSeFileName）",
+      "sourceHash": "7e1065add81cf5dd378c35b49e2e195ab871ad846f22097bf73c9c536ea60700",
+      "translation": "Sound Effect Filename When Reserving a Skill (ReserveSkillSeFileName)",
+      "contextHash": "7e1065add81cf5dd378c35b49e2e195ab871ad846f22097bf73c9c536ea60700"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "スキルを予約したときに再生するSEのファイル名を指定します。",
+      "sourceHash": "00670cce3d0bb7574cafe1b0b578cee754d9a26e84a30d8e90ea5b2e7068131b",
+      "translation": "Specifies the filename of the SE played when a skill is reserved.",
+      "contextHash": "00670cce3d0bb7574cafe1b0b578cee754d9a26e84a30d8e90ea5b2e7068131b"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "スキル予約時の効果音量（ReserveSkillSeVolume）",
+      "sourceHash": "ddde353260c49972a8d03e338dc336281b877822cd6953379ed162db5a911e96",
+      "translation": "Sound Effect Volume When Reserving a Skill (ReserveSkillSeVolume)",
+      "contextHash": "ddde353260c49972a8d03e338dc336281b877822cd6953379ed162db5a911e96"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "スキルを予約したときに再生するSEのvolumeを指定します。",
+      "sourceHash": "8a7249cd4516f258869eeb2945d8d0af04cb1c40d20ef386767684dd2031dcc3",
+      "translation": "Specifies the volume of the SE played when a skill is reserved.",
+      "contextHash": "8a7249cd4516f258869eeb2945d8d0af04cb1c40d20ef386767684dd2031dcc3"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "スキル予約時の効果音ピッチ（ReserveSkillSePitch）",
+      "sourceHash": "b9818f8338d45cfd9bda4e03b8263b9e269fe4d9d9bd025200efd12ffb07b5ba",
+      "translation": "Sound Effect Pitch When Reserving a Skill (ReserveSkillSePitch)",
+      "contextHash": "b9818f8338d45cfd9bda4e03b8263b9e269fe4d9d9bd025200efd12ffb07b5ba"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "スキルを予約したときに再生するSEのpitchを指定します。",
+      "sourceHash": "ab717475ce79a25b213f26d58379474b0fe9ba963a272e02916ca31250d12e05",
+      "translation": "Specifies the pitch of the SE played when a skill is reserved.",
+      "contextHash": "ab717475ce79a25b213f26d58379474b0fe9ba963a272e02916ca31250d12e05"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "スキル予約時の効果音位相（ReserveSkillSePan）",
+      "sourceHash": "3217689a02d8f84100d182c382d5814fca6cd97a46237d6d3c82eee6a0466e03",
+      "translation": "Sound Effect Pan When Reserving a Skill (ReserveSkillSePan)",
+      "contextHash": "3217689a02d8f84100d182c382d5814fca6cd97a46237d6d3c82eee6a0466e03"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "スキルを予約したときに再生するSEのpanを指定します。",
+      "sourceHash": "ff09dc9845341fa5ecd8bf830f3b5b4710f7a0c288a87f8c11f37ab67ef292e5",
+      "translation": "Specifies the pan of the SE played when a skill is reserved.",
+      "contextHash": "ff09dc9845341fa5ecd8bf830f3b5b4710f7a0c288a87f8c11f37ab67ef292e5"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "予約時の文章（確認）（ReserveConfirmationText）",
+      "sourceHash": "24da640e0e7aa5c8ed0bd877d42574b63b0a4be064f0055e170cc12f4ead7efd",
+      "translation": "Text When Reserving (Confirmation) (ReserveConfirmationText)",
+      "contextHash": "24da640e0e7aa5c8ed0bd877d42574b63b0a4be064f0055e170cc12f4ead7efd"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "スキルを予約する際の確認用文章です。",
+      "sourceHash": "d17fe307f8dab1594846577183b1aeaa382bfbeb59185a2b30aac752c24ee1c5",
+      "translation": "This is the confirmation text displayed when reserving a skill.",
+      "contextHash": "d17fe307f8dab1594846577183b1aeaa382bfbeb59185a2b30aac752c24ee1c5"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "%1:消費するSP値, %2:SP名, %3:取得するスキル名",
+      "sourceHash": "2c965f3ae69c9bbd02bb72ad1558da0b82cbcb8022841a2de83175aa18d37d94",
+      "translation": "%1:SP cost, %2:SP name, %3:skill name to acquire",
+      "contextHash": "2c965f3ae69c9bbd02bb72ad1558da0b82cbcb8022841a2de83175aa18d37d94"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "予約時の文章（はい）（ReserveYesText）",
+      "sourceHash": "1fbfdd6b881dea52dff967dc9a31003b5d8f2fde661c401780d2b29e7e9fce8a",
+      "translation": "Text When Reserving (Yes) (ReserveYesText)",
+      "contextHash": "1fbfdd6b881dea52dff967dc9a31003b5d8f2fde661c401780d2b29e7e9fce8a"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "スキルを予約する場合のテキストを指定します。",
+      "sourceHash": "111d245d7e2b8516a38b1214b0ab7d4ef2c53cf56b218d5aca01599092b3f451",
+      "translation": "Specifies the text displayed when reserving a skill.",
+      "contextHash": "111d245d7e2b8516a38b1214b0ab7d4ef2c53cf56b218d5aca01599092b3f451"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "予約時の文章（いいえ）（ReserveNoText）",
+      "sourceHash": "8105dfef249cf8f113027c929f885c6527fe93795e2afba1f14b6accd8800a7f",
+      "translation": "Text When Reserving (No) (ReserveNoText)",
+      "contextHash": "8105dfef249cf8f113027c929f885c6527fe93795e2afba1f14b6accd8800a7f"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "スキルを予約しない場合のテキストを指定します。",
+      "sourceHash": "e2cd8927d5c61c19376ef97b3795cca0e898271044c2af084da9ef5c4222928e",
+      "translation": "Specifies the text displayed when not reserving a skill.",
+      "contextHash": "e2cd8927d5c61c19376ef97b3795cca0e898271044c2af084da9ef5c4222928e"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "予約取消時の文章（確認）（ReserveCancelConfirmationText）",
+      "sourceHash": "e5dd36fe5a6f2b192d804b1a44dbb34a5a48b10651fe43c8917e56eb54b6db24",
+      "translation": "Text When Canceling a Reservation (Confirmation) (ReserveCancelConfirmationText)",
+      "contextHash": "e5dd36fe5a6f2b192d804b1a44dbb34a5a48b10651fe43c8917e56eb54b6db24"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "スキルの予約を取り消す際の確認用文章です。",
+      "sourceHash": "0ce1d9d80eb9cef95a7f49cdbfb844e05b2e335636496ea4dbfc70e7e239ba91",
+      "translation": "This is the confirmation text displayed when canceling a skill reservation.",
+      "contextHash": "0ce1d9d80eb9cef95a7f49cdbfb844e05b2e335636496ea4dbfc70e7e239ba91"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "%1:消費するSP値, %2:SP名, %3:取得するスキル名",
+      "sourceHash": "2c965f3ae69c9bbd02bb72ad1558da0b82cbcb8022841a2de83175aa18d37d94",
+      "translation": "%1: SP cost, %2: SP name, %3: skill name to learn",
+      "contextHash": "2c965f3ae69c9bbd02bb72ad1558da0b82cbcb8022841a2de83175aa18d37d94"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "予約取消時の文章（はい）（ReserveCancelYesText）",
+      "sourceHash": "30f9aa53ada2b99d9b89093382a82d3df69933e2870d37cffa57231c5e7802e7",
+      "translation": "Text When Canceling a Reservation (Yes) (ReserveCancelYesText)",
+      "contextHash": "30f9aa53ada2b99d9b89093382a82d3df69933e2870d37cffa57231c5e7802e7"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "スキルの予約を取り消す場合のテキストを指定します。",
+      "sourceHash": "9b53f5d9487e30406f8bdb5c2eaaf0d33b45715e1e25bf83521953f67de93c51",
+      "translation": "Specify the text displayed when canceling a skill reservation.",
+      "contextHash": "9b53f5d9487e30406f8bdb5c2eaaf0d33b45715e1e25bf83521953f67de93c51"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "予約取消時の文章（いいえ）（ReserveCancelNoText）",
+      "sourceHash": "f2982dbc8d95746af28ff2d467e39cac72075cd0c4121495ec4cc08b7743d7c2",
+      "translation": "Text When Canceling a Reservation (No) (ReserveCancelNoText)",
+      "contextHash": "f2982dbc8d95746af28ff2d467e39cac72075cd0c4121495ec4cc08b7743d7c2"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "スキルの予約を取り消さない場合のテキストを指定します。",
+      "sourceHash": "ebbcfe8072d77401eea64c6fd343724418f8b04c8ac8bf601832feae40dbc758",
+      "translation": "Specify the text displayed when not canceling a skill reservation.",
+      "contextHash": "ebbcfe8072d77401eea64c6fd343724418f8b04c8ac8bf601832feae40dbc758"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "予約スキルの習得文（LearnReserveSkillText）",
+      "sourceHash": "fd164b8a5344b6d3dbabd6812382ddf6dddbf42e16f3c4d25caf7a4f4f963969",
+      "translation": "Text for Learning a Reserved Skill (LearnReserveSkillText)",
+      "contextHash": "fd164b8a5344b6d3dbabd6812382ddf6dddbf42e16f3c4d25caf7a4f4f963969"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "予約したスキルを習得した際の文章です。",
+      "sourceHash": "1adaf69cf3bb3ee6f7ce9f6dd60caa3732e07e1dd13612764172f665b0fe158d",
+      "translation": "This is the text displayed when a reserved skill is learned.",
+      "contextHash": "1adaf69cf3bb3ee6f7ce9f6dd60caa3732e07e1dd13612764172f665b0fe158d"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "%1:アクター名, %2:取得するスキル名",
+      "sourceHash": "2db95367bb61799fe799195c5031cbb1816541a41f601f8df5913cf71799cd65",
+      "translation": "%1: actor name, %2: skill name to learn",
+      "contextHash": "2db95367bb61799fe799195c5031cbb1816541a41f601f8df5913cf71799cd65"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "【その他】",
+      "sourceHash": "787515813b933a0eb49ff942dd5f8b19cfb94bd9ca63c171826139c4ab57dca8",
+      "translation": "[Other]",
+      "contextHash": "787515813b933a0eb49ff942dd5f8b19cfb94bd9ca63c171826139c4ab57dca8"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "ＳＰ不足スキルの表示変更（SpecifySkillCanLearn）",
+      "sourceHash": "c5cd16b2ae6eccafd8801df90296dcd554b98acd619c6a2c2e3b3e8ca5cd09c7",
+      "translation": "Change the Display of Skills with Insufficient SP (SpecifySkillCanLearn)",
+      "contextHash": "c5cd16b2ae6eccafd8801df90296dcd554b98acd619c6a2c2e3b3e8ca5cd09c7"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "ＳＰが不足しているスキルの表示を変更します。",
+      "sourceHash": "ef66e42aad63062907ef061bd59f4edaea26e7759fbbc9fd32f0373a1a06a1ab",
+      "translation": "Changes the display of skills for which there is insufficient SP.",
+      "contextHash": "ef66e42aad63062907ef061bd59f4edaea26e7759fbbc9fd32f0373a1a06a1ab"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "ＳＰ不足なら半透明、条件未達なら暗く表示します。",
+      "sourceHash": "38b0a7e02302c3192e5fae67a43f68ba57a68805a8b9ef798ec45fd10fb0947a",
+      "translation": "Skills with insufficient SP are displayed semi-transparently, while skills with unmet requirements are displayed dimmed.",
+      "contextHash": "38b0a7e02302c3192e5fae67a43f68ba57a68805a8b9ef798ec45fd10fb0947a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]スキルツリープラグイン[[/LINK_1]]（うなぎおおとろ様）に予約機能を追加します。",
+      "sourceHash": "0e38a1535648790b0bfaad0c33bbc561d22aca4cd80c7eea82143a684adbf2e5",
+      "parts": [
+        {
+          "source": "スキルツリープラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（うなぎおおとろ様）に予約機能を追加します。",
+          "link": false
+        }
+      ],
+      "translation": "Adds a reservation function to the [[LINK_1]]Skill Tree Plugin[[/LINK_1]] (by Unagi Ootoro).",
+      "contextHash": "0e38a1535648790b0bfaad0c33bbc561d22aca4cd80c7eea82143a684adbf2e5"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "※[[LINK_1]]ミスティックスター[[/LINK_1]]で採用している予約機能をプラグイン化したものです。",
+      "sourceHash": "4e20dda10c390721e3aefbd11e058acde7aa50d0b9a6b3c70da32f7b5aeaea51",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "ミスティックスター",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で採用している予約機能をプラグイン化したものです。",
+          "link": false
+        }
+      ],
+      "translation": "※This is a plugin version of the reservation function used in [[LINK_1]]Mystic Star[[/LINK_1]].",
+      "contextHash": "4e20dda10c390721e3aefbd11e058acde7aa50d0b9a6b3c70da32f7b5aeaea51"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]利用規約（Terms）[[/LINK_1]]",
+      "sourceHash": "2bb94758fe1089096b243971c950fb57a7f5aa5d1178b46114af273a0f824f33",
+      "parts": [
+        {
+          "source": "利用規約（Terms）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Terms of Use (Terms)[[/LINK_1]]",
+      "contextHash": "2bb94758fe1089096b243971c950fb57a7f5aa5d1178b46114af273a0f824f33"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（Plugin Command MZ）[[/LINK_1]]",
+      "sourceHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（Plugin Command MZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (Plugin Command MZ)[[/LINK_1]]",
+      "contextHash": "e4d89b31cb4814ec5156660803be6be237dfa99a6a93ca4869c154bfc57ef2db"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘時に習得（LearnTimingBattle）[[/LINK_1]]",
+      "sourceHash": "c09d1ea3878bb670b2d3a802ea65c2ec4731ac7e806f9831a91f48e46f26853c",
+      "parts": [
+        {
+          "source": "戦闘時に習得（LearnTimingBattle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Learn During Battle (LearnTimingBattle)[[/LINK_1]]",
+      "contextHash": "c09d1ea3878bb670b2d3a802ea65c2ec4731ac7e806f9831a91f48e46f26853c"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]非戦闘時に習得（LearnTimingNotBattle）[[/LINK_1]]",
+      "sourceHash": "a097a5358dc61320f8ad6bc1b3373619c46313e9e88184b3ac1a4c0b46c7d30d",
+      "parts": [
+        {
+          "source": "非戦闘時に習得（LearnTimingNotBattle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Learn Outside of Battle (LearnTimingNotBattle)[[/LINK_1]]",
+      "contextHash": "a097a5358dc61320f8ad6bc1b3373619c46313e9e88184b3ac1a4c0b46c7d30d"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]予約スキルの枠線色（ReserveRectColor）[[/LINK_1]]",
+      "sourceHash": "ecb5e2c389004e5b523b1e891f8fe7104fc874198fe0f4fa5529dcc95c0cf239",
+      "parts": [
+        {
+          "source": "予約スキルの枠線色（ReserveRectColor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Border Color for Reserved Skills (ReserveRectColor)[[/LINK_1]]",
+      "contextHash": "ecb5e2c389004e5b523b1e891f8fe7104fc874198fe0f4fa5529dcc95c0cf239"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]スキル予約時の効果音名（ReserveSkillSeFileName）[[/LINK_1]]",
+      "sourceHash": "6d37103470378149f3342c857993298fb83e9b8d24f99fc557e787ef0210ccab",
+      "parts": [
+        {
+          "source": "スキル予約時の効果音名（ReserveSkillSeFileName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect Name When Reserving a Skill (ReserveSkillSeFileName)[[/LINK_1]]",
+      "contextHash": "6d37103470378149f3342c857993298fb83e9b8d24f99fc557e787ef0210ccab"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]スキル予約時の効果音量（ReserveSkillSeVolume）[[/LINK_1]]",
+      "sourceHash": "83d4b337353dc3235e641ccddf1b4d4d29a1afc131ceb279a8ece11960a6d66a",
+      "parts": [
+        {
+          "source": "スキル予約時の効果音量（ReserveSkillSeVolume）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect Volume When Reserving a Skill (ReserveSkillSeVolume)[[/LINK_1]]",
+      "contextHash": "83d4b337353dc3235e641ccddf1b4d4d29a1afc131ceb279a8ece11960a6d66a"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]スキル予約時の効果音ピッチ（ReserveSkillSePitch）[[/LINK_1]]",
+      "sourceHash": "3bbd4dbd1033dfc496923e0b0497c051427f2bbfcf5bf3d835e22c787001da12",
+      "parts": [
+        {
+          "source": "スキル予約時の効果音ピッチ（ReserveSkillSePitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect Pitch When Reserving a Skill (ReserveSkillSePitch)[[/LINK_1]]",
+      "contextHash": "3bbd4dbd1033dfc496923e0b0497c051427f2bbfcf5bf3d835e22c787001da12"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]スキル予約時の効果音位相（ReserveSkillSePan）[[/LINK_1]]",
+      "sourceHash": "2556b2df65b0bc9e8f5cef36d0148be4ab2fc15559d6f1ea10b5642d86d338c5",
+      "parts": [
+        {
+          "source": "スキル予約時の効果音位相（ReserveSkillSePan）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect Pan When Reserving a Skill (ReserveSkillSePan)[[/LINK_1]]",
+      "contextHash": "2556b2df65b0bc9e8f5cef36d0148be4ab2fc15559d6f1ea10b5642d86d338c5"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]予約時の文章（確認）（ReserveConfirmationText）[[/LINK_1]]",
+      "sourceHash": "a1fa78c08de045a7701086ac731031f2a813f7d700c370930285ede9e35329a1",
+      "parts": [
+        {
+          "source": "予約時の文章（確認）（ReserveConfirmationText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reservation Confirmation Text (ReserveConfirmationText)[[/LINK_1]]",
+      "contextHash": "a1fa78c08de045a7701086ac731031f2a813f7d700c370930285ede9e35329a1"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]予約時の文章（はい）（ReserveYesText）[[/LINK_1]]",
+      "sourceHash": "136f8c78d53186710b7d887da60c41dfed1a08a21cb85e21835796d14bdc1da1",
+      "parts": [
+        {
+          "source": "予約時の文章（はい）（ReserveYesText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reservation Yes Text (ReserveYesText)[[/LINK_1]]",
+      "contextHash": "136f8c78d53186710b7d887da60c41dfed1a08a21cb85e21835796d14bdc1da1"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]予約時の文章（いいえ）（ReserveNoText）[[/LINK_1]]",
+      "sourceHash": "95cb43320dfa079c04b11d5aa8c1e13170b10d606496265f60e7f723df6ce328",
+      "parts": [
+        {
+          "source": "予約時の文章（いいえ）（ReserveNoText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reservation No Text (ReserveNoText)[[/LINK_1]]",
+      "contextHash": "95cb43320dfa079c04b11d5aa8c1e13170b10d606496265f60e7f723df6ce328"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]予約取消時の文章（確認）（ReserveCancelConfirmationText）[[/LINK_1]]",
+      "sourceHash": "b7827c16b890621f708149a4721eba941389ca397ad3e655419d980126ca78ca",
+      "parts": [
+        {
+          "source": "予約取消時の文章（確認）（ReserveCancelConfirmationText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reservation Cancellation Confirmation Text (ReserveCancelConfirmationText)[[/LINK_1]]",
+      "contextHash": "b7827c16b890621f708149a4721eba941389ca397ad3e655419d980126ca78ca"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]予約取消時の文章（はい）（ReserveCancelYesText）[[/LINK_1]]",
+      "sourceHash": "3c6dc0a64b2d8a924d34ef9b456b302a0cf0ee3998e6dfab744f9d87fc7f4b98",
+      "parts": [
+        {
+          "source": "予約取消時の文章（はい）（ReserveCancelYesText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reservation Cancellation Yes Text (ReserveCancelYesText)[[/LINK_1]]",
+      "contextHash": "3c6dc0a64b2d8a924d34ef9b456b302a0cf0ee3998e6dfab744f9d87fc7f4b98"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]予約取消時の文章（いいえ）（ReserveCancelNoText）[[/LINK_1]]",
+      "sourceHash": "b66e492902c9e23c4e3b763b6912ec297263aa0622b11f06d6a0739e5418882b",
+      "parts": [
+        {
+          "source": "予約取消時の文章（いいえ）（ReserveCancelNoText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reservation Cancellation No Text (ReserveCancelNoText)[[/LINK_1]]",
+      "contextHash": "b66e492902c9e23c4e3b763b6912ec297263aa0622b11f06d6a0739e5418882b"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]予約スキルの習得文（LearnReserveSkillText）[[/LINK_1]]",
+      "sourceHash": "ccc9d7941a99b51792a9c18d851854286c0ebeed43a1de7efa6b5515a11ad83e",
+      "parts": [
+        {
+          "source": "予約スキルの習得文（LearnReserveSkillText）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reserved Skill Learning Text (LearnReserveSkillText)[[/LINK_1]]",
+      "contextHash": "ccc9d7941a99b51792a9c18d851854286c0ebeed43a1de7efa6b5515a11ad83e"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]ＳＰ不足スキルの表示変更（SpecifySkillCanLearn）[[/LINK_1]]",
+      "sourceHash": "e7d36bac5f83cf0da3854e80cbe7e26e2016be72a5be39d4bbc3a4bd353c54e0",
+      "parts": [
+        {
+          "source": "ＳＰ不足スキルの表示変更（SpecifySkillCanLearn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Display of Skills with Insufficient SP (SpecifySkillCanLearn)[[/LINK_1]]",
+      "contextHash": "e7d36bac5f83cf0da3854e80cbe7e26e2016be72a5be39d4bbc3a4bd353c54e0"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "なお、前提として[[LINK_1]]スキルツリープラグイン[[/LINK_1]]が必要です。",
+      "sourceHash": "cf0f3c7aa4bc48b995e491f5a7624bb527c80fc7e51722a904ce085511b8075b",
+      "parts": [
+        {
+          "source": "なお、前提として",
+          "link": false
+        },
+        {
+          "source": "スキルツリープラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が必要です。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]Skill Tree Plugin[[/LINK_1]] is required as a prerequisite.",
+      "contextHash": "cf0f3c7aa4bc48b995e491f5a7624bb527c80fc7e51722a904ce085511b8075b"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "ない場合はリンク先（[[LINK_1]]サンプル[[/LINK_1]]、[[LINK_2]]解説[[/LINK_2]]）を参考に導入してください。",
+      "sourceHash": "184d19ff26153e200b5dfcf9ee68ab2b2eff48c70be86f6eddf86b9cf6a21459",
+      "parts": [
+        {
+          "source": "ない場合はリンク先（",
+          "link": false
+        },
+        {
+          "source": "サンプル",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "解説",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）を参考に導入してください。",
+          "link": false
+        }
+      ],
+      "translation": "If it is not installed, refer to the linked [[LINK_1]]sample[[/LINK_1]] and [[LINK_2]]explanation[[/LINK_2]] for instructions.",
+      "contextHash": "184d19ff26153e200b5dfcf9ee68ab2b2eff48c70be86f6eddf86b9cf6a21459"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "スキルツリー画面でＳＰが足りないスキルを選択すると、予約できます。": "When you select a skill that you do not have enough SP to learn on the skill tree screen, you can reserve it.",
+    "予約したスキルはＳＰが条件を満たした時点で、自動的に習得されます。": "Reserved skills are automatically learned once you have enough SP.",
+    "さらにスキルツリー画面が自動で開かれます。": "The skill tree screen will also open automatically.",
+    "※スキルツリーが開くタイミングは戦闘終了後またはイベント終了後です。イベント途中でもプラグインコマンド（ＭＺのみ）で強制的に呼び出すこともできます。": "※The skill tree opens after a battle or event ends. You can also force it to open during an event using a plugin command (MZ only).",
+    "※同時に複数のアクターがスキルを習得した場合は、最も先頭に近いアクターのスキルツリーが開かれます。": "※If multiple actors learn skills at the same time, the skill tree of the actor closest to the front of the party will open.",
+    "目次": "Table of Contents",
+    "【その他】": "[Other]",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_U_SkillTreeReserve.js": "NRP_U_SkillTreeReserve.js ",
+    "ver1.001（2022/08/12）": "ver1.001 (2022/08/12) ",
+    "上記の三つが必須です。": "The three items above are required.",
+    "さらに当プラグインを上記プラグインの下に配置してください。": "Also, place this plugin below the plugins listed above.",
+    "更新履歴（History）": "Update History (History)",
+    "2022/08/07 -> 2022/08/12（ver1.00 -> 1.001）": "2022/08/07 -> 2022/08/12 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "NRP_VisualTurn.jsがないとエラーになる不具合修正。": "Fixed a bug that caused an error when NRP_VisualTurn.js was missing.",
+    "（2022/08/12 ver1.001）": " (2022/08/12 ver1.001) ",
+    "利用規約（Terms）": "Terms of Use (Terms)",
+    "元のプラグインの処理を流用しているため、ライセンスも同じく、ＭＩＴライセンスとなります。": "Because this plugin reuses code from the original plugin, it is also released under the MIT License.",
+    "元の作者様とは関係なく、あくまで砂川赳が独自に作った代物であることにご注意ください。": "Please note that this plugin is an original creation by Takeshi Sunagawa and is unrelated to the original author.",
+    "ＭＺ用プラグインコマンド（Plugin Command MZ）": "Plugin Commands for MZ (Plugin Command MZ)",
+    "予約スキル習得後ツリー呼出": "Open Tree After Learning a Reserved Skill",
+    "予約スキル習得後にこのコマンドを実行すると、スキルツリーを呼び出します。": "Running this command after learning a reserved skill opens the skill tree.",
+    "該当スキルがない場合は無視されます。": "It is ignored if there is no applicable skill.",
+    "なお、ＳＰ獲得処理の直後にコマンドを実行すると、スキル習得メッセージより先にスキルツリーが呼び出されてしまう模様です。": "If you run the command immediately after processing SP acquisition, the skill tree may open before the skill-learning message.",
+    "ウェイト（１フレームでＯＫ）を入れると解決できます。": "You can resolve this by adding a wait (one frame is sufficient).",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "戦闘時に習得（LearnTimingBattle）": "Learn During Battle (LearnTimingBattle)",
+    "戦闘時に予約スキルの習得処理を行います。": "Performs the learning process for reserved skills during battle.",
+    "主に戦闘終了後にＳＰを獲得した場合を想定しています。": "This is mainly intended for cases where SP is acquired after a battle ends.",
+    "非戦闘時に習得（LearnTimingNotBattle）": "Learn Outside of Battle (LearnTimingNotBattle)",
+    "非戦闘時に予約スキルの習得処理を行います。": "Performs the learning process for reserved skills outside of battle.",
+    "スクリプトなどによって、戦闘以外でＳＰを獲得した場合を想定しています。": "This is intended for cases where SP is acquired outside of battle through a script or similar means.",
+    "予約スキルの枠線色（ReserveRectColor）": "Reserved Skill Border Color (ReserveRectColor)",
+    "予約中のスキルのアイコンを囲む枠線の色を指定します。": "Specifies the color of the border surrounding the icon of a reserved skill.",
+    "スキル予約時の効果音名（ReserveSkillSeFileName）": "Sound Effect Filename When Reserving a Skill (ReserveSkillSeFileName)",
+    "スキルを予約したときに再生するSEのファイル名を指定します。": "Specifies the filename of the SE played when a skill is reserved.",
+    "スキル予約時の効果音量（ReserveSkillSeVolume）": "Sound Effect Volume When Reserving a Skill (ReserveSkillSeVolume)",
+    "スキルを予約したときに再生するSEのvolumeを指定します。": "Specifies the volume of the SE played when a skill is reserved.",
+    "スキル予約時の効果音ピッチ（ReserveSkillSePitch）": "Sound Effect Pitch When Reserving a Skill (ReserveSkillSePitch)",
+    "スキルを予約したときに再生するSEのpitchを指定します。": "Specifies the pitch of the SE played when a skill is reserved.",
+    "スキル予約時の効果音位相（ReserveSkillSePan）": "Sound Effect Pan When Reserving a Skill (ReserveSkillSePan)",
+    "スキルを予約したときに再生するSEのpanを指定します。": "Specifies the pan of the SE played when a skill is reserved.",
+    "予約時の文章（確認）（ReserveConfirmationText）": "Text When Reserving (Confirmation) (ReserveConfirmationText)",
+    "スキルを予約する際の確認用文章です。": "This is the confirmation text displayed when reserving a skill.",
+    "%1:消費するSP値, %2:SP名, %3:取得するスキル名": "%1: SP cost, %2: SP name, %3: skill name to learn",
+    "予約時の文章（はい）（ReserveYesText）": "Text When Reserving (Yes) (ReserveYesText)",
+    "スキルを予約する場合のテキストを指定します。": "Specifies the text displayed when reserving a skill.",
+    "予約時の文章（いいえ）（ReserveNoText）": "Text When Reserving (No) (ReserveNoText)",
+    "スキルを予約しない場合のテキストを指定します。": "Specifies the text displayed when not reserving a skill.",
+    "予約取消時の文章（確認）（ReserveCancelConfirmationText）": "Text When Canceling a Reservation (Confirmation) (ReserveCancelConfirmationText)",
+    "スキルの予約を取り消す際の確認用文章です。": "This is the confirmation text displayed when canceling a skill reservation.",
+    "予約取消時の文章（はい）（ReserveCancelYesText）": "Text When Canceling a Reservation (Yes) (ReserveCancelYesText)",
+    "スキルの予約を取り消す場合のテキストを指定します。": "Specify the text displayed when canceling a skill reservation.",
+    "予約取消時の文章（いいえ）（ReserveCancelNoText）": "Text When Canceling a Reservation (No) (ReserveCancelNoText)",
+    "スキルの予約を取り消さない場合のテキストを指定します。": "Specify the text displayed when not canceling a skill reservation.",
+    "予約スキルの習得文（LearnReserveSkillText）": "Text for Learning a Reserved Skill (LearnReserveSkillText)",
+    "予約したスキルを習得した際の文章です。": "This is the text displayed when a reserved skill is learned.",
+    "%1:アクター名, %2:取得するスキル名": "%1: actor name, %2: skill name to learn",
+    "ＳＰ不足スキルの表示変更（SpecifySkillCanLearn）": "Change the Display of Skills with Insufficient SP (SpecifySkillCanLearn)",
+    "ＳＰが不足しているスキルの表示を変更します。": "Changes the display of skills for which there is insufficient SP.",
+    "ＳＰ不足なら半透明、条件未達なら暗く表示します。": "Skills with insufficient SP are displayed semi-transparently, while skills with unmet requirements are displayed dimmed."
+  }
+}

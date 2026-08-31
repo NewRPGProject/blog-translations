@@ -1,0 +1,494 @@
+{
+  "articleId": "483887712",
+  "sourceUrl": "https://newrpg.seesaa.net/article/483887712.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "b26097c9f8f0594e1d9ea230d3c26d4fa8755d1a9856950d7671f779e1403ae7",
+  "translatedAt": "2026-08-31T05:34:44.272Z",
+  "title": "Allow Off-Screen Event Autonomous Movement [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "画面外イベントの自律移動を許可【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "f7ca803ad58eb149233b94d384a8e1b1409bdd798a6bbe21af430d9bf7f37b5a",
+      "translation": "Allow Off-Screen Event Autonomous Movement [RPG Maker MZ & MV Plugin]",
+      "contextHash": "f7ca803ad58eb149233b94d384a8e1b1409bdd798a6bbe21af430d9bf7f37b5a"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "通常、イベントの自律移動に設定された動作は、イベントの位置が画面からある程度外れると停止する仕様になっています。",
+      "sourceHash": "e1102ca006d968c4cf022bf8f012bebd062688bb60ec1ef55fccabe38823358b",
+      "translation": "Normally, movement set as an event's autonomous movement stops when the event moves a certain distance off-screen.",
+      "contextHash": "e1102ca006d968c4cf022bf8f012bebd062688bb60ec1ef55fccabe38823358b"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "この仕様は処理を軽減するための措置だと思われますが、場合によっては困ることがあります。",
+      "sourceHash": "6157ccefbc64d3ffab7ba51f6be14a52cf64e14bc4ab7ced852752a8baff95a6",
+      "translation": "This is presumably intended to reduce processing load, but it can sometimes cause problems.",
+      "contextHash": "6157ccefbc64d3ffab7ba51f6be14a52cf64e14bc4ab7ced852752a8baff95a6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "例えば……",
+      "sourceHash": "c1cd6579a35677239f7e66be3ad6d39b458355337e2575625f7f4c8f7a4d56dd",
+      "translation": "For example...",
+      "contextHash": "c1cd6579a35677239f7e66be3ad6d39b458355337e2575625f7f4c8f7a4d56dd"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "画面外を含む複数のイベントで動作タイミングを合わせたい場合",
+      "sourceHash": "c1254ac1eaad3398233706658458e6c339370a0773697acf992bf9a82a84d0c9",
+      "translation": "When you want to synchronize the movement timing of multiple events, including off-screen events",
+      "contextHash": "c1254ac1eaad3398233706658458e6c339370a0773697acf992bf9a82a84d0c9"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "画面外でも動作するイベントを作成したい場合",
+      "sourceHash": "5a26dfbaeeb1a9351dbbb8cd5d2efcb4ffaf0b8fc897f3f4351387df0d66bf27",
+      "translation": "When you want to create events that operate even when off-screen",
+      "contextHash": "5a26dfbaeeb1a9351dbbb8cd5d2efcb4ffaf0b8fc897f3f4351387df0d66bf27"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "などです。",
+      "sourceHash": "8f8ca9e978e25e4e4dd85583994b7e71797d1459891874593ee8f24064cbbcbb",
+      "translation": "and so on.",
+      "contextHash": "8f8ca9e978e25e4e4dd85583994b7e71797d1459891874593ee8f24064cbbcbb"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "上記は戦争イベントを想定した例です。兵士と魔物がぶつかり合っています。",
+      "sourceHash": "9ff97ced007403887710c523d35f21172f818eebcff909dbdf01ba1606a758af",
+      "translation": "The above is an example depicting a battle. Soldiers and monsters are clashing.",
+      "contextHash": "9ff97ced007403887710c523d35f21172f818eebcff909dbdf01ba1606a758af"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ところが、右側のイベントの動作タイミングがズレてチグハグになっています。これは画面内に入るタイミング（＝動作開始するタイミング）がイベントによって異なるために起こる現象です。",
+      "sourceHash": "bf523de694ee4167d4e50993eae4130c733de81a90a11975fbb4fd3ced563b6b",
+      "translation": "However, the movement timing of the events on the right is out of sync and disjointed. This occurs because the timing at which events enter the screen (i.e., the timing at which they start moving) differs between events.",
+      "contextHash": "bf523de694ee4167d4e50993eae4130c733de81a90a11975fbb4fd3ced563b6b"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "こういった状況に対処するため、このプラグインではイベントの自律移動を画面外でも実行できるようにします。",
+      "sourceHash": "c2011c3ca5c0000c095b1e061d4719fbea2174abc8021404ea46294831279dc2",
+      "translation": "To address situations like these, this plugin allows events' autonomous movement to be executed even when they are off-screen.",
+      "contextHash": "c2011c3ca5c0000c095b1e061d4719fbea2174abc8021404ea46294831279dc2"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "設定方法は以下の三通りです。お好きな方法をお使いください。",
+      "sourceHash": "3918d00ab8d8c1bb894185d9098f68e9799a92ea091735397b359b0483f41fe0",
+      "translation": "There are three ways to configure this. Use whichever method you prefer.",
+      "contextHash": "3918d00ab8d8c1bb894185d9098f68e9799a92ea091735397b359b0483f41fe0"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "イベント単位でメモ欄に設定",
+      "sourceHash": "19d82a9a7a822be7ef52cda11bb152aa6dbc9230118115bfa7a8f23e8892858f",
+      "translation": "Configure it in the note field on an event-by-event basis",
+      "contextHash": "19d82a9a7a822be7ef52cda11bb152aa6dbc9230118115bfa7a8f23e8892858f"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "プラグインコマンドで一時的に有効化",
+      "sourceHash": "8070e086fd77eb2a5c0119faf9aecf6dc1a103043f7467405238570c891c2980",
+      "translation": "Temporarily enable it with a plugin command",
+      "contextHash": "8070e086fd77eb2a5c0119faf9aecf6dc1a103043f7467405238570c891c2980"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "プラグインパラメータで常に有効化",
+      "sourceHash": "4d886ae3acd69bab1ffbcba396314f57cacfe90c9ff6eae29e253f90536bf685",
+      "translation": "Always enable it using a plugin parameter",
+      "contextHash": "4d886ae3acd69bab1ffbcba396314f57cacfe90c9ff6eae29e253f90536bf685"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the file below and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※Both MV and MZ are supported by either plugin.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EventNearScreen.js",
+      "sourceHash": "8f63c4007c3e1380321c83db089caac06c4906fe400bdb849bc3c1cb62e5415b",
+      "translation": "NRP_EventNearScreen.js ",
+      "contextHash": "5c171b54d755a11c42959de3125cebf0b13049e5aa888aed66c259eaca1e7ebd"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ver1.01（2023/05/31）",
+      "sourceHash": "1f8349235ccfff89e8246916cab8a095d9e7774636cc44250fd084d4b8ad51a8",
+      "translation": "ver1.01 (2023/05/31) ",
+      "contextHash": "5c171b54d755a11c42959de3125cebf0b13049e5aa888aed66c259eaca1e7ebd"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2023/05/31（ver1.01）",
+      "sourceHash": "9a28eb8c0618f5b682161dae1bf0107e5a86293e12454d73c36eb1c1d5131cf3",
+      "translation": "2023/05/31 (ver1.01) ",
+      "contextHash": "9a28eb8c0618f5b682161dae1bf0107e5a86293e12454d73c36eb1c1d5131cf3"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "英語版のヘルプが完全に誤っていたので修正。",
+      "sourceHash": "73d0fd3b2831dbc2b31a1c5476b06b7c5d96a8618aa9b72466c3b3e0f0fc1499",
+      "translation": "Fixed the English help, which was completely incorrect.",
+      "contextHash": "73d0fd3b2831dbc2b31a1c5476b06b7c5d96a8618aa9b72466c3b3e0f0fc1499"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2021/10/15（ver1.00）",
+      "sourceHash": "b348dfb11a84e237ef85a8fb3171a0f6a5c8b2c95cce7251d9019a60dea4a8cd",
+      "translation": "2021/10/15 (ver1.00) ",
+      "contextHash": "b348dfb11a84e237ef85a8fb3171a0f6a5c8b2c95cce7251d9019a60dea4a8cd"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "イベントのメモ欄（Note of Events）",
+      "sourceHash": "3393f18f7691de42cc3aa07b140e8bee64959296040ba8f3afc2c13ddf6ea837",
+      "translation": "Event Note Field (Note of Events)",
+      "contextHash": "3393f18f7691de42cc3aa07b140e8bee64959296040ba8f3afc2c13ddf6ea837"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "イベントの自律移動を常に有効にします。",
+      "sourceHash": "fb3e6e7082df3ed05c03bcc72c9b44130abc05f72e39deb19b9cf1fb9c163fa3",
+      "translation": "Always enable autonomous movement for the event.",
+      "contextHash": "fb3e6e7082df3ed05c03bcc72c9b44130abc05f72e39deb19b9cf1fb9c163fa3"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+      "sourceHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985",
+      "translation": "Plugin Command for MZ (PluginCommandMZ)",
+      "contextHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "画面外の自律移動",
+      "sourceHash": "485f53c5416bb7c4cf5acd41ca245342526d74030b5ae9783c75ce3ebedd927d",
+      "translation": "Off-Screen Autonomous Movement",
+      "contextHash": "485f53c5416bb7c4cf5acd41ca245342526d74030b5ae9783c75ce3ebedd927d"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "イベントに対して画面外の自律移動を有効にします。",
+      "sourceHash": "29eda0afbc978aa7f395758943d6a42598cac83505d44e15fb054e5aa6bc045d",
+      "translation": "Enables off-screen autonomous movement for events.",
+      "contextHash": "29eda0afbc978aa7f395758943d6a42598cac83505d44e15fb054e5aa6bc045d"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "オフにすることも可能です。",
+      "sourceHash": "d9b100b3324988b3a0f18d9133d3de1aa2ed784622b97be61f306d66579c66d7",
+      "translation": "It can also be turned off.",
+      "contextHash": "d9b100b3324988b3a0f18d9133d3de1aa2ed784622b97be61f306d66579c66d7"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "全てのイベントが対象となります。",
+      "sourceHash": "b6451daea099d6c0b14f6945ef47901a3f76b466a1e32a0807fe86731605b533",
+      "translation": "All events are affected.",
+      "contextHash": "b6451daea099d6c0b14f6945ef47901a3f76b466a1e32a0807fe86731605b533"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "設定は画面を切り替えても有効なままです。",
+      "sourceHash": "ef6bcf36dd2897addf5b0eac1724ecd7150134810083860994d37d306cac2b38",
+      "translation": "This setting remains active even when changing maps.",
+      "contextHash": "ef6bcf36dd2897addf5b0eac1724ecd7150134810083860994d37d306cac2b38"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ただし、セーブデータには引き継がれません。",
+      "sourceHash": "6edbc44fc91bb8af9b66759c088c22ca29317609f8a1c77fd75493c20b7b9863",
+      "translation": "However, it is not carried over to save data.",
+      "contextHash": "6edbc44fc91bb8af9b66759c088c22ca29317609f8a1c77fd75493c20b7b9863"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（PluginCommandMV）",
+      "sourceHash": "6ca0f5c392df82c64b4ef7deb797c246265beb8f4cf38134205b69706e8136a7",
+      "translation": "Plugin Command for MV (PluginCommandMV)",
+      "contextHash": "6ca0f5c392df82c64b4ef7deb797c246265beb8f4cf38134205b69706e8136a7"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "処理内容はＭＺ版と同じです。",
+      "sourceHash": "81a587f1d6073f17654ea8f85e25e5f70c241329b2e3fa2a458aa10e9d5847ee",
+      "translation": "The functionality is the same as in the MZ version.",
+      "contextHash": "81a587f1d6073f17654ea8f85e25e5f70c241329b2e3fa2a458aa10e9d5847ee"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※大文字小文字は不問。[]は含めないでください。",
+      "sourceHash": "b2225ab29fae281b7f7ba0158d2d4f1edb24fbd238c3d9859b40c20b5c468e99",
+      "translation": "※Case does not matter. Do not include [].",
+      "contextHash": "b2225ab29fae281b7f7ba0158d2d4f1edb24fbd238c3d9859b40c20b5c468e99"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "常に自律移動を有効（AlwaysSelfMovement）",
+      "sourceHash": "4ed79881316dac6159bc6e6bea4404aecf6da72c2a46371d67bbaea22c0229b0",
+      "translation": "Always Enable Autonomous Movement (AlwaysSelfMovement)",
+      "contextHash": "4ed79881316dac6159bc6e6bea4404aecf6da72c2a46371d67bbaea22c0229b0"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "画面外のイベントに対しても常に自律移動を有効にします。",
+      "sourceHash": "59565e7a1eb4c5f27c2e8af53b10b44dfe9fd485ee8e7affedeb8125b8bb96c2",
+      "translation": "Always enable autonomous movement for off-screen events as well.",
+      "contextHash": "59565e7a1eb4c5f27c2e8af53b10b44dfe9fd485ee8e7affedeb8125b8bb96c2"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]イベントのメモ欄（Note of Events）[[/LINK_1]]",
+      "sourceHash": "ead5f032c83289476aa92b921b71fb2ff0362687c35542d25fa3c663b13603fd",
+      "parts": [
+        {
+          "source": "イベントのメモ欄（Note of Events）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Event Note Field (Note of Events)[[/LINK_1]]",
+      "contextHash": "ead5f032c83289476aa92b921b71fb2ff0362687c35542d25fa3c663b13603fd"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（PluginCommandMZ）[[/LINK_1]]",
+      "sourceHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (PluginCommandMZ)[[/LINK_1]]",
+      "contextHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用プラグインコマンド（PluginCommandMV）[[/LINK_1]]",
+      "sourceHash": "3a84c96d2126b2c6069bd0d1675927b3f22daea42eb25ec886b52aa4c4a69be0",
+      "parts": [
+        {
+          "source": "ＭＶ用プラグインコマンド（PluginCommandMV）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MV (PluginCommandMV)[[/LINK_1]]",
+      "contextHash": "3a84c96d2126b2c6069bd0d1675927b3f22daea42eb25ec886b52aa4c4a69be0"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]常に自律移動を有効（AlwaysSelfMovement）[[/LINK_1]]",
+      "sourceHash": "218ba4f74a97471d26a3965ccb99ca170d6c9f689cc04d2f989b72c91e0b4081",
+      "parts": [
+        {
+          "source": "常に自律移動を有効（AlwaysSelfMovement）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Always Enable Autonomous Movement (AlwaysSelfMovement)[[/LINK_1]]",
+      "contextHash": "218ba4f74a97471d26a3965ccb99ca170d6c9f689cc04d2f989b72c91e0b4081"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "通常、イベントの自律移動に設定された動作は、イベントの位置が画面からある程度外れると停止する仕様になっています。": "Normally, movement set as an event's autonomous movement stops when the event moves a certain distance off-screen.",
+    "この仕様は処理を軽減するための措置だと思われますが、場合によっては困ることがあります。": "This is presumably intended to reduce processing load, but it can sometimes cause problems.",
+    "例えば……": "For example...",
+    "画面外を含む複数のイベントで動作タイミングを合わせたい場合": "When you want to synchronize the movement timing of multiple events, including off-screen events",
+    "画面外でも動作するイベントを作成したい場合": "When you want to create events that operate even when off-screen",
+    "などです。": "and so on.",
+    "上記は戦争イベントを想定した例です。兵士と魔物がぶつかり合っています。": "The above is an example depicting a battle. Soldiers and monsters are clashing.",
+    "ところが、右側のイベントの動作タイミングがズレてチグハグになっています。これは画面内に入るタイミング（＝動作開始するタイミング）がイベントによって異なるために起こる現象です。": "However, the movement timing of the events on the right is out of sync and disjointed. This occurs because the timing at which events enter the screen (i.e., the timing at which they start moving) differs between events.",
+    "こういった状況に対処するため、このプラグインではイベントの自律移動を画面外でも実行できるようにします。": "To address situations like these, this plugin allows events' autonomous movement to be executed even when they are off-screen.",
+    "設定方法は以下の三通りです。お好きな方法をお使いください。": "There are three ways to configure this. Use whichever method you prefer.",
+    "イベント単位でメモ欄に設定": "Configure it in the note field on an event-by-event basis",
+    "プラグインコマンドで一時的に有効化": "Temporarily enable it with a plugin command",
+    "プラグインパラメータで常に有効化": "Always enable it using a plugin parameter",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the file below and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※Both MV and MZ are supported by either plugin.",
+    "NRP_EventNearScreen.js": "NRP_EventNearScreen.js ",
+    "ver1.01（2023/05/31）": "ver1.01 (2023/05/31) ",
+    "更新履歴（History）": "Update History (History)",
+    "2023/05/31（ver1.01）": "2023/05/31 (ver1.01) ",
+    "英語版のヘルプが完全に誤っていたので修正。": "Fixed the English help, which was completely incorrect.",
+    "2021/10/15（ver1.00）": "2021/10/15 (ver1.00) ",
+    "公開！": "Released!",
+    "イベントのメモ欄（Note of Events）": "Event Note Field (Note of Events)",
+    "イベントの自律移動を常に有効にします。": "Always enable autonomous movement for the event.",
+    "ＭＺ用プラグインコマンド（PluginCommandMZ）": "Plugin Command for MZ (PluginCommandMZ)",
+    "画面外の自律移動": "Off-Screen Autonomous Movement",
+    "イベントに対して画面外の自律移動を有効にします。": "Enables off-screen autonomous movement for events.",
+    "オフにすることも可能です。": "It can also be turned off.",
+    "全てのイベントが対象となります。": "All events are affected.",
+    "設定は画面を切り替えても有効なままです。": "This setting remains active even when changing maps.",
+    "ただし、セーブデータには引き継がれません。": "However, it is not carried over to save data.",
+    "ＭＶ用プラグインコマンド（PluginCommandMV）": "Plugin Command for MV (PluginCommandMV)",
+    "処理内容はＭＺ版と同じです。": "The functionality is the same as in the MZ version.",
+    "※大文字小文字は不問。[]は含めないでください。": "※Case does not matter. Do not include [].",
+    "プラグインパラメータ": "Plugin Parameters",
+    "常に自律移動を有効（AlwaysSelfMovement）": "Always Enable Autonomous Movement (AlwaysSelfMovement)",
+    "画面外のイベントに対しても常に自律移動を有効にします。": "Always enable autonomous movement for off-screen events as well."
+  }
+}
