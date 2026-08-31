@@ -416,6 +416,15 @@ function normalizeEnglishAscii(text) {
         .replace(/、[ \t]*/g, ", ");
 }
 
+// A translated link is rebuilt as its own DOM node. Ensure that an English
+// word or date following a closing placeholder cannot be glued to that link.
+function normalizeLinkMarkerBoundarySpaces(text) {
+    return String(text).replace(
+        /(\[\[\/LINK_\d+\]\])(?=[A-Za-z0-9])/g,
+        "$1 "
+    );
+}
+
 // Some old dialogue is split over several text nodes. In that situation a
 // translation can retain only the Japanese opening quote (「/『) while the
 // closing side becomes an English quote. The original source tells us which
@@ -703,10 +712,10 @@ function makeLineFragment(line, matchedNodes) {
     const lastNode = matchedNodes[matchedNodes.length - 1];
     const { indentation, noteMarker, trailing } =
         getOriginalLineFormat(firstNode.nodeValue);
-    let translation = preserveCircledNumberMarkers(
+    let translation = normalizeLinkMarkerBoundarySpaces(preserveCircledNumberMarkers(
         line.source,
         normalizeJapaneseQuoteBoundaries(line.source, line.translation)
-    )
+    ))
         .replace(/^[\s\u3000]*/u, "")
         .replace(/[\s\u3000]*$/u, "");
     // See restoreOriginalLineFormat: an ordinary leading space would be
