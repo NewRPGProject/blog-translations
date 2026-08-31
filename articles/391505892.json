@@ -1,0 +1,310 @@
+{
+  "articleId": "391505892",
+  "sourceUrl": "https://newrpg.seesaa.net/article/391505892.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "53fbcac626e16973f413cd20c82b8fa5626c1491e7961dd71a47e75ff900a3da",
+  "translatedAt": "2026-08-31T10:37:05.510Z",
+  "title": "[Classic Long-Form RPG] Two Arts",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【王道長編RPG】奥義二本立て",
+      "sourceHash": "ab18518dbcb14ef324a953f43f5fad6271fad274f6956fab9ae19763c89b08c7",
+      "translation": "[Classic Long-Form RPG] Two Arts",
+      "contextHash": "ab18518dbcb14ef324a953f43f5fad6271fad274f6956fab9ae19763c89b08c7"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "地味にマップチップを強化しています。柱とか床とか机とか椅子とか石像とか。",
+      "sourceHash": "99f7bf7881b60fba9659754de82a080ce6ffe111b38ab74c450d8bb66ded6a41",
+      "translation": "I've been quietly enhancing the map tiles—pillars, floors, desks, chairs, stone statues, and so on.",
+      "contextHash": "99f7bf7881b60fba9659754de82a080ce6ffe111b38ab74c450d8bb66ded6a41"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "さて、本題。前から仕様策定を放置していた奥義ゲージをついに本実装しました。青と赤の二本立てです。",
+      "sourceHash": "2d807b15d425d9efb7fa9feac35aa5502bd2800a8a1c13fd418bfd759367511e",
+      "translation": "Now, to the main topic. I've finally fully implemented the Arts gauges whose specifications I'd been neglecting for some time. There are two: blue and red.",
+      "contextHash": "2d807b15d425d9efb7fa9feac35aa5502bd2800a8a1c13fd418bfd759367511e"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "・青ゲージはストレートな攻撃系の奥義。攻撃などの行動をとった際に増加します。",
+      "sourceHash": "49eefedaff1eed2ef74d3a3403f947b5d3af601db3307656b48a732beb39ae38",
+      "translation": "・The blue gauge is for straightforward offensive Arts. It increases when taking actions such as attacking.",
+      "contextHash": "49eefedaff1eed2ef74d3a3403f947b5d3af601db3307656b48a732beb39ae38"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "・赤ゲージは補助寄りの奥義。能力上昇や全体回復など各キャラによって効果が異なります。補助系と言いましたが、キャラによっては攻撃的な技もあります。その辺も含めてキャラに個性が出せれば。ゲージはダメージを受けた際に増加します。",
+      "sourceHash": "85e9a13916b95673de8cb94c6c3e02e9cf5f71224f5b1779edf170d80bdb97a8",
+      "translation": "・The red gauge is for more support-oriented Arts. Its effects vary by character, such as increasing stats or restoring the entire party's HP. I called them support abilities, but some characters also have offensive techniques. I hope this will help give each character their own individuality. The gauge increases when taking damage.",
+      "contextHash": "85e9a13916b95673de8cb94c6c3e02e9cf5f71224f5b1779edf170d80bdb97a8"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ってな感じで戦闘に変化を付けられたら面白いなと。",
+      "sourceHash": "825e6cb66a656374a758c5bc6115fc758e5a8f0ef0d547ea0fe4a462686e99dd",
+      "translation": "I thought it would be interesting if this could add some variety to battles.",
+      "contextHash": "825e6cb66a656374a758c5bc6115fc758e5a8f0ef0d547ea0fe4a462686e99dd"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "しかし、実際に実装してみると意外と考えることが多くて難しい……。一番悩んだのはゲージの増加条件です。赤ゲージについては、ＦＦ７のリミット技と同じで難しく考えることはありません。「大きなダメージを受けるほど、大きく溜まる」ってわけですね。",
+      "sourceHash": "3b6b42868736b475057c413f916bf91247ff381ec9470db413c51e1ec8134b39",
+      "translation": "However, once I actually started implementing it, there turned out to be more to consider than expected, and it was difficult... The biggest challenge was deciding how the gauges should increase. The red gauge isn't particularly complicated; it's the same as FF7's Limit abilities. In other words, \"the more damage you take, the more the gauge fills.\"",
+      "contextHash": "3b6b42868736b475057c413f916bf91247ff381ec9470db413c51e1ec8134b39"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "問題は青ゲージ。同じ要領で「大きなダメージを敵に与えるほど、大きく溜まる」でいいじゃんってなりそうですが、そうはいきません。それをやってしまうと、攻撃の弱いキャラが不利になるからです。それに回復・補助・異常などの行動をとった際にもちゃんとゲージを増加させたいところ。じゃないとダメージ攻撃優遇で脳筋プレイ推奨になっちゃいます。",
+      "sourceHash": "da93fbe47e04629d985a7c3738e22139f0a3abb7c446490c0c8a4938b77652f0",
+      "translation": "The problem was the blue gauge. It might seem fine to use the same approach and have it fill more as you deal more damage to enemies, but that won't work. Doing so would put characters with weaker attacks at a disadvantage. I also want the gauge to increase properly when taking actions such as healing, providing support, or inflicting status ailments. Otherwise, it would favor damage-dealing attacks and encourage mindless brute-force play.",
+      "contextHash": "da93fbe47e04629d985a7c3738e22139f0a3abb7c446490c0c8a4938b77652f0"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "てなわけで、行動が成功した際は固定でゲージ上昇するように設定。敵を倒した時や会心が出た時は多めに上昇します。",
+      "sourceHash": "771df956d9eef0a46a3a697a61ef406ac6d62b47e1a556c3dc989189c151bf56",
+      "translation": "So, I set it to increase by a fixed amount whenever an action succeeds. It increases by more when defeating an enemy or landing a critical hit.",
+      "contextHash": "771df956d9eef0a46a3a697a61ef406ac6d62b47e1a556c3dc989189c151bf56"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "しかし、そこでまた問題発生。多段ヒット技は複数回の行動が行われるため、ゲージの上昇がウナギ登りになってしまいます。多段技の特典にするという考えもありますが、ボス戦で相当有利になりそうな予感。やはり元々の想定になかったことをやってバランスを崩したくない。",
+      "sourceHash": "3906db925c238a7a365adf5857cb587cbff5f198b06ac511d3f07470c1fb3009",
+      "translation": "However, another problem arose. Since multi-hit techniques involve multiple actions, the gauge would shoot up rapidly. Making that a benefit of multi-hit techniques is one option, but I have a feeling it would provide a considerable advantage in boss battles. I don't want to disrupt the balance by doing something that wasn't part of the original plan.",
+      "contextHash": "3906db925c238a7a365adf5857cb587cbff5f198b06ac511d3f07470c1fb3009"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "一番、単純なのはどんな行動をとったにせよ固定でゲージを上昇させることですが、それではちょっと物足りないかなと。",
+      "sourceHash": "e27ed501956f83c66bcae1f0edddeb16a7d32526429202af23f5b31369406157",
+      "translation": "The simplest solution would be to increase the gauge by a fixed amount regardless of the action taken, but that seemed a little unsatisfying.",
+      "contextHash": "e27ed501956f83c66bcae1f0edddeb16a7d32526429202af23f5b31369406157"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "結局、行き着いたのは「行動を当てた対象の数」によって、ゲージを上昇させるというもの。これなら、ボス戦で多段攻撃ばかりになるという事態も防げるはず。",
+      "sourceHash": "a641337bfa7c28132b6f6eb1efe365c1ef88a5120fa7d45993cbb59da7ca0143",
+      "translation": "In the end, I settled on increasing the gauge based on the number of targets hit by the action. This should prevent boss battles from devolving into nothing but multi-hit attacks.",
+      "contextHash": "a641337bfa7c28132b6f6eb1efe365c1ef88a5120fa7d45993cbb59da7ca0143"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "結局は下のような仕様になりました。色々と調整が細かくて実装に１５時間以上もかかってます。",
+      "sourceHash": "52c723500988c2530bce7d0ac97da9f88ac7c210c451e03053c984140e492a33",
+      "translation": "In the end, the specifications turned out as follows. There were so many fine adjustments that implementation took over 15 hours.",
+      "contextHash": "52c723500988c2530bce7d0ac97da9f88ac7c210c451e03053c984140e492a33"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "◆青奥義ゲージの仕様",
+      "sourceHash": "c2ac64aea7c4bc5fe9c93e5477ab9e283cda03976ec60e7f873152944342ca99",
+      "translation": "◆Blue Arts Gauge Specifications",
+      "contextHash": "c2ac64aea7c4bc5fe9c93e5477ab9e283cda03976ec60e7f873152944342ca99"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "・防御を除く行動時に固定値で上昇。",
+      "sourceHash": "36964f024d4cf6c18b071d3905823a8d242a8a81a4aa5458beceb4c46e8b2abd",
+      "translation": "・Increases by a fixed amount when taking actions other than defending.",
+      "contextHash": "36964f024d4cf6c18b071d3905823a8d242a8a81a4aa5458beceb4c46e8b2abd"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "・行動を当てた相手の数によって上昇。",
+      "sourceHash": "975d477bc7d4acac1c25afbbd4562f0fcb84a5c466d88c3806dbcc300b106cf9",
+      "translation": "・Increases based on the number of targets hit by the action.",
+      "contextHash": "975d477bc7d4acac1c25afbbd4562f0fcb84a5c466d88c3806dbcc300b106cf9"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "・会心時にさらに上昇。",
+      "sourceHash": "d1eef84e0a4a3aaedc8199656bbd08a0098191e4cf0e383bfaf5fa2bd2cbacd5",
+      "translation": "・Increases further on a critical hit.",
+      "contextHash": "d1eef84e0a4a3aaedc8199656bbd08a0098191e4cf0e383bfaf5fa2bd2cbacd5"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "・トドメを差した場合にさらに上昇。",
+      "sourceHash": "6783b89cc3c49c642c1666604aecc057fdacdbd3361d0e9b9b082c4c308c9b33",
+      "translation": "・Increases further when delivering the finishing blow.",
+      "contextHash": "6783b89cc3c49c642c1666604aecc057fdacdbd3361d0e9b9b082c4c308c9b33"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "◆赤奥義ゲージの仕様",
+      "sourceHash": "243834dff658c35eab86eb69e37e3f408564e1455cf020693559b7f4093a4292",
+      "translation": "◆Red Arts Gauge Specifications",
+      "contextHash": "243834dff658c35eab86eb69e37e3f408564e1455cf020693559b7f4093a4292"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "・ダメージを受けた際に最大ＨＰとの比率で上昇。",
+      "sourceHash": "02b4b7f81a7b7ce31dbf0eb89716750bdcb687aaec20dcbefeeba3066bc9fd66",
+      "translation": "・Increases in proportion to the damage taken relative to maximum HP.",
+      "contextHash": "02b4b7f81a7b7ce31dbf0eb89716750bdcb687aaec20dcbefeeba3066bc9fd66"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "・状態異常を受けた際に上昇。",
+      "sourceHash": "8ff8cc4e8e7dbf7f571f189f31dea98e529de7b68f8f523bdf26042134d8d28b",
+      "translation": "・Increases when afflicted with a status ailment.",
+      "contextHash": "8ff8cc4e8e7dbf7f571f189f31dea98e529de7b68f8f523bdf26042134d8d28b"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "・回避した際も上昇。",
+      "sourceHash": "8d436c605edc8c45d6ee381a32150dc8cadb1d5fae6b8ffc96de15f0bff96e36",
+      "translation": "・Also increases when evading.",
+      "contextHash": "8d436c605edc8c45d6ee381a32150dc8cadb1d5fae6b8ffc96de15f0bff96e36"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "・防御すると上昇。",
+      "sourceHash": "ebe39f26ee4a3e447409cfb91713d64830fe4feb6e7466d50b4800e9b21e8d11",
+      "translation": "・Increases when defending.",
+      "contextHash": "ebe39f26ee4a3e447409cfb91713d64830fe4feb6e7466d50b4800e9b21e8d11"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "◆共通の仕様",
+      "sourceHash": "a6e0842a8779fbd3df6cc1d45ff2507ba0d67f4b381b9b8635bbfa8751077835",
+      "translation": "◆Common Specifications",
+      "contextHash": "a6e0842a8779fbd3df6cc1d45ff2507ba0d67f4b381b9b8635bbfa8751077835"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "・奥義を習得していない場合はゲージを表示しない。",
+      "sourceHash": "d8f4c60ef3f582cac3382d36ced73486a1b016a1dbe57eaa7c6f3711a7f33fa3",
+      "translation": "・The gauge is not displayed if the character has not learned an Art.",
+      "contextHash": "d8f4c60ef3f582cac3382d36ced73486a1b016a1dbe57eaa7c6f3711a7f33fa3"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "・ターンが回ってきた際にわずかに上昇。",
+      "sourceHash": "3760ed127a69f8977e7ab15b7a1388017f880dd88b42ee5b1047838bf9f8554b",
+      "translation": "・Increases slightly when the character's turn comes around.",
+      "contextHash": "3760ed127a69f8977e7ab15b7a1388017f880dd88b42ee5b1047838bf9f8554b"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "・仲間が戦闘不能になった際に上昇。",
+      "sourceHash": "e1c8e0fe7ff0be761f60b850b5d5581ef600925a706e6101d82e54153d2ddccd",
+      "translation": "・Increases when an ally becomes incapacitated.",
+      "contextHash": "e1c8e0fe7ff0be761f60b850b5d5581ef600925a706e6101d82e54153d2ddccd"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "・満タンになった時は該当キャラにエフェクトをかけて知らせる。",
+      "sourceHash": "cead2d2f2a1254ad56c51ec1758c6e6db741c751aeba587814c19fb184b43119",
+      "translation": "・When full, an effect is applied to the relevant character to notify the player.",
+      "contextHash": "cead2d2f2a1254ad56c51ec1758c6e6db741c751aeba587814c19fb184b43119"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "もっとも、赤ゲージについても「陣形の後ろに配置したキャラが全然たまらないじゃんか！」ってなる可能性もありえます。この種のシステムは初挑戦なので、やはり実際やってみての感触が大事ですね。",
+      "sourceHash": "aa1299ebb3c8696400000ed6697969688058da46c29b7e3b2716f9b2a6b4e74e",
+      "translation": "That said, even with the red gauge, players might end up saying, \"The characters positioned at the back of the formation barely gain any gauge at all!\" This is my first attempt at a system of this kind, so the feel of it when actually played will be important.",
+      "contextHash": "aa1299ebb3c8696400000ed6697969688058da46c29b7e3b2716f9b2a6b4e74e"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "これにて今年の作業を約５００時間消化。驚きの年間２０００時間ペース！ 社会人が年間２０００時間作業を達成できれば、かなりの快挙のような気がします。",
+      "sourceHash": "8837f6744461738fc3f008284033016205e8a63c077390ec5c4b2fcba1075f3c",
+      "translation": "That brings this year's work total to about 500 hours. An astonishing pace of 2,000 hours a year! If a working adult can manage 2,000 hours of work in a year, that feels like quite an achievement.",
+      "contextHash": "8837f6744461738fc3f008284033016205e8a63c077390ec5c4b2fcba1075f3c"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "好調の原因は間違いなく仕事の疲労が激減したことです。システムエンジニアを辞めて、一介のプログラマになってから比較にならないほど楽になりました。なんせ誇張ではなく本当に仕事量が半減しましたので。まったりやっても定時に仕事が終わる幸せ！ 給料１～２割減でこの環境が買えるなら安いものです。",
+      "sourceHash": "61c4d77a7d54de310fce421fe3cec63e04a03f79350ca841d2bdc699251c7d7b",
+      "translation": "The reason things are going so well is undoubtedly that my work-related fatigue has decreased dramatically. After quitting my job as a systems engineer and becoming an ordinary programmer, life became incomparably easier. After all, my workload really was cut in half—not an exaggeration. What a joy to finish work on time even when taking it easy! If a 10–20% pay cut can buy me this kind of environment, it's a bargain.",
+      "contextHash": "61c4d77a7d54de310fce421fe3cec63e04a03f79350ca841d2bdc699251c7d7b"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "ていうか、生活時間の大半を創作に費やしているので、給料が減ったところで、そもそもお金を使う機会がないのです。たまに本を買ったりしますが、それも図書館にない本をたまに買うぐらいなので年間一万円の出費にも届きません。市販ＲＰＧは時間かかり過ぎなので、作品の完成までは基本我慢です。お陰様で１年働く度に、１年ニートやってても生きていけそうなほどの清貧振りです。よって、お金はこうやって創作時間を買うために使うのが、自分の人生にとってはベストなのだと思います。",
+      "sourceHash": "8b20512a5dedd9fb31acc80376a49e539a7c1468a6d732f10acc13127f67517d",
+      "translation": "Actually, I spend most of my waking hours creating things, so even if my salary decreases, I don't really have many opportunities to spend money in the first place. I occasionally buy books, but I only buy books that aren't available at the library, so my annual spending doesn't even reach 10,000 yen. Commercial RPGs take far too much time, so I basically have to abstain until I finish my own work. Thanks to this, after working for a year, I'm frugal enough that I could probably survive even if I spent a year unemployed. Therefore, I think using money to buy creative time like this is the best choice for my life.",
+      "contextHash": "8b20512a5dedd9fb31acc80376a49e539a7c1468a6d732f10acc13127f67517d"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "そんなわけで今年はどんどん創作に時間をつぎ込んでいきます。",
+      "sourceHash": "db416369282bdfe475ded71eac8a28703057535fe7322aa0569a98b9fbd7d9e4",
+      "translation": "So this year, I'll be pouring more and more time into creative work.",
+      "contextHash": "db416369282bdfe475ded71eac8a28703057535fe7322aa0569a98b9fbd7d9e4"
+    }
+  ],
+  "lines": [],
+  "texts": {
+    "地味にマップチップを強化しています。柱とか床とか机とか椅子とか石像とか。": "I've been quietly enhancing the map tiles—pillars, floors, desks, chairs, stone statues, and so on.",
+    "さて、本題。前から仕様策定を放置していた奥義ゲージをついに本実装しました。青と赤の二本立てです。": "Now, to the main topic. I've finally fully implemented the Arts gauges whose specifications I'd been neglecting for some time. There are two: blue and red.",
+    "・青ゲージはストレートな攻撃系の奥義。攻撃などの行動をとった際に増加します。": "・The blue gauge is for straightforward offensive Arts. It increases when taking actions such as attacking.",
+    "・赤ゲージは補助寄りの奥義。能力上昇や全体回復など各キャラによって効果が異なります。補助系と言いましたが、キャラによっては攻撃的な技もあります。その辺も含めてキャラに個性が出せれば。ゲージはダメージを受けた際に増加します。": "・The red gauge is for more support-oriented Arts. Its effects vary by character, such as increasing stats or restoring the entire party's HP. I called them support abilities, but some characters also have offensive techniques. I hope this will help give each character their own individuality. The gauge increases when taking damage.",
+    "ってな感じで戦闘に変化を付けられたら面白いなと。": "I thought it would be interesting if this could add some variety to battles.",
+    "しかし、実際に実装してみると意外と考えることが多くて難しい……。一番悩んだのはゲージの増加条件です。赤ゲージについては、ＦＦ７のリミット技と同じで難しく考えることはありません。「大きなダメージを受けるほど、大きく溜まる」ってわけですね。": "However, once I actually started implementing it, there turned out to be more to consider than expected, and it was difficult... The biggest challenge was deciding how the gauges should increase. The red gauge isn't particularly complicated; it's the same as FF7's Limit abilities. In other words, \"the more damage you take, the more the gauge fills.\"",
+    "問題は青ゲージ。同じ要領で「大きなダメージを敵に与えるほど、大きく溜まる」でいいじゃんってなりそうですが、そうはいきません。それをやってしまうと、攻撃の弱いキャラが不利になるからです。それに回復・補助・異常などの行動をとった際にもちゃんとゲージを増加させたいところ。じゃないとダメージ攻撃優遇で脳筋プレイ推奨になっちゃいます。": "The problem was the blue gauge. It might seem fine to use the same approach and have it fill more as you deal more damage to enemies, but that won't work. Doing so would put characters with weaker attacks at a disadvantage. I also want the gauge to increase properly when taking actions such as healing, providing support, or inflicting status ailments. Otherwise, it would favor damage-dealing attacks and encourage mindless brute-force play.",
+    "てなわけで、行動が成功した際は固定でゲージ上昇するように設定。敵を倒した時や会心が出た時は多めに上昇します。": "So, I set it to increase by a fixed amount whenever an action succeeds. It increases by more when defeating an enemy or landing a critical hit.",
+    "しかし、そこでまた問題発生。多段ヒット技は複数回の行動が行われるため、ゲージの上昇がウナギ登りになってしまいます。多段技の特典にするという考えもありますが、ボス戦で相当有利になりそうな予感。やはり元々の想定になかったことをやってバランスを崩したくない。": "However, another problem arose. Since multi-hit techniques involve multiple actions, the gauge would shoot up rapidly. Making that a benefit of multi-hit techniques is one option, but I have a feeling it would provide a considerable advantage in boss battles. I don't want to disrupt the balance by doing something that wasn't part of the original plan.",
+    "一番、単純なのはどんな行動をとったにせよ固定でゲージを上昇させることですが、それではちょっと物足りないかなと。": "The simplest solution would be to increase the gauge by a fixed amount regardless of the action taken, but that seemed a little unsatisfying.",
+    "結局、行き着いたのは「行動を当てた対象の数」によって、ゲージを上昇させるというもの。これなら、ボス戦で多段攻撃ばかりになるという事態も防げるはず。": "In the end, I settled on increasing the gauge based on the number of targets hit by the action. This should prevent boss battles from devolving into nothing but multi-hit attacks.",
+    "結局は下のような仕様になりました。色々と調整が細かくて実装に１５時間以上もかかってます。": "In the end, the specifications turned out as follows. There were so many fine adjustments that implementation took over 15 hours.",
+    "◆青奥義ゲージの仕様": "◆Blue Arts Gauge Specifications",
+    "・防御を除く行動時に固定値で上昇。": "・Increases by a fixed amount when taking actions other than defending.",
+    "・行動を当てた相手の数によって上昇。": "・Increases based on the number of targets hit by the action.",
+    "・会心時にさらに上昇。": "・Increases further on a critical hit.",
+    "・トドメを差した場合にさらに上昇。": "・Increases further when delivering the finishing blow.",
+    "◆赤奥義ゲージの仕様": "◆Red Arts Gauge Specifications",
+    "・ダメージを受けた際に最大ＨＰとの比率で上昇。": "・Increases in proportion to the damage taken relative to maximum HP.",
+    "・状態異常を受けた際に上昇。": "・Increases when afflicted with a status ailment.",
+    "・回避した際も上昇。": "・Also increases when evading.",
+    "・防御すると上昇。": "・Increases when defending.",
+    "◆共通の仕様": "◆Common Specifications",
+    "・奥義を習得していない場合はゲージを表示しない。": "・The gauge is not displayed if the character has not learned an Art.",
+    "・ターンが回ってきた際にわずかに上昇。": "・Increases slightly when the character's turn comes around.",
+    "・仲間が戦闘不能になった際に上昇。": "・Increases when an ally becomes incapacitated.",
+    "・満タンになった時は該当キャラにエフェクトをかけて知らせる。": "・When full, an effect is applied to the relevant character to notify the player.",
+    "もっとも、赤ゲージについても「陣形の後ろに配置したキャラが全然たまらないじゃんか！」ってなる可能性もありえます。この種のシステムは初挑戦なので、やはり実際やってみての感触が大事ですね。": "That said, even with the red gauge, players might end up saying, \"The characters positioned at the back of the formation barely gain any gauge at all!\" This is my first attempt at a system of this kind, so the feel of it when actually played will be important.",
+    "これにて今年の作業を約５００時間消化。驚きの年間２０００時間ペース！ 社会人が年間２０００時間作業を達成できれば、かなりの快挙のような気がします。": "That brings this year's work total to about 500 hours. An astonishing pace of 2,000 hours a year! If a working adult can manage 2,000 hours of work in a year, that feels like quite an achievement.",
+    "好調の原因は間違いなく仕事の疲労が激減したことです。システムエンジニアを辞めて、一介のプログラマになってから比較にならないほど楽になりました。なんせ誇張ではなく本当に仕事量が半減しましたので。まったりやっても定時に仕事が終わる幸せ！ 給料１～２割減でこの環境が買えるなら安いものです。": "The reason things are going so well is undoubtedly that my work-related fatigue has decreased dramatically. After quitting my job as a systems engineer and becoming an ordinary programmer, life became incomparably easier. After all, my workload really was cut in half—not an exaggeration. What a joy to finish work on time even when taking it easy! If a 10–20% pay cut can buy me this kind of environment, it's a bargain.",
+    "ていうか、生活時間の大半を創作に費やしているので、給料が減ったところで、そもそもお金を使う機会がないのです。たまに本を買ったりしますが、それも図書館にない本をたまに買うぐらいなので年間一万円の出費にも届きません。市販ＲＰＧは時間かかり過ぎなので、作品の完成までは基本我慢です。お陰様で１年働く度に、１年ニートやってても生きていけそうなほどの清貧振りです。よって、お金はこうやって創作時間を買うために使うのが、自分の人生にとってはベストなのだと思います。": "Actually, I spend most of my waking hours creating things, so even if my salary decreases, I don't really have many opportunities to spend money in the first place. I occasionally buy books, but I only buy books that aren't available at the library, so my annual spending doesn't even reach 10,000 yen. Commercial RPGs take far too much time, so I basically have to abstain until I finish my own work. Thanks to this, after working for a year, I'm frugal enough that I could probably survive even if I spent a year unemployed. Therefore, I think using money to buy creative time like this is the best choice for my life.",
+    "そんなわけで今年はどんどん創作に時間をつぎ込んでいきます。": "So this year, I'll be pouring more and more time into creative work."
+  }
+}
