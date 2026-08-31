@@ -80,12 +80,19 @@ jobs:
         continue-on-error: true
         run: node status/generate-article-status.mjs
 
+      - name: Update article title index
+        id: title_index
+        if: always()
+        continue-on-error: true
+        run: node scripts/generate-article-title-index.mjs
+
       - name: Commit completed translations
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add articles/
+          git add common/article-titles.json
           git add status/articles.json
           if (Test-Path ".translation-monitor.json") {
             git add .translation-monitor.json
@@ -103,12 +110,15 @@ jobs:
           }
 
       - name: Report translation failure
-        if: steps.translate.outcome == 'failure' || steps.status.outcome == 'failure'
+        if: steps.translate.outcome == 'failure' || steps.status.outcome == 'failure' || steps.title_index.outcome == 'failure'
         run: |
           if ("${{ steps.translate.outcome }}" -eq "failure") {
             Write-Error "Translation failed after completed articles were saved."
           }
           if ("${{ steps.status.outcome }}" -eq "failure") {
             Write-Error "Status update failed."
+          }
+          if ("${{ steps.title_index.outcome }}" -eq "failure") {
+            Write-Error "Article title index update failed."
           }
           exit 1
