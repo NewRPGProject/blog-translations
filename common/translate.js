@@ -346,6 +346,27 @@ function applyRecentPostArticleTitles(language, titleIndex = null) {
     }
 }
 
+function applyArticleNavigationTitles(language, titleIndex = null) {
+    const navigationRoots = document.querySelectorAll(".navi");
+    for (const root of navigationRoots) {
+        for (const link of root.querySelectorAll("a")) {
+            if (!getLinkedArticleId(link) || !link.textContent.trim()) {
+                continue;
+            }
+            if (!originalLinkText.has(link)) {
+                originalLinkText.set(link, link.textContent);
+            }
+            if (language === "ja") {
+                link.textContent = originalLinkText.get(link);
+            }
+        }
+
+        if (language === "en") {
+            applyCanonicalArticleLinkTitles(root, titleIndex);
+        }
+    }
+}
+
 function findArticleTitle(articleId) {
     const selectors = [
         ".article-title a",
@@ -1474,6 +1495,7 @@ async function applyLanguage(language, options = {}) {
 
         await applyCommonLanguage("ja");
         applyRecentPostArticleTitles("ja");
+        applyArticleNavigationTitles("ja");
 
         document.documentElement.lang = "ja";
         updateButtons("ja");
@@ -1558,7 +1580,9 @@ async function applyLanguage(language, options = {}) {
     const commonSucceeded = await applyCommonLanguage("en");
 
     try {
-        applyRecentPostArticleTitles("en", await loadArticleTitleIndex());
+        const titleIndex = await loadArticleTitleIndex();
+        applyRecentPostArticleTitles("en", titleIndex);
+        applyArticleNavigationTitles("en", titleIndex);
     } catch (error) {
         console.warn(
             "[NRP Language] 最近の記事のタイトル統一に失敗しました。",
