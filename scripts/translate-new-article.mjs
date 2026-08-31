@@ -402,11 +402,13 @@ function tokenizeHtml(html) {
             continue;
         }
 
-        // A comparison operator such as "<=" can occur in visible plugin
-        // formulas. Treat only a real HTML tag start as markup; otherwise the
-        // scanner would consume text until the next actual tag and lose the
-        // remainder of that sentence from the translation source.
-        if (!/^<\/?\s*[a-z][a-z0-9:-]*/iu.test(html.slice(index))) {
+        // Comparison operators can occur in visible plugin formulas, for
+        // example: "b1.hpRate() < b2.hpRate() #comment". Treat markup only
+        // when '<' is immediately followed by a valid tag name and that name
+        // is followed by a tag boundary. Without the boundary check, the
+        // scanner mistakes "< b2.hpRate()" for a tag and swallows everything
+        // up to the following real closing tag.
+        if (!/^<\/?[a-z][a-z0-9:-]*(?=[\s/>])/iu.test(html.slice(index))) {
             index++;
             continue;
         }
@@ -418,6 +420,15 @@ function tokenizeHtml(html) {
             if (quote) {
                 if (character === quote) quote = null;
             } else if (character === "\"" || character === "'") {
+                // Some older Seesaa entries contain a stray second quote at
+                // the end of an attribute, e.g. target="_blank"">. Treat it
+                // as malformed markup rather than the start of an unterminated
+                // attribute value, otherwise this tag swallows the following
+                // table-of-contents text and it never reaches translation.
+                if (html[cursor - 1] === character
+                    && /[\s/>]/u.test(html[cursor + 1] || "")) {
+                    continue;
+                }
                 quote = character;
             } else if (character === ">") {
                 tagEnd = cursor;
