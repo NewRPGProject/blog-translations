@@ -1,0 +1,302 @@
+{
+  "articleId": "475855922",
+  "sourceUrl": "https://newrpg.seesaa.net/article/475855922.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "2128dab1cc9eed0fe898e7f5f6c1683a89c1546068ec6492bba0cc615ff45516",
+  "translatedAt": "2026-08-31T07:18:03.624Z",
+  "title": "Let's Standardize Skill Formulas [RPG Maker MV]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "スキルの計算式を共通化しよう【RPGツクールMV】",
+      "sourceHash": "7f536afa2af81c09f07e250d93d3e235263bc09aef5ef8fad6b58068516fbdbd",
+      "translation": "Let's Standardize Skill Formulas [RPG Maker MV]",
+      "contextHash": "7f536afa2af81c09f07e250d93d3e235263bc09aef5ef8fad6b58068516fbdbd"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "JavaScript初心者向けに、スキル（およびアイテム）の計算式を共通化する手順を紹介します。",
+      "sourceHash": "52e5e763e2c3b758662f51d694610c6e9b951db67de887632229eb0bf82d9a9a",
+      "translation": "For JavaScript beginners, I’ll explain how to standardize the formulas for skills (and items).",
+      "contextHash": "52e5e763e2c3b758662f51d694610c6e9b951db67de887632229eb0bf82d9a9a"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "共通化すれば、制作途中で計算式を変えたくなった場合も一箇所を変更するだけで済みます。特に「クリティカル時は防御力を無視する」など複雑な式を作りたい場合は便利です。",
+      "sourceHash": "bd71ec8517dcc84ebd3328d5e89da9379e77a6aca0929e97d5ab41294b91dcc2",
+      "translation": "By standardizing them, even if you want to change a formula during development, you only need to modify it in one place. This is especially useful when creating complex formulas, such as “ignore defense when dealing a critical hit.”",
+      "contextHash": "bd71ec8517dcc84ebd3328d5e89da9379e77a6aca0929e97d5ab41294b91dcc2"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "具体的には計算式をJavaScriptのグローバル関数として定義し、どこからでも参照できるようにします。",
+      "sourceHash": "7abdc804c714820b192201724977cc68dbc4a91b9d31c0ad568c85b33cc91fea",
+      "translation": "Specifically, you define the formulas as global JavaScript functions so they can be referenced from anywhere.",
+      "contextHash": "7abdc804c714820b192201724977cc68dbc4a91b9d31c0ad568c85b33cc91fea"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "……といっても意味が分からないと思うので、サンプルを用意しました。",
+      "sourceHash": "ad9d4614ac183b035334fec75c93dc61c8a9e8cc3f2d3a278fde3d588853b5c0",
+      "translation": "That probably doesn’t make much sense, so I’ve prepared a sample.",
+      "contextHash": "ad9d4614ac183b035334fec75c93dc61c8a9e8cc3f2d3a278fde3d588853b5c0"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールＭＶのプラグイン管理から機能をONにしてください。その際、ファイル名は好きなように変えていただいて構いません。",
+      "sourceHash": "0948069b189e1efbf18776d800f73fbd3a7ffcd6f1fe63d38a58f035826c1f1b",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the function ON from RPG Maker MV’s Plugin Manager. You may change the file name to whatever you like.",
+      "contextHash": "0948069b189e1efbf18776d800f73fbd3a7ffcd6f1fe63d38a58f035826c1f1b"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "SkillFormula.js",
+      "sourceHash": "38226c0edabc517df61a2205a00e6ef68c4c89e6ae466d16dc2510d79f0f7857",
+      "translation": "SkillFormula.js",
+      "contextHash": "ddeb443f796804651e25178a519077ce8c7c61c9c568102ed262c7edbe984c3d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "でもって、ファイルをエディタで開きます。",
+      "sourceHash": "a0b6cdcdcaae47c6094e1a6b2f4575456119b58d33e20af42f64aadb96673338",
+      "translation": "Then, open the file in an editor.",
+      "contextHash": "a0b6cdcdcaae47c6094e1a6b2f4575456119b58d33e20af42f64aadb96673338"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※本格的にJavaScriptを触るつもりならVisual Studio Codeなど専用エディタの導入を推奨します。ちょっと触るだけなら通常のテキストエディタで十分です。",
+      "sourceHash": "4bd56c9bb23e27092a3149192485042215cb674b3fae22e072e639c403f6e50d",
+      "translation": "※If you plan to work with JavaScript seriously, I recommend installing a dedicated editor such as Visual Studio Code. A regular text editor is sufficient if you are only going to make minor changes.",
+      "contextHash": "4bd56c9bb23e27092a3149192485042215cb674b3fae22e072e639c403f6e50d"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "中身は以下のようになっています。",
+      "sourceHash": "9f39529194b2d8af3657c9ce29d90ab6ee767f37d78402d2f0c8ddd5ed4c4288",
+      "translation": "The contents look like this.",
+      "contextHash": "9f39529194b2d8af3657c9ce29d90ab6ee767f37d78402d2f0c8ddd5ed4c4288"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "* ●物理攻撃計算式",
+      "sourceHash": "0569907eee234abcc29c4db6280f1ee09edd177b7d8a42c5ea0953bee63b0337",
+      "translation": "* ●Physical Attack Formula",
+      "contextHash": "0569907eee234abcc29c4db6280f1ee09edd177b7d8a42c5ea0953bee63b0337"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "* a:行動主体、b:対象",
+      "sourceHash": "a0c090475313321fd6cd8fc3cc8dbf3341dc01bfc191d2081bf3a8f9db47ed80",
+      "translation": "* a:Action subject, b:target",
+      "contextHash": "a0c090475313321fd6cd8fc3cc8dbf3341dc01bfc191d2081bf3a8f9db47ed80"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "// 変数を移し替え",
+      "sourceHash": "8fe7e07e83acada3966fae4f8515a37a6d62e8adf23acfa9a38a8710e54a1f84",
+      "translation": "// Transfer variables",
+      "contextHash": "8fe7e07e83acada3966fae4f8515a37a6d62e8adf23acfa9a38a8710e54a1f84"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "// クリティカル時",
+      "sourceHash": "d01dcc5f24ba63fa25c5cfae88d2a7f88a59e8a1573d136da3f078c3d972877d",
+      "translation": "// On a critical hit",
+      "contextHash": "d01dcc5f24ba63fa25c5cfae88d2a7f88a59e8a1573d136da3f078c3d972877d"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "def = 0; // 防御を0として計算",
+      "sourceHash": "45a830506e5fbbd215aa1ef784fa6f96976d73b1b124853ed4ee9fe0df7ff256",
+      "translation": "def = 0; // Calculate with Defense set to 0",
+      "contextHash": "45a830506e5fbbd215aa1ef784fa6f96976d73b1b124853ed4ee9fe0df7ff256"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "* ●魔法攻撃計算式",
+      "sourceHash": "7a387e2f0c98c9e1bb01d27a2b2ac34111f7fb801f1a0cb2379fcfa9dbab4b53",
+      "translation": "* ●Magic Attack Formula",
+      "contextHash": "7a387e2f0c98c9e1bb01d27a2b2ac34111f7fb801f1a0cb2379fcfa9dbab4b53"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "* a:行動主体、b:対象",
+      "sourceHash": "a0c090475313321fd6cd8fc3cc8dbf3341dc01bfc191d2081bf3a8f9db47ed80",
+      "translation": "* a:Action subject, b:target",
+      "contextHash": "a0c090475313321fd6cd8fc3cc8dbf3341dc01bfc191d2081bf3a8f9db47ed80"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "// 変数を移し替え",
+      "sourceHash": "8fe7e07e83acada3966fae4f8515a37a6d62e8adf23acfa9a38a8710e54a1f84",
+      "translation": "// Transfer variables",
+      "contextHash": "8fe7e07e83acada3966fae4f8515a37a6d62e8adf23acfa9a38a8710e54a1f84"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "// クリティカル時",
+      "sourceHash": "d01dcc5f24ba63fa25c5cfae88d2a7f88a59e8a1573d136da3f078c3d972877d",
+      "translation": "// On a critical hit",
+      "contextHash": "d01dcc5f24ba63fa25c5cfae88d2a7f88a59e8a1573d136da3f078c3d972877d"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "mdf = 0; // 魔法防御を0として計算",
+      "sourceHash": "52739ff33241c9bbea49645bd054ac48e35d224abe81df5efcd834bdaa99992c",
+      "translation": "mdf = 0; // Calculate with Magic Defense set to 0",
+      "contextHash": "52739ff33241c9bbea49645bd054ac48e35d224abe81df5efcd834bdaa99992c"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "見ての通り、物理攻撃と魔法攻撃の二種類の計算式を定義しています。",
+      "sourceHash": "8a3e1cf5d4084008e347d797c3f28d5e2e298a56ef2b4e5b0723abb2b45ba4ad",
+      "translation": "As you can see, two types of formulas are defined: one for physical attacks and one for magical attacks.",
+      "contextHash": "8a3e1cf5d4084008e347d797c3f28d5e2e298a56ef2b4e5b0723abb2b45ba4ad"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "内容は標準の計算式に「クリティカル時の防御力（魔法防御）を０にする式」を追加（赤字部分）しただけです。",
+      "sourceHash": "5e8a5b40ecd8a266c6fc0c6b2558a86432cb1a54dc07595f1e14a8500af35bf9",
+      "translation": "All I did was add “set defense (magic defense) to 0 on a critical hit” to the standard formulas (the red text).",
+      "contextHash": "5e8a5b40ecd8a266c6fc0c6b2558a86432cb1a54dc07595f1e14a8500af35bf9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "これを好きなように変えてください。特にややこしいことはしていないので、スキルの計算式を普段から触っている方なら大丈夫かと思います。",
+      "sourceHash": "1907708eb4eb7d9a972d28e2e9facbe40c8119f77b05d3e9f1db092bf030db34",
+      "translation": "Change these however you like. Nothing particularly complicated is being done, so anyone who regularly works with skill formulas should be fine.",
+      "contextHash": "1907708eb4eb7d9a972d28e2e9facbe40c8119f77b05d3e9f1db092bf030db34"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "クリティカル時の処理が不要なら該当部分を削除してください。",
+      "sourceHash": "c845ea78e18365b38f8abf7b6543832cdd84e42466ef1ef53e97080a5a86f956",
+      "translation": "If you do not need the critical-hit processing, delete the relevant section.",
+      "contextHash": "c845ea78e18365b38f8abf7b6543832cdd84e42466ef1ef53e97080a5a86f956"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "$atk, $matというのが関数名なので、後はこれをスキルの計算式欄に設定するだけです。関数名は好きなように変えられます。$も別にいらないです。",
+      "sourceHash": "934096f240f470ea5d47b1a6c177aaa5db52549ba15e5dc2573257d442daa8f5",
+      "translation": "$atk and $mat are the function names, so all you have to do is set them in the skill’s Formula box. You can change the function names however you like. The $ is not necessary either.",
+      "contextHash": "934096f240f470ea5d47b1a6c177aaa5db52549ba15e5dc2573257d442daa8f5"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "例えば、「100 + ダメージ２倍の物理攻撃」なら以下のように設定します。",
+      "sourceHash": "b49a73a5ce026104adc438ed65342345d8e8435b56e80c816e5b1fdc21e56249",
+      "translation": "For example, for “100 + a physical attack that deals double damage,” set it as follows.",
+      "contextHash": "b49a73a5ce026104adc438ed65342345d8e8435b56e80c816e5b1fdc21e56249"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "なお、このままだとクリティカル時のダメージ３倍は残ったままです。必要なら以下のプラグインなどで変更してください。",
+      "sourceHash": "a8173f756d368bac6edc5e094558f7948fa693e74d85c2fe39888a4c1b2e3591",
+      "translation": "Note that, as it is, the three-times damage multiplier for critical hits will remain. If necessary, change it using a plugin such as the one below.",
+      "contextHash": "a8173f756d368bac6edc5e094558f7948fa693e74d85c2fe39888a4c1b2e3591"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "関数はいくらでも追加できますので、後はご自由にどうぞ。レベルや運などももちろん使えます。",
+      "sourceHash": "9fe3ba9beb03cc1de705069a2d058b04de1229a31241877ee34d22ebe0546068",
+      "translation": "You can add as many functions as you like, so feel free to customize them. You can also use level, luck, and so on.",
+      "contextHash": "9fe3ba9beb03cc1de705069a2d058b04de1229a31241877ee34d22ebe0546068"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "参考までに、ＭＶでスキル計算式にカーソルを合わせた場合のヘルプを貼っておきます。",
+      "sourceHash": "6e7dcca35a5a204c18d5b0ff42c50ff4b03db2bc68df80d4c3beb60c6fc0e354",
+      "translation": "For reference, I’ll include the help text displayed when you place the cursor over the skill formula in MV.",
+      "contextHash": "6e7dcca35a5a204c18d5b0ff42c50ff4b03db2bc68df80d4c3beb60c6fc0e354"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]基本システムの倍率を変更できるプラグイン（むーてぃ様）[[/LINK_1]]",
+      "sourceHash": "876d010657e4643e0c35842922fb013fc739319a9031fa93fbd88dfebe018fd6",
+      "parts": [
+        {
+          "source": "基本システムの倍率を変更できるプラグイン（むーてぃ様）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin for Changing Basic System Multipliers (Mooti)[[/LINK_1]]",
+      "contextHash": "876d010657e4643e0c35842922fb013fc739319a9031fa93fbd88dfebe018fd6"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "JavaScript初心者向けに、スキル（およびアイテム）の計算式を共通化する手順を紹介します。": "For JavaScript beginners, I’ll explain how to standardize the formulas for skills (and items).",
+    "共通化すれば、制作途中で計算式を変えたくなった場合も一箇所を変更するだけで済みます。特に「クリティカル時は防御力を無視する」など複雑な式を作りたい場合は便利です。": "By standardizing them, even if you want to change a formula during development, you only need to modify it in one place. This is especially useful when creating complex formulas, such as “ignore defense when dealing a critical hit.”",
+    "具体的には計算式をJavaScriptのグローバル関数として定義し、どこからでも参照できるようにします。": "Specifically, you define the formulas as global JavaScript functions so they can be referenced from anywhere.",
+    "……といっても意味が分からないと思うので、サンプルを用意しました。": "That probably doesn’t make much sense, so I’ve prepared a sample.",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールＭＶのプラグイン管理から機能をONにしてください。その際、ファイル名は好きなように変えていただいて構いません。": "Download the following file and place it in [Project]\\js\\plugins. Turn the function ON from RPG Maker MV’s Plugin Manager. You may change the file name to whatever you like.",
+    "SkillFormula.js": "SkillFormula.js",
+    "でもって、ファイルをエディタで開きます。": "Then, open the file in an editor.",
+    "※本格的にJavaScriptを触るつもりならVisual Studio Codeなど専用エディタの導入を推奨します。ちょっと触るだけなら通常のテキストエディタで十分です。": "※If you plan to work with JavaScript seriously, I recommend installing a dedicated editor such as Visual Studio Code. A regular text editor is sufficient if you are only going to make minor changes.",
+    "中身は以下のようになっています。": "The contents look like this.",
+    "* ●物理攻撃計算式": "* ●Physical Attack Formula",
+    "* a:行動主体、b:対象": "* a:Action subject, b:target",
+    "// 変数を移し替え": "// Transfer variables",
+    "// クリティカル時": "// On a critical hit",
+    "def = 0; // 防御を0として計算": "def = 0; // Calculate with Defense set to 0",
+    "* ●魔法攻撃計算式": "* ●Magic Attack Formula",
+    "mdf = 0; // 魔法防御を0として計算": "mdf = 0; // Calculate with Magic Defense set to 0",
+    "見ての通り、物理攻撃と魔法攻撃の二種類の計算式を定義しています。": "As you can see, two types of formulas are defined: one for physical attacks and one for magical attacks.",
+    "内容は標準の計算式に「クリティカル時の防御力（魔法防御）を０にする式」を追加（赤字部分）しただけです。": "All I did was add “set defense (magic defense) to 0 on a critical hit” to the standard formulas (the red text).",
+    "これを好きなように変えてください。特にややこしいことはしていないので、スキルの計算式を普段から触っている方なら大丈夫かと思います。": "Change these however you like. Nothing particularly complicated is being done, so anyone who regularly works with skill formulas should be fine.",
+    "クリティカル時の処理が不要なら該当部分を削除してください。": "If you do not need the critical-hit processing, delete the relevant section.",
+    "$atk, $matというのが関数名なので、後はこれをスキルの計算式欄に設定するだけです。関数名は好きなように変えられます。$も別にいらないです。": "$atk and $mat are the function names, so all you have to do is set them in the skill’s Formula box. You can change the function names however you like. The $ is not necessary either.",
+    "例えば、「100 + ダメージ２倍の物理攻撃」なら以下のように設定します。": "For example, for “100 + a physical attack that deals double damage,” set it as follows.",
+    "なお、このままだとクリティカル時のダメージ３倍は残ったままです。必要なら以下のプラグインなどで変更してください。": "Note that, as it is, the three-times damage multiplier for critical hits will remain. If necessary, change it using a plugin such as the one below.",
+    "関数はいくらでも追加できますので、後はご自由にどうぞ。レベルや運などももちろん使えます。": "You can add as many functions as you like, so feel free to customize them. You can also use level, luck, and so on.",
+    "参考までに、ＭＶでスキル計算式にカーソルを合わせた場合のヘルプを貼っておきます。": "For reference, I’ll include the help text displayed when you place the cursor over the skill formula in MV."
+  }
+}

@@ -1,0 +1,748 @@
+{
+  "articleId": "479020531",
+  "sourceUrl": "https://newrpg.seesaa.net/article/479020531.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "98274fb2622e403ee54947e743bad17d941ec524b317686a191070a8a94a2cb0",
+  "translatedAt": "2026-08-31T07:14:04.065Z",
+  "title": "Creating an FF-Style Dragoon Jump Attack [RPG Maker MZ & MV]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "ＦＦの竜騎士っぽいジャンプ技を作る【RPGツクールMZ&MV】",
+      "sourceHash": "3da66270e4c40e9cbe56d55fd049a8537af2699832f2c0307b0d8699c202d3c5",
+      "translation": "Creating an FF-Style Dragoon Jump Attack [RPG Maker MZ & MV]",
+      "contextHash": "3da66270e4c40e9cbe56d55fd049a8537af2699832f2c0307b0d8699c202d3c5"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ＦＦシリーズの竜騎士などでおなじみのジャンプ技を、ツクールＭＺおよびＭＶで実現する方法を紹介します。",
+      "sourceHash": "be4d4a561472d9530f119ea9add44002235b1ff8ca8c529cd65844360bffd48c",
+      "translation": "This guide explains how to create the familiar jump attack used by Dragoons in the FF series and similar characters in RPG Maker MZ and MV.",
+      "contextHash": "be4d4a561472d9530f119ea9add44002235b1ff8ca8c529cd65844360bffd48c"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ＣＴＢでもターン制でもどちらでも有効です。",
+      "sourceHash": "a02c3c8f0c82f4039b1895ec77f3a700438f1b9bf187fc00927c0b827fb6c3df",
+      "translation": "It works with both CTB and turn-based systems.",
+      "contextHash": "a02c3c8f0c82f4039b1895ec77f3a700438f1b9bf187fc00927c0b827fb6c3df"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ポケモンの「あなをほる」も同じ方法で作成できます。",
+      "sourceHash": "603438c194a47cb9e797a77d00413680248f822a00488c50b620eb19654039ee",
+      "translation": "Pokémon's \"Dig\" can also be created using the same method.",
+      "contextHash": "603438c194a47cb9e797a77d00413680248f822a00488c50b620eb19654039ee"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "実装には以下２つのプラグインを使用します。",
+      "sourceHash": "8a6359e2841336c14587920c2044e15c66e30d6677d2f1c9c4cfd4e20c35248e",
+      "translation": "The following two plugins are used for implementation.",
+      "contextHash": "8a6359e2841336c14587920c2044e15c66e30d6677d2f1c9c4cfd4e20c35248e"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "ため技を作成",
+      "sourceHash": "a0a91b6bc91c3f3f2886b2773ddcc021fc1fde6a8949c197528d66290a7405b5",
+      "translation": "Creating a Charge-Up Skill",
+      "contextHash": "a0a91b6bc91c3f3f2886b2773ddcc021fc1fde6a8949c197528d66290a7405b5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/474413155.html",
+      "sourceHash": "264181f5b044913eb22081c2525acad76a1c20823054549a2128cdad4c207cdb",
+      "translation": "http://newrpg.seesaa.net/article/474413155.html",
+      "contextHash": "212d9200a48642957d06fcc79593134a5b71cbf3c226adb7417ec1581b9cd897"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/477190386.html",
+      "sourceHash": "49a1e48632cf4dc071e360b244b18792458512de70f3719c1357f3e7398d0858",
+      "translation": "http://newrpg.seesaa.net/article/477190386.html",
+      "contextHash": "02f276883ef171ba884d04ecf919a9a17f2ae4297172af6a2affbd6316c4b53d"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/473809182.html",
+      "sourceHash": "65526d7d1f2caab49eb6e7948d9337e742482bded32a53c11321fd872a27fd53",
+      "translation": "http://newrpg.seesaa.net/article/473809182.html",
+      "contextHash": "db6aba3d54d78b5f19b99b8b3d5d4fe681050290a777ed21778c3bf168b0beac"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ジャンプは以下の複合によって作成します。",
+      "sourceHash": "b1b9a2bb76af683e8963a779dc47b46425a6954772fa2efbae4dfc5b84307e5b",
+      "translation": "The jump is created by combining the following elements.",
+      "contextHash": "b1b9a2bb76af683e8963a779dc47b46425a6954772fa2efbae4dfc5b84307e5b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "発動から１ターン後に攻撃するため技を作成",
+      "sourceHash": "bd3007b6f3624c549c63803988f5bab0dc92dfaf55cb164167dbc138283125d2",
+      "translation": "A charge-up skill that attacks one turn after activation",
+      "contextHash": "bd3007b6f3624c549c63803988f5bab0dc92dfaf55cb164167dbc138283125d2"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "発動時に無敵化するステート",
+      "sourceHash": "c569d151f4c8cc74220ad0c4c32412713f236be47beb34099688f962fc861375",
+      "translation": "A state that grants invincibility upon activation",
+      "contextHash": "c569d151f4c8cc74220ad0c4c32412713f236be47beb34099688f962fc861375"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "上空へと飛び上がる演出",
+      "sourceHash": "c6c1ff4f1a43fe51666114dc2a7728e89e3365f2de8d30949b637b17eb992652",
+      "translation": "An effect showing the character leaping into the air",
+      "contextHash": "c6c1ff4f1a43fe51666114dc2a7728e89e3365f2de8d30949b637b17eb992652"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "地面へと降下する演出",
+      "sourceHash": "60482604cd6aa28da60933e538e1076b20393b98c756f2019d2feb9f15295443",
+      "translation": "An effect showing the character descending to the ground",
+      "contextHash": "60482604cd6aa28da60933e538e1076b20393b98c756f2019d2feb9f15295443"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下、一つずつ解説していきます。",
+      "sourceHash": "d2440518e37aedd096f5107f9881589d0409a69263ec4e350361c5829d4bf1a9",
+      "translation": "I will explain each of these one at a time below.",
+      "contextHash": "d2440518e37aedd096f5107f9881589d0409a69263ec4e350361c5829d4bf1a9"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "ため技の作成",
+      "sourceHash": "13d586a44f6c7bc89fbaa8aac709e677221428b63733ea24d75987d6c68c9e4c",
+      "translation": "Creating the Charge-Up Skill",
+      "contextHash": "13d586a44f6c7bc89fbaa8aac709e677221428b63733ea24d75987d6c68c9e4c"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "まず最初にため技を作ります。",
+      "sourceHash": "5a9e9837c96960976ebb0b6f3083b1ccbae891e60956b06ef588fcf64f352419",
+      "translation": "First, create the charge-up skill.",
+      "contextHash": "5a9e9837c96960976ebb0b6f3083b1ccbae891e60956b06ef588fcf64f352419"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "手順はため技プラグインの解説に従ってください。",
+      "sourceHash": "ee53ecaf3998da42df3e78fe4ba8583adc9a09e2ea537f3695f54e26af09d0d4",
+      "translation": "Please follow the instructions in the charge-up skill plugin guide.",
+      "contextHash": "ee53ecaf3998da42df3e78fe4ba8583adc9a09e2ea537f3695f54e26af09d0d4"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/474413155.html",
+      "sourceHash": "264181f5b044913eb22081c2525acad76a1c20823054549a2128cdad4c207cdb",
+      "translation": "http://newrpg.seesaa.net/article/474413155.html",
+      "contextHash": "212d9200a48642957d06fcc79593134a5b71cbf3c226adb7417ec1581b9cd897"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ただし、後でジャンプ開始演出が必要となるので、以下の『ため開始演出』まで作成してください。",
+      "sourceHash": "4f73286939ce1698b53abdf4040845216b44c8572192702597a8d5001776c591",
+      "translation": "However, since an effect for starting the jump will be needed later, create the skill up to the following \"Charge Start Effect\".",
+      "contextHash": "4f73286939ce1698b53abdf4040845216b44c8572192702597a8d5001776c591"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/474413155.html#use",
+      "sourceHash": "c16e700443ceda7b25db3a22203f537f684c036fa7866bf915d5d623b6fd233e",
+      "translation": "http://newrpg.seesaa.net/article/474413155.html#use",
+      "contextHash": "781ba81fb0f2dd7cd47454104bb7ba3ffe1211aaf2e7308f2177049d5d20120e"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "手順通りにすれば、１つのステートと２つのスキルを作成しているはずです。それぞれジャンプ技においては、以下のように対応します。",
+      "sourceHash": "69ed1ae026d35fe51acb2c59a08f737439cb6b93a328de69c31f2da04e803703",
+      "translation": "If you follow the instructions, you should have created one state and two skills. For the jump attack, they correspond as follows.",
+      "contextHash": "69ed1ae026d35fe51acb2c59a08f737439cb6b93a328de69c31f2da04e803703"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "ため状態用ステート → ジャンプ状態のステート",
+      "sourceHash": "543865f8bd8fab7d80f32591650c5ff34b74e51d813d41bb118924f256ec1532",
+      "translation": "State for the charging state → State for the jumping state",
+      "contextHash": "543865f8bd8fab7d80f32591650c5ff34b74e51d813d41bb118924f256ec1532"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ため演出用スキル → ジャンプ開始演出（上昇）",
+      "sourceHash": "665ae87a93a1ff42d0d1ef9e79457e4077ae7a7157a607e934a36ad9d6081d49",
+      "translation": "Skill for the charging effect → Jump start effect (ascent)",
+      "contextHash": "665ae87a93a1ff42d0d1ef9e79457e4077ae7a7157a607e934a36ad9d6081d49"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "実行用スキル → ジャンプ降下演出＆攻撃",
+      "sourceHash": "4c130c8b8da11a7182091f3a30d1788bf6fc6ef1be48dc0ab2a7ef28a3e58c3b",
+      "translation": "Execution skill → Jump descent effect and attack",
+      "contextHash": "4c130c8b8da11a7182091f3a30d1788bf6fc6ef1be48dc0ab2a7ef28a3e58c3b"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "無敵ステートの設定（改良版）",
+      "sourceHash": "7b49ccf818c465e3fa8fab1b6c9f3a3a40fac4e5899e867c32e05f6bc6eb38ad",
+      "translation": "Configuring the Invincibility State (Improved Version)",
+      "contextHash": "7b49ccf818c465e3fa8fab1b6c9f3a3a40fac4e5899e867c32e05f6bc6eb38ad"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "これらのプラグインを導入し、『ため状態用ステート』に以下の記述を追加してください。",
+      "sourceHash": "aa49043be0b252abb75de72e8c382cc20cb8219b00ca4d7374b5060fa09a3d38",
+      "translation": "After installing these plugins, add the following entries to the \"State for the Charging State\".",
+      "contextHash": "aa49043be0b252abb75de72e8c382cc20cb8219b00ca4d7374b5060fa09a3d38"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "<Invincible>によって、そのステート中はあらゆるスキルを受けつけなくなります。",
+      "sourceHash": "a19c3050175a8883f532b06d4d9caf97e30d9c1c0da6e94e5d8e6664421420b7",
+      "translation": "<Invincible> prevents the battler from receiving any skills while affected by the state.",
+      "contextHash": "a19c3050175a8883f532b06d4d9caf97e30d9c1c0da6e94e5d8e6664421420b7"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "<BattlerInvisible>によって、そのステート中は表示が透明になります。この設定があるとDynamicMotionの他スキルによって不透明度が操作された場合も無効化できます。",
+      "sourceHash": "9e2288630ff28ca7681b127f1cfe569984d46e77d01fe9c56263c6cf0ff4dff2",
+      "translation": "<BattlerInvisible> makes the battler transparent while affected by the state. With this setting, changes to opacity made by other DynamicMotion skills can also be overridden.",
+      "contextHash": "9e2288630ff28ca7681b127f1cfe569984d46e77d01fe9c56263c6cf0ff4dff2"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ただし、この設定が残っていると降下演出まで表示されなくなります。",
+      "sourceHash": "391e512a2ff7bdc09c576899b506fee2f4488b86a1260bc31ce62bcb9c06cff5",
+      "translation": "However, if this setting remains active, the descent effect will no longer be visible.",
+      "contextHash": "391e512a2ff7bdc09c576899b506fee2f4488b86a1260bc31ce62bcb9c06cff5"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "そこで<AutoRemovalActionStart>によって、行動開始時にステートが解除するようにしています。",
+      "sourceHash": "b1c606c724e2b313b1302bc1d07c14132106454bc18fd98d78c54d22a954d834",
+      "translation": "Therefore, <AutoRemovalActionStart> removes the state when the action starts.",
+      "contextHash": "b1c606c724e2b313b1302bc1d07c14132106454bc18fd98d78c54d22a954d834"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "初期選択しない",
+      "sourceHash": "74c2a06bd94c473057bfd895d81bf15506a8609ada4845b6b30200c67e5367de",
+      "translation": "Exclude from Initial Selection",
+      "contextHash": "74c2a06bd94c473057bfd895d81bf15506a8609ada4845b6b30200c67e5367de"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "以下のプラグインの機能によって、ジャンプ中のバトラーを対象として初期選択しないようにできます。（2025/06/17）",
+      "sourceHash": "8acfbd794a2bf446125b7ec7ead1b77fbb0bce182cf4090a0214e267a36f6ab9",
+      "translation": "The following plugin feature prevents battlers in mid-jump from being selected initially. (2025/06/17)",
+      "contextHash": "8acfbd794a2bf446125b7ec7ead1b77fbb0bce182cf4090a0214e267a36f6ab9"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "https://newrpg.seesaa.net/article/506049329.html",
+      "sourceHash": "808af78b0dbc4f6141138f23bb2e124026cb51c225df3bfebe97593bf313410b",
+      "translation": "https://newrpg.seesaa.net/article/506049329.html",
+      "contextHash": "134ca6ba26f08ac48caeb0aeb80249f3deacbcca0399be2cdbc304603dc92b4d"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "プラグインを導入し、『ため状態用ステート』に以下の記述を追加してください。",
+      "sourceHash": "6bb9530788a48dd1e9f071e2b0753b51f9549086a3d6f247886ae62e9ae62fbe",
+      "translation": "Install the plugin and add the following entry to the \"State for the Charging State\".",
+      "contextHash": "6bb9530788a48dd1e9f071e2b0753b51f9549086a3d6f247886ae62e9ae62fbe"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "動画では隠れた敵が初期選択されなくなり、二番目の敵が選択されるようになっています。",
+      "sourceHash": "14352da35972d6823f608aa933911f2a66ad1333abb28f48ce516a4f51f181df",
+      "translation": "In the video, the hidden enemy is no longer selected initially, and the second enemy is selected instead.",
+      "contextHash": "14352da35972d6823f608aa933911f2a66ad1333abb28f48ce516a4f51f181df"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※選択自体はできます。",
+      "sourceHash": "effaad9fe12c58ecdf0627cb0f9c05b3ed46a6654e167ebf56f505d216edae67",
+      "translation": "※It can still be selected manually.",
+      "contextHash": "effaad9fe12c58ecdf0627cb0f9c05b3ed46a6654e167ebf56f505d216edae67"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "無敵ステートの設定（旧）",
+      "sourceHash": "be5f9d23bde78b4c3a4047681e2a9f5a273a28d6fc0d2ce5f42b3028d59eee68",
+      "translation": "Configuring the Invincibility State (Old Version)",
+      "contextHash": "be5f9d23bde78b4c3a4047681e2a9f5a273a28d6fc0d2ce5f42b3028d59eee68"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "※こちらは古い情報です。改良版の設定を使用することをオススメします。（2024/06/11）",
+      "sourceHash": "0ae791284ab4f3c55f2a2bdaf3cd78bcb6ab5a8ae50c39a6e2fc52ddc34de0da",
+      "translation": "※This is outdated information. I recommend using the improved configuration instead. (2024/06/11)",
+      "contextHash": "0ae791284ab4f3c55f2a2bdaf3cd78bcb6ab5a8ae50c39a6e2fc52ddc34de0da"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "上述のように『ため状態用ステート』がジャンプ状態を現すステートになります。これの設定を調整し、ジャンプ中の無敵を表現します。",
+      "sourceHash": "92439b6dff499dfa6544f757babac531066fb27c80d562e30668056751330a92",
+      "translation": "As described above, the \"State for the Charging State\" is the state representing the jumping state. Adjust its settings to make the battler invincible while jumping.",
+      "contextHash": "92439b6dff499dfa6544f757babac531066fb27c80d562e30668056751330a92"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "無敵ステートを作れるプラグインがあればそれでもいいのですが、今回は単純にステートの特徴だけで設定します。",
+      "sourceHash": "36030dd3f517fa2758caf2e32339e214185c0c500be0182e69da063bd022f7b6",
+      "translation": "A plugin that creates an invincibility state would also work, but this time, I will configure it using only the state's traits.",
+      "contextHash": "36030dd3f517fa2758caf2e32339e214185c0c500be0182e69da063bd022f7b6"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "『狙われ率』『回避率／魔法回避率』『物理／魔法ダメージ率』『弱体有効度』『ステート無効化』『属性有効度』など、上記のようにひたすら攻撃を無効化する設定を行います。",
+      "sourceHash": "96c06cdf5468e263beecc28e31201d4ca8136074da5f4f660ecfca9acb07ef31",
+      "translation": "Configure it to nullify attacks as thoroughly as possible, as shown above, using traits such as \"Target Rate,\" \"Evasion Rate / Magic Evasion Rate,\" \"Physical / Magic Damage Rate,\" \"Debuff Rate,\" \"State Resist,\" and \"Element Rate.\" ",
+      "contextHash": "bd9019b90b80917c4b822238c9ff6ac07fda99f3be81d0e40e241fec75a2efad"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ちょっと面倒です。",
+      "sourceHash": "8e67942f9b8849df8f9d00cbe1b55df1e1b946f0bdea01ae13f782ad61e50b9a",
+      "translation": "It is a little tedious.",
+      "contextHash": "bd9019b90b80917c4b822238c9ff6ac07fda99f3be81d0e40e241fec75a2efad"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "後でステートが追加された場合、当然こちらにも対応する必要があります。",
+      "sourceHash": "c061707d3a845511dda4521c70b401ebc0d84cf8352293229006e5ee5716abe0",
+      "translation": "If states are added later, you will naturally need to update this configuration as well.",
+      "contextHash": "c061707d3a845511dda4521c70b401ebc0d84cf8352293229006e5ee5716abe0"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "なお『必中』『属性なし』『固定ダメージ』の組み合わせなど、デフォルトではどうやってもダメージを受けるスキルも存在します。そこまでは考慮していませんのでご注意ください。",
+      "sourceHash": "34f613a8b12a1efdd4599773d8f82da7f8b2e7aed4e80bc2d57a4f47949910b7",
+      "translation": "Also, some skills will inevitably deal damage by default, such as those combining \"Certain Hit,\" \"None\" as the element, and \"Fixed Damage.\" Please note that these cases are not taken into consideration.",
+      "contextHash": "34f613a8b12a1efdd4599773d8f82da7f8b2e7aed4e80bc2d57a4f47949910b7"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ジャンプ開始演出",
+      "sourceHash": "6b1818830ba5e700c18ed2e9b1610709c3abb6948d54e5ede28b6e0fa4676307",
+      "translation": "Jump Start Effect",
+      "contextHash": "6b1818830ba5e700c18ed2e9b1610709c3abb6948d54e5ede28b6e0fa4676307"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "『ため演出用スキル』のメモ欄にDynamicMotionの定義を貼りつけます。",
+      "sourceHash": "93266c9a7c5f805f0535e718c8966a6ee9df79e8a51890176dcbff2cc49b4793",
+      "translation": "Paste the DynamicMotion definition into the note field of the \"Skill for the Charging Effect.\"",
+      "contextHash": "93266c9a7c5f805f0535e718c8966a6ee9df79e8a51890176dcbff2cc49b4793"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<NoResult> // メッセージ非表示用",
+      "sourceHash": "d8f93562c455661e2403e20320640db7506e6a1c46dbc5cf62d5b36348e8806d",
+      "translation": "<NoResult> // For hiding messages",
+      "contextHash": "d8f93562c455661e2403e20320640db7506e6a1c46dbc5cf62d5b36348e8806d"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "// アニメーション",
+      "sourceHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86",
+      "translation": "// Animation",
+      "contextHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "// 上昇しながら透明化",
+      "sourceHash": "9cab5d2ee0f63612cabaca491f5438d3fbdcb9f1d82b54aa168fc7a8f8541a78",
+      "translation": "// Become transparent while rising",
+      "contextHash": "9cab5d2ee0f63612cabaca491f5438d3fbdcb9f1d82b54aa168fc7a8f8541a78"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "// 元の位置に戻しながら透明化＆最小化",
+      "sourceHash": "b4b1dc4e1e6d3e31c7794a661b01604efea6bda9511db2b184f55c4e48dd1c9d",
+      "translation": "// Become transparent and smaller while returning to the original position",
+      "contextHash": "b4b1dc4e1e6d3e31c7794a661b01604efea6bda9511db2b184f55c4e48dd1c9d"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "// scale = 0 // 改良版では不要",
+      "sourceHash": "c1b96637418c1a1cc3652f5d2b165db74266f1d4750d25ceb01ba5de4fcf87ac",
+      "translation": "// scale = 0 // Not needed in the improved version",
+      "contextHash": "c1b96637418c1a1cc3652f5d2b165db74266f1d4750d25ceb01ba5de4fcf87ac"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "演出の最後に、こっそりとキャラを元の位置に戻しています。同時に透明化＆最小化を行うことで、非表示にしています。そうしないと、スキルによっては上空のキャラを狙いにいく不自然な演出になってしまうためです。",
+      "sourceHash": "9c68c428ef276f4c2363e56bfd22a9e44efce78b4b9114293beb624b4e1e523a",
+      "translation": "At the end of the effect, the character is secretly returned to its original position. It is hidden by making it transparent and minimizing it at the same time. Otherwise, some skills would produce the unnatural effect of targeting the character in the air.",
+      "contextHash": "9c68c428ef276f4c2363e56bfd22a9e44efce78b4b9114293beb624b4e1e523a"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "また、アニメーションを設定していますが、別になくても構いません。この例では、空のアニメーションにジャンプ用の効果音を付けているだけです。",
+      "sourceHash": "2eb159740671c99b2c0df6e95abcfbc160bd25e60a0870fa9627356332628b9f",
+      "translation": "An animation is also configured, but it is not required. In this example, a jump sound effect is simply attached to an empty animation.",
+      "contextHash": "2eb159740671c99b2c0df6e95abcfbc160bd25e60a0870fa9627356332628b9f"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ジャンプ降下演出",
+      "sourceHash": "a78f63cabfdea8f0034fdbdc2e8032313709b04e474c6ff959d42311ae744035",
+      "translation": "Jump Descent Effect",
+      "contextHash": "a78f63cabfdea8f0034fdbdc2e8032313709b04e474c6ff959d42311ae744035"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "『実行用スキル』のメモ欄にDynamicMotionの定義を貼りつけます。",
+      "sourceHash": "c36d7e1d02de7c2da85d59f2fb043613dbc1bbca38ac53e1f45f5b884c679d6c",
+      "translation": "Paste the DynamicMotion definition into the note field of the \"Execution Skill.\"",
+      "contextHash": "c36d7e1d02de7c2da85d59f2fb043613dbc1bbca38ac53e1f45f5b884c679d6c"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "// ため技用の指定（各自で設定してください）",
+      "sourceHash": "cff559d11d966c053c7df393f8b37561737d150a28640716c879aa0ca64625dd",
+      "translation": "// Setting for charge skills (please configure it yourself)",
+      "contextHash": "cff559d11d966c053c7df393f8b37561737d150a28640716c879aa0ca64625dd"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "// 前進禁止",
+      "sourceHash": "e6de2744bf180a3d2c575054b361ed3f18d573c18025bc8993cae9228be6248c",
+      "translation": "// Prevent moving forward",
+      "contextHash": "e6de2744bf180a3d2c575054b361ed3f18d573c18025bc8993cae9228be6248c"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "// 上空へ瞬間移動",
+      "sourceHash": "a253c36ce586bae7e53d6a7fe592b0d19413e8e8b5ecdf18a7596b199594d70d",
+      "translation": "// Instantly teleport into the air",
+      "contextHash": "a253c36ce586bae7e53d6a7fe592b0d19413e8e8b5ecdf18a7596b199594d70d"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "// 透明化＆最小化解除",
+      "sourceHash": "2acc027c19f3aaf2889e9e0e4403c60eeb879e3a9ef96e181ac589a22950a359",
+      "translation": "// Restore transparency and size",
+      "contextHash": "2acc027c19f3aaf2889e9e0e4403c60eeb879e3a9ef96e181ac589a22950a359"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "// 降下",
+      "sourceHash": "4bbae566411a9752c3f012b72bc1379618b9b9dbaf4e5cece52ecd62c80a8129",
+      "translation": "// Descend",
+      "contextHash": "4bbae566411a9752c3f012b72bc1379618b9b9dbaf4e5cece52ecd62c80a8129"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "position = 2 // 足元",
+      "sourceHash": "1565759c701b31651f053315144e6fc7a68e2b0ad278b4606767316c4a50bd65",
+      "translation": "position = 2 // At the feet",
+      "contextHash": "1565759c701b31651f053315144e6fc7a68e2b0ad278b4606767316c4a50bd65"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "// アニメーション",
+      "sourceHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86",
+      "translation": "// Animation",
+      "contextHash": "93a24cc243dbe24693facc01f1289c47b256b3e8e9c3e8c7de45b8bf4d6def86"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "delay = -2 // 少し早めに表示",
+      "sourceHash": "6306fbe956575b9e82828c8b43df01f9c794ded67111e30f0dc9697ae4889e99",
+      "translation": "delay = -2 // Display slightly earlier",
+      "contextHash": "6306fbe956575b9e82828c8b43df01f9c794ded67111e30f0dc9697ae4889e99"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "// しゃがみ",
+      "sourceHash": "cbcf65578886a06ff16a709ce15b7d34b5ca36670104d21d754017b772e9c9d3",
+      "translation": "// Crouch",
+      "contextHash": "cbcf65578886a06ff16a709ce15b7d34b5ca36670104d21d754017b772e9c9d3"
+    },
+    {
+      "id": "code-015",
+      "type": "code",
+      "source": "// 戻る",
+      "sourceHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97",
+      "translation": "// Return",
+      "contextHash": "04603bee4fec6c012e8209a4c06944b962ddd1db122b354d93bed473260f7b97"
+    },
+    {
+      "id": "code-016",
+      "type": "code",
+      "source": "arcY = -200 // 少し高めにジャンプ",
+      "sourceHash": "0c433c0f1bab5fe5ad240bf7442bdc64af9b45fc0e55b2800fd88df1c48cfafe",
+      "translation": "arcY = -200 // Jump slightly higher",
+      "contextHash": "0c433c0f1bab5fe5ad240bf7442bdc64af9b45fc0e55b2800fd88df1c48cfafe"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "以上でジャンプ技の完成です。",
+      "sourceHash": "e445677c8d149fdf97b1597a4d0a832954bbd308eb3b7af16912f950a059d7ac",
+      "translation": "That completes the jump attack.",
+      "contextHash": "e445677c8d149fdf97b1597a4d0a832954bbd308eb3b7af16912f950a059d7ac"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "後は好きなようにアレンジしてください。",
+      "sourceHash": "264442d613f10212faf33743728562d7e3500b8fd426a20d543fe4eb1e03b523",
+      "translation": "Feel free to customize it however you like.",
+      "contextHash": "264442d613f10212faf33743728562d7e3500b8fd426a20d543fe4eb1e03b523"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "有名なのでジャンプとして演出を作りましたが、必ずしも空を飛ぶ必要はありません。「穴を掘って入り、地面から襲いかかる」「画面外に隠れて背後から強襲する」などでも面白いと思います。",
+      "sourceHash": "a4fd163e256a3d1599035fb41d4efb8d1ee48b3f4e91288fa8d96b4aa89d683d",
+      "translation": "I created this effect as a jump because it is well known, but it does not necessarily have to involve flying through the air. It could also be fun to have the character \"dig a hole and enter it, then attack from underground\" or \"hide off-screen and launch a surprise attack from behind.\"",
+      "contextHash": "a4fd163e256a3d1599035fb41d4efb8d1ee48b3f4e91288fa8d96b4aa89d683d"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "注意点",
+      "sourceHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911",
+      "translation": "Notes",
+      "contextHash": "f39864615d170dfc6a6055ed9fef0d99f84acdd091057c6ff842a104aa9a5911"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "※こちらは古い情報です。改良版の設定なら問題ありません。（2024/06/11）",
+      "sourceHash": "108af553e941e969552dd3a03e624cf968efe6fbfc2151e1ac395c9f98d9fe42",
+      "translation": "※This is outdated information. There is no problem if you use the improved configuration. (2024/06/11)",
+      "contextHash": "108af553e941e969552dd3a03e624cf968efe6fbfc2151e1ac395c9f98d9fe42"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "ジャンプ中のキャラは、あくまで透明化と最小化によって消えて見えるだけです。",
+      "sourceHash": "2996e61643cfba38cadde534e00e3bd1d66a3a0ee2ccd691d9159fec8ad30771",
+      "translation": "Characters in mid-jump only appear to disappear because they are made transparent and minimized.",
+      "contextHash": "2996e61643cfba38cadde534e00e3bd1d66a3a0ee2ccd691d9159fec8ad30771"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "DynamicMotionによって、このキャラに対して透明度やサイズの変更を行うスキルをしかけた場合、表示状態が変化してしまう場合があります。",
+      "sourceHash": "695b7fce3c5c0347f0e7f4015679a2aae7bce4a637f3e8dea7cbc5b69c1ae41a",
+      "translation": "If you use DynamicMotion to activate a skill on this character that changes its opacity or size, its display state may change.",
+      "contextHash": "695b7fce3c5c0347f0e7f4015679a2aae7bce4a637f3e8dea7cbc5b69c1ae41a"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "現状、そこまでの考慮はしていません。ご注意ください。",
+      "sourceHash": "e4ea4411c1aaed79ad0abc7bc41649ff6943b0cd097849bf706ae1fddeda2812",
+      "translation": "At present, I have not taken this into consideration. Please be aware of this.",
+      "contextHash": "e4ea4411c1aaed79ad0abc7bc41649ff6943b0cd097849bf706ae1fddeda2812"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※[[LINK_1]]無敵状態を作成できるプラグイン[[/LINK_1]]を作成しました。（2023/09/02）",
+      "sourceHash": "1bdf09b563cba4f471e0f21a258c9aa8a57746dd2ee215cb5c9edfe6765ed59b",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "無敵状態を作成できるプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を作成しました。（2023/09/02）",
+          "link": false
+        }
+      ],
+      "translation": "※I created a [[LINK_1]]plugin that can create an invincible state[[/LINK_1]]. (2023/09/02)",
+      "contextHash": "1bdf09b563cba4f471e0f21a258c9aa8a57746dd2ee215cb5c9edfe6765ed59b"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "※[[LINK_1]]ステートの機能を色々と拡張するプラグイン[[/LINK_1]]に『自動解除を行動開始時に』する機能と『バトラーを非表示に』する機能を実装しました。（2024/06/11）",
+      "sourceHash": "83a6938e06c26b93337d98dfc459cc187bc341e616d1fa8d120305355786a6c3",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "ステートの機能を色々と拡張するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に『自動解除を行動開始時に』する機能と『バトラーを非表示に』する機能を実装しました。（2024/06/11）",
+          "link": false
+        }
+      ],
+      "translation": "※I implemented the features “Automatically remove at the start of an action” and “Hide battlers” in the [[LINK_1]]plugin that expands state functionality in various ways[[/LINK_1]]. (2024/06/11)",
+      "contextHash": "83a6938e06c26b93337d98dfc459cc187bc341e616d1fa8d120305355786a6c3"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ＦＦシリーズの竜騎士などでおなじみのジャンプ技を、ツクールＭＺおよびＭＶで実現する方法を紹介します。": "This guide explains how to create the familiar jump attack used by Dragoons in the FF series and similar characters in RPG Maker MZ and MV.",
+    "ＣＴＢでもターン制でもどちらでも有効です。": "It works with both CTB and turn-based systems.",
+    "ポケモンの「あなをほる」も同じ方法で作成できます。": "Pokémon's \"Dig\" can also be created using the same method.",
+    "実装には以下２つのプラグインを使用します。": "The following two plugins are used for implementation.",
+    "ため技を作成": "Creating a Charge-Up Skill",
+    "http://newrpg.seesaa.net/article/474413155.html": "http://newrpg.seesaa.net/article/474413155.html",
+    "http://newrpg.seesaa.net/article/477190386.html": "http://newrpg.seesaa.net/article/477190386.html",
+    "http://newrpg.seesaa.net/article/473809182.html": "http://newrpg.seesaa.net/article/473809182.html",
+    "ジャンプは以下の複合によって作成します。": "The jump is created by combining the following elements.",
+    "発動から１ターン後に攻撃するため技を作成": "A charge-up skill that attacks one turn after activation",
+    "発動時に無敵化するステート": "A state that grants invincibility upon activation",
+    "上空へと飛び上がる演出": "An effect showing the character leaping into the air",
+    "地面へと降下する演出": "An effect showing the character descending to the ground",
+    "以下、一つずつ解説していきます。": "I will explain each of these one at a time below.",
+    "ため技の作成": "Creating the Charge-Up Skill",
+    "まず最初にため技を作ります。": "First, create the charge-up skill.",
+    "手順はため技プラグインの解説に従ってください。": "Please follow the instructions in the charge-up skill plugin guide.",
+    "ただし、後でジャンプ開始演出が必要となるので、以下の『ため開始演出』まで作成してください。": "However, since an effect for starting the jump will be needed later, create the skill up to the following \"Charge Start Effect\".",
+    "http://newrpg.seesaa.net/article/474413155.html#use": "http://newrpg.seesaa.net/article/474413155.html#use",
+    "手順通りにすれば、１つのステートと２つのスキルを作成しているはずです。それぞれジャンプ技においては、以下のように対応します。": "If you follow the instructions, you should have created one state and two skills. For the jump attack, they correspond as follows.",
+    "ため状態用ステート → ジャンプ状態のステート": "State for the charging state → State for the jumping state",
+    "ため演出用スキル → ジャンプ開始演出（上昇）": "Skill for the charging effect → Jump start effect (ascent)",
+    "実行用スキル → ジャンプ降下演出＆攻撃": "Execution skill → Jump descent effect and attack",
+    "無敵ステートの設定（改良版）": "Configuring the Invincibility State (Improved Version)",
+    "これらのプラグインを導入し、『ため状態用ステート』に以下の記述を追加してください。": "After installing these plugins, add the following entries to the \"State for the Charging State\".",
+    "<Invincible>によって、そのステート中はあらゆるスキルを受けつけなくなります。": "<Invincible> prevents the battler from receiving any skills while affected by the state.",
+    "<BattlerInvisible>によって、そのステート中は表示が透明になります。この設定があるとDynamicMotionの他スキルによって不透明度が操作された場合も無効化できます。": "<BattlerInvisible> makes the battler transparent while affected by the state. With this setting, changes to opacity made by other DynamicMotion skills can also be overridden.",
+    "ただし、この設定が残っていると降下演出まで表示されなくなります。": "However, if this setting remains active, the descent effect will no longer be visible.",
+    "そこで<AutoRemovalActionStart>によって、行動開始時にステートが解除するようにしています。": "Therefore, <AutoRemovalActionStart> removes the state when the action starts.",
+    "初期選択しない": "Exclude from Initial Selection",
+    "以下のプラグインの機能によって、ジャンプ中のバトラーを対象として初期選択しないようにできます。（2025/06/17）": "The following plugin feature prevents battlers in mid-jump from being selected initially. (2025/06/17)",
+    "https://newrpg.seesaa.net/article/506049329.html": "https://newrpg.seesaa.net/article/506049329.html",
+    "プラグインを導入し、『ため状態用ステート』に以下の記述を追加してください。": "Install the plugin and add the following entry to the \"State for the Charging State\".",
+    "動画では隠れた敵が初期選択されなくなり、二番目の敵が選択されるようになっています。": "In the video, the hidden enemy is no longer selected initially, and the second enemy is selected instead.",
+    "※選択自体はできます。": "※It can still be selected manually.",
+    "無敵ステートの設定（旧）": "Configuring the Invincibility State (Old Version)",
+    "※こちらは古い情報です。改良版の設定を使用することをオススメします。（2024/06/11）": "※This is outdated information. I recommend using the improved configuration instead. (2024/06/11)",
+    "上述のように『ため状態用ステート』がジャンプ状態を現すステートになります。これの設定を調整し、ジャンプ中の無敵を表現します。": "As described above, the \"State for the Charging State\" is the state representing the jumping state. Adjust its settings to make the battler invincible while jumping.",
+    "無敵ステートを作れるプラグインがあればそれでもいいのですが、今回は単純にステートの特徴だけで設定します。": "A plugin that creates an invincibility state would also work, but this time, I will configure it using only the state's traits.",
+    "『狙われ率』『回避率／魔法回避率』『物理／魔法ダメージ率』『弱体有効度』『ステート無効化』『属性有効度』など、上記のようにひたすら攻撃を無効化する設定を行います。": "Configure it to nullify attacks as thoroughly as possible, as shown above, using traits such as \"Target Rate,\" \"Evasion Rate / Magic Evasion Rate,\" \"Physical / Magic Damage Rate,\" \"Debuff Rate,\" \"State Resist,\" and \"Element Rate.\" ",
+    "ちょっと面倒です。": "It is a little tedious.",
+    "後でステートが追加された場合、当然こちらにも対応する必要があります。": "If states are added later, you will naturally need to update this configuration as well.",
+    "なお『必中』『属性なし』『固定ダメージ』の組み合わせなど、デフォルトではどうやってもダメージを受けるスキルも存在します。そこまでは考慮していませんのでご注意ください。": "Also, some skills will inevitably deal damage by default, such as those combining \"Certain Hit,\" \"None\" as the element, and \"Fixed Damage.\" Please note that these cases are not taken into consideration.",
+    "ジャンプ開始演出": "Jump Start Effect",
+    "『ため演出用スキル』のメモ欄にDynamicMotionの定義を貼りつけます。": "Paste the DynamicMotion definition into the note field of the \"Skill for the Charging Effect.\"",
+    "<NoResult> // メッセージ非表示用": "<NoResult> // For hiding messages",
+    "// アニメーション": "// Animation",
+    "// 上昇しながら透明化": "// Become transparent while rising",
+    "// 元の位置に戻しながら透明化＆最小化": "// Become transparent and smaller while returning to the original position",
+    "// scale = 0 // 改良版では不要": "// scale = 0 // Not needed in the improved version",
+    "演出の最後に、こっそりとキャラを元の位置に戻しています。同時に透明化＆最小化を行うことで、非表示にしています。そうしないと、スキルによっては上空のキャラを狙いにいく不自然な演出になってしまうためです。": "At the end of the effect, the character is secretly returned to its original position. It is hidden by making it transparent and minimizing it at the same time. Otherwise, some skills would produce the unnatural effect of targeting the character in the air.",
+    "また、アニメーションを設定していますが、別になくても構いません。この例では、空のアニメーションにジャンプ用の効果音を付けているだけです。": "An animation is also configured, but it is not required. In this example, a jump sound effect is simply attached to an empty animation.",
+    "ジャンプ降下演出": "Jump Descent Effect",
+    "『実行用スキル』のメモ欄にDynamicMotionの定義を貼りつけます。": "Paste the DynamicMotion definition into the note field of the \"Execution Skill.\"",
+    "// ため技用の指定（各自で設定してください）": "// Setting for charge skills (please configure it yourself)",
+    "// 前進禁止": "// Prevent moving forward",
+    "// 上空へ瞬間移動": "// Instantly teleport into the air",
+    "// 透明化＆最小化解除": "// Restore transparency and size",
+    "// 降下": "// Descend",
+    "position = 2 // 足元": "position = 2 // At the feet",
+    "delay = -2 // 少し早めに表示": "delay = -2 // Display slightly earlier",
+    "// しゃがみ": "// Crouch",
+    "// 戻る": "// Return",
+    "arcY = -200 // 少し高めにジャンプ": "arcY = -200 // Jump slightly higher",
+    "以上でジャンプ技の完成です。": "That completes the jump attack.",
+    "後は好きなようにアレンジしてください。": "Feel free to customize it however you like.",
+    "有名なのでジャンプとして演出を作りましたが、必ずしも空を飛ぶ必要はありません。「穴を掘って入り、地面から襲いかかる」「画面外に隠れて背後から強襲する」などでも面白いと思います。": "I created this effect as a jump because it is well known, but it does not necessarily have to involve flying through the air. It could also be fun to have the character \"dig a hole and enter it, then attack from underground\" or \"hide off-screen and launch a surprise attack from behind.\"",
+    "注意点": "Notes",
+    "※こちらは古い情報です。改良版の設定なら問題ありません。（2024/06/11）": "※This is outdated information. There is no problem if you use the improved configuration. (2024/06/11)",
+    "ジャンプ中のキャラは、あくまで透明化と最小化によって消えて見えるだけです。": "Characters in mid-jump only appear to disappear because they are made transparent and minimized.",
+    "DynamicMotionによって、このキャラに対して透明度やサイズの変更を行うスキルをしかけた場合、表示状態が変化してしまう場合があります。": "If you use DynamicMotion to activate a skill on this character that changes its opacity or size, its display state may change.",
+    "現状、そこまでの考慮はしていません。ご注意ください。": "At present, I have not taken this into consideration. Please be aware of this."
+  }
+}
