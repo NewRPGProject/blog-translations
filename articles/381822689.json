@@ -1,0 +1,337 @@
+{
+  "articleId": "381822689",
+  "sourceUrl": "https://newrpg.seesaa.net/article/381822689.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "0d16595154f4b47e00de0ffe9f4325dbbc7b8fe02d213bc7a0e864af32cdebea",
+  "translatedAt": "2026-08-31T10:46:20.468Z",
+  "title": "[Classic Long-Form RPG] Implementing the Skill System and Allocating Equipment",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "【王道長編RPG】スキルシステム実装と装備品の配分",
+      "sourceHash": "515778cedc323f4db822b351d6020a9b0ded446daaf5593b70d24a34417d7755",
+      "translation": "[Classic Long-Form RPG] Implementing the Skill System and Allocating Equipment",
+      "contextHash": "515778cedc323f4db822b351d6020a9b0ded446daaf5593b70d24a34417d7755"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "スキルシステム実装",
+      "sourceHash": "6c806edff3bef17e2a04a1fe0f39844ea0aad38d1afae51ab06933fee55bbfb6",
+      "translation": "Implementing the Skill System",
+      "contextHash": "6c806edff3bef17e2a04a1fe0f39844ea0aad38d1afae51ab06933fee55bbfb6"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "前回、書いた通りにスキルシステムを実装してみました。こんな感じのスキルツリーです。怒涛の勢いでアイコンも自作しました。既存のグラフィックを使い回しまくったとはいえ、さすがに数が多くて辛かったです。",
+      "sourceHash": "251056834e1e829ab91a29c2f8118972275ec2ddaab750f5839f774d58c1672b",
+      "translation": "As I mentioned last time, I tried implementing the skill system. This is what the skill tree looks like. I also made all the icons myself in a burst of enthusiasm. Even though I reused existing graphics extensively, the sheer number of them was pretty tough to handle.",
+      "contextHash": "251056834e1e829ab91a29c2f8118972275ec2ddaab750f5839f774d58c1672b"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "この種のシステムで手間なのは、自分でポイントの溜まり具合を判断して、スキル習得をしなければならないことです。",
+      "sourceHash": "e3c1df23ed2d72b3abaaffe56a0b2bfa3476045ba8b4523553ed7cccdcef6549",
+      "translation": "The troublesome part of this kind of system is having to judge for yourself how many points you have accumulated and then learn skills.",
+      "contextHash": "e3c1df23ed2d72b3abaaffe56a0b2bfa3476045ba8b4523553ed7cccdcef6549"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "戦闘終了 → メニューを開く → まだポイント不足 → 戦闘終了 → ……",
+      "sourceHash": "f406c623dcf14cf8ce9829d17c7938d6d1b60e1cd02ef2ea41f8e6e6d314e091",
+      "translation": "Battle ends → Open the menu → Still not enough points → Battle ends → …...",
+      "contextHash": "f406c623dcf14cf8ce9829d17c7938d6d1b60e1cd02ef2ea41f8e6e6d314e091"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "とまあ、何ともじれったい……。この辺、放っといたら勝手に上がるレベル制は楽チンです。レベル制が古臭いと言われながらも、廃れないのはこの点で優位だからでしょう。",
+      "sourceHash": "199dc92162e75d42d637e6abd56c23a87c6881f1fbe9854cab647aa8375e7cb1",
+      "translation": "It gets pretty frustrating. A level-based system is much easier in this regard since levels go up on their own if you leave them alone. Even though level-based systems are sometimes called old-fashioned, this advantage is probably why they never go out of style.",
+      "contextHash": "199dc92162e75d42d637e6abd56c23a87c6881f1fbe9854cab647aa8375e7cb1"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "というわけで、少しでもその手間を軽減すべく予約機能を付けてみました。習得したいがポイントが足らないってスキルには予約印を付けておきます。",
+      "sourceHash": "f59abd700f27e41c5163c089bb8231640622d655eec5fbab022588d41166058b",
+      "translation": "So, I added a reservation feature to reduce that hassle, even if only a little. You can mark skills that you want to learn but don't have enough points for.",
+      "contextHash": "f59abd700f27e41c5163c089bb8231640622d655eec5fbab022588d41166058b"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "戦闘終了後、印を付けたスキルに必要なポイントが溜まれば、その時点で習得してくれます。ついでに、没になりそうだった閃きエフェクトもめでたく復活です。",
+      "sourceHash": "c398bb1e40b79d3843df59fcf9ed7a38e0d079cedef2d49086df545cafbb3b47",
+      "translation": "After battle, once you have accumulated enough points for a marked skill, you will learn it right then. As a bonus, the flash effect that was about to be cut has made a triumphant return.",
+      "contextHash": "c398bb1e40b79d3843df59fcf9ed7a38e0d079cedef2d49086df545cafbb3b47"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "スキル習得した時点で予約は消えるので、自動で次の予約ができるようにスキル画面を開くほうが親切かもしれませんが、そこまでやるかはまだ保留です。",
+      "sourceHash": "c12f71c6e11b1a62b0a3e86cca090d224cf5886df9f3748f7b6c2249af2b9547",
+      "translation": "The reservation disappears once you learn the skill, so it might be more considerate to open the skill screen automatically and let you reserve the next one, but I'm still undecided about going that far.",
+      "contextHash": "c12f71c6e11b1a62b0a3e86cca090d224cf5886df9f3748f7b6c2249af2b9547"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "装備品の配分",
+      "sourceHash": "3df28717c6dee97cfa88fd2a3df938a3448f77aec690ebc3a7964ef9058042ac",
+      "translation": "Allocating Equipment",
+      "contextHash": "3df28717c6dee97cfa88fd2a3df938a3448f77aec690ebc3a7964ef9058042ac"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "また、話題が変わりますが、そろそろ武器や防具の設定に入りたいなと思っています。ちょっと悩むのが、『店売りにする物』と『他の入手方にする物（宝箱など）』の配分です。調整にしくじった場合、「苦労して武器を買ったが、同じ物がダンジョン入ってすぐに落ちていた！ 金を無駄にした！」なんて悲劇が起こるわけです。",
+      "sourceHash": "3807151443f4cae11c0cc90b1cb22465f50bf85a248647c618cb29eb6b19e337",
+      "translation": "On another topic, I think it's about time I started setting up weapons and armor. One thing I'm having trouble deciding is how to distribute items that will be sold in shops and items that will be obtained in other ways (such as treasure chests). If I get the balance wrong, a tragedy like this could happen: “I went through all that trouble to buy a weapon, but the same one was lying just inside the dungeon! I wasted my money!”",
+      "contextHash": "3807151443f4cae11c0cc90b1cb22465f50bf85a248647c618cb29eb6b19e337"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以前、",
+      "sourceHash": "3d49b20a9f0c07cf06da3c6ef41be339102c5b5393a799efc03a949aba71b58a",
+      "translation": "Previously,",
+      "contextHash": "3d49b20a9f0c07cf06da3c6ef41be339102c5b5393a799efc03a949aba71b58a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "【RPG制作講座】アイテムバランス② 宝箱の設定",
+      "sourceHash": "533afba8f4f666bc98939d5c69487bf5683b50612a57d7d5ece8b24ce2844901",
+      "translation": "[RPG Design Guides] Item Balance ②: Setting Up Treasure Chests",
+      "contextHash": "533afba8f4f666bc98939d5c69487bf5683b50612a57d7d5ece8b24ce2844901"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "http://newrpg.seesaa.net/article/215113242.html",
+      "sourceHash": "616f28f4f7b8c090b88a00add9c82ca747e76f32614d6f17222a302fde63161e",
+      "translation": "http://newrpg.seesaa.net/article/215113242.html",
+      "contextHash": "588f20e30a17bcceb09038e567a5f0ec284245672b23692150286408342917d9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "なんて、記事を書いたぐらいなので大まかな方針は決まっています。武器・防具は店買いをやや重視し、宝箱での入手は質量共に程々に抑えるという感じです。それはいいのですが、それにしても細部で悩みます。特に中盤、船を手に入れてから自由度が増大するところなんてどうしたものか……。",
+      "sourceHash": "93614943463438798348d26e36433b93401a7bcf3785ba479449d2d6617be5b9",
+      "translation": "I even wrote an article about it, so the general policy is already decided. I plan to place slightly more emphasis on buying weapons and armor from shops, while keeping the quantity and quality of equipment obtained from treasure chests moderate. That's fine, but I still have trouble with the details. In particular, what should I do around the middle of the game, when freedom increases dramatically after obtaining the ship...?",
+      "contextHash": "93614943463438798348d26e36433b93401a7bcf3785ba479449d2d6617be5b9"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "いきなり強い装備が買える町に行けてしまう場合、あまり存在価値なく素通りされる店＆装備ができてしまいそうです。かといって、順当な強さの装備しか買えないような調整にしてしまうのも、せっかくの自由度を殺してしまうというもの。",
+      "sourceHash": "b4ee97cd3c5caf8617cfa3c9f4972b353367189674fa9892a57f118a68efebd1",
+      "translation": "If players can suddenly visit a town where powerful equipment is available, some shops and equipment may end up being ignored because they have little value. On the other hand, restricting shops to only sell equipment of an appropriate strength would defeat the purpose of having that freedom in the first place.",
+      "contextHash": "b4ee97cd3c5caf8617cfa3c9f4972b353367189674fa9892a57f118a68efebd1"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "強い装備が買える町にも行けるけど、高くて簡単には手を出せない。",
+      "sourceHash": "ad314a10f5678c9fa596ba43d5a99ca861eeec5c08c1ac4d0005139ae8ef107c",
+      "translation": "You can visit towns where powerful equipment is available, but it's expensive and not easy to buy.",
+      "contextHash": "ad314a10f5678c9fa596ba43d5a99ca861eeec5c08c1ac4d0005139ae8ef107c"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "町によって、売ってる装備の種類が違う。町Ａは剣。町Ｂは弓。",
+      "sourceHash": "0c021d1ab92f64d0dd2b336c2a6c2365d3b7c7592c1b1a26e524bc361f9d8dbb",
+      "translation": "Different towns sell different types of equipment. Town A sells swords. Town B sells bows.",
+      "contextHash": "0c021d1ab92f64d0dd2b336c2a6c2365d3b7c7592c1b1a26e524bc361f9d8dbb"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "町によって、特殊効果重視、攻撃力重視というように特徴が分かれる。",
+      "sourceHash": "cccdced6fd785b4d86906e6b4c374c903beab965cb44f6be3e95d5be20242a87",
+      "translation": "Each town has its own focus, such as emphasizing special effects or attack power.",
+      "contextHash": "cccdced6fd785b4d86906e6b4c374c903beab965cb44f6be3e95d5be20242a87"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "って辺りが無難かなという感じです。",
+      "sourceHash": "4bb4a3616a037d39657303d8651d7cfc2f153fddc706ac5a56f5d8c0de048915",
+      "translation": "Something along those lines seems like the safest approach.",
+      "contextHash": "4bb4a3616a037d39657303d8651d7cfc2f153fddc706ac5a56f5d8c0de048915"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "気になったので、参考にＤＱ３がこの辺どうなっているか調べてみました。困った時は原点たるＤＱ３（ＦＣ版）を見るに限ります。",
+      "sourceHash": "65355080b7a2d50120b753a72ee9591a9d1e7396175a3648f5600e8b9456ea1d",
+      "translation": "This got me curious, so I looked into how DQ3 handles this for reference. When you're stuck, you can't go wrong by looking at the origin: DQ3 (the FC version).",
+      "contextHash": "65355080b7a2d50120b753a72ee9591a9d1e7396175a3648f5600e8b9456ea1d"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "で、今回の調査対象は勇者が装備できる武器の変遷です。船を手に入れた時点の武器は「はがねのつるぎ」か「てつのオノ」といったところ。では、船を手に入れた後には、どんな武器を入手できるようになるのか見てみましょう。",
+      "sourceHash": "5e31fe7e23fb107146bb10bea4a454a3c47e14777a12f5a19761c90b7fda3c00",
+      "translation": "For this investigation, I looked at how the weapons available to the Luminary change over the course of the game. When you obtain the ship, your weapon options are roughly the Steel Sword or the Iron Axe. So, let's see what weapons become available after obtaining the ship.",
+      "contextHash": "5e31fe7e23fb107146bb10bea4a454a3c47e14777a12f5a19761c90b7fda3c00"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "■船入手前",
+      "sourceHash": "5831eb0e8b8fb578224f0406a0882f4d26bcde62c3eeea607df140c4f27c91fb",
+      "translation": "■Before Obtaining the Ship",
+      "contextHash": "5831eb0e8b8fb578224f0406a0882f4d26bcde62c3eeea607df140c4f27c91fb"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "はがねのつるぎ ＋３３ 1500G",
+      "sourceHash": "092923453001303cd286be0b5cab65f239e1ff04e2b53688963a911ee25bf5aa",
+      "translation": "Steel Sword +33 1500G",
+      "contextHash": "092923453001303cd286be0b5cab65f239e1ff04e2b53688963a911ee25bf5aa"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "てつのオノ ＋４０ 2500G",
+      "sourceHash": "3488759818dd13f405e4440c70c3bb9ae6a099ead288b582f29d6947a4e7673f",
+      "translation": "Iron Axe +40 2500G",
+      "contextHash": "3488759818dd13f405e4440c70c3bb9ae6a099ead288b582f29d6947a4e7673f"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "■船入手後",
+      "sourceHash": "9a6846eae93a86104adad44e1b36369e9e628202452d671322b0165d1ccb56c5",
+      "translation": "■After Obtaining the Ship",
+      "contextHash": "9a6846eae93a86104adad44e1b36369e9e628202452d671322b0165d1ccb56c5"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "くさなぎのけん ＋６３ ボスの戦利品",
+      "sourceHash": "4467cba347ab43a4cbc403e9215135d35a173e43c17ed4b626353848617afed9",
+      "translation": "Kusanagi Sword +63 Boss Loot",
+      "contextHash": "4467cba347ab43a4cbc403e9215135d35a173e43c17ed4b626353848617afed9"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ゾンビキラー ＋６５ 9800G",
+      "sourceHash": "787d2619046010c2804f147e4125c4074ae9b22eeec7dcd9b5094b3cd79e8c7d",
+      "translation": "Zombie Slayer +65 9800G",
+      "contextHash": "787d2619046010c2804f147e4125c4074ae9b22eeec7dcd9b5094b3cd79e8c7d"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ドラゴンキラー ＋７７ 15000G",
+      "sourceHash": "49cfac97a221a5b43279573687438bed7b71a31810fc90cd0a46c7bec2065550",
+      "translation": "Dragon Killer +77 15000G",
+      "contextHash": "49cfac97a221a5b43279573687438bed7b71a31810fc90cd0a46c7bec2065550"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "いなづまのけん ＋８５ 宝箱",
+      "sourceHash": "1e5a56ce4a72ec0066e8cef9cba56b41730eb532729c5e01ef750a5d03ba276b",
+      "translation": "Lightning Sword +85 Treasure Chest",
+      "contextHash": "1e5a56ce4a72ec0066e8cef9cba56b41730eb532729c5e01ef750a5d03ba276b"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "「くさなぎのけん」「いなづまのけん」はボス戦勝利が必須であり、入手が難しいので置いておきます。",
+      "sourceHash": "5cc7b7666ab0de330768add00e8b1706f20b69853546f5bc05159e797fec27c2",
+      "translation": "I'm leaving out the Kusanagi Sword and Lightning Sword since obtaining them requires winning boss battles and is difficult.",
+      "contextHash": "5cc7b7666ab0de330768add00e8b1706f20b69853546f5bc05159e797fec27c2"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "意外なのは該当条件の店売り武器が「ゾンビキラー」「ドラゴンキラー」の二つしかなかったことです。もっと一気に装備品が増えるイメージを勝手に持っていました。",
+      "sourceHash": "f116d52e58e3967a3bac410866331c8282112af2adc97612133cadfb9266214e",
+      "translation": "What surprised me was that there were only two shop-sold weapons meeting those conditions: the Zombie Slayer and the Dragon Killer. I had somehow imagined that the number of available equipment items would increase much more all at once.",
+      "contextHash": "f116d52e58e3967a3bac410866331c8282112af2adc97612133cadfb9266214e"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "というか、攻略サイトを眺めていて気が付きましたが、ＤＱ３って、中盤以降はそもそも店売りの装備品自体が少ないですね。最近のＲＰＧは装備品多すぎなのかもしれません。",
+      "sourceHash": "c1eee5533e1c05e03792f357a08b55a97062b9790fbc0b03cd0967264aa35c48",
+      "translation": "Actually, I noticed this while looking at a walkthrough site, but DQ3 has relatively few shop-sold equipment items to begin with after the middle of the game. Maybe modern RPGs simply have too much equipment.",
+      "contextHash": "c1eee5533e1c05e03792f357a08b55a97062b9790fbc0b03cd0967264aa35c48"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "なお、「ドラゴンキラー」を売っている町は手順さえ知っていれば、船入手してから、ボス戦＆ダンジョンなしで到達できます。なので、金さえ足りれば船入手直後でも買えてしまうわけです。「はがねのつるぎ」から「ドラゴンキラー」に武器交代した場合は攻撃力が一気に２倍以上。しかも、これ普通にプレイしていても、かなりありえそうなパターンです。",
+      "sourceHash": "f891d4831aa773425d91da1e9d76cd4d086b755d44688278ee9aa43f3290c32a",
+      "translation": "As for the town that sells the Dragon Killer, if you know the route, you can reach it after obtaining the ship without any boss battles or dungeons. So, as long as you have enough money, you can buy it immediately after obtaining the ship. If you switch weapons from the Steel Sword to the Dragon Killer, your attack power more than doubles at once. What's more, this seems like a fairly plausible scenario even during a normal playthrough.",
+      "contextHash": "f891d4831aa773425d91da1e9d76cd4d086b755d44688278ee9aa43f3290c32a"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "ＤＱ３は無難なようで、意外ととんがったゲームバランスのようです。もしかしたら、こういうメリハリの強さが人気の秘訣なのかもしれませんね。",
+      "sourceHash": "6712790bd9bd27f5dc6dac160ae4bcf5827f4909c6fe409e6886685ff542c496",
+      "translation": "DQ3 seems safe and conventional, but its game balance is surprisingly bold. Perhaps this strong contrast is one of the secrets behind its popularity.",
+      "contextHash": "6712790bd9bd27f5dc6dac160ae4bcf5827f4909c6fe409e6886685ff542c496"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "以上、参考になるような、ならんような調査結果でした。後はこれを踏まえて自分がどうするかです。",
+      "sourceHash": "16f35fa3395cb1c4830bf60f4645ca8c3de1f1c09b82a080219a3a61eebdab54",
+      "translation": "That concludes these investigation results, which may or may not be useful as a reference. Now I just have to decide what to do myself based on them.",
+      "contextHash": "16f35fa3395cb1c4830bf60f4645ca8c3de1f1c09b82a080219a3a61eebdab54"
+    }
+  ],
+  "lines": [],
+  "texts": {
+    "スキルシステム実装": "Implementing the Skill System",
+    "前回、書いた通りにスキルシステムを実装してみました。こんな感じのスキルツリーです。怒涛の勢いでアイコンも自作しました。既存のグラフィックを使い回しまくったとはいえ、さすがに数が多くて辛かったです。": "As I mentioned last time, I tried implementing the skill system. This is what the skill tree looks like. I also made all the icons myself in a burst of enthusiasm. Even though I reused existing graphics extensively, the sheer number of them was pretty tough to handle.",
+    "この種のシステムで手間なのは、自分でポイントの溜まり具合を判断して、スキル習得をしなければならないことです。": "The troublesome part of this kind of system is having to judge for yourself how many points you have accumulated and then learn skills.",
+    "戦闘終了 → メニューを開く → まだポイント不足 → 戦闘終了 → ……": "Battle ends → Open the menu → Still not enough points → Battle ends → …...",
+    "とまあ、何ともじれったい……。この辺、放っといたら勝手に上がるレベル制は楽チンです。レベル制が古臭いと言われながらも、廃れないのはこの点で優位だからでしょう。": "It gets pretty frustrating. A level-based system is much easier in this regard since levels go up on their own if you leave them alone. Even though level-based systems are sometimes called old-fashioned, this advantage is probably why they never go out of style.",
+    "というわけで、少しでもその手間を軽減すべく予約機能を付けてみました。習得したいがポイントが足らないってスキルには予約印を付けておきます。": "So, I added a reservation feature to reduce that hassle, even if only a little. You can mark skills that you want to learn but don't have enough points for.",
+    "戦闘終了後、印を付けたスキルに必要なポイントが溜まれば、その時点で習得してくれます。ついでに、没になりそうだった閃きエフェクトもめでたく復活です。": "After battle, once you have accumulated enough points for a marked skill, you will learn it right then. As a bonus, the flash effect that was about to be cut has made a triumphant return.",
+    "スキル習得した時点で予約は消えるので、自動で次の予約ができるようにスキル画面を開くほうが親切かもしれませんが、そこまでやるかはまだ保留です。": "The reservation disappears once you learn the skill, so it might be more considerate to open the skill screen automatically and let you reserve the next one, but I'm still undecided about going that far.",
+    "装備品の配分": "Allocating Equipment",
+    "また、話題が変わりますが、そろそろ武器や防具の設定に入りたいなと思っています。ちょっと悩むのが、『店売りにする物』と『他の入手方にする物（宝箱など）』の配分です。調整にしくじった場合、「苦労して武器を買ったが、同じ物がダンジョン入ってすぐに落ちていた！ 金を無駄にした！」なんて悲劇が起こるわけです。": "On another topic, I think it's about time I started setting up weapons and armor. One thing I'm having trouble deciding is how to distribute items that will be sold in shops and items that will be obtained in other ways (such as treasure chests). If I get the balance wrong, a tragedy like this could happen: “I went through all that trouble to buy a weapon, but the same one was lying just inside the dungeon! I wasted my money!”",
+    "以前、": "Previously,",
+    "【RPG制作講座】アイテムバランス② 宝箱の設定": "[RPG Design Guides] Item Balance ②: Setting Up Treasure Chests",
+    "http://newrpg.seesaa.net/article/215113242.html": "http://newrpg.seesaa.net/article/215113242.html",
+    "なんて、記事を書いたぐらいなので大まかな方針は決まっています。武器・防具は店買いをやや重視し、宝箱での入手は質量共に程々に抑えるという感じです。それはいいのですが、それにしても細部で悩みます。特に中盤、船を手に入れてから自由度が増大するところなんてどうしたものか……。": "I even wrote an article about it, so the general policy is already decided. I plan to place slightly more emphasis on buying weapons and armor from shops, while keeping the quantity and quality of equipment obtained from treasure chests moderate. That's fine, but I still have trouble with the details. In particular, what should I do around the middle of the game, when freedom increases dramatically after obtaining the ship...?",
+    "いきなり強い装備が買える町に行けてしまう場合、あまり存在価値なく素通りされる店＆装備ができてしまいそうです。かといって、順当な強さの装備しか買えないような調整にしてしまうのも、せっかくの自由度を殺してしまうというもの。": "If players can suddenly visit a town where powerful equipment is available, some shops and equipment may end up being ignored because they have little value. On the other hand, restricting shops to only sell equipment of an appropriate strength would defeat the purpose of having that freedom in the first place.",
+    "強い装備が買える町にも行けるけど、高くて簡単には手を出せない。": "You can visit towns where powerful equipment is available, but it's expensive and not easy to buy.",
+    "町によって、売ってる装備の種類が違う。町Ａは剣。町Ｂは弓。": "Different towns sell different types of equipment. Town A sells swords. Town B sells bows.",
+    "町によって、特殊効果重視、攻撃力重視というように特徴が分かれる。": "Each town has its own focus, such as emphasizing special effects or attack power.",
+    "って辺りが無難かなという感じです。": "Something along those lines seems like the safest approach.",
+    "気になったので、参考にＤＱ３がこの辺どうなっているか調べてみました。困った時は原点たるＤＱ３（ＦＣ版）を見るに限ります。": "This got me curious, so I looked into how DQ3 handles this for reference. When you're stuck, you can't go wrong by looking at the origin: DQ3 (the FC version).",
+    "で、今回の調査対象は勇者が装備できる武器の変遷です。船を手に入れた時点の武器は「はがねのつるぎ」か「てつのオノ」といったところ。では、船を手に入れた後には、どんな武器を入手できるようになるのか見てみましょう。": "For this investigation, I looked at how the weapons available to the Luminary change over the course of the game. When you obtain the ship, your weapon options are roughly the Steel Sword or the Iron Axe. So, let's see what weapons become available after obtaining the ship.",
+    "■船入手前": "■Before Obtaining the Ship",
+    "はがねのつるぎ ＋３３ 1500G": "Steel Sword +33 1500G",
+    "てつのオノ ＋４０ 2500G": "Iron Axe +40 2500G",
+    "■船入手後": "■After Obtaining the Ship",
+    "くさなぎのけん ＋６３ ボスの戦利品": "Kusanagi Sword +63 Boss Loot",
+    "ゾンビキラー ＋６５ 9800G": "Zombie Slayer +65 9800G",
+    "ドラゴンキラー ＋７７ 15000G": "Dragon Killer +77 15000G",
+    "いなづまのけん ＋８５ 宝箱": "Lightning Sword +85 Treasure Chest",
+    "「くさなぎのけん」「いなづまのけん」はボス戦勝利が必須であり、入手が難しいので置いておきます。": "I'm leaving out the Kusanagi Sword and Lightning Sword since obtaining them requires winning boss battles and is difficult.",
+    "意外なのは該当条件の店売り武器が「ゾンビキラー」「ドラゴンキラー」の二つしかなかったことです。もっと一気に装備品が増えるイメージを勝手に持っていました。": "What surprised me was that there were only two shop-sold weapons meeting those conditions: the Zombie Slayer and the Dragon Killer. I had somehow imagined that the number of available equipment items would increase much more all at once.",
+    "というか、攻略サイトを眺めていて気が付きましたが、ＤＱ３って、中盤以降はそもそも店売りの装備品自体が少ないですね。最近のＲＰＧは装備品多すぎなのかもしれません。": "Actually, I noticed this while looking at a walkthrough site, but DQ3 has relatively few shop-sold equipment items to begin with after the middle of the game. Maybe modern RPGs simply have too much equipment.",
+    "なお、「ドラゴンキラー」を売っている町は手順さえ知っていれば、船入手してから、ボス戦＆ダンジョンなしで到達できます。なので、金さえ足りれば船入手直後でも買えてしまうわけです。「はがねのつるぎ」から「ドラゴンキラー」に武器交代した場合は攻撃力が一気に２倍以上。しかも、これ普通にプレイしていても、かなりありえそうなパターンです。": "As for the town that sells the Dragon Killer, if you know the route, you can reach it after obtaining the ship without any boss battles or dungeons. So, as long as you have enough money, you can buy it immediately after obtaining the ship. If you switch weapons from the Steel Sword to the Dragon Killer, your attack power more than doubles at once. What's more, this seems like a fairly plausible scenario even during a normal playthrough.",
+    "ＤＱ３は無難なようで、意外ととんがったゲームバランスのようです。もしかしたら、こういうメリハリの強さが人気の秘訣なのかもしれませんね。": "DQ3 seems safe and conventional, but its game balance is surprisingly bold. Perhaps this strong contrast is one of the secrets behind its popularity.",
+    "以上、参考になるような、ならんような調査結果でした。後はこれを踏まえて自分がどうするかです。": "That concludes these investigation results, which may or may not be useful as a reference. Now I just have to decide what to do myself based on them."
+  }
+}
