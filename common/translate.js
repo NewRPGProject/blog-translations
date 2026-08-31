@@ -247,7 +247,9 @@ function applyCanonicalArticleLinkTitles(root, titleIndex) {
         } else if (label === normalizeTitleMatch(entry.sourceShort)) {
             replacement = entry.titleShort;
         } else if (isUrlOnlyArticleLabel(label, articleId)) {
-            replacement = entry.titleShort;
+            // A bare article URL is often placed on the line after a heading
+            // or a plain-text article title. Keep that URL visible as a URL;
+            // only normalise the preceding title when it actually matches.
             const preceding = findPrecedingTitleNode(root, link, entry);
             if (preceding) {
                 preceding.node.nodeValue = restoreOriginalLineFormat(
