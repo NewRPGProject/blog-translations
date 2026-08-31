@@ -11,17 +11,22 @@ const TRANSLATION_BASE_URL =
 const COMMON_TRANSLATION_URL =
     "https://newrpgproject.github.io/blog-translations/common/en.json";
 
+const ARTICLE_TITLE_INDEX_URL =
+    "https://newrpgproject.github.io/blog-translations/common/article-titles.json";
+
 const originalText = new Map();
 const originalTitle = new Map();
 const originalCommonText = new Map();
 const translationCache = new Map();
 const originalLineContent = new WeakMap();
+const originalLinkText = new WeakMap();
 const PRESERVED_INLINE_WRAPPER_TAGS = new Set([
     "b", "del", "em", "i", "mark", "s", "small", "span", "strong",
     "sub", "sup", "u"
 ]);
 
 let commonTranslationCache = null;
+let articleTitleIndexPromise = null;
 
 let cachedTitleElement = null;
 let cachedBodyElement = null;
@@ -137,6 +142,111 @@ function getArticleId() {
         location.pathname.match(/\/article\/(\d+)\.html/);
 
     return match ? match[1] : null;
+}
+
+function getLinkedArticleId(link) {
+    try {
+        const url = new URL(link.href, location.href);
+        if (!/^(?:www\.)?newrpg\.seesaa\.net$/iu.test(url.hostname)) {
+            return null;
+        }
+        return /\/article\/(\d+)\.html$/u.exec(url.pathname)?.[1] || null;
+    } catch {
+        return null;
+    }
+}
+
+function normalizeTitleMatch(value) {
+    return normalizeText(value).replace(/\s+/gu, " ").trim();
+}
+
+function isUrlOnlyArticleLabel(label, articleId) {
+    try {
+        const url = new URL(label, location.href);
+        return /^(?:www\.)?newrpg\.seesaa\.net$/iu.test(url.hostname)
+            && /\/article\/(\d+)\.html$/u.exec(url.pathname)?.[1] === articleId;
+    } catch {
+        return false;
+    }
+}
+
+function rememberOriginalLinkText(root) {
+    root?.querySelectorAll("a").forEach(link => {
+        if (!originalLinkText.has(link)) {
+            originalLinkText.set(link, link.textContent);
+        }
+    });
+}
+
+function originalLinkLabel(link) {
+    return link.dataset.nrpOriginalLinkText
+        || originalLinkText.get(link)
+        || link.textContent;
+}
+
+function findPrecedingTitleNode(root, link, entry) {
+    const candidates = [];
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+            if (link.contains(node)) return NodeFilter.FILTER_ACCEPT;
+            if (node.parentElement?.closest("a")) return NodeFilter.FILTER_REJECT;
+            return normalizeTitleMatch(originalText.get(node) || node.nodeValue)
+                ? NodeFilter.FILTER_ACCEPT
+                : NodeFilter.FILTER_REJECT;
+        }
+    });
+
+    while (walker.nextNode()) {
+        const node = walker.currentNode;
+        // The walker enters the URL link after all preceding candidates. Stop
+        // there, so a later heading cannot accidentally be selected.
+        if (link.contains(node)) break;
+        candidates.push(node);
+    }
+
+    for (const node of candidates.slice(-8).reverse()) {
+        const label = normalizeTitleMatch(originalText.get(node) || node.nodeValue);
+        if (label === normalizeTitleMatch(entry.source)) {
+            return { node, title: entry.title };
+        }
+        if (label === normalizeTitleMatch(entry.sourceShort)) {
+            return { node, title: entry.titleShort };
+        }
+    }
+    return null;
+}
+
+function applyCanonicalArticleLinkTitles(root, titleIndex) {
+    if (!root || !titleIndex?.titles) return;
+
+    for (const link of root.querySelectorAll("a")) {
+        const articleId = getLinkedArticleId(link);
+        const entry = articleId ? titleIndex.titles[articleId] : null;
+        if (!entry?.source || !entry?.sourceShort || !entry?.title || !entry?.titleShort) {
+            continue;
+        }
+
+        const label = normalizeTitleMatch(originalLinkLabel(link));
+        let replacement = null;
+        if (label === normalizeTitleMatch(entry.source)) {
+            replacement = entry.title;
+        } else if (label === normalizeTitleMatch(entry.sourceShort)) {
+            replacement = entry.titleShort;
+        } else if (isUrlOnlyArticleLabel(label, articleId)) {
+            replacement = entry.titleShort;
+            const preceding = findPrecedingTitleNode(root, link, entry);
+            if (preceding) {
+                preceding.node.nodeValue = restoreOriginalLineFormat(
+                    originalText.get(preceding.node) || preceding.node.nodeValue,
+                    normalizeEnglishAscii(preceding.title)
+                );
+            }
+        }
+
+        if (replacement) {
+            link.textContent = normalizeEnglishAscii(replacement);
+        }
+    }
 }
 
 function findArticleTitle(articleId) {
@@ -334,6 +444,40 @@ function normalizeText(text) {
         // Match the normalization used when generating JSON. In particular,
         // Seesaa may emit an ideographic space (U+3000) inside a sentence.
         .replace(/\s+/g, " ");
+}
+
+async function loadArticleTitleIndex() {
+    if (articleTitleIndexPromise) {
+        return articleTitleIndexPromise;
+    }
+
+    articleTitleIndexPromise = (async () => {
+        try {
+            const response = await fetch(ARTICLE_TITLE_INDEX_URL, {
+                // The index is small and changed by the translation workflow.
+                // Revalidate it so title corrections are reflected without
+                // manually changing a cache-busting version in the blog.
+                cache: "no-cache"
+            });
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            const index = await response.json();
+            if (!index || typeof index.titles !== "object" || index.titles === null) {
+                throw new Error("JSON形式が正しくありません。");
+            }
+            return index;
+        } catch (error) {
+            // Title canonicalisation is an optional display enhancement. A
+            // missing or temporarily unavailable index must not stop normal
+            // article translation from appearing.
+            console.warn("[NRP Language] 記事タイトル索引を読み込めません。", error);
+            return null;
+        }
+    })();
+
+    return articleTitleIndexPromise;
 }
 
 function decodeHtmlEntities(text) {
@@ -699,6 +843,12 @@ function cloneTranslatedLink(originalLink, sourceNode, translatedText) {
         const fallback = originalLink.cloneNode(false);
         fallback.textContent = decodeHtmlEntities(translatedText);
         child = fallback;
+    }
+
+    // Linked-line reconstruction creates a new anchor, so retain its original
+    // Japanese label for canonical article-title matching after translation.
+    if (child instanceof Element && child.matches("a")) {
+        child.dataset.nrpOriginalLinkText = originalLink.textContent;
     }
 
     // Also retain decorations surrounding a link, e.g.
@@ -1113,9 +1263,10 @@ async function applyIndexLanguage(language, options = {}) {
       }
 
       try {
-        const translation = await loadTranslation(
-          article.articleId
-        );
+        const [translation, titleIndex] = await Promise.all([
+          loadTranslation(article.articleId),
+          loadArticleTitleIndex()
+        ]);
 
         if (!translation) {
           return false;
@@ -1133,12 +1284,14 @@ async function applyIndexLanguage(language, options = {}) {
           normalizeEnglishAscii(translation.title)
         );
 
+        rememberOriginalLinkText(article.bodyElement);
         translateLinkedLines(article.bodyElement, translation, "en");
         translateTextNodes(
             article.bodyElement,
             createArticleDictionary(translation),
             "en"
         );
+        applyCanonicalArticleLinkTitles(article.bodyElement, titleIndex);
 
         return true;
       } catch (error) {
@@ -1216,10 +1369,13 @@ async function applyLanguage(language, options = {}) {
 
     if (articleId) {
         let translation = null;
+        let titleIndex = null;
 
         try {
-            translation =
-                await loadTranslation(articleId);
+            [translation, titleIndex] = await Promise.all([
+                loadTranslation(articleId),
+                loadArticleTitleIndex()
+            ]);
         } catch (error) {
             console.error(
                 "[NRP Language] 記事翻訳の読み込みに失敗しました。",
@@ -1258,12 +1414,14 @@ async function applyLanguage(language, options = {}) {
                     );
                 }
 
+                rememberOriginalLinkText(bodyElement);
                 translateLinkedLines(bodyElement, translation, "en");
                 translateTextNodes(
                     bodyElement,
                     createArticleDictionary(translation),
                     "en"
                 );
+                applyCanonicalArticleLinkTitles(bodyElement, titleIndex);
 
                 articleSucceeded = true;
             }
