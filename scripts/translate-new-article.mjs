@@ -30,6 +30,11 @@ Translate the entire line naturally. Keep every placeholder exactly once, paired
 The text between each matched [[LINK_n]] and [[/LINK_n]] is the visible label of that link. It is required content: translate it and keep the resulting non-empty label inside that same placeholder pair. Never delete a link label or leave a matched placeholder pair empty.
 Never output HTML tags, URLs, or any text outside the translation template.
 `.trim();
+const SOURCE_SCOPE_INSTRUCTION = `
+Each item must be translated strictly from its own "source" field only.
+For ordinary text items, no neighbouring sentence is provided as context.
+Never complete, paraphrase, or repeat text that belongs to another item, even if the source ends with a comma or the sentence continues inside <strong>, <span>, or another inline element.
+`.trim();
 const CODE_FRAGMENT_INSTRUCTION = `
 Items whose type starts with "code-" are natural-language fragments extracted from a code example. Translate only that fragment.
 Always translate Japanese in these fragments; any rule about preserving source code applies to the surrounding syntax, which has already been removed from source.
@@ -60,6 +65,10 @@ const STRUCTURAL_PUNCTUATION_TRANSLATIONS = new Map([
     ["（", " ("],
     ["）", ") "]
 ]);
+const CIRCLED_NUMBER_MARKERS = new Map([
+    ["①", "1"], ["②", "2"], ["③", "3"], ["④", "4"], ["⑤", "5"],
+    ["⑥", "6"], ["⑦", "7"], ["⑧", "8"], ["⑨", "9"], ["⑩", "10"]
+]);
 
 function fail(message) {
     throw new Error(message);
@@ -78,6 +87,10 @@ function normalizeText(value) {
 // symbols, letters, and digits but intentionally excludes U+3000.
 function normalizeEnglishAscii(value) {
     return String(value)
+        // Article-category labels must use the same ASCII brackets regardless
+        // of whether the model returned 【…】 or […]. Keep a following word
+        // boundary so the label cannot be glued to the next word.
+        .replace(/[【\[]RPG Design Guides[】\]][ \t]*/giu, "[RPG Design Guides] ")
         // Full-width parentheses in Japanese prose are separator punctuation,
         // so preserve their intended word boundaries in English. Existing
         // ASCII parentheses (for example, function(arg)) are left untouched.
@@ -115,6 +128,21 @@ function normalizeJapaneseQuoteBoundaries(source, value) {
         }
     }
 
+    return translation;
+}
+
+// Circled numbers are article-series markers, not quantities to translate.
+// Restore them from the source when a model turned them into ordinary digits.
+function preserveCircledNumberMarkers(source, value) {
+    const original = String(source || "");
+    let translation = String(value || "");
+    for (const [marker, number] of CIRCLED_NUMBER_MARKERS) {
+        if (!original.includes(marker) || translation.includes(marker)) continue;
+        translation = translation.replace(
+            new RegExp(`(?<![0-9])${number}(?![0-9])`, "u"),
+            marker
+        );
+    }
     return translation;
 }
 
@@ -763,6 +791,7 @@ function outputSchema() {
 async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
     const instructions = [
         rules,
+        SOURCE_SCOPE_INSTRUCTION,
         LINK_CONTEXT_INSTRUCTION,
         blocks.some(block => block.type === "line") ? LINK_LINE_INSTRUCTION : null,
         blocks.some(block => block.type.startsWith("code-")) ? CODE_FRAGMENT_INSTRUCTION : null,
@@ -773,7 +802,12 @@ async function translateChunk(blocks, apiKey, rules, glossary, retry = false) {
         id: block.id,
         type: block.type,
         source: block.source,
-        context: block.context
+        // Context is necessary for code fragments and link-adjacent text, but
+        // supplying an entire line for ordinary text lets a model absorb the
+        // following <strong>/<span> block and output it twice.
+        context: block.type === "code" || block.linkAdjacent
+            ? block.context
+            : block.source
     })));
     const response = await fetch(OPENAI_RESPONSES_URL, {
         method: "POST",
@@ -1135,9 +1169,12 @@ function normalizeStoredEnglishAscii(article) {
     let repaired = false;
     for (const item of [...(article.blocks || []), ...(article.lines || [])]) {
         if (typeof item.translation !== "string") continue;
-        const normalized = normalizeJapaneseQuoteBoundaries(
+        const normalized = preserveCircledNumberMarkers(
             item.source,
-            normalizeEnglishAscii(item.translation)
+            normalizeJapaneseQuoteBoundaries(
+                item.source,
+                normalizeEnglishAscii(item.translation)
+            )
         );
         if (normalized !== item.translation) {
             item.translation = normalized;
@@ -1145,7 +1182,11 @@ function normalizeStoredEnglishAscii(article) {
         }
     }
     if (typeof article.title === "string") {
-        const normalizedTitle = normalizeEnglishAscii(article.title);
+        const titleSource = (article.blocks || []).find(block => block.type === "title")?.source;
+        const normalizedTitle = preserveCircledNumberMarkers(
+            titleSource,
+            normalizeEnglishAscii(article.title)
+        );
         if (normalizedTitle !== article.title) {
             article.title = normalizedTitle;
             repaired = true;
@@ -1153,9 +1194,12 @@ function normalizeStoredEnglishAscii(article) {
     }
     for (const [source, translation] of Object.entries(article.texts || {})) {
         if (typeof translation !== "string") continue;
-        const normalized = normalizeJapaneseQuoteBoundaries(
+        const normalized = preserveCircledNumberMarkers(
             source,
-            normalizeEnglishAscii(translation)
+            normalizeJapaneseQuoteBoundaries(
+                source,
+                normalizeEnglishAscii(translation)
+            )
         );
         if (normalized !== translation) {
             article.texts[source] = normalized;
@@ -1177,9 +1221,12 @@ function synchronizeTextsFromBlocks(article) {
 function makeOutput({ articleId, articleUrl, lastModified, blocks, linkedLines }) {
     for (const item of [...blocks, ...linkedLines]) {
         if (typeof item.translation === "string") {
-            item.translation = normalizeJapaneseQuoteBoundaries(
+            item.translation = preserveCircledNumberMarkers(
                 item.source,
-                normalizeEnglishAscii(item.translation)
+                normalizeJapaneseQuoteBoundaries(
+                    item.source,
+                    normalizeEnglishAscii(item.translation)
+                )
             );
         }
     }
