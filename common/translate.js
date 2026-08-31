@@ -265,6 +265,53 @@ function applyCanonicalArticleLinkTitles(root, titleIndex) {
     }
 }
 
+function getRecentPostArticleLinks() {
+    const recentHeadings = [...document.querySelectorAll(".sidetitle")]
+        .filter(heading => {
+            const label = normalizeText(heading.textContent);
+            return label === "最近の記事" || label === "Recent Posts";
+        });
+
+    return recentHeadings.flatMap(heading => {
+        const container = heading.nextElementSibling;
+        if (!container?.classList.contains("side")) {
+            return [];
+        }
+
+        return [...container.querySelectorAll("a")].filter(link =>
+            getLinkedArticleId(link) && link.textContent.trim()
+        );
+    });
+}
+
+function applyRecentPostArticleTitles(language, titleIndex = null) {
+    const links = getRecentPostArticleLinks();
+    for (const link of links) {
+        if (!originalLinkText.has(link)) {
+            originalLinkText.set(link, link.textContent);
+        }
+
+        const original = originalLinkText.get(link);
+        if (language === "ja") {
+            link.textContent = original;
+            continue;
+        }
+
+        const articleId = getLinkedArticleId(link);
+        const entry = articleId ? titleIndex?.titles?.[articleId] : null;
+        if (!entry?.source || !entry?.sourceShort || !entry?.title || !entry?.titleShort) {
+            continue;
+        }
+
+        const label = normalizeTitleMatch(original);
+        if (label === normalizeTitleMatch(entry.source)) {
+            link.textContent = normalizeEnglishAscii(entry.title);
+        } else if (label === normalizeTitleMatch(entry.sourceShort)) {
+            link.textContent = normalizeEnglishAscii(entry.titleShort);
+        }
+    }
+}
+
 function findArticleTitle(articleId) {
     const selectors = [
         ".article-title a",
@@ -1372,6 +1419,7 @@ async function applyLanguage(language, options = {}) {
         }
 
         await applyCommonLanguage("ja");
+        applyRecentPostArticleTitles("ja");
 
         document.documentElement.lang = "ja";
         updateButtons("ja");
@@ -1453,6 +1501,15 @@ async function applyLanguage(language, options = {}) {
     // that can also occur in article text, so running these two passes in
     // parallel makes the final wording depend on network timing.
     const commonSucceeded = await applyCommonLanguage("en");
+
+    try {
+        applyRecentPostArticleTitles("en", await loadArticleTitleIndex());
+    } catch (error) {
+        console.warn(
+            "[NRP Language] 最近の記事のタイトル統一に失敗しました。",
+            error
+        );
+    }
 
     document.documentElement.lang = "en";
     updateButtons("en");
