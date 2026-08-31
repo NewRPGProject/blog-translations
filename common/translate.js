@@ -27,6 +27,7 @@ const PRESERVED_INLINE_WRAPPER_TAGS = new Set([
 
 let commonTranslationCache = null;
 let articleTitleIndexPromise = null;
+let originalDocumentTitle = null;
 
 let cachedTitleElement = null;
 let cachedBodyElement = null;
@@ -142,6 +143,28 @@ function getArticleId() {
         location.pathname.match(/\/article\/(\d+)\.html/);
 
     return match ? match[1] : null;
+}
+
+function applyDocumentTitle(language, translation = null) {
+    if (originalDocumentTitle === null) {
+        originalDocumentTitle = document.title;
+    }
+
+    if (language === "ja" || !translation?.title) {
+        document.title = originalDocumentTitle;
+        return;
+    }
+
+    const sourceTitle = translation.blocks?.find(
+        block => block.type === "title"
+    )?.source;
+    const translatedTitle = normalizeEnglishAscii(translation.title);
+
+    // Seesaa normally uses "記事タイトル - ブログ名". Replace only the
+    // article-title portion so the existing site-name suffix is preserved.
+    document.title = sourceTitle && originalDocumentTitle.includes(sourceTitle)
+        ? originalDocumentTitle.replace(sourceTitle, translatedTitle)
+        : translatedTitle;
 }
 
 function getLinkedArticleId(link) {
@@ -1395,6 +1418,7 @@ async function applyLanguage(language, options = {}) {
     // 日本語の場合
     if (language === "ja") {
         if (articleId) {
+            applyDocumentTitle("ja");
             const { titleElement, bodyElement } =
                 getArticleElements(articleId);
 
@@ -1448,6 +1472,7 @@ async function applyLanguage(language, options = {}) {
         }
 
         if (translation) {
+            applyDocumentTitle("en", translation);
             const {
                 titleElement,
                 bodyElement
