@@ -1,0 +1,1341 @@
+{
+  "articleId": "498761194",
+  "sourceUrl": "https://newrpg.seesaa.net/article/498761194.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "53e694cd8c8782439f470738c5ae2b6276424a6a55a525c8a0749b697dc8179e",
+  "translatedAt": "2026-08-31T01:12:43.454Z",
+  "title": "Implementing a System That Restores HP, MP, and TP After Actions [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "行動後に回復するシステムを実装【RPGツクールMZプラグイン】",
+      "sourceHash": "89f9abbf21725728e90c079df4fda415b19f231ab337a207d1756ca1106f36b8",
+      "translation": "Implementing a System That Restores HP, MP, and TP After Actions [RPG Maker MZ Plugin]",
+      "contextHash": "89f9abbf21725728e90c079df4fda415b19f231ab337a207d1756ca1106f36b8"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "行動後にＨＰ、ＭＰ、ＴＰが回復するシステムを実装します。",
+      "sourceHash": "35081f1f795cf22227a95f85581b3b4969138e363dd4bee94d12096a559e4be5",
+      "translation": "Implement a system that restores HP, MP, and TP after an action.",
+      "contextHash": "35081f1f795cf22227a95f85581b3b4969138e363dd4bee94d12096a559e4be5"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "回復を行う条件を細かく設定可能な他、スキル選択時に回復量を表示することもできます。",
+      "sourceHash": "ce4b9bef09db552c388b51cf380becb00727d62d2f18cd3c337a1e96ddebdd3b",
+      "translation": "You can configure the recovery conditions in detail and display the recovery amount when selecting a skill.",
+      "contextHash": "ce4b9bef09db552c388b51cf380becb00727d62d2f18cd3c337a1e96ddebdd3b"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_RecoverAfterAction.js",
+      "sourceHash": "80a438eb3c8863304aa4b4e8e2a677cf99c2ac28af0ac4644d7fb8173f5c5847",
+      "translation": "NRP_RecoverAfterAction.js ",
+      "contextHash": "3688dd3ef2fb7c71d98484b6f3491014d0e51483be0070fc73239b5ca131fb84"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "ver1.022（2025/05/10）",
+      "sourceHash": "ba32704515a3e68fa4889e680db88be4c6da3cf5d70c4a7c664795724297aa5c",
+      "translation": "ver1.022 (2025/05/10) ",
+      "contextHash": "3688dd3ef2fb7c71d98484b6f3491014d0e51483be0070fc73239b5ca131fb84"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2024/08/13 -> 2025/05/10（ver1.021 -> 1.022）",
+      "sourceHash": "027573eb0128b4db440dca02c3eac90f9c13f11cfc1f8b3b3845bd49b55eb917",
+      "translation": "2024/08/13 -> 2025/05/10 (ver1.021 -> 1.022) ",
+      "contextHash": "027573eb0128b4db440dca02c3eac90f9c13f11cfc1f8b3b3845bd49b55eb917"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "最後の１体に留めを刺した際、ＭＰＴＰが回復しない不具合を修正。",
+      "sourceHash": "ba4a6e9431d590d0a0eb9fca35074b2255fa8d9f2fcd9261f00ccc6c8de4158a",
+      "translation": "Fixed a bug that prevented MP and TP from recovering when delivering the finishing blow to the last enemy.",
+      "contextHash": "ba4a6e9431d590d0a0eb9fca35074b2255fa8d9f2fcd9261f00ccc6c8de4158a"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ターン制の場合、まともに動作しない不具合修正。",
+      "sourceHash": "6ff4a734b3b0bfef4779dab04d56a73418ad967b91b8451cfc40df515cd731b3",
+      "translation": "Fixed a bug that caused the plugin to malfunction in turn-based battles.",
+      "contextHash": "6ff4a734b3b0bfef4779dab04d56a73418ad967b91b8451cfc40df515cd731b3"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "回復量が０の時でもウィンドウが表示されてしまう不具合修正。",
+      "sourceHash": "ed4f01b7721c096e5c134fec63e9b0f029ba58cc78d3022c8e4a2f71b066cad5",
+      "translation": "Fixed a bug that caused the window to appear even when the recovery amount was 0.",
+      "contextHash": "ed4f01b7721c096e5c134fec63e9b0f029ba58cc78d3022c8e4a2f71b066cad5"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "（2025/05/10 ver1.022）",
+      "sourceHash": "d15bd01c79f35902bb06727df7f0b225f88a73f2fd7fc428437ee6f6cb057f94",
+      "translation": " (2025/05/10 ver1.022) ",
+      "contextHash": "d15bd01c79f35902bb06727df7f0b225f88a73f2fd7fc428437ee6f6cb057f94"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/02/05（ver1.01）",
+      "sourceHash": "ec60530a52ec705cbf2464d8455724db938800cecdf97f14ec723dcf0828f45e",
+      "translation": "2024/02/05 (ver1.01) ",
+      "contextHash": "ec60530a52ec705cbf2464d8455724db938800cecdf97f14ec723dcf0828f45e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "配置（横）が左の場合、ウィンドウ位置が正しく表示されない不具合修正。",
+      "sourceHash": "9848adbac1545d1a07f6707ff784c4b2dd740ae8ebdf532f5c963041b0a4067c",
+      "translation": "Fixed a bug that caused the window to be displayed in the wrong position when the horizontal placement was set to left.",
+      "contextHash": "9848adbac1545d1a07f6707ff784c4b2dd740ae8ebdf532f5c963041b0a4067c"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/03/28 -> 2023/04/05（ver1.00 -> 1.002）",
+      "sourceHash": "fe91fce0fa6ec17e52cfca734cd625eb61e189fab55669a99cf75613bb0e63d2",
+      "translation": "2023/03/28 -> 2023/04/05 (ver1.00 -> 1.002) ",
+      "contextHash": "fe91fce0fa6ec17e52cfca734cd625eb61e189fab55669a99cf75613bb0e63d2"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "移動中にエラーとなる不具合修正。（ver1.001）",
+      "sourceHash": "a2f449798214bde4a7c2cecdd083e3d782bd51f8d9410bf7bbf875db81ff2a1a",
+      "translation": "Fixed a bug that caused an error during movement. (ver1.001)",
+      "contextHash": "a2f449798214bde4a7c2cecdd083e3d782bd51f8d9410bf7bbf875db81ff2a1a"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "回復量が存在しない場合でもウィンドウが表示されてしまう不具合修正。",
+      "sourceHash": "7e5e43a65435208edfbe2b7dffce845fecd8def669b1dfa5f1d9898d31468954",
+      "translation": "Fixed a bug that caused the window to appear even when no recovery amount existed.",
+      "contextHash": "7e5e43a65435208edfbe2b7dffce845fecd8def669b1dfa5f1d9898d31468954"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "（2023/04/05 ver1.002）",
+      "sourceHash": "bbc12d17704dc4063e4fe6f16a9669d1aab1ffd90b6bfb48ecf2f6cff20edf02",
+      "translation": " (2023/04/05 ver1.002) ",
+      "contextHash": "bbc12d17704dc4063e4fe6f16a9669d1aab1ffd90b6bfb48ecf2f6cff20edf02"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "回復量の指定（Recovery Amount）",
+      "sourceHash": "017950ab83f50b52a50fbc694a40797eded4dca104c4542fb9d5e0c1c681a3a9",
+      "translation": "Specifying the Recovery Amount (Recovery Amount)",
+      "contextHash": "017950ab83f50b52a50fbc694a40797eded4dca104c4542fb9d5e0c1c681a3a9"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "アクター、エネミー、職業、装備、ステート、パッシブスキルのメモ欄に以下を記入してください。",
+      "sourceHash": "e3d399ea0193434e073701bb157ccb8653ed2b9534ab761d566a5e8d61080eee",
+      "translation": "Enter the following in the note fields of actors, enemies, classes, equipment, states, and passive skills.",
+      "contextHash": "e3d399ea0193434e073701bb157ccb8653ed2b9534ab761d566a5e8d61080eee"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "行動後にＨＰ、ＭＰ、ＴＰを指定した数値分だけ回復します。",
+      "sourceHash": "dc134f607efd86ca2a142bf0105fcab59b8e404e8377bcab572ea077e2661608",
+      "translation": "After an action, restores HP, MP, and TP by the specified amounts.",
+      "contextHash": "dc134f607efd86ca2a142bf0105fcab59b8e404e8377bcab572ea077e2661608"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "複数の装備品などによる重複加算も可能です。",
+      "sourceHash": "21eff4d84108d03318d52d2d4b47fb4c9264d76da0160204c14d021e0e6070a1",
+      "translation": "Amounts from multiple pieces of equipment can also be added cumulatively.",
+      "contextHash": "21eff4d84108d03318d52d2d4b47fb4c9264d76da0160204c14d021e0e6070a1"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "また、数式も使用可能です。",
+      "sourceHash": "34809c70a05cc705c7af5ecf9ff10a653fd10191eac73204fabb5dc1bc7bfff6",
+      "translation": "Formulas can also be used.",
+      "contextHash": "34809c70a05cc705c7af5ecf9ff10a653fd10191eac73204fabb5dc1bc7bfff6"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "\"a.mhp / 2\"ならば、最大ＨＰの半分になります。",
+      "sourceHash": "c63426f4d3c79c52b67952121af3d31170b8e525c7bc677eb6ebd38ef75e5da3",
+      "translation": "\"a.mhp / 2\" restores half of the maximum HP.",
+      "contextHash": "c63426f4d3c79c52b67952121af3d31170b8e525c7bc677eb6ebd38ef75e5da3"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "パッシブスキルについて（About Passive Skills）",
+      "sourceHash": "c0bfab733f8b9a9b35601cba1251246fba4d7d75e3c8f2fb098265ca4423f37b",
+      "translation": "About Passive Skills (About Passive Skills)",
+      "contextHash": "c0bfab733f8b9a9b35601cba1251246fba4d7d75e3c8f2fb098265ca4423f37b"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "スキルの使用可能時を『使用不可』にした場合、そのスキルはパッシブスキルとして機能します。",
+      "sourceHash": "6dbf37c6bd15c2e4228ac88387b5f8279afd44048d190b9e3409918b777a8a81",
+      "translation": "If a skill's occasion is set to “Never,” that skill functions as a passive skill.",
+      "contextHash": "6dbf37c6bd15c2e4228ac88387b5f8279afd44048d190b9e3409918b777a8a81"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "上記の設定を行う場合は、パッシブスキルにしてください。",
+      "sourceHash": "12e8d38b7abd5c55df86894434b719f21ecf250139e8842405b4661f7ba87813",
+      "translation": "When using the settings above, make the skill a passive skill.",
+      "contextHash": "12e8d38b7abd5c55df86894434b719f21ecf250139e8842405b4661f7ba87813"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "スキル、アイテムのメモ欄（Note Of Skill & Item)）",
+      "sourceHash": "9488c6cb9ebfc43d53f92dd53a0bda5e98ea1f56affc031c30ec2f609319d7e4",
+      "translation": "Skill and Item Note Fields (Note Of Skill & Item)",
+      "contextHash": "9488c6cb9ebfc43d53f92dd53a0bda5e98ea1f56affc031c30ec2f609319d7e4"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "そのスキル（アイテム）を使用した際、ＨＰ、ＭＰ、ＴＰの回復を有効／無効にします。",
+      "sourceHash": "ccb1bfe0a9a6616c26ecac2d83f0d0f92daa42801d8a79eaffee2b7575cf546c",
+      "translation": "Enables or disables HP, MP, and TP recovery when that skill or item is used.",
+      "contextHash": "ccb1bfe0a9a6616c26ecac2d83f0d0f92daa42801d8a79eaffee2b7575cf546c"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "これらはプラグインパラメータの設定より優先されます。",
+      "sourceHash": "43ada47f9edecc5b76ba835b4faa0aa7c70ccdd744959f994170685efb984b1e",
+      "translation": "These settings take priority over the plugin parameter settings.",
+      "contextHash": "43ada47f9edecc5b76ba835b4faa0aa7c70ccdd744959f994170685efb984b1e"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameters (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "敵キャラにも適用（ApplyEnemy）",
+      "sourceHash": "f9806c6c051f50b21eee6a99b5b9c957b6a291848a65f05ce3c779f7f536901b",
+      "translation": "Apply to Enemies (ApplyEnemy)",
+      "contextHash": "f9806c6c051f50b21eee6a99b5b9c957b6a291848a65f05ce3c779f7f536901b"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "敵キャラにも回復設定を適用します。",
+      "sourceHash": "0371a47f3c8cb5d84a08d69006096e9d62220cc336957c26e3aedfaac555d178",
+      "translation": "Applies the recovery settings to enemies as well.",
+      "contextHash": "0371a47f3c8cb5d84a08d69006096e9d62220cc336957c26e3aedfaac555d178"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "＜ＨＰ回復関連＞（<HPRecover>）",
+      "sourceHash": "2a062e19231ee23bf2656e1885a933412c271532d1100572cbe4610636732684",
+      "translation": "<HP Recovery> (<HPRecover>)",
+      "contextHash": "2a062e19231ee23bf2656e1885a933412c271532d1100572cbe4610636732684"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ＨＰ回復関連の設定です。",
+      "sourceHash": "bf0f0c473c26f58d4fab15fbb87f4b9941606815966ff9bba05dc587dcdc1f83",
+      "translation": "These are the settings related to HP recovery.",
+      "contextHash": "bf0f0c473c26f58d4fab15fbb87f4b9941606815966ff9bba05dc587dcdc1f83"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "基本ＨＰ回復量（BasicHpRecover）",
+      "sourceHash": "a7a2dd6a466001853acbf40a8647bcfd7ac600daa18d213df85968d165b2f21b",
+      "translation": "Basic HP Recovery Amount (BasicHpRecover)",
+      "contextHash": "a7a2dd6a466001853acbf40a8647bcfd7ac600daa18d213df85968d165b2f21b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "基本となるＨＰ回復量です。",
+      "sourceHash": "d7983e48d0389c4d5b4fe147c5bfb85b8c03dbbee4bf98511034c24108877d59",
+      "translation": "The basic HP recovery amount.",
+      "contextHash": "d7983e48d0389c4d5b4fe147c5bfb85b8c03dbbee4bf98511034c24108877d59"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "ＨＰ回復するスキルタイプ（HpRecoverSkillType）",
+      "sourceHash": "74c1da605cfa48ea9621b1837b3f7541eaee433f29e2abb875a1e7ecf522bc5f",
+      "translation": "Skill Types That Recover HP (HpRecoverSkillType)",
+      "contextHash": "74c1da605cfa48ea9621b1837b3f7541eaee433f29e2abb875a1e7ecf522bc5f"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ＨＰ回復を行うスキルタイプ。",
+      "sourceHash": "2d080cdf946306d12239d45dddeb57be5b39eb8c4a3ba440a05193a5459b28fc",
+      "translation": "The skill types that perform HP recovery.",
+      "contextHash": "2d080cdf946306d12239d45dddeb57be5b39eb8c4a3ba440a05193a5459b28fc"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "複数指定可（例：0,1,2）。",
+      "sourceHash": "c2b426dae209725d8cfc55d4157f94f430c26f9502fd3f0058ac04edf10c6778",
+      "translation": "Multiple values can be specified (example: 0,1,2).",
+      "contextHash": "c2b426dae209725d8cfc55d4157f94f430c26f9502fd3f0058ac04edf10c6778"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "標準だと0:通常攻撃や防御, 1:魔法, 2:必殺技",
+      "sourceHash": "e407af4af8c829c1d67b6b4ffdfc76229d9c2b603891dc14b08bd734129a988f",
+      "translation": "By default: 0: Normal Attack and Guard, 1: Magic, 2: Special Skill",
+      "contextHash": "e407af4af8c829c1d67b6b4ffdfc76229d9c2b603891dc14b08bd734129a988f"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "アイテム使用時にＨＰ回復（HpRecoverUseItem）",
+      "sourceHash": "5483565e73c3e39db8f25cf45e00681ccf7a4882f31cace5ffa4f2b4ba93055c",
+      "translation": "Recover HP When Using an Item (HpRecoverUseItem)",
+      "contextHash": "5483565e73c3e39db8f25cf45e00681ccf7a4882f31cace5ffa4f2b4ba93055c"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "アイテム使用時にＨＰ回復を行います。",
+      "sourceHash": "5f7c84625871074711cd5b509e8900b1a30fc0e76e486cb36ddbad0f71f5e5af",
+      "translation": "Recovers HP when an item is used.",
+      "contextHash": "5f7c84625871074711cd5b509e8900b1a30fc0e76e486cb36ddbad0f71f5e5af"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "ＨＰ回復をダメージ表示（DisplayHpRecover）",
+      "sourceHash": "9e633db5e167d330a8148c16686a21fbb684efadec23f68405719ff3daf2fa35",
+      "translation": "Display HP Recovery as Damage (DisplayHpRecover)",
+      "contextHash": "9e633db5e167d330a8148c16686a21fbb684efadec23f68405719ff3daf2fa35"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ＨＰ回復量をダメージ表示します。",
+      "sourceHash": "e05b7286a4e9146e38aa01caf8b7d957c7337a1e3efc39fdcf0a7c993b8a00c2",
+      "translation": "Displays the HP recovery amount as damage.",
+      "contextHash": "e05b7286a4e9146e38aa01caf8b7d957c7337a1e3efc39fdcf0a7c993b8a00c2"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "ＨＰ回復の表記（HpRecoverLabel）",
+      "sourceHash": "b811b397b99af371da50b6b910fe0f63b31cb39f3b7b987d10a8ee45c5859979",
+      "translation": "HP Recovery Label (HpRecoverLabel)",
+      "contextHash": "b811b397b99af371da50b6b910fe0f63b31cb39f3b7b987d10a8ee45c5859979"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "ＨＰ回復量をウィンドウに表示する際の表記です。",
+      "sourceHash": "fe8e402888f1da1089aef0a82069a30f0c9fca18a4a4c0b4bcc9f14001f25c2a",
+      "translation": "The label displayed in the window when showing the HP recovery amount.",
+      "contextHash": "fe8e402888f1da1089aef0a82069a30f0c9fca18a4a4c0b4bcc9f14001f25c2a"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "＜ＭＰ回復関連＞（<MPRecover>）",
+      "sourceHash": "7ca491dc52d57ab3c80f05257e5260270ec0248ffd15c3eb16160cd26340e76b",
+      "translation": "<MP Recovery> (<MPRecover>)",
+      "contextHash": "7ca491dc52d57ab3c80f05257e5260270ec0248ffd15c3eb16160cd26340e76b"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ＭＰ回復関連の設定です。",
+      "sourceHash": "8c8eb19a120b55bf9789dd2d46ed731e76c90f6489cf7983f42247edab68a1fd",
+      "translation": "These are the settings related to MP recovery.",
+      "contextHash": "8c8eb19a120b55bf9789dd2d46ed731e76c90f6489cf7983f42247edab68a1fd"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "基本ＭＰ回復量（BasicMpRecover）",
+      "sourceHash": "0275bb5dd4e345b14f05ec3efffa9a67379401b03b1f6ff3daf0c64759c25e55",
+      "translation": "Basic MP Recovery Amount (BasicMpRecover)",
+      "contextHash": "0275bb5dd4e345b14f05ec3efffa9a67379401b03b1f6ff3daf0c64759c25e55"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "基本となるＭＰ回復量です。",
+      "sourceHash": "f20e756f90ebcb111daea27001c63380e7a943d43cfe16649c329155d2aef947",
+      "translation": "The basic MP recovery amount.",
+      "contextHash": "f20e756f90ebcb111daea27001c63380e7a943d43cfe16649c329155d2aef947"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "ＭＰ回復するスキルタイプ（MpRecoverSkillType）",
+      "sourceHash": "faf64e6447fcabc226332117bfb0ab04a122ac4a4a976ccbb5d0f3cd46850e22",
+      "translation": "Skill Types That Recover MP (MpRecoverSkillType)",
+      "contextHash": "faf64e6447fcabc226332117bfb0ab04a122ac4a4a976ccbb5d0f3cd46850e22"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "ＭＰ回復を行うスキルタイプ。",
+      "sourceHash": "732a76654beb19344c13910384f7f54e7951d1fcbc4c58db934d29f98c8de835",
+      "translation": "The skill types that perform MP recovery.",
+      "contextHash": "732a76654beb19344c13910384f7f54e7951d1fcbc4c58db934d29f98c8de835"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "複数指定可（例：0,1,2）。",
+      "sourceHash": "c2b426dae209725d8cfc55d4157f94f430c26f9502fd3f0058ac04edf10c6778",
+      "translation": "Multiple values can be specified (e.g., 0,1,2).",
+      "contextHash": "c2b426dae209725d8cfc55d4157f94f430c26f9502fd3f0058ac04edf10c6778"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "標準だと0:通常攻撃や防御, 1:魔法, 2:必殺技",
+      "sourceHash": "e407af4af8c829c1d67b6b4ffdfc76229d9c2b603891dc14b08bd734129a988f",
+      "translation": "By default: 0: Normal Attack or Guard, 1: Magic, 2: Special Skill",
+      "contextHash": "e407af4af8c829c1d67b6b4ffdfc76229d9c2b603891dc14b08bd734129a988f"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "アイテム使用時にＭＰ回復（MpRecoverUseItem）",
+      "sourceHash": "8d6d4683623dadcc575caee07de2e14cd0c4e488d54b98e40b115f3000a3c289",
+      "translation": "Recover MP When Using an Item (MpRecoverUseItem)",
+      "contextHash": "8d6d4683623dadcc575caee07de2e14cd0c4e488d54b98e40b115f3000a3c289"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "アイテム使用時にＭＰ回復を行います。",
+      "sourceHash": "700e30315ed7b7eec3a463cb924eeec548f5dff6a056651bb663ff5b10bb86b5",
+      "translation": "Recovers MP when using an item.",
+      "contextHash": "700e30315ed7b7eec3a463cb924eeec548f5dff6a056651bb663ff5b10bb86b5"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "ＭＰ回復をダメージ表示（DisplayMpRecover）",
+      "sourceHash": "9585ccade791e321002e2e57bb4cf04236432740c16143f85cf0264d1ce08320",
+      "translation": "Display MP Recovery as Damage (DisplayMpRecover)",
+      "contextHash": "9585ccade791e321002e2e57bb4cf04236432740c16143f85cf0264d1ce08320"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "ＭＰ回復量をダメージ表示します。",
+      "sourceHash": "5d4fef7e94d7e9288a8a4b8ad4a7067068d774e967860b021eef61c1dbe06b4e",
+      "translation": "Displays the amount of MP recovered as damage.",
+      "contextHash": "5d4fef7e94d7e9288a8a4b8ad4a7067068d774e967860b021eef61c1dbe06b4e"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "ＭＰ回復の表記（MpRecoverLabel）",
+      "sourceHash": "e021da34724c214d676aa569ce08e90d923dc56bd86d3af28a6d32788efcb77c",
+      "translation": "MP Recovery Label (MpRecoverLabel)",
+      "contextHash": "e021da34724c214d676aa569ce08e90d923dc56bd86d3af28a6d32788efcb77c"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "ＭＰ回復量をウィンドウに表示する際の表記です。",
+      "sourceHash": "966843cc36792cb7e3a9164ffda27312b7d8c9508dd663d4a826732a61f09f04",
+      "translation": "The label displayed in the window for the amount of MP recovered.",
+      "contextHash": "966843cc36792cb7e3a9164ffda27312b7d8c9508dd663d4a826732a61f09f04"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "＜ＴＰ回復関連＞（<TPRecover>）",
+      "sourceHash": "ceb37a1fae735d1342a7dc26f833fc7e3797f20e951695e2a5020c817894741b",
+      "translation": "<TP Recovery-Related Settings> (<TPRecover>)",
+      "contextHash": "ceb37a1fae735d1342a7dc26f833fc7e3797f20e951695e2a5020c817894741b"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "ＴＰ回復関連の設定です。",
+      "sourceHash": "127669809e10048f9e20d83ccffc58bf38ca9ba3fe6764d9d387784b6d062649",
+      "translation": "Settings related to TP recovery.",
+      "contextHash": "127669809e10048f9e20d83ccffc58bf38ca9ba3fe6764d9d387784b6d062649"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "基本ＴＰ回復量（BasicTpRecover）",
+      "sourceHash": "4ddd9c8d36968b5d655c1ea98f61d76513c3eed6f498cce60cbeea27a53d9a69",
+      "translation": "Basic TP Recovery Amount (BasicTpRecover)",
+      "contextHash": "4ddd9c8d36968b5d655c1ea98f61d76513c3eed6f498cce60cbeea27a53d9a69"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "基本となるＴＰ回復量です。",
+      "sourceHash": "d517da3254ecae9d46fe701b5618059a6da677f0eab699ff820b9331645309b7",
+      "translation": "The basic amount of TP recovered.",
+      "contextHash": "d517da3254ecae9d46fe701b5618059a6da677f0eab699ff820b9331645309b7"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "ＴＰ回復するスキルタイプ（TpRecoverSkillType）",
+      "sourceHash": "8cdc699904a93c61bc6d609c1157f8134538378c35252f3d5f9a7b650c41b2c7",
+      "translation": "Skill Types That Recover TP (TpRecoverSkillType)",
+      "contextHash": "8cdc699904a93c61bc6d609c1157f8134538378c35252f3d5f9a7b650c41b2c7"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "ＴＰ回復を行うスキルタイプ。",
+      "sourceHash": "66d90a28a645e9433b9b8b5a0b576c86d516c59af242aa288f239d17ffce532f",
+      "translation": "The skill types that recover TP.",
+      "contextHash": "66d90a28a645e9433b9b8b5a0b576c86d516c59af242aa288f239d17ffce532f"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "複数指定可（例：0,1,2）。",
+      "sourceHash": "c2b426dae209725d8cfc55d4157f94f430c26f9502fd3f0058ac04edf10c6778",
+      "translation": "Multiple values can be specified (e.g., 0,1,2).",
+      "contextHash": "c2b426dae209725d8cfc55d4157f94f430c26f9502fd3f0058ac04edf10c6778"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "標準だと0:通常攻撃や防御, 1:魔法, 2:必殺技",
+      "sourceHash": "e407af4af8c829c1d67b6b4ffdfc76229d9c2b603891dc14b08bd734129a988f",
+      "translation": "By default: 0: Normal Attack or Guard, 1: Magic, 2: Special Skill",
+      "contextHash": "e407af4af8c829c1d67b6b4ffdfc76229d9c2b603891dc14b08bd734129a988f"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "アイテム使用時にＴＰ回復（TpRecoverUseItem）",
+      "sourceHash": "a42cde91518c39372e497dde1a774a60478c5afe528d57a8e2541cf2780f8cbb",
+      "translation": "Recover TP When Using an Item (TpRecoverUseItem)",
+      "contextHash": "a42cde91518c39372e497dde1a774a60478c5afe528d57a8e2541cf2780f8cbb"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "アイテム使用時にＴＰ回復を行います。",
+      "sourceHash": "076eefd04013e2feeb8ee92921cbf7bbb0b4684d7a55cfd09d72298c5b34ec00",
+      "translation": "Recovers TP when using an item.",
+      "contextHash": "076eefd04013e2feeb8ee92921cbf7bbb0b4684d7a55cfd09d72298c5b34ec00"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "ＴＰ回復をダメージ表示（DisplayTpRecover）",
+      "sourceHash": "bfc07b0bf07a888bb3b0735f534cbb03f552002381b1ae2271534070d436d127",
+      "translation": "Display TP Recovery as Damage (DisplayTpRecover)",
+      "contextHash": "bfc07b0bf07a888bb3b0735f534cbb03f552002381b1ae2271534070d436d127"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "ＴＰ回復量をダメージ表示します。",
+      "sourceHash": "653384f1444b14bb16e88ec70e8b6a410249a75abf11d9006540ff4662cee2e0",
+      "translation": "Displays the amount of TP recovered as damage.",
+      "contextHash": "653384f1444b14bb16e88ec70e8b6a410249a75abf11d9006540ff4662cee2e0"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "ＴＰ回復の表記（TpRecoverLabel）",
+      "sourceHash": "6b26103af33316db9272eccec74daaa7a4c91b25c2449767504219ecf422f582",
+      "translation": "TP Recovery Label (TpRecoverLabel)",
+      "contextHash": "6b26103af33316db9272eccec74daaa7a4c91b25c2449767504219ecf422f582"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "ＴＰ回復量をウィンドウに表示する際の表記です。",
+      "sourceHash": "a395d6c8d8ea56163ac4704f0b7d97d33d621a44e297b94b37ebbe4910f302da",
+      "translation": "The label displayed in the window for the amount of TP recovered.",
+      "contextHash": "a395d6c8d8ea56163ac4704f0b7d97d33d621a44e297b94b37ebbe4910f302da"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "＜回復ウィンドウ関連＞（<RecoverWindow>）",
+      "sourceHash": "f74383daac7a887a79e566c184a5fbc332f882c1363149548b675097922d3a53",
+      "translation": "<Recovery Window-Related Settings> (<RecoverWindow>)",
+      "contextHash": "f74383daac7a887a79e566c184a5fbc332f882c1363149548b675097922d3a53"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "回復値を表示するためのウィンドウの設定です。",
+      "sourceHash": "378d3f6f1e67d9a44fab19dbaa821d5584f48eb6bbd30b3a4f5813f83db9faaa",
+      "translation": "Settings for the window that displays recovery values.",
+      "contextHash": "378d3f6f1e67d9a44fab19dbaa821d5584f48eb6bbd30b3a4f5813f83db9faaa"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "回復ウィンドウを表示（UseRecoverWindow）",
+      "sourceHash": "51319d94c3c8a7c09950b4833d345af1e58edc0ffe1b1deeb6dfee3661b336ba",
+      "translation": "Display the Recovery Window (UseRecoverWindow)",
+      "contextHash": "51319d94c3c8a7c09950b4833d345af1e58edc0ffe1b1deeb6dfee3661b336ba"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "スキル選択時に回復量をウィンドウに表示します。",
+      "sourceHash": "717db2d1953db5f7e07db1a3dd6b618f80dd5143a1d9a4281779b636b88e0e09",
+      "translation": "Displays the recovery amount in a window when selecting a skill.",
+      "contextHash": "717db2d1953db5f7e07db1a3dd6b618f80dd5143a1d9a4281779b636b88e0e09"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "コマンド時の表示方法（CommandType）",
+      "sourceHash": "f988051cabf0dac2012e44ab96dc2dccdcaffef243d0c2f9ed7cdf2ea33dee8e",
+      "translation": "Display Method for Commands (CommandType)",
+      "contextHash": "f988051cabf0dac2012e44ab96dc2dccdcaffef243d0c2f9ed7cdf2ea33dee8e"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "コマンド（通常攻撃や防御）選択時の回復ウィンドウの表示方法です。",
+      "sourceHash": "0896ecde83c99b3687e03bc526ef0a8fe4b4fbc2dcb35de39f43a9c0fe476362",
+      "translation": "The display method for the recovery window when selecting a command (Normal Attack or Guard).",
+      "contextHash": "0896ecde83c99b3687e03bc526ef0a8fe4b4fbc2dcb35de39f43a9c0fe476362"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "配置（横）（HorizontalPosition）",
+      "sourceHash": "907ad386d505be781b80dc4fe255355fb2d4cf1ccff62b0e10552338f4215198",
+      "translation": "Position (Horizontal) (HorizontalPosition)",
+      "contextHash": "907ad386d505be781b80dc4fe255355fb2d4cf1ccff62b0e10552338f4215198"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "回復ウィンドウの配置（横）です。",
+      "sourceHash": "c88b46189051116f258fa2804c5fb500c024b3586ef3417e400d207abca45890",
+      "translation": "The horizontal position of the recovery window.",
+      "contextHash": "c88b46189051116f258fa2804c5fb500c024b3586ef3417e400d207abca45890"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "数値の表示幅（NumberWidth）",
+      "sourceHash": "e13150dd5a19c660c6a698142c29b6a154cc4971d278109a6e628fe94bd84d21",
+      "translation": "Number Display Width (NumberWidth)",
+      "contextHash": "e13150dd5a19c660c6a698142c29b6a154cc4971d278109a6e628fe94bd84d21"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "回復ウィンドウに数値を表示する幅です。",
+      "sourceHash": "b8be038c91bfac9a06e93858c47d6c1f3d3ddd1bbb3d18c2b6e1e831afc43944",
+      "translation": "The width used to display numbers in the recovery window.",
+      "contextHash": "b8be038c91bfac9a06e93858c47d6c1f3d3ddd1bbb3d18c2b6e1e831afc43944"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "なお、[[LINK_1]]作者の自作品[[/LINK_1]]にある「武器を使った時はＭＰ回復」「魔法を使った時はＴＰ回復」というシステムをＭＺで実現するために作成したプラグインなので、仕様が微妙にマニアックです。",
+      "sourceHash": "ba4a05fa6f295984d3deed7035a4e28fd0ba3ae7658af3717dc78acd9c98cf9a",
+      "parts": [
+        {
+          "source": "なお、",
+          "link": false
+        },
+        {
+          "source": "作者の自作品",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にある「武器を使った時はＭＰ回復」「魔法を使った時はＴＰ回復」というシステムをＭＺで実現するために作成したプラグインなので、仕様が微妙にマニアックです。",
+          "link": false
+        }
+      ],
+      "translation": "Additionally, this plugin was created to implement in MZ the system found in the [[LINK_1]]author's own works[[/LINK_1]], where using a weapon recovers MP and using magic recovers TP, so its specifications are somewhat niche.",
+      "contextHash": "ba4a05fa6f295984d3deed7035a4e28fd0ba3ae7658af3717dc78acd9c98cf9a"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "また、[[LINK_1]]ＴＰをレベル成長させるプラグイン[[/LINK_1]]との併用も可能です。",
+      "sourceHash": "e3fda54154428d34c728f0942192bd07328dccbef38660bea5f30cd8bfb3469e",
+      "parts": [
+        {
+          "source": "また、",
+          "link": false
+        },
+        {
+          "source": "ＴＰをレベル成長させるプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との併用も可能です。",
+          "link": false
+        }
+      ],
+      "translation": "It can also be used together with the [[LINK_1]]plugin that increases TP as you level up[[/LINK_1]].",
+      "contextHash": "e3fda54154428d34c728f0942192bd07328dccbef38660bea5f30cd8bfb3469e"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Install (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]回復量の指定（Recovery Amount）[[/LINK_1]]",
+      "sourceHash": "56f02fc3b927b78b99c3a15882c46388a3c7a3b4d415d25974a60c2383b0d0cb",
+      "parts": [
+        {
+          "source": "回復量の指定（Recovery Amount）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Specifying the Recovery Amount (Recovery Amount)[[/LINK_1]]",
+      "contextHash": "56f02fc3b927b78b99c3a15882c46388a3c7a3b4d415d25974a60c2383b0d0cb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]パッシブスキルについて（About Passive Skills）[[/LINK_1]]",
+      "sourceHash": "9d4a3c055b9351c00fdc3c52015772be5b93044493899113ca2d926caf7f88ff",
+      "parts": [
+        {
+          "source": "パッシブスキルについて（About Passive Skills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About Passive Skills (About Passive Skills)[[/LINK_1]]",
+      "contextHash": "9d4a3c055b9351c00fdc3c52015772be5b93044493899113ca2d926caf7f88ff"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]スキル、アイテムのメモ欄（Note Of Skill & Item)）[[/LINK_1]]",
+      "sourceHash": "7b08635ddc96196a8a4d9678f57e51e38d78eba868c8f407067896d5954949d0",
+      "parts": [
+        {
+          "source": "スキル、アイテムのメモ欄（Note Of Skill & Item)）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill and Item Note Field (Note Of Skill & Item))[[/LINK_1]]",
+      "contextHash": "7b08635ddc96196a8a4d9678f57e51e38d78eba868c8f407067896d5954949d0"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラにも適用（ApplyEnemy）[[/LINK_1]]",
+      "sourceHash": "582eaa8af1b01097c4027b4e60fcbda557286058b8de04d4d4b92bd8d79d3f9d",
+      "parts": [
+        {
+          "source": "敵キャラにも適用（ApplyEnemy）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Enemies (ApplyEnemy)[[/LINK_1]]",
+      "contextHash": "582eaa8af1b01097c4027b4e60fcbda557286058b8de04d4d4b92bd8d79d3f9d"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＜ＨＰ回復関連＞（<HPRecover>）[[/LINK_1]]",
+      "sourceHash": "d0491cf045a3c17195351d7414a9160bc152b39badb4ef05bf7b3b2b7d09c1bb",
+      "parts": [
+        {
+          "source": "＜ＨＰ回復関連＞（<HPRecover>）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<HP Recovery> (<HPRecover>)[[/LINK_1]]",
+      "contextHash": "d0491cf045a3c17195351d7414a9160bc152b39badb4ef05bf7b3b2b7d09c1bb"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]基本ＨＰ回復量（BasicHpRecover）[[/LINK_1]]",
+      "sourceHash": "aea0dbb8cf2529a2ec7b9966a581908299dc47b100f1daeb06e30ac3c7b66422",
+      "parts": [
+        {
+          "source": "基本ＨＰ回復量（BasicHpRecover）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Basic HP Recovery Amount (BasicHpRecover)[[/LINK_1]]",
+      "contextHash": "aea0dbb8cf2529a2ec7b9966a581908299dc47b100f1daeb06e30ac3c7b66422"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰ回復するスキルタイプ（HpRecoverSkillType）[[/LINK_1]]",
+      "sourceHash": "0a3e0b56113bd8a076f7d68816f2b56ff6ec230cf015666313d272f7ae199d6c",
+      "parts": [
+        {
+          "source": "ＨＰ回復するスキルタイプ（HpRecoverSkillType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Type that Recovers HP (HpRecoverSkillType)[[/LINK_1]]",
+      "contextHash": "0a3e0b56113bd8a076f7d68816f2b56ff6ec230cf015666313d272f7ae199d6c"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム使用時にＨＰ回復（HpRecoverUseItem）[[/LINK_1]]",
+      "sourceHash": "6368754be93b6972e50e20eb635fdcfeee45757a15bb302e4de0863d7cf960b3",
+      "parts": [
+        {
+          "source": "アイテム使用時にＨＰ回復（HpRecoverUseItem）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover HP When Using an Item (HpRecoverUseItem)[[/LINK_1]]",
+      "contextHash": "6368754be93b6972e50e20eb635fdcfeee45757a15bb302e4de0863d7cf960b3"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰ回復をダメージ表示（DisplayHpRecover）[[/LINK_1]]",
+      "sourceHash": "bf8ea3f5f234bf01754c62daaa78fc9fe08e21ba2e823c5a679d63550d739c03",
+      "parts": [
+        {
+          "source": "ＨＰ回復をダメージ表示（DisplayHpRecover）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display HP Recovery as Damage (DisplayHpRecover)[[/LINK_1]]",
+      "contextHash": "bf8ea3f5f234bf01754c62daaa78fc9fe08e21ba2e823c5a679d63550d739c03"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰ回復の表記（HpRecoverLabel）[[/LINK_1]]",
+      "sourceHash": "46c19f1dc4e3e37b7ffb09e05632ce9ddbf1a1b4d41612fed5f970731569b1bc",
+      "parts": [
+        {
+          "source": "ＨＰ回復の表記（HpRecoverLabel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]HP Recovery Label (HpRecoverLabel)[[/LINK_1]]",
+      "contextHash": "46c19f1dc4e3e37b7ffb09e05632ce9ddbf1a1b4d41612fed5f970731569b1bc"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＜ＭＰ回復関連＞（<MPRecover>）[[/LINK_1]]",
+      "sourceHash": "6cbf1ba6cca721c38b672fc52206d6315cbd2a2d09bc41c746ecaff506af40b0",
+      "parts": [
+        {
+          "source": "＜ＭＰ回復関連＞（<MPRecover>）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<MP Recovery> (<MPRecover>)[[/LINK_1]]",
+      "contextHash": "6cbf1ba6cca721c38b672fc52206d6315cbd2a2d09bc41c746ecaff506af40b0"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]基本ＭＰ回復量（BasicMpRecover）[[/LINK_1]]",
+      "sourceHash": "3a1bcf260e9c55f98d99d68695ef533ebae531f7def652a00da969010e107bb4",
+      "parts": [
+        {
+          "source": "基本ＭＰ回復量（BasicMpRecover）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Basic MP Recovery Amount (BasicMpRecover)[[/LINK_1]]",
+      "contextHash": "3a1bcf260e9c55f98d99d68695ef533ebae531f7def652a00da969010e107bb4"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＰ回復するスキルタイプ（MpRecoverSkillType）[[/LINK_1]]",
+      "sourceHash": "e773de6708a9fa4b91d70cb51eb86726baba048ffe7920e13e1c0eacd4b08877",
+      "parts": [
+        {
+          "source": "ＭＰ回復するスキルタイプ（MpRecoverSkillType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Type that Recovers MP (MpRecoverSkillType)[[/LINK_1]]",
+      "contextHash": "e773de6708a9fa4b91d70cb51eb86726baba048ffe7920e13e1c0eacd4b08877"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム使用時にＭＰ回復（MpRecoverUseItem）[[/LINK_1]]",
+      "sourceHash": "28b31aacf4f44a428be9dcfd519fdc6864b157b9d52700c970f8ff7090b07deb",
+      "parts": [
+        {
+          "source": "アイテム使用時にＭＰ回復（MpRecoverUseItem）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover MP When Using an Item (MpRecoverUseItem)[[/LINK_1]]",
+      "contextHash": "28b31aacf4f44a428be9dcfd519fdc6864b157b9d52700c970f8ff7090b07deb"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＰ回復をダメージ表示（DisplayMpRecover）[[/LINK_1]]",
+      "sourceHash": "0efb46d7658c13adf6b7fcfb1919d2909a7bb3178f0e943fbaeefd5f4353c725",
+      "parts": [
+        {
+          "source": "ＭＰ回復をダメージ表示（DisplayMpRecover）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display MP Recovery as Damage (DisplayMpRecover)[[/LINK_1]]",
+      "contextHash": "0efb46d7658c13adf6b7fcfb1919d2909a7bb3178f0e943fbaeefd5f4353c725"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＰ回復の表記（MpRecoverLabel）[[/LINK_1]]",
+      "sourceHash": "102a0cfb2f9fbc8dc357d558645b1102a4078bb94aecc02c19747eee560e44d8",
+      "parts": [
+        {
+          "source": "ＭＰ回復の表記（MpRecoverLabel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MP Recovery Label (MpRecoverLabel)[[/LINK_1]]",
+      "contextHash": "102a0cfb2f9fbc8dc357d558645b1102a4078bb94aecc02c19747eee560e44d8"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]＜ＴＰ回復関連＞（<TPRecover>）[[/LINK_1]]",
+      "sourceHash": "b3fca4dba74799e1dddd342d660d026bd7656d9d461d506506980ec031b2b40c",
+      "parts": [
+        {
+          "source": "＜ＴＰ回復関連＞（<TPRecover>）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<TP Recovery> (<TPRecover>)[[/LINK_1]]",
+      "contextHash": "b3fca4dba74799e1dddd342d660d026bd7656d9d461d506506980ec031b2b40c"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]基本ＴＰ回復量（BasicTpRecover）[[/LINK_1]]",
+      "sourceHash": "557a0b92474dedb45ee96faf5b2500b032a6c8de6c1f51a337c679ee5087d5a6",
+      "parts": [
+        {
+          "source": "基本ＴＰ回復量（BasicTpRecover）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Basic TP Recovery Amount (BasicTpRecover)[[/LINK_1]]",
+      "contextHash": "557a0b92474dedb45ee96faf5b2500b032a6c8de6c1f51a337c679ee5087d5a6"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]ＴＰ回復するスキルタイプ（TpRecoverSkillType）[[/LINK_1]]",
+      "sourceHash": "376f57cbebb43b132877bbe0cf88635a3ca1977747f57cdb667def0f02e6630e",
+      "parts": [
+        {
+          "source": "ＴＰ回復するスキルタイプ（TpRecoverSkillType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Type that Recovers TP (TpRecoverSkillType)[[/LINK_1]]",
+      "contextHash": "376f57cbebb43b132877bbe0cf88635a3ca1977747f57cdb667def0f02e6630e"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム使用時にＴＰ回復（TpRecoverUseItem）[[/LINK_1]]",
+      "sourceHash": "3621b8c117ef4a2de47e472f4b65ff18b83f5d13361531ff0e222a716096afd8",
+      "parts": [
+        {
+          "source": "アイテム使用時にＴＰ回復（TpRecoverUseItem）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover TP When Using an Item (TpRecoverUseItem)[[/LINK_1]]",
+      "contextHash": "3621b8c117ef4a2de47e472f4b65ff18b83f5d13361531ff0e222a716096afd8"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]ＴＰ回復をダメージ表示（DisplayTpRecover）[[/LINK_1]]",
+      "sourceHash": "2a3d90fe58fa533846f9544f8b25dd11a4a323e30e6684688b52ad45ea424bd0",
+      "parts": [
+        {
+          "source": "ＴＰ回復をダメージ表示（DisplayTpRecover）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display TP Recovery as Damage (DisplayTpRecover)[[/LINK_1]]",
+      "contextHash": "2a3d90fe58fa533846f9544f8b25dd11a4a323e30e6684688b52ad45ea424bd0"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]ＴＰ回復の表記（TpRecoverLabel）[[/LINK_1]]",
+      "sourceHash": "aacc909650cf57b7f7ec90d98dbf9d97649a92ae74e47e87481980d17dbf2335",
+      "parts": [
+        {
+          "source": "ＴＰ回復の表記（TpRecoverLabel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]TP Recovery Label (TpRecoverLabel)[[/LINK_1]]",
+      "contextHash": "aacc909650cf57b7f7ec90d98dbf9d97649a92ae74e47e87481980d17dbf2335"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]＜回復ウィンドウ関連＞（<RecoverWindow>）[[/LINK_1]]",
+      "sourceHash": "31cae2b72b4ae9de27aca8aeb45965617d44ea6dade278dc31598852c2820fd4",
+      "parts": [
+        {
+          "source": "＜回復ウィンドウ関連＞（<RecoverWindow>）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<Recovery Window> (<RecoverWindow>)[[/LINK_1]]",
+      "contextHash": "31cae2b72b4ae9de27aca8aeb45965617d44ea6dade278dc31598852c2820fd4"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]回復ウィンドウを表示（UseRecoverWindow）[[/LINK_1]]",
+      "sourceHash": "eae1f3e0ef386e5db29f6b9645e234766e71609364799e4ca8599d0669e00715",
+      "parts": [
+        {
+          "source": "回復ウィンドウを表示（UseRecoverWindow）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display the Recovery Window (UseRecoverWindow)[[/LINK_1]]",
+      "contextHash": "eae1f3e0ef386e5db29f6b9645e234766e71609364799e4ca8599d0669e00715"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]コマンド時の表示方法（CommandType）[[/LINK_1]]",
+      "sourceHash": "3b5a2d0cdaf0d402377f02e85c67db44f366dd48552b3942955f9d151219c6f6",
+      "parts": [
+        {
+          "source": "コマンド時の表示方法（CommandType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Method for Commands (CommandType)[[/LINK_1]]",
+      "contextHash": "3b5a2d0cdaf0d402377f02e85c67db44f366dd48552b3942955f9d151219c6f6"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]配置（横）（HorizontalPosition）[[/LINK_1]]",
+      "sourceHash": "bac26cbcb1a92a1b355853e57a59c401ab72937f585281a9c1a09a33b2c32516",
+      "parts": [
+        {
+          "source": "配置（横）（HorizontalPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Position (Horizontal) (HorizontalPosition)[[/LINK_1]]",
+      "contextHash": "bac26cbcb1a92a1b355853e57a59c401ab72937f585281a9c1a09a33b2c32516"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]数値の表示幅（NumberWidth）[[/LINK_1]]",
+      "sourceHash": "84b7793a0cdc153c28c68bf22add2cb8c5ae96fc1193ff25a54ee7867fbef5ae",
+      "parts": [
+        {
+          "source": "数値の表示幅（NumberWidth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number Display Width (NumberWidth)[[/LINK_1]]",
+      "contextHash": "84b7793a0cdc153c28c68bf22add2cb8c5ae96fc1193ff25a54ee7867fbef5ae"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラにも適用[[/LINK_1]]するかどうかの設定を追加。",
+      "sourceHash": "e4b2a0ea0126421ca893942a9d8c83990acc45c0db102ea41cf0c112bf555b1a",
+      "parts": [
+        {
+          "source": "敵キャラにも適用",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "するかどうかの設定を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Add a setting for whether to [[LINK_1]]apply it to enemies[[/LINK_1]].",
+      "contextHash": "e4b2a0ea0126421ca893942a9d8c83990acc45c0db102ea41cf0c112bf555b1a"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Index[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "行動後にＨＰ、ＭＰ、ＴＰが回復するシステムを実装します。": "Implement a system that restores HP, MP, and TP after an action.",
+    "回復を行う条件を細かく設定可能な他、スキル選択時に回復量を表示することもできます。": "You can configure the recovery conditions in detail and display the recovery amount when selecting a skill.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the following file and save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_RecoverAfterAction.js": "NRP_RecoverAfterAction.js ",
+    "ver1.022（2025/05/10）": "ver1.022 (2025/05/10) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/08/13 -> 2025/05/10（ver1.021 -> 1.022）": "2024/08/13 -> 2025/05/10 (ver1.021 -> 1.022) ",
+    "最後の１体に留めを刺した際、ＭＰＴＰが回復しない不具合を修正。": "Fixed a bug that prevented MP and TP from recovering when delivering the finishing blow to the last enemy.",
+    "ターン制の場合、まともに動作しない不具合修正。": "Fixed a bug that caused the plugin to malfunction in turn-based battles.",
+    "回復量が０の時でもウィンドウが表示されてしまう不具合修正。": "Fixed a bug that caused the window to appear even when the recovery amount was 0.",
+    "（2025/05/10 ver1.022）": " (2025/05/10 ver1.022) ",
+    "2024/02/05（ver1.01）": "2024/02/05 (ver1.01) ",
+    "配置（横）が左の場合、ウィンドウ位置が正しく表示されない不具合修正。": "Fixed a bug that caused the window to be displayed in the wrong position when the horizontal placement was set to left.",
+    "2023/03/28 -> 2023/04/05（ver1.00 -> 1.002）": "2023/03/28 -> 2023/04/05 (ver1.00 -> 1.002) ",
+    "公開！": "Released!",
+    "移動中にエラーとなる不具合修正。（ver1.001）": "Fixed a bug that caused an error during movement. (ver1.001)",
+    "回復量が存在しない場合でもウィンドウが表示されてしまう不具合修正。": "Fixed a bug that caused the window to appear even when no recovery amount existed.",
+    "（2023/04/05 ver1.002）": " (2023/04/05 ver1.002) ",
+    "回復量の指定（Recovery Amount）": "Specifying the Recovery Amount (Recovery Amount)",
+    "アクター、エネミー、職業、装備、ステート、パッシブスキルのメモ欄に以下を記入してください。": "Enter the following in the note fields of actors, enemies, classes, equipment, states, and passive skills.",
+    "行動後にＨＰ、ＭＰ、ＴＰを指定した数値分だけ回復します。": "After an action, restores HP, MP, and TP by the specified amounts.",
+    "複数の装備品などによる重複加算も可能です。": "Amounts from multiple pieces of equipment can also be added cumulatively.",
+    "また、数式も使用可能です。": "Formulas can also be used.",
+    "\"a.mhp / 2\"ならば、最大ＨＰの半分になります。": "\"a.mhp / 2\" restores half of the maximum HP.",
+    "パッシブスキルについて（About Passive Skills）": "About Passive Skills (About Passive Skills)",
+    "スキルの使用可能時を『使用不可』にした場合、そのスキルはパッシブスキルとして機能します。": "If a skill's occasion is set to “Never,” that skill functions as a passive skill.",
+    "上記の設定を行う場合は、パッシブスキルにしてください。": "When using the settings above, make the skill a passive skill.",
+    "スキル、アイテムのメモ欄（Note Of Skill & Item)）": "Skill and Item Note Fields (Note Of Skill & Item)",
+    "そのスキル（アイテム）を使用した際、ＨＰ、ＭＰ、ＴＰの回復を有効／無効にします。": "Enables or disables HP, MP, and TP recovery when that skill or item is used.",
+    "これらはプラグインパラメータの設定より優先されます。": "These settings take priority over the plugin parameter settings.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameters (Plugin Parameter)",
+    "敵キャラにも適用（ApplyEnemy）": "Apply to Enemies (ApplyEnemy)",
+    "敵キャラにも回復設定を適用します。": "Applies the recovery settings to enemies as well.",
+    "＜ＨＰ回復関連＞（<HPRecover>）": "<HP Recovery> (<HPRecover>)",
+    "ＨＰ回復関連の設定です。": "These are the settings related to HP recovery.",
+    "基本ＨＰ回復量（BasicHpRecover）": "Basic HP Recovery Amount (BasicHpRecover)",
+    "基本となるＨＰ回復量です。": "The basic HP recovery amount.",
+    "ＨＰ回復するスキルタイプ（HpRecoverSkillType）": "Skill Types That Recover HP (HpRecoverSkillType)",
+    "ＨＰ回復を行うスキルタイプ。": "The skill types that perform HP recovery.",
+    "複数指定可（例：0,1,2）。": "Multiple values can be specified (e.g., 0,1,2).",
+    "標準だと0:通常攻撃や防御, 1:魔法, 2:必殺技": "By default: 0: Normal Attack or Guard, 1: Magic, 2: Special Skill",
+    "アイテム使用時にＨＰ回復（HpRecoverUseItem）": "Recover HP When Using an Item (HpRecoverUseItem)",
+    "アイテム使用時にＨＰ回復を行います。": "Recovers HP when an item is used.",
+    "ＨＰ回復をダメージ表示（DisplayHpRecover）": "Display HP Recovery as Damage (DisplayHpRecover)",
+    "ＨＰ回復量をダメージ表示します。": "Displays the HP recovery amount as damage.",
+    "ＨＰ回復の表記（HpRecoverLabel）": "HP Recovery Label (HpRecoverLabel)",
+    "ＨＰ回復量をウィンドウに表示する際の表記です。": "The label displayed in the window when showing the HP recovery amount.",
+    "＜ＭＰ回復関連＞（<MPRecover>）": "<MP Recovery> (<MPRecover>)",
+    "ＭＰ回復関連の設定です。": "These are the settings related to MP recovery.",
+    "基本ＭＰ回復量（BasicMpRecover）": "Basic MP Recovery Amount (BasicMpRecover)",
+    "基本となるＭＰ回復量です。": "The basic MP recovery amount.",
+    "ＭＰ回復するスキルタイプ（MpRecoverSkillType）": "Skill Types That Recover MP (MpRecoverSkillType)",
+    "ＭＰ回復を行うスキルタイプ。": "The skill types that perform MP recovery.",
+    "アイテム使用時にＭＰ回復（MpRecoverUseItem）": "Recover MP When Using an Item (MpRecoverUseItem)",
+    "アイテム使用時にＭＰ回復を行います。": "Recovers MP when using an item.",
+    "ＭＰ回復をダメージ表示（DisplayMpRecover）": "Display MP Recovery as Damage (DisplayMpRecover)",
+    "ＭＰ回復量をダメージ表示します。": "Displays the amount of MP recovered as damage.",
+    "ＭＰ回復の表記（MpRecoverLabel）": "MP Recovery Label (MpRecoverLabel)",
+    "ＭＰ回復量をウィンドウに表示する際の表記です。": "The label displayed in the window for the amount of MP recovered.",
+    "＜ＴＰ回復関連＞（<TPRecover>）": "<TP Recovery-Related Settings> (<TPRecover>)",
+    "ＴＰ回復関連の設定です。": "Settings related to TP recovery.",
+    "基本ＴＰ回復量（BasicTpRecover）": "Basic TP Recovery Amount (BasicTpRecover)",
+    "基本となるＴＰ回復量です。": "The basic amount of TP recovered.",
+    "ＴＰ回復するスキルタイプ（TpRecoverSkillType）": "Skill Types That Recover TP (TpRecoverSkillType)",
+    "ＴＰ回復を行うスキルタイプ。": "The skill types that recover TP.",
+    "アイテム使用時にＴＰ回復（TpRecoverUseItem）": "Recover TP When Using an Item (TpRecoverUseItem)",
+    "アイテム使用時にＴＰ回復を行います。": "Recovers TP when using an item.",
+    "ＴＰ回復をダメージ表示（DisplayTpRecover）": "Display TP Recovery as Damage (DisplayTpRecover)",
+    "ＴＰ回復量をダメージ表示します。": "Displays the amount of TP recovered as damage.",
+    "ＴＰ回復の表記（TpRecoverLabel）": "TP Recovery Label (TpRecoverLabel)",
+    "ＴＰ回復量をウィンドウに表示する際の表記です。": "The label displayed in the window for the amount of TP recovered.",
+    "＜回復ウィンドウ関連＞（<RecoverWindow>）": "<Recovery Window-Related Settings> (<RecoverWindow>)",
+    "回復値を表示するためのウィンドウの設定です。": "Settings for the window that displays recovery values.",
+    "回復ウィンドウを表示（UseRecoverWindow）": "Display the Recovery Window (UseRecoverWindow)",
+    "スキル選択時に回復量をウィンドウに表示します。": "Displays the recovery amount in a window when selecting a skill.",
+    "コマンド時の表示方法（CommandType）": "Display Method for Commands (CommandType)",
+    "コマンド（通常攻撃や防御）選択時の回復ウィンドウの表示方法です。": "The display method for the recovery window when selecting a command (Normal Attack or Guard).",
+    "配置（横）（HorizontalPosition）": "Position (Horizontal) (HorizontalPosition)",
+    "回復ウィンドウの配置（横）です。": "The horizontal position of the recovery window.",
+    "数値の表示幅（NumberWidth）": "Number Display Width (NumberWidth)",
+    "回復ウィンドウに数値を表示する幅です。": "The width used to display numbers in the recovery window."
+  }
+}

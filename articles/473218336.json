@@ -1,0 +1,1370 @@
+{
+  "articleId": "473218336",
+  "sourceUrl": "https://newrpg.seesaa.net/article/473218336.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "7c57959ec021c14e357765cba1b52ba0401663eda8f51699af5d8a40a0511493",
+  "translatedAt": "2026-08-31T01:13:29.429Z",
+  "title": "Improved Enemy Action Routines [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵行動ルーチンの改善【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "3bbd1a73f48870a8940be1621f60d20842eebdeaaf35b75d45ce999fab09d057",
+      "translation": "Improved Enemy Action Routines [RPG Maker MZ & MV Plugin]",
+      "contextHash": "3bbd1a73f48870a8940be1621f60d20842eebdeaaf35b75d45ce999fab09d057"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "敵の行動ルーチン（ＡＩ）を改善するプラグインです。",
+      "sourceHash": "eef8908908002ade297d26e66f40093055df331d7948bc8e8bdbdf25009dd28b",
+      "translation": "This plugin improves enemy action routines (AI).",
+      "contextHash": "eef8908908002ade297d26e66f40093055df331d7948bc8e8bdbdf25009dd28b"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "初めに（introduction）",
+      "sourceHash": "161c55ea2c1c7abde520f534efced29c739ec5a27a495d04769cd693f561a926",
+      "translation": "Introduction (introduction)",
+      "contextHash": "161c55ea2c1c7abde520f534efced29c739ec5a27a495d04769cd693f561a926"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ツクールＭＺ＆ＭＶの初期状態では、敵キャラはあまり賢く行動してくれません。",
+      "sourceHash": "4c89efd89c2284a61dc3492d8682d147d1bccb0f44aa8fb242bab079f03ca24b",
+      "translation": "By default, enemies in RPG Maker MZ & MV do not act very intelligently.",
+      "contextHash": "4c89efd89c2284a61dc3492d8682d147d1bccb0f44aa8fb242bab079f03ca24b"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "例えば、回復魔法を使わせても対象は完全ランダムです。",
+      "sourceHash": "70066a82e9dddcb95e1dd75a6912cfec44d20d8528a88141ffa50e9463d63cd5",
+      "translation": "For example, even when made to use a healing spell, they select a completely random target.",
+      "contextHash": "70066a82e9dddcb95e1dd75a6912cfec44d20d8528a88141ffa50e9463d63cd5"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "高確率で無駄撃ちするので、怖さや鬱陶しさがありません。ドラクエがファミコン時代から実現していたホイミスライムのようなモンスターすら作成が困難です。",
+      "sourceHash": "21a7fc9c35bb788cd62d5c8d0eee39a3b921842f6f754c70a2a97c4e21d8a014",
+      "translation": "They waste their actions so often that they are neither frightening nor annoying. It is even difficult to create a monster like the Healslime from Dragon Quest, which was already possible in the Famicom era.",
+      "contextHash": "21a7fc9c35bb788cd62d5c8d0eee39a3b921842f6f754c70a2a97c4e21d8a014"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "また、蘇生魔法を使わせれば、戦闘不能者がいようがいまいが無駄撃ちする始末。ドラクエ４のブラックマージ（マイナーかも……）のような蘇生を使ってくる敵もまともに作れません。",
+      "sourceHash": "3eef8df75e86f11d5458a47edc4cbcba1425bc6e6eb8f7a822df382e90782c45",
+      "translation": "Similarly, if they are made to use a revival spell, they will waste it regardless of whether anyone is incapacitated. It is not possible to properly create an enemy that uses revival, like Black Marge from Dragon Quest IV (perhaps a minor example...).",
+      "contextHash": "3eef8df75e86f11d5458a47edc4cbcba1425bc6e6eb8f7a822df382e90782c45"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "一応、ＨＰを行動の条件に使えますが、参照できるのは自分のＨＰのみ。",
+      "sourceHash": "2ec2887e27e0fc14daf4fc11271d348d1d558676ee0c622efc014b1d030aaf3a",
+      "translation": "You can use HP as an action condition, but you can only reference your own HP.",
+      "contextHash": "2ec2887e27e0fc14daf4fc11271d348d1d558676ee0c622efc014b1d030aaf3a"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そもそも、ツクールＭＺ&ＭＶの仕様では行動を決定するタイミングがターンの最初だけです。ターンの途中で自分が瀕死になっても、次のターンまで回復行動は取りません。その隙に、プレイヤーは容赦なく敵を葬ってしまうでしょう。",
+      "sourceHash": "d5931fda9a17d1e777ffffd2111c4205b0aed2cc5fdfda406104db8dd73dc907",
+      "translation": "Moreover, under the specifications of RPG Maker MZ & MV, actions are decided only at the beginning of a turn. Even if an enemy becomes critically injured midway through a turn, it will not take a healing action until the next turn. During that opening, the player will mercilessly finish it off.",
+      "contextHash": "d5931fda9a17d1e777ffffd2111c4205b0aed2cc5fdfda406104db8dd73dc907"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "そんなこんなを改善するのが、このプラグインです。",
+      "sourceHash": "d5e44a7ed1843beb8b3816f9ffec87bf542e741f00458144b8d60acea9ae654b",
+      "translation": "This plugin improves all of these issues.",
+      "contextHash": "d5e44a7ed1843beb8b3816f9ffec87bf542e741f00458144b8d60acea9ae654b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ＨＰ＆ＭＰ回復時に最も減っている対象を選択する。",
+      "sourceHash": "d53803fec72027897809b2ed6048d593a41cea16775d18e7e5c5a1981cf9e7ad",
+      "translation": "Select the target with the lowest HP or MP when restoring HP or MP.",
+      "contextHash": "d53803fec72027897809b2ed6048d593a41cea16775d18e7e5c5a1981cf9e7ad"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "有効な対象が存在しない場合、回復や治療、蘇生を行わない。",
+      "sourceHash": "64de0ced10b0e7c4f13ad1a213704f0f8ab25c08e2e2b313ad69c0f5337e5002",
+      "translation": "Do not heal, treat, or revive when no valid target exists.",
+      "contextHash": "64de0ced10b0e7c4f13ad1a213704f0f8ab25c08e2e2b313ad69c0f5337e5002"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ターン開始時だけでなく行動直前にも行動再選択を行う。",
+      "sourceHash": "5101750d2c5eb4cc2e58949ede911e20c49f72f2976a9e269b36ff9903fa32de",
+      "translation": "Reconsider actions immediately before acting, not only at the start of a turn.",
+      "contextHash": "5101750d2c5eb4cc2e58949ede911e20c49f72f2976a9e269b36ff9903fa32de"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "既にかかっているステートを重ねがけしない。",
+      "sourceHash": "ad109426a25f51f47765b58bd1b69e176702d576ea33c9e8dd1f9632ac166a6e",
+      "translation": "Do not stack a state that is already applied.",
+      "contextHash": "ad109426a25f51f47765b58bd1b69e176702d576ea33c9e8dd1f9632ac166a6e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "既に限界となっている能力変化を重ねがけしない。",
+      "sourceHash": "ad85928a4142326bed6beae98495824d9584d9c7baccfe3b4953f34b84c9e707",
+      "translation": "Do not stack a parameter change that has already reached its limit.",
+      "contextHash": "ad85928a4142326bed6beae98495824d9584d9c7baccfe3b4953f34b84c9e707"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "ＭＰが０の相手にＭＰ吸収スキルを使わない。",
+      "sourceHash": "3734dad8114ab585badeca002402f6f1a45b601d55611cb675084f6d58b2bcb6",
+      "translation": "Do not use an MP absorption skill on an opponent with 0 MP.",
+      "contextHash": "3734dad8114ab585badeca002402f6f1a45b601d55611cb675084f6d58b2bcb6"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "一人しかいない場合、身代わりスキルを使用しない。",
+      "sourceHash": "9f9fc10252bce12abe6e6f6390a313537e31d79de4866b1ff9337d3ccedb46be",
+      "translation": "Do not use a substitute skill when there is only one party member.",
+      "contextHash": "9f9fc10252bce12abe6e6f6390a313537e31d79de4866b1ff9337d3ccedb46be"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以上のような修正によって、賢く個性的な敵を実現します。",
+      "sourceHash": "084e3a66eed3a2bb9d5341406b6d561c532359d5080149775218f8c26830f2b3",
+      "translation": "These adjustments create intelligent and distinctive enemies.",
+      "contextHash": "084e3a66eed3a2bb9d5341406b6d561c532359d5080149775218f8c26830f2b3"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "この動画はその例です。敵は意味のない行動を取らず、的確に回復やステートを使ってきます。",
+      "sourceHash": "3be4a44921f99779aa05186a1cdb5e9de04152a58047ed837cbed7c7f1a508b9",
+      "translation": "This video is an example. The enemies do not take meaningless actions and use healing and states effectively.",
+      "contextHash": "3be4a44921f99779aa05186a1cdb5e9de04152a58047ed837cbed7c7f1a508b9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "このブラウザでは再生できません。",
+      "sourceHash": "146b4fafcc99e418f977a61e09afb37fe146806b151e92d1497ef7e48ab3f1d1",
+      "translation": "This video cannot be played in this browser.",
+      "contextHash": "146b4fafcc99e418f977a61e09afb37fe146806b151e92d1497ef7e48ab3f1d1"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EnemyRoutineKai.js",
+      "sourceHash": "6b11854b07b01c4b20f2f83aa42f8414d553052c44f8918068731037980f8a3e",
+      "translation": "NRP_EnemyRoutineKai.js ",
+      "contextHash": "7c73f189a4051f9bd2ad956e6926589f279ff931976ad6dda642c2f20e2cbca4"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "ver1.111（2025/05/09）",
+      "sourceHash": "f586871b913291d932cba627fa24adf64ae6fb81cbb14f179fcaccf241356de7",
+      "translation": "ver1.111 (2025/05/09) ",
+      "contextHash": "7c73f189a4051f9bd2ad956e6926589f279ff931976ad6dda642c2f20e2cbca4"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（history）",
+      "sourceHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09",
+      "translation": "Update History (history)",
+      "contextHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/01/22 -> 2025/05/09（ver1.11 -> 1.111）",
+      "sourceHash": "64e26bc68483a23a2c70ec4e0d8f7dd34d1dd068939b265939078115a332be85",
+      "translation": "2025/01/22 -> 2025/05/09 (ver1.11 -> 1.111) ",
+      "contextHash": "64e26bc68483a23a2c70ec4e0d8f7dd34d1dd068939b265939078115a332be85"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "ver1.101の対応（回復スキルを無効な相手には使わない）が不十分だったので再修正。（2025/05/09 ver1.111）",
+      "sourceHash": "9729b3d820fe542bcf1014f0b48580924335abd9934a5bee2a90d5779c7f0f32",
+      "translation": "Revised again because the ver1.101 fix (not using healing skills on invalid targets) was insufficient. (2025/05/09 ver1.111)",
+      "contextHash": "9729b3d820fe542bcf1014f0b48580924335abd9934a5bee2a90d5779c7f0f32"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/09/13 -> 2024/10/12（ver1.10 -> 1.101）",
+      "sourceHash": "9aa840cee6a68897d4d89b5a2ca8d61799142ae9d74ce7fb59e2f34cbb77aa61",
+      "translation": "2024/09/13 -> 2024/10/12 (ver1.10 -> 1.101) ",
+      "contextHash": "9aa840cee6a68897d4d89b5a2ca8d61799142ae9d74ce7fb59e2f34cbb77aa61"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "回復スキルを無効な相手には使わないように修正。（2024/10/12 ver1.101）",
+      "sourceHash": "2268fe8f05ab7e5f931ed8f453166bb301c73f31e111a84002eea747c58e6366",
+      "translation": "Fixed the plugin so that healing skills are not used on invalid targets. (2024/10/12 ver1.101)",
+      "contextHash": "2268fe8f05ab7e5f931ed8f453166bb301c73f31e111a84002eea747c58e6366"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/08/05（ver1.09）",
+      "sourceHash": "8c76c3b1ab6f8e3e44ef787ceb59e5c7eca2c6624cb951aaaa6cb461f234ce8d",
+      "translation": "2024/08/05 (ver1.09) ",
+      "contextHash": "8c76c3b1ab6f8e3e44ef787ceb59e5c7eca2c6624cb951aaaa6cb461f234ce8d"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "ＴＰＢで『行動直前の再設定』をオンにした場合、行動が不発になってしまう不具合を修正。",
+      "sourceHash": "bde55e0e9e3975d152685f1bcb9696b7ca6f1b0759cf01824bef75d589a7f9e7",
+      "translation": "Fixed a bug where actions failed when “Reset Immediately Before Action” was enabled in TPB.",
+      "contextHash": "bde55e0e9e3975d152685f1bcb9696b7ca6f1b0759cf01824bef75d589a7f9e7"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2022/08/19 -> 2024/07/21（ver1.08 -> 1.083）",
+      "sourceHash": "3ff188b65e133c9ed759e5986eca0e7bc089ce2792ac2d2e1d81771014265752",
+      "translation": "2022/08/19 -> 2024/07/21 (ver1.08 -> 1.083) ",
+      "contextHash": "3ff188b65e133c9ed759e5986eca0e7bc089ce2792ac2d2e1d81771014265752"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "『行動直前の再設定』がオンかつ複数回行動かつ速度補正技の後に非速度補正技を使用した際、行動回数が増えてしまう不具合修正。",
+      "sourceHash": "e3b5f571f7def7183086a9df72a746520033ca2b0d35495f77ac47ce5eea8dc1",
+      "translation": "Fixed a bug where the number of actions increased when “Reset Immediately Before Action” was enabled, multiple actions were available, and a non-speed-adjusted skill was used after a speed-adjusted skill.",
+      "contextHash": "e3b5f571f7def7183086a9df72a746520033ca2b0d35495f77ac47ce5eea8dc1"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "（2023/06/06 ver1.081）",
+      "sourceHash": "6c9b2baa15e0d86034f28919f70469b9d8f79041c51175a674f267be08e57de4",
+      "translation": " (2023/06/06 ver1.081) ",
+      "contextHash": "6c9b2baa15e0d86034f28919f70469b9d8f79041c51175a674f267be08e57de4"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "敵に範囲が味方かつ『ステート付加 通常攻撃』のスキルを使わせるとエラーになる不具合修正。（2023/11/11 ver1.082）",
+      "sourceHash": "610bec1aae7dc01bf7f7bc8ff6116b016300901f46d5da0433390ff502ec19c8",
+      "translation": "Fixed a bug that caused an error when an enemy used a skill with an ally scope and “Add State: Normal Attack.” (2023/11/11 ver1.082)",
+      "contextHash": "610bec1aae7dc01bf7f7bc8ff6116b016300901f46d5da0433390ff502ec19c8"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "不要な競合を引き起こす不具合修正。（2024/07/21 ver1.083）",
+      "sourceHash": "52b35b9a74c589fc93b3598a6d7f6b6ccc2348d16d3006e09f0119dacca76d19",
+      "translation": "Fixed a bug that caused unnecessary conflicts. (2024/07/21 ver1.083)",
+      "contextHash": "52b35b9a74c589fc93b3598a6d7f6b6ccc2348d16d3006e09f0119dacca76d19"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/07/18（ver1.07）",
+      "sourceHash": "2aa1d34dd9dbc8f6a70a2f30802a5013391cf7b507e1a32982a239581f2e784b",
+      "translation": "2021/07/18 (ver1.07) ",
+      "contextHash": "2aa1d34dd9dbc8f6a70a2f30802a5013391cf7b507e1a32982a239581f2e784b"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "『戦闘行動の強制』などで有効な対象が存在しないスキルを実行した場合、対象なしのまま実行する仕様を修正。普通に無効な対象に対して実行します。",
+      "sourceHash": "0d908e83a7fd1be1fb2a72017ea2aa8e1f368faa7151ed778dccd9d50a8fbdbd",
+      "translation": "Changed the behavior when a skill with no valid target was executed through Force Action or similar commands. It is now executed normally against an invalid target.",
+      "contextHash": "0d908e83a7fd1be1fb2a72017ea2aa8e1f368faa7151ed778dccd9d50a8fbdbd"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "※DynamicAnimationと組み合わせた場合、自分にアニメーションを表示してしまう問題への対処です。",
+      "sourceHash": "082e64b306d29723f5cdfb2b530e914a455ddd378d5f4c0f47ddf446c71ae686",
+      "translation": "※This addresses an issue where, when used with DynamicAnimation, the animation was displayed on the user.",
+      "contextHash": "082e64b306d29723f5cdfb2b530e914a455ddd378d5f4c0f47ddf446c71ae686"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2020/10/04（ver1.06）",
+      "sourceHash": "86538b127a3eccac3a0e52fb509322582b98620f3e34fdccf29283036dd78592",
+      "translation": "2020/10/04 (ver1.06) ",
+      "contextHash": "86538b127a3eccac3a0e52fb509322582b98620f3e34fdccf29283036dd78592"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "ＭＶでエラーになる不具合修正。",
+      "sourceHash": "9c7e79d70ae97c1378aa95510617810743710937a923531de69c93333d6a376b",
+      "translation": "Fixed a bug that caused errors in MV.",
+      "contextHash": "9c7e79d70ae97c1378aa95510617810743710937a923531de69c93333d6a376b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2020/09/13（ver1.05 -> 1.051）",
+      "sourceHash": "344cc51c9f46f4f832d2d314cbbc89b9a2857ed38ad77265171bef4d6f1ee228",
+      "translation": "2020/09/13 (ver1.05 -> 1.051) ",
+      "contextHash": "344cc51c9f46f4f832d2d314cbbc89b9a2857ed38ad77265171bef4d6f1ee228"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "ＭＺのタイムプログレスで行動が不発する不具合修正。",
+      "sourceHash": "35709be7ed5176eb98c27b230edb7529349d31dbeb372a12c424cd2b12b96cf5",
+      "translation": "Fixed a bug where actions failed in MZ Time Progress.",
+      "contextHash": "35709be7ed5176eb98c27b230edb7529349d31dbeb372a12c424cd2b12b96cf5"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "タイムプログレスで速度補正技が選択されない不具合修正。（ver1.051）",
+      "sourceHash": "707e13a8b69967ff449127002098789eabe4a7f432e46c3075a21126e52e50fc",
+      "translation": "Fixed a bug where speed-adjusted skills were not selected in Time Progress. (ver1.051)",
+      "contextHash": "707e13a8b69967ff449127002098789eabe4a7f432e46c3075a21126e52e50fc"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2020/09/06（ver1.04 -> 1.042）",
+      "sourceHash": "3e263125e4257fa788e1e9de4d79877a03f6ca57026c36b7e9b827101aa0001c",
+      "translation": "2020/09/06 (ver1.04 -> 1.042) ",
+      "contextHash": "3e263125e4257fa788e1e9de4d79877a03f6ca57026c36b7e9b827101aa0001c"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "『行動直前の再設定』が有効なら、複数回行動時も毎回考慮するように修正。",
+      "sourceHash": "b28a30177fab0a2e2ba1ac66aa18232af225c85962042fcae0d1e277bacc40d0",
+      "translation": "When “Reset Immediately Before Action” is enabled, reconsider the action every time, including during multiple actions.",
+      "contextHash": "b28a30177fab0a2e2ba1ac66aa18232af225c85962042fcae0d1e277bacc40d0"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "1.04で行動が不発する不具合修正。（ver1.042）",
+      "sourceHash": "13e66a8d62ec59670530b6f2b4a5e0fd913f5e740994cefda34992db7ccdf624",
+      "translation": "Fixed a bug where actions failed in 1.04. (ver1.042)",
+      "contextHash": "13e66a8d62ec59670530b6f2b4a5e0fd913f5e740994cefda34992db7ccdf624"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "2020/08/22（ver1.03 -> 1.031）",
+      "sourceHash": "ae2c0bae751e4ac809905c2cc4ecaae3f419291472b62ae82860b024f0ca7310",
+      "translation": "2020/08/22 (ver1.03 -> 1.031) ",
+      "contextHash": "ae2c0bae751e4ac809905c2cc4ecaae3f419291472b62ae82860b024f0ca7310"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "ツクールＭＺ向けにヘルプを修正。",
+      "sourceHash": "e33356abe9c537841860530dc7440bc724b30e965817a3a4032dc3db95ef99a1",
+      "translation": "Updated the help for RPG Maker MZ.",
+      "contextHash": "e33356abe9c537841860530dc7440bc724b30e965817a3a4032dc3db95ef99a1"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "『行動直前の再設定』が有効だと、複数回行動の敵が無限に行動してしまう不具合修正。(09/03 ver1.031)",
+      "sourceHash": "f1b03df50eb7617757c9cc717290bac077463e2ecca4f0b99a358a99a7f78eb5",
+      "translation": "Fixed a bug where enemies with multiple actions acted indefinitely when “Reset Immediately Before Action” was enabled. (09/03 ver1.031)",
+      "contextHash": "f1b03df50eb7617757c9cc717290bac077463e2ecca4f0b99a358a99a7f78eb5"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "2020/06/14（ver1.02）",
+      "sourceHash": "1b6b78b66067a757aae22cd4e916e3ada2a23bbba36432b6887e2aa733d6fa31",
+      "translation": "2020/06/14 (ver1.02) ",
+      "contextHash": "1b6b78b66067a757aae22cd4e916e3ada2a23bbba36432b6887e2aa733d6fa31"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "英語対応。",
+      "sourceHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978",
+      "translation": "Added English support.",
+      "contextHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "2020/01/27（ver1.01）",
+      "sourceHash": "809cd9093d8c3f2e0b3ac3bd6440e6b81c7835b745beca38f4db37c21f35393a",
+      "translation": "2020/01/27 (ver1.01) ",
+      "contextHash": "809cd9093d8c3f2e0b3ac3bd6440e6b81c7835b745beca38f4db37c21f35393a"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "ツクールＭＶの本体verが古い場合でも動作するよう修正。",
+      "sourceHash": "8b6769859816131e092889586cf2641d1d4d8581db0090384b170ce11d67678a",
+      "translation": "Updated the plugin to work even when the RPG Maker MV core version is outdated.",
+      "contextHash": "8b6769859816131e092889586cf2641d1d4d8581db0090384b170ce11d67678a"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "2020/01/24（ver1.00）",
+      "sourceHash": "d5cfcd496a14b6081cf6399fe4fc980249e3990d902a7d94d7b760481c7ab66f",
+      "translation": "2020/01/24 (ver1.00) ",
+      "contextHash": "d5cfcd496a14b6081cf6399fe4fc980249e3990d902a7d94d7b760481c7ab66f"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "公開開始！",
+      "sourceHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5",
+      "translation": "Now available!",
+      "contextHash": "91033586ec687a01c522c864ab2c626e34fa98bd85867e8a931027dab21018c5"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "パラメータ（parameter）",
+      "sourceHash": "b8c81d2e56f65f9dc43196ac9ec43c8744081cb37a5b9bb27a2e094bee9a3521",
+      "translation": "Parameters (parameter)",
+      "contextHash": "b8c81d2e56f65f9dc43196ac9ec43c8744081cb37a5b9bb27a2e094bee9a3521"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "以下のプラグインパラメータで、敵全体の初期値を設定します。",
+      "sourceHash": "abdc1b973515d9d623f7c132fe46d02916f509a0ef061438d9143496d3f85e75",
+      "translation": "Use the following plugin parameters to set the initial values for all enemies.",
+      "contextHash": "abdc1b973515d9d623f7c132fe46d02916f509a0ef061438d9143496d3f85e75"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "基本的にはほとんどＯＮでいいと思います。",
+      "sourceHash": "325708a5599d2f15ca20c19fb2725bdc09c7ade68341f8c525cdd3bdf79a3253",
+      "translation": "Basically, I think it is fine to leave almost everything ON.",
+      "contextHash": "325708a5599d2f15ca20c19fb2725bdc09c7ade68341f8c525cdd3bdf79a3253"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "ただし『対アクターの使用効果制御』をＯＮにすると、わりと嫌らしくなるので取り扱い注意です。",
+      "sourceHash": "20812f78ff3e894d852fd632f548ca27e6416e025797e279a3fb4dea06faa1c7",
+      "translation": "However, enabling “Control Use Effects Against Actors” makes enemies rather nasty, so use it with caution.",
+      "contextHash": "20812f78ff3e894d852fd632f548ca27e6416e025797e279a3fb4dea06faa1c7"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "個別の敵キャラごとに設定したい場合は、メモ欄に記述することで切替可能です。",
+      "sourceHash": "36c619bc73b744ebb41a3e8850a0ff630943b25a02be4655700159ed0d777e24",
+      "translation": "To configure individual enemies, enter the settings in their note field to switch them.",
+      "contextHash": "36c619bc73b744ebb41a3e8850a0ff630943b25a02be4655700159ed0d777e24"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "パラメータ（基本設定）",
+      "sourceHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704",
+      "translation": "Parameters (Basic Settings)",
+      "contextHash": "7506bbc153e34c820851314b740081aaec5042853f698990511a0b2c9a591704"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "行動直前の再設定（resetAction）",
+      "sourceHash": "6d0a5791fc477153871ed652fe4d4395c9ee6b29709f214a2e76041b0dca3c64",
+      "translation": "Reset Immediately Before Action (resetAction)",
+      "contextHash": "6d0a5791fc477153871ed652fe4d4395c9ee6b29709f214a2e76041b0dca3c64"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "ＯＮならば、行動直前にも再度の行動決定を行います。",
+      "sourceHash": "759c4c231deb367bbcbda0476ce7fe70cf5ad18b401afd0bef9341feb13672cc",
+      "translation": "When ON, the action is decided again immediately before acting.",
+      "contextHash": "759c4c231deb367bbcbda0476ce7fe70cf5ad18b401afd0bef9341feb13672cc"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "※一人ずつ行動するＣＴＢでは無意味なので、ＯＦＦ推奨です。",
+      "sourceHash": "96294ae596ccf2787afe93641ef2674fc990e97dfb93023320c4bfd0bdb17627",
+      "translation": "※Since it is meaningless in CTB, where battlers act one at a time, OFF is recommended.",
+      "contextHash": "96294ae596ccf2787afe93641ef2674fc990e97dfb93023320c4bfd0bdb17627"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "※ＣＴＢでも複数回行動時には有効です。（ver1.04）",
+      "sourceHash": "aa33f7b3a6e2dc1bbab6290c86d782dfd216ecfe49bc44657f9b6416d8938f69",
+      "translation": "※It is also effective during multiple actions in CTB. (ver1.04)",
+      "contextHash": "aa33f7b3a6e2dc1bbab6290c86d782dfd216ecfe49bc44657f9b6416d8938f69"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "※ターン開始時に速度補正技が選ばれた場合は、行動再選択を行いません。また、行動再選択時に速度補正技を選ぶこともありません。速度補正の処理はターン開始時に行われるため、整合性が取れないためです。",
+      "sourceHash": "bad344954fd7d1fce6185762d7867773abf57875e832de9276a99856f56cd258",
+      "translation": "※If a speed-modifying skill is selected at the start of the turn, the action is not reselected. Also, a speed-modifying skill will not be selected when reselecting an action. This is because speed modification is processed at the start of the turn, which would otherwise cause inconsistencies.",
+      "contextHash": "bad344954fd7d1fce6185762d7867773abf57875e832de9276a99856f56cd258"
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring individual settings, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "※[]は条件式内部に書かないでください。",
+      "sourceHash": "b1d701d4e187f81edf491397419be0dbbbee6ecc01a7c5ee82b2a59ce9bdf9c0",
+      "translation": "※Do not write [] inside the conditional expression.",
+      "contextHash": "b1d701d4e187f81edf491397419be0dbbbee6ecc01a7c5ee82b2a59ce9bdf9c0"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "<RoutineReset:true>でON、<RoutineReset:false>でOFFという意味です。",
+      "sourceHash": "43eb02d8b9b53f2d0a5d56fb18c475f7a51675694af98d7518076dea0ed4728b",
+      "translation": "<RoutineReset:true> means ON, and <RoutineReset:false> means OFF.",
+      "contextHash": "43eb02d8b9b53f2d0a5d56fb18c475f7a51675694af98d7518076dea0ed4728b"
+    },
+    {
+      "id": "list-041",
+      "type": "list",
+      "source": "ちなみに、<RoutineReset>と省略しても、trueと同じ扱いになるみたいです。",
+      "sourceHash": "c0ca7783b4681c10cd03aa96d3b94aca95f7b5bc29677751c3bbad09c0bcbf69",
+      "translation": "Incidentally, even if abbreviated as <RoutineReset>, it seems to be treated the same as true.",
+      "contextHash": "c0ca7783b4681c10cd03aa96d3b94aca95f7b5bc29677751c3bbad09c0bcbf69"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "行動判定の実行（testApply）",
+      "sourceHash": "10926bb096710e42431a20118f0fbea1046fad0cb0a464bae28cf58302633c6d",
+      "translation": "Executing Action Determination (testApply)",
+      "contextHash": "10926bb096710e42431a20118f0fbea1046fad0cb0a464bae28cf58302633c6d"
+    },
+    {
+      "id": "list-042",
+      "type": "list",
+      "source": "ＯＮならば効果の得られないスキルは使用しなくなります。",
+      "sourceHash": "80c65d41f4689b6ac054e24ab21471414ef92e9535e7b4ea29915e282680c217",
+      "translation": "When ON, skills that would produce no effect will no longer be used.",
+      "contextHash": "80c65d41f4689b6ac054e24ab21471414ef92e9535e7b4ea29915e282680c217"
+    },
+    {
+      "id": "list-043",
+      "type": "list",
+      "source": "例えば、ＨＰの減った仲間が存在しなければ回復を行いません。",
+      "sourceHash": "6d84df7335a2be589b028976c627f3810acaee61877ab744af61fd6d515da4a0",
+      "translation": "For example, recovery will not be performed if there are no allies with reduced HP.",
+      "contextHash": "6d84df7335a2be589b028976c627f3810acaee61877ab744af61fd6d515da4a0"
+    },
+    {
+      "id": "list-044",
+      "type": "list",
+      "source": "戦闘不能の仲間がいなければ、蘇生を行いません。",
+      "sourceHash": "25cc9be41496d09f41f0bd36b31590b9d9e3156e0b324e61bd5176789177ce06",
+      "translation": "Revival will not be performed if there are no incapacitated allies.",
+      "contextHash": "25cc9be41496d09f41f0bd36b31590b9d9e3156e0b324e61bd5176789177ce06"
+    },
+    {
+      "id": "list-045",
+      "type": "list",
+      "source": "既に仲間の全員がステートにかかっていれば、同一のステートをかけません。",
+      "sourceHash": "f1eeaca6281b5745dbf6e6ee0c8a2f17f426eb01e0cca4da417ae8715c2099b0",
+      "translation": "If all allies are already afflicted with a state, the same state will not be applied again.",
+      "contextHash": "f1eeaca6281b5745dbf6e6ee0c8a2f17f426eb01e0cca4da417ae8715c2099b0"
+    },
+    {
+      "id": "list-046",
+      "type": "list",
+      "source": "この設定がＯＦＦの場合、以下の回復関連や使用効果関連の制御がONでも優先されます。",
+      "sourceHash": "cd137fb1c66cd3cabb215254a93e0d265792b88dc574d26019d2289027b4955f",
+      "translation": "When this setting is OFF, it takes priority even if the following recovery-related or effect-related controls are ON.",
+      "contextHash": "cd137fb1c66cd3cabb215254a93e0d265792b88dc574d26019d2289027b4955f"
+    },
+    {
+      "id": "list-047",
+      "type": "list",
+      "source": "個別設定時は以下を敵キャラのメモ欄に記入してください。",
+      "sourceHash": "6a6ab5253a7c074cd234ca12af837beefb456726675f08a05e149da7c6689e44",
+      "translation": "When configuring individual settings, enter the following in the enemy's note field.",
+      "contextHash": "6a6ab5253a7c074cd234ca12af837beefb456726675f08a05e149da7c6689e44"
+    },
+    {
+      "id": "list-048",
+      "type": "list",
+      "source": "また、スキルのメモ欄に以下を記入すると、スキル毎の使用条件を設定できます。",
+      "sourceHash": "36c2f8c13cb90f04c24bf3c6294a5b0d4604fb59950ad4791156c22d949e1029",
+      "translation": "Also, entering the following in a skill's note field allows you to configure its usage conditions.",
+      "contextHash": "36c2f8c13cb90f04c24bf3c6294a5b0d4604fb59950ad4791156c22d949e1029"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "例：10:睡眠の敵がいる場合のみ実行",
+      "sourceHash": "005cc1b38a1fd04b5c528c882ad9809feabfac470049ac6fadf19a3d8bb80d9a",
+      "translation": "Example: Execute only when there is an enemy with Sleep",
+      "contextHash": "005cc1b38a1fd04b5c528c882ad9809feabfac470049ac6fadf19a3d8bb80d9a"
+    },
+    {
+      "id": "list-049",
+      "type": "list",
+      "source": "※>（大なり）は条件式に使わないでください。タグ全体を閉じる記号と混同されるらしく認識できません。<（小なり）については有効です。",
+      "sourceHash": "5b867fc019a2628f36e376fd1c65b865c8be9b87fd81539f83b0af80098bc5e3",
+      "translation": "※Do not use > (greater than) in conditional expressions. It apparently gets confused with the symbol that closes the entire tag and cannot be recognized. < (less than) is valid.",
+      "contextHash": "5b867fc019a2628f36e376fd1c65b865c8be9b87fd81539f83b0af80098bc5e3"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "パラメータ（回復関連）",
+      "sourceHash": "3b18a8cc69e2f7c8fe07056ce47663b5def6b069553b7e2878c89bed8b690d6c",
+      "translation": "Parameters (Recovery-Related)",
+      "contextHash": "3b18a8cc69e2f7c8fe07056ce47663b5def6b069553b7e2878c89bed8b690d6c"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "回復系行動の制御（controlRecover）",
+      "sourceHash": "b95e10875887e464143ce3e50d0f45e80d9a844d68addac19ecbfbd86863f642",
+      "translation": "Recovery Action Control (controlRecover)",
+      "contextHash": "b95e10875887e464143ce3e50d0f45e80d9a844d68addac19ecbfbd86863f642"
+    },
+    {
+      "id": "list-050",
+      "type": "list",
+      "source": "ＯＮならば回復系スキルの制御を行います。",
+      "sourceHash": "904c1c7e21ae2c5164827f0728b754422432abb99e240465730a0e44bf7b15e6",
+      "translation": "When ON, recovery skills are controlled.",
+      "contextHash": "904c1c7e21ae2c5164827f0728b754422432abb99e240465730a0e44bf7b15e6"
+    },
+    {
+      "id": "list-051",
+      "type": "list",
+      "source": "ＨＰ（ＭＰ）が最も減った仲間に対して回復スキルを使います。また、減った仲間がいなければ、優先度によらずスキルを使いません。",
+      "sourceHash": "e6055443272100aee6ca7629231c6dda59002255e51e628401423392bf6a070c",
+      "translation": "Uses a recovery skill on the ally with the lowest HP (MP). If there are no allies with reduced HP (MP), the skill is not used regardless of its priority.",
+      "contextHash": "e6055443272100aee6ca7629231c6dda59002255e51e628401423392bf6a070c"
+    },
+    {
+      "id": "list-052",
+      "type": "list",
+      "source": "※タイプが『HP回復』『MP回復』のスキルが対象となります。使用効果などに回復値を設定するだけでは、制御を行いませんので注意してください。",
+      "sourceHash": "854a605a03dad0d07b6e45cd16aae018d40c9e0427d0958125843432952ac496",
+      "translation": "※Skills whose type is “HP Recovery” or “MP Recovery” are covered. Please note that simply setting a recovery value in the skill's effects, for example, will not activate this control.",
+      "contextHash": "854a605a03dad0d07b6e45cd16aae018d40c9e0427d0958125843432952ac496"
+    },
+    {
+      "id": "list-053",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring individual settings, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "HP回復行動の条件（ifHpRecover）",
+      "sourceHash": "84e7bd609d2b84faf4c2a3c33f7068570efd4b59fd919444f35ec2981a25fc36",
+      "translation": "HP Recovery Action Condition (ifHpRecover)",
+      "contextHash": "84e7bd609d2b84faf4c2a3c33f7068570efd4b59fd919444f35ec2981a25fc36"
+    },
+    {
+      "id": "list-054",
+      "type": "list",
+      "source": "指定した条件式でＨＰ回復を行います。",
+      "sourceHash": "f1e3652a5345aed0e05cf9792c64ab3a24e09d37d539d25cf577c2f2e2119ed9",
+      "translation": "Performs HP recovery according to the specified conditional expression.",
+      "contextHash": "f1e3652a5345aed0e05cf9792c64ab3a24e09d37d539d25cf577c2f2e2119ed9"
+    },
+    {
+      "id": "list-055",
+      "type": "list",
+      "source": "『回復系行動の制御』がＯＮの時のみ有効です。",
+      "sourceHash": "86d7e4a7df3a0234d7f5ed83f409caac570d8d058f8d3bb969b3f17dd6eb65ff",
+      "translation": "Effective only when “Recovery Action Control” is ON.",
+      "contextHash": "86d7e4a7df3a0234d7f5ed83f409caac570d8d058f8d3bb969b3f17dd6eb65ff"
+    },
+    {
+      "id": "list-056",
+      "type": "list",
+      "source": "初期値の『b.hpRate() < 1.0』は、誰かのHPが１００％未満になった時を意味します。",
+      "sourceHash": "1682ad74c4af36f01c717903fdd6e66156b1a3d0583048504528b0430937a96c",
+      "translation": "The default value “b.hpRate() < 1.0” means that someone’s HP is below 100%.",
+      "contextHash": "1682ad74c4af36f01c717903fdd6e66156b1a3d0583048504528b0430937a96c"
+    },
+    {
+      "id": "list-057",
+      "type": "list",
+      "source": "例えば、５０％以下に変更したい場合は、『b.hpRate() <= 0.5』にしてください。",
+      "sourceHash": "819696cc88295a7ecfe7f6fd3f65b8f49bd91d2b09f73e6879a930ad9c6295bd",
+      "translation": "For example, to change it to 50% or below, set it to “b.hpRate() <= 0.5”.",
+      "contextHash": "819696cc88295a7ecfe7f6fd3f65b8f49bd91d2b09f73e6879a930ad9c6295bd"
+    },
+    {
+      "id": "list-058",
+      "type": "list",
+      "source": "参照できる値はスキルの計算式と同じで、aは行動主体、bは対象者を意味します。基本的には『b.hpRate()』以外を使う必要はありません。",
+      "sourceHash": "c7b4d27321d6171ab12b91c5c6ec103e6a181330f8d2a54718bd8bd8c620201d",
+      "translation": "The available values are the same as those in a skill's formula: a represents the action subject, and b represents the target. Basically, there is no need to use anything other than “b.hpRate()”.",
+      "contextHash": "c7b4d27321d6171ab12b91c5c6ec103e6a181330f8d2a54718bd8bd8c620201d"
+    },
+    {
+      "id": "list-059",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring individual settings, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<RoutineIfHp:[条件式]>",
+      "sourceHash": "e87b1aa344b78e8d1a2e8a45b6ab7bcebe61ed13e9958d44e1fe07d0337f0486",
+      "translation": "<RoutineIfHp:[Conditional Expression]>",
+      "contextHash": "e87b1aa344b78e8d1a2e8a45b6ab7bcebe61ed13e9958d44e1fe07d0337f0486"
+    },
+    {
+      "id": "list-060",
+      "type": "list",
+      "source": "実際には以下のようになります。",
+      "sourceHash": "e8e6345c1f0b2291a317f3912aab22101b4a225afbfe0b9e6f409995b12e02ce",
+      "translation": "In practice, it will look like this:",
+      "contextHash": "e8e6345c1f0b2291a317f3912aab22101b4a225afbfe0b9e6f409995b12e02ce"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "MP回復行動の条件（ifMpRecover）",
+      "sourceHash": "6d921ca7259f3d495fc51b75d7436946d5c580c5b88c15db83d38fba6b6cb95f",
+      "translation": "MP Recovery Action Condition (ifMpRecover)",
+      "contextHash": "6d921ca7259f3d495fc51b75d7436946d5c580c5b88c15db83d38fba6b6cb95f"
+    },
+    {
+      "id": "list-061",
+      "type": "list",
+      "source": "指定した条件式でＭＰ回復を行います。",
+      "sourceHash": "28e8006aa02f0231e4e76c234db4334d10409301d52bc308f322d1d7fa857bad",
+      "translation": "Performs MP recovery according to the specified conditional expression.",
+      "contextHash": "28e8006aa02f0231e4e76c234db4334d10409301d52bc308f322d1d7fa857bad"
+    },
+    {
+      "id": "list-062",
+      "type": "list",
+      "source": "『回復系行動の制御』がＯＮの時のみ有効です。",
+      "sourceHash": "86d7e4a7df3a0234d7f5ed83f409caac570d8d058f8d3bb969b3f17dd6eb65ff",
+      "translation": "Effective only when “Recovery Action Control” is ON.",
+      "contextHash": "86d7e4a7df3a0234d7f5ed83f409caac570d8d058f8d3bb969b3f17dd6eb65ff"
+    },
+    {
+      "id": "list-063",
+      "type": "list",
+      "source": "初期値の『b.mpRate() < 1.0』は、誰かのＭＰが１００％未満になった時を意味します。",
+      "sourceHash": "f1a4c028044a525245c05e84ca9c806b80f8a2e43104e12ba6144fe2ecd93ff6",
+      "translation": "The default value “b.mpRate() < 1.0” means that someone’s MP is below 100%.",
+      "contextHash": "f1a4c028044a525245c05e84ca9c806b80f8a2e43104e12ba6144fe2ecd93ff6"
+    },
+    {
+      "id": "list-064",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring individual settings, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "<RoutineIfMp:[条件式]>",
+      "sourceHash": "8d0fdccc3dc5bb470e517519a241ae1c5d1e6cf385b83b80849a4acec1925194",
+      "translation": "<RoutineIfMp:[Conditional Expression]>",
+      "contextHash": "8d0fdccc3dc5bb470e517519a241ae1c5d1e6cf385b83b80849a4acec1925194"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "MP吸収の制御（controlMpDrain） ver1.07",
+      "sourceHash": "20d5968b25fb654ec080ad9664620bce9fc5473b569d9f55de984c621c2b07ac",
+      "translation": "MP Drain Control (controlMpDrain) ver1.07",
+      "contextHash": "20d5968b25fb654ec080ad9664620bce9fc5473b569d9f55de984c621c2b07ac"
+    },
+    {
+      "id": "list-065",
+      "type": "list",
+      "source": "ＯＮならばＭＰ吸収／ダメージスキルの制御を行います。",
+      "sourceHash": "470805012d58a35a0ed4050c6ad4a40052153ae68fcb7666ca925100cad090de",
+      "translation": "When ON, MP drain/damage skills are controlled.",
+      "contextHash": "470805012d58a35a0ed4050c6ad4a40052153ae68fcb7666ca925100cad090de"
+    },
+    {
+      "id": "list-066",
+      "type": "list",
+      "source": "ＭＰが０の相手に対してスキルを使用しなくなります。",
+      "sourceHash": "003817b909194da02352f8e62b48603ee370b70871ab5c1610b1ddaae11f5945",
+      "translation": "Skills will no longer be used on targets with 0 MP.",
+      "contextHash": "003817b909194da02352f8e62b48603ee370b70871ab5c1610b1ddaae11f5945"
+    },
+    {
+      "id": "list-067",
+      "type": "list",
+      "source": "※項目名は吸収になっていますが、ＭＰダメージにも対応しています。",
+      "sourceHash": "df482a83ae5d2717d932ddd8de7264898b79c37517d67886518269da1a50cbc2",
+      "translation": "※Although the item name refers to drain, it also supports MP damage.",
+      "contextHash": "df482a83ae5d2717d932ddd8de7264898b79c37517d67886518269da1a50cbc2"
+    },
+    {
+      "id": "list-068",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring individual settings, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "蘇生系行動の制御（controlForDead）",
+      "sourceHash": "6d93fc075f701a6bb627bbbe7c7ed7385d6143af0e41f6ebf3da1820f0189382",
+      "translation": "Revival Action Control (controlForDead)",
+      "contextHash": "6d93fc075f701a6bb627bbbe7c7ed7385d6143af0e41f6ebf3da1820f0189382"
+    },
+    {
+      "id": "list-069",
+      "type": "list",
+      "source": "ＯＮならば戦闘不能者を対象にしたスキルの制御を行います。",
+      "sourceHash": "6a106d734a5fcf9ff8bd3bb5657a3863d2fea584c483eb0c23fbfde4bb1d53f0",
+      "translation": "When ON, skills targeting incapacitated battlers are controlled.",
+      "contextHash": "6a106d734a5fcf9ff8bd3bb5657a3863d2fea584c483eb0c23fbfde4bb1d53f0"
+    },
+    {
+      "id": "list-070",
+      "type": "list",
+      "source": "行動の優先度を高めに設定しておけば、戦闘不能者が出るなり即座に蘇生を行う厄介な敵も作れます。",
+      "sourceHash": "0ace57a022137301febff4aa988594c0cb9047f7fa6fe9577de5c4caed7ae5f7",
+      "translation": "By setting the action priority relatively high, you can create troublesome enemies that revive an incapacitated battler immediately after one appears.",
+      "contextHash": "0ace57a022137301febff4aa988594c0cb9047f7fa6fe9577de5c4caed7ae5f7"
+    },
+    {
+      "id": "list-071",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring individual settings, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "パラメータ（使用効果関連）",
+      "sourceHash": "ff0cf994806da1aea8483348da2c4b0ba64afdadc772459d643e88567597dbb2",
+      "translation": "Parameters (Effect-Related)",
+      "contextHash": "ff0cf994806da1aea8483348da2c4b0ba64afdadc772459d643e88567597dbb2"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "対エネミーの使用効果制御（controlEnemyEffect）",
+      "sourceHash": "96aa410d1cc5b7a9577fa7da6a35ccb9b3ca9fdaddb56409f154104ffdce1442",
+      "translation": "Effect Control Against Enemies (controlEnemyEffect)",
+      "contextHash": "96aa410d1cc5b7a9577fa7da6a35ccb9b3ca9fdaddb56409f154104ffdce1442"
+    },
+    {
+      "id": "list-072",
+      "type": "list",
+      "source": "ＯＮならば仲間（エネミー）サイドに対する使用効果系スキルの制御を行います。",
+      "sourceHash": "3b3c9546bf887945e78be1aab119b16d7a59e72088f3e9c14e89705d6f24afcc",
+      "translation": "When ON, effect-based skills targeting the ally (enemy) side are controlled.",
+      "contextHash": "3b3c9546bf887945e78be1aab119b16d7a59e72088f3e9c14e89705d6f24afcc"
+    },
+    {
+      "id": "list-073",
+      "type": "list",
+      "source": "例えば、支援系ステートの無意味な重ねがけをせず、かかっていない対象を選ぶようになります。",
+      "sourceHash": "d3b82c0f49e5b496fa727ef8ccea843e0db7a20a4141657c8cbb1c63721ff7d0",
+      "translation": "For example, instead of meaninglessly stacking support states, the skill will select a target that is not affected by the state.",
+      "contextHash": "d3b82c0f49e5b496fa727ef8ccea843e0db7a20a4141657c8cbb1c63721ff7d0"
+    },
+    {
+      "id": "list-074",
+      "type": "list",
+      "source": "※タイプが『なし』のスキルが対象となります。タイプが『HP回復』などの使用効果にステートを設定しても、制御を行いませんので注意してください。",
+      "sourceHash": "738b3c979acbe9cd464f9e7b6cd73aef10f68b9d0d16d0a3ad7898c7bc9e258d",
+      "translation": "※Skills whose type is “None” are covered. Please note that setting a state as a skill effect, such as an “HP Recovery” effect, will not activate this control.",
+      "contextHash": "738b3c979acbe9cd464f9e7b6cd73aef10f68b9d0d16d0a3ad7898c7bc9e258d"
+    },
+    {
+      "id": "list-075",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring this individually, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "対アクターの使用効果制御（controlActorEffect）",
+      "sourceHash": "bf1d48deb0e37f0d0356655d760e4eecae4c5d8487d825724b24d43af84b017c",
+      "translation": "Control Effects Used on Actors (controlActorEffect)",
+      "contextHash": "bf1d48deb0e37f0d0356655d760e4eecae4c5d8487d825724b24d43af84b017c"
+    },
+    {
+      "id": "list-076",
+      "type": "list",
+      "source": "ＯＮならば相手（アクター）サイドに対する使用効果系スキルの制御を行います。",
+      "sourceHash": "75abdf1f6fab4a3280190a5a1342d52c04bf87af500c5d96551974ec1a93b1e6",
+      "translation": "If ON, skills with usage effects targeting the actor side will be controlled.",
+      "contextHash": "75abdf1f6fab4a3280190a5a1342d52c04bf87af500c5d96551974ec1a93b1e6"
+    },
+    {
+      "id": "list-077",
+      "type": "list",
+      "source": "例えば、異常系ステートの無意味な重ねがけをせず、かかっていない対象を選ぶようになります。",
+      "sourceHash": "00d9d6015a3cc4120e414b985160af68a3c1d93f21fd6f7ad64aad8c155ee881",
+      "translation": "For example, they will avoid needlessly stacking abnormal states and choose targets that are not afflicted.",
+      "contextHash": "00d9d6015a3cc4120e414b985160af68a3c1d93f21fd6f7ad64aad8c155ee881"
+    },
+    {
+      "id": "list-078",
+      "type": "list",
+      "source": "つまり、一人ずつ着実に異常スキルをしかけてきます。行動異常の場合、必然的にハメ殺しが発生しやすくなります。取り扱いには若干の注意が必要です。",
+      "sourceHash": "c1cd926301bc3e253bdfeef1fd693ae77ab2567b209b19a76b0dbd370097957f",
+      "translation": "In other words, they will steadily use abnormality-inducing skills against one target at a time. In the case of action-affecting abnormalities, this will inevitably make it easier to lock targets down until they die. Use this with some caution.",
+      "contextHash": "c1cd926301bc3e253bdfeef1fd693ae77ab2567b209b19a76b0dbd370097957f"
+    },
+    {
+      "id": "list-079",
+      "type": "list",
+      "source": "※タイプが『なし』のスキルが対象となります。タイプが『HPダメージ』などの使用効果にステートを設定しても、制御を行いませんので注意してください。",
+      "sourceHash": "723d251e51fc0f131e224b4f3e0baae60e61871e8872413e2f928b31c6af60b3",
+      "translation": "※ Skills whose type is “None” are affected. Note that control will not be applied even if you set a state as a usage effect for types such as “HP Damage.”",
+      "contextHash": "723d251e51fc0f131e224b4f3e0baae60e61871e8872413e2f928b31c6af60b3"
+    },
+    {
+      "id": "list-080",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring this individually, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "ステート耐性を見るか（watchResist）",
+      "sourceHash": "629efa9f9fa4f7a99ddfcba01f54761a69e642443d44521fc955fee5f86e6856",
+      "translation": "Check State Resistances (watchResist)",
+      "contextHash": "629efa9f9fa4f7a99ddfcba01f54761a69e642443d44521fc955fee5f86e6856"
+    },
+    {
+      "id": "list-081",
+      "type": "list",
+      "source": "ＯＮならば対象の耐性を確認し、無効なステートを使用しなくなります。",
+      "sourceHash": "c3941998355831ce9a0499074e520e9b2997c8c435ba90a091dc2a0284112704",
+      "translation": "If ON, the target's resistances will be checked, and invalid states will no longer be used.",
+      "contextHash": "c3941998355831ce9a0499074e520e9b2997c8c435ba90a091dc2a0284112704"
+    },
+    {
+      "id": "list-082",
+      "type": "list",
+      "source": "ちなみにツクールＭＶの仕様では、命中タイプが『必中』だと、有効度が０％の相手にまでステートがかかります。",
+      "sourceHash": "e5fcf950945d4d1238e0c8c6f54e9a911d45efda4e848c85d2a0b3486be92330",
+      "translation": "Incidentally, under RPG Maker MV's specifications, if the Hit Type is “Certain Hit,” states will be applied even to targets with 0% effectiveness.",
+      "contextHash": "e5fcf950945d4d1238e0c8c6f54e9a911d45efda4e848c85d2a0b3486be92330"
+    },
+    {
+      "id": "list-083",
+      "type": "list",
+      "source": "必中スキルを無効化したい場合は、ステート無効化を設定する必要があります。",
+      "sourceHash": "f998e58412c55e227e6387e4d8c1f553a66f886b1b5cc9da7cc94860843a9ad7",
+      "translation": "To invalidate Certain Hit skills, you must set State Nullification.",
+      "contextHash": "f998e58412c55e227e6387e4d8c1f553a66f886b1b5cc9da7cc94860843a9ad7"
+    },
+    {
+      "id": "list-084",
+      "type": "list",
+      "source": "個別設定時は以下をメモ欄に記入してください。",
+      "sourceHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8",
+      "translation": "When configuring this individually, enter the following in the note field.",
+      "contextHash": "972a2885dbd5175f1fdc02ca88b9c2db590c901fd6dfb4dc209def31fb9fa6b8"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "身代わりを改善（improveSubstitute）",
+      "sourceHash": "05cc5333553ba563b4c3c173e2b10b34a0cacbcd78412ff8cdd8e925d31f0d6c",
+      "translation": "Improve Substitute (improveSubstitute)",
+      "contextHash": "05cc5333553ba563b4c3c173e2b10b34a0cacbcd78412ff8cdd8e925d31f0d6c"
+    },
+    {
+      "id": "list-085",
+      "type": "list",
+      "source": "ONならば一人しかいない状態で身代わりステート付きのスキルを使用しません。",
+      "sourceHash": "d1d138db36259dbbdbadb4618f97e54febddb51de7171bbf96b4630a17ea70b1",
+      "translation": "If ON, a skill with the Substitute state will not be used when there is only one person.",
+      "contextHash": "d1d138db36259dbbdbadb4618f97e54febddb51de7171bbf96b4630a17ea70b1"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "再生できない場合、ダウンロードは🎥[[LINK_1]]こちら[[/LINK_1]]※画面が小さい場合は右下の全画面表示をクリックしてください。",
+      "sourceHash": "bc871fcca71cd9a3f220f660d37b684389508facc752fca345e7ad3249abddd0",
+      "parts": [
+        {
+          "source": "再生できない場合、ダウンロードは🎥",
+          "link": false
+        },
+        {
+          "source": "こちら",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "※画面が小さい場合は右下の全画面表示をクリックしてください。",
+          "link": false
+        }
+      ],
+      "translation": "If playback is unavailable, download it 🎥[[LINK_1]]here[[/LINK_1]]※ If the screen is small, click the full-screen button in the bottom right.",
+      "contextHash": "bc871fcca71cd9a3f220f660d37b684389508facc752fca345e7ad3249abddd0"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（install）[[/LINK_1]]",
+      "sourceHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8",
+      "parts": [
+        {
+          "source": "導入方法（install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (install)[[/LINK_1]]",
+      "contextHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（history）[[/LINK_1]]",
+      "sourceHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73",
+      "parts": [
+        {
+          "source": "更新履歴（history）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (history)[[/LINK_1]]",
+      "contextHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータ（parameter）[[/LINK_1]]",
+      "sourceHash": "ae9d5e19fa38cc7e003b53fe9145050e0f695d7eeaca49be8b42167a10d92360",
+      "parts": [
+        {
+          "source": "パラメータ（parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameters (parameter)[[/LINK_1]]",
+      "contextHash": "ae9d5e19fa38cc7e003b53fe9145050e0f695d7eeaca49be8b42167a10d92360"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]スキル毎の使用条件[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "8ae4592e800c9705b0f07a0dac46c39f05774f06bf336f17247525a3a51502bf",
+      "parts": [
+        {
+          "source": "スキル毎の使用条件",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Made it possible to set [[LINK_1]]usage conditions for each skill[[/LINK_1]].",
+      "contextHash": "8ae4592e800c9705b0f07a0dac46c39f05774f06bf336f17247525a3a51502bf"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_SkillEX.js[[/LINK_1]]との併用に対応。ステート付加率がNRP_SkillEX.js側で変更されている場合も制御できるようにした。",
+      "sourceHash": "d56964fb781acd0fc20f6c69ed2c80dc845ed9564de989d58009027a5ecf2eec",
+      "parts": [
+        {
+          "source": "NRP_SkillEX.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との併用に対応。ステート付加率がNRP_SkillEX.js側で変更されている場合も制御できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Added support for use with [[LINK_1]]NRP_SkillEX.js[[/LINK_1]]. Control is also possible when the state application rate has been changed by NRP_SkillEX.js.",
+      "contextHash": "d56964fb781acd0fc20f6c69ed2c80dc845ed9564de989d58009027a5ecf2eec"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "※特に[[LINK_1]]NRP_TraitsPlus.js[[/LINK_1]]でアンデッドが回復でダメージを受ける設定にした場合など。",
+      "sourceHash": "ce7dc7008f3237faf9c05e6950292c80d883c729d542bbd2dd3c1a3d27fabdae",
+      "parts": [
+        {
+          "source": "※特に",
+          "link": false
+        },
+        {
+          "source": "NRP_TraitsPlus.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "でアンデッドが回復でダメージを受ける設定にした場合など。",
+          "link": false
+        }
+      ],
+      "translation": "※ For example, when [[LINK_1]]NRP_TraitsPlus.js[[/LINK_1]] is configured so that undead take damage from healing.",
+      "contextHash": "ce7dc7008f3237faf9c05e6950292c80d883c729d542bbd2dd3c1a3d27fabdae"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "敵が自分しかいない場合、[[LINK_1]]身代わりステートつきのスキルを使用しない[[/LINK_1]]ように改善。",
+      "sourceHash": "31fe0b440495fd7dd02f0656b373193a42cb36b9d47c2258e7295cb166b4ea60",
+      "parts": [
+        {
+          "source": "敵が自分しかいない場合、",
+          "link": false
+        },
+        {
+          "source": "身代わりステートつきのスキルを使用しない",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ように改善。",
+          "link": false
+        }
+      ],
+      "translation": "Improved it so that when the only enemy is itself, it [[LINK_1]]does not use skills with the Substitute state[[/LINK_1]].",
+      "contextHash": "31fe0b440495fd7dd02f0656b373193a42cb36b9d47c2258e7295cb166b4ea60"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＰが０の相手にＭＰ吸収／ダメージスキルを使わない機能[[/LINK_1]]を追加。",
+      "sourceHash": "ee52ff831b89563a1cd8525edcd31376a6b55a7c2a24efc102028f11d24f97b8",
+      "parts": [
+        {
+          "source": "ＭＰが０の相手にＭＰ吸収／ダメージスキルを使わない機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to [[LINK_1]]not use MP absorption/damage skills against targets with 0 MP[[/LINK_1]].",
+      "contextHash": "ee52ff831b89563a1cd8525edcd31376a6b55a7c2a24efc102028f11d24f97b8"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "敵の行動ルーチン（ＡＩ）を改善するプラグインです。": "This plugin improves enemy action routines (AI).",
+    "初めに（introduction）": "Introduction (introduction)",
+    "ツクールＭＺ＆ＭＶの初期状態では、敵キャラはあまり賢く行動してくれません。": "By default, enemies in RPG Maker MZ & MV do not act very intelligently.",
+    "例えば、回復魔法を使わせても対象は完全ランダムです。": "For example, even when made to use a healing spell, they select a completely random target.",
+    "高確率で無駄撃ちするので、怖さや鬱陶しさがありません。ドラクエがファミコン時代から実現していたホイミスライムのようなモンスターすら作成が困難です。": "They waste their actions so often that they are neither frightening nor annoying. It is even difficult to create a monster like the Healslime from Dragon Quest, which was already possible in the Famicom era.",
+    "また、蘇生魔法を使わせれば、戦闘不能者がいようがいまいが無駄撃ちする始末。ドラクエ４のブラックマージ（マイナーかも……）のような蘇生を使ってくる敵もまともに作れません。": "Similarly, if they are made to use a revival spell, they will waste it regardless of whether anyone is incapacitated. It is not possible to properly create an enemy that uses revival, like Black Marge from Dragon Quest IV (perhaps a minor example...).",
+    "一応、ＨＰを行動の条件に使えますが、参照できるのは自分のＨＰのみ。": "You can use HP as an action condition, but you can only reference your own HP.",
+    "そもそも、ツクールＭＺ&ＭＶの仕様では行動を決定するタイミングがターンの最初だけです。ターンの途中で自分が瀕死になっても、次のターンまで回復行動は取りません。その隙に、プレイヤーは容赦なく敵を葬ってしまうでしょう。": "Moreover, under the specifications of RPG Maker MZ & MV, actions are decided only at the beginning of a turn. Even if an enemy becomes critically injured midway through a turn, it will not take a healing action until the next turn. During that opening, the player will mercilessly finish it off.",
+    "そんなこんなを改善するのが、このプラグインです。": "This plugin improves all of these issues.",
+    "ＨＰ＆ＭＰ回復時に最も減っている対象を選択する。": "Select the target with the lowest HP or MP when restoring HP or MP.",
+    "有効な対象が存在しない場合、回復や治療、蘇生を行わない。": "Do not heal, treat, or revive when no valid target exists.",
+    "ターン開始時だけでなく行動直前にも行動再選択を行う。": "Reconsider actions immediately before acting, not only at the start of a turn.",
+    "既にかかっているステートを重ねがけしない。": "Do not stack a state that is already applied.",
+    "既に限界となっている能力変化を重ねがけしない。": "Do not stack a parameter change that has already reached its limit.",
+    "ＭＰが０の相手にＭＰ吸収スキルを使わない。": "Do not use an MP absorption skill on an opponent with 0 MP.",
+    "一人しかいない場合、身代わりスキルを使用しない。": "Do not use a substitute skill when there is only one party member.",
+    "以上のような修正によって、賢く個性的な敵を実現します。": "These adjustments create intelligent and distinctive enemies.",
+    "この動画はその例です。敵は意味のない行動を取らず、的確に回復やステートを使ってきます。": "This video is an example. The enemies do not take meaningless actions and use healing and states effectively.",
+    "このブラウザでは再生できません。": "This video cannot be played in this browser.",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EnemyRoutineKai.js": "NRP_EnemyRoutineKai.js ",
+    "ver1.111（2025/05/09）": "ver1.111 (2025/05/09) ",
+    "更新履歴（history）": "Update History (history)",
+    "2025/01/22 -> 2025/05/09（ver1.11 -> 1.111）": "2025/01/22 -> 2025/05/09 (ver1.11 -> 1.111) ",
+    "ver1.101の対応（回復スキルを無効な相手には使わない）が不十分だったので再修正。（2025/05/09 ver1.111）": "Revised again because the ver1.101 fix (not using healing skills on invalid targets) was insufficient. (2025/05/09 ver1.111)",
+    "2024/09/13 -> 2024/10/12（ver1.10 -> 1.101）": "2024/09/13 -> 2024/10/12 (ver1.10 -> 1.101) ",
+    "回復スキルを無効な相手には使わないように修正。（2024/10/12 ver1.101）": "Fixed the plugin so that healing skills are not used on invalid targets. (2024/10/12 ver1.101)",
+    "2024/08/05（ver1.09）": "2024/08/05 (ver1.09) ",
+    "ＴＰＢで『行動直前の再設定』をオンにした場合、行動が不発になってしまう不具合を修正。": "Fixed a bug where actions failed when “Reset Immediately Before Action” was enabled in TPB.",
+    "2022/08/19 -> 2024/07/21（ver1.08 -> 1.083）": "2022/08/19 -> 2024/07/21 (ver1.08 -> 1.083) ",
+    "『行動直前の再設定』がオンかつ複数回行動かつ速度補正技の後に非速度補正技を使用した際、行動回数が増えてしまう不具合修正。": "Fixed a bug where the number of actions increased when “Reset Immediately Before Action” was enabled, multiple actions were available, and a non-speed-adjusted skill was used after a speed-adjusted skill.",
+    "（2023/06/06 ver1.081）": " (2023/06/06 ver1.081) ",
+    "敵に範囲が味方かつ『ステート付加 通常攻撃』のスキルを使わせるとエラーになる不具合修正。（2023/11/11 ver1.082）": "Fixed a bug that caused an error when an enemy used a skill with an ally scope and “Add State: Normal Attack.” (2023/11/11 ver1.082)",
+    "不要な競合を引き起こす不具合修正。（2024/07/21 ver1.083）": "Fixed a bug that caused unnecessary conflicts. (2024/07/21 ver1.083)",
+    "2021/07/18（ver1.07）": "2021/07/18 (ver1.07) ",
+    "『戦闘行動の強制』などで有効な対象が存在しないスキルを実行した場合、対象なしのまま実行する仕様を修正。普通に無効な対象に対して実行します。": "Changed the behavior when a skill with no valid target was executed through Force Action or similar commands. It is now executed normally against an invalid target.",
+    "※DynamicAnimationと組み合わせた場合、自分にアニメーションを表示してしまう問題への対処です。": "※This addresses an issue where, when used with DynamicAnimation, the animation was displayed on the user.",
+    "2020/10/04（ver1.06）": "2020/10/04 (ver1.06) ",
+    "ＭＶでエラーになる不具合修正。": "Fixed a bug that caused errors in MV.",
+    "2020/09/13（ver1.05 -> 1.051）": "2020/09/13 (ver1.05 -> 1.051) ",
+    "ＭＺのタイムプログレスで行動が不発する不具合修正。": "Fixed a bug where actions failed in MZ Time Progress.",
+    "タイムプログレスで速度補正技が選択されない不具合修正。（ver1.051）": "Fixed a bug where speed-adjusted skills were not selected in Time Progress. (ver1.051)",
+    "2020/09/06（ver1.04 -> 1.042）": "2020/09/06 (ver1.04 -> 1.042) ",
+    "『行動直前の再設定』が有効なら、複数回行動時も毎回考慮するように修正。": "When “Reset Immediately Before Action” is enabled, reconsider the action every time, including during multiple actions.",
+    "1.04で行動が不発する不具合修正。（ver1.042）": "Fixed a bug where actions failed in 1.04. (ver1.042)",
+    "2020/08/22（ver1.03 -> 1.031）": "2020/08/22 (ver1.03 -> 1.031) ",
+    "ツクールＭＺ向けにヘルプを修正。": "Updated the help for RPG Maker MZ.",
+    "『行動直前の再設定』が有効だと、複数回行動の敵が無限に行動してしまう不具合修正。(09/03 ver1.031)": "Fixed a bug where enemies with multiple actions acted indefinitely when “Reset Immediately Before Action” was enabled. (09/03 ver1.031)",
+    "2020/06/14（ver1.02）": "2020/06/14 (ver1.02) ",
+    "英語対応。": "Added English support.",
+    "2020/01/27（ver1.01）": "2020/01/27 (ver1.01) ",
+    "ツクールＭＶの本体verが古い場合でも動作するよう修正。": "Updated the plugin to work even when the RPG Maker MV core version is outdated.",
+    "2020/01/24（ver1.00）": "2020/01/24 (ver1.00) ",
+    "公開開始！": "Now available!",
+    "パラメータ（parameter）": "Parameters (parameter)",
+    "以下のプラグインパラメータで、敵全体の初期値を設定します。": "Use the following plugin parameters to set the initial values for all enemies.",
+    "基本的にはほとんどＯＮでいいと思います。": "Basically, I think it is fine to leave almost everything ON.",
+    "ただし『対アクターの使用効果制御』をＯＮにすると、わりと嫌らしくなるので取り扱い注意です。": "However, enabling “Control Use Effects Against Actors” makes enemies rather nasty, so use it with caution.",
+    "個別の敵キャラごとに設定したい場合は、メモ欄に記述することで切替可能です。": "To configure individual enemies, enter the settings in their note field to switch them.",
+    "パラメータ（基本設定）": "Parameters (Basic Settings)",
+    "行動直前の再設定（resetAction）": "Reset Immediately Before Action (resetAction)",
+    "ＯＮならば、行動直前にも再度の行動決定を行います。": "When ON, the action is decided again immediately before acting.",
+    "※一人ずつ行動するＣＴＢでは無意味なので、ＯＦＦ推奨です。": "※Since it is meaningless in CTB, where battlers act one at a time, OFF is recommended.",
+    "※ＣＴＢでも複数回行動時には有効です。（ver1.04）": "※It is also effective during multiple actions in CTB. (ver1.04)",
+    "※ターン開始時に速度補正技が選ばれた場合は、行動再選択を行いません。また、行動再選択時に速度補正技を選ぶこともありません。速度補正の処理はターン開始時に行われるため、整合性が取れないためです。": "※If a speed-modifying skill is selected at the start of the turn, the action is not reselected. Also, a speed-modifying skill will not be selected when reselecting an action. This is because speed modification is processed at the start of the turn, which would otherwise cause inconsistencies.",
+    "個別設定時は以下をメモ欄に記入してください。": "When configuring this individually, enter the following in the note field.",
+    "※[]は条件式内部に書かないでください。": "※Do not write [] inside the conditional expression.",
+    "<RoutineReset:true>でON、<RoutineReset:false>でOFFという意味です。": "<RoutineReset:true> means ON, and <RoutineReset:false> means OFF.",
+    "ちなみに、<RoutineReset>と省略しても、trueと同じ扱いになるみたいです。": "Incidentally, even if abbreviated as <RoutineReset>, it seems to be treated the same as true.",
+    "行動判定の実行（testApply）": "Executing Action Determination (testApply)",
+    "ＯＮならば効果の得られないスキルは使用しなくなります。": "When ON, skills that would produce no effect will no longer be used.",
+    "例えば、ＨＰの減った仲間が存在しなければ回復を行いません。": "For example, recovery will not be performed if there are no allies with reduced HP.",
+    "戦闘不能の仲間がいなければ、蘇生を行いません。": "Revival will not be performed if there are no incapacitated allies.",
+    "既に仲間の全員がステートにかかっていれば、同一のステートをかけません。": "If all allies are already afflicted with a state, the same state will not be applied again.",
+    "この設定がＯＦＦの場合、以下の回復関連や使用効果関連の制御がONでも優先されます。": "When this setting is OFF, it takes priority even if the following recovery-related or effect-related controls are ON.",
+    "個別設定時は以下を敵キャラのメモ欄に記入してください。": "When configuring individual settings, enter the following in the enemy's note field.",
+    "また、スキルのメモ欄に以下を記入すると、スキル毎の使用条件を設定できます。": "Also, entering the following in a skill's note field allows you to configure its usage conditions.",
+    "例：10:睡眠の敵がいる場合のみ実行": "Example: Execute only when there is an enemy with Sleep",
+    "※>（大なり）は条件式に使わないでください。タグ全体を閉じる記号と混同されるらしく認識できません。<（小なり）については有効です。": "※Do not use > (greater than) in conditional expressions. It apparently gets confused with the symbol that closes the entire tag and cannot be recognized. < (less than) is valid.",
+    "パラメータ（回復関連）": "Parameters (Recovery-Related)",
+    "回復系行動の制御（controlRecover）": "Recovery Action Control (controlRecover)",
+    "ＯＮならば回復系スキルの制御を行います。": "When ON, recovery skills are controlled.",
+    "ＨＰ（ＭＰ）が最も減った仲間に対して回復スキルを使います。また、減った仲間がいなければ、優先度によらずスキルを使いません。": "Uses a recovery skill on the ally with the lowest HP (MP). If there are no allies with reduced HP (MP), the skill is not used regardless of its priority.",
+    "※タイプが『HP回復』『MP回復』のスキルが対象となります。使用効果などに回復値を設定するだけでは、制御を行いませんので注意してください。": "※Skills whose type is “HP Recovery” or “MP Recovery” are covered. Please note that simply setting a recovery value in the skill's effects, for example, will not activate this control.",
+    "HP回復行動の条件（ifHpRecover）": "HP Recovery Action Condition (ifHpRecover)",
+    "指定した条件式でＨＰ回復を行います。": "Performs HP recovery according to the specified conditional expression.",
+    "『回復系行動の制御』がＯＮの時のみ有効です。": "Effective only when “Recovery Action Control” is ON.",
+    "初期値の『b.hpRate() < 1.0』は、誰かのHPが１００％未満になった時を意味します。": "The default value “b.hpRate() < 1.0” means that someone’s HP is below 100%.",
+    "例えば、５０％以下に変更したい場合は、『b.hpRate() <= 0.5』にしてください。": "For example, to change it to 50% or below, set it to “b.hpRate() <= 0.5”.",
+    "参照できる値はスキルの計算式と同じで、aは行動主体、bは対象者を意味します。基本的には『b.hpRate()』以外を使う必要はありません。": "The available values are the same as those in a skill's formula: a represents the action subject, and b represents the target. Basically, there is no need to use anything other than “b.hpRate()”.",
+    "<RoutineIfHp:[条件式]>": "<RoutineIfHp:[Conditional Expression]>",
+    "実際には以下のようになります。": "In practice, it will look like this:",
+    "MP回復行動の条件（ifMpRecover）": "MP Recovery Action Condition (ifMpRecover)",
+    "指定した条件式でＭＰ回復を行います。": "Performs MP recovery according to the specified conditional expression.",
+    "初期値の『b.mpRate() < 1.0』は、誰かのＭＰが１００％未満になった時を意味します。": "The default value “b.mpRate() < 1.0” means that someone’s MP is below 100%.",
+    "<RoutineIfMp:[条件式]>": "<RoutineIfMp:[Conditional Expression]>",
+    "MP吸収の制御（controlMpDrain） ver1.07": "MP Drain Control (controlMpDrain) ver1.07",
+    "ＯＮならばＭＰ吸収／ダメージスキルの制御を行います。": "When ON, MP drain/damage skills are controlled.",
+    "ＭＰが０の相手に対してスキルを使用しなくなります。": "Skills will no longer be used on targets with 0 MP.",
+    "※項目名は吸収になっていますが、ＭＰダメージにも対応しています。": "※Although the item name refers to drain, it also supports MP damage.",
+    "蘇生系行動の制御（controlForDead）": "Revival Action Control (controlForDead)",
+    "ＯＮならば戦闘不能者を対象にしたスキルの制御を行います。": "When ON, skills targeting incapacitated battlers are controlled.",
+    "行動の優先度を高めに設定しておけば、戦闘不能者が出るなり即座に蘇生を行う厄介な敵も作れます。": "By setting the action priority relatively high, you can create troublesome enemies that revive an incapacitated battler immediately after one appears.",
+    "パラメータ（使用効果関連）": "Parameters (Effect-Related)",
+    "対エネミーの使用効果制御（controlEnemyEffect）": "Effect Control Against Enemies (controlEnemyEffect)",
+    "ＯＮならば仲間（エネミー）サイドに対する使用効果系スキルの制御を行います。": "When ON, effect-based skills targeting the ally (enemy) side are controlled.",
+    "例えば、支援系ステートの無意味な重ねがけをせず、かかっていない対象を選ぶようになります。": "For example, instead of meaninglessly stacking support states, the skill will select a target that is not affected by the state.",
+    "※タイプが『なし』のスキルが対象となります。タイプが『HP回復』などの使用効果にステートを設定しても、制御を行いませんので注意してください。": "※Skills whose type is “None” are covered. Please note that setting a state as a skill effect, such as an “HP Recovery” effect, will not activate this control.",
+    "対アクターの使用効果制御（controlActorEffect）": "Control Effects Used on Actors (controlActorEffect)",
+    "ＯＮならば相手（アクター）サイドに対する使用効果系スキルの制御を行います。": "If ON, skills with usage effects targeting the actor side will be controlled.",
+    "例えば、異常系ステートの無意味な重ねがけをせず、かかっていない対象を選ぶようになります。": "For example, they will avoid needlessly stacking abnormal states and choose targets that are not afflicted.",
+    "つまり、一人ずつ着実に異常スキルをしかけてきます。行動異常の場合、必然的にハメ殺しが発生しやすくなります。取り扱いには若干の注意が必要です。": "In other words, they will steadily use abnormality-inducing skills against one target at a time. In the case of action-affecting abnormalities, this will inevitably make it easier to lock targets down until they die. Use this with some caution.",
+    "※タイプが『なし』のスキルが対象となります。タイプが『HPダメージ』などの使用効果にステートを設定しても、制御を行いませんので注意してください。": "※ Skills whose type is “None” are affected. Note that control will not be applied even if you set a state as a usage effect for types such as “HP Damage.”",
+    "ステート耐性を見るか（watchResist）": "Check State Resistances (watchResist)",
+    "ＯＮならば対象の耐性を確認し、無効なステートを使用しなくなります。": "If ON, the target's resistances will be checked, and invalid states will no longer be used.",
+    "ちなみにツクールＭＶの仕様では、命中タイプが『必中』だと、有効度が０％の相手にまでステートがかかります。": "Incidentally, under RPG Maker MV's specifications, if the Hit Type is “Certain Hit,” states will be applied even to targets with 0% effectiveness.",
+    "必中スキルを無効化したい場合は、ステート無効化を設定する必要があります。": "To invalidate Certain Hit skills, you must set State Nullification.",
+    "身代わりを改善（improveSubstitute）": "Improve Substitute (improveSubstitute)",
+    "ONならば一人しかいない状態で身代わりステート付きのスキルを使用しません。": "If ON, a skill with the Substitute state will not be used when there is only one person."
+  }
+}

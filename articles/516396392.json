@@ -1,0 +1,1830 @@
+{
+  "articleId": "516396392",
+  "sourceUrl": "https://newrpg.seesaa.net/article/516396392.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "5c602587cd18149bd2788899bb5c62245cf8520e9f1ded6a1dcfd015a8ab0a64",
+  "translatedAt": "2026-08-31T01:09:24.331Z",
+  "title": "Formation System (Modified Version) [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "陣形システム（改造版）【RPGツクールMZプラグイン】",
+      "sourceHash": "165578f6d63529cbb2ce51d1b7ea2369ea88da1def66736d8a7d35aa285b68e9",
+      "translation": "Formation System (Modified Version) [RPG Maker MZ Plugin]",
+      "contextHash": "165578f6d63529cbb2ce51d1b7ea2369ea88da1def66736d8a7d35aa285b68e9"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ロマサガ２～３っぽい陣形システムを実現します。",
+      "sourceHash": "50e02219ff07643c8ca342f43e1953b5413a1c29aabd5d594a0f33b63b801e99",
+      "translation": "Implements a Romancing SaGa 2–3-style formation system.",
+      "contextHash": "50e02219ff07643c8ca342f43e1953b5413a1c29aabd5d594a0f33b63b801e99"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "このプラグインはうなぎおおとろ様の陣形システムプラグイン（v1.2.0）を砂川赳がＭＩＴライセンスに則って改造したものです。ロマサガ２～３っぽくするため、仕様の簡略化を始めとした変更を加えています。",
+      "sourceHash": "8376117cbdb6f4d5d09ccccfdd0068ae99384f7ac05f73ae96cc1f2c40bfdc99",
+      "translation": "This plugin is a modified version of Unagi-Otoro's Formation System plugin (v1.2.0), modified by Takeshi Sunagawa in accordance with the MIT License. Changes including simplified specifications have been made to give it a more Romancing SaGa 2–3-like feel.",
+      "contextHash": "8376117cbdb6f4d5d09ccccfdd0068ae99384f7ac05f73ae96cc1f2c40bfdc99"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "https://raw.githubusercontent.com/unagiootoro/RPGMZ/master/FormationSystem.js",
+      "sourceHash": "3f518b48b38ce6f735340fbaefc7e2646647ab72354fae91bc0ab0a6fbe5c5a9",
+      "translation": "https://raw.githubusercontent.com/unagiootoro/RPGMZ/master/FormationSystem.js",
+      "contextHash": "3b2ec43fe722de1773dc206564ad4eb1a48bb5450da5dfc41c7dd6a5eb85648f"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "※機能を削っているので単純な上位互換ではありません。場合によっては元のプラグインを使用したほうが有用です。",
+      "sourceHash": "52177a25d8fa9c28f3f142fa82be2770b19c7d02bcb5444d20d5bd961677f8b2",
+      "translation": "※Since some features have been removed, this is not simply an upper-compatible version. Depending on the situation, it may be more useful to use the original plugin.",
+      "contextHash": "52177a25d8fa9c28f3f142fa82be2770b19c7d02bcb5444d20d5bd961677f8b2"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "メニュー画面から「陣形」を開くことで、陣形を選択できるようになります。",
+      "sourceHash": "eb4d40035dc4186c483a73de8ce01cd1b89f664fba8efab8f0cfec13ec7ba6d7",
+      "translation": "You can select a formation by opening “Formation” from the menu screen.",
+      "contextHash": "eb4d40035dc4186c483a73de8ce01cd1b89f664fba8efab8f0cfec13ec7ba6d7"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "戦闘中のアクターの並びが変化すると共に様々な効果が発揮されます。",
+      "sourceHash": "105e7a422d91650ff8db3e7fe31290cee343d61c2d52b2c258098a00974cdb1c",
+      "translation": "Various effects take effect as the arrangement of actors in battle changes.",
+      "contextHash": "105e7a422d91650ff8db3e7fe31290cee343d61c2d52b2c258098a00974cdb1c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "なお、効果はステートを付加することによって実現します。",
+      "sourceHash": "28f3420ad5babf5024cc116f5e247fd8812a9693d0672b468af913d67ff502d4",
+      "translation": "The effects are implemented by adding states.",
+      "contextHash": "28f3420ad5babf5024cc116f5e247fd8812a9693d0672b468af913d67ff502d4"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な変更点",
+      "sourceHash": "6bfb4f5f6abc51ca7901904b3a4b1e5b0a83af16f9720d4c8adb2f27ee70fc8f",
+      "translation": "Main Changes",
+      "contextHash": "6bfb4f5f6abc51ca7901904b3a4b1e5b0a83af16f9720d4c8adb2f27ee70fc8f"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "装備できる陣形を一つに限定。",
+      "sourceHash": "ad9b8e4e0b87cb518986cb6e29f36968b699fba71e9310c643872e81e43aca44",
+      "translation": "Limited the number of formations that can be equipped to one.",
+      "contextHash": "ad9b8e4e0b87cb518986cb6e29f36968b699fba71e9310c643872e81e43aca44"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "単純に装備した陣形＝現在の陣形とした。",
+      "sourceHash": "5becbcda7f583a902f1c1c890ce934c8c3470be78ee6aed23301816f718a8905",
+      "translation": "The equipped formation is simply treated as the current formation.",
+      "contextHash": "5becbcda7f583a902f1c1c890ce934c8c3470be78ee6aed23301816f718a8905"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "※それに伴い、戦闘中の陣形変更機能は廃止しました。",
+      "sourceHash": "b0c22a490e58c928b2df45e10fd80bc5a79b3394d7313956295e687ec99ef4cd",
+      "translation": "※Accordingly, the ability to change formations during battle has been removed.",
+      "contextHash": "b0c22a490e58c928b2df45e10fd80bc5a79b3394d7313956295e687ec99ef4cd"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "陣形の習得機能を廃止し、デフォルトで全て選択できるようにした。",
+      "sourceHash": "8a42c047edc43c182522d9fbcd298d048a7b0ddd3708365e58edb34ed28f741a",
+      "translation": "Removed the formation acquisition feature, allowing all formations to be selected by default.",
+      "contextHash": "8a42c047edc43c182522d9fbcd298d048a7b0ddd3708365e58edb34ed28f741a"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "その上で、必要なものはスイッチを有効条件とするように変更。",
+      "sourceHash": "35b6f8260f04f2acd37421dbcb362a897253b9ccd45c6e46322ff0ea50847277",
+      "translation": "Formation requirements can instead be set to require switches to be enabled.",
+      "contextHash": "35b6f8260f04f2acd37421dbcb362a897253b9ccd45c6e46322ff0ea50847277"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "パーティ人数を陣形の有効条件にできるようにした。",
+      "sourceHash": "ffb38c330bb0c0053976150f49751e07da70cffa1ea5d5840960239da26d4c21",
+      "translation": "Party size can now be used as a formation requirement.",
+      "contextHash": "ffb38c330bb0c0053976150f49751e07da70cffa1ea5d5840960239da26d4c21"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "陣形画面で位置の入替をできるようにした。",
+      "sourceHash": "6e2acad304654978170f6cc2dc53a245db0e24aff1125af86ebec2c8ed5fd313",
+      "translation": "Positions can now be swapped on the formation screen.",
+      "contextHash": "6e2acad304654978170f6cc2dc53a245db0e24aff1125af86ebec2c8ed5fd313"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "一覧の横幅やヘルプ欄の縦幅を可変にした。",
+      "sourceHash": "067393482c5bb90028f228e2d72c667ccbee245b0af2ed6938999cfa33d70d90",
+      "translation": "The width of the list and the height of the help window can now be adjusted.",
+      "contextHash": "067393482c5bb90028f228e2d72c667ccbee245b0af2ed6938999cfa33d70d90"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "陣形の座標指定をグリッド単位（48ピクセル）にした。",
+      "sourceHash": "102f3f28675ce567ae5395af9fc8ef7e8487c80ae4e4e36924a82b953734118d",
+      "translation": "Formation coordinates are specified in grid units (48 pixels).",
+      "contextHash": "102f3f28675ce567ae5395af9fc8ef7e8487c80ae4e4e36924a82b953734118d"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "例えば、x=10なら480となります。",
+      "sourceHash": "8fb1e56fe03c9c8b187387000efbb5fff0ef8fd143173320b8df1bc5ba9542ab",
+      "translation": "For example, x=10 results in 480.",
+      "contextHash": "8fb1e56fe03c9c8b187387000efbb5fff0ef8fd143173320b8df1bc5ba9542ab"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "『メニュー陣形座標オフセット』をパラメータに追加した。",
+      "sourceHash": "afbd151f027c85bd3ded257eac01463a34beab0742060d805c2b91c951fc8970",
+      "translation": "Added “Menu Formation Coordinate Offset” as a parameter.",
+      "contextHash": "afbd151f027c85bd3ded257eac01463a34beab0742060d805c2b91c951fc8970"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※改変元に従い、規約はＭＩＴライセンスとなります。",
+      "sourceHash": "1d3a3a1650dc039e9fc3c86097b02ee416127488f8db8f14ba9d0012d31259fa",
+      "translation": "※In accordance with the original plugin, it is distributed under the MIT License.",
+      "contextHash": "1d3a3a1650dc039e9fc3c86097b02ee416127488f8db8f14ba9d0012d31259fa"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_U_FormationSystem.js",
+      "sourceHash": "75a40b171368d18872182b3b8b3484835d8d79459ab60568f7c5e410e72bcd88",
+      "translation": "NRP_U_FormationSystem.js ",
+      "contextHash": "5c9773c6af81b47354c72cfc5aafc08473ef0cc6647d2809594fa88d2d57f00d"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ver1.00（2025/06/19）",
+      "sourceHash": "c7a8b930079554a1c9a703ac49c37fe3481cc39029b933f5d0fa9781890ecbfb",
+      "translation": "ver1.00 (2025/06/19) ",
+      "contextHash": "5c9773c6af81b47354c72cfc5aafc08473ef0cc6647d2809594fa88d2d57f00d"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2025/06/19（ver1.00）",
+      "sourceHash": "f40b2abe46ea9938ebfc6fa0ca467233885fc3d3617630039cc98c7ddc2ad35c",
+      "translation": "2025/06/19 (ver1.00) ",
+      "contextHash": "f40b2abe46ea9938ebfc6fa0ca467233885fc3d3617630039cc98c7ddc2ad35c"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※改造した点に合わせて原文から内容を変更しています。",
+      "sourceHash": "c0df2aa82e4763605c51fafa02201c9901a06db5292bbb7d96064b8e9a58ab4f",
+      "translation": "※The content has been changed from the original to reflect the modifications.",
+      "contextHash": "c0df2aa82e4763605c51fafa02201c9901a06db5292bbb7d96064b8e9a58ab4f"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "陣形の作成（Create Formation）",
+      "sourceHash": "b6401d6e9a9a47ee54080c2bb8bec16ae780fbbc1de4dd30412211bfd6b2ad82",
+      "translation": "Creating Formations (Create Formation)",
+      "contextHash": "b6401d6e9a9a47ee54080c2bb8bec16ae780fbbc1de4dd30412211bfd6b2ad82"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "プラグインパラメータの「陣形データ」を編集して、陣形を作成します。",
+      "sourceHash": "a6c8835142cea807a662f33ba81ed64343cef05bd27de10a986e36d612df33b3",
+      "translation": "Create formations by editing “Formation Data” in the plugin parameters.",
+      "contextHash": "a6c8835142cea807a662f33ba81ed64343cef05bd27de10a986e36d612df33b3"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "各アクターのポジションの設定には、次の二つの方法があります。",
+      "sourceHash": "01311fc35f7c05660411abdc4001e0a3805315f98cdbf4fc23d2a50b035626cc",
+      "translation": "There are two ways to set each actor's position.",
+      "contextHash": "01311fc35f7c05660411abdc4001e0a3805315f98cdbf4fc23d2a50b035626cc"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "数式で座標を入力する",
+      "sourceHash": "79ff0e71526124e732ed34952708d1f87bfe70277e4416707c2119a6ad412663",
+      "translation": "Entering Coordinates Using Formulas",
+      "contextHash": "79ff0e71526124e732ed34952708d1f87bfe70277e4416707c2119a6ad412663"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "Ｘ座標とＹ座標を指定する方法です。座標には数式を使うことができます。",
+      "sourceHash": "1856aaa6d741f1b5d09fa23b83b8cd93efce28bcc8efb65523f87e4da32fe249",
+      "translation": "This method specifies the X and Y coordinates. Formulas can be used for the coordinates.",
+      "contextHash": "1856aaa6d741f1b5d09fa23b83b8cd93efce28bcc8efb65523f87e4da32fe249"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "また、数式内でindexというワードを使用すると、該当するアクターが先頭から何番目かを表す数値に置き換えられます。(先頭から0, 1, 2...という値になります)",
+      "sourceHash": "98c9f325bfcda057fda8b53caa84c3049ffa49c0a59fdfe292c3aec022b7ef9b",
+      "translation": "Additionally, using the word index in a formula replaces it with a number indicating the position of the relevant actor from the front. (The values are 0, 1, 2... from the front.)",
+      "contextHash": "98c9f325bfcda057fda8b53caa84c3049ffa49c0a59fdfe292c3aec022b7ef9b"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "この値にグリッドサイズを乗算して、オフセットを加算した値が実際の配置座標になります。",
+      "sourceHash": "bb271f4699f035b861d3618af0c0850c009ab21d5428a6f30a712479c4cc6504",
+      "translation": "The actual placement coordinate is obtained by multiplying this value by the grid size and adding the offset.",
+      "contextHash": "bb271f4699f035b861d3618af0c0850c009ab21d5428a6f30a712479c4cc6504"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "この方法を使用する場合、プラグインパラメータのマップIDには0（または空欄）を指定してください。",
+      "sourceHash": "f42b62e4e2f3b08ef15b333a9102fc4e0495782d6ca4eabbfd0ba1f43bacbdf1",
+      "translation": "When using this method, specify 0 (or leave it blank) for the Map ID in the plugin parameters.",
+      "contextHash": "f42b62e4e2f3b08ef15b333a9102fc4e0495782d6ca4eabbfd0ba1f43bacbdf1"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "マップから座標を読み込む",
+      "sourceHash": "9fc7e2901978e7abb6c485b30fd53a111ae822abc6ea51b147129fceb1c8e0dd",
+      "translation": "Loading Coordinates from a Map",
+      "contextHash": "9fc7e2901978e7abb6c485b30fd53a111ae822abc6ea51b147129fceb1c8e0dd"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "マップに配置されたイベントを各アクターのポジションと見立てる方法です。",
+      "sourceHash": "0436f1a4092ea039d97eb51e3476f8de71cad7b8d719102841308c22770d0f37",
+      "translation": "This method treats events placed on a map as the positions of the actors.",
+      "contextHash": "0436f1a4092ea039d97eb51e3476f8de71cad7b8d719102841308c22770d0f37"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "対象のマップにイベントを作成し、メモ欄に該当するアクターの先頭からの順番を記載します。",
+      "sourceHash": "a03e60ebec1fde7ce159f74e583ae7226bfa302462d784343814ac5f002fccba",
+      "translation": "Create events on the target map and enter the corresponding actor's order from the front in the note field.",
+      "contextHash": "a03e60ebec1fde7ce159f74e583ae7226bfa302462d784343814ac5f002fccba"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "（例）先頭のアクターのポジションを設定する場合",
+      "sourceHash": "0dc7d4e06c1dbcdcc156b81c1e664988d47fce051f14d304e4f9a2b048972c5e",
+      "translation": "(Example) When setting the position of the actor at the front",
+      "contextHash": "0dc7d4e06c1dbcdcc156b81c1e664988d47fce051f14d304e4f9a2b048972c5e"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "イベントを作成し、メモ欄に『0』と記載します。",
+      "sourceHash": "03c75ebf0bf40591426dba0440dedd664e11212c79967f205792dea866a07d6b",
+      "translation": "Create an event and enter “0” in the note field.",
+      "contextHash": "03c75ebf0bf40591426dba0440dedd664e11212c79967f205792dea866a07d6b"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "作成した陣形は、プラグインパラメータの登録順に(0, 1, 2, ...)という形でIDが振られます。条件を満たしている中で最もIDの小さいものがデフォルトの陣形として使用されます。",
+      "sourceHash": "583d57bd68e70db02a9543db08737918de9411d5b2bda44fbc060576ba6701f8",
+      "translation": "Created formations are assigned IDs in the order they are registered in the plugin parameters, in the form (0, 1, 2, ...). Among the formations whose conditions are met, the one with the lowest ID is used as the default formation.",
+      "contextHash": "583d57bd68e70db02a9543db08737918de9411d5b2bda44fbc060576ba6701f8"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "陣形のポジションは戦闘に参加するアクターの数だけ用意する必要があります。",
+      "sourceHash": "992b5296eb6f96863cf78347c3fdbef8e9523a366d6a16b7c05e84a01a18e729",
+      "translation": "You need to prepare as many formation positions as there are actors participating in battle.",
+      "contextHash": "992b5296eb6f96863cf78347c3fdbef8e9523a366d6a16b7c05e84a01a18e729"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "例えば４人を戦闘に参加させる場合、４人分のポジションの登録が必要となります。",
+      "sourceHash": "738d73fc2940ce28ee7caec8e25f645b4f1c795f790b753173c62347ac5cf49d",
+      "translation": "For example, if four actors are participating in battle, you must register positions for all four.",
+      "contextHash": "738d73fc2940ce28ee7caec8e25f645b4f1c795f790b753173c62347ac5cf49d"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "陣形のサンプル（Sample Formations）",
+      "sourceHash": "e14716bace9bb922dcdc6f509c37f8d15f9d6b1cb862d84b204b26be2e3e92b6",
+      "translation": "Formation Samples (Sample Formations)",
+      "contextHash": "e14716bace9bb922dcdc6f509c37f8d15f9d6b1cb862d84b204b26be2e3e92b6"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "「陣形データ」にサンプルを設定しているので参考にしてください。",
+      "sourceHash": "43c7ceb4522671c3e91fc48b1eacc99afd3b3656e29c1ca927e19633a776201b",
+      "translation": "Samples are configured in “Formation Data” for your reference.",
+      "contextHash": "43c7ceb4522671c3e91fc48b1eacc99afd3b3656e29c1ca927e19633a776201b"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "※『数式で座標を入力する』方法を想定しています。",
+      "sourceHash": "4efbce2ab88c2420f425456bc6d72592e46b662e93f4a58d20df23f7e0b47df9",
+      "translation": "※This assumes the “Entering Coordinates Using Formulas” method.",
+      "contextHash": "4efbce2ab88c2420f425456bc6d72592e46b662e93f4a58d20df23f7e0b47df9"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "スタンダード（１）～（４）はパーティ人数毎に設定した初期陣形です。",
+      "sourceHash": "4d4e2da1c96821866e2f84a97cf671ff7bee94690ab92cc6753d0fd5405db65e",
+      "translation": "Standard (1)–(4) are initial formations configured for each party size.",
+      "contextHash": "4d4e2da1c96821866e2f84a97cf671ff7bee94690ab92cc6753d0fd5405db65e"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "スタンダード（自動）はパーティ人数によって配置が自動調整される陣形です。",
+      "sourceHash": "8e7815a8a88b3f3589e1b29a475966b41c18605ef4c8a3520053c66c02dbf2b0",
+      "translation": "Standard (Automatic) is a formation whose arrangement is automatically adjusted according to the party size.",
+      "contextHash": "8e7815a8a88b3f3589e1b29a475966b41c18605ef4c8a3520053c66c02dbf2b0"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "どちらか好きな方法を選んでください。",
+      "sourceHash": "7165f2f4e94697066da3bf9806490794cb80e428be8c787367e97548b7fdd41b",
+      "translation": "Choose whichever method you prefer.",
+      "contextHash": "7165f2f4e94697066da3bf9806490794cb80e428be8c787367e97548b7fdd41b"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "また、座標に関しては以下のような表を作って設定すると便利です。",
+      "sourceHash": "00ad87df83cf2a7236af37fe715dbd652c15238d345f152b119657f197bb5caa",
+      "translation": "Also, for coordinates, it is convenient to create and configure a table like the following.",
+      "contextHash": "00ad87df83cf2a7236af37fe715dbd652c15238d345f152b119657f197bb5caa"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "20250619_FormationSample.xlsx",
+      "sourceHash": "fc745a2ced2770539291ecf7ebe6b722a8f4b5ae4e55e9600108f981dfb44e26",
+      "translation": "20250619_FormationSample.xlsx",
+      "contextHash": "642119b81be5234fe3d8550f404a6f063032f4c6fd0b3bdc9994554b24fb14ee"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "例えば、スクウェアシールドの１人目はＸ座標＝０、Ｙ座標＝１になります。",
+      "sourceHash": "29d12caf21ea935cbce793e1a9458a7948b4e399665e25ec9b714a9fa452191a",
+      "translation": "For example, the first member of Square Shield has an X-coordinate of 0 and a Y-coordinate of 1.",
+      "contextHash": "29d12caf21ea935cbce793e1a9458a7948b4e399665e25ec9b714a9fa452191a"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "陣形の追加効果（Additional Effects）",
+      "sourceHash": "fd5e77f3e16bc6b683109a2f96cf0ef4e682f362d7aff7c7f458d528c0594eb9",
+      "translation": "Additional Formation Effects (Additional Effects)",
+      "contextHash": "fd5e77f3e16bc6b683109a2f96cf0ef4e682f362d7aff7c7f458d528c0594eb9"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "陣形の追加効果はステートによって作成します。",
+      "sourceHash": "e472408fb5c2c74bdcb7b12280168fa96e3c43691c142923b975e15febcd84e5",
+      "translation": "Formation additional effects are created using states.",
+      "contextHash": "e472408fb5c2c74bdcb7b12280168fa96e3c43691c142923b975e15febcd84e5"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "陣形の各アクターのポジションごとに適用するステートを指定し、ステートに追加効果の内容を設定します。",
+      "sourceHash": "4c25f79533f42355a16e42f6c4a76a94eb3c4f5a67ee1bce57dfc34358043b6f",
+      "translation": "Specify the state to apply for each actor position in the formation, and configure the additional effects for the state.",
+      "contextHash": "4c25f79533f42355a16e42f6c4a76a94eb3c4f5a67ee1bce57dfc34358043b6f"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "以下は設定例です。狙われ率や能力変化などを設定してください。",
+      "sourceHash": "e1ad4fac94c653ef0d2063bef2791ec997852cd393ea8878b17b2bcc439c1907",
+      "translation": "The following is an example configuration. Configure the likelihood of being targeted, parameter changes, and so on.",
+      "contextHash": "e1ad4fac94c653ef0d2063bef2791ec997852cd393ea8878b17b2bcc439c1907"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "※なお、初期状態では誰かが戦闘不能になっても効果が継続する仕様です。必要ならば、戦闘不能ステートに次の『陣形の無効化』を設定してください。",
+      "sourceHash": "13c487189755f6f2d0ad402281345a94e6ad992c05600f5f004d56045aa2bb6f",
+      "translation": "※By default, the effects continue even if someone becomes incapacitated in battle. If necessary, configure the following “Invalid Formation” setting for the incapacitated state.",
+      "contextHash": "13c487189755f6f2d0ad402281345a94e6ad992c05600f5f004d56045aa2bb6f"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "陣形の無効化（Invalid Formation）",
+      "sourceHash": "81eb97c495bc4144f1f672b2879ca8d63093b48e661d68ac34e0aa2b794f602a",
+      "translation": "Invalid Formation (Invalid Formation)",
+      "contextHash": "81eb97c495bc4144f1f672b2879ca8d63093b48e661d68ac34e0aa2b794f602a"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "陣形の追加効果を無効化するステートを作成できます。",
+      "sourceHash": "4c08d46d8fc607584fbbd3c37928da72c4acc36c3246d8c67795b525900b9204",
+      "translation": "You can create a state that disables the formation's additional effects.",
+      "contextHash": "4c08d46d8fc607584fbbd3c37928da72c4acc36c3246d8c67795b525900b9204"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "ステートのメモ欄に",
+      "sourceHash": "742e47ccfa149265af9f2367a385eafc914fc38e7ad76b373776e3c3bc679d6f",
+      "translation": "In the state's note field,",
+      "contextHash": "742e47ccfa149265af9f2367a385eafc914fc38e7ad76b373776e3c3bc679d6f"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "と記載すると、そのステートにかかったアクターが一人でもいる場合、陣形の追加効果が無効化されます。",
+      "sourceHash": "54849835d629dd8604287ed9bc85839865d3c49b9f7bd70b40fc9a721bac9a1d",
+      "translation": "if this is entered, the formation's additional effects are disabled whenever even one actor is affected by that state.",
+      "contextHash": "54849835d629dd8604287ed9bc85839865d3c49b9f7bd70b40fc9a721bac9a1d"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "陣形の習得（Acquire Formation）",
+      "sourceHash": "c057e212f1e2c62a31228b0fcc2ee3616e655b1a4cc9afe9e8e46b96e7757797",
+      "translation": "Acquire Formation (Acquire Formation)",
+      "contextHash": "c057e212f1e2c62a31228b0fcc2ee3616e655b1a4cc9afe9e8e46b96e7757797"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "陣形データの中で指定したスイッチがオンになっている陣形が有効になります。",
+      "sourceHash": "b2e7258a5ae9dd25b5c4ae7a47d30cb85d37c5b04bfa6c4e90630aef8e29efb3",
+      "translation": "A formation becomes available when the switch specified in its formation data is turned on.",
+      "contextHash": "b2e7258a5ae9dd25b5c4ae7a47d30cb85d37c5b04bfa6c4e90630aef8e29efb3"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "スイッチの指定がない場合は常に有効になります。",
+      "sourceHash": "b32b73ac9beecb17b4a28ebb10389591641ce12f5a52004570385357fe3a44b3",
+      "translation": "If no switch is specified, it is always available.",
+      "contextHash": "b32b73ac9beecb17b4a28ebb10389591641ce12f5a52004570385357fe3a44b3"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインコマンド（Plugin Commands）",
+      "sourceHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2",
+      "translation": "Plugin Commands (Plugin Commands)",
+      "contextHash": "4312cefd057cde28f1ea6e48d19e9eb70d06779bb725376f8d8032e94d05e4d2"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "陣形シーン開始（StartFormationScene）",
+      "sourceHash": "41ea3a43eccdd735a1b83e6b1b6c6d9968a28e7807e18956ce95f3c81ff501f5",
+      "translation": "Start Formation Scene (StartFormationScene)",
+      "contextHash": "41ea3a43eccdd735a1b83e6b1b6c6d9968a28e7807e18956ce95f3c81ff501f5"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "陣形シーンを開始します。",
+      "sourceHash": "fa6057872c27e507a22a855ba26c1348221ab77edc5f84b3c4f3dc243322b4ac",
+      "translation": "Starts the formation scene.",
+      "contextHash": "fa6057872c27e507a22a855ba26c1348221ab77edc5f84b3c4f3dc243322b4ac"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "メニュー画面以外からも呼び出したい場合に使用してください。",
+      "sourceHash": "ac12de064e28b8672d4252d9bede90ce9fe695e57620d4ef2b8d45332dd13eb5",
+      "translation": "Use this when you want to call it from somewhere other than the menu screen.",
+      "contextHash": "ac12de064e28b8672d4252d9bede90ce9fe695e57620d4ef2b8d45332dd13eb5"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "装備陣形変更（ChangeEquipFormations）",
+      "sourceHash": "25e811a18ac83a78e31576762658c26a834f832ff2bee01a81c75ebf5fea78cf",
+      "translation": "Change Equipped Formation (ChangeEquipFormations)",
+      "contextHash": "25e811a18ac83a78e31576762658c26a834f832ff2bee01a81c75ebf5fea78cf"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "現在の陣形を変更します。",
+      "sourceHash": "d0a99f3c9183f76aaf504266e88d4b484a9cbb7a364c98f570c304fbb51802b5",
+      "translation": "Changes the current formation.",
+      "contextHash": "d0a99f3c9183f76aaf504266e88d4b484a9cbb7a364c98f570c304fbb51802b5"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "0から開始する陣形のＩＤを指定してください。条件（パーティ人数／スイッチ）を満たしていない陣形を指定しても無効です。",
+      "sourceHash": "51e1d6fbf63de8d78a9cbd6c85f332efbff321c6459b5be47eb77312833ba8f8",
+      "translation": "Specify the formation ID, starting from 0. Specifying a formation whose conditions (party size/switch) are not met has no effect.",
+      "contextHash": "51e1d6fbf63de8d78a9cbd6c85f332efbff321c6459b5be47eb77312833ba8f8"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "陣形名の表示（Formation Name）",
+      "sourceHash": "0de2b14d027227a30196842f6f39494ae3f6c656dc54eaa27f7b71e29512c391",
+      "translation": "Display Formation Name (Formation Name)",
+      "contextHash": "0de2b14d027227a30196842f6f39494ae3f6c656dc54eaa27f7b71e29512c391"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "当プラグインにはメニュー画面に現在の陣形名を表示する機能はありません。",
+      "sourceHash": "f31aa41e3e2880b0d1436fd12131f4e35b244e0cde63bda6186dda38a19c8318",
+      "translation": "This plugin does not have a function to display the current formation name on the menu screen.",
+      "contextHash": "f31aa41e3e2880b0d1436fd12131f4e35b244e0cde63bda6186dda38a19c8318"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "もし表示したい場合は別途、メニュー画面をカスタマイズするプラグインを使用する必要があります。",
+      "sourceHash": "3c48e7e8b171d312a4cbbafb6650596829dbc714174029884d8cb873a44e5e63",
+      "translation": "If you want to display it, you must use a separate plugin that customizes the menu screen.",
+      "contextHash": "3c48e7e8b171d312a4cbbafb6650596829dbc714174029884d8cb873a44e5e63"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "※現在、当サイトで公開しているプラグインでは対応できません。",
+      "sourceHash": "3baab73bfb086115cb4bed007a356394920cdfabdbfc5b263a12213165aabc3f",
+      "translation": "※This is currently not supported by any of the plugins published on this site.",
+      "contextHash": "3baab73bfb086115cb4bed007a356394920cdfabdbfc5b263a12213165aabc3f"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "現在の陣形名は以下のスクリプトで取得できます。",
+      "sourceHash": "b43d41530850214f1e8460e966bfdfd0c517095c080666368577c22e8f780e8d",
+      "translation": "The current formation name can be obtained using the following script.",
+      "contextHash": "b43d41530850214f1e8460e966bfdfd0c517095c080666368577c22e8f780e8d"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "陣形データ（FormationDatas）",
+      "sourceHash": "c22549d831f4c817548e8a9f9b8c666eecb69a0207ac6d8da441de9ebbf8ba7c",
+      "translation": "Formation Data (FormationDatas)",
+      "contextHash": "c22549d831f4c817548e8a9f9b8c666eecb69a0207ac6d8da441de9ebbf8ba7c"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "陣形データを設定します。",
+      "sourceHash": "e3747a2a3c18c72f5316252341e25b50c092562a65cd802b022a31fc4cabf90c",
+      "translation": "Configure the formation data.",
+      "contextHash": "e3747a2a3c18c72f5316252341e25b50c092562a65cd802b022a31fc4cabf90c"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "陣形メニュー表示スイッチ（EnabledFormationMenuSwitchId）",
+      "sourceHash": "7fbc28a48fe03cbf6f78a9fa7b9f45f1eead4cd13d9fd538d6b22efe85a58977",
+      "translation": "Formation Menu Display Switch (EnabledFormationMenuSwitchId)",
+      "contextHash": "7fbc28a48fe03cbf6f78a9fa7b9f45f1eead4cd13d9fd538d6b22efe85a58977"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "陣形メニュー表示有無を切り替えるスイッチを指定します。",
+      "sourceHash": "bb214ad27b3b87de343d0fa65eb3838f1ac7937b8e66aa59b002e50bfe953cfa",
+      "translation": "Specify the switch that controls whether the formation menu is displayed.",
+      "contextHash": "bb214ad27b3b87de343d0fa65eb3838f1ac7937b8e66aa59b002e50bfe953cfa"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "陣形スロット変更SE（ChangeFormationSlotSe）",
+      "sourceHash": "5558763b9e07751000554590847ad06fb323e025bfca64a52e102e6832e9ad51",
+      "translation": "Formation Slot Change SE (ChangeFormationSlotSe)",
+      "contextHash": "5558763b9e07751000554590847ad06fb323e025bfca64a52e102e6832e9ad51"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "陣形のスロットを変更したときに再生するSEを指定します。",
+      "sourceHash": "da6cabab43afc049ac3b55fb602f5867f8a2a82f82eb640614c4d45e13befe32",
+      "translation": "Specify the SE to play when changing a formation slot.",
+      "contextHash": "da6cabab43afc049ac3b55fb602f5867f8a2a82f82eb640614c4d45e13befe32"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "使用陣形変更SE（ChangeCurrentFormationSe）",
+      "sourceHash": "7a7bd3cc93a5760d42b4494ad018149f74d06349a1b3170f375144aa3aea43e3",
+      "translation": "Current Formation Change SE (ChangeCurrentFormationSe)",
+      "contextHash": "7a7bd3cc93a5760d42b4494ad018149f74d06349a1b3170f375144aa3aea43e3"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "使用する陣形を変更したときに再生するSEを指定します。",
+      "sourceHash": "49d69c800d121e68c266255c11234e15c73fb05fe0f610e996740971d7fcb272",
+      "translation": "Specify the SE to play when changing the formation in use.",
+      "contextHash": "49d69c800d121e68c266255c11234e15c73fb05fe0f610e996740971d7fcb272"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "メニュー陣形X座標オフセット（MenuFormationXOfs）",
+      "sourceHash": "e64ed70e318cd01eac2876667146726ea514adf061c1b3c7a53c3fa7411182ea",
+      "translation": "Menu Formation X-Coordinate Offset (MenuFormationXOfs)",
+      "contextHash": "e64ed70e318cd01eac2876667146726ea514adf061c1b3c7a53c3fa7411182ea"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "メニューでの陣形の開始地点までのX座標オフセットを指定します。",
+      "sourceHash": "20c98ff5ff97f31fb363b95efd7e9ca69b4c6883fb16617327d6c8d1bb0bb564",
+      "translation": "Specify the X-coordinate offset to the formation's starting point in the menu.",
+      "contextHash": "20c98ff5ff97f31fb363b95efd7e9ca69b4c6883fb16617327d6c8d1bb0bb564"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "陣形の設定座標にこの値を足したものが実際に表示される座標となります。",
+      "sourceHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af",
+      "translation": "The displayed coordinate is the formation's configured coordinate plus this value.",
+      "contextHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "メニュー陣形Y座標オフセット（MenuFormationYOfs）",
+      "sourceHash": "90755e171a2cb67ce66dc1d99f27564fa80f7082cd1b9573061689f65c0f21b7",
+      "translation": "Menu Formation Y-Coordinate Offset (MenuFormationYOfs)",
+      "contextHash": "90755e171a2cb67ce66dc1d99f27564fa80f7082cd1b9573061689f65c0f21b7"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "メニューでの陣形の開始地点までのY座標オフセットを指定します。",
+      "sourceHash": "91f654ac668e873450a7cdffada577df28ef2e9ffd4826deb6c867a01433edad",
+      "translation": "Specify the Y-coordinate offset to the formation's starting point in the menu.",
+      "contextHash": "91f654ac668e873450a7cdffada577df28ef2e9ffd4826deb6c867a01433edad"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "陣形の設定座標にこの値を足したものが実際に表示される座標となります。",
+      "sourceHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af",
+      "translation": "The displayed coordinate is the formation's configured coordinate plus this value.",
+      "contextHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "戦闘陣形X座標オフセット（BattleFormationXOfs）",
+      "sourceHash": "d1c1eb745208c587a593cada759c32299c5857a36639937fd3ff40068e382c6e",
+      "translation": "Battle Formation X-Coordinate Offset (BattleFormationXOfs)",
+      "contextHash": "d1c1eb745208c587a593cada759c32299c5857a36639937fd3ff40068e382c6e"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "戦闘での陣形の開始地点までのX座標オフセットを指定します。",
+      "sourceHash": "79e4ac3241e51c9b683de7b4ebd7c345f0c03ba5157aa7871ead3fc577b88af7",
+      "translation": "Specify the X-coordinate offset to the formation's starting point in battle.",
+      "contextHash": "79e4ac3241e51c9b683de7b4ebd7c345f0c03ba5157aa7871ead3fc577b88af7"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "陣形の設定座標にこの値を足したものが実際に表示される座標となります。",
+      "sourceHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af",
+      "translation": "The displayed coordinate is the formation's configured coordinate plus this value.",
+      "contextHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "戦闘陣形Y座標オフセット（BattleFormationYOfs）",
+      "sourceHash": "695cf844f6d2f2fdc67d7913584953270b0c0b66acb720facae7aeaf413c0624",
+      "translation": "Battle Formation Y-Coordinate Offset (BattleFormationYOfs)",
+      "contextHash": "695cf844f6d2f2fdc67d7913584953270b0c0b66acb720facae7aeaf413c0624"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "戦闘での陣形の開始地点までのY座標オフセットを指定します。",
+      "sourceHash": "8da55fc7e4a4e6c9b4d5c698cbabb37b6e1b77807763ef744cfc58eb6950bb61",
+      "translation": "Specify the Y-coordinate offset to the formation's starting point in battle.",
+      "contextHash": "8da55fc7e4a4e6c9b4d5c698cbabb37b6e1b77807763ef744cfc58eb6950bb61"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "陣形の設定座標にこの値を足したものが実際に表示される座標となります。",
+      "sourceHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af",
+      "translation": "The displayed coordinate is the formation's configured coordinate plus this value.",
+      "contextHash": "5d73498cd8fe791f089bdf7d4f008fcd723e6d73fa4fa8458a9aed55f54048af"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "ウィンドウサイズ（WindowSize）",
+      "sourceHash": "de64a0e81cd1c71c8cc9cc341830440245bd111669c9744ebc86621d037fdfad",
+      "translation": "Window Size (WindowSize)",
+      "contextHash": "de64a0e81cd1c71c8cc9cc341830440245bd111669c9744ebc86621d037fdfad"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "各種ウィンドウのサイズを設定します。",
+      "sourceHash": "b03391e44dd4c17ab3149a536dc631988e9d4ae0b70688d0a581d581c8957e7c",
+      "translation": "Configure the sizes of the various windows.",
+      "contextHash": "b03391e44dd4c17ab3149a536dc631988e9d4ae0b70688d0a581d581c8957e7c"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "『現在陣形縦幅』『陣形リスト横幅』『ヘルプの行数』を変更可能です。",
+      "sourceHash": "144212c3f423bc63ccaf66184b0deb8f11952f7dd5621b2cf6c2177a5f24471b",
+      "translation": "You can change “Current Formation Height,” “Formation List Width,” and “Number of Help Lines.”",
+      "contextHash": "144212c3f423bc63ccaf66184b0deb8f11952f7dd5621b2cf6c2177a5f24471b"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "表示テキスト（Text）",
+      "sourceHash": "4f18ef63e687838374b13167f24fc3827f946c33f544fe27d219ccc58330201c",
+      "translation": "Display Text (Text)",
+      "contextHash": "4f18ef63e687838374b13167f24fc3827f946c33f544fe27d219ccc58330201c"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "ゲーム中で使用されるテキストを設定します。",
+      "sourceHash": "7128153cc23658efeb783400195ac2603d1bb9b2d96b8e310700ae9c3098b61d",
+      "translation": "Sets the text used in the game.",
+      "contextHash": "7128153cc23658efeb783400195ac2603d1bb9b2d96b8e310700ae9c3098b61d"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "『メニュー表示テキスト』『現在の陣形』『空スロット』のテキストを変更可能です。",
+      "sourceHash": "85a8c892daabef2abf6ede1db58dadb943837bf52633b7c76168ddb8191542a1",
+      "translation": "You can change the text for “Menu Display Text,” “Current Formation,” and “Empty Slot.”",
+      "contextHash": "85a8c892daabef2abf6ede1db58dadb943837bf52633b7c76168ddb8191542a1"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "グリッドサイズ（GridSize）",
+      "sourceHash": "01f0793b6c97af057c59578e55c74852cf202d52a14bb961deb5f4a795de1252",
+      "translation": "Grid Size (GridSize)",
+      "contextHash": "01f0793b6c97af057c59578e55c74852cf202d52a14bb961deb5f4a795de1252"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "陣形の配置に用いる座標のグリッドサイズです。",
+      "sourceHash": "d93c3e69c65e89c15f399cf4ac6ca6367747a7655c83a1d219eb0f5989d0f769",
+      "translation": "This is the grid size of the coordinates used to arrange the formation.",
+      "contextHash": "d93c3e69c65e89c15f399cf4ac6ca6367747a7655c83a1d219eb0f5989d0f769"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "標準では1=48ピクセルとして換算されます。",
+      "sourceHash": "e1a16fd67a051a4f353e9d2fb08dc3d90d051e07120ad3881d1b6593eeb93f7c",
+      "translation": "By default, 1 is converted as 48 pixels.",
+      "contextHash": "e1a16fd67a051a4f353e9d2fb08dc3d90d051e07120ad3881d1b6593eeb93f7c"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "コマンド挿入位置（CommandPosition）",
+      "sourceHash": "b8ca8ae2168318dcf016fb566fb25cb2706e72223e87106e3941c687f7690902",
+      "translation": "Command Insertion Position (CommandPosition)",
+      "contextHash": "b8ca8ae2168318dcf016fb566fb25cb2706e72223e87106e3941c687f7690902"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "陣形コマンドをメニューに挿入する位置です。",
+      "sourceHash": "1039be1ab5317187585232638ee6e63e095f46f3792109cad80899bebf9a424f",
+      "translation": "This is the position where the formation command is inserted into the menu.",
+      "contextHash": "1039be1ab5317187585232638ee6e63e095f46f3792109cad80899bebf9a424f"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "逃げる移動距離（EacapeDistance）",
+      "sourceHash": "354e4d92a623d2b82eaa2166f63a181e04608e80b63d435832249dbd8e2c37b1",
+      "translation": "Escape Movement Distance (EacapeDistance)",
+      "contextHash": "354e4d92a623d2b82eaa2166f63a181e04608e80b63d435832249dbd8e2c37b1"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "逃げるによって後退する距離です。",
+      "sourceHash": "c34822850f1d0c0d5f4eb0cb7780e162b77a03c4057471ccc0a285a213a6d86b",
+      "translation": "This is the distance retreated when escaping.",
+      "contextHash": "c34822850f1d0c0d5f4eb0cb7780e162b77a03c4057471ccc0a285a213a6d86b"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "ＭＺ標準の300では陣形の前側に配置したアクターが画面外に消えないことがあるため、調整ができます。",
+      "sourceHash": "cb3275f46e3602ee6b3b2f20da671b24b554f1c5be5906301b0f1259890c17af",
+      "translation": "With the MZ default of 300, actors placed at the front of the formation may not disappear off-screen, so this value can be adjusted.",
+      "contextHash": "cb3275f46e3602ee6b3b2f20da671b24b554f1c5be5906301b0f1259890c17af"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "陣形データのパラメータ（Formation Parameters）",
+      "sourceHash": "3ddeee3d461f5b5c8b9e902fa07476a330e1b9a29dea073c0a8877a0f29dba05",
+      "translation": "Formation Data Parameters (Formation Parameters)",
+      "contextHash": "3ddeee3d461f5b5c8b9e902fa07476a330e1b9a29dea073c0a8877a0f29dba05"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "陣形データの設定パラメータです。",
+      "sourceHash": "ca8f8498a87e284de334ac3beb029d45377121328bc0fea71dab25beb546af6d",
+      "translation": "These are the parameters for configuring formation data.",
+      "contextHash": "ca8f8498a87e284de334ac3beb029d45377121328bc0fea71dab25beb546af6d"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "陣形名（Name）",
+      "sourceHash": "866347702a4a7b0f08221a7a7378d8c3ecab61265c1cecae2c30882e95280dad",
+      "translation": "Formation Name (Name)",
+      "contextHash": "866347702a4a7b0f08221a7a7378d8c3ecab61265c1cecae2c30882e95280dad"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "陣形名を指定します。",
+      "sourceHash": "f18d406f103a02a03aaabe84a5c4d5d59f026e22dd1c94182571594e636e3fb6",
+      "translation": "Specifies the formation name.",
+      "contextHash": "f18d406f103a02a03aaabe84a5c4d5d59f026e22dd1c94182571594e636e3fb6"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "アイコン（IconIndex）",
+      "sourceHash": "74c48885dc3dfba9d984a68f70e7d014266c4183c1246eda569a403c5a78634f",
+      "translation": "Icon (IconIndex)",
+      "contextHash": "74c48885dc3dfba9d984a68f70e7d014266c4183c1246eda569a403c5a78634f"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "陣形のアイコンを指定します。",
+      "sourceHash": "b382ce468071742101c433c05dc64055357792a0150d54b11e38d8e72b0ff4e7",
+      "translation": "Specifies the formation icon.",
+      "contextHash": "b382ce468071742101c433c05dc64055357792a0150d54b11e38d8e72b0ff4e7"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "陣形の説明（Description）",
+      "sourceHash": "8ec03c30828edd496df8a4ac7f373a82cf4fc4fe9460fb6328dcb82f15236788",
+      "translation": "Formation Description (Description)",
+      "contextHash": "8ec03c30828edd496df8a4ac7f373a82cf4fc4fe9460fb6328dcb82f15236788"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "陣形の説明を指定します。",
+      "sourceHash": "b43655326bca944138201c22b7086f3cb1388be1310885c2ccd3b277f2662a43",
+      "translation": "Specifies the formation description.",
+      "contextHash": "b43655326bca944138201c22b7086f3cb1388be1310885c2ccd3b277f2662a43"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "なお、初期状態では２行しか表示されません。表示行数を増やすには『ウィンドウサイズ』の『ヘルプの行数』を変更してください。",
+      "sourceHash": "15533be39577a934c7c02f7dc4e336c4847c9c4f630930fdc9fd83ba22e9169d",
+      "translation": "By default, only two lines are displayed. To increase the number of displayed lines, change “Help Lines” under “Window Size.”",
+      "contextHash": "15533be39577a934c7c02f7dc4e336c4847c9c4f630930fdc9fd83ba22e9169d"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "例えば、以下では表示を５行に変更して、ポジション毎の効果を追加しています。",
+      "sourceHash": "d4fef6fcbeec812d666b82efbb96381cd01b41e7618b68d4d52d14ba997a6a57",
+      "translation": "For example, below, the display has been changed to five lines, and effects for each position have been added.",
+      "contextHash": "d4fef6fcbeec812d666b82efbb96381cd01b41e7618b68d4d52d14ba997a6a57"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "ポジション（Positions）",
+      "sourceHash": "918423aaa59314805f978a1dc43ac2595fec99ebbfcd1f4b655181416a3d691b",
+      "translation": "Positions (Positions)",
+      "contextHash": "918423aaa59314805f978a1dc43ac2595fec99ebbfcd1f4b655181416a3d691b"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "各アクターのポジション毎の設定を行います。",
+      "sourceHash": "5d53660136bb1e297d7dd7fd4d3d8f0f7af96ea091d14ef51d1ee7f4ec81189a",
+      "translation": "Configures the settings for each actor's position.",
+      "contextHash": "5d53660136bb1e297d7dd7fd4d3d8f0f7af96ea091d14ef51d1ee7f4ec81189a"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "Ｘ座標、Ｙ座標、ステートを設定可能です。",
+      "sourceHash": "c8d36cbed9ca8c10b2cf5571124055e27305a2eb2b555274d144e05eb1dc7df3",
+      "translation": "The X coordinate, Y coordinate, and states can be configured.",
+      "contextHash": "c8d36cbed9ca8c10b2cf5571124055e27305a2eb2b555274d144e05eb1dc7df3"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "マップID（MapId）",
+      "sourceHash": "df3cdfb104ae9d951e22d43b425f0a1fe091cbc79e15bde834e079b8dc740e6d",
+      "translation": "Map ID (MapId)",
+      "contextHash": "df3cdfb104ae9d951e22d43b425f0a1fe091cbc79e15bde834e079b8dc740e6d"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "ポジションを読み込むマップIDを指定します。",
+      "sourceHash": "c8d3872317ab98e3f9f04dc310b6dc5a838450d831ef6a4cbe246c4d26724c1b",
+      "translation": "Specifies the Map ID from which to load the positions.",
+      "contextHash": "c8d3872317ab98e3f9f04dc310b6dc5a838450d831ef6a4cbe246c4d26724c1b"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "人数（NumberOfMembers）",
+      "sourceHash": "f0529c034541b9e2415eac0eb855facf41c2f512de2bc0063ceac3dadb6fbd5d",
+      "translation": "Number of Members (NumberOfMembers)",
+      "contextHash": "f0529c034541b9e2415eac0eb855facf41c2f512de2bc0063ceac3dadb6fbd5d"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "陣形を有効にする人数です。",
+      "sourceHash": "0ab705dede244278c04fd5a1b859aa803047d8f72c502d0f14ac085e2b59248d",
+      "translation": "This is the number of members required to enable the formation.",
+      "contextHash": "0ab705dede244278c04fd5a1b859aa803047d8f72c502d0f14ac085e2b59248d"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "空欄の場合は常に有効となります。",
+      "sourceHash": "1bd91fe443001ade4168a9520b75cee8d6e5bda60e679346c8894012570924db",
+      "translation": "If left blank, it is always enabled.",
+      "contextHash": "1bd91fe443001ade4168a9520b75cee8d6e5bda60e679346c8894012570924db"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "陣形を有効にするスイッチです。",
+      "sourceHash": "bffa777a84a871a03c6df04c72b4301303fb2443704a61eb76fab9257f47d061",
+      "translation": "This is the switch that enables the formation.",
+      "contextHash": "bffa777a84a871a03c6df04c72b4301303fb2443704a61eb76fab9257f47d061"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "空欄の場合は人数さえ満たしていれば、常に有効となります。",
+      "sourceHash": "0d01a81de4b791f1b3453f627bbc9bae1fcdb4b0a891b967d800cc32fc5df3ce",
+      "translation": "If left blank, it is always enabled as long as the required number of members is met.",
+      "contextHash": "0d01a81de4b791f1b3453f627bbc9bae1fcdb4b0a891b967d800cc32fc5df3ce"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]陣形の作成（Create Formation）[[/LINK_1]]",
+      "sourceHash": "46348189037b2d440230bbca754cea8020edd942c159fc87b08fc2c82b0dfb0b",
+      "parts": [
+        {
+          "source": "陣形の作成（Create Formation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Create Formations (Create Formation)[[/LINK_1]]",
+      "contextHash": "46348189037b2d440230bbca754cea8020edd942c159fc87b08fc2c82b0dfb0b"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]陣形のサンプル（Sample Formations）[[/LINK_1]]",
+      "sourceHash": "5d6ee67955b3740fb9bc4d36f8f3eea83c8c63cc294c180033991651173322b1",
+      "parts": [
+        {
+          "source": "陣形のサンプル（Sample Formations）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sample Formations (Sample Formations)[[/LINK_1]]",
+      "contextHash": "5d6ee67955b3740fb9bc4d36f8f3eea83c8c63cc294c180033991651173322b1"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]陣形の追加効果（Additional Effects）[[/LINK_1]]",
+      "sourceHash": "73685f219fbefd98cf0b9a1d6e70a51bd5933f60d027c29d015324260bb3ed81",
+      "parts": [
+        {
+          "source": "陣形の追加効果（Additional Effects）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additional Formation Effects (Additional Effects)[[/LINK_1]]",
+      "contextHash": "73685f219fbefd98cf0b9a1d6e70a51bd5933f60d027c29d015324260bb3ed81"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]陣形の無効化（Invalid Formation）[[/LINK_1]]",
+      "sourceHash": "0d8315d67f54c6fe2e6d44c2f2487160c2cd1e556ff2ff4ff542a6a2dff08bd4",
+      "parts": [
+        {
+          "source": "陣形の無効化（Invalid Formation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Disable Formations (Invalid Formation)[[/LINK_1]]",
+      "contextHash": "0d8315d67f54c6fe2e6d44c2f2487160c2cd1e556ff2ff4ff542a6a2dff08bd4"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]陣形の習得（Acquire Formation）[[/LINK_1]]",
+      "sourceHash": "d5cea3041d5a312858c79fcb1b46873f92c83a17a09356c0d10f6e7715835fe1",
+      "parts": [
+        {
+          "source": "陣形の習得（Acquire Formation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Acquire Formations (Acquire Formation)[[/LINK_1]]",
+      "contextHash": "d5cea3041d5a312858c79fcb1b46873f92c83a17a09356c0d10f6e7715835fe1"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド（Plugin Commands）[[/LINK_1]]",
+      "sourceHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174",
+      "parts": [
+        {
+          "source": "プラグインコマンド（Plugin Commands）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands (Plugin Commands)[[/LINK_1]]",
+      "contextHash": "991177a9af10cb5021e195ba69e6d5ef2d0565f3c9ed84b0252b09a045ac9174"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]陣形シーン開始（StartFormationScene）[[/LINK_1]]",
+      "sourceHash": "e14e4eed01ebd909cd8f05e4ada622d178002605b918a62aaf7604bece5428ed",
+      "parts": [
+        {
+          "source": "陣形シーン開始（StartFormationScene）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Formation Scene (StartFormationScene)[[/LINK_1]]",
+      "contextHash": "e14e4eed01ebd909cd8f05e4ada622d178002605b918a62aaf7604bece5428ed"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]装備陣形変更（ChangeEquipFormations）[[/LINK_1]]",
+      "sourceHash": "f337537dfc5e2a52868d423ecc2b43c087a7986bb06efecda56af42404629cc4",
+      "parts": [
+        {
+          "source": "装備陣形変更（ChangeEquipFormations）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Change Equipped Formations (ChangeEquipFormations)[[/LINK_1]]",
+      "contextHash": "f337537dfc5e2a52868d423ecc2b43c087a7986bb06efecda56af42404629cc4"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]陣形名の表示（Formation Name）[[/LINK_1]]",
+      "sourceHash": "701309a4fa6e1e27b34fe0853efce8c82e2958817ed834aa77b92fec51c64bbc",
+      "parts": [
+        {
+          "source": "陣形名の表示（Formation Name）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Formation Name (Formation Name)[[/LINK_1]]",
+      "contextHash": "701309a4fa6e1e27b34fe0853efce8c82e2958817ed834aa77b92fec51c64bbc"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]陣形データ（FormationDatas）[[/LINK_1]]",
+      "sourceHash": "e7a535dada80351f9487a1834ac625be406fdd7fd079aab9e0aa79ccf1ff43ca",
+      "parts": [
+        {
+          "source": "陣形データ（FormationDatas）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formation Data (FormationDatas)[[/LINK_1]]",
+      "contextHash": "e7a535dada80351f9487a1834ac625be406fdd7fd079aab9e0aa79ccf1ff43ca"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]陣形メニュー表示スイッチ（EnabledFormationMenuSwitchId）[[/LINK_1]]",
+      "sourceHash": "a18e9678d545f7b6a5cf5201fb37d16d4a26a9031daf1cec4ce206d2e471fa07",
+      "parts": [
+        {
+          "source": "陣形メニュー表示スイッチ（EnabledFormationMenuSwitchId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formation Menu Display Switch (EnabledFormationMenuSwitchId)[[/LINK_1]]",
+      "contextHash": "a18e9678d545f7b6a5cf5201fb37d16d4a26a9031daf1cec4ce206d2e471fa07"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]陣形スロット変更SE（ChangeFormationSlotSe）[[/LINK_1]]",
+      "sourceHash": "573e68d597adf885b568f8f96fce05327fe67e13702d12f3794b51e47b29bd59",
+      "parts": [
+        {
+          "source": "陣形スロット変更SE（ChangeFormationSlotSe）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formation Slot Change SE (ChangeFormationSlotSe)[[/LINK_1]]",
+      "contextHash": "573e68d597adf885b568f8f96fce05327fe67e13702d12f3794b51e47b29bd59"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]使用陣形変更SE（ChangeCurrentFormationSe）[[/LINK_1]]",
+      "sourceHash": "1027b18b76426aac31ec8dd069e0242757f7b61ab95f11d25833da1e7f1d9e37",
+      "parts": [
+        {
+          "source": "使用陣形変更SE（ChangeCurrentFormationSe）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Current Formation Change SE (ChangeCurrentFormationSe)[[/LINK_1]]",
+      "contextHash": "1027b18b76426aac31ec8dd069e0242757f7b61ab95f11d25833da1e7f1d9e37"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]メニュー陣形X座標オフセット（MenuFormationXOfs）[[/LINK_1]]",
+      "sourceHash": "422fe26a747b1823d760aeea8d7846a3bc233e4f41f01d1d7ebac903b8a58c83",
+      "parts": [
+        {
+          "source": "メニュー陣形X座標オフセット（MenuFormationXOfs）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Formation X-Coordinate Offset (MenuFormationXOfs)[[/LINK_1]]",
+      "contextHash": "422fe26a747b1823d760aeea8d7846a3bc233e4f41f01d1d7ebac903b8a58c83"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]メニュー陣形Y座標オフセット（MenuFormationYOfs）[[/LINK_1]]",
+      "sourceHash": "bb020bfc741e2ef1ff679ec134d33ea55f4370e055ab0ea95dab9e8e53f8481f",
+      "parts": [
+        {
+          "source": "メニュー陣形Y座標オフセット（MenuFormationYOfs）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Formation Y-Coordinate Offset (MenuFormationYOfs)[[/LINK_1]]",
+      "contextHash": "bb020bfc741e2ef1ff679ec134d33ea55f4370e055ab0ea95dab9e8e53f8481f"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘陣形X座標オフセット（BattleFormationXOfs）[[/LINK_1]]",
+      "sourceHash": "c2a91bd15cd9e7dc56de9d6bc331a7c4b82ec20e3dd04a1c7cbae4611a79c430",
+      "parts": [
+        {
+          "source": "戦闘陣形X座標オフセット（BattleFormationXOfs）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Formation X-Coordinate Offset (BattleFormationXOfs)[[/LINK_1]]",
+      "contextHash": "c2a91bd15cd9e7dc56de9d6bc331a7c4b82ec20e3dd04a1c7cbae4611a79c430"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘陣形Y座標オフセット（BattleFormationYOfs）[[/LINK_1]]",
+      "sourceHash": "fc73b19a349bde59fcd260f67dec0cf4ee56941321b1f5add49c03a010fa21ee",
+      "parts": [
+        {
+          "source": "戦闘陣形Y座標オフセット（BattleFormationYOfs）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Formation Y-Coordinate Offset (BattleFormationYOfs)[[/LINK_1]]",
+      "contextHash": "fc73b19a349bde59fcd260f67dec0cf4ee56941321b1f5add49c03a010fa21ee"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]ウィンドウサイズ（WindowSize）[[/LINK_1]]",
+      "sourceHash": "2e1b42ac0e486ff410c7d64a31332241183b18e04c6757b6eaa702acbdfc6f18",
+      "parts": [
+        {
+          "source": "ウィンドウサイズ（WindowSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Window Size (WindowSize)[[/LINK_1]]",
+      "contextHash": "2e1b42ac0e486ff410c7d64a31332241183b18e04c6757b6eaa702acbdfc6f18"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]シフトボタン（ShiftButton）[[/LINK_1]]",
+      "sourceHash": "2c22c59b897c968c6f754c6e3514c7ce031cdc8a0d021814cbe40ae7ab7e02fa",
+      "parts": [
+        {
+          "source": "シフトボタン（ShiftButton）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Shift Button (ShiftButton)[[/LINK_1]]",
+      "contextHash": "2c22c59b897c968c6f754c6e3514c7ce031cdc8a0d021814cbe40ae7ab7e02fa"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]表示テキスト（Text）[[/LINK_1]]",
+      "sourceHash": "140fbde99544953223dc0f77181ded987bdf7c3ea2de20845f79eeb51c6c4ed0",
+      "parts": [
+        {
+          "source": "表示テキスト（Text）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Text (Text)[[/LINK_1]]",
+      "contextHash": "140fbde99544953223dc0f77181ded987bdf7c3ea2de20845f79eeb51c6c4ed0"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]グリッドサイズ（GridSize）[[/LINK_1]]",
+      "sourceHash": "da6090dbba64797ce965119f1cebe26733cb0291467824461fe2bd465d2d1598",
+      "parts": [
+        {
+          "source": "グリッドサイズ（GridSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Grid Size (GridSize)[[/LINK_1]]",
+      "contextHash": "da6090dbba64797ce965119f1cebe26733cb0291467824461fe2bd465d2d1598"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]コマンド挿入位置（CommandPosition）[[/LINK_1]]",
+      "sourceHash": "d740b2a955e659b3d5c6c032183f9976e13a413ee84d9d8452c4f74836e24242",
+      "parts": [
+        {
+          "source": "コマンド挿入位置（CommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Command Insertion Position (CommandPosition)[[/LINK_1]]",
+      "contextHash": "d740b2a955e659b3d5c6c032183f9976e13a413ee84d9d8452c4f74836e24242"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]逃げる移動距離（EacapeDistance）[[/LINK_1]]",
+      "sourceHash": "6800fac130d459098ede484b97c13ccd6c890763793894d65213484e11d657bb",
+      "parts": [
+        {
+          "source": "逃げる移動距離（EacapeDistance）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Escape Distance (EacapeDistance)[[/LINK_1]]",
+      "contextHash": "6800fac130d459098ede484b97c13ccd6c890763793894d65213484e11d657bb"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]陣形データのパラメータ（Formation Parameters）[[/LINK_1]]",
+      "sourceHash": "84faac4c5c2544ac7f58617545a33d851c5c61b50a2995e87108ac95a08b37eb",
+      "parts": [
+        {
+          "source": "陣形データのパラメータ（Formation Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formation Data Parameters (Formation Parameters)[[/LINK_1]]",
+      "contextHash": "84faac4c5c2544ac7f58617545a33d851c5c61b50a2995e87108ac95a08b37eb"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]陣形名（Name）[[/LINK_1]]",
+      "sourceHash": "911d325b0f23c98ba9d759725730785e98b3fc626b1c05257a4e62a83088c243",
+      "parts": [
+        {
+          "source": "陣形名（Name）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formation Name (Name)[[/LINK_1]]",
+      "contextHash": "911d325b0f23c98ba9d759725730785e98b3fc626b1c05257a4e62a83088c243"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]アイコン（IconIndex）[[/LINK_1]]",
+      "sourceHash": "52cbbeaef29486f424c37b06bff6dc97b9359f57bbdbecc97e52382c8328b286",
+      "parts": [
+        {
+          "source": "アイコン（IconIndex）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Icon (IconIndex)[[/LINK_1]]",
+      "contextHash": "52cbbeaef29486f424c37b06bff6dc97b9359f57bbdbecc97e52382c8328b286"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]陣形の説明（Description）[[/LINK_1]]",
+      "sourceHash": "e5a47a394bec3f6a7869b529554e3cba8033e1c9c90dde8f24a32f9ffcc0a5a5",
+      "parts": [
+        {
+          "source": "陣形の説明（Description）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Formation Description (Description)[[/LINK_1]]",
+      "contextHash": "e5a47a394bec3f6a7869b529554e3cba8033e1c9c90dde8f24a32f9ffcc0a5a5"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]ポジション（Positions）[[/LINK_1]]",
+      "sourceHash": "8de48d4711c55f45bdaae9ff3b42fb23b509237a43f101f7c4627da19e09160b",
+      "parts": [
+        {
+          "source": "ポジション（Positions）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Positions (Positions)[[/LINK_1]]",
+      "contextHash": "8de48d4711c55f45bdaae9ff3b42fb23b509237a43f101f7c4627da19e09160b"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]マップID（MapId）[[/LINK_1]]",
+      "sourceHash": "2b953765233a1339d9df2185ee09607404bccf27963e4aa584a626c6619f64d2",
+      "parts": [
+        {
+          "source": "マップID（MapId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Map ID (MapId)[[/LINK_1]]",
+      "contextHash": "2b953765233a1339d9df2185ee09607404bccf27963e4aa584a626c6619f64d2"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]人数（NumberOfMembers）[[/LINK_1]]",
+      "sourceHash": "58117f940bc89f662dbbd341b47429929374b15a95fd3e285947b7bed749702f",
+      "parts": [
+        {
+          "source": "人数（NumberOfMembers）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Members (NumberOfMembers)[[/LINK_1]]",
+      "contextHash": "58117f940bc89f662dbbd341b47429929374b15a95fd3e285947b7bed749702f"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]スイッチ（Switch）[[/LINK_1]]",
+      "sourceHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056",
+      "parts": [
+        {
+          "source": "スイッチ（Switch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch (Switch)[[/LINK_1]]",
+      "contextHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "詳細は[[LINK_1]]陣形データのパラメータ[[/LINK_1]]をご覧ください。",
+      "sourceHash": "f4b81504caa3c6da3ceb0040d50436f7346a38c5f87ccab1bc3f7f9f562be973",
+      "parts": [
+        {
+          "source": "詳細は",
+          "link": false
+        },
+        {
+          "source": "陣形データのパラメータ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をご覧ください。",
+          "link": false
+        }
+      ],
+      "translation": "For details, please see [[LINK_1]]Formation Data Parameters[[/LINK_1]].",
+      "contextHash": "f4b81504caa3c6da3ceb0040d50436f7346a38c5f87ccab1bc3f7f9f562be973"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "※座標で設定した値にはグリッドサイズが乗算されます。実際に戦闘や陣形画面で表示される座標には、さらに[[LINK_1]]座標オフセット[[/LINK_1]]が加算されます。",
+      "sourceHash": "66769868f62fa433f1332c817b993613a07050990de4f9eb125b482517a61d98",
+      "parts": [
+        {
+          "source": "※座標で設定した値にはグリッドサイズが乗算されます。実際に戦闘や陣形画面で表示される座標には、さらに",
+          "link": false
+        },
+        {
+          "source": "座標オフセット",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が加算されます。",
+          "link": false
+        }
+      ],
+      "translation": "※The values set for the coordinates are multiplied by the grid size. The [[LINK_1]]coordinate offset[[/LINK_1]] is then added to the coordinates actually displayed in battle and on the formation screen.",
+      "contextHash": "66769868f62fa433f1332c817b993613a07050990de4f9eb125b482517a61d98"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ロマサガ２～３っぽい陣形システムを実現します。": "Implements a Romancing SaGa 2–3-style formation system.",
+    "このプラグインはうなぎおおとろ様の陣形システムプラグイン（v1.2.0）を砂川赳がＭＩＴライセンスに則って改造したものです。ロマサガ２～３っぽくするため、仕様の簡略化を始めとした変更を加えています。": "This plugin is a modified version of Unagi-Otoro's Formation System plugin (v1.2.0), modified by Takeshi Sunagawa in accordance with the MIT License. Changes including simplified specifications have been made to give it a more Romancing SaGa 2–3-like feel.",
+    "https://raw.githubusercontent.com/unagiootoro/RPGMZ/master/FormationSystem.js": "https://raw.githubusercontent.com/unagiootoro/RPGMZ/master/FormationSystem.js",
+    "※機能を削っているので単純な上位互換ではありません。場合によっては元のプラグインを使用したほうが有用です。": "※Since some features have been removed, this is not simply an upper-compatible version. Depending on the situation, it may be more useful to use the original plugin.",
+    "メニュー画面から「陣形」を開くことで、陣形を選択できるようになります。": "You can select a formation by opening “Formation” from the menu screen.",
+    "戦闘中のアクターの並びが変化すると共に様々な効果が発揮されます。": "Various effects take effect as the arrangement of actors in battle changes.",
+    "なお、効果はステートを付加することによって実現します。": "The effects are implemented by adding states.",
+    "主な変更点": "Main Changes",
+    "装備できる陣形を一つに限定。": "Limited the number of formations that can be equipped to one.",
+    "単純に装備した陣形＝現在の陣形とした。": "The equipped formation is simply treated as the current formation.",
+    "※それに伴い、戦闘中の陣形変更機能は廃止しました。": "※Accordingly, the ability to change formations during battle has been removed.",
+    "陣形の習得機能を廃止し、デフォルトで全て選択できるようにした。": "Removed the formation acquisition feature, allowing all formations to be selected by default.",
+    "その上で、必要なものはスイッチを有効条件とするように変更。": "Formation requirements can instead be set to require switches to be enabled.",
+    "パーティ人数を陣形の有効条件にできるようにした。": "Party size can now be used as a formation requirement.",
+    "陣形画面で位置の入替をできるようにした。": "Positions can now be swapped on the formation screen.",
+    "一覧の横幅やヘルプ欄の縦幅を可変にした。": "The width of the list and the height of the help window can now be adjusted.",
+    "陣形の座標指定をグリッド単位（48ピクセル）にした。": "Formation coordinates are specified in grid units (48 pixels).",
+    "例えば、x=10なら480となります。": "For example, x=10 results in 480.",
+    "『メニュー陣形座標オフセット』をパラメータに追加した。": "Added “Menu Formation Coordinate Offset” as a parameter.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "※改変元に従い、規約はＭＩＴライセンスとなります。": "※In accordance with the original plugin, it is distributed under the MIT License.",
+    "NRP_U_FormationSystem.js": "NRP_U_FormationSystem.js ",
+    "ver1.00（2025/06/19）": "ver1.00 (2025/06/19) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/06/19（ver1.00）": "2025/06/19 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "※改造した点に合わせて原文から内容を変更しています。": "※The content has been changed from the original to reflect the modifications.",
+    "陣形の作成（Create Formation）": "Creating Formations (Create Formation)",
+    "プラグインパラメータの「陣形データ」を編集して、陣形を作成します。": "Create formations by editing “Formation Data” in the plugin parameters.",
+    "各アクターのポジションの設定には、次の二つの方法があります。": "There are two ways to set each actor's position.",
+    "数式で座標を入力する": "Entering Coordinates Using Formulas",
+    "Ｘ座標とＹ座標を指定する方法です。座標には数式を使うことができます。": "This method specifies the X and Y coordinates. Formulas can be used for the coordinates.",
+    "また、数式内でindexというワードを使用すると、該当するアクターが先頭から何番目かを表す数値に置き換えられます。(先頭から0, 1, 2...という値になります)": "Additionally, using the word index in a formula replaces it with a number indicating the position of the relevant actor from the front. (The values are 0, 1, 2... from the front.)",
+    "この値にグリッドサイズを乗算して、オフセットを加算した値が実際の配置座標になります。": "The actual placement coordinate is obtained by multiplying this value by the grid size and adding the offset.",
+    "この方法を使用する場合、プラグインパラメータのマップIDには0（または空欄）を指定してください。": "When using this method, specify 0 (or leave it blank) for the Map ID in the plugin parameters.",
+    "マップから座標を読み込む": "Loading Coordinates from a Map",
+    "マップに配置されたイベントを各アクターのポジションと見立てる方法です。": "This method treats events placed on a map as the positions of the actors.",
+    "対象のマップにイベントを作成し、メモ欄に該当するアクターの先頭からの順番を記載します。": "Create events on the target map and enter the corresponding actor's order from the front in the note field.",
+    "（例）先頭のアクターのポジションを設定する場合": "(Example) When setting the position of the actor at the front",
+    "イベントを作成し、メモ欄に『0』と記載します。": "Create an event and enter “0” in the note field.",
+    "作成した陣形は、プラグインパラメータの登録順に(0, 1, 2, ...)という形でIDが振られます。条件を満たしている中で最もIDの小さいものがデフォルトの陣形として使用されます。": "Created formations are assigned IDs in the order they are registered in the plugin parameters, in the form (0, 1, 2, ...). Among the formations whose conditions are met, the one with the lowest ID is used as the default formation.",
+    "陣形のポジションは戦闘に参加するアクターの数だけ用意する必要があります。": "You need to prepare as many formation positions as there are actors participating in battle.",
+    "例えば４人を戦闘に参加させる場合、４人分のポジションの登録が必要となります。": "For example, if four actors are participating in battle, you must register positions for all four.",
+    "陣形のサンプル（Sample Formations）": "Formation Samples (Sample Formations)",
+    "「陣形データ」にサンプルを設定しているので参考にしてください。": "Samples are configured in “Formation Data” for your reference.",
+    "※『数式で座標を入力する』方法を想定しています。": "※This assumes the “Entering Coordinates Using Formulas” method.",
+    "スタンダード（１）～（４）はパーティ人数毎に設定した初期陣形です。": "Standard (1)–(4) are initial formations configured for each party size.",
+    "スタンダード（自動）はパーティ人数によって配置が自動調整される陣形です。": "Standard (Automatic) is a formation whose arrangement is automatically adjusted according to the party size.",
+    "どちらか好きな方法を選んでください。": "Choose whichever method you prefer.",
+    "また、座標に関しては以下のような表を作って設定すると便利です。": "Also, for coordinates, it is convenient to create and configure a table like the following.",
+    "20250619_FormationSample.xlsx": "20250619_FormationSample.xlsx",
+    "例えば、スクウェアシールドの１人目はＸ座標＝０、Ｙ座標＝１になります。": "For example, the first member of Square Shield has an X-coordinate of 0 and a Y-coordinate of 1.",
+    "陣形の追加効果（Additional Effects）": "Additional Formation Effects (Additional Effects)",
+    "陣形の追加効果はステートによって作成します。": "Formation additional effects are created using states.",
+    "陣形の各アクターのポジションごとに適用するステートを指定し、ステートに追加効果の内容を設定します。": "Specify the state to apply for each actor position in the formation, and configure the additional effects for the state.",
+    "以下は設定例です。狙われ率や能力変化などを設定してください。": "The following is an example configuration. Configure the likelihood of being targeted, parameter changes, and so on.",
+    "※なお、初期状態では誰かが戦闘不能になっても効果が継続する仕様です。必要ならば、戦闘不能ステートに次の『陣形の無効化』を設定してください。": "※By default, the effects continue even if someone becomes incapacitated in battle. If necessary, configure the following “Invalid Formation” setting for the incapacitated state.",
+    "陣形の無効化（Invalid Formation）": "Invalid Formation (Invalid Formation)",
+    "陣形の追加効果を無効化するステートを作成できます。": "You can create a state that disables the formation's additional effects.",
+    "ステートのメモ欄に": "In the state's note field,",
+    "と記載すると、そのステートにかかったアクターが一人でもいる場合、陣形の追加効果が無効化されます。": "if this is entered, the formation's additional effects are disabled whenever even one actor is affected by that state.",
+    "陣形の習得（Acquire Formation）": "Acquire Formation (Acquire Formation)",
+    "陣形データの中で指定したスイッチがオンになっている陣形が有効になります。": "A formation becomes available when the switch specified in its formation data is turned on.",
+    "スイッチの指定がない場合は常に有効になります。": "If no switch is specified, it is always available.",
+    "プラグインコマンド（Plugin Commands）": "Plugin Commands (Plugin Commands)",
+    "陣形シーン開始（StartFormationScene）": "Start Formation Scene (StartFormationScene)",
+    "陣形シーンを開始します。": "Starts the formation scene.",
+    "メニュー画面以外からも呼び出したい場合に使用してください。": "Use this when you want to call it from somewhere other than the menu screen.",
+    "装備陣形変更（ChangeEquipFormations）": "Change Equipped Formation (ChangeEquipFormations)",
+    "現在の陣形を変更します。": "Changes the current formation.",
+    "0から開始する陣形のＩＤを指定してください。条件（パーティ人数／スイッチ）を満たしていない陣形を指定しても無効です。": "Specify the formation ID, starting from 0. Specifying a formation whose conditions (party size/switch) are not met has no effect.",
+    "陣形名の表示（Formation Name）": "Display Formation Name (Formation Name)",
+    "当プラグインにはメニュー画面に現在の陣形名を表示する機能はありません。": "This plugin does not have a function to display the current formation name on the menu screen.",
+    "もし表示したい場合は別途、メニュー画面をカスタマイズするプラグインを使用する必要があります。": "If you want to display it, you must use a separate plugin that customizes the menu screen.",
+    "※現在、当サイトで公開しているプラグインでは対応できません。": "※This is currently not supported by any of the plugins published on this site.",
+    "現在の陣形名は以下のスクリプトで取得できます。": "The current formation name can be obtained using the following script.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "陣形データ（FormationDatas）": "Formation Data (FormationDatas)",
+    "陣形データを設定します。": "Configure the formation data.",
+    "陣形メニュー表示スイッチ（EnabledFormationMenuSwitchId）": "Formation Menu Display Switch (EnabledFormationMenuSwitchId)",
+    "陣形メニュー表示有無を切り替えるスイッチを指定します。": "Specify the switch that controls whether the formation menu is displayed.",
+    "陣形スロット変更SE（ChangeFormationSlotSe）": "Formation Slot Change SE (ChangeFormationSlotSe)",
+    "陣形のスロットを変更したときに再生するSEを指定します。": "Specify the SE to play when changing a formation slot.",
+    "使用陣形変更SE（ChangeCurrentFormationSe）": "Current Formation Change SE (ChangeCurrentFormationSe)",
+    "使用する陣形を変更したときに再生するSEを指定します。": "Specify the SE to play when changing the formation in use.",
+    "メニュー陣形X座標オフセット（MenuFormationXOfs）": "Menu Formation X-Coordinate Offset (MenuFormationXOfs)",
+    "メニューでの陣形の開始地点までのX座標オフセットを指定します。": "Specify the X-coordinate offset to the formation's starting point in the menu.",
+    "陣形の設定座標にこの値を足したものが実際に表示される座標となります。": "The displayed coordinate is the formation's configured coordinate plus this value.",
+    "メニュー陣形Y座標オフセット（MenuFormationYOfs）": "Menu Formation Y-Coordinate Offset (MenuFormationYOfs)",
+    "メニューでの陣形の開始地点までのY座標オフセットを指定します。": "Specify the Y-coordinate offset to the formation's starting point in the menu.",
+    "戦闘陣形X座標オフセット（BattleFormationXOfs）": "Battle Formation X-Coordinate Offset (BattleFormationXOfs)",
+    "戦闘での陣形の開始地点までのX座標オフセットを指定します。": "Specify the X-coordinate offset to the formation's starting point in battle.",
+    "戦闘陣形Y座標オフセット（BattleFormationYOfs）": "Battle Formation Y-Coordinate Offset (BattleFormationYOfs)",
+    "戦闘での陣形の開始地点までのY座標オフセットを指定します。": "Specify the Y-coordinate offset to the formation's starting point in battle.",
+    "ウィンドウサイズ（WindowSize）": "Window Size (WindowSize)",
+    "各種ウィンドウのサイズを設定します。": "Configure the sizes of the various windows.",
+    "『現在陣形縦幅』『陣形リスト横幅』『ヘルプの行数』を変更可能です。": "You can change “Current Formation Height,” “Formation List Width,” and “Number of Help Lines.”",
+    "表示テキスト（Text）": "Display Text (Text)",
+    "ゲーム中で使用されるテキストを設定します。": "Sets the text used in the game.",
+    "『メニュー表示テキスト』『現在の陣形』『空スロット』のテキストを変更可能です。": "You can change the text for “Menu Display Text,” “Current Formation,” and “Empty Slot.”",
+    "グリッドサイズ（GridSize）": "Grid Size (GridSize)",
+    "陣形の配置に用いる座標のグリッドサイズです。": "This is the grid size of the coordinates used to arrange the formation.",
+    "標準では1=48ピクセルとして換算されます。": "By default, 1 is converted as 48 pixels.",
+    "コマンド挿入位置（CommandPosition）": "Command Insertion Position (CommandPosition)",
+    "陣形コマンドをメニューに挿入する位置です。": "This is the position where the formation command is inserted into the menu.",
+    "逃げる移動距離（EacapeDistance）": "Escape Movement Distance (EacapeDistance)",
+    "逃げるによって後退する距離です。": "This is the distance retreated when escaping.",
+    "ＭＺ標準の300では陣形の前側に配置したアクターが画面外に消えないことがあるため、調整ができます。": "With the MZ default of 300, actors placed at the front of the formation may not disappear off-screen, so this value can be adjusted.",
+    "陣形データのパラメータ（Formation Parameters）": "Formation Data Parameters (Formation Parameters)",
+    "陣形データの設定パラメータです。": "These are the parameters for configuring formation data.",
+    "陣形名（Name）": "Formation Name (Name)",
+    "陣形名を指定します。": "Specifies the formation name.",
+    "アイコン（IconIndex）": "Icon (IconIndex)",
+    "陣形のアイコンを指定します。": "Specifies the formation icon.",
+    "陣形の説明（Description）": "Formation Description (Description)",
+    "陣形の説明を指定します。": "Specifies the formation description.",
+    "なお、初期状態では２行しか表示されません。表示行数を増やすには『ウィンドウサイズ』の『ヘルプの行数』を変更してください。": "By default, only two lines are displayed. To increase the number of displayed lines, change “Help Lines” under “Window Size.”",
+    "例えば、以下では表示を５行に変更して、ポジション毎の効果を追加しています。": "For example, below, the display has been changed to five lines, and effects for each position have been added.",
+    "ポジション（Positions）": "Positions (Positions)",
+    "各アクターのポジション毎の設定を行います。": "Configures the settings for each actor's position.",
+    "Ｘ座標、Ｙ座標、ステートを設定可能です。": "The X coordinate, Y coordinate, and states can be configured.",
+    "マップID（MapId）": "Map ID (MapId)",
+    "ポジションを読み込むマップIDを指定します。": "Specifies the Map ID from which to load the positions.",
+    "人数（NumberOfMembers）": "Number of Members (NumberOfMembers)",
+    "陣形を有効にする人数です。": "This is the number of members required to enable the formation.",
+    "空欄の場合は常に有効となります。": "If left blank, it is always enabled.",
+    "スイッチ（Switch）": "Switch (Switch)",
+    "陣形を有効にするスイッチです。": "This is the switch that enables the formation.",
+    "空欄の場合は人数さえ満たしていれば、常に有効となります。": "If left blank, it is always enabled as long as the required number of members is met."
+  }
+}

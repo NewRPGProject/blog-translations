@@ -1,0 +1,569 @@
+{
+  "articleId": "506049329",
+  "sourceUrl": "https://newrpg.seesaa.net/article/506049329.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "264a3731628733c6a4fdfaa064cad8b6bd2c6bcd4e7c99152495e53924a47e49",
+  "translatedAt": "2026-08-31T01:07:22.853Z",
+  "title": "Assist with Healing Skill Target Selection [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "回復スキルの対象選択をアシスト【RPGツクールMZプラグイン】",
+      "sourceHash": "d80839a17e3e9c385d907a0e3bccd2b69add5bd6ef200a76a81dc2516835e785",
+      "translation": "Assist with Healing Skill Target Selection [RPG Maker MZ Plugin]",
+      "contextHash": "d80839a17e3e9c385d907a0e3bccd2b69add5bd6ef200a76a81dc2516835e785"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "回復系スキル（アイテム）の選択時、自動的に最適な対象にカーソルが合わさるようにします。",
+      "sourceHash": "5055086b378414e52462dc042dc6555cd595129c45c5ee4feee4547cc9291455",
+      "translation": "When selecting a healing skill (or item), the cursor automatically moves to the optimal target.",
+      "contextHash": "5055086b378414e52462dc042dc6555cd595129c45c5ee4feee4547cc9291455"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "回復スキルは最もＨＰ（％）が減っている対象を選択",
+      "sourceHash": "1c6529fadc23a6b0deaab3109367d9a738a7f742a984afd26dddf10e63ea0f73",
+      "translation": "Healing skills select the target with the lowest HP (%)",
+      "contextHash": "1c6529fadc23a6b0deaab3109367d9a738a7f742a984afd26dddf10e63ea0f73"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "蘇生スキルは戦闘不能者を選択",
+      "sourceHash": "d41752ebf924ee65f6952c712332abdaa0300b502f78c6e5fdd0eeb3fa8b15a1",
+      "translation": "Revival skills select incapacitated allies",
+      "contextHash": "d41752ebf924ee65f6952c712332abdaa0300b502f78c6e5fdd0eeb3fa8b15a1"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "ステート＆弱体の解除スキルは該当の対象を選択",
+      "sourceHash": "1730051cb1a7d6d396bcd532f6adb6c20b9a45a521a17696cdbaec3405c0203f",
+      "translation": "State and debuff removal skills select the applicable target",
+      "contextHash": "1730051cb1a7d6d396bcd532f6adb6c20b9a45a521a17696cdbaec3405c0203f"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "なお、優先度は以下のようになっています。",
+      "sourceHash": "79c123b47ac325119b5a44a322e10913e768eff73649ae69fcad57c42d8187ab",
+      "translation": "The priorities are as follows.",
+      "contextHash": "79c123b47ac325119b5a44a322e10913e768eff73649ae69fcad57c42d8187ab"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "蘇生＞ＨＰ回復＞ＭＰ回復＞ステート＆弱体解除",
+      "sourceHash": "f04ade996dcf610d33101f82e314ed0dc5921e4e23067d495f57f87dd100d763",
+      "translation": "Revive > HP Recovery > MP Recovery > Remove States & Debuffs",
+      "contextHash": "f04ade996dcf610d33101f82e314ed0dc5921e4e23067d495f57f87dd100d763"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "例えば、ＨＰと毒を同時に回復できるスキルならば、毒ステートにかかっている対象ではなく、最もＨＰが減っている対象を優先して選択します。",
+      "sourceHash": "8d562481fcba3e425f61f4e16617f036d9a70c39afd724468b55485abeb133d3",
+      "translation": "For example, if a skill can restore both HP and poison, it prioritizes the target with the lowest HP rather than a target affected by the poison state.",
+      "contextHash": "8d562481fcba3e425f61f4e16617f036d9a70c39afd724468b55485abeb133d3"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the function ON in the plugin manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_HealAssist.js",
+      "sourceHash": "f8d2460c514265a81c250b65d583f41b7848fc290c86474410dcca61207efb68",
+      "translation": "NRP_HealAssist.js ",
+      "contextHash": "8f32530b1ed8789d08bc49c5167dea9f86693904c52998d243dca4653ac6ae16"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.011（2025/07/22）",
+      "sourceHash": "98671a40ead84b735bda757db20dbfded1f664d275ba5cbb23b4edb614d5a0a0",
+      "translation": "ver1.011 (2025/07/22) ",
+      "contextHash": "8f32530b1ed8789d08bc49c5167dea9f86693904c52998d243dca4653ac6ae16"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/06/17（ver1.01 -> 1.011）",
+      "sourceHash": "fcb112cc85d5a6bf8e46f497489e778150b1f0472fcc1ae7d86d6a710f373831",
+      "translation": "2025/06/17 (ver1.01 -> 1.011) ",
+      "contextHash": "fcb112cc85d5a6bf8e46f497489e778150b1f0472fcc1ae7d86d6a710f373831"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "対象の選択優先度を下げる機能について、戦闘不能の敵が存在する場合に正しく機能しない不具合修正。（2025/07/22 ver1.011）",
+      "sourceHash": "f54918da3d94c5b6fd267d3f31c8da76b7da0e3d20ddc01dec87b48a623b1484",
+      "translation": "Fixed a bug where the feature that lowers target selection priority did not function correctly when an incapacitated enemy was present. (2025/07/22 ver1.011)",
+      "contextHash": "f54918da3d94c5b6fd267d3f31c8da76b7da0e3d20ddc01dec87b48a623b1484"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/12/09 -> 2025/06/03（ver1.00 -> 1.002）",
+      "sourceHash": "4c67862a39335098e8ff51d3d3e3d7ff999e84deddc517ba03f41603bd7d1d6e",
+      "translation": "2024/12/09 -> 2025/06/03 (ver1.00 -> 1.002) ",
+      "contextHash": "4c67862a39335098e8ff51d3d3e3d7ff999e84deddc517ba03f41603bd7d1d6e"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "最大ＭＰ０のアクターがＭＰ回復のアシスト対象になってしまう不具合を修正。（2024/12/11 ver1.001）",
+      "sourceHash": "30ba865f8b7985651c25bb43f4fcf7839546ff980909a8d8bc62302f7f9f9dce",
+      "translation": "Fixed a bug where an actor with 0 maximum MP became a target for MP recovery assistance. (2024/12/11 ver1.001)",
+      "contextHash": "30ba865f8b7985651c25bb43f4fcf7839546ff980909a8d8bc62302f7f9f9dce"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "範囲が味方単体（無条件）の蘇生スキルがアシスト対象にならない不具合修正。（2025/06/03 ver1.002）",
+      "sourceHash": "5735840d0d3405780b2a7ac40271679cd244ba1f2ceccf41b79ce9d2715bf688",
+      "translation": "Fixed a bug where revival skills targeting a single ally (no conditions) did not become eligible for assistance. (2025/06/03 ver1.002)",
+      "contextHash": "5735840d0d3405780b2a7ac40271679cd244ba1f2ceccf41b79ce9d2715bf688"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ステートのメモ欄（Note of State）",
+      "sourceHash": "52ac0d6295a54cdd0d63037e5851d32ae7d5aa3f998699bd3a4a0066dfbb72a6",
+      "translation": "State Note Field (Note of State)",
+      "contextHash": "52ac0d6295a54cdd0d63037e5851d32ae7d5aa3f998699bd3a4a0066dfbb72a6"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ステートにかかった対象の選択優先度を下げます。",
+      "sourceHash": "ec7607131f776fe31a84d161c58a1152bb76ca03c36d98e0b05d6302dc6eefea",
+      "translation": "Lowers the selection priority of targets affected by the state.",
+      "contextHash": "ec7607131f776fe31a84d161c58a1152bb76ca03c36d98e0b05d6302dc6eefea"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※選択自体は可能です。",
+      "sourceHash": "167f3c34cac6e838078f7cfbce7cb940bbb2b25f2b94ef9b929f1c83af97ce0c",
+      "translation": "※The target can still be selected.",
+      "contextHash": "167f3c34cac6e838078f7cfbce7cb940bbb2b25f2b94ef9b929f1c83af97ce0c"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "ＨＰ回復に適用（ApplyHpHeal）",
+      "sourceHash": "f7676bdeb4f7f62f9d7b2395a158f53719b7f6249f2b9ce335c8224a6e9741ed",
+      "translation": "Apply to HP Recovery (ApplyHpHeal)",
+      "contextHash": "f7676bdeb4f7f62f9d7b2395a158f53719b7f6249f2b9ce335c8224a6e9741ed"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ＨＰ回復スキルにアシスト機能を適用します。",
+      "sourceHash": "53fae00f53a71fc5a5aabccbdfb1429825e017cf78a66c41e85684a3aae85967",
+      "translation": "Applies the assistance feature to HP recovery skills.",
+      "contextHash": "53fae00f53a71fc5a5aabccbdfb1429825e017cf78a66c41e85684a3aae85967"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ＭＰ回復に適用（ApplyMpHeal）",
+      "sourceHash": "a9be61fae81d139333d4882f9294d2063d12d1659da8a960ef62f764dd57357b",
+      "translation": "Apply to MP Recovery (ApplyMpHeal)",
+      "contextHash": "a9be61fae81d139333d4882f9294d2063d12d1659da8a960ef62f764dd57357b"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ＭＰ回復スキルにアシスト機能を適用します。",
+      "sourceHash": "bf652f095148272419ab210785e8e4f0f9487ddc211daa85859e9c8709157f2a",
+      "translation": "Applies the assistance feature to MP recovery skills.",
+      "contextHash": "bf652f095148272419ab210785e8e4f0f9487ddc211daa85859e9c8709157f2a"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "蘇生に適用（ApplyRevive）",
+      "sourceHash": "66fb7d8d4917d378b914a05480c766a55a4f397dadacfea3e77da42acbda6411",
+      "translation": "Apply to Revival (ApplyRevive)",
+      "contextHash": "66fb7d8d4917d378b914a05480c766a55a4f397dadacfea3e77da42acbda6411"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "蘇生スキルにアシスト機能を適用します。",
+      "sourceHash": "cba16ae153333d96b5b529cc37167d8d3c91f13bd019e9076991bd23e8813539",
+      "translation": "Applies the assistance feature to revival skills.",
+      "contextHash": "cba16ae153333d96b5b529cc37167d8d3c91f13bd019e9076991bd23e8813539"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "ステート解除に適用（ApplyRemoveState）",
+      "sourceHash": "47aa6af71b01843fbe5fb9568e4e3bcaf4fd51174756ec262f2c374988ab742d",
+      "translation": "Apply to State Removal (ApplyRemoveState)",
+      "contextHash": "47aa6af71b01843fbe5fb9568e4e3bcaf4fd51174756ec262f2c374988ab742d"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ステート（弱体）解除スキルにアシスト機能を適用します。",
+      "sourceHash": "4b27654caf71d5b8c5f030aae25fc1b50e9a8dbd942d178574836a2ffc4d78aa",
+      "translation": "Applies the assistance feature to state (debuff) removal skills.",
+      "contextHash": "4b27654caf71d5b8c5f030aae25fc1b50e9a8dbd942d178574836a2ffc4d78aa"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "戦闘画面に適用（ApplyBattle）",
+      "sourceHash": "69998dc6c7febf1f39213e7feec3493c7559a5b29c4504d532d5c6b8b916e2c2",
+      "translation": "Apply to Battle Screen (ApplyBattle)",
+      "contextHash": "69998dc6c7febf1f39213e7feec3493c7559a5b29c4504d532d5c6b8b916e2c2"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "戦闘画面にてアシスト機能を適用します。",
+      "sourceHash": "c3775049fa2eda77ff97c08257b373393d07ea8c61fae4fb1b19b25375d4e92f",
+      "translation": "Applies the assistance feature on the battle screen.",
+      "contextHash": "c3775049fa2eda77ff97c08257b373393d07ea8c61fae4fb1b19b25375d4e92f"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "メニュー画面に適用（ApplyMenu）",
+      "sourceHash": "5b5c293c929503124ccc1c972441f7d0bcd4d7a63839344bca152afa6da5c1d0",
+      "translation": "Apply to Menu Screen (ApplyMenu)",
+      "contextHash": "5b5c293c929503124ccc1c972441f7d0bcd4d7a63839344bca152afa6da5c1d0"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "メニュー画面にてアシスト機能を適用します。",
+      "sourceHash": "a33b74b50d4e3f3eaf930ebd2c1d0888ee163bf3c288831724473c6406b6d8a6",
+      "translation": "Applies the assistance feature on the menu screen.",
+      "contextHash": "a33b74b50d4e3f3eaf930ebd2c1d0888ee163bf3c288831724473c6406b6d8a6"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄（Note of State）[[/LINK_1]]",
+      "sourceHash": "923a1f7d0ce66cc38d7ebc5830d9a38860a1804a2d65260366c1d553df815089",
+      "parts": [
+        {
+          "source": "ステートのメモ欄（Note of State）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Note Field[[/LINK_1]]",
+      "contextHash": "923a1f7d0ce66cc38d7ebc5830d9a38860a1804a2d65260366c1d553df815089"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰ回復に適用（ApplyHpHeal）[[/LINK_1]]",
+      "sourceHash": "2cc3088b1ed3a44e6072220676040bd22b20ed5f7b7919fbe5d073411e0e1913",
+      "parts": [
+        {
+          "source": "ＨＰ回復に適用（ApplyHpHeal）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to HP Recovery[[/LINK_1]]",
+      "contextHash": "2cc3088b1ed3a44e6072220676040bd22b20ed5f7b7919fbe5d073411e0e1913"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＰ回復に適用（ApplyMpHeal）[[/LINK_1]]",
+      "sourceHash": "1853e18fe55ef36c87fab6671220a7f179339755e5990cc8242a2ae95e40b0e3",
+      "parts": [
+        {
+          "source": "ＭＰ回復に適用（ApplyMpHeal）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to MP Recovery[[/LINK_1]]",
+      "contextHash": "1853e18fe55ef36c87fab6671220a7f179339755e5990cc8242a2ae95e40b0e3"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]蘇生に適用（ApplyRevive）[[/LINK_1]]",
+      "sourceHash": "fb54542365cde902067eea8ff901c6f7daccf1715edcc8c2689a8d47377f9680",
+      "parts": [
+        {
+          "source": "蘇生に適用（ApplyRevive）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Revive[[/LINK_1]]",
+      "contextHash": "fb54542365cde902067eea8ff901c6f7daccf1715edcc8c2689a8d47377f9680"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ステート解除に適用（ApplyRemoveState）[[/LINK_1]]",
+      "sourceHash": "eb57556b30f9e866738e4ab8c4a26f8880d1c931349635a1251eb98d39a5adfb",
+      "parts": [
+        {
+          "source": "ステート解除に適用（ApplyRemoveState）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to State Removal[[/LINK_1]]",
+      "contextHash": "eb57556b30f9e866738e4ab8c4a26f8880d1c931349635a1251eb98d39a5adfb"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘画面に適用（ApplyBattle）[[/LINK_1]]",
+      "sourceHash": "5a2d5bb24d130455c27e7ba018297bb166c0c2336af0934f4e8d7558994e27e1",
+      "parts": [
+        {
+          "source": "戦闘画面に適用（ApplyBattle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Battle Screen[[/LINK_1]]",
+      "contextHash": "5a2d5bb24d130455c27e7ba018297bb166c0c2336af0934f4e8d7558994e27e1"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]メニュー画面に適用（ApplyMenu）[[/LINK_1]]",
+      "sourceHash": "1ce4c6529c60a97fd72ac8f7841cbd8d488e08435c435e4871672eb9e3d96a66",
+      "parts": [
+        {
+          "source": "メニュー画面に適用（ApplyMenu）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply to Menu Screen[[/LINK_1]]",
+      "contextHash": "1ce4c6529c60a97fd72ac8f7841cbd8d488e08435c435e4871672eb9e3d96a66"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]対象の選択優先度を下げるステート[[/LINK_1]]を作れるようにした。",
+      "sourceHash": "d2e09f03b52f7997064f429032cfe05f7db86c4c0b3cc6b8f7165d7431c5a6be",
+      "parts": [
+        {
+          "source": "対象の選択優先度を下げるステート",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を作れるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "You can now create [[LINK_1]]states that lower the target selection priority[[/LINK_1]].",
+      "contextHash": "d2e09f03b52f7997064f429032cfe05f7db86c4c0b3cc6b8f7165d7431c5a6be"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "主に[[LINK_1]]隠れる、ジャンプなどの無敵ステート[[/LINK_1]]と組み合わせることで、攻撃・回復対象として初期選択されないようにします。動画では隠れた敵を初期選択していないことが分かると思います。",
+      "sourceHash": "d0ae1707b0f39ee723b43a70d9a4ddafa0b3f729ff7f7b42f995fb8cd13848c2",
+      "parts": [
+        {
+          "source": "主に",
+          "link": false
+        },
+        {
+          "source": "隠れる、ジャンプなどの無敵ステート",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と組み合わせることで、攻撃・回復対象として初期選択されないようにします。動画では隠れた敵を初期選択していないことが分かると思います。",
+          "link": false
+        }
+      ],
+      "translation": "By mainly combining them with [[LINK_1]]invincible states such as Hide and Jump[[/LINK_1]], they will not be initially selected as attack or recovery targets. In the video, you can probably see that the hidden enemy is not initially selected.",
+      "contextHash": "d0ae1707b0f39ee723b43a70d9a4ddafa0b3f729ff7f7b42f995fb8cd13848c2"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "回復系スキル（アイテム）の選択時、自動的に最適な対象にカーソルが合わさるようにします。": "When selecting a healing skill (or item), the cursor automatically moves to the optimal target.",
+    "回復スキルは最もＨＰ（％）が減っている対象を選択": "Healing skills select the target with the lowest HP (%)",
+    "蘇生スキルは戦闘不能者を選択": "Revival skills select incapacitated allies",
+    "ステート＆弱体の解除スキルは該当の対象を選択": "State and debuff removal skills select the applicable target",
+    "なお、優先度は以下のようになっています。": "The priorities are as follows.",
+    "蘇生＞ＨＰ回復＞ＭＰ回復＞ステート＆弱体解除": "Revive > HP Recovery > MP Recovery > Remove States & Debuffs",
+    "例えば、ＨＰと毒を同時に回復できるスキルならば、毒ステートにかかっている対象ではなく、最もＨＰが減っている対象を優先して選択します。": "For example, if a skill can restore both HP and poison, it prioritizes the target with the lowest HP rather than a target affected by the poison state.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the function ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_HealAssist.js": "NRP_HealAssist.js ",
+    "ver1.011（2025/07/22）": "ver1.011 (2025/07/22) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/06/17（ver1.01 -> 1.011）": "2025/06/17 (ver1.01 -> 1.011) ",
+    "対象の選択優先度を下げる機能について、戦闘不能の敵が存在する場合に正しく機能しない不具合修正。（2025/07/22 ver1.011）": "Fixed a bug where the feature that lowers target selection priority did not function correctly when an incapacitated enemy was present. (2025/07/22 ver1.011)",
+    "2024/12/09 -> 2025/06/03（ver1.00 -> 1.002）": "2024/12/09 -> 2025/06/03 (ver1.00 -> 1.002) ",
+    "公開！": "Released!",
+    "最大ＭＰ０のアクターがＭＰ回復のアシスト対象になってしまう不具合を修正。（2024/12/11 ver1.001）": "Fixed a bug where an actor with 0 maximum MP became a target for MP recovery assistance. (2024/12/11 ver1.001)",
+    "範囲が味方単体（無条件）の蘇生スキルがアシスト対象にならない不具合修正。（2025/06/03 ver1.002）": "Fixed a bug where revival skills targeting a single ally (no conditions) did not become eligible for assistance. (2025/06/03 ver1.002)",
+    "ステートのメモ欄（Note of State）": "State Note Field (Note of State)",
+    "ステートにかかった対象の選択優先度を下げます。": "Lowers the selection priority of targets affected by the state.",
+    "※選択自体は可能です。": "※The target can still be selected.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "ＨＰ回復に適用（ApplyHpHeal）": "Apply to HP Recovery (ApplyHpHeal)",
+    "ＨＰ回復スキルにアシスト機能を適用します。": "Applies the assistance feature to HP recovery skills.",
+    "ＭＰ回復に適用（ApplyMpHeal）": "Apply to MP Recovery (ApplyMpHeal)",
+    "ＭＰ回復スキルにアシスト機能を適用します。": "Applies the assistance feature to MP recovery skills.",
+    "蘇生に適用（ApplyRevive）": "Apply to Revival (ApplyRevive)",
+    "蘇生スキルにアシスト機能を適用します。": "Applies the assistance feature to revival skills.",
+    "ステート解除に適用（ApplyRemoveState）": "Apply to State Removal (ApplyRemoveState)",
+    "ステート（弱体）解除スキルにアシスト機能を適用します。": "Applies the assistance feature to state (debuff) removal skills.",
+    "戦闘画面に適用（ApplyBattle）": "Apply to Battle Screen (ApplyBattle)",
+    "戦闘画面にてアシスト機能を適用します。": "Applies the assistance feature on the battle screen.",
+    "メニュー画面に適用（ApplyMenu）": "Apply to Menu Screen (ApplyMenu)",
+    "メニュー画面にてアシスト機能を適用します。": "Applies the assistance feature on the menu screen."
+  }
+}

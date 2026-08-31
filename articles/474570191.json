@@ -1,0 +1,2675 @@
+{
+  "articleId": "474570191",
+  "sourceUrl": "https://newrpg.seesaa.net/article/474570191.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "974c8ff7ab405f2e77e054635a3b44de4ef2f0baf070c12c689bded5f139589d",
+  "translatedAt": "2026-08-31T01:15:22.819Z",
+  "title": "Implementing Combo Skills [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "合体技の実現【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "09adcabfa7f52e21650ced3602096ba5d91a35e2bee14252dad91adf79f3ef38",
+      "translation": "Implementing Combo Skills [RPG Maker MZ & MV Plugin]",
+      "contextHash": "09adcabfa7f52e21650ced3602096ba5d91a35e2bee14252dad91adf79f3ef38"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "複数人で発動する合体技を実現するプラグインです。",
+      "sourceHash": "6cd3d8eca0a41d925eb7352c1bf1a7c7bb42525d6f3af0068ac4ac15835d8bd2",
+      "translation": "This plugin allows combo skills to be activated by multiple actors.",
+      "contextHash": "6cd3d8eca0a41d925eb7352c1bf1a7c7bb42525d6f3af0068ac4ac15835d8bd2"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "アクターと敵キャラの両方に対応しています。（ver1.30）",
+      "sourceHash": "683b520983bacd27231b3d976b81b18f8c9a1a8ea9dfd23c4d226bd98b5f00a2",
+      "translation": "Supports both actors and enemies. (ver1.30)",
+      "contextHash": "683b520983bacd27231b3d976b81b18f8c9a1a8ea9dfd23c4d226bd98b5f00a2"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ツクールＭＺのタイムプログレス（アクティブ）に対応しました！ ウェイトについても一応動きます。（ver1.351）",
+      "sourceHash": "996889e95d633b0bae3d55429b999300a61eb0c1fdd2b08a1a02423c27e91346",
+      "translation": "Now supports RPG Maker MZ's Time Progress (Active)! Wait also works for the time being. (ver1.351)",
+      "contextHash": "996889e95d633b0bae3d55429b999300a61eb0c1fdd2b08a1a02423c27e91346"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "具体的には以下の通りです。",
+      "sourceHash": "19055e5a1054d35e4f406a3f365d79e0e84e1bd22401ba876f3a93293b9b297c",
+      "translation": "Specifically, it works as follows.",
+      "contextHash": "19055e5a1054d35e4f406a3f365d79e0e84e1bd22401ba876f3a93293b9b297c"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "スキルを使用した際、発動条件や消費ＭＰＴＰ、得ＴＰを協力者にも適用。",
+      "sourceHash": "be017442acc64ba9c7aa8a10eee6668d7228c086c7c000bd21b2f3e8a84389d1",
+      "translation": "When a skill is used, its activation requirements, MP/TP costs, and TP gain are also applied to the participants.",
+      "contextHash": "be017442acc64ba9c7aa8a10eee6668d7228c086c7c000bd21b2f3e8a84389d1"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "命中率やクリティカル率は参加者の平均値を取得。",
+      "sourceHash": "666e8a355a7140e5eb5e50852d57c818be784695d3147fb2371b49361d6da77e",
+      "translation": "Accuracy and critical rates use the average values of the participants.",
+      "contextHash": "666e8a355a7140e5eb5e50852d57c818be784695d3147fb2371b49361d6da77e"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "協力者へ行動不能ステートを付加し、ＣＴＢのターン経過を再現。",
+      "sourceHash": "9b8bf291a1c2565b6fbe40da6c3c478ba65be29a936d28fa17dffed4e476b02a",
+      "translation": "Adds an incapacitated state to the participants and reproduces the passage of turns in CTB.",
+      "contextHash": "9b8bf291a1c2565b6fbe40da6c3c478ba65be29a936d28fa17dffed4e476b02a"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "この仕組みにより、ＣＴＢ以外の個別行動型のシステムでも利用できます。",
+      "sourceHash": "eb3f59ce18e461f1ebe22632b05ffacef70ba904c19362a0a2eef3e62c1f5e9f",
+      "translation": "This mechanism allows it to be used with individual-action systems other than CTB.",
+      "contextHash": "eb3f59ce18e461f1ebe22632b05ffacef70ba904c19362a0a2eef3e62c1f5e9f"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "サイドビューで複数のバトラーを動かす方法は、以下を参考にしてください。",
+      "sourceHash": "f8bc655c03780539b4d4852c3c457a27ec7dfcc9fe1013cf68335ecc647c2ab6",
+      "translation": "For information on how to move multiple battlers in side-view battles, see below.",
+      "contextHash": "f8bc655c03780539b4d4852c3c457a27ec7dfcc9fe1013cf68335ecc647c2ab6"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※現状、アクターの複数回行動（特徴の行動回数追加）は想定していませんのでご注意ください。仕様が難解すぎて作者もどうすればよいかさっぱりです。",
+      "sourceHash": "b8434d93f6f5355f8c2024c27973fe13372040a16cf2f5000438a6d347aa96ef",
+      "translation": "※Please note that multiple actions by actors (the Add Action Times trait) are not currently supported. The specifications are so complicated that even I, the author, have no idea what to do.",
+      "contextHash": "b8434d93f6f5355f8c2024c27973fe13372040a16cf2f5000438a6d347aa96ef"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "$actor(id)",
+      "sourceHash": "23e37ec183986d11e058986810d80d59c9981817745a8e5ed89f0529877474a4",
+      "translation": "$actor(id)",
+      "contextHash": "56e9f73ea1109d20141c3689065d2fb8e57931a13095349c4eaf4b8e08f06319"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "$cs(no)",
+      "sourceHash": "e97e861e675ba0f0fe991340c540f8a6349ce118be2840e332660c42f2befa84",
+      "translation": "$cs(no)",
+      "contextHash": "ec0e4a7c1d9bde04e55d74a3b6ed3879286c60cfe8f75a062e078df15e83e7be"
+    },
+    {
+      "id": "link-003",
+      "type": "link",
+      "source": "<CS_Seal>",
+      "sourceHash": "527723f7ca1b130302564076f2a725758b3b73ed218f7d81551b35c15c3775a0",
+      "translation": "<CS_Seal>",
+      "contextHash": "89cc6d6a48724a7ca34781356011bdaf4d083e9d6314a3f0d2f102bf20f59340"
+    },
+    {
+      "id": "link-004",
+      "type": "link",
+      "source": "<CS_SealSub>",
+      "sourceHash": "df3c25fa503f25d7766e2f85a084ed1aa7a58592ed2c01618bc0acaa764e13e8",
+      "translation": "<CS_SealSub>",
+      "contextHash": "91117bc216bf6da68c812c7d214eeb4b1044a41fdac8684ad6c399dffd519432"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on through the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-005",
+      "type": "link",
+      "source": "NRP_CombinationSkill.js",
+      "sourceHash": "268ce3dcd3c7b150d16135128ca2bfd4400ac8227741973b45de3f2bd08505aa",
+      "translation": "NRP_CombinationSkill.js ",
+      "contextHash": "20082d58a1afc2a8aef482fdf6214d846294408802f3f513cbe20498468d2453"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.40（2025/05/07）",
+      "sourceHash": "05d51d1c429597bf83090a2b0e9c0985315958a4ce6f22b5830d002784919b49",
+      "translation": "ver1.40 (2025/05/07) ",
+      "contextHash": "20082d58a1afc2a8aef482fdf6214d846294408802f3f513cbe20498468d2453"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（history）",
+      "sourceHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09",
+      "translation": "Update History (history)",
+      "contextHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/05/07（ver1.40）",
+      "sourceHash": "bf1ff18e853c02864f1bc59652fec11a19ace87fb534a7a9e0481283b136afc4",
+      "translation": "2025/05/07 (ver1.40) ",
+      "contextHash": "bf1ff18e853c02864f1bc59652fec11a19ace87fb534a7a9e0481283b136afc4"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※例えば、協力者が睡眠中でも実行できるなど。",
+      "sourceHash": "dd72999d841eae2d72d8d5129c76472f64c765b8bc1580666173044414bfb3a5",
+      "translation": "※For example, it can be executed even when a participant is asleep.",
+      "contextHash": "dd72999d841eae2d72d8d5129c76472f64c765b8bc1580666173044414bfb3a5"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/08/18 -> 2025/04/02（ver1.39 -> 1.391）",
+      "sourceHash": "93d8032ed762f78d20dd9fe1a13bd24da2a3e1096b73e022ff844dfd09786bdb",
+      "translation": "2024/08/18 -> 2025/04/02 (ver1.39 -> 1.391) ",
+      "contextHash": "93d8032ed762f78d20dd9fe1a13bd24da2a3e1096b73e022ff844dfd09786bdb"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "<CS_Enemys>で同一の敵キャラＩＤを複数指定した際、ステートなどで行動不能の敵キャラを無視して合体技を使えるように改善した。",
+      "sourceHash": "08b8d30192f01a117dde861069454c24acf3e01d7e265b918c21379612f39975",
+      "translation": "Improved <CS_Enemys> so that when multiple identical enemy IDs are specified, combo skills can be used while ignoring enemies unable to act due to states or other effects.",
+      "contextHash": "08b8d30192f01a117dde861069454c24acf3e01d7e265b918c21379612f39975"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "<CS_Enemys>で同一の敵キャラＩＤを複数指定した際、攻撃系の行動制約ステートにかかっている敵が正しく合体技の参加者として判定できない不具合修正。（2025/04/02 ver1.391）",
+      "sourceHash": "ae191c926971811a8e1a7364e2ce93f928bbdcedbdf38419600f808e268fbe37",
+      "translation": "Fixed an issue where, when multiple identical enemy IDs were specified in <CS_Enemys>, enemies affected by an attack restriction state could not be correctly determined as combo skill participants. (2025/04/02 ver1.391)",
+      "contextHash": "ae191c926971811a8e1a7364e2ce93f928bbdcedbdf38419600f808e268fbe37"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/01/07 -> 2024/06/24（ver1.38 -> 1.381）",
+      "sourceHash": "db48522076baecbff2faf252f36f6d1b6075cf60d6e5b1bac6f273b81dcd0cfe",
+      "translation": "2023/01/07 -> 2024/06/24 (ver1.38 -> 1.381) ",
+      "contextHash": "db48522076baecbff2faf252f36f6d1b6075cf60d6e5b1bac6f273b81dcd0cfe"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "ver1.371にて戦闘時、パーティコマンドの合体技の一覧が表示されない不具合修正。",
+      "sourceHash": "2431b913e054dd739baefdcb33c30d83be4dc0273b41a505e037590088f02bce",
+      "translation": "Fixed an issue in ver1.371 where the list of combo skills was not displayed in the party commands during battles.",
+      "contextHash": "2431b913e054dd739baefdcb33c30d83be4dc0273b41a505e037590088f02bce"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/04/05 -> 2022/08/18（ver1.37 -> 1.371）",
+      "sourceHash": "d903eb84266d6f026c2bcea3be2a1b816cfcb5b094f4e854f894a5b0dedfb788",
+      "translation": "2021/04/05 -> 2022/08/18 (ver1.37 -> 1.371) ",
+      "contextHash": "d903eb84266d6f026c2bcea3be2a1b816cfcb5b094f4e854f894a5b0dedfb788"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "<CS_Actors>に特殊文字（\\v[1]など）や数式を有効に。",
+      "sourceHash": "5c07afa7e6859036c6460c0df75757bd7ae3cfc60961159310807f48758e4c41",
+      "translation": "Enabled escape characters (such as \\v[1]) and formulas in <CS_Actors>.",
+      "contextHash": "5c07afa7e6859036c6460c0df75757bd7ae3cfc60961159310807f48758e4c41"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "メニューでスキル選択時に一瞬だけ異なるスキルタイプのスキルが表示される不具合修正。（2022/08/18 ver1.371）",
+      "sourceHash": "2d8a0adc111331f7205d7ceb10af852e927e6f8d3a0aa3502a2bd0e84ed387a0",
+      "translation": "Fixed an issue where skills of a different skill type were briefly displayed when selecting a skill in the menu. (2022/08/18 ver1.371)",
+      "contextHash": "2d8a0adc111331f7205d7ceb10af852e927e6f8d3a0aa3502a2bd0e84ed387a0"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2020/09/18（ver1.36 -> 1.361）",
+      "sourceHash": "5fda9697281d9a4f9467ecb4035e442ca24affa35c07a1845eb8c9f979d2d414",
+      "translation": "2020/09/18 (ver1.36 -> 1.361) ",
+      "contextHash": "5fda9697281d9a4f9467ecb4035e442ca24affa35c07a1845eb8c9f979d2d414"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "ＭＺの移動時の合体技メニューにて、ヘルプ領域が表示されない不具合修正。",
+      "sourceHash": "2c6ee277541bd7bce456d651f81966c719dd2b9b86e3d3eae3dca93b034ed170",
+      "translation": "Fixed an issue where the help area was not displayed in the combo skill menu while moving in MZ.",
+      "contextHash": "2c6ee277541bd7bce456d651f81966c719dd2b9b86e3d3eae3dca93b034ed170"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "↑に加えて、アクター切替ボタンが表示されてしまう不具合修正。",
+      "sourceHash": "d5bbc7097b4dfb5da459af7e8ba1b2454904e232e48107e9590410f0e7cbda05",
+      "translation": "In addition to the above, fixed an issue where the actor switching button was displayed.",
+      "contextHash": "d5bbc7097b4dfb5da459af7e8ba1b2454904e232e48107e9590410f0e7cbda05"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "他プラグインとの連携用に調整。（ver1.361）",
+      "sourceHash": "5c7b59816c9551c0158805f4abd739446613d8f15998dd0e23aa4c0689d1bbbe",
+      "translation": "Adjusted for compatibility with other plugins. (ver1.361)",
+      "contextHash": "5c7b59816c9551c0158805f4abd739446613d8f15998dd0e23aa4c0689d1bbbe"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2020/09/13（ver1.35 -> 1.352）",
+      "sourceHash": "2f1f4a7d3b6d835f2bad973c056a5f6cfff851b908deaa6a876a3cd97789b07f",
+      "translation": "2020/09/13 (ver1.35 -> 1.352) ",
+      "contextHash": "2f1f4a7d3b6d835f2bad973c056a5f6cfff851b908deaa6a876a3cd97789b07f"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "ツクールＭＺのタイムプログレス（アクティブ）に対応。",
+      "sourceHash": "7b6042a166cc6d88c355c75150c41b85400bbee82904406bb5f245f4d2c55946",
+      "translation": "Added support for RPG Maker MZ's Time Progress (Active).",
+      "contextHash": "7b6042a166cc6d88c355c75150c41b85400bbee82904406bb5f245f4d2c55946"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "タイムプログレス（アクティブ）にて、妨害ステートを受けた際に行動キャンセルされない不具合を修正。（ver1.351）",
+      "sourceHash": "7d9d2c82bea05037f06e8c4e21bcdde69a44bb796ffaed33f68a8e1de3acca0f",
+      "translation": "Fixed an issue in Time Progress (Active) where actions were not canceled when affected by a hindrance state. (ver1.351)",
+      "contextHash": "7d9d2c82bea05037f06e8c4e21bcdde69a44bb796ffaed33f68a8e1de3acca0f"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "タイムプログレス（アクティブ）にて、キャスト有の合体技とキャスト無の合体技が混在すると、モーションの実行者が入れ替わってしまう不具合修正。（09/16 ver1.352）",
+      "sourceHash": "0f7e055af9d9ad4d9abef94a1ef06d449d1dd78f3ae1207e70c69c7f453dd9cf",
+      "translation": "Fixed an issue in Time Progress (Active) where, when combo skills with and without casting were mixed, the battlers performing the motions were switched. (09/16 ver1.352)",
+      "contextHash": "0f7e055af9d9ad4d9abef94a1ef06d449d1dd78f3ae1207e70c69c7f453dd9cf"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2020/09/07（ver1.34 -> 1.342）",
+      "sourceHash": "ab673749f7275f195193eae1aea4979993f6ecb5044ef812558a6c27659c438c",
+      "translation": "2020/09/07 (ver1.34 -> 1.342) ",
+      "contextHash": "ab673749f7275f195193eae1aea4979993f6ecb5044ef812558a6c27659c438c"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "ツクールＭＺに対応。",
+      "sourceHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9",
+      "translation": "Added support for RPG Maker MZ.",
+      "contextHash": "3bd292b47cf8c4fbe82bbec598ba00c0c3f188a03d306b54aa6b116ec77473d9"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "プラグインパラメータに『パーティコマンド挿入位置』『メニューコマンド挿入位置』を追加。",
+      "sourceHash": "a0ba3639e13cf0728e306cab718206d394ad59f1b8fcd481fd72dd90d064e9a6",
+      "translation": "Added “Party Command Insertion Position” and “Menu Command Insertion Position” to the plugin parameters.",
+      "contextHash": "a0ba3639e13cf0728e306cab718206d394ad59f1b8fcd481fd72dd90d064e9a6"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "自動戦闘にて合体技を選択しないように修正。",
+      "sourceHash": "982b9361d2ec68f7eab44b3a0e4f7fbcec10bb87cdbb25f0d9252d8996c8eda1",
+      "translation": "Adjusted so that combo skills are not selected during automatic battle.",
+      "contextHash": "982b9361d2ec68f7eab44b3a0e4f7fbcec10bb87cdbb25f0d9252d8996c8eda1"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "協力者の待機モーションも発動者と同じになるよう修正。（ver1.341）",
+      "sourceHash": "ba8ee5bcd5e56f84d0450a38dab75ab86039f8fcd7a6bca599f763beb876476c",
+      "translation": "Adjusted the participants' idle motions to match those of the initiator. (ver1.341)",
+      "contextHash": "ba8ee5bcd5e56f84d0450a38dab75ab86039f8fcd7a6bca599f763beb876476c"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "攻撃系の行動制約でも合体技が選択できる不具合修正。（09/12 ver1.342）",
+      "sourceHash": "6c5e75b8d40461784be44e0afe6cba354bf1219a1621559ca37353ccc25e887e",
+      "translation": "Fixed an issue where combo skills could be selected even under an attack restriction. (09/12 ver1.342)",
+      "contextHash": "6c5e75b8d40461784be44e0afe6cba354bf1219a1621559ca37353ccc25e887e"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2020/06/15（ver1.33）",
+      "sourceHash": "301b1befc34d3afd785b739a501cee7ef697b2131d9d7e72883fc681dd998026",
+      "translation": "2020/06/15 (ver1.33) ",
+      "contextHash": "301b1befc34d3afd785b739a501cee7ef697b2131d9d7e72883fc681dd998026"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "英語対応。",
+      "sourceHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978",
+      "translation": "Added English support.",
+      "contextHash": "4e62b60deb6efa85b65cade429fba17703938931f412bc132212ee203cf7e978"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "2020/05/27（ver1.32）",
+      "sourceHash": "96903f79a437120a3ca56269c664f18ec67029d59718a92af65c711e7eea52bd",
+      "translation": "2020/05/27 (ver1.32) ",
+      "contextHash": "96903f79a437120a3ca56269c664f18ec67029d59718a92af65c711e7eea52bd"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "2020/05/06（ver1.31 -> 1.311）",
+      "sourceHash": "4f7a48415639b23fdf997c61e75f9ce72aac41f97c7b3e46f28685803e9ee858",
+      "translation": "2020/05/06 (ver1.31 -> 1.311) ",
+      "contextHash": "4f7a48415639b23fdf997c61e75f9ce72aac41f97c7b3e46f28685803e9ee858"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "パーティにいないキャラの合体技が使用できてしまう不具合修正。",
+      "sourceHash": "00c8ccc4297e98d39397afb02d4a6f0a06280a84b40d44f8756f64e918a5b80b",
+      "translation": "Fixed an issue where combo skills belonging to characters not in the party could be used.",
+      "contextHash": "00c8ccc4297e98d39397afb02d4a6f0a06280a84b40d44f8756f64e918a5b80b"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "競合対策のためソース整理。",
+      "sourceHash": "4508271abb542995423717a122ef2e5cd195dc1674075896205bd5031e40f894",
+      "translation": "Reorganized the source code to prevent conflicts.",
+      "contextHash": "4508271abb542995423717a122ef2e5cd195dc1674075896205bd5031e40f894"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "2020/04/27（ver1.30 -> 1.303）",
+      "sourceHash": "6f77b80fde9558ebc63eb880c49bfdaf9421b0b5971ed643b712da77cd30a97a",
+      "translation": "2020/04/27 (ver1.30 -> 1.303) ",
+      "contextHash": "6f77b80fde9558ebc63eb880c49bfdaf9421b0b5971ed643b712da77cd30a97a"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "参加者３人以上の場合、命中とクリティカルの計算がおかしい不具合修正。",
+      "sourceHash": "f420b69313a3fb737713fc32bbc6be632681aa47558fdf823a05a1d6365e34fe",
+      "translation": "Fixed an issue where accuracy and critical calculations were incorrect when there were three or more participants.",
+      "contextHash": "f420b69313a3fb737713fc32bbc6be632681aa47558fdf823a05a1d6365e34fe"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "通常スキルのＭＰ等が消費されない不具合修正。（04/28 ver1.301）",
+      "sourceHash": "d9d29dde2efc2ccd76c9ceb013657144f8730ff85c9ff3b1c7e5a5f439c2e1a4",
+      "translation": "Fixed an issue where MP and other costs for normal skills were not consumed. (04/28 ver1.301)",
+      "contextHash": "d9d29dde2efc2ccd76c9ceb013657144f8730ff85c9ff3b1c7e5a5f439c2e1a4"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "MV1.5系で<CS_Enemys>がエラーとなる不具合修正。（04/28 ver1.302）",
+      "sourceHash": "9f2f1f6f4a803d3a23fe70e700eda90c702356f07125b58fd23ce6cdc1813f9d",
+      "translation": "Fixed an issue where <CS_Enemys> caused an error in MV 1.5 series versions. (04/28 ver1.302)",
+      "contextHash": "9f2f1f6f4a803d3a23fe70e700eda90c702356f07125b58fd23ce6cdc1813f9d"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "2020/04/26（ver1.22）",
+      "sourceHash": "d809664cfffca8ca1556e103e47472dcea9bbd30b401dd563705c602caec80b9",
+      "translation": "2020/04/26 (ver1.22) ",
+      "contextHash": "d809664cfffca8ca1556e103e47472dcea9bbd30b401dd563705c602caec80b9"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "ver1.20時点で動作しなくなっていた重大な不具合修正。",
+      "sourceHash": "50dcd99ed8c25dd7b81741fdcb5be281f9e59802bf85cb675bea0e6423d5ce82",
+      "translation": "Fixed a critical issue that had made the plugin stop working as of ver1.20.",
+      "contextHash": "50dcd99ed8c25dd7b81741fdcb5be281f9e59802bf85cb675bea0e6423d5ce82"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "2020/04/24（ver1.21 -> 1.211）",
+      "sourceHash": "01de38bfdf70cd11d979c31466be16ca10cf4435500620be614e0043213f2725",
+      "translation": "2020/04/24 (ver1.21 -> 1.211) ",
+      "contextHash": "01de38bfdf70cd11d979c31466be16ca10cf4435500620be614e0043213f2725"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "戦闘メッセージを考慮し、参加者全員の名前を表示できるようにした。",
+      "sourceHash": "470dddc514fe0cc2e2164363a488ed264badd612ed8e817d08bac7b8ec934926",
+      "translation": "Added consideration for battle messages so that all participants' names can be displayed.",
+      "contextHash": "470dddc514fe0cc2e2164363a488ed264badd612ed8e817d08bac7b8ec934926"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "複数回行動でも適切にキャンセルできるように修正。（04/25 ver1.211）",
+      "sourceHash": "59ea420cbf957410461e2fe600ec883bf3c1bca1eefe9077c5520e62d93452d4",
+      "translation": "Adjusted so that actions can be canceled correctly even with multiple actions. (04/25 ver1.211)",
+      "contextHash": "59ea420cbf957410461e2fe600ec883bf3c1bca1eefe9077c5520e62d93452d4"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "協力者の行動キャンセル時も待機状態を保持。（04/25 ver1.211）",
+      "sourceHash": "696995309e99cbbb270ea3a8f84b96b4bfed5517a5f08184b7c41b7ebce9e1c9",
+      "translation": "The participants retain their waiting state even when their actions are canceled. (04/25 ver1.211)",
+      "contextHash": "696995309e99cbbb270ea3a8f84b96b4bfed5517a5f08184b7c41b7ebce9e1c9"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "2020/04/18（ver1.20）",
+      "sourceHash": "bf6d636a4bd3133fed065c2d3ced601978034e0da1db438027df83a91a3ba968",
+      "translation": "2020/04/18 (ver1.20) ",
+      "contextHash": "bf6d636a4bd3133fed065c2d3ced601978034e0da1db438027df83a91a3ba968"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "2020/04/15（ver1.10）",
+      "sourceHash": "c7a7c5ba155587c9faea65a14950183c825a722c20f24b3814dc0f60f54b1899",
+      "translation": "2020/04/15 (ver1.10) ",
+      "contextHash": "c7a7c5ba155587c9faea65a14950183c825a722c20f24b3814dc0f60f54b1899"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "ターン制に対応。",
+      "sourceHash": "934e6f2415d9533b1644d19d3de2aa482e1cef7cc2634e7ec7b75458c7f51ba0",
+      "translation": "Added support for turn-based battles.",
+      "contextHash": "934e6f2415d9533b1644d19d3de2aa482e1cef7cc2634e7ec7b75458c7f51ba0"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "ステートのメモ欄で合体技の禁止状態を制御可能に。",
+      "sourceHash": "787315d7c8e8770f216251d947d1a1283f956337cc63ec59ae24be4c946563bd",
+      "translation": "The prohibition of combo skills can now be controlled in a state's note field.",
+      "contextHash": "787315d7c8e8770f216251d947d1a1283f956337cc63ec59ae24be4c946563bd"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "2020/04/14（ver1.00）",
+      "sourceHash": "333a074cd8ce8f091df0eb09a59dbf3656f84bb802674943ed14318541f39548",
+      "translation": "2020/04/14 (ver1.00) ",
+      "contextHash": "333a074cd8ce8f091df0eb09a59dbf3656f84bb802674943ed14318541f39548"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "使用方法（usage）",
+      "sourceHash": "63abdf377e21027573ece7c0d9c514bfb66e007531c9074d333dcf1dd1d17821",
+      "translation": "Usage (usage)",
+      "contextHash": "63abdf377e21027573ece7c0d9c514bfb66e007531c9074d333dcf1dd1d17821"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "共通",
+      "sourceHash": "3bc4fc2328cbc68ec3401c10e957edcdccff0428a54927707dfe03a772ca5f82",
+      "translation": "Common",
+      "contextHash": "3bc4fc2328cbc68ec3401c10e957edcdccff0428a54927707dfe03a772ca5f82"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "スキルのメモ欄へ以下を記入すれば、アクターID=1,2が参加する合体技となります。",
+      "sourceHash": "b0e89d8960029cb2917c633297e160bef15ace1f1f732f51f73d21867264719e",
+      "translation": "Enter the following in a skill's note field to make it a combo skill involving actors with IDs 1 and 2.",
+      "contextHash": "b0e89d8960029cb2917c633297e160bef15ace1f1f732f51f73d21867264719e"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※『,』でつなげていけば３人以上も可能です。",
+      "sourceHash": "4d0cc81e11fb99c01e7bae89d6ea78312bcd7ff55d51b9c2c1a98b3e610bbdd3",
+      "translation": "※Connecting them with “,” allows three or more participants.",
+      "contextHash": "4d0cc81e11fb99c01e7bae89d6ea78312bcd7ff55d51b9c2c1a98b3e610bbdd3"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "これで『発動条件、消費ＭＰＴＰ、得ＴＰ』などが合体技の参加者全員に適用されます。例えば、一人でも行動制約やスキル封印などのステートにかかっていたら使用できなくなります。",
+      "sourceHash": "1c893e1427c10c2a9bb81b875ffb42230b8a2930cb3a9a932773a6079e879fab",
+      "translation": "This applies the “activation conditions, MP/TP cost, TP gained,” and other effects to all participants in the combo skill. For example, the skill cannot be used if even one participant is affected by a state such as Restriction or Skill Seal.",
+      "contextHash": "1c893e1427c10c2a9bb81b875ffb42230b8a2930cb3a9a932773a6079e879fab"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ターン制の場合、該当スキルを選択すると協力者の行動も確定されます。並び順が後ろの協力者の入力は飛ばされ、前の協力者の行動は上書きされます。ターン開始後、参加者の中で最も速いキャラがスキルを実行します。",
+      "sourceHash": "4ef909a6e44e5f2899b7b93743003268b05729a96b6672183f3bfed2bcabfe34",
+      "translation": "In turn-based battles, selecting the applicable skill also confirms the actions of the assisting participants. Inputs from assisting participants later in the order are skipped, while the actions of those earlier in the order are overwritten. After the turn begins, the fastest participant executes the skill.",
+      "contextHash": "4ef909a6e44e5f2899b7b93743003268b05729a96b6672183f3bfed2bcabfe34"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※協力者とは「スキル使用者以外の合体技の参加者」を意味します。",
+      "sourceHash": "13f832499f21bf5bccc517ed27406b1c7a8b9898cff6dacfb1fb9f1397f8a102",
+      "translation": "※“Assisting participants” refers to “combo skill participants other than the skill user.”",
+      "contextHash": "13f832499f21bf5bccc517ed27406b1c7a8b9898cff6dacfb1fb9f1397f8a102"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "なお、合体技の参加者などの要件はスキルの説明欄に手動で記載してください。",
+      "sourceHash": "c6281ea7cca01c5fc0753e39a2a23a9e6352874238eb7da4789e9b1c9670ed6b",
+      "translation": "Requirements such as the participants in a combo skill must be entered manually in the skill description.",
+      "contextHash": "c6281ea7cca01c5fc0753e39a2a23a9e6352874238eb7da4789e9b1c9670ed6b"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "また、「該当者がいないスキルを非表示にする」などの機能はありません。必要なら通常のイベントコマンドでスキルの習得状態を制御してください。",
+      "sourceHash": "db4192ee36745438b19ba46bea6e179b9a05abd0a69c3ad79bb91b5625046a61",
+      "translation": "There is also no function for hiding skills that have no eligible users. If necessary, use the standard event commands to control skill acquisition.",
+      "contextHash": "db4192ee36745438b19ba46bea6e179b9a05abd0a69c3ad79bb91b5625046a61"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ターン制の場合、以上で完了です。",
+      "sourceHash": "eb61eaed3abeb54c0fb0aad06133676fdd7a9eabc289beb84a28e95f2622eda6",
+      "translation": "That completes the setup for turn-based battles.",
+      "contextHash": "eb61eaed3abeb54c0fb0aad06133676fdd7a9eabc289beb84a28e95f2622eda6"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "ＣＴＢ用の設定",
+      "sourceHash": "9855a221f9e414f91db2f008548a0609aab3e8bb0e545d1a99bbbb40efdbfc76",
+      "translation": "Settings for CTB",
+      "contextHash": "9855a221f9e414f91db2f008548a0609aab3e8bb0e545d1a99bbbb40efdbfc76"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ＣＴＢや個別行動系の戦闘システムの場合、協力者がターン消費をしません。",
+      "sourceHash": "c7c03728f1dd52f189ba8bd38ed4a9b4771b7c7e30583c866c71c2651fc1f4fc",
+      "translation": "In CTB and individual-action battle systems, assisting participants do not consume a turn.",
+      "contextHash": "c7c03728f1dd52f189ba8bd38ed4a9b4771b7c7e30583c866c71c2651fc1f4fc"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "そこでプラグインパラメータの『実行後ステート』を設定します。",
+      "sourceHash": "955b89c34509729d33e0c9a6fdc8d5d9d9e60ec8fbad678945e7094c5300af15",
+      "translation": "To address this, configure the plugin parameter “State After Execution.”",
+      "contextHash": "955b89c34509729d33e0c9a6fdc8d5d9d9e60ec8fbad678945e7094c5300af15"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ここで設定したステートが合体技の協力者へ付加されます。『１回休み』などにすることでターン消費を表現できます。",
+      "sourceHash": "914c557d14a23c630cc63bb8bacb2c39e693a740bb6400adcd520563637d26e1",
+      "translation": "The state configured here is added to the assisting participants in the combo skill. Setting it to something like “One Turn Skip” can represent turn consumption.",
+      "contextHash": "914c557d14a23c630cc63bb8bacb2c39e693a740bb6400adcd520563637d26e1"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "タイムプログレス（アクティブ） ver1.35",
+      "sourceHash": "92ec8fe3edede9912276efc281d20b1b13ed30f0f61491ddb34dcca69db30173",
+      "translation": "Time Progress (Active) ver1.35",
+      "contextHash": "92ec8fe3edede9912276efc281d20b1b13ed30f0f61491ddb34dcca69db30173"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ツクールＭＺで導入されたＴＰＢ（アクティブ）でも、合体技を使用できます。",
+      "sourceHash": "68ce3355b4b02e48f5ffec4b84f3e6e6a7133044c5eef804d9a7788c777071d4",
+      "translation": "Combo skills can also be used with TPB (Active), which was introduced in RPG Maker MZ.",
+      "contextHash": "68ce3355b4b02e48f5ffec4b84f3e6e6a7133044c5eef804d9a7788c777071d4"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "合体技の参加者全員のタイムゲージが溜まっていれば使用可能となります。",
+      "sourceHash": "acd134a7e2858b841027fbe751be35a8b2ac89634c85a9afed169367f1777517",
+      "translation": "They can be used when the time gauges of all combo skill participants are full.",
+      "contextHash": "acd134a7e2858b841027fbe751be35a8b2ac89634c85a9afed169367f1777517"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "※パーティコマンド方式は現状動作しません。",
+      "sourceHash": "0df6b94074d304f4948e24f46b7187657a117a3fa9711ada0556e626c97842bc",
+      "translation": "※The party command method does not currently work.",
+      "contextHash": "0df6b94074d304f4948e24f46b7187657a117a3fa9711ada0556e626c97842bc"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "タイムプログレス（ウェイト） ver1.34",
+      "sourceHash": "7b81c0d27cea6ae34ef99bfab5ca917d5d7f74d1e143d6b2c5c3a3189a15598d",
+      "translation": "Time Progress (Wait) ver1.34",
+      "contextHash": "7b81c0d27cea6ae34ef99bfab5ca917d5d7f74d1e143d6b2c5c3a3189a15598d"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ＴＰＢ（ウェイト）でも合体技は使用できます。基本的にはＣＴＢと同じ考え方です。",
+      "sourceHash": "40a485c20585f2f3738b93b4e07c5f5c0d23172bbfd2dd993572f7ce0091acb1",
+      "translation": "Combo skills can also be used with TPB (Wait). The basic concept is the same as CTB.",
+      "contextHash": "40a485c20585f2f3738b93b4e07c5f5c0d23172bbfd2dd993572f7ce0091acb1"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "……が、残念ながらＭＺのＴＰＢ（ウェイト）の初期状態では『１回休み』的なちょうど良いステートを作れません。行動制約を『行動できない』にすると、タイムゲージ自体が空になって停止してしまいます。",
+      "sourceHash": "9e9de146fdf8dda1800e151638049a6331384b0675a55d8e0b6e2ccf7ac282a9",
+      "translation": "...Unfortunately, in the initial state of MZ's TPB (Wait), it is not possible to create an appropriate state equivalent to “One Turn Skip.” If the action restriction is set to “Cannot Move,” the time gauge itself becomes empty and stops.",
+      "contextHash": "9e9de146fdf8dda1800e151638049a6331384b0675a55d8e0b6e2ccf7ac282a9"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "これは合体技の協力者としては、過剰なペナルティです。",
+      "sourceHash": "56c69a2774601128bb0ad0fe14bd12e6c198acf2a13412a3cc2728e417ba6a00",
+      "translation": "This is an excessive penalty for an assisting participant in a combo skill.",
+      "contextHash": "56c69a2774601128bb0ad0fe14bd12e6c198acf2a13412a3cc2728e417ba6a00"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "そのため、外部のプラグインでちょうど良いステート（１回休み、タイムゲージ減少など）を用意するのが理想となります。現状ではＭＺ発売から日が浅いのですが、そのうちＴＰＢ向けのプラグインもそろってくると思われます。",
+      "sourceHash": "b968cd569eb2dc2541d44e08b744ec69cdb4afde5d13bd13bd38dd6d0788f277",
+      "translation": "Therefore, ideally, an external plugin should provide an appropriate state, such as One Turn Skip or a reduction to the time gauge. Although it has not been long since MZ was released, plugins for TPB will likely become available in due course.",
+      "contextHash": "b968cd569eb2dc2541d44e08b744ec69cdb4afde5d13bd13bd38dd6d0788f277"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "……ここまで書いておいてなんですが「ぶっちゃけ、ＴＰＢ（ウェイト）を使うぐらいなら、ウチのＣＴＢでよくね？」というのが作者の立場だったりします。",
+      "sourceHash": "b9ae5705928cc34c2b68179b992c03dd1cea2ac994ee5dfffbc9fbcc54e9d23f",
+      "translation": "...After writing all that, though, the author's position is, “To be honest, if you're going to use TPB (Wait), why not just use my CTB?”",
+      "contextHash": "b9ae5705928cc34c2b68179b992c03dd1cea2ac994ee5dfffbc9fbcc54e9d23f"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "グローバル関数",
+      "sourceHash": "1cfd1351c707c58cd45f658dd726ab89261288221fa41e7dec74e4e5acdb776b",
+      "translation": "Global Functions",
+      "contextHash": "1cfd1351c707c58cd45f658dd726ab89261288221fa41e7dec74e4e5acdb776b"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "以下をグローバル関数として定義しています。スキルの計算式や他のプラグインとの連携に有用です。",
+      "sourceHash": "0f07c931aca78ec2c820c0d9075553edf74829ca3f13d30c59c9406ba78489a4",
+      "translation": "The following are defined as global functions. They are useful for skill damage formulas and integration with other plugins.",
+      "contextHash": "0f07c931aca78ec2c820c0d9075553edf74829ca3f13d30c59c9406ba78489a4"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "指定したアクターＩＤからアクターの情報を取得します。",
+      "sourceHash": "429ace9c7f9bde8428abea4b0296c1936d8cddeb99460e433a6d56a515a182db",
+      "translation": "Retrieves actor information using the specified actor ID.",
+      "contextHash": "429ace9c7f9bde8428abea4b0296c1936d8cddeb99460e433a6d56a515a182db"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "例えば、以下はアクター１とアクター２の攻撃力を使用したダメージ計算式です。",
+      "sourceHash": "08dc323595ebaa9aa79871f9f53885378d1cf6361e11b58372368842ea23a274",
+      "translation": "For example, the following is a damage formula that uses the Attack of Actor 1 and Actor 2.",
+      "contextHash": "08dc323595ebaa9aa79871f9f53885378d1cf6361e11b58372368842ea23a274"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "合体技参加者を取得します。",
+      "sourceHash": "0a96a43ff5d372e45397f51df7b24545ee213800bdade78d1c5a67032a0da070",
+      "translation": "Retrieves combo skill participants.",
+      "contextHash": "0a96a43ff5d372e45397f51df7b24545ee213800bdade78d1c5a67032a0da070"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "というように『$actor(id)』と使い方は似ていますが、こちらの数値は合体技の参加者に対応します。",
+      "sourceHash": "c862441f8d9694e6606581c89dda7792f7990ce08df1a6a7fc88bb813a73675f",
+      "translation": "Its usage is similar to “$actor(id),” as shown above, but the number here corresponds to the combo skill participants.",
+      "contextHash": "c862441f8d9694e6606581c89dda7792f7990ce08df1a6a7fc88bb813a73675f"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "例えば『<CS_Actors:4,1>』と指定された合体技なら、『$cs(1)』がID=4のアクター、『$cs(2)』がID=1のアクターに対応します。",
+      "sourceHash": "0857c0f54530d819dff5ca8bbd7dd2e8927de06f0832862abd5ba68be1c12014",
+      "translation": "For a combo skill specified as “<CS_Actors:4,1>,” “$cs(1)” corresponds to the actor with ID=4, and “$cs(2)” corresponds to the actor with ID=1.",
+      "contextHash": "0857c0f54530d819dff5ca8bbd7dd2e8927de06f0832862abd5ba68be1c12014"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "『<CS_Battlers:2,3>』なら、『$cs(1)』が２番目のアクター、『$cs(2)』が３番目のアクターに対応します。",
+      "sourceHash": "f7c6bf9838976da7278d67f3c7e4fcc5c5c0043ff3c99774d406a3d6713a8a5d",
+      "translation": "For “<CS_Battlers:2,3>,” “$cs(1)” corresponds to the second actor, and “$cs(2)” corresponds to the third actor.",
+      "contextHash": "f7c6bf9838976da7278d67f3c7e4fcc5c5c0043ff3c99774d406a3d6713a8a5d"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "※指定した数値ではなく順番に対応します。まぎらわしいので要注意です。",
+      "sourceHash": "c66c9b5d6c82b9ec55d4e182ff62a0f829b84fd31ed367b9c9b2e2d72f13f30f",
+      "translation": "※It corresponds to the order, not the specified numbers. Be careful, as this can be confusing.",
+      "contextHash": "c66c9b5d6c82b9ec55d4e182ff62a0f829b84fd31ed367b9c9b2e2d72f13f30f"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "また『$cs()』というようにno未指定ならば、全参加者を保有する配列を取得できます。",
+      "sourceHash": "3a00cb26aae8b192159d4c582c8863ea97b631f4e98316ba99298feaee5f3a12",
+      "translation": "If no is omitted, as in “$cs(),” an array containing all participants can be retrieved.",
+      "contextHash": "3a00cb26aae8b192159d4c582c8863ea97b631f4e98316ba99298feaee5f3a12"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "『$cs(1).x』『$cs(1).y』『$cs(1).width』『$cs(1).height』というように、座標やサイズ情報も取得可能です。（要DynamicAnimation ver1.09）",
+      "sourceHash": "f70a8abb1fa780524874d45ae2eca5d2dd633763d6936bd7e93731846bb0dbfe",
+      "translation": "Coordinate and size information can also be retrieved, as in “$cs(1).x,” “$cs(1).y,” “$cs(1).width,” and “$cs(1).height.” (Requires DynamicAnimation ver1.09)",
+      "contextHash": "f70a8abb1fa780524874d45ae2eca5d2dd633763d6936bd7e93731846bb0dbfe"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "※DynamicAnimation ver1.09より、以下$cssへの参照は不要となりました。全て$csだけで完結します。",
+      "sourceHash": "9935a84e0437b91b40490f24e3224d75ff756898f5e607f7418edee8a89131bd",
+      "translation": "※As of DynamicAnimation ver1.09, references to $css below are no longer necessary. Everything can be handled using only $cs.",
+      "contextHash": "9935a84e0437b91b40490f24e3224d75ff756898f5e607f7418edee8a89131bd"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "合体技参加者のスプライトを取得します。",
+      "sourceHash": "9cb0d452cc3f0ad709334ef508d9839956784ff768fbbcacc36b72f5d9b74c09",
+      "translation": "Retrieves the sprites of combo skill participants.",
+      "contextHash": "9cb0d452cc3f0ad709334ef508d9839956784ff768fbbcacc36b72f5d9b74c09"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "『$css(1).x』『$css(1).y』『$css(1).width』『$css(1).height』というように、座標やサイズを取得可能です。",
+      "sourceHash": "e3bacc9fd4cc4c792ffc2be18ff29566dc361aa33b390ae72efeeb72d6b25f32",
+      "translation": "Coordinates and sizes can be retrieved, as in “$css(1).x,” “$css(1).y,” “$css(1).width,” and “$css(1).height.”",
+      "contextHash": "e3bacc9fd4cc4c792ffc2be18ff29566dc361aa33b390ae72efeeb72d6b25f32"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "プラグインパラメータ（ＣＴＢ関連）",
+      "sourceHash": "2aca2330a372a6d7244df6b255405f7423cf10f3b6ca3498bd0a0d047bc7f467",
+      "translation": "Plugin Parameters (CTB-Related)",
+      "contextHash": "2aca2330a372a6d7244df6b255405f7423cf10f3b6ca3498bd0a0d047bc7f467"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "実行後ステート（reactionState）",
+      "sourceHash": "9b4c7d35d6e3ac255c034e1d5140e9bd63cece41ed4ec16440c81608f273e835",
+      "translation": "State After Execution (reactionState)",
+      "contextHash": "9b4c7d35d6e3ac255c034e1d5140e9bd63cece41ed4ec16440c81608f273e835"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "スキル実行後、協力者に指定したステートを付加します。",
+      "sourceHash": "42121cdfbc2519cfbcea4c3c4c430283e2af29ac14623e5a7a9a705be651179a",
+      "translation": "After the skill is executed, the specified state is added to the assisting participants.",
+      "contextHash": "42121cdfbc2519cfbcea4c3c4c430283e2af29ac14623e5a7a9a705be651179a"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "１回行動不能やディレイなどを想定しています。",
+      "sourceHash": "2209a6cc8ecd3e653d6332a60235d377be713c4280c6e634eb81689f9af0f0c1",
+      "translation": "This is intended for effects such as being unable to act once or having a delay.",
+      "contextHash": "2209a6cc8ecd3e653d6332a60235d377be713c4280c6e634eb81689f9af0f0c1"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "プラグインパラメータ（メッセージ関連） ver1.21",
+      "sourceHash": "cac122f4bcc0d81906d65fecc0fff485c80e985ce920d2d686bb4aca46100eb0",
+      "translation": "Plugin Parameters (Message-Related) ver1.21",
+      "contextHash": "cac122f4bcc0d81906d65fecc0fff485c80e985ce920d2d686bb4aca46100eb0"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "連結用の文字（andLetter）",
+      "sourceHash": "6d672bff7fa7b6d7935f657d647bc5722cda96a51f839e2b416f874dcd8c9396",
+      "translation": "Joining Text (andLetter)",
+      "contextHash": "6d672bff7fa7b6d7935f657d647bc5722cda96a51f839e2b416f874dcd8c9396"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "戦闘メッセージを表示する際、合体技の参加者名を指定の文字で連結します。",
+      "sourceHash": "5d7baba6707e976141ba00e28b0342ace6e5252a2632342e11a14405641c9c81",
+      "translation": "When displaying battle messages, the names of combo skill participants are joined using the specified text.",
+      "contextHash": "5d7baba6707e976141ba00e28b0342ace6e5252a2632342e11a14405641c9c81"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "初期値は「と」です。",
+      "sourceHash": "1727640cd580d8662ae4a097ea5952b543effa7724cff0a521c1bd3a8fa04b36",
+      "translation": "The default value is “and.”",
+      "contextHash": "1727640cd580d8662ae4a097ea5952b543effa7724cff0a521c1bd3a8fa04b36"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "例：「ハロルドとテレーゼは～」",
+      "sourceHash": "70f8e5ed55f1b7528f6a0553421e0baf22fb7f0f160e3744fae842f1812144a4",
+      "translation": "Example: “Harold and Therese...\"",
+      "contextHash": "70f8e5ed55f1b7528f6a0553421e0baf22fb7f0f160e3744fae842f1812144a4"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "プラグインパラメータ（パーティコマンド関連） ver1.20",
+      "sourceHash": "dd74a983eb190d6f935fc3f03035c5c7ac2c58ac03fb189f1c2f844a45f30500",
+      "translation": "Plugin Parameters (Party Command-Related) ver1.20",
+      "contextHash": "dd74a983eb190d6f935fc3f03035c5c7ac2c58ac03fb189f1c2f844a45f30500"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "パーティコマンドから合体技を呼び出す設定が可能です。",
+      "sourceHash": "83ceb1836f9e451893df7a15f66e69ce4059dda38e236b7a5a4e518bf8c43a1a",
+      "translation": "You can configure combo skills to be called from the party command.",
+      "contextHash": "83ceb1836f9e451893df7a15f66e69ce4059dda38e236b7a5a4e518bf8c43a1a"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "基本的にはターン制やＣＴＴＢ向きです。仕様上、１ターン内に１つしか合体技を使用できませんので、お好みでどうぞ。",
+      "sourceHash": "490171689c0309e6a831826857dcea14c3e88d87c2b44a4da369d423bd915ff6",
+      "translation": "This is generally suited to turn-based battles and CTTB. Due to the specifications, only one combo skill can be used per turn, so use it as you prefer.",
+      "contextHash": "490171689c0309e6a831826857dcea14c3e88d87c2b44a4da369d423bd915ff6"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "事前にダミーのアクターを作成し、合体技を習得させる必要があります。",
+      "sourceHash": "08b993ca0e338cf6afc18eeae4217c3545f7b02619dc71419eca5ac6ddd04cc2",
+      "translation": "You must first create a dummy actor and have them learn the combo skills.",
+      "contextHash": "08b993ca0e338cf6afc18eeae4217c3545f7b02619dc71419eca5ac6ddd04cc2"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "※この方式を使う場合、個別のアクターに合体技を習得させる必要はありません。",
+      "sourceHash": "1f21c0d45b6c7ea964e135fc96e04aba470a4cbcde256c6e0f56ebd1d4ba5d87",
+      "translation": "※When using this method, individual actors do not need to learn the combo skills.",
+      "contextHash": "1f21c0d45b6c7ea964e135fc96e04aba470a4cbcde256c6e0f56ebd1d4ba5d87"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "↓ダミーアクターの設定例です。",
+      "sourceHash": "d06694e3f4592b87260f12e0dd12d460f4792f505660882204b28ac1a216b6dc",
+      "translation": "↓Here is an example of the dummy actor settings.",
+      "contextHash": "d06694e3f4592b87260f12e0dd12d460f4792f505660882204b28ac1a216b6dc"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "イベントコマンドからスキルを習得させることで、合体技を管理できます。",
+      "sourceHash": "9d2392cdfd921b95f8ee9853905224a2f23fffb880f1dacc042234ef2a5e6c54",
+      "translation": "You can manage combo skills by having actors learn them through event commands.",
+      "contextHash": "9d2392cdfd921b95f8ee9853905224a2f23fffb880f1dacc042234ef2a5e6c54"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "具体的な設定は、以下の各パラメータをご覧ください。",
+      "sourceHash": "9f36e4445ba046df3a15b7b1de5079ef35bc59300ad0c559ebc69b136369aa77",
+      "translation": "For specific settings, see the parameters below.",
+      "contextHash": "9f36e4445ba046df3a15b7b1de5079ef35bc59300ad0c559ebc69b136369aa77"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "合体技用アクター（partySkillActor）",
+      "sourceHash": "a60acf1cc589affecc1f7bcda4a287677fd4707d6a76ad4eef704f58f39dc2f1",
+      "translation": "Actor for Combination Skills (partySkillActor)",
+      "contextHash": "a60acf1cc589affecc1f7bcda4a287677fd4707d6a76ad4eef704f58f39dc2f1"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "合体技を保持するアクターを指定します。",
+      "sourceHash": "125cbb4c18d0b40fed613c04bba938e1b1de87682631e20b17c12b805d74428a",
+      "translation": "Specifies the actor who holds the combination skills.",
+      "contextHash": "125cbb4c18d0b40fed613c04bba938e1b1de87682631e20b17c12b805d74428a"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "パーティコマンド専用のダミーを設定してください。",
+      "sourceHash": "dd47cfff1e9f69988af75e0f4db47b146c7e4a7909d34c1afe40f8eb377bdc9c",
+      "translation": "Set a dummy used exclusively for the Party Command.",
+      "contextHash": "dd47cfff1e9f69988af75e0f4db47b146c7e4a7909d34c1afe40f8eb377bdc9c"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "合体技記号（combinationSymbol）",
+      "sourceHash": "8f398b3be329bcd25d5e9fe86b71a52d13e9a1002b80525dc2dfc655a70b9c73",
+      "translation": "Combination Skill Symbol (combinationSymbol)",
+      "contextHash": "8f398b3be329bcd25d5e9fe86b71a52d13e9a1002b80525dc2dfc655a70b9c73"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "合体技の記号を設定します。",
+      "sourceHash": "d81afdbcbeb5252fa49ec382acf7c38d9f34a60b469ba962ef3f5914b465a40c",
+      "translation": "Sets the symbol for combination skills.",
+      "contextHash": "d81afdbcbeb5252fa49ec382acf7c38d9f34a60b469ba962ef3f5914b465a40c"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "『YEP_MainMenuManager』のようなメニューのレイアウトを変更するプラグインとの連携に用います。この値を指定することで、外部プラグインから合体技コマンドをレイアウトへ設定できるようになります。",
+      "sourceHash": "ef87bbedbe3f1ca37a71895ddd0b104f9e585465b91f0f04663f01bbafade9d1",
+      "translation": "This is used to integrate with plugins that change the menu layout, such as 『YEP_MainMenuManager』. By specifying this value, external plugins can add the combination skill command to the layout.",
+      "contextHash": "ef87bbedbe3f1ca37a71895ddd0b104f9e585465b91f0f04663f01bbafade9d1"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "合体技表示名（combinationName）",
+      "sourceHash": "8a5ad0ecbb86f0f570747e300bbd5902455c4efe24f6fcd0b79817054d19e78c",
+      "translation": "Combination Skill Display Name (combinationName)",
+      "contextHash": "8a5ad0ecbb86f0f570747e300bbd5902455c4efe24f6fcd0b79817054d19e78c"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "下２つをオンにした際、表示されるコマンド名です。",
+      "sourceHash": "df0177843eb859ab1e3ea7602e1fe8f713625bc0f3a47caa8035586127fdb358",
+      "translation": "The command name displayed when the two options below are enabled.",
+      "contextHash": "df0177843eb859ab1e3ea7602e1fe8f713625bc0f3a47caa8035586127fdb358"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "パーティコマンドに表示（showPartyCommand）",
+      "sourceHash": "ddbb4b3142deb44e282da0db0af749e331c864d59b652f8f56a441e14010ed2a",
+      "translation": "Show in Party Command (showPartyCommand)",
+      "contextHash": "ddbb4b3142deb44e282da0db0af749e331c864d59b652f8f56a441e14010ed2a"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "オンにすれば、戦闘時のパーティコマンドに合体技用のコマンドが表示されます。",
+      "sourceHash": "04842b5b0c605d1be62f772adccf0834ba7f6230d1517e0c0ce4fc6229082250",
+      "translation": "When enabled, a command for combination skills is displayed in the Party Command during battle.",
+      "contextHash": "04842b5b0c605d1be62f772adccf0834ba7f6230d1517e0c0ce4fc6229082250"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "パーティコマンド挿入位置（showPartyCommandPosition） ver1.34",
+      "sourceHash": "1e8e3e2f44e9822b9b305dd76eaf12838b2394bfc6d33a10efea4c22535a6898",
+      "translation": "Party Command Insertion Position (showPartyCommandPosition) ver1.34",
+      "contextHash": "1e8e3e2f44e9822b9b305dd76eaf12838b2394bfc6d33a10efea4c22535a6898"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "パーティコマンドに合体技を挿入する位置です。",
+      "sourceHash": "9bd84b3698a38a07090add5bc579649a19b44a0791263663d16a36f7ba11a0b6",
+      "translation": "The position where the combination skill is inserted into the Party Command.",
+      "contextHash": "9bd84b3698a38a07090add5bc579649a19b44a0791263663d16a36f7ba11a0b6"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "0が先頭になります。初期値の1は戦うの下になります。",
+      "sourceHash": "8f6d946e26492a1db696b6ee47f43befa24803465630cabccb3550c4a438f470",
+      "translation": "0 is the first position. The default value, 1, places it below Fight.",
+      "contextHash": "8f6d946e26492a1db696b6ee47f43befa24803465630cabccb3550c4a438f470"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "メニューコマンドに表示（showMenuCommand）",
+      "sourceHash": "5780a612873198558c13b4b3d4e4ec03dc56c317a148daaad0999a8787159673",
+      "translation": "Show in Menu Command (showMenuCommand)",
+      "contextHash": "5780a612873198558c13b4b3d4e4ec03dc56c317a148daaad0999a8787159673"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "オンにすれば、メニュー画面に合体技用のコマンドが表示されます。",
+      "sourceHash": "6e09aa881fe726e2cb4b352ba311e8f62666930e3a182dea83bd0e5612a2fe5f",
+      "translation": "When enabled, a command for combination skills is displayed on the menu screen.",
+      "contextHash": "6e09aa881fe726e2cb4b352ba311e8f62666930e3a182dea83bd0e5612a2fe5f"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "メニューコマンド挿入位置（showMenuCommandPosition） ver1.34",
+      "sourceHash": "a3c3200f7e9a5fd3cfaf97a6c34314b14a9845f6184b52ca4d77e3f121830426",
+      "translation": "Menu Command Insertion Position (showMenuCommandPosition) ver1.34",
+      "contextHash": "a3c3200f7e9a5fd3cfaf97a6c34314b14a9845f6184b52ca4d77e3f121830426"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "メニューコマンドに合体技を挿入する位置です。",
+      "sourceHash": "551e424a165bf40fb4905ec35cf0b36f006c66086c63d758cb2c678965785f8f",
+      "translation": "The position where the combination skill is inserted into the Menu Command.",
+      "contextHash": "551e424a165bf40fb4905ec35cf0b36f006c66086c63d758cb2c678965785f8f"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "0が先頭になります。初期値の2はスキルの下になります。",
+      "sourceHash": "42e381957c92e3e1c8d4ac87ce1d9b71a098c2f8b58c6f42a7b452a4c52e96da",
+      "translation": "0 is the first position. The default value, 2, places it below Skills.",
+      "contextHash": "42e381957c92e3e1c8d4ac87ce1d9b71a098c2f8b58c6f42a7b452a4c52e96da"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "パーティコマンド非表示スイッチ",
+      "sourceHash": "02b6362af27a6428413144d4f1d2b8067a640b49f01b5c5a17891e58b7e2ee01",
+      "translation": "Party Command Hide Switch",
+      "contextHash": "e4a70e909495a79e605bc8b7e8bed7a1a38d1484ca03b15d4780277f57eb3ef9"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "（hidePartyCommandSwitch）ver1.32",
+      "sourceHash": "7efb5808b76c2fe2b4e3b951a65a5f7e01ce81f9bd8816fa9ea6906ed13417d4",
+      "translation": " (hidePartyCommandSwitch) ver1.32",
+      "contextHash": "e4a70e909495a79e605bc8b7e8bed7a1a38d1484ca03b15d4780277f57eb3ef9"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "指定のスイッチをオンにすると、パーティコマンドの合体技を非表示できます。",
+      "sourceHash": "65ed04e68c04e14edc99eee118b98ea3c67b8faa579110217fbac021f19cb01f",
+      "translation": "When the specified switch is turned on, the combination skill can be hidden from the Party Command.",
+      "contextHash": "65ed04e68c04e14edc99eee118b98ea3c67b8faa579110217fbac021f19cb01f"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "メニューコマンド非表示スイッチ",
+      "sourceHash": "5c1921e69c5cda075674ff3f55bb71f9c322a6b0b9f8bc3435bcf625acba1e35",
+      "translation": "Menu Command Hide Switch",
+      "contextHash": "559be922b0630a4230b872e5134289c4f21c4d5793bcdb66e0f6ad60f965c267"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "（hideMenuCommandSwitch）ver1.32",
+      "sourceHash": "c1ba84dd87f144cf4ae701d8d1e9a2d6e01a5801030342b83340af13c74d91a3",
+      "translation": " (hideMenuCommandSwitch) ver1.32",
+      "contextHash": "559be922b0630a4230b872e5134289c4f21c4d5793bcdb66e0f6ad60f965c267"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "指定のスイッチをオンにすると、メニューコマンドの合体技を非表示できます。",
+      "sourceHash": "a6d87eaf3397655cd2075439f00f4e90001e28632edacc4fcac8c8d3f0458eac",
+      "translation": "When the specified switch is turned on, the combination skill can be hidden from the Menu Command.",
+      "contextHash": "a6d87eaf3397655cd2075439f00f4e90001e28632edacc4fcac8c8d3f0458eac"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "プラグインパラメータ（外部連携） ver1.20",
+      "sourceHash": "b4f03b101284bb45ad0ff9ae0ff2367f7aaa6c96241250274383882190c1cca1",
+      "translation": "Plugin Parameters (External Integration) ver1.20",
+      "contextHash": "b4f03b101284bb45ad0ff9ae0ff2367f7aaa6c96241250274383882190c1cca1"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "外部プラグインとの連携を想定した項目です。",
+      "sourceHash": "11516e4f5de777f323e3d4d03b921aa428b5c72187ba1945551a7373b47d91bb",
+      "translation": "This item is intended for integration with external plugins.",
+      "contextHash": "11516e4f5de777f323e3d4d03b921aa428b5c72187ba1945551a7373b47d91bb"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "使用禁止条件（invalidCondition）",
+      "sourceHash": "db0710ae9c8b05c4266b4450c6dfa6806ad1d38169752eed3958a200557f10a8",
+      "translation": "Usage Restriction Conditions (invalidCondition)",
+      "contextHash": "db0710ae9c8b05c4266b4450c6dfa6806ad1d38169752eed3958a200557f10a8"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "いずれかの条件を満たす場合、合体技の実行を禁止します。",
+      "sourceHash": "4d46dd55874f71b736d15b76a4de382c59d37641525d20ce9bee8bca1887afde",
+      "translation": "If any of the conditions are met, execution of the combination skill is prohibited.",
+      "contextHash": "4d46dd55874f71b736d15b76a4de382c59d37641525d20ce9bee8bca1887afde"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "条件は複数指定可能です。",
+      "sourceHash": "6c724e634bcd3841257b83938cd4ddd6be647c868f911a689bdec5e76a34efc2",
+      "translation": "Multiple conditions can be specified.",
+      "contextHash": "6c724e634bcd3841257b83938cd4ddd6be647c868f911a689bdec5e76a34efc2"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "『subject』でスキルの使用者、『a』で各参加者を参照します。",
+      "sourceHash": "739e510e2081c9298448c73ab87e20e8c2a46ecc3e17e60312e6e950d362042c",
+      "translation": " \"subject』refers to the skill user, and 『a』refers to each participant.",
+      "contextHash": "739e510e2081c9298448c73ab87e20e8c2a46ecc3e17e60312e6e950d362042c"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "例えば、ＡＴＢプラグインと連携し、「タイムゲージが溜まっていないバトラーは合体技を実行禁止にする」というような用法を想定しています。",
+      "sourceHash": "87ac3369ac99e8ab2228a49d4ec0b3c6db6d8492ff20c91ccb1b84f59693e720",
+      "translation": "For example, it is intended for use with an ATB plugin to prohibit battlers whose time gauge has not filled from executing combination skills.",
+      "contextHash": "87ac3369ac99e8ab2228a49d4ec0b3c6db6d8492ff20c91ccb1b84f59693e720"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "スキルのメモ欄パラメータ",
+      "sourceHash": "73fef51d30e7669878b61b96bbb442b040baff1273dc1fe2ed771d03f72f911e",
+      "translation": "Skill Note Field Parameters",
+      "contextHash": "73fef51d30e7669878b61b96bbb442b040baff1273dc1fe2ed771d03f72f911e"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "<CS_Actors:[アクターID],[アクターID]>",
+      "sourceHash": "59c2b40f147543e0714ac913039a64982b9300ddf82eeac2f5954b5e62762e60",
+      "translation": "<CS_Actors:[Actor ID],[Actor ID]>",
+      "contextHash": "59c2b40f147543e0714ac913039a64982b9300ddf82eeac2f5954b5e62762e60"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "合体スキルの参加者となるアクターＩＤをカンマ区切りで指定します。",
+      "sourceHash": "14fe896db0af65b25290e8bad154eb5147178ac8525ed6ace4fca23fea2b958b",
+      "translation": "Specify the actor IDs of the participants in the combination skill, separated by commas.",
+      "contextHash": "14fe896db0af65b25290e8bad154eb5147178ac8525ed6ace4fca23fea2b958b"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "３人以上も可能です。",
+      "sourceHash": "b207ff32931a9f132c107e7d531eed120462d3a4e7bb191d928516c0c177fc00",
+      "translation": "Three or more participants are also possible.",
+      "contextHash": "b207ff32931a9f132c107e7d531eed120462d3a4e7bb191d928516c0c177fc00"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "\\v[1]などの特殊文字や数式も有効です。（ver1.37）",
+      "sourceHash": "b7d8e26d7a28de0f06ed671c4d435df09b20111458726aa873502c937a96d0fb",
+      "translation": "Special characters such as \\v[1] and formulas are also valid. (ver1.37)",
+      "contextHash": "b7d8e26d7a28de0f06ed671c4d435df09b20111458726aa873502c937a96d0fb"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "<CS_Enemys:[敵キャラID],[敵キャラID]> ver1.30",
+      "sourceHash": "5c7a2f8607e5c5ce8b2fb233949686520f69315896702303ae5fcd5081c136fc",
+      "translation": "<CS_Enemys:[Enemy ID],[Enemy ID]> ver1.30",
+      "contextHash": "5c7a2f8607e5c5ce8b2fb233949686520f69315896702303ae5fcd5081c136fc"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "合体スキルの参加者となる敵キャラＩＤをカンマ区切りで指定します。",
+      "sourceHash": "ef91fa11c4cf101c60c654063a1a4c010b7c009d5b7ad6dbf35a30011be5a54a",
+      "translation": "Specify the enemy IDs of the participants in the combination skill, separated by commas.",
+      "contextHash": "ef91fa11c4cf101c60c654063a1a4c010b7c009d5b7ad6dbf35a30011be5a54a"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "同一ＩＤも可能です。",
+      "sourceHash": "9718d2c6c340d53092bd2037355915dc25087d8e7a2482e8c9be34f4b3e9b138",
+      "translation": "The same ID can also be specified.",
+      "contextHash": "9718d2c6c340d53092bd2037355915dc25087d8e7a2482e8c9be34f4b3e9b138"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "例えば、以下のように設定するとID=10の敵キャラ同士が連携します。",
+      "sourceHash": "d3e0d67c63c23e2c19a9a7db0a6ddef934921a4a3a1139188b247eb63cc196cc",
+      "translation": "For example, if configured as shown below, enemies with ID=10 will cooperate with each other.",
+      "contextHash": "d3e0d67c63c23e2c19a9a7db0a6ddef934921a4a3a1139188b247eb63cc196cc"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "<CS_Battlers:[番号],[番号]> ver1.30",
+      "sourceHash": "b6f12a8e8db824672e6e8fdc00e05ea1b513c3f5fb16a02b2f83ed2161449742",
+      "translation": "<CS_Battlers:[Number],[Number]> ver1.30",
+      "contextHash": "b6f12a8e8db824672e6e8fdc00e05ea1b513c3f5fb16a02b2f83ed2161449742"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "合体スキルの参加者となるバトラーをカンマ区切りで指定します。",
+      "sourceHash": "0043504e991c8b589db1c7540b668bccebfebff209647474d7b83c675c40adc3",
+      "translation": "Specify the battlers who will participate in the combination skill, separated by commas.",
+      "contextHash": "0043504e991c8b589db1c7540b668bccebfebff209647474d7b83c675c40adc3"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "[番号]には1から開始する並び順を指定します。",
+      "sourceHash": "ea6cc8c2d32c00b103e712441dfa3188dd208ba5aff5a24c477aff765fb0f0f8",
+      "translation": "For [Number], specify the order beginning with 1.",
+      "contextHash": "ea6cc8c2d32c00b103e712441dfa3188dd208ba5aff5a24c477aff765fb0f0f8"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "敵味方共通で使用できます。",
+      "sourceHash": "3d598c34a5f205187196d15d7f4b82261e7476e9576f3c6d9a7fffade3d61c27",
+      "translation": "This can be used for both allies and enemies.",
+      "contextHash": "3d598c34a5f205187196d15d7f4b82261e7476e9576f3c6d9a7fffade3d61c27"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "以下のように設定すると４人全員参加の合体技も作れます。人数が足らない場合は使用できません。",
+      "sourceHash": "45a10e9bb4b54207e7f6b1a269616f5fd2345759f63adbae93d4bf3d49210c17",
+      "translation": "As shown below, you can also create a combination skill involving all four members. It cannot be used if there are not enough members.",
+      "contextHash": "45a10e9bb4b54207e7f6b1a269616f5fd2345759f63adbae93d4bf3d49210c17"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "<CS_ReactionState:[ステートID]>",
+      "sourceHash": "2843df840fef9201f079f83990b6d45e1eea93d678ac57c0f435a98c9f904dc2",
+      "translation": "<CS_ReactionState:[State ID]>",
+      "contextHash": "2843df840fef9201f079f83990b6d45e1eea93d678ac57c0f435a98c9f904dc2"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "スキル実行後、協力者に付加するステートを個別指定したい場合に使用できます。",
+      "sourceHash": "f4823ed92df48fe70d6548ea0d0057f8e8569cbc167821c65d5d98cc951fa59e",
+      "translation": "This can be used when you want to individually specify the state applied to the participants after the skill is executed.",
+      "contextHash": "f4823ed92df48fe70d6548ea0d0057f8e8569cbc167821c65d5d98cc951fa59e"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "通常はプラグインパラメータの値が設定されるため、指定は不要です。",
+      "sourceHash": "8075caf20d3975bf4dda7d32bff8ced6b3e8950b17fa21260eb8c647e0149467",
+      "translation": "Normally, the value from the plugin parameter is used, so this does not need to be specified.",
+      "contextHash": "8075caf20d3975bf4dda7d32bff8ced6b3e8950b17fa21260eb8c647e0149467"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "<CS_ExceptState:[ステートID]> ver1.40",
+      "sourceHash": "352dfb703debf775492256d5c2752aede363e63561d045518c646ad7d5491efc",
+      "translation": "<CS_ExceptState:[State ID]> ver1.40",
+      "contextHash": "352dfb703debf775492256d5c2752aede363e63561d045518c646ad7d5491efc"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "スキル選択時、指定したステート中でも実行できるようにします。",
+      "sourceHash": "f61cee88c0f42af0c5287ef3a416b8c6f63beee91328b86e02aa421ce9e21c5b",
+      "translation": "Allows the skill to be executed while the specified state is active when selecting the skill.",
+      "contextHash": "f61cee88c0f42af0c5287ef3a416b8c6f63beee91328b86e02aa421ce9e21c5b"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "※例えば、協力者が睡眠中でも実行できるなど。",
+      "sourceHash": "dd72999d841eae2d72d8d5129c76472f64c765b8bc1580666173044414bfb3a5",
+      "translation": "※For example, it can be executed even when a participant is asleep.",
+      "contextHash": "dd72999d841eae2d72d8d5129c76472f64c765b8bc1580666173044414bfb3a5"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "※カンマ区切りで複数指定も可能です。",
+      "sourceHash": "e8f1214d3117c3a03fdce56482f72d02d69df3784141d16dd068cecad0532dec",
+      "translation": "※Multiple entries can also be specified, separated by commas.",
+      "contextHash": "e8f1214d3117c3a03fdce56482f72d02d69df3784141d16dd068cecad0532dec"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "<CS_UserName:[ユーザ名]> ver1.21",
+      "sourceHash": "20dcd2972172aca3014fd759c6611c19ce229862cea07cde22baea138d6c8988",
+      "translation": "<CS_UserName:[User Name]> ver1.21",
+      "contextHash": "20dcd2972172aca3014fd759c6611c19ce229862cea07cde22baea138d6c8988"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "戦闘メッセージを表示する際の合体技の使用者名です。",
+      "sourceHash": "eeee5243a433e1510b13be6d2c29cf54bcc63a376ac74d6d34a1ced44b14a204",
+      "translation": "The name of the combo skill user displayed in battle messages.",
+      "contextHash": "eeee5243a433e1510b13be6d2c29cf54bcc63a376ac74d6d34a1ced44b14a204"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "文字列、Javascript計算式の両方が有効です。",
+      "sourceHash": "be94c045934e86d310323e55029daabb18b466eff6d9b937058d2daa3b258748",
+      "translation": "Both strings and JavaScript formulas are supported.",
+      "contextHash": "be94c045934e86d310323e55029daabb18b466eff6d9b937058d2daa3b258748"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "\\n[1]なども使えます。",
+      "sourceHash": "0ac108dc15a9e621cd8e210417c0398dca3cab4defd14fc1af608294398ae880",
+      "translation": "\\n[1], etc. can also be used.",
+      "contextHash": "0ac108dc15a9e621cd8e210417c0398dca3cab4defd14fc1af608294398ae880"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<CS_UserName:\\n[1]達>",
+      "sourceHash": "e64114b4385d8f82be2edd360b0069b61da6d0a7a62cd82d73a5141768222874",
+      "translation": "<CS_UserName:\\n[1]Tatsu>",
+      "contextHash": "e64114b4385d8f82be2edd360b0069b61da6d0a7a62cd82d73a5141768222874"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "また『$cs(1).name()』で先頭の参加者の名前が取得できます。敵の名称表示もこの方法でＯＫです。",
+      "sourceHash": "e493aa3b47739204eb932b0eb9ed0daa210af7b16f5d4e2cc0001b4e4b27da29",
+      "translation": "You can also retrieve the name of the first participant with 『$cs(1).name()』. This method can also be used to display enemy names.",
+      "contextHash": "e493aa3b47739204eb932b0eb9ed0daa210af7b16f5d4e2cc0001b4e4b27da29"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "<CS_UserName:$cs(1).name() + \"達\">",
+      "sourceHash": "80f05a904ca0d47a484f5e2609d24e4423a10a97837eeb4bd1fe2b4a6574c34e",
+      "translation": "<CS_UserName:$cs(1).name() + \"Tatsu\">",
+      "contextHash": "80f05a904ca0d47a484f5e2609d24e4423a10a97837eeb4bd1fe2b4a6574c34e"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "指定がない場合は参加者の名前を自動で連結します。",
+      "sourceHash": "a8a02118a21c050f5a24bee124f872309c3ca074e6d49f30000970e0718f9dcb",
+      "translation": "If none is specified, the participants' names are concatenated automatically.",
+      "contextHash": "a8a02118a21c050f5a24bee124f872309c3ca074e6d49f30000970e0718f9dcb"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "ステートのメモ欄パラメータ",
+      "sourceHash": "fa82f3d46d44cc6cfb2dd577bbc3f1eddae8b7b4155e4ab9a2a9c7c6de921b15",
+      "translation": "State Note Field Parameters",
+      "contextHash": "fa82f3d46d44cc6cfb2dd577bbc3f1eddae8b7b4155e4ab9a2a9c7c6de921b15"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "以下で合体技の禁止状態を制御できます。行動制約以外のステートでも禁止したい場合はどうぞ。",
+      "sourceHash": "782d09d241139f731c652d7f2349c88d0185d91ff54cdd03768586e33dbdb9f8",
+      "translation": "You can control whether combo skills are prohibited using the settings below. Use these when you want to prohibit them with states other than those imposing action restrictions.",
+      "contextHash": "782d09d241139f731c652d7f2349c88d0185d91ff54cdd03768586e33dbdb9f8"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "ステート中、合体技を禁止します。",
+      "sourceHash": "3c77caa425c8a8b10f22f31bd92dc40b0b400b83bf73f412f110703547c09516",
+      "translation": "Prohibits the use of combo skills while affected by the state.",
+      "contextHash": "3c77caa425c8a8b10f22f31bd92dc40b0b400b83bf73f412f110703547c09516"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "ステート中、合体技への協力を禁止します。",
+      "sourceHash": "fd5f33f843f0ae25deb0d36c976c0afa0c5898f53ef90e5d9064b401fb402f4f",
+      "translation": "Prohibits cooperation in combo skills while affected by the state.",
+      "contextHash": "fd5f33f843f0ae25deb0d36c976c0afa0c5898f53ef90e5d9064b401fb402f4f"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "『CS_Seal』と異なり、自身が起点となる合体技は使えます。",
+      "sourceHash": "b8eff67bd65efd22a7ce58df9896b9d641cb9fa7570f899a33ea7a6c68b84c1f",
+      "translation": "Unlike 『CS_Seal』, combo skills initiated by the affected battler can still be used.",
+      "contextHash": "b8eff67bd65efd22a7ce58df9896b9d641cb9fa7570f899a33ea7a6c68b84c1f"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "ＣＴＢなどで連続して合体技の協力者にされるのを防止したい時など。",
+      "sourceHash": "5325d08a460f4f7f9aa7ba2bff88a8f309e077b4269350d860987d55eeab6659",
+      "translation": "For example, when you want to prevent a battler from being repeatedly selected as a combo skill collaborator in CTB and similar systems.",
+      "contextHash": "5325d08a460f4f7f9aa7ba2bff88a8f309e077b4269350d860987d55eeab6659"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "参考情報",
+      "sourceHash": "402843e10adf15435e43209744f131df9270bb90ee15f2d80c2a75e5aec229bf",
+      "translation": "Reference Information",
+      "contextHash": "402843e10adf15435e43209744f131df9270bb90ee15f2d80c2a75e5aec229bf"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "合体技プラグインは他所にもありますので、用途によってはこちらもどうぞ。",
+      "sourceHash": "d689be0037b2a24bf8a5a090a878d33e03cd876f51c4afbb9b664d45e486d202",
+      "translation": "There are also combo skill plugins available elsewhere, so consider these as well depending on your intended use.",
+      "contextHash": "d689be0037b2a24bf8a5a090a878d33e03cd876f51c4afbb9b664d45e486d202"
+    },
+    {
+      "id": "link-006",
+      "type": "link",
+      "source": "https://fungamemake.com/archives/6239",
+      "sourceHash": "e3eec2a5d2ad04b8df088d537acfaa239bf9f19bf6a0f42ff4011f62c708a206",
+      "translation": "https://fungamemake.com/archives/6239",
+      "contextHash": "393c9ef46798735388ecd2e3b8ec3b7e0b1d2effe8a5d3a8ba1375709533769e"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "通常のターン制でも[[LINK_1]]ＣＴＢ[[/LINK_1]]でもどちらでも使えます。（ver1.10）",
+      "sourceHash": "c0a858b4a4afc3632033082b13ac312defbb08703d55a3fc1cb8c5b4f9d03844",
+      "parts": [
+        {
+          "source": "通常のターン制でも",
+          "link": false
+        },
+        {
+          "source": "ＣＴＢ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "でもどちらでも使えます。（ver1.10）",
+          "link": false
+        }
+      ],
+      "translation": "Usable with either the normal turn-based system or [[LINK_1]]CTB[[/LINK_1]]. (ver1.10)",
+      "contextHash": "c0a858b4a4afc3632033082b13ac312defbb08703d55a3fc1cb8c5b4f9d03844"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンドから合体技を使用する設定[[/LINK_1]]も可能。",
+      "sourceHash": "fc314d5aa479307c052e482dd19cd30ba290cbad49985c14b810dd04d0c80f42",
+      "parts": [
+        {
+          "source": "パーティコマンドから合体技を使用する設定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "も可能。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]A setting to use Combination Skills from the party command[[/LINK_1]] is also available.",
+      "contextHash": "fc314d5aa479307c052e482dd19cd30ba290cbad49985c14b810dd04d0c80f42"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicAnimation&Motion サンプル技（合体技）[[/LINK_1]]",
+      "sourceHash": "f2b1134bf294a7e7a574591b512e25a9e40f3e452659b9cab418031039d365e7",
+      "parts": [
+        {
+          "source": "DynamicAnimation&Motion サンプル技（合体技）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]DynamicAnimation&Motion Sample Skills (Combination Skills)[[/LINK_1]]",
+      "contextHash": "f2b1134bf294a7e7a574591b512e25a9e40f3e452659b9cab418031039d365e7"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（install）[[/LINK_1]]",
+      "sourceHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8",
+      "parts": [
+        {
+          "source": "導入方法（install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (install)[[/LINK_1]]",
+      "contextHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（history）[[/LINK_1]]",
+      "sourceHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73",
+      "parts": [
+        {
+          "source": "更新履歴（history）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (history)[[/LINK_1]]",
+      "contextHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（usage）[[/LINK_1]]",
+      "sourceHash": "b99707125760914538f188f692f7d2783b7ef50b7bca581cbe2f14a39e9a58ed",
+      "parts": [
+        {
+          "source": "使用方法（usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (usage)[[/LINK_1]]",
+      "contextHash": "b99707125760914538f188f692f7d2783b7ef50b7bca581cbe2f14a39e9a58ed"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]共通[[/LINK_1]]",
+      "sourceHash": "d6d9b2d7bd8bba702489c83e034ba61025df63855b5e9c77afdf4ac8a282fb63",
+      "parts": [
+        {
+          "source": "共通",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]General[[/LINK_1]]",
+      "contextHash": "d6d9b2d7bd8bba702489c83e034ba61025df63855b5e9c77afdf4ac8a282fb63"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]ＣＴＢ用の設定[[/LINK_1]]",
+      "sourceHash": "03207f083d9bc181876f3cc6d39c210359ea8fb558f5fb767dbc8cc98b42be6b",
+      "parts": [
+        {
+          "source": "ＣＴＢ用の設定",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Settings for CTB[[/LINK_1]]",
+      "contextHash": "03207f083d9bc181876f3cc6d39c210359ea8fb558f5fb767dbc8cc98b42be6b"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]タイムプログレス（アクティブ）[[/LINK_1]]",
+      "sourceHash": "bfacff8f1efa08181936e5583290bb3e0dea8723e3803532a58ce676b0104905",
+      "parts": [
+        {
+          "source": "タイムプログレス（アクティブ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Time Progress (Active)[[/LINK_1]]",
+      "contextHash": "bfacff8f1efa08181936e5583290bb3e0dea8723e3803532a58ce676b0104905"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]タイムプログレス（ウェイト）[[/LINK_1]]",
+      "sourceHash": "efe01c03f6b55b22aa89157b6c5772605ff181c117669c135061d0f24450ab38",
+      "parts": [
+        {
+          "source": "タイムプログレス（ウェイト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Time Progress (Wait)[[/LINK_1]]",
+      "contextHash": "efe01c03f6b55b22aa89157b6c5772605ff181c117669c135061d0f24450ab38"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]グローバル関数[[/LINK_1]]",
+      "sourceHash": "ced0a1d5fc16305f5a75d255f1adf3a7bcc9b75c0c95dda19503cae6577df337",
+      "parts": [
+        {
+          "source": "グローバル関数",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Global Functions[[/LINK_1]]",
+      "contextHash": "ced0a1d5fc16305f5a75d255f1adf3a7bcc9b75c0c95dda19503cae6577df337"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（ＣＴＢ関連）[[/LINK_1]]",
+      "sourceHash": "12b4bfe2c9f3a487bfa25395b2e633c189be1870dba863dfe29d144af499c4c0",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（ＣＴＢ関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (CTB-Related)[[/LINK_1]]",
+      "contextHash": "12b4bfe2c9f3a487bfa25395b2e633c189be1870dba863dfe29d144af499c4c0"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]実行後ステート（reactionState）[[/LINK_1]]",
+      "sourceHash": "b05a5e9c7dc54ddf348ae86fc23b6d2d4f8e21c8a70ccf7a6790ccbe638893dd",
+      "parts": [
+        {
+          "source": "実行後ステート（reactionState）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Post-Execution State (reactionState)[[/LINK_1]]",
+      "contextHash": "b05a5e9c7dc54ddf348ae86fc23b6d2d4f8e21c8a70ccf7a6790ccbe638893dd"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（メッセージ関連）[[/LINK_1]]",
+      "sourceHash": "06e42bdf3435d6b64675e35d078fa0c28232bb5bb13252141dfe2d06ec5f7a96",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（メッセージ関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Message-Related)[[/LINK_1]]",
+      "contextHash": "06e42bdf3435d6b64675e35d078fa0c28232bb5bb13252141dfe2d06ec5f7a96"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]連結用の文字（andLetter）[[/LINK_1]]",
+      "sourceHash": "df5bd17c03f61bcea4fbe018a0033dedf9e6e6dcec089bdeca4a560562080d48",
+      "parts": [
+        {
+          "source": "連結用の文字（andLetter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Concatenation Character (andLetter)[[/LINK_1]]",
+      "contextHash": "df5bd17c03f61bcea4fbe018a0033dedf9e6e6dcec089bdeca4a560562080d48"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（パーティコマンド関連）[[/LINK_1]]",
+      "sourceHash": "f994bb4ee8d3d9ad4b2920864eb866098672585f4b90441c35852aa8366e2638",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（パーティコマンド関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Party Command-Related)[[/LINK_1]]",
+      "contextHash": "f994bb4ee8d3d9ad4b2920864eb866098672585f4b90441c35852aa8366e2638"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]合体技用アクター（partySkillActor）[[/LINK_1]]",
+      "sourceHash": "c11efebfbf1fcfce4f43b921cffe906de58c9f5acb28fa8f29f3eef9885ad3e0",
+      "parts": [
+        {
+          "source": "合体技用アクター（partySkillActor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor for Combination Skills (partySkillActor)[[/LINK_1]]",
+      "contextHash": "c11efebfbf1fcfce4f43b921cffe906de58c9f5acb28fa8f29f3eef9885ad3e0"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]合体技記号（combinationSymbol）[[/LINK_1]]",
+      "sourceHash": "182885f7efce2249fd517e19d460de25bdc7b1ec7d68e9c6460bb4fbac26ffb2",
+      "parts": [
+        {
+          "source": "合体技記号（combinationSymbol）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Combination Skill Symbol (combinationSymbol)[[/LINK_1]]",
+      "contextHash": "182885f7efce2249fd517e19d460de25bdc7b1ec7d68e9c6460bb4fbac26ffb2"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]合体技表示名（combinationName）[[/LINK_1]]",
+      "sourceHash": "c18db7e12d0724173099d429bb30b2a60a3d4f88f16e6c109cf7e50c42a2ea8d",
+      "parts": [
+        {
+          "source": "合体技表示名（combinationName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Combination Skill Display Name (combinationName)[[/LINK_1]]",
+      "contextHash": "c18db7e12d0724173099d429bb30b2a60a3d4f88f16e6c109cf7e50c42a2ea8d"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンドに表示（showPartyCommand）[[/LINK_1]]",
+      "sourceHash": "e6545c1a70c3fcd451dd17c3b33969c445ceaa560609b65f71189f70a8bbdec7",
+      "parts": [
+        {
+          "source": "パーティコマンドに表示（showPartyCommand）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display in Party Commands (showPartyCommand)[[/LINK_1]]",
+      "contextHash": "e6545c1a70c3fcd451dd17c3b33969c445ceaa560609b65f71189f70a8bbdec7"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンド挿入位置（showPartyCommandPosition）[[/LINK_1]]",
+      "sourceHash": "1c26bc24582fb17b202d736261332b58ba1756136f53b69a4981442447b7c0f4",
+      "parts": [
+        {
+          "source": "パーティコマンド挿入位置（showPartyCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Party Command Insertion Position (showPartyCommandPosition)[[/LINK_1]]",
+      "contextHash": "1c26bc24582fb17b202d736261332b58ba1756136f53b69a4981442447b7c0f4"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンドに表示（showMenuCommand）[[/LINK_1]]",
+      "sourceHash": "87d9a6cb9ec22d7df8e0cef62ddcb019ddb06cad26532c27598557f6e3724989",
+      "parts": [
+        {
+          "source": "メニューコマンドに表示（showMenuCommand）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display in Menu Commands (showMenuCommand)[[/LINK_1]]",
+      "contextHash": "87d9a6cb9ec22d7df8e0cef62ddcb019ddb06cad26532c27598557f6e3724989"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンド挿入位置（showMenuCommandPosition）[[/LINK_1]]",
+      "sourceHash": "28a156ce162addfad0e9f3e6200f4867daeae5ce89fa71d63b5d91282f089a1f",
+      "parts": [
+        {
+          "source": "メニューコマンド挿入位置（showMenuCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Command Insertion Position (showMenuCommandPosition)[[/LINK_1]]",
+      "contextHash": "28a156ce162addfad0e9f3e6200f4867daeae5ce89fa71d63b5d91282f089a1f"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンド非表示スイッチ（hidePartyCommandSwitch）[[/LINK_1]]",
+      "sourceHash": "a4b4f71757cc90bcc15de0b34afa1a3d5ba669d30baee896cf3f3e7c628782dc",
+      "parts": [
+        {
+          "source": "パーティコマンド非表示スイッチ（hidePartyCommandSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch to Hide Party Commands (hidePartyCommandSwitch)[[/LINK_1]]",
+      "contextHash": "a4b4f71757cc90bcc15de0b34afa1a3d5ba669d30baee896cf3f3e7c628782dc"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンド非表示スイッチ（hideMenuCommandSwitch）[[/LINK_1]]",
+      "sourceHash": "1f7c4c272039b12889b05edea1789206b42d5af4a7f49f92fe9fdf96c27b0fa6",
+      "parts": [
+        {
+          "source": "メニューコマンド非表示スイッチ（hideMenuCommandSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch to Hide Menu Commands (hideMenuCommandSwitch)[[/LINK_1]]",
+      "contextHash": "1f7c4c272039b12889b05edea1789206b42d5af4a7f49f92fe9fdf96c27b0fa6"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（外部連携）[[/LINK_1]]",
+      "sourceHash": "dd960cb9d7d8731209b78f4962fd5f9ff686dd1edc54645e678bcce0af913f38",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（外部連携）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (External Integration)[[/LINK_1]]",
+      "contextHash": "dd960cb9d7d8731209b78f4962fd5f9ff686dd1edc54645e678bcce0af913f38"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]使用禁止条件（invalidCondition）[[/LINK_1]]",
+      "sourceHash": "ee3cac7447d1e3be5a40238052f3a43133c66a08767f3d6c8401ca2c0acf3a5a",
+      "parts": [
+        {
+          "source": "使用禁止条件（invalidCondition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage Restriction Condition (invalidCondition)[[/LINK_1]]",
+      "contextHash": "ee3cac7447d1e3be5a40238052f3a43133c66a08767f3d6c8401ca2c0acf3a5a"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄パラメータ[[/LINK_1]]",
+      "sourceHash": "a4297dbd46d88246c1cd105c4c0eccf05f5332f317ef032f74ddd1ad362ce9f7",
+      "parts": [
+        {
+          "source": "スキルのメモ欄パラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field Parameters[[/LINK_1]]",
+      "contextHash": "a4297dbd46d88246c1cd105c4c0eccf05f5332f317ef032f74ddd1ad362ce9f7"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_Actors:[アクターID],[アクターID]>[[/LINK_1]]",
+      "sourceHash": "d202b8c449653eb316e30936217f4241f12abc08db6142092bd40e2ebb3d281e",
+      "parts": [
+        {
+          "source": "<CS_Actors:[アクターID],[アクターID]>",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<CS_Actors:[Actor ID],[Actor ID]>[[/LINK_1]]",
+      "contextHash": "d202b8c449653eb316e30936217f4241f12abc08db6142092bd40e2ebb3d281e"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_Enemys:[敵キャラID],[敵キャラID]>[[/LINK_1]]",
+      "sourceHash": "75d0239f2bd75daafc250e3a732ba429e9e65206d3d81a125725130fb4e80fc3",
+      "parts": [
+        {
+          "source": "<CS_Enemys:[敵キャラID],[敵キャラID]>",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<CS_Enemys:[Enemy ID],[Enemy ID]>[[/LINK_1]]",
+      "contextHash": "75d0239f2bd75daafc250e3a732ba429e9e65206d3d81a125725130fb4e80fc3"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_Battlers:[番号],[番号]>[[/LINK_1]]",
+      "sourceHash": "45cd588e28f479f83e7dd1dfd027b5e1146d24218ebfb815160c9d78961d1412",
+      "parts": [
+        {
+          "source": "<CS_Battlers:[番号],[番号]>",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<CS_Battlers:[Position],[Position]>[[/LINK_1]]",
+      "contextHash": "45cd588e28f479f83e7dd1dfd027b5e1146d24218ebfb815160c9d78961d1412"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_ReactionState:[ステートID]>[[/LINK_1]]",
+      "sourceHash": "744416b9db6c52ad7cf0e4e8f0bca807276a9f38c4554fc25512dfe059eef05f",
+      "parts": [
+        {
+          "source": "<CS_ReactionState:[ステートID]>",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<CS_ReactionState:[State ID]>[[/LINK_1]]",
+      "contextHash": "744416b9db6c52ad7cf0e4e8f0bca807276a9f38c4554fc25512dfe059eef05f"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_UserName:[ユーザ名]>[[/LINK_1]]",
+      "sourceHash": "b6d364afbb6a4f8df32b6a485b75cf53a05eb3e0b3597f5f6975c63a2c83ef4e",
+      "parts": [
+        {
+          "source": "<CS_UserName:[ユーザ名]>",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]<CS_UserName:[Username]>[[/LINK_1]]",
+      "contextHash": "b6d364afbb6a4f8df32b6a485b75cf53a05eb3e0b3597f5f6975c63a2c83ef4e"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄パラメータ[[/LINK_1]]",
+      "sourceHash": "5779219fb1f1cf61b5dd0cd69d7707aa0c6a59adf65829ea54f781c75a10de78",
+      "parts": [
+        {
+          "source": "ステートのメモ欄パラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Note Field Parameters[[/LINK_1]]",
+      "contextHash": "5779219fb1f1cf61b5dd0cd69d7707aa0c6a59adf65829ea54f781c75a10de78"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]参考情報[[/LINK_1]]",
+      "sourceHash": "728da8e97233f8f7579f7e24a124ff8b58125a4239a2d97c631179d93a6464e5",
+      "parts": [
+        {
+          "source": "参考情報",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reference Information[[/LINK_1]]",
+      "contextHash": "728da8e97233f8f7579f7e24a124ff8b58125a4239a2d97c631179d93a6464e5"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "スキル選択時、[[LINK_1]]指定したステート中でも合体技を実行できる[[/LINK_1]]ようにした。",
+      "sourceHash": "6c0a172a805b7b8868d59d12bff39477a25e0316e1982684e9ebe1ed7e3dc118",
+      "parts": [
+        {
+          "source": "スキル選択時、",
+          "link": false
+        },
+        {
+          "source": "指定したステート中でも合体技を実行できる",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ようにした。",
+          "link": false
+        }
+      ],
+      "translation": "When selecting a skill, I made it possible to execute Combination Skills even while [[LINK_1]]under the specified state[[/LINK_1]].",
+      "contextHash": "6c0a172a805b7b8868d59d12bff39477a25e0316e1982684e9ebe1ed7e3dc118"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]<CS_ReactionState>[[/LINK_1]]について、0を指定した場合はステートをなしにできるようにした。",
+      "sourceHash": "873cc139c18ebb75a87de8369bf165fe403b0e8fc54f0bb08a667b8208a5bad3",
+      "parts": [
+        {
+          "source": "<CS_ReactionState>",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "について、0を指定した場合はステートをなしにできるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Regarding [[LINK_1]]<CS_ReactionState>[[/LINK_1]], specifying 0 now makes it possible to have no state.",
+      "contextHash": "873cc139c18ebb75a87de8369bf165fe403b0e8fc54f0bb08a667b8208a5bad3"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "プラグインパラメータに[[LINK_1]]合体技コマンド非表示用のスイッチ[[/LINK_1]]を追加。",
+      "sourceHash": "ee38a65e41a0dab0743b625157654f21187b7b8e73ddb6dffd6db3b40c1a9116",
+      "parts": [
+        {
+          "source": "プラグインパラメータに",
+          "link": false
+        },
+        {
+          "source": "合体技コマンド非表示用のスイッチ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]a switch for hiding the Combination Skill command[[/LINK_1]] to the plugin parameters.",
+      "contextHash": "ee38a65e41a0dab0743b625157654f21187b7b8e73ddb6dffd6db3b40c1a9116"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラの合体技[[/LINK_1]]に対応。",
+      "sourceHash": "bb0d9aaa75a26009bb10778819aefe11036f85b1a10bdf52b333880ef34f36ef",
+      "parts": [
+        {
+          "source": "敵キャラの合体技",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Support for [[LINK_1]]enemy Combination Skills[[/LINK_1]] has been added.",
+      "contextHash": "bb0d9aaa75a26009bb10778819aefe11036f85b1a10bdf52b333880ef34f36ef"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]並び順指定での合体技[[/LINK_1]]に対応。",
+      "sourceHash": "65956bb42323160ac635d518b22ee8ca86cb813e577ce086f52abcdefea665a5",
+      "parts": [
+        {
+          "source": "並び順指定での合体技",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Support for [[LINK_1]]Combination Skills specified by position order[[/LINK_1]] has been added.",
+      "contextHash": "65956bb42323160ac635d518b22ee8ca86cb813e577ce086f52abcdefea665a5"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]合体技参加者をグローバル関数で取得[[/LINK_1]]できるようにした。",
+      "sourceHash": "1afde28a8a8956b6b152e4283ad54171139aa0d9856458acf6a09f1dbb4d336e",
+      "parts": [
+        {
+          "source": "合体技参加者をグローバル関数で取得",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to [[LINK_1]]retrieve Combination Skill participants using a global function[[/LINK_1]].",
+      "contextHash": "1afde28a8a8956b6b152e4283ad54171139aa0d9856458acf6a09f1dbb4d336e"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]合体技参加者のスプライトを取得[[/LINK_1]]できるようにした。（05/04 ver1.303）",
+      "sourceHash": "1d71e9fe0cdfede4b01e3490c0252eca2cc0c12a47e1df86d309199aec42434e",
+      "parts": [
+        {
+          "source": "合体技参加者のスプライトを取得",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。（05/04 ver1.303）",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to [[LINK_1]]retrieve the sprites of Combination Skill participants[[/LINK_1]]. (05/04 ver1.303)",
+      "contextHash": "1d71e9fe0cdfede4b01e3490c0252eca2cc0c12a47e1df86d309199aec42434e"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "プラグインパラメータに[[LINK_1]]連結用の文字（andLetter）[[/LINK_1]]を追加。",
+      "sourceHash": "01333b51099a8612f5db3aafcabecb8fa95113aa9f8edbdb6015898970f39da9",
+      "parts": [
+        {
+          "source": "プラグインパラメータに",
+          "link": false
+        },
+        {
+          "source": "連結用の文字（andLetter）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]the concatenation character (andLetter)[[/LINK_1]] to the plugin parameters.",
+      "contextHash": "01333b51099a8612f5db3aafcabecb8fa95113aa9f8edbdb6015898970f39da9"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "スキルのメモ欄パラメータに[[LINK_1]]CS_UserName[[/LINK_1]]を追加。",
+      "sourceHash": "0554a3d9ec0a0815c5ad1252c58a117cf9a3b079b610eca037d09d4a8b3b0fdc",
+      "parts": [
+        {
+          "source": "スキルのメモ欄パラメータに",
+          "link": false
+        },
+        {
+          "source": "CS_UserName",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]CS_UserName[[/LINK_1]] to the skill note field parameters.",
+      "contextHash": "0554a3d9ec0a0815c5ad1252c58a117cf9a3b079b610eca037d09d4a8b3b0fdc"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]パーティコマンドから呼び出す機能[[/LINK_1]]を追加。",
+      "sourceHash": "1a507cca0bdffd156cbb0e93cbb8a24273844b4e5492b8523b61cf1b063f8785",
+      "parts": [
+        {
+          "source": "パーティコマンドから呼び出す機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]the function to call it from the party commands[[/LINK_1]].",
+      "contextHash": "1a507cca0bdffd156cbb0e93cbb8a24273844b4e5492b8523b61cf1b063f8785"
+    },
+    {
+      "id": "line-046",
+      "type": "line",
+      "source": "[[LINK_1]]外部プラグインとの連携機能[[/LINK_1]]を追加。",
+      "sourceHash": "0a6b9537b4d0f9e2bd423b59ea800d3b1a82f13f6c233ec4eed5e3bc7a8efd49",
+      "parts": [
+        {
+          "source": "外部プラグインとの連携機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]a function for integration with external plugins[[/LINK_1]].",
+      "contextHash": "0a6b9537b4d0f9e2bd423b59ea800d3b1a82f13f6c233ec4eed5e3bc7a8efd49"
+    },
+    {
+      "id": "line-047",
+      "type": "line",
+      "source": "[[LINK_1]]ＣＴＴＢ[[/LINK_1]]にも対応。",
+      "sourceHash": "7b51869d2b6c5fd7c853704ff5f748c1b87c8831617dc0f99d10b94f7fecfd23",
+      "parts": [
+        {
+          "source": "ＣＴＴＢ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にも対応。",
+          "link": false
+        }
+      ],
+      "translation": "Supports [[LINK_1]]CTTB[[/LINK_1]] as well.",
+      "contextHash": "7b51869d2b6c5fd7c853704ff5f748c1b87c8831617dc0f99d10b94f7fecfd23"
+    },
+    {
+      "id": "line-048",
+      "type": "line",
+      "source": "敵のＩＤ指定による合体技は、[[LINK_1]]CS_Enemys[[/LINK_1]]を参照してください。",
+      "sourceHash": "2ee1960c524cf65d0b69ce95e17dbad87d9d395bc3dd323cc5cd7a21c4988dfe",
+      "parts": [
+        {
+          "source": "敵のＩＤ指定による合体技は、",
+          "link": false
+        },
+        {
+          "source": "CS_Enemys",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "For Combination Skills specified by enemy ID, see [[LINK_1]]CS_Enemys[[/LINK_1]].",
+      "contextHash": "2ee1960c524cf65d0b69ce95e17dbad87d9d395bc3dd323cc5cd7a21c4988dfe"
+    },
+    {
+      "id": "line-049",
+      "type": "line",
+      "source": "敵味方の位置指定による合体技は、[[LINK_1]]CS_Battlers[[/LINK_1]]を参照してください。",
+      "sourceHash": "3b804f47e2031b31cf532acca1af4703dc1865b77e319983faa26b7e3ec4d742",
+      "parts": [
+        {
+          "source": "敵味方の位置指定による合体技は、",
+          "link": false
+        },
+        {
+          "source": "CS_Battlers",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "For Combination Skills specified by the positions of allies and enemies, see [[LINK_1]]CS_Battlers[[/LINK_1]].",
+      "contextHash": "3b804f47e2031b31cf532acca1af4703dc1865b77e319983faa26b7e3ec4d742"
+    },
+    {
+      "id": "line-050",
+      "type": "line",
+      "source": "ダメージ計算式については、[[LINK_1]]グローバル関数[[/LINK_1]]を参照してください。",
+      "sourceHash": "b844c84d758436fe8767847fc8d931d673d77a37c316f4bf30d38ab8a0a9bb48",
+      "parts": [
+        {
+          "source": "ダメージ計算式については、",
+          "link": false
+        },
+        {
+          "source": "グローバル関数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を参照してください。",
+          "link": false
+        }
+      ],
+      "translation": "For damage formulas, see [[LINK_1]]Global Functions[[/LINK_1]].",
+      "contextHash": "b844c84d758436fe8767847fc8d931d673d77a37c316f4bf30d38ab8a0a9bb48"
+    },
+    {
+      "id": "line-051",
+      "type": "line",
+      "source": "また、[[LINK_1]]当ブログのＣＴＢでは待ち時間を変更するステート[[/LINK_1]]も作成できますので、お好みでどうぞ。例えば「スキル使用者は１ターン消費、協力者は1/2ターン消費」なんて調整ができます。",
+      "sourceHash": "871f4a80a8d83b7f569d3a7307ea82f7a13cd7306ef44dec1f2eb7cd881b4a49",
+      "parts": [
+        {
+          "source": "また、",
+          "link": false
+        },
+        {
+          "source": "当ブログのＣＴＢでは待ち時間を変更するステート",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "も作成できますので、お好みでどうぞ。例えば「スキル使用者は１ターン消費、協力者は1/2ターン消費」なんて調整ができます。",
+          "link": false
+        }
+      ],
+      "translation": "Also, you can create [[LINK_1]]states that change wait times in this blog's CTB[[/LINK_1]], so feel free to customize them as you like. For example, you can set it so that “the skill user consumes one turn, while collaborators consume 1/2 turn.”",
+      "contextHash": "871f4a80a8d83b7f569d3a7307ea82f7a13cd7306ef44dec1f2eb7cd881b4a49"
+    },
+    {
+      "id": "line-052",
+      "type": "line",
+      "source": "協力者が連続して合体技に参加させられるのを防ぎたい場合は、ステートのメモ欄に[[LINK_1]]<CS_SealSub>[[/LINK_1]]を記入してください。",
+      "sourceHash": "2caf24c02138726e4adec69098a75af004539fa7a0f0b893708e6adbf2c0fb2c",
+      "parts": [
+        {
+          "source": "協力者が連続して合体技に参加させられるのを防ぎたい場合は、ステートのメモ欄に",
+          "link": false
+        },
+        {
+          "source": "<CS_SealSub>",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を記入してください。",
+          "link": false
+        }
+      ],
+      "translation": "If you want to prevent collaborators from being repeatedly forced to participate in combo skills, enter [[LINK_1]]<CS_SealSub>[[/LINK_1]] in the state's note field.",
+      "contextHash": "2caf24c02138726e4adec69098a75af004539fa7a0f0b893708e6adbf2c0fb2c"
+    },
+    {
+      "id": "line-053",
+      "type": "line",
+      "source": "ちなみに初期状態では[[LINK_1]]ＣＴＴＢ[[/LINK_1]]用の設定が入っています。",
+      "sourceHash": "8a5b55306b5299bc077ecbccc7515395893ccc145a04474032c717d00ac456ca",
+      "parts": [
+        {
+          "source": "ちなみに初期状態では",
+          "link": false
+        },
+        {
+          "source": "ＣＴＴＢ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "用の設定が入っています。",
+          "link": false
+        }
+      ],
+      "translation": "Incidentally, the initial settings are configured for [[LINK_1]]CTTB[[/LINK_1]].",
+      "contextHash": "8a5b55306b5299bc077ecbccc7515395893ccc145a04474032c717d00ac456ca"
+    },
+    {
+      "id": "line-054",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "複数人で発動する合体技を実現するプラグインです。": "This plugin allows combo skills to be activated by multiple actors.",
+    "アクターと敵キャラの両方に対応しています。（ver1.30）": "Supports both actors and enemies. (ver1.30)",
+    "ツクールＭＺのタイムプログレス（アクティブ）に対応しました！ ウェイトについても一応動きます。（ver1.351）": "Now supports RPG Maker MZ's Time Progress (Active)! Wait also works for the time being. (ver1.351)",
+    "具体的には以下の通りです。": "Specifically, it works as follows.",
+    "スキルを使用した際、発動条件や消費ＭＰＴＰ、得ＴＰを協力者にも適用。": "When a skill is used, its activation requirements, MP/TP costs, and TP gain are also applied to the participants.",
+    "命中率やクリティカル率は参加者の平均値を取得。": "Accuracy and critical rates use the average values of the participants.",
+    "協力者へ行動不能ステートを付加し、ＣＴＢのターン経過を再現。": "Adds an incapacitated state to the participants and reproduces the passage of turns in CTB.",
+    "この仕組みにより、ＣＴＢ以外の個別行動型のシステムでも利用できます。": "This mechanism allows it to be used with individual-action systems other than CTB.",
+    "サイドビューで複数のバトラーを動かす方法は、以下を参考にしてください。": "For information on how to move multiple battlers in side-view battles, see below.",
+    "※現状、アクターの複数回行動（特徴の行動回数追加）は想定していませんのでご注意ください。仕様が難解すぎて作者もどうすればよいかさっぱりです。": "※Please note that multiple actions by actors (the Add Action Times trait) are not currently supported. The specifications are so complicated that even I, the author, have no idea what to do.",
+    "目次": "Table of Contents",
+    "$actor(id)": "$actor(id)",
+    "$cs(no)": "$cs(no)",
+    "<CS_Seal>": "<CS_Seal>",
+    "<CS_SealSub>": "<CS_SealSub>",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on through the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_CombinationSkill.js": "NRP_CombinationSkill.js ",
+    "ver1.40（2025/05/07）": "ver1.40 (2025/05/07) ",
+    "更新履歴（history）": "Update History (history)",
+    "2025/05/07（ver1.40）": "2025/05/07 (ver1.40) ",
+    "※例えば、協力者が睡眠中でも実行できるなど。": "※For example, it can be executed even when a participant is asleep.",
+    "2024/08/18 -> 2025/04/02（ver1.39 -> 1.391）": "2024/08/18 -> 2025/04/02 (ver1.39 -> 1.391) ",
+    "<CS_Enemys>で同一の敵キャラＩＤを複数指定した際、ステートなどで行動不能の敵キャラを無視して合体技を使えるように改善した。": "Improved <CS_Enemys> so that when multiple identical enemy IDs are specified, combo skills can be used while ignoring enemies unable to act due to states or other effects.",
+    "<CS_Enemys>で同一の敵キャラＩＤを複数指定した際、攻撃系の行動制約ステートにかかっている敵が正しく合体技の参加者として判定できない不具合修正。（2025/04/02 ver1.391）": "Fixed an issue where, when multiple identical enemy IDs were specified in <CS_Enemys>, enemies affected by an attack restriction state could not be correctly determined as combo skill participants. (2025/04/02 ver1.391)",
+    "2023/01/07 -> 2024/06/24（ver1.38 -> 1.381）": "2023/01/07 -> 2024/06/24 (ver1.38 -> 1.381) ",
+    "ver1.371にて戦闘時、パーティコマンドの合体技の一覧が表示されない不具合修正。": "Fixed an issue in ver1.371 where the list of combo skills was not displayed in the party commands during battles.",
+    "2021/04/05 -> 2022/08/18（ver1.37 -> 1.371）": "2021/04/05 -> 2022/08/18 (ver1.37 -> 1.371) ",
+    "<CS_Actors>に特殊文字（\\v[1]など）や数式を有効に。": "Enabled escape characters (such as \\v[1]) and formulas in <CS_Actors>.",
+    "メニューでスキル選択時に一瞬だけ異なるスキルタイプのスキルが表示される不具合修正。（2022/08/18 ver1.371）": "Fixed an issue where skills of a different skill type were briefly displayed when selecting a skill in the menu. (2022/08/18 ver1.371)",
+    "2020/09/18（ver1.36 -> 1.361）": "2020/09/18 (ver1.36 -> 1.361) ",
+    "ＭＺの移動時の合体技メニューにて、ヘルプ領域が表示されない不具合修正。": "Fixed an issue where the help area was not displayed in the combo skill menu while moving in MZ.",
+    "↑に加えて、アクター切替ボタンが表示されてしまう不具合修正。": "In addition to the above, fixed an issue where the actor switching button was displayed.",
+    "他プラグインとの連携用に調整。（ver1.361）": "Adjusted for compatibility with other plugins. (ver1.361)",
+    "2020/09/13（ver1.35 -> 1.352）": "2020/09/13 (ver1.35 -> 1.352) ",
+    "ツクールＭＺのタイムプログレス（アクティブ）に対応。": "Added support for RPG Maker MZ's Time Progress (Active).",
+    "タイムプログレス（アクティブ）にて、妨害ステートを受けた際に行動キャンセルされない不具合を修正。（ver1.351）": "Fixed an issue in Time Progress (Active) where actions were not canceled when affected by a hindrance state. (ver1.351)",
+    "タイムプログレス（アクティブ）にて、キャスト有の合体技とキャスト無の合体技が混在すると、モーションの実行者が入れ替わってしまう不具合修正。（09/16 ver1.352）": "Fixed an issue in Time Progress (Active) where, when combo skills with and without casting were mixed, the battlers performing the motions were switched. (09/16 ver1.352)",
+    "2020/09/07（ver1.34 -> 1.342）": "2020/09/07 (ver1.34 -> 1.342) ",
+    "ツクールＭＺに対応。": "Added support for RPG Maker MZ.",
+    "プラグインパラメータに『パーティコマンド挿入位置』『メニューコマンド挿入位置』を追加。": "Added “Party Command Insertion Position” and “Menu Command Insertion Position” to the plugin parameters.",
+    "自動戦闘にて合体技を選択しないように修正。": "Adjusted so that combo skills are not selected during automatic battle.",
+    "協力者の待機モーションも発動者と同じになるよう修正。（ver1.341）": "Adjusted the participants' idle motions to match those of the initiator. (ver1.341)",
+    "攻撃系の行動制約でも合体技が選択できる不具合修正。（09/12 ver1.342）": "Fixed an issue where combo skills could be selected even under an attack restriction. (09/12 ver1.342)",
+    "2020/06/15（ver1.33）": "2020/06/15 (ver1.33) ",
+    "英語対応。": "Added English support.",
+    "2020/05/27（ver1.32）": "2020/05/27 (ver1.32) ",
+    "2020/05/06（ver1.31 -> 1.311）": "2020/05/06 (ver1.31 -> 1.311) ",
+    "パーティにいないキャラの合体技が使用できてしまう不具合修正。": "Fixed an issue where combo skills belonging to characters not in the party could be used.",
+    "競合対策のためソース整理。": "Reorganized the source code to prevent conflicts.",
+    "2020/04/27（ver1.30 -> 1.303）": "2020/04/27 (ver1.30 -> 1.303) ",
+    "参加者３人以上の場合、命中とクリティカルの計算がおかしい不具合修正。": "Fixed an issue where accuracy and critical calculations were incorrect when there were three or more participants.",
+    "通常スキルのＭＰ等が消費されない不具合修正。（04/28 ver1.301）": "Fixed an issue where MP and other costs for normal skills were not consumed. (04/28 ver1.301)",
+    "MV1.5系で<CS_Enemys>がエラーとなる不具合修正。（04/28 ver1.302）": "Fixed an issue where <CS_Enemys> caused an error in MV 1.5 series versions. (04/28 ver1.302)",
+    "2020/04/26（ver1.22）": "2020/04/26 (ver1.22) ",
+    "ver1.20時点で動作しなくなっていた重大な不具合修正。": "Fixed a critical issue that had made the plugin stop working as of ver1.20.",
+    "2020/04/24（ver1.21 -> 1.211）": "2020/04/24 (ver1.21 -> 1.211) ",
+    "戦闘メッセージを考慮し、参加者全員の名前を表示できるようにした。": "Added consideration for battle messages so that all participants' names can be displayed.",
+    "複数回行動でも適切にキャンセルできるように修正。（04/25 ver1.211）": "Adjusted so that actions can be canceled correctly even with multiple actions. (04/25 ver1.211)",
+    "協力者の行動キャンセル時も待機状態を保持。（04/25 ver1.211）": "The participants retain their waiting state even when their actions are canceled. (04/25 ver1.211)",
+    "2020/04/18（ver1.20）": "2020/04/18 (ver1.20) ",
+    "2020/04/15（ver1.10）": "2020/04/15 (ver1.10) ",
+    "ターン制に対応。": "Added support for turn-based battles.",
+    "ステートのメモ欄で合体技の禁止状態を制御可能に。": "The prohibition of combo skills can now be controlled in a state's note field.",
+    "2020/04/14（ver1.00）": "2020/04/14 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（usage）": "Usage (usage)",
+    "共通": "Common",
+    "スキルのメモ欄へ以下を記入すれば、アクターID=1,2が参加する合体技となります。": "Enter the following in a skill's note field to make it a combo skill involving actors with IDs 1 and 2.",
+    "※『,』でつなげていけば３人以上も可能です。": "※Connecting them with “,” allows three or more participants.",
+    "これで『発動条件、消費ＭＰＴＰ、得ＴＰ』などが合体技の参加者全員に適用されます。例えば、一人でも行動制約やスキル封印などのステートにかかっていたら使用できなくなります。": "This applies the “activation conditions, MP/TP cost, TP gained,” and other effects to all participants in the combo skill. For example, the skill cannot be used if even one participant is affected by a state such as Restriction or Skill Seal.",
+    "ターン制の場合、該当スキルを選択すると協力者の行動も確定されます。並び順が後ろの協力者の入力は飛ばされ、前の協力者の行動は上書きされます。ターン開始後、参加者の中で最も速いキャラがスキルを実行します。": "In turn-based battles, selecting the applicable skill also confirms the actions of the assisting participants. Inputs from assisting participants later in the order are skipped, while the actions of those earlier in the order are overwritten. After the turn begins, the fastest participant executes the skill.",
+    "※協力者とは「スキル使用者以外の合体技の参加者」を意味します。": "※“Assisting participants” refers to “combo skill participants other than the skill user.”",
+    "なお、合体技の参加者などの要件はスキルの説明欄に手動で記載してください。": "Requirements such as the participants in a combo skill must be entered manually in the skill description.",
+    "また、「該当者がいないスキルを非表示にする」などの機能はありません。必要なら通常のイベントコマンドでスキルの習得状態を制御してください。": "There is also no function for hiding skills that have no eligible users. If necessary, use the standard event commands to control skill acquisition.",
+    "ターン制の場合、以上で完了です。": "That completes the setup for turn-based battles.",
+    "ＣＴＢ用の設定": "Settings for CTB",
+    "ＣＴＢや個別行動系の戦闘システムの場合、協力者がターン消費をしません。": "In CTB and individual-action battle systems, assisting participants do not consume a turn.",
+    "そこでプラグインパラメータの『実行後ステート』を設定します。": "To address this, configure the plugin parameter “State After Execution.”",
+    "ここで設定したステートが合体技の協力者へ付加されます。『１回休み』などにすることでターン消費を表現できます。": "The state configured here is added to the assisting participants in the combo skill. Setting it to something like “One Turn Skip” can represent turn consumption.",
+    "タイムプログレス（アクティブ） ver1.35": "Time Progress (Active) ver1.35",
+    "ツクールＭＺで導入されたＴＰＢ（アクティブ）でも、合体技を使用できます。": "Combo skills can also be used with TPB (Active), which was introduced in RPG Maker MZ.",
+    "合体技の参加者全員のタイムゲージが溜まっていれば使用可能となります。": "They can be used when the time gauges of all combo skill participants are full.",
+    "※パーティコマンド方式は現状動作しません。": "※The party command method does not currently work.",
+    "タイムプログレス（ウェイト） ver1.34": "Time Progress (Wait) ver1.34",
+    "ＴＰＢ（ウェイト）でも合体技は使用できます。基本的にはＣＴＢと同じ考え方です。": "Combo skills can also be used with TPB (Wait). The basic concept is the same as CTB.",
+    "……が、残念ながらＭＺのＴＰＢ（ウェイト）の初期状態では『１回休み』的なちょうど良いステートを作れません。行動制約を『行動できない』にすると、タイムゲージ自体が空になって停止してしまいます。": "...Unfortunately, in the initial state of MZ's TPB (Wait), it is not possible to create an appropriate state equivalent to “One Turn Skip.” If the action restriction is set to “Cannot Move,” the time gauge itself becomes empty and stops.",
+    "これは合体技の協力者としては、過剰なペナルティです。": "This is an excessive penalty for an assisting participant in a combo skill.",
+    "そのため、外部のプラグインでちょうど良いステート（１回休み、タイムゲージ減少など）を用意するのが理想となります。現状ではＭＺ発売から日が浅いのですが、そのうちＴＰＢ向けのプラグインもそろってくると思われます。": "Therefore, ideally, an external plugin should provide an appropriate state, such as One Turn Skip or a reduction to the time gauge. Although it has not been long since MZ was released, plugins for TPB will likely become available in due course.",
+    "……ここまで書いておいてなんですが「ぶっちゃけ、ＴＰＢ（ウェイト）を使うぐらいなら、ウチのＣＴＢでよくね？」というのが作者の立場だったりします。": "...After writing all that, though, the author's position is, “To be honest, if you're going to use TPB (Wait), why not just use my CTB?”",
+    "グローバル関数": "Global Functions",
+    "以下をグローバル関数として定義しています。スキルの計算式や他のプラグインとの連携に有用です。": "The following are defined as global functions. They are useful for skill damage formulas and integration with other plugins.",
+    "指定したアクターＩＤからアクターの情報を取得します。": "Retrieves actor information using the specified actor ID.",
+    "例えば、以下はアクター１とアクター２の攻撃力を使用したダメージ計算式です。": "For example, the following is a damage formula that uses the Attack of Actor 1 and Actor 2.",
+    "合体技参加者を取得します。": "Retrieves combo skill participants.",
+    "というように『$actor(id)』と使い方は似ていますが、こちらの数値は合体技の参加者に対応します。": "Its usage is similar to “$actor(id),” as shown above, but the number here corresponds to the combo skill participants.",
+    "例えば『<CS_Actors:4,1>』と指定された合体技なら、『$cs(1)』がID=4のアクター、『$cs(2)』がID=1のアクターに対応します。": "For a combo skill specified as “<CS_Actors:4,1>,” “$cs(1)” corresponds to the actor with ID=4, and “$cs(2)” corresponds to the actor with ID=1.",
+    "『<CS_Battlers:2,3>』なら、『$cs(1)』が２番目のアクター、『$cs(2)』が３番目のアクターに対応します。": "For “<CS_Battlers:2,3>,” “$cs(1)” corresponds to the second actor, and “$cs(2)” corresponds to the third actor.",
+    "※指定した数値ではなく順番に対応します。まぎらわしいので要注意です。": "※It corresponds to the order, not the specified numbers. Be careful, as this can be confusing.",
+    "また『$cs()』というようにno未指定ならば、全参加者を保有する配列を取得できます。": "If no is omitted, as in “$cs(),” an array containing all participants can be retrieved.",
+    "『$cs(1).x』『$cs(1).y』『$cs(1).width』『$cs(1).height』というように、座標やサイズ情報も取得可能です。（要DynamicAnimation ver1.09）": "Coordinate and size information can also be retrieved, as in “$cs(1).x,” “$cs(1).y,” “$cs(1).width,” and “$cs(1).height.” (Requires DynamicAnimation ver1.09)",
+    "※DynamicAnimation ver1.09より、以下$cssへの参照は不要となりました。全て$csだけで完結します。": "※As of DynamicAnimation ver1.09, references to $css below are no longer necessary. Everything can be handled using only $cs.",
+    "合体技参加者のスプライトを取得します。": "Retrieves the sprites of combo skill participants.",
+    "『$css(1).x』『$css(1).y』『$css(1).width』『$css(1).height』というように、座標やサイズを取得可能です。": "Coordinates and sizes can be retrieved, as in “$css(1).x,” “$css(1).y,” “$css(1).width,” and “$css(1).height.”",
+    "プラグインパラメータ（ＣＴＢ関連）": "Plugin Parameters (CTB-Related)",
+    "実行後ステート（reactionState）": "State After Execution (reactionState)",
+    "スキル実行後、協力者に指定したステートを付加します。": "After the skill is executed, the specified state is added to the assisting participants.",
+    "１回行動不能やディレイなどを想定しています。": "This is intended for effects such as being unable to act once or having a delay.",
+    "プラグインパラメータ（メッセージ関連） ver1.21": "Plugin Parameters (Message-Related) ver1.21",
+    "連結用の文字（andLetter）": "Joining Text (andLetter)",
+    "戦闘メッセージを表示する際、合体技の参加者名を指定の文字で連結します。": "When displaying battle messages, the names of combo skill participants are joined using the specified text.",
+    "初期値は「と」です。": "The default value is “and.”",
+    "例：「ハロルドとテレーゼは～」": "Example: “Harold and Therese...\"",
+    "プラグインパラメータ（パーティコマンド関連） ver1.20": "Plugin Parameters (Party Command-Related) ver1.20",
+    "パーティコマンドから合体技を呼び出す設定が可能です。": "You can configure combo skills to be called from the party command.",
+    "基本的にはターン制やＣＴＴＢ向きです。仕様上、１ターン内に１つしか合体技を使用できませんので、お好みでどうぞ。": "This is generally suited to turn-based battles and CTTB. Due to the specifications, only one combo skill can be used per turn, so use it as you prefer.",
+    "事前にダミーのアクターを作成し、合体技を習得させる必要があります。": "You must first create a dummy actor and have them learn the combo skills.",
+    "※この方式を使う場合、個別のアクターに合体技を習得させる必要はありません。": "※When using this method, individual actors do not need to learn the combo skills.",
+    "↓ダミーアクターの設定例です。": "↓Here is an example of the dummy actor settings.",
+    "イベントコマンドからスキルを習得させることで、合体技を管理できます。": "You can manage combo skills by having actors learn them through event commands.",
+    "具体的な設定は、以下の各パラメータをご覧ください。": "For specific settings, see the parameters below.",
+    "合体技用アクター（partySkillActor）": "Actor for Combination Skills (partySkillActor)",
+    "合体技を保持するアクターを指定します。": "Specifies the actor who holds the combination skills.",
+    "パーティコマンド専用のダミーを設定してください。": "Set a dummy used exclusively for the Party Command.",
+    "合体技記号（combinationSymbol）": "Combination Skill Symbol (combinationSymbol)",
+    "合体技の記号を設定します。": "Sets the symbol for combination skills.",
+    "『YEP_MainMenuManager』のようなメニューのレイアウトを変更するプラグインとの連携に用います。この値を指定することで、外部プラグインから合体技コマンドをレイアウトへ設定できるようになります。": "This is used to integrate with plugins that change the menu layout, such as 『YEP_MainMenuManager』. By specifying this value, external plugins can add the combination skill command to the layout.",
+    "合体技表示名（combinationName）": "Combination Skill Display Name (combinationName)",
+    "下２つをオンにした際、表示されるコマンド名です。": "The command name displayed when the two options below are enabled.",
+    "パーティコマンドに表示（showPartyCommand）": "Show in Party Command (showPartyCommand)",
+    "オンにすれば、戦闘時のパーティコマンドに合体技用のコマンドが表示されます。": "When enabled, a command for combination skills is displayed in the Party Command during battle.",
+    "パーティコマンド挿入位置（showPartyCommandPosition） ver1.34": "Party Command Insertion Position (showPartyCommandPosition) ver1.34",
+    "パーティコマンドに合体技を挿入する位置です。": "The position where the combination skill is inserted into the Party Command.",
+    "0が先頭になります。初期値の1は戦うの下になります。": "0 is the first position. The default value, 1, places it below Fight.",
+    "メニューコマンドに表示（showMenuCommand）": "Show in Menu Command (showMenuCommand)",
+    "オンにすれば、メニュー画面に合体技用のコマンドが表示されます。": "When enabled, a command for combination skills is displayed on the menu screen.",
+    "メニューコマンド挿入位置（showMenuCommandPosition） ver1.34": "Menu Command Insertion Position (showMenuCommandPosition) ver1.34",
+    "メニューコマンドに合体技を挿入する位置です。": "The position where the combination skill is inserted into the Menu Command.",
+    "0が先頭になります。初期値の2はスキルの下になります。": "0 is the first position. The default value, 2, places it below Skills.",
+    "パーティコマンド非表示スイッチ": "Party Command Hide Switch",
+    "（hidePartyCommandSwitch）ver1.32": " (hidePartyCommandSwitch) ver1.32",
+    "指定のスイッチをオンにすると、パーティコマンドの合体技を非表示できます。": "When the specified switch is turned on, the combination skill can be hidden from the Party Command.",
+    "メニューコマンド非表示スイッチ": "Menu Command Hide Switch",
+    "（hideMenuCommandSwitch）ver1.32": " (hideMenuCommandSwitch) ver1.32",
+    "指定のスイッチをオンにすると、メニューコマンドの合体技を非表示できます。": "When the specified switch is turned on, the combination skill can be hidden from the Menu Command.",
+    "プラグインパラメータ（外部連携） ver1.20": "Plugin Parameters (External Integration) ver1.20",
+    "外部プラグインとの連携を想定した項目です。": "This item is intended for integration with external plugins.",
+    "使用禁止条件（invalidCondition）": "Usage Restriction Conditions (invalidCondition)",
+    "いずれかの条件を満たす場合、合体技の実行を禁止します。": "If any of the conditions are met, execution of the combination skill is prohibited.",
+    "条件は複数指定可能です。": "Multiple conditions can be specified.",
+    "『subject』でスキルの使用者、『a』で各参加者を参照します。": " \"subject』refers to the skill user, and 『a』refers to each participant.",
+    "例えば、ＡＴＢプラグインと連携し、「タイムゲージが溜まっていないバトラーは合体技を実行禁止にする」というような用法を想定しています。": "For example, it is intended for use with an ATB plugin to prohibit battlers whose time gauge has not filled from executing combination skills.",
+    "スキルのメモ欄パラメータ": "Skill Note Field Parameters",
+    "<CS_Actors:[アクターID],[アクターID]>": "<CS_Actors:[Actor ID],[Actor ID]>",
+    "合体スキルの参加者となるアクターＩＤをカンマ区切りで指定します。": "Specify the actor IDs of the participants in the combination skill, separated by commas.",
+    "３人以上も可能です。": "Three or more participants are also possible.",
+    "\\v[1]などの特殊文字や数式も有効です。（ver1.37）": "Special characters such as \\v[1] and formulas are also valid. (ver1.37)",
+    "<CS_Enemys:[敵キャラID],[敵キャラID]> ver1.30": "<CS_Enemys:[Enemy ID],[Enemy ID]> ver1.30",
+    "合体スキルの参加者となる敵キャラＩＤをカンマ区切りで指定します。": "Specify the enemy IDs of the participants in the combination skill, separated by commas.",
+    "同一ＩＤも可能です。": "The same ID can also be specified.",
+    "例えば、以下のように設定するとID=10の敵キャラ同士が連携します。": "For example, if configured as shown below, enemies with ID=10 will cooperate with each other.",
+    "<CS_Battlers:[番号],[番号]> ver1.30": "<CS_Battlers:[Number],[Number]> ver1.30",
+    "合体スキルの参加者となるバトラーをカンマ区切りで指定します。": "Specify the battlers who will participate in the combination skill, separated by commas.",
+    "[番号]には1から開始する並び順を指定します。": "For [Number], specify the order beginning with 1.",
+    "敵味方共通で使用できます。": "This can be used for both allies and enemies.",
+    "以下のように設定すると４人全員参加の合体技も作れます。人数が足らない場合は使用できません。": "As shown below, you can also create a combination skill involving all four members. It cannot be used if there are not enough members.",
+    "<CS_ReactionState:[ステートID]>": "<CS_ReactionState:[State ID]>",
+    "スキル実行後、協力者に付加するステートを個別指定したい場合に使用できます。": "This can be used when you want to individually specify the state applied to the participants after the skill is executed.",
+    "通常はプラグインパラメータの値が設定されるため、指定は不要です。": "Normally, the value from the plugin parameter is used, so this does not need to be specified.",
+    "<CS_ExceptState:[ステートID]> ver1.40": "<CS_ExceptState:[State ID]> ver1.40",
+    "スキル選択時、指定したステート中でも実行できるようにします。": "Allows the skill to be executed while the specified state is active when selecting the skill.",
+    "※カンマ区切りで複数指定も可能です。": "※Multiple entries can also be specified, separated by commas.",
+    "<CS_UserName:[ユーザ名]> ver1.21": "<CS_UserName:[User Name]> ver1.21",
+    "戦闘メッセージを表示する際の合体技の使用者名です。": "The name of the combo skill user displayed in battle messages.",
+    "文字列、Javascript計算式の両方が有効です。": "Both strings and JavaScript formulas are supported.",
+    "\\n[1]なども使えます。": "\\n[1], etc. can also be used.",
+    "<CS_UserName:\\n[1]達>": "<CS_UserName:\\n[1]Tatsu>",
+    "また『$cs(1).name()』で先頭の参加者の名前が取得できます。敵の名称表示もこの方法でＯＫです。": "You can also retrieve the name of the first participant with 『$cs(1).name()』. This method can also be used to display enemy names.",
+    "<CS_UserName:$cs(1).name() + \"達\">": "<CS_UserName:$cs(1).name() + \"Tatsu\">",
+    "指定がない場合は参加者の名前を自動で連結します。": "If none is specified, the participants' names are concatenated automatically.",
+    "ステートのメモ欄パラメータ": "State Note Field Parameters",
+    "以下で合体技の禁止状態を制御できます。行動制約以外のステートでも禁止したい場合はどうぞ。": "You can control whether combo skills are prohibited using the settings below. Use these when you want to prohibit them with states other than those imposing action restrictions.",
+    "ステート中、合体技を禁止します。": "Prohibits the use of combo skills while affected by the state.",
+    "ステート中、合体技への協力を禁止します。": "Prohibits cooperation in combo skills while affected by the state.",
+    "『CS_Seal』と異なり、自身が起点となる合体技は使えます。": "Unlike 『CS_Seal』, combo skills initiated by the affected battler can still be used.",
+    "ＣＴＢなどで連続して合体技の協力者にされるのを防止したい時など。": "For example, when you want to prevent a battler from being repeatedly selected as a combo skill collaborator in CTB and similar systems.",
+    "参考情報": "Reference Information",
+    "合体技プラグインは他所にもありますので、用途によってはこちらもどうぞ。": "There are also combo skill plugins available elsewhere, so consider these as well depending on your intended use.",
+    "https://fungamemake.com/archives/6239": "https://fungamemake.com/archives/6239"
+  }
+}

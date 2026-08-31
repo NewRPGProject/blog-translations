@@ -1,0 +1,2187 @@
+{
+  "articleId": "480069638",
+  "sourceUrl": "https://newrpg.seesaa.net/article/480069638.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "f1d73eaad163ea9d60d6bd71691bbefe345a61481d99c717ddaec13782d018ed",
+  "translatedAt": "2026-08-31T01:10:18.816Z",
+  "title": "Implementing an Auto-Heal Command (Full Recovery) [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "自動回復コマンド（まんたん）を実現【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "9b904fb5907b7728956fcba9ee30cc1450a0134bbbc1106013cd873b7cd5283f",
+      "translation": "Implementing an Auto-Heal Command (Full Recovery) [RPG Maker MZ & MV Plugin]",
+      "contextHash": "9b904fb5907b7728956fcba9ee30cc1450a0134bbbc1106013cd873b7cd5283f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "自動回復コマンドを実現します。",
+      "sourceHash": "744798310a22b27c28b328062591412bad88ff46fe88e6ca8336cbb8372dd2a9",
+      "translation": "Implements an auto-heal command.",
+      "contextHash": "744798310a22b27c28b328062591412bad88ff46fe88e6ca8336cbb8372dd2a9"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "いわゆるドラクエのまんたんコマンドです。",
+      "sourceHash": "afe21ffcd51956ec0d21382ebce87a156226c84d601e654a027b24abc29db409",
+      "translation": "This is the so-called Dragon Quest full recovery command.",
+      "contextHash": "afe21ffcd51956ec0d21382ebce87a156226c84d601e654a027b24abc29db409"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "メニュー画面などから実行すると、パーティメンバーがスキルを自動的に使用して回復してくれます。",
+      "sourceHash": "f62a6f016995df7860c00a759415c8d5a7d6da04a6632f808813517125e78f82",
+      "translation": "When executed from the menu screen or elsewhere, party members automatically use skills to heal themselves.",
+      "contextHash": "f62a6f016995df7860c00a759415c8d5a7d6da04a6632f808813517125e78f82"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な仕様",
+      "sourceHash": "80ff6a9d905be1a9775f467cf7b70c13224535bf872ddf269eb5995b1bd011bf",
+      "translation": "Main Features",
+      "contextHash": "80ff6a9d905be1a9775f467cf7b70c13224535bf872ddf269eb5995b1bd011bf"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "メニューに自動回復コマンドを追加。",
+      "sourceHash": "171f5576096647486e20e3eb785ad1714ad6e6416095ed179616ad5bd897f871",
+      "translation": "Adds an auto-heal command to the menu.",
+      "contextHash": "171f5576096647486e20e3eb785ad1714ad6e6416095ed179616ad5bd897f871"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "また、プラグインコマンドからの呼び出しも可能。",
+      "sourceHash": "6b05ad3633cd917c3cb9cb20f102b4331544f118df49927730b2b0bcaafa6be5",
+      "translation": "It can also be called from a plugin command.",
+      "contextHash": "6b05ad3633cd917c3cb9cb20f102b4331544f118df49927730b2b0bcaafa6be5"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "登録したステートを同時に治療。",
+      "sourceHash": "5248b6e5474c00e9ebbb8103586ab4f957dcf8317119c79fd5bba72d60c659c8",
+      "translation": "Cures registered states at the same time.",
+      "contextHash": "5248b6e5474c00e9ebbb8103586ab4f957dcf8317119c79fd5bba72d60c659c8"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "（初期状態では戦闘不能と毒のみ対象）",
+      "sourceHash": "19fa9483ecd3d73b698a8a36100461f05db1cedf115815e9f6d7f9e97ae2b156",
+      "translation": "(Initially, only Incapacitated and Poison are included.)",
+      "contextHash": "19fa9483ecd3d73b698a8a36100461f05db1cedf115815e9f6d7f9e97ae2b156"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "なるべく消費効率の良いスキルを自動で選択。",
+      "sourceHash": "fd97cc6a74fe67b47bae1813e571ef54c00f5613bdec6c54fb5af1eb8fcffaf6",
+      "translation": "Automatically selects skills with the best possible resource efficiency.",
+      "contextHash": "fd97cc6a74fe67b47bae1813e571ef54c00f5613bdec6c54fb5af1eb8fcffaf6"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "回復スキルの使用者を決定する条件を変更可能。",
+      "sourceHash": "820ae9088ed25f6fa07398ff68e7256ca097a4a173139c4dc81fca8650058d21",
+      "translation": "The criteria for determining who uses healing skills can be changed.",
+      "contextHash": "820ae9088ed25f6fa07398ff68e7256ca097a4a173139c4dc81fca8650058d21"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "例えば、ＭＰが高い者、効率の良いスキルを持つ者など。",
+      "sourceHash": "a6767cfc6f0841f5b5eead046d874dd4847506b564195dd035bd73217d5782fc",
+      "translation": "For example, the actor with the highest MP or the one with the most efficient skill.",
+      "contextHash": "a6767cfc6f0841f5b5eead046d874dd4847506b564195dd035bd73217d5782fc"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "最大ＨＰのＸＸ％まで回復するような設定も可能。",
+      "sourceHash": "716b4bca6b92cf5aefedda91b1d63b56f9922696f136e8ccb96cf29631cdd93e",
+      "translation": "You can also configure it to heal up to a percentage of the maximum HP.",
+      "contextHash": "716b4bca6b92cf5aefedda91b1d63b56f9922696f136e8ccb96cf29631cdd93e"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "（いわゆる『ほぼまんたん』）",
+      "sourceHash": "280ef393be904311e24ef375cd5c99a5bf2a602f0f6ec084393eeffd4efba217",
+      "translation": "(The so-called “almost full recovery.”)",
+      "contextHash": "280ef393be904311e24ef375cd5c99a5bf2a602f0f6ec084393eeffd4efba217"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "メッセージの表示方法を選択可。",
+      "sourceHash": "be6cdf4178159cc3a144f45b07bb3e9959e19f4696842bd9881fd73d476a55a3",
+      "translation": "You can choose how messages are displayed.",
+      "contextHash": "be6cdf4178159cc3a144f45b07bb3e9959e19f4696842bd9881fd73d476a55a3"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "控えメンバーを対象に含めるかを選択可。",
+      "sourceHash": "2003a73b51b3b035d9e2238382349d0a8979b642cfe6b622c336188bb1d332cd",
+      "translation": "You can choose whether to include reserve members as targets.",
+      "contextHash": "2003a73b51b3b035d9e2238382349d0a8979b642cfe6b622c336188bb1d332cd"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（Install）",
+      "sourceHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f",
+      "translation": "Installation (Install)",
+      "contextHash": "2ba1510953d23bb2a0e5c8072c1c3f4ca1747f07bd8f51dd8d162d4f4653235f"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_AutoHeal.js",
+      "sourceHash": "d53aab1e5b180557b8fd2bfbda03f6fca1c0dc52a5860785eee79fb24801ef29",
+      "translation": "NRP_AutoHeal.js ",
+      "contextHash": "21fcf8931ce56bdb56131ca159f930cc7d532d5fed34d29a4d9d2dbf522e78ae"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.03（2025/06/18）",
+      "sourceHash": "bb23124d9bb7d5885363e6092910ab38c3ee2b1b25a945efc86809293196b918",
+      "translation": "ver1.03 (2025/06/18) ",
+      "contextHash": "21fcf8931ce56bdb56131ca159f930cc7d532d5fed34d29a4d9d2dbf522e78ae"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（history）",
+      "sourceHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09",
+      "translation": "Update History (history)",
+      "contextHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2025/06/18（ver1.03）",
+      "sourceHash": "d948067ee11a46300d43890320a589dc266e88b93a7989f2cb66125481a09607",
+      "translation": "2025/06/18 (ver1.03) ",
+      "contextHash": "d948067ee11a46300d43890320a589dc266e88b93a7989f2cb66125481a09607"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/07/03 -> 2025/03/02（ver1.02 -> 1.021）",
+      "sourceHash": "cc362d3700e8cc2c0ca466bbd28d82444af48a12279dc1c669d0b5d22951ec07",
+      "translation": "2024/07/03 -> 2025/03/02 (ver1.02 -> 1.021) ",
+      "contextHash": "cc362d3700e8cc2c0ca466bbd28d82444af48a12279dc1c669d0b5d22951ec07"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "（2025/03/02 ver1.021）",
+      "sourceHash": "a7f66d69658b6f3eb1ea15e4abab14e5def06552566cec7a03854414e8417223",
+      "translation": " (2025/03/02 ver1.021) ",
+      "contextHash": "a7f66d69658b6f3eb1ea15e4abab14e5def06552566cec7a03854414e8417223"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/05/20 -> 2024/07/02（ver1.01 -> 1.011）",
+      "sourceHash": "2b81b14a8498e7b264e4af13e9ecb00a9d12e2acb5a79552996046fcd24aea21",
+      "translation": "2024/05/20 -> 2024/07/02 (ver1.01 -> 1.011) ",
+      "contextHash": "2b81b14a8498e7b264e4af13e9ecb00a9d12e2acb5a79552996046fcd24aea21"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "（2024/07/02 ver1.011）",
+      "sourceHash": "ad1dd8c5a778c83d484383212ce7b88ebec39566358f8973472661b074468bf8",
+      "translation": " (2024/07/02 ver1.011) ",
+      "contextHash": "ad1dd8c5a778c83d484383212ce7b88ebec39566358f8973472661b074468bf8"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/02/17 -> 2023/04/03（ver1.00 -> 1.002）",
+      "sourceHash": "d5fbceca0032a081da8394d6efbbf84fd7e468097be3cb090f1cb8087090c8a3",
+      "translation": "2021/02/17 -> 2023/04/03 (ver1.00 -> 1.002) ",
+      "contextHash": "d5fbceca0032a081da8394d6efbbf84fd7e468097be3cb090f1cb8087090c8a3"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "ＭＺのプラグイン一覧で「MZに対応していない可能性があります」のメッセージが出る問題に対処。（2021/02/22 ver1.001）",
+      "sourceHash": "59a11319e1f57a25b3d59376e2c1f70384eb846fd7b0159fd02d61d8530f0902",
+      "translation": "Fixed an issue where the message “May not be compatible with MZ” appeared in the MZ plugin list. (2021/02/22 ver1.001)",
+      "contextHash": "59a11319e1f57a25b3d59376e2c1f70384eb846fd7b0159fd02d61d8530f0902"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "メニューコマンドの挿入位置が想定通りにならないことがある不具合修正。",
+      "sourceHash": "394367b49c55e0a66de44d62c0ce87f3ac70e1b22c557d7ed3b6b8761dd4d085",
+      "translation": "Fixed a bug that could cause the menu command insertion position to differ from the intended position.",
+      "contextHash": "394367b49c55e0a66de44d62c0ce87f3ac70e1b22c557d7ed3b6b8761dd4d085"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "（2023/04/03 ver1.002）",
+      "sourceHash": "f534f34e01ff8b6366202fe808ac09cd9b31f937c061bc2351881153ab9abc0f",
+      "translation": " (2023/04/03 ver1.002) ",
+      "contextHash": "f534f34e01ff8b6366202fe808ac09cd9b31f937c061bc2351881153ab9abc0f"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "プラグインをオンにすれば、メニューコマンドに自動回復コマンドが追加されます。",
+      "sourceHash": "ff590fa8208118b8a55ebb27c446ec42b627dc025ccc1a315c12d7eadf322861",
+      "translation": "Turning on the plugin adds an auto-heal command to the menu commands.",
+      "contextHash": "ff590fa8208118b8a55ebb27c446ec42b627dc025ccc1a315c12d7eadf322861"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "メニューに表示せず、プラグインコマンドから呼び出すことも可能です。",
+      "sourceHash": "fb06f8deca7c1aa24535ca1cdc5da3c426b14a089e8780d9ee2fc82502cacf4d",
+      "translation": "It can also be called from a plugin command without displaying it in the menu.",
+      "contextHash": "fb06f8deca7c1aa24535ca1cdc5da3c426b14a089e8780d9ee2fc82502cacf4d"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "また、プラグインパラメータより細かい調整が可能です。",
+      "sourceHash": "9a5236fe2ba11dcc2d6660c8caec5cf371ddfffa6b2ffea7aa63d9d7268fe42d",
+      "translation": "More detailed adjustments can also be made using the plugin parameters.",
+      "contextHash": "9a5236fe2ba11dcc2d6660c8caec5cf371ddfffa6b2ffea7aa63d9d7268fe42d"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "スキルのメモ欄（Note Of Skills）",
+      "sourceHash": "b16b0692f360efbb6ef8fb6cc881d17071405f749aab1a1c62c639b2c0b6dbf9",
+      "translation": "Skill Note Field (Note Of Skills)",
+      "contextHash": "b16b0692f360efbb6ef8fb6cc881d17071405f749aab1a1c62c639b2c0b6dbf9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "指定したスキルを自動回復の使用対象から除きます。",
+      "sourceHash": "4368769415a051eec2974c5c0fc1d48726c32e959dcb6598dc2dbcc294ca6537",
+      "translation": "Excludes the specified skills from those available for auto-healing.",
+      "contextHash": "4368769415a051eec2974c5c0fc1d48726c32e959dcb6598dc2dbcc294ca6537"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "プラグインパラメータ（メニューコマンド関連）",
+      "sourceHash": "72a6568364f4f396ba87c15bac5f1907cf223116f3d90e18d52a9be22a3558ee",
+      "translation": "Plugin Parameters (Menu Command Settings)",
+      "contextHash": "72a6568364f4f396ba87c15bac5f1907cf223116f3d90e18d52a9be22a3558ee"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "メニューコマンドに表示（ShowMenuCommand）",
+      "sourceHash": "4eed4339f37cbc719335d18cab6a52dde015c49b34c55352bf1271d7ff1d0d86",
+      "translation": "Show in Menu Commands (ShowMenuCommand)",
+      "contextHash": "4eed4339f37cbc719335d18cab6a52dde015c49b34c55352bf1271d7ff1d0d86"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "メニューコマンドに自動回復を追加します。",
+      "sourceHash": "b0dfcba43f43bace25eb63598e1576cce7ecd2cc1aee1fc9ad688523a2fab57d",
+      "translation": "Adds auto-heal to the menu commands.",
+      "contextHash": "b0dfcba43f43bace25eb63598e1576cce7ecd2cc1aee1fc9ad688523a2fab57d"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+      "contextHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "メニューコマンドに自動回復を挿入する位置です。",
+      "sourceHash": "f0463709cfbbe11fdc54c8c0b85f987d9f94f3c10f36cc18d205f249b5ebe7ae",
+      "translation": "The position at which auto-heal is inserted into the menu commands.",
+      "contextHash": "f0463709cfbbe11fdc54c8c0b85f987d9f94f3c10f36cc18d205f249b5ebe7ae"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "0が先頭になります。",
+      "sourceHash": "6579e828acbb15a63d25e6819700e380e51a1123f911dc906cec92706543a301",
+      "translation": "0 places it at the beginning.",
+      "contextHash": "6579e828acbb15a63d25e6819700e380e51a1123f911dc906cec92706543a301"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "自動回復表示名（AutoHealName）",
+      "sourceHash": "68773f35981b741bcfcca1d04702d34695907cfe864be45247f0a4056926be92",
+      "translation": "Auto-Heal Display Name (AutoHealName)",
+      "contextHash": "68773f35981b741bcfcca1d04702d34695907cfe864be45247f0a4056926be92"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "自動回復の表示コマンド名を設定します。",
+      "sourceHash": "e31ca787a544efd20b5765c3b8c99de0f0cddf40d5b36d2a9d168a5bece53b59",
+      "translation": "Sets the displayed command name for auto-heal.",
+      "contextHash": "e31ca787a544efd20b5765c3b8c99de0f0cddf40d5b36d2a9d168a5bece53b59"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "[上級]自動回復記号（AutoHealSymbol）",
+      "sourceHash": "12e905f48e84b768974c23e7cbd662f67faddcb394379167b637e9b4faa5d351",
+      "translation": "[Advanced] Auto-Heal Symbol (AutoHealSymbol)",
+      "contextHash": "12e905f48e84b768974c23e7cbd662f67faddcb394379167b637e9b4faa5d351"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "自動回復の記号を設定します。",
+      "sourceHash": "eaa918096880cb85516f3fccbc63daeec3d7b8b311ee56be939bfb9483f96549",
+      "translation": "Sets the symbol for auto-heal.",
+      "contextHash": "eaa918096880cb85516f3fccbc63daeec3d7b8b311ee56be939bfb9483f96549"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "この値は他のプラグインと連携する際に使用できます。",
+      "sourceHash": "c3da54dadc711224f6ce7600bf45880f4ed48400f8b9d98c84fbdbe460558efd",
+      "translation": "This value can be used when integrating with other plugins.",
+      "contextHash": "c3da54dadc711224f6ce7600bf45880f4ed48400f8b9d98c84fbdbe460558efd"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "プラグインパラメータ（回復設定関連）",
+      "sourceHash": "15242d78bb5cbad8667218ed356600188d483458db460aa5caf5d9f2279d898e",
+      "translation": "Plugin Parameters (Healing Settings)",
+      "contextHash": "15242d78bb5cbad8667218ed356600188d483458db460aa5caf5d9f2279d898e"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "治療するステート（CureStates）",
+      "sourceHash": "3d8672d7defc7c9466284f8f595f02918b156f5626d05fa7584be720b26d34ad",
+      "translation": "States to Cure (CureStates)",
+      "contextHash": "3d8672d7defc7c9466284f8f595f02918b156f5626d05fa7584be720b26d34ad"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "治療の対象とするステートの一覧です。",
+      "sourceHash": "e04b2e0539b6b4883d52d816f239a39a623c01454a7f42808a2adaf64a9e6964",
+      "translation": "A list of states to be targeted for curing.",
+      "contextHash": "e04b2e0539b6b4883d52d816f239a39a623c01454a7f42808a2adaf64a9e6964"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ステートの治療はＨＰの回復より優先されます。",
+      "sourceHash": "8eb1ac33d6548cad865ebdaf912bfdf47013f3315de22cf40ea21091f6730686",
+      "translation": "Curing states takes priority over recovering HP.",
+      "contextHash": "8eb1ac33d6548cad865ebdaf912bfdf47013f3315de22cf40ea21091f6730686"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "初期状態では『戦闘不能』と『毒』が設定されています。必要に応じて追加・削除してください。",
+      "sourceHash": "544e1db886b6ec4b08df388e724804f330a43e6dedfad9be6a302c3cfc0599d8",
+      "translation": "By default, “Incapacitated” and “Poison” are configured. Add or remove them as needed.",
+      "contextHash": "544e1db886b6ec4b08df388e724804f330a43e6dedfad9be6a302c3cfc0599d8"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "対象とするＨＰ％（TargetHpRate）",
+      "sourceHash": "57a91f0784a81fc96beca8d24d4718cba1418f623b6b29d3a86103e186c6b876",
+      "translation": "Target HP% (TargetHpRate)",
+      "contextHash": "57a91f0784a81fc96beca8d24d4718cba1418f623b6b29d3a86103e186c6b876"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "ＨＰ％がこの数値未満の場合に回復対象とします。",
+      "sourceHash": "f7663201d861501e8c122f4f9d13fff778fa21491fd4be2409d1df0ddba8a1ac",
+      "translation": "An actor is targeted for healing when their HP% is below this value.",
+      "contextHash": "f7663201d861501e8c122f4f9d13fff778fa21491fd4be2409d1df0ddba8a1ac"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "初期値は100。少しでも減っていれば回復します。",
+      "sourceHash": "43ba53a3fa5ee13971339185e8a1058671b63548be95194e7597c861f8fdc726",
+      "translation": "The default value is 100. Actors are healed even if they are missing only a small amount of HP.",
+      "contextHash": "43ba53a3fa5ee13971339185e8a1058671b63548be95194e7597c861f8fdc726"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "この値を変更することで『ほぼまんたん』的な挙動も実現できます。",
+      "sourceHash": "fbcf0e4b0d536f01f3110cf8e1899f5d6a36e30b541a32c378803c780a7d005a",
+      "translation": "Changing this value can also produce an “almost full recovery” behavior.",
+      "contextHash": "fbcf0e4b0d536f01f3110cf8e1899f5d6a36e30b541a32c378803c780a7d005a"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "数式も有効です。",
+      "sourceHash": "215ef46825dacca5beada99d255dbdcb006ff3ab318acb3a41c7b7fdb5ef93a1",
+      "translation": "Formulas are also supported.",
+      "contextHash": "215ef46825dacca5beada99d255dbdcb006ff3ab318acb3a41c7b7fdb5ef93a1"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "対象ＨＰ％を変数指定（TargetHpRateVariable）",
+      "sourceHash": "3aafaf397055131ca893452a76c8a8246709cc4d8658a7879328250a2280989c",
+      "translation": "Specify Target HP % by Variable (TargetHpRateVariable)",
+      "contextHash": "3aafaf397055131ca893452a76c8a8246709cc4d8658a7879328250a2280989c"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "上の『対象とするＨＰ％』の設定値を変数指定できるようにします。",
+      "sourceHash": "37686714add9a6b61f8f2eaeac569df4b2540fe96121ff8748797e7949f1bc5a",
+      "translation": "You can specify the setting for “Target HP %” above using a variable.",
+      "contextHash": "37686714add9a6b61f8f2eaeac569df4b2540fe96121ff8748797e7949f1bc5a"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "設定すると、こちらのほうが優先されるようになります。",
+      "sourceHash": "2877265beae6c0c7eb547479e4f6133014bce8a0015c2268fc5ed9d5a2151255",
+      "translation": "When configured, this setting takes priority.",
+      "contextHash": "2877265beae6c0c7eb547479e4f6133014bce8a0015c2268fc5ed9d5a2151255"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "使用者優先順位（UserPriority）",
+      "sourceHash": "6dc82280f7032a6cc76a551b10fbee8b8fee48f8cd86737936339f908e9e2ccd",
+      "translation": "User Priority (UserPriority)",
+      "contextHash": "6dc82280f7032a6cc76a551b10fbee8b8fee48f8cd86737936339f908e9e2ccd"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "回復スキルの使用者の優先順位を決める条件を選択します。",
+      "sourceHash": "1ffe5e773a095e32c8b74025b870189fa8bc11fc0fc30f94a76262008aba6801",
+      "translation": "Select the criteria for determining the priority of users of the healing skill.",
+      "contextHash": "1ffe5e773a095e32c8b74025b870189fa8bc11fc0fc30f94a76262008aba6801"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "残ＭＰ優先：現在ＭＰが多いキャラが回復を行います。",
+      "sourceHash": "cb06b7f3ece73f3c093daa4cb36031198bdd09a116180b8a8503392369615d51",
+      "translation": "Prioritize Remaining MP: The character with more current MP performs the healing.",
+      "contextHash": "cb06b7f3ece73f3c093daa4cb36031198bdd09a116180b8a8503392369615d51"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "後列優先：隊列の後ろ側にいるキャラが回復を行います。",
+      "sourceHash": "7b200e2969f6d79ea2a4e7bfa9b11e26de3ebc06eb25dacd62d5e058671700a0",
+      "translation": "Prioritize Rear Row: The character positioned farther back in the formation performs the healing.",
+      "contextHash": "7b200e2969f6d79ea2a4e7bfa9b11e26de3ebc06eb25dacd62d5e058671700a0"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "低消費優先：最も低い消費で回復できるキャラが回復を行います。",
+      "sourceHash": "33cd157bdf1db75234f323fa9d2ae08d81ffe89d6a5ae24b6f4e8778eb5da93c",
+      "translation": "Prioritize Low Cost: The character who can heal using the lowest cost performs the healing.",
+      "contextHash": "33cd157bdf1db75234f323fa9d2ae08d81ffe89d6a5ae24b6f4e8778eb5da93c"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "要するに、優秀な回復スキルを持つキャラが優先されます。",
+      "sourceHash": "23b80772ec6c0ca43aa369a07f573c838abefeac83fb0d1ff489be1004c2a080",
+      "translation": "In short, characters with better healing skills are prioritized.",
+      "contextHash": "23b80772ec6c0ca43aa369a07f573c838abefeac83fb0d1ff489be1004c2a080"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "バランス（残ＭＰ＋低消費）：残ＭＰ優先と低消費優先の中間です。",
+      "sourceHash": "e5676222bbfcb601879926cd97de4b49ac6b60cacc5676cfe7086f5e0adc7cc7",
+      "translation": "Balance (Remaining MP + Low Cost): This is a middle ground between Prioritize Remaining MP and Prioritize Low Cost.",
+      "contextHash": "e5676222bbfcb601879926cd97de4b49ac6b60cacc5676cfe7086f5e0adc7cc7"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "初期状態では『バランス』になっています。",
+      "sourceHash": "83b917b1b8c87d207a45d67599557de36ba1ae618e8c7dea4c7584eed1782cde",
+      "translation": "The initial setting is “Balance.”",
+      "contextHash": "83b917b1b8c87d207a45d67599557de36ba1ae618e8c7dea4c7584eed1782cde"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "少し分かりにくいかもしれませんが、これは「残ＭＰ&times;消費ＭＰ&times;予想回復量」を優先度として使用するものです。",
+      "sourceHash": "07c4bf1d7b8ce7ba5b34b58734ad0625a1fb7c1e8aae6d52e2c75b685a8e7c53",
+      "translation": "This may be a little difficult to understand, but it uses “Remaining MP × MP Cost × Estimated Recovery Amount” as the priority.",
+      "contextHash": "07c4bf1d7b8ce7ba5b34b58734ad0625a1fb7c1e8aae6d52e2c75b685a8e7c53"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "例えば「攻撃魔法が得意で、回復魔法が苦手な魔道士」と「攻撃魔法が苦手で、回復魔法が得意な神官」がいたとします。",
+      "sourceHash": "d36658de854bdf7dc14ee472e6ffb9dc8f1e1f995310ced3f1c395370dad8779",
+      "translation": "For example, suppose there is a mage who is good at attack magic but poor at healing magic, and a priest who is poor at attack magic but good at healing magic.",
+      "contextHash": "d36658de854bdf7dc14ee472e6ffb9dc8f1e1f995310ced3f1c395370dad8779"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "この場合、「普段の回復は神官が担当し、神官のＭＰが減ってきた時だけ魔道士が担当する」というような運用をするプレイヤーが多くいると思います。",
+      "sourceHash": "0caf43fc5a7c517b877bdffca39a42b54d34517639de86f8dde444f7e61d372e",
+      "translation": "In this case, I think many players would use them so that “the priest handles healing normally, and the mage takes over only when the priest’s MP starts to run low.”",
+      "contextHash": "0caf43fc5a7c517b877bdffca39a42b54d34517639de86f8dde444f7e61d372e"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "このような運用を自動的に実現できる設定が『バランス』です。",
+      "sourceHash": "62ededc4e85b3f5435fe13759c33c2482c3e9d9bb22026ed2d6fd6d0bd2213f8",
+      "translation": "“Balance” is the setting that automatically achieves this kind of arrangement.",
+      "contextHash": "62ededc4e85b3f5435fe13759c33c2482c3e9d9bb22026ed2d6fd6d0bd2213f8"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "魔道士：残ＭＰ２００、消費ＭＰ１０で１００回復できる。",
+      "sourceHash": "12dde5863659c85d3da4834f1ac0d62ada725dccd058e76268f764ad632b859f",
+      "translation": "Mage: 200 remaining MP; can recover 100 HP for 10 MP.",
+      "contextHash": "12dde5863659c85d3da4834f1ac0d62ada725dccd058e76268f764ad632b859f"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "神官 ：残ＭＰ１００、消費ＭＰ１０で２００回復できる。",
+      "sourceHash": "9fbc699f7653c0ff8d4072bd8fe9043f18aaad98ee050446b71f7fcce9a68021",
+      "translation": "Priest: 100 remaining MP; can recover 200 HP for 10 MP.",
+      "contextHash": "9fbc699f7653c0ff8d4072bd8fe9043f18aaad98ee050446b71f7fcce9a68021"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "上記の場合、二人の優先度がちょうど釣り合うことになります。",
+      "sourceHash": "26fce19fb2de7853d7688d8e71ea734cd731f7511852d1014faa3570ea654319",
+      "translation": "In the above case, the two characters’ priorities are exactly balanced.",
+      "contextHash": "26fce19fb2de7853d7688d8e71ea734cd731f7511852d1014faa3570ea654319"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "控えメンバーも使用者に（UseReserveMembers）",
+      "sourceHash": "7a798e2b42c6441e1a78981bf5c467ae09861426bb454d17a671ae6564f9ef7b",
+      "translation": "Allow Reserve Members to Be Users (UseReserveMembers)",
+      "contextHash": "7a798e2b42c6441e1a78981bf5c467ae09861426bb454d17a671ae6564f9ef7b"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "戦闘に参加しない控えメンバーも回復スキルを使用します。",
+      "sourceHash": "94597274cf0428594fc8d59ae46ef65b0682545d6efe723b981aa2b781bcdd44",
+      "translation": "Reserve members who are not participating in battle can also use healing skills.",
+      "contextHash": "94597274cf0428594fc8d59ae46ef65b0682545d6efe723b981aa2b781bcdd44"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "要するにドラクエでいう馬車メンバーも回復してくれるようにできるよ――ということです。",
+      "sourceHash": "d1322ba7e5797e119191942de518f0028c89d993ca783a91263b5095b79c1bbe",
+      "translation": "In short, even the wagon members from Dragon Quest can be made to heal you.",
+      "contextHash": "d1322ba7e5797e119191942de518f0028c89d993ca783a91263b5095b79c1bbe"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "初期状態では無効です。",
+      "sourceHash": "87bce31fd49ac591079ab2adaa5338c8ef9925a9f403ac18082625bbffb688b6",
+      "translation": "The initial setting is disabled.",
+      "contextHash": "87bce31fd49ac591079ab2adaa5338c8ef9925a9f403ac18082625bbffb688b6"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "控えメンバーも対象に（TargetReserveMembers）",
+      "sourceHash": "af767f4494afee2ff2975494d0f412bf8d1571c14649d4156b01405e43448e48",
+      "translation": "Include Reserve Members as Targets (TargetReserveMembers)",
+      "contextHash": "af767f4494afee2ff2975494d0f412bf8d1571c14649d4156b01405e43448e48"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "戦闘に参加しない控えメンバーも回復の対象とします。",
+      "sourceHash": "52dded3783e2556d4491c79de0acab7cb8489588579992ad8a47fa9133493a38",
+      "translation": "Reserve members who are not participating in battle are also included as healing targets.",
+      "contextHash": "52dded3783e2556d4491c79de0acab7cb8489588579992ad8a47fa9133493a38"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "こちらは回復を受ける側です。",
+      "sourceHash": "e9ce7f27b20e92f3401198aa8d7469ec0313228e3f59c2caaa637396323bdd25",
+      "translation": "This setting applies to the recipients of healing.",
+      "contextHash": "e9ce7f27b20e92f3401198aa8d7469ec0313228e3f59c2caaa637396323bdd25"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "初期状態では無効です。",
+      "sourceHash": "87bce31fd49ac591079ab2adaa5338c8ef9925a9f403ac18082625bbffb688b6",
+      "translation": "The initial setting is disabled.",
+      "contextHash": "87bce31fd49ac591079ab2adaa5338c8ef9925a9f403ac18082625bbffb688b6"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "プラグインパラメータ（メッセージ関連）",
+      "sourceHash": "81eded227dbfdb71586b70ffb2a381b73cdc66608aeb50cfab2894f1ad53a7e2",
+      "translation": "Plugin Parameters (Message-Related)",
+      "contextHash": "81eded227dbfdb71586b70ffb2a381b73cdc66608aeb50cfab2894f1ad53a7e2"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "メッセージの表示方式（MessageType）",
+      "sourceHash": "4911b63dd06a8a00d949c068d5e90e509b375f8be10e486791735fa659096e93",
+      "translation": "Message Display Mode (MessageType)",
+      "contextHash": "4911b63dd06a8a00d949c068d5e90e509b375f8be10e486791735fa659096e93"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "メッセージの表示方式を設定します。",
+      "sourceHash": "7892364225140f3cded95ae46b505a0af948e884b793be9345a85c5ae6ddc163",
+      "translation": "Sets how messages are displayed.",
+      "contextHash": "7892364225140f3cded95ae46b505a0af948e884b793be9345a85c5ae6ddc163"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "0:表示しない",
+      "sourceHash": "65121cd19808eea2149f9e5d92459392f0d7a0bfd25ddfbf8360e7652092f150",
+      "translation": "0: Do not display",
+      "contextHash": "65121cd19808eea2149f9e5d92459392f0d7a0bfd25ddfbf8360e7652092f150"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "1:簡易表示：一行だけの簡単なメッセージを表示",
+      "sourceHash": "b7717e8f4fa240eaf44c316bd979205a345a006ed9a00fdb2c663a55c8a06911",
+      "translation": "1: Simple Display: Displays a simple one-line message",
+      "contextHash": "b7717e8f4fa240eaf44c316bd979205a345a006ed9a00fdb2c663a55c8a06911"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "2:スキルの使用状況を表示：「～は～を唱えた」のメッセージを表示",
+      "sourceHash": "fbe5d3ab86691e0f8549a17d975976f753eb7994433422c465a6596603fbf2a7",
+      "translation": "2: Display Skill Usage: Displays a message such as “~ used ~.”",
+      "contextHash": "fbe5d3ab86691e0f8549a17d975976f753eb7994433422c465a6596603fbf2a7"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "3:スキルの使用結果も表示：「～のＨＰが～回復した」のメッセージまで表示",
+      "sourceHash": "36fa145ee796c0d6c932140983f6319b321dc57d3b14e191ca4ce215b4a22ab6",
+      "translation": "3: Also Display Skill Results: Displays messages such as “~ recovered ~ HP.”",
+      "contextHash": "36fa145ee796c0d6c932140983f6319b321dc57d3b14e191ca4ce215b4a22ab6"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "なお、失敗時のメッセージは1~3のいずれも同じです。",
+      "sourceHash": "43bf65cd7eeb68e7fbe799c9154eedae247a060182149cff6a4afe45ecbe513a",
+      "translation": "The failure message is the same for options 1–3.",
+      "contextHash": "43bf65cd7eeb68e7fbe799c9154eedae247a060182149cff6a4afe45ecbe513a"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "初期状態では『3:スキルの使用結果も表示』になっています。",
+      "sourceHash": "32f34cd2525de05c984bad5e9a3cff570cc8be2920f42f4469c8bb3b90108856",
+      "translation": "The initial setting is “3: Also Display Skill Results.”",
+      "contextHash": "32f34cd2525de05c984bad5e9a3cff570cc8be2920f42f4469c8bb3b90108856"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "メッセージの瞬間表示（MessageShowFast）",
+      "sourceHash": "f67a629b4c22cc2290bbcfde9d717550a925744875452373d1e1896b96f9ae34",
+      "translation": "Show Messages Instantly (MessageShowFast)",
+      "contextHash": "f67a629b4c22cc2290bbcfde9d717550a925744875452373d1e1896b96f9ae34"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "スキルの使用状況、結果を表示する際のメッセージを瞬間表示します。",
+      "sourceHash": "6fd0586ac4e19101dc456ec6ead74678582575032fa5638fd0dd890b32d7da83",
+      "translation": "Displays messages about skill usage and results instantly.",
+      "contextHash": "6fd0586ac4e19101dc456ec6ead74678582575032fa5638fd0dd890b32d7da83"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "ウィンドウ背景（MessageBackgroundType）",
+      "sourceHash": "ddc07588179d15204dc0c77f4ca571d9aef917da85f7f87b85b5aec88439d81d",
+      "translation": "Window Background (MessageBackgroundType)",
+      "contextHash": "ddc07588179d15204dc0c77f4ca571d9aef917da85f7f87b85b5aec88439d81d"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "メッセージウィンドウの背景です。",
+      "sourceHash": "aa67c0623bd46103ec03dd654d669ecdbd6385bf3949c7722189296395941c0c",
+      "translation": "Sets the background of the message window.",
+      "contextHash": "aa67c0623bd46103ec03dd654d669ecdbd6385bf3949c7722189296395941c0c"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "回復成功メッセージ（MessageSuccess）",
+      "sourceHash": "4150e2dca53ca2d9c5621330f766aa2238d919fb6a0ce7b9d0b0a4b018a186dc",
+      "translation": "Successful Healing Message (MessageSuccess)",
+      "contextHash": "4150e2dca53ca2d9c5621330f766aa2238d919fb6a0ce7b9d0b0a4b018a186dc"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "回復成功時のメッセージです。",
+      "sourceHash": "afa928803917c5b6488bb213a6567975c661c55c5f50aea07c387765a39044b0",
+      "translation": "The message displayed when healing succeeds.",
+      "contextHash": "afa928803917c5b6488bb213a6567975c661c55c5f50aea07c387765a39044b0"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "『メッセージの表示方式』が『1:簡易表示』の場合のみ表示されます。",
+      "sourceHash": "1bd44158c1e014f0f27c48fd6f9e52815d039feef645828399152ea1563ec308",
+      "translation": "Displayed only when “Message Display Mode” is set to “1: Simple Display.”",
+      "contextHash": "1bd44158c1e014f0f27c48fd6f9e52815d039feef645828399152ea1563ec308"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "回復不要メッセージ（MessageUnnecessary）",
+      "sourceHash": "f58e12ca2a07140139d374b9337e5e09e4f524dc337b6cc04d4c354fed8d6972",
+      "translation": "Unnecessary Healing Message (MessageUnnecessary)",
+      "contextHash": "f58e12ca2a07140139d374b9337e5e09e4f524dc337b6cc04d4c354fed8d6972"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "回復が不要な際のメッセージです。",
+      "sourceHash": "fcd72499f50eaa02b98f1a2d4bf43b949424d5bed6d93eee0577cf28daa45a53",
+      "translation": "The message displayed when healing is unnecessary.",
+      "contextHash": "fcd72499f50eaa02b98f1a2d4bf43b949424d5bed6d93eee0577cf28daa45a53"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "回復失敗メッセージ（MessageFailure）",
+      "sourceHash": "a192adfc43036d1febf6287ce0bfe846ca637a165f6fc0f68d7f73589f9d7e95",
+      "translation": "Failed Healing Message (MessageFailure)",
+      "contextHash": "a192adfc43036d1febf6287ce0bfe846ca637a165f6fc0f68d7f73589f9d7e95"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "回復に失敗した際のメッセージです。",
+      "sourceHash": "8300d0c5cbfcdf997bc83f12ecb728c59992c78e7c1bb923c887024c0be5d430",
+      "translation": "The message displayed when healing fails.",
+      "contextHash": "8300d0c5cbfcdf997bc83f12ecb728c59992c78e7c1bb923c887024c0be5d430"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "メッセージ中はウェイト（MessageWait）",
+      "sourceHash": "582ba2a9b12068a38b964b2cc1c1d947c133f0bc8d98b442ff6792ad3eeab73c",
+      "translation": "Wait During Messages (MessageWait)",
+      "contextHash": "582ba2a9b12068a38b964b2cc1c1d947c133f0bc8d98b442ff6792ad3eeab73c"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "メッセージが終了するまで処理を待ちます。",
+      "sourceHash": "2ad65858ccdf5aae9c8db163adcfed6b4611a4894eab7abffe0f2f8c17cf5a0a",
+      "translation": "Waits for processing until the message ends.",
+      "contextHash": "2ad65858ccdf5aae9c8db163adcfed6b4611a4894eab7abffe0f2f8c17cf5a0a"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "Mano_InputConfig.jsなどのコモンイベント呼び出し処理と組み合わせた際の挙動が安定します。オフの場合かつMano_InputConfig.js（ver9.3.0）と組み合わせた場合、メッセージが無限ループする現象を確認しました。",
+      "sourceHash": "65ed809a8a46473be1b82d2b6fd9c90e7bfcb8c78d1e3b542be80ccb2460f653",
+      "translation": "This stabilizes behavior when combined with common event call processing such as Mano_InputConfig.js. When disabled and used together with Mano_InputConfig.js (ver9.3.0), I confirmed an issue where the message enters an infinite loop.",
+      "contextHash": "65ed809a8a46473be1b82d2b6fd9c90e7bfcb8c78d1e3b542be80ccb2460f653"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "ただし、オンの場合は挙動が少し変わることに注意してください。",
+      "sourceHash": "50562b4e25bebbf5e81343495966aceb4ae96d97ac84a732411024e0fd21260b",
+      "translation": "However, please note that the behavior may change slightly when this is enabled.",
+      "contextHash": "50562b4e25bebbf5e81343495966aceb4ae96d97ac84a732411024e0fd21260b"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "例えば、自動回復成功時にアニメーションを表示する場合、アニメーションを再生するタイミングがメッセージの終了後になります。",
+      "sourceHash": "9d6cc583b0434dd3d2c1aa0cd51313f62e2de35ddb307368a37da1e6df03ef4a",
+      "translation": "For example, when displaying an animation upon successful auto-healing, the animation will play after the message ends.",
+      "contextHash": "9d6cc583b0434dd3d2c1aa0cd51313f62e2de35ddb307368a37da1e6df03ef4a"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "オフの場合でも自動回復の成功／失敗時にイベントコマンド側で何らかのウェイト系の処理を入れると安定しやすいです。",
+      "sourceHash": "69b264ff171ae9d570fde81be17ac0d967c3b96a81d8593d717d496d223f3f80",
+      "translation": "Even when this is disabled, adding some kind of wait-related processing in the event command when auto-healing succeeds or fails can improve stability.",
+      "contextHash": "69b264ff171ae9d570fde81be17ac0d967c3b96a81d8593d717d496d223f3f80"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "プラグインパラメータ（効果音関連）",
+      "sourceHash": "b7d1adaa0ae06517407fefcbcc3d21a5949ffc19eac9d33b9b849f49147ba053",
+      "translation": "Plugin Parameters (Sound Effects)",
+      "contextHash": "b7d1adaa0ae06517407fefcbcc3d21a5949ffc19eac9d33b9b849f49147ba053"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "成功時の効果音（SoundSuccess）",
+      "sourceHash": "0d310af8e0f1b2a16ce720594c29da76c945943d287ee783e5cb6cf8c8f599ad",
+      "translation": "Success Sound (SoundSuccess)",
+      "contextHash": "0d310af8e0f1b2a16ce720594c29da76c945943d287ee783e5cb6cf8c8f599ad"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "回復に成功した際の効果音です。",
+      "sourceHash": "8bb258329cd4665b3c6d25fc0eb82ca21e733639939cf670c539f59c7042a806",
+      "translation": "This is the sound effect played when healing succeeds.",
+      "contextHash": "8bb258329cd4665b3c6d25fc0eb82ca21e733639939cf670c539f59c7042a806"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "失敗時の効果音（SoundFailure）",
+      "sourceHash": "e7fc6dd7455f89a6a33b5a7b545d8d9b840ba50b1bd635b8c1eceaa8837329b1",
+      "translation": "Failure Sound (SoundFailure)",
+      "contextHash": "e7fc6dd7455f89a6a33b5a7b545d8d9b840ba50b1bd635b8c1eceaa8837329b1"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "回復に失敗した際の効果音です。",
+      "sourceHash": "9d8d2cd8ccbcf2710f977fa0986d938ff736b6fa3e22f79a64111adec726b27b",
+      "translation": "This is the sound effect played when healing fails.",
+      "contextHash": "9d8d2cd8ccbcf2710f977fa0986d938ff736b6fa3e22f79a64111adec726b27b"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "プラグインパラメータ（メニューを閉じる）",
+      "sourceHash": "bc7559fd09a87065fb2744cf7e336916ab60a7f0906e2544fa6acd4bb7c1d868",
+      "translation": "Plugin Parameters (Closing the Menu)",
+      "contextHash": "bc7559fd09a87065fb2744cf7e336916ab60a7f0906e2544fa6acd4bb7c1d868"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "メニューを閉じる（CloseMenu）",
+      "sourceHash": "03e848cb291735bf269d6edc6729136dbdfe462135796ba16322f49cd2475b4c",
+      "translation": "Close Menu (CloseMenu)",
+      "contextHash": "03e848cb291735bf269d6edc6729136dbdfe462135796ba16322f49cd2475b4c"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "自動回復後にメニューを閉じます。",
+      "sourceHash": "2dae32c93fd4fcdb328057aa91dd9c36c51826aee95c6579007d12d251c682b2",
+      "translation": "Closes the menu after auto-healing.",
+      "contextHash": "2dae32c93fd4fcdb328057aa91dd9c36c51826aee95c6579007d12d251c682b2"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "これが有効な場合のみ、同時にオンにするスイッチを以下で指定可能です。",
+      "sourceHash": "4098ba562e58ef99bd9e229f15a5fa1c0c874e702d9a524abf5b669cc968dbba",
+      "translation": "Only when this is enabled can you specify below a switch to turn on at the same time.",
+      "contextHash": "4098ba562e58ef99bd9e229f15a5fa1c0c874e702d9a524abf5b669cc968dbba"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "初期状態では無効です。",
+      "sourceHash": "87bce31fd49ac591079ab2adaa5338c8ef9925a9f403ac18082625bbffb688b6",
+      "translation": "It is disabled by default.",
+      "contextHash": "87bce31fd49ac591079ab2adaa5338c8ef9925a9f403ac18082625bbffb688b6"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "成功時のスイッチ（SuccessSwitch）",
+      "sourceHash": "7f576a2b18f410ef06b44cc038f389fd0046c9d254c7b4dcb94e9aaefc16b19a",
+      "translation": "Success Switch (SuccessSwitch)",
+      "contextHash": "7f576a2b18f410ef06b44cc038f389fd0046c9d254c7b4dcb94e9aaefc16b19a"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "自動回復の成功時、オンにするスイッチです。",
+      "sourceHash": "4002bcfd60fea5cf817d930fd7f1f753701cee5e7503555a02abd5acd3e0f79e",
+      "translation": "This is the switch to turn on when auto-healing succeeds.",
+      "contextHash": "4002bcfd60fea5cf817d930fd7f1f753701cee5e7503555a02abd5acd3e0f79e"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "基本的にはコモンイベントの呼び出しに用いる想定です。フラッシュやアニメーションなどの演出に利用できます。",
+      "sourceHash": "10ef3b0f21e1ad8c6e888ff04d58b40d995483e6bdd29cbe9f9e916c45822f14",
+      "translation": "It is primarily intended for calling common events. It can be used for effects such as flashes and animations.",
+      "contextHash": "10ef3b0f21e1ad8c6e888ff04d58b40d995483e6bdd29cbe9f9e916c45822f14"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "失敗時のスイッチ（FailureSwitch）",
+      "sourceHash": "6ca70a2c86bdd9b3c2d2fdef9c7d94e6eb3389752f3bd4b57def4dd862143c92",
+      "translation": "Failure Switch (FailureSwitch)",
+      "contextHash": "6ca70a2c86bdd9b3c2d2fdef9c7d94e6eb3389752f3bd4b57def4dd862143c92"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "自動回復の失敗時、オンにするスイッチです。",
+      "sourceHash": "b483cf1d3fc6af17ecaf75bd9a397a148d046879c8b551b5cae463de48e625a3",
+      "translation": "This is the switch to turn on when auto-healing fails.",
+      "contextHash": "b483cf1d3fc6af17ecaf75bd9a397a148d046879c8b551b5cae463de48e625a3"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（MZ Plugin Command）",
+      "sourceHash": "b26d5a372ca2c44849064090ed591c3b05e0504ea802012fbd0104a05bda5362",
+      "translation": "MZ Plugin Command (MZ Plugin Command)",
+      "contextHash": "b26d5a372ca2c44849064090ed591c3b05e0504ea802012fbd0104a05bda5362"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "イベント上から自動回復を実行できます。",
+      "sourceHash": "cc2878ed7d7cd350cdf4030cd91df823168c74c4e78e4351d259619dfde8b884",
+      "translation": "You can perform auto-healing from an event.",
+      "contextHash": "cc2878ed7d7cd350cdf4030cd91df823168c74c4e78e4351d259619dfde8b884"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "『対象とするＨＰ％』『成功時のスイッチ』『失敗時のスイッチ』を指定可能です。",
+      "sourceHash": "8bdcf9848bfe6fe823ead0787b9fa6f1e350afac608090c9aa4d2af62866a344",
+      "translation": "You can specify the \"Target HP %\", \"Success Switch\", and \"Failure Switch\".",
+      "contextHash": "8bdcf9848bfe6fe823ead0787b9fa6f1e350afac608090c9aa4d2af62866a344"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "内容はプラグインパラメータと同一のため割愛します。",
+      "sourceHash": "3095ea725858f1238955f3df604f99de2dac516e757f79baaf8051e2144bb373",
+      "translation": "The details are the same as those for the plugin parameters, so they are omitted here.",
+      "contextHash": "3095ea725858f1238955f3df604f99de2dac516e757f79baaf8051e2144bb373"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "ＭＶ用プラグインコマンド（MV Plugin Command）",
+      "sourceHash": "ea8ab467517099ee2d689f4a4c53d86f3ce649bf54149dbfdcc8588dfbbe2fb1",
+      "translation": "MV Plugin Command (MV Plugin Command)",
+      "contextHash": "ea8ab467517099ee2d689f4a4c53d86f3ce649bf54149dbfdcc8588dfbbe2fb1"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "自動回復を実行します。",
+      "sourceHash": "f24a46e42eb02c193c3ecada51d6f154526e1ab2783fba67c7512be61b96f27d",
+      "translation": "Performs auto-healing.",
+      "contextHash": "f24a46e42eb02c193c3ecada51d6f154526e1ab2783fba67c7512be61b96f27d"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "また、以下を事前に指定すればオプションも指定可能です。",
+      "sourceHash": "867e7a2c37d4d8e2868ce10d3d12f291a22adbf2cf40b9bfe87ddceed804bf38",
+      "translation": "You can also specify options by setting the following in advance.",
+      "contextHash": "867e7a2c37d4d8e2868ce10d3d12f291a22adbf2cf40b9bfe87ddceed804bf38"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "ＨＰが指定した数値％以下ならば、回復を実行します。",
+      "sourceHash": "764c106de2de26e6e93908beaa4422f0d9ad118bb273059461e4c49531c979bf",
+      "translation": "Healing is performed if HP is at or below the specified percentage.",
+      "contextHash": "764c106de2de26e6e93908beaa4422f0d9ad118bb273059461e4c49531c979bf"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "回復成功時、指定した番号のスイッチをオンにします。",
+      "sourceHash": "c1e41fd31d6012b5751b716ae886871a58b5aaaf0df9e9579499fc7e3cd35170",
+      "translation": "When healing succeeds, the switch with the specified number is turned on.",
+      "contextHash": "c1e41fd31d6012b5751b716ae886871a58b5aaaf0df9e9579499fc7e3cd35170"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "回復失敗時、指定した番号のスイッチをオンにします。",
+      "sourceHash": "74931b81431dabc552f8e281c21fdd6ff122ae66bde512e9ba280a885afe9923",
+      "translation": "When healing fails, the switch with the specified number is turned on.",
+      "contextHash": "74931b81431dabc552f8e281c21fdd6ff122ae66bde512e9ba280a885afe9923"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "以下は全てをまとめた実行例です。",
+      "sourceHash": "873c1ac965680c15a25ea1e0faf7ee4fad26b5d0d645f042392681a379df779d",
+      "translation": "The following is an example that brings everything together.",
+      "contextHash": "873c1ac965680c15a25ea1e0faf7ee4fad26b5d0d645f042392681a379df779d"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "※一行ずつ呼び出してください。",
+      "sourceHash": "d6dc81fdd262499aa720c62ded05a4d66bcd1734038eecc58698471ac41d6b74",
+      "translation": "※Call them one line at a time.",
+      "contextHash": "d6dc81fdd262499aa720c62ded05a4d66bcd1734038eecc58698471ac41d6b74"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "メッセージの表示について（About Displaying Messages）",
+      "sourceHash": "64b44d64ec55e8e96360309cf7008f439b52f866a8a6285d355dcb994eeb322e",
+      "translation": "Displaying Messages (About Displaying Messages)",
+      "contextHash": "64b44d64ec55e8e96360309cf7008f439b52f866a8a6285d355dcb994eeb322e"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "自動回復を行った際、結果をメッセージで表示します。",
+      "sourceHash": "7835b1823319bf08a0f19b01c4c0297bc87ae266bae327ef016cefa929e093a8",
+      "translation": "When auto-healing is performed, the result is displayed in a message.",
+      "contextHash": "7835b1823319bf08a0f19b01c4c0297bc87ae266bae327ef016cefa929e093a8"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "ただし、本来ツクールの仕様ではメニュー画面でのメッセージ表示はできません。",
+      "sourceHash": "0237646a767e90a7a4dfceadcaac2232fb600b300a1e45756c0b6a49cd524177",
+      "translation": "However, by default, RPG Maker does not allow messages to be displayed on the menu screen.",
+      "contextHash": "0237646a767e90a7a4dfceadcaac2232fb600b300a1e45756c0b6a49cd524177"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "色々と無理矢理なので、競合などの問題が発生する可能性もあります。",
+      "sourceHash": "1239072b0e19aa4592204768c4cf2eb428f21cfcb5bff82d73eecba20951edef",
+      "translation": "Since this involves various workarounds, conflicts and other issues may occur.",
+      "contextHash": "1239072b0e19aa4592204768c4cf2eb428f21cfcb5bff82d73eecba20951edef"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "その際は、自動回復後にメニューを閉じる設定にするか、メッセージ表示をオフにしてください。",
+      "sourceHash": "151db61ab2496a45696c20a898e03945b8d2ba4f49749c992ff154db27f48451",
+      "translation": "If that happens, either set the menu to close after auto-healing or turn off message display.",
+      "contextHash": "151db61ab2496a45696c20a898e03945b8d2ba4f49749c992ff154db27f48451"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "また、メニューを閉じる場合のみ、コモンイベントの呼出も可能です。",
+      "sourceHash": "4b2743660a306cbe02dbb06fbebe8bd15b45f87448d70168635d1a638688a501",
+      "translation": "Also, a common event can be called only when the menu is closed.",
+      "contextHash": "4b2743660a306cbe02dbb06fbebe8bd15b45f87448d70168635d1a638688a501"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "演出などにご利用ください。",
+      "sourceHash": "5ed3d7c4f035014da424a5c93e2a40c1d96806c49201de01b24e37b413649db3",
+      "translation": "Please use this for effects and similar purposes.",
+      "contextHash": "5ed3d7c4f035014da424a5c93e2a40c1d96806c49201de01b24e37b413649db3"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "自動回復のアルゴリズム（Algorithm of \"Auto Heal\"）",
+      "sourceHash": "70572c0fca0ba3bb121dfc22f8e3d116f193e53c30eea5b4f4278f2a5a462147",
+      "translation": "The Auto-Healing Algorithm (Algorithm of \"Auto Heal\")",
+      "contextHash": "70572c0fca0ba3bb121dfc22f8e3d116f193e53c30eea5b4f4278f2a5a462147"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "最もＨＰの割合が減っている対象者を求める。",
+      "sourceHash": "1c698feab1d185f4a0ee0a73a13501f3a998b38dcdc412a06f14af188ca765ed",
+      "translation": "Find the target whose HP percentage has decreased the most.",
+      "contextHash": "1c698feab1d185f4a0ee0a73a13501f3a998b38dcdc412a06f14af188ca765ed"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "設定に従って、回復スキルの使用者を確定。",
+      "sourceHash": "343e64997626f83b95f92677dcf49c07247b35576e7b92fdad892762dfae33af",
+      "translation": "Determine the users of healing skills according to the settings.",
+      "contextHash": "343e64997626f83b95f92677dcf49c07247b35576e7b92fdad892762dfae33af"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "対象者に対して、最も効率の良いスキルを求める。",
+      "sourceHash": "a71f35ac305436dce57558f36a07af9c5698cc152b3f03b7147e7587576030b1",
+      "translation": "For the target, find the most efficient skill.",
+      "contextHash": "a71f35ac305436dce57558f36a07af9c5698cc152b3f03b7147e7587576030b1"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "※（回復量／消費）が最大のスキル。",
+      "sourceHash": "8f27e08211f4103c9ffa8c89bbb84b2c032d06881c6b7960498fad2a4e051283",
+      "translation": "※The skill with the highest (healing amount / cost).",
+      "contextHash": "8f27e08211f4103c9ffa8c89bbb84b2c032d06881c6b7960498fad2a4e051283"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "回復実行。",
+      "sourceHash": "8df1c1bc191420122ac766bc662a5d56bda666f718ef3b887085bcb7178dde19",
+      "translation": "Perform healing.",
+      "contextHash": "8df1c1bc191420122ac766bc662a5d56bda666f718ef3b887085bcb7178dde19"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "上記を繰り返し。",
+      "sourceHash": "43158c6d0bdb81d24ede3d4380fe888a1d8596fe17d353f10c6f25b8c4966af9",
+      "translation": "Repeat the above.",
+      "contextHash": "43158c6d0bdb81d24ede3d4380fe888a1d8596fe17d353f10c6f25b8c4966af9"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "誰もＨＰが減っていないか、誰もスキルを使用できなくなれば終了。",
+      "sourceHash": "724fc0f5ff2e7b4691922d0f72e866a5e1aaa08b6fd3fc7d7b98e1740d466174",
+      "translation": "End when no one's HP has decreased or no one can use a skill anymore.",
+      "contextHash": "724fc0f5ff2e7b4691922d0f72e866a5e1aaa08b6fd3fc7d7b98e1740d466174"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "その他、細かい仕様（Other Detailed Specifications）",
+      "sourceHash": "421735b547595c4bfd7e7f72c0028f74ec35ff525a7b00efc9d539f4092b6d60",
+      "translation": "Other Detailed Specifications (Other Detailed Specifications)",
+      "contextHash": "421735b547595c4bfd7e7f72c0028f74ec35ff525a7b00efc9d539f4092b6d60"
+    },
+    {
+      "id": "list-036",
+      "type": "list",
+      "source": "回復の対象はタイプが『ＨＰ回復』のスキルのみです。",
+      "sourceHash": "f868b91d3d6ffaf7a2711131ed82945ece209b1ab83480ea89ec945827819d04",
+      "translation": "Only skills whose type is \"HP Recovery\" are eligible for healing.",
+      "contextHash": "f868b91d3d6ffaf7a2711131ed82945ece209b1ab83480ea89ec945827819d04"
+    },
+    {
+      "id": "list-037",
+      "type": "list",
+      "source": "また、効果の計算は計算式で行います。",
+      "sourceHash": "eebcfb15ecf14ac37804d69eb3d9e51f0c94cc51b4ab9af59df17105540dc0bf",
+      "translation": "The effect is calculated using the formula.",
+      "contextHash": "eebcfb15ecf14ac37804d69eb3d9e51f0c94cc51b4ab9af59df17105540dc0bf"
+    },
+    {
+      "id": "list-038",
+      "type": "list",
+      "source": "使用効果での回復量までは考慮していません。",
+      "sourceHash": "e58d5383b9b844111342ea1372d3be69a2f80e230968d635f2c05d6e66be26a9",
+      "translation": "The amount healed by the skill's effects is not taken into account.",
+      "contextHash": "e58d5383b9b844111342ea1372d3be69a2f80e230968d635f2c05d6e66be26a9"
+    },
+    {
+      "id": "list-039",
+      "type": "list",
+      "source": "ＭＰとＴＰは同列に扱います。",
+      "sourceHash": "6774035ab91900fbc83046a7a94a44613393a0a2ffa4ebf080ca27c86e2a9ff8",
+      "translation": "MP and TP are treated equally.",
+      "contextHash": "6774035ab91900fbc83046a7a94a44613393a0a2ffa4ebf080ca27c86e2a9ff8"
+    },
+    {
+      "id": "list-040",
+      "type": "list",
+      "source": "つまり、回復量が同じなら、消費ＭＰが１０のスキルと",
+      "sourceHash": "4eb3fef1e4f4143879951cb590ea4d3935c0bb180da7b98107152210cc5deff8",
+      "translation": "In other words, if the amount restored is the same, a skill that costs 10 MP and",
+      "contextHash": "4eb3fef1e4f4143879951cb590ea4d3935c0bb180da7b98107152210cc5deff8"
+    },
+    {
+      "id": "list-041",
+      "type": "list",
+      "source": "消費ＴＰが１０のスキルの効率は同等とみなします。",
+      "sourceHash": "915ff173b5981ced53fbb02f30ccbb846b327904f688291cd7d35d2d8f1f6bc1",
+      "translation": "a skill that costs 10 TP are considered equally efficient.",
+      "contextHash": "915ff173b5981ced53fbb02f30ccbb846b327904f688291cd7d35d2d8f1f6bc1"
+    },
+    {
+      "id": "list-042",
+      "type": "list",
+      "source": "回復量を求めるため、内部的にスキルの計算式を実行します。",
+      "sourceHash": "72845b458a50dcbef8aa0b27949676d1519e81f365fdd99d5b09379188a7b394",
+      "translation": "To determine the amount restored, the skill's formula is executed internally.",
+      "contextHash": "72845b458a50dcbef8aa0b27949676d1519e81f365fdd99d5b09379188a7b394"
+    },
+    {
+      "id": "list-043",
+      "type": "list",
+      "source": "計算式内に実処理を書くと、それも実行されるので注意です。",
+      "sourceHash": "82d75f23d69ac21e26fba4350ed9da88c3bed268537ee17037b739b166a7d300",
+      "translation": "Be aware that any actual processing written in the formula will also be executed.",
+      "contextHash": "82d75f23d69ac21e26fba4350ed9da88c3bed268537ee17037b739b166a7d300"
+    },
+    {
+      "id": "list-044",
+      "type": "list",
+      "source": "完全な効率化を保証するものではありません。",
+      "sourceHash": "7c8bde0f5a26e21466e40ca878855f1a02f08bc0fb6748e4d5e1eab38e68b001",
+      "translation": "This does not guarantee complete optimization.",
+      "contextHash": "7c8bde0f5a26e21466e40ca878855f1a02f08bc0fb6748e4d5e1eab38e68b001"
+    },
+    {
+      "id": "list-045",
+      "type": "list",
+      "source": "特にステートの治療については、あまり効率化されていません。",
+      "sourceHash": "0a6badf014efd12762caf1209478aaa18c95fdce30c10032cffd8de2b52ebf9e",
+      "translation": "In particular, state removal has not been optimized very much.",
+      "contextHash": "0a6badf014efd12762caf1209478aaa18c95fdce30c10032cffd8de2b52ebf9e"
+    },
+    {
+      "id": "list-046",
+      "type": "list",
+      "source": "例えば、複数ステートを治療できるスキルと、一つのステートしか、治療できないスキルの効率の差などは計算していません。",
+      "sourceHash": "2e7d635e1c6346163cda4414fe652cf1ffe17584d099c1973eb83426a8701059",
+      "translation": "For example, it does not calculate the difference in efficiency between a skill that can cure multiple states and one that can cure only a single state.",
+      "contextHash": "2e7d635e1c6346163cda4414fe652cf1ffe17584d099c1973eb83426a8701059"
+    },
+    {
+      "id": "list-047",
+      "type": "list",
+      "source": "複雑すぎて作者が諦めました。",
+      "sourceHash": "a58b5819893c77902403972b34d1f6305886e5ed523756ec63ce8e67560048be",
+      "translation": "It was too complex, so the author gave up.",
+      "contextHash": "a58b5819893c77902403972b34d1f6305886e5ed523756ec63ce8e67560048be"
+    },
+    {
+      "id": "list-048",
+      "type": "list",
+      "source": "あまりないと思いますが、対象がランダムの回復スキルは対象外です。",
+      "sourceHash": "91d3d7a62761327785dc953c970959edff091211aecee51519548c879b3dbce0",
+      "translation": "Although there probably aren't many, healing skills with random targets are excluded.",
+      "contextHash": "91d3d7a62761327785dc953c970959edff091211aecee51519548c879b3dbce0"
+    },
+    {
+      "id": "list-049",
+      "type": "list",
+      "source": "結果を計算できないのでどうしようもありません。",
+      "sourceHash": "620ecb04f4ea5bd764c171f4974bbae1b6c12c85d864ab422f9044c69c14bf48",
+      "translation": "There is nothing that can be done because the result cannot be calculated.",
+      "contextHash": "620ecb04f4ea5bd764c171f4974bbae1b6c12c85d864ab422f9044c69c14bf48"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Install (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（Note Of Skills）[[/LINK_1]]",
+      "sourceHash": "5c2424b47c620924da2816a6c2036cd463fef33dbe91e6fc90250d34f47683e4",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（Note Of Skills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note Field (Note Of Skills)[[/LINK_1]]",
+      "contextHash": "5c2424b47c620924da2816a6c2036cd463fef33dbe91e6fc90250d34f47683e4"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（メニューコマンド関連）[[/LINK_1]]",
+      "sourceHash": "be77dd1b2fd95cc25a09025e7d9a4599b80dc430921883f67154be2b471a9db4",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（メニューコマンド関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Menu Command Related)[[/LINK_1]]",
+      "contextHash": "be77dd1b2fd95cc25a09025e7d9a4599b80dc430921883f67154be2b471a9db4"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンドに表示（ShowMenuCommand）[[/LINK_1]]",
+      "sourceHash": "9a379bd45bbd417405578252eeec294dd11800b02d5a3e790fb3ae17eadbfd37",
+      "parts": [
+        {
+          "source": "メニューコマンドに表示（ShowMenuCommand）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show in Menu Command (ShowMenuCommand)[[/LINK_1]]",
+      "contextHash": "9a379bd45bbd417405578252eeec294dd11800b02d5a3e790fb3ae17eadbfd37"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンド挿入位置（ShowMenuCommandPosition）[[/LINK_1]]",
+      "sourceHash": "d7c1fcc9759c3e74ac0839d98eb837b82ce4d083a07dad7de3ac4b7166b98312",
+      "parts": [
+        {
+          "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Command Insertion Position (ShowMenuCommandPosition)[[/LINK_1]]",
+      "contextHash": "d7c1fcc9759c3e74ac0839d98eb837b82ce4d083a07dad7de3ac4b7166b98312"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]自動回復表示名（AutoHealName）[[/LINK_1]]",
+      "sourceHash": "fa00a6059be080b57b230144e75206cdd7b9fee37fd3bdf587f698789a2258ee",
+      "parts": [
+        {
+          "source": "自動回復表示名（AutoHealName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Auto-Heal Display Name (AutoHealName)[[/LINK_1]]",
+      "contextHash": "fa00a6059be080b57b230144e75206cdd7b9fee37fd3bdf587f698789a2258ee"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]][上級]自動回復記号（AutoHealSymbol）[[/LINK_1]]",
+      "sourceHash": "48f1cd43e3a751713908bec194c772f07bb3c166ab28134d6205224135a78fa2",
+      "parts": [
+        {
+          "source": "[上級]自動回復記号（AutoHealSymbol）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][Advanced] Auto-Heal Symbol (AutoHealSymbol)[[/LINK_1]]",
+      "contextHash": "48f1cd43e3a751713908bec194c772f07bb3c166ab28134d6205224135a78fa2"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（回復設定関連）[[/LINK_1]]",
+      "sourceHash": "8907ba3d765193b84f5048a30716a682cf075fbae6a896671ea0418615d8b389",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（回復設定関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Recovery Settings Related)[[/LINK_1]]",
+      "contextHash": "8907ba3d765193b84f5048a30716a682cf075fbae6a896671ea0418615d8b389"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]治療するステート（CureStates）[[/LINK_1]]",
+      "sourceHash": "621034e71d058b9090f4b72dd3bf13d4778bd8678cad422de3adf4bd20ef4ec0",
+      "parts": [
+        {
+          "source": "治療するステート（CureStates）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]States to Cure (CureStates)[[/LINK_1]]",
+      "contextHash": "621034e71d058b9090f4b72dd3bf13d4778bd8678cad422de3adf4bd20ef4ec0"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]対象とするＨＰ％（TargetHpRate）[[/LINK_1]]",
+      "sourceHash": "1c96a6d84b5b34c771901520f1454ecef2592240edaecd7b0e15e361bdc2030c",
+      "parts": [
+        {
+          "source": "対象とするＨＰ％（TargetHpRate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Target HP% (TargetHpRate)[[/LINK_1]]",
+      "contextHash": "1c96a6d84b5b34c771901520f1454ecef2592240edaecd7b0e15e361bdc2030c"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]対象ＨＰ％を変数指定（TargetHpRateVariable）[[/LINK_1]]",
+      "sourceHash": "ec6d6d1cfb325953be2cebeef3985da863b7ad51f34f0e460a4b5e8415e89e5c",
+      "parts": [
+        {
+          "source": "対象ＨＰ％を変数指定（TargetHpRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Specify Target HP% by Variable (TargetHpRateVariable)[[/LINK_1]]",
+      "contextHash": "ec6d6d1cfb325953be2cebeef3985da863b7ad51f34f0e460a4b5e8415e89e5c"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]使用者優先順位（UserPriority）[[/LINK_1]]",
+      "sourceHash": "5e1f86c1167f4706bb6652ecbfe1e07f154b6542b468556692c7268aeccfe56b",
+      "parts": [
+        {
+          "source": "使用者優先順位（UserPriority）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]User Priority (UserPriority)[[/LINK_1]]",
+      "contextHash": "5e1f86c1167f4706bb6652ecbfe1e07f154b6542b468556692c7268aeccfe56b"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]控えメンバーも使用者に（UseReserveMembers）[[/LINK_1]]",
+      "sourceHash": "ae346226378f6938a952a33d9f8c3d21b39ebbc39d82c37ad3031edb2fa5499d",
+      "parts": [
+        {
+          "source": "控えメンバーも使用者に（UseReserveMembers）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Allow Reserve Members to Use (UseReserveMembers)[[/LINK_1]]",
+      "contextHash": "ae346226378f6938a952a33d9f8c3d21b39ebbc39d82c37ad3031edb2fa5499d"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]控えメンバーも対象に（TargetReserveMembers）[[/LINK_1]]",
+      "sourceHash": "5c3be8e4c23fd94a645e383f96e73c271ffdaa44b46165171237cd83a683ee65",
+      "parts": [
+        {
+          "source": "控えメンバーも対象に（TargetReserveMembers）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Include Reserve Members as Targets (TargetReserveMembers)[[/LINK_1]]",
+      "contextHash": "5c3be8e4c23fd94a645e383f96e73c271ffdaa44b46165171237cd83a683ee65"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（メッセージ関連）[[/LINK_1]]",
+      "sourceHash": "06e42bdf3435d6b64675e35d078fa0c28232bb5bb13252141dfe2d06ec5f7a96",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（メッセージ関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Message Related)[[/LINK_1]]",
+      "contextHash": "06e42bdf3435d6b64675e35d078fa0c28232bb5bb13252141dfe2d06ec5f7a96"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージの表示方式（MessageType）[[/LINK_1]]",
+      "sourceHash": "771b77be72e539454177049ce6a388789d169809d0da53204eefc36772986885",
+      "parts": [
+        {
+          "source": "メッセージの表示方式（MessageType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Message Display Method (MessageType)[[/LINK_1]]",
+      "contextHash": "771b77be72e539454177049ce6a388789d169809d0da53204eefc36772986885"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージの瞬間表示（MessageShowFast）[[/LINK_1]]",
+      "sourceHash": "02eb0424cb5194bd287bd82ecdffee2671c11fd21138c2a0ffbe5927e3122c78",
+      "parts": [
+        {
+          "source": "メッセージの瞬間表示（MessageShowFast）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Instant Message Display (MessageShowFast)[[/LINK_1]]",
+      "contextHash": "02eb0424cb5194bd287bd82ecdffee2671c11fd21138c2a0ffbe5927e3122c78"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]ウィンドウ背景（MessageBackgroundType）[[/LINK_1]]",
+      "sourceHash": "3f179eafdfdac30a17bd88d13a08ff85f51af153e71050b0afa1cf7dfb394987",
+      "parts": [
+        {
+          "source": "ウィンドウ背景（MessageBackgroundType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Window Background (MessageBackgroundType)[[/LINK_1]]",
+      "contextHash": "3f179eafdfdac30a17bd88d13a08ff85f51af153e71050b0afa1cf7dfb394987"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]回復成功メッセージ（MessageSuccess）[[/LINK_1]]",
+      "sourceHash": "f5d9603e28c47a15f7b0c0d494293d0750f29f88663c29321d9af08283650096",
+      "parts": [
+        {
+          "source": "回復成功メッセージ（MessageSuccess）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recovery Success Message (MessageSuccess)[[/LINK_1]]",
+      "contextHash": "f5d9603e28c47a15f7b0c0d494293d0750f29f88663c29321d9af08283650096"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]回復不要メッセージ（MessageUnnecessary）[[/LINK_1]]",
+      "sourceHash": "81b71e6acf195d3e2d7385f3138b9716778eadef31e6190868b01fde112cbb0e",
+      "parts": [
+        {
+          "source": "回復不要メッセージ（MessageUnnecessary）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recovery Unnecessary Message (MessageUnnecessary)[[/LINK_1]]",
+      "contextHash": "81b71e6acf195d3e2d7385f3138b9716778eadef31e6190868b01fde112cbb0e"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]回復失敗メッセージ（MessageFailure）[[/LINK_1]]",
+      "sourceHash": "e384709450bf758c5157c72e1c760af44743bcfdc22918133702a8cbccdd5399",
+      "parts": [
+        {
+          "source": "回復失敗メッセージ（MessageFailure）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recovery Failure Message (MessageFailure)[[/LINK_1]]",
+      "contextHash": "e384709450bf758c5157c72e1c760af44743bcfdc22918133702a8cbccdd5399"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージ中はウェイト（MessageWait）[[/LINK_1]]",
+      "sourceHash": "c1ccfff91390538508be474e4c8989823379329d6e85d3c0ddd0697d5b76e304",
+      "parts": [
+        {
+          "source": "メッセージ中はウェイト（MessageWait）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Wait During Message (MessageWait)[[/LINK_1]]",
+      "contextHash": "c1ccfff91390538508be474e4c8989823379329d6e85d3c0ddd0697d5b76e304"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（効果音関連）[[/LINK_1]]",
+      "sourceHash": "ca9dce660057496d2ab0d8d7b11cfdce74f2c4f8144224ef5459a968aec58062",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（効果音関連）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Sound Effect Related)[[/LINK_1]]",
+      "contextHash": "ca9dce660057496d2ab0d8d7b11cfdce74f2c4f8144224ef5459a968aec58062"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]成功時の効果音（SoundSuccess）[[/LINK_1]]",
+      "sourceHash": "0f43c61d2d47ff219be2157bd891519317b7b5a8c7070513f912703658cbab87",
+      "parts": [
+        {
+          "source": "成功時の効果音（SoundSuccess）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect on Success (SoundSuccess)[[/LINK_1]]",
+      "contextHash": "0f43c61d2d47ff219be2157bd891519317b7b5a8c7070513f912703658cbab87"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]失敗時の効果音（SoundFailure）[[/LINK_1]]",
+      "sourceHash": "730b38b8fbb6f34843c6c83731ffa8408df4a93942967e8fc7636f22fc2efba8",
+      "parts": [
+        {
+          "source": "失敗時の効果音（SoundFailure）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect on Failure (SoundFailure)[[/LINK_1]]",
+      "contextHash": "730b38b8fbb6f34843c6c83731ffa8408df4a93942967e8fc7636f22fc2efba8"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（メニューを閉じる）[[/LINK_1]]",
+      "sourceHash": "28a4aab190e259497348dee6bd39f6563cc87912fd9a7d63135b35e31921b752",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（メニューを閉じる）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Closing the Menu)[[/LINK_1]]",
+      "contextHash": "28a4aab190e259497348dee6bd39f6563cc87912fd9a7d63135b35e31921b752"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]メニューを閉じる（CloseMenu）[[/LINK_1]]",
+      "sourceHash": "c4097680c78b4b4bddf375138c252e28aae179b6ea91e3e4e8528dd8854bdd06",
+      "parts": [
+        {
+          "source": "メニューを閉じる（CloseMenu）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Close Menu (CloseMenu)[[/LINK_1]]",
+      "contextHash": "c4097680c78b4b4bddf375138c252e28aae179b6ea91e3e4e8528dd8854bdd06"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]成功時のスイッチ（SuccessSwitch）[[/LINK_1]]",
+      "sourceHash": "259fecee265728274fa48aeb33c61caac284e2fc61562ebce5937cf7992fa3c2",
+      "parts": [
+        {
+          "source": "成功時のスイッチ（SuccessSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch on Success (SuccessSwitch)[[/LINK_1]]",
+      "contextHash": "259fecee265728274fa48aeb33c61caac284e2fc61562ebce5937cf7992fa3c2"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]失敗時のスイッチ（FailureSwitch）[[/LINK_1]]",
+      "sourceHash": "4e252fb86e45ff36cd6d09ab5761d81fab7264f4ca5aa052b73e39eb3caf40bf",
+      "parts": [
+        {
+          "source": "失敗時のスイッチ（FailureSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch on Failure (FailureSwitch)[[/LINK_1]]",
+      "contextHash": "4e252fb86e45ff36cd6d09ab5761d81fab7264f4ca5aa052b73e39eb3caf40bf"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（MZ Plugin Command）[[/LINK_1]]",
+      "sourceHash": "9ea3022d16d9de72535f03cc5ffcf10a90d9b6052ca49d9f546750297b7e8d29",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（MZ Plugin Command）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Command for MZ (MZ Plugin Command)[[/LINK_1]]",
+      "contextHash": "9ea3022d16d9de72535f03cc5ffcf10a90d9b6052ca49d9f546750297b7e8d29"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＶ用プラグインコマンド（MV Plugin Command）[[/LINK_1]]",
+      "sourceHash": "0d2cae96c04c9daf64697842469ef5ed0da95f0c6a040d63b310b503d9102ff7",
+      "parts": [
+        {
+          "source": "ＭＶ用プラグインコマンド（MV Plugin Command）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Command for MV (MV Plugin Command)[[/LINK_1]]",
+      "contextHash": "0d2cae96c04c9daf64697842469ef5ed0da95f0c6a040d63b310b503d9102ff7"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージの表示について（About Displaying Messages）[[/LINK_1]]",
+      "sourceHash": "59c3d26a5f1fd6edc8a1573048460a768bff169ed86da33ffa4cc236e8f9dfaa",
+      "parts": [
+        {
+          "source": "メッセージの表示について（About Displaying Messages）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About Displaying Messages (About Displaying Messages)[[/LINK_1]]",
+      "contextHash": "59c3d26a5f1fd6edc8a1573048460a768bff169ed86da33ffa4cc236e8f9dfaa"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]自動回復のアルゴリズム（Algorithm of \"Auto Heal\"）[[/LINK_1]]",
+      "sourceHash": "b6987cc8a93d2c0374b57783b125bb4cf6c2f775333257ae7ddbe0c52750236c",
+      "parts": [
+        {
+          "source": "自動回復のアルゴリズム（Algorithm of \"Auto Heal\"）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Auto-Heal Algorithm (Algorithm of \"Auto Heal\")[[/LINK_1]]",
+      "contextHash": "b6987cc8a93d2c0374b57783b125bb4cf6c2f775333257ae7ddbe0c52750236c"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]その他、細かい仕様（Other Detailed Specifications）[[/LINK_1]]",
+      "sourceHash": "494cbb57b1d0504538bdb157cdd2655a2371ce76418939991b01e0766a4156fc",
+      "parts": [
+        {
+          "source": "その他、細かい仕様（Other Detailed Specifications）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Other Detailed Specifications (Other Detailed Specifications)[[/LINK_1]]",
+      "contextHash": "494cbb57b1d0504538bdb157cdd2655a2371ce76418939991b01e0766a4156fc"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "他プラグインとの競合対策のため、[[LINK_1]]回復メッセージの表示中はウェイト[[/LINK_1]]するようにした。",
+      "sourceHash": "6a684c35677fa6169cc8e75b4f3fb9d742c86a32b4e93a5071383667876d7065",
+      "parts": [
+        {
+          "source": "他プラグインとの競合対策のため、",
+          "link": false
+        },
+        {
+          "source": "回復メッセージの表示中はウェイト",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "するようにした。",
+          "link": false
+        }
+      ],
+      "translation": "To prevent conflicts with other plugins, [[LINK_1]]wait while the recovery message is displayed[[/LINK_1]].",
+      "contextHash": "6a684c35677fa6169cc8e75b4f3fb9d742c86a32b4e93a5071383667876d7065"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージを瞬間表示するかどうか[[/LINK_1]]を設定可能にした。",
+      "sourceHash": "5efbf37f8d622eca4aedb3894cb401d102533363be3b16fca0256ab91c9fc2e9",
+      "parts": [
+        {
+          "source": "メッセージを瞬間表示するかどうか",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定可能にした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Whether to display messages instantly[[/LINK_1]] can now be configured.",
+      "contextHash": "5efbf37f8d622eca4aedb3894cb401d102533363be3b16fca0256ab91c9fc2e9"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]対象とするＨＰ％[[/LINK_1]]を文字入力に変更し、数式を有効にした。",
+      "sourceHash": "7547615c0b5c331a36bb295e3fe7ba6642ed618ab1067f640c711311bc3fa246",
+      "parts": [
+        {
+          "source": "対象とするＨＰ％",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を文字入力に変更し、数式を有効にした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Target HP%[[/LINK_1]] was changed to text input, enabling formulas.",
+      "contextHash": "7547615c0b5c331a36bb295e3fe7ba6642ed618ab1067f640c711311bc3fa246"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]メッセージのウィンドウ背景[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "e0eaea9f161fea004eb2ca5d68614362cd76cc97056a1ab09ad1748aae45298d",
+      "parts": [
+        {
+          "source": "メッセージのウィンドウ背景",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]The message window background[[/LINK_1]] can now be configured.",
+      "contextHash": "e0eaea9f161fea004eb2ca5d68614362cd76cc97056a1ab09ad1748aae45298d"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_MenuBackground.js[[/LINK_1]]など他プラグインとの競合対策用に調整。",
+      "sourceHash": "d196834add4fc5c17d92f277421167051a78fafa4103ae9e9cdca05e1d073d81",
+      "parts": [
+        {
+          "source": "NRP_MenuBackground.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "など他プラグインとの競合対策用に調整。",
+          "link": false
+        }
+      ],
+      "translation": "Adjusted to prevent conflicts with other plugins, such as [[LINK_1]]NRP_MenuBackground.js[[/LINK_1]].",
+      "contextHash": "d196834add4fc5c17d92f277421167051a78fafa4103ae9e9cdca05e1d073d81"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "自動回復コマンドを実現します。": "Implements an auto-heal command.",
+    "いわゆるドラクエのまんたんコマンドです。": "This is the so-called Dragon Quest full recovery command.",
+    "メニュー画面などから実行すると、パーティメンバーがスキルを自動的に使用して回復してくれます。": "When executed from the menu screen or elsewhere, party members automatically use skills to heal themselves.",
+    "主な仕様": "Main Features",
+    "メニューに自動回復コマンドを追加。": "Adds an auto-heal command to the menu.",
+    "また、プラグインコマンドからの呼び出しも可能。": "It can also be called from a plugin command.",
+    "登録したステートを同時に治療。": "Cures registered states at the same time.",
+    "（初期状態では戦闘不能と毒のみ対象）": "(Initially, only Incapacitated and Poison are included.)",
+    "なるべく消費効率の良いスキルを自動で選択。": "Automatically selects skills with the best possible resource efficiency.",
+    "回復スキルの使用者を決定する条件を変更可能。": "The criteria for determining who uses healing skills can be changed.",
+    "例えば、ＭＰが高い者、効率の良いスキルを持つ者など。": "For example, the actor with the highest MP or the one with the most efficient skill.",
+    "最大ＨＰのＸＸ％まで回復するような設定も可能。": "You can also configure it to heal up to a percentage of the maximum HP.",
+    "（いわゆる『ほぼまんたん』）": "(The so-called “almost full recovery.”)",
+    "メッセージの表示方法を選択可。": "You can choose how messages are displayed.",
+    "控えメンバーを対象に含めるかを選択可。": "You can choose whether to include reserve members as targets.",
+    "目次": "Table of Contents",
+    "導入方法（Install）": "Installation (Install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [project]\\js\\plugins. Turn the feature ON from the RPG Maker plugin manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_AutoHeal.js": "NRP_AutoHeal.js ",
+    "ver1.03（2025/06/18）": "ver1.03 (2025/06/18) ",
+    "更新履歴（history）": "Update History (history)",
+    "2025/06/18（ver1.03）": "2025/06/18 (ver1.03) ",
+    "2024/07/03 -> 2025/03/02（ver1.02 -> 1.021）": "2024/07/03 -> 2025/03/02 (ver1.02 -> 1.021) ",
+    "（2025/03/02 ver1.021）": " (2025/03/02 ver1.021) ",
+    "2024/05/20 -> 2024/07/02（ver1.01 -> 1.011）": "2024/05/20 -> 2024/07/02 (ver1.01 -> 1.011) ",
+    "（2024/07/02 ver1.011）": " (2024/07/02 ver1.011) ",
+    "2021/02/17 -> 2023/04/03（ver1.00 -> 1.002）": "2021/02/17 -> 2023/04/03 (ver1.00 -> 1.002) ",
+    "公開！": "Released!",
+    "ＭＺのプラグイン一覧で「MZに対応していない可能性があります」のメッセージが出る問題に対処。（2021/02/22 ver1.001）": "Fixed an issue where the message “May not be compatible with MZ” appeared in the MZ plugin list. (2021/02/22 ver1.001)",
+    "メニューコマンドの挿入位置が想定通りにならないことがある不具合修正。": "Fixed a bug that could cause the menu command insertion position to differ from the intended position.",
+    "（2023/04/03 ver1.002）": " (2023/04/03 ver1.002) ",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインをオンにすれば、メニューコマンドに自動回復コマンドが追加されます。": "Turning on the plugin adds an auto-heal command to the menu commands.",
+    "メニューに表示せず、プラグインコマンドから呼び出すことも可能です。": "It can also be called from a plugin command without displaying it in the menu.",
+    "また、プラグインパラメータより細かい調整が可能です。": "More detailed adjustments can also be made using the plugin parameters.",
+    "スキルのメモ欄（Note Of Skills）": "Skill Note Field (Note Of Skills)",
+    "指定したスキルを自動回復の使用対象から除きます。": "Excludes the specified skills from those available for auto-healing.",
+    "プラグインパラメータ（メニューコマンド関連）": "Plugin Parameters (Menu Command Settings)",
+    "メニューコマンドに表示（ShowMenuCommand）": "Show in Menu Commands (ShowMenuCommand)",
+    "メニューコマンドに自動回復を追加します。": "Adds auto-heal to the menu commands.",
+    "メニューコマンド挿入位置（ShowMenuCommandPosition）": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+    "メニューコマンドに自動回復を挿入する位置です。": "The position at which auto-heal is inserted into the menu commands.",
+    "0が先頭になります。": "0 places it at the beginning.",
+    "自動回復表示名（AutoHealName）": "Auto-Heal Display Name (AutoHealName)",
+    "自動回復の表示コマンド名を設定します。": "Sets the displayed command name for auto-heal.",
+    "[上級]自動回復記号（AutoHealSymbol）": "[Advanced] Auto-Heal Symbol (AutoHealSymbol)",
+    "自動回復の記号を設定します。": "Sets the symbol for auto-heal.",
+    "この値は他のプラグインと連携する際に使用できます。": "This value can be used when integrating with other plugins.",
+    "プラグインパラメータ（回復設定関連）": "Plugin Parameters (Healing Settings)",
+    "治療するステート（CureStates）": "States to Cure (CureStates)",
+    "治療の対象とするステートの一覧です。": "A list of states to be targeted for curing.",
+    "ステートの治療はＨＰの回復より優先されます。": "Curing states takes priority over recovering HP.",
+    "初期状態では『戦闘不能』と『毒』が設定されています。必要に応じて追加・削除してください。": "By default, “Incapacitated” and “Poison” are configured. Add or remove them as needed.",
+    "対象とするＨＰ％（TargetHpRate）": "Target HP% (TargetHpRate)",
+    "ＨＰ％がこの数値未満の場合に回復対象とします。": "An actor is targeted for healing when their HP% is below this value.",
+    "初期値は100。少しでも減っていれば回復します。": "The default value is 100. Actors are healed even if they are missing only a small amount of HP.",
+    "この値を変更することで『ほぼまんたん』的な挙動も実現できます。": "Changing this value can also produce an “almost full recovery” behavior.",
+    "数式も有効です。": "Formulas are also supported.",
+    "対象ＨＰ％を変数指定（TargetHpRateVariable）": "Specify Target HP % by Variable (TargetHpRateVariable)",
+    "上の『対象とするＨＰ％』の設定値を変数指定できるようにします。": "You can specify the setting for “Target HP %” above using a variable.",
+    "設定すると、こちらのほうが優先されるようになります。": "When configured, this setting takes priority.",
+    "使用者優先順位（UserPriority）": "User Priority (UserPriority)",
+    "回復スキルの使用者の優先順位を決める条件を選択します。": "Select the criteria for determining the priority of users of the healing skill.",
+    "残ＭＰ優先：現在ＭＰが多いキャラが回復を行います。": "Prioritize Remaining MP: The character with more current MP performs the healing.",
+    "後列優先：隊列の後ろ側にいるキャラが回復を行います。": "Prioritize Rear Row: The character positioned farther back in the formation performs the healing.",
+    "低消費優先：最も低い消費で回復できるキャラが回復を行います。": "Prioritize Low Cost: The character who can heal using the lowest cost performs the healing.",
+    "要するに、優秀な回復スキルを持つキャラが優先されます。": "In short, characters with better healing skills are prioritized.",
+    "バランス（残ＭＰ＋低消費）：残ＭＰ優先と低消費優先の中間です。": "Balance (Remaining MP + Low Cost): This is a middle ground between Prioritize Remaining MP and Prioritize Low Cost.",
+    "初期状態では『バランス』になっています。": "The initial setting is “Balance.”",
+    "少し分かりにくいかもしれませんが、これは「残ＭＰ&times;消費ＭＰ&times;予想回復量」を優先度として使用するものです。": "This may be a little difficult to understand, but it uses “Remaining MP × MP Cost × Estimated Recovery Amount” as the priority.",
+    "例えば「攻撃魔法が得意で、回復魔法が苦手な魔道士」と「攻撃魔法が苦手で、回復魔法が得意な神官」がいたとします。": "For example, suppose there is a mage who is good at attack magic but poor at healing magic, and a priest who is poor at attack magic but good at healing magic.",
+    "この場合、「普段の回復は神官が担当し、神官のＭＰが減ってきた時だけ魔道士が担当する」というような運用をするプレイヤーが多くいると思います。": "In this case, I think many players would use them so that “the priest handles healing normally, and the mage takes over only when the priest’s MP starts to run low.”",
+    "このような運用を自動的に実現できる設定が『バランス』です。": "“Balance” is the setting that automatically achieves this kind of arrangement.",
+    "魔道士：残ＭＰ２００、消費ＭＰ１０で１００回復できる。": "Mage: 200 remaining MP; can recover 100 HP for 10 MP.",
+    "神官 ：残ＭＰ１００、消費ＭＰ１０で２００回復できる。": "Priest: 100 remaining MP; can recover 200 HP for 10 MP.",
+    "上記の場合、二人の優先度がちょうど釣り合うことになります。": "In the above case, the two characters’ priorities are exactly balanced.",
+    "控えメンバーも使用者に（UseReserveMembers）": "Allow Reserve Members to Be Users (UseReserveMembers)",
+    "戦闘に参加しない控えメンバーも回復スキルを使用します。": "Reserve members who are not participating in battle can also use healing skills.",
+    "要するにドラクエでいう馬車メンバーも回復してくれるようにできるよ――ということです。": "In short, even the wagon members from Dragon Quest can be made to heal you.",
+    "初期状態では無効です。": "It is disabled by default.",
+    "控えメンバーも対象に（TargetReserveMembers）": "Include Reserve Members as Targets (TargetReserveMembers)",
+    "戦闘に参加しない控えメンバーも回復の対象とします。": "Reserve members who are not participating in battle are also included as healing targets.",
+    "こちらは回復を受ける側です。": "This setting applies to the recipients of healing.",
+    "プラグインパラメータ（メッセージ関連）": "Plugin Parameters (Message-Related)",
+    "メッセージの表示方式（MessageType）": "Message Display Mode (MessageType)",
+    "メッセージの表示方式を設定します。": "Sets how messages are displayed.",
+    "0:表示しない": "0: Do not display",
+    "1:簡易表示：一行だけの簡単なメッセージを表示": "1: Simple Display: Displays a simple one-line message",
+    "2:スキルの使用状況を表示：「～は～を唱えた」のメッセージを表示": "2: Display Skill Usage: Displays a message such as “~ used ~.”",
+    "3:スキルの使用結果も表示：「～のＨＰが～回復した」のメッセージまで表示": "3: Also Display Skill Results: Displays messages such as “~ recovered ~ HP.”",
+    "なお、失敗時のメッセージは1~3のいずれも同じです。": "The failure message is the same for options 1–3.",
+    "初期状態では『3:スキルの使用結果も表示』になっています。": "The initial setting is “3: Also Display Skill Results.”",
+    "メッセージの瞬間表示（MessageShowFast）": "Show Messages Instantly (MessageShowFast)",
+    "スキルの使用状況、結果を表示する際のメッセージを瞬間表示します。": "Displays messages about skill usage and results instantly.",
+    "ウィンドウ背景（MessageBackgroundType）": "Window Background (MessageBackgroundType)",
+    "メッセージウィンドウの背景です。": "Sets the background of the message window.",
+    "回復成功メッセージ（MessageSuccess）": "Successful Healing Message (MessageSuccess)",
+    "回復成功時のメッセージです。": "The message displayed when healing succeeds.",
+    "『メッセージの表示方式』が『1:簡易表示』の場合のみ表示されます。": "Displayed only when “Message Display Mode” is set to “1: Simple Display.”",
+    "回復不要メッセージ（MessageUnnecessary）": "Unnecessary Healing Message (MessageUnnecessary)",
+    "回復が不要な際のメッセージです。": "The message displayed when healing is unnecessary.",
+    "回復失敗メッセージ（MessageFailure）": "Failed Healing Message (MessageFailure)",
+    "回復に失敗した際のメッセージです。": "The message displayed when healing fails.",
+    "メッセージ中はウェイト（MessageWait）": "Wait During Messages (MessageWait)",
+    "メッセージが終了するまで処理を待ちます。": "Waits for processing until the message ends.",
+    "Mano_InputConfig.jsなどのコモンイベント呼び出し処理と組み合わせた際の挙動が安定します。オフの場合かつMano_InputConfig.js（ver9.3.0）と組み合わせた場合、メッセージが無限ループする現象を確認しました。": "This stabilizes behavior when combined with common event call processing such as Mano_InputConfig.js. When disabled and used together with Mano_InputConfig.js (ver9.3.0), I confirmed an issue where the message enters an infinite loop.",
+    "ただし、オンの場合は挙動が少し変わることに注意してください。": "However, please note that the behavior may change slightly when this is enabled.",
+    "例えば、自動回復成功時にアニメーションを表示する場合、アニメーションを再生するタイミングがメッセージの終了後になります。": "For example, when displaying an animation upon successful auto-healing, the animation will play after the message ends.",
+    "オフの場合でも自動回復の成功／失敗時にイベントコマンド側で何らかのウェイト系の処理を入れると安定しやすいです。": "Even when this is disabled, adding some kind of wait-related processing in the event command when auto-healing succeeds or fails can improve stability.",
+    "プラグインパラメータ（効果音関連）": "Plugin Parameters (Sound Effects)",
+    "成功時の効果音（SoundSuccess）": "Success Sound (SoundSuccess)",
+    "回復に成功した際の効果音です。": "This is the sound effect played when healing succeeds.",
+    "失敗時の効果音（SoundFailure）": "Failure Sound (SoundFailure)",
+    "回復に失敗した際の効果音です。": "This is the sound effect played when healing fails.",
+    "プラグインパラメータ（メニューを閉じる）": "Plugin Parameters (Closing the Menu)",
+    "メニューを閉じる（CloseMenu）": "Close Menu (CloseMenu)",
+    "自動回復後にメニューを閉じます。": "Closes the menu after auto-healing.",
+    "これが有効な場合のみ、同時にオンにするスイッチを以下で指定可能です。": "Only when this is enabled can you specify below a switch to turn on at the same time.",
+    "成功時のスイッチ（SuccessSwitch）": "Success Switch (SuccessSwitch)",
+    "自動回復の成功時、オンにするスイッチです。": "This is the switch to turn on when auto-healing succeeds.",
+    "基本的にはコモンイベントの呼び出しに用いる想定です。フラッシュやアニメーションなどの演出に利用できます。": "It is primarily intended for calling common events. It can be used for effects such as flashes and animations.",
+    "失敗時のスイッチ（FailureSwitch）": "Failure Switch (FailureSwitch)",
+    "自動回復の失敗時、オンにするスイッチです。": "This is the switch to turn on when auto-healing fails.",
+    "ＭＺ用プラグインコマンド（MZ Plugin Command）": "MZ Plugin Command (MZ Plugin Command)",
+    "イベント上から自動回復を実行できます。": "You can perform auto-healing from an event.",
+    "『対象とするＨＰ％』『成功時のスイッチ』『失敗時のスイッチ』を指定可能です。": "You can specify the \"Target HP %\", \"Success Switch\", and \"Failure Switch\".",
+    "内容はプラグインパラメータと同一のため割愛します。": "The details are the same as those for the plugin parameters, so they are omitted here.",
+    "ＭＶ用プラグインコマンド（MV Plugin Command）": "MV Plugin Command (MV Plugin Command)",
+    "自動回復を実行します。": "Performs auto-healing.",
+    "また、以下を事前に指定すればオプションも指定可能です。": "You can also specify options by setting the following in advance.",
+    "ＨＰが指定した数値％以下ならば、回復を実行します。": "Healing is performed if HP is at or below the specified percentage.",
+    "回復成功時、指定した番号のスイッチをオンにします。": "When healing succeeds, the switch with the specified number is turned on.",
+    "回復失敗時、指定した番号のスイッチをオンにします。": "When healing fails, the switch with the specified number is turned on.",
+    "以下は全てをまとめた実行例です。": "The following is an example that brings everything together.",
+    "※一行ずつ呼び出してください。": "※Call them one line at a time.",
+    "メッセージの表示について（About Displaying Messages）": "Displaying Messages (About Displaying Messages)",
+    "自動回復を行った際、結果をメッセージで表示します。": "When auto-healing is performed, the result is displayed in a message.",
+    "ただし、本来ツクールの仕様ではメニュー画面でのメッセージ表示はできません。": "However, by default, RPG Maker does not allow messages to be displayed on the menu screen.",
+    "色々と無理矢理なので、競合などの問題が発生する可能性もあります。": "Since this involves various workarounds, conflicts and other issues may occur.",
+    "その際は、自動回復後にメニューを閉じる設定にするか、メッセージ表示をオフにしてください。": "If that happens, either set the menu to close after auto-healing or turn off message display.",
+    "また、メニューを閉じる場合のみ、コモンイベントの呼出も可能です。": "Also, a common event can be called only when the menu is closed.",
+    "演出などにご利用ください。": "Please use this for effects and similar purposes.",
+    "自動回復のアルゴリズム（Algorithm of \"Auto Heal\"）": "The Auto-Healing Algorithm (Algorithm of \"Auto Heal\")",
+    "最もＨＰの割合が減っている対象者を求める。": "Find the target whose HP percentage has decreased the most.",
+    "設定に従って、回復スキルの使用者を確定。": "Determine the users of healing skills according to the settings.",
+    "対象者に対して、最も効率の良いスキルを求める。": "For the target, find the most efficient skill.",
+    "※（回復量／消費）が最大のスキル。": "※The skill with the highest (healing amount / cost).",
+    "回復実行。": "Perform healing.",
+    "上記を繰り返し。": "Repeat the above.",
+    "誰もＨＰが減っていないか、誰もスキルを使用できなくなれば終了。": "End when no one's HP has decreased or no one can use a skill anymore.",
+    "その他、細かい仕様（Other Detailed Specifications）": "Other Detailed Specifications (Other Detailed Specifications)",
+    "回復の対象はタイプが『ＨＰ回復』のスキルのみです。": "Only skills whose type is \"HP Recovery\" are eligible for healing.",
+    "また、効果の計算は計算式で行います。": "The effect is calculated using the formula.",
+    "使用効果での回復量までは考慮していません。": "The amount healed by the skill's effects is not taken into account.",
+    "ＭＰとＴＰは同列に扱います。": "MP and TP are treated equally.",
+    "つまり、回復量が同じなら、消費ＭＰが１０のスキルと": "In other words, if the amount restored is the same, a skill that costs 10 MP and",
+    "消費ＴＰが１０のスキルの効率は同等とみなします。": "a skill that costs 10 TP are considered equally efficient.",
+    "回復量を求めるため、内部的にスキルの計算式を実行します。": "To determine the amount restored, the skill's formula is executed internally.",
+    "計算式内に実処理を書くと、それも実行されるので注意です。": "Be aware that any actual processing written in the formula will also be executed.",
+    "完全な効率化を保証するものではありません。": "This does not guarantee complete optimization.",
+    "特にステートの治療については、あまり効率化されていません。": "In particular, state removal has not been optimized very much.",
+    "例えば、複数ステートを治療できるスキルと、一つのステートしか、治療できないスキルの効率の差などは計算していません。": "For example, it does not calculate the difference in efficiency between a skill that can cure multiple states and one that can cure only a single state.",
+    "複雑すぎて作者が諦めました。": "It was too complex, so the author gave up.",
+    "あまりないと思いますが、対象がランダムの回復スキルは対象外です。": "Although there probably aren't many, healing skills with random targets are excluded.",
+    "結果を計算できないのでどうしようもありません。": "There is nothing that can be done because the result cannot be calculated."
+  }
+}

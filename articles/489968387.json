@@ -1,0 +1,3027 @@
+{
+  "articleId": "489968387",
+  "sourceUrl": "https://newrpg.seesaa.net/article/489968387.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "4310894ea101937dd0cb166e0a15fd2251120c7b1905dd622406895c0a3e1f16",
+  "translatedAt": "2026-08-31T01:16:42.461Z",
+  "title": "Implementation of the Arts System [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "奥義システムの実装【RPGツクールMZプラグイン】",
+      "sourceHash": "58ba3741302ff54d53b240c1946ee1bce51322580382dea61a46ce38e6359748",
+      "translation": "Implementation of the Arts System [RPG Maker MZ Plugin]",
+      "contextHash": "58ba3741302ff54d53b240c1946ee1bce51322580382dea61a46ce38e6359748"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ゲージを溜めて発動する特別なスキルを実装します。",
+      "sourceHash": "2d12b88448dda3af214048b011aada02a82d91a2ad4bb6333dcd1c54605a9888",
+      "translation": "Implement special skills that are activated by filling a gauge.",
+      "contextHash": "2d12b88448dda3af214048b011aada02a82d91a2ad4bb6333dcd1c54605a9888"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "いわゆる奥義のようなものです。",
+      "sourceHash": "ab5647734c6522946efe5a4e02294e1da8767577ca74662a38ceb4f53d641467",
+      "translation": "They are essentially Arts.",
+      "contextHash": "ab5647734c6522946efe5a4e02294e1da8767577ca74662a38ceb4f53d641467"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "既存のＴＰ制に類似していますが、ゲージを複数持たせることができます。",
+      "sourceHash": "0e9f60eb4cebf86ab63ffdbf0a06aea6bb056b81587f39f22402dcfec1028e63",
+      "translation": "Although similar to the existing TP system, you can have multiple gauges.",
+      "contextHash": "0e9f60eb4cebf86ab63ffdbf0a06aea6bb056b81587f39f22402dcfec1028e63"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "ゲージが溜まる条件や溜まった時の演出、ゲージのレイアウトなども調整できます。",
+      "sourceHash": "80f1082213d2dd73533dae519ba639f4e1731325efe3d3ffa07f386070a7dfac",
+      "translation": "You can also adjust the conditions for filling the gauges, the effects played when they are filled, and the gauge layout.",
+      "contextHash": "80f1082213d2dd73533dae519ba639f4e1731325efe3d3ffa07f386070a7dfac"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "【ゲージのレイアウト関連】",
+      "sourceHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1",
+      "translation": "[Gauge Layout] ",
+      "contextHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "【ゲージのレイアウト関連】",
+      "sourceHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1",
+      "translation": "[Gauge Layout]",
+      "contextHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_SpecialSkill.js",
+      "sourceHash": "50d9e728055d151ddcc16d99fe94ae3ded5fe58572b19f0d9ffdeeac467ed7c0",
+      "translation": "NRP_SpecialSkill.js ",
+      "contextHash": "6326fc74fccfbf1e8dd66eeffd8987673ec2b540afc7f94a3ef0e53a91de007e"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.07（2025/05/06）",
+      "sourceHash": "9dacfa5671a274244150af0640df49c141cb5d954749d11fbb13d5bbca46dd8f",
+      "translation": "ver1.07 (2025/05/06) ",
+      "contextHash": "6326fc74fccfbf1e8dd66eeffd8987673ec2b540afc7f94a3ef0e53a91de007e"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/05/06（ver1.07）",
+      "sourceHash": "5f647372443f7252be83b889e9b5c5174034817ddab004f4a7b502ce7d1b0244",
+      "translation": "2025/05/06 (ver1.07) ",
+      "contextHash": "5f647372443f7252be83b889e9b5c5174034817ddab004f4a7b502ce7d1b0244"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2025/04/03（ver1.06）",
+      "sourceHash": "631097710e07b4d65c3c77c7c26ac53f96adae135786522e47a5c006d03c7ee3",
+      "translation": "2025/04/03 (ver1.06) ",
+      "contextHash": "631097710e07b4d65c3c77c7c26ac53f96adae135786522e47a5c006d03c7ee3"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/03/17 -> 2024/06/05（ver1.05 -> 1.051）",
+      "sourceHash": "3dcd5593d4f111f6a1ed3a29bb40b27e684570b63df1cd22ba66cd707490c425",
+      "translation": "2024/03/17 -> 2024/06/05 (ver1.05 -> 1.051) ",
+      "contextHash": "3dcd5593d4f111f6a1ed3a29bb40b27e684570b63df1cd22ba66cd707490c425"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "敵キャラが奥義スキルを使用できない不具合修正。（2024/06/05 ver1.051）",
+      "sourceHash": "4ec27302e3ba655f08d47d8ed32b5e94ef839c52a8004a1073960023c50a5ba0",
+      "translation": "Fixed a bug that prevented enemies from using Arts skills. (2024/06/05 ver1.051)",
+      "contextHash": "4ec27302e3ba655f08d47d8ed32b5e94ef839c52a8004a1073960023c50a5ba0"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "※敵キャラについては特に制約なく使用できる仕様とします。",
+      "sourceHash": "2f79d19b6e6fceea1caf6221daf675c5d382ef59615077dc13bad86d349138af",
+      "translation": "※Enemies can use them without any particular restrictions.",
+      "contextHash": "2f79d19b6e6fceea1caf6221daf675c5d382ef59615077dc13bad86d349138af"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/03/16（ver1.04）",
+      "sourceHash": "d4859765c280c1502d2df6e2dd519c1dbb5f35945a586c4626e81b0036cf8c51",
+      "translation": "2024/03/16 (ver1.04) ",
+      "contextHash": "d4859765c280c1502d2df6e2dd519c1dbb5f35945a586c4626e81b0036cf8c51"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2023/05/23（ver1.03）",
+      "sourceHash": "4094b71d61a1bacfb98b896c2485693f8b1188c33caf94b9ed9957225453b49a",
+      "translation": "2023/05/23 (ver1.03) ",
+      "contextHash": "4094b71d61a1bacfb98b896c2485693f8b1188c33caf94b9ed9957225453b49a"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2023/04/02 -> 2023/04/11（ver1.02 -> 1.023）",
+      "sourceHash": "2079d71e3f54f19cbd37db2326d1cd6f7527f2f1d6b9613ab2636d63c5b12143",
+      "translation": "2023/04/02 -> 2023/04/11 (ver1.02 -> 1.023) ",
+      "contextHash": "2079d71e3f54f19cbd37db2326d1cd6f7527f2f1d6b9613ab2636d63c5b12143"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "他プラグインとの連携用にソース整理。（ver1.021）",
+      "sourceHash": "4e68920c2f79f4bb907e057504630928db6f7ea874aa6d9d0f7fa6e6abc371a9",
+      "translation": "Reorganized the source for integration with other plugins. (ver1.021)",
+      "contextHash": "4e68920c2f79f4bb907e057504630928db6f7ea874aa6d9d0f7fa6e6abc371a9"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "並び替えするとゲージが消える不具合修正。（ver1.022）",
+      "sourceHash": "14804d376ed35d3168a5d29b86021c4a26ab11850c1f15aed2cff98902789774",
+      "translation": "Fixed a bug that caused gauges to disappear when changing the order. (ver1.022)",
+      "contextHash": "14804d376ed35d3168a5d29b86021c4a26ab11850c1f15aed2cff98902789774"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "満タン時のアニメを設定した状態で、マップ上で奥義ゲージが満タンになるとエラーになる不具合修正。（2023/04/11 ver1.023）",
+      "sourceHash": "1ff88f78a7307ff8988c49bbb1369f9621af510560476dddccaeb25ac129e938",
+      "translation": "Fixed a bug that caused an error when an Arts gauge became full on the map while an animation was set for when it reached maximum. (2023/04/11 ver1.023)",
+      "contextHash": "1ff88f78a7307ff8988c49bbb1369f9621af510560476dddccaeb25ac129e938"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2023/03/29 -> 2023/04/01（ver1.01 -> 1.011）",
+      "sourceHash": "95e54392ea2484a21781f15f5f6044524f91ce705f8235d60e5ac8ac1febb0ff",
+      "translation": "2023/03/29 -> 2023/04/01 (ver1.01 -> 1.011) ",
+      "contextHash": "95e54392ea2484a21781f15f5f6044524f91ce705f8235d60e5ac8ac1febb0ff"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "奥義ゲージの幅が反映されない不具合修正。",
+      "sourceHash": "940675a9c9691d96e6ba67b890fd61ab84e9b1a50182a201e37afb25e7aefd81",
+      "translation": "Fixed a bug that prevented the Arts gauge width from being applied.",
+      "contextHash": "940675a9c9691d96e6ba67b890fd61ab84e9b1a50182a201e37afb25e7aefd81"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "スキル画面にゲージが表示されてしまう不具合修正。",
+      "sourceHash": "50ec92990825017cc1d3e179e93232b7a9404175528999208a69fc16d4fc1b8c",
+      "translation": "Fixed a bug that caused gauges to be displayed on the Skills screen.",
+      "contextHash": "50ec92990825017cc1d3e179e93232b7a9404175528999208a69fc16d4fc1b8c"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "戦闘開始時にエラーとなる不具合修正。（2023/04/01 ver1.011）",
+      "sourceHash": "356d6f6bbeb00cc75f4d1aff5022052fec7933bd5ad8c83a40cb7ff9ef879784",
+      "translation": "Fixed a bug that caused an error when a battle started. (2023/04/01 ver1.011)",
+      "contextHash": "356d6f6bbeb00cc75f4d1aff5022052fec7933bd5ad8c83a40cb7ff9ef879784"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2022/07/23 -> 2022/07/24（ver1.00 -> 1.001）",
+      "sourceHash": "56968b775c660c2b2dac12c28c7534c9cb1a353e629bee2d8069e0d5716f9ed4",
+      "translation": "2022/07/23 -> 2022/07/24 (ver1.00 -> 1.001) ",
+      "contextHash": "56968b775c660c2b2dac12c28c7534c9cb1a353e629bee2d8069e0d5716f9ed4"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "途中のセーブデータに適用した場合、エラーになる不具合修正。",
+      "sourceHash": "3de78b4a34442187d1c2ca763ef0fb65d1a4c5c583182cdc0a9f9d01156a6de1",
+      "translation": "Fixed a bug that caused an error when applied to an existing save file.",
+      "contextHash": "3de78b4a34442187d1c2ca763ef0fb65d1a4c5c583182cdc0a9f9d01156a6de1"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "（2022/07/24 ver1.001）",
+      "sourceHash": "022bcde0e06eba33c8fa079df5a7b2c3a0562289f89cd34e913d19471b4f8e16",
+      "translation": " (2022/07/24 ver1.001) ",
+      "contextHash": "022bcde0e06eba33c8fa079df5a7b2c3a0562289f89cd34e913d19471b4f8e16"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "プラグインパラメータの奥義タイプ一覧に、情報を登録してください。",
+      "sourceHash": "29fd2eae14e96f4e42d50d5f67d80e660ce0a166d36eb07ba8673b1734282c98",
+      "translation": "Register the information in the Arts Type list in the plugin parameters.",
+      "contextHash": "29fd2eae14e96f4e42d50d5f67d80e660ce0a166d36eb07ba8673b1734282c98"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "ゲージが溜まる条件を詳細に設定できます。",
+      "sourceHash": "f55f2260bc2ece45d65b3d1d63ca3d11792d8690d6ec0d30f94f9a2cd113c074",
+      "translation": "You can configure the conditions for filling the gauges in detail.",
+      "contextHash": "f55f2260bc2ece45d65b3d1d63ca3d11792d8690d6ec0d30f94f9a2cd113c074"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "初期状態では一つだけ登録されていますが、複数登録することも可能です。",
+      "sourceHash": "15bdfcb3aa9b687900b389150e3c2bdbcc1e5a63fb6b3c0494d58921add2af21",
+      "translation": "One is registered by default, but you can register multiple types.",
+      "contextHash": "15bdfcb3aa9b687900b389150e3c2bdbcc1e5a63fb6b3c0494d58921add2af21"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "先頭のデータが『奥義タイプ = 1』として扱われます。",
+      "sourceHash": "e87be3d10d39115945059149af702f867bec556e5d9a30356f115090ad4e983a",
+      "translation": "The first entry is treated as “Arts Type = 1.”",
+      "contextHash": "e87be3d10d39115945059149af702f867bec556e5d9a30356f115090ad4e983a"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "さらに奥義タイプに対応する奥義スキルを設定してください。",
+      "sourceHash": "496f1feeea450d0db521721574017c7b4fb05a1c8d1c849413864ebafade51a8",
+      "translation": "Next, set the Arts skill corresponding to each Arts Type.",
+      "contextHash": "496f1feeea450d0db521721574017c7b4fb05a1c8d1c849413864ebafade51a8"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※以下の『スキルのメモ欄』を参照",
+      "sourceHash": "259f42999dabd891bdaaef623c391a4ee922e97a9e91d6258db1ba2ed56fd750",
+      "translation": "※See the “Skill note field” below.",
+      "contextHash": "259f42999dabd891bdaaef623c391a4ee922e97a9e91d6258db1ba2ed56fd750"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "スキルのメモ欄（奥義用）（Note of Skill [Special]）",
+      "sourceHash": "9a2491a76d0d2d65aaeb47f2de2a0c6464d5603171cbc19d9e70e6054f2e2d06",
+      "translation": "Skill Note Field (for Arts) (Note of Skill [Special])",
+      "contextHash": "9a2491a76d0d2d65aaeb47f2de2a0c6464d5603171cbc19d9e70e6054f2e2d06"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "奥義となるスキルのメモ欄に以下を記入してください。",
+      "sourceHash": "d3a50fadfd33049c072afe14e4b3cc3e968a85b80688051f8f43a961daef59cc",
+      "translation": "Enter the following in the note field of the skill that will be an Arts skill.",
+      "contextHash": "d3a50fadfd33049c072afe14e4b3cc3e968a85b80688051f8f43a961daef59cc"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "<SpecialSkill:[奥義タイプ]>",
+      "sourceHash": "49d2f3ba6b897e618d86bde661a79b1c76dc111f596506de0576df97519b9957",
+      "translation": "<SpecialSkill:[Arts Type]>",
+      "contextHash": "49d2f3ba6b897e618d86bde661a79b1c76dc111f596506de0576df97519b9957"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "スキルを奥義スキルとして設定します。",
+      "sourceHash": "3df835ff25274135687252bc641e44220deeff2155b411c59ef54a310c090e40",
+      "translation": "Sets the skill as an Arts skill.",
+      "contextHash": "3df835ff25274135687252bc641e44220deeff2155b411c59ef54a310c090e40"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "<SpecialSkill:1>ならば、奥義タイプ一覧の１番目に対応します。",
+      "sourceHash": "f5d245ad75cc1521fa52e32703067de3f8f8ca21ef5dd8b3c7ff433d4a001842",
+      "translation": "If it is <SpecialSkill:1>, it corresponds to the first entry in the Arts Type list.",
+      "contextHash": "f5d245ad75cc1521fa52e32703067de3f8f8ca21ef5dd8b3c7ff433d4a001842"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "奥義ゲージを100ポイント消費します。",
+      "sourceHash": "1e1c57a529fc7359c48afc702a97363e8458e1db1c8383b54276a98c68b2be5b",
+      "translation": "Consumes 100 points from the Arts gauge.",
+      "contextHash": "1e1c57a529fc7359c48afc702a97363e8458e1db1c8383b54276a98c68b2be5b"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "指定がない場合は全てを消費します。",
+      "sourceHash": "8294977b58e1062d59af6e143745bdd8a6b230cdb73a8dae601827c436af37f2",
+      "translation": "If not specified, it consumes the entire gauge.",
+      "contextHash": "8294977b58e1062d59af6e143745bdd8a6b230cdb73a8dae601827c436af37f2"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "スキルのメモ欄（通常用）（Note of Skill [Normal]）",
+      "sourceHash": "c93a74d694a66652c9527e12e2e10d6a27340b39a36cade4c5cd4d8dec67335c",
+      "translation": "Skill Note Field (for Normal Skills) (Note of Skill [Normal])",
+      "contextHash": "c93a74d694a66652c9527e12e2e10d6a27340b39a36cade4c5cd4d8dec67335c"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "ゲージが溜まる条件をスキル毎に設定できます。",
+      "sourceHash": "fa54b9f9440878771b43a129cbfa38617e87973665e8e668c827b4126b411ccf",
+      "translation": "You can set the conditions for filling the gauges for each skill.",
+      "contextHash": "fa54b9f9440878771b43a129cbfa38617e87973665e8e668c827b4126b411ccf"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "指定がない場合はプラグインパラメータの既定値を用います。",
+      "sourceHash": "52359455f4b9497baf48a018ba664f2a0edea182a4145e2abe9be52678753f99",
+      "translation": "If not specified, the default values from the plugin parameters are used.",
+      "contextHash": "52359455f4b9497baf48a018ba664f2a0edea182a4145e2abe9be52678753f99"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "スキル命中時に、スキル使用者の全ゲージを10加算します。",
+      "sourceHash": "da9c94323340259980351e24c64c7cc5560d5991c633f6edbc7dec5cf31c8de9",
+      "translation": "When the skill hits, adds 10 to all gauges of the skill user.",
+      "contextHash": "da9c94323340259980351e24c64c7cc5560d5991c633f6edbc7dec5cf31c8de9"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "対象数や連続回数に比例して増加量も大きくなります。",
+      "sourceHash": "f5385423f5e45a5a63297aa59e4166429d38cc8e5d7e8f2a014e113b7b79f3c7",
+      "translation": "The amount added also increases in proportion to the number of targets and consecutive hits.",
+      "contextHash": "f5385423f5e45a5a63297aa59e4166429d38cc8e5d7e8f2a014e113b7b79f3c7"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "※外れても増加する設定もできます。",
+      "sourceHash": "9f5fa8a4d7368efc731d7faae09e0eb33c8ce8da26c5a7e79e7322131c4e26df",
+      "translation": "※You can also configure it to increase even when the skill misses.",
+      "contextHash": "9f5fa8a4d7368efc731d7faae09e0eb33c8ce8da26c5a7e79e7322131c4e26df"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "スキル使用後に、スキル使用者の全ゲージを10加算します。",
+      "sourceHash": "45315649a0ef4a1455e77894168990001e77d9e40ec84813d23f3c1e45b26858",
+      "translation": "After using the skill, adds 10 to all gauges of the skill user.",
+      "contextHash": "45315649a0ef4a1455e77894168990001e77d9e40ec84813d23f3c1e45b26858"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "スキルを受けた相手の全ゲージを10加算します。",
+      "sourceHash": "23f832dbfa9a82140b5e584de9a05a5a35eb2d82dded50da44571cce17f71118",
+      "translation": "Adds 10 to all gauges of the skill's target.",
+      "contextHash": "23f832dbfa9a82140b5e584de9a05a5a35eb2d82dded50da44571cce17f71118"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "基本的には補助スキルを想定しています。",
+      "sourceHash": "8fe2fcf1cadd9232f7e02572c8ad03c00cc68eceaaccd0c3c7edf4953b0ca8f0",
+      "translation": "This is primarily intended for support skills.",
+      "contextHash": "8fe2fcf1cadd9232f7e02572c8ad03c00cc68eceaaccd0c3c7edf4953b0ca8f0"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "特定のゲージだけを増加させたい場合は、タグ名の末尾に数値を付加してください。",
+      "sourceHash": "985431ea4c731fb2e6223cda9e22ad1fc19fa0b7050882fc53a1cda1ff6313b2",
+      "translation": "To increase only a specific gauge, append a number to the end of the tag name.",
+      "contextHash": "985431ea4c731fb2e6223cda9e22ad1fc19fa0b7050882fc53a1cda1ff6313b2"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "例：『SpecialSkillActionValue1』ならば一番目のゲージが対象。",
+      "sourceHash": "61835f0e3212ccb283592ce468c034a78f5006b7a65923bd52a5866a288ce239",
+      "translation": "Example: “SpecialSkillActionValue1” targets the first gauge.",
+      "contextHash": "61835f0e3212ccb283592ce468c034a78f5006b7a65923bd52a5866a288ce239"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "アクター、職業、装備、ステートのメモ欄（Note of Objects）",
+      "sourceHash": "3d705cd62fd6e99235d83601affd0082c5f44e0bb43a6570dc4d0bfac546f1ad",
+      "translation": "Note Fields for Actors, Classes, Equipment, and States (Note of Objects)",
+      "contextHash": "3d705cd62fd6e99235d83601affd0082c5f44e0bb43a6570dc4d0bfac546f1ad"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "メモ欄に記載することで、ゲージの上昇量が変化する特性を設定できます。",
+      "sourceHash": "c0150e9547362c6dc30c863d140c7ffa6ad45e698ac579af019006d9f8fdbdda",
+      "translation": "By entering this in the note field, you can set traits that change the amount by which the gauges increase.",
+      "contextHash": "c0150e9547362c6dc30c863d140c7ffa6ad45e698ac579af019006d9f8fdbdda"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "全ゲージの上昇量を150%にします。",
+      "sourceHash": "3ec4c97583290ed112ad3dfcb900c954de281bdd5ef0c4ac011a8ca650ca365b",
+      "translation": "Sets the increase amount for all gauges to 150%.",
+      "contextHash": "3ec4c97583290ed112ad3dfcb900c954de281bdd5ef0c4ac011a8ca650ca365b"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "ターン毎に全ゲージを10加算します。",
+      "sourceHash": "356e2e5c6dce4436c4c2f555e63a4f2eee3d961479d949835ed24a775bac8314",
+      "translation": "Adds 10 to all gauges each turn.",
+      "contextHash": "356e2e5c6dce4436c4c2f555e63a4f2eee3d961479d949835ed24a775bac8314"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "スキルと同じ要領で特定の奥義タイプだけを対象にできます。",
+      "sourceHash": "9fd4f73abd27244cb54ee142fee64b3a30c104026e202b69a4959f23d4ebd621",
+      "translation": "As with skills, you can target only specific Arts types.",
+      "contextHash": "9fd4f73abd27244cb54ee142fee64b3a30c104026e202b69a4959f23d4ebd621"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "ステートのメモ欄（Note of States）",
+      "sourceHash": "54a98acdf67609c50f53512f1e79936d7923f88d1bceef0c426b0aa36dc22976",
+      "translation": "State Note Field (Note of States)",
+      "contextHash": "54a98acdf67609c50f53512f1e79936d7923f88d1bceef0c426b0aa36dc22976"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "ステートを受けた相手の全ゲージを10加算します。",
+      "sourceHash": "58920703d4c1a3309a9ebe4d8c0376a4b19811463606ea9466601c1155d4042e",
+      "translation": "Adds 10 to all gauges of the target affected by the state.",
+      "contextHash": "58920703d4c1a3309a9ebe4d8c0376a4b19811463606ea9466601c1155d4042e"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "スキルと同じ要領で特定の奥義タイプだけを対象にできます。",
+      "sourceHash": "9fd4f73abd27244cb54ee142fee64b3a30c104026e202b69a4959f23d4ebd621",
+      "translation": "As with skills, you can target only specific Arts types.",
+      "contextHash": "9fd4f73abd27244cb54ee142fee64b3a30c104026e202b69a4959f23d4ebd621"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "プラグインコマンド",
+      "sourceHash": "79ea8ba002ca23e2ff9a4e2ee622505766c8623e34fcf035dac772595d316ff4",
+      "translation": "Plugin Commands",
+      "contextHash": "79ea8ba002ca23e2ff9a4e2ee622505766c8623e34fcf035dac772595d316ff4"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "奥義ゲージの増減",
+      "sourceHash": "8bb6829d94c7b088b7e922bfe78f95b676072bf036153761df5395445660659e",
+      "translation": "Increase/Decrease Arts Gauge",
+      "contextHash": "8bb6829d94c7b088b7e922bfe78f95b676072bf036153761df5395445660659e"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "奥義ゲージを増減させます。",
+      "sourceHash": "e0608dab6577501342c8417a5d24f1d6201fe8b7f1043a77fdb1817406e89983",
+      "translation": "Increases or decreases the Arts gauge.",
+      "contextHash": "e0608dab6577501342c8417a5d24f1d6201fe8b7f1043a77fdb1817406e89983"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "操作するアクターや奥義タイプを指定可能です。",
+      "sourceHash": "a170c26832bc5d249e497ea9cb7e333ec7904a4b3a6d7477c2e95389a166ea74",
+      "translation": "You can specify the actor and Arts type to affect.",
+      "contextHash": "a170c26832bc5d249e497ea9cb7e333ec7904a4b3a6d7477c2e95389a166ea74"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "アクターを指定しなかった場合は、パーティ全員が対象となります。",
+      "sourceHash": "cd7683b49d1bcee5d964d362ea99c5e7603bc212aad1167f2ffaf8829d588c51",
+      "translation": "If no actor is specified, all party members are affected.",
+      "contextHash": "cd7683b49d1bcee5d964d362ea99c5e7603bc212aad1167f2ffaf8829d588c51"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "奥義タイプを指定しなかった場合は、全奥義タイプが対象となります。",
+      "sourceHash": "0420b84752d0e71dbd1b7c2dca4666a0583faefc8d70b38019309219cc10b9d4",
+      "translation": "If no Arts type is specified, all Arts types are affected.",
+      "contextHash": "0420b84752d0e71dbd1b7c2dca4666a0583faefc8d70b38019309219cc10b9d4"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "レイアウトについて",
+      "sourceHash": "80945cd9719cf6d61ef6230f48719c79401b9c7bffcb192c7a489d8d99121c11",
+      "translation": "Regarding Layout",
+      "contextHash": "80945cd9719cf6d61ef6230f48719c79401b9c7bffcb192c7a489d8d99121c11"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "初期状態では奥義ゲージを表示する場所が狭いので窮屈です。",
+      "sourceHash": "433f937e643683c36e6c3d62db7c58280911636403d8575afe5526647bf808e5",
+      "translation": "By default, the space for displaying the Arts gauge is narrow and cramped.",
+      "contextHash": "433f937e643683c36e6c3d62db7c58280911636403d8575afe5526647bf808e5"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "特にゲージを複数登録した場合は顕著になります。",
+      "sourceHash": "5ea953aab6dd68e20d11d725e3b74ed16ea1a0a5778450c5ed982f91eb7e1814",
+      "translation": "This is especially noticeable when multiple gauges are registered.",
+      "contextHash": "5ea953aab6dd68e20d11d725e3b74ed16ea1a0a5778450c5ed982f91eb7e1814"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "対象はメニュー、ステータス、戦闘の３画面です。",
+      "sourceHash": "1120c5f8fedc3b96190243dee582a8207ef61f3365250d2c1c55e935e139fa5c",
+      "translation": "The applicable screens are the Menu, Status, and Battle screens.",
+      "contextHash": "1120c5f8fedc3b96190243dee582a8207ef61f3365250d2c1c55e935e139fa5c"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "プラグインパラメータによって、ゲージのレイアウトを設定できますが、このプラグインだけでは厳しいかもしれません。",
+      "sourceHash": "ee8e67801e225fb4ba3181d4e184ec8c6fbf95fe6f74a9e038660c3588877933",
+      "translation": "You can configure the gauge layout using plugin parameters, but this plugin alone may not be sufficient.",
+      "contextHash": "ee8e67801e225fb4ba3181d4e184ec8c6fbf95fe6f74a9e038660c3588877933"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "その他のレイアウト系プラグインと組み合わせて、いい感じに調整してください。",
+      "sourceHash": "52fa344e5ee21c0b6aac8b88ffc23bb865fe8524c801225d5b2d7e86d0eb368c",
+      "translation": "Combine it with other layout plugins and adjust it to your liking.",
+      "contextHash": "52fa344e5ee21c0b6aac8b88ffc23bb865fe8524c801225d5b2d7e86d0eb368c"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "※このプラグイン単体では無理があるので、作者はさじを投げました。",
+      "sourceHash": "3eb752c761cc452edadd03e398bfdac66a95a1871e8a78ad5e392ebe6a4fab41",
+      "translation": "※This plugin alone is too limited, so I have thrown in the towel.",
+      "contextHash": "3eb752c761cc452edadd03e398bfdac66a95a1871e8a78ad5e392ebe6a4fab41"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "奥義タイプ一覧（SpecialTypeList）",
+      "sourceHash": "4c2df1190794071a4ba6aacf9d9251a9fa336938bff46b2ce87269034b12d171",
+      "translation": "Arts Type List (SpecialTypeList)",
+      "contextHash": "4c2df1190794071a4ba6aacf9d9251a9fa336938bff46b2ce87269034b12d171"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "奥義タイプの一覧です。それぞれがゲージ情報を保有します。",
+      "sourceHash": "d6426843f506e8fdcfde253aa983d89f2b557500e0f28e8d2d8b16bce2b771a7",
+      "translation": "A list of Arts types. Each one contains gauge information.",
+      "contextHash": "d6426843f506e8fdcfde253aa983d89f2b557500e0f28e8d2d8b16bce2b771a7"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "奥義所有時のみゲージ表示（ShowGaugeWhenLearned）",
+      "sourceHash": "2a82501aabd0f7624a5818b9dfbc430bfe97ff76bfb917caa415528f73eb7731",
+      "translation": "Show Gauge Only When Arts Are Learned (ShowGaugeWhenLearned)",
+      "contextHash": "2a82501aabd0f7624a5818b9dfbc430bfe97ff76bfb917caa415528f73eb7731"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "アクターが有効な奥義を覚えている場合のみゲージを表示します。",
+      "sourceHash": "4e7a0f1b9ba3c90432ea4b0c5f983370aa926726ea147559413a3efabdb95aff",
+      "translation": "Displays the gauge only when the actor has learned a usable Art.",
+      "contextHash": "4e7a0f1b9ba3c90432ea4b0c5f983370aa926726ea147559413a3efabdb95aff"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "全回復にゲージを含める（RecoverGauge）",
+      "sourceHash": "ede22452bc18d3a4dc9a3b9505d40a4a685feff8dfa0fe328da85ad81a80a64d",
+      "translation": "Include Gauge in Full Recovery (RecoverGauge)",
+      "contextHash": "ede22452bc18d3a4dc9a3b9505d40a4a685feff8dfa0fe328da85ad81a80a64d"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "全回復時に奥義ゲージも回復します。",
+      "sourceHash": "e8158b3ac14d94f3a2bf64ac882ae15ed2ac78a12bb62065a1f940c9565d8ba7",
+      "translation": "The Arts gauge is also recovered during full recovery.",
+      "contextHash": "e8158b3ac14d94f3a2bf64ac882ae15ed2ac78a12bb62065a1f940c9565d8ba7"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "命中時のみ加算（PlusOnlyHit）",
+      "sourceHash": "5b958fdc13603e3e1fa7f3837aa42c8c370adab3378e572ae5e4d7fd9c3360fb",
+      "translation": "Add Only on Hit (PlusOnlyHit)",
+      "contextHash": "5b958fdc13603e3e1fa7f3837aa42c8c370adab3378e572ae5e4d7fd9c3360fb"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "行動毎のゲージ上昇を命中時のみ有効にします。",
+      "sourceHash": "d3bb7aede44302ea25d8192e252903951160656dade37ec932278eedfe36b3f5",
+      "translation": "Per-action gauge increases apply only when an attack hits.",
+      "contextHash": "d3bb7aede44302ea25d8192e252903951160656dade37ec932278eedfe36b3f5"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "奥義発動時は加算しない（NotPlusWhenUsed）",
+      "sourceHash": "fa44b82324b73ec608a1e8394320dc3c46e04a912a61d41d4649500d4e694436",
+      "translation": "Do Not Add When an Art Is Used (NotPlusWhenUsed)",
+      "contextHash": "fa44b82324b73ec608a1e8394320dc3c46e04a912a61d41d4649500d4e694436"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "奥義発動時はゲージ上昇を停止します。",
+      "sourceHash": "62c20e8ab208bf54a37975baf26589d9d5a915007235c87296ac1ad36a282f6b",
+      "translation": "Stops the gauge from increasing when an Art is used.",
+      "contextHash": "62c20e8ab208bf54a37975baf26589d9d5a915007235c87296ac1ad36a282f6b"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "つまり、自身で発動した奥義ではゲージが溜まりません。",
+      "sourceHash": "7cd0eee05bc4af334b495d6e89a22271c495026266b2b824d282d28647e8fe02",
+      "translation": "In other words, using an Art yourself will not fill the gauge.",
+      "contextHash": "7cd0eee05bc4af334b495d6e89a22271c495026266b2b824d282d28647e8fe02"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "発動に使用したゲージのみが対象となります。",
+      "sourceHash": "50ac62f836372f72e617c9244f7f3c47d7c380ba3f40f7d74afb494775411dae",
+      "translation": "Only the gauge used to activate the Art is affected.",
+      "contextHash": "50ac62f836372f72e617c9244f7f3c47d7c380ba3f40f7d74afb494775411dae"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "同じ対象は加算しない（NotPlusSameTarget）",
+      "sourceHash": "fe79f9a9122b443933f6fe14f5a18a8904dde616955f9ebca35c99b2009360c5",
+      "translation": "Do Not Add for the Same Target (NotPlusSameTarget)",
+      "contextHash": "fe79f9a9122b443933f6fe14f5a18a8904dde616955f9ebca35c99b2009360c5"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "多段技などで同一の対象に複数攻撃を当てても、行動毎の上昇値が溜まらないようにします。",
+      "sourceHash": "af88597461efd1c902a2396381a4959704faa9b04f212f48fc7bb177c6a68d9f",
+      "translation": "Prevents the per-action increase from accumulating when multiple attacks hit the same target, such as with multi-hit skills.",
+      "contextHash": "af88597461efd1c902a2396381a4959704faa9b04f212f48fc7bb177c6a68d9f"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "会心ボーナスは重複しない（NoMultipleCriticalBonus）ver1.06",
+      "sourceHash": "4632b8740fdab4477d3a7b163e8b403bd16320cab558a11ae88612d725f49b46",
+      "translation": "Critical Bonuses Do Not Stack (NoMultipleCriticalBonus)ver1.06",
+      "contextHash": "4632b8740fdab4477d3a7b163e8b403bd16320cab558a11ae88612d725f49b46"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "複数ヒットするスキルにて、会心時のゲージ上昇値が重複しないようにします。",
+      "sourceHash": "5beef34d694a4bbfa424cceabae01a43f1ad0c3ae2c758ab3112ba9dd76667ca",
+      "translation": "For multi-hit skills, prevents the gauge increase from critical hits from stacking.",
+      "contextHash": "5beef34d694a4bbfa424cceabae01a43f1ad0c3ae2c758ab3112ba9dd76667ca"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "複数ヒット時に減衰（MultipleAttenuation）",
+      "sourceHash": "a08d44dedd3c26a9070769c96916f55cdee76fa3256fcfddcc1f20b906426dd5",
+      "translation": "Attenuation on Multiple Hits (MultipleAttenuation)",
+      "contextHash": "a08d44dedd3c26a9070769c96916f55cdee76fa3256fcfddcc1f20b906426dd5"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "範囲技／多段技にてヒット毎のゲージ上昇量を減少させます。",
+      "sourceHash": "f51717e5e66196f8cc72a46f3f8377cfe4dbb69b8f8caf58bda26935fe7fa282",
+      "translation": "Reduces the gauge increase per hit for area-of-effect and multi-hit skills.",
+      "contextHash": "f51717e5e66196f8cc72a46f3f8377cfe4dbb69b8f8caf58bda26935fe7fa282"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "例：「value / count」で上昇量／ヒット数へと減衰。",
+      "sourceHash": "81ffac376e82c9aae97318d655fee0b04fcbf212b8d9de98702c4b238ec58839",
+      "translation": "Example: The increase is reduced to \"value / count\" based on the number of hits.",
+      "contextHash": "81ffac376e82c9aae97318d655fee0b04fcbf212b8d9de98702c4b238ec58839"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "満タンアニメを待つ（WaitChargedAnimation）ver1.04",
+      "sourceHash": "b0f5b1eda00ae47dc602fc3c942001ecf2250806777444c95b716ae32f4c9477",
+      "translation": "Wait for Full Gauge Animation (WaitChargedAnimation)ver1.04",
+      "contextHash": "b0f5b1eda00ae47dc602fc3c942001ecf2250806777444c95b716ae32f4c9477"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "満タン時のアニメを待ちます。",
+      "sourceHash": "2488f4ba5a820cc1b8207597e6c07b8f2f2578d4f27e5b0f2bad534c5215305d",
+      "translation": "Waits for the animation played when the gauge is full.",
+      "contextHash": "2488f4ba5a820cc1b8207597e6c07b8f2f2578d4f27e5b0f2bad534c5215305d"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "初期状態ではオンになっているので、ウェイトをなくしたい場合はオフにしてください。",
+      "sourceHash": "fc42330d7b4508c6ec2b775f7bfa7dc84c6141a7cf65dfe839d90d1d7d67dff6",
+      "translation": "This is enabled by default, so disable it if you want to eliminate the wait.",
+      "contextHash": "fc42330d7b4508c6ec2b775f7bfa7dc84c6141a7cf65dfe839d90d1d7d67dff6"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "※ＭＶでは常にオンとして扱われます。",
+      "sourceHash": "0279598da2bfb2c8caac12d2c5d3bd436b989afb7abbb5628852a8273e765da9",
+      "translation": "※In MV, this is always treated as enabled.",
+      "contextHash": "0279598da2bfb2c8caac12d2c5d3bd436b989afb7abbb5628852a8273e765da9"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "満タンアニメの間隔（ChargedAnimationInterval）ver1.04",
+      "sourceHash": "e7ab4ee4e9a999887081a43b0ce20c5650f9db06ae3fd154dc36d37b8a257b14",
+      "translation": "Full Gauge Animation Interval (ChargedAnimationInterval)ver1.04",
+      "contextHash": "e7ab4ee4e9a999887081a43b0ce20c5650f9db06ae3fd154dc36d37b8a257b14"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "満タン時のアニメが重なった場合の表示間隔です。",
+      "sourceHash": "a2b838aec02f1161a9b72946c5252a673349975dd0d5af8fd305059547e9b8e0",
+      "translation": "The display interval when full gauge animations overlap.",
+      "contextHash": "a2b838aec02f1161a9b72946c5252a673349975dd0d5af8fd305059547e9b8e0"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "複数の奥義ゲージを使用しないなら無意味です。",
+      "sourceHash": "28f5e5105c6ac01662b4f77b1267e47c892a85a7e5df2b828bdec8f916c57044",
+      "translation": "This has no effect unless you use multiple Arts gauges.",
+      "contextHash": "28f5e5105c6ac01662b4f77b1267e47c892a85a7e5df2b828bdec8f916c57044"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "DynamicMotionを待つ（WaitDynamicMotion）ver1.05",
+      "sourceHash": "cdd3018dba20993cdb7332a38e7f8ec82e4d93f51f27b329eff622c31efb58be",
+      "translation": "Wait for DynamicMotion (WaitDynamicMotion)ver1.05",
+      "contextHash": "cdd3018dba20993cdb7332a38e7f8ec82e4d93f51f27b329eff622c31efb58be"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "DynamicMotion併用時、帰還を待ってから満タンアニメーションを実行します。",
+      "sourceHash": "070c2b8834a9fffe1466ca54f8c850ce5854bcca32f3176e6d01ceaedd291570",
+      "translation": "When used with DynamicMotion, waits for the return before playing the full gauge animation.",
+      "contextHash": "070c2b8834a9fffe1466ca54f8c850ce5854bcca32f3176e6d01ceaedd291570"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "【ゲージのレイアウト関連】",
+      "sourceHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1",
+      "translation": "[Gauge Layout Related]",
+      "contextHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "数値の表示（ShowGaugeNumber）",
+      "sourceHash": "d33149a053dcb65080149d2cce67d682e0a9946a5d0add947b4f3e7f54298f56",
+      "translation": "Display Value (ShowGaugeNumber)",
+      "contextHash": "d33149a053dcb65080149d2cce67d682e0a9946a5d0add947b4f3e7f54298f56"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "ゲージ上に現在値を数値表示します。",
+      "sourceHash": "26b548591652bed3f109ab749b35e05d22871befbf43de9759a451045b904ccc",
+      "translation": "Displays the current value numerically above the gauge.",
+      "contextHash": "26b548591652bed3f109ab749b35e05d22871befbf43de9759a451045b904ccc"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "ラベルの横幅（LabelWidth）",
+      "sourceHash": "e9ec1caab39c356e0e28bdb215f7e07aa54102f7cbf9ee9c5d077fbf7bf9636c",
+      "translation": "Label Width (LabelWidth)",
+      "contextHash": "e9ec1caab39c356e0e28bdb215f7e07aa54102f7cbf9ee9c5d077fbf7bf9636c"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "ラベルを表示する横幅です。不要な場合は0にしてください。",
+      "sourceHash": "0145158c73e7f8eb72cd0fe72aab78edb0609628babad1e9d197da6a94724a2c",
+      "translation": "This is the width for displaying the label. Set it to 0 if it is not needed.",
+      "contextHash": "0145158c73e7f8eb72cd0fe72aab78edb0609628babad1e9d197da6a94724a2c"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "横幅（GaugeWidth）",
+      "sourceHash": "ff723c9e18d21a0320a447c857317d06f6b27dc46dc23a1355f04c953e0e2b14",
+      "translation": "Width (GaugeWidth)",
+      "contextHash": "ff723c9e18d21a0320a447c857317d06f6b27dc46dc23a1355f04c953e0e2b14"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "ゲージの横幅です。初期値は128です。",
+      "sourceHash": "4ddc7e1b6672a5ffbfd5844df76f70841cf7a366ee467de9e89f9480f321f604",
+      "translation": "This is the width of the gauge. The default value is 128.",
+      "contextHash": "4ddc7e1b6672a5ffbfd5844df76f70841cf7a366ee467de9e89f9480f321f604"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "ここからラベル幅が引かれることに注意です。",
+      "sourceHash": "f1e8a04ef8c5b4e3c8e8088b22b6b9a90be77ec257303c80741cbbcb2c03f7d1",
+      "translation": "Note that the label width is subtracted from this.",
+      "contextHash": "f1e8a04ef8c5b4e3c8e8088b22b6b9a90be77ec257303c80741cbbcb2c03f7d1"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "縦幅（GaugeHeight）",
+      "sourceHash": "ecc88c12129519582fa6c17ca9aab6623632870ec7483a89f3227bc2c2ff02f8",
+      "translation": "Height (GaugeHeight)",
+      "contextHash": "ecc88c12129519582fa6c17ca9aab6623632870ec7483a89f3227bc2c2ff02f8"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "ゲージの縦幅です。初期値は12です。",
+      "sourceHash": "620c2942187310e5170370686994def0af2ef3707b117a77edbe2d4eaf61ea59",
+      "translation": "This is the height of the gauge. The default value is 12.",
+      "contextHash": "620c2942187310e5170370686994def0af2ef3707b117a77edbe2d4eaf61ea59"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "ゲージの間隔（GaugeInterval）",
+      "sourceHash": "9a48696382e04d77b5f91ef61e9465fad70dacd6dede212d1a06167e0b55847a",
+      "translation": "Gauge Interval (GaugeInterval)",
+      "contextHash": "9a48696382e04d77b5f91ef61e9465fad70dacd6dede212d1a06167e0b55847a"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "ゲージ同士の間隔です。",
+      "sourceHash": "afca7b522fa9802619d033409df914e72811f65e42527931822014e63a50eac9",
+      "translation": "This is the interval between gauges.",
+      "contextHash": "afca7b522fa9802619d033409df914e72811f65e42527931822014e63a50eac9"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "ゲージフラッシュ（GaugeFlash）",
+      "sourceHash": "d9d082cd3a17d284d156f120aafaadfc12360278633ddd6fa75446abfff0e623",
+      "translation": "Gauge Flash (GaugeFlash)",
+      "contextHash": "d9d082cd3a17d284d156f120aafaadfc12360278633ddd6fa75446abfff0e623"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "満タンになったゲージをフラッシュさせます。",
+      "sourceHash": "bf4520b5b818e28cd28158fd3804eaf227276ba4e436936876d9505756bfa04d",
+      "translation": "Flashes gauges when they become full.",
+      "contextHash": "bf4520b5b818e28cd28158fd3804eaf227276ba4e436936876d9505756bfa04d"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "メニュー画面に表示（ShowMenu）",
+      "sourceHash": "ffa14ba05dcfda378570183ea4487515d6b4d403c3a1c1c83143a6d1e67306bb",
+      "translation": "Show in Menu (ShowMenu)",
+      "contextHash": "ffa14ba05dcfda378570183ea4487515d6b4d403c3a1c1c83143a6d1e67306bb"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "メニュー画面に奥義ゲージを表示します。",
+      "sourceHash": "2fb524607ff84781ec21a9da99bb011bc466588b24c13718f6098af1aacd8a00",
+      "translation": "Displays the Arts gauge in the menu.",
+      "contextHash": "2fb524607ff84781ec21a9da99bb011bc466588b24c13718f6098af1aacd8a00"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "開始Ｘ座標（メニュー）（MenuStartGaugeX）",
+      "sourceHash": "9bd2598d4e6d4b525cd49d67020aa38bbb634c412caeeffd2eed56ec2ad1d05f",
+      "translation": "Start X Coordinate (Menu) (MenuStartGaugeX)",
+      "contextHash": "9bd2598d4e6d4b525cd49d67020aa38bbb634c412caeeffd2eed56ec2ad1d05f"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "メニューにゲージを表示するＸ座標です。",
+      "sourceHash": "3568f00a4c060389d31aeb8768baa7ff206423ec49ce66dd172e7f8781c9062f",
+      "translation": "This is the X coordinate for displaying the gauge in the menu.",
+      "contextHash": "3568f00a4c060389d31aeb8768baa7ff206423ec49ce66dd172e7f8781c9062f"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "アクター名からの相対座標を指定してください。",
+      "sourceHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead",
+      "translation": "Specify the coordinate relative to the actor's name.",
+      "contextHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "ちなみに、右列（ＨＰなどの列）に表示したい場合は値を180にすればＯＫです。",
+      "sourceHash": "8d21caa7f7f60acf1984519d3faa5ae980932f0a894897f1ffb517e8b62b4a4a",
+      "translation": "By the way, to display it in the right column (the column containing HP, etc.), set the value to 180.",
+      "contextHash": "8d21caa7f7f60acf1984519d3faa5ae980932f0a894897f1ffb517e8b62b4a4a"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "開始Ｙ座標（メニュー）（MenuStartGaugeY）",
+      "sourceHash": "cbddeb0876e48da87b7d38ecba6042eebba0348bd6c1a354d5ebfa8e61f1bf8a",
+      "translation": "Start Y Coordinate (Menu) (MenuStartGaugeY)",
+      "contextHash": "cbddeb0876e48da87b7d38ecba6042eebba0348bd6c1a354d5ebfa8e61f1bf8a"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "メニューにゲージを表示するＹ座標です。",
+      "sourceHash": "fe63f88eb906b3e23c29fd9214712fde18899eadabbf86df0933013a178f8dca",
+      "translation": "This is the Y coordinate for displaying the gauge in the menu.",
+      "contextHash": "fe63f88eb906b3e23c29fd9214712fde18899eadabbf86df0933013a178f8dca"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "アクター名からの相対座標を指定してください。",
+      "sourceHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead",
+      "translation": "Specify the coordinate relative to the actor's name.",
+      "contextHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "スキル画面に表示（ShowSkillStatus）",
+      "sourceHash": "a6a4db1f299d48ac459becc7e8b9e3293e1271f6583d29b2b719ba2dfbab64ea",
+      "translation": "Show on Skill Screen (ShowSkillStatus)",
+      "contextHash": "a6a4db1f299d48ac459becc7e8b9e3293e1271f6583d29b2b719ba2dfbab64ea"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "スキル画面に奥義ゲージを表示します。",
+      "sourceHash": "8c377fbdaccace73fa4c324eb61ff88f72497db63e3b13bf1143a65dff565516",
+      "translation": "Displays the Arts gauge on the skill screen.",
+      "contextHash": "8c377fbdaccace73fa4c324eb61ff88f72497db63e3b13bf1143a65dff565516"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "なお、配置はメニュー画面と共有です。",
+      "sourceHash": "8e622128ddf0d631204b072502baf532f4e3346a1072af51c618f557cd759d74",
+      "translation": "The positioning is shared with the menu screen.",
+      "contextHash": "8e622128ddf0d631204b072502baf532f4e3346a1072af51c618f557cd759d74"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "ステータス画面に表示（ShowStatus）",
+      "sourceHash": "d26dfc6ddf354fb1e3214ded5aef6537042b489cc11fa503b28fad76710a5b06",
+      "translation": "Show on Status Screen (ShowStatus)",
+      "contextHash": "d26dfc6ddf354fb1e3214ded5aef6537042b489cc11fa503b28fad76710a5b06"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "ステータス画面に奥義ゲージを表示します。",
+      "sourceHash": "58333976c5d4a8ad117937a487c51f2a80f7fb4958245dd6db15d507fc20530d",
+      "translation": "Displays the Arts gauge on the status screen.",
+      "contextHash": "58333976c5d4a8ad117937a487c51f2a80f7fb4958245dd6db15d507fc20530d"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "開始Ｘ座標（ステータス）（StatusStartGaugeX）",
+      "sourceHash": "1da880c35866f4a7ee8396ddcfbdfcbcc3d3348b803da2ec5d3d4c3b4231ccc4",
+      "translation": "Start X Coordinate (Status) (StatusStartGaugeX)",
+      "contextHash": "1da880c35866f4a7ee8396ddcfbdfcbcc3d3348b803da2ec5d3d4c3b4231ccc4"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "ステータスにゲージを表示するＸ座標です。",
+      "sourceHash": "778bc1de2a31135d0ccd361bfc66ab55ee640d9f5e6367e85dde927e1c1b36f0",
+      "translation": "This is the X coordinate for displaying the gauge on the status screen.",
+      "contextHash": "778bc1de2a31135d0ccd361bfc66ab55ee640d9f5e6367e85dde927e1c1b36f0"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "レベルからの相対座標を指定してください。",
+      "sourceHash": "e1d4a8e11d35e7b23e3d81dca47993fa05233a7705e1405c8b4d0d729bbba271",
+      "translation": "Specify the coordinate relative to the level.",
+      "contextHash": "e1d4a8e11d35e7b23e3d81dca47993fa05233a7705e1405c8b4d0d729bbba271"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "開始Ｙ座標（ステータス）（StatusStartGaugeY）",
+      "sourceHash": "29fee06eb58a413b00a114649ef4f0c6bcce969914c00ff060b943a90e4594c1",
+      "translation": "Start Y Coordinate (Status) (StatusStartGaugeY)",
+      "contextHash": "29fee06eb58a413b00a114649ef4f0c6bcce969914c00ff060b943a90e4594c1"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "ステータスにゲージを表示するＹ座標です。",
+      "sourceHash": "205c28c101806b0e4872f285e6ce136d0e74c755a73a6ed10e00ef842268b453",
+      "translation": "This is the Y coordinate for displaying the gauge on the status screen.",
+      "contextHash": "205c28c101806b0e4872f285e6ce136d0e74c755a73a6ed10e00ef842268b453"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "レベルからの相対座標を指定してください。",
+      "sourceHash": "e1d4a8e11d35e7b23e3d81dca47993fa05233a7705e1405c8b4d0d729bbba271",
+      "translation": "Specify the coordinate relative to the level.",
+      "contextHash": "e1d4a8e11d35e7b23e3d81dca47993fa05233a7705e1405c8b4d0d729bbba271"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "戦闘画面に表示（ShowBattle）",
+      "sourceHash": "b725f5e62e4fd39bcbd64f046118cc5a0e221064fc3e86f84dcc508d7c4e9bc7",
+      "translation": "Show in Battle (ShowBattle)",
+      "contextHash": "b725f5e62e4fd39bcbd64f046118cc5a0e221064fc3e86f84dcc508d7c4e9bc7"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "戦闘画面に奥義ゲージを表示します。",
+      "sourceHash": "0e74ab8443f0e1d3fbf9de5020150d9d4945e7297bab278452c6ed11c373b78b",
+      "translation": "Displays the Arts gauge in battle.",
+      "contextHash": "0e74ab8443f0e1d3fbf9de5020150d9d4945e7297bab278452c6ed11c373b78b"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "開始Ｘ座標（戦闘）（BattleStartGaugeX）",
+      "sourceHash": "1f839b253275cfbbc4446f7fb81e4af0b2228f18674716863f2d4f3577c345d0",
+      "translation": "Start X Coordinate (Battle) (BattleStartGaugeX)",
+      "contextHash": "1f839b253275cfbbc4446f7fb81e4af0b2228f18674716863f2d4f3577c345d0"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "戦闘にゲージを表示するＸ座標です。",
+      "sourceHash": "aff467283f30cd9031139d5ffa97724eccb5aa71df172445487ec3a1150c0d15",
+      "translation": "This is the X coordinate for displaying the gauge in battle.",
+      "contextHash": "aff467283f30cd9031139d5ffa97724eccb5aa71df172445487ec3a1150c0d15"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "アクター名からの相対座標を指定してください。",
+      "sourceHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead",
+      "translation": "Specify the coordinate relative to the actor's name.",
+      "contextHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "開始Ｙ座標（戦闘）（BattleStartGaugeY）",
+      "sourceHash": "85a3be2c9ab88afc2b86b849a68ab32878180603a334ef1e66664bf8f997cff1",
+      "translation": "Start Y Coordinate (Battle) (BattleStartGaugeY)",
+      "contextHash": "85a3be2c9ab88afc2b86b849a68ab32878180603a334ef1e66664bf8f997cff1"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "戦闘にゲージを表示するＹ座標です。",
+      "sourceHash": "569452de8f0fbe86f112fd1afa8d64576f988a8b8dd4ee3e71c8764b3b795fbf",
+      "translation": "This is the Y coordinate for displaying the gauge in battle.",
+      "contextHash": "569452de8f0fbe86f112fd1afa8d64576f988a8b8dd4ee3e71c8764b3b795fbf"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "アクター名からの相対座標を指定してください。",
+      "sourceHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead",
+      "translation": "Specify the coordinate relative to the actor's name.",
+      "contextHash": "21aaa720c47eed653018b56d3c6e747591c0401d2e17fef3b2dbf6b5b4467ead"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "ＨＰ調整Ｙ座標（BattleAdjustNameY）",
+      "sourceHash": "11cb783c1821adb1d9f3846b5a4cc701612a6f59236ad46d23ee8dcb7b024b77",
+      "translation": "HP Adjustment Y Coordinate (BattleAdjustNameY)",
+      "contextHash": "11cb783c1821adb1d9f3846b5a4cc701612a6f59236ad46d23ee8dcb7b024b77"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "戦闘時、名前～ＴＰのＹ座標を調整します。",
+      "sourceHash": "8eafb6c37be080e3dc6f402640d0fc0f034d434549665bf29f795dd096c09cab",
+      "translation": "Adjusts the Y coordinates from the name to TP during battle.",
+      "contextHash": "8eafb6c37be080e3dc6f402640d0fc0f034d434549665bf29f795dd096c09cab"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "名前～ＨＰの間隔（BattleNameHpInterval）",
+      "sourceHash": "8369a5711c6a8647fc69952267018e1be3fd4d73c1b0510bd36958d0ad85d806",
+      "translation": "Name–HP Interval (BattleNameHpInterval)",
+      "contextHash": "8369a5711c6a8647fc69952267018e1be3fd4d73c1b0510bd36958d0ad85d806"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "戦闘時、名前とＨＰの間隔を数値分広げます。",
+      "sourceHash": "4a1921e9654828634f300da37a92d7a0d797afe438eaf719e2f66c749568c6f2",
+      "translation": "During battle, increases the interval between the name and HP by the specified value.",
+      "contextHash": "4a1921e9654828634f300da37a92d7a0d797afe438eaf719e2f66c749568c6f2"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "プラグインパラメータ（奥義タイプ一覧）",
+      "sourceHash": "307caf9b0d918ccbb7bed292441cce3c47c21c5b092aebbfdba5a8226d98817a",
+      "translation": "Plugin Parameters (Arts Type List)",
+      "contextHash": "307caf9b0d918ccbb7bed292441cce3c47c21c5b092aebbfdba5a8226d98817a"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "有効条件（Condition）",
+      "sourceHash": "a45ec22b08ce80aef17504826ce8d84071636d21e1e9bf88454344b44d147565",
+      "translation": "Activation Condition (Condition)",
+      "contextHash": "a45ec22b08ce80aef17504826ce8d84071636d21e1e9bf88454344b44d147565"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "奥義ゲージの有効条件です。（aをバトラーとした数式）",
+      "sourceHash": "315cb60bd59342ec5279c5344403176f654bb7cc7cd2a456b4264fd45cd03eba",
+      "translation": "The activation condition for the Arts gauge. (A formula with a as the battler)",
+      "contextHash": "315cb60bd59342ec5279c5344403176f654bb7cc7cd2a456b4264fd45cd03eba"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "例：a.level >= 10",
+      "sourceHash": "b34eb2a25bad0cd2337752dc672c064eb64089670c01df575a630815228f0db9",
+      "translation": "Example: a.level >= 10",
+      "contextHash": "b34eb2a25bad0cd2337752dc672c064eb64089670c01df575a630815228f0db9"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "最大値（GaugeMax）",
+      "sourceHash": "a44e43705b67da743c08812aab10188c70a788eff4371b00b1b98d891027ecda",
+      "translation": "Maximum Value (GaugeMax)",
+      "contextHash": "a44e43705b67da743c08812aab10188c70a788eff4371b00b1b98d891027ecda"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "奥義ゲージの最大値となる数値です。",
+      "sourceHash": "37f6f89297359bad760f52cac824d2f1678dea853ed95a6766b2be3cbccbca22",
+      "translation": "This is the value that serves as the maximum value for the Arts gauge.",
+      "contextHash": "37f6f89297359bad760f52cac824d2f1678dea853ed95a6766b2be3cbccbca22"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "戦闘後もゲージ持越（PreserveGauge）",
+      "sourceHash": "e8b7241f18afb09596c31d519a91a40d17118fd41b66dbe59c4e22d57775f56f",
+      "translation": "Carry Over Gauge After Battle (PreserveGauge)",
+      "contextHash": "e8b7241f18afb09596c31d519a91a40d17118fd41b66dbe59c4e22d57775f56f"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "戦闘終了後も奥義ゲージを保持します。",
+      "sourceHash": "5d203be02b5a289ee9ad1179b2f506f8f73adbb09166436cbad1d0443d30cec9",
+      "translation": "Retains the Arts gauge after battle ends.",
+      "contextHash": "5d203be02b5a289ee9ad1179b2f506f8f73adbb09166436cbad1d0443d30cec9"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "戦闘開始時の上昇値（BattleStartValue）",
+      "sourceHash": "0980c8b635772b3910e0b2dca03658accaaf8e3ab450ef2cef39d205fddbd020",
+      "translation": "Battle Start Gain Value (BattleStartValue)",
+      "contextHash": "0980c8b635772b3910e0b2dca03658accaaf8e3ab450ef2cef39d205fddbd020"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "戦闘開始時に加算するゲージ上昇値です。",
+      "sourceHash": "b654f0f3656640c1bcf4ce410e24981d91fd6bd2ac3bd9c41229cffbc65db7e7",
+      "translation": "The gauge value added at the start of battle.",
+      "contextHash": "b654f0f3656640c1bcf4ce410e24981d91fd6bd2ac3bd9c41229cffbc65db7e7"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "例：「Math.randomInt(25)」で0~24",
+      "sourceHash": "ab990fae352db2779d2032aad057a6b2f3e0cb00dc88f3cf4c4b9189c292f4ca",
+      "translation": "Example: 0–24 with “Math.randomInt(25)”",
+      "contextHash": "ab990fae352db2779d2032aad057a6b2f3e0cb00dc88f3cf4c4b9189c292f4ca"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "行動毎の上昇値（ActionValue）",
+      "sourceHash": "a55e93ac29de7a861ffbbec1d830cba62ba4bfefebb61dbf038a9a4d8ca222bb",
+      "translation": "Per-Action Gain Value (ActionValue)",
+      "contextHash": "a55e93ac29de7a861ffbbec1d830cba62ba4bfefebb61dbf038a9a4d8ca222bb"
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "行動毎のゲージ上昇値です。",
+      "sourceHash": "77094b36a039fac300ef483df1b77b197ebcdd9dfcae5317672c68ca0503397a",
+      "translation": "The gauge value gained for each action.",
+      "contextHash": "77094b36a039fac300ef483df1b77b197ebcdd9dfcae5317672c68ca0503397a"
+    },
+    {
+      "id": "text-099",
+      "type": "text",
+      "source": "ヒット数分加算されます。",
+      "sourceHash": "4b2e8d302176d3abbe9e64b6f7bd59cc0f7dc870efa8b415123df3bcea7a9e04",
+      "translation": "Added for each hit.",
+      "contextHash": "4b2e8d302176d3abbe9e64b6f7bd59cc0f7dc870efa8b415123df3bcea7a9e04"
+    },
+    {
+      "id": "text-100",
+      "type": "text",
+      "source": "例：10",
+      "sourceHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec",
+      "translation": "Example: 10",
+      "contextHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "行動終了時の上昇値（ActionEndValue）",
+      "sourceHash": "dd9937133b0ba9c143f0b4da588ceb323d101b915171b1da26c4595b0499bb84",
+      "translation": "Action End Gain Value (ActionEndValue)",
+      "contextHash": "dd9937133b0ba9c143f0b4da588ceb323d101b915171b1da26c4595b0499bb84"
+    },
+    {
+      "id": "text-101",
+      "type": "text",
+      "source": "行動終了時の上昇値です。",
+      "sourceHash": "f8d3969d92e75a0221336cee676f4425a16792f4679a0211af45b89ce7503fb9",
+      "translation": "The gain value added when an action ends.",
+      "contextHash": "f8d3969d92e75a0221336cee676f4425a16792f4679a0211af45b89ce7503fb9"
+    },
+    {
+      "id": "text-102",
+      "type": "text",
+      "source": "こちらは１回だけです。",
+      "sourceHash": "fe914e64ddc585898a2b0f38b5fcd64a7fcf1ee2094e244b0f592f338e686d70",
+      "translation": "This is applied only once.",
+      "contextHash": "fe914e64ddc585898a2b0f38b5fcd64a7fcf1ee2094e244b0f592f338e686d70"
+    },
+    {
+      "id": "text-103",
+      "type": "text",
+      "source": "例：10",
+      "sourceHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec",
+      "translation": "Example: 10",
+      "contextHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "ターン毎の再生値（RegenerateValue）",
+      "sourceHash": "890e0e4377066c87ba7e279faaecb927ae2ef8a99e0ec145e484a75c44409e11",
+      "translation": "Per-Turn Regeneration Value (RegenerateValue)",
+      "contextHash": "890e0e4377066c87ba7e279faaecb927ae2ef8a99e0ec145e484a75c44409e11"
+    },
+    {
+      "id": "text-104",
+      "type": "text",
+      "source": "ターン毎の再生値です。",
+      "sourceHash": "53c879244822476b88629c7d12cd73695b50a13a9c19dd89422b9a72f2e46c98",
+      "translation": "The regeneration value applied each turn.",
+      "contextHash": "53c879244822476b88629c7d12cd73695b50a13a9c19dd89422b9a72f2e46c98"
+    },
+    {
+      "id": "text-105",
+      "type": "text",
+      "source": "例：10",
+      "sourceHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec",
+      "translation": "Example: 10",
+      "contextHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "ダメージ時の上昇値（DamageValue）",
+      "sourceHash": "9e941621813590917e9902ca13b97a4915ed1bae0b0c13321115da696ae9b6bb",
+      "translation": "Damage Gain Value (DamageValue)",
+      "contextHash": "9e941621813590917e9902ca13b97a4915ed1bae0b0c13321115da696ae9b6bb"
+    },
+    {
+      "id": "text-106",
+      "type": "text",
+      "source": "ダメージを受けた時の奥義ゲージ上昇値です。",
+      "sourceHash": "d97ffb544982c46af1e5bb45a93d9b996316c163efff60c52a87c968be5c0b77",
+      "translation": "The Arts gauge value gained when taking damage.",
+      "contextHash": "d97ffb544982c46af1e5bb45a93d9b996316c163efff60c52a87c968be5c0b77"
+    },
+    {
+      "id": "text-107",
+      "type": "text",
+      "source": "例：50 * damage / a.mhp",
+      "sourceHash": "bf57942df48343279170bad3b5f24f344667fcef9a9efa320d7d9a0ebec6771c",
+      "translation": "Example: 50 * damage / a.mhp",
+      "contextHash": "bf57942df48343279170bad3b5f24f344667fcef9a9efa320d7d9a0ebec6771c"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "回避時の上昇値（EvadedValue）",
+      "sourceHash": "baba9ac14fa2bd2b8f2dd751c4417573ce87907468fa0166e42d45d0fa5c50d7",
+      "translation": "Evade Gain Value (EvadedValue)",
+      "contextHash": "baba9ac14fa2bd2b8f2dd751c4417573ce87907468fa0166e42d45d0fa5c50d7"
+    },
+    {
+      "id": "text-108",
+      "type": "text",
+      "source": "攻撃を回避した時の奥義ゲージ上昇値です。",
+      "sourceHash": "491eee9e0d152f862f42a981db5373c184e162db4cc0fe23915bba30cca6ad5c",
+      "translation": "The Arts gauge value gained when evading an attack.",
+      "contextHash": "491eee9e0d152f862f42a981db5373c184e162db4cc0fe23915bba30cca6ad5c"
+    },
+    {
+      "id": "text-109",
+      "type": "text",
+      "source": "例：10",
+      "sourceHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec",
+      "translation": "Example: 10",
+      "contextHash": "73031a85030651809bd377b1d00060d520db5c20bb65995aa8f992a2de2801ec"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "仲間死亡時の上昇値（FriendsDeadValue）",
+      "sourceHash": "46d9a56f894f3a8ccf526a20169d04d987659c2b75033b0adaab4db28a6b322b",
+      "translation": "Ally Death Gain Value (FriendsDeadValue)",
+      "contextHash": "46d9a56f894f3a8ccf526a20169d04d987659c2b75033b0adaab4db28a6b322b"
+    },
+    {
+      "id": "text-110",
+      "type": "text",
+      "source": "仲間が戦闘不能になった際のゲージ上昇値です。",
+      "sourceHash": "30f3fdbf51e0a62bc505fbcd8fed097cb1e73bf244830816e915eda99e929fd4",
+      "translation": "The gauge value gained when an ally becomes incapacitated.",
+      "contextHash": "30f3fdbf51e0a62bc505fbcd8fed097cb1e73bf244830816e915eda99e929fd4"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "敵撃破時の上昇値（DefeatEnemyValue）",
+      "sourceHash": "e538911321288a232c478d87e7ec5dc2c4e64a5e8c56f976b14bd62bfd6021e0",
+      "translation": "Enemy Defeat Gain Value (DefeatEnemyValue)",
+      "contextHash": "e538911321288a232c478d87e7ec5dc2c4e64a5e8c56f976b14bd62bfd6021e0"
+    },
+    {
+      "id": "text-111",
+      "type": "text",
+      "source": "敵を撃破した際のゲージ上昇値です。",
+      "sourceHash": "fb0b5d1fc70d890a2e059c74d1146d1f4b6a925861b2a53a46aea60304620277",
+      "translation": "The gauge value gained when defeating an enemy.",
+      "contextHash": "fb0b5d1fc70d890a2e059c74d1146d1f4b6a925861b2a53a46aea60304620277"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "会心時の上昇値（CriticalValue）",
+      "sourceHash": "4a7ec33a7c6555fd2b87f05c7041ad4e31555660402d08cc2f44cfc1d014d43f",
+      "translation": "Critical Hit Gain Value (CriticalValue)",
+      "contextHash": "4a7ec33a7c6555fd2b87f05c7041ad4e31555660402d08cc2f44cfc1d014d43f"
+    },
+    {
+      "id": "text-112",
+      "type": "text",
+      "source": "会心時のゲージ上昇値です。",
+      "sourceHash": "10fd7dd2797378dcaf03eec166b26b0c6b1af3d84b853da91685d84c4779648d",
+      "translation": "The gauge value gained on a critical hit.",
+      "contextHash": "10fd7dd2797378dcaf03eec166b26b0c6b1af3d84b853da91685d84c4779648d"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "消費ポイントの色（CostColor）",
+      "sourceHash": "23f79ccf55fd51d3db04840c0076a82c8202ba905cb61718e3ff278724cb5d10",
+      "translation": "Cost Point Color (CostColor)",
+      "contextHash": "23f79ccf55fd51d3db04840c0076a82c8202ba905cb61718e3ff278724cb5d10"
+    },
+    {
+      "id": "text-113",
+      "type": "text",
+      "source": "奥義の消費ポイントの色です。",
+      "sourceHash": "459c1b9a39bd7dad42f3dfc2cb468bdf25b770bce3ca1c6c6af23102db037e31",
+      "translation": "The color of the Arts cost points.",
+      "contextHash": "459c1b9a39bd7dad42f3dfc2cb468bdf25b770bce3ca1c6c6af23102db037e31"
+    },
+    {
+      "id": "text-114",
+      "type": "text",
+      "source": "システムカラーの番号を指定。",
+      "sourceHash": "dda10bc58485ae61f035ccb467525808e7a347c69f4ba05813b9e1a41213c432",
+      "translation": "Specify the system color number.",
+      "contextHash": "dda10bc58485ae61f035ccb467525808e7a347c69f4ba05813b9e1a41213c432"
+    },
+    {
+      "id": "text-115",
+      "type": "text",
+      "source": "空欄なら消費非表示。",
+      "sourceHash": "aab69552c3aef9447b04bc8d387e202b3b72ff389fc3c104147f3271384cc9ed",
+      "translation": "If left blank, the cost is hidden.",
+      "contextHash": "aab69552c3aef9447b04bc8d387e202b3b72ff389fc3c104147f3271384cc9ed"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "満タン時のアニメ（ChargedAnimation）",
+      "sourceHash": "e55895031c448441daf0a3eb2bf254419753c9c17981c594a8c6fa2d3b0ffe40",
+      "translation": "Animation When Full (ChargedAnimation)",
+      "contextHash": "e55895031c448441daf0a3eb2bf254419753c9c17981c594a8c6fa2d3b0ffe40"
+    },
+    {
+      "id": "text-116",
+      "type": "text",
+      "source": "奥義ゲージが満タンになった際のアニメーションです。",
+      "sourceHash": "c07460cc7859b39f1e3727e3783ed0b134e2f44ecb1138b45fde910652672e29",
+      "translation": "The animation played when the Arts gauge becomes full.",
+      "contextHash": "c07460cc7859b39f1e3727e3783ed0b134e2f44ecb1138b45fde910652672e29"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "満タン時Dynamicスキル（ChargedDynamicSkill）ver1.04",
+      "sourceHash": "d930ecc657aad77c176bd6bcad36cbb5f5d145df185d0c5b7c34bdc5e1d9963c",
+      "translation": "Dynamic Skill When Full (ChargedDynamicSkill) ver1.04",
+      "contextHash": "d930ecc657aad77c176bd6bcad36cbb5f5d145df185d0c5b7c34bdc5e1d9963c"
+    },
+    {
+      "id": "text-117",
+      "type": "text",
+      "source": "DynamicMotionによる動作を入れると不具合が起きやすいので、基本的にはDynamicAnimationの処理だけで完結されることをオススメします。",
+      "sourceHash": "a17918c63c34a66f17ff58e9d1cd636445f1ac55c0d02c04440ab51a46ef7250",
+      "translation": "Since adding motions using DynamicMotion is likely to cause problems, I recommend generally handling everything with DynamicAnimation alone.",
+      "contextHash": "a17918c63c34a66f17ff58e9d1cd636445f1ac55c0d02c04440ab51a46ef7250"
+    },
+    {
+      "id": "text-118",
+      "type": "text",
+      "source": "【ゲージのレイアウト関連】",
+      "sourceHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1",
+      "translation": "[Gauge Layout Settings]",
+      "contextHash": "c4b34adf423a65a3c4351c8948d4fef74b54ee5cb6cd23d68c970a488611c8c1"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "ラベル（Label）",
+      "sourceHash": "67d9fcd3de91cb70a4d635d1e99d663b5abeade3cb8acd1906f3f896143025c6",
+      "translation": "Label (Label)",
+      "contextHash": "67d9fcd3de91cb70a4d635d1e99d663b5abeade3cb8acd1906f3f896143025c6"
+    },
+    {
+      "id": "text-119",
+      "type": "text",
+      "source": "表示するラベルです。",
+      "sourceHash": "141e9db6af6c864d134e3151464c00263706561603bd8139317035a623279872",
+      "translation": "The label to display.",
+      "contextHash": "141e9db6af6c864d134e3151464c00263706561603bd8139317035a623279872"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "色（左）（GaugeColor1）",
+      "sourceHash": "e6925a9c1149cbb3286499904a57f8e95e431b84e02ab22197ff8eb4ee940283",
+      "translation": "Color (Left) (GaugeColor1)",
+      "contextHash": "e6925a9c1149cbb3286499904a57f8e95e431b84e02ab22197ff8eb4ee940283"
+    },
+    {
+      "id": "text-120",
+      "type": "text",
+      "source": "奥義ゲージの色（左）です。",
+      "sourceHash": "a6dab34539db31df886246abc5017d27b77637a1d0e66079ba3c4154f8e829e8",
+      "translation": "The left color of the Arts gauge.",
+      "contextHash": "a6dab34539db31df886246abc5017d27b77637a1d0e66079ba3c4154f8e829e8"
+    },
+    {
+      "id": "text-121",
+      "type": "text",
+      "source": "システムカラーの番号を指定してください。",
+      "sourceHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf",
+      "translation": "Specify the system color number.",
+      "contextHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "色（右）（GaugeColor2）",
+      "sourceHash": "4f6fd003b9627601c6e8cfd3808f2bfd3ce348953f2d4f6f46fbe14addbade8a",
+      "translation": "Color (Right) (GaugeColor2)",
+      "contextHash": "4f6fd003b9627601c6e8cfd3808f2bfd3ce348953f2d4f6f46fbe14addbade8a"
+    },
+    {
+      "id": "text-122",
+      "type": "text",
+      "source": "奥義ゲージの色（右）です。",
+      "sourceHash": "dc6f68ee76f5baa5fd80c5f1bc753d4b9aa828bab7399f27b8caae876b5c7832",
+      "translation": "The right color of the Arts gauge.",
+      "contextHash": "dc6f68ee76f5baa5fd80c5f1bc753d4b9aa828bab7399f27b8caae876b5c7832"
+    },
+    {
+      "id": "text-123",
+      "type": "text",
+      "source": "システムカラーの番号を指定してください。",
+      "sourceHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf",
+      "translation": "Specify the system color number.",
+      "contextHash": "ea74c65d4f963fd64478adf95cf6452ca6f7c9cf8b2553a0aa3e046045cb0ebf"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "また、[[LINK_1]]ＴＰをレベル成長させるプラグイン（NRP_LevelGrowTP.js）[[/LINK_1]]との併用も可能です。",
+      "sourceHash": "f2f8737a7ae24ed5b74c14a10db15f6b80bf4c9fbb246d863558e538da7c2131",
+      "parts": [
+        {
+          "source": "また、",
+          "link": false
+        },
+        {
+          "source": "ＴＰをレベル成長させるプラグイン（NRP_LevelGrowTP.js）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との併用も可能です。",
+          "link": false
+        }
+      ],
+      "translation": "It can also be used together with the [[LINK_1]]TP Level Growth plugin (NRP_LevelGrowTP.js)[[/LINK_1]].",
+      "contextHash": "f2f8737a7ae24ed5b74c14a10db15f6b80bf4c9fbb246d863558e538da7c2131"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]ミスティックスター[[/LINK_1]]の奥義システムを再現するために作ったプラグインなので、作者独自の仕様が多くて使いづらいかもしれませんが、工夫次第で色々なシステムができるかも……。",
+      "sourceHash": "99ccb179f28ae4ffadfa811922e0117311fb8bf9508ea7094ff428e55aac113d",
+      "parts": [
+        {
+          "source": "ミスティックスター",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の奥義システムを再現するために作ったプラグインなので、作者独自の仕様が多くて使いづらいかもしれませんが、工夫次第で色々なシステムができるかも……。",
+          "link": false
+        }
+      ],
+      "translation": "Since I created this plugin to recreate the Arts system from [[LINK_1]]Mystic Star[[/LINK_1]], it contains many of my own specifications and may be difficult to use, but with some ingenuity, you may be able to create various systems...",
+      "contextHash": "99ccb179f28ae4ffadfa811922e0117311fb8bf9508ea7094ff428e55aac113d"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（奥義用）（Note of Skills [Special]）[[/LINK_1]]",
+      "sourceHash": "5fe18a3de88ee019e9010c954a11f43e30201698af3628a69de2c94f4cbfcd20",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（奥義用）（Note of Skills [Special]）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note (for Arts) (Note of Skills [Special])[[/LINK_1]]",
+      "contextHash": "5fe18a3de88ee019e9010c954a11f43e30201698af3628a69de2c94f4cbfcd20"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのメモ欄（通常用）（Note of Skills [Normal]）[[/LINK_1]]",
+      "sourceHash": "a689e900ae55cbaa89d3699ff6808ea2f9e09477433d238c5feeecc42567f8f7",
+      "parts": [
+        {
+          "source": "スキルのメモ欄（通常用）（Note of Skills [Normal]）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Note (for Normal Use) (Note of Skills [Normal])[[/LINK_1]]",
+      "contextHash": "a689e900ae55cbaa89d3699ff6808ea2f9e09477433d238c5feeecc42567f8f7"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]アクター、職業、装備、ステートのメモ欄（Note of Objects）[[/LINK_1]]",
+      "sourceHash": "b1d9a04e956969e2743edcf93b201b7bc12005108501171a85a0496cc878f80d",
+      "parts": [
+        {
+          "source": "アクター、職業、装備、ステートのメモ欄（Note of Objects）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor, Class, Equipment, and State Note (Note of Objects)[[/LINK_1]]",
+      "contextHash": "b1d9a04e956969e2743edcf93b201b7bc12005108501171a85a0496cc878f80d"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ステートのメモ欄（Note of States）[[/LINK_1]]",
+      "sourceHash": "9f3775641d7ab9dfe5cf6b182031c9c3992421759ffa3493039d4316c03e6392",
+      "parts": [
+        {
+          "source": "ステートのメモ欄（Note of States）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]State Note (Note of States)[[/LINK_1]]",
+      "contextHash": "9f3775641d7ab9dfe5cf6b182031c9c3992421759ffa3493039d4316c03e6392"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド[[/LINK_1]]",
+      "sourceHash": "9166c6445aabacfd1ade662b3da42c05307bcf71a1cc65175d5bb2ee22806514",
+      "parts": [
+        {
+          "source": "プラグインコマンド",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands[[/LINK_1]]",
+      "contextHash": "9166c6445aabacfd1ade662b3da42c05307bcf71a1cc65175d5bb2ee22806514"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]レイアウトについて[[/LINK_1]]",
+      "sourceHash": "e16c4a2ca29ab62a3e99510700d9bc759518a71824afc60c1a489cbf9fc916c8",
+      "parts": [
+        {
+          "source": "レイアウトについて",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About the Layout[[/LINK_1]]",
+      "contextHash": "e16c4a2ca29ab62a3e99510700d9bc759518a71824afc60c1a489cbf9fc916c8"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]奥義タイプ一覧（SpecialTypeList）[[/LINK_1]]",
+      "sourceHash": "d28b89dd415ba0627f5a4ce3ab834ad1a625052937480213bd1a4fd6bead2cc5",
+      "parts": [
+        {
+          "source": "奥義タイプ一覧（SpecialTypeList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Arts Type List (SpecialTypeList)[[/LINK_1]]",
+      "contextHash": "d28b89dd415ba0627f5a4ce3ab834ad1a625052937480213bd1a4fd6bead2cc5"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]奥義所有時のみゲージ表示（ShowGaugeWhenLearned）[[/LINK_1]]",
+      "sourceHash": "1c512e7ef3411818aab908a054d3985ee32ccae8091e4e9788acf29a06bb8db8",
+      "parts": [
+        {
+          "source": "奥義所有時のみゲージ表示（ShowGaugeWhenLearned）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Gauge Only When Arts Are Learned (ShowGaugeWhenLearned)[[/LINK_1]]",
+      "contextHash": "1c512e7ef3411818aab908a054d3985ee32ccae8091e4e9788acf29a06bb8db8"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]全回復にゲージを含める（RecoverGauge）[[/LINK_1]]",
+      "sourceHash": "01e7bee72f87d26107e37aae1f0bb3c1719a1857767fa1eb5d53c168ffafd8fe",
+      "parts": [
+        {
+          "source": "全回復にゲージを含める（RecoverGauge）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Include Gauge in Full Recovery (RecoverGauge)[[/LINK_1]]",
+      "contextHash": "01e7bee72f87d26107e37aae1f0bb3c1719a1857767fa1eb5d53c168ffafd8fe"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]命中時のみ加算（PlusOnlyHit）[[/LINK_1]]",
+      "sourceHash": "f7b96b06f483d2074f7fc01f6d3a0886a4759b38678993e91aaf2e2217c854a7",
+      "parts": [
+        {
+          "source": "命中時のみ加算（PlusOnlyHit）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Only on Hit (PlusOnlyHit)[[/LINK_1]]",
+      "contextHash": "f7b96b06f483d2074f7fc01f6d3a0886a4759b38678993e91aaf2e2217c854a7"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]奥義発動時は加算しない（NotPlusWhenUsed）[[/LINK_1]]",
+      "sourceHash": "dfc829c27b3982170610e736c49b080d8d44f7caba6049b3d00658aca8be0f4a",
+      "parts": [
+        {
+          "source": "奥義発動時は加算しない（NotPlusWhenUsed）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Do Not Add When an Art Is Activated (NotPlusWhenUsed)[[/LINK_1]]",
+      "contextHash": "dfc829c27b3982170610e736c49b080d8d44f7caba6049b3d00658aca8be0f4a"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]同じ対象は加算しない（NotPlusSameTarget）[[/LINK_1]]",
+      "sourceHash": "44fde3e4732ce61b8e26018f099188dd9e90c8d5131a3510f2f976d40fb52720",
+      "parts": [
+        {
+          "source": "同じ対象は加算しない（NotPlusSameTarget）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Do Not Add for the Same Target (NotPlusSameTarget)[[/LINK_1]]",
+      "contextHash": "44fde3e4732ce61b8e26018f099188dd9e90c8d5131a3510f2f976d40fb52720"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]会心ボーナスは重複しない（NoMultipleCriticalBonus）[[/LINK_1]]ver1.06",
+      "sourceHash": "8d4e72adc7a7afeeff640ab92a95cde6612ce8fd8e344fd674602ed29eb5e9a3",
+      "parts": [
+        {
+          "source": "会心ボーナスは重複しない（NoMultipleCriticalBonus）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.06",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Critical Bonus Does Not Stack (NoMultipleCriticalBonus)[[/LINK_1]] ver1.06",
+      "contextHash": "8d4e72adc7a7afeeff640ab92a95cde6612ce8fd8e344fd674602ed29eb5e9a3"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]複数ヒット時に減衰（MultipleAttenuation）[[/LINK_1]]",
+      "sourceHash": "d5918643aa6cf8a6838809f362bd79bbb59cc6906b06cddfa2deb1edd65760f3",
+      "parts": [
+        {
+          "source": "複数ヒット時に減衰（MultipleAttenuation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Attenuate on Multiple Hits (MultipleAttenuation)[[/LINK_1]]",
+      "contextHash": "d5918643aa6cf8a6838809f362bd79bbb59cc6906b06cddfa2deb1edd65760f3"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]満タンアニメを待つ（WaitChargedAnimation）[[/LINK_1]]ver1.04",
+      "sourceHash": "6af13e364e3a48d986c00392eb586cc00e549f3caac7012e5ff281fac9b411c6",
+      "parts": [
+        {
+          "source": "満タンアニメを待つ（WaitChargedAnimation）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Wait for Full Gauge Animation (WaitChargedAnimation)[[/LINK_1]] ver1.04",
+      "contextHash": "6af13e364e3a48d986c00392eb586cc00e549f3caac7012e5ff281fac9b411c6"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]満タンアニメの間隔（ChargedAnimationInterval）[[/LINK_1]]ver1.04",
+      "sourceHash": "0734aeb0520c955fb77e825a260e222bcfa62fab3a3b22b81f7b92d3bb589e70",
+      "parts": [
+        {
+          "source": "満タンアニメの間隔（ChargedAnimationInterval）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Full Gauge Animation Interval (ChargedAnimationInterval)[[/LINK_1]] ver1.04",
+      "contextHash": "0734aeb0520c955fb77e825a260e222bcfa62fab3a3b22b81f7b92d3bb589e70"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]数値の表示（ShowGaugeNumber）[[/LINK_1]]",
+      "sourceHash": "6a25a07775120ff630daa3cbbc05ee480fce4d695ea32c51fec324325b0b1bbe",
+      "parts": [
+        {
+          "source": "数値の表示（ShowGaugeNumber）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Numeric Value (ShowGaugeNumber)[[/LINK_1]]",
+      "contextHash": "6a25a07775120ff630daa3cbbc05ee480fce4d695ea32c51fec324325b0b1bbe"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]ラベルの横幅（LabelWidth）[[/LINK_1]]",
+      "sourceHash": "e8063f39564f192afc5b0d4c044feb877b333511191c0993ae59e1d03232904b",
+      "parts": [
+        {
+          "source": "ラベルの横幅（LabelWidth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Label Width (LabelWidth)[[/LINK_1]]",
+      "contextHash": "e8063f39564f192afc5b0d4c044feb877b333511191c0993ae59e1d03232904b"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]横幅（GaugeWidth）[[/LINK_1]]",
+      "sourceHash": "883a7e109067b16a7d20505bf94b07269443acbf6d0e8676ecd4416ea108e3b1",
+      "parts": [
+        {
+          "source": "横幅（GaugeWidth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Width (GaugeWidth)[[/LINK_1]]",
+      "contextHash": "883a7e109067b16a7d20505bf94b07269443acbf6d0e8676ecd4416ea108e3b1"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]縦幅（GaugeHeight）[[/LINK_1]]",
+      "sourceHash": "41ca03dc8e8957e93041202592332e61b82602efed2054e2ea2dd6ea58d77662",
+      "parts": [
+        {
+          "source": "縦幅（GaugeHeight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Height (GaugeHeight)[[/LINK_1]]",
+      "contextHash": "41ca03dc8e8957e93041202592332e61b82602efed2054e2ea2dd6ea58d77662"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]ゲージの間隔（GaugeInterval）[[/LINK_1]]",
+      "sourceHash": "8ac52bdf2534540a2fefcb98556f917892a8030bb34071eaedfc103220077bc2",
+      "parts": [
+        {
+          "source": "ゲージの間隔（GaugeInterval）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Gauge Interval (GaugeInterval)[[/LINK_1]]",
+      "contextHash": "8ac52bdf2534540a2fefcb98556f917892a8030bb34071eaedfc103220077bc2"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]ゲージフラッシュ（GaugeFlash）[[/LINK_1]]",
+      "sourceHash": "baf80ff01c1bd677829753044598b3a1341df5751bd4f7c87efaec7caa8439cf",
+      "parts": [
+        {
+          "source": "ゲージフラッシュ（GaugeFlash）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Gauge Flash (GaugeFlash)[[/LINK_1]]",
+      "contextHash": "baf80ff01c1bd677829753044598b3a1341df5751bd4f7c87efaec7caa8439cf"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]メニュー画面に表示（ShowMenu）[[/LINK_1]]",
+      "sourceHash": "214ac0958775dea1b98db6747e15e28b00524798ab97b02e9ab833aa67a5cf08",
+      "parts": [
+        {
+          "source": "メニュー画面に表示（ShowMenu）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show in Menu Screen (ShowMenu)[[/LINK_1]]",
+      "contextHash": "214ac0958775dea1b98db6747e15e28b00524798ab97b02e9ab833aa67a5cf08"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｘ座標（メニュー）（MenuStartGaugeX）[[/LINK_1]]",
+      "sourceHash": "5e8bf105a60a5dfa02b110ab8ad4a54f39ec693c5e4022870fab8d8040f54686",
+      "parts": [
+        {
+          "source": "開始Ｘ座標（メニュー）（MenuStartGaugeX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting X Coordinate (Menu) (MenuStartGaugeX)[[/LINK_1]]",
+      "contextHash": "5e8bf105a60a5dfa02b110ab8ad4a54f39ec693c5e4022870fab8d8040f54686"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｙ座標（メニュー）（MenuStartGaugeY）[[/LINK_1]]",
+      "sourceHash": "1c14d0e4b63d8a515aadbe73d036b2fc4d71eeb7828121834b5e30ba3d217503",
+      "parts": [
+        {
+          "source": "開始Ｙ座標（メニュー）（MenuStartGaugeY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting Y Coordinate (Menu) (MenuStartGaugeY)[[/LINK_1]]",
+      "contextHash": "1c14d0e4b63d8a515aadbe73d036b2fc4d71eeb7828121834b5e30ba3d217503"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]スキル画面に表示（ShowSkillStatus）[[/LINK_1]]",
+      "sourceHash": "ba6d1b60aa1c9b7be573b137a96b6e10f49db53f0b3df14b8fd1f33abb1384b6",
+      "parts": [
+        {
+          "source": "スキル画面に表示（ShowSkillStatus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show in Skill Screen (ShowSkillStatus)[[/LINK_1]]",
+      "contextHash": "ba6d1b60aa1c9b7be573b137a96b6e10f49db53f0b3df14b8fd1f33abb1384b6"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]ステータス画面に表示（ShowStatus）[[/LINK_1]]",
+      "sourceHash": "28d248c344a8b415e2c05c31248c044b2cc135fa60a717cd0b38971efe17b420",
+      "parts": [
+        {
+          "source": "ステータス画面に表示（ShowStatus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show in Status Screen (ShowStatus)[[/LINK_1]]",
+      "contextHash": "28d248c344a8b415e2c05c31248c044b2cc135fa60a717cd0b38971efe17b420"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｘ座標（ステータス）（StatusStartGaugeX）[[/LINK_1]]",
+      "sourceHash": "fd053b1c821eb3066436f151182b67bcc1afb329e503109e3dd4b6554a64d9f1",
+      "parts": [
+        {
+          "source": "開始Ｘ座標（ステータス）（StatusStartGaugeX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting X Coordinate (Status) (StatusStartGaugeX)[[/LINK_1]]",
+      "contextHash": "fd053b1c821eb3066436f151182b67bcc1afb329e503109e3dd4b6554a64d9f1"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｙ座標（ステータス）（StatusStartGaugeY）[[/LINK_1]]",
+      "sourceHash": "349425f01f1657587ac271e99fee865b2d7c9a5ed16702a8d3e4116aed030840",
+      "parts": [
+        {
+          "source": "開始Ｙ座標（ステータス）（StatusStartGaugeY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting Y Coordinate (Status) (StatusStartGaugeY)[[/LINK_1]]",
+      "contextHash": "349425f01f1657587ac271e99fee865b2d7c9a5ed16702a8d3e4116aed030840"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘画面に表示（ShowBattle）[[/LINK_1]]",
+      "sourceHash": "2d63e2925aacfb04292a6d0ba69d9e9e18a73621d1d8c9fecaeacfecd0a49c22",
+      "parts": [
+        {
+          "source": "戦闘画面に表示（ShowBattle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show in Battle Screen (ShowBattle)[[/LINK_1]]",
+      "contextHash": "2d63e2925aacfb04292a6d0ba69d9e9e18a73621d1d8c9fecaeacfecd0a49c22"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｘ座標（戦闘）（BattleStartGaugeX）[[/LINK_1]]",
+      "sourceHash": "a8492cbfea24754d2f7706cf7cf0c8b358f19a963665d83c74d7a60c7ec81770",
+      "parts": [
+        {
+          "source": "開始Ｘ座標（戦闘）（BattleStartGaugeX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting X Coordinate (Battle) (BattleStartGaugeX)[[/LINK_1]]",
+      "contextHash": "a8492cbfea24754d2f7706cf7cf0c8b358f19a963665d83c74d7a60c7ec81770"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]開始Ｙ座標（戦闘）（BattleStartGaugeY）[[/LINK_1]]",
+      "sourceHash": "f3df250e0a0fda22d24513bb9bef1cf6750218496a3b19b27e333896f51681df",
+      "parts": [
+        {
+          "source": "開始Ｙ座標（戦闘）（BattleStartGaugeY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Starting Y Coordinate (Battle) (BattleStartGaugeY)[[/LINK_1]]",
+      "contextHash": "f3df250e0a0fda22d24513bb9bef1cf6750218496a3b19b27e333896f51681df"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰ調整Ｙ座標（BattleAdjustNameY）[[/LINK_1]]",
+      "sourceHash": "7402e1cedba4571f4bb382e69fedef814828aa525dd5b0ab6f0b79634c659514",
+      "parts": [
+        {
+          "source": "ＨＰ調整Ｙ座標（BattleAdjustNameY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]HP Adjustment Y Coordinate (BattleAdjustNameY)[[/LINK_1]]",
+      "contextHash": "7402e1cedba4571f4bb382e69fedef814828aa525dd5b0ab6f0b79634c659514"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]名前～ＨＰの間隔（BattleNameHpInterval）[[/LINK_1]]",
+      "sourceHash": "2be297dd2672d7abc4930eaabf20bca9da5cd57cc2d51603b4cb7191f7b76daf",
+      "parts": [
+        {
+          "source": "名前～ＨＰの間隔（BattleNameHpInterval）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Name-to-HP Spacing (BattleNameHpInterval)[[/LINK_1]]",
+      "contextHash": "2be297dd2672d7abc4930eaabf20bca9da5cd57cc2d51603b4cb7191f7b76daf"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（奥義タイプ一覧）[[/LINK_1]]",
+      "sourceHash": "5585a7c430fc87ef6ce043004396dcb593b4a9c348b913039b2debf9b5260b51",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（奥義タイプ一覧）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Arts Type List)[[/LINK_1]]",
+      "contextHash": "5585a7c430fc87ef6ce043004396dcb593b4a9c348b913039b2debf9b5260b51"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]有効条件（Condition）[[/LINK_1]]",
+      "sourceHash": "7b4e08ed26b28acbff0f1068b7da4ca482b0fdbd8a4aacc178a00f3fd42130a2",
+      "parts": [
+        {
+          "source": "有効条件（Condition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Activation Condition (Condition)[[/LINK_1]]",
+      "contextHash": "7b4e08ed26b28acbff0f1068b7da4ca482b0fdbd8a4aacc178a00f3fd42130a2"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "[[LINK_1]]最大値（GaugeMax）[[/LINK_1]]",
+      "sourceHash": "3992dd9a339c81a56db25bc4c8ffcd652fe9b84e6aa53a062b64d108473be15c",
+      "parts": [
+        {
+          "source": "最大値（GaugeMax）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Maximum Value (GaugeMax)[[/LINK_1]]",
+      "contextHash": "3992dd9a339c81a56db25bc4c8ffcd652fe9b84e6aa53a062b64d108473be15c"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘後もゲージ持越（PreserveGauge）[[/LINK_1]]",
+      "sourceHash": "d1f7050ae6a1fba8d08285dec325ca3c1ff95087af0860bd080df425b6d217ac",
+      "parts": [
+        {
+          "source": "戦闘後もゲージ持越（PreserveGauge）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Carry Gauge Over After Battle (PreserveGauge)[[/LINK_1]]",
+      "contextHash": "d1f7050ae6a1fba8d08285dec325ca3c1ff95087af0860bd080df425b6d217ac"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘開始時の上昇値（BattleStartValue）[[/LINK_1]]",
+      "sourceHash": "5567b0b6d62fbae6f7f8f9f28103b8817b7483a48e48da095adcec085f95b60d",
+      "parts": [
+        {
+          "source": "戦闘開始時の上昇値（BattleStartValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase at Battle Start (BattleStartValue)[[/LINK_1]]",
+      "contextHash": "5567b0b6d62fbae6f7f8f9f28103b8817b7483a48e48da095adcec085f95b60d"
+    },
+    {
+      "id": "line-046",
+      "type": "line",
+      "source": "[[LINK_1]]行動毎の上昇値（ActionValue）[[/LINK_1]]",
+      "sourceHash": "b9eb210bd5920ece1d7e65981decab2588c7be97cf775fa97209d730710e28f0",
+      "parts": [
+        {
+          "source": "行動毎の上昇値（ActionValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase per Action (ActionValue)[[/LINK_1]]",
+      "contextHash": "b9eb210bd5920ece1d7e65981decab2588c7be97cf775fa97209d730710e28f0"
+    },
+    {
+      "id": "line-047",
+      "type": "line",
+      "source": "[[LINK_1]]行動終了時の上昇値（ActionEndValue）[[/LINK_1]]",
+      "sourceHash": "71ab98da6f61340eca8a05ad30aa86e17126a3874e3d5c30c1450e841653d8c7",
+      "parts": [
+        {
+          "source": "行動終了時の上昇値（ActionEndValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase at Action End (ActionEndValue)[[/LINK_1]]",
+      "contextHash": "71ab98da6f61340eca8a05ad30aa86e17126a3874e3d5c30c1450e841653d8c7"
+    },
+    {
+      "id": "line-048",
+      "type": "line",
+      "source": "[[LINK_1]]ターン毎の再生値（RegenerateValue）[[/LINK_1]]",
+      "sourceHash": "55ee2810bce1027ea37e35db58476440a9b94d0aa93a7f2a92cadb0e53ec59d5",
+      "parts": [
+        {
+          "source": "ターン毎の再生値（RegenerateValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Regeneration per Turn (RegenerateValue)[[/LINK_1]]",
+      "contextHash": "55ee2810bce1027ea37e35db58476440a9b94d0aa93a7f2a92cadb0e53ec59d5"
+    },
+    {
+      "id": "line-049",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージ時の上昇値（DamageValue）[[/LINK_1]]",
+      "sourceHash": "d62fae724fff0f2f2c673a0003e6ce2df3376602beec13f600c10d50c0000b55",
+      "parts": [
+        {
+          "source": "ダメージ時の上昇値（DamageValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase When Damaged (DamageValue)[[/LINK_1]]",
+      "contextHash": "d62fae724fff0f2f2c673a0003e6ce2df3376602beec13f600c10d50c0000b55"
+    },
+    {
+      "id": "line-050",
+      "type": "line",
+      "source": "[[LINK_1]]回避時の上昇値（EvadedValue）[[/LINK_1]]",
+      "sourceHash": "1945f0c50a01c1b236cd4d836e4e14ae205f4fe4346aea1f22c444b60386b550",
+      "parts": [
+        {
+          "source": "回避時の上昇値（EvadedValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase When Evading (EvadedValue)[[/LINK_1]]",
+      "contextHash": "1945f0c50a01c1b236cd4d836e4e14ae205f4fe4346aea1f22c444b60386b550"
+    },
+    {
+      "id": "line-051",
+      "type": "line",
+      "source": "[[LINK_1]]仲間死亡時の上昇値（FriendsDeadValue）[[/LINK_1]]",
+      "sourceHash": "4b61af20c8756da51c3c4cc37c0f5ff103561693b675e34dc1743cd860ff4e05",
+      "parts": [
+        {
+          "source": "仲間死亡時の上昇値（FriendsDeadValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase when an ally dies (FriendsDeadValue)[[/LINK_1]]",
+      "contextHash": "4b61af20c8756da51c3c4cc37c0f5ff103561693b675e34dc1743cd860ff4e05"
+    },
+    {
+      "id": "line-052",
+      "type": "line",
+      "source": "[[LINK_1]]敵撃破時の上昇値（DefeatEnemyValue）[[/LINK_1]]",
+      "sourceHash": "cc67ae29c91d6570df94bc5d7d4b33a3f6b755747ced1548a1a5c4da595f3d79",
+      "parts": [
+        {
+          "source": "敵撃破時の上昇値（DefeatEnemyValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase when an enemy is defeated (DefeatEnemyValue)[[/LINK_1]]",
+      "contextHash": "cc67ae29c91d6570df94bc5d7d4b33a3f6b755747ced1548a1a5c4da595f3d79"
+    },
+    {
+      "id": "line-053",
+      "type": "line",
+      "source": "[[LINK_1]]会心時の上昇値（CriticalValue）[[/LINK_1]]",
+      "sourceHash": "82937cc115cddf0f591d550f90370ff55f35d4d5e9d7ce6e0d375a89e3792736",
+      "parts": [
+        {
+          "source": "会心時の上昇値（CriticalValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Increase on a critical hit (CriticalValue)[[/LINK_1]]",
+      "contextHash": "82937cc115cddf0f591d550f90370ff55f35d4d5e9d7ce6e0d375a89e3792736"
+    },
+    {
+      "id": "line-054",
+      "type": "line",
+      "source": "[[LINK_1]]消費ポイントの色（CostColor）[[/LINK_1]]",
+      "sourceHash": "c6cf34c91d4468109baa00bb0cd6879a1275955bd147a428f551133656dc899d",
+      "parts": [
+        {
+          "source": "消費ポイントの色（CostColor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Cost point color (CostColor)[[/LINK_1]]",
+      "contextHash": "c6cf34c91d4468109baa00bb0cd6879a1275955bd147a428f551133656dc899d"
+    },
+    {
+      "id": "line-055",
+      "type": "line",
+      "source": "[[LINK_1]]満タン時のアニメ（ChargedAnimation）[[/LINK_1]]",
+      "sourceHash": "4ff9fce11fac656ae8d07a6e49a546de23a6d3d9784e1b411a586ba9e94d62d3",
+      "parts": [
+        {
+          "source": "満タン時のアニメ（ChargedAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Animation when full (ChargedAnimation)[[/LINK_1]]",
+      "contextHash": "4ff9fce11fac656ae8d07a6e49a546de23a6d3d9784e1b411a586ba9e94d62d3"
+    },
+    {
+      "id": "line-056",
+      "type": "line",
+      "source": "[[LINK_1]]満タン時Dynamicスキル（ChargedDynamicSkill）[[/LINK_1]]ver1.04",
+      "sourceHash": "86fe99af1eb228338cced3f1642fc2fe3115f7c940fbf1613a36fe3cd2c38312",
+      "parts": [
+        {
+          "source": "満タン時Dynamicスキル（ChargedDynamicSkill）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Dynamic skill when full (ChargedDynamicSkill)[[/LINK_1]]ver1.04",
+      "contextHash": "86fe99af1eb228338cced3f1642fc2fe3115f7c940fbf1613a36fe3cd2c38312"
+    },
+    {
+      "id": "line-057",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionを待つ（WaitDynamicMotion）[[/LINK_1]]ver1.05",
+      "sourceHash": "5b83604e813799f1aae77ddd29348da23ec3a357d9590b6c30250c5b8621159e",
+      "parts": [
+        {
+          "source": "DynamicMotionを待つ（WaitDynamicMotion）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.05",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Wait for DynamicMotion (WaitDynamicMotion)[[/LINK_1]]ver1.05",
+      "contextHash": "5b83604e813799f1aae77ddd29348da23ec3a357d9590b6c30250c5b8621159e"
+    },
+    {
+      "id": "line-058",
+      "type": "line",
+      "source": "[[LINK_1]]ラベル（Label）[[/LINK_1]]",
+      "sourceHash": "31330e3278468f109c45dfb9ffcb7bffa132a6776127ca9cbff1328e61014f42",
+      "parts": [
+        {
+          "source": "ラベル（Label）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Label (Label)[[/LINK_1]]",
+      "contextHash": "31330e3278468f109c45dfb9ffcb7bffa132a6776127ca9cbff1328e61014f42"
+    },
+    {
+      "id": "line-059",
+      "type": "line",
+      "source": "[[LINK_1]]色（左）（GaugeColor1）[[/LINK_1]]",
+      "sourceHash": "2082e81c7c7b202dee6a14985442906fe89b67cfc665154b9d7338cd44e49072",
+      "parts": [
+        {
+          "source": "色（左）（GaugeColor1）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Color (Left) (GaugeColor1)[[/LINK_1]]",
+      "contextHash": "2082e81c7c7b202dee6a14985442906fe89b67cfc665154b9d7338cd44e49072"
+    },
+    {
+      "id": "line-060",
+      "type": "line",
+      "source": "[[LINK_1]]色（右）（GaugeColor2）[[/LINK_1]]",
+      "sourceHash": "328489067847d6978dd905884d8182689d9d51468cee0aa2bb1d0ffbb8dadd4b",
+      "parts": [
+        {
+          "source": "色（右）（GaugeColor2）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Color (Right) (GaugeColor2)[[/LINK_1]]",
+      "contextHash": "328489067847d6978dd905884d8182689d9d51468cee0aa2bb1d0ffbb8dadd4b"
+    },
+    {
+      "id": "line-061",
+      "type": "line",
+      "source": "[[LINK_1]]奥義発動時は加算しない[[/LINK_1]]がオンの場合、発動した奥義系統以外には影響を与えないように修正した。また、会心ボーナスは発生しないようにした。",
+      "sourceHash": "3968066528c7e54d6211083f0359a5c33f1e2ce8a0fe6dc8ce36b128b6ddda93",
+      "parts": [
+        {
+          "source": "奥義発動時は加算しない",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "がオンの場合、発動した奥義系統以外には影響を与えないように修正した。また、会心ボーナスは発生しないようにした。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Do not add when an Art is activated[[/LINK_1]] has been revised so that, when enabled, it does not affect anything other than the activated Art type. Critical bonuses will also no longer occur.",
+      "contextHash": "3968066528c7e54d6211083f0359a5c33f1e2ce8a0fe6dc8ce36b128b6ddda93"
+    },
+    {
+      "id": "line-062",
+      "type": "line",
+      "source": "[[LINK_1]]複数ヒット時の会心ボーナスを重複禁止[[/LINK_1]]にできるようにした。",
+      "sourceHash": "aab6a529eaa125e215aacc6e23a551cc8bfd3558f3041f0152bef349da594c52",
+      "parts": [
+        {
+          "source": "複数ヒット時の会心ボーナスを重複禁止",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "にできるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to [[LINK_1]]prevent critical bonuses from stacking on multiple hits[[/LINK_1]].",
+      "contextHash": "aab6a529eaa125e215aacc6e23a551cc8bfd3558f3041f0152bef349da594c52"
+    },
+    {
+      "id": "line-063",
+      "type": "line",
+      "source": "満タン演出を[[LINK_1]]DynamicMotionのアクション終了後[[/LINK_1]]に行うようにした。",
+      "sourceHash": "de335e93197111e5d1970c7465f7cb581f1b0280b17d6f7e7e5fd4f82ee63c59",
+      "parts": [
+        {
+          "source": "満タン演出を",
+          "link": false
+        },
+        {
+          "source": "DynamicMotionのアクション終了後",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に行うようにした。",
+          "link": false
+        }
+      ],
+      "translation": "The full-gauge effect now occurs [[LINK_1]]after the DynamicMotion action ends[[/LINK_1]].",
+      "contextHash": "de335e93197111e5d1970c7465f7cb581f1b0280b17d6f7e7e5fd4f82ee63c59"
+    },
+    {
+      "id": "line-064",
+      "type": "line",
+      "source": "※[[LINK_1]]DynamicMotionMZ[[/LINK_1]]も最新に更新したほうが安定します。",
+      "sourceHash": "8eb2b17d2d62f639bd104a4eef987fba638070af66e19762399411961db1b2c9",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "DynamicMotionMZ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "も最新に更新したほうが安定します。",
+          "link": false
+        }
+      ],
+      "translation": "※It is recommended to also update [[LINK_1]]DynamicMotionMZ[[/LINK_1]] to the latest version for greater stability.",
+      "contextHash": "8eb2b17d2d62f639bd104a4eef987fba638070af66e19762399411961db1b2c9"
+    },
+    {
+      "id": "line-065",
+      "type": "line",
+      "source": "ゲージ満タン時のアニメーションを[[LINK_1]]DynamicAnimationに対応[[/LINK_1]]。",
+      "sourceHash": "e9612e445fd4cc9cd050c1f3fc5b4c8a6aebb0d82fa4032599af7e4a78f493ee",
+      "parts": [
+        {
+          "source": "ゲージ満タン時のアニメーションを",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimationに対応",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "。",
+          "link": false
+        }
+      ],
+      "translation": "The animation displayed when the gauge is full now [[LINK_1]]supports DynamicAnimation[[/LINK_1]].",
+      "contextHash": "e9612e445fd4cc9cd050c1f3fc5b4c8a6aebb0d82fa4032599af7e4a78f493ee"
+    },
+    {
+      "id": "line-066",
+      "type": "line",
+      "source": "ゲージ満タン時のアニメーションに[[LINK_1]]ウェイトをかける[[/LINK_1]]かを選択可能にした。",
+      "sourceHash": "5d06f560c334262c050a5ac054d9c413e80c9c9aac2ae3e6eeb865e8a24d3ea8",
+      "parts": [
+        {
+          "source": "ゲージ満タン時のアニメーションに",
+          "link": false
+        },
+        {
+          "source": "ウェイトをかける",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "かを選択可能にした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to choose whether to [[LINK_1]]apply a wait[[/LINK_1]] to the animation displayed when the gauge is full.",
+      "contextHash": "5d06f560c334262c050a5ac054d9c413e80c9c9aac2ae3e6eeb865e8a24d3ea8"
+    },
+    {
+      "id": "line-067",
+      "type": "line",
+      "source": "ゲージ満タン時のアニメーションが[[LINK_1]]重なった際の演出間隔[[/LINK_1]]を指定可能にした。",
+      "sourceHash": "e34903b97ad1df451f8c6f2000e8c78b117c28572bccd0f2facea6cee286353b",
+      "parts": [
+        {
+          "source": "ゲージ満タン時のアニメーションが",
+          "link": false
+        },
+        {
+          "source": "重なった際の演出間隔",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を指定可能にした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to specify the [[LINK_1]]interval between effects when full-gauge animations overlap[[/LINK_1]].",
+      "contextHash": "e34903b97ad1df451f8c6f2000e8c78b117c28572bccd0f2facea6cee286353b"
+    },
+    {
+      "id": "line-068",
+      "type": "line",
+      "source": "[[LINK_1]]ゲージ上昇倍率[[/LINK_1]]を変更可能にした。",
+      "sourceHash": "9f8ca1a1d234b92e3d68727911edec3ea72930279d27ff403bee80e2b6490cbb",
+      "parts": [
+        {
+          "source": "ゲージ上昇倍率",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を変更可能にした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to change the [[LINK_1]]gauge increase multiplier[[/LINK_1]].",
+      "contextHash": "9f8ca1a1d234b92e3d68727911edec3ea72930279d27ff403bee80e2b6490cbb"
+    },
+    {
+      "id": "line-069",
+      "type": "line",
+      "source": "[[LINK_1]]ターン毎のゲージ回復効果[[/LINK_1]]をアクター、職業、装備に対しても有効にした。",
+      "sourceHash": "650ebda41b8cc851a8657b2eb38f52acc18c5385e1ee68cb0cb59529a70a5e3d",
+      "parts": [
+        {
+          "source": "ターン毎のゲージ回復効果",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をアクター、職業、装備に対しても有効にした。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]gauge recovery effect per turn[[/LINK_1]] is now also effective for actors, classes, and equipment.",
+      "contextHash": "650ebda41b8cc851a8657b2eb38f52acc18c5385e1ee68cb0cb59529a70a5e3d"
+    },
+    {
+      "id": "line-070",
+      "type": "line",
+      "source": "[[LINK_1]]スキル画面にもゲージを表示[[/LINK_1]]できるようにした。",
+      "sourceHash": "cf3475153afda8b1dd34598ec3a3a3d2ef9cf5887663df865b27b0d01466ec93",
+      "parts": [
+        {
+          "source": "スキル画面にもゲージを表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "It is now possible to [[LINK_1]]display the gauge on the skill screen[[/LINK_1]].",
+      "contextHash": "cf3475153afda8b1dd34598ec3a3a3d2ef9cf5887663df865b27b0d01466ec93"
+    },
+    {
+      "id": "line-071",
+      "type": "line",
+      "source": "奥義ゲージが満タンになった際に実行する[[LINK_1]]DynamicAnimation&Motion[[/LINK_1]]のスキル演出です。",
+      "sourceHash": "1f25cef361c143acc43bd27cc5840d0e166e384a2db0741b4d103fa242fbec3e",
+      "parts": [
+        {
+          "source": "奥義ゲージが満タンになった際に実行する",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation&Motion",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のスキル演出です。",
+          "link": false
+        }
+      ],
+      "translation": "This is the skill effect of [[LINK_1]]DynamicAnimation&Motion[[/LINK_1]] that is executed when the Art gauge becomes full.",
+      "contextHash": "1f25cef361c143acc43bd27cc5840d0e166e384a2db0741b4d103fa242fbec3e"
+    },
+    {
+      "id": "line-072",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ゲージを溜めて発動する特別なスキルを実装します。": "Implement special skills that are activated by filling a gauge.",
+    "いわゆる奥義のようなものです。": "They are essentially Arts.",
+    "既存のＴＰ制に類似していますが、ゲージを複数持たせることができます。": "Although similar to the existing TP system, you can have multiple gauges.",
+    "ゲージが溜まる条件や溜まった時の演出、ゲージのレイアウトなども調整できます。": "You can also adjust the conditions for filling the gauges, the effects played when they are filled, and the gauge layout.",
+    "目次": "Table of Contents",
+    "【ゲージのレイアウト関連】": "[Gauge Layout Settings]",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_SpecialSkill.js": "NRP_SpecialSkill.js ",
+    "ver1.07（2025/05/06）": "ver1.07 (2025/05/06) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/05/06（ver1.07）": "2025/05/06 (ver1.07) ",
+    "2025/04/03（ver1.06）": "2025/04/03 (ver1.06) ",
+    "2024/03/17 -> 2024/06/05（ver1.05 -> 1.051）": "2024/03/17 -> 2024/06/05 (ver1.05 -> 1.051) ",
+    "敵キャラが奥義スキルを使用できない不具合修正。（2024/06/05 ver1.051）": "Fixed a bug that prevented enemies from using Arts skills. (2024/06/05 ver1.051)",
+    "※敵キャラについては特に制約なく使用できる仕様とします。": "※Enemies can use them without any particular restrictions.",
+    "2024/03/16（ver1.04）": "2024/03/16 (ver1.04) ",
+    "2023/05/23（ver1.03）": "2023/05/23 (ver1.03) ",
+    "2023/04/02 -> 2023/04/11（ver1.02 -> 1.023）": "2023/04/02 -> 2023/04/11 (ver1.02 -> 1.023) ",
+    "他プラグインとの連携用にソース整理。（ver1.021）": "Reorganized the source for integration with other plugins. (ver1.021)",
+    "並び替えするとゲージが消える不具合修正。（ver1.022）": "Fixed a bug that caused gauges to disappear when changing the order. (ver1.022)",
+    "満タン時のアニメを設定した状態で、マップ上で奥義ゲージが満タンになるとエラーになる不具合修正。（2023/04/11 ver1.023）": "Fixed a bug that caused an error when an Arts gauge became full on the map while an animation was set for when it reached maximum. (2023/04/11 ver1.023)",
+    "2023/03/29 -> 2023/04/01（ver1.01 -> 1.011）": "2023/03/29 -> 2023/04/01 (ver1.01 -> 1.011) ",
+    "奥義ゲージの幅が反映されない不具合修正。": "Fixed a bug that prevented the Arts gauge width from being applied.",
+    "スキル画面にゲージが表示されてしまう不具合修正。": "Fixed a bug that caused gauges to be displayed on the Skills screen.",
+    "戦闘開始時にエラーとなる不具合修正。（2023/04/01 ver1.011）": "Fixed a bug that caused an error when a battle started. (2023/04/01 ver1.011)",
+    "2022/07/23 -> 2022/07/24（ver1.00 -> 1.001）": "2022/07/23 -> 2022/07/24 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "途中のセーブデータに適用した場合、エラーになる不具合修正。": "Fixed a bug that caused an error when applied to an existing save file.",
+    "（2022/07/24 ver1.001）": " (2022/07/24 ver1.001) ",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータの奥義タイプ一覧に、情報を登録してください。": "Register the information in the Arts Type list in the plugin parameters.",
+    "ゲージが溜まる条件を詳細に設定できます。": "You can configure the conditions for filling the gauges in detail.",
+    "初期状態では一つだけ登録されていますが、複数登録することも可能です。": "One is registered by default, but you can register multiple types.",
+    "先頭のデータが『奥義タイプ = 1』として扱われます。": "The first entry is treated as “Arts Type = 1.”",
+    "さらに奥義タイプに対応する奥義スキルを設定してください。": "Next, set the Arts skill corresponding to each Arts Type.",
+    "※以下の『スキルのメモ欄』を参照": "※See the “Skill note field” below.",
+    "スキルのメモ欄（奥義用）（Note of Skill [Special]）": "Skill Note Field (for Arts) (Note of Skill [Special])",
+    "奥義となるスキルのメモ欄に以下を記入してください。": "Enter the following in the note field of the skill that will be an Arts skill.",
+    "<SpecialSkill:[奥義タイプ]>": "<SpecialSkill:[Arts Type]>",
+    "スキルを奥義スキルとして設定します。": "Sets the skill as an Arts skill.",
+    "<SpecialSkill:1>ならば、奥義タイプ一覧の１番目に対応します。": "If it is <SpecialSkill:1>, it corresponds to the first entry in the Arts Type list.",
+    "奥義ゲージを100ポイント消費します。": "Consumes 100 points from the Arts gauge.",
+    "指定がない場合は全てを消費します。": "If not specified, it consumes the entire gauge.",
+    "スキルのメモ欄（通常用）（Note of Skill [Normal]）": "Skill Note Field (for Normal Skills) (Note of Skill [Normal])",
+    "ゲージが溜まる条件をスキル毎に設定できます。": "You can set the conditions for filling the gauges for each skill.",
+    "指定がない場合はプラグインパラメータの既定値を用います。": "If not specified, the default values from the plugin parameters are used.",
+    "スキル命中時に、スキル使用者の全ゲージを10加算します。": "When the skill hits, adds 10 to all gauges of the skill user.",
+    "対象数や連続回数に比例して増加量も大きくなります。": "The amount added also increases in proportion to the number of targets and consecutive hits.",
+    "※外れても増加する設定もできます。": "※You can also configure it to increase even when the skill misses.",
+    "スキル使用後に、スキル使用者の全ゲージを10加算します。": "After using the skill, adds 10 to all gauges of the skill user.",
+    "スキルを受けた相手の全ゲージを10加算します。": "Adds 10 to all gauges of the skill's target.",
+    "基本的には補助スキルを想定しています。": "This is primarily intended for support skills.",
+    "特定のゲージだけを増加させたい場合は、タグ名の末尾に数値を付加してください。": "To increase only a specific gauge, append a number to the end of the tag name.",
+    "例：『SpecialSkillActionValue1』ならば一番目のゲージが対象。": "Example: “SpecialSkillActionValue1” targets the first gauge.",
+    "アクター、職業、装備、ステートのメモ欄（Note of Objects）": "Note Fields for Actors, Classes, Equipment, and States (Note of Objects)",
+    "メモ欄に記載することで、ゲージの上昇量が変化する特性を設定できます。": "By entering this in the note field, you can set traits that change the amount by which the gauges increase.",
+    "全ゲージの上昇量を150%にします。": "Sets the increase amount for all gauges to 150%.",
+    "ターン毎に全ゲージを10加算します。": "Adds 10 to all gauges each turn.",
+    "スキルと同じ要領で特定の奥義タイプだけを対象にできます。": "As with skills, you can target only specific Arts types.",
+    "ステートのメモ欄（Note of States）": "State Note Field (Note of States)",
+    "ステートを受けた相手の全ゲージを10加算します。": "Adds 10 to all gauges of the target affected by the state.",
+    "プラグインコマンド": "Plugin Commands",
+    "奥義ゲージの増減": "Increase/Decrease Arts Gauge",
+    "奥義ゲージを増減させます。": "Increases or decreases the Arts gauge.",
+    "操作するアクターや奥義タイプを指定可能です。": "You can specify the actor and Arts type to affect.",
+    "アクターを指定しなかった場合は、パーティ全員が対象となります。": "If no actor is specified, all party members are affected.",
+    "奥義タイプを指定しなかった場合は、全奥義タイプが対象となります。": "If no Arts type is specified, all Arts types are affected.",
+    "レイアウトについて": "Regarding Layout",
+    "初期状態では奥義ゲージを表示する場所が狭いので窮屈です。": "By default, the space for displaying the Arts gauge is narrow and cramped.",
+    "特にゲージを複数登録した場合は顕著になります。": "This is especially noticeable when multiple gauges are registered.",
+    "対象はメニュー、ステータス、戦闘の３画面です。": "The applicable screens are the Menu, Status, and Battle screens.",
+    "プラグインパラメータによって、ゲージのレイアウトを設定できますが、このプラグインだけでは厳しいかもしれません。": "You can configure the gauge layout using plugin parameters, but this plugin alone may not be sufficient.",
+    "その他のレイアウト系プラグインと組み合わせて、いい感じに調整してください。": "Combine it with other layout plugins and adjust it to your liking.",
+    "※このプラグイン単体では無理があるので、作者はさじを投げました。": "※This plugin alone is too limited, so I have thrown in the towel.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "奥義タイプ一覧（SpecialTypeList）": "Arts Type List (SpecialTypeList)",
+    "奥義タイプの一覧です。それぞれがゲージ情報を保有します。": "A list of Arts types. Each one contains gauge information.",
+    "奥義所有時のみゲージ表示（ShowGaugeWhenLearned）": "Show Gauge Only When Arts Are Learned (ShowGaugeWhenLearned)",
+    "アクターが有効な奥義を覚えている場合のみゲージを表示します。": "Displays the gauge only when the actor has learned a usable Art.",
+    "全回復にゲージを含める（RecoverGauge）": "Include Gauge in Full Recovery (RecoverGauge)",
+    "全回復時に奥義ゲージも回復します。": "The Arts gauge is also recovered during full recovery.",
+    "命中時のみ加算（PlusOnlyHit）": "Add Only on Hit (PlusOnlyHit)",
+    "行動毎のゲージ上昇を命中時のみ有効にします。": "Per-action gauge increases apply only when an attack hits.",
+    "奥義発動時は加算しない（NotPlusWhenUsed）": "Do Not Add When an Art Is Used (NotPlusWhenUsed)",
+    "奥義発動時はゲージ上昇を停止します。": "Stops the gauge from increasing when an Art is used.",
+    "つまり、自身で発動した奥義ではゲージが溜まりません。": "In other words, using an Art yourself will not fill the gauge.",
+    "発動に使用したゲージのみが対象となります。": "Only the gauge used to activate the Art is affected.",
+    "同じ対象は加算しない（NotPlusSameTarget）": "Do Not Add for the Same Target (NotPlusSameTarget)",
+    "多段技などで同一の対象に複数攻撃を当てても、行動毎の上昇値が溜まらないようにします。": "Prevents the per-action increase from accumulating when multiple attacks hit the same target, such as with multi-hit skills.",
+    "会心ボーナスは重複しない（NoMultipleCriticalBonus）ver1.06": "Critical Bonuses Do Not Stack (NoMultipleCriticalBonus)ver1.06",
+    "複数ヒットするスキルにて、会心時のゲージ上昇値が重複しないようにします。": "For multi-hit skills, prevents the gauge increase from critical hits from stacking.",
+    "複数ヒット時に減衰（MultipleAttenuation）": "Attenuation on Multiple Hits (MultipleAttenuation)",
+    "範囲技／多段技にてヒット毎のゲージ上昇量を減少させます。": "Reduces the gauge increase per hit for area-of-effect and multi-hit skills.",
+    "例：「value / count」で上昇量／ヒット数へと減衰。": "Example: The increase is reduced to \"value / count\" based on the number of hits.",
+    "満タンアニメを待つ（WaitChargedAnimation）ver1.04": "Wait for Full Gauge Animation (WaitChargedAnimation)ver1.04",
+    "満タン時のアニメを待ちます。": "Waits for the animation played when the gauge is full.",
+    "初期状態ではオンになっているので、ウェイトをなくしたい場合はオフにしてください。": "This is enabled by default, so disable it if you want to eliminate the wait.",
+    "※ＭＶでは常にオンとして扱われます。": "※In MV, this is always treated as enabled.",
+    "満タンアニメの間隔（ChargedAnimationInterval）ver1.04": "Full Gauge Animation Interval (ChargedAnimationInterval)ver1.04",
+    "満タン時のアニメが重なった場合の表示間隔です。": "The display interval when full gauge animations overlap.",
+    "複数の奥義ゲージを使用しないなら無意味です。": "This has no effect unless you use multiple Arts gauges.",
+    "DynamicMotionを待つ（WaitDynamicMotion）ver1.05": "Wait for DynamicMotion (WaitDynamicMotion)ver1.05",
+    "DynamicMotion併用時、帰還を待ってから満タンアニメーションを実行します。": "When used with DynamicMotion, waits for the return before playing the full gauge animation.",
+    "数値の表示（ShowGaugeNumber）": "Display Value (ShowGaugeNumber)",
+    "ゲージ上に現在値を数値表示します。": "Displays the current value numerically above the gauge.",
+    "ラベルの横幅（LabelWidth）": "Label Width (LabelWidth)",
+    "ラベルを表示する横幅です。不要な場合は0にしてください。": "This is the width for displaying the label. Set it to 0 if it is not needed.",
+    "横幅（GaugeWidth）": "Width (GaugeWidth)",
+    "ゲージの横幅です。初期値は128です。": "This is the width of the gauge. The default value is 128.",
+    "ここからラベル幅が引かれることに注意です。": "Note that the label width is subtracted from this.",
+    "縦幅（GaugeHeight）": "Height (GaugeHeight)",
+    "ゲージの縦幅です。初期値は12です。": "This is the height of the gauge. The default value is 12.",
+    "ゲージの間隔（GaugeInterval）": "Gauge Interval (GaugeInterval)",
+    "ゲージ同士の間隔です。": "This is the interval between gauges.",
+    "ゲージフラッシュ（GaugeFlash）": "Gauge Flash (GaugeFlash)",
+    "満タンになったゲージをフラッシュさせます。": "Flashes gauges when they become full.",
+    "メニュー画面に表示（ShowMenu）": "Show in Menu (ShowMenu)",
+    "メニュー画面に奥義ゲージを表示します。": "Displays the Arts gauge in the menu.",
+    "開始Ｘ座標（メニュー）（MenuStartGaugeX）": "Start X Coordinate (Menu) (MenuStartGaugeX)",
+    "メニューにゲージを表示するＸ座標です。": "This is the X coordinate for displaying the gauge in the menu.",
+    "アクター名からの相対座標を指定してください。": "Specify the coordinate relative to the actor's name.",
+    "ちなみに、右列（ＨＰなどの列）に表示したい場合は値を180にすればＯＫです。": "By the way, to display it in the right column (the column containing HP, etc.), set the value to 180.",
+    "開始Ｙ座標（メニュー）（MenuStartGaugeY）": "Start Y Coordinate (Menu) (MenuStartGaugeY)",
+    "メニューにゲージを表示するＹ座標です。": "This is the Y coordinate for displaying the gauge in the menu.",
+    "スキル画面に表示（ShowSkillStatus）": "Show on Skill Screen (ShowSkillStatus)",
+    "スキル画面に奥義ゲージを表示します。": "Displays the Arts gauge on the skill screen.",
+    "なお、配置はメニュー画面と共有です。": "The positioning is shared with the menu screen.",
+    "ステータス画面に表示（ShowStatus）": "Show on Status Screen (ShowStatus)",
+    "ステータス画面に奥義ゲージを表示します。": "Displays the Arts gauge on the status screen.",
+    "開始Ｘ座標（ステータス）（StatusStartGaugeX）": "Start X Coordinate (Status) (StatusStartGaugeX)",
+    "ステータスにゲージを表示するＸ座標です。": "This is the X coordinate for displaying the gauge on the status screen.",
+    "レベルからの相対座標を指定してください。": "Specify the coordinate relative to the level.",
+    "開始Ｙ座標（ステータス）（StatusStartGaugeY）": "Start Y Coordinate (Status) (StatusStartGaugeY)",
+    "ステータスにゲージを表示するＹ座標です。": "This is the Y coordinate for displaying the gauge on the status screen.",
+    "戦闘画面に表示（ShowBattle）": "Show in Battle (ShowBattle)",
+    "戦闘画面に奥義ゲージを表示します。": "Displays the Arts gauge in battle.",
+    "開始Ｘ座標（戦闘）（BattleStartGaugeX）": "Start X Coordinate (Battle) (BattleStartGaugeX)",
+    "戦闘にゲージを表示するＸ座標です。": "This is the X coordinate for displaying the gauge in battle.",
+    "開始Ｙ座標（戦闘）（BattleStartGaugeY）": "Start Y Coordinate (Battle) (BattleStartGaugeY)",
+    "戦闘にゲージを表示するＹ座標です。": "This is the Y coordinate for displaying the gauge in battle.",
+    "ＨＰ調整Ｙ座標（BattleAdjustNameY）": "HP Adjustment Y Coordinate (BattleAdjustNameY)",
+    "戦闘時、名前～ＴＰのＹ座標を調整します。": "Adjusts the Y coordinates from the name to TP during battle.",
+    "名前～ＨＰの間隔（BattleNameHpInterval）": "Name–HP Interval (BattleNameHpInterval)",
+    "戦闘時、名前とＨＰの間隔を数値分広げます。": "During battle, increases the interval between the name and HP by the specified value.",
+    "プラグインパラメータ（奥義タイプ一覧）": "Plugin Parameters (Arts Type List)",
+    "有効条件（Condition）": "Activation Condition (Condition)",
+    "奥義ゲージの有効条件です。（aをバトラーとした数式）": "The activation condition for the Arts gauge. (A formula with a as the battler)",
+    "例：a.level >= 10": "Example: a.level >= 10",
+    "最大値（GaugeMax）": "Maximum Value (GaugeMax)",
+    "奥義ゲージの最大値となる数値です。": "This is the value that serves as the maximum value for the Arts gauge.",
+    "戦闘後もゲージ持越（PreserveGauge）": "Carry Over Gauge After Battle (PreserveGauge)",
+    "戦闘終了後も奥義ゲージを保持します。": "Retains the Arts gauge after battle ends.",
+    "戦闘開始時の上昇値（BattleStartValue）": "Battle Start Gain Value (BattleStartValue)",
+    "戦闘開始時に加算するゲージ上昇値です。": "The gauge value added at the start of battle.",
+    "例：「Math.randomInt(25)」で0~24": "Example: 0–24 with “Math.randomInt(25)”",
+    "行動毎の上昇値（ActionValue）": "Per-Action Gain Value (ActionValue)",
+    "行動毎のゲージ上昇値です。": "The gauge value gained for each action.",
+    "ヒット数分加算されます。": "Added for each hit.",
+    "例：10": "Example: 10",
+    "行動終了時の上昇値（ActionEndValue）": "Action End Gain Value (ActionEndValue)",
+    "行動終了時の上昇値です。": "The gain value added when an action ends.",
+    "こちらは１回だけです。": "This is applied only once.",
+    "ターン毎の再生値（RegenerateValue）": "Per-Turn Regeneration Value (RegenerateValue)",
+    "ターン毎の再生値です。": "The regeneration value applied each turn.",
+    "ダメージ時の上昇値（DamageValue）": "Damage Gain Value (DamageValue)",
+    "ダメージを受けた時の奥義ゲージ上昇値です。": "The Arts gauge value gained when taking damage.",
+    "例：50 * damage / a.mhp": "Example: 50 * damage / a.mhp",
+    "回避時の上昇値（EvadedValue）": "Evade Gain Value (EvadedValue)",
+    "攻撃を回避した時の奥義ゲージ上昇値です。": "The Arts gauge value gained when evading an attack.",
+    "仲間死亡時の上昇値（FriendsDeadValue）": "Ally Death Gain Value (FriendsDeadValue)",
+    "仲間が戦闘不能になった際のゲージ上昇値です。": "The gauge value gained when an ally becomes incapacitated.",
+    "敵撃破時の上昇値（DefeatEnemyValue）": "Enemy Defeat Gain Value (DefeatEnemyValue)",
+    "敵を撃破した際のゲージ上昇値です。": "The gauge value gained when defeating an enemy.",
+    "会心時の上昇値（CriticalValue）": "Critical Hit Gain Value (CriticalValue)",
+    "会心時のゲージ上昇値です。": "The gauge value gained on a critical hit.",
+    "消費ポイントの色（CostColor）": "Cost Point Color (CostColor)",
+    "奥義の消費ポイントの色です。": "The color of the Arts cost points.",
+    "システムカラーの番号を指定。": "Specify the system color number.",
+    "空欄なら消費非表示。": "If left blank, the cost is hidden.",
+    "満タン時のアニメ（ChargedAnimation）": "Animation When Full (ChargedAnimation)",
+    "奥義ゲージが満タンになった際のアニメーションです。": "The animation played when the Arts gauge becomes full.",
+    "満タン時Dynamicスキル（ChargedDynamicSkill）ver1.04": "Dynamic Skill When Full (ChargedDynamicSkill) ver1.04",
+    "DynamicMotionによる動作を入れると不具合が起きやすいので、基本的にはDynamicAnimationの処理だけで完結されることをオススメします。": "Since adding motions using DynamicMotion is likely to cause problems, I recommend generally handling everything with DynamicAnimation alone.",
+    "ラベル（Label）": "Label (Label)",
+    "表示するラベルです。": "The label to display.",
+    "色（左）（GaugeColor1）": "Color (Left) (GaugeColor1)",
+    "奥義ゲージの色（左）です。": "The left color of the Arts gauge.",
+    "システムカラーの番号を指定してください。": "Specify the system color number.",
+    "色（右）（GaugeColor2）": "Color (Right) (GaugeColor2)",
+    "奥義ゲージの色（右）です。": "The right color of the Arts gauge."
+  }
+}

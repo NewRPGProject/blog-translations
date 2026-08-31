@@ -1,0 +1,1693 @@
+{
+  "articleId": "484538732",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484538732.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "3b8503ce0c402aad3b780c4034d3bda96d8f60f4c68b98f3616fa5c3a57a859d",
+  "translatedAt": "2026-08-31T01:14:11.791Z",
+  "title": "Set Enemy Stats by Level and Percentage [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "敵の能力をレベルと百分率によって設定【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "cb6d4198f58cdf3df038ff920dcb021a5b027cf6a5f096d2b56eb8033a1be266",
+      "translation": "Set Enemy Stats by Level and Percentage [RPG Maker MZ & MV Plugin]",
+      "contextHash": "cb6d4198f58cdf3df038ff920dcb021a5b027cf6a5f096d2b56eb8033a1be266"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "データベースの職業能力値を基準とし、レベルと組み合わせることによって敵の能力を自動計算します。",
+      "sourceHash": "58cd3d4f51994e020356339bc9dfcba168423eced387f67d59cbf1d07d1fce96",
+      "translation": "Enemy stats are calculated automatically by using the class stats in the database as a baseline and combining them with the enemy's level.",
+      "contextHash": "58cd3d4f51994e020356339bc9dfcba168423eced387f67d59cbf1d07d1fce96"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "進行状況によって敵の能力値を変化させたい場合の他にも、単純に数値設定の手間を省きたい場合にも使えます。",
+      "sourceHash": "ce1f94d6c6dd39fa4c359f3f587fc0b27b29cb2147a323a50234f2e1497a1b63",
+      "translation": "In addition to changing enemy stats based on game progress, this can also be used to simply save the effort of setting numerical values.",
+      "contextHash": "ce1f94d6c6dd39fa4c359f3f587fc0b27b29cb2147a323a50234f2e1497a1b63"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "特に経験値については、次のレベルに必要な経験値を基準に自動で算出できます。",
+      "sourceHash": "77f9c5144fa045e97d078b46771b4ac830f1c04812fd7b2f6bcb12c2c5d9e486",
+      "translation": "In particular, EXP can be calculated automatically based on the EXP required to reach the next level.",
+      "contextHash": "77f9c5144fa045e97d078b46771b4ac830f1c04812fd7b2f6bcb12c2c5d9e486"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "これによりバランス調整の手間を軽減できます。",
+      "sourceHash": "0e9ca7c8941ffd3504dd5a54b9e3266d4e801e451148e635c0fece201a6354ab",
+      "translation": "This reduces the effort required for balance adjustments.",
+      "contextHash": "0e9ca7c8941ffd3504dd5a54b9e3266d4e801e451148e635c0fece201a6354ab"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the plugin ON in the plugin manager in RPG Maker.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EnemyPercentParams.js",
+      "sourceHash": "e5c54fe4f54cf2825cbcb50aa3bb7100bf5c0959cbe7d44f93524bca2a90fd3c",
+      "translation": "NRP_EnemyPercentParams.js ",
+      "contextHash": "7ad5bcf5a0652656b154a468a7c310eb18a0803823963742be018ec246826bf3"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ver1.03（2025/05/08）",
+      "sourceHash": "afde2f31eaff8c2ec5d07cbad2b82b4e03327df05c65686a9140de5d537877d5",
+      "translation": "ver1.03 (2025/05/08) ",
+      "contextHash": "7ad5bcf5a0652656b154a468a7c310eb18a0803823963742be018ec246826bf3"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/05/08（ver1.03）",
+      "sourceHash": "2ac3aa0a515fd1cb3f5617ea473bfbfb3974d31a709638cb6cacbfb84481eae2",
+      "translation": "2025/05/08 (ver1.03) ",
+      "contextHash": "2ac3aa0a515fd1cb3f5617ea473bfbfb3974d31a709638cb6cacbfb84481eae2"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2022/06/15 -> 2024/05/06（ver1.02 -> 1.022）",
+      "sourceHash": "cedb429d96cce69a21dfd0b30c873c890cd35a7e11355fa7ada84a0a4bec4be2",
+      "translation": "2022/06/15 -> 2024/05/06 (ver1.02 -> 1.022) ",
+      "contextHash": "cedb429d96cce69a21dfd0b30c873c890cd35a7e11355fa7ada84a0a4bec4be2"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "図鑑の経験値と金に対応できてなかったので修正。（ver1.021）",
+      "sourceHash": "6d3f8dc5919b9268202c2460c5603e2b49314ef9853e3d31a2bcdebbccf6c8a0",
+      "translation": "Fixed an issue where the plugin did not support the EXP and gold displayed in the bestiary. (ver1.021)",
+      "contextHash": "6d3f8dc5919b9268202c2460c5603e2b49314ef9853e3d31a2bcdebbccf6c8a0"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "敵レベルにマイナス値が設定できてしまう上に、パラメータが不正になる不具合修正。（2024/05/06 ver1.022）",
+      "sourceHash": "414e9a39ead9ce0389b47bd4883c1501965cd0f6477c924c21d2b0b32c9e529e",
+      "translation": "Fixed an issue where negative values could be set for enemy levels, causing invalid parameters. (2024/05/06 ver1.022)",
+      "contextHash": "414e9a39ead9ce0389b47bd4883c1501965cd0f6477c924c21d2b0b32c9e529e"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2022/06/14（ver1.01）",
+      "sourceHash": "d2018acd42707cfdf80b342aa3c2330ff1dfcf17eb9bb88240204bd7127d7804",
+      "translation": "2022/06/14 (ver1.01) ",
+      "contextHash": "d2018acd42707cfdf80b342aa3c2330ff1dfcf17eb9bb88240204bd7127d7804"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "『レベルランダム幅の変数』が未指定の場合、敵レベルの初期値が0になってしまう不具合修正。",
+      "sourceHash": "5161c75af4961f7f28f5b6ffc5cbcb65be7fdc8b4f4d313bdb2ffa6630e9c3bd",
+      "translation": "Fixed an issue where the initial enemy level became 0 when 'Level Random Range Variable' was not specified.",
+      "contextHash": "5161c75af4961f7f28f5b6ffc5cbcb65be7fdc8b4f4d313bdb2ffa6630e9c3bd"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "敵レベルが最低でも1になるように修正。",
+      "sourceHash": "254dd84a2a8ef45176c8536b7be73ec3957c179d653aec76a1639adb9e9933b0",
+      "translation": "Adjusted enemy levels so that they are at least 1.",
+      "contextHash": "254dd84a2a8ef45176c8536b7be73ec3957c179d653aec76a1639adb9e9933b0"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "※0の場合は経験値が異常値になるため。",
+      "sourceHash": "38ffe5c9b55c616e54fba3d7241c1e6a8c2e9aafe8361988c120f042030cb6a7",
+      "translation": "※Because a value of 0 causes EXP to become abnormal.",
+      "contextHash": "38ffe5c9b55c616e54fba3d7241c1e6a8c2e9aafe8361988c120f042030cb6a7"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/11/26（ver1.00）",
+      "sourceHash": "a3bb58405aeaa327da5f1f33a3a6b5f13a4001436d07fe8e514c79cd66ddb86b",
+      "translation": "2021/11/26 (ver1.00) ",
+      "contextHash": "a3bb58405aeaa327da5f1f33a3a6b5f13a4001436d07fe8e514c79cd66ddb86b"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "まず、敵の能力の基準となる職業を設定し、プラグインパラメータで指定します。",
+      "sourceHash": "a578bc875e15312c688d68be5f0daf77c8be4edc5d9c8f620b1c2568f599de70",
+      "translation": "First, set the class that serves as the basis for enemy stats, and specify it in the plugin parameter.",
+      "contextHash": "a578bc875e15312c688d68be5f0daf77c8be4edc5d9c8f620b1c2568f599de70"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※能力だけでなく経験値曲線も取得経験値の計算に使用されます。",
+      "sourceHash": "d5a369cc7eed1beed266f1215f44ea913673a45347ae5d3b007052de4e1eaea7",
+      "translation": "※The EXP curve, as well as the stats, is used to calculate the EXP gained.",
+      "contextHash": "d5a369cc7eed1beed266f1215f44ea913673a45347ae5d3b007052de4e1eaea7"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "次に敵の能力に１００を基準にした値を設定します。ここでの１００は１００％の意味になります。",
+      "sourceHash": "bc75e59aed893e2476cbbb994310325512fe00a60281aaaf8ef9a40bf682d374",
+      "translation": "Next, set the enemy's stats using 100 as the baseline. Here, 100 means 100%.",
+      "contextHash": "bc75e59aed893e2476cbbb994310325512fe00a60281aaaf8ef9a40bf682d374"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "例えば、攻撃力に１１０を設定すれば、基準値の１１０％の値になります。",
+      "sourceHash": "656654a94db942f9d719cba107eebb17ee01c1c4b4462cfbbc1c3399f919a767",
+      "translation": "For example, setting Attack to 110 makes it 110% of the baseline value.",
+      "contextHash": "656654a94db942f9d719cba107eebb17ee01c1c4b4462cfbbc1c3399f919a767"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "さらに敵に対してレベルを設定します。",
+      "sourceHash": "83a60925b0e9e344cb023c6a718a5849f842892aea4a727d94b6248be0219ccd",
+      "translation": "Then, set a level for the enemy.",
+      "contextHash": "83a60925b0e9e344cb023c6a718a5849f842892aea4a727d94b6248be0219ccd"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "プラグインパラメータで指定した変数に値を代入することで、基準となるレベルを設定可能です。",
+      "sourceHash": "ae467d22b44d7c9795205094733e83d02de2ec23034f92559b91f946cf4bc342",
+      "translation": "You can set the baseline level by assigning a value to the variable specified in the plugin parameter.",
+      "contextHash": "ae467d22b44d7c9795205094733e83d02de2ec23034f92559b91f946cf4bc342"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "場所や進行状況によって基準レベルを変更すれば、敵の強さを変動させることができるようになります。",
+      "sourceHash": "d8364798070083b2b6bebda0c2c8300967da068c71b41371046fea4a566efbc2",
+      "translation": "By changing the baseline level according to the location or game progress, you can vary the strength of enemies.",
+      "contextHash": "d8364798070083b2b6bebda0c2c8300967da068c71b41371046fea4a566efbc2"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "また、同じ要領で変数によって、レベルのランダム幅も設定できます。",
+      "sourceHash": "9036c9a91e7ff3e07697cd477d4e94ba0f97bf4a6b453108465174b93d8d2e72",
+      "translation": "Similarly, you can also set the random level range using a variable.",
+      "contextHash": "9036c9a91e7ff3e07697cd477d4e94ba0f97bf4a6b453108465174b93d8d2e72"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "もちろん、敵毎に固定値を設定しても構いません。",
+      "sourceHash": "a0515815358604b19a42d38c41755c54f8a19828fd8193441b8c23d90b54e5e3",
+      "translation": "Of course, you can also set a fixed value for each enemy.",
+      "contextHash": "a0515815358604b19a42d38c41755c54f8a19828fd8193441b8c23d90b54e5e3"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "柔軟な設定が可能ですので、以下の『敵キャラのメモ欄』を参照してください。",
+      "sourceHash": "c6c4f07dad4cedc0c189e92e1fab2f7cfdff97eb32d97cb39b1b45ee39dfb973",
+      "translation": "Since flexible settings are available, refer to the 'Enemy Note Field' below.",
+      "contextHash": "c6c4f07dad4cedc0c189e92e1fab2f7cfdff97eb32d97cb39b1b45ee39dfb973"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "敵キャラのメモ欄（Note of Enemies）",
+      "sourceHash": "b274f85ded5086cc11d9797be5f401d2a3af33520b62b538f77b6629febda530",
+      "translation": "Enemy Note Field (Note of Enemies)",
+      "contextHash": "b274f85ded5086cc11d9797be5f401d2a3af33520b62b538f77b6629febda530"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "敵のレベルを設定します。",
+      "sourceHash": "6919ea04835984fcd50646dda61d670d6787efc1c99b7a485eae65aad09b43c3",
+      "translation": "Sets the enemy's level.",
+      "contextHash": "6919ea04835984fcd50646dda61d670d6787efc1c99b7a485eae65aad09b43c3"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "この値は基準レベルよりも優先されます。",
+      "sourceHash": "2ad40de341f55a9c96596a5d99b8232f7d8634efc03a6e8822018c8fef2c46a7",
+      "translation": "This value takes priority over the baseline level.",
+      "contextHash": "2ad40de341f55a9c96596a5d99b8232f7d8634efc03a6e8822018c8fef2c46a7"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "また、以下のように基準レベルを参照することも可能です。",
+      "sourceHash": "44b9562da82775ec21b0958b07147a6fe65906e5a75319882d8716179122f360",
+      "translation": "You can also refer to the baseline level as shown below.",
+      "contextHash": "44b9562da82775ec21b0958b07147a6fe65906e5a75319882d8716179122f360"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "以下はさらに基準レベルにランダム幅を追加したものです。",
+      "sourceHash": "d4ab765eb756cec40a8ff3597f9dc706accd1dee123d61e42e8cac1faff43d46",
+      "translation": "The following also adds a random range to the baseline level.",
+      "contextHash": "d4ab765eb756cec40a8ff3597f9dc706accd1dee123d61e42e8cac1faff43d46"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ボス戦だけはランダム幅をなくしたいなどの場合もあると思いますので、使い分けてください。",
+      "sourceHash": "b889fb960347bae73096a1a68492c1eb6caa9bc7380b046cda60feecda7957a7",
+      "translation": "You may want to remove the random range only for boss battles, for example, so use these options accordingly.",
+      "contextHash": "b889fb960347bae73096a1a68492c1eb6caa9bc7380b046cda60feecda7957a7"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "能力値の基準となる職業を変更します。?がＩＤです。",
+      "sourceHash": "129e2c0add477b65b52a061b1fab4f80afe8992beb11f3dd6aade7b5982bd57b",
+      "translation": "Changes the class used as the basis for the stats. ? is the ID.",
+      "contextHash": "129e2c0add477b65b52a061b1fab4f80afe8992beb11f3dd6aade7b5982bd57b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "経験値と所持金（EXP & Gold）",
+      "sourceHash": "26b172b7ffc442cf53f5e1f126c65212494fbedbc1307d2fdd6070120a939711",
+      "translation": "EXP and Gold (EXP & Gold)",
+      "contextHash": "26b172b7ffc442cf53f5e1f126c65212494fbedbc1307d2fdd6070120a939711"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "経験値と所持金の基準値については職業データから単純取得できないため、以下の数式で決定しています。",
+      "sourceHash": "232d0d4b91b4e35107fe52702af44b7a567be49da16a866dcbae87302d41ecb7",
+      "translation": "Because the baseline values for EXP and gold cannot be obtained directly from the class data, they are determined using the following formulas.",
+      "contextHash": "232d0d4b91b4e35107fe52702af44b7a567be49da16a866dcbae87302d41ecb7"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "経験値：1 + 次のレベルまでの経験値 / 30",
+      "sourceHash": "a98ba81b24df1ae31dc6352a32fbe0663f67a87e689ae802f2a8c1e202104555",
+      "translation": "EXP: 1 + EXP to Next Level / 30",
+      "contextHash": "a98ba81b24df1ae31dc6352a32fbe0663f67a87e689ae802f2a8c1e202104555"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "要するに敵とアクターのレベルが同じ場合、３０体ほど倒せばレベルが上がる計算です。",
+      "sourceHash": "b650bef54b9eaaa022e9ec0c2e2210df53d970715db930baf385f321dd545b4d",
+      "translation": "In short, if the enemy and actor are the same level, defeating about 30 of them will be enough to level up.",
+      "contextHash": "b650bef54b9eaaa022e9ec0c2e2210df53d970715db930baf385f321dd545b4d"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "自動で計算してくれるのでとても便利です。",
+      "sourceHash": "2497652b4ab09e59d5afc98889dec0fd41612e609b5f0a8ea5d258c238e95913",
+      "translation": "It is very convenient because the values are calculated automatically.",
+      "contextHash": "2497652b4ab09e59d5afc98889dec0fd41612e609b5f0a8ea5d258c238e95913"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "※最初の1は低レベル用の調整です。",
+      "sourceHash": "54fd978ebaaecbb0c0f6f548d01a7b01c2c4568b3506178d02f16d8eb554cc76",
+      "translation": "※The initial 1 is an adjustment for low levels.",
+      "contextHash": "54fd978ebaaecbb0c0f6f548d01a7b01c2c4568b3506178d02f16d8eb554cc76"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "所持金：5 + （レベル * レベル） / 2",
+      "sourceHash": "17828b6a5b322b086292a1477b2f5e1a471b7834aa32e257709984d5ecd56152",
+      "translation": "Gold: 5 + (Level * Level) / 2",
+      "contextHash": "17828b6a5b322b086292a1477b2f5e1a471b7834aa32e257709984d5ecd56152"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "レベルの２乗に比例する数式です。",
+      "sourceHash": "b2ba6b8ad4c35734ed86a5163cc8226051d3bfa1c4da71e1b8674c0229bec2cd",
+      "translation": "This formula is proportional to the square of the level.",
+      "contextHash": "b2ba6b8ad4c35734ed86a5163cc8226051d3bfa1c4da71e1b8674c0229bec2cd"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "数式はプラグインパラメータで調整できます。",
+      "sourceHash": "233b61c808671a9538ff84b92a2cdb855576c598ff7a182bfe5e8bac435532f3",
+      "translation": "The formulas can be adjusted in the plugin parameters.",
+      "contextHash": "233b61c808671a9538ff84b92a2cdb855576c598ff7a182bfe5e8bac435532f3"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "空欄にすれば、エディタの設定値をそのまま使用することもできます。",
+      "sourceHash": "c3b30ce0d55ced05af64ca002fbf5ab6911a6d2fc7ccaba5f5e2f9f2c32e5a1b",
+      "translation": "If left blank, you can use the values set in the editor as-is.",
+      "contextHash": "c3b30ce0d55ced05af64ca002fbf5ab6911a6d2fc7ccaba5f5e2f9f2c32e5a1b"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "能力値補正（Adjust Variable）",
+      "sourceHash": "5a3e6da43e0b58aa51941f82fc85c85d4f32c57f35acf74dfd434e77a254be92",
+      "translation": "Stat Adjustment (Adjust Variable)",
+      "contextHash": "5a3e6da43e0b58aa51941f82fc85c85d4f32c57f35acf74dfd434e77a254be92"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "プラグインパラメータで能力値補正を行う変数を設定できます。",
+      "sourceHash": "d53f3e1bc31903d8d770db4ac749fdb50c3e292c013271cd3a1f006e299e181e",
+      "translation": "You can set a variable used to adjust stats in the plugin parameters.",
+      "contextHash": "d53f3e1bc31903d8d770db4ac749fdb50c3e292c013271cd3a1f006e299e181e"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "難易度設定や細かいバランス調整にご利用ください。",
+      "sourceHash": "bb8549e5e9c898e98bc9d57e12b8cbfc0389db9c2003189609e04e87d8862daf",
+      "translation": "Use it for difficulty settings and fine-tuning the balance.",
+      "contextHash": "bb8549e5e9c898e98bc9d57e12b8cbfc0389db9c2003189609e04e87d8862daf"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "b.levelで参照できる値や、経験値や所持金の計算にも影響を与えません。",
+      "sourceHash": "9abe9d38e4bcf39b389ef2c3595b1b87700f145384928f42733243af33517628",
+      "translation": "It does not affect the value referenced by b.level or the calculation of EXP and gold.",
+      "contextHash": "9abe9d38e4bcf39b389ef2c3595b1b87700f145384928f42733243af33517628"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "※マイナス値も可能ですが、レベル1を下回ることはできません。",
+      "sourceHash": "0275ddd8ad8ac0a7501b82bc63bb3d7813bd963257e3b207fb5ad21bc5894afa",
+      "translation": "※Negative values are also possible, but the level cannot be reduced below 1.",
+      "contextHash": "0275ddd8ad8ac0a7501b82bc63bb3d7813bd963257e3b207fb5ad21bc5894afa"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "戦闘テスト（Battle Test）",
+      "sourceHash": "417a38b8382145ee5ee440c79dbc28668e7872dcc7d2b1dd956aaf2736f1ce7d",
+      "translation": "Battle Test (Battle Test)",
+      "contextHash": "417a38b8382145ee5ee440c79dbc28668e7872dcc7d2b1dd956aaf2736f1ce7d"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "戦闘テスト開始時に呼び出すコモンイベントを、プラグインパラメータで設定可能です。",
+      "sourceHash": "df2b7d45af69e2165a0644a252a9c08f116268ac753ecda4a899530b24f94f3a",
+      "translation": "You can set the Common Event to call when starting a battle test using a plugin parameter.",
+      "contextHash": "df2b7d45af69e2165a0644a252a9c08f116268ac753ecda4a899530b24f94f3a"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ここで基準レベル等の設定をすれば、敵の能力にも反映されます。",
+      "sourceHash": "1a1c53ffa3ee7cfaeba77c0e3d5a3584030fd72c6b9223276d423ca38dbf20e6",
+      "translation": "Settings such as the base level configured here will also be reflected in the enemy's abilities.",
+      "contextHash": "1a1c53ffa3ee7cfaeba77c0e3d5a3584030fd72c6b9223276d423ca38dbf20e6"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "戦闘テスト時に設定したアクターの能力も参照できます。",
+      "sourceHash": "4124fc258fd9edb0d3e2a4f5c4240f61fdde9d23efeab29c6940ebd0c71c9a69",
+      "translation": "You can also reference the abilities of the actor configured for the battle test.",
+      "contextHash": "4124fc258fd9edb0d3e2a4f5c4240f61fdde9d23efeab29c6940ebd0c71c9a69"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "例えば、主人公のレベルを参照して、基準レベルを設定するといった運用を想定しています。",
+      "sourceHash": "9e98e398b8e4e6c0dc579fa6083d6f1f433d8b378b6cf079ae75adef71ac8838",
+      "translation": "For example, this is intended to allow you to reference the protagonist's level and use it to set the base level.",
+      "contextHash": "9e98e398b8e4e6c0dc579fa6083d6f1f433d8b378b6cf079ae75adef71ac8838"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "図鑑系プラグインとの併用について（For EnemyBook）",
+      "sourceHash": "ae7362d0e20825c3d54d3e171275f47b8b5d9c75321572b2ca94ed95c08113f2",
+      "translation": "Using This with Monster Encyclopedia Plugins (For EnemyBook)",
+      "contextHash": "ae7362d0e20825c3d54d3e171275f47b8b5d9c75321572b2ca94ed95c08113f2"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "外部のモンスター図鑑系プラグインと併用する場合は注意が必要です。",
+      "sourceHash": "24cfc29d31a9875e8e1939ccb0aeefa8b0394144d4d49e613cc7e62912295043",
+      "translation": "Care is required when using this with an external monster encyclopedia plugin.",
+      "contextHash": "24cfc29d31a9875e8e1939ccb0aeefa8b0394144d4d49e613cc7e62912295043"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "図鑑で敵キャラデータを表示した場合も、現在の設定レベルでのパラメータが表示されるためです。",
+      "sourceHash": "7464af5631c385a37986b002f0b4a9ba550138f85ea2f99321b13e823020b660",
+      "translation": "This is because even when enemy data is displayed in the encyclopedia, the parameters for the currently configured level are displayed.",
+      "contextHash": "7464af5631c385a37986b002f0b4a9ba550138f85ea2f99321b13e823020b660"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "※ABMZ_EnemyBook.jsなどEnemyBook.js（ＭＶのＤＬＣプラグイン）に準拠したプラグインを想定しています。",
+      "sourceHash": "ff6f02993895d8c2df180bec4dbccd000ed9322184a2275ef103d05734e3a9b9",
+      "translation": "※This is intended for plugins based on EnemyBook.js (the MV DLC plugin), such as ABMZ_EnemyBook.js.",
+      "contextHash": "ff6f02993895d8c2df180bec4dbccd000ed9322184a2275ef103d05734e3a9b9"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "レベルが常に固定値ならば問題ないのですが、基準レベルやランダム幅を利用している場合はそれらによる変動まで反映されてしまいます。",
+      "sourceHash": "7d6a5f5ad1dfb14dd47b5f48eb56552369ba1415ecc3d87cdd8b29e59780010a",
+      "translation": "There is no problem if the level is always fixed, but if a base level or random range is used, variations resulting from them will also be reflected.",
+      "contextHash": "7d6a5f5ad1dfb14dd47b5f48eb56552369ba1415ecc3d87cdd8b29e59780010a"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "暫定的な対処として、図鑑表示中は％値をそのまま表示できるようにしています。",
+      "sourceHash": "cfb25c0dee62fe414b7cedc8e914c173245d9e25ac6529731e31965e71e6eb6c",
+      "translation": "As a temporary solution, percent values are displayed as-is while viewing the encyclopedia.",
+      "contextHash": "cfb25c0dee62fe414b7cedc8e914c173245d9e25ac6529731e31965e71e6eb6c"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "『魔物図鑑に対応』をオンにすると有効になります。",
+      "sourceHash": "980998f0004cc2f0a23b83374271af96fe215807dc7c5ca8b4dd1df413e72978",
+      "translation": "This is enabled when “Support Monster Encyclopedia” is turned on.",
+      "contextHash": "980998f0004cc2f0a23b83374271af96fe215807dc7c5ca8b4dd1df413e72978"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "※本当は数値の後ろに％文字を付けたかったのですが、こちらでは困難でした。",
+      "sourceHash": "27ccf498a990def887e351f7c9a3a17f34b836ce934340ee861f8bcb1486d643",
+      "translation": "※I originally wanted to add a % symbol after the value, but that was difficult to do here.",
+      "contextHash": "27ccf498a990def887e351f7c9a3a17f34b836ce934340ee861f8bcb1486d643"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "図鑑プラグイン側を編集したほうが現実的と思われます。",
+      "sourceHash": "39de4bec30ea49842ecadc80640c7b5e3777ee710746926e5320c8eed40b8eba",
+      "translation": "Editing the encyclopedia plugin itself would probably be more practical.",
+      "contextHash": "39de4bec30ea49842ecadc80640c7b5e3777ee710746926e5320c8eed40b8eba"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "なお、この仕様は戦闘中には対応しておらず、現在値がそのまま表示されます。",
+      "sourceHash": "264e7821027462021b829cbc17d4d108ca2d2f49ba6e0c4102f4d8abd4ff056f",
+      "translation": "This feature does not apply during battle; the current values are displayed as-is.",
+      "contextHash": "264e7821027462021b829cbc17d4d108ca2d2f49ba6e0c4102f4d8abd4ff056f"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "該当のプラグインの中には、戦闘中に敵の能力値を調べる機能もありますが、その際はそのほうが都合が良いと思われます。",
+      "sourceHash": "eb723f7f2affef9e183d72a8aa45d1067c02878f590c9109f1f0a3560a417f33",
+      "translation": "Some of these plugins also have a function for checking enemy parameters during battle, in which case displaying the current values is probably more convenient.",
+      "contextHash": "eb723f7f2affef9e183d72a8aa45d1067c02878f590c9109f1f0a3560a417f33"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "……そもそも、戦闘時は図鑑を開いているという判定を得ること自体が難しいという事情もあります。",
+      "sourceHash": "e0f77f601c15fec6e75859bef72a125c55674b8f2eae5e45e753b6884a077a2a",
+      "translation": "...In the first place, it is also difficult to determine whether the encyclopedia is open during battle.",
+      "contextHash": "e0f77f601c15fec6e75859bef72a125c55674b8f2eae5e45e753b6884a077a2a"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "他にも、簡単な対処として図鑑側でパラメータを表示しないという方法もありますので、用途に合わせて調整してください。",
+      "sourceHash": "0cc29cf229087f24e2584eea6a953dd11832fa9693705560c4bcbf2ac2075a9a",
+      "translation": "Another simple solution is to not display parameters in the encyclopedia, so please adjust it to suit your intended use.",
+      "contextHash": "0cc29cf229087f24e2584eea6a953dd11832fa9693705560c4bcbf2ac2075a9a"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "基準となる職業（BaseClass）",
+      "sourceHash": "18f0aba33cd5c340b4a2a1a10fcf07d360a0f2919fdeb742f17ba60e715026a3",
+      "translation": "Base Class (BaseClass)",
+      "contextHash": "18f0aba33cd5c340b4a2a1a10fcf07d360a0f2919fdeb742f17ba60e715026a3"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "能力値の基準となる職業です。",
+      "sourceHash": "84e740e00e20fb9c6f83d7ff65ff2007f54d99a78e95211340e054f1fe85fdfb",
+      "translation": "This is the class used as the basis for ability values.",
+      "contextHash": "84e740e00e20fb9c6f83d7ff65ff2007f54d99a78e95211340e054f1fe85fdfb"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "基準レベルの変数（VariableBaseLevel）",
+      "sourceHash": "2a2ef57f4b1a8b8fdff5b41bbe4f42229e47a95df86a059ab1058ae77697eb40",
+      "translation": "Base Level Variable (VariableBaseLevel)",
+      "contextHash": "2a2ef57f4b1a8b8fdff5b41bbe4f42229e47a95df86a059ab1058ae77697eb40"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "基準レベルを指定する変数です。",
+      "sourceHash": "7d1d7b7928bbcc7584196091256033634c5cb8466ea6e5bd0fac5b34fd8164bb",
+      "translation": "This variable specifies the base level.",
+      "contextHash": "7d1d7b7928bbcc7584196091256033634c5cb8466ea6e5bd0fac5b34fd8164bb"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "レベルランダム幅の変数（VariableRandomLevel）",
+      "sourceHash": "1065b1b9810faba500bc2a42d8896027529249af60bba76a7257dc3bb24495c7",
+      "translation": "Level Random Range Variable (VariableRandomLevel)",
+      "contextHash": "1065b1b9810faba500bc2a42d8896027529249af60bba76a7257dc3bb24495c7"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "レベルのランダム幅を指定する変数です。",
+      "sourceHash": "3335dea0868a3ee8fc5e140308f8d98737ac90230b3373348d51f68039cf08bd",
+      "translation": "This variable specifies the level's random range.",
+      "contextHash": "3335dea0868a3ee8fc5e140308f8d98737ac90230b3373348d51f68039cf08bd"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "値が2の場合、基準レベルに0~2が加算されます。",
+      "sourceHash": "753fbfb5555cb335474bd2a2399f0100a0a6a4f3fe4c4ee7bb5e52812475a7f5",
+      "translation": "If the value is 2, a value from 0 to 2 is added to the base level.",
+      "contextHash": "753fbfb5555cb335474bd2a2399f0100a0a6a4f3fe4c4ee7bb5e52812475a7f5"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "基準経験値（BaseExp）",
+      "sourceHash": "a40da09c4896490987113cd46ddb28537364ddc4e622e98e533b72d11d524f2e",
+      "translation": "Base EXP (BaseExp)",
+      "contextHash": "a40da09c4896490987113cd46ddb28537364ddc4e622e98e533b72d11d524f2e"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "基準となる経験値を求める数式です。",
+      "sourceHash": "a8c7faa8485241f9f8d489bb5c598623d136a90aef5dfba046f196d9023958dd",
+      "translation": "This is the formula used to calculate the base EXP.",
+      "contextHash": "a8c7faa8485241f9f8d489bb5c598623d136a90aef5dfba046f196d9023958dd"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "a.nextRequiredExp()で次のレベルまでのＥＸＰ",
+      "sourceHash": "ae126f6ccbba5f65af82a4a139129a118e064786dda46627f91bfcf680ceab81",
+      "translation": "EXP required to reach the next level with a.nextRequiredExp()",
+      "contextHash": "ae126f6ccbba5f65af82a4a139129a118e064786dda46627f91bfcf680ceab81"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "基準所持金（BaseGold）",
+      "sourceHash": "0619c8dfb9584d5cd5e3e0e1da50d1bd148be5cd7924743e4c5bd47a280ed6ed",
+      "translation": "Base Gold (BaseGold)",
+      "contextHash": "0619c8dfb9584d5cd5e3e0e1da50d1bd148be5cd7924743e4c5bd47a280ed6ed"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "基準となる所持金を求める数式です。",
+      "sourceHash": "98a52ebd7a36800159936b3eaf8d6f2f5a9581c94208db5622a16736a17e1f26",
+      "translation": "This is the formula used to calculate the base gold.",
+      "contextHash": "98a52ebd7a36800159936b3eaf8d6f2f5a9581c94208db5622a16736a17e1f26"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "戦闘テスト時コモンイベント（TestCommonEvent）",
+      "sourceHash": "d375240cb1cca384ff1a3f9252674bb48ba936cd09b30efbf9cee7e15a7a8adf",
+      "translation": "Common Event During Battle Test (TestCommonEvent)",
+      "contextHash": "d375240cb1cca384ff1a3f9252674bb48ba936cd09b30efbf9cee7e15a7a8adf"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "戦闘テスト前に実行されるコモンイベントです。",
+      "sourceHash": "6dd328a63850f8bb824a77a3b3d06bcc1179d994a932442a46019b4417a671ee",
+      "translation": "This Common Event is executed before a battle test.",
+      "contextHash": "6dd328a63850f8bb824a77a3b3d06bcc1179d994a932442a46019b4417a671ee"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "基準レベルの設定などにご活用ください。",
+      "sourceHash": "5888b903b2667eb048af18ccbf0236c87dc97393f8f5f2574c026455d6053950",
+      "translation": "Use it for setting the base level and other purposes.",
+      "contextHash": "5888b903b2667eb048af18ccbf0236c87dc97393f8f5f2574c026455d6053950"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "魔物図鑑に対応（SupportEnemyBook）ver1.02",
+      "sourceHash": "dfdfce9534f692e759c57fe0d581e08179e5b601a1cb3535d2283004a5ceb334",
+      "translation": "Support Monster Encyclopedia (SupportEnemyBook) ver1.02",
+      "contextHash": "dfdfce9534f692e759c57fe0d581e08179e5b601a1cb3535d2283004a5ceb334"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "モンスター図鑑と併用時、実際のパラメータではなく％値を表示するようにします。",
+      "sourceHash": "9467a0f91211372dd142e1c57fca8c96ab4eae5bba99bdc860c9ef7c9da6e959",
+      "translation": "When used with a monster encyclopedia, displays percent values instead of the actual parameters.",
+      "contextHash": "9467a0f91211372dd142e1c57fca8c96ab4eae5bba99bdc860c9ef7c9da6e959"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "能力値補正のパラメータ（AdjustVariable）ver1.03",
+      "sourceHash": "2a5fe255d67705ca646c68b3826d11f082abbf471ba7dd18683505169b31c36b",
+      "translation": "Ability Value Adjustment Parameters (AdjustVariable) ver1.03",
+      "contextHash": "2a5fe255d67705ca646c68b3826d11f082abbf471ba7dd18683505169b31c36b"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "能力値を補正するための変数を設定します。",
+      "sourceHash": "7474f26b745d82fafeaf58183c45e9ad4d589f21f14467c45ae4773dcd7e7906",
+      "translation": "Set the variables used to adjust ability values.",
+      "contextHash": "7474f26b745d82fafeaf58183c45e9ad4d589f21f14467c45ae4773dcd7e7906"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "能力値レベル変数（ParamLevelVariable）",
+      "sourceHash": "8b60bf839ed1aea54204c39b715569106b042dbdec401abf350b45678477cdf5",
+      "translation": "Ability Value Level Variable (ParamLevelVariable)",
+      "contextHash": "8b60bf839ed1aea54204c39b715569106b042dbdec401abf350b45678477cdf5"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "指定したレベル分、能力を上昇させます。",
+      "sourceHash": "873216996528158883697675b0436e436c7ba264d150ba486561e7d73a190698",
+      "translation": "Raises abilities by the specified number of levels.",
+      "contextHash": "873216996528158883697675b0436e436c7ba264d150ba486561e7d73a190698"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "経験値などには影響を与えません。",
+      "sourceHash": "34dfe115e63d5cdac2582aec47685c29192df71fd84634aa2381f79a073ea5b9",
+      "translation": "This does not affect EXP or other values.",
+      "contextHash": "34dfe115e63d5cdac2582aec47685c29192df71fd84634aa2381f79a073ea5b9"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "ＨＰ補正変数（HpRateVariable）",
+      "sourceHash": "84d85540be23bc2e321376b249bb12648ce0f9cdf209d9e3097e669df58ee091",
+      "translation": "HP Adjustment Variable (HpRateVariable)",
+      "contextHash": "84d85540be23bc2e321376b249bb12648ce0f9cdf209d9e3097e669df58ee091"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "最大ＨＰの補正値を設定する変数です。",
+      "sourceHash": "864dea9deeba7f2459f9f736af94cd339b36f4d97a370eef799dff6651d8bfd3",
+      "translation": "This variable sets the adjustment value for maximum HP.",
+      "contextHash": "864dea9deeba7f2459f9f736af94cd339b36f4d97a370eef799dff6651d8bfd3"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "ＭＰ補正変数（MpRateVariable）",
+      "sourceHash": "58d7b7d7fa8450cded2a9dfc87b9f6d002f1697dec4e3708e6a06c70949aedcb",
+      "translation": "MP Adjustment Variable (MpRateVariable)",
+      "contextHash": "58d7b7d7fa8450cded2a9dfc87b9f6d002f1697dec4e3708e6a06c70949aedcb"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "最大ＭＰの補正値を設定する変数です。",
+      "sourceHash": "b943d22b62b67ae62a359a9d23e2941e042cf9befc5fbc6efd0e6a321abc84de",
+      "translation": "This variable sets the adjustment value for maximum MP.",
+      "contextHash": "b943d22b62b67ae62a359a9d23e2941e042cf9befc5fbc6efd0e6a321abc84de"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "攻撃力補正変数（AtkRateVariable）",
+      "sourceHash": "3408917c1b6657049a11c7b6b725f102d316080dd025258ac1116a2acb38bd91",
+      "translation": "Attack Adjustment Variable (AtkRateVariable)",
+      "contextHash": "3408917c1b6657049a11c7b6b725f102d316080dd025258ac1116a2acb38bd91"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "攻撃力の補正値を設定する変数です。",
+      "sourceHash": "f0760cb392eaaa375fdb323ec640a1b52fbcc989ea17b89e2e5894efcb5a0826",
+      "translation": "This variable sets the adjustment value for attack.",
+      "contextHash": "f0760cb392eaaa375fdb323ec640a1b52fbcc989ea17b89e2e5894efcb5a0826"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "防御力補正変数（DefRateVariable）",
+      "sourceHash": "b72921d8e2ea6098e165ebb83c773acf384fe236a5a82bb89d6b8fa2cac5ad78",
+      "translation": "Defense Adjustment Variable (DefRateVariable)",
+      "contextHash": "b72921d8e2ea6098e165ebb83c773acf384fe236a5a82bb89d6b8fa2cac5ad78"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "防御力の補正値を設定する変数です。",
+      "sourceHash": "c8b8785f2cf259a018b78894e771abc53633a6ebf7fce6048d8dcb41133d2987",
+      "translation": "This variable sets the defense rate.",
+      "contextHash": "c8b8785f2cf259a018b78894e771abc53633a6ebf7fce6048d8dcb41133d2987"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "魔法力補正変数（MatRateVariable）",
+      "sourceHash": "817974b4e4a52605764ae214bc40c30ed9d3cbf3a0c603f681bb96f079493b4e",
+      "translation": "Magic Attack Rate Variable (MatRateVariable)",
+      "contextHash": "817974b4e4a52605764ae214bc40c30ed9d3cbf3a0c603f681bb96f079493b4e"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "魔法力の補正値を設定する変数です。",
+      "sourceHash": "8527a6da93ce18919ffb3d07ef644e20db97529652728ea84ba1705d9cae5588",
+      "translation": "This variable sets the magic attack rate.",
+      "contextHash": "8527a6da93ce18919ffb3d07ef644e20db97529652728ea84ba1705d9cae5588"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "魔法防御補正変数（MdfRateVariable）",
+      "sourceHash": "8929b82a873c7a14127a6ba653b30bddffbab812778914404fe706b8117b7afd",
+      "translation": "Magic Defense Rate Variable (MdfRateVariable)",
+      "contextHash": "8929b82a873c7a14127a6ba653b30bddffbab812778914404fe706b8117b7afd"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "魔法防御の補正値を設定する変数です。",
+      "sourceHash": "61d64c00084ff5c307c0d3ea96944786fa3fd6377a415e335f98c59ed3f01945",
+      "translation": "This variable sets the magic defense rate.",
+      "contextHash": "61d64c00084ff5c307c0d3ea96944786fa3fd6377a415e335f98c59ed3f01945"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "敏捷性補正変数（AgiRateVariable）",
+      "sourceHash": "f1e9a3132b3adcaf737571b1dd5d234c8409a81d685cc07aa4bd23a5aee7fe1c",
+      "translation": "Agility Rate Variable (AgiRateVariable)",
+      "contextHash": "f1e9a3132b3adcaf737571b1dd5d234c8409a81d685cc07aa4bd23a5aee7fe1c"
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "敏捷性の補正値を設定する変数です。",
+      "sourceHash": "2e9406c14356369bb13bbe1384e21715fee625ea8507c8908fd8f56c4a0f2a5d",
+      "translation": "This variable sets the agility rate.",
+      "contextHash": "2e9406c14356369bb13bbe1384e21715fee625ea8507c8908fd8f56c4a0f2a5d"
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "運補正変数（LukRateVariable）",
+      "sourceHash": "71dff9a6fd153a0ef8d9b20cc8b748e098563b551ebd69589771603bf2994537",
+      "translation": "Luck Rate Variable (LukRateVariable)",
+      "contextHash": "71dff9a6fd153a0ef8d9b20cc8b748e098563b551ebd69589771603bf2994537"
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "運の補正値を設定する変数です。",
+      "sourceHash": "5bc4da568a2f6e69188392227c5d9f6c9cd44b3cda4c03c66f11411dceacae1e",
+      "translation": "This variable sets the luck rate.",
+      "contextHash": "5bc4da568a2f6e69188392227c5d9f6c9cd44b3cda4c03c66f11411dceacae1e"
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-075",
+      "type": "heading",
+      "source": "経験値補正変数（ExpRateVariable）",
+      "sourceHash": "455c7848e2ac91ac42554db2c4273e0a892571515aa9b10ce73df9dda01c21b7",
+      "translation": "Experience Rate Variable (ExpRateVariable)",
+      "contextHash": "455c7848e2ac91ac42554db2c4273e0a892571515aa9b10ce73df9dda01c21b7"
+    },
+    {
+      "id": "heading-076",
+      "type": "heading",
+      "source": "経験値の補正値を設定する変数です。",
+      "sourceHash": "bbb85ff7d3fb1e51f0d5e7f9c4179fa6f4e21b2f54268b3e573d6df10dfe21af",
+      "translation": "This variable sets the experience rate.",
+      "contextHash": "bbb85ff7d3fb1e51f0d5e7f9c4179fa6f4e21b2f54268b3e573d6df10dfe21af"
+    },
+    {
+      "id": "heading-077",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    },
+    {
+      "id": "heading-078",
+      "type": "heading",
+      "source": "所持金補正変数（GoldRateVariable）",
+      "sourceHash": "89cf0d8f747291bbb4576e1e864b763d7ecb8f5dbe57b49174a954288426e33f",
+      "translation": "Gold Rate Variable (GoldRateVariable)",
+      "contextHash": "89cf0d8f747291bbb4576e1e864b763d7ecb8f5dbe57b49174a954288426e33f"
+    },
+    {
+      "id": "heading-079",
+      "type": "heading",
+      "source": "所持金の補正値を設定する変数です。",
+      "sourceHash": "05eff4d655ed0a33130cadde5038f1e2fb53172f2b4844b9684b56037847a53e",
+      "translation": "This variable sets the gold rate.",
+      "contextHash": "05eff4d655ed0a33130cadde5038f1e2fb53172f2b4844b9684b56037847a53e"
+    },
+    {
+      "id": "heading-080",
+      "type": "heading",
+      "source": "変数の値が10ならば、10%上昇します。",
+      "sourceHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a",
+      "translation": "If the variable's value is 10, it increases by 10%.",
+      "contextHash": "4057297bf8d6963d4be4a627ed88f81af11ca650ab583e1497103805a5040d0a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラのメモ欄（Note of Enemies）[[/LINK_1]]",
+      "sourceHash": "5d8ba4be513a6f62ce8934e607995ecbca1395f612e252ce728a9deb12233cff",
+      "parts": [
+        {
+          "source": "敵キャラのメモ欄（Note of Enemies）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Note Field (Note of Enemies)[[/LINK_1]]",
+      "contextHash": "5d8ba4be513a6f62ce8934e607995ecbca1395f612e252ce728a9deb12233cff"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]経験値と所持金（EXP & Gold）[[/LINK_1]]",
+      "sourceHash": "9047175b4aba5e3c1dc064831fbdbd1d37dd189ea69887dc1685742c68b0f0a8",
+      "parts": [
+        {
+          "source": "経験値と所持金（EXP & Gold）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]EXP and Gold (EXP & Gold)[[/LINK_1]]",
+      "contextHash": "9047175b4aba5e3c1dc064831fbdbd1d37dd189ea69887dc1685742c68b0f0a8"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]能力値補正（Adjust Variable）[[/LINK_1]]ver1.04",
+      "sourceHash": "4c00e71c9ee3440fb61bcd05b143138a104696e6e2d327b40c275d04faa4d608",
+      "parts": [
+        {
+          "source": "能力値補正（Adjust Variable）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.04",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Stat Adjustments (Adjust Variable)[[/LINK_1]]ver1.04",
+      "contextHash": "4c00e71c9ee3440fb61bcd05b143138a104696e6e2d327b40c275d04faa4d608"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘テスト（Battle Test）[[/LINK_1]]",
+      "sourceHash": "2dd3cf1e2e9bb1ccbf733f1bc911e9d4941477deb2909118989b3667e377a9c3",
+      "parts": [
+        {
+          "source": "戦闘テスト（Battle Test）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Battle Test (Battle Test)[[/LINK_1]]",
+      "contextHash": "2dd3cf1e2e9bb1ccbf733f1bc911e9d4941477deb2909118989b3667e377a9c3"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]図鑑系プラグインとの併用について（For EnemyBook）[[/LINK_1]]",
+      "sourceHash": "e19e646c059850c014a7b4cfc12e375203b81468fd4dcc75fb12b06d8ca39f0e",
+      "parts": [
+        {
+          "source": "図鑑系プラグインとの併用について（For EnemyBook）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Compatibility with Enemy Book Plugins (For EnemyBook)[[/LINK_1]]",
+      "contextHash": "e19e646c059850c014a7b4cfc12e375203b81468fd4dcc75fb12b06d8ca39f0e"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]基準となる職業（BaseClass）[[/LINK_1]]",
+      "sourceHash": "128ed66ad478cc13c74c54f3802d2e7ebc466534c2b18d4c4aebb59d12ff56b0",
+      "parts": [
+        {
+          "source": "基準となる職業（BaseClass）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Base Class (BaseClass)[[/LINK_1]]",
+      "contextHash": "128ed66ad478cc13c74c54f3802d2e7ebc466534c2b18d4c4aebb59d12ff56b0"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]基準レベルの変数（VariableBaseLevel）[[/LINK_1]]",
+      "sourceHash": "e34e0fb7c1d474bda94868e42e2bb73170d06f13907f75e4c48f6a31eb5f7b54",
+      "parts": [
+        {
+          "source": "基準レベルの変数（VariableBaseLevel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Base Level Variable (VariableBaseLevel)[[/LINK_1]]",
+      "contextHash": "e34e0fb7c1d474bda94868e42e2bb73170d06f13907f75e4c48f6a31eb5f7b54"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]レベルランダム幅の変数（VariableRandomLevel）[[/LINK_1]]",
+      "sourceHash": "63b09ccdc2645b97ecf5ed1cfd7fad70bb4cd3e137cd9773a6f9db50821491bd",
+      "parts": [
+        {
+          "source": "レベルランダム幅の変数（VariableRandomLevel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Random Level Range Variable (VariableRandomLevel)[[/LINK_1]]",
+      "contextHash": "63b09ccdc2645b97ecf5ed1cfd7fad70bb4cd3e137cd9773a6f9db50821491bd"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]基準経験値（BaseExp）[[/LINK_1]]",
+      "sourceHash": "5db8a65d3cde8ff4b413e913715348576a0446f5684f47fbc38fd848e00702d7",
+      "parts": [
+        {
+          "source": "基準経験値（BaseExp）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Base EXP (BaseExp)[[/LINK_1]]",
+      "contextHash": "5db8a65d3cde8ff4b413e913715348576a0446f5684f47fbc38fd848e00702d7"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]基準所持金（BaseGold）[[/LINK_1]]",
+      "sourceHash": "778ca770ef9918c766c830f1a10ad919f93800908a78ac727dd4392f00060949",
+      "parts": [
+        {
+          "source": "基準所持金（BaseGold）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Base Gold (BaseGold)[[/LINK_1]]",
+      "contextHash": "778ca770ef9918c766c830f1a10ad919f93800908a78ac727dd4392f00060949"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]戦闘テスト時コモンイベント（TestCommonEvent）[[/LINK_1]]",
+      "sourceHash": "12840e00946eae98bcc34905522a6260312d2a044e60bb650ed187f682fc89e7",
+      "parts": [
+        {
+          "source": "戦闘テスト時コモンイベント（TestCommonEvent）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Common Event During Battle Test (TestCommonEvent)[[/LINK_1]]",
+      "contextHash": "12840e00946eae98bcc34905522a6260312d2a044e60bb650ed187f682fc89e7"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]魔物図鑑に対応（SupportEnemyBook）[[/LINK_1]]ver1.02",
+      "sourceHash": "ea1d8f3d05b4133b06f4c1d366fb13936085f8b9361505b1ed7e53f274251396",
+      "parts": [
+        {
+          "source": "魔物図鑑に対応（SupportEnemyBook）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Book Support (SupportEnemyBook)[[/LINK_1]]ver1.02",
+      "contextHash": "ea1d8f3d05b4133b06f4c1d366fb13936085f8b9361505b1ed7e53f274251396"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]能力値補正のパラメータ（AdjustVariable）[[/LINK_1]]ver1.03",
+      "sourceHash": "b39c6516c119a46a30325fb7450ce78f442de8176a90630ff120d2209b0a97ae",
+      "parts": [
+        {
+          "source": "能力値補正のパラメータ（AdjustVariable）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.03",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Stat Adjustment Parameter (AdjustVariable)[[/LINK_1]]ver1.03",
+      "contextHash": "b39c6516c119a46a30325fb7450ce78f442de8176a90630ff120d2209b0a97ae"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]能力値レベル変数（ParamLevelVariable）[[/LINK_1]]",
+      "sourceHash": "08bc6d42b722e58fc1ad927458ab9ccabf28862ac3ddb9307e05a29972449954",
+      "parts": [
+        {
+          "source": "能力値レベル変数（ParamLevelVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Stat Level Variable (ParamLevelVariable)[[/LINK_1]]",
+      "contextHash": "08bc6d42b722e58fc1ad927458ab9ccabf28862ac3ddb9307e05a29972449954"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]ＨＰ補正変数（HpRateVariable）[[/LINK_1]]",
+      "sourceHash": "8cda75bfd1ad3e4e4bbddd1faff0ee06725ef9bc61a203360158ae4e7b667482",
+      "parts": [
+        {
+          "source": "ＨＰ補正変数（HpRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]HP Adjustment Variable (HpRateVariable)[[/LINK_1]]",
+      "contextHash": "8cda75bfd1ad3e4e4bbddd1faff0ee06725ef9bc61a203360158ae4e7b667482"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＰ補正変数（MpRateVariable）[[/LINK_1]]",
+      "sourceHash": "939b6195ccbe5334d11042f83ac7c22676b94abf78a71b568a5eb473189b2b0e",
+      "parts": [
+        {
+          "source": "ＭＰ補正変数（MpRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MP Adjustment Variable (MpRateVariable)[[/LINK_1]]",
+      "contextHash": "939b6195ccbe5334d11042f83ac7c22676b94abf78a71b568a5eb473189b2b0e"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]攻撃力補正変数（AtkRateVariable）[[/LINK_1]]",
+      "sourceHash": "bc779e9796f84d44b66a8a564c5ff7b430d9f4bc45b31f60421105aa35da6fd4",
+      "parts": [
+        {
+          "source": "攻撃力補正変数（AtkRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]ATK Adjustment Variable (AtkRateVariable)[[/LINK_1]]",
+      "contextHash": "bc779e9796f84d44b66a8a564c5ff7b430d9f4bc45b31f60421105aa35da6fd4"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]防御力補正変数（DefRateVariable）[[/LINK_1]]",
+      "sourceHash": "3520fd27bac55cb665e8353563b706b841bcaee5de64f1e520bcedd77f98b808",
+      "parts": [
+        {
+          "source": "防御力補正変数（DefRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]DEF Adjustment Variable (DefRateVariable)[[/LINK_1]]",
+      "contextHash": "3520fd27bac55cb665e8353563b706b841bcaee5de64f1e520bcedd77f98b808"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]魔法力補正変数（MatRateVariable）[[/LINK_1]]",
+      "sourceHash": "f136ed5f8fd4b0911a67773302cc21b631cc95995a44d62f196555b884f513e3",
+      "parts": [
+        {
+          "source": "魔法力補正変数（MatRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MAT Adjustment Variable (MatRateVariable)[[/LINK_1]]",
+      "contextHash": "f136ed5f8fd4b0911a67773302cc21b631cc95995a44d62f196555b884f513e3"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]魔法防御補正変数（MdfRateVariable）[[/LINK_1]]",
+      "sourceHash": "00bc81f431f45119e35b2ee925c1aa4194b037bf426824e2023db6a8fda3ae3d",
+      "parts": [
+        {
+          "source": "魔法防御補正変数（MdfRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]MDF Adjustment Variable (MdfRateVariable)[[/LINK_1]]",
+      "contextHash": "00bc81f431f45119e35b2ee925c1aa4194b037bf426824e2023db6a8fda3ae3d"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]敏捷性補正変数（AgiRateVariable）[[/LINK_1]]",
+      "sourceHash": "06db273097dfda6cd6ff9d5ba5c04cb67109f2521e0805fda61c2f8132c47ab3",
+      "parts": [
+        {
+          "source": "敏捷性補正変数（AgiRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]AGI Adjustment Variable (AgiRateVariable)[[/LINK_1]]",
+      "contextHash": "06db273097dfda6cd6ff9d5ba5c04cb67109f2521e0805fda61c2f8132c47ab3"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]運補正変数（LukRateVariable）[[/LINK_1]]",
+      "sourceHash": "3cdc552b05bce4fea3967f1edca111605ddedc50bc78c6eae13bd661988f66af",
+      "parts": [
+        {
+          "source": "運補正変数（LukRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]LUK Adjustment Variable (LukRateVariable)[[/LINK_1]]",
+      "contextHash": "3cdc552b05bce4fea3967f1edca111605ddedc50bc78c6eae13bd661988f66af"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]経験値補正変数（ExpRateVariable）[[/LINK_1]]",
+      "sourceHash": "539d1f1acb66746c1328e6b78ce1318bad3c819311eaa3038252624e532502c6",
+      "parts": [
+        {
+          "source": "経験値補正変数（ExpRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]EXP Adjustment Variable (ExpRateVariable)[[/LINK_1]]",
+      "contextHash": "539d1f1acb66746c1328e6b78ce1318bad3c819311eaa3038252624e532502c6"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]所持金補正変数（GoldRateVariable）[[/LINK_1]]",
+      "sourceHash": "5d93725344eed659486bb320ec95e393189cec8dd328c0b2c08170df80e0b79e",
+      "parts": [
+        {
+          "source": "所持金補正変数（GoldRateVariable）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Gold Adjustment Variable (GoldRateVariable)[[/LINK_1]]",
+      "contextHash": "5d93725344eed659486bb320ec95e393189cec8dd328c0b2c08170df80e0b79e"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]能力値を変数によって補正する機能[[/LINK_1]]を実装した。",
+      "sourceHash": "218c16d424e7dab2ecc0d8f2487d2f402ae086d709241fdbc11d05ee2f800079",
+      "parts": [
+        {
+          "source": "能力値を変数によって補正する機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を実装した。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]A function to adjust stats using variables[[/LINK_1]] was implemented.",
+      "contextHash": "218c16d424e7dab2ecc0d8f2487d2f402ae086d709241fdbc11d05ee2f800079"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]モンスター図鑑系プラグインとの併用[[/LINK_1]]を考慮。",
+      "sourceHash": "2248e7ab471422b6d041eff446bfbe05178beff8f84e841759d2a37868bd9874",
+      "parts": [
+        {
+          "source": "モンスター図鑑系プラグインとの併用",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を考慮。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Compatibility with monster encyclopedia plugins[[/LINK_1]] was taken into consideration.",
+      "contextHash": "2248e7ab471422b6d041eff446bfbe05178beff8f84e841759d2a37868bd9874"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "メモ欄で[[LINK_1]]能力値の基準となる職業を変更[[/LINK_1]]できるように対応。",
+      "sourceHash": "9e265d9fe8fae423d07cd06ca333e6379b7037151e6578312c6298d79b6599da",
+      "parts": [
+        {
+          "source": "メモ欄で",
+          "link": false
+        },
+        {
+          "source": "能力値の基準となる職業を変更",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるように対応。",
+          "link": false
+        }
+      ],
+      "translation": "Support was added to allow the [[LINK_1]]class used as the basis for stats[[/LINK_1]] to be changed in the note field.",
+      "contextHash": "9e265d9fe8fae423d07cd06ca333e6379b7037151e6578312c6298d79b6599da"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "例えば、[[LINK_1]]ＨＰ補正変数[[/LINK_1]]に設定した変数の値を10にすれば、全ての敵の最大ＨＰが１０％上昇します。",
+      "sourceHash": "4f8a28ce84060a85ab0288e960c74cffd9307da2cf384b791acab0695cccb5df",
+      "parts": [
+        {
+          "source": "例えば、",
+          "link": false
+        },
+        {
+          "source": "ＨＰ補正変数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "に設定した変数の値を10にすれば、全ての敵の最大ＨＰが１０％上昇します。",
+          "link": false
+        }
+      ],
+      "translation": "For example, if you set the value of the variable assigned to the [[LINK_1]]HP Adjustment Variable[[/LINK_1]] to 10, the maximum HP of all enemies will increase by 10%.",
+      "contextHash": "4f8a28ce84060a85ab0288e960c74cffd9307da2cf384b791acab0695cccb5df"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "なお、[[LINK_1]]能力値レベル変数[[/LINK_1]]のみ特殊で、これは指定した数値分だけ能力値の計算に関するレベルを上げるというものです。",
+      "sourceHash": "e1b062045b48cd43cf9e56de72fb9906bce8b51d2f9be72d82a5f8ad95603f86",
+      "parts": [
+        {
+          "source": "なお、",
+          "link": false
+        },
+        {
+          "source": "能力値レベル変数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のみ特殊で、これは指定した数値分だけ能力値の計算に関するレベルを上げるというものです。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]Stat Level Variable[[/LINK_1]] is special: it raises the level used in stat calculations by the specified value.",
+      "contextHash": "e1b062045b48cd43cf9e56de72fb9906bce8b51d2f9be72d82a5f8ad95603f86"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "データベースの職業能力値を基準とし、レベルと組み合わせることによって敵の能力を自動計算します。": "Enemy stats are calculated automatically by using the class stats in the database as a baseline and combining them with the enemy's level.",
+    "進行状況によって敵の能力値を変化させたい場合の他にも、単純に数値設定の手間を省きたい場合にも使えます。": "In addition to changing enemy stats based on game progress, this can also be used to simply save the effort of setting numerical values.",
+    "特に経験値については、次のレベルに必要な経験値を基準に自動で算出できます。": "In particular, EXP can be calculated automatically based on the EXP required to reach the next level.",
+    "これによりバランス調整の手間を軽減できます。": "This reduces the effort required for balance adjustments.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the plugin ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_EnemyPercentParams.js": "NRP_EnemyPercentParams.js ",
+    "ver1.03（2025/05/08）": "ver1.03 (2025/05/08) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/05/08（ver1.03）": "2025/05/08 (ver1.03) ",
+    "2022/06/15 -> 2024/05/06（ver1.02 -> 1.022）": "2022/06/15 -> 2024/05/06 (ver1.02 -> 1.022) ",
+    "図鑑の経験値と金に対応できてなかったので修正。（ver1.021）": "Fixed an issue where the plugin did not support the EXP and gold displayed in the bestiary. (ver1.021)",
+    "敵レベルにマイナス値が設定できてしまう上に、パラメータが不正になる不具合修正。（2024/05/06 ver1.022）": "Fixed an issue where negative values could be set for enemy levels, causing invalid parameters. (2024/05/06 ver1.022)",
+    "2022/06/14（ver1.01）": "2022/06/14 (ver1.01) ",
+    "『レベルランダム幅の変数』が未指定の場合、敵レベルの初期値が0になってしまう不具合修正。": "Fixed an issue where the initial enemy level became 0 when 'Level Random Range Variable' was not specified.",
+    "敵レベルが最低でも1になるように修正。": "Adjusted enemy levels so that they are at least 1.",
+    "※0の場合は経験値が異常値になるため。": "※Because a value of 0 causes EXP to become abnormal.",
+    "2021/11/26（ver1.00）": "2021/11/26 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "まず、敵の能力の基準となる職業を設定し、プラグインパラメータで指定します。": "First, set the class that serves as the basis for enemy stats, and specify it in the plugin parameter.",
+    "※能力だけでなく経験値曲線も取得経験値の計算に使用されます。": "※The EXP curve, as well as the stats, is used to calculate the EXP gained.",
+    "次に敵の能力に１００を基準にした値を設定します。ここでの１００は１００％の意味になります。": "Next, set the enemy's stats using 100 as the baseline. Here, 100 means 100%.",
+    "例えば、攻撃力に１１０を設定すれば、基準値の１１０％の値になります。": "For example, setting Attack to 110 makes it 110% of the baseline value.",
+    "さらに敵に対してレベルを設定します。": "Then, set a level for the enemy.",
+    "プラグインパラメータで指定した変数に値を代入することで、基準となるレベルを設定可能です。": "You can set the baseline level by assigning a value to the variable specified in the plugin parameter.",
+    "場所や進行状況によって基準レベルを変更すれば、敵の強さを変動させることができるようになります。": "By changing the baseline level according to the location or game progress, you can vary the strength of enemies.",
+    "また、同じ要領で変数によって、レベルのランダム幅も設定できます。": "Similarly, you can also set the random level range using a variable.",
+    "もちろん、敵毎に固定値を設定しても構いません。": "Of course, you can also set a fixed value for each enemy.",
+    "柔軟な設定が可能ですので、以下の『敵キャラのメモ欄』を参照してください。": "Since flexible settings are available, refer to the 'Enemy Note Field' below.",
+    "敵キャラのメモ欄（Note of Enemies）": "Enemy Note Field (Note of Enemies)",
+    "敵のレベルを設定します。": "Sets the enemy's level.",
+    "この値は基準レベルよりも優先されます。": "This value takes priority over the baseline level.",
+    "また、以下のように基準レベルを参照することも可能です。": "You can also refer to the baseline level as shown below.",
+    "以下はさらに基準レベルにランダム幅を追加したものです。": "The following also adds a random range to the baseline level.",
+    "ボス戦だけはランダム幅をなくしたいなどの場合もあると思いますので、使い分けてください。": "You may want to remove the random range only for boss battles, for example, so use these options accordingly.",
+    "能力値の基準となる職業を変更します。?がＩＤです。": "Changes the class used as the basis for the stats. ? is the ID.",
+    "経験値と所持金（EXP & Gold）": "EXP and Gold (EXP & Gold)",
+    "経験値と所持金の基準値については職業データから単純取得できないため、以下の数式で決定しています。": "Because the baseline values for EXP and gold cannot be obtained directly from the class data, they are determined using the following formulas.",
+    "経験値：1 + 次のレベルまでの経験値 / 30": "EXP: 1 + EXP to Next Level / 30",
+    "要するに敵とアクターのレベルが同じ場合、３０体ほど倒せばレベルが上がる計算です。": "In short, if the enemy and actor are the same level, defeating about 30 of them will be enough to level up.",
+    "自動で計算してくれるのでとても便利です。": "It is very convenient because the values are calculated automatically.",
+    "※最初の1は低レベル用の調整です。": "※The initial 1 is an adjustment for low levels.",
+    "所持金：5 + （レベル * レベル） / 2": "Gold: 5 + (Level * Level) / 2",
+    "レベルの２乗に比例する数式です。": "This formula is proportional to the square of the level.",
+    "数式はプラグインパラメータで調整できます。": "The formulas can be adjusted in the plugin parameters.",
+    "空欄にすれば、エディタの設定値をそのまま使用することもできます。": "If left blank, you can use the values set in the editor as-is.",
+    "能力値補正（Adjust Variable）": "Stat Adjustment (Adjust Variable)",
+    "プラグインパラメータで能力値補正を行う変数を設定できます。": "You can set a variable used to adjust stats in the plugin parameters.",
+    "難易度設定や細かいバランス調整にご利用ください。": "Use it for difficulty settings and fine-tuning the balance.",
+    "b.levelで参照できる値や、経験値や所持金の計算にも影響を与えません。": "It does not affect the value referenced by b.level or the calculation of EXP and gold.",
+    "※マイナス値も可能ですが、レベル1を下回ることはできません。": "※Negative values are also possible, but the level cannot be reduced below 1.",
+    "戦闘テスト（Battle Test）": "Battle Test (Battle Test)",
+    "戦闘テスト開始時に呼び出すコモンイベントを、プラグインパラメータで設定可能です。": "You can set the Common Event to call when starting a battle test using a plugin parameter.",
+    "ここで基準レベル等の設定をすれば、敵の能力にも反映されます。": "Settings such as the base level configured here will also be reflected in the enemy's abilities.",
+    "戦闘テスト時に設定したアクターの能力も参照できます。": "You can also reference the abilities of the actor configured for the battle test.",
+    "例えば、主人公のレベルを参照して、基準レベルを設定するといった運用を想定しています。": "For example, this is intended to allow you to reference the protagonist's level and use it to set the base level.",
+    "図鑑系プラグインとの併用について（For EnemyBook）": "Using This with Monster Encyclopedia Plugins (For EnemyBook)",
+    "外部のモンスター図鑑系プラグインと併用する場合は注意が必要です。": "Care is required when using this with an external monster encyclopedia plugin.",
+    "図鑑で敵キャラデータを表示した場合も、現在の設定レベルでのパラメータが表示されるためです。": "This is because even when enemy data is displayed in the encyclopedia, the parameters for the currently configured level are displayed.",
+    "※ABMZ_EnemyBook.jsなどEnemyBook.js（ＭＶのＤＬＣプラグイン）に準拠したプラグインを想定しています。": "※This is intended for plugins based on EnemyBook.js (the MV DLC plugin), such as ABMZ_EnemyBook.js.",
+    "レベルが常に固定値ならば問題ないのですが、基準レベルやランダム幅を利用している場合はそれらによる変動まで反映されてしまいます。": "There is no problem if the level is always fixed, but if a base level or random range is used, variations resulting from them will also be reflected.",
+    "暫定的な対処として、図鑑表示中は％値をそのまま表示できるようにしています。": "As a temporary solution, percent values are displayed as-is while viewing the encyclopedia.",
+    "『魔物図鑑に対応』をオンにすると有効になります。": "This is enabled when “Support Monster Encyclopedia” is turned on.",
+    "※本当は数値の後ろに％文字を付けたかったのですが、こちらでは困難でした。": "※I originally wanted to add a % symbol after the value, but that was difficult to do here.",
+    "図鑑プラグイン側を編集したほうが現実的と思われます。": "Editing the encyclopedia plugin itself would probably be more practical.",
+    "なお、この仕様は戦闘中には対応しておらず、現在値がそのまま表示されます。": "This feature does not apply during battle; the current values are displayed as-is.",
+    "該当のプラグインの中には、戦闘中に敵の能力値を調べる機能もありますが、その際はそのほうが都合が良いと思われます。": "Some of these plugins also have a function for checking enemy parameters during battle, in which case displaying the current values is probably more convenient.",
+    "……そもそも、戦闘時は図鑑を開いているという判定を得ること自体が難しいという事情もあります。": "...In the first place, it is also difficult to determine whether the encyclopedia is open during battle.",
+    "他にも、簡単な対処として図鑑側でパラメータを表示しないという方法もありますので、用途に合わせて調整してください。": "Another simple solution is to not display parameters in the encyclopedia, so please adjust it to suit your intended use.",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "基準となる職業（BaseClass）": "Base Class (BaseClass)",
+    "能力値の基準となる職業です。": "This is the class used as the basis for ability values.",
+    "基準レベルの変数（VariableBaseLevel）": "Base Level Variable (VariableBaseLevel)",
+    "基準レベルを指定する変数です。": "This variable specifies the base level.",
+    "レベルランダム幅の変数（VariableRandomLevel）": "Level Random Range Variable (VariableRandomLevel)",
+    "レベルのランダム幅を指定する変数です。": "This variable specifies the level's random range.",
+    "値が2の場合、基準レベルに0~2が加算されます。": "If the value is 2, a value from 0 to 2 is added to the base level.",
+    "基準経験値（BaseExp）": "Base EXP (BaseExp)",
+    "基準となる経験値を求める数式です。": "This is the formula used to calculate the base EXP.",
+    "a.nextRequiredExp()で次のレベルまでのＥＸＰ": "EXP required to reach the next level with a.nextRequiredExp()",
+    "基準所持金（BaseGold）": "Base Gold (BaseGold)",
+    "基準となる所持金を求める数式です。": "This is the formula used to calculate the base gold.",
+    "戦闘テスト時コモンイベント（TestCommonEvent）": "Common Event During Battle Test (TestCommonEvent)",
+    "戦闘テスト前に実行されるコモンイベントです。": "This Common Event is executed before a battle test.",
+    "基準レベルの設定などにご活用ください。": "Use it for setting the base level and other purposes.",
+    "魔物図鑑に対応（SupportEnemyBook）ver1.02": "Support Monster Encyclopedia (SupportEnemyBook) ver1.02",
+    "モンスター図鑑と併用時、実際のパラメータではなく％値を表示するようにします。": "When used with a monster encyclopedia, displays percent values instead of the actual parameters.",
+    "能力値補正のパラメータ（AdjustVariable）ver1.03": "Ability Value Adjustment Parameters (AdjustVariable) ver1.03",
+    "能力値を補正するための変数を設定します。": "Set the variables used to adjust ability values.",
+    "能力値レベル変数（ParamLevelVariable）": "Ability Value Level Variable (ParamLevelVariable)",
+    "指定したレベル分、能力を上昇させます。": "Raises abilities by the specified number of levels.",
+    "経験値などには影響を与えません。": "This does not affect EXP or other values.",
+    "ＨＰ補正変数（HpRateVariable）": "HP Adjustment Variable (HpRateVariable)",
+    "最大ＨＰの補正値を設定する変数です。": "This variable sets the adjustment value for maximum HP.",
+    "変数の値が10ならば、10%上昇します。": "If the variable's value is 10, it increases by 10%.",
+    "ＭＰ補正変数（MpRateVariable）": "MP Adjustment Variable (MpRateVariable)",
+    "最大ＭＰの補正値を設定する変数です。": "This variable sets the adjustment value for maximum MP.",
+    "攻撃力補正変数（AtkRateVariable）": "Attack Adjustment Variable (AtkRateVariable)",
+    "攻撃力の補正値を設定する変数です。": "This variable sets the adjustment value for attack.",
+    "防御力補正変数（DefRateVariable）": "Defense Adjustment Variable (DefRateVariable)",
+    "防御力の補正値を設定する変数です。": "This variable sets the defense rate.",
+    "魔法力補正変数（MatRateVariable）": "Magic Attack Rate Variable (MatRateVariable)",
+    "魔法力の補正値を設定する変数です。": "This variable sets the magic attack rate.",
+    "魔法防御補正変数（MdfRateVariable）": "Magic Defense Rate Variable (MdfRateVariable)",
+    "魔法防御の補正値を設定する変数です。": "This variable sets the magic defense rate.",
+    "敏捷性補正変数（AgiRateVariable）": "Agility Rate Variable (AgiRateVariable)",
+    "敏捷性の補正値を設定する変数です。": "This variable sets the agility rate.",
+    "運補正変数（LukRateVariable）": "Luck Rate Variable (LukRateVariable)",
+    "運の補正値を設定する変数です。": "This variable sets the luck rate.",
+    "経験値補正変数（ExpRateVariable）": "Experience Rate Variable (ExpRateVariable)",
+    "経験値の補正値を設定する変数です。": "This variable sets the experience rate.",
+    "所持金補正変数（GoldRateVariable）": "Gold Rate Variable (GoldRateVariable)",
+    "所持金の補正値を設定する変数です。": "This variable sets the gold rate."
+  }
+}
