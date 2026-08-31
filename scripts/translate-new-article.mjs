@@ -101,6 +101,16 @@ function normalizeEnglishAscii(value) {
         .replace(/、[ \t]*/gu, ", ");
 }
 
+// Link placeholders are rebuilt as separate DOM nodes. If the model places an
+// English word or date immediately after a closing marker, it would otherwise
+// be rendered as "linkUpdated". Preserve a normal word boundary there.
+function normalizeLinkMarkerBoundarySpaces(value) {
+    return String(value).replace(
+        /(\[\[\/LINK_\d+\]\])(?=[A-Za-z0-9])/gu,
+        "$1 "
+    );
+}
+
 // Dialogue in older articles is often split across several <br>-separated
 // text nodes. Models can then leave the Japanese opening quote in the first
 // node while converting only the closing quote in a later node. Use the source
@@ -1169,13 +1179,13 @@ function normalizeStoredEnglishAscii(article) {
     let repaired = false;
     for (const item of [...(article.blocks || []), ...(article.lines || [])]) {
         if (typeof item.translation !== "string") continue;
-        const normalized = preserveCircledNumberMarkers(
+        const normalized = normalizeLinkMarkerBoundarySpaces(preserveCircledNumberMarkers(
             item.source,
             normalizeJapaneseQuoteBoundaries(
                 item.source,
                 normalizeEnglishAscii(item.translation)
             )
-        );
+        ));
         if (normalized !== item.translation) {
             item.translation = normalized;
             repaired = true;
@@ -1221,13 +1231,13 @@ function synchronizeTextsFromBlocks(article) {
 function makeOutput({ articleId, articleUrl, lastModified, blocks, linkedLines }) {
     for (const item of [...blocks, ...linkedLines]) {
         if (typeof item.translation === "string") {
-            item.translation = preserveCircledNumberMarkers(
+            item.translation = normalizeLinkMarkerBoundarySpaces(preserveCircledNumberMarkers(
                 item.source,
                 normalizeJapaneseQuoteBoundaries(
                     item.source,
                     normalizeEnglishAscii(item.translation)
                 )
-            );
+            ));
         }
     }
     const titleBlock = blocks.find(block => block.type === "title");
