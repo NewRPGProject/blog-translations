@@ -1,0 +1,3039 @@
+{
+  "articleId": "483582942",
+  "sourceUrl": "https://newrpg.seesaa.net/article/483582942.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "063bd788a2137a108d87406d80e699e42d6bd93301ccfb4497b203a33def23bc",
+  "translatedAt": "2026-08-31T02:37:11.225Z",
+  "title": "Implement a Class Change Screen for Multiple Classes [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "多重職業用の転職画面を実装する【RPGツクールMZプラグイン】",
+      "sourceHash": "d5d643b6cbd8c46befe65c3b804836e80b2359b91a1c19ae3587c7b7476a093f",
+      "translation": "Implement a Class Change Screen for Multiple Classes [RPG Maker MZ Plugin]",
+      "contextHash": "d5d643b6cbd8c46befe65c3b804836e80b2359b91a1c19ae3587c7b7476a093f"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "多重職業用の転職画面を実装します。",
+      "sourceHash": "b3442932e4708d53a4c36ef220fd5a2a55f5c9fe0db85f7e8a8bb6e926d73c3e",
+      "translation": "Implements a class change screen for multiple classes.",
+      "contextHash": "b3442932e4708d53a4c36ef220fd5a2a55f5c9fe0db85f7e8a8bb6e926d73c3e"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "ＤＱ６～７的な機能を持つ転職システムが簡単に作れます。",
+      "sourceHash": "08ba66f9ca3dd87cfbe72f1ee98f09314e6252832c453fe05dd1f8d7c8b235ed",
+      "translation": "You can easily create a class change system with features similar to DQ6–7.",
+      "contextHash": "08ba66f9ca3dd87cfbe72f1ee98f09314e6252832c453fe05dd1f8d7c8b235ed"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "そちらの説明も合わせてお読みください。",
+      "sourceHash": "23107a38e356fb65b87bb2e14fb1548fe0f48d966a42a58c14e73dea06feead8",
+      "translation": "Please read that explanation as well.",
+      "contextHash": "23107a38e356fb65b87bb2e14fb1548fe0f48d966a42a58c14e73dea06feead8"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "主な機能",
+      "sourceHash": "c38e630d348b526e176f6cfd8a4c185e06c0a28dde73c13226a6074d2f726c42",
+      "translation": "Main Features",
+      "contextHash": "c38e630d348b526e176f6cfd8a4c185e06c0a28dde73c13226a6074d2f726c42"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "複数の職業へ同時に就くことが可能",
+      "sourceHash": "3ec0b5ca51f9741bf7ea0df1d8fd68a7f4a02074aabcabb74e7637c7f0284c87",
+      "translation": "Allows actors to have multiple classes simultaneously",
+      "contextHash": "3ec0b5ca51f9741bf7ea0df1d8fd68a7f4a02074aabcabb74e7637c7f0284c87"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "転職後の能力変化や習得スキルを表示",
+      "sourceHash": "e4b686a3ab99dd12320e3e0c4b2943bc7396c13837f0193f225838e55f765841",
+      "translation": "Displays stat changes and skills learned after changing class",
+      "contextHash": "e4b686a3ab99dd12320e3e0c4b2943bc7396c13837f0193f225838e55f765841"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "条件を満たした場合に転職できる上級職などを設定可",
+      "sourceHash": "23cdbd3bde478592222a50475f416244a76b558f60a2a989994eefae98bbe70a",
+      "translation": "Allows you to set advanced classes that become available after meeting certain conditions",
+      "contextHash": "23cdbd3bde478592222a50475f416244a76b558f60a2a989994eefae98bbe70a"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "メニュー画面に転職用のコマンドを追加可",
+      "sourceHash": "7f73e234cddcc546e7e758edcbbcf643411c0a1398eea27f5865fff2f1bcbc76",
+      "translation": "Allows you to add a class change command to the menu screen",
+      "contextHash": "7f73e234cddcc546e7e758edcbbcf643411c0a1398eea27f5865fff2f1bcbc76"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "また、参照だけにすることも可",
+      "sourceHash": "eeab80d374e05ebef28d8c633851f33f1b384813c0ddc3ffa9b4d04aa4969c83",
+      "translation": "Can also be used for viewing only",
+      "contextHash": "eeab80d374e05ebef28d8c633851f33f1b384813c0ddc3ffa9b4d04aa4969c83"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "職業やアクター毎に異なる画像（顔グラ、キャラグラ、バトラー）を指定可",
+      "sourceHash": "a42b0aeb3dedfb5cdefd557e204e13117d0e471270cf5de2a3e8066af221d015",
+      "translation": "Allows you to specify different images (face, character, and battler graphics) for each class or actor",
+      "contextHash": "a42b0aeb3dedfb5cdefd557e204e13117d0e471270cf5de2a3e8066af221d015"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Turn the plugin on in the Plugin Manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_AdditionalCCScene.js",
+      "sourceHash": "ef705eafcd372ac32608dba8bf87616f883ff52af1a112389d7baa473c1a63a4",
+      "translation": "NRP_AdditionalCCScene.js ",
+      "contextHash": "f9108ccf50466417870e809b93de4748c0c11423ecbb7f777fc9d232ac69bfb6"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.102（2025/03/03）",
+      "sourceHash": "a6cce0b616208c5043e4455c2c9a034e458bd6f505647abef4e73ba4e78e5359",
+      "translation": "ver1.102 (2025/03/03) ",
+      "contextHash": "f9108ccf50466417870e809b93de4748c0c11423ecbb7f777fc9d232ac69bfb6"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/09/25 -> 2025/03/03（ver1.10 -> 1.102）",
+      "sourceHash": "ff35d98dec098c6a7e8d78db7d662249a9c8377e418f1a31b0f22beef420e9ed",
+      "translation": "2024/09/25 -> 2025/03/03 (ver1.10 -> 1.102) ",
+      "contextHash": "ff35d98dec098c6a7e8d78db7d662249a9c8377e418f1a31b0f22beef420e9ed"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "ver1.092にて、クラス一覧のスキル欄を表示した場合に装備品（アクターの初期装備）が増殖してしまう重大な不具合修正。",
+      "sourceHash": "3f352fa7eeddc8110781e43e21e7ca2ecb1128e00065fe46733d7373de2378ff",
+      "translation": "Fixed a critical bug in ver1.092 that caused equipment (the actor's initial equipment) to multiply when the skill section of the class list was displayed.",
+      "contextHash": "3f352fa7eeddc8110781e43e21e7ca2ecb1128e00065fe46733d7373de2378ff"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "転職成功メッセージを設定した状態で、プラグインコマンドで転職画面を呼び出すと転職後に決定キーを受け付けなくなる不具合修正。",
+      "sourceHash": "503bcffd169177193f62980dcc3f6d558ff9c047884ffa7ffa02c05d75e4506e",
+      "translation": "Fixed a bug where the confirm key could no longer be used after changing class when the class change screen was opened via a plugin command with a class change success message configured.",
+      "contextHash": "503bcffd169177193f62980dcc3f6d558ff9c047884ffa7ffa02c05d75e4506e"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "（2024/12/23 ver1.101）",
+      "sourceHash": "a383dc41ce4dc268b4a4af11147398dd31a3a37c8500f85838e44afeedeab60e",
+      "translation": " (2024/12/23 ver1.101) ",
+      "contextHash": "a383dc41ce4dc268b4a4af11147398dd31a3a37c8500f85838e44afeedeab60e"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "職業名の配置が右過ぎたので若干左に寄せた。（2024/12/23 ver1.101）",
+      "sourceHash": "8ca62790b48ca91fcfb9cd6a73f17466c289e29c6a02dcade9d6a62ae030b38c",
+      "translation": "The class names were positioned too far to the right, so they were moved slightly to the left. (2024/12/23 ver1.101)",
+      "contextHash": "8ca62790b48ca91fcfb9cd6a73f17466c289e29c6a02dcade9d6a62ae030b38c"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "職業位置を入替するとＨＰＭＰＴＰが減ってしまうことがある不具合修正。（2025/03/03 ver1.102）",
+      "sourceHash": "93e6559fe36b35db071b5bc94c09d487a9e660bb0aa75e4b7b164dca8a7249fe",
+      "translation": "Fixed a bug where HP, MP, and TP could decrease when swapping class positions. (2025/03/03 ver1.102)",
+      "contextHash": "93e6559fe36b35db071b5bc94c09d487a9e660bb0aa75e4b7b164dca8a7249fe"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/08/06 -> 2024/09/11（ver1.09 -> 1.092）",
+      "sourceHash": "23da9169c91c1ca421d08b35d323decd8fe87e01ab91e14502eae7704337ce15",
+      "translation": "2024/08/06 -> 2024/09/11 (ver1.09 -> 1.092) ",
+      "contextHash": "23da9169c91c1ca421d08b35d323decd8fe87e01ab91e14502eae7704337ce15"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "他のアクターで習得済のスキルはマスク表示しないように改良した。",
+      "sourceHash": "e778da01e60ecce48721e6d3a32bf617b426282b993e6347d1794f1d90171839",
+      "translation": "Improved the display so that skills already learned by another actor are not masked.",
+      "contextHash": "e778da01e60ecce48721e6d3a32bf617b426282b993e6347d1794f1d90171839"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "職業が空欄の場合はスキル一覧を表示しないようにした。",
+      "sourceHash": "836b8be1d4bded9889accb68c504ebd88ad5e9d5b6c6fd23540b388c057e7720",
+      "translation": "The skill list is no longer displayed when the class field is blank.",
+      "contextHash": "836b8be1d4bded9889accb68c504ebd88ad5e9d5b6c6fd23540b388c057e7720"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "※装備品で得たスキルなどが不自然な表示になってしまうため。",
+      "sourceHash": "30a8587017fd1b4d2e13336051d3e3ee7b964403ba12b4d4b9ce22cdba84d49e",
+      "translation": "※This is because skills obtained from equipment and similar sources would otherwise be displayed unnaturally.",
+      "contextHash": "30a8587017fd1b4d2e13336051d3e3ee7b964403ba12b4d4b9ce22cdba84d49e"
+    },
+    {
+      "id": "list-015",
+      "type": "list",
+      "source": "（2024/08/17 ver1.091）",
+      "sourceHash": "27812f89e1f93684f02c35bf9e434d7205be59c72ada2334773e61f93d74a9f2",
+      "translation": " (2024/08/17 ver1.091) ",
+      "contextHash": "27812f89e1f93684f02c35bf9e434d7205be59c72ada2334773e61f93d74a9f2"
+    },
+    {
+      "id": "list-016",
+      "type": "list",
+      "source": "他のアクターで習得済のスキルについて、現在就いているクラスの分しか表示できていなかったので修正した。（2024/09/11 ver1.092）",
+      "sourceHash": "9a353ed9b3efd896bb4a9d3848e255665b2e23ee151628a91489ebf08f4c3c0f",
+      "translation": "Fixed an issue where, for skills already learned by another actor, only those belonging to the currently assigned class could be displayed. (2024/09/11 ver1.092)",
+      "contextHash": "9a353ed9b3efd896bb4a9d3848e255665b2e23ee151628a91489ebf08f4c3c0f"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2024/02/25（ver1.08）",
+      "sourceHash": "a5f2b5a757f090ebe4e1c00b4222c705e0b32be8f26bed3c0d57cad26af196cb",
+      "translation": "2024/02/25 (ver1.08) ",
+      "contextHash": "a5f2b5a757f090ebe4e1c00b4222c705e0b32be8f26bed3c0d57cad26af196cb"
+    },
+    {
+      "id": "list-017",
+      "type": "list",
+      "source": "職業数がウィンドウ内に収まらない場合、職業一覧のスクロール位置がおかしくなる不具合修正。",
+      "sourceHash": "b015725d7e19370df5704821140ecbfbad10e79e4d967e83285ad1132e07835a",
+      "translation": "Fixed a bug where the scroll position of the class list became incorrect when the number of classes did not fit in the window.",
+      "contextHash": "b015725d7e19370df5704821140ecbfbad10e79e4d967e83285ad1132e07835a"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2023/10/24 -> 2023/11/01（ver1.07 -> 1.071）",
+      "sourceHash": "afb2cce65eee32c34d521d01989b960e5a3c19c535778cfc5e317d19d943e298",
+      "translation": "2023/10/24 -> 2023/11/01 (ver1.07 -> 1.071) ",
+      "contextHash": "afb2cce65eee32c34d521d01989b960e5a3c19c535778cfc5e317d19d943e298"
+    },
+    {
+      "id": "list-018",
+      "type": "list",
+      "source": "職業位置の入れ替えにて、空欄と交換しようとするとエラーになる不具合修正。（2023/11/01 ver1.071）",
+      "sourceHash": "9de7a0bf9c1adbc85c01b62c27b54fd040ba325c5b8c9370e4f28f5b94b8a943",
+      "translation": "Fixed a bug where an error occurred when attempting to swap a class position with a blank entry. (2023/11/01 ver1.071)",
+      "contextHash": "9de7a0bf9c1adbc85c01b62c27b54fd040ba325c5b8c9370e4f28f5b94b8a943"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2023/08/06（ver1.06）",
+      "sourceHash": "ef042e1a4022a7243228ee94856aaef41b8eade826797152c8273ded87ed43d3",
+      "translation": "2023/08/06 (ver1.06) ",
+      "contextHash": "ef042e1a4022a7243228ee94856aaef41b8eade826797152c8273ded87ed43d3"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2023/08/01（ver1.05）",
+      "sourceHash": "273e15aeb509aaacc49222368a70aeaf55b934d47e7c68de6f370738427a1c91",
+      "translation": "2023/08/01 (ver1.05) ",
+      "contextHash": "273e15aeb509aaacc49222368a70aeaf55b934d47e7c68de6f370738427a1c91"
+    },
+    {
+      "id": "list-019",
+      "type": "list",
+      "source": "最大レベル時の経験値表示（-------）をNRP_AdditionalClasses.jsから参照するようにした。",
+      "sourceHash": "6de931514d5d9abddb0eb05042a166e96966ca13e84633d64b3bc7a016c1c298",
+      "translation": "The maximum-level experience display (-------) now references NRP_AdditionalClasses.js.",
+      "contextHash": "6de931514d5d9abddb0eb05042a166e96966ca13e84633d64b3bc7a016c1c298"
+    },
+    {
+      "id": "list-020",
+      "type": "list",
+      "source": "職業経験値の項目名の表示位置がズレていたので微調整。",
+      "sourceHash": "022f81a2fc4c94cb777472f38cbdea66e4c6783e75993e97a0221b9a316151e5",
+      "translation": "Fine-tuned the position of the class experience label, which was misaligned.",
+      "contextHash": "022f81a2fc4c94cb777472f38cbdea66e4c6783e75993e97a0221b9a316151e5"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "2023/04/10（ver1.04）",
+      "sourceHash": "2d7de36a7c887746f71b229127cc442e991545978722cb77b9c4e2e1e9128a9e",
+      "translation": "2023/04/10 (ver1.04) ",
+      "contextHash": "2d7de36a7c887746f71b229127cc442e991545978722cb77b9c4e2e1e9128a9e"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "2023/04/02（ver1.03）",
+      "sourceHash": "133f3a9c7a00402be6d1e588b2559e4e707e9180b21b68192475e575ffc8b84a",
+      "translation": "2023/04/02 (ver1.03) ",
+      "contextHash": "133f3a9c7a00402be6d1e588b2559e4e707e9180b21b68192475e575ffc8b84a"
+    },
+    {
+      "id": "list-021",
+      "type": "list",
+      "source": "職業名がウィンドウに収まらない場合に縮小されない不具合修正。",
+      "sourceHash": "3a235837d4429151534bb35556bcce2c1ee6a794d5cb5e12ddb1ce5b8147287f",
+      "translation": "Fixed a bug where class names were not reduced in size when they did not fit in the window.",
+      "contextHash": "3a235837d4429151534bb35556bcce2c1ee6a794d5cb5e12ddb1ce5b8147287f"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "2022/07/31 -> 2022/09/09（ver1.02 -> 1.022）",
+      "sourceHash": "a533916318dcacf594ccef7101967d47135a5c683249db7b4a5b04fb6cfad5ff",
+      "translation": "2022/07/31 -> 2022/09/09 (ver1.02 -> 1.022) ",
+      "contextHash": "a533916318dcacf594ccef7101967d47135a5c683249db7b4a5b04fb6cfad5ff"
+    },
+    {
+      "id": "list-022",
+      "type": "list",
+      "source": "条件のアクターが機能していない不具合修正。",
+      "sourceHash": "1d338fde452aa66bd4c6337417109eda95af0abc91162921413621e64d37681c",
+      "translation": "Fixed a bug where the actor condition was not functioning.",
+      "contextHash": "1d338fde452aa66bd4c6337417109eda95af0abc91162921413621e64d37681c"
+    },
+    {
+      "id": "list-023",
+      "type": "list",
+      "source": "プラグインコマンドからアクターを指定した際、該当者が仲間にいないと先頭のアクターが表示されてしまう不具合修正。",
+      "sourceHash": "e8c1ac6fe06d25fb7334956cd7782cea3279f1b9e5fc708347ae0fa3734aef1b",
+      "translation": "Fixed a bug where specifying an actor via a plugin command caused the first actor to be displayed when the specified actor was not in the party.",
+      "contextHash": "e8c1ac6fe06d25fb7334956cd7782cea3279f1b9e5fc708347ae0fa3734aef1b"
+    },
+    {
+      "id": "list-024",
+      "type": "list",
+      "source": "ver1.02にてアクターを指定しなかった場合、エラーになる不具合修正。（ver1.021）",
+      "sourceHash": "8c95a44c66a71ab93ab4a8f5fc31cc721f09948cc5c17c69dcd98893149c4484",
+      "translation": "Fixed a bug where an error occurred when no actor was specified in ver1.02. (ver1.021)",
+      "contextHash": "8c95a44c66a71ab93ab4a8f5fc31cc721f09948cc5c17c69dcd98893149c4484"
+    },
+    {
+      "id": "list-025",
+      "type": "list",
+      "source": "職業の重複禁止がオンの際、データロード後の転職時にエラーとなる不具合修正。（2022/09/09 ver1.022）",
+      "sourceHash": "41b9d0c832ab3894f30d070179c50eae90a3afef17f940f2980a267ce5551621",
+      "translation": "Fixed a bug where an error occurred when changing class after loading data while duplicate classes were prohibited. (2022/09/09 ver1.022)",
+      "contextHash": "41b9d0c832ab3894f30d070179c50eae90a3afef17f940f2980a267ce5551621"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "2021/11/20 -> 2022/06/11（ver1.01 -> 1.014）",
+      "sourceHash": "8cab76f9c6e1edac0ab7229ae976d1dd579c1af61724a8030cb15e3d1c3fff36",
+      "translation": "2021/11/20 -> 2022/06/11 (ver1.01 -> 1.014) ",
+      "contextHash": "8cab76f9c6e1edac0ab7229ae976d1dd579c1af61724a8030cb15e3d1c3fff36"
+    },
+    {
+      "id": "list-026",
+      "type": "list",
+      "source": "転職後、無効になった装備品が外れるように修正。",
+      "sourceHash": "0a7b0fbff704c18ca6ea75cea475c6fd7806d1439eb3e4323f42862c552a594e",
+      "translation": "Equipment that becomes invalid after changing class is now unequipped.",
+      "contextHash": "0a7b0fbff704c18ca6ea75cea475c6fd7806d1439eb3e4323f42862c552a594e"
+    },
+    {
+      "id": "list-027",
+      "type": "list",
+      "source": "転職条件のアクターが文字列一致になってしまっている不具合修正。（2022/01/13 ver1.011）",
+      "sourceHash": "c2b845642bde7ce269ac7e447338c6e5a2d2dcdddd83bb04b9f9ee60e211bf82",
+      "translation": "Fixed a bug where the actor in the class change conditions was treated as a string match. (2022/01/13 ver1.011)",
+      "contextHash": "c2b845642bde7ce269ac7e447338c6e5a2d2dcdddd83bb04b9f9ee60e211bf82"
+    },
+    {
+      "id": "list-028",
+      "type": "list",
+      "source": "転職条件に0や[]が設定されていると判定無効になる不具合修正。（2022/01/13 ver1.011）",
+      "sourceHash": "e5d44f0ef304ac3d464f52d86aece85b1ab8a5efcf38cb3f3e1df8505bc27cd4",
+      "translation": "Fixed a bug where setting 0 or [] as a class change condition disabled the check. (2022/01/13 ver1.011)",
+      "contextHash": "e5d44f0ef304ac3d464f52d86aece85b1ab8a5efcf38cb3f3e1df8505bc27cd4"
+    },
+    {
+      "id": "list-029",
+      "type": "list",
+      "source": "競合対策用にクラス名を変更。（2022/01/13 ver1.011）",
+      "sourceHash": "f79b42bd8d742ccb54ab4e38bdade965c982cc29fd4efb9d94c276d46ee40890",
+      "translation": "Changed the class name to prevent conflicts. (2022/01/13 ver1.011)",
+      "contextHash": "f79b42bd8d742ccb54ab4e38bdade965c982cc29fd4efb9d94c276d46ee40890"
+    },
+    {
+      "id": "list-030",
+      "type": "list",
+      "source": "ver1.011にてメニューから転職時にエラーとなる不具合修正。（2022/01/15 ver1.012）",
+      "sourceHash": "a0adae1c4b44efa7b3b1deb528be0102eee2544fc4965d620521323f4ecea464",
+      "translation": "Fixed a bug where an error occurred when changing class from the menu in ver1.011. (2022/01/15 ver1.012)",
+      "contextHash": "a0adae1c4b44efa7b3b1deb528be0102eee2544fc4965d620521323f4ecea464"
+    },
+    {
+      "id": "list-031",
+      "type": "list",
+      "source": "装備画面の名前配置を変更するプラグインと組み合わせると、転職画面の名前が想定外の配置になる問題に対応。",
+      "sourceHash": "0b9fb60c8e9c9eb88baa6cc4a608228391f57180b77b90134c31e5b32bf37bdd",
+      "translation": "Addressed an issue where combining this with a plugin that changes name placement on the equipment screen caused names on the class change screen to appear in an unexpected position.",
+      "contextHash": "0b9fb60c8e9c9eb88baa6cc4a608228391f57180b77b90134c31e5b32bf37bdd"
+    },
+    {
+      "id": "list-032",
+      "type": "list",
+      "source": "（2022/06/11 ver1.013）",
+      "sourceHash": "88ccded17ec64902ff207a0866764f763e105dcd990d61553df403f1f2a12ac3",
+      "translation": " (2022/06/11 ver1.013) ",
+      "contextHash": "88ccded17ec64902ff207a0866764f763e105dcd990d61553df403f1f2a12ac3"
+    },
+    {
+      "id": "list-033",
+      "type": "list",
+      "source": "上の再修正。（2022/06/11 ver1.014）",
+      "sourceHash": "3b96b3713fd9ec0624bcda7202a831a8e0dfe9534d24cde3bf55e75cb0d55b63",
+      "translation": "Revised the above again. (2022/06/11 ver1.014)",
+      "contextHash": "3b96b3713fd9ec0624bcda7202a831a8e0dfe9534d24cde3bf55e75cb0d55b63"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "2021/09/26 -> 10/04（ver1.00 -> 1.001）",
+      "sourceHash": "b9714bcc09350e0e9ceb901d30a3d0c0385b1a60d744df5de51166149abb9513",
+      "translation": "2021/09/26 -> 10/04 (ver1.00 -> 1.001) ",
+      "contextHash": "b9714bcc09350e0e9ceb901d30a3d0c0385b1a60d744df5de51166149abb9513"
+    },
+    {
+      "id": "list-034",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-035",
+      "type": "list",
+      "source": "『経験値』の表示が狭いのでわずかに左に寄せた。（10/04 ver1.001）",
+      "sourceHash": "b42d891c69a9dc0c3fae1ddda879e70ed740bd4339c7cbc7d6db3d048ec58a7b",
+      "translation": "The display area for “Experience” was narrow, so it was moved slightly to the left. (10/04 ver1.001)",
+      "contextHash": "b42d891c69a9dc0c3fae1ddda879e70ed740bd4339c7cbc7d6db3d048ec58a7b"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "プラグインパラメータの『職業一覧』に、候補となる職業を登録してください。",
+      "sourceHash": "eb281ca1fdaedf7d2964d024fb702a9f9a02a1e96b4db6bdf41ce8241f06850c",
+      "translation": "Register the candidate classes in the “Class List” plugin parameter.",
+      "contextHash": "eb281ca1fdaedf7d2964d024fb702a9f9a02a1e96b4db6bdf41ce8241f06850c"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "その際、転職条件の設定も可能です。",
+      "sourceHash": "a41a957938f8c8fc1ddf2ce0ffe63d8d47dfa4871b1d330fbae75421a999f3f3",
+      "translation": "You can also configure class change conditions at that time.",
+      "contextHash": "a41a957938f8c8fc1ddf2ce0ffe63d8d47dfa4871b1d330fbae75421a999f3f3"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "条件を満たさない職業は表示されません。",
+      "sourceHash": "69820ba2b8d2dc6425a42b616979b81ef0a2472b6c228e327c72b234e24c1b2e",
+      "translation": "Classes whose conditions are not met will not be displayed.",
+      "contextHash": "69820ba2b8d2dc6425a42b616979b81ef0a2472b6c228e327c72b234e24c1b2e"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "また、『職業画像一覧』に顔グラフィックやピクチャーを登録することで、職業やアクター毎に異なる画像を表示することも可能です。",
+      "sourceHash": "ccefdead9afb6b04568555ff6e836dc242a7b330f06977c795708b5c21fa1e40",
+      "translation": "You can also display different images for each class or actor by registering face graphics or pictures in the “Class Image List.”",
+      "contextHash": "ccefdead9afb6b04568555ff6e836dc242a7b330f06977c795708b5c21fa1e40"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "下記のプラグインコマンドを実行すれば、転職画面が表示されます。",
+      "sourceHash": "f90f16686d4385dad2c78f5c928320fd47b928640ee1cc4c1a1a6f0be4d7440a",
+      "translation": "The class change screen will be displayed when you execute the plugin command below.",
+      "contextHash": "f90f16686d4385dad2c78f5c928320fd47b928640ee1cc4c1a1a6f0be4d7440a"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "『メニューコマンドに表示』をオンにすれば、メニュー画面から呼び出すことも可能です。",
+      "sourceHash": "8cf6113e3736b93d3b9eea3c73c3ec485b7084c04d57b0ee162a7b334a202f69",
+      "translation": "You can also open it from the menu screen by turning on “Show in Menu Commands.”",
+      "contextHash": "8cf6113e3736b93d3b9eea3c73c3ec485b7084c04d57b0ee162a7b334a202f69"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "複数職業",
+      "sourceHash": "153c73db1b3cc43aec845af68aeedd0960044239374e0fa0b73316869c1247e4",
+      "translation": "Multiple Classes",
+      "contextHash": "153c73db1b3cc43aec845af68aeedd0960044239374e0fa0b73316869c1247e4"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "『複数の職業を使用』をオンにすると、複数の職業へ同時に就けるようになります。それにより、転職時には職業スロットの選択画面が表示されるようになります。",
+      "sourceHash": "94707d78d2c49367744e32eff164e24545542c4c13c8539d0f74f0c2db1e3ad5",
+      "translation": "Turning on \"Use Multiple Classes\" allows an actor to have multiple classes at the same time. This also causes the class slot selection screen to be displayed when changing classes.",
+      "contextHash": "94707d78d2c49367744e32eff164e24545542c4c13c8539d0f74f0c2db1e3ad5"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "※画像が設定されている場合、アクターに適用されるのは先頭の職業だけです。",
+      "sourceHash": "ba3dc767a5b4fafe223a601a9a493fdef8c060e8ca40555005479832d8f6d99c",
+      "translation": "※If an image is set, only the first class is applied to the actor.",
+      "contextHash": "ba3dc767a5b4fafe223a601a9a493fdef8c060e8ca40555005479832d8f6d99c"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※NRP_AdditionalClasses.jsの機能では、ステータス画面に二つまでしか職業を表示できません。",
+      "sourceHash": "5c1c18bcbd7b4909a57e2f702f3be9140de0b74315dbf6ebce745177d86af6ef",
+      "translation": "※NRP_AdditionalClasses.js only allows up to two classes to be displayed on the status screen.",
+      "contextHash": "5c1c18bcbd7b4909a57e2f702f3be9140de0b74315dbf6ebce745177d86af6ef"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+      "sourceHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985",
+      "translation": "Plugin Commands for MZ (PluginCommandMZ)",
+      "contextHash": "946aa8208c9cd247b3536f2a014b425d562e81d98a2aa53188216558adfb3985"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "シーン開始",
+      "sourceHash": "2aa97e25a655180f18fd14290ccf41815e5a62d4ec3f18d3b5b98a9b1f5756ce",
+      "translation": "Scene Start",
+      "contextHash": "2aa97e25a655180f18fd14290ccf41815e5a62d4ec3f18d3b5b98a9b1f5756ce"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "転職画面を呼び出します。",
+      "sourceHash": "90de54f66d501600d93731186ac26744800d49eef87443331831fc7fda4b5e0b",
+      "translation": "Calls up the class change screen.",
+      "contextHash": "90de54f66d501600d93731186ac26744800d49eef87443331831fc7fda4b5e0b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "転職の対象とするアクターを指定可能です。",
+      "sourceHash": "45e99176b175bfc07f69181b9deb1be8ca30318d64c79d65d98ac95d16bf519b",
+      "translation": "You can specify the actor who will change classes.",
+      "contextHash": "45e99176b175bfc07f69181b9deb1be8ca30318d64c79d65d98ac95d16bf519b"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "指定しなかった場合は、アクターの選択画面が事前に表示されます。",
+      "sourceHash": "7442861e48e231502f64147a37efcbf02f60e44b392f795132ff401caf08d8c1",
+      "translation": "If no actor is specified, the actor selection screen will be displayed first.",
+      "contextHash": "7442861e48e231502f64147a37efcbf02f60e44b392f795132ff401caf08d8c1"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "また、追加の職業一覧を指定可能です。",
+      "sourceHash": "22b9f71b3f1e4b20fcc3564bf8cf8377ad1267da419ec07283b0cf04f7b0c634",
+      "translation": "You can also specify an additional list of classes.",
+      "contextHash": "22b9f71b3f1e4b20fcc3564bf8cf8377ad1267da419ec07283b0cf04f7b0c634"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "例えば、特定の場所でのみ転職可能な職業などに便利です。",
+      "sourceHash": "312066ef4e8e8146067e698aaaea7aeb264f395df76fad23cf4321eb0ad29234",
+      "translation": "For example, this is useful for classes that can only be changed to in specific locations.",
+      "contextHash": "312066ef4e8e8146067e698aaaea7aeb264f395df76fad23cf4321eb0ad29234"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "職業のメモ欄（Note of Classes）",
+      "sourceHash": "9df8a2fc21274f3da09e3831ffb27dc9489e590987724452df4356d7077380bc",
+      "translation": "Class Note Field (Note of Classes)",
+      "contextHash": "9df8a2fc21274f3da09e3831ffb27dc9489e590987724452df4356d7077380bc"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "以下のように記述すれば、転職画面に説明が表示されます。",
+      "sourceHash": "b83b1df38d962c4fafd4c904aab827e8a48a385458afb7e020c144602653f640",
+      "translation": "Writing it as shown below will display a description on the class change screen.",
+      "contextHash": "b83b1df38d962c4fafd4c904aab827e8a48a385458afb7e020c144602653f640"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "改行や制御文字も可能です。",
+      "sourceHash": "c11592ed42c6bbae8000c66ac4aa4cbb6fea5126db1ba80b7939afa0749ca8ec",
+      "translation": "Line breaks and control characters are also supported.",
+      "contextHash": "c11592ed42c6bbae8000c66ac4aa4cbb6fea5126db1ba80b7939afa0749ca8ec"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "～表示したい文章～",
+      "sourceHash": "0e489e9eb89bbb379d6c39ac9b948afaedf1a84e9489cc1b585e05acb43d84be",
+      "translation": "~Text you want to display~",
+      "contextHash": "0e489e9eb89bbb379d6c39ac9b948afaedf1a84e9489cc1b585e05acb43d84be"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "職業一覧（ClassList）",
+      "sourceHash": "56afd4bdba563029dfc4e53d5d13783540f1b5ad4acfa4ffc2d6f4374682c56c",
+      "translation": "Class List (ClassList)",
+      "contextHash": "56afd4bdba563029dfc4e53d5d13783540f1b5ad4acfa4ffc2d6f4374682c56c"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "転職の対象となる職業一覧です。",
+      "sourceHash": "2e55257b4931e6c4f484be27f988fda5b87aff262d693b6fa36a9c030a59e885",
+      "translation": "This is the list of classes available for class changes.",
+      "contextHash": "2e55257b4931e6c4f484be27f988fda5b87aff262d693b6fa36a9c030a59e885"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "転職条件なども含めて登録してください。",
+      "sourceHash": "0795e6ba34dc4a87f760de48d9d7b395372202d015a44b44bfa1a618304169bf",
+      "translation": "Please register them, including class change requirements and so on.",
+      "contextHash": "0795e6ba34dc4a87f760de48d9d7b395372202d015a44b44bfa1a618304169bf"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "職業の重複禁止（NoDuplicate）",
+      "sourceHash": "82233e7ee1be04821d082ad1da55ae767d571c34a3c82ef23c176f19c1aec821",
+      "translation": "Prohibit Duplicate Classes (NoDuplicate)",
+      "contextHash": "82233e7ee1be04821d082ad1da55ae767d571c34a3c82ef23c176f19c1aec821"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "同一の職業へ複数のアクターが転職することを禁止します。",
+      "sourceHash": "b68f5c282bdaa6928f192917bac8f5cb72a99a3daf29178d41361b6476adcf43",
+      "translation": "Prevents multiple actors from changing to the same class.",
+      "contextHash": "b68f5c282bdaa6928f192917bac8f5cb72a99a3daf29178d41361b6476adcf43"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "外す用の空欄を追加（AddBlankToLeave）",
+      "sourceHash": "2a5bea047d5d776b8b68233a8b4fec5dfc22dd89da0b792562f5ab3d2d39644f",
+      "translation": "Add a Blank for Leaving (AddBlankToLeave)",
+      "contextHash": "2a5bea047d5d776b8b68233a8b4fec5dfc22dd89da0b792562f5ab3d2d39644f"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "職業を外すための空欄を追加します。",
+      "sourceHash": "16ee509d3e747202d4b5f7bd50d4dde7b5de9be5657d022e0f8d5cb73cdd62b2",
+      "translation": "Adds a blank option for leaving a class.",
+      "contextHash": "16ee509d3e747202d4b5f7bd50d4dde7b5de9be5657d022e0f8d5cb73cdd62b2"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "確認用に選択を挟む（UseClassFocus）",
+      "sourceHash": "d6f3115992a19968f2ee3fa9ad02bc61003fa7892c1da92b971b547ff9128e98",
+      "translation": "Insert a Selection for Confirmation (UseClassFocus)",
+      "contextHash": "d6f3115992a19968f2ee3fa9ad02bc61003fa7892c1da92b971b547ff9128e98"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "転職時に一旦、職業情報を選択状態にします。",
+      "sourceHash": "a5dab2f89d10db38bb290721527b2c9442163411a415a8c3f8fdbfda6866f0b5",
+      "translation": "When changing classes, the class information is first placed in a selected state.",
+      "contextHash": "a5dab2f89d10db38bb290721527b2c9442163411a415a8c3f8fdbfda6866f0b5"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "オフなら即座に転職します。",
+      "sourceHash": "ffa336ce1fb31e52a2fd223e4ddef31382f427021175393b971648c0ad18cd2f",
+      "translation": "If turned off, the class changes immediately.",
+      "contextHash": "ffa336ce1fb31e52a2fd223e4ddef31382f427021175393b971648c0ad18cd2f"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "転職時のメッセージ（ClassChangeMessage）",
+      "sourceHash": "b4df83ac6a6f85001dacfca9a1405fc0fbbbefc6532b0401ed389a3fe5d55759",
+      "translation": "Class Change Message (ClassChangeMessage)",
+      "contextHash": "b4df83ac6a6f85001dacfca9a1405fc0fbbbefc6532b0401ed389a3fe5d55759"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "転職時のメッセージです。",
+      "sourceHash": "e1b6f415f28337d7a82e4f5975d5e5e32c328f332803eed1e3c3183f161374a5",
+      "translation": "The message displayed when changing classes.",
+      "contextHash": "e1b6f415f28337d7a82e4f5975d5e5e32c328f332803eed1e3c3183f161374a5"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "%1=アクター, %2=職業。空白で非表示します。",
+      "sourceHash": "cc5defc8235a2016023e5549d1e310c801f4bf38d771de2d92b372bb13edd291",
+      "translation": "%1=actor, %2=class. Leave blank to hide.",
+      "contextHash": "cc5defc8235a2016023e5549d1e310c801f4bf38d771de2d92b372bb13edd291"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "成功時の効果音（SoundSuccess）",
+      "sourceHash": "0d310af8e0f1b2a16ce720594c29da76c945943d287ee783e5cb6cf8c8f599ad",
+      "translation": "Success Sound Effect (SoundSuccess)",
+      "contextHash": "0d310af8e0f1b2a16ce720594c29da76c945943d287ee783e5cb6cf8c8f599ad"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "転職に成功した際の効果音です。",
+      "sourceHash": "341f5f8e24e207c80afc4a47f9d3cdbdd56facb9aa86d123a8e24512cc423a12",
+      "translation": "The sound effect played when a class change succeeds.",
+      "contextHash": "341f5f8e24e207c80afc4a47f9d3cdbdd56facb9aa86d123a8e24512cc423a12"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "指定がない場合はデフォルトの決定音を鳴らします。",
+      "sourceHash": "ba4a1f707232885677b219ec4219117f08c3ceb4333fa82775d7c7c2436eefc8",
+      "translation": "If none is specified, the default decision sound will be played.",
+      "contextHash": "ba4a1f707232885677b219ec4219117f08c3ceb4333fa82775d7c7c2436eefc8"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "複数の職業を使用（UseMultipleClasses）",
+      "sourceHash": "1a9168b62c4f873f1ddc525f170553a17a66c97ecefdb8c4d969024711ac43da",
+      "translation": "Use Multiple Classes (UseMultipleClasses)",
+      "contextHash": "1a9168b62c4f873f1ddc525f170553a17a66c97ecefdb8c4d969024711ac43da"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "複数の追加職業へ同時に就けるようにします。",
+      "sourceHash": "7da47c2358345e0d60f93a2789da26bf1f2ba8dc33bf774607aa5acb98df7ced",
+      "translation": "Allows the actor to have multiple additional classes at the same time.",
+      "contextHash": "7da47c2358345e0d60f93a2789da26bf1f2ba8dc33bf774607aa5acb98df7ced"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "なお、職業スロットの選択画面が表示されるようになります。",
+      "sourceHash": "5a3f07b54822c50713068a24b86e4811c7162d2741c2a27718e20dd60a9a1321",
+      "translation": "The class slot selection screen will also be displayed.",
+      "contextHash": "5a3f07b54822c50713068a24b86e4811c7162d2741c2a27718e20dd60a9a1321"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "職業スロット数（NumberOfSlots）",
+      "sourceHash": "529eb1980a88a65dd57017bc68bec6a2be2baf389cce01b8b083f57ec1af1350",
+      "translation": "Number of Class Slots (NumberOfSlots)",
+      "contextHash": "529eb1980a88a65dd57017bc68bec6a2be2baf389cce01b8b083f57ec1af1350"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "同時に就ける職業の数です。数式可。",
+      "sourceHash": "c894d4a69c7a9d780eee45e56609d2f5ee93c8c469c21eae0c92cd6a6ed60f0d",
+      "translation": "The number of classes the actor can have at the same time. Formulas are supported.",
+      "contextHash": "c894d4a69c7a9d780eee45e56609d2f5ee93c8c469c21eae0c92cd6a6ed60f0d"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "例えば、以下はスイッチ１００番がオンの時にスロット数が２になる数式です。",
+      "sourceHash": "dfe6dd922be3ef70f1c54895437fb54e05114525c0de8e746bac4bd873d1c51b",
+      "translation": "For example, the following formula sets the number of slots to 2 when Switch 100 is on.",
+      "contextHash": "dfe6dd922be3ef70f1c54895437fb54e05114525c0de8e746bac4bd873d1c51b"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "スロットの重複禁止（NoDuplicateSlots）",
+      "sourceHash": "2ab03bf6cfb835fdbb00b53d11175b71f8a6a2aebf543398e56654053c99ff64",
+      "translation": "Prohibit Duplicate Slots (NoDuplicateSlots)",
+      "contextHash": "2ab03bf6cfb835fdbb00b53d11175b71f8a6a2aebf543398e56654053c99ff64"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "アクターが同じ職業に重ねて転職することを禁止します。",
+      "sourceHash": "dc585cfe9224fcd72506bb1f58ac06c953784fda849d660d74d29f808718c7cd",
+      "translation": "Prevents an actor from changing to the same class in multiple slots.",
+      "contextHash": "dc585cfe9224fcd72506bb1f58ac06c953784fda849d660d74d29f808718c7cd"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "職業の入替許可（SwapClasses）",
+      "sourceHash": "452aeca2eec3b886eda6c9d2aab1f6836f01fc5ce9bdffe968c9e8a3ab72dada",
+      "translation": "Allow Class Swapping (SwapClasses)",
+      "contextHash": "452aeca2eec3b886eda6c9d2aab1f6836f01fc5ce9bdffe968c9e8a3ab72dada"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "スロットの重複禁止がオンの場合、既に就いている職業を選択した場合は入れ替えとして扱います。",
+      "sourceHash": "76636d451591526e53e6f397fbeb99988000f112a25566cf79c27e96e348ca20",
+      "translation": "When Prohibit Duplicate Slots is on, selecting a class the actor already has treats it as a swap.",
+      "contextHash": "76636d451591526e53e6f397fbeb99988000f112a25566cf79c27e96e348ca20"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "外す用の空欄を追加（AddBlankToLeaveSub）",
+      "sourceHash": "c690276953de35dfa2fe0e73640341ef39cf8a90d757baf758deb78f31c2381c",
+      "translation": "Add a Blank for Leaving (AddBlankToLeaveSub)",
+      "contextHash": "c690276953de35dfa2fe0e73640341ef39cf8a90d757baf758deb78f31c2381c"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "サブ職業を外すための空欄を追加します。",
+      "sourceHash": "2ba1dc4340744a529d040fd561c15e869cbb25ba35f26bbd669051e49e8c5460",
+      "translation": "Adds a blank option for leaving a sub-class.",
+      "contextHash": "2ba1dc4340744a529d040fd561c15e869cbb25ba35f26bbd669051e49e8c5460"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "前職を一行表示（PreviousClassOneLine）",
+      "sourceHash": "706e3252215e080a44aace7c56d1ce6bc703451dbda8795e648ce60d007b1e62",
+      "translation": "Display Previous Class on One Line (PreviousClassOneLine)",
+      "contextHash": "706e3252215e080a44aace7c56d1ce6bc703451dbda8795e648ce60d007b1e62"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "スロット選択後、変更前の職業を一行だけ表示するようにします。",
+      "sourceHash": "a7e288b9e8df107905226a7edb9ada923857f479fa15d0157240f61b7e20165c",
+      "translation": "After selecting a slot, displays the class held before the change on a single line.",
+      "contextHash": "a7e288b9e8df107905226a7edb9ada923857f479fa15d0157240f61b7e20165c"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "職業ＩＤで並び替え（SortClassId）",
+      "sourceHash": "0c1abb47defdfb35668c2731d30e9de4abb96b9a1fd38453a8131032827a0526",
+      "translation": "Sort by Class ID (SortClassId)",
+      "contextHash": "0c1abb47defdfb35668c2731d30e9de4abb96b9a1fd38453a8131032827a0526"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "職業ＩＤ順で一覧を並び替えます。",
+      "sourceHash": "70f8aff38be99030c2c6126b58177245a5929f238a379e78ff689cde921488ad",
+      "translation": "Sorts the list by class ID.",
+      "contextHash": "70f8aff38be99030c2c6126b58177245a5929f238a379e78ff689cde921488ad"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "職業一覧の横幅（ClassListWidth）",
+      "sourceHash": "03faab27c436df8a193dc0330bb966fb55535a1f6335c9da838dc5566210e89c",
+      "translation": "Class List Width (ClassListWidth)",
+      "contextHash": "03faab27c436df8a193dc0330bb966fb55535a1f6335c9da838dc5566210e89c"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "職業一覧の横幅です。",
+      "sourceHash": "a3a61cec0a5f007f9bbce29720f74a8d4c405bf6d584b3ca91e5219b80975898",
+      "translation": "The width of the class list.",
+      "contextHash": "a3a61cec0a5f007f9bbce29720f74a8d4c405bf6d584b3ca91e5219b80975898"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "一覧にレベルを表示（DisplayListLevel）",
+      "sourceHash": "8a054e9a2118d785b05f94f9e935dc0c8fbbda57b902aae34a9b6a652a15b0a2",
+      "translation": "Display Levels in List (DisplayListLevel)",
+      "contextHash": "8a054e9a2118d785b05f94f9e935dc0c8fbbda57b902aae34a9b6a652a15b0a2"
+    },
+    {
+      "id": "text-043",
+      "type": "text",
+      "source": "職業一覧にレベルを表示します。",
+      "sourceHash": "88afa9200d763f8b447da1a95b8082ae9c2294809e1306eaa34aa49be09a2473",
+      "translation": "Displays levels in the class list.",
+      "contextHash": "88afa9200d763f8b447da1a95b8082ae9c2294809e1306eaa34aa49be09a2473"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "説明文のフォントサイズ（MessageFontSize）",
+      "sourceHash": "b650c915dccdb3acee7872c0cc2a5cd0c454655ea71196945d66b24ca75f753b",
+      "translation": "Description Text Font Size (MessageFontSize)",
+      "contextHash": "b650c915dccdb3acee7872c0cc2a5cd0c454655ea71196945d66b24ca75f753b"
+    },
+    {
+      "id": "text-044",
+      "type": "text",
+      "source": "職業の説明文のフォントサイズです。",
+      "sourceHash": "9afe0767ccc38f9e75d0b60587ea562d67f61427beda6f2f200d998d13c04056",
+      "translation": "The font size of the class description text.",
+      "contextHash": "9afe0767ccc38f9e75d0b60587ea562d67f61427beda6f2f200d998d13c04056"
+    },
+    {
+      "id": "text-045",
+      "type": "text",
+      "source": "未指定ならシステム設定を使います。",
+      "sourceHash": "a74802bc1897e155a2ba344cb3587909808818af7815a99ac70b2950fb549083",
+      "translation": "If unspecified, the system setting is used.",
+      "contextHash": "a74802bc1897e155a2ba344cb3587909808818af7815a99ac70b2950fb549083"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "表示するパラメータ（DisplayParameters）",
+      "sourceHash": "bcbb9070098006c3e79d24d33617ae1df8dc1a79243bb5c27334fa1157dd0aab",
+      "translation": "Parameters to Display (DisplayParameters)",
+      "contextHash": "bcbb9070098006c3e79d24d33617ae1df8dc1a79243bb5c27334fa1157dd0aab"
+    },
+    {
+      "id": "text-046",
+      "type": "text",
+      "source": "表示するパラメータです。",
+      "sourceHash": "332b44f25dd1bb0d8d306963299cbc245b3827dd9a08005e93af2b52086f73ef",
+      "translation": "The parameters to display.",
+      "contextHash": "332b44f25dd1bb0d8d306963299cbc245b3827dd9a08005e93af2b52086f73ef"
+    },
+    {
+      "id": "text-047",
+      "type": "text",
+      "source": "初期値：0,1,2,3,4,5,6,7",
+      "sourceHash": "baef80c4a3ef4de186ae3c3d2e5b2f5950d7cb117af1abbf686ff1903fdecc79",
+      "translation": "Default: 0,1,2,3,4,5,6,7",
+      "contextHash": "baef80c4a3ef4de186ae3c3d2e5b2f5950d7cb117af1abbf686ff1903fdecc79"
+    },
+    {
+      "id": "text-048",
+      "type": "text",
+      "source": "0:最大ＨＰ～7:運となります。",
+      "sourceHash": "6bf2100e04c4da62ad97d57b2de615ca23a5855b185c4f940bdc8327a1ca4eb9",
+      "translation": "0: Max HP through 7: Luck.",
+      "contextHash": "6bf2100e04c4da62ad97d57b2de615ca23a5855b185c4f940bdc8327a1ca4eb9"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "パラメータのﾌｫﾝﾄｻｲｽﾞ（ParamFontSize）",
+      "sourceHash": "c7b8ece2bc95d10493a0e776b1fafe364186016b9487f8e247d2f0f6453ec8b5",
+      "translation": "Parameter Font Size (ParamFontSize)",
+      "contextHash": "c7b8ece2bc95d10493a0e776b1fafe364186016b9487f8e247d2f0f6453ec8b5"
+    },
+    {
+      "id": "text-049",
+      "type": "text",
+      "source": "職業のパラメータのフォントサイズです。",
+      "sourceHash": "472c24eb2e45e09e5a382343f4b535a84773a19ddc7103db2c093c0f9d8dba3e",
+      "translation": "The font size of the class parameters.",
+      "contextHash": "472c24eb2e45e09e5a382343f4b535a84773a19ddc7103db2c093c0f9d8dba3e"
+    },
+    {
+      "id": "text-050",
+      "type": "text",
+      "source": "未指定ならシステム設定を使います。",
+      "sourceHash": "a74802bc1897e155a2ba344cb3587909808818af7815a99ac70b2950fb549083",
+      "translation": "If unspecified, the system setting is used.",
+      "contextHash": "a74802bc1897e155a2ba344cb3587909808818af7815a99ac70b2950fb549083"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "パラメータの一行縦幅（ParamLineHeight）",
+      "sourceHash": "166b5ae17bb053c41ad717201fa5b3627a8397245db2d36c641ddd914016f40b",
+      "translation": "Parameter Line Height (ParamLineHeight)",
+      "contextHash": "166b5ae17bb053c41ad717201fa5b3627a8397245db2d36c641ddd914016f40b"
+    },
+    {
+      "id": "text-051",
+      "type": "text",
+      "source": "職業のパラメータの一行の縦幅です。",
+      "sourceHash": "c6a51dfa15f390c1ecc689483f19c95d5e7cb03fdeaec467564150b76db67da2",
+      "translation": "The line height for the class parameters.",
+      "contextHash": "c6a51dfa15f390c1ecc689483f19c95d5e7cb03fdeaec467564150b76db67da2"
+    },
+    {
+      "id": "text-052",
+      "type": "text",
+      "source": "初期値は36。",
+      "sourceHash": "3b78f0a5253467a13f42862e536efdbc0b002eaebc308025928dda2f76c39490",
+      "translation": "The default value is 36.",
+      "contextHash": "3b78f0a5253467a13f42862e536efdbc0b002eaebc308025928dda2f76c39490"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "通常経験値を非表示（HideNormalExp）",
+      "sourceHash": "5d0030e1b95ca32686b23e6896d1412ebcace680272ec90c4e2f9b294449bf27",
+      "translation": "Hide Normal EXP (HideNormalExp)",
+      "contextHash": "5d0030e1b95ca32686b23e6896d1412ebcace680272ec90c4e2f9b294449bf27"
+    },
+    {
+      "id": "text-053",
+      "type": "text",
+      "source": "通常経験値を非表示にします。",
+      "sourceHash": "87b2403090e869f4b95bb0ef069af6ae7c6e547790765e998307e5a47a6cb850",
+      "translation": "Hides normal EXP.",
+      "contextHash": "87b2403090e869f4b95bb0ef069af6ae7c6e547790765e998307e5a47a6cb850"
+    },
+    {
+      "id": "text-054",
+      "type": "text",
+      "source": "※職業を空欄にする際に表示される項目です。",
+      "sourceHash": "d980aeef74032be04463a94a45a61e674f6e7f7fb5c016c594c64a12a07c24ad",
+      "translation": "※This item is displayed when the class is left blank.",
+      "contextHash": "d980aeef74032be04463a94a45a61e674f6e7f7fb5c016c594c64a12a07c24ad"
+    },
+    {
+      "id": "text-055",
+      "type": "text",
+      "source": "経験値曲線を変更するプラグインなどと組み合わせた際、レイアウトに収まらない場合があるので、その場合は非表示にしてしまうことをオススメします。",
+      "sourceHash": "460391367cf00b9110dd84afc759490e8e7386e68821e12ce29cb8250819b846",
+      "translation": "When combined with a plugin that changes the EXP curve, the layout may not fit. In that case, I recommend hiding it.",
+      "contextHash": "460391367cf00b9110dd84afc759490e8e7386e68821e12ce29cb8250819b846"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "職業画像一覧（ClassImageList）",
+      "sourceHash": "055d8afd86675c954fa29dfd6b327c97ba7024dda8a1cd18692dd96e06e86a58",
+      "translation": "Class Image List (ClassImageList)",
+      "contextHash": "055d8afd86675c954fa29dfd6b327c97ba7024dda8a1cd18692dd96e06e86a58"
+    },
+    {
+      "id": "text-056",
+      "type": "text",
+      "source": "職業やアクター毎に画像を設定するリストです。",
+      "sourceHash": "60b7107cb7b13d5bc9ebda5b46390fb8013d0fbf074165c0eeab7c0b5bbd7acd",
+      "translation": "A list for setting images for each class or actor.",
+      "contextHash": "60b7107cb7b13d5bc9ebda5b46390fb8013d0fbf074165c0eeab7c0b5bbd7acd"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "画像を他画面に反映（UseClassImage）",
+      "sourceHash": "c0e992a8fbc60f601cbe740954b903670b9cea2e4181cb45ffdb7d8ed8c06567",
+      "translation": "Apply Images to Other Screens (UseClassImage)",
+      "contextHash": "c0e992a8fbc60f601cbe740954b903670b9cea2e4181cb45ffdb7d8ed8c06567"
+    },
+    {
+      "id": "text-057",
+      "type": "text",
+      "source": "職業画像一覧に設定した画像（ピクチャー以外）を、戦闘やメニューなどにも反映します。",
+      "sourceHash": "ccb49d4c2ee4fa8d65d180301ccde9f562dd478f79c9e6c8e8b6ed34715de0bc",
+      "translation": "Applies images set in the class image list (excluding pictures) to battles, menus, and other screens.",
+      "contextHash": "ccb49d4c2ee4fa8d65d180301ccde9f562dd478f79c9e6c8e8b6ed34715de0bc"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "画像配置の左右反転（ReverseImagePos）",
+      "sourceHash": "22c3a53c1c76ccf3b3cde4a767236dfc0fb2dcd6a4139c5ea7ad32ce82ceadae",
+      "translation": "Flip Image Placement Horizontally (ReverseImagePos)",
+      "contextHash": "22c3a53c1c76ccf3b3cde4a767236dfc0fb2dcd6a4139c5ea7ad32ce82ceadae"
+    },
+    {
+      "id": "text-058",
+      "type": "text",
+      "source": "パラメータと画像の配置を左右反転します。",
+      "sourceHash": "fd18ba87bfdc112151d762b2b007e3b98c08cbb755f203b3c19eee355e7ee393",
+      "translation": "Flips the placement of the parameters and image horizontally.",
+      "contextHash": "fd18ba87bfdc112151d762b2b007e3b98c08cbb755f203b3c19eee355e7ee393"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "ピクチャーのｽｸﾛｰﾙ連動（PictureOnScroll）",
+      "sourceHash": "f8c8541b299831457fe449ef0e4351333e888132d646c4c162c21860fefcb357",
+      "translation": "Picture Scroll Synchronization (PictureOnScroll)",
+      "contextHash": "f8c8541b299831457fe449ef0e4351333e888132d646c4c162c21860fefcb357"
+    },
+    {
+      "id": "text-059",
+      "type": "text",
+      "source": "ピクチャーを上下のスクロールに連動します。",
+      "sourceHash": "4cc0a628a44a193684d994b09bee885a858a7cb25ee28d9ad9b8846572b38c2d",
+      "translation": "Synchronizes the picture with vertical scrolling.",
+      "contextHash": "4cc0a628a44a193684d994b09bee885a858a7cb25ee28d9ad9b8846572b38c2d"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "ピクチャーＸ補正（PictureAdjustX）",
+      "sourceHash": "bf3183d8afbaf6ef8004f91ed9212e09abf2bba25f91cfac64d74f34464445e4",
+      "translation": "Picture X Adjustment (PictureAdjustX)",
+      "contextHash": "bf3183d8afbaf6ef8004f91ed9212e09abf2bba25f91cfac64d74f34464445e4"
+    },
+    {
+      "id": "text-060",
+      "type": "text",
+      "source": "ピクチャーを表示するＸ座標を調整します。",
+      "sourceHash": "b91985f2516f7024c58cc4fcf1f9f641a098e70e2f62e19a77ba73e32ac2c3e4",
+      "translation": "Adjusts the X coordinate at which the picture is displayed.",
+      "contextHash": "b91985f2516f7024c58cc4fcf1f9f641a098e70e2f62e19a77ba73e32ac2c3e4"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "ピクチャーＹ補正（PictureAdjustY）",
+      "sourceHash": "6802078f12ec5829c25658c0b72a80f5b58e4b9ded3c0584752c9e073ec4cea2",
+      "translation": "Picture Y Adjustment (PictureAdjustY)",
+      "contextHash": "6802078f12ec5829c25658c0b72a80f5b58e4b9ded3c0584752c9e073ec4cea2"
+    },
+    {
+      "id": "text-061",
+      "type": "text",
+      "source": "ピクチャーを表示するＹ座標を調整します。",
+      "sourceHash": "cda903d9fbc69633b44c4899b9b5885f52bd55f0c19e450511be1ac32c9f6c91",
+      "translation": "Adjusts the Y coordinate at which the picture is displayed.",
+      "contextHash": "cda903d9fbc69633b44c4899b9b5885f52bd55f0c19e450511be1ac32c9f6c91"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "ピクチャー不透明度（PictureOpacity）",
+      "sourceHash": "6de688f5318752d8dcf92e3d5d398a83f1faea7c46b1b4273c7d69777989b68f",
+      "translation": "Picture Opacity (PictureOpacity)",
+      "contextHash": "6de688f5318752d8dcf92e3d5d398a83f1faea7c46b1b4273c7d69777989b68f"
+    },
+    {
+      "id": "text-062",
+      "type": "text",
+      "source": "ピクチャーの不透明度です。",
+      "sourceHash": "d0186eba7379207f7ea052e77e05132977539b676d2f4f02598a47a67e4b551b",
+      "translation": "The opacity of the picture.",
+      "contextHash": "d0186eba7379207f7ea052e77e05132977539b676d2f4f02598a47a67e4b551b"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "習得スキルの表示位置（ShowSkillsType）",
+      "sourceHash": "78ca9ea472f5db38040d52c46217f30a107ca6535fd7b4f9142ae8e640a6a516",
+      "translation": "Learned Skill Display Position (ShowSkillsType)",
+      "contextHash": "78ca9ea472f5db38040d52c46217f30a107ca6535fd7b4f9142ae8e640a6a516"
+    },
+    {
+      "id": "text-063",
+      "type": "text",
+      "source": "職業情報に習得スキルを表示する配置を設定します。",
+      "sourceHash": "e8f78c724e5afda102265b920d645e6b83b97d51e700354be5883aaa4e27534f",
+      "translation": "Sets where learned skills are displayed in the class information.",
+      "contextHash": "e8f78c724e5afda102265b920d645e6b83b97d51e700354be5883aaa4e27534f"
+    },
+    {
+      "id": "text-064",
+      "type": "text",
+      "source": "デフォルトの『別ページに表示』の場合、左右でページを切り替えられます。",
+      "sourceHash": "610b9abd442618185ed217f28201dada07e03be46af122dcd99972d085cf83e9",
+      "translation": "With the default “Display on a separate page,” you can switch pages left and right.",
+      "contextHash": "610b9abd442618185ed217f28201dada07e03be46af122dcd99972d085cf83e9"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "未習得のスキル表示（ShowUnlearnedSkills）",
+      "sourceHash": "7135e4d9873df4833881a3d36e3419c87056ee82c9c4fdd124b0207756dcbc94",
+      "translation": "Display Unlearned Skills (ShowUnlearnedSkills)",
+      "contextHash": "7135e4d9873df4833881a3d36e3419c87056ee82c9c4fdd124b0207756dcbc94"
+    },
+    {
+      "id": "text-065",
+      "type": "text",
+      "source": "職業情報に未習得のスキルを表示するかどうかを設定できます。",
+      "sourceHash": "33ef1676308b9ae10b840ff66f5846b298dddf29dcae12af031a0e5ea7bd6cdf",
+      "translation": "Sets whether unlearned skills are displayed in the class information.",
+      "contextHash": "33ef1676308b9ae10b840ff66f5846b298dddf29dcae12af031a0e5ea7bd6cdf"
+    },
+    {
+      "id": "text-066",
+      "type": "text",
+      "source": "デフォルトの『マスク表示』では、未習得のスキルを？？？？？で表示します。",
+      "sourceHash": "94b20c0e371cb3260a89e286bf299fe02923fd59d99e80dbe4a8b0a4b684dd9f",
+      "translation": "With the default “Masked Display,” unlearned skills are displayed as ?????.",
+      "contextHash": "94b20c0e371cb3260a89e286bf299fe02923fd59d99e80dbe4a8b0a4b684dd9f"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "スキルのフォントサイズ（SkillFontSize）",
+      "sourceHash": "94e64ee006eecc793b357646bd1825920a02c5328329b2c7c39bcf643165f4d0",
+      "translation": "Skill Font Size (SkillFontSize)",
+      "contextHash": "94e64ee006eecc793b357646bd1825920a02c5328329b2c7c39bcf643165f4d0"
+    },
+    {
+      "id": "text-067",
+      "type": "text",
+      "source": "スキル名のフォントサイズです。未指定ならシステム設定を使います。",
+      "sourceHash": "031b9ebb889add55fae7bbc45b510eedd128b6d395ce142e915fe262e1cf6a6a",
+      "translation": "The font size of skill names. If unspecified, the system setting is used.",
+      "contextHash": "031b9ebb889add55fae7bbc45b510eedd128b6d395ce142e915fe262e1cf6a6a"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "メニューコマンドに表示（ShowMenuCommand）",
+      "sourceHash": "4eed4339f37cbc719335d18cab6a52dde015c49b34c55352bf1271d7ff1d0d86",
+      "translation": "Display in Menu Commands (ShowMenuCommand)",
+      "contextHash": "4eed4339f37cbc719335d18cab6a52dde015c49b34c55352bf1271d7ff1d0d86"
+    },
+    {
+      "id": "text-068",
+      "type": "text",
+      "source": "メニューコマンドに転職を追加します。",
+      "sourceHash": "40e7b3a36d4b2c9d61391e41c926d60b1827409cdb77aa5d183eff7015b84d0c",
+      "translation": "Adds class change to the menu commands.",
+      "contextHash": "40e7b3a36d4b2c9d61391e41c926d60b1827409cdb77aa5d183eff7015b84d0c"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+      "sourceHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956",
+      "translation": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+      "contextHash": "a34ca3d1a29f900fe2736c10b07d47f6c00b0c643f1cc764fb7c7ceffb25f956"
+    },
+    {
+      "id": "text-069",
+      "type": "text",
+      "source": "メニューコマンドに転職を挿入する位置です。",
+      "sourceHash": "623c858a9609a25253558920eab1a2b51517b47c361892cf1edaf1e591fcb2ac",
+      "translation": "The position at which class change is inserted into the menu commands.",
+      "contextHash": "623c858a9609a25253558920eab1a2b51517b47c361892cf1edaf1e591fcb2ac"
+    },
+    {
+      "id": "text-070",
+      "type": "text",
+      "source": "0が先頭になります。",
+      "sourceHash": "6579e828acbb15a63d25e6819700e380e51a1123f911dc906cec92706543a301",
+      "translation": "0 is the first position.",
+      "contextHash": "6579e828acbb15a63d25e6819700e380e51a1123f911dc906cec92706543a301"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "転職表示名（ClassChangeName）",
+      "sourceHash": "6885248a978aaca10e87b4e2b7226c17838fd6e92edd3010adb9e7439dfd6d9e",
+      "translation": "Class Change Display Name (ClassChangeName)",
+      "contextHash": "6885248a978aaca10e87b4e2b7226c17838fd6e92edd3010adb9e7439dfd6d9e"
+    },
+    {
+      "id": "text-071",
+      "type": "text",
+      "source": "転職の表示コマンド名を設定します。",
+      "sourceHash": "9f0eee80f1235a4b0b26dce90689f81e1a10f8c1887fec663220f027e5ef0134",
+      "translation": "Sets the displayed command name for class change.",
+      "contextHash": "9f0eee80f1235a4b0b26dce90689f81e1a10f8c1887fec663220f027e5ef0134"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "表示許可するスイッチ（MenuCommandSwitch）",
+      "sourceHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81",
+      "translation": "Switch Required for Display (MenuCommandSwitch)",
+      "contextHash": "677642406f8188734fb716c31e6539945288b9dca0f55a4bcbd5e215b6e4ff81"
+    },
+    {
+      "id": "text-072",
+      "type": "text",
+      "source": "スイッチがオンの時のみコマンドを表示します。",
+      "sourceHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7",
+      "translation": "Displays the command only when the switch is on.",
+      "contextHash": "371a7bb065d6db9cec762049c83c0e95b8813e8aabcdeaacf551c44168e695e7"
+    },
+    {
+      "id": "text-073",
+      "type": "text",
+      "source": "空白なら常に表示します。",
+      "sourceHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e",
+      "translation": "If left blank, it is always displayed.",
+      "contextHash": "f2a7c3f788bcd97cbcf698eae82dc09a3875f7fd59d84368c91868b5cc627e0e"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "マスク文字列（MaskString）",
+      "sourceHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d",
+      "translation": "Mask String (MaskString)",
+      "contextHash": "56b6197e71a7f06e6a68e89996f1e2cf10f2a068aa4049c411e7e21d27484f8d"
+    },
+    {
+      "id": "text-074",
+      "type": "text",
+      "source": "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。",
+      "sourceHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a",
+      "translation": "When the display permission switch is off, the command is displayed with the specified text.",
+      "contextHash": "bf3b202e9a000b6d55524665729c594803600ce1ebbfd630efbdf623d994c62a"
+    },
+    {
+      "id": "text-075",
+      "type": "text",
+      "source": "例えば、機能を解放する前のコマンドを「？？？？」というように表示できます。",
+      "sourceHash": "75696b12a6253dd295d1dab97ac71874a2abb1e9b8f30d1a95a552de6558a0dd",
+      "translation": "For example, you can display a command for a feature that has not yet been unlocked as “????”.",
+      "contextHash": "75696b12a6253dd295d1dab97ac71874a2abb1e9b8f30d1a95a552de6558a0dd"
+    },
+    {
+      "id": "text-076",
+      "type": "text",
+      "source": "空欄ならコマンド自体を非表示にします。",
+      "sourceHash": "ee543d903862b4cbd50cad343433c27785dd0c199f3cbf821571e72ec2cc2f94",
+      "translation": "If left blank, the command itself is hidden.",
+      "contextHash": "ee543d903862b4cbd50cad343433c27785dd0c199f3cbf821571e72ec2cc2f94"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "禁止するスイッチ（DisableSwitch）",
+      "sourceHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b",
+      "translation": "Disable Switch (DisableSwitch)",
+      "contextHash": "701f5d7abb13434cd1c9d5d486797bc5069ad40d201f4ae9219ebda2bc8cb70b"
+    },
+    {
+      "id": "text-077",
+      "type": "text",
+      "source": "スイッチがオンの時のみコマンドを禁止（灰色）します。",
+      "sourceHash": "222a12005dd77b43d982d7401dfca08e54a186b66a285aeb7bf82353668dfce1",
+      "translation": "The command is disabled (grayed out) only when the switch is on.",
+      "contextHash": "222a12005dd77b43d982d7401dfca08e54a186b66a285aeb7bf82353668dfce1"
+    },
+    {
+      "id": "text-078",
+      "type": "text",
+      "source": "空白なら常に許可します。",
+      "sourceHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333",
+      "translation": "If left blank, it is always allowed.",
+      "contextHash": "cb3a37aec40df500dbc65cc05da1b039b6cd81979c7fb480c368e5a25c651333"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "[上級]転職記号（ClassChangeSymbol）",
+      "sourceHash": "4de652137fdc5d965ac0ff68e5b7e4b7859f16d6456248e594765708b13086de",
+      "translation": "[Advanced] Class Change Symbol (ClassChangeSymbol)",
+      "contextHash": "4de652137fdc5d965ac0ff68e5b7e4b7859f16d6456248e594765708b13086de"
+    },
+    {
+      "id": "text-079",
+      "type": "text",
+      "source": "転職の記号を設定します。",
+      "sourceHash": "5bb7262d91d90f82f601671addc4f86ef5fa47e1ee7acbca4764d170dfbafb69",
+      "translation": "Sets the class change symbol.",
+      "contextHash": "5bb7262d91d90f82f601671addc4f86ef5fa47e1ee7acbca4764d170dfbafb69"
+    },
+    {
+      "id": "text-080",
+      "type": "text",
+      "source": "この値は他のプラグインと連携する際に使用できます。",
+      "sourceHash": "c3da54dadc711224f6ce7600bf45880f4ed48400f8b9d98c84fbdbe460558efd",
+      "translation": "This value can be used when integrating with other plugins.",
+      "contextHash": "c3da54dadc711224f6ce7600bf45880f4ed48400f8b9d98c84fbdbe460558efd"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "参照専用（ReadOnlyMenu）",
+      "sourceHash": "e90b83cc0a549bdde02cd40b508ea41b4b97d976e0015a35b8d866372dc319d4",
+      "translation": "Read-Only (ReadOnlyMenu)",
+      "contextHash": "e90b83cc0a549bdde02cd40b508ea41b4b97d976e0015a35b8d866372dc319d4"
+    },
+    {
+      "id": "text-081",
+      "type": "text",
+      "source": "転職コマンドを参照専用にします。",
+      "sourceHash": "aac014a0c4462faf6b3a1c98d9a81933366056038d85361aea87f073258849fa",
+      "translation": "Makes the class change command read-only.",
+      "contextHash": "aac014a0c4462faf6b3a1c98d9a81933366056038d85361aea87f073258849fa"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "現職以外も表示（ReadOnlyMenuOther）",
+      "sourceHash": "51bf96420f61c5121543345ba51def911ce35caacedea10190d7ed9b9ee5397a",
+      "translation": "Display Other Classes (ReadOnlyMenuOther)",
+      "contextHash": "51bf96420f61c5121543345ba51def911ce35caacedea10190d7ed9b9ee5397a"
+    },
+    {
+      "id": "text-082",
+      "type": "text",
+      "source": "転職コマンドを参照専用にした際、転職先の候補も表示します。",
+      "sourceHash": "e06cea24ecd1af6475399e9704211cc22a4268b051088db1ca2faba370acd30b",
+      "translation": "When the class change command is read-only, candidates for the destination class are also displayed.",
+      "contextHash": "e06cea24ecd1af6475399e9704211cc22a4268b051088db1ca2faba370acd30b"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "プラグインパラメータ（職業一覧）",
+      "sourceHash": "30444b770da10a7cb626218e15569b038f86f94e925bc3dccfcc174bb6d98347",
+      "translation": "Plugin Parameters (Class List)",
+      "contextHash": "30444b770da10a7cb626218e15569b038f86f94e925bc3dccfcc174bb6d98347"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "職業（Class）",
+      "sourceHash": "0dd509c433b851d3ece0dd8e402d3f41979306ceaef6697f3313a45ecd801264",
+      "translation": "Class (Class)",
+      "contextHash": "0dd509c433b851d3ece0dd8e402d3f41979306ceaef6697f3313a45ecd801264"
+    },
+    {
+      "id": "text-083",
+      "type": "text",
+      "source": "転職対象とする職業です。",
+      "sourceHash": "94b169fef34dc60b4dd9a3c586cc32b88ac6482171c4939e2f18af8de2a450a4",
+      "translation": "The class targeted for class change.",
+      "contextHash": "94b169fef34dc60b4dd9a3c586cc32b88ac6482171c4939e2f18af8de2a450a4"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "アクター（配列）（Actors）",
+      "sourceHash": "e0760902dcfe5db3134b4208173f9358d101412778dd6299fcd8448267a13a85",
+      "translation": "Actors (Array) (Actors)",
+      "contextHash": "e0760902dcfe5db3134b4208173f9358d101412778dd6299fcd8448267a13a85"
+    },
+    {
+      "id": "text-084",
+      "type": "text",
+      "source": "転職を許可するアクターの候補です。",
+      "sourceHash": "09ebd1b7659bef78288b7e2f1af40e470cc667d4802635a5d09d6c3648434ff1",
+      "translation": "Candidates for actors who are allowed to change class.",
+      "contextHash": "09ebd1b7659bef78288b7e2f1af40e470cc667d4802635a5d09d6c3648434ff1"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "text-085",
+      "type": "text",
+      "source": "転職条件となるスイッチです。",
+      "sourceHash": "ccbfe12ad0c5adf9d1433966de0215774f4e7d161dfbeb6ddc906b3dcf26d1a4",
+      "translation": "The switch used as a class change condition.",
+      "contextHash": "ccbfe12ad0c5adf9d1433966de0215774f4e7d161dfbeb6ddc906b3dcf26d1a4"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "アイテム（Item）",
+      "sourceHash": "b2c3a54e81aa48f954aa484c841a252aa6fe8e0a1242a16ee5549ef04112699e",
+      "translation": "Item (Item)",
+      "contextHash": "b2c3a54e81aa48f954aa484c841a252aa6fe8e0a1242a16ee5549ef04112699e"
+    },
+    {
+      "id": "text-086",
+      "type": "text",
+      "source": "転職条件となるアイテムです。",
+      "sourceHash": "2db70e605e7fd6982329f0fd09dd76006da9946ba52671709fac8bcb29a20a5e",
+      "translation": "The item used as a class change condition.",
+      "contextHash": "2db70e605e7fd6982329f0fd09dd76006da9946ba52671709fac8bcb29a20a5e"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "職業情報（配列）（ClassInfo）",
+      "sourceHash": "67cb87136b1cbc3d5d63fe46ee59c2c3c76649a88f1d6d5b2e48a83e913fdf1d",
+      "translation": "Class Information (Array) (ClassInfo)",
+      "contextHash": "67cb87136b1cbc3d5d63fe46ee59c2c3c76649a88f1d6d5b2e48a83e913fdf1d"
+    },
+    {
+      "id": "text-087",
+      "type": "text",
+      "source": "転職条件となる職業情報です。",
+      "sourceHash": "e1a8ef5a2c2d1faf93b1aa7de94a328c360d12bdc0a3ec4e1a9247ebb792107a",
+      "translation": "Class information used as a class change condition.",
+      "contextHash": "e1a8ef5a2c2d1faf93b1aa7de94a328c360d12bdc0a3ec4e1a9247ebb792107a"
+    },
+    {
+      "id": "text-088",
+      "type": "text",
+      "source": "職業とレベルを指定可能です。",
+      "sourceHash": "07a5fe307ed519e347570969f2e0d854e2e49f3f7fae7eb44e1089b8c90a2016",
+      "translation": "You can specify a class and level.",
+      "contextHash": "07a5fe307ed519e347570969f2e0d854e2e49f3f7fae7eb44e1089b8c90a2016"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "スクリプト（Script）",
+      "sourceHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac",
+      "translation": "Script (Script)",
+      "contextHash": "6c9f87dece54fc9e3b7d05daea689046806d4b618be399a6c1e23b9999cf45ac"
+    },
+    {
+      "id": "text-089",
+      "type": "text",
+      "source": "転職条件となるスクリプトです。",
+      "sourceHash": "ed5c80958cae2859edfd63bdb3d4cefb1d4933f71f73f780932d6741ccc93530",
+      "translation": "The script used as a class change condition.",
+      "contextHash": "ed5c80958cae2859edfd63bdb3d4cefb1d4933f71f73f780932d6741ccc93530"
+    },
+    {
+      "id": "text-090",
+      "type": "text",
+      "source": "例：a.level >= 10",
+      "sourceHash": "b34eb2a25bad0cd2337752dc672c064eb64089670c01df575a630815228f0db9",
+      "translation": "Example: a.level >= 10",
+      "contextHash": "b34eb2a25bad0cd2337752dc672c064eb64089670c01df575a630815228f0db9"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "プラグインパラメータ（職業画像一覧）",
+      "sourceHash": "30aaab3d049de30d4edeca6dc9f432e44cf145dcb3cf1af2d2d1fc489ccf896e",
+      "translation": "Plugin Parameters (Class Image List)",
+      "contextHash": "30aaab3d049de30d4edeca6dc9f432e44cf145dcb3cf1af2d2d1fc489ccf896e"
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "職業（Class）",
+      "sourceHash": "0dd509c433b851d3ece0dd8e402d3f41979306ceaef6697f3313a45ecd801264",
+      "translation": "Class (Class)",
+      "contextHash": "0dd509c433b851d3ece0dd8e402d3f41979306ceaef6697f3313a45ecd801264"
+    },
+    {
+      "id": "text-091",
+      "type": "text",
+      "source": "対象の職業です。",
+      "sourceHash": "d0130627c33aa67545e4ba7e42ef5efc24adace7465feb511eb489b09a339ef8",
+      "translation": "The target class.",
+      "contextHash": "d0130627c33aa67545e4ba7e42ef5efc24adace7465feb511eb489b09a339ef8"
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "アクター（Actor）",
+      "sourceHash": "d1e3e4fa9d9b0c34d66f166c920e68a3c66cedd376e694ab51fa390bb71ac00b",
+      "translation": "Actor (Actor)",
+      "contextHash": "d1e3e4fa9d9b0c34d66f166c920e68a3c66cedd376e694ab51fa390bb71ac00b"
+    },
+    {
+      "id": "text-092",
+      "type": "text",
+      "source": "対象のアクターです。",
+      "sourceHash": "80d65b77edf90e27d6d34950c4f3fc64503be5d304e605720e4bfcfa70248cd0",
+      "translation": "The target actor.",
+      "contextHash": "80d65b77edf90e27d6d34950c4f3fc64503be5d304e605720e4bfcfa70248cd0"
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "顔グラフィック（Face）",
+      "sourceHash": "2cb1a0d79402d3b4a872a30723fe309c3b03375131ff1dbeb5cda8e3537033ff",
+      "translation": "Face Graphic (Face)",
+      "contextHash": "2cb1a0d79402d3b4a872a30723fe309c3b03375131ff1dbeb5cda8e3537033ff"
+    },
+    {
+      "id": "text-093",
+      "type": "text",
+      "source": "表示する顔グラフィックのファイルです。",
+      "sourceHash": "cc3423a20aae97670098542cdabf2a51bd526290defec0ae1a42c0e10dc2abb0",
+      "translation": "The file for the face graphic to display.",
+      "contextHash": "cc3423a20aae97670098542cdabf2a51bd526290defec0ae1a42c0e10dc2abb0"
+    },
+    {
+      "id": "text-094",
+      "type": "text",
+      "source": "下のインデックスと組み合わせてください。",
+      "sourceHash": "cfa6a12176bb62eaeecf9d72b915877cd1211124500bc11ff0a754274cb32bc1",
+      "translation": "Use it together with the index below.",
+      "contextHash": "cfa6a12176bb62eaeecf9d72b915877cd1211124500bc11ff0a754274cb32bc1"
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "顔インデックス（FaceIndex）",
+      "sourceHash": "c2f47da5dfb24a75dd5ef072ba86008dd14099fddd8eac9837f407979deff425",
+      "translation": "Face Index (FaceIndex)",
+      "contextHash": "c2f47da5dfb24a75dd5ef072ba86008dd14099fddd8eac9837f407979deff425"
+    },
+    {
+      "id": "text-095",
+      "type": "text",
+      "source": "顔グラフィックのインデックスです。",
+      "sourceHash": "cb711c8eb91311088ddd49e509a0ff68c44f65a1588d8f1a3d8241a4abbafa8c",
+      "translation": "The face graphic index.",
+      "contextHash": "cb711c8eb91311088ddd49e509a0ff68c44f65a1588d8f1a3d8241a4abbafa8c"
+    },
+    {
+      "id": "text-096",
+      "type": "text",
+      "source": "顔グラフィックを省略すると現在のファイルを使用します。",
+      "sourceHash": "b03038451cfe496617e89b24111cf103f2b298ce388361534fad4716c1684fd3",
+      "translation": "If no face graphic is specified, the current file is used.",
+      "contextHash": "b03038451cfe496617e89b24111cf103f2b298ce388361534fad4716c1684fd3"
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "ピクチャー（Picture）",
+      "sourceHash": "6ae4f64fa7c24bfdee6dd201490d51fe94e3d65bb9d5bbbc69a9da7d2d4dc594",
+      "translation": "Picture (Picture)",
+      "contextHash": "6ae4f64fa7c24bfdee6dd201490d51fe94e3d65bb9d5bbbc69a9da7d2d4dc594"
+    },
+    {
+      "id": "text-097",
+      "type": "text",
+      "source": "表示するピクチャーを指定します。",
+      "sourceHash": "d87ac1b5b95b62531f7e80eca17d4708810def72b49eb54cb32990b968bbe83d",
+      "translation": "Specifies the picture to display.",
+      "contextHash": "d87ac1b5b95b62531f7e80eca17d4708810def72b49eb54cb32990b968bbe83d"
+    },
+    {
+      "id": "text-098",
+      "type": "text",
+      "source": "顔グラフィックよりも優先されます。",
+      "sourceHash": "3622163ebedf1490c22e4bdc138b896ef4112fc07d623380c2357d288a202488",
+      "translation": "Takes priority over the face graphic.",
+      "contextHash": "3622163ebedf1490c22e4bdc138b896ef4112fc07d623380c2357d288a202488"
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "キャラクター画像（Character）",
+      "sourceHash": "5f5ba072a45e171e8f9aad28858cee8971e8b33612f53ec159b8d44b1ac8215d",
+      "translation": "Character Image (Character)",
+      "contextHash": "5f5ba072a45e171e8f9aad28858cee8971e8b33612f53ec159b8d44b1ac8215d"
+    },
+    {
+      "id": "text-099",
+      "type": "text",
+      "source": "使用するキャラクター画像のファイルです。",
+      "sourceHash": "b7f56308c5515fa5a9b94b3845891d1f2c7f7d44a0a3951c88fbebae83d26ab7",
+      "translation": "The file for the character image to use.",
+      "contextHash": "b7f56308c5515fa5a9b94b3845891d1f2c7f7d44a0a3951c88fbebae83d26ab7"
+    },
+    {
+      "id": "text-100",
+      "type": "text",
+      "source": "下のインデックスと組み合わせてください。",
+      "sourceHash": "cfa6a12176bb62eaeecf9d72b915877cd1211124500bc11ff0a754274cb32bc1",
+      "translation": "Use it together with the index below.",
+      "contextHash": "cfa6a12176bb62eaeecf9d72b915877cd1211124500bc11ff0a754274cb32bc1"
+    },
+    {
+      "id": "heading-075",
+      "type": "heading",
+      "source": "キャラクターｲﾝﾃﾞｯｸｽ（CharacterIndex）",
+      "sourceHash": "8f220eff767beec7d5b263639dd2cb9029e5f1f884651cdcabf6e066a20e9e1d",
+      "translation": "Character Index (CharacterIndex)",
+      "contextHash": "8f220eff767beec7d5b263639dd2cb9029e5f1f884651cdcabf6e066a20e9e1d"
+    },
+    {
+      "id": "text-101",
+      "type": "text",
+      "source": "キャラクター画像のインデックスです。",
+      "sourceHash": "23b40b7e6ead6cb4006bbea0e3cf9bc1aabd28007c3a2db8a4dc841e9e7f0e35",
+      "translation": "The character image index.",
+      "contextHash": "23b40b7e6ead6cb4006bbea0e3cf9bc1aabd28007c3a2db8a4dc841e9e7f0e35"
+    },
+    {
+      "id": "text-102",
+      "type": "text",
+      "source": "キャラクター画像を省略すると現在のファイルを使用します。",
+      "sourceHash": "52c9913438e4a45896c4ea3df043c20e8428f399cdc990ec72226f9aa3a8ac55",
+      "translation": "If no character image is specified, the current file is used.",
+      "contextHash": "52c9913438e4a45896c4ea3df043c20e8428f399cdc990ec72226f9aa3a8ac55"
+    },
+    {
+      "id": "heading-076",
+      "type": "heading",
+      "source": "ＳＶアクター画像（Battler）",
+      "sourceHash": "a5232a83608bfcc08b306f5e623939ec4ba3fa19d53b48623b04cbb066dff625",
+      "translation": "SV Actor Image (Battler)",
+      "contextHash": "a5232a83608bfcc08b306f5e623939ec4ba3fa19d53b48623b04cbb066dff625"
+    },
+    {
+      "id": "text-103",
+      "type": "text",
+      "source": "使用するＳＶアクター画像のファイルです。",
+      "sourceHash": "982a51da02d635037166a78a6ec19d0adc7ca5b055d86303ed5d21f69212caa1",
+      "translation": "The file for the SV actor image to use.",
+      "contextHash": "982a51da02d635037166a78a6ec19d0adc7ca5b055d86303ed5d21f69212caa1"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "当プラグインの動作には[[LINK_1]]NRP_AdditionalClasses.js[[/LINK_1]]が必要です。",
+      "sourceHash": "c1a5797fbae92b9c97bfbf2f4fa058839482270dcbe826cb7fbbeb7404ff45a2",
+      "parts": [
+        {
+          "source": "当プラグインの動作には",
+          "link": false
+        },
+        {
+          "source": "NRP_AdditionalClasses.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が必要です。",
+          "link": false
+        }
+      ],
+      "translation": "The [[LINK_1]]NRP_AdditionalClasses.js[[/LINK_1]] plugin is required for this plugin to work.",
+      "contextHash": "c1a5797fbae92b9c97bfbf2f4fa058839482270dcbe826cb7fbbeb7404ff45a2"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ＭＺ用プラグインコマンド（PluginCommandMZ）[[/LINK_1]]",
+      "sourceHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a",
+      "parts": [
+        {
+          "source": "ＭＺ用プラグインコマンド（PluginCommandMZ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands for MZ (PluginCommandMZ)[[/LINK_1]]",
+      "contextHash": "6cb926927011b80ba7805733e13e55789389316994a02dfad3312a5f8c33f00a"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]職業のメモ欄（Note of Classes）[[/LINK_1]]",
+      "sourceHash": "e7b7cac4cc61177d2eea0a19f5b3759ffc0fb79b3380a16b8ea01cc5e40c6303",
+      "parts": [
+        {
+          "source": "職業のメモ欄（Note of Classes）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class Note Field (Note of Classes)[[/LINK_1]]",
+      "contextHash": "e7b7cac4cc61177d2eea0a19f5b3759ffc0fb79b3380a16b8ea01cc5e40c6303"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]職業一覧（ClassList）[[/LINK_1]]",
+      "sourceHash": "6107b5362e5466c055cdde3c8915a04cb5f551639d15a924da03ea609a9f81c4",
+      "parts": [
+        {
+          "source": "職業一覧（ClassList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class List (ClassList)[[/LINK_1]]",
+      "contextHash": "6107b5362e5466c055cdde3c8915a04cb5f551639d15a924da03ea609a9f81c4"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]職業の重複禁止（NoDuplicate）[[/LINK_1]]",
+      "sourceHash": "f72436775916827b3756e6f263b4c8fc92bef23667c734cec319d88f5e06584f",
+      "parts": [
+        {
+          "source": "職業の重複禁止（NoDuplicate）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Prohibit Duplicate Classes (NoDuplicate)[[/LINK_1]]",
+      "contextHash": "f72436775916827b3756e6f263b4c8fc92bef23667c734cec319d88f5e06584f"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]外す用の空欄を追加（AddBlankToLeave）[[/LINK_1]]",
+      "sourceHash": "91d158a2eb2d570bf43d97754f1bf8cdaedc24530f0b2199e30b151e2f936a78",
+      "parts": [
+        {
+          "source": "外す用の空欄を追加（AddBlankToLeave）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add a Blank for Removal (AddBlankToLeave)[[/LINK_1]]",
+      "contextHash": "91d158a2eb2d570bf43d97754f1bf8cdaedc24530f0b2199e30b151e2f936a78"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]確認用に選択を挟む（UseClassFocus）[[/LINK_1]]",
+      "sourceHash": "ca9ed28fc1f9629e03f9b80bc57c9938f0043a2b3756c062536f6c2373baa31b",
+      "parts": [
+        {
+          "source": "確認用に選択を挟む（UseClassFocus）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Insert a Selection for Confirmation (UseClassFocus)[[/LINK_1]]",
+      "contextHash": "ca9ed28fc1f9629e03f9b80bc57c9938f0043a2b3756c062536f6c2373baa31b"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]転職時のメッセージ（ClassChangeMessage）[[/LINK_1]]",
+      "sourceHash": "ddebd9166dfe0c9bc276ce8a2c4e795f76dcb35dfb15d3d191964830a8fd0840",
+      "parts": [
+        {
+          "source": "転職時のメッセージ（ClassChangeMessage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Message When Changing Classes (ClassChangeMessage)[[/LINK_1]]",
+      "contextHash": "ddebd9166dfe0c9bc276ce8a2c4e795f76dcb35dfb15d3d191964830a8fd0840"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]成功時の効果音（SoundSuccess）[[/LINK_1]]",
+      "sourceHash": "0f43c61d2d47ff219be2157bd891519317b7b5a8c7070513f912703658cbab87",
+      "parts": [
+        {
+          "source": "成功時の効果音（SoundSuccess）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sound Effect on Success (SoundSuccess)[[/LINK_1]]",
+      "contextHash": "0f43c61d2d47ff219be2157bd891519317b7b5a8c7070513f912703658cbab87"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]複数の職業を使用（UseMultipleClasses）[[/LINK_1]]",
+      "sourceHash": "ba8912b33c0c39f43cb4f861973c0ddce596cbbe7e623f7712a930f236809a45",
+      "parts": [
+        {
+          "source": "複数の職業を使用（UseMultipleClasses）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Use Multiple Classes (UseMultipleClasses)[[/LINK_1]]",
+      "contextHash": "ba8912b33c0c39f43cb4f861973c0ddce596cbbe7e623f7712a930f236809a45"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]職業スロット数（NumberOfSlots）[[/LINK_1]]",
+      "sourceHash": "5dec33a69bee9281f55946ece121e426ff3b939d029520f339e0901ca3c03ba8",
+      "parts": [
+        {
+          "source": "職業スロット数（NumberOfSlots）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Class Slots (NumberOfSlots)[[/LINK_1]]",
+      "contextHash": "5dec33a69bee9281f55946ece121e426ff3b939d029520f339e0901ca3c03ba8"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]スロットの重複禁止（NoDuplicateSlots）[[/LINK_1]]",
+      "sourceHash": "bf781f04e9ef635c2ead8a5b28a85dc5fdcaae29cc224c3badda73752912140e",
+      "parts": [
+        {
+          "source": "スロットの重複禁止（NoDuplicateSlots）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Prohibit Duplicate Slots (NoDuplicateSlots)[[/LINK_1]]",
+      "contextHash": "bf781f04e9ef635c2ead8a5b28a85dc5fdcaae29cc224c3badda73752912140e"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]職業の入替許可（SwapClasses）[[/LINK_1]]",
+      "sourceHash": "4b6c5058eb16b265b791666d2faea99b4fea3a9ee00b4f8097d7bafe4157472f",
+      "parts": [
+        {
+          "source": "職業の入替許可（SwapClasses）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Allow Swapping Classes (SwapClasses)[[/LINK_1]]",
+      "contextHash": "4b6c5058eb16b265b791666d2faea99b4fea3a9ee00b4f8097d7bafe4157472f"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]外す用の空欄を追加（AddBlankToLeaveSub）[[/LINK_1]]",
+      "sourceHash": "53773bb8edb45b4c97932f5c330bc271b3d94c0e96f8d162a879fc64e415be6f",
+      "parts": [
+        {
+          "source": "外す用の空欄を追加（AddBlankToLeaveSub）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add a Blank for Removal (AddBlankToLeaveSub)[[/LINK_1]]",
+      "contextHash": "53773bb8edb45b4c97932f5c330bc271b3d94c0e96f8d162a879fc64e415be6f"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]前職を一行表示（PreviousClassOneLine）[[/LINK_1]]",
+      "sourceHash": "9d8336da4c28f4c98c924c4e34ac4acfe040c2e9312d1fa4310260c73ef32519",
+      "parts": [
+        {
+          "source": "前職を一行表示（PreviousClassOneLine）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Previous Class on One Line (PreviousClassOneLine)[[/LINK_1]]",
+      "contextHash": "9d8336da4c28f4c98c924c4e34ac4acfe040c2e9312d1fa4310260c73ef32519"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]職業ＩＤで並び替え（SortClassId）[[/LINK_1]]",
+      "sourceHash": "cc70f661d0658abd2a6c9be5aeb8601b82c713f1da1d30e124637809c09452a2",
+      "parts": [
+        {
+          "source": "職業ＩＤで並び替え（SortClassId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Sort by Class ID (SortClassId)[[/LINK_1]]",
+      "contextHash": "cc70f661d0658abd2a6c9be5aeb8601b82c713f1da1d30e124637809c09452a2"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]職業一覧の横幅（ClassListWidth）[[/LINK_1]]",
+      "sourceHash": "0a1ddef4c9dcd52a50ca7cfe7423452ceff9d4b4f4215a9b6334ac1d2b514897",
+      "parts": [
+        {
+          "source": "職業一覧の横幅（ClassListWidth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class List Width (ClassListWidth)[[/LINK_1]]",
+      "contextHash": "0a1ddef4c9dcd52a50ca7cfe7423452ceff9d4b4f4215a9b6334ac1d2b514897"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]一覧にレベルを表示（DisplayListLevel）[[/LINK_1]]",
+      "sourceHash": "4e1c93ed691cc6f59bf076fed739f790c37a000c165ad5d0073ab1b1ad922ded",
+      "parts": [
+        {
+          "source": "一覧にレベルを表示（DisplayListLevel）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Levels in List (DisplayListLevel)[[/LINK_1]]",
+      "contextHash": "4e1c93ed691cc6f59bf076fed739f790c37a000c165ad5d0073ab1b1ad922ded"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]説明文のフォントサイズ（MessageFontSize）[[/LINK_1]]",
+      "sourceHash": "ec513ad1bb1b1aee5026457d80d32aef343494210740aad5e79fbc160195201e",
+      "parts": [
+        {
+          "source": "説明文のフォントサイズ（MessageFontSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Description Font Size (MessageFontSize)[[/LINK_1]]",
+      "contextHash": "ec513ad1bb1b1aee5026457d80d32aef343494210740aad5e79fbc160195201e"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]表示するパラメータ（DisplayParameters）[[/LINK_1]]",
+      "sourceHash": "6cec103aef1d13cc7e0306ce7836fb9d924ae72801b8fc143adb68cf7907ab32",
+      "parts": [
+        {
+          "source": "表示するパラメータ（DisplayParameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameters to Display (DisplayParameters)[[/LINK_1]]",
+      "contextHash": "6cec103aef1d13cc7e0306ce7836fb9d924ae72801b8fc143adb68cf7907ab32"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータのﾌｫﾝﾄｻｲｽﾞ（ParamFontSize）[[/LINK_1]]",
+      "sourceHash": "1823aa5a5ad5c81684b9f8bbc1d043a3ada69857b617f8878689191f4345296f",
+      "parts": [
+        {
+          "source": "パラメータのﾌｫﾝﾄｻｲｽﾞ（ParamFontSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameter Font Size (ParamFontSize)[[/LINK_1]]",
+      "contextHash": "1823aa5a5ad5c81684b9f8bbc1d043a3ada69857b617f8878689191f4345296f"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]パラメータの一行縦幅（ParamLineHeight）[[/LINK_1]]",
+      "sourceHash": "7f9675434a25a06d7391921e912591bcb22cb6550356247217c34f5912f7064a",
+      "parts": [
+        {
+          "source": "パラメータの一行縦幅（ParamLineHeight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Parameter Line Height (ParamLineHeight)[[/LINK_1]]",
+      "contextHash": "7f9675434a25a06d7391921e912591bcb22cb6550356247217c34f5912f7064a"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]通常経験値を非表示（HideNormalExp）[[/LINK_1]]",
+      "sourceHash": "eb5aa67f886888bae1751d3fe7e84b521d41fdd4b6e4f05fa83a11dfe11d829b",
+      "parts": [
+        {
+          "source": "通常経験値を非表示（HideNormalExp）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Hide Normal Experience (HideNormalExp)[[/LINK_1]]",
+      "contextHash": "eb5aa67f886888bae1751d3fe7e84b521d41fdd4b6e4f05fa83a11dfe11d829b"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]職業画像一覧（ClassImageList）[[/LINK_1]]",
+      "sourceHash": "f784efd02d14dc42baefda8c4256f416bbea5cefd1b519a053abde5b44d5174e",
+      "parts": [
+        {
+          "source": "職業画像一覧（ClassImageList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class Image List (ClassImageList)[[/LINK_1]]",
+      "contextHash": "f784efd02d14dc42baefda8c4256f416bbea5cefd1b519a053abde5b44d5174e"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]画像を他画面に反映（UseClassImage）[[/LINK_1]]",
+      "sourceHash": "1f4fd219feb4d2438ce51ddd7c8ceab020f89bc2fda5d7bd9e9b51f169381779",
+      "parts": [
+        {
+          "source": "画像を他画面に反映（UseClassImage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Apply Images to Other Screens (UseClassImage)[[/LINK_1]]",
+      "contextHash": "1f4fd219feb4d2438ce51ddd7c8ceab020f89bc2fda5d7bd9e9b51f169381779"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]画像配置の左右反転（ReverseImagePos）[[/LINK_1]]",
+      "sourceHash": "a831a7dd6843daffe113a6ea118cfae5fbb1910d68f6e17b05e664aa19f8c87c",
+      "parts": [
+        {
+          "source": "画像配置の左右反転（ReverseImagePos）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Reverse Image Placement Horizontally (ReverseImagePos)[[/LINK_1]]",
+      "contextHash": "a831a7dd6843daffe113a6ea118cfae5fbb1910d68f6e17b05e664aa19f8c87c"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャーのｽｸﾛｰﾙ連動（PictureOnScroll）[[/LINK_1]]",
+      "sourceHash": "18757cce17525d5601eedccddc738e66a71928ecc232ae6f2aa7f5f0a25937c0",
+      "parts": [
+        {
+          "source": "ピクチャーのｽｸﾛｰﾙ連動（PictureOnScroll）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture Scrolling (PictureOnScroll)[[/LINK_1]]",
+      "contextHash": "18757cce17525d5601eedccddc738e66a71928ecc232ae6f2aa7f5f0a25937c0"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャーＸ補正（PictureAdjustX）[[/LINK_1]]",
+      "sourceHash": "842901c64df998e046e944f7cb4708de94dfed58d353eeeb93b0105ff30ba70f",
+      "parts": [
+        {
+          "source": "ピクチャーＸ補正（PictureAdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture X Adjustment (PictureAdjustX)[[/LINK_1]]",
+      "contextHash": "842901c64df998e046e944f7cb4708de94dfed58d353eeeb93b0105ff30ba70f"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャーＹ補正（PictureAdjustY）[[/LINK_1]]",
+      "sourceHash": "b22730f397ca8c30d67d589185e17b1aade73fe1d0ba3e40db7a03b8cb0ca30a",
+      "parts": [
+        {
+          "source": "ピクチャーＹ補正（PictureAdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture Y Adjustment (PictureAdjustY)[[/LINK_1]]",
+      "contextHash": "b22730f397ca8c30d67d589185e17b1aade73fe1d0ba3e40db7a03b8cb0ca30a"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャー不透明度（PictureOpacity）[[/LINK_1]]",
+      "sourceHash": "160d4ec2a91b45d9d38142a7a349f4d58dd1123f463b39a5818b2d055febb475",
+      "parts": [
+        {
+          "source": "ピクチャー不透明度（PictureOpacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture Opacity (PictureOpacity)[[/LINK_1]]",
+      "contextHash": "160d4ec2a91b45d9d38142a7a349f4d58dd1123f463b39a5818b2d055febb475"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "[[LINK_1]]習得スキルの表示位置（ShowSkillsType）[[/LINK_1]]",
+      "sourceHash": "9fcfd001b3e2b2dc81942af45785a1da670aff6615ac0296b7ae48c095eaf792",
+      "parts": [
+        {
+          "source": "習得スキルの表示位置（ShowSkillsType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Acquired Skill Display Position (ShowSkillsType)[[/LINK_1]]",
+      "contextHash": "9fcfd001b3e2b2dc81942af45785a1da670aff6615ac0296b7ae48c095eaf792"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]未習得のスキル表示（ShowUnlearnedSkills）[[/LINK_1]]",
+      "sourceHash": "d1b31cb9fdcaacb69d9a66aae767d6484221347698fe2441b3e268968625392c",
+      "parts": [
+        {
+          "source": "未習得のスキル表示（ShowUnlearnedSkills）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Unlearned Skills (ShowUnlearnedSkills)[[/LINK_1]]",
+      "contextHash": "d1b31cb9fdcaacb69d9a66aae767d6484221347698fe2441b3e268968625392c"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]スキルのフォントサイズ（SkillFontSize）[[/LINK_1]]",
+      "sourceHash": "6b6635fc266aea9ab861d6cc29704f73321544f067a8644bfe0c35963c8a0223",
+      "parts": [
+        {
+          "source": "スキルのフォントサイズ（SkillFontSize）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill Font Size (SkillFontSize)[[/LINK_1]]",
+      "contextHash": "6b6635fc266aea9ab861d6cc29704f73321544f067a8644bfe0c35963c8a0223"
+    },
+    {
+      "id": "line-038",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンドに表示（ShowMenuCommand）[[/LINK_1]]",
+      "sourceHash": "9a379bd45bbd417405578252eeec294dd11800b02d5a3e790fb3ae17eadbfd37",
+      "parts": [
+        {
+          "source": "メニューコマンドに表示（ShowMenuCommand）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display in Menu Commands (ShowMenuCommand)[[/LINK_1]]",
+      "contextHash": "9a379bd45bbd417405578252eeec294dd11800b02d5a3e790fb3ae17eadbfd37"
+    },
+    {
+      "id": "line-039",
+      "type": "line",
+      "source": "[[LINK_1]]メニューコマンド挿入位置（ShowMenuCommandPosition）[[/LINK_1]]",
+      "sourceHash": "d7c1fcc9759c3e74ac0839d98eb837b82ce4d083a07dad7de3ac4b7166b98312",
+      "parts": [
+        {
+          "source": "メニューコマンド挿入位置（ShowMenuCommandPosition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Menu Command Insertion Position (ShowMenuCommandPosition)[[/LINK_1]]",
+      "contextHash": "d7c1fcc9759c3e74ac0839d98eb837b82ce4d083a07dad7de3ac4b7166b98312"
+    },
+    {
+      "id": "line-040",
+      "type": "line",
+      "source": "[[LINK_1]]転職表示名（ClassChangeName）[[/LINK_1]]",
+      "sourceHash": "072cde16a79976a6f8e6ec7bf85e782293048ee806e14b1a75f163e853ed01e1",
+      "parts": [
+        {
+          "source": "転職表示名（ClassChangeName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Displayed Class Change Name (ClassChangeName)[[/LINK_1]]",
+      "contextHash": "072cde16a79976a6f8e6ec7bf85e782293048ee806e14b1a75f163e853ed01e1"
+    },
+    {
+      "id": "line-041",
+      "type": "line",
+      "source": "[[LINK_1]]表示許可するスイッチ（MenuCommandSwitch）[[/LINK_1]]",
+      "sourceHash": "3293b80b5c91a2c4f95d75f6a4f4a7210c940b475c4dfec58745c59a68be668c",
+      "parts": [
+        {
+          "source": "表示許可するスイッチ（MenuCommandSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch Required for Display (MenuCommandSwitch)[[/LINK_1]]",
+      "contextHash": "3293b80b5c91a2c4f95d75f6a4f4a7210c940b475c4dfec58745c59a68be668c"
+    },
+    {
+      "id": "line-042",
+      "type": "line",
+      "source": "[[LINK_1]]マスク文字列（MaskString）[[/LINK_1]]",
+      "sourceHash": "80baa1cc3f18b303620b1f83972e1cdd01dec75aa7a42ba372d38ea736fa0bbd",
+      "parts": [
+        {
+          "source": "マスク文字列（MaskString）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Mask String (MaskString)[[/LINK_1]]",
+      "contextHash": "80baa1cc3f18b303620b1f83972e1cdd01dec75aa7a42ba372d38ea736fa0bbd"
+    },
+    {
+      "id": "line-043",
+      "type": "line",
+      "source": "[[LINK_1]]禁止するスイッチ（DisableSwitch）[[/LINK_1]]",
+      "sourceHash": "25a913f2d8e9ea472489503918de504555fe4869abb6e04474347ab94b9e7536",
+      "parts": [
+        {
+          "source": "禁止するスイッチ（DisableSwitch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switches to Disable (DisableSwitch)[[/LINK_1]]",
+      "contextHash": "25a913f2d8e9ea472489503918de504555fe4869abb6e04474347ab94b9e7536"
+    },
+    {
+      "id": "line-044",
+      "type": "line",
+      "source": "[[LINK_1]][上級]転職記号（ClassChangeSymbol）[[/LINK_1]]",
+      "sourceHash": "7065914bc1a64e8ff80115bed7b4d3d8c7745b4860c31511160d6fa5918113f8",
+      "parts": [
+        {
+          "source": "[上級]転職記号（ClassChangeSymbol）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]][Advanced] Class Change Symbol (ClassChangeSymbol)[[/LINK_1]]",
+      "contextHash": "7065914bc1a64e8ff80115bed7b4d3d8c7745b4860c31511160d6fa5918113f8"
+    },
+    {
+      "id": "line-045",
+      "type": "line",
+      "source": "[[LINK_1]]参照専用（ReadOnlyMenu）[[/LINK_1]]",
+      "sourceHash": "108b51b855cbeebb4b79f6326e37ff5bad484cd46d993308c96f5eb3180ec116",
+      "parts": [
+        {
+          "source": "参照専用（ReadOnlyMenu）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Read-Only (ReadOnlyMenu)[[/LINK_1]]",
+      "contextHash": "108b51b855cbeebb4b79f6326e37ff5bad484cd46d993308c96f5eb3180ec116"
+    },
+    {
+      "id": "line-046",
+      "type": "line",
+      "source": "[[LINK_1]]現職以外も表示（ReadOnlyMenuOther）[[/LINK_1]]",
+      "sourceHash": "be046f6af4415239ad06db483da93afd07675f61b14f3b9f26771a02021d7bfb",
+      "parts": [
+        {
+          "source": "現職以外も表示（ReadOnlyMenuOther）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Display Other Than Current Class (ReadOnlyMenuOther)[[/LINK_1]]",
+      "contextHash": "be046f6af4415239ad06db483da93afd07675f61b14f3b9f26771a02021d7bfb"
+    },
+    {
+      "id": "line-047",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（職業一覧）[[/LINK_1]]",
+      "sourceHash": "aaa5713d7633f582fcdd75a67beedde48f88b3d13883ef5d574cf2a12545bab8",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（職業一覧）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Class List)[[/LINK_1]]",
+      "contextHash": "aaa5713d7633f582fcdd75a67beedde48f88b3d13883ef5d574cf2a12545bab8"
+    },
+    {
+      "id": "line-048",
+      "type": "line",
+      "source": "[[LINK_1]]職業（Class）[[/LINK_1]]",
+      "sourceHash": "50f145b65e3dd81caee2854b8ae047b9607ec230cf03aae78a960a436bb8d295",
+      "parts": [
+        {
+          "source": "職業（Class）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class (Class)[[/LINK_1]]",
+      "contextHash": "50f145b65e3dd81caee2854b8ae047b9607ec230cf03aae78a960a436bb8d295"
+    },
+    {
+      "id": "line-049",
+      "type": "line",
+      "source": "[[LINK_1]]アクター（配列）（Actors）[[/LINK_1]]",
+      "sourceHash": "1cbcdf6b409a5dea2bd1587698c592c0af59330c8d6345fa1836ac07a2cc2912",
+      "parts": [
+        {
+          "source": "アクター（配列）（Actors）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actors (Array) (Actors)[[/LINK_1]]",
+      "contextHash": "1cbcdf6b409a5dea2bd1587698c592c0af59330c8d6345fa1836ac07a2cc2912"
+    },
+    {
+      "id": "line-050",
+      "type": "line",
+      "source": "[[LINK_1]]スイッチ（Switch）[[/LINK_1]]",
+      "sourceHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056",
+      "parts": [
+        {
+          "source": "スイッチ（Switch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch (Switch)[[/LINK_1]]",
+      "contextHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056"
+    },
+    {
+      "id": "line-051",
+      "type": "line",
+      "source": "[[LINK_1]]アイテム（Item）[[/LINK_1]]",
+      "sourceHash": "8de74b6ba3e879b308a781943ca3d9f4e28ecaef53598a176d3174dd8c020883",
+      "parts": [
+        {
+          "source": "アイテム（Item）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Item (Item)[[/LINK_1]]",
+      "contextHash": "8de74b6ba3e879b308a781943ca3d9f4e28ecaef53598a176d3174dd8c020883"
+    },
+    {
+      "id": "line-052",
+      "type": "line",
+      "source": "[[LINK_1]]職業情報（配列）（ClassInfo）[[/LINK_1]]",
+      "sourceHash": "6b3f7987950d4961eb7a6d5b229a9a07e08efb7fbe1744499f05d612c7bfe581",
+      "parts": [
+        {
+          "source": "職業情報（配列）（ClassInfo）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class Information (Array) (ClassInfo)[[/LINK_1]]",
+      "contextHash": "6b3f7987950d4961eb7a6d5b229a9a07e08efb7fbe1744499f05d612c7bfe581"
+    },
+    {
+      "id": "line-053",
+      "type": "line",
+      "source": "[[LINK_1]]スクリプト（Script）[[/LINK_1]]",
+      "sourceHash": "5d2b31d8e691d3e03af02d6a49cf93329510ad46316bcab2ab41b548ce182aa4",
+      "parts": [
+        {
+          "source": "スクリプト（Script）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Script (Script)[[/LINK_1]]",
+      "contextHash": "5d2b31d8e691d3e03af02d6a49cf93329510ad46316bcab2ab41b548ce182aa4"
+    },
+    {
+      "id": "line-054",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（職業画像一覧）[[/LINK_1]]",
+      "sourceHash": "ecf6ae5e3ecd1401e1dae67ddbe5bb8591b8046f4866b91ca7682477d15a8b0c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（職業画像一覧）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Class Image List)[[/LINK_1]]",
+      "contextHash": "ecf6ae5e3ecd1401e1dae67ddbe5bb8591b8046f4866b91ca7682477d15a8b0c"
+    },
+    {
+      "id": "line-055",
+      "type": "line",
+      "source": "[[LINK_1]]職業（Class）[[/LINK_1]]",
+      "sourceHash": "50f145b65e3dd81caee2854b8ae047b9607ec230cf03aae78a960a436bb8d295",
+      "parts": [
+        {
+          "source": "職業（Class）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Class (Class)[[/LINK_1]]",
+      "contextHash": "50f145b65e3dd81caee2854b8ae047b9607ec230cf03aae78a960a436bb8d295"
+    },
+    {
+      "id": "line-056",
+      "type": "line",
+      "source": "[[LINK_1]]アクター（Actor）[[/LINK_1]]",
+      "sourceHash": "030fc672be9804fad016f40782a2836ff936110e0620e8ec079f5cc729c59191",
+      "parts": [
+        {
+          "source": "アクター（Actor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor (Actor)[[/LINK_1]]",
+      "contextHash": "030fc672be9804fad016f40782a2836ff936110e0620e8ec079f5cc729c59191"
+    },
+    {
+      "id": "line-057",
+      "type": "line",
+      "source": "[[LINK_1]]顔グラフィック（Face）[[/LINK_1]]",
+      "sourceHash": "acaed5b23e5fc196369d642935aff5036f0687bf86562f2232e92c298e7ce2bd",
+      "parts": [
+        {
+          "source": "顔グラフィック（Face）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Face Graphic (Face)[[/LINK_1]]",
+      "contextHash": "acaed5b23e5fc196369d642935aff5036f0687bf86562f2232e92c298e7ce2bd"
+    },
+    {
+      "id": "line-058",
+      "type": "line",
+      "source": "[[LINK_1]]顔インデックス（FaceIndex）[[/LINK_1]]",
+      "sourceHash": "1770e383aec1d3e03a1bbde589988fe1011810716f2ab14caae321dbddd85b1c",
+      "parts": [
+        {
+          "source": "顔インデックス（FaceIndex）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Face Index (FaceIndex)[[/LINK_1]]",
+      "contextHash": "1770e383aec1d3e03a1bbde589988fe1011810716f2ab14caae321dbddd85b1c"
+    },
+    {
+      "id": "line-059",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャー（Picture）[[/LINK_1]]",
+      "sourceHash": "91866e77455f017d2adbbab8dd79ffb0538a2a7c452150779e5275bd5dbea226",
+      "parts": [
+        {
+          "source": "ピクチャー（Picture）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture (Picture)[[/LINK_1]]",
+      "contextHash": "91866e77455f017d2adbbab8dd79ffb0538a2a7c452150779e5275bd5dbea226"
+    },
+    {
+      "id": "line-060",
+      "type": "line",
+      "source": "[[LINK_1]]キャラクター画像（Character）[[/LINK_1]]",
+      "sourceHash": "ccca640f67252e7a562a119f888538e1c923ad73e08e98193cf62a93fc21dd52",
+      "parts": [
+        {
+          "source": "キャラクター画像（Character）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Character Image (Character)[[/LINK_1]]",
+      "contextHash": "ccca640f67252e7a562a119f888538e1c923ad73e08e98193cf62a93fc21dd52"
+    },
+    {
+      "id": "line-061",
+      "type": "line",
+      "source": "[[LINK_1]]キャラクターｲﾝﾃﾞｯｸｽ（CharacterIndex）[[/LINK_1]]",
+      "sourceHash": "acc2247b971998f3801be0a4f7fc8808da98f33a29998ffb6b77cc6e23b0bb72",
+      "parts": [
+        {
+          "source": "キャラクターｲﾝﾃﾞｯｸｽ（CharacterIndex）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Character Index (CharacterIndex)[[/LINK_1]]",
+      "contextHash": "acc2247b971998f3801be0a4f7fc8808da98f33a29998ffb6b77cc6e23b0bb72"
+    },
+    {
+      "id": "line-062",
+      "type": "line",
+      "source": "[[LINK_1]]ＳＶアクター画像（Battler）[[/LINK_1]]",
+      "sourceHash": "b4ca8e25af30d6261acd7daafb54bda4ab8b120b54770ea6d7ce3e99b540a34e",
+      "parts": [
+        {
+          "source": "ＳＶアクター画像（Battler）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]SV Actor Image (Battler)[[/LINK_1]]",
+      "contextHash": "b4ca8e25af30d6261acd7daafb54bda4ab8b120b54770ea6d7ce3e99b540a34e"
+    },
+    {
+      "id": "line-063",
+      "type": "line",
+      "source": "※ＣＴＢプラグインなどに使用する[[LINK_1]]NRP_VisualTurn.js[[/LINK_1]]と併用する場合は、そちらも最新（ver1.13～）に更新してください。転職による画像変更が反映されません。",
+      "sourceHash": "25922fe0d12b44017fb36b22902d4eb36bf1086633bb3e59f313bc934c01990c",
+      "parts": [
+        {
+          "source": "※ＣＴＢプラグインなどに使用する",
+          "link": false
+        },
+        {
+          "source": "NRP_VisualTurn.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用する場合は、そちらも最新（ver1.13～）に更新してください。転職による画像変更が反映されません。",
+          "link": false
+        }
+      ],
+      "translation": "※When using it together with [[LINK_1]]NRP_VisualTurn.js[[/LINK_1]], which is used for CTB plugins and the like, please update that as well to the latest version (ver1.13 or later). Changes to images due to changing class will not be reflected.",
+      "contextHash": "25922fe0d12b44017fb36b22902d4eb36bf1086633bb3e59f313bc934c01990c"
+    },
+    {
+      "id": "line-064",
+      "type": "line",
+      "source": "スロットが重複禁止かつ、サブ職業使用時に[[LINK_1]]職業位置の入れ替え[[/LINK_1]]をできるようにした。",
+      "sourceHash": "55b6021e245676167a6eac49f4c0b9d63220b277a3e592b9b78a9005f739c945",
+      "parts": [
+        {
+          "source": "スロットが重複禁止かつ、サブ職業使用時に",
+          "link": false
+        },
+        {
+          "source": "職業位置の入れ替え",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をできるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Enabled duplicate-prohibited slots and the ability to [[LINK_1]]swap class positions[[/LINK_1]] when using a subclass.",
+      "contextHash": "55b6021e245676167a6eac49f4c0b9d63220b277a3e592b9b78a9005f739c945"
+    },
+    {
+      "id": "line-065",
+      "type": "line",
+      "source": "[[LINK_1]]転職時の確認を省略[[/LINK_1]]できるようにした。",
+      "sourceHash": "dec1ad5281a2b14f0f2808fc6dc4faa12bd3d8b4cc3ce594f297b7bcbd48d44e",
+      "parts": [
+        {
+          "source": "転職時の確認を省略",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Enabled the ability to [[LINK_1]]skip confirmation when changing class[[/LINK_1]].",
+      "contextHash": "dec1ad5281a2b14f0f2808fc6dc4faa12bd3d8b4cc3ce594f297b7bcbd48d44e"
+    },
+    {
+      "id": "line-066",
+      "type": "line",
+      "source": "[[LINK_1]]コマンドのマスク表示機能[[/LINK_1]]を追加。",
+      "sourceHash": "e376d077ff3afb2b95814c0967db536eb6e55d1a5989f4162b8fea8ed9bc1667",
+      "parts": [
+        {
+          "source": "コマンドのマスク表示機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]the command mask display function[[/LINK_1]].",
+      "contextHash": "e376d077ff3afb2b95814c0967db536eb6e55d1a5989f4162b8fea8ed9bc1667"
+    },
+    {
+      "id": "line-067",
+      "type": "line",
+      "source": "[[LINK_1]]通常経験値を非表示[[/LINK_1]]できるようにした。",
+      "sourceHash": "a8598217d4e08545de6c1d414ce7b6094f42828e0bb17d9231c17821fc3a176f",
+      "parts": [
+        {
+          "source": "通常経験値を非表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Enabled the ability to [[LINK_1]]hide normal EXP[[/LINK_1]].",
+      "contextHash": "a8598217d4e08545de6c1d414ce7b6094f42828e0bb17d9231c17821fc3a176f"
+    },
+    {
+      "id": "line-068",
+      "type": "line",
+      "source": "[[LINK_1]]コマンドの使用を禁止するスイッチ[[/LINK_1]]を追加。",
+      "sourceHash": "13c8ca5396290459a842b1230c624574f3b3ef20791b6a53938c624ebc96804f",
+      "parts": [
+        {
+          "source": "コマンドの使用を禁止するスイッチ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added [[LINK_1]]a switch that prohibits use of the command[[/LINK_1]].",
+      "contextHash": "13c8ca5396290459a842b1230c624574f3b3ef20791b6a53938c624ebc96804f"
+    },
+    {
+      "id": "line-069",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "多重職業用の転職画面を実装します。": "Implements a class change screen for multiple classes.",
+    "ＤＱ６～７的な機能を持つ転職システムが簡単に作れます。": "You can easily create a class change system with features similar to DQ6–7.",
+    "そちらの説明も合わせてお読みください。": "Please read that explanation as well.",
+    "主な機能": "Main Features",
+    "複数の職業へ同時に就くことが可能": "Allows actors to have multiple classes simultaneously",
+    "転職後の能力変化や習得スキルを表示": "Displays stat changes and skills learned after changing class",
+    "条件を満たした場合に転職できる上級職などを設定可": "Allows you to set advanced classes that become available after meeting certain conditions",
+    "メニュー画面に転職用のコマンドを追加可": "Allows you to add a class change command to the menu screen",
+    "また、参照だけにすることも可": "Can also be used for viewing only",
+    "職業やアクター毎に異なる画像（顔グラ、キャラグラ、バトラー）を指定可": "Allows you to specify different images (face, character, and battler graphics) for each class or actor",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below and save it, then place it in [Project]\\js\\plugins. Turn the plugin on in the Plugin Manager.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_AdditionalCCScene.js": "NRP_AdditionalCCScene.js ",
+    "ver1.102（2025/03/03）": "ver1.102 (2025/03/03) ",
+    "更新履歴（History）": "Update History (History)",
+    "2024/09/25 -> 2025/03/03（ver1.10 -> 1.102）": "2024/09/25 -> 2025/03/03 (ver1.10 -> 1.102) ",
+    "ver1.092にて、クラス一覧のスキル欄を表示した場合に装備品（アクターの初期装備）が増殖してしまう重大な不具合修正。": "Fixed a critical bug in ver1.092 that caused equipment (the actor's initial equipment) to multiply when the skill section of the class list was displayed.",
+    "転職成功メッセージを設定した状態で、プラグインコマンドで転職画面を呼び出すと転職後に決定キーを受け付けなくなる不具合修正。": "Fixed a bug where the confirm key could no longer be used after changing class when the class change screen was opened via a plugin command with a class change success message configured.",
+    "（2024/12/23 ver1.101）": " (2024/12/23 ver1.101) ",
+    "職業名の配置が右過ぎたので若干左に寄せた。（2024/12/23 ver1.101）": "The class names were positioned too far to the right, so they were moved slightly to the left. (2024/12/23 ver1.101)",
+    "職業位置を入替するとＨＰＭＰＴＰが減ってしまうことがある不具合修正。（2025/03/03 ver1.102）": "Fixed a bug where HP, MP, and TP could decrease when swapping class positions. (2025/03/03 ver1.102)",
+    "2024/08/06 -> 2024/09/11（ver1.09 -> 1.092）": "2024/08/06 -> 2024/09/11 (ver1.09 -> 1.092) ",
+    "他のアクターで習得済のスキルはマスク表示しないように改良した。": "Improved the display so that skills already learned by another actor are not masked.",
+    "職業が空欄の場合はスキル一覧を表示しないようにした。": "The skill list is no longer displayed when the class field is blank.",
+    "※装備品で得たスキルなどが不自然な表示になってしまうため。": "※This is because skills obtained from equipment and similar sources would otherwise be displayed unnaturally.",
+    "（2024/08/17 ver1.091）": " (2024/08/17 ver1.091) ",
+    "他のアクターで習得済のスキルについて、現在就いているクラスの分しか表示できていなかったので修正した。（2024/09/11 ver1.092）": "Fixed an issue where, for skills already learned by another actor, only those belonging to the currently assigned class could be displayed. (2024/09/11 ver1.092)",
+    "2024/02/25（ver1.08）": "2024/02/25 (ver1.08) ",
+    "職業数がウィンドウ内に収まらない場合、職業一覧のスクロール位置がおかしくなる不具合修正。": "Fixed a bug where the scroll position of the class list became incorrect when the number of classes did not fit in the window.",
+    "2023/10/24 -> 2023/11/01（ver1.07 -> 1.071）": "2023/10/24 -> 2023/11/01 (ver1.07 -> 1.071) ",
+    "職業位置の入れ替えにて、空欄と交換しようとするとエラーになる不具合修正。（2023/11/01 ver1.071）": "Fixed a bug where an error occurred when attempting to swap a class position with a blank entry. (2023/11/01 ver1.071)",
+    "2023/08/06（ver1.06）": "2023/08/06 (ver1.06) ",
+    "2023/08/01（ver1.05）": "2023/08/01 (ver1.05) ",
+    "最大レベル時の経験値表示（-------）をNRP_AdditionalClasses.jsから参照するようにした。": "The maximum-level experience display (-------) now references NRP_AdditionalClasses.js.",
+    "職業経験値の項目名の表示位置がズレていたので微調整。": "Fine-tuned the position of the class experience label, which was misaligned.",
+    "2023/04/10（ver1.04）": "2023/04/10 (ver1.04) ",
+    "2023/04/02（ver1.03）": "2023/04/02 (ver1.03) ",
+    "職業名がウィンドウに収まらない場合に縮小されない不具合修正。": "Fixed a bug where class names were not reduced in size when they did not fit in the window.",
+    "2022/07/31 -> 2022/09/09（ver1.02 -> 1.022）": "2022/07/31 -> 2022/09/09 (ver1.02 -> 1.022) ",
+    "条件のアクターが機能していない不具合修正。": "Fixed a bug where the actor condition was not functioning.",
+    "プラグインコマンドからアクターを指定した際、該当者が仲間にいないと先頭のアクターが表示されてしまう不具合修正。": "Fixed a bug where specifying an actor via a plugin command caused the first actor to be displayed when the specified actor was not in the party.",
+    "ver1.02にてアクターを指定しなかった場合、エラーになる不具合修正。（ver1.021）": "Fixed a bug where an error occurred when no actor was specified in ver1.02. (ver1.021)",
+    "職業の重複禁止がオンの際、データロード後の転職時にエラーとなる不具合修正。（2022/09/09 ver1.022）": "Fixed a bug where an error occurred when changing class after loading data while duplicate classes were prohibited. (2022/09/09 ver1.022)",
+    "2021/11/20 -> 2022/06/11（ver1.01 -> 1.014）": "2021/11/20 -> 2022/06/11 (ver1.01 -> 1.014) ",
+    "転職後、無効になった装備品が外れるように修正。": "Equipment that becomes invalid after changing class is now unequipped.",
+    "転職条件のアクターが文字列一致になってしまっている不具合修正。（2022/01/13 ver1.011）": "Fixed a bug where the actor in the class change conditions was treated as a string match. (2022/01/13 ver1.011)",
+    "転職条件に0や[]が設定されていると判定無効になる不具合修正。（2022/01/13 ver1.011）": "Fixed a bug where setting 0 or [] as a class change condition disabled the check. (2022/01/13 ver1.011)",
+    "競合対策用にクラス名を変更。（2022/01/13 ver1.011）": "Changed the class name to prevent conflicts. (2022/01/13 ver1.011)",
+    "ver1.011にてメニューから転職時にエラーとなる不具合修正。（2022/01/15 ver1.012）": "Fixed a bug where an error occurred when changing class from the menu in ver1.011. (2022/01/15 ver1.012)",
+    "装備画面の名前配置を変更するプラグインと組み合わせると、転職画面の名前が想定外の配置になる問題に対応。": "Addressed an issue where combining this with a plugin that changes name placement on the equipment screen caused names on the class change screen to appear in an unexpected position.",
+    "（2022/06/11 ver1.013）": " (2022/06/11 ver1.013) ",
+    "上の再修正。（2022/06/11 ver1.014）": "Revised the above again. (2022/06/11 ver1.014)",
+    "2021/09/26 -> 10/04（ver1.00 -> 1.001）": "2021/09/26 -> 10/04 (ver1.00 -> 1.001) ",
+    "公開！": "Released!",
+    "『経験値』の表示が狭いのでわずかに左に寄せた。（10/04 ver1.001）": "The display area for “Experience” was narrow, so it was moved slightly to the left. (10/04 ver1.001)",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインパラメータの『職業一覧』に、候補となる職業を登録してください。": "Register the candidate classes in the “Class List” plugin parameter.",
+    "その際、転職条件の設定も可能です。": "You can also configure class change conditions at that time.",
+    "条件を満たさない職業は表示されません。": "Classes whose conditions are not met will not be displayed.",
+    "また、『職業画像一覧』に顔グラフィックやピクチャーを登録することで、職業やアクター毎に異なる画像を表示することも可能です。": "You can also display different images for each class or actor by registering face graphics or pictures in the “Class Image List.”",
+    "下記のプラグインコマンドを実行すれば、転職画面が表示されます。": "The class change screen will be displayed when you execute the plugin command below.",
+    "『メニューコマンドに表示』をオンにすれば、メニュー画面から呼び出すことも可能です。": "You can also open it from the menu screen by turning on “Show in Menu Commands.”",
+    "複数職業": "Multiple Classes",
+    "『複数の職業を使用』をオンにすると、複数の職業へ同時に就けるようになります。それにより、転職時には職業スロットの選択画面が表示されるようになります。": "Turning on \"Use Multiple Classes\" allows an actor to have multiple classes at the same time. This also causes the class slot selection screen to be displayed when changing classes.",
+    "※画像が設定されている場合、アクターに適用されるのは先頭の職業だけです。": "※If an image is set, only the first class is applied to the actor.",
+    "※NRP_AdditionalClasses.jsの機能では、ステータス画面に二つまでしか職業を表示できません。": "※NRP_AdditionalClasses.js only allows up to two classes to be displayed on the status screen.",
+    "ＭＺ用プラグインコマンド（PluginCommandMZ）": "Plugin Commands for MZ (PluginCommandMZ)",
+    "シーン開始": "Scene Start",
+    "転職画面を呼び出します。": "Calls up the class change screen.",
+    "転職の対象とするアクターを指定可能です。": "You can specify the actor who will change classes.",
+    "指定しなかった場合は、アクターの選択画面が事前に表示されます。": "If no actor is specified, the actor selection screen will be displayed first.",
+    "また、追加の職業一覧を指定可能です。": "You can also specify an additional list of classes.",
+    "例えば、特定の場所でのみ転職可能な職業などに便利です。": "For example, this is useful for classes that can only be changed to in specific locations.",
+    "職業のメモ欄（Note of Classes）": "Class Note Field (Note of Classes)",
+    "以下のように記述すれば、転職画面に説明が表示されます。": "Writing it as shown below will display a description on the class change screen.",
+    "改行や制御文字も可能です。": "Line breaks and control characters are also supported.",
+    "～表示したい文章～": "~Text you want to display~",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "職業一覧（ClassList）": "Class List (ClassList)",
+    "転職の対象となる職業一覧です。": "This is the list of classes available for class changes.",
+    "転職条件なども含めて登録してください。": "Please register them, including class change requirements and so on.",
+    "職業の重複禁止（NoDuplicate）": "Prohibit Duplicate Classes (NoDuplicate)",
+    "同一の職業へ複数のアクターが転職することを禁止します。": "Prevents multiple actors from changing to the same class.",
+    "外す用の空欄を追加（AddBlankToLeave）": "Add a Blank for Leaving (AddBlankToLeave)",
+    "職業を外すための空欄を追加します。": "Adds a blank option for leaving a class.",
+    "確認用に選択を挟む（UseClassFocus）": "Insert a Selection for Confirmation (UseClassFocus)",
+    "転職時に一旦、職業情報を選択状態にします。": "When changing classes, the class information is first placed in a selected state.",
+    "オフなら即座に転職します。": "If turned off, the class changes immediately.",
+    "転職時のメッセージ（ClassChangeMessage）": "Class Change Message (ClassChangeMessage)",
+    "転職時のメッセージです。": "The message displayed when changing classes.",
+    "%1=アクター, %2=職業。空白で非表示します。": "%1=actor, %2=class. Leave blank to hide.",
+    "成功時の効果音（SoundSuccess）": "Success Sound Effect (SoundSuccess)",
+    "転職に成功した際の効果音です。": "The sound effect played when a class change succeeds.",
+    "指定がない場合はデフォルトの決定音を鳴らします。": "If none is specified, the default decision sound will be played.",
+    "複数の職業を使用（UseMultipleClasses）": "Use Multiple Classes (UseMultipleClasses)",
+    "複数の追加職業へ同時に就けるようにします。": "Allows the actor to have multiple additional classes at the same time.",
+    "なお、職業スロットの選択画面が表示されるようになります。": "The class slot selection screen will also be displayed.",
+    "職業スロット数（NumberOfSlots）": "Number of Class Slots (NumberOfSlots)",
+    "同時に就ける職業の数です。数式可。": "The number of classes the actor can have at the same time. Formulas are supported.",
+    "例えば、以下はスイッチ１００番がオンの時にスロット数が２になる数式です。": "For example, the following formula sets the number of slots to 2 when Switch 100 is on.",
+    "スロットの重複禁止（NoDuplicateSlots）": "Prohibit Duplicate Slots (NoDuplicateSlots)",
+    "アクターが同じ職業に重ねて転職することを禁止します。": "Prevents an actor from changing to the same class in multiple slots.",
+    "職業の入替許可（SwapClasses）": "Allow Class Swapping (SwapClasses)",
+    "スロットの重複禁止がオンの場合、既に就いている職業を選択した場合は入れ替えとして扱います。": "When Prohibit Duplicate Slots is on, selecting a class the actor already has treats it as a swap.",
+    "外す用の空欄を追加（AddBlankToLeaveSub）": "Add a Blank for Leaving (AddBlankToLeaveSub)",
+    "サブ職業を外すための空欄を追加します。": "Adds a blank option for leaving a sub-class.",
+    "前職を一行表示（PreviousClassOneLine）": "Display Previous Class on One Line (PreviousClassOneLine)",
+    "スロット選択後、変更前の職業を一行だけ表示するようにします。": "After selecting a slot, displays the class held before the change on a single line.",
+    "職業ＩＤで並び替え（SortClassId）": "Sort by Class ID (SortClassId)",
+    "職業ＩＤ順で一覧を並び替えます。": "Sorts the list by class ID.",
+    "職業一覧の横幅（ClassListWidth）": "Class List Width (ClassListWidth)",
+    "職業一覧の横幅です。": "The width of the class list.",
+    "一覧にレベルを表示（DisplayListLevel）": "Display Levels in List (DisplayListLevel)",
+    "職業一覧にレベルを表示します。": "Displays levels in the class list.",
+    "説明文のフォントサイズ（MessageFontSize）": "Description Text Font Size (MessageFontSize)",
+    "職業の説明文のフォントサイズです。": "The font size of the class description text.",
+    "未指定ならシステム設定を使います。": "If unspecified, the system setting is used.",
+    "表示するパラメータ（DisplayParameters）": "Parameters to Display (DisplayParameters)",
+    "表示するパラメータです。": "The parameters to display.",
+    "初期値：0,1,2,3,4,5,6,7": "Default: 0,1,2,3,4,5,6,7",
+    "0:最大ＨＰ～7:運となります。": "0: Max HP through 7: Luck.",
+    "パラメータのﾌｫﾝﾄｻｲｽﾞ（ParamFontSize）": "Parameter Font Size (ParamFontSize)",
+    "職業のパラメータのフォントサイズです。": "The font size of the class parameters.",
+    "パラメータの一行縦幅（ParamLineHeight）": "Parameter Line Height (ParamLineHeight)",
+    "職業のパラメータの一行の縦幅です。": "The line height for the class parameters.",
+    "初期値は36。": "The default value is 36.",
+    "通常経験値を非表示（HideNormalExp）": "Hide Normal EXP (HideNormalExp)",
+    "通常経験値を非表示にします。": "Hides normal EXP.",
+    "※職業を空欄にする際に表示される項目です。": "※This item is displayed when the class is left blank.",
+    "経験値曲線を変更するプラグインなどと組み合わせた際、レイアウトに収まらない場合があるので、その場合は非表示にしてしまうことをオススメします。": "When combined with a plugin that changes the EXP curve, the layout may not fit. In that case, I recommend hiding it.",
+    "職業画像一覧（ClassImageList）": "Class Image List (ClassImageList)",
+    "職業やアクター毎に画像を設定するリストです。": "A list for setting images for each class or actor.",
+    "画像を他画面に反映（UseClassImage）": "Apply Images to Other Screens (UseClassImage)",
+    "職業画像一覧に設定した画像（ピクチャー以外）を、戦闘やメニューなどにも反映します。": "Applies images set in the class image list (excluding pictures) to battles, menus, and other screens.",
+    "画像配置の左右反転（ReverseImagePos）": "Flip Image Placement Horizontally (ReverseImagePos)",
+    "パラメータと画像の配置を左右反転します。": "Flips the placement of the parameters and image horizontally.",
+    "ピクチャーのｽｸﾛｰﾙ連動（PictureOnScroll）": "Picture Scroll Synchronization (PictureOnScroll)",
+    "ピクチャーを上下のスクロールに連動します。": "Synchronizes the picture with vertical scrolling.",
+    "ピクチャーＸ補正（PictureAdjustX）": "Picture X Adjustment (PictureAdjustX)",
+    "ピクチャーを表示するＸ座標を調整します。": "Adjusts the X coordinate at which the picture is displayed.",
+    "ピクチャーＹ補正（PictureAdjustY）": "Picture Y Adjustment (PictureAdjustY)",
+    "ピクチャーを表示するＹ座標を調整します。": "Adjusts the Y coordinate at which the picture is displayed.",
+    "ピクチャー不透明度（PictureOpacity）": "Picture Opacity (PictureOpacity)",
+    "ピクチャーの不透明度です。": "The opacity of the picture.",
+    "習得スキルの表示位置（ShowSkillsType）": "Learned Skill Display Position (ShowSkillsType)",
+    "職業情報に習得スキルを表示する配置を設定します。": "Sets where learned skills are displayed in the class information.",
+    "デフォルトの『別ページに表示』の場合、左右でページを切り替えられます。": "With the default “Display on a separate page,” you can switch pages left and right.",
+    "未習得のスキル表示（ShowUnlearnedSkills）": "Display Unlearned Skills (ShowUnlearnedSkills)",
+    "職業情報に未習得のスキルを表示するかどうかを設定できます。": "Sets whether unlearned skills are displayed in the class information.",
+    "デフォルトの『マスク表示』では、未習得のスキルを？？？？？で表示します。": "With the default “Masked Display,” unlearned skills are displayed as ?????.",
+    "スキルのフォントサイズ（SkillFontSize）": "Skill Font Size (SkillFontSize)",
+    "スキル名のフォントサイズです。未指定ならシステム設定を使います。": "The font size of skill names. If unspecified, the system setting is used.",
+    "メニューコマンドに表示（ShowMenuCommand）": "Display in Menu Commands (ShowMenuCommand)",
+    "メニューコマンドに転職を追加します。": "Adds class change to the menu commands.",
+    "メニューコマンド挿入位置（ShowMenuCommandPosition）": "Menu Command Insertion Position (ShowMenuCommandPosition)",
+    "メニューコマンドに転職を挿入する位置です。": "The position at which class change is inserted into the menu commands.",
+    "0が先頭になります。": "0 is the first position.",
+    "転職表示名（ClassChangeName）": "Class Change Display Name (ClassChangeName)",
+    "転職の表示コマンド名を設定します。": "Sets the displayed command name for class change.",
+    "表示許可するスイッチ（MenuCommandSwitch）": "Switch Required for Display (MenuCommandSwitch)",
+    "スイッチがオンの時のみコマンドを表示します。": "Displays the command only when the switch is on.",
+    "空白なら常に表示します。": "If left blank, it is always displayed.",
+    "マスク文字列（MaskString）": "Mask String (MaskString)",
+    "表示許可するスイッチがオフの際、指定した文字列でコマンドを表示します。": "When the display permission switch is off, the command is displayed with the specified text.",
+    "例えば、機能を解放する前のコマンドを「？？？？」というように表示できます。": "For example, you can display a command for a feature that has not yet been unlocked as “????”.",
+    "空欄ならコマンド自体を非表示にします。": "If left blank, the command itself is hidden.",
+    "禁止するスイッチ（DisableSwitch）": "Disable Switch (DisableSwitch)",
+    "スイッチがオンの時のみコマンドを禁止（灰色）します。": "The command is disabled (grayed out) only when the switch is on.",
+    "空白なら常に許可します。": "If left blank, it is always allowed.",
+    "[上級]転職記号（ClassChangeSymbol）": "[Advanced] Class Change Symbol (ClassChangeSymbol)",
+    "転職の記号を設定します。": "Sets the class change symbol.",
+    "この値は他のプラグインと連携する際に使用できます。": "This value can be used when integrating with other plugins.",
+    "参照専用（ReadOnlyMenu）": "Read-Only (ReadOnlyMenu)",
+    "転職コマンドを参照専用にします。": "Makes the class change command read-only.",
+    "現職以外も表示（ReadOnlyMenuOther）": "Display Other Classes (ReadOnlyMenuOther)",
+    "転職コマンドを参照専用にした際、転職先の候補も表示します。": "When the class change command is read-only, candidates for the destination class are also displayed.",
+    "プラグインパラメータ（職業一覧）": "Plugin Parameters (Class List)",
+    "職業（Class）": "Class (Class)",
+    "転職対象とする職業です。": "The class targeted for class change.",
+    "アクター（配列）（Actors）": "Actors (Array) (Actors)",
+    "転職を許可するアクターの候補です。": "Candidates for actors who are allowed to change class.",
+    "スイッチ（Switch）": "Switch (Switch)",
+    "転職条件となるスイッチです。": "The switch used as a class change condition.",
+    "アイテム（Item）": "Item (Item)",
+    "転職条件となるアイテムです。": "The item used as a class change condition.",
+    "職業情報（配列）（ClassInfo）": "Class Information (Array) (ClassInfo)",
+    "転職条件となる職業情報です。": "Class information used as a class change condition.",
+    "職業とレベルを指定可能です。": "You can specify a class and level.",
+    "スクリプト（Script）": "Script (Script)",
+    "転職条件となるスクリプトです。": "The script used as a class change condition.",
+    "例：a.level >= 10": "Example: a.level >= 10",
+    "プラグインパラメータ（職業画像一覧）": "Plugin Parameters (Class Image List)",
+    "対象の職業です。": "The target class.",
+    "アクター（Actor）": "Actor (Actor)",
+    "対象のアクターです。": "The target actor.",
+    "顔グラフィック（Face）": "Face Graphic (Face)",
+    "表示する顔グラフィックのファイルです。": "The file for the face graphic to display.",
+    "下のインデックスと組み合わせてください。": "Use it together with the index below.",
+    "顔インデックス（FaceIndex）": "Face Index (FaceIndex)",
+    "顔グラフィックのインデックスです。": "The face graphic index.",
+    "顔グラフィックを省略すると現在のファイルを使用します。": "If no face graphic is specified, the current file is used.",
+    "ピクチャー（Picture）": "Picture (Picture)",
+    "表示するピクチャーを指定します。": "Specifies the picture to display.",
+    "顔グラフィックよりも優先されます。": "Takes priority over the face graphic.",
+    "キャラクター画像（Character）": "Character Image (Character)",
+    "使用するキャラクター画像のファイルです。": "The file for the character image to use.",
+    "キャラクターｲﾝﾃﾞｯｸｽ（CharacterIndex）": "Character Index (CharacterIndex)",
+    "キャラクター画像のインデックスです。": "The character image index.",
+    "キャラクター画像を省略すると現在のファイルを使用します。": "If no character image is specified, the current file is used.",
+    "ＳＶアクター画像（Battler）": "SV Actor Image (Battler)",
+    "使用するＳＶアクター画像のファイルです。": "The file for the SV actor image to use."
+  }
+}

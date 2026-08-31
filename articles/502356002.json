@@ -1,0 +1,957 @@
+{
+  "articleId": "502356002",
+  "sourceUrl": "https://newrpg.seesaa.net/article/502356002.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "8a94f7d2c336d3de89b463fadae16fb31de776bcfcb674816bc76765bd42a7f7",
+  "translatedAt": "2026-08-31T02:39:18.715Z",
+  "title": "Display Pictures as Face Graphics [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "ピクチャを顔グラとして表示【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "f7c7053fdd4e82b18d6a000b017b54af43d58ce4a0de2ea9ef2d22da374028b3",
+      "translation": "Display Pictures as Face Graphics [RPG Maker MZ & MV Plugin]",
+      "contextHash": "f7c7053fdd4e82b18d6a000b017b54af43d58ce4a0de2ea9ef2d22da374028b3"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ピクチャを顔グラとしてそのまま使用できるようにします。",
+      "sourceHash": "be5a95d9bb93395c78ccec04a1c25bede3237153f89ca54a64573be89bd85dfb",
+      "translation": "Allows pictures to be used directly as face graphics.",
+      "contextHash": "be5a95d9bb93395c78ccec04a1c25bede3237153f89ca54a64573be89bd85dfb"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "このプラグインは立ち絵用のピクチャから、いちいち顔グラを別ファイルとして切り抜くのが面倒になった作者が、作業を省略するために作ったものです。",
+      "sourceHash": "e8c1f5dac7e1a60702e5205c8701bd09da4a44565e937c9c4d8af23002ef1765",
+      "translation": "I created this plugin to save time after finding it tedious to repeatedly crop face graphics from pictures intended for character portraits.",
+      "contextHash": "e8c1f5dac7e1a60702e5205c8701bd09da4a44565e937c9c4d8af23002ef1765"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "一応、メッセージの顔グラにも対応していますが、基本的にはメニュー画面などに表示されるアクター用です。",
+      "sourceHash": "a0a15f9684701106bd96c8d7635b039007ce1d1b33f53037a82d46745abbd82f",
+      "translation": "It also supports message face graphics, but it is primarily intended for actors displayed on screens such as the menu screen.",
+      "contextHash": "a0a15f9684701106bd96c8d7635b039007ce1d1b33f53037a82d46745abbd82f"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "具体的には顔グラのファイルとピクチャを紐づけることで、ピクチャを144x144のサイズの顔グラとして表示します。",
+      "sourceHash": "dc28cf585ca661b3c328deb521bd84df9290cef242a7cd5a95eb895c95b38039",
+      "translation": "Specifically, by linking face graphic files to pictures, it displays the pictures as 144x144 face graphics.",
+      "contextHash": "dc28cf585ca661b3c328deb521bd84df9290cef242a7cd5a95eb895c95b38039"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※なお、顔グラのパターンは参照しません。１キャラクター＝１ファイルとしてください。",
+      "sourceHash": "a945f060b6f1ff70d840d0e5ddbc71d9d5c5e721639f48e4685754763a4d9511",
+      "translation": "※Face graphic patterns are not referenced. Use one file per character.",
+      "contextHash": "a945f060b6f1ff70d840d0e5ddbc71d9d5c5e721639f48e4685754763a4d9511"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※MZ ver1.9.0より、システム2で顔サイズを指定できるようになりました。",
+      "sourceHash": "36f7a1a9466663c4f5d650c87a6e231d50f10ea9503feec208d70b39697c1fdd",
+      "translation": "※As of MZ ver1.9.0, you can specify the face graphic size in System 2.",
+      "contextHash": "36f7a1a9466663c4f5d650c87a6e231d50f10ea9503feec208d70b39697c1fdd"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Enable the plugin in the Plugin Manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_PictureToFace.js",
+      "sourceHash": "136433908c316db40041171d795e358e6ef4e00518903ce7d9aa4a5ee404f40a",
+      "translation": "NRP_PictureToFace.js ",
+      "contextHash": "9e13546f5cf12cc0852c45fc05d1226971890c805eafc1049531f77643c9d9ba"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.01（2025/02/22）",
+      "sourceHash": "8411ba05b1ad137a8171b2d96f867c432459d530188eae2fe16675d21371977b",
+      "translation": "ver1.01 (2025/02/22) ",
+      "contextHash": "9e13546f5cf12cc0852c45fc05d1226971890c805eafc1049531f77643c9d9ba"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/02/22（ver1.01）",
+      "sourceHash": "5ca951e30f25ad360d204dd1f000450f3e52aa29b1f5eb690df4d505e1425bbc",
+      "translation": "2025/02/22 (ver1.01) ",
+      "contextHash": "5ca951e30f25ad360d204dd1f000450f3e52aa29b1f5eb690df4d505e1425bbc"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "MZ ver1.9.0でエラーになる問題に対応した。",
+      "sourceHash": "58b786a80132fcebfb1238540af92fee8c2726d547c1b90f59ddfad3df17ab24",
+      "translation": "Fixed an issue that caused an error in MZ ver1.9.0.",
+      "contextHash": "58b786a80132fcebfb1238540af92fee8c2726d547c1b90f59ddfad3df17ab24"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/02/14（ver1.00）",
+      "sourceHash": "8cfcc1c4cde4a7dd0235f34e25ff81ccf16dafc30d04c332455be1f62d112be3",
+      "translation": "2024/02/14 (ver1.00) ",
+      "contextHash": "8cfcc1c4cde4a7dd0235f34e25ff81ccf16dafc30d04c332455be1f62d112be3"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "『ピクチャリスト』の『顔グラ』に置換元となるファイルを設定し、置換先となるピクチャと紐づけてください。",
+      "sourceHash": "86dd22f99726c222b8468fa07840f8927c9e979c1392d82fd76ae3e8d3835afe",
+      "translation": "Set the file to be replaced under “Face” in “PictureList,” and link it to the picture to replace it with.",
+      "contextHash": "86dd22f99726c222b8468fa07840f8927c9e979c1392d82fd76ae3e8d3835afe"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "Ｘ座標補正、Ｙ座標補正、拡大率を設定し、切り抜く位置を調整してください。",
+      "sourceHash": "91aa3c1d605831fe2245a94171f525257aaf4172bb6fe055e8076963ba125768",
+      "translation": "Set AdjustX, AdjustY, and Scale to adjust the cropping position.",
+      "contextHash": "91aa3c1d605831fe2245a94171f525257aaf4172bb6fe055e8076963ba125768"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "条件について（About Conditions）",
+      "sourceHash": "93ad634104c972cb2855b5ef19f265ead262ea971ce3b5314ebf755d08a04855",
+      "translation": "About Conditions (About Conditions)",
+      "contextHash": "93ad634104c972cb2855b5ef19f265ead262ea971ce3b5314ebf755d08a04855"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "スイッチやスクリプトを条件とすることで、状況によって参照するピクチャを変更できます。",
+      "sourceHash": "7fe90e4a9ad8a9164c3560fdaceae39c3769ca045713c9b3f935180e93db2e75",
+      "translation": "You can change the picture referenced depending on the situation by using a switch or script as a condition.",
+      "contextHash": "7fe90e4a9ad8a9164c3560fdaceae39c3769ca045713c9b3f935180e93db2e75"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "例えば、スクリプト条件に「a.isDead()」と設定すれば、戦闘不能時のみ表示を変更させることができます。",
+      "sourceHash": "e604b211c609ab2bd2870fa8386d02027bcce8d658ff5f5cf7db2f47fb6a35d6",
+      "translation": "For example, setting “a.isDead()” as the script condition changes the display only when the actor is incapacitated.",
+      "contextHash": "e604b211c609ab2bd2870fa8386d02027bcce8d658ff5f5cf7db2f47fb6a35d6"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ただし、場面によっては、a（battler）の情報を取得できないため、反映されない可能性があります。",
+      "sourceHash": "424e8433a75bb2082cb23f4bb7b85ab34b2076879fbe77661342bf99cca73b2f",
+      "translation": "However, depending on the scene, the information for a (battler) may not be available, so the change may not be applied.",
+      "contextHash": "424e8433a75bb2082cb23f4bb7b85ab34b2076879fbe77661342bf99cca73b2f"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "ピクチャリスト（PictureList）",
+      "sourceHash": "df71b3a1c97ed3baf1b14eba1d61299564f45a7aee0954094a8e821aae818aac",
+      "translation": "PictureList (PictureList)",
+      "contextHash": "df71b3a1c97ed3baf1b14eba1d61299564f45a7aee0954094a8e821aae818aac"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "立ち絵の表示を行うピクチャの一覧です。",
+      "sourceHash": "4839b913cdea73f3e5134c799764b375f94ad6a934ae0a23d8904317d36953e7",
+      "translation": "A list of pictures used to display character portraits.",
+      "contextHash": "4839b913cdea73f3e5134c799764b375f94ad6a934ae0a23d8904317d36953e7"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "原点（Origin）",
+      "sourceHash": "95561f3300073372475f2c8cf85e7f9a77e69af2830ba00da97b98e7033d93f1",
+      "translation": "Origin (Origin)",
+      "contextHash": "95561f3300073372475f2c8cf85e7f9a77e69af2830ba00da97b98e7033d93f1"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ピクチャを表示する原点です。",
+      "sourceHash": "c591e6dce5a399fa10400e923f6986054739684446cfb46d48458758c09ae8a0",
+      "translation": "The origin for displaying pictures.",
+      "contextHash": "c591e6dce5a399fa10400e923f6986054739684446cfb46d48458758c09ae8a0"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "Ｘ座標補正（AdjustX）",
+      "sourceHash": "dcfc08d6da2067f3bac9df8ab569ab14bcad5e8f3001faf2e5d040a9241edc22",
+      "translation": "AdjustX (AdjustX)",
+      "contextHash": "dcfc08d6da2067f3bac9df8ab569ab14bcad5e8f3001faf2e5d040a9241edc22"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "ピクチャを切り取るＸ座標を調整します。",
+      "sourceHash": "d414842c26d0f8cfd7be13256871090ae5f4d796791ba8e1ed3e048692b685d4",
+      "translation": "Adjusts the X coordinate at which the picture is cropped.",
+      "contextHash": "d414842c26d0f8cfd7be13256871090ae5f4d796791ba8e1ed3e048692b685d4"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "Ｙ座標補正（AdjustY）",
+      "sourceHash": "4bf807a717d1d7895fc85e091711954140d72451defa384742ab2c4a6f1cae9e",
+      "translation": "AdjustY (AdjustY)",
+      "contextHash": "4bf807a717d1d7895fc85e091711954140d72451defa384742ab2c4a6f1cae9e"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ピクチャを切り取るＹ座標を調整します。",
+      "sourceHash": "b11d0d7e5dad9b9a33d2154e55ce9f328547e2ec07b160b7f1c79a0eb14248da",
+      "translation": "Adjusts the Y coordinate at which the picture is cropped.",
+      "contextHash": "b11d0d7e5dad9b9a33d2154e55ce9f328547e2ec07b160b7f1c79a0eb14248da"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "拡大率（Scale）",
+      "sourceHash": "355c6f03a83a431fd149b53b21f98433ed5cdff14c07881cd809a5295dda6a31",
+      "translation": "Scale (Scale)",
+      "contextHash": "355c6f03a83a431fd149b53b21f98433ed5cdff14c07881cd809a5295dda6a31"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "標準となるピクチャの拡大率です。",
+      "sourceHash": "82fc296c7cbe2718e6137d60b613cb51bb1f51e780e8238b345b59ebdd6ef6d8",
+      "translation": "The default scale for pictures.",
+      "contextHash": "82fc296c7cbe2718e6137d60b613cb51bb1f51e780e8238b345b59ebdd6ef6d8"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "100を基準に設定してください。",
+      "sourceHash": "995108f2823f974353957e798bc083f2fae1c637d6c3221033a84531de8bc4b9",
+      "translation": "Set it based on 100.",
+      "contextHash": "995108f2823f974353957e798bc083f2fae1c637d6c3221033a84531de8bc4b9"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "顔グラの横幅（FaceWidth）",
+      "sourceHash": "52ee7444bf870520c62f500a14a1441659bbf618d0e908c57f9bdad548420437",
+      "translation": "Face Width (FaceWidth)",
+      "contextHash": "52ee7444bf870520c62f500a14a1441659bbf618d0e908c57f9bdad548420437"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "表示される顔グラの横幅です。",
+      "sourceHash": "83500ef5a1fa963c8aba98566d39b4d727368604bb36d8b03406ff620300ab0d",
+      "translation": "The width of the displayed face graphic.",
+      "contextHash": "83500ef5a1fa963c8aba98566d39b4d727368604bb36d8b03406ff620300ab0d"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "空欄ならシステム2の設定値を参照します。",
+      "sourceHash": "894260c23757d380ef9dba6a09c3735e7a50756e96710992f9c040f9f0a8f22b",
+      "translation": "If left blank, the value set in System 2 is used.",
+      "contextHash": "894260c23757d380ef9dba6a09c3735e7a50756e96710992f9c040f9f0a8f22b"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "顔グラの縦幅（FaceHeight）",
+      "sourceHash": "8eaebce0e6097883df20fcf942f519c1c4561266e0527936f0c778419444fea0",
+      "translation": "Face Height (FaceHeight)",
+      "contextHash": "8eaebce0e6097883df20fcf942f519c1c4561266e0527936f0c778419444fea0"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "表示される顔グラの縦幅です。",
+      "sourceHash": "24dbd86ff3389230a258a198aeebd8c4b3696ae0560be138849bd3356e7b8446",
+      "translation": "The height of the displayed face graphic.",
+      "contextHash": "24dbd86ff3389230a258a198aeebd8c4b3696ae0560be138849bd3356e7b8446"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "空欄ならシステム2の設定値を参照します。",
+      "sourceHash": "894260c23757d380ef9dba6a09c3735e7a50756e96710992f9c040f9f0a8f22b",
+      "translation": "If left blank, the value set in System 2 is used.",
+      "contextHash": "894260c23757d380ef9dba6a09c3735e7a50756e96710992f9c040f9f0a8f22b"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "プラグインパラメータ（ピクチャ）（Plugin Parameters Picture）",
+      "sourceHash": "eb9eefe548c395ff9d8017775e469f75108e31205b74231608aeac11e54d1a05",
+      "translation": "Plugin Parameters (Picture) (Plugin Parameters Picture)",
+      "contextHash": "eb9eefe548c395ff9d8017775e469f75108e31205b74231608aeac11e54d1a05"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "こちらはピクチャ毎の設定です。",
+      "sourceHash": "a0255cb6490510c61c5df247f09f53dc82b46d1a7de127e1ca647dff42318a03",
+      "translation": "These are settings for each picture.",
+      "contextHash": "a0255cb6490510c61c5df247f09f53dc82b46d1a7de127e1ca647dff42318a03"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "空欄にした項目は共通の設定がそのまま引き継がれます。",
+      "sourceHash": "caa4b79be2d61832ed18e6e2f2a4aac58d6d1122a1a26387d85350f076cd25d2",
+      "translation": "Any fields left blank inherit the corresponding common settings.",
+      "contextHash": "caa4b79be2d61832ed18e6e2f2a4aac58d6d1122a1a26387d85350f076cd25d2"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "顔グラ（Face）",
+      "sourceHash": "776183fa925786e3e7c3343792228a9da569116f7faecae8f9c7174211339ffa",
+      "translation": "Face (Face)",
+      "contextHash": "776183fa925786e3e7c3343792228a9da569116f7faecae8f9c7174211339ffa"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "置換対象とする顔グラのファイルです。",
+      "sourceHash": "e54734314faf969b06b56cda99a029193d778a4ba33a971fcffc542371f2ff12",
+      "translation": "The face graphic file to be replaced.",
+      "contextHash": "e54734314faf969b06b56cda99a029193d778a4ba33a971fcffc542371f2ff12"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "ピクチャ（Picture）",
+      "sourceHash": "37229cdac3dac67e0fd2dd2ecda64f20f85cd1cc28bd86be0a0e755e3479c6d3",
+      "translation": "Picture (Picture)",
+      "contextHash": "37229cdac3dac67e0fd2dd2ecda64f20f85cd1cc28bd86be0a0e755e3479c6d3"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "置換先のピクチャです。",
+      "sourceHash": "40c6c70d2d5a52fc2bd28fcad5182f51f1b7c15378c981afb47ec8c0532d1149",
+      "translation": "The picture to replace it with.",
+      "contextHash": "40c6c70d2d5a52fc2bd28fcad5182f51f1b7c15378c981afb47ec8c0532d1149"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "スイッチ（Switch）",
+      "sourceHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78",
+      "translation": "Switch (Switch)",
+      "contextHash": "47d3a1306fa93ec24f65abc28fc9e4790ce4e05a03f888af5f4024e2d2e5ea78"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "表示を有効にするスイッチです。",
+      "sourceHash": "eb23a48c4799568f62752b77979449fb3e87deaa2a05073acd482be6fe1e2134",
+      "translation": "The switch that enables the display.",
+      "contextHash": "eb23a48c4799568f62752b77979449fb3e87deaa2a05073acd482be6fe1e2134"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "条件を満たした中で最も上の設定が表示されます。",
+      "sourceHash": "fd0edfb0458aaec72bf8079b8757bbc8d307fef5e8cce6d60d214a86119b089d",
+      "translation": "Among the conditions that are met, the highest setting in the list is displayed.",
+      "contextHash": "fd0edfb0458aaec72bf8079b8757bbc8d307fef5e8cce6d60d214a86119b089d"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "スクリプト条件（ScriptCondition）",
+      "sourceHash": "6380ad6048950ab4bd983af99d71453a9ef81d4239d6f9f14acf4a6aec58e60f",
+      "translation": "Script Condition (ScriptCondition)",
+      "contextHash": "6380ad6048950ab4bd983af99d71453a9ef81d4239d6f9f14acf4a6aec58e60f"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "表示を有効にするスクリプトです。",
+      "sourceHash": "83f2bd1e75926a069dc407eec0f069795027b4c97ed3071b384cce04bd678c5e",
+      "translation": "This is a script that enables display.",
+      "contextHash": "83f2bd1e75926a069dc407eec0f069795027b4c97ed3071b384cce04bd678c5e"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "例：a.isDead()",
+      "sourceHash": "f106ebdcf71df70bdce3e8564e991b3a134090b127ae8ecd44afe9119a5fb3b9",
+      "translation": "Example: a.isDead()",
+      "contextHash": "f106ebdcf71df70bdce3e8564e991b3a134090b127ae8ecd44afe9119a5fb3b9"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "原点（Origin）",
+      "sourceHash": "95561f3300073372475f2c8cf85e7f9a77e69af2830ba00da97b98e7033d93f1",
+      "translation": "Origin (Origin)",
+      "contextHash": "95561f3300073372475f2c8cf85e7f9a77e69af2830ba00da97b98e7033d93f1"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "ピクチャを表示する原点です。",
+      "sourceHash": "c591e6dce5a399fa10400e923f6986054739684446cfb46d48458758c09ae8a0",
+      "translation": "This is the origin for displaying pictures.",
+      "contextHash": "c591e6dce5a399fa10400e923f6986054739684446cfb46d48458758c09ae8a0"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "Ｘ座標調整（AdjustX）",
+      "sourceHash": "9c2a6f117215ab258fe78e842c89e7f50068379e23d3d47621ed379cce98d94c",
+      "translation": "X Coordinate Adjustment (AdjustX)",
+      "contextHash": "9c2a6f117215ab258fe78e842c89e7f50068379e23d3d47621ed379cce98d94c"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "ピクチャを切り取るＸ座標を調整します。",
+      "sourceHash": "d414842c26d0f8cfd7be13256871090ae5f4d796791ba8e1ed3e048692b685d4",
+      "translation": "Adjusts the X coordinate at which the picture is cropped.",
+      "contextHash": "d414842c26d0f8cfd7be13256871090ae5f4d796791ba8e1ed3e048692b685d4"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "値を設定した場合は共通の設定に対して、さらに値が加算されます。",
+      "sourceHash": "74bbea278fdb1e688770b48b15741f172a8094bae2b2468f49c50a96ed7056e3",
+      "translation": "When a value is set, it is added to the common setting.",
+      "contextHash": "74bbea278fdb1e688770b48b15741f172a8094bae2b2468f49c50a96ed7056e3"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "Ｙ座標調整（AdjustY）",
+      "sourceHash": "1ba3cb850888c214f319f1680dd3dbd6d54a5b3305a6084066369243d4fa8242",
+      "translation": "Y Coordinate Adjustment (AdjustY)",
+      "contextHash": "1ba3cb850888c214f319f1680dd3dbd6d54a5b3305a6084066369243d4fa8242"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "ピクチャを切り取るＹ座標を調整します。",
+      "sourceHash": "b11d0d7e5dad9b9a33d2154e55ce9f328547e2ec07b160b7f1c79a0eb14248da",
+      "translation": "Adjusts the Y coordinate at which the picture is cropped.",
+      "contextHash": "b11d0d7e5dad9b9a33d2154e55ce9f328547e2ec07b160b7f1c79a0eb14248da"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "値を設定した場合は共通の設定に対して、さらに値が加算されます。",
+      "sourceHash": "74bbea278fdb1e688770b48b15741f172a8094bae2b2468f49c50a96ed7056e3",
+      "translation": "When a value is set, it is added to the common setting.",
+      "contextHash": "74bbea278fdb1e688770b48b15741f172a8094bae2b2468f49c50a96ed7056e3"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "拡大率（Scale）",
+      "sourceHash": "355c6f03a83a431fd149b53b21f98433ed5cdff14c07881cd809a5295dda6a31",
+      "translation": "Scale (Scale)",
+      "contextHash": "355c6f03a83a431fd149b53b21f98433ed5cdff14c07881cd809a5295dda6a31"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "ピクチャの拡大率です。",
+      "sourceHash": "a690dc2d36b0775fd687cce869ccd658cb1215c4060137e2b4807f06c65e2392",
+      "translation": "This is the picture's scale.",
+      "contextHash": "a690dc2d36b0775fd687cce869ccd658cb1215c4060137e2b4807f06c65e2392"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "100を基準に設定してください。",
+      "sourceHash": "995108f2823f974353957e798bc083f2fae1c637d6c3221033a84531de8bc4b9",
+      "translation": "Set it relative to 100.",
+      "contextHash": "995108f2823f974353957e798bc083f2fae1c637d6c3221033a84531de8bc4b9"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "値を設定した場合は共通の設定を無視して上書きします。",
+      "sourceHash": "46ec576a2627901a7806a0e2f3a8f486b9bb7e73cc1664cc0ee5e38698f981b2",
+      "translation": "When a value is set, it overrides the common setting.",
+      "contextHash": "46ec576a2627901a7806a0e2f3a8f486b9bb7e73cc1664cc0ee5e38698f981b2"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "座標調整とは挙動が異なるのでご注意ください。",
+      "sourceHash": "dd5e2dfd953e643a03cfd3e311cc0f10286629addcce1161788b7d567091b74c",
+      "translation": "Please note that its behavior differs from coordinate adjustment.",
+      "contextHash": "dd5e2dfd953e643a03cfd3e311cc0f10286629addcce1161788b7d567091b74c"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]条件について（About Conditions）[[/LINK_1]]",
+      "sourceHash": "b436230f298e25a3763d633dabfab4ce0036d1dcf58256ce1021c226109e3b08",
+      "parts": [
+        {
+          "source": "条件について（About Conditions）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]About Conditions (About Conditions)[[/LINK_1]]",
+      "contextHash": "b436230f298e25a3763d633dabfab4ce0036d1dcf58256ce1021c226109e3b08"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャリスト（PictureList）[[/LINK_1]]",
+      "sourceHash": "f4906900ba46224156f75a5cd68bf70ebc51c3f6dfd047040a87c46156b3f000",
+      "parts": [
+        {
+          "source": "ピクチャリスト（PictureList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture List (PictureList)[[/LINK_1]]",
+      "contextHash": "f4906900ba46224156f75a5cd68bf70ebc51c3f6dfd047040a87c46156b3f000"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]原点（Origin）[[/LINK_1]]",
+      "sourceHash": "9504c61a39eae9a2c83c93aa2f516b2a9ac934f2cecfe7d80a55a82411664581",
+      "parts": [
+        {
+          "source": "原点（Origin）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Origin (Origin)[[/LINK_1]]",
+      "contextHash": "9504c61a39eae9a2c83c93aa2f516b2a9ac934f2cecfe7d80a55a82411664581"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]Ｘ座標補正（AdjustX）[[/LINK_1]]",
+      "sourceHash": "285a63b7e9a393df15e09bedc551457e89d9cd4ddf876fe8117de65191dc1ace",
+      "parts": [
+        {
+          "source": "Ｘ座標補正（AdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]X Coordinate Adjustment (AdjustX)[[/LINK_1]]",
+      "contextHash": "285a63b7e9a393df15e09bedc551457e89d9cd4ddf876fe8117de65191dc1ace"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]Ｙ座標補正（AdjustY）[[/LINK_1]]",
+      "sourceHash": "7b9e11d093c405950d22daf951e3239b6dd18b4801ef36e8fe71db51f0502044",
+      "parts": [
+        {
+          "source": "Ｙ座標補正（AdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Y Coordinate Adjustment (AdjustY)[[/LINK_1]]",
+      "contextHash": "7b9e11d093c405950d22daf951e3239b6dd18b4801ef36e8fe71db51f0502044"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]拡大率（Scale）[[/LINK_1]]",
+      "sourceHash": "7049488268c2c4163fd2a79c2b4c75bf0e112aa56c459a7783177f3e003f3a00",
+      "parts": [
+        {
+          "source": "拡大率（Scale）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Scale (Scale)[[/LINK_1]]",
+      "contextHash": "7049488268c2c4163fd2a79c2b4c75bf0e112aa56c459a7783177f3e003f3a00"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]顔グラの横幅（FaceWidth）[[/LINK_1]]",
+      "sourceHash": "b2fb1c6f2e72f5f5487be736ffda82e3ec76992d2b2c2b640b1c710f9d2f9e22",
+      "parts": [
+        {
+          "source": "顔グラの横幅（FaceWidth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Face Graphic Width (FaceWidth)[[/LINK_1]]",
+      "contextHash": "b2fb1c6f2e72f5f5487be736ffda82e3ec76992d2b2c2b640b1c710f9d2f9e22"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]顔グラの縦幅（FaceHeight）[[/LINK_1]]",
+      "sourceHash": "c9d0a7233a243e824c9e6a96949385c8edc06b69e78cb9a5a29ee286de477355",
+      "parts": [
+        {
+          "source": "顔グラの縦幅（FaceHeight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Face Graphic Height (FaceHeight)[[/LINK_1]]",
+      "contextHash": "c9d0a7233a243e824c9e6a96949385c8edc06b69e78cb9a5a29ee286de477355"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（ピクチャ）（Plugin Parameters Picture）[[/LINK_1]]",
+      "sourceHash": "e88aca74076ef11fd67bfd8a8128b68217c7c04d444498ad0b507905cd7163ba",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（ピクチャ）（Plugin Parameters Picture）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Picture) (Plugin Parameters Picture)[[/LINK_1]]",
+      "contextHash": "e88aca74076ef11fd67bfd8a8128b68217c7c04d444498ad0b507905cd7163ba"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]顔グラ（Face）[[/LINK_1]]",
+      "sourceHash": "9bbd947ae42b65bfc1bf4605542e487e4226e193ef6b0ca4bfaa522315a6cc1f",
+      "parts": [
+        {
+          "source": "顔グラ（Face）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Face Graphic (Face)[[/LINK_1]]",
+      "contextHash": "9bbd947ae42b65bfc1bf4605542e487e4226e193ef6b0ca4bfaa522315a6cc1f"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]ピクチャ（Picture）[[/LINK_1]]",
+      "sourceHash": "c7f69d3ab9096fc0b62dc7f2c8c46556ddfab6f95485fbcea55883a436ee218f",
+      "parts": [
+        {
+          "source": "ピクチャ（Picture）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Picture (Picture)[[/LINK_1]]",
+      "contextHash": "c7f69d3ab9096fc0b62dc7f2c8c46556ddfab6f95485fbcea55883a436ee218f"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]スイッチ（Switch）[[/LINK_1]]",
+      "sourceHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056",
+      "parts": [
+        {
+          "source": "スイッチ（Switch）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Switch (Switch)[[/LINK_1]]",
+      "contextHash": "6d543fec16049e41922aa4ea6160b4552d2395e7ab2f483a051a284c86201056"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]スクリプト条件（ScriptCondition）[[/LINK_1]]",
+      "sourceHash": "1e016bcf71fbf7901237733fa9d297313d2e024a86cb9af3d9a68855ffc5ae3f",
+      "parts": [
+        {
+          "source": "スクリプト条件（ScriptCondition）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Script Condition (ScriptCondition)[[/LINK_1]]",
+      "contextHash": "1e016bcf71fbf7901237733fa9d297313d2e024a86cb9af3d9a68855ffc5ae3f"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]原点（Origin）[[/LINK_1]]",
+      "sourceHash": "9504c61a39eae9a2c83c93aa2f516b2a9ac934f2cecfe7d80a55a82411664581",
+      "parts": [
+        {
+          "source": "原点（Origin）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Origin (Origin)[[/LINK_1]]",
+      "contextHash": "9504c61a39eae9a2c83c93aa2f516b2a9ac934f2cecfe7d80a55a82411664581"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]Ｘ座標調整（AdjustX）[[/LINK_1]]",
+      "sourceHash": "51dd25ab55202408d575ec377d4fdc0e54f0389c14a58cd64cfa94473e68a525",
+      "parts": [
+        {
+          "source": "Ｘ座標調整（AdjustX）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]X Coordinate Adjustment (AdjustX)[[/LINK_1]]",
+      "contextHash": "51dd25ab55202408d575ec377d4fdc0e54f0389c14a58cd64cfa94473e68a525"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]Ｙ座標調整（AdjustY）[[/LINK_1]]",
+      "sourceHash": "109f0f22f579a001cd0bb225196be656136f342daa3eceb1e8e353e33be6314a",
+      "parts": [
+        {
+          "source": "Ｙ座標調整（AdjustY）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Y Coordinate Adjustment (AdjustY)[[/LINK_1]]",
+      "contextHash": "109f0f22f579a001cd0bb225196be656136f342daa3eceb1e8e353e33be6314a"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]拡大率（Scale）[[/LINK_1]]",
+      "sourceHash": "7049488268c2c4163fd2a79c2b4c75bf0e112aa56c459a7783177f3e003f3a00",
+      "parts": [
+        {
+          "source": "拡大率（Scale）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Scale (Scale)[[/LINK_1]]",
+      "contextHash": "7049488268c2c4163fd2a79c2b4c75bf0e112aa56c459a7783177f3e003f3a00"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ピクチャを顔グラとしてそのまま使用できるようにします。": "Allows pictures to be used directly as face graphics.",
+    "このプラグインは立ち絵用のピクチャから、いちいち顔グラを別ファイルとして切り抜くのが面倒になった作者が、作業を省略するために作ったものです。": "I created this plugin to save time after finding it tedious to repeatedly crop face graphics from pictures intended for character portraits.",
+    "一応、メッセージの顔グラにも対応していますが、基本的にはメニュー画面などに表示されるアクター用です。": "It also supports message face graphics, but it is primarily intended for actors displayed on screens such as the menu screen.",
+    "具体的には顔グラのファイルとピクチャを紐づけることで、ピクチャを144x144のサイズの顔グラとして表示します。": "Specifically, by linking face graphic files to pictures, it displays the pictures as 144x144 face graphics.",
+    "※なお、顔グラのパターンは参照しません。１キャラクター＝１ファイルとしてください。": "※Face graphic patterns are not referenced. Use one file per character.",
+    "※MZ ver1.9.0より、システム2で顔サイズを指定できるようになりました。": "※As of MZ ver1.9.0, you can specify the face graphic size in System 2.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Enable the plugin in the Plugin Manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_PictureToFace.js": "NRP_PictureToFace.js ",
+    "ver1.01（2025/02/22）": "ver1.01 (2025/02/22) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/02/22（ver1.01）": "2025/02/22 (ver1.01) ",
+    "MZ ver1.9.0でエラーになる問題に対応した。": "Fixed an issue that caused an error in MZ ver1.9.0.",
+    "2024/02/14（ver1.00）": "2024/02/14 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "『ピクチャリスト』の『顔グラ』に置換元となるファイルを設定し、置換先となるピクチャと紐づけてください。": "Set the file to be replaced under “Face” in “PictureList,” and link it to the picture to replace it with.",
+    "Ｘ座標補正、Ｙ座標補正、拡大率を設定し、切り抜く位置を調整してください。": "Set AdjustX, AdjustY, and Scale to adjust the cropping position.",
+    "条件について（About Conditions）": "About Conditions (About Conditions)",
+    "スイッチやスクリプトを条件とすることで、状況によって参照するピクチャを変更できます。": "You can change the picture referenced depending on the situation by using a switch or script as a condition.",
+    "例えば、スクリプト条件に「a.isDead()」と設定すれば、戦闘不能時のみ表示を変更させることができます。": "For example, setting “a.isDead()” as the script condition changes the display only when the actor is incapacitated.",
+    "ただし、場面によっては、a（battler）の情報を取得できないため、反映されない可能性があります。": "However, depending on the scene, the information for a (battler) may not be available, so the change may not be applied.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "ピクチャリスト（PictureList）": "PictureList (PictureList)",
+    "立ち絵の表示を行うピクチャの一覧です。": "A list of pictures used to display character portraits.",
+    "原点（Origin）": "Origin (Origin)",
+    "ピクチャを表示する原点です。": "This is the origin for displaying pictures.",
+    "Ｘ座標補正（AdjustX）": "AdjustX (AdjustX)",
+    "ピクチャを切り取るＸ座標を調整します。": "Adjusts the X coordinate at which the picture is cropped.",
+    "Ｙ座標補正（AdjustY）": "AdjustY (AdjustY)",
+    "ピクチャを切り取るＹ座標を調整します。": "Adjusts the Y coordinate at which the picture is cropped.",
+    "拡大率（Scale）": "Scale (Scale)",
+    "標準となるピクチャの拡大率です。": "The default scale for pictures.",
+    "100を基準に設定してください。": "Set it relative to 100.",
+    "顔グラの横幅（FaceWidth）": "Face Width (FaceWidth)",
+    "表示される顔グラの横幅です。": "The width of the displayed face graphic.",
+    "空欄ならシステム2の設定値を参照します。": "If left blank, the value set in System 2 is used.",
+    "顔グラの縦幅（FaceHeight）": "Face Height (FaceHeight)",
+    "表示される顔グラの縦幅です。": "The height of the displayed face graphic.",
+    "プラグインパラメータ（ピクチャ）（Plugin Parameters Picture）": "Plugin Parameters (Picture) (Plugin Parameters Picture)",
+    "こちらはピクチャ毎の設定です。": "These are settings for each picture.",
+    "空欄にした項目は共通の設定がそのまま引き継がれます。": "Any fields left blank inherit the corresponding common settings.",
+    "顔グラ（Face）": "Face (Face)",
+    "置換対象とする顔グラのファイルです。": "The face graphic file to be replaced.",
+    "ピクチャ（Picture）": "Picture (Picture)",
+    "置換先のピクチャです。": "The picture to replace it with.",
+    "スイッチ（Switch）": "Switch (Switch)",
+    "表示を有効にするスイッチです。": "The switch that enables the display.",
+    "条件を満たした中で最も上の設定が表示されます。": "Among the conditions that are met, the highest setting in the list is displayed.",
+    "スクリプト条件（ScriptCondition）": "Script Condition (ScriptCondition)",
+    "表示を有効にするスクリプトです。": "This is a script that enables display.",
+    "例：a.isDead()": "Example: a.isDead()",
+    "Ｘ座標調整（AdjustX）": "X Coordinate Adjustment (AdjustX)",
+    "値を設定した場合は共通の設定に対して、さらに値が加算されます。": "When a value is set, it is added to the common setting.",
+    "Ｙ座標調整（AdjustY）": "Y Coordinate Adjustment (AdjustY)",
+    "ピクチャの拡大率です。": "This is the picture's scale.",
+    "値を設定した場合は共通の設定を無視して上書きします。": "When a value is set, it overrides the common setting.",
+    "座標調整とは挙動が異なるのでご注意ください。": "Please note that its behavior differs from coordinate adjustment."
+  }
+}

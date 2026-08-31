@@ -1,0 +1,746 @@
+{
+  "articleId": "500606923",
+  "sourceUrl": "https://newrpg.seesaa.net/article/500606923.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "dedbe3e90a20ab229b2246c8db326a987b27c39ed27dc0520d6a956538525d0c",
+  "translatedAt": "2026-08-31T02:37:35.154Z",
+  "title": "Activate Skills When Incapacitated [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "戦闘不能時にスキルを発動する【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "d0ef8d52afbd585af2f291b0cb7cd8a99e15e32768ce5d55604e0064b5600079",
+      "translation": "Activate Skills When Incapacitated [RPG Maker MZ & MV Plugin]",
+      "contextHash": "d0ef8d52afbd585af2f291b0cb7cd8a99e15e32768ce5d55604e0064b5600079"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "戦闘不能時にスキルを発動します。",
+      "sourceHash": "0d7e88fe2a72df3837c3649ee6980c433c60516fe9e54e4cc895e0f1484702d2",
+      "translation": "Activates skills when incapacitated.",
+      "contextHash": "0d7e88fe2a72df3837c3649ee6980c433c60516fe9e54e4cc895e0f1484702d2"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "死に際のファイナルアタックや自動蘇生（リレイズ）などに使えます。",
+      "sourceHash": "4ccd36ce210797a19f5d98a6b12619cc9b7b38f251a8a40fc01706fc1dd56309",
+      "translation": "Can be used for a final attack upon death, automatic revival (Reraise), and more.",
+      "contextHash": "4ccd36ce210797a19f5d98a6b12619cc9b7b38f251a8a40fc01706fc1dd56309"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）に対して、戦闘不能時にスキルを発動する特徴を設定できます。",
+      "sourceHash": "41119147d9d47820540ef0fff0404006776d195eb32812f9dce6599b5e4f82f5",
+      "translation": "You can set a feature for each object (actor, enemy, class, equipment, state, and skill) to activate a skill when incapacitated.",
+      "contextHash": "41119147d9d47820540ef0fff0404006776d195eb32812f9dce6599b5e4f82f5"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "スキルについては覚えているだけで、発揮するパッシブスキルとなります。",
+      "sourceHash": "63b3846ebc56a4eddc782adb43e0deda60f35ca02b734af0f49b67e1642d99ed",
+      "translation": "For skills, simply learning them makes them passive skills that take effect.",
+      "contextHash": "63b3846ebc56a4eddc782adb43e0deda60f35ca02b734af0f49b67e1642d99ed"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_DeadSkill.js",
+      "sourceHash": "a526a7d04a344c5ef72f0fc1542e28276580db61eedcfe1db13e2ed8633d0651",
+      "translation": "NRP_DeadSkill.js ",
+      "contextHash": "b1751fb0aabe9da6832a75ff2ac64d4f1004484db80dff1f56f1a4c99d591185"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ver1.042（2025/02/27）",
+      "sourceHash": "b0baedda91517b95c071291ead8b49ff9b7ec6a3407fdcd2579858f9f0a2776e",
+      "translation": "ver1.042 (2025/02/27) ",
+      "contextHash": "b1751fb0aabe9da6832a75ff2ac64d4f1004484db80dff1f56f1a4c99d591185"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/02/08 -> 2025/02/27（ver1.04 -> 1.042）",
+      "sourceHash": "6c08bea4b05cdb20502aa90da8505024f49919f4aa901f85fc0753f6f98bc998",
+      "translation": "2025/02/08 -> 2025/02/27 (ver1.04 -> 1.042) ",
+      "contextHash": "6c08bea4b05cdb20502aa90da8505024f49919f4aa901f85fc0753f6f98bc998"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "フロントビューの際にエラーになってしまう不具合修正。",
+      "sourceHash": "d361e47e8646f9838fb20b6d68554b7f2b4afa9b70c25794cbda9a96d1f24eae",
+      "translation": "Fixed an error that occurred in front-view battles.",
+      "contextHash": "d361e47e8646f9838fb20b6d68554b7f2b4afa9b70c25794cbda9a96d1f24eae"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "スキル発動時に戦闘不能メッセージが適切に表示されない不具合修正。",
+      "sourceHash": "6f4304ffe1055362767eedd0e5c783e5f0a4c69b005c076df40d1ee0927b566e",
+      "translation": "Fixed an issue where the incapacitation message was not displayed correctly when a skill was activated.",
+      "contextHash": "6f4304ffe1055362767eedd0e5c783e5f0a4c69b005c076df40d1ee0927b566e"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "スリップダメージで戦闘不能になった際、エラーになる不具合修正。（ver1.041）",
+      "sourceHash": "4b65b39894403b40c0de4e7fac484747086dc6c79bb81c46246a44f80455ce1f",
+      "translation": "Fixed an error that occurred when a battler became incapacitated due to slip damage. (ver1.041)",
+      "contextHash": "4b65b39894403b40c0de4e7fac484747086dc6c79bb81c46246a44f80455ce1f"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "ＣＴＢかつスリップダメージで戦闘不能になった際、次のバトラーのターンが強制終了してしまう不具合修正。（2025/02/27 ver1.042）",
+      "sourceHash": "0f5d86ee0c7d808e1c32cd30c678df419dba135d920c0549a80f0c2ea1156311",
+      "translation": "Fixed an issue where the next battler's turn was forcibly ended when a battler became incapacitated due to slip damage during CTB. (2025/02/27 ver1.042)",
+      "contextHash": "0f5d86ee0c7d808e1c32cd30c678df419dba135d920c0549a80f0c2ea1156311"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2024/06/04 -> 2024/08/23（ver1.03 -> 1.032）",
+      "sourceHash": "2a3e66b4897eef579973880b7551c6b3ac5ce7869f978ad4844b65f6189972f6",
+      "translation": "2024/06/04 -> 2024/08/23 (ver1.03 -> 1.032) ",
+      "contextHash": "2a3e66b4897eef579973880b7551c6b3ac5ce7869f978ad4844b65f6189972f6"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "一人が複数の戦闘不能スキルを発動した場合、片方しか発動しない不具合を修正。",
+      "sourceHash": "0c99bf2e44e74f9814f095d497ef5db3cf4c0dd757a82ada2ba9f84cd0e92732",
+      "translation": "Fixed an issue where only one skill was activated when a single battler activated multiple skills upon incapacitation.",
+      "contextHash": "0c99bf2e44e74f9814f095d497ef5db3cf4c0dd757a82ada2ba9f84cd0e92732"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "プラグインパラメータの『死亡スキルを先に発動』をオフにした場合が機能していないので項目自体を廃止して、オンが標準の挙動にした。",
+      "sourceHash": "d2a10399205a6b6efb0ba572340080ecb44f8134ef0d48a6e033959294133e26",
+      "translation": "The plugin parameter “Activate Death Skills First” did not function when turned off, so the parameter itself was removed and the ON behavior was made standard.",
+      "contextHash": "d2a10399205a6b6efb0ba572340080ecb44f8134ef0d48a6e033959294133e26"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "NRP_StateEX.jsより上にプラグインを配置した場合、スキルが発動するより前に戦闘終了してしまう問題があったのでプラグインの登録順序を明記した。",
+      "sourceHash": "089ac95850388b8237ad7e1c5bdbe9630f7aa5f281506f192aa2c7759f23ad4d",
+      "translation": "Since placing the plugin above NRP_StateEX.js caused the battle to end before the skill was activated, the plugin registration order is now specified.",
+      "contextHash": "089ac95850388b8237ad7e1c5bdbe9630f7aa5f281506f192aa2c7759f23ad4d"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "毒などのステートで戦闘不能になった際、スキルが実行されない不具合を修正。",
+      "sourceHash": "0eda2d78d8834d7527d25a37a3f9ff6c4b9b59833a781099f08a90f95ac6c23c",
+      "translation": "Fixed an issue where skills were not executed when a battler became incapacitated due to states such as poison.",
+      "contextHash": "0eda2d78d8834d7527d25a37a3f9ff6c4b9b59833a781099f08a90f95ac6c23c"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "NRP_CombinationSkill.js（合体技）との併用時に不要な前進処理が発生してしまう競合に対処。（2024/08/23 ver1.032）",
+      "sourceHash": "9d3cf5f885b8cb975a488255d409f5449601adf40b2ccb73d27e1af35f849505",
+      "translation": "Addressed a conflict that caused unnecessary forward movement when used together with NRP_CombinationSkill.js (combination skills). (2024/08/23 ver1.032)",
+      "contextHash": "9d3cf5f885b8cb975a488255d409f5449601adf40b2ccb73d27e1af35f849505"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2024/06/03（ver1.02）",
+      "sourceHash": "956c54112682a6a8e99c0a8ae7cbf3dcb7fa2b12106d6a4d63b27dc8f6c2b5f0",
+      "translation": "2024/06/03 (ver1.02) ",
+      "contextHash": "956c54112682a6a8e99c0a8ae7cbf3dcb7fa2b12106d6a4d63b27dc8f6c2b5f0"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "自身を攻撃して発動した戦闘不能スキルによる自己ステートは継続ターンを+1する機能を追加。",
+      "sourceHash": "5dd09e4a2bec5090e584235ba98421672def468a8e6a7aec4fea5776f68ac76b",
+      "translation": "Added a feature that increases the duration of a self-inflicted state caused by a skill activated upon incapacitation by +1 turn.",
+      "contextHash": "5dd09e4a2bec5090e584235ba98421672def468a8e6a7aec4fea5776f68ac76b"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2023/09/03（ver1.01）",
+      "sourceHash": "fd534878b5dcbff1321aeda937a0a2f6af8feca8dfa2dd57b8918cbe6abfa8ef",
+      "translation": "2023/09/03 (ver1.01) ",
+      "contextHash": "fd534878b5dcbff1321aeda937a0a2f6af8feca8dfa2dd57b8918cbe6abfa8ef"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "オブジェクトのメモ欄",
+      "sourceHash": "0518cdb1ccf2f1322afbe951455b5ca3a421dc5cd40094ec8e56e2eaf8403edd",
+      "translation": "Object Note Fields",
+      "contextHash": "0518cdb1ccf2f1322afbe951455b5ca3a421dc5cd40094ec8e56e2eaf8403edd"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を指定してください。",
+      "sourceHash": "e3f3b8c91a68007393c1c509c58151f5c9407b2b555a58c6e0aa07da718fc12c",
+      "translation": "Specify the following in the note field of each object (actor, enemy, class, equipment, state, and skill).",
+      "contextHash": "e3f3b8c91a68007393c1c509c58151f5c9407b2b555a58c6e0aa07da718fc12c"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "戦闘不能時に１００番のスキルを発動します。",
+      "sourceHash": "a7371578e972c73a04633690787e1e0cc119485b4b43653eebde135bd1e33d3a",
+      "translation": "Activates skill number 100 when incapacitated.",
+      "contextHash": "a7371578e972c73a04633690787e1e0cc119485b4b43653eebde135bd1e33d3a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "範囲が単体の場合、対象は攻撃してきた相手になります。",
+      "sourceHash": "b207e7df5501c02baabd99c3eaa2652e3b4964fbee988792dc8302641200f2fe",
+      "translation": "If the scope is one ally or enemy, the target will be the opponent who attacked the user.",
+      "contextHash": "b207e7df5501c02baabd99c3eaa2652e3b4964fbee988792dc8302641200f2fe"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "スキル／アイテムのメモ欄",
+      "sourceHash": "3fe6e13709b1eab1fb9c0b1788939c16206e6322ae7e616037cfa5d5db76718b",
+      "translation": "Skill/Item Note Fields",
+      "contextHash": "3fe6e13709b1eab1fb9c0b1788939c16206e6322ae7e616037cfa5d5db76718b"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "戦闘不能者を対象化",
+      "sourceHash": "c86ce481e2926375765157ce73e1f0cbf8b9742deb1c68c4c35ca97421b6f4ee",
+      "translation": "Allow Incapacitated Battlers as Targets",
+      "contextHash": "c86ce481e2926375765157ce73e1f0cbf8b9742deb1c68c4c35ca97421b6f4ee"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "戦闘不能者を対象として、スキルが命中するようになります。",
+      "sourceHash": "bf4fbb6acc409f4e4632fb9e320182b7a63259b08aa0fa1ebb42350f774406a7",
+      "translation": "Skills will be able to hit incapacitated battlers as targets.",
+      "contextHash": "bf4fbb6acc409f4e4632fb9e320182b7a63259b08aa0fa1ebb42350f774406a7"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "※範囲を自身にして、自動蘇生をやりたい場合は必須です。",
+      "sourceHash": "a6366f9153449d8362807a0619830b6335b1d6d4300164becb7828fbf17972bd",
+      "translation": "※This is required if you want to use automatic revival with the scope set to User.",
+      "contextHash": "a6366f9153449d8362807a0619830b6335b1d6d4300164becb7828fbf17972bd"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "これがないとスキルが命中しません。",
+      "sourceHash": "257311134ca28cf6c4e948aa0be7e1ecaa53e0509855b9a14f5e9850145ecf43",
+      "translation": "Without this, the skill will not hit.",
+      "contextHash": "257311134ca28cf6c4e948aa0be7e1ecaa53e0509855b9a14f5e9850145ecf43"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "スキルを戦闘不能演出後に実行",
+      "sourceHash": "7c43c9ae70b0f5b52ff37aa425aa8c81b4c20b6b6ef98e605213c7461c621a5b",
+      "translation": "Execute Skill After Incapacitation Animation",
+      "contextHash": "7c43c9ae70b0f5b52ff37aa425aa8c81b4c20b6b6ef98e605213c7461c621a5b"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "スキルを戦闘不能演出が終わった後に実行するようにします。",
+      "sourceHash": "317a94b19b0cbcbfb7a7c06648df3a6db2cacd9ffdbc60e2a4b4d127dafb5859",
+      "translation": "Causes the skill to be executed after the incapacitation animation has finished.",
+      "contextHash": "317a94b19b0cbcbfb7a7c06648df3a6db2cacd9ffdbc60e2a4b4d127dafb5859"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "ただし、これが設定されたスキルとされてないスキルの混在はできません。",
+      "sourceHash": "94b23a602cd617a7e3030935644d35b0da1981278d85aaa0d398eeac4edcdd2b",
+      "translation": "However, you cannot mix skills with this setting and skills without it.",
+      "contextHash": "94b23a602cd617a7e3030935644d35b0da1981278d85aaa0d398eeac4edcdd2b"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "同時に設定した場合は、戦闘不能演出前のスキルだけが実行されます。",
+      "sourceHash": "0ed41761a750c7850849a1bdcd38609b51a7565564f5babbc663c1b765e02430",
+      "translation": "If both are set at the same time, only the skills executed before the incapacitation animation will be executed.",
+      "contextHash": "0ed41761a750c7850849a1bdcd38609b51a7565564f5babbc663c1b765e02430"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "スキルの発動演出を一部省略",
+      "sourceHash": "49b7d3def5dda3bd46a31d19d0951d16e110a5c65781248cc30ce2df8b9274e8",
+      "translation": "Partially Skip the Skill Activation Animation",
+      "contextHash": "49b7d3def5dda3bd46a31d19d0951d16e110a5c65781248cc30ce2df8b9274e8"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "スキルの発動演出を一部省略します。",
+      "sourceHash": "0e58d79031828e1da7d0dd6e35e015ee4926e3b699e26a98fd1c0792efbc62f3",
+      "translation": "Partially skips the skill activation animation.",
+      "contextHash": "0e58d79031828e1da7d0dd6e35e015ee4926e3b699e26a98fd1c0792efbc62f3"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "倒れた状態からスキルを発動する演出を行いたい場合に使えるかも？",
+      "sourceHash": "8e7beaf9fc367c4aade7c27a5fcaaf00cf80bc0ee3d6b6aeff39a45220b16167",
+      "translation": "Might be useful if you want to create an animation of activating a skill while in a fallen state?",
+      "contextHash": "8e7beaf9fc367c4aade7c27a5fcaaf00cf80bc0ee3d6b6aeff39a45220b16167"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "自身へのステートターン+1（SelfStatePlusTurn）",
+      "sourceHash": "c696e78f51d8e5d47411b72ca167c73ee7e7b9178ce3052bee75cd9fafe8a71d",
+      "translation": "Self State Turn +1 (SelfStatePlusTurn)",
+      "contextHash": "c696e78f51d8e5d47411b72ca167c73ee7e7b9178ce3052bee75cd9fafe8a71d"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "自身を攻撃して発動した戦闘不能スキルによる自己ステートは継続ターンを+1します。",
+      "sourceHash": "5911121d2ed6e6c9188d2a837178e3bf2dbaf811c58474850deba59139bf96e6",
+      "translation": "Adds +1 turn to self-inflicted states caused by a skill activated upon incapacitation by attacking oneself.",
+      "contextHash": "5911121d2ed6e6c9188d2a837178e3bf2dbaf811c58474850deba59139bf96e6"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "自動解除のタイミングが『行動終了時』のものが対象です。",
+      "sourceHash": "e56c7bb4a7aa0986aa8cb1c68f3651decd12e2e5a369a21dd2954bd752378821",
+      "translation": "This applies to states whose automatic removal timing is “At Action End.”",
+      "contextHash": "e56c7bb4a7aa0986aa8cb1c68f3651decd12e2e5a369a21dd2954bd752378821"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "なお、この項目が機能する状況は極めて限定的なので、基本的にオフでよいと思います。",
+      "sourceHash": "769eb13c5513af3f08f345533de0a982613d119eaa3df5fe578e7713ab058001",
+      "translation": "Since the situations in which this parameter functions are extremely limited, I think it is generally fine to leave it OFF.",
+      "contextHash": "769eb13c5513af3f08f345533de0a982613d119eaa3df5fe578e7713ab058001"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "※作者が複雑なスキルの組み合わせの果てにやむなく必要になった機能です。",
+      "sourceHash": "7dfa8c9b1f43602dc3995ae47922ce5c3c97614fab24c6538b149811897360e0",
+      "translation": "※This feature became necessary only as a last resort after the author created complex combinations of skills.",
+      "contextHash": "7dfa8c9b1f43602dc3995ae47922ce5c3c97614fab24c6538b149811897360e0"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "ステートを自動削除（AutoRemoveState）",
+      "sourceHash": "94182f5eabd970fe510dcc637b3583a39f895c61d13e88ce1e6035b6d7eae1e8",
+      "translation": "Automatically Remove States (AutoRemoveState)",
+      "contextHash": "94182f5eabd970fe510dcc637b3583a39f895c61d13e88ce1e6035b6d7eae1e8"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "ステートに設定された戦闘不能スキルを発動した際、そのステートを削除します。",
+      "sourceHash": "9dc6bdcea6db683ca7a9761402fc3cb51a5d8000f94101b9fd23b7c9220277a8",
+      "translation": "Removes a state when the skill activated upon incapacitation set on that state is activated.",
+      "contextHash": "9dc6bdcea6db683ca7a9761402fc3cb51a5d8000f94101b9fd23b7c9220277a8"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "通常、ステートはバトラーが戦闘不能になった際に除去されます。ですが、それだと当プラグインによるスキルを発動できなくなるので対象のステートのみ戦闘不能後も保持するように変更しています。そのステートを後で削除するかどうかです。",
+      "sourceHash": "22a733ca5cfc2b3adab026ee11c094b7f1fff752d6eb0f6d325ec7a47d691b16",
+      "translation": "Normally, states are removed when a battler becomes incapacitated. However, that would prevent skills from this plugin from being activated, so only the relevant states are changed to remain after incapacitation. This determines whether to remove those states later.",
+      "contextHash": "22a733ca5cfc2b3adab026ee11c094b7f1fff752d6eb0f6d325ec7a47d691b16"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "もし、ステートを残す場合も『ステートの解除』によって任意のタイミングで削除することができます。",
+      "sourceHash": "60cfde5cf25a8e8e9d26883da9a7ae6af112224cb763a56880842c500b9a0b8a",
+      "translation": "Even if you choose to keep the state, you can remove it at any time using “Remove State.”",
+      "contextHash": "60cfde5cf25a8e8e9d26883da9a7ae6af112224cb763a56880842c500b9a0b8a"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]オブジェクトのメモ欄[[/LINK_1]]",
+      "sourceHash": "9b72d22bf8b10924c76286ee7401aa22eb5a72bd2f3a077a5c5f95247f85c686",
+      "parts": [
+        {
+          "source": "オブジェクトのメモ欄",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Object Note Field[[/LINK_1]]",
+      "contextHash": "9b72d22bf8b10924c76286ee7401aa22eb5a72bd2f3a077a5c5f95247f85c686"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]スキル／アイテムのメモ欄[[/LINK_1]]",
+      "sourceHash": "22cda51c11181d7b6adba82d5c182d599306dbb9a2ecf46ffd392b7d902a5b08",
+      "parts": [
+        {
+          "source": "スキル／アイテムのメモ欄",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Skill/Item Note Field[[/LINK_1]]",
+      "contextHash": "22cda51c11181d7b6adba82d5c182d599306dbb9a2ecf46ffd392b7d902a5b08"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]自身へのステートターン+1（SelfStatePlusTurn）[[/LINK_1]]",
+      "sourceHash": "e518d6a27c3022aa8d5bf075d406df7a42db7f0d753e3b03081d84fe401bf841",
+      "parts": [
+        {
+          "source": "自身へのステートターン+1（SelfStatePlusTurn）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add 1 Turn to a State on Self (SelfStatePlusTurn)[[/LINK_1]]",
+      "contextHash": "e518d6a27c3022aa8d5bf075d406df7a42db7f0d753e3b03081d84fe401bf841"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]ステートを自動削除（AutoRemoveState）[[/LINK_1]]",
+      "sourceHash": "4c864c70d40a6851b1f94bcb7e4c460a62d01214e2456596a04e651b4d6deb63",
+      "parts": [
+        {
+          "source": "ステートを自動削除（AutoRemoveState）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Automatically Remove States (AutoRemoveState)[[/LINK_1]]",
+      "contextHash": "4c864c70d40a6851b1f94bcb7e4c460a62d01214e2456596a04e651b4d6deb63"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]※ダメージタイミングの調整[[/LINK_1]]のダメージ一括表示と併用している場合は、あちらを最新化してください。ダメージが重なって表示される問題を修正しています。",
+      "sourceHash": "3ab750dc60b3aecf265ffb7fe47ed4ee3b9fcdb21c92c44416e07fbcab6d5e4a",
+      "parts": [
+        {
+          "source": "※ダメージタイミングの調整",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のダメージ一括表示と併用している場合は、あちらを最新化してください。ダメージが重なって表示される問題を修正しています。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]※Adjust Damage Timing[[/LINK_1]] If you are using it together with the batch damage display, please update that one to the latest version. This fixes an issue where damage was displayed overlapping.",
+      "contextHash": "3ab750dc60b3aecf265ffb7fe47ed4ee3b9fcdb21c92c44416e07fbcab6d5e4a"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]スキルの開始演出を省略[[/LINK_1]]する機能（<DeadStartAction>）を追加。",
+      "sourceHash": "0a8e5bb47cd63d553336ff5bb49cf6b689d4b6d82251a6307e48c68a936daae3",
+      "parts": [
+        {
+          "source": "スキルの開始演出を省略",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "する機能（<DeadStartAction>）を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a feature to [[LINK_1]]skip the skill start animation[[/LINK_1]] (<DeadStartAction>).",
+      "contextHash": "0a8e5bb47cd63d553336ff5bb49cf6b689d4b6d82251a6307e48c68a936daae3"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "それに伴い、[[LINK_1]]スキルを戦闘不能演出後に実行するかどうか[[/LINK_1]]をスキル毎に指定（<DeadSkillAfterCollapse>）できるようにした。",
+      "sourceHash": "26ece28e6e139a9ae249aea6eeafd2bad786401aa6a6503b3f01322490c118cb",
+      "parts": [
+        {
+          "source": "それに伴い、",
+          "link": false
+        },
+        {
+          "source": "スキルを戦闘不能演出後に実行するかどうか",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "をスキル毎に指定（<DeadSkillAfterCollapse>）できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "Accordingly, it is now possible to specify for each skill [[LINK_1]]whether to execute it after the incapacitation animation[[/LINK_1]] (<DeadSkillAfterCollapse>).",
+      "contextHash": "26ece28e6e139a9ae249aea6eeafd2bad786401aa6a6503b3f01322490c118cb"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "ステートをスキル発動の条件にした際、[[LINK_1]]戦闘不能時にステートを自動で消すかどうか[[/LINK_1]]を設定できるようにした。",
+      "sourceHash": "bbbb09f186862ebf11ef1e99e3bf507a33a0fa9e6568b05031291d932b8dd94f",
+      "parts": [
+        {
+          "source": "ステートをスキル発動の条件にした際、",
+          "link": false
+        },
+        {
+          "source": "戦闘不能時にステートを自動で消すかどうか",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を設定できるようにした。",
+          "link": false
+        }
+      ],
+      "translation": "When a state is set as a condition for activating a skill, it is now possible to configure [[LINK_1]]whether to automatically remove the state when incapacitated[[/LINK_1]].",
+      "contextHash": "bbbb09f186862ebf11ef1e99e3bf507a33a0fa9e6568b05031291d932b8dd94f"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]ステートを自動削除[[/LINK_1]]がオンの場合、[[LINK_2]]スキルを戦闘不能演出後に実行[[/LINK_2]]する設定が機能しない不具合修正。（2024/08/22 ver1.031）",
+      "sourceHash": "b3c0ebc54a193159ae91a859f1d7802d593535b989f3367f8a1f198f11fcadb5",
+      "parts": [
+        {
+          "source": "ステートを自動削除",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "がオンの場合、",
+          "link": false
+        },
+        {
+          "source": "スキルを戦闘不能演出後に実行",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "する設定が機能しない不具合修正。（2024/08/22 ver1.031）",
+          "link": false
+        }
+      ],
+      "translation": "Fixed a bug where, when [[LINK_1]]Automatically Remove States[[/LINK_1]] was enabled, the setting to [[LINK_2]]execute a skill after the incapacitation animation[[/LINK_2]] did not work. (2024/08/22 ver1.031)",
+      "contextHash": "b3c0ebc54a193159ae91a859f1d7802d593535b989f3367f8a1f198f11fcadb5"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "一応、[[LINK_1]]ＣＴＢプラグインの戦闘不能状態でも行動順序に表示[[/LINK_1]]する機能との組み合わせを想定していますが、その上でさらに自爆技などと組み合わせないと状況が発生しません。",
+      "sourceHash": "fcc645722a95d1b861484cf405749c413c4219fcc2b87345b903a02d91ad0613",
+      "parts": [
+        {
+          "source": "一応、",
+          "link": false
+        },
+        {
+          "source": "ＣＴＢプラグインの戦闘不能状態でも行動順序に表示",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "する機能との組み合わせを想定していますが、その上でさらに自爆技などと組み合わせないと状況が発生しません。",
+          "link": false
+        }
+      ],
+      "translation": "This is intended to be used in combination with the feature of the [[LINK_1]]CTB plugin that displays battlers in the action order even when incapacitated[[/LINK_1]], but the situation will not occur unless it is also combined with something like a self-destruct Tech.",
+      "contextHash": "fcc645722a95d1b861484cf405749c413c4219fcc2b87345b903a02d91ad0613"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "戦闘不能時にスキルを発動します。": "Activates skills when incapacitated.",
+    "死に際のファイナルアタックや自動蘇生（リレイズ）などに使えます。": "Can be used for a final attack upon death, automatic revival (Reraise), and more.",
+    "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）に対して、戦闘不能時にスキルを発動する特徴を設定できます。": "You can set a feature for each object (actor, enemy, class, equipment, state, and skill) to activate a skill when incapacitated.",
+    "スキルについては覚えているだけで、発揮するパッシブスキルとなります。": "For skills, simply learning them makes them passive skills that take effect.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON from the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_DeadSkill.js": "NRP_DeadSkill.js ",
+    "ver1.042（2025/02/27）": "ver1.042 (2025/02/27) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/02/08 -> 2025/02/27（ver1.04 -> 1.042）": "2025/02/08 -> 2025/02/27 (ver1.04 -> 1.042) ",
+    "フロントビューの際にエラーになってしまう不具合修正。": "Fixed an error that occurred in front-view battles.",
+    "スキル発動時に戦闘不能メッセージが適切に表示されない不具合修正。": "Fixed an issue where the incapacitation message was not displayed correctly when a skill was activated.",
+    "スリップダメージで戦闘不能になった際、エラーになる不具合修正。（ver1.041）": "Fixed an error that occurred when a battler became incapacitated due to slip damage. (ver1.041)",
+    "ＣＴＢかつスリップダメージで戦闘不能になった際、次のバトラーのターンが強制終了してしまう不具合修正。（2025/02/27 ver1.042）": "Fixed an issue where the next battler's turn was forcibly ended when a battler became incapacitated due to slip damage during CTB. (2025/02/27 ver1.042)",
+    "2024/06/04 -> 2024/08/23（ver1.03 -> 1.032）": "2024/06/04 -> 2024/08/23 (ver1.03 -> 1.032) ",
+    "一人が複数の戦闘不能スキルを発動した場合、片方しか発動しない不具合を修正。": "Fixed an issue where only one skill was activated when a single battler activated multiple skills upon incapacitation.",
+    "プラグインパラメータの『死亡スキルを先に発動』をオフにした場合が機能していないので項目自体を廃止して、オンが標準の挙動にした。": "The plugin parameter “Activate Death Skills First” did not function when turned off, so the parameter itself was removed and the ON behavior was made standard.",
+    "NRP_StateEX.jsより上にプラグインを配置した場合、スキルが発動するより前に戦闘終了してしまう問題があったのでプラグインの登録順序を明記した。": "Since placing the plugin above NRP_StateEX.js caused the battle to end before the skill was activated, the plugin registration order is now specified.",
+    "毒などのステートで戦闘不能になった際、スキルが実行されない不具合を修正。": "Fixed an issue where skills were not executed when a battler became incapacitated due to states such as poison.",
+    "NRP_CombinationSkill.js（合体技）との併用時に不要な前進処理が発生してしまう競合に対処。（2024/08/23 ver1.032）": "Addressed a conflict that caused unnecessary forward movement when used together with NRP_CombinationSkill.js (combination skills). (2024/08/23 ver1.032)",
+    "2024/06/03（ver1.02）": "2024/06/03 (ver1.02) ",
+    "自身を攻撃して発動した戦闘不能スキルによる自己ステートは継続ターンを+1する機能を追加。": "Added a feature that increases the duration of a self-inflicted state caused by a skill activated upon incapacitation by +1 turn.",
+    "2023/09/03（ver1.01）": "2023/09/03 (ver1.01) ",
+    "公開！": "Released!",
+    "オブジェクトのメモ欄": "Object Note Fields",
+    "各オブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を指定してください。": "Specify the following in the note field of each object (actor, enemy, class, equipment, state, and skill).",
+    "戦闘不能時に１００番のスキルを発動します。": "Activates skill number 100 when incapacitated.",
+    "範囲が単体の場合、対象は攻撃してきた相手になります。": "If the scope is one ally or enemy, the target will be the opponent who attacked the user.",
+    "スキル／アイテムのメモ欄": "Skill/Item Note Fields",
+    "戦闘不能者を対象化": "Allow Incapacitated Battlers as Targets",
+    "戦闘不能者を対象として、スキルが命中するようになります。": "Skills will be able to hit incapacitated battlers as targets.",
+    "※範囲を自身にして、自動蘇生をやりたい場合は必須です。": "※This is required if you want to use automatic revival with the scope set to User.",
+    "これがないとスキルが命中しません。": "Without this, the skill will not hit.",
+    "スキルを戦闘不能演出後に実行": "Execute Skill After Incapacitation Animation",
+    "スキルを戦闘不能演出が終わった後に実行するようにします。": "Causes the skill to be executed after the incapacitation animation has finished.",
+    "ただし、これが設定されたスキルとされてないスキルの混在はできません。": "However, you cannot mix skills with this setting and skills without it.",
+    "同時に設定した場合は、戦闘不能演出前のスキルだけが実行されます。": "If both are set at the same time, only the skills executed before the incapacitation animation will be executed.",
+    "スキルの発動演出を一部省略": "Partially Skip the Skill Activation Animation",
+    "スキルの発動演出を一部省略します。": "Partially skips the skill activation animation.",
+    "倒れた状態からスキルを発動する演出を行いたい場合に使えるかも？": "Might be useful if you want to create an animation of activating a skill while in a fallen state?",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "自身へのステートターン+1（SelfStatePlusTurn）": "Self State Turn +1 (SelfStatePlusTurn)",
+    "自身を攻撃して発動した戦闘不能スキルによる自己ステートは継続ターンを+1します。": "Adds +1 turn to self-inflicted states caused by a skill activated upon incapacitation by attacking oneself.",
+    "自動解除のタイミングが『行動終了時』のものが対象です。": "This applies to states whose automatic removal timing is “At Action End.”",
+    "なお、この項目が機能する状況は極めて限定的なので、基本的にオフでよいと思います。": "Since the situations in which this parameter functions are extremely limited, I think it is generally fine to leave it OFF.",
+    "※作者が複雑なスキルの組み合わせの果てにやむなく必要になった機能です。": "※This feature became necessary only as a last resort after the author created complex combinations of skills.",
+    "ステートを自動削除（AutoRemoveState）": "Automatically Remove States (AutoRemoveState)",
+    "ステートに設定された戦闘不能スキルを発動した際、そのステートを削除します。": "Removes a state when the skill activated upon incapacitation set on that state is activated.",
+    "通常、ステートはバトラーが戦闘不能になった際に除去されます。ですが、それだと当プラグインによるスキルを発動できなくなるので対象のステートのみ戦闘不能後も保持するように変更しています。そのステートを後で削除するかどうかです。": "Normally, states are removed when a battler becomes incapacitated. However, that would prevent skills from this plugin from being activated, so only the relevant states are changed to remain after incapacitation. This determines whether to remove those states later.",
+    "もし、ステートを残す場合も『ステートの解除』によって任意のタイミングで削除することができます。": "Even if you choose to keep the state, you can remove it at any time using “Remove State.”"
+  }
+}

@@ -1,0 +1,600 @@
+{
+  "articleId": "484101737",
+  "sourceUrl": "https://newrpg.seesaa.net/article/484101737.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "6e03ff86bde028bc25f271257ce1acb2d2834c1a138258d2763b4756d7f40ae4",
+  "translatedAt": "2026-08-31T02:34:38.051Z",
+  "title": "Eliminate Seams When Closing the Menu [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "メニューを閉じた際の継ぎ目をなくす【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "260b40973ea689ff9cd1732bea35db9d9daae585aa098b6b2bf38ee00c88e479",
+      "translation": "Eliminate Seams When Closing the Menu [RPG Maker MZ & MV Plugin]",
+      "contextHash": "260b40973ea689ff9cd1732bea35db9d9daae585aa098b6b2bf38ee00c88e479"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "メニューを閉じた際の継ぎ目をなくします。",
+      "sourceHash": "a5378e67aeeed8d2ab86f24fc7f466c1ab444aa9996edb00c9464e941c75a1fb",
+      "translation": "Eliminates seams when closing the menu.",
+      "contextHash": "a5378e67aeeed8d2ab86f24fc7f466c1ab444aa9996edb00c9464e941c75a1fb"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "マップ版DynamicAnimationなどのプラグインを使用している際、メニュー画面を閉じた時に、一瞬要素が表示されないことがあります。",
+      "sourceHash": "12d5a8cdd2626345b6b3162fd61ca7143b6cc0c821bc218e881ff86a5a6a33a0",
+      "translation": "When using plugins such as the map version of DynamicAnimation, elements may briefly disappear when closing the menu screen.",
+      "contextHash": "12d5a8cdd2626345b6b3162fd61ca7143b6cc0c821bc218e881ff86a5a6a33a0"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "これはマップ画面 → メニュー画面 → マップ画面とシーンを切り替えた際に、各要素を作り直しているために発生する仕様です。",
+      "sourceHash": "ed0752fc2b30f8a95288fc98510eab68956121a17e4801e853205502593224bb",
+      "translation": "This occurs because each element is recreated when switching scenes from the map screen → menu screen → map screen.",
+      "contextHash": "ed0752fc2b30f8a95288fc98510eab68956121a17e4801e853205502593224bb"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※傾向としてはアニメーションやマップタイルを書き換えるプラグインで起こりやすいと思われます。",
+      "sourceHash": "b5c97e3d6376f83dee9f6768247871eab1386b87381154b779fdf7f03bd0b915",
+      "translation": "※As a general tendency, this seems more likely to occur with plugins that modify animations or map tiles.",
+      "contextHash": "b5c97e3d6376f83dee9f6768247871eab1386b87381154b779fdf7f03bd0b915"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "そこでメニュー画面を閉じた際に「メニューを開く直前の画面のキャプチャ画像」をかぶせることで、一瞬の切れ目をなくします。",
+      "sourceHash": "f0580b27e231ecdd5653c86fad016f39c422a69bd932186ddadcbaca9d131dde",
+      "translation": "To prevent this brief gap, when closing the menu screen, a capture of the screen immediately before opening the menu is overlaid.",
+      "contextHash": "f0580b27e231ecdd5653c86fad016f39c422a69bd932186ddadcbaca9d131dde"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "さらにプラグインパラメータにシーン名を指定すれば、メニュー以外から戻った際にも適応できます。",
+      "sourceHash": "c0b5be77dd96f3d3bc97b2bafe7b487e43cd682d76bf90f2262fee8fb0cafcfe",
+      "translation": "In addition, by specifying scene names in the plugin parameter, this can also be applied when returning from scenes other than the menu.",
+      "contextHash": "c0b5be77dd96f3d3bc97b2bafe7b487e43cd682d76bf90f2262fee8fb0cafcfe"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a",
+      "translation": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON from RPG Maker's Plugin Manager.",
+      "contextHash": "7f5880d732c954e0e725bc277f22b64c316416f8cec8a7b7a0622deed1c8217a"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_ReturnMenuMask.js",
+      "sourceHash": "18c9d1ac6c12adc4d3474b0366f16f05f668511504704f4dec0e4d473fa65899",
+      "translation": "NRP_ReturnMenuMask.js ",
+      "contextHash": "38ac66520c149da66be4013013ba49b6bd5962773d252aa8a5c6731b7801f964"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "ver1.02（2025/03/03）",
+      "sourceHash": "557ef1425f8ec52e58764b8b53b2ff7517139abe0fbfaa2d841f619c11c8364a",
+      "translation": "ver1.02 (2025/03/03) ",
+      "contextHash": "38ac66520c149da66be4013013ba49b6bd5962773d252aa8a5c6731b7801f964"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2025/03/03（ver1.02）",
+      "sourceHash": "9eafc06b4d960f0d9a4f3ef66c2f48e29d27191049268d5a65a7c7c04251f28e",
+      "translation": "2025/03/03 (ver1.02) ",
+      "contextHash": "9eafc06b4d960f0d9a4f3ef66c2f48e29d27191049268d5a65a7c7c04251f28e"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2022/07/03（ver1.01）",
+      "sourceHash": "fb788581e0d3632ee4ea7095fd63a0ba5c1bfd66b2b005fe40c579d4b2c2502c",
+      "translation": "2022/07/03 (ver1.01) ",
+      "contextHash": "fb788581e0d3632ee4ea7095fd63a0ba5c1bfd66b2b005fe40c579d4b2c2502c"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "※更新後は一度プラグインの詳細を開いてＯＫしてください。",
+      "sourceHash": "4a41135a026fdc10b3b7448ae4acaa6bdfce841c302d02e262886583d4c8d0cc",
+      "translation": "※After updating, open the plugin details once and click OK.",
+      "contextHash": "4a41135a026fdc10b3b7448ae4acaa6bdfce841c302d02e262886583d4c8d0cc"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/10/28（ver1.00）",
+      "sourceHash": "e045c6215fd04235ba3ce0e66fe53e2bc0a635e751ef281800736a4b02cc9639",
+      "translation": "2021/10/28 (ver1.00) ",
+      "contextHash": "e045c6215fd04235ba3ce0e66fe53e2bc0a635e751ef281800736a4b02cc9639"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameter）",
+      "sourceHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805",
+      "translation": "Plugin Parameter (Plugin Parameter)",
+      "contextHash": "f4b540e9f0397a1265e0ce8b0574e8fade43b17d30f049312ef0f2eb5efd4805"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "マスクするフレーム数（MaskFrame）",
+      "sourceHash": "50c961362bffa077887a7bd0dfc3c593145f55cf0f5253e7ec1fdcf402c81df2",
+      "translation": "Number of Masked Frames (MaskFrame)",
+      "contextHash": "50c961362bffa077887a7bd0dfc3c593145f55cf0f5253e7ec1fdcf402c81df2"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "メニューを閉じた時の継ぎ目を隠すフレーム数です。",
+      "sourceHash": "edb2caefadda048f99a5cf7f1ab7c8999fc6165d1a5dd10aa14b3dbaed4d3186",
+      "translation": "The number of frames for which to hide the seam when closing the menu.",
+      "contextHash": "edb2caefadda048f99a5cf7f1ab7c8999fc6165d1a5dd10aa14b3dbaed4d3186"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "初期設定では１フレームですが、継ぎ目がまだ見えてしまうという場合は長くしてみるとよいかもしれません。",
+      "sourceHash": "7cb085dd4734ab36baccf6204febbebd5e90a221855f9ef2b3fe883670e37e8c",
+      "translation": "The default setting is 1 frame, but if the seam is still visible, you may want to try increasing this value.",
+      "contextHash": "7cb085dd4734ab36baccf6204febbebd5e90a221855f9ef2b3fe883670e37e8c"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "フェードするフレーム数（FadeFrame）ver1.02",
+      "sourceHash": "307d8202cd2724c6c1cf947337ca6cec1ffe76cd47ab4b62c7663e71fb7a404f",
+      "translation": "Number of Fade Frames (FadeFrame) ver1.02",
+      "contextHash": "307d8202cd2724c6c1cf947337ca6cec1ffe76cd47ab4b62c7663e71fb7a404f"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "フェードするフレーム数です。",
+      "sourceHash": "81ebfdd0ad79ab97f171a82937c7de575a509b224bcd0a345602159c78db0c0c",
+      "translation": "The number of frames used for fading.",
+      "contextHash": "81ebfdd0ad79ab97f171a82937c7de575a509b224bcd0a345602159c78db0c0c"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "マスクするフレーム数分のマスクが終了した後で、さらに指定したフレーム数でのフェード処理を行います。",
+      "sourceHash": "a89c61e40357920dcca350b3251d112412b4d72fa89a467bcbc3d1e892059168",
+      "translation": "After masking is complete for the specified number of masked frames, a fade is performed over the additionally specified number of frames.",
+      "contextHash": "a89c61e40357920dcca350b3251d112412b4d72fa89a467bcbc3d1e892059168"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "マスクタイプ（MaskType）ver1.02",
+      "sourceHash": "2cf1fb66b2184cb47daff41bf7f363c11b89b15919f7a3e8e9cf161d6d098fbd",
+      "translation": "Mask Type (MaskType) ver1.02",
+      "contextHash": "2cf1fb66b2184cb47daff41bf7f363c11b89b15919f7a3e8e9cf161d6d098fbd"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "マスクに使用する画面です。",
+      "sourceHash": "f598d11853e71da776ebd7071d8d29be61e7dcab3cdb0db9f9b0383c373e101e",
+      "translation": "The screen used for the mask.",
+      "contextHash": "f598d11853e71da776ebd7071d8d29be61e7dcab3cdb0db9f9b0383c373e101e"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "『マップ画面』『メニュー画面』『黒画面』の３つを選択できます。",
+      "sourceHash": "5e662be486e6b20ca8b9fa712883a8002cf6a111064cd7bf191e633f03b659c4",
+      "translation": "You can choose from three options: “Map Screen,” “Menu Screen,” and “Black Screen.”",
+      "contextHash": "5e662be486e6b20ca8b9fa712883a8002cf6a111064cd7bf191e633f03b659c4"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "キャラクター停止（StopCharacter）ver1.02",
+      "sourceHash": "da433e4817abe499546f21b52f88d78ff9c541cf7d75f0c028377f85c936e2ec",
+      "translation": "Stop Characters (StopCharacter) ver1.02",
+      "contextHash": "da433e4817abe499546f21b52f88d78ff9c541cf7d75f0c028377f85c936e2ec"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "マスク中はキャラクターの動作を停止します。",
+      "sourceHash": "aa69d00d7038a1883daf07e69ea86632f324dd0d9bc0a079c219714e40f37817",
+      "translation": "Characters stop moving while the mask is active.",
+      "contextHash": "aa69d00d7038a1883daf07e69ea86632f324dd0d9bc0a079c219714e40f37817"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "シーン名のリスト（SceneList）ver1.01",
+      "sourceHash": "2902786f7328f2bbee26ea66f53b2577e40ab7540037fb1ffa8050b85dd58d9c",
+      "translation": "Scene Name List (SceneList) ver1.01",
+      "contextHash": "2902786f7328f2bbee26ea66f53b2577e40ab7540037fb1ffa8050b85dd58d9c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "マスク処理を行うシーンの一覧です。",
+      "sourceHash": "6de7b04082c7e6effbd15096f35012c8c484427ccb99862ef285c6e2b8ac234f",
+      "translation": "A list of scenes to which the masking process is applied.",
+      "contextHash": "6de7b04082c7e6effbd15096f35012c8c484427ccb99862ef285c6e2b8ac234f"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ここに追加した名称のシーンから戻った際も、継ぎ目を隠すようになります。",
+      "sourceHash": "932d7e34d9f4d8b713b85bf701b985d77651bd760ae2b6dffd6e74b393843359",
+      "translation": "The seam will also be hidden when returning from scenes with names added here.",
+      "contextHash": "932d7e34d9f4d8b713b85bf701b985d77651bd760ae2b6dffd6e74b393843359"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "※例えば、外部のメッセージログ系プラグインなどに対応できます。",
+      "sourceHash": "3778ded27d4e4594d2dea3cfb5a785c3acf6bb772a9bb7d87f407ea35539fdf6",
+      "translation": "※For example, this can support external message log plugins.",
+      "contextHash": "3778ded27d4e4594d2dea3cfb5a785c3acf6bb772a9bb7d87f407ea35539fdf6"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "※やや上級者向けですが、該当のプラグインのjsを開いてシーン名（普通はScene_XXXXという名称）を見つければＯＫです。",
+      "sourceHash": "760c96748b2fe06f5e4c24ae8577c676993dfb3d752c03ed9849ca6e2e7d8bc3",
+      "translation": "※This is somewhat advanced, but you can open the JS file for the relevant plugin and find the scene name (usually named Scene_XXXX).",
+      "contextHash": "760c96748b2fe06f5e4c24ae8577c676993dfb3d752c03ed9849ca6e2e7d8bc3"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "※上記の例では[[LINK_1]]DynamicAnimation[[/LINK_1]]で作成した煙や、[[LINK_2]]SupponChangeTileId[[/LINK_2]]で置換した穴が一瞬だけ非表示になっています。",
+      "sourceHash": "eff8540998ec056a809daa446dc4f132eccabe81feacbab6eb42b8944d2f66d5",
+      "parts": [
+        {
+          "source": "※上記の例では",
+          "link": false
+        },
+        {
+          "source": "DynamicAnimation",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "で作成した煙や、",
+          "link": false
+        },
+        {
+          "source": "SupponChangeTileId",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "で置換した穴が一瞬だけ非表示になっています。",
+          "link": false
+        }
+      ],
+      "translation": "※In the example above, the smoke created with [[LINK_1]]DynamicAnimation[[/LINK_1]] and the hole replaced with [[LINK_2]]SupponChangeTileId[[/LINK_2]] are hidden for just a moment.",
+      "contextHash": "eff8540998ec056a809daa446dc4f132eccabe81feacbab6eb42b8944d2f66d5"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameter）[[/LINK_1]]",
+      "sourceHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (Plugin Parameter)[[/LINK_1]]",
+      "contextHash": "5b749a360b59cbba9e6dcd9a37417e89d6daa2552f7f470cf1d1f902ce33132c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]マスクするフレーム数（MaskFrame）[[/LINK_1]]",
+      "sourceHash": "21d2f78a9af51284ef3c5d4845bf6aa8ae8c972eaa525796eb032156d62fad80",
+      "parts": [
+        {
+          "source": "マスクするフレーム数（MaskFrame）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Frames to Mask (MaskFrame)[[/LINK_1]]",
+      "contextHash": "21d2f78a9af51284ef3c5d4845bf6aa8ae8c972eaa525796eb032156d62fad80"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]フェードするフレーム数（FadeFrame）[[/LINK_1]]ver1.02",
+      "sourceHash": "4baf2e48ad53549c3ffb391cb55f0c35a4cc847c1a2f13b09bacb174edc6b26b",
+      "parts": [
+        {
+          "source": "フェードするフレーム数（FadeFrame）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Number of Frames to Fade (FadeFrame)[[/LINK_1]] ver1.02",
+      "contextHash": "4baf2e48ad53549c3ffb391cb55f0c35a4cc847c1a2f13b09bacb174edc6b26b"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]マスクタイプ（MaskType）[[/LINK_1]]ver1.02",
+      "sourceHash": "73a3f3f05f96114840411fe77e8367d3ddf3265f6721ec9a06a99fbeb5648607",
+      "parts": [
+        {
+          "source": "マスクタイプ（MaskType）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Mask Type (MaskType)[[/LINK_1]] ver1.02",
+      "contextHash": "73a3f3f05f96114840411fe77e8367d3ddf3265f6721ec9a06a99fbeb5648607"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]キャラクター停止（StopCharacter）[[/LINK_1]]ver1.02",
+      "sourceHash": "30fb6e2221a3e298590ca6b2e4051b59aa65497d9748fbd82d3c29f331de260b",
+      "parts": [
+        {
+          "source": "キャラクター停止（StopCharacter）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Stop Characters (StopCharacter)[[/LINK_1]] ver1.02",
+      "contextHash": "30fb6e2221a3e298590ca6b2e4051b59aa65497d9748fbd82d3c29f331de260b"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]シーン名のリスト（SceneList）[[/LINK_1]]ver1.01",
+      "sourceHash": "6360a838a55e8e2d3848e6dafd9f548569e97046f14605f911473ce50e4b4e99",
+      "parts": [
+        {
+          "source": "シーン名のリスト（SceneList）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Scene Name List (SceneList)[[/LINK_1]] ver1.01",
+      "contextHash": "6360a838a55e8e2d3848e6dafd9f548569e97046f14605f911473ce50e4b4e99"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "※[[LINK_1]]NRP_DynamicAnimationMapMZ.js[[/LINK_1]]と併用する場合は当プラグインを上側に配置したほうがよいかもしれません。",
+      "sourceHash": "e396d6a60f897e0f214362680e6fcd2f377050a3dbb30286bf77a8a98d6c55d2",
+      "parts": [
+        {
+          "source": "※",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicAnimationMapMZ.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と併用する場合は当プラグインを上側に配置したほうがよいかもしれません。",
+          "link": false
+        }
+      ],
+      "translation": "※When used together with [[LINK_1]]NRP_DynamicAnimationMapMZ.js[[/LINK_1]], it may be better to place this plugin above it.",
+      "contextHash": "e396d6a60f897e0f214362680e6fcd2f377050a3dbb30286bf77a8a98d6c55d2"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]フェードするフレーム数[[/LINK_1]]、[[LINK_2]]マスクタイプ[[/LINK_2]]、[[LINK_3]]マスク中のキャラクター停止[[/LINK_3]]の機能を追加した。",
+      "sourceHash": "bca1a96ea3ad677ed70eb8ab88e46c2bce95eddcd6827bbbbf78a76279f0b15d",
+      "parts": [
+        {
+          "source": "フェードするフレーム数",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "マスクタイプ",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "、",
+          "link": false
+        },
+        {
+          "source": "マスク中のキャラクター停止",
+          "link": true,
+          "linkIndex": 3
+        },
+        {
+          "source": "の機能を追加した。",
+          "link": false
+        }
+      ],
+      "translation": "Added functionality for [[LINK_1]]the number of frames to fade[[/LINK_1]], [[LINK_2]]the mask type[[/LINK_2]], and [[LINK_3]]stopping characters during masking[[/LINK_3]].",
+      "contextHash": "bca1a96ea3ad677ed70eb8ab88e46c2bce95eddcd6827bbbbf78a76279f0b15d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]メニュー以外のシーンにも対応[[/LINK_1]]できるようリスト機能を追加。",
+      "sourceHash": "217b386f0b427ab749d37d9fbe6fcdaa69057e760f18451ff6b061ba1bda1588",
+      "parts": [
+        {
+          "source": "メニュー以外のシーンにも対応",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "できるようリスト機能を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added a list function to [[LINK_1]]support scenes other than the menu[[/LINK_1]].",
+      "contextHash": "217b386f0b427ab749d37d9fbe6fcdaa69057e760f18451ff6b061ba1bda1588"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "メニューを閉じた際の継ぎ目をなくします。": "Eliminates seams when closing the menu.",
+    "マップ版DynamicAnimationなどのプラグインを使用している際、メニュー画面を閉じた時に、一瞬要素が表示されないことがあります。": "When using plugins such as the map version of DynamicAnimation, elements may briefly disappear when closing the menu screen.",
+    "これはマップ画面 → メニュー画面 → マップ画面とシーンを切り替えた際に、各要素を作り直しているために発生する仕様です。": "This occurs because each element is recreated when switching scenes from the map screen → menu screen → map screen.",
+    "※傾向としてはアニメーションやマップタイルを書き換えるプラグインで起こりやすいと思われます。": "※As a general tendency, this seems more likely to occur with plugins that modify animations or map tiles.",
+    "そこでメニュー画面を閉じた際に「メニューを開く直前の画面のキャプチャ画像」をかぶせることで、一瞬の切れ目をなくします。": "To prevent this brief gap, when closing the menu screen, a capture of the screen immediately before opening the menu is overlaid.",
+    "さらにプラグインパラメータにシーン名を指定すれば、メニュー以外から戻った際にも適応できます。": "In addition, by specifying scene names in the plugin parameter, this can also be applied when returning from scenes other than the menu.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click and save the following file, then place it in [Project]\\js\\plugins. Turn the feature ON from RPG Maker's Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_ReturnMenuMask.js": "NRP_ReturnMenuMask.js ",
+    "ver1.02（2025/03/03）": "ver1.02 (2025/03/03) ",
+    "更新履歴（History）": "Update History (History)",
+    "2025/03/03（ver1.02）": "2025/03/03 (ver1.02) ",
+    "2022/07/03（ver1.01）": "2022/07/03 (ver1.01) ",
+    "※更新後は一度プラグインの詳細を開いてＯＫしてください。": "※After updating, open the plugin details once and click OK.",
+    "2021/10/28（ver1.00）": "2021/10/28 (ver1.00) ",
+    "公開！": "Released!",
+    "プラグインパラメータ（Plugin Parameter）": "Plugin Parameter (Plugin Parameter)",
+    "マスクするフレーム数（MaskFrame）": "Number of Masked Frames (MaskFrame)",
+    "メニューを閉じた時の継ぎ目を隠すフレーム数です。": "The number of frames for which to hide the seam when closing the menu.",
+    "初期設定では１フレームですが、継ぎ目がまだ見えてしまうという場合は長くしてみるとよいかもしれません。": "The default setting is 1 frame, but if the seam is still visible, you may want to try increasing this value.",
+    "フェードするフレーム数（FadeFrame）ver1.02": "Number of Fade Frames (FadeFrame) ver1.02",
+    "フェードするフレーム数です。": "The number of frames used for fading.",
+    "マスクするフレーム数分のマスクが終了した後で、さらに指定したフレーム数でのフェード処理を行います。": "After masking is complete for the specified number of masked frames, a fade is performed over the additionally specified number of frames.",
+    "マスクタイプ（MaskType）ver1.02": "Mask Type (MaskType) ver1.02",
+    "マスクに使用する画面です。": "The screen used for the mask.",
+    "『マップ画面』『メニュー画面』『黒画面』の３つを選択できます。": "You can choose from three options: “Map Screen,” “Menu Screen,” and “Black Screen.”",
+    "キャラクター停止（StopCharacter）ver1.02": "Stop Characters (StopCharacter) ver1.02",
+    "マスク中はキャラクターの動作を停止します。": "Characters stop moving while the mask is active.",
+    "シーン名のリスト（SceneList）ver1.01": "Scene Name List (SceneList) ver1.01",
+    "マスク処理を行うシーンの一覧です。": "A list of scenes to which the masking process is applied.",
+    "ここに追加した名称のシーンから戻った際も、継ぎ目を隠すようになります。": "The seam will also be hidden when returning from scenes with names added here.",
+    "※例えば、外部のメッセージログ系プラグインなどに対応できます。": "※For example, this can support external message log plugins.",
+    "※やや上級者向けですが、該当のプラグインのjsを開いてシーン名（普通はScene_XXXXという名称）を見つければＯＫです。": "※This is somewhat advanced, but you can open the JS file for the relevant plugin and find the scene name (usually named Scene_XXXX)."
+  }
+}

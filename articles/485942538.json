@@ -1,0 +1,835 @@
+{
+  "articleId": "485942538",
+  "sourceUrl": "https://newrpg.seesaa.net/article/485942538.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "a70b2e82c945996ba33db39b813828458976d8282facdd00aa1171251c69b770",
+  "translatedAt": "2026-08-31T02:33:05.706Z",
+  "title": "Execute an Entrance Effect at Battle Start [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "戦闘開始時に登場演出を実行【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "8744b87807bb2081ab4c7a6c804d00911ee70051f92920cabd38927048d8d84a",
+      "translation": "Execute an Entrance Effect at Battle Start [RPG Maker MZ & MV Plugin]",
+      "contextHash": "8744b87807bb2081ab4c7a6c804d00911ee70051f92920cabd38927048d8d84a"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "戦闘開始時にバトラーの登場演出を実行します。",
+      "sourceHash": "9b91a5d1c6e523d9ab3aee3c0dfccc4e0f4faae888dcb5f5052f5dea24d8787a",
+      "translation": "Executes an entrance effect for battlers at the start of battle.",
+      "contextHash": "9b91a5d1c6e523d9ab3aee3c0dfccc4e0f4faae888dcb5f5052f5dea24d8787a"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "演出はDynamicAnimation&Motionプラグインによって作成します。",
+      "sourceHash": "deea8e6b8fcc70fc7c40727a71507885ce61d7ebdace51aa0a4cc23983da860c",
+      "translation": "The effects are created using the DynamicAnimation&Motion plugin.",
+      "contextHash": "deea8e6b8fcc70fc7c40727a71507885ce61d7ebdace51aa0a4cc23983da860c"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※ただし、ＭＶでは挙動が怪しいです。アクター側の登場演出を設定するとエラーになってしまう模様です。",
+      "sourceHash": "6a52b7854744bfc9a2163113df8ed09b559f937d2ec98c2ae2841112e8c262ba",
+      "translation": "※However, its behavior in MV is unreliable. Setting an entrance effect for an actor appears to cause an error.",
+      "contextHash": "6a52b7854744bfc9a2163113df8ed09b559f937d2ec98c2ae2841112e8c262ba"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_DynamicAppear.js",
+      "sourceHash": "6db16484030c713628a70a32b65b33a2ed89eebfdc7b3a3bcbbb19a849d589dd",
+      "translation": "NRP_DynamicAppear.js ",
+      "contextHash": "706a0362fa70447bc4a124b4e2089af881c709a987c9523e585124d7c86f13cf"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.01（2022/12/10）",
+      "sourceHash": "4c41b9f41dc9f7d22781ad1baa2ee871a6a1cd77d508953dfb27ad183abdbe21",
+      "translation": "ver1.01 (2022/12/10) ",
+      "contextHash": "706a0362fa70447bc4a124b4e2089af881c709a987c9523e585124d7c86f13cf"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "動作には、さらに以下のプラグインが必須となります。",
+      "sourceHash": "60b7e6080d05c7a5b6b538c104278f91acbd1feb1e76f5c4440a15e4a241667f",
+      "translation": "The following additional plugins are also required for this plugin to work.",
+      "contextHash": "60b7e6080d05c7a5b6b538c104278f91acbd1feb1e76f5c4440a15e4a241667f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "ＭＺ版",
+      "sourceHash": "f4e12ec1f262af102a6e78afd980be32c1cf3dc99bc801df41f42e942c3093f1",
+      "translation": "MZ Version",
+      "contextHash": "f4e12ec1f262af102a6e78afd980be32c1cf3dc99bc801df41f42e942c3093f1"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "ＭＶ版",
+      "sourceHash": "941cc4be91979678473712609fd10f5550941c370ac71bbf9f8464c7f48e0c25",
+      "translation": "MV Version",
+      "contextHash": "941cc4be91979678473712609fd10f5550941c370ac71bbf9f8464c7f48e0c25"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2022/12/10（ver1.01）",
+      "sourceHash": "2ae5f71e522d90d9a8432f7c73ee862b2a6eee6a9de55bf9837beaa7b6d45bb2",
+      "translation": "2022/12/10 (ver1.01) ",
+      "contextHash": "2ae5f71e522d90d9a8432f7c73ee862b2a6eee6a9de55bf9837beaa7b6d45bb2"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "戦闘開始直後に逃げると移動演出がなくなる不具合を修正。",
+      "sourceHash": "c09e7b6cd76281bc9006acc29b07305075720fb890ae220f377d428cd9db8743",
+      "translation": "Fixed a bug where the movement effect disappeared when escaping immediately after battle started.",
+      "contextHash": "c09e7b6cd76281bc9006acc29b07305075720fb890ae220f377d428cd9db8743"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2022/03/11 -> 2022/04/21（ver1.00）",
+      "sourceHash": "cf0970f2d45ee244a5ae3037e8531364989aae74c9f45bbaca725476720a2a5c",
+      "translation": "2022/03/11 -> 2022/04/21 (ver1.00) ",
+      "contextHash": "cf0970f2d45ee244a5ae3037e8531364989aae74c9f45bbaca725476720a2a5c"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "DynamicAnimation&Motionプラグインの説明に従って、演出用のスキルを作成してください。",
+      "sourceHash": "0a847dfa81406eb38654b673c821140cc0991b6bd4912018f13d59d648bfe276",
+      "translation": "Following the instructions for the DynamicAnimation&Motion plugin, create a skill for the effect.",
+      "contextHash": "0a847dfa81406eb38654b673c821140cc0991b6bd4912018f13d59d648bfe276"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※必要なのはメモ欄の定義だけなので、その他の設定は不問です。",
+      "sourceHash": "f89adb6df9d558faf6d5d8f92c10b679622307183d4811f0e7e93582b71d2451",
+      "translation": "※Only the note field definition is required, so the other settings do not matter.",
+      "contextHash": "f89adb6df9d558faf6d5d8f92c10b679622307183d4811f0e7e93582b71d2451"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "後はアクター（または職業）、敵キャラのメモ欄に以下の通り、スキルＩＤを設定すればＯＫです。",
+      "sourceHash": "b7a4953124913e7a44fe9d4536bff4cf1259a85edac0a41c8530e418c21c173b",
+      "translation": "Then, simply set the skill ID in the note field of the actor (or class) and enemy as follows.",
+      "contextHash": "b7a4953124913e7a44fe9d4536bff4cf1259a85edac0a41c8530e418c21c173b"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "個別の指定がない場合は、プラグインパラメータの初期値が使用されます。",
+      "sourceHash": "3854af684423b28096dc326bb58ff23b891967c7969b2b93c00614bbe9f1ebe1",
+      "translation": "If no individual setting is specified, the default plugin parameter value is used.",
+      "contextHash": "3854af684423b28096dc326bb58ff23b891967c7969b2b93c00614bbe9f1ebe1"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "アクター、敵キャラ、職業のメモ欄（Note）",
+      "sourceHash": "d5fc7fb5ba0f101b6602f54d5d38d6ea154f39d5d141849e9aec1d0c0a27ee36",
+      "translation": "Actor, Enemy, and Class Note Fields (Note)",
+      "contextHash": "d5fc7fb5ba0f101b6602f54d5d38d6ea154f39d5d141849e9aec1d0c0a27ee36"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "DynamicAnimation&Motionプラグインと連携し、x番のスキルに指定された演出で登場します。",
+      "sourceHash": "b0aef1247a935f43d2b3fbb2a2f75fe9a541af7e81adc6c6bed309380c44ef62",
+      "translation": "In coordination with the DynamicAnimation&Motion plugin, the battler enters with the effect specified for skill x.",
+      "contextHash": "b0aef1247a935f43d2b3fbb2a2f75fe9a541af7e81adc6c6bed309380c44ef62"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "なお、職業のメモ欄に設定した場合は、アクターの設定よりも優先されます。",
+      "sourceHash": "67e4b2a6ba203868587359c12905b41d67e30162c04712ac21a0a8aaa38c6f6c",
+      "translation": "When set in a class's note field, it takes priority over the actor's setting.",
+      "contextHash": "67e4b2a6ba203868587359c12905b41d67e30162c04712ac21a0a8aaa38c6f6c"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "DynamicMotionによる演出の例（Sample of DynamicMotion）",
+      "sourceHash": "b7865d2dc9ac568b893fd183118c4bc38c4aa20d27c9d7a086f84426e6c0e4cf",
+      "translation": "Examples of Effects Using DynamicMotion (Sample of DynamicMotion)",
+      "contextHash": "b7865d2dc9ac568b893fd183118c4bc38c4aa20d27c9d7a086f84426e6c0e4cf"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "画面外から登場",
+      "sourceHash": "8e1f15934f5753dadf9fa550e80ef9258d3bd891b895b4da2db87981b697e2e3",
+      "translation": "Enter from Off-Screen",
+      "contextHash": "8e1f15934f5753dadf9fa550e80ef9258d3bd891b895b4da2db87981b697e2e3"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "オーソドックスに画面外から登場します。",
+      "sourceHash": "6ffdcd109e2664e5ff848ec4a5ba29ed7ddd544ca2fd5aa59300c06ce47f1172",
+      "translation": "The battler enters from off-screen in a classic fashion.",
+      "contextHash": "6ffdcd109e2664e5ff848ec4a5ba29ed7ddd544ca2fd5aa59300c06ce47f1172"
+    },
+    {
+      "id": "code-001",
+      "type": "code",
+      "source": "// 戦闘開始時に時間差",
+      "sourceHash": "dea716aa371ee8d9be4ee4ced088c89d09eb9642855f70964d44422c3c7acc17",
+      "translation": "// Time delay at battle start",
+      "contextHash": "dea716aa371ee8d9be4ee4ced088c89d09eb9642855f70964d44422c3c7acc17"
+    },
+    {
+      "id": "code-002",
+      "type": "code",
+      "source": "wait = a.index() * 3 // 時間差",
+      "sourceHash": "2b79c8400ed9dcda10a2b3de56dea31c98feede85940c66d0822c1e1c4f9fd7e",
+      "translation": "wait = a.index() * 3 // Time delay",
+      "contextHash": "2b79c8400ed9dcda10a2b3de56dea31c98feede85940c66d0822c1e1c4f9fd7e"
+    },
+    {
+      "id": "code-003",
+      "type": "code",
+      "source": "frame = 5 // 移動時間",
+      "sourceHash": "a486c8795d44600f25d6092fad62f4784ae7c3014c2d1707e97a34fdac508819",
+      "translation": "frame = 5 // Movement time",
+      "contextHash": "a486c8795d44600f25d6092fad62f4784ae7c3014c2d1707e97a34fdac508819"
+    },
+    {
+      "id": "code-004",
+      "type": "code",
+      "source": "sx = a._homeX + 500 * mirroring // 始点Ｘ座標（画面外）",
+      "sourceHash": "308c4e8b61c6724b1c6d847daa9665f849adf09f65214e7b605bee51afb6f590",
+      "translation": "sx = a._homeX + 500 * mirroring // Starting X coordinate (off-screen)",
+      "contextHash": "308c4e8b61c6724b1c6d847daa9665f849adf09f65214e7b605bee51afb6f590"
+    },
+    {
+      "id": "code-005",
+      "type": "code",
+      "source": "sy = a._homeY // 始点Ｙ座標",
+      "sourceHash": "117143737c5b2d941dfe468b1a0d03105404acd938d0097e0387fbd335a35b56",
+      "translation": "sy = a._homeY // Starting Y coordinate",
+      "contextHash": "117143737c5b2d941dfe468b1a0d03105404acd938d0097e0387fbd335a35b56"
+    },
+    {
+      "id": "code-006",
+      "type": "code",
+      "source": "ex = a._homeX // 終点Ｘ座標",
+      "sourceHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585",
+      "translation": "ex = a._homeX // Ending X coordinate",
+      "contextHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585"
+    },
+    {
+      "id": "code-007",
+      "type": "code",
+      "source": "ey = a._homeY // 終点Ｙ座標",
+      "sourceHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f",
+      "translation": "ey = a._homeY // Ending Y coordinate",
+      "contextHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "『a』で登場するバトラーを参照できます。",
+      "sourceHash": "3bdd735338971b9d311b2aed862a36539a8af7bd221f3bc56683783c9a0e0f57",
+      "translation": "You can reference the battler entering with 『a』.",
+      "contextHash": "3bdd735338971b9d311b2aed862a36539a8af7bd221f3bc56683783c9a0e0f57"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『a._homeX』『a._homeY』が配置地点となるので、最終的にそこへ移動するように実装してください。",
+      "sourceHash": "f694b4b3d26cb51f2e62eee988f00e37c68a5258e91eecaf0607a5bb6a0b4e9b",
+      "translation": " \"a._homeX』 and 『a._homeY』 are the placement coordinates, so implement the movement so that the battler ultimately moves there.",
+      "contextHash": "f694b4b3d26cb51f2e62eee988f00e37c68a5258e91eecaf0607a5bb6a0b4e9b"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "赤字部分によって、登場時の時間差を表現しています。",
+      "sourceHash": "d54316d85cac9b6702500ad4e19307791ab62fae8632616ebcc70331876728a5",
+      "translation": "The red portions represent the time offset when entering.",
+      "contextHash": "d54316d85cac9b6702500ad4e19307791ab62fae8632616ebcc70331876728a5"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※この機能（condition）はDynamicAnimation&Motionを最新化（2022/03/10～）していないとうまく動作しないので、ご注意ください。",
+      "sourceHash": "c49f57167c1566bf7d04f75aa28e1ff6c43ddb96f8b3fa851e39d66579bd3e17",
+      "translation": "※Please note that this feature (condition) will not work properly unless DynamicAnimation&Motion has been updated to the latest version (2022/03/10 onward).",
+      "contextHash": "c49f57167c1566bf7d04f75aa28e1ff6c43ddb96f8b3fa851e39d66579bd3e17"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "上空から登場（2023/03/09更新）",
+      "sourceHash": "0675f65357489d9a52778f0c19032c5d3b2ab3de3c82dce7fdc9dc98391c1aaa",
+      "translation": "Enter from Above (Updated 2023/03/09)",
+      "contextHash": "0675f65357489d9a52778f0c19032c5d3b2ab3de3c82dce7fdc9dc98391c1aaa"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "上空から登場します。飛行系の魔物などに最適です。",
+      "sourceHash": "e97a33632985367ab244d9198132ec108afbd318b2038dd1ae72b1ae4d00131a",
+      "translation": "The battler enters from above. This is ideal for flying monsters and the like.",
+      "contextHash": "e97a33632985367ab244d9198132ec108afbd318b2038dd1ae72b1ae4d00131a"
+    },
+    {
+      "id": "code-008",
+      "type": "code",
+      "source": "// 戦闘開始時に時間差",
+      "sourceHash": "dea716aa371ee8d9be4ee4ced088c89d09eb9642855f70964d44422c3c7acc17",
+      "translation": "// Time delay at battle start",
+      "contextHash": "dea716aa371ee8d9be4ee4ced088c89d09eb9642855f70964d44422c3c7acc17"
+    },
+    {
+      "id": "code-009",
+      "type": "code",
+      "source": "// 時間差",
+      "sourceHash": "f16a1f40535878c9b68fd77916b2b87deb4ce6aa1889b9e79fda59dddefbc33a",
+      "translation": "// Time delay",
+      "contextHash": "27660ed5bf287a4d9be08f909f1d9226f042890444ad27e9f4d6358b43b7851c"
+    },
+    {
+      "id": "code-010",
+      "type": "code",
+      "source": "airY = -500 // 空中Ｙ座標",
+      "sourceHash": "13d455c57b7cc9c543d256ab811b7262bccd7086768358f4aba6d1235b8f93ca",
+      "translation": "airY = -500 // Airborne Y coordinate",
+      "contextHash": "13d455c57b7cc9c543d256ab811b7262bccd7086768358f4aba6d1235b8f93ca"
+    },
+    {
+      "id": "code-011",
+      "type": "code",
+      "source": "ex = a._homeX // 終点Ｘ座標",
+      "sourceHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585",
+      "translation": "ex = a._homeX // Ending X coordinate",
+      "contextHash": "e747cf0dc45528854b11206e934881d0de106d6c54271e9ef74b06b60fbc0585"
+    },
+    {
+      "id": "code-012",
+      "type": "code",
+      "source": "ey = a._homeY // 終点Ｙ座標",
+      "sourceHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f",
+      "translation": "ey = a._homeY // Ending Y coordinate",
+      "contextHash": "d8367a3f908a7eaab930b539101c856c6fb8dcf55757ff0e1f329b397d9b759f"
+    },
+    {
+      "id": "code-013",
+      "type": "code",
+      "source": "frame = 8 // 移動時間",
+      "sourceHash": "d9564cf8bdd445b8498c7444dc62242e642b330c90babd50474030376be64fd6",
+      "translation": "frame = 8 // Movement time",
+      "contextHash": "d9564cf8bdd445b8498c7444dc62242e642b330c90babd50474030376be64fd6"
+    },
+    {
+      "id": "code-014",
+      "type": "code",
+      "source": "airY = 0 // 空中Ｙ座標",
+      "sourceHash": "ac27a09966c9796d5d42afb77fdad72d56a7a7b4c2d9b9221be04da91a2d983d",
+      "translation": "airY = 0 // Airborne Y coordinate",
+      "contextHash": "ac27a09966c9796d5d42afb77fdad72d56a7a7b4c2d9b9221be04da91a2d983d"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "赤字部分ですが、アクターの場合はなぜか『+1』しておかないと動きません……。",
+      "sourceHash": "7c68d7d5bccb8ca2777f95fd841639d91f919db777d9b8e1db6f347bb3643cbc",
+      "translation": "Regarding the red portion, for some reason it will not work for actors unless you add 『+1』…….",
+      "contextHash": "7c68d7d5bccb8ca2777f95fd841639d91f919db777d9b8e1db6f347bb3643cbc"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "アクターの開始演出（ActorDynamicId）",
+      "sourceHash": "11b0dad99c831f126847f3b8d1a90b82a1717cba8b335addd31352c7b9837f7b",
+      "translation": "Actor Start Effect (ActorDynamicId)",
+      "contextHash": "11b0dad99c831f126847f3b8d1a90b82a1717cba8b335addd31352c7b9837f7b"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "アクターの戦闘開始演出（初期値）です。",
+      "sourceHash": "d5918719dc2e3da8035ffe9ec1f21d174f0a9884671383b8b93cc896b3fe7b03",
+      "translation": "This is the actor's battle start effect (default value).",
+      "contextHash": "d5918719dc2e3da8035ffe9ec1f21d174f0a9884671383b8b93cc896b3fe7b03"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "演出を定義したスキルを指定してください。",
+      "sourceHash": "0f845fe58ddde52d0ec43a5aaf6f795b476df628d69860dc5b02235f97c3019e",
+      "translation": "Specify the skill that defines the effect.",
+      "contextHash": "0f845fe58ddde52d0ec43a5aaf6f795b476df628d69860dc5b02235f97c3019e"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "敵キャラの開始演出（EnemyDynamicId）",
+      "sourceHash": "0981e9e6c160fb3ca4a5d41f899abfb02dff250336b0b8e661e4397453c9f882",
+      "translation": "Enemy Start Effect (EnemyDynamicId)",
+      "contextHash": "0981e9e6c160fb3ca4a5d41f899abfb02dff250336b0b8e661e4397453c9f882"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "敵キャラの戦闘開始演出（初期値）です。",
+      "sourceHash": "c2883e8182af8e9662147aa3652b0e9b941e5174d2d035f63a0f823ae152d38f",
+      "translation": "This is the enemy's battle start effect (default value).",
+      "contextHash": "c2883e8182af8e9662147aa3652b0e9b941e5174d2d035f63a0f823ae152d38f"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "演出を定義したスキルを指定してください。",
+      "sourceHash": "0f845fe58ddde52d0ec43a5aaf6f795b476df628d69860dc5b02235f97c3019e",
+      "translation": "Specify the skill that defines the effect.",
+      "contextHash": "0f845fe58ddde52d0ec43a5aaf6f795b476df628d69860dc5b02235f97c3019e"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Revision History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]アクター、敵キャラ、職業のメモ欄（Note）[[/LINK_1]]",
+      "sourceHash": "3031a1f11ef09250c19ccfe3deb6d2bd108cfd68cd81e807192e5299eebc653c",
+      "parts": [
+        {
+          "source": "アクター、敵キャラ、職業のメモ欄（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor, Enemy, and Class Note Fields (Note)[[/LINK_1]]",
+      "contextHash": "3031a1f11ef09250c19ccfe3deb6d2bd108cfd68cd81e807192e5299eebc653c"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]DynamicMotionによる演出の例（Sample of DynamicMotion）[[/LINK_1]]",
+      "sourceHash": "635ec9aac8ebeeed72728e40bb48df7fac9cdaec17172e72e2f88b32478acd3f",
+      "parts": [
+        {
+          "source": "DynamicMotionによる演出の例（Sample of DynamicMotion）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Examples of Effects Using DynamicMotion (Sample of DynamicMotion)[[/LINK_1]]",
+      "contextHash": "635ec9aac8ebeeed72728e40bb48df7fac9cdaec17172e72e2f88b32478acd3f"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]アクターの開始演出（ActorDynamicId）[[/LINK_1]]",
+      "sourceHash": "1e2b4d2ccbb88d7c310693dad55a40aad49240dc7530b791e528671cc5caba5a",
+      "parts": [
+        {
+          "source": "アクターの開始演出（ActorDynamicId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Actor Entry Effect (ActorDynamicId)[[/LINK_1]]",
+      "contextHash": "1e2b4d2ccbb88d7c310693dad55a40aad49240dc7530b791e528671cc5caba5a"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]敵キャラの開始演出（EnemyDynamicId）[[/LINK_1]]",
+      "sourceHash": "2c3e0f2959a76f2e1ce93115f452a8feb528f85fadfd46674379c549253b9bf4",
+      "parts": [
+        {
+          "source": "敵キャラの開始演出（EnemyDynamicId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Enemy Entry Effect (EnemyDynamicId)[[/LINK_1]]",
+      "contextHash": "2c3e0f2959a76f2e1ce93115f452a8feb528f85fadfd46674379c549253b9bf4"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DynamicAnimationMZ.js[[/LINK_1]]（[[LINK_2]]詳細[[/LINK_2]]）",
+      "sourceHash": "8977f61dea7470e33b6dc78b85e8ccedc0e4c8b1793e18958c33c051f632232b",
+      "parts": [
+        {
+          "source": "NRP_DynamicAnimationMZ.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_DynamicAnimationMZ.js[[/LINK_1]] ([[LINK_2]]Details[[/LINK_2]])",
+      "contextHash": "8977f61dea7470e33b6dc78b85e8ccedc0e4c8b1793e18958c33c051f632232b"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DynamicMotionMZ.js[[/LINK_1]]（[[LINK_2]]詳細[[/LINK_2]]）",
+      "sourceHash": "c3bb603aaab0c9dd53a222fef7733f9196dbe1400e13efbee251c0ab428f7412",
+      "parts": [
+        {
+          "source": "NRP_DynamicMotionMZ.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_DynamicMotionMZ.js[[/LINK_1]] ([[LINK_2]]Details[[/LINK_2]])",
+      "contextHash": "c3bb603aaab0c9dd53a222fef7733f9196dbe1400e13efbee251c0ab428f7412"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DynamicAnimation.js[[/LINK_1]]（[[LINK_2]]詳細[[/LINK_2]]）",
+      "sourceHash": "bbf0a3d58ee0ad6ebd794d52a6ba043c9da6f1e72a91da7d591841046052ca4d",
+      "parts": [
+        {
+          "source": "NRP_DynamicAnimation.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_DynamicAnimation.js[[/LINK_1]] ([[LINK_2]]Details[[/LINK_2]])",
+      "contextHash": "bbf0a3d58ee0ad6ebd794d52a6ba043c9da6f1e72a91da7d591841046052ca4d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_DynamicMotion.js[[/LINK_1]]（[[LINK_2]]詳細[[/LINK_2]]）",
+      "sourceHash": "9c70bc1e27a98333eefeab916a4dccab73f8e7bff2c1aa7d05dd06627c5b4ea4",
+      "parts": [
+        {
+          "source": "NRP_DynamicMotion.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_DynamicMotion.js[[/LINK_1]] ([[LINK_2]]Details[[/LINK_2]])",
+      "contextHash": "9c70bc1e27a98333eefeab916a4dccab73f8e7bff2c1aa7d05dd06627c5b4ea4"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]上空から登場[[/LINK_1]]のサンプルにて登場前にチラ見えする不具合修正。（2022/04/21）",
+      "sourceHash": "ab161336599f691f7dd1d16473327db7603cdc6c6b6e33cba9c004899be6d191",
+      "parts": [
+        {
+          "source": "上空から登場",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "のサンプルにて登場前にチラ見えする不具合修正。（2022/04/21）",
+          "link": false
+        }
+      ],
+      "translation": "Bug fix for briefly appearing before entry in the [[LINK_1]]Appearing from Above[[/LINK_1]] sample. (2022/04/21)",
+      "contextHash": "ab161336599f691f7dd1d16473327db7603cdc6c6b6e33cba9c004899be6d191"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "戦闘開始時のみウェイトをかけるようにしているため、[[LINK_1]]仲間を呼ぶプラグイン[[/LINK_1]]と同じ定義を流用することもできます。",
+      "sourceHash": "869d2774758753b4d3edab24f43a867d362e90a918adfd60bea2749f7460b7c6",
+      "parts": [
+        {
+          "source": "戦闘開始時のみウェイトをかけるようにしているため、",
+          "link": false
+        },
+        {
+          "source": "仲間を呼ぶプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "と同じ定義を流用することもできます。",
+          "link": false
+        }
+      ],
+      "translation": "Since a wait is applied only at the start of battle, the same definition as the [[LINK_1]]Call Allies plugin[[/LINK_1]] can also be reused.",
+      "contextHash": "869d2774758753b4d3edab24f43a867d362e90a918adfd60bea2749f7460b7c6"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "なお、敵キャラの影の表示については、[[LINK_1]]影プラグイン[[/LINK_1]]が必要です。",
+      "sourceHash": "02703039d395f8518056da2b6fc881bb264e4c02432d7f15b5707e142bb37742",
+      "parts": [
+        {
+          "source": "なお、敵キャラの影の表示については、",
+          "link": false
+        },
+        {
+          "source": "影プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が必要です。",
+          "link": false
+        }
+      ],
+      "translation": "In addition, the [[LINK_1]]Shadow plugin[[/LINK_1]] is required to display enemy shadows.",
+      "contextHash": "02703039d395f8518056da2b6fc881bb264e4c02432d7f15b5707e142bb37742"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "戦闘開始時にバトラーの登場演出を実行します。": "Executes an entrance effect for battlers at the start of battle.",
+    "演出はDynamicAnimation&Motionプラグインによって作成します。": "The effects are created using the DynamicAnimation&Motion plugin.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature ON in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "※ただし、ＭＶでは挙動が怪しいです。アクター側の登場演出を設定するとエラーになってしまう模様です。": "※However, its behavior in MV is unreliable. Setting an entrance effect for an actor appears to cause an error.",
+    "NRP_DynamicAppear.js": "NRP_DynamicAppear.js ",
+    "ver1.01（2022/12/10）": "ver1.01 (2022/12/10) ",
+    "動作には、さらに以下のプラグインが必須となります。": "The following additional plugins are also required for this plugin to work.",
+    "ＭＺ版": "MZ Version",
+    "ＭＶ版": "MV Version",
+    "更新履歴（History）": "Update History (History)",
+    "2022/12/10（ver1.01）": "2022/12/10 (ver1.01) ",
+    "戦闘開始直後に逃げると移動演出がなくなる不具合を修正。": "Fixed a bug where the movement effect disappeared when escaping immediately after battle started.",
+    "2022/03/11 -> 2022/04/21（ver1.00）": "2022/03/11 -> 2022/04/21 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "DynamicAnimation&Motionプラグインの説明に従って、演出用のスキルを作成してください。": "Following the instructions for the DynamicAnimation&Motion plugin, create a skill for the effect.",
+    "※必要なのはメモ欄の定義だけなので、その他の設定は不問です。": "※Only the note field definition is required, so the other settings do not matter.",
+    "後はアクター（または職業）、敵キャラのメモ欄に以下の通り、スキルＩＤを設定すればＯＫです。": "Then, simply set the skill ID in the note field of the actor (or class) and enemy as follows.",
+    "個別の指定がない場合は、プラグインパラメータの初期値が使用されます。": "If no individual setting is specified, the default plugin parameter value is used.",
+    "アクター、敵キャラ、職業のメモ欄（Note）": "Actor, Enemy, and Class Note Fields (Note)",
+    "DynamicAnimation&Motionプラグインと連携し、x番のスキルに指定された演出で登場します。": "In coordination with the DynamicAnimation&Motion plugin, the battler enters with the effect specified for skill x.",
+    "なお、職業のメモ欄に設定した場合は、アクターの設定よりも優先されます。": "When set in a class's note field, it takes priority over the actor's setting.",
+    "DynamicMotionによる演出の例（Sample of DynamicMotion）": "Examples of Effects Using DynamicMotion (Sample of DynamicMotion)",
+    "画面外から登場": "Enter from Off-Screen",
+    "オーソドックスに画面外から登場します。": "The battler enters from off-screen in a classic fashion.",
+    "// 戦闘開始時に時間差": "// Time delay at battle start",
+    "wait = a.index() * 3 // 時間差": "wait = a.index() * 3 // Time delay",
+    "frame = 5 // 移動時間": "frame = 5 // Movement time",
+    "sx = a._homeX + 500 * mirroring // 始点Ｘ座標（画面外）": "sx = a._homeX + 500 * mirroring // Starting X coordinate (off-screen)",
+    "sy = a._homeY // 始点Ｙ座標": "sy = a._homeY // Starting Y coordinate",
+    "ex = a._homeX // 終点Ｘ座標": "ex = a._homeX // Ending X coordinate",
+    "ey = a._homeY // 終点Ｙ座標": "ey = a._homeY // Ending Y coordinate",
+    "『a』で登場するバトラーを参照できます。": "You can reference the battler entering with 『a』.",
+    "『a._homeX』『a._homeY』が配置地点となるので、最終的にそこへ移動するように実装してください。": " \"a._homeX』 and 『a._homeY』 are the placement coordinates, so implement the movement so that the battler ultimately moves there.",
+    "赤字部分によって、登場時の時間差を表現しています。": "The red portions represent the time offset when entering.",
+    "※この機能（condition）はDynamicAnimation&Motionを最新化（2022/03/10～）していないとうまく動作しないので、ご注意ください。": "※Please note that this feature (condition) will not work properly unless DynamicAnimation&Motion has been updated to the latest version (2022/03/10 onward).",
+    "上空から登場（2023/03/09更新）": "Enter from Above (Updated 2023/03/09)",
+    "上空から登場します。飛行系の魔物などに最適です。": "The battler enters from above. This is ideal for flying monsters and the like.",
+    "// 時間差": "// Time delay",
+    "airY = -500 // 空中Ｙ座標": "airY = -500 // Airborne Y coordinate",
+    "frame = 8 // 移動時間": "frame = 8 // Movement time",
+    "airY = 0 // 空中Ｙ座標": "airY = 0 // Airborne Y coordinate",
+    "赤字部分ですが、アクターの場合はなぜか『+1』しておかないと動きません……。": "Regarding the red portion, for some reason it will not work for actors unless you add 『+1』…….",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "アクターの開始演出（ActorDynamicId）": "Actor Start Effect (ActorDynamicId)",
+    "アクターの戦闘開始演出（初期値）です。": "This is the actor's battle start effect (default value).",
+    "演出を定義したスキルを指定してください。": "Specify the skill that defines the effect.",
+    "敵キャラの開始演出（EnemyDynamicId）": "Enemy Start Effect (EnemyDynamicId)",
+    "敵キャラの戦闘開始演出（初期値）です。": "This is the enemy's battle start effect (default value)."
+  }
+}
