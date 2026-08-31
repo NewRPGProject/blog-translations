@@ -1,0 +1,970 @@
+{
+  "articleId": "481944599",
+  "sourceUrl": "https://newrpg.seesaa.net/article/481944599.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "0e310f654ed56657163d24ea7d0f6dd7274c371ef5e6693759a5011f946d9797",
+  "translatedAt": "2026-08-31T05:45:26.225Z",
+  "title": "Expanding Event Collision Detection [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "イベントの当たり判定を拡張する【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "97064e4f4b4e21ca527dd3d2223158c19fad80c29081170208aeceb969abaf02",
+      "translation": "Expanding Event Collision Detection [RPG Maker MZ & MV Plugin]",
+      "contextHash": "97064e4f4b4e21ca527dd3d2223158c19fad80c29081170208aeceb969abaf02"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "イベントの当たり判定を拡張します。",
+      "sourceHash": "88356dfa6f1f5523ed3553068b319e324cb5c9c2a1a98585fa7184359d42820e",
+      "translation": "Expands event collision detection.",
+      "contextHash": "88356dfa6f1f5523ed3553068b319e324cb5c9c2a1a98585fa7184359d42820e"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "大型のオブジェクトや巨大モンスターなどに便利です。",
+      "sourceHash": "bd12ac16a61d097b8000ba567a3bac855420967d59309672016ca51005e1bcd8",
+      "translation": "Useful for large objects and giant monsters.",
+      "contextHash": "bd12ac16a61d097b8000ba567a3bac855420967d59309672016ca51005e1bcd8"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "トリガーによるイベントの実行範囲も拡張されます。",
+      "sourceHash": "d8d638537784d0732072d315741f0f325bc22b9eb537a7ceaa9084af714843d9",
+      "translation": "The range in which events are executed by triggers is also expanded.",
+      "contextHash": "d8d638537784d0732072d315741f0f325bc22b9eb537a7ceaa9084af714843d9"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "なお、拡張できる範囲は四角だけです。",
+      "sourceHash": "f66f50ab16d779e50de6439450d7252853fda808884afa8e535815b44b7eda34",
+      "translation": "However, the expandable area is limited to rectangles.",
+      "contextHash": "f66f50ab16d779e50de6439450d7252853fda808884afa8e535815b44b7eda34"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "円や十字などの柔軟な変更には対応していません。",
+      "sourceHash": "9fb4089e3f2b50e02557c962b8a39a1e854c2282c2d783648015a06c7cc5e58a",
+      "translation": "Flexible shapes such as circles and crosses are not supported.",
+      "contextHash": "9fb4089e3f2b50e02557c962b8a39a1e854c2282c2d783648015a06c7cc5e58a"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Enable the plugin through the RPG Maker plugin manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※All plugins work with both MV and MZ.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_EventCollisionEX.js",
+      "sourceHash": "9ba1e320b8c17c0db64a0eb543a43bc0e96b0bbee4777f15d46d463e6081176f",
+      "translation": "NRP_EventCollisionEX.js ",
+      "contextHash": "e4fed048e61f4cf466e8f46aca0b41c3ab31fe7ff7e957953a99862066f4317c"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "ver1.04（2023/08/04）",
+      "sourceHash": "882a672561c08da0c84a3b3f8f7517b77d6c59c8c03f20f1a7329a2ca83bc10c",
+      "translation": "ver1.04 (2023/08/04) ",
+      "contextHash": "e4fed048e61f4cf466e8f46aca0b41c3ab31fe7ff7e957953a99862066f4317c"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "※比較的、影響の大きいプラグインです。",
+      "sourceHash": "fc841adf07b66b46d47f930665c5829bd9ddd07e28b5b84ed532bff97b06590a",
+      "translation": "※This plugin has a relatively significant impact.",
+      "contextHash": "fc841adf07b66b46d47f930665c5829bd9ddd07e28b5b84ed532bff97b06590a"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "競合を避けるため、なるべく上方への配置を推奨します。",
+      "sourceHash": "8dd3c4772ce0316449e3e73da5b6ecb8400f23d9c04b34044628b8e514e060a7",
+      "translation": "To avoid conflicts, placing it as high as possible is recommended.",
+      "contextHash": "8dd3c4772ce0316449e3e73da5b6ecb8400f23d9c04b34044628b8e514e060a7"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2023/08/04（ver1.04）",
+      "sourceHash": "e14cc10155c8ce8beb66191c9387cd4d0ecb80dbdc76ec6e8eab2c1722c9531b",
+      "translation": "2023/08/04 (ver1.04) ",
+      "contextHash": "e14cc10155c8ce8beb66191c9387cd4d0ecb80dbdc76ec6e8eab2c1722c9531b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "RegionBase.jsと併用時、イベントの衝突判定が無視される問題に対応。",
+      "sourceHash": "48f84829b472f5086af83dcba37408ae1ef31f91f1fe56a92aba1312f89e150e",
+      "translation": "Fixed an issue where event collision detection was ignored when used with RegionBase.js.",
+      "contextHash": "48f84829b472f5086af83dcba37408ae1ef31f91f1fe56a92aba1312f89e150e"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2022/03/24（ver1.03）",
+      "sourceHash": "8af371c85eb5427438a24aadb3aba2213790a87c3dbd758c6bbc7518feafe043",
+      "translation": "2022/03/24 (ver1.03) ",
+      "contextHash": "8af371c85eb5427438a24aadb3aba2213790a87c3dbd758c6bbc7518feafe043"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2021/11/26（ver1.02）",
+      "sourceHash": "e89a8bee7fe14edb148aaf398460c46b72ae9f9a53bb52b024a82fdf23a63039",
+      "translation": "2021/11/26 (ver1.02) ",
+      "contextHash": "e89a8bee7fe14edb148aaf398460c46b72ae9f9a53bb52b024a82fdf23a63039"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "CharacterGraphicExtend.jsなど他プラグインとの競合を解消。",
+      "sourceHash": "3ebbdfa8cbdfbac6a763965b2bf13904ec6e78c43a16a9bb18f28bb5068342c7",
+      "translation": "Resolved conflicts with other plugins such as CharacterGraphicExtend.js.",
+      "contextHash": "3ebbdfa8cbdfbac6a763965b2bf13904ec6e78c43a16a9bb18f28bb5068342c7"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2021/06/17 -> 07/09（ver1.01 -> 1.011）",
+      "sourceHash": "a11af8444f9862dafa492e4229679ede1fdf3b11dd4771365523a11c9d3d77e8",
+      "translation": "2021/06/17 -> 07/09 (ver1.01 -> 1.011) ",
+      "contextHash": "a11af8444f9862dafa492e4229679ede1fdf3b11dd4771365523a11c9d3d77e8"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "下に拡張イベントがある場合は、飛行船の着陸を禁止。（07/09 ver1.011）",
+      "sourceHash": "53ca9d2d9af7387ffc49ab3bd522c4336d5956c5e0d87c217a769fa954f832db",
+      "translation": "Prevents airships from landing when there is an expanded event below. (07/09 ver1.011)",
+      "contextHash": "53ca9d2d9af7387ffc49ab3bd522c4336d5956c5e0d87c217a769fa954f832db"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/06/11（ver1.00）",
+      "sourceHash": "08e55c9076c5c17ca050c8af7f4cc1da0079224665e84292881d22c392f79932",
+      "translation": "2021/06/11 (ver1.00) ",
+      "contextHash": "08e55c9076c5c17ca050c8af7f4cc1da0079224665e84292881d22c392f79932"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "三通りの方法によって、イベントの当たり判定を拡張できます。",
+      "sourceHash": "d2ab67db5622ba0a7197178324a64c040965e9b3fb20130f9d15e647097ef74f",
+      "translation": "You can expand event collision detection in three ways.",
+      "contextHash": "d2ab67db5622ba0a7197178324a64c040965e9b3fb20130f9d15e647097ef74f"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "使いやすい方法をご利用ください。",
+      "sourceHash": "f7df865406b13b45dad791d21ed4281facf9c0f5567b697fc877a66b60ca16b2",
+      "translation": "Use whichever method is most convenient for you.",
+      "contextHash": "f7df865406b13b45dad791d21ed4281facf9c0f5567b697fc877a66b60ca16b2"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "設定リスト",
+      "sourceHash": "f55fdf026c97315074febdb96ea900c6f25afcb61e378c941a5698b700815821",
+      "translation": "Setting List",
+      "contextHash": "f55fdf026c97315074febdb96ea900c6f25afcb61e378c941a5698b700815821"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "プラグインパラメータの設定リストに、対象のファイルと当たり判定を登録できます。いちいちイベント毎に登録する必要がないので便利です。",
+      "sourceHash": "151d2bc510d5bb9995bc738db14e480660b5dbea1e47eb5c89fd39c86e28a1e8",
+      "translation": "You can register the target file and collision detection settings in the plugin parameter setting list. This is convenient because you do not need to register them for each individual event.",
+      "contextHash": "151d2bc510d5bb9995bc738db14e480660b5dbea1e47eb5c89fd39c86e28a1e8"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "詳細はプラグインパラメータをご覧ください。",
+      "sourceHash": "fb140316883821453d5078369aad08601e9707a08190098f257871b85c566680",
+      "translation": "See the plugin parameters for details.",
+      "contextHash": "fb140316883821453d5078369aad08601e9707a08190098f257871b85c566680"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "メモ欄",
+      "sourceHash": "bfe8aafaf90e25e18d725a599628d34c645e915c6188069e762ad4bd1d07f389",
+      "translation": "Note Field",
+      "contextHash": "bfe8aafaf90e25e18d725a599628d34c645e915c6188069e762ad4bd1d07f389"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "イベントのメモ欄に以下を記入してください。",
+      "sourceHash": "9708ea7044917359f8dfbdf357fb1c0808a68edd8f8c9f8833cf8dc045d83212",
+      "translation": "Enter the following in the event's note field.",
+      "contextHash": "9708ea7044917359f8dfbdf357fb1c0808a68edd8f8c9f8833cf8dc045d83212"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "?には数値を設定してください。",
+      "sourceHash": "7288c570d88bec377d96196a58bffa668d2166dc98fb6c2e17e9d81d468ee15c",
+      "translation": "Set a numeric value for ?.",
+      "contextHash": "7288c570d88bec377d96196a58bffa668d2166dc98fb6c2e17e9d81d468ee15c"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "下、左、右、上の順番に当たり判定が拡張されます。",
+      "sourceHash": "7de658307342cd86535f9bd76a895eefffbcdd8e69a405975d1e87703aaf5fda",
+      "translation": "Collision detection is expanded in the order of down, left, right, and up.",
+      "contextHash": "7de658307342cd86535f9bd76a895eefffbcdd8e69a405975d1e87703aaf5fda"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "注釈",
+      "sourceHash": "1700de690be68197de8052ee5701ad93c4c371635028cfe9740249d66556f3ae",
+      "translation": "Comment",
+      "contextHash": "1700de690be68197de8052ee5701ad93c4c371635028cfe9740249d66556f3ae"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "また、イベントページ先頭の注釈に同様の記入しても有効となります。",
+      "sourceHash": "4940f39c2e5266b475357f5e6133b1266fd8271f7e4adcef12e80dea5d2decaf",
+      "translation": "The same entry is also effective when made in a comment at the beginning of an event page.",
+      "contextHash": "4940f39c2e5266b475357f5e6133b1266fd8271f7e4adcef12e80dea5d2decaf"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "こちらは現在のページ毎に状態を切り替えられます。",
+      "sourceHash": "ead7f43d4c8f3f54a3a00325954e17f297990cf8130814de20bc72b471225aae",
+      "translation": "This allows you to switch the state for each current page.",
+      "contextHash": "ead7f43d4c8f3f54a3a00325954e17f297990cf8130814de20bc72b471225aae"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "なお、優先度は『注釈＞メモ欄＞設定リスト』の順番になっています。",
+      "sourceHash": "c41d3e6c1507d16bcc5f32ab6200e6f301238ce034490c3194a20065650ee0ea",
+      "translation": "The priority order is “Comment > Note Field > Setting List”.",
+      "contextHash": "c41d3e6c1507d16bcc5f32ab6200e6f301238ce034490c3194a20065650ee0ea"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "イベント自体に指定がある場合、設定リストに登録した内容は無視されますのでご注意ください。",
+      "sourceHash": "4f4a332e6a2d7e7959c0be202663bc124033bb77b96376b283775a644b84e383",
+      "translation": "Please note that if specifications are set directly on the event, the contents registered in the setting list will be ignored.",
+      "contextHash": "4f4a332e6a2d7e7959c0be202663bc124033bb77b96376b283775a644b84e383"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "注意点（Notice）",
+      "sourceHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0",
+      "translation": "Notes (Notice)",
+      "contextHash": "fa3299f1e938208d8e5b6d58c9b496bc8f9347c77a554d10a359ea869f0706a0"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "影響の大きいプラグインだというのは上述の通りです。",
+      "sourceHash": "e624955ae2ec0912f0a19627ce64ad9d03a1f2d49ec5dbd9f840ae2d7187fd29",
+      "translation": "As mentioned above, this plugin has a significant impact.",
+      "contextHash": "e624955ae2ec0912f0a19627ce64ad9d03a1f2d49ec5dbd9f840ae2d7187fd29"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "大型イベントの通常移動が不要な場合は、『大型イベントの移動を考慮』をオフにしておくと安定するかもしれません。動作負荷や競合の問題が軽減される可能性があります。",
+      "sourceHash": "de024bdead4d8fee145b81518617329ada016cf97088a3db3f8966569469268e",
+      "translation": "If normal movement for large events is unnecessary, turning off “Consider Large Event Movement” may improve stability. This may reduce processing load and conflict issues.",
+      "contextHash": "de024bdead4d8fee145b81518617329ada016cf97088a3db3f8966569469268e"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "また、ループするマップの境界付近での挙動については、ややこしくて実装を断念しました。すまぬ……。",
+      "sourceHash": "1157044e64d50eb1e9a37aa459af21114949d0b8f06507ef6fc7450683d3d72d",
+      "translation": "Also, the behavior near the boundaries of looping maps was complicated, so I gave up implementing it. Sorry……",
+      "contextHash": "1157044e64d50eb1e9a37aa459af21114949d0b8f06507ef6fc7450683d3d72d"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "なので、ループの向こうへはみ出している部分には、当たり判定がありません。",
+      "sourceHash": "2f5f33bcd38e8d1d46886ca6c55cbd90e860167c354319545425d8be2d877f79",
+      "translation": "Therefore, the parts extending beyond the loop have no collision detection.",
+      "contextHash": "2f5f33bcd38e8d1d46886ca6c55cbd90e860167c354319545425d8be2d877f79"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "検証した感じ、当プラグインが動作に与える負荷はさほど大きくないと思われます。",
+      "sourceHash": "d1cb216fa853a7d3cbfa28d65d307d4ffd439dfc4bdef14144f86463e171dea2",
+      "translation": "Based on testing, it seems that this plugin does not place a particularly large load on performance.",
+      "contextHash": "d1cb216fa853a7d3cbfa28d65d307d4ffd439dfc4bdef14144f86463e171dea2"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "……が、以下のイベント処理軽量化プラグイン（EaseEventLoad.js）の『最適化１』の効果を打ち消してしまう模様です。",
+      "sourceHash": "d5322acd940b3f56879ff558b61a9fc7669adfa9f1fe22bee4d2acf79bc00330",
+      "translation": "……However, it appears to negate the effect of “Optimization 1” in the following event processing optimization plugin (EaseEventLoad.js).",
+      "contextHash": "d5322acd940b3f56879ff558b61a9fc7669adfa9f1fe22bee4d2acf79bc00330"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "https://forum.tkool.jp/index.php?threads/4933/",
+      "sourceHash": "2c5d66c4e42f00dbb0a774cef54ad09075591f7cc420850fe817e878a375db62",
+      "translation": "https://forum.tkool.jp/index.php?threads/4933/",
+      "contextHash": "97ce2a7dd8796c4495ab7b50799bf88c818b0eb489b089176f1e2c6c36d7ffcf"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "よほど大量のイベントで頻繁に衝突判定を行わない場合は、大した問題にはならないと思いますが一応です。",
+      "sourceHash": "80478f3a92c0d9c7fef8155070157dd47c1c7c73972d2e0796ba771c3046d498",
+      "translation": "Unless collision detection is performed frequently with a very large number of events, I do not think this will be a significant problem, but I wanted to mention it just in case.",
+      "contextHash": "80478f3a92c0d9c7fef8155070157dd47c1c7c73972d2e0796ba771c3046d498"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "※なお、当プラグインはEaseEventLoad.jsより下に配置しないと機能しません。",
+      "sourceHash": "c33e9167b5df61a09a864b917df2f717c1ddb8ff5a2a625df69575f0f2ba2e5d",
+      "translation": "※This plugin will not function unless it is placed below EaseEventLoad.js.",
+      "contextHash": "c33e9167b5df61a09a864b917df2f717c1ddb8ff5a2a625df69575f0f2ba2e5d"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "大型イベントの移動を考慮（ConsiderEventMove）",
+      "sourceHash": "732f8ee74b2f6767976eeaf990bf9d25bc2bec98ea6571acf721633ad71aa20e",
+      "translation": "Consider Large Event Movement (ConsiderEventMove)",
+      "contextHash": "732f8ee74b2f6767976eeaf990bf9d25bc2bec98ea6571acf721633ad71aa20e"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "大型イベントが移動した際も当たり判定を計算します。",
+      "sourceHash": "2408cdbe101d03e7043ac88b2bb13b222c1bea74dd3f145568a44e199b9702fc",
+      "translation": "Collision detection is also calculated when a large event moves.",
+      "contextHash": "2408cdbe101d03e7043ac88b2bb13b222c1bea74dd3f145568a44e199b9702fc"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "デフォルトはオンになっていますが、オフにすると処理が軽減されます。",
+      "sourceHash": "78a1726a5b228969d3d59d62da888b08405132b03388323db00d49a927a8ec33",
+      "translation": "This is enabled by default, but turning it off reduces processing.",
+      "contextHash": "78a1726a5b228969d3d59d62da888b08405132b03388323db00d49a927a8ec33"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "正確には「大型イベントが移動した際に、自身と他のイベントやタイルとの当たり判定を計算する」かどうかを切り替えます。",
+      "sourceHash": "3b988c606a65841d9ba36315da6ff18bf96c88a97f99b1236d45ee852f5f581a",
+      "translation": "More precisely, this setting determines whether to “calculate collision detection between the large event itself and other events or tiles when the large event moves.”",
+      "contextHash": "3b988c606a65841d9ba36315da6ff18bf96c88a97f99b1236d45ee852f5f581a"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "オフにした場合も、プレイヤーや通常のイベントが大型イベントに近づいた際の判定は行われます。",
+      "sourceHash": "696fd83f57a5c74813caa6736351f34ef61788ee0a23188ac900eecd1607473a",
+      "translation": "Even when turned off, detection is still performed when the player or a normal event approaches a large event.",
+      "contextHash": "696fd83f57a5c74813caa6736351f34ef61788ee0a23188ac900eecd1607473a"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "自由に移動する大型イベントを作りたい場合などは、そのままオンにしておいてください。",
+      "sourceHash": "628b6f8b3d1f7bf18f7d4148b73354749cccb17f5c80c341294fa33fc26bdbd1",
+      "translation": "Leave this enabled if you want to create a large event that moves freely.",
+      "contextHash": "628b6f8b3d1f7bf18f7d4148b73354749cccb17f5c80c341294fa33fc26bdbd1"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "静止した障害物しか使わない場合や、特定のイベントコマンドで操作するに留まる場合はオフにしても問題ありません。",
+      "sourceHash": "bbf435b0ce9503b48c3e5ae21439c2da016b1d1c1aa20cc254b304e4cb38d485",
+      "translation": "You can turn it off if you only use stationary obstacles or only control them with specific event commands.",
+      "contextHash": "bbf435b0ce9503b48c3e5ae21439c2da016b1d1c1aa20cc254b304e4cb38d485"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "設定リスト（SettingList）",
+      "sourceHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287",
+      "translation": "Setting List (SettingList)",
+      "contextHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "当たり判定の設定の一覧です。",
+      "sourceHash": "0c160d6486f67fc32d421ed5e19a98abf28243cec937f9e0504b912e5f2d2baf",
+      "translation": "This is a list of collision settings.",
+      "contextHash": "0c160d6486f67fc32d421ed5e19a98abf28243cec937f9e0504b912e5f2d2baf"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "以下、その詳細設定のパラメータです。",
+      "sourceHash": "b27c3a353986983e8798706b83c3b4c6dbf015e796fa8add9713ef8b4646af34",
+      "translation": "The following are the parameters for the detailed settings.",
+      "contextHash": "b27c3a353986983e8798706b83c3b4c6dbf015e796fa8add9713ef8b4646af34"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト）",
+      "sourceHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb",
+      "translation": "plugin parameter (Settings List)",
+      "contextHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "画像ファイル（File）",
+      "sourceHash": "11a256f7996031f24735dca00f9686d2ae8d96354d23134907b94ab857b0f300",
+      "translation": "Image File (File)",
+      "contextHash": "11a256f7996031f24735dca00f9686d2ae8d96354d23134907b94ab857b0f300"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "当たり判定を拡張するキャラクター画像のファイルです。",
+      "sourceHash": "0cf7a3752a39b0265830984318641bd4cc97fbf2e5c1e2a0271e7758931a87a7",
+      "translation": "This is the character image file for extending collision detection.",
+      "contextHash": "0cf7a3752a39b0265830984318641bd4cc97fbf2e5c1e2a0271e7758931a87a7"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "画像インデックス（Index）",
+      "sourceHash": "7594a63e85664857fc8cc8d41bb5073717dda126707276e2f2e1c9ef65f1a16f",
+      "translation": "Image Index (Index)",
+      "contextHash": "7594a63e85664857fc8cc8d41bb5073717dda126707276e2f2e1c9ef65f1a16f"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "使用する画像のインデックス値（0~7）です。空欄なら全てを対象とします。",
+      "sourceHash": "3789a6b32598c855dad88d8c22d71fb0bc918bf8066411e5c955e48d2893f298",
+      "translation": "The index value (0~7) of the image to use. If left blank, all images are targeted.",
+      "contextHash": "3789a6b32598c855dad88d8c22d71fb0bc918bf8066411e5c955e48d2893f298"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "左上が0で、右下が7になります。",
+      "sourceHash": "70dfb27b4ca7b8ce4a1c3720cc117fa2210db9aeb74b6116114fefcf3a55c517",
+      "translation": "The top-left is 0, and the bottom-right is 7.",
+      "contextHash": "70dfb27b4ca7b8ce4a1c3720cc117fa2210db9aeb74b6116114fefcf3a55c517"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "当たり判定（下）（CollisionDown）",
+      "sourceHash": "0a2ba485788ca685e7c5969714b209f3ac78822e06d9d5ff716333c1a6fe61fb",
+      "translation": "Collision (Down) (CollisionDown)",
+      "contextHash": "0a2ba485788ca685e7c5969714b209f3ac78822e06d9d5ff716333c1a6fe61fb"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "当たり判定（左）（CollisionLeft）",
+      "sourceHash": "a73ecc600866109fc4eee4d9113da593068a0de713fd5c59aa4d1c043db7acde",
+      "translation": "Collision (Left) (CollisionLeft)",
+      "contextHash": "a73ecc600866109fc4eee4d9113da593068a0de713fd5c59aa4d1c043db7acde"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "当たり判定（右）（CollisionRight）",
+      "sourceHash": "52428843747d488e3155c2b220e1b752379bf8166e4955be50408d53c9f107e0",
+      "translation": "Collision (Right) (CollisionRight)",
+      "contextHash": "52428843747d488e3155c2b220e1b752379bf8166e4955be50408d53c9f107e0"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "当たり判定（上）（CollisionUp）",
+      "sourceHash": "bd317dffaac5b540f6472bb2427e06a548b5d293b8bba86689eb4054bf7f02da",
+      "translation": "Collision (Up) (CollisionUp)",
+      "contextHash": "bd317dffaac5b540f6472bb2427e06a548b5d293b8bba86689eb4054bf7f02da"
+    },
+    {
+      "id": "text-041",
+      "type": "text",
+      "source": "各方向への当たり判定の加算値です。",
+      "sourceHash": "42d4b4f24cf2159d38de7acb449de4952f96179727c84fe1c682aa29231be7b7",
+      "translation": "The amount added to collision detection in each direction.",
+      "contextHash": "42d4b4f24cf2159d38de7acb449de4952f96179727c84fe1c682aa29231be7b7"
+    },
+    {
+      "id": "text-042",
+      "type": "text",
+      "source": "0だと標準のままになります。1にすると１マス拡大する仕様です。",
+      "sourceHash": "74ee9c13291a01460ccbf3228123b10ae22403761be8a0751755102d0f64a605",
+      "translation": "At 0, it remains at the default. At 1, it expands by one tile.",
+      "contextHash": "74ee9c13291a01460ccbf3228123b10ae22403761be8a0751755102d0f64a605"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]設定リスト（SettingList）[[/LINK_1]]",
+      "sourceHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a",
+      "parts": [
+        {
+          "source": "設定リスト（SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting List (SettingList)[[/LINK_1]]",
+      "contextHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]メモ欄（Note）[[/LINK_1]]",
+      "sourceHash": "4a94507e47fabfb8a32c0cfce067671aa6c9f8f6c8528de421a2721fc2c88d8a",
+      "parts": [
+        {
+          "source": "メモ欄（Note）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Note Field (Note)[[/LINK_1]]",
+      "contextHash": "4a94507e47fabfb8a32c0cfce067671aa6c9f8f6c8528de421a2721fc2c88d8a"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]注釈（Annotations）[[/LINK_1]]",
+      "sourceHash": "39c4292ccfa2bc1011d1e3ee28d7a76ff7c780babfec326ffd36171d4089eb77",
+      "parts": [
+        {
+          "source": "注釈（Annotations）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Annotations (Annotations)[[/LINK_1]]",
+      "contextHash": "39c4292ccfa2bc1011d1e3ee28d7a76ff7c780babfec326ffd36171d4089eb77"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]注意点（Notice）[[/LINK_1]]",
+      "sourceHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e",
+      "parts": [
+        {
+          "source": "注意点（Notice）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Notes (Notice)[[/LINK_1]]",
+      "contextHash": "87a5b7a150f6f0183cba167c20670a76ee81036d6346f0f172dc8da02dc8789e"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]大型イベントの移動を考慮（ConsiderEventMove）[[/LINK_1]]",
+      "sourceHash": "d51aae5e2cbdec4d5ab4494181025addd37078a7382a751e58de123cf3f16816",
+      "parts": [
+        {
+          "source": "大型イベントの移動を考慮（ConsiderEventMove）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Consider Large Event Movement (ConsiderEventMove)[[/LINK_1]]",
+      "contextHash": "d51aae5e2cbdec4d5ab4494181025addd37078a7382a751e58de123cf3f16816"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]設定リスト（SettingList）[[/LINK_1]]",
+      "sourceHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a",
+      "parts": [
+        {
+          "source": "設定リスト（SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting List (SettingList)[[/LINK_1]]",
+      "contextHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト）[[/LINK_1]]",
+      "sourceHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List)[[/LINK_1]]",
+      "contextHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]画像ファイル（File）[[/LINK_1]]",
+      "sourceHash": "db9d0fbf668b4a2693e91648aa1d0d8e8199ae5c24c9a3bfb1bb45eb25b70679",
+      "parts": [
+        {
+          "source": "画像ファイル（File）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Image File (File)[[/LINK_1]]",
+      "contextHash": "db9d0fbf668b4a2693e91648aa1d0d8e8199ae5c24c9a3bfb1bb45eb25b70679"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]画像インデックス（Index）[[/LINK_1]]",
+      "sourceHash": "3790fd9ec60a4f8e17a7448585075bd2804a1dc8bba378e7936d0496dc78952d",
+      "parts": [
+        {
+          "source": "画像インデックス（Index）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Image Index (Index)[[/LINK_1]]",
+      "contextHash": "3790fd9ec60a4f8e17a7448585075bd2804a1dc8bba378e7936d0496dc78952d"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]当たり判定（下）（CollisionDown）[[/LINK_1]]",
+      "sourceHash": "46dfc5bb5da6558ce8b703607676ca65289835c169f1cad24809530f1f419113",
+      "parts": [
+        {
+          "source": "当たり判定（下）（CollisionDown）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Collision Detection (Down) (CollisionDown)[[/LINK_1]]",
+      "contextHash": "46dfc5bb5da6558ce8b703607676ca65289835c169f1cad24809530f1f419113"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]当たり判定（左）（CollisionLeft）[[/LINK_1]]",
+      "sourceHash": "51b3086d67b8b8e095d5265e04ac55d4313571c73f5527e41d1b3046bba70161",
+      "parts": [
+        {
+          "source": "当たり判定（左）（CollisionLeft）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Collision Detection (Left) (CollisionLeft)[[/LINK_1]]",
+      "contextHash": "51b3086d67b8b8e095d5265e04ac55d4313571c73f5527e41d1b3046bba70161"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]当たり判定（右）（CollisionRight）[[/LINK_1]]",
+      "sourceHash": "3b4c2d5c79fd1879e3fc4d289b6ae5fc981eb8c0ea5ef19b474ff5af8479fcf3",
+      "parts": [
+        {
+          "source": "当たり判定（右）（CollisionRight）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Collision Detection (Right) (CollisionRight)[[/LINK_1]]",
+      "contextHash": "3b4c2d5c79fd1879e3fc4d289b6ae5fc981eb8c0ea5ef19b474ff5af8479fcf3"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]当たり判定（上）（CollisionUp）[[/LINK_1]]",
+      "sourceHash": "e44c7d5b1fe53c9fc7fb1e9426a6b1c80e9493e3e98efe52a9c676ef6c7cd3ea",
+      "parts": [
+        {
+          "source": "当たり判定（上）（CollisionUp）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Collision Detection (Up) (CollisionUp)[[/LINK_1]]",
+      "contextHash": "e44c7d5b1fe53c9fc7fb1e9426a6b1c80e9493e3e98efe52a9c676ef6c7cd3ea"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]イベントの通行判定を変更するプラグイン[[/LINK_1]]との併用に対応。",
+      "sourceHash": "f930db2fc06ab50bb7177c3ed26b43db0801975ccdaa0d8d029ff3f6a9186a33",
+      "parts": [
+        {
+          "source": "イベントの通行判定を変更するプラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との併用に対応。",
+          "link": false
+        }
+      ],
+      "translation": "Compatible with [[LINK_1]]the plugin that changes event passability[[/LINK_1]].",
+      "contextHash": "f930db2fc06ab50bb7177c3ed26b43db0801975ccdaa0d8d029ff3f6a9186a33"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]立体交差プラグイン[[/LINK_1]]との競合に対処。",
+      "sourceHash": "0953ae67e697d41384bdd528497b498dd148ebc6ec27e06d1be8b218c490f697",
+      "parts": [
+        {
+          "source": "立体交差プラグイン",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "との競合に対処。",
+          "link": false
+        }
+      ],
+      "translation": "Addresses conflicts with the [[LINK_1]]3D intersection plugin[[/LINK_1]].",
+      "contextHash": "0953ae67e697d41384bdd528497b498dd148ebc6ec27e06d1be8b218c490f697"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "イベントの当たり判定を拡張します。": "Expands event collision detection.",
+    "大型のオブジェクトや巨大モンスターなどに便利です。": "Useful for large objects and giant monsters.",
+    "トリガーによるイベントの実行範囲も拡張されます。": "The range in which events are executed by triggers is also expanded.",
+    "なお、拡張できる範囲は四角だけです。": "However, the expandable area is limited to rectangles.",
+    "円や十字などの柔軟な変更には対応していません。": "Flexible shapes such as circles and crosses are not supported.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Enable the plugin through the RPG Maker plugin manager.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※All plugins work with both MV and MZ.",
+    "NRP_EventCollisionEX.js": "NRP_EventCollisionEX.js ",
+    "ver1.04（2023/08/04）": "ver1.04 (2023/08/04) ",
+    "※比較的、影響の大きいプラグインです。": "※This plugin has a relatively significant impact.",
+    "競合を避けるため、なるべく上方への配置を推奨します。": "To avoid conflicts, placing it as high as possible is recommended.",
+    "更新履歴（History）": "Update History (History)",
+    "2023/08/04（ver1.04）": "2023/08/04 (ver1.04) ",
+    "RegionBase.jsと併用時、イベントの衝突判定が無視される問題に対応。": "Fixed an issue where event collision detection was ignored when used with RegionBase.js.",
+    "2022/03/24（ver1.03）": "2022/03/24 (ver1.03) ",
+    "2021/11/26（ver1.02）": "2021/11/26 (ver1.02) ",
+    "CharacterGraphicExtend.jsなど他プラグインとの競合を解消。": "Resolved conflicts with other plugins such as CharacterGraphicExtend.js.",
+    "2021/06/17 -> 07/09（ver1.01 -> 1.011）": "2021/06/17 -> 07/09 (ver1.01 -> 1.011) ",
+    "下に拡張イベントがある場合は、飛行船の着陸を禁止。（07/09 ver1.011）": "Prevents airships from landing when there is an expanded event below. (07/09 ver1.011)",
+    "2021/06/11（ver1.00）": "2021/06/11 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "三通りの方法によって、イベントの当たり判定を拡張できます。": "You can expand event collision detection in three ways.",
+    "使いやすい方法をご利用ください。": "Use whichever method is most convenient for you.",
+    "設定リスト": "Setting List",
+    "プラグインパラメータの設定リストに、対象のファイルと当たり判定を登録できます。いちいちイベント毎に登録する必要がないので便利です。": "You can register the target file and collision detection settings in the plugin parameter setting list. This is convenient because you do not need to register them for each individual event.",
+    "詳細はプラグインパラメータをご覧ください。": "See the plugin parameters for details.",
+    "メモ欄": "Note Field",
+    "イベントのメモ欄に以下を記入してください。": "Enter the following in the event's note field.",
+    "?には数値を設定してください。": "Set a numeric value for ?.",
+    "下、左、右、上の順番に当たり判定が拡張されます。": "Collision detection is expanded in the order of down, left, right, and up.",
+    "注釈": "Comment",
+    "また、イベントページ先頭の注釈に同様の記入しても有効となります。": "The same entry is also effective when made in a comment at the beginning of an event page.",
+    "こちらは現在のページ毎に状態を切り替えられます。": "This allows you to switch the state for each current page.",
+    "なお、優先度は『注釈＞メモ欄＞設定リスト』の順番になっています。": "The priority order is “Comment > Note Field > Setting List”.",
+    "イベント自体に指定がある場合、設定リストに登録した内容は無視されますのでご注意ください。": "Please note that if specifications are set directly on the event, the contents registered in the setting list will be ignored.",
+    "注意点（Notice）": "Notes (Notice)",
+    "影響の大きいプラグインだというのは上述の通りです。": "As mentioned above, this plugin has a significant impact.",
+    "大型イベントの通常移動が不要な場合は、『大型イベントの移動を考慮』をオフにしておくと安定するかもしれません。動作負荷や競合の問題が軽減される可能性があります。": "If normal movement for large events is unnecessary, turning off “Consider Large Event Movement” may improve stability. This may reduce processing load and conflict issues.",
+    "また、ループするマップの境界付近での挙動については、ややこしくて実装を断念しました。すまぬ……。": "Also, the behavior near the boundaries of looping maps was complicated, so I gave up implementing it. Sorry……",
+    "なので、ループの向こうへはみ出している部分には、当たり判定がありません。": "Therefore, the parts extending beyond the loop have no collision detection.",
+    "検証した感じ、当プラグインが動作に与える負荷はさほど大きくないと思われます。": "Based on testing, it seems that this plugin does not place a particularly large load on performance.",
+    "……が、以下のイベント処理軽量化プラグイン（EaseEventLoad.js）の『最適化１』の効果を打ち消してしまう模様です。": "……However, it appears to negate the effect of “Optimization 1” in the following event processing optimization plugin (EaseEventLoad.js).",
+    "https://forum.tkool.jp/index.php?threads/4933/": "https://forum.tkool.jp/index.php?threads/4933/",
+    "よほど大量のイベントで頻繁に衝突判定を行わない場合は、大した問題にはならないと思いますが一応です。": "Unless collision detection is performed frequently with a very large number of events, I do not think this will be a significant problem, but I wanted to mention it just in case.",
+    "※なお、当プラグインはEaseEventLoad.jsより下に配置しないと機能しません。": "※This plugin will not function unless it is placed below EaseEventLoad.js.",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "大型イベントの移動を考慮（ConsiderEventMove）": "Consider Large Event Movement (ConsiderEventMove)",
+    "大型イベントが移動した際も当たり判定を計算します。": "Collision detection is also calculated when a large event moves.",
+    "デフォルトはオンになっていますが、オフにすると処理が軽減されます。": "This is enabled by default, but turning it off reduces processing.",
+    "正確には「大型イベントが移動した際に、自身と他のイベントやタイルとの当たり判定を計算する」かどうかを切り替えます。": "More precisely, this setting determines whether to “calculate collision detection between the large event itself and other events or tiles when the large event moves.”",
+    "オフにした場合も、プレイヤーや通常のイベントが大型イベントに近づいた際の判定は行われます。": "Even when turned off, detection is still performed when the player or a normal event approaches a large event.",
+    "自由に移動する大型イベントを作りたい場合などは、そのままオンにしておいてください。": "Leave this enabled if you want to create a large event that moves freely.",
+    "静止した障害物しか使わない場合や、特定のイベントコマンドで操作するに留まる場合はオフにしても問題ありません。": "You can turn it off if you only use stationary obstacles or only control them with specific event commands.",
+    "設定リスト（SettingList）": "Setting List (SettingList)",
+    "当たり判定の設定の一覧です。": "This is a list of collision settings.",
+    "以下、その詳細設定のパラメータです。": "The following are the parameters for the detailed settings.",
+    "プラグインパラメータ（設定リスト）": "plugin parameter (Settings List)",
+    "画像ファイル（File）": "Image File (File)",
+    "当たり判定を拡張するキャラクター画像のファイルです。": "This is the character image file for extending collision detection.",
+    "画像インデックス（Index）": "Image Index (Index)",
+    "使用する画像のインデックス値（0~7）です。空欄なら全てを対象とします。": "The index value (0~7) of the image to use. If left blank, all images are targeted.",
+    "左上が0で、右下が7になります。": "The top-left is 0, and the bottom-right is 7.",
+    "当たり判定（下）（CollisionDown）": "Collision (Down) (CollisionDown)",
+    "当たり判定（左）（CollisionLeft）": "Collision (Left) (CollisionLeft)",
+    "当たり判定（右）（CollisionRight）": "Collision (Right) (CollisionRight)",
+    "当たり判定（上）（CollisionUp）": "Collision (Up) (CollisionUp)",
+    "各方向への当たり判定の加算値です。": "The amount added to collision detection in each direction.",
+    "0だと標準のままになります。1にすると１マス拡大する仕様です。": "At 0, it remains at the default. At 1, it expands by one tile."
+  }
+}

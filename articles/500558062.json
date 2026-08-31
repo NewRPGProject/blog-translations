@@ -1,0 +1,464 @@
+{
+  "articleId": "500558062",
+  "sourceUrl": "https://newrpg.seesaa.net/article/500558062.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "bca5e95402d51f55b9f4f4b013f320bdb8933651a3191a9b4d0b2980a79d5d1d",
+  "translatedAt": "2026-08-31T05:43:25.121Z",
+  "title": "Recover MP and TP When Taking Damage [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "ダメージ時にＭＰやＴＰを回復【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "9a722cfaa83bc5b7255144e628dab0610c7fc971c5b2d392e0ef949cf96a05eb",
+      "translation": "Recover MP and TP When Taking Damage [RPG Maker MZ & MV Plugin]",
+      "contextHash": "9a722cfaa83bc5b7255144e628dab0610c7fc971c5b2d392e0ef949cf96a05eb"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "ダメージを受けた際にＭＰやＴＰを回復する特徴を作成します。",
+      "sourceHash": "66f4bfd0a061102e247b8177ebdae615b4180f943d1b9eab936f8aef7ed68988",
+      "translation": "Creates traits that recover MP or TP when damage is taken.",
+      "contextHash": "66f4bfd0a061102e247b8177ebdae615b4180f943d1b9eab936f8aef7ed68988"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "※小さくて見辛いですが、ダメージを受けた時にＭＰが回復しています。",
+      "sourceHash": "2e74fa27cad0a26dc48fe2be2b4cab3d85ed3cb1e55303d7e52de44c7161fe0d",
+      "translation": "※It is small and difficult to see, but MP is recovered when damage is taken.",
+      "contextHash": "2e74fa27cad0a26dc48fe2be2b4cab3d85ed3cb1e55303d7e52de44c7161fe0d"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "ちなみに、ＨＰ、ＭＰ、ＴＰが複数回復した場合、ツクールの仕様では一つしか数字が表示されないようです。残念……。",
+      "sourceHash": "13d0ef7b4958a9773c4604a1d1052f07d60e64c20bb4b35ba1aed5eb3136c256",
+      "translation": "Incidentally, when HP, MP, and TP are recovered multiple times, RPG Maker's specifications only display one number. What a shame...",
+      "contextHash": "13d0ef7b4958a9773c4604a1d1052f07d60e64c20bb4b35ba1aed5eb3136c256"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "How to Install (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON in RPG Maker's Plugin Manager.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_DamageHeal.js",
+      "sourceHash": "8846e6155cd67342d36495c4ba9f782551daa09a3f86d8e0f6c0988c7d896a63",
+      "translation": "NRP_DamageHeal.js ",
+      "contextHash": "eef88c64d993293121298ff7498ddf57dd56ab834e5ff6fe05909daac9e72896"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "ver1.00（2023/08/31）",
+      "sourceHash": "67fe11f0a389034d2ebe2fdd6e9bdc1d696e15b479963934b12e37ab3ad6a515",
+      "translation": "ver1.00 (2023/08/31) ",
+      "contextHash": "eef88c64d993293121298ff7498ddf57dd56ab834e5ff6fe05909daac9e72896"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2023/08/31（ver1.00）",
+      "sourceHash": "6c212ef89fcc3ae4ef3541e8299ec85768c1603e3495f9370333bfade408b2ee",
+      "translation": "2023/08/31 (ver1.00) ",
+      "contextHash": "6c212ef89fcc3ae4ef3541e8299ec85768c1603e3495f9370333bfade408b2ee"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "特徴を保有するオブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を記載してください。",
+      "sourceHash": "5af5ccafe062581b5db1ec3dba2ecb689119a608f232d37888e4ea919295b8bc",
+      "translation": "Add the following to the note field of an object that possesses traits (actor, enemy, class, equipment, state, or skill).",
+      "contextHash": "5af5ccafe062581b5db1ec3dba2ecb689119a608f232d37888e4ea919295b8bc"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "スキルについては覚えているだけで、機能するパッシブスキルとなります。",
+      "sourceHash": "5ad8eb8f107e691a857f2e2db77ee02e672740a0b2f547a5d1512967af79c167",
+      "translation": "For skills, simply learning them makes them functioning passive skills.",
+      "contextHash": "5ad8eb8f107e691a857f2e2db77ee02e672740a0b2f547a5d1512967af79c167"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "また、いずれの効果も重ねがけ可能です。",
+      "sourceHash": "633b0b6b379e953d665e005fc159798cced88553709a24d5c36e68d3552a665a",
+      "translation": "Additionally, all of these effects can be stacked.",
+      "contextHash": "633b0b6b379e953d665e005fc159798cced88553709a24d5c36e68d3552a665a"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "ダメージ時にＨＰ回復",
+      "sourceHash": "5f44756550db7a58b894fc6a9f3ba33bea079e8b24b07c79bf8096023574b5c1",
+      "translation": "Recover HP When Taking Damage",
+      "contextHash": "5f44756550db7a58b894fc6a9f3ba33bea079e8b24b07c79bf8096023574b5c1"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ダメージを受けた際にＨＰが１０回復します。",
+      "sourceHash": "8121d4daf108b51c08dd681011c2c079743125655e7d1a03489ceff79f6cc3b4",
+      "translation": "Recovers 10 HP when damage is taken.",
+      "contextHash": "8121d4daf108b51c08dd681011c2c079743125655e7d1a03489ceff79f6cc3b4"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "なお、先にＨＰが０になった場合は回復しません。",
+      "sourceHash": "f44f236032d1c97d99a5debb87ff1dae233be733813d3f48b8d910041ca361b4",
+      "translation": "However, if HP reaches 0 first, it will not recover.",
+      "contextHash": "f44f236032d1c97d99a5debb87ff1dae233be733813d3f48b8d910041ca361b4"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "ダメージ時にＭＰ回復",
+      "sourceHash": "9cd7f5017632fd59c798a176b39a983b5132888590e5e9e04b151b4ed0bb1ef7",
+      "translation": "Recover MP When Taking Damage",
+      "contextHash": "9cd7f5017632fd59c798a176b39a983b5132888590e5e9e04b151b4ed0bb1ef7"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ダメージを受けた際にＭＰが１０回復します。",
+      "sourceHash": "428fa078cdfc0d69bebbd861e408f2562786fec712fd15993ff8dc87750013fc",
+      "translation": "Recovers 10 MP when damage is taken.",
+      "contextHash": "428fa078cdfc0d69bebbd861e408f2562786fec712fd15993ff8dc87750013fc"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "ダメージ時にＴＰ回復",
+      "sourceHash": "5d22f081a23c86b4036264090bc5e732ba3155854b418679f8107413cc3f39e4",
+      "translation": "Recover TP When Taking Damage",
+      "contextHash": "5d22f081a23c86b4036264090bc5e732ba3155854b418679f8107413cc3f39e4"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "ダメージを受けた際にＴＰが１０回復します。",
+      "sourceHash": "5af63cfe6bc797250c94508dae3a62e5946e1f973b9d012c6013da6ed948ce36",
+      "translation": "Recovers 10 TP when damage is taken.",
+      "contextHash": "5af63cfe6bc797250c94508dae3a62e5946e1f973b9d012c6013da6ed948ce36"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "さらにいずれも数式が可能です。",
+      "sourceHash": "b33dcad89275201083f7fef67db3c6eff632088201786bcfb13dd92d70b33d62",
+      "translation": "In addition, formulas can be used for all of them.",
+      "contextHash": "b33dcad89275201083f7fef67db3c6eff632088201786bcfb13dd92d70b33d62"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "また、『damage』で受けたダメージを参照できます。",
+      "sourceHash": "fb68a68a25f590508efe026f3dfd79719fc37d21b5855ce034142908e729c489",
+      "translation": "You can also reference the damage taken with “damage”.",
+      "contextHash": "fb68a68a25f590508efe026f3dfd79719fc37d21b5855ce034142908e729c489"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "『skill』でスキルの情報を参照できます。",
+      "sourceHash": "2beb02f5869a315bb474e82373f81757b14c09a827169da22a774a7a09d822cb",
+      "translation": "You can reference skill information with “skill”.",
+      "contextHash": "2beb02f5869a315bb474e82373f81757b14c09a827169da22a774a7a09d822cb"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "以下は例です。",
+      "sourceHash": "cdbf2c5225f24ae8f83451c20006ab03a21295b440bea2884ecd11c35a4b8160",
+      "translation": "Here are some examples.",
+      "contextHash": "cdbf2c5225f24ae8f83451c20006ab03a21295b440bea2884ecd11c35a4b8160"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "ダメージを受けた際に、スキルの消費分のＭＰが回復します。",
+      "sourceHash": "b9383eaf307626916f9e9277f7ea54cd3b9cd1939f00c8b541d7f037ac769f24",
+      "translation": "When damage is taken, MP equal to the skill's cost is recovered.",
+      "contextHash": "b9383eaf307626916f9e9277f7ea54cd3b9cd1939f00c8b541d7f037ac769f24"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "要するにドラクエのマホキテです。",
+      "sourceHash": "be737dae7696ca1b02c285fce42176da71057428fb1eb3072305311eafec96df",
+      "translation": "In other words, it's Dragon Quest's Mahokite.",
+      "contextHash": "be737dae7696ca1b02c285fce42176da71057428fb1eb3072305311eafec96df"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "受けたダメージの３％分だけＴＰが回復します。",
+      "sourceHash": "124fbf036da002227189702f6a961c66b27d5f94b970073217cd9a4099526668",
+      "translation": "TP equal to 3% of the damage taken is recovered.",
+      "contextHash": "124fbf036da002227189702f6a961c66b27d5f94b970073217cd9a4099526668"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "なお、回復量は四捨五入される仕様です。",
+      "sourceHash": "d8f87cbf724c720420867282c04b725fd45e237ba9b3e363f0b550e728ad666e",
+      "translation": "The recovery amount is rounded to the nearest whole number.",
+      "contextHash": "d8f87cbf724c720420867282c04b725fd45e237ba9b3e363f0b550e728ad666e"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "プラグインパラメータ（Plugin Parameters）",
+      "sourceHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad",
+      "translation": "Plugin Parameters (Plugin Parameters)",
+      "contextHash": "7876cc6e169aa1ffb59ad7ff0263d5dbdd1b309638a0319bcebc599acddc70ad"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "回復量を表示（ShowValue）",
+      "sourceHash": "01e97fb0ff82af220e7b542f272b9e78edf492ec0165082c7593d4f096f6c879",
+      "translation": "Show Recovery Amount (ShowValue)",
+      "contextHash": "01e97fb0ff82af220e7b542f272b9e78edf492ec0165082c7593d4f096f6c879"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "回復量をポップアップ表示します。",
+      "sourceHash": "a877a681138ec0153239429e01cafe92187552eb84cbbf4fde95bf15ff77a497",
+      "translation": "Displays the recovery amount as a popup.",
+      "contextHash": "a877a681138ec0153239429e01cafe92187552eb84cbbf4fde95bf15ff77a497"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージ時にＨＰ回復[[/LINK_1]]",
+      "sourceHash": "a727200a724791a5157a2ffb2e26d8023142b48c2c5b376d6fdbbf1889f36993",
+      "parts": [
+        {
+          "source": "ダメージ時にＨＰ回復",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover HP When Damaged[[/LINK_1]]",
+      "contextHash": "a727200a724791a5157a2ffb2e26d8023142b48c2c5b376d6fdbbf1889f36993"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージ時にＭＰ回復[[/LINK_1]]",
+      "sourceHash": "1da6e20b3395ae4cc5560858fb5bdc689af957298d600fe9068fe8316e65d689",
+      "parts": [
+        {
+          "source": "ダメージ時にＭＰ回復",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover MP When Damaged[[/LINK_1]]",
+      "contextHash": "1da6e20b3395ae4cc5560858fb5bdc689af957298d600fe9068fe8316e65d689"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]ダメージ時にＴＰ回復[[/LINK_1]]",
+      "sourceHash": "c734b98ecb57b20b0d8fceb112c1228f0a61061371dd39dedf2c797133faaa23",
+      "parts": [
+        {
+          "source": "ダメージ時にＴＰ回復",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Recover TP When Damaged[[/LINK_1]]",
+      "contextHash": "c734b98ecb57b20b0d8fceb112c1228f0a61061371dd39dedf2c797133faaa23"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（Plugin Parameters）[[/LINK_1]]",
+      "sourceHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（Plugin Parameters）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Plugin Parameters)[[/LINK_1]]",
+      "contextHash": "4e47c2dd2efa92342e92db9def1808c809971009d0572490b64cdc1a853f62fb"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]回復量を表示（ShowValue）[[/LINK_1]]",
+      "sourceHash": "7b9768facc7385360da9139711b4c8e6801f6be2d205c3a243c709cdfebd8a9d",
+      "parts": [
+        {
+          "source": "回復量を表示（ShowValue）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Show Recovery Amount (ShowValue)[[/LINK_1]]",
+      "contextHash": "7b9768facc7385360da9139711b4c8e6801f6be2d205c3a243c709cdfebd8a9d"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]> Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "ダメージを受けた際にＭＰやＴＰを回復する特徴を作成します。": "Creates traits that recover MP or TP when damage is taken.",
+    "※小さくて見辛いですが、ダメージを受けた時にＭＰが回復しています。": "※It is small and difficult to see, but MP is recovered when damage is taken.",
+    "ちなみに、ＨＰ、ＭＰ、ＴＰが複数回復した場合、ツクールの仕様では一つしか数字が表示されないようです。残念……。": "Incidentally, when HP, MP, and TP are recovered multiple times, RPG Maker's specifications only display one number. What a shame...",
+    "目次": "Table of Contents",
+    "導入方法（install）": "How to Install (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the feature ON in RPG Maker's Plugin Manager.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_DamageHeal.js": "NRP_DamageHeal.js ",
+    "ver1.00（2023/08/31）": "ver1.00 (2023/08/31) ",
+    "更新履歴（History）": "Update History (History)",
+    "2023/08/31（ver1.00）": "2023/08/31 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法（Usage）": "Usage (Usage)",
+    "特徴を保有するオブジェクト（アクター、エネミー、職業、装備、ステート、スキル）のメモ欄に以下を記載してください。": "Add the following to the note field of an object that possesses traits (actor, enemy, class, equipment, state, or skill).",
+    "スキルについては覚えているだけで、機能するパッシブスキルとなります。": "For skills, simply learning them makes them functioning passive skills.",
+    "また、いずれの効果も重ねがけ可能です。": "Additionally, all of these effects can be stacked.",
+    "ダメージ時にＨＰ回復": "Recover HP When Taking Damage",
+    "ダメージを受けた際にＨＰが１０回復します。": "Recovers 10 HP when damage is taken.",
+    "なお、先にＨＰが０になった場合は回復しません。": "However, if HP reaches 0 first, it will not recover.",
+    "ダメージ時にＭＰ回復": "Recover MP When Taking Damage",
+    "ダメージを受けた際にＭＰが１０回復します。": "Recovers 10 MP when damage is taken.",
+    "ダメージ時にＴＰ回復": "Recover TP When Taking Damage",
+    "ダメージを受けた際にＴＰが１０回復します。": "Recovers 10 TP when damage is taken.",
+    "さらにいずれも数式が可能です。": "In addition, formulas can be used for all of them.",
+    "また、『damage』で受けたダメージを参照できます。": "You can also reference the damage taken with “damage”.",
+    "『skill』でスキルの情報を参照できます。": "You can reference skill information with “skill”.",
+    "以下は例です。": "Here are some examples.",
+    "ダメージを受けた際に、スキルの消費分のＭＰが回復します。": "When damage is taken, MP equal to the skill's cost is recovered.",
+    "要するにドラクエのマホキテです。": "In other words, it's Dragon Quest's Mahokite.",
+    "受けたダメージの３％分だけＴＰが回復します。": "TP equal to 3% of the damage taken is recovered.",
+    "なお、回復量は四捨五入される仕様です。": "The recovery amount is rounded to the nearest whole number.",
+    "プラグインパラメータ（Plugin Parameters）": "Plugin Parameters (Plugin Parameters)",
+    "回復量を表示（ShowValue）": "Show Recovery Amount (ShowValue)",
+    "回復量をポップアップ表示します。": "Displays the recovery amount as a popup."
+  }
+}

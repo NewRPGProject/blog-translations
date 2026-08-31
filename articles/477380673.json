@@ -1,0 +1,638 @@
+{
+  "articleId": "477380673",
+  "sourceUrl": "https://newrpg.seesaa.net/article/477380673.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "79fdc1015de6c78dca290c209e0747fe6b61cd4acb1dcc690f671479c5aed1c3",
+  "translatedAt": "2026-08-31T05:43:08.801Z",
+  "title": "Display an Animation on the Actor During Command Input [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "コマンド入力時のアクターにアニメを表示【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "0d073d60191337b387750b4ada66d6c78dd08174d380c6f48891fc10c6898b9e",
+      "translation": "Display an Animation on the Actor During Command Input [RPG Maker MZ & MV Plugin]",
+      "contextHash": "0d073d60191337b387750b4ada66d6c78dd08174d380c6f48891fc10c6898b9e"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "戦闘でコマンド入力中のアクターの上にアニメーションを表示します。",
+      "sourceHash": "7be206a80c95c2f9914901c732eefd121237c3e6bcbbe8add2282b03b497a822",
+      "translation": "Displays an animation above the actor currently entering commands in battle.",
+      "contextHash": "7be206a80c95c2f9914901c732eefd121237c3e6bcbbe8add2282b03b497a822"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "主にＣＴＢやタイムプログレスバトルなどで、入力中のアクターを分かりやすくする目的で使います。",
+      "sourceHash": "87bc537c5a89eed4c7be6eb00afa6218c28712b6e93e648f4fb0d1845e3ad5ff",
+      "translation": "It is mainly used in systems such as CTB and time progress battles to make the actor currently entering commands easier to identify.",
+      "contextHash": "87bc537c5a89eed4c7be6eb00afa6218c28712b6e93e648f4fb0d1845e3ad5ff"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "開始アニメーションとループアニメーションの二通りが設定できます。",
+      "sourceHash": "ce444c4e4edffa4836b923d1554022e3e404a43523b2af18bd32faf0c4f8508c",
+      "translation": "You can configure both a starting animation and a looping animation.",
+      "contextHash": "ce444c4e4edffa4836b923d1554022e3e404a43523b2af18bd32faf0c4f8508c"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "また、アニメーションに付加する形で効果音やフラッシュも設定可能です。",
+      "sourceHash": "9bfec29824449e736564e7fbdee61578b106ed9521d031bc617618ed11c9e514",
+      "translation": "You can also configure sound effects and flashes to accompany the animation.",
+      "contextHash": "9bfec29824449e736564e7fbdee61578b106ed9521d031bc617618ed11c9e514"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25",
+      "translation": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on in the plugin manager in RPG Maker.",
+      "contextHash": "add69b36d300edf1592f52945943668587da00473f5edb9e6c87aeb402e1aa25"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "※このプラグインはＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5",
+      "translation": "※This plugin works with both MV and MZ.",
+      "contextHash": "340f20fc141f77062a4b651d80f5fa9579a7f4f61e9d652070241707a1e11ad5"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_AnimationCommandActor.js",
+      "sourceHash": "5e304ea2a4a7cf3e6898e82c13d92371b25f90c95c6015c725d64fce07002e9b",
+      "translation": "NRP_AnimationCommandActor.js ",
+      "contextHash": "96285806507e5eb3a42909353628be2d6a7b9b88d09d3992f1d7bcc8cbd60cac"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "ver1.01（2022/04/14）",
+      "sourceHash": "f63f0f66459098752faa6dc3f2d9b218f8287cdc877a280a6f6c11ae12e4dc75",
+      "translation": "ver1.01 (2022/04/14) ",
+      "contextHash": "96285806507e5eb3a42909353628be2d6a7b9b88d09d3992f1d7bcc8cbd60cac"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（history）",
+      "sourceHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09",
+      "translation": "Update History (history)",
+      "contextHash": "a89f1ad6f50b0a0e22088d4b9432e4ba42d7910e54843b68fe6f1faceaf7cb09"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2022/04/14（ver1.01）",
+      "sourceHash": "5ae98cc76db840c37f88b6f9bbc0abef1075666d78663624400ab00238d62767",
+      "translation": "2022/04/14 (ver1.01) ",
+      "contextHash": "5ae98cc76db840c37f88b6f9bbc0abef1075666d78663624400ab00238d62767"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ＭＺ1.4の更新によるＭＶアニメに対応。",
+      "sourceHash": "220eb003d74ccfe5ff5af2339f9ae9e28f7561cd676a4e10945b2d0bf6bcacb5",
+      "translation": "Added support for MV animations following the MZ 1.4 update.",
+      "contextHash": "220eb003d74ccfe5ff5af2339f9ae9e28f7561cd676a4e10945b2d0bf6bcacb5"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2020/09/14（ver1.00 -> 1.002）",
+      "sourceHash": "ee4105be44089440c356c805f204483e39b84edb8b5b0214e45f6afe0d2971e3",
+      "translation": "2020/09/14 (ver1.00 -> 1.002) ",
+      "contextHash": "ee4105be44089440c356c805f204483e39b84edb8b5b0214e45f6afe0d2971e3"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "TPBでアクターを高速切替するとループアニメが消える不具合修正。（09/16 ver1.001）",
+      "sourceHash": "9dd761dceef7bfadad29cc153d374899145985de1679c72d690722fa977956bd",
+      "translation": "Fixed a bug that caused the looping animation to disappear when rapidly switching actors in TPB. (09/16 ver1.001)",
+      "contextHash": "9dd761dceef7bfadad29cc153d374899145985de1679c72d690722fa977956bd"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "初期設定のアニメーションNo=0でエラーになる不具合修正。（09/19 ver1.002）",
+      "sourceHash": "393bf05128f1c447dc29f11d758573627b43c11afffa2a54be74b45e713787df",
+      "translation": "Fixed a bug that caused an error when the initial Animation No. was set to 0. (09/19 ver1.002)",
+      "contextHash": "393bf05128f1c447dc29f11d758573627b43c11afffa2a54be74b45e713787df"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "使用方法（usage）",
+      "sourceHash": "63abdf377e21027573ece7c0d9c514bfb66e007531c9074d333dcf1dd1d17821",
+      "translation": "Usage (usage)",
+      "contextHash": "63abdf377e21027573ece7c0d9c514bfb66e007531c9074d333dcf1dd1d17821"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "アクター上に再生したいアニメーションを、プラグインパラメータへ登録すればＯＫです。",
+      "sourceHash": "7d912d2e67d5487d707f507de5d3cd2c110744c7ed16c8fcdf43f1678a292e4c",
+      "translation": "Simply register the animation you want to play on the actor in the plugin parameter.",
+      "contextHash": "7d912d2e67d5487d707f507de5d3cd2c110744c7ed16c8fcdf43f1678a292e4c"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "詳細は以下のプラグインパラメータをご確認ください。",
+      "sourceHash": "5516377c01b2d219bf590be93fe8f71e0bc701f990a6e80aa06748ec1f23b409",
+      "translation": "For details, see the plugin parameters below.",
+      "contextHash": "5516377c01b2d219bf590be93fe8f71e0bc701f990a6e80aa06748ec1f23b409"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "ちなみに、上記サンプルで使用した開始アニメーション、ループアニメーションの設定は以下の通りです。",
+      "sourceHash": "ed135796f8acbed96ea6fc7d3afff49499f34d86c4684e6e1d9f50cf6ca723b7",
+      "translation": "For reference, the settings for the starting and looping animations used in the sample above are as follows.",
+      "contextHash": "ed135796f8acbed96ea6fc7d3afff49499f34d86c4684e6e1d9f50cf6ca723b7"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "要するに、40:閃光と37:咆哮の改変です。",
+      "sourceHash": "f013b5ebf3980ebb2b01bf1ec746bf9384c7072bb48c4226a4a365f8ea7500f6",
+      "translation": "In short, they are modifications of 40: Flash and 37: Roar.",
+      "contextHash": "f013b5ebf3980ebb2b01bf1ec746bf9384c7072bb48c4226a4a365f8ea7500f6"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ループアニメ表示周期は240にしています。",
+      "sourceHash": "3b80545170b357e73818554b2d194fd4a815abc9adfbfe8c00d7363b2dc99b37",
+      "translation": "The looping animation display cycle is set to 240.",
+      "contextHash": "3b80545170b357e73818554b2d194fd4a815abc9adfbfe8c00d7363b2dc99b37"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "プラグインパラメータ（plugin parameter）",
+      "sourceHash": "8e75144a53f7d65cb8543a1973dc3498b8a1e291d9c3df9c4f559002907277fc",
+      "translation": "plugin parameter (plugin parameter)",
+      "contextHash": "8e75144a53f7d65cb8543a1973dc3498b8a1e291d9c3df9c4f559002907277fc"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "開始アニメーション （startAnimation）",
+      "sourceHash": "ee59148b289bc7992da6dbe0958be7f94b04d12d5d663b4581560502ee8a763e",
+      "translation": "Starting Animation (startAnimation)",
+      "contextHash": "ee59148b289bc7992da6dbe0958be7f94b04d12d5d663b4581560502ee8a763e"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "コマンド入力中のアクターに表示する開始アニメーションです。",
+      "sourceHash": "ed7457a2bf3629451405ab086ee321e609263c8b6bcae58a9d9df23d0bf9619d",
+      "translation": "The starting animation displayed on the actor currently entering commands.",
+      "contextHash": "ed7457a2bf3629451405ab086ee321e609263c8b6bcae58a9d9df23d0bf9619d"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "一度だけ表示されます。",
+      "sourceHash": "292dcb5861cd6e70cd1f5452c87cd02bdae82bf76a2c6ddfee31a8d7a04edf05",
+      "translation": "It is displayed only once.",
+      "contextHash": "292dcb5861cd6e70cd1f5452c87cd02bdae82bf76a2c6ddfee31a8d7a04edf05"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "開始アニメウェイト （startAnimationWait）",
+      "sourceHash": "fe4f459528ba1416b0839b00276ee5c4134d2f83457efd2b4fb4398177051c0e",
+      "translation": "Starting Animation Wait (startAnimationWait)",
+      "contextHash": "fe4f459528ba1416b0839b00276ee5c4134d2f83457efd2b4fb4398177051c0e"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "開始アニメーションを表示する際のウェイトです。",
+      "sourceHash": "488d465aa61bf24a7129148d1e09bd86a2086afbe97b6621b1372894dee35498",
+      "translation": "The wait time before displaying the starting animation.",
+      "contextHash": "488d465aa61bf24a7129148d1e09bd86a2086afbe97b6621b1372894dee35498"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "1/60秒単位で指定してください。",
+      "sourceHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2",
+      "translation": "Specify it in units of 1/60 second.",
+      "contextHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "開始アニメの背景表示 （startAnimationBackground）",
+      "sourceHash": "08f44537c6d520d7fc37e232610d1362ad7a50503694867bfe2548f3a89959db",
+      "translation": "Display Starting Animation in Background (startAnimationBackground)",
+      "contextHash": "08f44537c6d520d7fc37e232610d1362ad7a50503694867bfe2548f3a89959db"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "開始アニメをアクターよりも下に表示します。",
+      "sourceHash": "b782ed8c34dfbbd79d192fa96f1cda6fc1694ca24f29f8cfa40472096e24a96f",
+      "translation": "Displays the starting animation below the actor.",
+      "contextHash": "b782ed8c34dfbbd79d192fa96f1cda6fc1694ca24f29f8cfa40472096e24a96f"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "※正確には各要素の表示優先度（Ｚ座標）を設定するプラグインが必要です。Ｚ座標の設定があるなら、NRP_DynamicMotion以外でも構いません。",
+      "sourceHash": "07220f43b65e3282aa46ee772aefd3127c618a41a763c26222a31a8a89dc4d62",
+      "translation": "※More precisely, a plugin that sets the display priority (Z coordinate) of each element is required. Any plugin other than NRP_DynamicMotion is also acceptable as long as it supports setting the Z coordinate.",
+      "contextHash": "07220f43b65e3282aa46ee772aefd3127c618a41a763c26222a31a8a89dc4d62"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "足下に表示するアニメーションなどにどうぞ。",
+      "sourceHash": "60ce4d36421c8456644c0361ce5b2ffdbc98d86289412e667cb1cf900902b517",
+      "translation": "Use this for animations displayed at the actor's feet, for example.",
+      "contextHash": "60ce4d36421c8456644c0361ce5b2ffdbc98d86289412e667cb1cf900902b517"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "ループアニメーション （loopAnimation）",
+      "sourceHash": "b63266c2f6158dae420d5ce6887c24916f30f39c4e2512876ed8351549dd9551",
+      "translation": "Looping Animation (loopAnimation)",
+      "contextHash": "b63266c2f6158dae420d5ce6887c24916f30f39c4e2512876ed8351549dd9551"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "コマンド入力中のアクターに表示するループアニメーションです。",
+      "sourceHash": "434ffe1cf5aaf4f3009bd423455d15744545f1eb2b87ef96febb0c439233e3b6",
+      "translation": "The looping animation displayed on the actor currently entering commands.",
+      "contextHash": "434ffe1cf5aaf4f3009bd423455d15744545f1eb2b87ef96febb0c439233e3b6"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "開始アニメウェイトの後に表示されます。",
+      "sourceHash": "d9dd62e4d3da7e42b14b712bcaea682c7933ac8b91d3ce62fc5671ca6c205c96",
+      "translation": "It is displayed after the starting animation wait.",
+      "contextHash": "d9dd62e4d3da7e42b14b712bcaea682c7933ac8b91d3ce62fc5671ca6c205c96"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "ループアニメ表示周期 （loopAnimationCycle）",
+      "sourceHash": "c3a057c7432923db79f254960fd7b71d39397a4463f118dc71973f747474686d",
+      "translation": "Looping Animation Display Cycle (loopAnimationCycle)",
+      "contextHash": "c3a057c7432923db79f254960fd7b71d39397a4463f118dc71973f747474686d"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "ループアニメーションを表示する周期です。",
+      "sourceHash": "ce003f2438115a897f959fe40b573347b6bac8a3dc4ae80638d199925c81b87b",
+      "translation": "The cycle at which the looping animation is displayed.",
+      "contextHash": "ce003f2438115a897f959fe40b573347b6bac8a3dc4ae80638d199925c81b87b"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "1/60秒単位で指定してください。",
+      "sourceHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2",
+      "translation": "Specify it in units of 1/60 second.",
+      "contextHash": "0d67a437c43218dafbd38a85ac2d8658470c0d691f5807c709bb3fe68f22a0f2"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "ループアニメの背景表示（loopAnimationBackground）",
+      "sourceHash": "a8915e8d7c4f5e2db0bfc1be9296f64fdb15a6475a64780fcb35dfc3124d62d6",
+      "translation": "Display Looping Animation in Background (loopAnimationBackground)",
+      "contextHash": "a8915e8d7c4f5e2db0bfc1be9296f64fdb15a6475a64780fcb35dfc3124d62d6"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "ループアニメをアクターよりも下に表示します。",
+      "sourceHash": "340b0eaa0f144245f24b4c31a86deac902737cff29b4f0a22724ba25a8be4e22",
+      "translation": "Displays the looping animation below the actor.",
+      "contextHash": "340b0eaa0f144245f24b4c31a86deac902737cff29b4f0a22724ba25a8be4e22"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "この機能には、NRP_DynamicMotion(MV, MZ)が必要です。",
+      "sourceHash": "099bb793c1cb1f2c4f6c0d794c0d2c129536cd98e865cd5545ad734cf952982e",
+      "translation": "This feature requires NRP_DynamicMotion (MV, MZ).",
+      "contextHash": "099bb793c1cb1f2c4f6c0d794c0d2c129536cd98e865cd5545ad734cf952982e"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "（2023/09/17追記）",
+      "sourceHash": "c83d6781d35dfa6b4ac4b77f8c5b06914f491e24b180b10090125e2b9b458a32",
+      "translation": "(Added 2023/09/17)",
+      "contextHash": "c83d6781d35dfa6b4ac4b77f8c5b06914f491e24b180b10090125e2b9b458a32"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "当機能がオンかつタイムプログレス（アクティブ）かつDynamicAnimation&Motionと組み合わせた場合、稀に挙動が不安定になることがあるようです。怪しいようなら、デフォルトのままオフにしておくことをオススメします。",
+      "sourceHash": "5faca8ef32ea1e1b38114f5290c250766a07c407b85eb714106852c226ac024d",
+      "translation": "When this feature is enabled, Time Progress (Active) is enabled, and it is combined with DynamicAnimation&Motion, the behavior may occasionally become unstable. If anything seems suspicious, I recommend leaving it off as it is by default.",
+      "contextHash": "5faca8ef32ea1e1b38114f5290c250766a07c407b85eb714106852c226ac024d"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（install）[[/LINK_1]]",
+      "sourceHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8",
+      "parts": [
+        {
+          "source": "導入方法（install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (install)[[/LINK_1]]",
+      "contextHash": "2ba49ca4041367e4c5da309b481a2b967bec8196c33a2e648c875c4a6745cfe8"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（history）[[/LINK_1]]",
+      "sourceHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73",
+      "parts": [
+        {
+          "source": "更新履歴（history）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (history)[[/LINK_1]]",
+      "contextHash": "743ef285be9fd485385f61df466a1d72f6d97c25c24acf2b5253782512683b73"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（usage）[[/LINK_1]]",
+      "sourceHash": "b99707125760914538f188f692f7d2783b7ef50b7bca581cbe2f14a39e9a58ed",
+      "parts": [
+        {
+          "source": "使用方法（usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (usage)[[/LINK_1]]",
+      "contextHash": "b99707125760914538f188f692f7d2783b7ef50b7bca581cbe2f14a39e9a58ed"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（plugin parameter）[[/LINK_1]]",
+      "sourceHash": "6aa227c86193d601c106e6c419cc0ad220bebea26f568b69d72d37b9951815fa",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（plugin parameter）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameter (plugin parameter)[[/LINK_1]]",
+      "contextHash": "6aa227c86193d601c106e6c419cc0ad220bebea26f568b69d72d37b9951815fa"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]開始アニメーション （startAnimation）[[/LINK_1]]",
+      "sourceHash": "67cd89b0b87d66ddb7d1602d7515d5dfa3825d7923f519d3804ac3e36b424f0f",
+      "parts": [
+        {
+          "source": "開始アニメーション （startAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Animation (startAnimation)[[/LINK_1]]",
+      "contextHash": "67cd89b0b87d66ddb7d1602d7515d5dfa3825d7923f519d3804ac3e36b424f0f"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]開始アニメウェイト （startAnimationWait）[[/LINK_1]]",
+      "sourceHash": "bc3e02dd5af6a585c95c11b9666c2cbc921354b8ebc71f2962233b123d12903a",
+      "parts": [
+        {
+          "source": "開始アニメウェイト （startAnimationWait）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Animation Wait (startAnimationWait)[[/LINK_1]]",
+      "contextHash": "bc3e02dd5af6a585c95c11b9666c2cbc921354b8ebc71f2962233b123d12903a"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]開始アニメの背景表示 （startAnimationBackground）[[/LINK_1]]",
+      "sourceHash": "4cff21d59b434db1a560325c2ffcc6627cca47bd25cdfb0340dc93d4fe6f834a",
+      "parts": [
+        {
+          "source": "開始アニメの背景表示 （startAnimationBackground）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Start Animation Background Display (startAnimationBackground)[[/LINK_1]]",
+      "contextHash": "4cff21d59b434db1a560325c2ffcc6627cca47bd25cdfb0340dc93d4fe6f834a"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]ループアニメーション （loopAnimation）[[/LINK_1]]",
+      "sourceHash": "f8eb179a0bf19398f00fb189066c015312a4d5cc4a97cb4eb965c5758e1ca6a5",
+      "parts": [
+        {
+          "source": "ループアニメーション （loopAnimation）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Loop Animation (loopAnimation)[[/LINK_1]]",
+      "contextHash": "f8eb179a0bf19398f00fb189066c015312a4d5cc4a97cb4eb965c5758e1ca6a5"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]ループアニメ表示周期 （loopAnimationCycle）[[/LINK_1]]",
+      "sourceHash": "8ee1b28ebe0e27fefd6a1de9b1c79aab2cf501b455b32ba5a3bf3e79e61fea08",
+      "parts": [
+        {
+          "source": "ループアニメ表示周期 （loopAnimationCycle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Loop Animation Display Cycle (loopAnimationCycle)[[/LINK_1]]",
+      "contextHash": "8ee1b28ebe0e27fefd6a1de9b1c79aab2cf501b455b32ba5a3bf3e79e61fea08"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]ループアニメの背景表示（loopAnimationBackground）[[/LINK_1]]",
+      "sourceHash": "958e5dadc73edd420579f9966312ce9e94cc0e31cdac249926bdde4f91bc1675",
+      "parts": [
+        {
+          "source": "ループアニメの背景表示（loopAnimationBackground）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Loop Animation Background Display (loopAnimationBackground)[[/LINK_1]]",
+      "contextHash": "958e5dadc73edd420579f9966312ce9e94cc0e31cdac249926bdde4f91bc1675"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "※ツクールＭＺからＭＶアニメを再生することもできます。その際、公式のAnimationMv.jsあるいは[[LINK_1]]NRP_DynamicAnimationMV2MZ.js[[/LINK_1]]が必要です。データ未設定のアニメならば、同ＩＤのＭＶアニメが再生されます。",
+      "sourceHash": "b81c47f23e5b47118e0ce11c2c88d3c2402165810b6ad0fa9c489fc770d30b20",
+      "parts": [
+        {
+          "source": "※ツクールＭＺからＭＶアニメを再生することもできます。その際、公式のAnimationMv.jsあるいは",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicAnimationMV2MZ.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "が必要です。データ未設定のアニメならば、同ＩＤのＭＶアニメが再生されます。",
+          "link": false
+        }
+      ],
+      "translation": "※You can also play MV animations from RPG Maker MZ. In that case, the official AnimationMv.js or [[LINK_1]]NRP_DynamicAnimationMV2MZ.js[[/LINK_1]] is required. If no data is set for an animation, the MV animation with the same ID will be played.",
+      "contextHash": "b81c47f23e5b47118e0ce11c2c88d3c2402165810b6ad0fa9c489fc770d30b20"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "この機能には、[[LINK_1]]NRP_DynamicMotion[[/LINK_1]](MV, MZ)が必要です。",
+      "sourceHash": "466ac5d5f6206664ee030342cf6f200871ce6552a7df19471113c5e97741e8b1",
+      "parts": [
+        {
+          "source": "この機能には、",
+          "link": false
+        },
+        {
+          "source": "NRP_DynamicMotion",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "(MV, MZ)が必要です。",
+          "link": false
+        }
+      ],
+      "translation": "This feature requires [[LINK_1]]NRP_DynamicMotion[[/LINK_1]] (MV, MZ).",
+      "contextHash": "466ac5d5f6206664ee030342cf6f200871ce6552a7df19471113c5e97741e8b1"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "戦闘でコマンド入力中のアクターの上にアニメーションを表示します。": "Displays an animation above the actor currently entering commands in battle.",
+    "主にＣＴＢやタイムプログレスバトルなどで、入力中のアクターを分かりやすくする目的で使います。": "It is mainly used in systems such as CTB and time progress battles to make the actor currently entering commands easier to identify.",
+    "開始アニメーションとループアニメーションの二通りが設定できます。": "You can configure both a starting animation and a looping animation.",
+    "また、アニメーションに付加する形で効果音やフラッシュも設定可能です。": "You can also configure sound effects and flashes to accompany the animation.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のファイルをダウンロードし 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Download the following file and place it in [Project]\\js\\plugins. Turn the feature on in the plugin manager in RPG Maker.",
+    "※このプラグインはＭＶ、ＭＺの両方で有効です。": "※This plugin works with both MV and MZ.",
+    "NRP_AnimationCommandActor.js": "NRP_AnimationCommandActor.js ",
+    "ver1.01（2022/04/14）": "ver1.01 (2022/04/14) ",
+    "更新履歴（history）": "Update History (history)",
+    "2022/04/14（ver1.01）": "2022/04/14 (ver1.01) ",
+    "ＭＺ1.4の更新によるＭＶアニメに対応。": "Added support for MV animations following the MZ 1.4 update.",
+    "2020/09/14（ver1.00 -> 1.002）": "2020/09/14 (ver1.00 -> 1.002) ",
+    "公開！": "Released!",
+    "TPBでアクターを高速切替するとループアニメが消える不具合修正。（09/16 ver1.001）": "Fixed a bug that caused the looping animation to disappear when rapidly switching actors in TPB. (09/16 ver1.001)",
+    "初期設定のアニメーションNo=0でエラーになる不具合修正。（09/19 ver1.002）": "Fixed a bug that caused an error when the initial Animation No. was set to 0. (09/19 ver1.002)",
+    "使用方法（usage）": "Usage (usage)",
+    "アクター上に再生したいアニメーションを、プラグインパラメータへ登録すればＯＫです。": "Simply register the animation you want to play on the actor in the plugin parameter.",
+    "詳細は以下のプラグインパラメータをご確認ください。": "For details, see the plugin parameters below.",
+    "ちなみに、上記サンプルで使用した開始アニメーション、ループアニメーションの設定は以下の通りです。": "For reference, the settings for the starting and looping animations used in the sample above are as follows.",
+    "要するに、40:閃光と37:咆哮の改変です。": "In short, they are modifications of 40: Flash and 37: Roar.",
+    "ループアニメ表示周期は240にしています。": "The looping animation display cycle is set to 240.",
+    "プラグインパラメータ（plugin parameter）": "plugin parameter (plugin parameter)",
+    "開始アニメーション （startAnimation）": "Starting Animation (startAnimation)",
+    "コマンド入力中のアクターに表示する開始アニメーションです。": "The starting animation displayed on the actor currently entering commands.",
+    "一度だけ表示されます。": "It is displayed only once.",
+    "開始アニメウェイト （startAnimationWait）": "Starting Animation Wait (startAnimationWait)",
+    "開始アニメーションを表示する際のウェイトです。": "The wait time before displaying the starting animation.",
+    "1/60秒単位で指定してください。": "Specify it in units of 1/60 second.",
+    "開始アニメの背景表示 （startAnimationBackground）": "Display Starting Animation in Background (startAnimationBackground)",
+    "開始アニメをアクターよりも下に表示します。": "Displays the starting animation below the actor.",
+    "※正確には各要素の表示優先度（Ｚ座標）を設定するプラグインが必要です。Ｚ座標の設定があるなら、NRP_DynamicMotion以外でも構いません。": "※More precisely, a plugin that sets the display priority (Z coordinate) of each element is required. Any plugin other than NRP_DynamicMotion is also acceptable as long as it supports setting the Z coordinate.",
+    "足下に表示するアニメーションなどにどうぞ。": "Use this for animations displayed at the actor's feet, for example.",
+    "ループアニメーション （loopAnimation）": "Looping Animation (loopAnimation)",
+    "コマンド入力中のアクターに表示するループアニメーションです。": "The looping animation displayed on the actor currently entering commands.",
+    "開始アニメウェイトの後に表示されます。": "It is displayed after the starting animation wait.",
+    "ループアニメ表示周期 （loopAnimationCycle）": "Looping Animation Display Cycle (loopAnimationCycle)",
+    "ループアニメーションを表示する周期です。": "The cycle at which the looping animation is displayed.",
+    "ループアニメの背景表示（loopAnimationBackground）": "Display Looping Animation in Background (loopAnimationBackground)",
+    "ループアニメをアクターよりも下に表示します。": "Displays the looping animation below the actor.",
+    "この機能には、NRP_DynamicMotion(MV, MZ)が必要です。": "This feature requires NRP_DynamicMotion (MV, MZ).",
+    "（2023/09/17追記）": "(Added 2023/09/17)",
+    "当機能がオンかつタイムプログレス（アクティブ）かつDynamicAnimation&Motionと組み合わせた場合、稀に挙動が不安定になることがあるようです。怪しいようなら、デフォルトのままオフにしておくことをオススメします。": "When this feature is enabled, Time Progress (Active) is enabled, and it is combined with DynamicAnimation&Motion, the behavior may occasionally become unstable. If anything seems suspicious, I recommend leaving it off as it is by default."
+  }
+}

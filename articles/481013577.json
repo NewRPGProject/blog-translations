@@ -1,0 +1,1866 @@
+{
+  "articleId": "481013577",
+  "sourceUrl": "https://newrpg.seesaa.net/article/481013577.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": null,
+  "sourceHash": "4c5a8ade54338de84a730ec890805f82de209aa972588117a08934556115b789",
+  "translatedAt": "2026-08-31T05:46:07.047Z",
+  "title": "Expand Bush Attribute Functions [RPG Maker MZ & MV Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "茂み属性の機能を拡張【RPGツクールMZ&MVプラグイン】",
+      "sourceHash": "274b15417bb2dd0eef2dde7e5adc3e5afd7b61813b414e9032da24764aa4725e",
+      "translation": "Expand Bush Attribute Functions [RPG Maker MZ & MV Plugin]",
+      "contextHash": "274b15417bb2dd0eef2dde7e5adc3e5afd7b61813b414e9032da24764aa4725e"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "茂み属性の機能を拡張します。",
+      "sourceHash": "1f97587e72c5084388096454c4f9d45693fbe99983d8af8865c4a72d3cc067ca",
+      "translation": "Expands the functions of the bush attribute.",
+      "contextHash": "1f97587e72c5084388096454c4f9d45693fbe99983d8af8865c4a72d3cc067ca"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "通常、茂み属性を付加されたタイルの上に立つと、キャラクターの下半身が半透明になって表示されます。",
+      "sourceHash": "8a2c9b29df3c975ef10d96e35ccbfdf8b308f0f015e3c2c074bb960dca9377c5",
+      "translation": "Normally, when standing on a tile with the bush attribute, the character's lower body is displayed semi-transparently.",
+      "contextHash": "8a2c9b29df3c975ef10d96e35ccbfdf8b308f0f015e3c2c074bb960dca9377c5"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "この機能は茂みだけでなく、水場などの表現にも利用されます。",
+      "sourceHash": "2089e23eb4c506dadc98bfe098e86f81ba58e8af590b96fdf9342e6f44bc160c",
+      "translation": "This function can be used not only for bushes, but also to represent water and similar terrain.",
+      "contextHash": "2089e23eb4c506dadc98bfe098e86f81ba58e8af590b96fdf9342e6f44bc160c"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "しかしながら、困ったことに茂み属性は全てのレイヤーに適用されてしまいます。",
+      "sourceHash": "12b3eefd4220c2e1c32304cf50e014c4b46dae5a592564b23df79964f35412f9",
+      "translation": "However, the bush attribute is applied to every layer, which can cause problems.",
+      "contextHash": "12b3eefd4220c2e1c32304cf50e014c4b46dae5a592564b23df79964f35412f9"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "例えば、水の上に架かる橋を設置した場合、橋の上に立っているのに、水中にいるかのようにキャラが半透明になってしまいます。",
+      "sourceHash": "5c946f65ef756cfa9a3574a48111052b71e494849dd510bb754695bc8bfbd34a",
+      "translation": "For example, if you place a bridge over water, the character becomes semi-transparent as if they were underwater even when standing on the bridge.",
+      "contextHash": "5c946f65ef756cfa9a3574a48111052b71e494849dd510bb754695bc8bfbd34a"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "そこで、茂みの上のレイヤーに他のタイルがある場合、茂み属性を適用しないようにします。",
+      "sourceHash": "dc3af6d540eac67c6061ae24d5af7b5ee2e4778ce6304278403c63a21bcee488",
+      "translation": "Therefore, the bush attribute is not applied when another tile exists on a layer above the bush.",
+      "contextHash": "dc3af6d540eac67c6061ae24d5af7b5ee2e4778ce6304278403c63a21bcee488"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "その他にも、不透明度や茂みの深さ、おまけに色を調整できます。",
+      "sourceHash": "465698d532d77e9aa069492df254bd72c14f033af1b6221cfcf3497e0a94f928",
+      "translation": "You can also adjust the opacity, bush depth, and even the color.",
+      "contextHash": "465698d532d77e9aa069492df254bd72c14f033af1b6221cfcf3497e0a94f928"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "地形タグやリージョンＩＤ、タイルＩＤやオートタイルタイプを条件にして細かく設定することも可能です。",
+      "sourceHash": "ae765aceb110c19fa26e8d0e8ee4cee8314a2c7741464db3716cff41893027bd",
+      "translation": "Detailed settings can be configured based on terrain tags, region IDs, tile IDs, and auto-tile types.",
+      "contextHash": "ae765aceb110c19fa26e8d0e8ee4cee8314a2c7741464db3716cff41893027bd"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "作成した設定に『設定ＩＤ』を付加すれば、タイルセット毎に設定を呼び出すことも可能です。",
+      "sourceHash": "0e3f05d4b5a3f6be446b1081f7631c4f295287d2f474850c7fb3691e9ab11384",
+      "translation": "By assigning a Setting ID to a created configuration, you can also call up the configuration for each tileset.",
+      "contextHash": "0e3f05d4b5a3f6be446b1081f7631c4f295287d2f474850c7fb3691e9ab11384"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "さらに浮遊効果をキャラクターに付加することができます。",
+      "sourceHash": "e5119d9603ca627ff65c8eb30b8414dc456bc6185d53e370344d318e13f11870",
+      "translation": "You can also add a floating effect to characters.",
+      "contextHash": "e5119d9603ca627ff65c8eb30b8414dc456bc6185d53e370344d318e13f11870"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "元々は水タイル上で水に浮かぶ演出をする目的で追加した機能ですが、それ以外にも様々な利用ができます。",
+      "sourceHash": "467a87caf6116e081b5d3c90042c6ee6aac97cc6845f17f4964592a30905b6b0",
+      "translation": "This function was originally added to create the effect of floating on water tiles, but it can be used in many other ways as well.",
+      "contextHash": "467a87caf6116e081b5d3c90042c6ee6aac97cc6845f17f4964592a30905b6b0"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法（install）",
+      "sourceHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275",
+      "translation": "Installation (install)",
+      "contextHash": "a74eebb051e898173751a501ebea136f6891e7f24c5dc00722bd5bd693d13275"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the function ON in the plugin manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。",
+      "sourceHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a",
+      "translation": "※Both MV and MZ are supported by all of the plugins.",
+      "contextHash": "22618a56102a594c722145199f7ab1565103da056daac564257d33f1e0b8ee7a"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_BushEX.js",
+      "sourceHash": "91b1cb679fb9cdaca180fd5ec98f7bcb77bacaba7e10960ead4fe4d963e9a4ce",
+      "translation": "NRP_BushEX.js ",
+      "contextHash": "8df3c31f6475abec7ed50286e3e44fa2a2c132a85ebe7106263e4157a8b5a3f0"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "ver1.05（2023/07/28）",
+      "sourceHash": "655c665b12508b21e0b41fed40f65b4032f0913396721c8a8324f81a765d8e1c",
+      "translation": "ver1.05 (2023/07/28) ",
+      "contextHash": "8df3c31f6475abec7ed50286e3e44fa2a2c132a85ebe7106263e4157a8b5a3f0"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "※OverpassTile.js（立体交差プラグイン）と併用する場合は、当プラグインを上に配置してください。",
+      "sourceHash": "e54325145351dbfb6c8e5f7565d8db653cb9b3647d0e954ce439d179cd17d5d9",
+      "translation": "※When using this together with OverpassTile.js (the elevated crossing plugin), place this plugin above it.",
+      "contextHash": "e54325145351dbfb6c8e5f7565d8db653cb9b3647d0e954ce439d179cd17d5d9"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "オプション",
+      "sourceHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5",
+      "translation": "Options",
+      "contextHash": "5b717728bbead38118553940600d0a6e78f6bab6a330874a69809e291682e3f5"
+    },
+    {
+      "id": "link-002",
+      "type": "link",
+      "source": "NRP_DebugTile.js",
+      "sourceHash": "d839245e2d4ad88768cbb74e24135b6d06d5363d64d3fc85797e48514859684d",
+      "translation": "NRP_DebugTile.js ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "ver1.01（2021/08/15）",
+      "sourceHash": "5951f72e8493d63ef9b4ecf28b1663a47bcbcd982784edf97350cbc43b29937d",
+      "translation": "ver1.01 (2021/08/15) ",
+      "contextHash": "126d708a429165354fd54a802d31024558df494bd7cc8d512a626846aa1a9a39"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_BushEXの補助用に使えます。",
+      "sourceHash": "c35698105d316881a94c17175d379d1bbc7ab2dc17cc4650379d631174a59e74",
+      "translation": "※This plugin allows you to check the auto-tile type and tile ID at your feet simply by pressing F2. It can be used as an aid for NRP_BushEX.",
+      "contextHash": "c35698105d316881a94c17175d379d1bbc7ab2dc17cc4650379d631174a59e74"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "2023/07/28（ver1.05）",
+      "sourceHash": "665c1f50f25f00802059a3a0bac231c9668cd1902b2377df4479873118a0e985",
+      "translation": "2023/07/28 (ver1.05) ",
+      "contextHash": "665c1f50f25f00802059a3a0bac231c9668cd1902b2377df4479873118a0e985"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "2023/01/03（ver1.04 -> 1.041）",
+      "sourceHash": "4dfd6cab74d0d98531992e43a35428b8bd410af30f8f1bdf12a5fc125c35358b",
+      "translation": "2023/01/03 (ver1.04 -> 1.041) ",
+      "contextHash": "4dfd6cab74d0d98531992e43a35428b8bd410af30f8f1bdf12a5fc125c35358b"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "ゲームロード直後に茂み設定が反映されない不具合修正。",
+      "sourceHash": "fa20e858da703a692f276ececf3c4d0eef5dbdf50651863969384261eced29f4",
+      "translation": "Fixed an issue where bush settings were not applied immediately after loading a game.",
+      "contextHash": "fa20e858da703a692f276ececf3c4d0eef5dbdf50651863969384261eced29f4"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "ロードに失敗してしまう重大な不具合修正。（ver1.041）",
+      "sourceHash": "3f9edfccc4b884e9074cef90215a22d42f80d8530f89ee5ffbb4cf813d77757c",
+      "translation": "Fixed a critical issue that caused loading to fail. (ver1.041)",
+      "contextHash": "3f9edfccc4b884e9074cef90215a22d42f80d8530f89ee5ffbb4cf813d77757c"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "2022/04/22 -> 04/25（ver1.03 -> 1.031）",
+      "sourceHash": "51e68fb0078d06fd4a93a7077438ed7d49fb6a1f8b16f58048948f7b5f13eafe",
+      "translation": "2022/04/22 -> 04/25 (ver1.03 -> 1.031) ",
+      "contextHash": "51e68fb0078d06fd4a93a7077438ed7d49fb6a1f8b16f58048948f7b5f13eafe"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "浮遊処理時に不要な横線が表示されてしまう不具合修正。（04/25 ver1.031）",
+      "sourceHash": "c5fee017b995c2e3cb636de73fc9586a0e97c2e67f4197ad621543d81e3eaaaf",
+      "translation": "Fixed an issue where an unnecessary horizontal line was displayed during floating. (04/25 ver1.031)",
+      "contextHash": "c5fee017b995c2e3cb636de73fc9586a0e97c2e67f4197ad621543d81e3eaaaf"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "2021/10/14 -> 2022/02/17（ver1.02 -> 1.023）",
+      "sourceHash": "689ba1e43ff68e976f8ee82b778cb9736beb8922c064d2b186b96cc7e79af8e1",
+      "translation": "2021/10/14 -> 2022/02/17 (ver1.02 -> 1.023) ",
+      "contextHash": "689ba1e43ff68e976f8ee82b778cb9736beb8922c064d2b186b96cc7e79af8e1"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "不透明度が0の時に無効となる不具合修正。",
+      "sourceHash": "6a23f0b5ce0c9678ca1ec95c27c8f03796f3f4bad51b653c6a3d7b4e50b88aa7",
+      "translation": "Fixed an issue where the function was disabled when opacity was set to 0.",
+      "contextHash": "6a23f0b5ce0c9678ca1ec95c27c8f03796f3f4bad51b653c6a3d7b4e50b88aa7"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "画面初期表示時に茂み属性が機能しない不具合修正。",
+      "sourceHash": "773048699458980956bc8ef0d6c8cf79db10057a5dcb221cc31420398ef284ce",
+      "translation": "Fixed an issue where the bush attribute did not function when the screen was first displayed.",
+      "contextHash": "773048699458980956bc8ef0d6c8cf79db10057a5dcb221cc31420398ef284ce"
+    },
+    {
+      "id": "list-006",
+      "type": "list",
+      "source": "小数点座標上でも茂み属性を適用するよう対応。",
+      "sourceHash": "4272058ea5e8b6fef8af75e89d11d58c95957339f2f8a7840a7b7324a2d9a7cf",
+      "translation": "The bush attribute is now applied at fractional coordinates.",
+      "contextHash": "4272058ea5e8b6fef8af75e89d11d58c95957339f2f8a7840a7b7324a2d9a7cf"
+    },
+    {
+      "id": "list-007",
+      "type": "list",
+      "source": "茂み設定があるタイル同士で移動した場合、浮遊設定が正しく適用されない不具合を修正。（11/05 ver1.021）",
+      "sourceHash": "753dd44aba75d3247d6cf120b0125b08903d43c796a9a4d1897f48b0018885eb",
+      "translation": "Fixed an issue where floating settings were not correctly applied when moving between tiles with bush settings. (11/05 ver1.021)",
+      "contextHash": "753dd44aba75d3247d6cf120b0125b08903d43c796a9a4d1897f48b0018885eb"
+    },
+    {
+      "id": "list-008",
+      "type": "list",
+      "source": "イベントテストでエラーになる不具合修正。（11/11 ver1.022）",
+      "sourceHash": "0abf80503b2fecb798939790b4de5b319e3ebb5eedc696e2d84c471629eff06e",
+      "translation": "Fixed an issue that caused an error during event testing. (11/11 ver1.022)",
+      "contextHash": "0abf80503b2fecb798939790b4de5b319e3ebb5eedc696e2d84c471629eff06e"
+    },
+    {
+      "id": "list-009",
+      "type": "list",
+      "source": "小数点座標上の茂み判定が正しく処理されない不具合修正。",
+      "sourceHash": "67acfab83ec1fc657f774be24dbae217a8064a03a3e1eb60580b4c893e22cfe0",
+      "translation": "Fixed an issue where bush detection at fractional coordinates was not processed correctly.",
+      "contextHash": "67acfab83ec1fc657f774be24dbae217a8064a03a3e1eb60580b4c893e22cfe0"
+    },
+    {
+      "id": "list-010",
+      "type": "list",
+      "source": "（2022/02/17 ver1.023）",
+      "sourceHash": "16673e43dd5f8fd5ecbd9d27b3945ce6cc182bbe8d247e3d9a418b08cba3afd8",
+      "translation": " (2022/02/17 ver1.023) ",
+      "contextHash": "16673e43dd5f8fd5ecbd9d27b3945ce6cc182bbe8d247e3d9a418b08cba3afd8"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "2021/06/26（ver1.01）",
+      "sourceHash": "3ba4e07f44d1818905a21fea65b50c686643675a9ba0a1d7a168ff838892596c",
+      "translation": "2021/06/26 (ver1.01) ",
+      "contextHash": "3ba4e07f44d1818905a21fea65b50c686643675a9ba0a1d7a168ff838892596c"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "2021/04/16 -> 06/02（ver1.00 -> 1.002）",
+      "sourceHash": "194794935d93ea7fcc01aa152f31b991920d0b0cb5aa9f7712f083021bf43b70",
+      "translation": "2021/04/16 -> 06/02 (ver1.00 -> 1.002) ",
+      "contextHash": "194794935d93ea7fcc01aa152f31b991920d0b0cb5aa9f7712f083021bf43b70"
+    },
+    {
+      "id": "list-011",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "list-012",
+      "type": "list",
+      "source": "設定リストにて全体の初期値が有効になっていない不具合を修正。",
+      "sourceHash": "6d4c05afcce2dec04d5796edfa22ebe55faaeae5edc954ad8914ebd110d62d62",
+      "translation": "Fixed an issue where the default values for all settings were not enabled in the settings list.",
+      "contextHash": "6d4c05afcce2dec04d5796edfa22ebe55faaeae5edc954ad8914ebd110d62d62"
+    },
+    {
+      "id": "list-013",
+      "type": "list",
+      "source": "（05/13 ver1.001）",
+      "sourceHash": "d994d600b2fd22c06c7804f1f520ebe27528e6bc9a29d174a4494e4a5cad02c6",
+      "translation": " (05/13 ver1.001) ",
+      "contextHash": "d994d600b2fd22c06c7804f1f520ebe27528e6bc9a29d174a4494e4a5cad02c6"
+    },
+    {
+      "id": "list-014",
+      "type": "list",
+      "source": "OverpassTile.js（立体交差プラグイン）との併用について注記。（06/02 ver1.002）",
+      "sourceHash": "30674db1751bb2568fcb078a3b3a6efda72c3eb1ba66e02192584465ba510f98",
+      "translation": "Added a note about using this together with OverpassTile.js (the elevated crossing plugin). (06/02 ver1.002)",
+      "contextHash": "30674db1751bb2568fcb078a3b3a6efda72c3eb1ba66e02192584465ba510f98"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "使用方法（Usage）",
+      "sourceHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9",
+      "translation": "Usage (Usage)",
+      "contextHash": "25d0346b6851547b0b6d3d18bb163958617996499b78e2fa5feef574272b89b9"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "プラグインを適用すると初期状態で『茂みレイヤーの限定』機能がオンとなります。",
+      "sourceHash": "0b6783698fa6d158362748e380fa369cc73534fc0e658be769dae4922840d58e",
+      "translation": "When the plugin is applied, the “Limit Bush Layer” function is enabled by default.",
+      "contextHash": "0b6783698fa6d158362748e380fa369cc73534fc0e658be769dae4922840d58e"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "茂みの深さや不透明度もパラメータで設定可能です。",
+      "sourceHash": "af6456e8b7a662fd961270f92a35d8c3cc01e7d4f3dfcbec776741cb1db8f729",
+      "translation": "The bush depth and opacity can also be configured using parameters.",
+      "contextHash": "af6456e8b7a662fd961270f92a35d8c3cc01e7d4f3dfcbec776741cb1db8f729"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "さらに、設定リストによって細かい調整が可能となります。",
+      "sourceHash": "3865dc3f205c1b2874c089c9b80f2f55c01f8beb7a8e43a22f94813d443e0d50",
+      "translation": "In addition, detailed adjustments can be made using the settings list.",
+      "contextHash": "3865dc3f205c1b2874c089c9b80f2f55c01f8beb7a8e43a22f94813d443e0d50"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "全タイルセットで有効とするか、タイルセット毎に呼び出すかを、リスト内のパラメータによって切り替え可能です。",
+      "sourceHash": "ca6835c72a77efdfba3000069ca8ae991b546c303ae0663406c112f948d39720",
+      "translation": "The parameters in the list allow you to switch between enabling the settings for all tilesets and calling them separately for each tileset.",
+      "contextHash": "ca6835c72a77efdfba3000069ca8ae991b546c303ae0663406c112f948d39720"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "タイルセットのメモ欄（Note of Tilesets）",
+      "sourceHash": "a7fb0c4350b88f7045ae1697325595a01ef6526266327bee5e79454050fe4dc3",
+      "translation": "Tileset Note Field (Note of Tilesets)",
+      "contextHash": "a7fb0c4350b88f7045ae1697325595a01ef6526266327bee5e79454050fe4dc3"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "タイルセット毎に設定する場合はメモ欄に以下を指定してください。",
+      "sourceHash": "be3ef53da2e9a738a579843ea1eb70f29ce6233459ea149e3f6fe667cb2346ac",
+      "translation": "To configure this for each tileset, specify the following in the note field.",
+      "contextHash": "be3ef53da2e9a738a579843ea1eb70f29ce6233459ea149e3f6fe667cb2346ac"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "?の部分が設定リストに登録した『設定ＩＤ』となります。",
+      "sourceHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005",
+      "translation": "The ? represents the Setting ID registered in the settings list.",
+      "contextHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "また、カンマ区切りによって複数指定も可能です。",
+      "sourceHash": "a6cd6ded998b27d622a05705fb2bab73d3884e0fcf671b8aefdf41dd04d323ed",
+      "translation": "Multiple IDs can also be specified, separated by commas.",
+      "contextHash": "a6cd6ded998b27d622a05705fb2bab73d3884e0fcf671b8aefdf41dd04d323ed"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "イベントのメモ欄（Note of Events）ver1.03",
+      "sourceHash": "c8b3040cbff6876c46df864fda32780fc16040f5d12c1bf65b9c562276e4f186",
+      "translation": "Event Note Field (Note of Events) ver1.03",
+      "contextHash": "c8b3040cbff6876c46df864fda32780fc16040f5d12c1bf65b9c562276e4f186"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "現在の地形に関わらず、茂み効果を強制的に対象へ設定します。",
+      "sourceHash": "678fd1403dca2e99200f295c903c66e26f9fac2c95f40b82e67a8f9faf5b8e12",
+      "translation": "Forcibly applies the bush effect to the target regardless of the current terrain.",
+      "contextHash": "678fd1403dca2e99200f295c903c66e26f9fac2c95f40b82e67a8f9faf5b8e12"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "?の部分が設定リストに登録した『設定ＩＤ』となります。",
+      "sourceHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005",
+      "translation": "The ? represents the Setting ID registered in the settings list.",
+      "contextHash": "41ae895cde2d6d3191c55acd31219cac11e46db4ddc3866362b895afdcce0005"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "また、イベントページ先頭の注釈に記入しても有効です。",
+      "sourceHash": "d3f6881b183d9a0b1fcc94bc314ae3eaf7c49514d28b47ed6c02bb8affb68814",
+      "translation": "This is also effective when entered in the comment at the beginning of an event page.",
+      "contextHash": "d3f6881b183d9a0b1fcc94bc314ae3eaf7c49514d28b47ed6c02bb8affb68814"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "こちらは現在のページ毎に状態を切り替えることも可能です。",
+      "sourceHash": "160bf3c16e9d9073639434c3b1f5ca5c9e9503dab21e97423103722591db160d",
+      "translation": "The state can also be switched for each current event page.",
+      "contextHash": "160bf3c16e9d9073639434c3b1f5ca5c9e9503dab21e97423103722591db160d"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "イベントが茂み属性の影響を受けなくなります。",
+      "sourceHash": "1e7efdccea1527f75bc022b84e967ce84083ea4bd7e31ab05c6db32d0a05fc42",
+      "translation": "The event will no longer be affected by the bush attribute.",
+      "contextHash": "1e7efdccea1527f75bc022b84e967ce84083ea4bd7e31ab05c6db32d0a05fc42"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "プラグインコマンド（ＭＺ）ver1.03",
+      "sourceHash": "3571c6a4a23b9f12769f0baf5b7f359ddba4d4229946777c316e1951c1c0d2ed",
+      "translation": "Plugin Commands (MZ) ver1.03",
+      "contextHash": "3571c6a4a23b9f12769f0baf5b7f359ddba4d4229946777c316e1951c1c0d2ed"
+    },
+    {
+      "id": "heading-015",
+      "type": "heading",
+      "source": "茂み効果の設定（SetBushEffect）",
+      "sourceHash": "6660ff8a5f25a8727e664b853edf88730b027e0472156d0fbfc4d4edfb058805",
+      "translation": "Set Bush Effect (SetBushEffect)",
+      "contextHash": "6660ff8a5f25a8727e664b853edf88730b027e0472156d0fbfc4d4edfb058805"
+    },
+    {
+      "id": "heading-016",
+      "type": "heading",
+      "source": "現在の地形に関わらず、茂み効果を強制的に対象へ設定します。",
+      "sourceHash": "678fd1403dca2e99200f295c903c66e26f9fac2c95f40b82e67a8f9faf5b8e12",
+      "translation": "Forcibly applies the bush effect to the target regardless of the current terrain.",
+      "contextHash": "678fd1403dca2e99200f295c903c66e26f9fac2c95f40b82e67a8f9faf5b8e12"
+    },
+    {
+      "id": "heading-017",
+      "type": "heading",
+      "source": "対象ＩＤに対象となるイベントＩＤを指定してください。",
+      "sourceHash": "92b88a3f57636b7cb993632c1611fe6fe9bb48d4d1985bd820acc83552da4e01",
+      "translation": "Specify the target event ID in Target ID.",
+      "contextHash": "92b88a3f57636b7cb993632c1611fe6fe9bb48d4d1985bd820acc83552da4e01"
+    },
+    {
+      "id": "heading-018",
+      "type": "heading",
+      "source": "また、-1でプレイヤー、-2以下でフォロワーが対象になります。",
+      "sourceHash": "8fa626c2e1a585867a1167b082401c7892ff8245ea71a6017ea72b03d6cfd4fd",
+      "translation": "Additionally, -1 targets the player, while -2 and below target followers.",
+      "contextHash": "8fa626c2e1a585867a1167b082401c7892ff8245ea71a6017ea72b03d6cfd4fd"
+    },
+    {
+      "id": "heading-019",
+      "type": "heading",
+      "source": "適用できる設定は、プラグインパラメータの設定リストで使用できるものと同等です。",
+      "sourceHash": "ebe4192e08f40eefbbcacc6b88705ece0c286bf145f1d838599086972d799b8f",
+      "translation": "The settings that can be applied are equivalent to those available in the plugin parameter settings list.",
+      "contextHash": "ebe4192e08f40eefbbcacc6b88705ece0c286bf145f1d838599086972d799b8f"
+    },
+    {
+      "id": "heading-020",
+      "type": "heading",
+      "source": "効果を解除したい場合は、対象ＩＤを指定した上で他のパラメータを空白にしてください。",
+      "sourceHash": "ac132003ea18371444e0c70a6871fe8a7cabf12bc2e9bb572b58b8984b8db99a",
+      "translation": "To remove the effect, specify the Target ID and leave the other parameters blank.",
+      "contextHash": "ac132003ea18371444e0c70a6871fe8a7cabf12bc2e9bb572b58b8984b8db99a"
+    },
+    {
+      "id": "heading-021",
+      "type": "heading",
+      "source": "茂み効果の設定（乗物）（SetBushEffectVehicle）",
+      "sourceHash": "c6171f237bdf514de448e68bcb56f9daf013e01fb29b46eb72dfec1438ff5767",
+      "translation": "Set Bush Effect (Vehicle) (SetBushEffectVehicle)",
+      "contextHash": "c6171f237bdf514de448e68bcb56f9daf013e01fb29b46eb72dfec1438ff5767"
+    },
+    {
+      "id": "heading-022",
+      "type": "heading",
+      "source": "現在の地形に関わらず、茂み効果を強制的に乗物へ設定します。",
+      "sourceHash": "9b326279c08b3e6326f937dd50aae6e64ff335b94b2d231e03e12fa0a80bfa48",
+      "translation": "Force the bush effect onto a vehicle regardless of the current terrain.",
+      "contextHash": "9b326279c08b3e6326f937dd50aae6e64ff335b94b2d231e03e12fa0a80bfa48"
+    },
+    {
+      "id": "heading-023",
+      "type": "heading",
+      "source": "効果を解除したい場合は、乗物タイプを指定した上で他のパラメータを空白にしてください。",
+      "sourceHash": "21b9142bee15703519a4057faeafe469112a0be4d074bf1783fbfe01aee21f88",
+      "translation": "To remove the effect, specify the vehicle type and leave the other parameters blank.",
+      "contextHash": "21b9142bee15703519a4057faeafe469112a0be4d074bf1783fbfe01aee21f88"
+    },
+    {
+      "id": "heading-024",
+      "type": "heading",
+      "source": "イベントに対する命令は場所移動すれば自動で解除されます。",
+      "sourceHash": "aa4714c1a8f66c75a8403a7774313596c7148546d79f3b5d5a2110102a0f0bc1",
+      "translation": "Commands affecting events are automatically cleared when changing locations.",
+      "contextHash": "aa4714c1a8f66c75a8403a7774313596c7148546d79f3b5d5a2110102a0f0bc1"
+    },
+    {
+      "id": "heading-025",
+      "type": "heading",
+      "source": "一方でプレイヤーやフォロワー、乗物に対する命令は、場所移動やセーブ＆ロードを行っても解除されません。必要がなくなった際には必ず解除してください。",
+      "sourceHash": "44ebf78d85ba0ba06ed8baf1e387dbbe5f19f8ca8966e4d5ad18613ef7487ffd",
+      "translation": "On the other hand, commands affecting the player, followers, or vehicles are not cleared even when changing locations or saving and loading. Be sure to clear them when they are no longer needed.",
+      "contextHash": "44ebf78d85ba0ba06ed8baf1e387dbbe5f19f8ca8966e4d5ad18613ef7487ffd"
+    },
+    {
+      "id": "heading-026",
+      "type": "heading",
+      "source": "プラグインパラメータ（基本）",
+      "sourceHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0",
+      "translation": "Plugin Parameters (Basic)",
+      "contextHash": "bd229977c067a68bfc3b5bfa49792c324da6a38eca1eb1f2434c941bd658c3d0"
+    },
+    {
+      "id": "heading-027",
+      "type": "heading",
+      "source": "茂みレイヤーの限定（LimitBushLayer）",
+      "sourceHash": "d435c148611d1d2061549516d4661137bc46f07970ce73658a5e19693ee945ca",
+      "translation": "Limit Bush Layer (LimitBushLayer)",
+      "contextHash": "d435c148611d1d2061549516d4661137bc46f07970ce73658a5e19693ee945ca"
+    },
+    {
+      "id": "heading-028",
+      "type": "heading",
+      "source": "茂みの上のレイヤーに他のタイルがある場合、茂み属性を無効化します。",
+      "sourceHash": "17f640dc7e91512ccda128f246ba307651e7aee293e5fba0654d5c744e4db617",
+      "translation": "If another tile exists on the layer above a bush, the bush attribute is disabled.",
+      "contextHash": "17f640dc7e91512ccda128f246ba307651e7aee293e5fba0654d5c744e4db617"
+    },
+    {
+      "id": "heading-029",
+      "type": "heading",
+      "source": "除外する地形タグ（ExcludedTerrain）ver1.01",
+      "sourceHash": "42702acc51e1428469514eeaa6f206e839feaa3acc4cdd043fec9a975dad3209",
+      "translation": "Excluded Terrain Tags (ExcludedTerrain) ver1.01",
+      "contextHash": "42702acc51e1428469514eeaa6f206e839feaa3acc4cdd043fec9a975dad3209"
+    },
+    {
+      "id": "heading-030",
+      "type": "heading",
+      "source": "『茂みレイヤーの限定』について除外する地形タグ（1~7）を指定します。",
+      "sourceHash": "d4b0857c733122ce0ffad15700b44aa49498226f728119cdda360a14563d04f8",
+      "translation": "Specify the terrain tags (1~7) to exclude from Limit Bush Layer.",
+      "contextHash": "d4b0857c733122ce0ffad15700b44aa49498226f728119cdda360a14563d04f8"
+    },
+    {
+      "id": "heading-031",
+      "type": "heading",
+      "source": "複数指定可。（例：1,3）",
+      "sourceHash": "524190de0fff57ef041b2af7c83635e811052575a67c09091a334eaf6f4253b3",
+      "translation": "Multiple entries can be specified. (Example: 1,3)",
+      "contextHash": "524190de0fff57ef041b2af7c83635e811052575a67c09091a334eaf6f4253b3"
+    },
+    {
+      "id": "heading-032",
+      "type": "heading",
+      "source": "例えば、茂みタイルの上に半透明の影のようなタイルを配置した場合、影を無視して茂み属性を参照するといった調整ができます。",
+      "sourceHash": "039a323fbaefaf8dec2e06467e1fd7bb9a6861200070b6eb1547b1506a076806",
+      "translation": "For example, if you place a semitransparent, shadow-like tile above a bush tile, you can configure the plugin to ignore the shadow when checking the bush attribute.",
+      "contextHash": "039a323fbaefaf8dec2e06467e1fd7bb9a6861200070b6eb1547b1506a076806"
+    },
+    {
+      "id": "heading-033",
+      "type": "heading",
+      "source": "茂みの深さ（BushDepth）",
+      "sourceHash": "02cceff563e2e60c50d2e41aa409a383228dd597bc9cdfa839daa88ab93df095",
+      "translation": "Bush Depth (BushDepth)",
+      "contextHash": "02cceff563e2e60c50d2e41aa409a383228dd597bc9cdfa839daa88ab93df095"
+    },
+    {
+      "id": "heading-034",
+      "type": "heading",
+      "source": "茂み上でキャラクターの下半身に半透明効果を適用する高さです。",
+      "sourceHash": "31c0ba39ad0ec8bb5de19362aba676b2aa7cbafadd49c72855664e2d7ca5df22",
+      "translation": "The height at which the semitransparency effect is applied to the lower body of a character on a bush.",
+      "contextHash": "31c0ba39ad0ec8bb5de19362aba676b2aa7cbafadd49c72855664e2d7ca5df22"
+    },
+    {
+      "id": "heading-035",
+      "type": "heading",
+      "source": "初期値は12。デフォルトのちびキャラを想定した値になっているので、大きなキャラを使いたい場合は変更すると吉です。",
+      "sourceHash": "66d9eb21f2c70cdbe00b7cf032dca9569d565fe554b6bb6173e890ee3d514bff",
+      "translation": "The default value is 12. Since this value is intended for the default chibi characters, it is recommended that you change it when using larger characters.",
+      "contextHash": "66d9eb21f2c70cdbe00b7cf032dca9569d565fe554b6bb6173e890ee3d514bff"
+    },
+    {
+      "id": "heading-036",
+      "type": "heading",
+      "source": "茂みでの不透明度（BushOpacity）",
+      "sourceHash": "d8b5d77bc73450b09ed0c426275ef518a0cbefa3dfef1297b5f39ec1b7c3fc4f",
+      "translation": "Bush Opacity (BushOpacity)",
+      "contextHash": "d8b5d77bc73450b09ed0c426275ef518a0cbefa3dfef1297b5f39ec1b7c3fc4f"
+    },
+    {
+      "id": "heading-037",
+      "type": "heading",
+      "source": "茂み上でキャラクターの下半身に適用する不透明度です。",
+      "sourceHash": "8410677ff06799b24f4c8555b9c07c95e841f3e292e13b28427543bf01bc90a6",
+      "translation": "The opacity applied to the lower body of a character on a bush.",
+      "contextHash": "8410677ff06799b24f4c8555b9c07c95e841f3e292e13b28427543bf01bc90a6"
+    },
+    {
+      "id": "heading-038",
+      "type": "heading",
+      "source": "255で完全な不透明。0で完全な透明。初期値は128です。",
+      "sourceHash": "7afc3bec97c9e78a3869ee7cf2c5e32d121f167d99cac1289dd4d0e0021fa7b3",
+      "translation": "255 is completely opaque, and 0 is completely transparent. The default value is 128.",
+      "contextHash": "7afc3bec97c9e78a3869ee7cf2c5e32d121f167d99cac1289dd4d0e0021fa7b3"
+    },
+    {
+      "id": "heading-039",
+      "type": "heading",
+      "source": "設定リスト（SettingList）",
+      "sourceHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287",
+      "translation": "Setting List (SettingList)",
+      "contextHash": "67e1351a4794cc48f9607ebe8ad3924cf08e38cc33ac4a5d4d768f7b9528c287"
+    },
+    {
+      "id": "heading-040",
+      "type": "heading",
+      "source": "茂み設定の一覧です。",
+      "sourceHash": "9c0130bc6fc22f0fa7b799e99f1b3a59f6288d52a288bfb6668c013042ed7777",
+      "translation": "A list of bush settings.",
+      "contextHash": "9c0130bc6fc22f0fa7b799e99f1b3a59f6288d52a288bfb6668c013042ed7777"
+    },
+    {
+      "id": "heading-041",
+      "type": "heading",
+      "source": "細かい条件を指定したい場合に有効です。",
+      "sourceHash": "d8c04351fa5ad8598a43605558a01b6cdf8de4480c39ae52ffab38aaea55594f",
+      "translation": "Useful when you want to specify detailed conditions.",
+      "contextHash": "d8c04351fa5ad8598a43605558a01b6cdf8de4480c39ae52ffab38aaea55594f"
+    },
+    {
+      "id": "heading-042",
+      "type": "heading",
+      "source": "以下、その詳細設定のパラメータです。",
+      "sourceHash": "b27c3a353986983e8798706b83c3b4c6dbf015e796fa8add9713ef8b4646af34",
+      "translation": "The parameters for these detailed settings are described below.",
+      "contextHash": "b27c3a353986983e8798706b83c3b4c6dbf015e796fa8add9713ef8b4646af34"
+    },
+    {
+      "id": "heading-043",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト）",
+      "sourceHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb",
+      "translation": "Plugin Parameters (Setting List)",
+      "contextHash": "7148cb3edbfdb8b7d22a0b2e4120a72d24776e1da7f7e6702d7fd083588920cb"
+    },
+    {
+      "id": "heading-044",
+      "type": "heading",
+      "source": "設定ＩＤ（SettingId）",
+      "sourceHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d",
+      "translation": "Setting ID (SettingId)",
+      "contextHash": "1fbefa1fcfac743ddf5653b58ba309de5c46933931ada3d7a3ec34f7f9ee990d"
+    },
+    {
+      "id": "heading-045",
+      "type": "heading",
+      "source": "タイルセットのメモ欄からの呼び出しに使う識別子です。",
+      "sourceHash": "d9260bb02a09c2fbcf3b8e476cc5533e0c4828ae2b41257fe06d88cc7b217daa",
+      "translation": "The identifier used to call the setting from a tileset's note field.",
+      "contextHash": "d9260bb02a09c2fbcf3b8e476cc5533e0c4828ae2b41257fe06d88cc7b217daa"
+    },
+    {
+      "id": "heading-046",
+      "type": "heading",
+      "source": "『全タイルセットで有効』がオンの場合は不要です。",
+      "sourceHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6",
+      "translation": "This is unnecessary when Valid All Tilesets is enabled.",
+      "contextHash": "84a92ded7b3e63187c28a2698a494a855fe5a839ffe7d56f8fe6342556f5c3f6"
+    },
+    {
+      "id": "heading-047",
+      "type": "heading",
+      "source": "全タイルセットで有効（ValidAllTilesets）",
+      "sourceHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280",
+      "translation": "Valid All Tilesets (ValidAllTilesets)",
+      "contextHash": "c170f27e194a3eaea9d8bb47273f56f7fd7c6d0adb10d0a1d67b971bf57d2280"
+    },
+    {
+      "id": "heading-048",
+      "type": "heading",
+      "source": "設定を全てのタイルセットで有効にします。",
+      "sourceHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e",
+      "translation": "Makes the setting valid for all tilesets.",
+      "contextHash": "bb75a7a26f7606e35b142ca3aba6fdcc58b97627804ec412dda97e14aa8a6d5e"
+    },
+    {
+      "id": "heading-049",
+      "type": "heading",
+      "source": "特定のタイルセットにのみ設定を反映したい場合は、オフにしてください。",
+      "sourceHash": "dd012eabb25dfb7aad6083af2188c9c32f06b7f2c8eb988efac77c101666968d",
+      "translation": "Turn this off if you want the setting to apply only to specific tilesets.",
+      "contextHash": "dd012eabb25dfb7aad6083af2188c9c32f06b7f2c8eb988efac77c101666968d"
+    },
+    {
+      "id": "heading-050",
+      "type": "heading",
+      "source": "茂みを強制適用（ForceBush）",
+      "sourceHash": "a36fda684343722907aad9a790ac4c20ab16e26d8c570a14992c5ae2a38066eb",
+      "translation": "Force Bush (ForceBush)",
+      "contextHash": "a36fda684343722907aad9a790ac4c20ab16e26d8c570a14992c5ae2a38066eb"
+    },
+    {
+      "id": "heading-051",
+      "type": "heading",
+      "source": "条件を満たした場合、茂み以外のタイルでも常に茂み状態を適用します。",
+      "sourceHash": "203c4e26c7d686348187011a38ec80d64456d890eceecc197fc581d4aee1c352",
+      "translation": "When the conditions are met, the bush state is always applied, even on tiles that are not bushes.",
+      "contextHash": "203c4e26c7d686348187011a38ec80d64456d890eceecc197fc581d4aee1c352"
+    },
+    {
+      "id": "heading-052",
+      "type": "heading",
+      "source": "オフにした場合は通常通り、タイルセット側にも茂み属性が必要となります。",
+      "sourceHash": "9298b15bfc7a3802e4f96e6de0983ba49a080a1780c16448939f56d08ef0d66a",
+      "translation": "When turned off, bush attributes are still required on the tileset side as usual.",
+      "contextHash": "9298b15bfc7a3802e4f96e6de0983ba49a080a1780c16448939f56d08ef0d66a"
+    },
+    {
+      "id": "heading-053",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：条件）",
+      "sourceHash": "2b09a5c11b4ae90e9e4d9db6506e85eeec491a71f1d5836a2cb940a92c553b11",
+      "translation": "Plugin Parameters (Setting List: Conditions)",
+      "contextHash": "2b09a5c11b4ae90e9e4d9db6506e85eeec491a71f1d5836a2cb940a92c553b11"
+    },
+    {
+      "id": "heading-054",
+      "type": "heading",
+      "source": "地形タグ（TerrainTag）",
+      "sourceHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061",
+      "translation": "Terrain Tag (TerrainTag)",
+      "contextHash": "9813f08c67c51ff07e736f77490a0fd5ba7746bfd3178d42393e96b8a8e64061"
+    },
+    {
+      "id": "heading-055",
+      "type": "heading",
+      "source": "対象とする地形タグ（1~7）を指定します。",
+      "sourceHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6",
+      "translation": "Specify the target terrain tags (1~7).",
+      "contextHash": "2a1ea289a530198f2c28e2971254aa1f0775b7104aef65e9b61101185b53eca6"
+    },
+    {
+      "id": "heading-056",
+      "type": "heading",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple entries can also be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-057",
+      "type": "heading",
+      "source": "７つまでしか設定できないのでご利用は計画的に。",
+      "sourceHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620",
+      "translation": "Only up to seven can be configured, so use them wisely.",
+      "contextHash": "031ae8441498db5300d640070896c83d63508601641c1a82705c471a6f760620"
+    },
+    {
+      "id": "heading-058",
+      "type": "heading",
+      "source": "リージョンＩＤ（RegionId）",
+      "sourceHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78",
+      "translation": "Region ID (RegionId)",
+      "contextHash": "674fe77c8a1d00ed1c203074c0f99da2a715ea4dac4aa8d7aef0994bef067f78"
+    },
+    {
+      "id": "heading-059",
+      "type": "heading",
+      "source": "対象とするリージョン（1~255）を指定します。",
+      "sourceHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644",
+      "translation": "Specify the target regions (1~255).",
+      "contextHash": "3c92c4201ea1b866fd667dbc686fb3b013f472f8f2c61c78b45400ca8c4d0644"
+    },
+    {
+      "id": "heading-060",
+      "type": "heading",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple entries can also be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-061",
+      "type": "heading",
+      "source": "オートタイルタイプ（AutotileType）",
+      "sourceHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e",
+      "translation": "Autotile Type (AutotileType)",
+      "contextHash": "0b5b585c1d0d6020d6f985cf832783c5ffeeed0efd67ea5cf48a9922e99f9a0e"
+    },
+    {
+      "id": "heading-062",
+      "type": "heading",
+      "source": "対象とするオートタイルタイプを指定します。",
+      "sourceHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b",
+      "translation": "Specify the target autotile types.",
+      "contextHash": "4a1e0c65f10bbf1c58b538c8d218f554dc8cc13dd36dc4f2723036266478ae8b"
+    },
+    {
+      "id": "heading-063",
+      "type": "heading",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple entries can also be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-064",
+      "type": "heading",
+      "source": "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。",
+      "sourceHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8",
+      "translation": "An autotile type is a number assigned to each autotile. By default, it is used to determine battle backgrounds.",
+      "contextHash": "ede489fb0e77046186fdd1c2e20830556601def32e5984cfc6fd55d352b0a9c8"
+    },
+    {
+      "id": "heading-065",
+      "type": "heading",
+      "source": "地形タグと異なり数の制限がないため、自由に設定が可能です。",
+      "sourceHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61",
+      "translation": "Unlike terrain tags, there is no limit on the number of these, so they can be configured freely.",
+      "contextHash": "4cb5a775f8c2f16e842fce5488a127d5787d5e8f8b279efa65357d164befbe61"
+    },
+    {
+      "id": "heading-066",
+      "type": "heading",
+      "source": "ただし、この値は通常確認できません。",
+      "sourceHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1",
+      "translation": "However, this value cannot normally be checked.",
+      "contextHash": "273440e2259ae8e9967ab96e5812c21e5d771622d565cd258ab56ba504db14d1"
+    },
+    {
+      "id": "heading-067",
+      "type": "heading",
+      "source": "オプションにある「タイル情報をデバッグ表示する」プラグインで確認ができます。",
+      "sourceHash": "a46cb84c60ff214ebce3c51036d5cccdfd5d0d955b04e443d0a7b9a2bffb08d5",
+      "translation": "You can check this with the “Display Tile Information for Debugging” plugin in the options.",
+      "contextHash": "a46cb84c60ff214ebce3c51036d5cccdfd5d0d955b04e443d0a7b9a2bffb08d5"
+    },
+    {
+      "id": "heading-068",
+      "type": "heading",
+      "source": "タイルＩＤ（TileId）",
+      "sourceHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e",
+      "translation": "Tile ID (TileId)",
+      "contextHash": "0884bfb17ac9796a6caeef3973e9dfbcda5292037021b0d52b5ba0cd61ef5b7e"
+    },
+    {
+      "id": "heading-069",
+      "type": "heading",
+      "source": "対象とするタイルＩＤを指定します。",
+      "sourceHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf",
+      "translation": "Specify the target tile IDs.",
+      "contextHash": "b1e604cfddeae7f35e73cc46941943d98a7b467972c0ca53005455c59cd840cf"
+    },
+    {
+      "id": "heading-070",
+      "type": "heading",
+      "source": "複数指定も可能です。（例：1,3~5）",
+      "sourceHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62",
+      "translation": "Multiple IDs can be specified. (Example: 1,3~5)",
+      "contextHash": "8953f8b47c61c329867e6ad7acbec18348eebcff57bdb50c6420add861a18a62"
+    },
+    {
+      "id": "heading-071",
+      "type": "heading",
+      "source": "こちらはエディタの機能で普通に取得できますが、面倒です。",
+      "sourceHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4",
+      "translation": "This can be obtained normally using the editor's features, but it is tedious.",
+      "contextHash": "748259dc6cae5b8b222ef6f9c217b67542646e97f764317813bf5cd2685c17a4"
+    },
+    {
+      "id": "heading-072",
+      "type": "heading",
+      "source": "こちらも「タイル情報をデバッグ表示する」プラグインでの確認をオススメします。",
+      "sourceHash": "eff68a8e6e250dced0b450620df1e235036f410e59117ef23b87e17e39cdab34",
+      "translation": "Here too, I recommend checking with the “Display Tile Information for Debugging” plugin.",
+      "contextHash": "eff68a8e6e250dced0b450620df1e235036f410e59117ef23b87e17e39cdab34"
+    },
+    {
+      "id": "heading-073",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：不透明度設定）",
+      "sourceHash": "f2d0f1c9b1d8e8e5e17b3eea3f9cce9e2171f8f5ec9a4e27bfb362485f35f5a6",
+      "translation": "Plugin Parameters (Settings List: Opacity Settings)",
+      "contextHash": "f2d0f1c9b1d8e8e5e17b3eea3f9cce9e2171f8f5ec9a4e27bfb362485f35f5a6"
+    },
+    {
+      "id": "heading-074",
+      "type": "heading",
+      "source": "茂みの深さ（BushDepth）",
+      "sourceHash": "02cceff563e2e60c50d2e41aa409a383228dd597bc9cdfa839daa88ab93df095",
+      "translation": "Bush Depth (BushDepth)",
+      "contextHash": "02cceff563e2e60c50d2e41aa409a383228dd597bc9cdfa839daa88ab93df095"
+    },
+    {
+      "id": "heading-075",
+      "type": "heading",
+      "source": "茂み上でキャラクターの下半身に半透明効果を適用する高さです。",
+      "sourceHash": "31c0ba39ad0ec8bb5de19362aba676b2aa7cbafadd49c72855664e2d7ca5df22",
+      "translation": "The height at which a translucent effect is applied to the lower half of a character while on a bush tile.",
+      "contextHash": "31c0ba39ad0ec8bb5de19362aba676b2aa7cbafadd49c72855664e2d7ca5df22"
+    },
+    {
+      "id": "heading-076",
+      "type": "heading",
+      "source": "値を設定しない場合は、全体の初期値が適用されます。",
+      "sourceHash": "9fb7a3a671a7f361031488531008ef1f6767cdd7a7b087d32e67f3a2d18c28ff",
+      "translation": "If no value is set, the overall default value is applied.",
+      "contextHash": "9fb7a3a671a7f361031488531008ef1f6767cdd7a7b087d32e67f3a2d18c28ff"
+    },
+    {
+      "id": "heading-077",
+      "type": "heading",
+      "source": "茂みでの不透明度（BushOpacity）",
+      "sourceHash": "d8b5d77bc73450b09ed0c426275ef518a0cbefa3dfef1297b5f39ec1b7c3fc4f",
+      "translation": "Opacity in Bushes (BushOpacity)",
+      "contextHash": "d8b5d77bc73450b09ed0c426275ef518a0cbefa3dfef1297b5f39ec1b7c3fc4f"
+    },
+    {
+      "id": "heading-078",
+      "type": "heading",
+      "source": "茂み上でキャラクターの下半身に適用する不透明度です。",
+      "sourceHash": "8410677ff06799b24f4c8555b9c07c95e841f3e292e13b28427543bf01bc90a6",
+      "translation": "The opacity applied to the lower half of a character while on a bush tile.",
+      "contextHash": "8410677ff06799b24f4c8555b9c07c95e841f3e292e13b28427543bf01bc90a6"
+    },
+    {
+      "id": "heading-079",
+      "type": "heading",
+      "source": "値を設定しない場合は、全体の初期値が適用されます。",
+      "sourceHash": "9fb7a3a671a7f361031488531008ef1f6767cdd7a7b087d32e67f3a2d18c28ff",
+      "translation": "If no value is set, the overall default value is applied.",
+      "contextHash": "9fb7a3a671a7f361031488531008ef1f6767cdd7a7b087d32e67f3a2d18c28ff"
+    },
+    {
+      "id": "heading-080",
+      "type": "heading",
+      "source": "プラグインパラメータ（設定リスト：おまけ）",
+      "sourceHash": "1636a2ef02f71defe2797c199d69f9e0d249f790ad6ece50f981bfc29969d1ac",
+      "translation": "Plugin Parameters (Settings List: Bonus)",
+      "contextHash": "1636a2ef02f71defe2797c199d69f9e0d249f790ad6ece50f981bfc29969d1ac"
+    },
+    {
+      "id": "heading-081",
+      "type": "heading",
+      "source": "茂みでの色（BushColor）",
+      "sourceHash": "6f619c087290f0baad50612869e78add8ef374d33a3b4b33e4b03cdc23575d15",
+      "translation": "Color in Bushes (BushColor)",
+      "contextHash": "6f619c087290f0baad50612869e78add8ef374d33a3b4b33e4b03cdc23575d15"
+    },
+    {
+      "id": "heading-082",
+      "type": "heading",
+      "source": "茂み上でキャラクターの下半身に適用する色です。",
+      "sourceHash": "a4e0f1a0dc6e69deda366c5b5196355e1cf566053ddf55deaa6f9de478d9491e",
+      "translation": "The color applied to the lower half of a character while on a bush tile.",
+      "contextHash": "a4e0f1a0dc6e69deda366c5b5196355e1cf566053ddf55deaa6f9de478d9491e"
+    },
+    {
+      "id": "heading-083",
+      "type": "heading",
+      "source": "例：[255,255,255,255]",
+      "sourceHash": "1f60137482b159093ba4a0a72c86fb92584039d800326ad5da1ec072451373d9",
+      "translation": "Example: [255,255,255,255]",
+      "contextHash": "1f60137482b159093ba4a0a72c86fb92584039d800326ad5da1ec072451373d9"
+    },
+    {
+      "id": "heading-084",
+      "type": "heading",
+      "source": "順番に[赤、緑、青、強さ]です。",
+      "sourceHash": "48cf87e93c2a47b5fa5c757b9c86e74390090b320c341a7adebd4bbdd90278e2",
+      "translation": "In order: [red, green, blue, strength].",
+      "contextHash": "48cf87e93c2a47b5fa5c757b9c86e74390090b320c341a7adebd4bbdd90278e2"
+    },
+    {
+      "id": "heading-085",
+      "type": "heading",
+      "source": "※[]も必須です。",
+      "sourceHash": "7b21df12100a786f3e967a2157f6b27ec18545b7c7260a1406894fe82c6194bb",
+      "translation": "※[] are also required.",
+      "contextHash": "7b21df12100a786f3e967a2157f6b27ec18545b7c7260a1406894fe82c6194bb"
+    },
+    {
+      "id": "heading-086",
+      "type": "heading",
+      "source": "浮遊効果の振幅（FloatAmplitude）ver1.02",
+      "sourceHash": "4bb4411560d0b81f7957ac0071f3076231ff6fc831b460dfe7ccd76ad6a022ef",
+      "translation": "Float Effect Amplitude (FloatAmplitude) ver1.02",
+      "contextHash": "4bb4411560d0b81f7957ac0071f3076231ff6fc831b460dfe7ccd76ad6a022ef"
+    },
+    {
+      "id": "heading-087",
+      "type": "heading",
+      "source": "茂み上での浮遊効果の振幅です。数式可。",
+      "sourceHash": "05293a37c4a3410293b4f3d7fffaca26a849566cf7d0c9ca04ba60dec1f905a1",
+      "translation": "The amplitude of the float effect while on a bush tile. Formulas can be used.",
+      "contextHash": "05293a37c4a3410293b4f3d7fffaca26a849566cf7d0c9ca04ba60dec1f905a1"
+    },
+    {
+      "id": "heading-088",
+      "type": "heading",
+      "source": "水に浮かぶような演出にどうぞ。",
+      "sourceHash": "2335f499657d892b68d63e02f4f43d329ff10225ed5ccb77f30d2d29cbfb567b",
+      "translation": "Use this to create an effect that makes characters appear to float on water.",
+      "contextHash": "2335f499657d892b68d63e02f4f43d329ff10225ed5ccb77f30d2d29cbfb567b"
+    },
+    {
+      "id": "heading-089",
+      "type": "heading",
+      "source": "浮遊効果の周期（FloatPeriodicTime）ver1.02",
+      "sourceHash": "3ee9b6561423f8ee90cc80c22d34db6934f04975916aed2d2a4810f9dadcbd7c",
+      "translation": "Float Effect Period (FloatPeriodicTime) ver1.02",
+      "contextHash": "3ee9b6561423f8ee90cc80c22d34db6934f04975916aed2d2a4810f9dadcbd7c"
+    },
+    {
+      "id": "heading-090",
+      "type": "heading",
+      "source": "茂み上での浮遊効果の振幅の周期です。数式可。",
+      "sourceHash": "e68983bfff3d71ab5f7db3655615e79b1f3d28261a820579527fcc62193d087c",
+      "translation": "The period of the float effect's amplitude while on a bush tile. Formulas can be used.",
+      "contextHash": "e68983bfff3d71ab5f7db3655615e79b1f3d28261a820579527fcc62193d087c"
+    },
+    {
+      "id": "heading-091",
+      "type": "heading",
+      "source": "60が1秒に相当します。空白の場合は120になります。",
+      "sourceHash": "63148034841b0cdfb71cf6b986b9bcbd2f7b220820b75050e212cb41370c2940",
+      "translation": "60 corresponds to one second. If left blank, it becomes 120.",
+      "contextHash": "63148034841b0cdfb71cf6b986b9bcbd2f7b220820b75050e212cb41370c2940"
+    },
+    {
+      "id": "heading-092",
+      "type": "heading",
+      "source": "なお、浮遊効果の振幅に値がある場合のみ機能します。",
+      "sourceHash": "9f5fb9886941902448f68cb1510bb1904be6591be49178231ed58a4e188ac8d7",
+      "translation": "This only functions when the float effect amplitude has a value.",
+      "contextHash": "9f5fb9886941902448f68cb1510bb1904be6591be49178231ed58a4e188ac8d7"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法（Install）[[/LINK_1]]",
+      "sourceHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c",
+      "parts": [
+        {
+          "source": "導入方法（Install）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Installation (Install)[[/LINK_1]]",
+      "contextHash": "5695cb54a17bbca56e40dd0127c3f798e16311a15400a2c4cf2d2e1b3fc0412c"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴（History）[[/LINK_1]]",
+      "sourceHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2",
+      "parts": [
+        {
+          "source": "更新履歴（History）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History (History)[[/LINK_1]]",
+      "contextHash": "4161acbf513d9807a27c04cd1a62d982f5d7c3c54acce7475b0c6bc7cafab6c2"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法（Usage）[[/LINK_1]]",
+      "sourceHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374",
+      "parts": [
+        {
+          "source": "使用方法（Usage）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Usage (Usage)[[/LINK_1]]",
+      "contextHash": "e30caaae1523b9d421ebf062c0ee683bdbd9d48924a909e74fd5e4e070f55374"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]タイルセットのメモ欄（Note of Tilesets）[[/LINK_1]]",
+      "sourceHash": "a074d89bd3c9cbe4f11d115baaae8851d062f01e0fe3402a61da6145591089c4",
+      "parts": [
+        {
+          "source": "タイルセットのメモ欄（Note of Tilesets）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tileset Note (Note of Tilesets)[[/LINK_1]]",
+      "contextHash": "a074d89bd3c9cbe4f11d115baaae8851d062f01e0fe3402a61da6145591089c4"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]イベントのメモ欄（Note of Events）[[/LINK_1]]ver1.03",
+      "sourceHash": "50ec5d0c0b3b1e70df0ff2ab86ec104d625b88a2c7b4810ef330dab6ec2b5226",
+      "parts": [
+        {
+          "source": "イベントのメモ欄（Note of Events）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.03",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Event Note (Note of Events)[[/LINK_1]] ver1.03",
+      "contextHash": "50ec5d0c0b3b1e70df0ff2ab86ec104d625b88a2c7b4810ef330dab6ec2b5226"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインコマンド（ＭＺ）[[/LINK_1]]ver1.03",
+      "sourceHash": "2f32e40dd0566aef0e9377ea451b832282ceb08876c81b2a5ebfea43266a8039",
+      "parts": [
+        {
+          "source": "プラグインコマンド（ＭＺ）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.03",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Commands (MZ)[[/LINK_1]] ver1.03",
+      "contextHash": "2f32e40dd0566aef0e9377ea451b832282ceb08876c81b2a5ebfea43266a8039"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]茂み効果の設定（SetBushEffect）[[/LINK_1]]",
+      "sourceHash": "adcb6f84d104a07cd0f28b5b3fe43e77e6c09c272f0ce2958c84b891219ddaa3",
+      "parts": [
+        {
+          "source": "茂み効果の設定（SetBushEffect）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Effect Settings (SetBushEffect)[[/LINK_1]]",
+      "contextHash": "adcb6f84d104a07cd0f28b5b3fe43e77e6c09c272f0ce2958c84b891219ddaa3"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]茂み効果の設定（乗物）（SetBushEffectVehicle）[[/LINK_1]]",
+      "sourceHash": "5c3b7fdecfd954ad0185f18ed1238704741722d6644fb5de67c4a0028b45718f",
+      "parts": [
+        {
+          "source": "茂み効果の設定（乗物）（SetBushEffectVehicle）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Effect Settings (Vehicles) (SetBushEffectVehicle)[[/LINK_1]]",
+      "contextHash": "5c3b7fdecfd954ad0185f18ed1238704741722d6644fb5de67c4a0028b45718f"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（基本）[[/LINK_1]]",
+      "sourceHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（基本）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Basic)[[/LINK_1]]",
+      "contextHash": "cf0349a2da0888e77ecb34c311da0799ba8fb72b614a6a89c10491e05c59e003"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]茂みレイヤーの限定（LimitBushLayer）[[/LINK_1]]",
+      "sourceHash": "9366f02c29dcc782da547c3bf2c624841a764ae518127c838f4f44eab00cdd8a",
+      "parts": [
+        {
+          "source": "茂みレイヤーの限定（LimitBushLayer）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Layer Limit (LimitBushLayer)[[/LINK_1]]",
+      "contextHash": "9366f02c29dcc782da547c3bf2c624841a764ae518127c838f4f44eab00cdd8a"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]除外する地形タグ（ExcludedTerrain）[[/LINK_1]]ver1.01",
+      "sourceHash": "c89a5be22b6412be218e04c1e09ce515b6d8eb2e0586983ecb5767962b374b23",
+      "parts": [
+        {
+          "source": "除外する地形タグ（ExcludedTerrain）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.01",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Excluded Terrain Tags (ExcludedTerrain)[[/LINK_1]] ver1.01",
+      "contextHash": "c89a5be22b6412be218e04c1e09ce515b6d8eb2e0586983ecb5767962b374b23"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]茂みの深さ（BushDepth）[[/LINK_1]]",
+      "sourceHash": "b82a5d5570d9a4565639412b767b26982008e83b932b7425b6db7a313b4b8ae0",
+      "parts": [
+        {
+          "source": "茂みの深さ（BushDepth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Depth (BushDepth)[[/LINK_1]]",
+      "contextHash": "b82a5d5570d9a4565639412b767b26982008e83b932b7425b6db7a313b4b8ae0"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]茂みでの不透明度（BushOpacity）[[/LINK_1]]",
+      "sourceHash": "b71a5f7b68a91d452592ebdcc8d59af02c712e975f19e25a5fa3d7df866152a6",
+      "parts": [
+        {
+          "source": "茂みでの不透明度（BushOpacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Opacity in Bushes (BushOpacity)[[/LINK_1]]",
+      "contextHash": "b71a5f7b68a91d452592ebdcc8d59af02c712e975f19e25a5fa3d7df866152a6"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]設定リスト（SettingList）[[/LINK_1]]",
+      "sourceHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a",
+      "parts": [
+        {
+          "source": "設定リスト（SettingList）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting List (SettingList)[[/LINK_1]]",
+      "contextHash": "6fdb368dcab9a1e73f0c9a92248d6cace3181b6af5ff63569e5418f70f2d1a3a"
+    },
+    {
+      "id": "line-015",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト）[[/LINK_1]]",
+      "sourceHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List)[[/LINK_1]]",
+      "contextHash": "5422744838042f5bcc8be9c5798553f0c510b6253dd0d91c7365b0baf1ba4e2d"
+    },
+    {
+      "id": "line-016",
+      "type": "line",
+      "source": "[[LINK_1]]設定ＩＤ（SettingId）[[/LINK_1]]",
+      "sourceHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165",
+      "parts": [
+        {
+          "source": "設定ＩＤ（SettingId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Setting ID (SettingId)[[/LINK_1]]",
+      "contextHash": "e155f51300224d7b4beafc89eba28f13f7d0c065000d86f8f7d2d5a80e7b0165"
+    },
+    {
+      "id": "line-017",
+      "type": "line",
+      "source": "[[LINK_1]]全タイルセットで有効（ValidAllTilesets）[[/LINK_1]]",
+      "sourceHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58",
+      "parts": [
+        {
+          "source": "全タイルセットで有効（ValidAllTilesets）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Valid for All Tilesets (ValidAllTilesets)[[/LINK_1]]",
+      "contextHash": "1d7be728c668cb02cbb0175416d6efaa68954543edaa6ef38856ba57b9d93a58"
+    },
+    {
+      "id": "line-018",
+      "type": "line",
+      "source": "[[LINK_1]]茂みを強制適用（ForceBush）[[/LINK_1]]",
+      "sourceHash": "c5188caa8ddd3e770b1802ad7b0928863c5c629b69d72ee49d5f77b1cfcb73d9",
+      "parts": [
+        {
+          "source": "茂みを強制適用（ForceBush）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Force Bush (ForceBush)[[/LINK_1]]",
+      "contextHash": "c5188caa8ddd3e770b1802ad7b0928863c5c629b69d72ee49d5f77b1cfcb73d9"
+    },
+    {
+      "id": "line-019",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：条件）[[/LINK_1]]",
+      "sourceHash": "b40654d723344ac5a0c7887773b3614f8582027ddb6aa288c59023e459749b8b",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：条件）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List: Conditions)[[/LINK_1]]",
+      "contextHash": "b40654d723344ac5a0c7887773b3614f8582027ddb6aa288c59023e459749b8b"
+    },
+    {
+      "id": "line-020",
+      "type": "line",
+      "source": "[[LINK_1]]地形タグ（TerrainTag）[[/LINK_1]]",
+      "sourceHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0",
+      "parts": [
+        {
+          "source": "地形タグ（TerrainTag）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Terrain Tag (TerrainTag)[[/LINK_1]]",
+      "contextHash": "c7e81e774e914fb4fd9e6deb1423327639e07938e061f59960b4686f13526da0"
+    },
+    {
+      "id": "line-021",
+      "type": "line",
+      "source": "[[LINK_1]]リージョンＩＤ（RegionId）[[/LINK_1]]",
+      "sourceHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3",
+      "parts": [
+        {
+          "source": "リージョンＩＤ（RegionId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Region ID (RegionId)[[/LINK_1]]",
+      "contextHash": "ab15bccfc2c7c177b3cd1bcf306cd382f801479aa724a5f673a67951644a68d3"
+    },
+    {
+      "id": "line-022",
+      "type": "line",
+      "source": "[[LINK_1]]オートタイルタイプ（AutotileType）[[/LINK_1]]",
+      "sourceHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6",
+      "parts": [
+        {
+          "source": "オートタイルタイプ（AutotileType）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Autotile Type (AutotileType)[[/LINK_1]]",
+      "contextHash": "ec1bf506fdbf23a46b78f226896c15ab05f9a0876e405aecfeeb2440275d88b6"
+    },
+    {
+      "id": "line-023",
+      "type": "line",
+      "source": "[[LINK_1]]タイルＩＤ（TileId）[[/LINK_1]]",
+      "sourceHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065",
+      "parts": [
+        {
+          "source": "タイルＩＤ（TileId）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Tile ID (TileId)[[/LINK_1]]",
+      "contextHash": "1b700e257ae34ed12329619e0249a787b07c93a9cc1b53d217d6ec6a9344b065"
+    },
+    {
+      "id": "line-024",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：不透明度設定）[[/LINK_1]]",
+      "sourceHash": "037d2c5ba53473fc2d82a17cce46a629575962db786348fafb8bdd313f2fb286",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：不透明度設定）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List: Opacity Settings)[[/LINK_1]]",
+      "contextHash": "037d2c5ba53473fc2d82a17cce46a629575962db786348fafb8bdd313f2fb286"
+    },
+    {
+      "id": "line-025",
+      "type": "line",
+      "source": "[[LINK_1]]茂みの深さ（BushDepth）[[/LINK_1]]",
+      "sourceHash": "b82a5d5570d9a4565639412b767b26982008e83b932b7425b6db7a313b4b8ae0",
+      "parts": [
+        {
+          "source": "茂みの深さ（BushDepth）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Depth (BushDepth)[[/LINK_1]]",
+      "contextHash": "b82a5d5570d9a4565639412b767b26982008e83b932b7425b6db7a313b4b8ae0"
+    },
+    {
+      "id": "line-026",
+      "type": "line",
+      "source": "[[LINK_1]]茂みでの不透明度（BushOpacity）[[/LINK_1]]",
+      "sourceHash": "b71a5f7b68a91d452592ebdcc8d59af02c712e975f19e25a5fa3d7df866152a6",
+      "parts": [
+        {
+          "source": "茂みでの不透明度（BushOpacity）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Opacity in Bushes (BushOpacity)[[/LINK_1]]",
+      "contextHash": "b71a5f7b68a91d452592ebdcc8d59af02c712e975f19e25a5fa3d7df866152a6"
+    },
+    {
+      "id": "line-027",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ（設定リスト：おまけ）[[/LINK_1]]",
+      "sourceHash": "fa767530a23dfdab82d38d409a7574ec2d8f7fa24a993dc133cc4113f204322e",
+      "parts": [
+        {
+          "source": "プラグインパラメータ（設定リスト：おまけ）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters (Setting List: Extras)[[/LINK_1]]",
+      "contextHash": "fa767530a23dfdab82d38d409a7574ec2d8f7fa24a993dc133cc4113f204322e"
+    },
+    {
+      "id": "line-028",
+      "type": "line",
+      "source": "[[LINK_1]]茂みでの色（BushColor）[[/LINK_1]]",
+      "sourceHash": "752ee7ac6bfd72befa986d41767cb5bb727202a7bd0f2c099af9a407f16e7023",
+      "parts": [
+        {
+          "source": "茂みでの色（BushColor）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Bush Color (BushColor)[[/LINK_1]]",
+      "contextHash": "752ee7ac6bfd72befa986d41767cb5bb727202a7bd0f2c099af9a407f16e7023"
+    },
+    {
+      "id": "line-029",
+      "type": "line",
+      "source": "[[LINK_1]]浮遊効果の振幅（FloatAmplitude）[[/LINK_1]]ver1.02",
+      "sourceHash": "34e6b9b6767f1266d3f58c262b0d79f71ba1df2db1fb11d8ae4df061fcb4df34",
+      "parts": [
+        {
+          "source": "浮遊効果の振幅（FloatAmplitude）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Float Effect Amplitude (FloatAmplitude)[[/LINK_1]] ver1.02",
+      "contextHash": "34e6b9b6767f1266d3f58c262b0d79f71ba1df2db1fb11d8ae4df061fcb4df34"
+    },
+    {
+      "id": "line-030",
+      "type": "line",
+      "source": "[[LINK_1]]浮遊効果の周期（FloatPeriodicTime）[[/LINK_1]]ver1.02",
+      "sourceHash": "a246c0747bcfdc5dbfd16240503bca0239f4ba2a0c8fba44e1ce1b15001cc8d6",
+      "parts": [
+        {
+          "source": "浮遊効果の周期（FloatPeriodicTime）",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "ver1.02",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Float Effect Period (FloatPeriodicTime)[[/LINK_1]] ver1.02",
+      "contextHash": "a246c0747bcfdc5dbfd16240503bca0239f4ba2a0c8fba44e1ce1b15001cc8d6"
+    },
+    {
+      "id": "line-031",
+      "type": "line",
+      "source": "タイル情報をデバッグ表示する（[[LINK_1]]詳細[[/LINK_1]]）",
+      "sourceHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887",
+      "parts": [
+        {
+          "source": "タイル情報をデバッグ表示する（",
+          "link": false
+        },
+        {
+          "source": "詳細",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "）",
+          "link": false
+        }
+      ],
+      "translation": "Display tile information for debugging ([[LINK_1]]Details[[/LINK_1]])",
+      "contextHash": "d619948bdfff8654670d34246f25f1a3f393b25e9f743e80539591b271ca0887"
+    },
+    {
+      "id": "line-032",
+      "type": "line",
+      "source": "[[LINK_1]]イベントのメモ欄および注釈から茂み効果を強制設定する機能[[/LINK_1]]を追加。",
+      "sourceHash": "b895dfe8b82e4b3314def44c5cead62c8e0c786459a74ad00bffe5a8dfdfa57b",
+      "parts": [
+        {
+          "source": "イベントのメモ欄および注釈から茂み効果を強制設定する機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]Added a feature to force bush effects to be set from an event's note field and comments[[/LINK_1]].",
+      "contextHash": "b895dfe8b82e4b3314def44c5cead62c8e0c786459a74ad00bffe5a8dfdfa57b"
+    },
+    {
+      "id": "line-033",
+      "type": "line",
+      "source": "[[LINK_1]]茂み効果の設定[[/LINK_1]]および[[LINK_2]]茂み効果の設定（乗物）[[/LINK_2]]のプラグインコマンド（ＭＺ）を追加。",
+      "sourceHash": "04e8dd3ff7cfb4da7bc94e5be9db602548f8a028e1a4cdceec5da4187439710c",
+      "parts": [
+        {
+          "source": "茂み効果の設定",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "および",
+          "link": false
+        },
+        {
+          "source": "茂み効果の設定（乗物）",
+          "link": true,
+          "linkIndex": 2
+        },
+        {
+          "source": "のプラグインコマンド（ＭＺ）を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]Bush Effect Settings[[/LINK_1]] and [[LINK_2]]Bush Effect Settings (Vehicles)[[/LINK_2]] plugin commands (MZ).",
+      "contextHash": "04e8dd3ff7cfb4da7bc94e5be9db602548f8a028e1a4cdceec5da4187439710c"
+    },
+    {
+      "id": "line-034",
+      "type": "line",
+      "source": "イベントの[[LINK_1]]茂み無効機能[[/LINK_1]]を追加。",
+      "sourceHash": "abe404229d60eecb5332fb2026b0362ec839ea8d4729280db865a5af2e7daf96",
+      "parts": [
+        {
+          "source": "イベントの",
+          "link": false
+        },
+        {
+          "source": "茂み無効機能",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added an event [[LINK_1]]bush effect disable feature[[/LINK_1]].",
+      "contextHash": "abe404229d60eecb5332fb2026b0362ec839ea8d4729280db865a5af2e7daf96"
+    },
+    {
+      "id": "line-035",
+      "type": "line",
+      "source": "おまけに[[LINK_1]]浮遊効果[[/LINK_1]]を追加。水に浮かんでいるような演出にどうぞ。",
+      "sourceHash": "c3c7beb29d87c79d89619ceb2f4734709e978ce743b024eb2d1062ddc5e68c53",
+      "parts": [
+        {
+          "source": "おまけに",
+          "link": false
+        },
+        {
+          "source": "浮遊効果",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を追加。水に浮かんでいるような演出にどうぞ。",
+          "link": false
+        }
+      ],
+      "translation": "Added a [[LINK_1]]float effect[[/LINK_1]] as an extra. Use it to create an effect that looks like something is floating on water.",
+      "contextHash": "c3c7beb29d87c79d89619ceb2f4734709e978ce743b024eb2d1062ddc5e68c53"
+    },
+    {
+      "id": "line-036",
+      "type": "line",
+      "source": "[[LINK_1]]除外する地形タグ[[/LINK_1]]の項目を追加。",
+      "sourceHash": "7646df03220fa4d39dbe4127b1da85b716a28ec93f31ca4709d88b8e1d6b3716",
+      "parts": [
+        {
+          "source": "除外する地形タグ",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "の項目を追加。",
+          "link": false
+        }
+      ],
+      "translation": "Added the [[LINK_1]]Excluded Terrain Tags[[/LINK_1]] option.",
+      "contextHash": "7646df03220fa4d39dbe4127b1da85b716a28ec93f31ca4709d88b8e1d6b3716"
+    },
+    {
+      "id": "line-037",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to the RPG Maker MZ & MV table of contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "茂み属性の機能を拡張します。": "Expands the functions of the bush attribute.",
+    "通常、茂み属性を付加されたタイルの上に立つと、キャラクターの下半身が半透明になって表示されます。": "Normally, when standing on a tile with the bush attribute, the character's lower body is displayed semi-transparently.",
+    "この機能は茂みだけでなく、水場などの表現にも利用されます。": "This function can be used not only for bushes, but also to represent water and similar terrain.",
+    "しかしながら、困ったことに茂み属性は全てのレイヤーに適用されてしまいます。": "However, the bush attribute is applied to every layer, which can cause problems.",
+    "例えば、水の上に架かる橋を設置した場合、橋の上に立っているのに、水中にいるかのようにキャラが半透明になってしまいます。": "For example, if you place a bridge over water, the character becomes semi-transparent as if they were underwater even when standing on the bridge.",
+    "そこで、茂みの上のレイヤーに他のタイルがある場合、茂み属性を適用しないようにします。": "Therefore, the bush attribute is not applied when another tile exists on a layer above the bush.",
+    "その他にも、不透明度や茂みの深さ、おまけに色を調整できます。": "You can also adjust the opacity, bush depth, and even the color.",
+    "地形タグやリージョンＩＤ、タイルＩＤやオートタイルタイプを条件にして細かく設定することも可能です。": "Detailed settings can be configured based on terrain tags, region IDs, tile IDs, and auto-tile types.",
+    "作成した設定に『設定ＩＤ』を付加すれば、タイルセット毎に設定を呼び出すことも可能です。": "By assigning a Setting ID to a created configuration, you can also call up the configuration for each tileset.",
+    "さらに浮遊効果をキャラクターに付加することができます。": "You can also add a floating effect to characters.",
+    "元々は水タイル上で水に浮かぶ演出をする目的で追加した機能ですが、それ以外にも様々な利用ができます。": "This function was originally added to create the effect of floating on water tiles, but it can be used in many other ways as well.",
+    "目次": "Table of Contents",
+    "導入方法（install）": "Installation (install)",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below to save it, then place it in [Project]\\js\\plugins. Turn the function ON in the plugin manager in RPG Maker.",
+    "※いずれのプラグインもＭＶ、ＭＺの両方で有効です。": "※Both MV and MZ are supported by all of the plugins.",
+    "NRP_BushEX.js": "NRP_BushEX.js ",
+    "ver1.05（2023/07/28）": "ver1.05 (2023/07/28) ",
+    "※OverpassTile.js（立体交差プラグイン）と併用する場合は、当プラグインを上に配置してください。": "※When using this together with OverpassTile.js (the elevated crossing plugin), place this plugin above it.",
+    "オプション": "Options",
+    "NRP_DebugTile.js": "NRP_DebugTile.js ",
+    "ver1.01（2021/08/15）": "ver1.01 (2021/08/15) ",
+    "※Ｆ２を押すだけで、足元のオートタイルタイプやタイルＩＤを確認できるようにするプラグインです。NRP_BushEXの補助用に使えます。": "※This plugin allows you to check the auto-tile type and tile ID at your feet simply by pressing F2. It can be used as an aid for NRP_BushEX.",
+    "更新履歴（History）": "Update History (History)",
+    "2023/07/28（ver1.05）": "2023/07/28 (ver1.05) ",
+    "2023/01/03（ver1.04 -> 1.041）": "2023/01/03 (ver1.04 -> 1.041) ",
+    "ゲームロード直後に茂み設定が反映されない不具合修正。": "Fixed an issue where bush settings were not applied immediately after loading a game.",
+    "ロードに失敗してしまう重大な不具合修正。（ver1.041）": "Fixed a critical issue that caused loading to fail. (ver1.041)",
+    "2022/04/22 -> 04/25（ver1.03 -> 1.031）": "2022/04/22 -> 04/25 (ver1.03 -> 1.031) ",
+    "浮遊処理時に不要な横線が表示されてしまう不具合修正。（04/25 ver1.031）": "Fixed an issue where an unnecessary horizontal line was displayed during floating. (04/25 ver1.031)",
+    "2021/10/14 -> 2022/02/17（ver1.02 -> 1.023）": "2021/10/14 -> 2022/02/17 (ver1.02 -> 1.023) ",
+    "不透明度が0の時に無効となる不具合修正。": "Fixed an issue where the function was disabled when opacity was set to 0.",
+    "画面初期表示時に茂み属性が機能しない不具合修正。": "Fixed an issue where the bush attribute did not function when the screen was first displayed.",
+    "小数点座標上でも茂み属性を適用するよう対応。": "The bush attribute is now applied at fractional coordinates.",
+    "茂み設定があるタイル同士で移動した場合、浮遊設定が正しく適用されない不具合を修正。（11/05 ver1.021）": "Fixed an issue where floating settings were not correctly applied when moving between tiles with bush settings. (11/05 ver1.021)",
+    "イベントテストでエラーになる不具合修正。（11/11 ver1.022）": "Fixed an issue that caused an error during event testing. (11/11 ver1.022)",
+    "小数点座標上の茂み判定が正しく処理されない不具合修正。": "Fixed an issue where bush detection at fractional coordinates was not processed correctly.",
+    "（2022/02/17 ver1.023）": " (2022/02/17 ver1.023) ",
+    "2021/06/26（ver1.01）": "2021/06/26 (ver1.01) ",
+    "2021/04/16 -> 06/02（ver1.00 -> 1.002）": "2021/04/16 -> 06/02 (ver1.00 -> 1.002) ",
+    "公開！": "Released!",
+    "設定リストにて全体の初期値が有効になっていない不具合を修正。": "Fixed an issue where the default values for all settings were not enabled in the settings list.",
+    "（05/13 ver1.001）": " (05/13 ver1.001) ",
+    "OverpassTile.js（立体交差プラグイン）との併用について注記。（06/02 ver1.002）": "Added a note about using this together with OverpassTile.js (the elevated crossing plugin). (06/02 ver1.002)",
+    "使用方法（Usage）": "Usage (Usage)",
+    "プラグインを適用すると初期状態で『茂みレイヤーの限定』機能がオンとなります。": "When the plugin is applied, the “Limit Bush Layer” function is enabled by default.",
+    "茂みの深さや不透明度もパラメータで設定可能です。": "The bush depth and opacity can also be configured using parameters.",
+    "さらに、設定リストによって細かい調整が可能となります。": "In addition, detailed adjustments can be made using the settings list.",
+    "全タイルセットで有効とするか、タイルセット毎に呼び出すかを、リスト内のパラメータによって切り替え可能です。": "The parameters in the list allow you to switch between enabling the settings for all tilesets and calling them separately for each tileset.",
+    "タイルセットのメモ欄（Note of Tilesets）": "Tileset Note Field (Note of Tilesets)",
+    "タイルセット毎に設定する場合はメモ欄に以下を指定してください。": "To configure this for each tileset, specify the following in the note field.",
+    "?の部分が設定リストに登録した『設定ＩＤ』となります。": "The ? represents the Setting ID registered in the settings list.",
+    "また、カンマ区切りによって複数指定も可能です。": "Multiple IDs can also be specified, separated by commas.",
+    "イベントのメモ欄（Note of Events）ver1.03": "Event Note Field (Note of Events) ver1.03",
+    "現在の地形に関わらず、茂み効果を強制的に対象へ設定します。": "Forcibly applies the bush effect to the target regardless of the current terrain.",
+    "また、イベントページ先頭の注釈に記入しても有効です。": "This is also effective when entered in the comment at the beginning of an event page.",
+    "こちらは現在のページ毎に状態を切り替えることも可能です。": "The state can also be switched for each current event page.",
+    "イベントが茂み属性の影響を受けなくなります。": "The event will no longer be affected by the bush attribute.",
+    "プラグインコマンド（ＭＺ）ver1.03": "Plugin Commands (MZ) ver1.03",
+    "茂み効果の設定（SetBushEffect）": "Set Bush Effect (SetBushEffect)",
+    "対象ＩＤに対象となるイベントＩＤを指定してください。": "Specify the target event ID in Target ID.",
+    "また、-1でプレイヤー、-2以下でフォロワーが対象になります。": "Additionally, -1 targets the player, while -2 and below target followers.",
+    "適用できる設定は、プラグインパラメータの設定リストで使用できるものと同等です。": "The settings that can be applied are equivalent to those available in the plugin parameter settings list.",
+    "効果を解除したい場合は、対象ＩＤを指定した上で他のパラメータを空白にしてください。": "To remove the effect, specify the Target ID and leave the other parameters blank.",
+    "茂み効果の設定（乗物）（SetBushEffectVehicle）": "Set Bush Effect (Vehicle) (SetBushEffectVehicle)",
+    "現在の地形に関わらず、茂み効果を強制的に乗物へ設定します。": "Force the bush effect onto a vehicle regardless of the current terrain.",
+    "効果を解除したい場合は、乗物タイプを指定した上で他のパラメータを空白にしてください。": "To remove the effect, specify the vehicle type and leave the other parameters blank.",
+    "イベントに対する命令は場所移動すれば自動で解除されます。": "Commands affecting events are automatically cleared when changing locations.",
+    "一方でプレイヤーやフォロワー、乗物に対する命令は、場所移動やセーブ＆ロードを行っても解除されません。必要がなくなった際には必ず解除してください。": "On the other hand, commands affecting the player, followers, or vehicles are not cleared even when changing locations or saving and loading. Be sure to clear them when they are no longer needed.",
+    "プラグインパラメータ（基本）": "Plugin Parameters (Basic)",
+    "茂みレイヤーの限定（LimitBushLayer）": "Limit Bush Layer (LimitBushLayer)",
+    "茂みの上のレイヤーに他のタイルがある場合、茂み属性を無効化します。": "If another tile exists on the layer above a bush, the bush attribute is disabled.",
+    "除外する地形タグ（ExcludedTerrain）ver1.01": "Excluded Terrain Tags (ExcludedTerrain) ver1.01",
+    "『茂みレイヤーの限定』について除外する地形タグ（1~7）を指定します。": "Specify the terrain tags (1~7) to exclude from Limit Bush Layer.",
+    "複数指定可。（例：1,3）": "Multiple entries can be specified. (Example: 1,3)",
+    "例えば、茂みタイルの上に半透明の影のようなタイルを配置した場合、影を無視して茂み属性を参照するといった調整ができます。": "For example, if you place a semitransparent, shadow-like tile above a bush tile, you can configure the plugin to ignore the shadow when checking the bush attribute.",
+    "茂みの深さ（BushDepth）": "Bush Depth (BushDepth)",
+    "茂み上でキャラクターの下半身に半透明効果を適用する高さです。": "The height at which a translucent effect is applied to the lower half of a character while on a bush tile.",
+    "初期値は12。デフォルトのちびキャラを想定した値になっているので、大きなキャラを使いたい場合は変更すると吉です。": "The default value is 12. Since this value is intended for the default chibi characters, it is recommended that you change it when using larger characters.",
+    "茂みでの不透明度（BushOpacity）": "Opacity in Bushes (BushOpacity)",
+    "茂み上でキャラクターの下半身に適用する不透明度です。": "The opacity applied to the lower half of a character while on a bush tile.",
+    "255で完全な不透明。0で完全な透明。初期値は128です。": "255 is completely opaque, and 0 is completely transparent. The default value is 128.",
+    "設定リスト（SettingList）": "Setting List (SettingList)",
+    "茂み設定の一覧です。": "A list of bush settings.",
+    "細かい条件を指定したい場合に有効です。": "Useful when you want to specify detailed conditions.",
+    "以下、その詳細設定のパラメータです。": "The parameters for these detailed settings are described below.",
+    "プラグインパラメータ（設定リスト）": "Plugin Parameters (Setting List)",
+    "設定ＩＤ（SettingId）": "Setting ID (SettingId)",
+    "タイルセットのメモ欄からの呼び出しに使う識別子です。": "The identifier used to call the setting from a tileset's note field.",
+    "『全タイルセットで有効』がオンの場合は不要です。": "This is unnecessary when Valid All Tilesets is enabled.",
+    "全タイルセットで有効（ValidAllTilesets）": "Valid All Tilesets (ValidAllTilesets)",
+    "設定を全てのタイルセットで有効にします。": "Makes the setting valid for all tilesets.",
+    "特定のタイルセットにのみ設定を反映したい場合は、オフにしてください。": "Turn this off if you want the setting to apply only to specific tilesets.",
+    "茂みを強制適用（ForceBush）": "Force Bush (ForceBush)",
+    "条件を満たした場合、茂み以外のタイルでも常に茂み状態を適用します。": "When the conditions are met, the bush state is always applied, even on tiles that are not bushes.",
+    "オフにした場合は通常通り、タイルセット側にも茂み属性が必要となります。": "When turned off, bush attributes are still required on the tileset side as usual.",
+    "プラグインパラメータ（設定リスト：条件）": "Plugin Parameters (Setting List: Conditions)",
+    "地形タグ（TerrainTag）": "Terrain Tag (TerrainTag)",
+    "対象とする地形タグ（1~7）を指定します。": "Specify the target terrain tags (1~7).",
+    "複数指定も可能です。（例：1,3~5）": "Multiple IDs can be specified. (Example: 1,3~5)",
+    "７つまでしか設定できないのでご利用は計画的に。": "Only up to seven can be configured, so use them wisely.",
+    "リージョンＩＤ（RegionId）": "Region ID (RegionId)",
+    "対象とするリージョン（1~255）を指定します。": "Specify the target regions (1~255).",
+    "オートタイルタイプ（AutotileType）": "Autotile Type (AutotileType)",
+    "対象とするオートタイルタイプを指定します。": "Specify the target autotile types.",
+    "オートタイルタイプとはオートタイル毎に割り当てられる番号です。デフォルトでは戦闘背景の判定に用いられています。": "An autotile type is a number assigned to each autotile. By default, it is used to determine battle backgrounds.",
+    "地形タグと異なり数の制限がないため、自由に設定が可能です。": "Unlike terrain tags, there is no limit on the number of these, so they can be configured freely.",
+    "ただし、この値は通常確認できません。": "However, this value cannot normally be checked.",
+    "オプションにある「タイル情報をデバッグ表示する」プラグインで確認ができます。": "You can check this with the “Display Tile Information for Debugging” plugin in the options.",
+    "タイルＩＤ（TileId）": "Tile ID (TileId)",
+    "対象とするタイルＩＤを指定します。": "Specify the target tile IDs.",
+    "こちらはエディタの機能で普通に取得できますが、面倒です。": "This can be obtained normally using the editor's features, but it is tedious.",
+    "こちらも「タイル情報をデバッグ表示する」プラグインでの確認をオススメします。": "Here too, I recommend checking with the “Display Tile Information for Debugging” plugin.",
+    "プラグインパラメータ（設定リスト：不透明度設定）": "Plugin Parameters (Settings List: Opacity Settings)",
+    "値を設定しない場合は、全体の初期値が適用されます。": "If no value is set, the overall default value is applied.",
+    "プラグインパラメータ（設定リスト：おまけ）": "Plugin Parameters (Settings List: Bonus)",
+    "茂みでの色（BushColor）": "Color in Bushes (BushColor)",
+    "茂み上でキャラクターの下半身に適用する色です。": "The color applied to the lower half of a character while on a bush tile.",
+    "例：[255,255,255,255]": "Example: [255,255,255,255]",
+    "順番に[赤、緑、青、強さ]です。": "In order: [red, green, blue, strength].",
+    "※[]も必須です。": "※[] are also required.",
+    "浮遊効果の振幅（FloatAmplitude）ver1.02": "Float Effect Amplitude (FloatAmplitude) ver1.02",
+    "茂み上での浮遊効果の振幅です。数式可。": "The amplitude of the float effect while on a bush tile. Formulas can be used.",
+    "水に浮かぶような演出にどうぞ。": "Use this to create an effect that makes characters appear to float on water.",
+    "浮遊効果の周期（FloatPeriodicTime）ver1.02": "Float Effect Period (FloatPeriodicTime) ver1.02",
+    "茂み上での浮遊効果の振幅の周期です。数式可。": "The period of the float effect's amplitude while on a bush tile. Formulas can be used.",
+    "60が1秒に相当します。空白の場合は120になります。": "60 corresponds to one second. If left blank, it becomes 120.",
+    "なお、浮遊効果の振幅に値がある場合のみ機能します。": "This only functions when the float effect amplitude has a value."
+  }
+}
