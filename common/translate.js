@@ -369,6 +369,9 @@ function applyArticleNavigationTitles(language, titleIndex = null) {
 
 function findArticleTitle(articleId) {
     const selectors = [
+        // Seesaa's current article template uses this table-based title.
+        // Prefer it over any other link pointing at the same article.
+        "table.articletitle a",
         ".article-title a",
         ".article__title a",
         ".entry-title a",
@@ -416,7 +419,12 @@ function findArticleTitle(articleId) {
             continue;
         }
 
-        return link;
+        // A URL match on its own is not enough: the header may intentionally
+        // contain an "About" link to the current article.  It is navigation,
+        // not the article title, and must never be rewritten as the title.
+        if (link.closest(".blogbody, article, .article, .entry")) {
+            return link;
+        }
     }
 
     return null;
