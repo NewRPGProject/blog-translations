@@ -14,6 +14,8 @@ const GLOSSARY_PATH = join(REPOSITORY_DIRECTORY, "glossary", "glossary.json");
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const DRY_RUN = /^true$/iu.test(process.env.COMMON_DRY_RUN || "");
+const TRANSIENT_FETCH_STATUSES = new Set([502, 503, 504]);
+const FETCH_RETRY_DELAYS_MS = [5000, 15000, 30000];
 const JAPANESE_CHARACTERS = /[ぁ-んァ-ヶ一-龠々〆〤ー]/u;
 const IGNORED_TAGS = new Set(["script", "style", "noscript", "textarea", "select", "option"]);
 const VOID_TAGS = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]);
@@ -53,6 +55,10 @@ function hasJapanese(value) {
     return JAPANESE_CHARACTERS.test(String(value || ""));
 }
 
+function wait(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 async function readOptional(path, fallback = null) {
     try {
         return await readFile(path, "utf8");
@@ -68,20 +74,39 @@ async function readJson(path, fallback = null) {
 }
 
 async function fetchText(url) {
-    const response = await fetch(url, { headers: BROWSER_HEADERS });
-    if (!response.ok) {
-        const detail = (await response.text()).replace(/\s+/gu, " ").slice(0, 200);
-        throw new Error(`取得に失敗しました (${response.status}): ${url}${detail ? ` / ${detail}` : ""}`);
+    let lastError = null;
+    for (let attempt = 0; attempt <= FETCH_RETRY_DELAYS_MS.length; attempt++) {
+        try {
+            const response = await fetch(url, { headers: BROWSER_HEADERS });
+            if (response.ok) {
+                // Seesaa's top page is currently Shift_JIS. response.text()
+                // would turn Japanese into mojibake in this response.
+                const bytes = await response.arrayBuffer();
+                const header = response.headers.get("content-type") || "";
+                const charset = /charset=([^;\s]+)/iu.exec(header)?.[1]?.toLowerCase();
+                return new TextDecoder(
+                    charset?.includes("shift") || charset?.includes("sjis") ? "shift_jis" : "utf-8"
+                ).decode(bytes);
+            }
+
+            const detail = (await response.text()).replace(/\s+/gu, " ").slice(0, 200);
+            lastError = new Error(`取得に失敗しました (${response.status}): ${url}${detail ? ` / ${detail}` : ""}`);
+            if (!TRANSIENT_FETCH_STATUSES.has(response.status)) throw lastError;
+        } catch (error) {
+            if (error === lastError && !TRANSIENT_FETCH_STATUSES.has(
+                Number(/\((\d{3})\)/u.exec(error.message)?.[1])
+            )) {
+                throw error;
+            }
+            lastError = error instanceof Error ? error : new Error(String(error));
+        }
+
+        if (attempt === FETCH_RETRY_DELAYS_MS.length) break;
+        const seconds = FETCH_RETRY_DELAYS_MS[attempt] / 1000;
+        console.warn(`一時的な取得失敗。${seconds}秒後に再試行します (${attempt + 1}/${FETCH_RETRY_DELAYS_MS.length}): ${url}`);
+        await wait(FETCH_RETRY_DELAYS_MS[attempt]);
     }
-    // Seesaa's top page is currently Shift_JIS.  response.text() assumes
-    // UTF-8 in this response and would turn Japanese into mojibake, making
-    // the Japanese-text detector find zero entries.
-    const bytes = await response.arrayBuffer();
-    const header = response.headers.get("content-type") || "";
-    const charset = /charset=([^;\s]+)/iu.exec(header)?.[1]?.toLowerCase();
-    return new TextDecoder(
-        charset?.includes("shift") || charset?.includes("sjis") ? "shift_jis" : "utf-8"
-    ).decode(bytes);
+    throw lastError;
 }
 
 function parseTag(token) {

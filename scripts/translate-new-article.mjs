@@ -11,6 +11,11 @@ const SITEMAP_INDEX_URL = "https://newrpg.seesaa.net/sitemap.xml";
 const MONITOR_STATE_PATH = join(REPOSITORY_DIRECTORY, ".translation-monitor.json");
 const INITIAL_MONITOR_LOOKBACK_HOURS = 24;
 const EXTRACTION_VERSION = 9;
+// Seesaa occasionally returns a transient gateway error while its sitemap is
+// otherwise healthy. Retry only errors that are safe to retry; notably, do
+// not hide an access denial such as HTTP 403.
+const TRANSIENT_FETCH_STATUSES = new Set([502, 503, 504]);
+const FETCH_RETRY_DELAYS_MS = [5000, 15000, 30000];
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.6-luna";
 const RETRY_TRANSLATION_INSTRUCTION = `
@@ -76,6 +81,10 @@ const CIRCLED_NUMBER_MARKERS = new Map([
 
 function fail(message) {
     throw new Error(message);
+}
+
+function wait(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
 function normalizeText(value) {
@@ -196,25 +205,44 @@ function extractArticleId(url) {
 }
 
 async function fetchText(url) {
-    const response = await fetch(url, {
-        headers: BROWSER_HEADERS
-    });
-    if (!response.ok) {
-        const detail = (await response.text())
-            .replace(/\s+/gu, " ")
-            .slice(0, 200);
-        fail(`取得に失敗しました (${response.status}): ${url}${detail ? ` / ${detail}` : ""}`);
-    }
+    let lastError = null;
+    for (let attempt = 0; attempt <= FETCH_RETRY_DELAYS_MS.length; attempt++) {
+        try {
+            const response = await fetch(url, { headers: BROWSER_HEADERS });
+            if (response.ok) {
+                const bytes = await response.arrayBuffer();
+                const header = response.headers.get("content-type") || "";
+                const charset = /charset=([^;\s]+)/iu.exec(header)?.[1]?.toLowerCase();
+                const decoder = new TextDecoder(
+                    charset?.includes("shift") || charset?.includes("sjis")
+                        ? "shift_jis"
+                        : "utf-8"
+                );
+                return decoder.decode(bytes);
+            }
 
-    const bytes = await response.arrayBuffer();
-    const header = response.headers.get("content-type") || "";
-    const charset = /charset=([^;\s]+)/iu.exec(header)?.[1]?.toLowerCase();
-    const decoder = new TextDecoder(
-        charset?.includes("shift") || charset?.includes("sjis")
-            ? "shift_jis"
-            : "utf-8"
-    );
-    return decoder.decode(bytes);
+            const detail = (await response.text()).replace(/\s+/gu, " ").slice(0, 200);
+            lastError = new Error(`取得に失敗しました (${response.status}): ${url}${detail ? ` / ${detail}` : ""}`);
+            if (!TRANSIENT_FETCH_STATUSES.has(response.status)) {
+                throw lastError;
+            }
+        } catch (error) {
+            // Network errors have no HTTP status, so retry them as well.
+            // Non-transient HTTP errors were deliberately thrown above.
+            if (error === lastError && !TRANSIENT_FETCH_STATUSES.has(
+                Number(/\((\d{3})\)/u.exec(error.message)?.[1])
+            )) {
+                throw error;
+            }
+            lastError = error instanceof Error ? error : new Error(String(error));
+        }
+
+        if (attempt === FETCH_RETRY_DELAYS_MS.length) break;
+        const seconds = FETCH_RETRY_DELAYS_MS[attempt] / 1000;
+        console.warn(`一時的な取得失敗。${seconds}秒後に再試行します (${attempt + 1}/${FETCH_RETRY_DELAYS_MS.length}): ${url}`);
+        await wait(FETCH_RETRY_DELAYS_MS[attempt]);
+    }
+    throw lastError;
 }
 
 async function getSitemapEntries() {
