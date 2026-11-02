@@ -1,0 +1,777 @@
+{
+  "articleId": "521916718",
+  "sourceUrl": "https://newrpg.seesaa.net/article/521916718.html",
+  "extractionVersion": 9,
+  "sourceUpdatedAt": "2026-11-02T14:44:45+09:00",
+  "sourceHash": "24032b192ea44edf480e706a410a287ea82792ed360a47f14659c434c283c3aa",
+  "translatedAt": "2026-11-02T05:48:05.372Z",
+  "title": "Automatically Save Message Screens [RPG Maker MZ Plugin]",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "title",
+      "source": "メッセージ画面を自動保存する【RPGツクールMZプラグイン】",
+      "sourceHash": "b6df04c8bcc2ed020d2f5c8be1fd08894cf8f97b47893a044626d8b6662b3058",
+      "translation": "Automatically Save Message Screens [RPG Maker MZ Plugin]",
+      "contextHash": "b6df04c8bcc2ed020d2f5c8be1fd08894cf8f97b47893a044626d8b6662b3058"
+    },
+    {
+      "id": "text-001",
+      "type": "text",
+      "source": "メッセージ画面を自動保存します。",
+      "sourceHash": "125de653fdf9e9b73b307777a9baa47b21e9cfcdf688e85a95496fd90959a069",
+      "translation": "Automatically saves message screens.",
+      "contextHash": "125de653fdf9e9b73b307777a9baa47b21e9cfcdf688e85a95496fd90959a069"
+    },
+    {
+      "id": "text-002",
+      "type": "text",
+      "source": "CodexなどのＡＩエージェントと組み合わせることで、翻訳文をチェックする用途を想定しています。",
+      "sourceHash": "e20d823d82336b1445ec0f5266069386bd456a76ed04a9d97c54dac3b10abde6",
+      "translation": "This is intended for checking translations in combination with AI agents such as Codex.",
+      "contextHash": "e20d823d82336b1445ec0f5266069386bd456a76ed04a9d97c54dac3b10abde6"
+    },
+    {
+      "id": "text-003",
+      "type": "text",
+      "source": "現在のＡＩ翻訳は極めて高性能ですが、文章だけで完全な翻訳をすることは非常に難しいです。",
+      "sourceHash": "528b615c8b2e9e9eae3006951c939acc92621c60a709efdc0d26d09cd729b937",
+      "translation": "AI translation is now extremely capable, but producing a complete translation based on text alone is very difficult.",
+      "contextHash": "528b615c8b2e9e9eae3006951c939acc92621c60a709efdc0d26d09cd729b937"
+    },
+    {
+      "id": "text-004",
+      "type": "text",
+      "source": "例えば、日本語から英語に翻訳する場合、",
+      "sourceHash": "0c54248fccd42bea1ba785b9087df8631f61816ed49ee505d06699c44a8ea153",
+      "translation": "For example, when translating from Japanese into English, you need information such as:",
+      "contextHash": "0c54248fccd42bea1ba785b9087df8631f61816ed49ee505d06699c44a8ea153"
+    },
+    {
+      "id": "list-001",
+      "type": "list",
+      "source": "省略されている主語や目的語",
+      "sourceHash": "8f53d95cd2c64d740b5a8fcb6b893ff2bd7def9981d3a3344c062ecdddc19e76",
+      "translation": "The omitted subjects and objects",
+      "contextHash": "8f53d95cd2c64d740b5a8fcb6b893ff2bd7def9981d3a3344c062ecdddc19e76"
+    },
+    {
+      "id": "list-002",
+      "type": "list",
+      "source": "そのモノが単数か複数か？",
+      "sourceHash": "ac2ff7b208b77c0c97d163fcf733c327f30c36aed198dd22a80a68e9e9b64c3f",
+      "translation": "Whether something is singular or plural",
+      "contextHash": "ac2ff7b208b77c0c97d163fcf733c327f30c36aed198dd22a80a68e9e9b64c3f"
+    },
+    {
+      "id": "list-003",
+      "type": "list",
+      "source": "その人物が男か女か？",
+      "sourceHash": "fbeca1a698def55ffd19aff4da8c52c89d87193f6e26c12e3a406c5fb4bb38c1",
+      "translation": "Whether a character is male or female",
+      "contextHash": "fbeca1a698def55ffd19aff4da8c52c89d87193f6e26c12e3a406c5fb4bb38c1"
+    },
+    {
+      "id": "list-004",
+      "type": "list",
+      "source": "誰と誰が話しているのか？",
+      "sourceHash": "2cc226e30c62bf13b5d77979c5e6876be089019d6f1a6f0057cec23c9a6e87b5",
+      "translation": "Who is speaking to whom",
+      "contextHash": "2cc226e30c62bf13b5d77979c5e6876be089019d6f1a6f0057cec23c9a6e87b5"
+    },
+    {
+      "id": "text-005",
+      "type": "text",
+      "source": "といった情報が必要になります。",
+      "sourceHash": "a7d7f26dd897eec58d52cab821e61c87db4d77af5c56f5556aed82410ba6463c",
+      "translation": "and other such details.",
+      "contextHash": "a7d7f26dd897eec58d52cab821e61c87db4d77af5c56f5556aed82410ba6463c"
+    },
+    {
+      "id": "text-006",
+      "type": "text",
+      "source": "また多くの場合、文章データは格納順もバラバラなのでストーリーの時系列に沿って確認することが難しいです。",
+      "sourceHash": "22cd32971a8e27cf5e4e06b8a650c928278a0b599fccf071aae94b496e7f9fde",
+      "translation": "Also, text data is often stored in a jumbled order, making it difficult to review it in the chronological order of the story.",
+      "contextHash": "22cd32971a8e27cf5e4e06b8a650c928278a0b599fccf071aae94b496e7f9fde"
+    },
+    {
+      "id": "text-007",
+      "type": "text",
+      "source": "そこでこのプラグインでは、ゲームをテストプレイした際に表示されたメッセージと画面を自動で順番に保存します。",
+      "sourceHash": "fc48dbb0963228676fa5d4c3a91d5db434d7e7334e72b3ba647458db5d6e9ecf",
+      "translation": "This plugin automatically saves, in sequence, the messages and screens shown during a test playthrough.",
+      "contextHash": "fc48dbb0963228676fa5d4c3a91d5db434d7e7334e72b3ba647458db5d6e9ecf"
+    },
+    {
+      "id": "text-008",
+      "type": "text",
+      "source": "実際のゲーム画面を参照することで現在の状況と翻訳文に食い違いがないかを確認できるようになります。",
+      "sourceHash": "9f9604c4950151e304972c06dd03d5354646a59b54d555cff78f904d7d478322",
+      "translation": "By referring to actual game screens, you can check whether the current situation and the translation match.",
+      "contextHash": "9f9604c4950151e304972c06dd03d5354646a59b54d555cff78f904d7d478322"
+    },
+    {
+      "id": "text-009",
+      "type": "text",
+      "source": "以下はキャプチャした画像をCodexに読み込ませて英訳をチェックさせた例です。実際のゲーム画面を参照できるので、文章だけでは分からない違和感を指摘してくれます。",
+      "sourceHash": "903b29676e143c931f4094adbe7d2b417fd6a807e3a8c9003723e404b629445d",
+      "translation": "Below is an example of having Codex check an English translation using captured screenshots. Since it can refer to the actual game screens, it can point out awkwardness that isn't apparent from the text alone.",
+      "contextHash": "903b29676e143c931f4094adbe7d2b417fd6a807e3a8c9003723e404b629445d"
+    },
+    {
+      "id": "heading-001",
+      "type": "heading",
+      "source": "目次",
+      "sourceHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120",
+      "translation": "Table of Contents",
+      "contextHash": "6763aa62211b44a20c71505eed18421683192c2f2f37668012e8aaa008367120"
+    },
+    {
+      "id": "heading-002",
+      "type": "heading",
+      "source": "導入方法",
+      "sourceHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4",
+      "translation": "Installation",
+      "contextHash": "383b8a6e4ccea2d3d7370b04ba5122a414e3a19931a7e6f456500993f5b427c4"
+    },
+    {
+      "id": "text-010",
+      "type": "text",
+      "source": "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。",
+      "sourceHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d",
+      "translation": "Right-click the link below and save the file, then drop it into [project]\\js\\plugins. Enable it in the Plugin Manager in RPG Maker.",
+      "contextHash": "df37526b20b5f2ba92e3b1a5531ab0d95afff6043931b4bc2347f126750d5d3d"
+    },
+    {
+      "id": "text-011",
+      "type": "text",
+      "source": "※このプラグインはＭＺ専用です。",
+      "sourceHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d",
+      "translation": "※This plugin is for MZ only.",
+      "contextHash": "ed0c5667915fe7ad6e95a93a20e8331a11f4cc8b43f40dd22f930598cecbf19d"
+    },
+    {
+      "id": "link-001",
+      "type": "link",
+      "source": "NRP_MessageAutoCapture.js",
+      "sourceHash": "cfa1d66a7724d245e1a8b0ffca301c866fafd8cdf12e6a019672c80eeb4abfa5",
+      "translation": "NRP_MessageAutoCapture.js ",
+      "contextHash": "a7fd20521e341f18faea4b49619167121940ddb05be74f2fc9e15e0a5573fa9f"
+    },
+    {
+      "id": "text-012",
+      "type": "text",
+      "source": "ver1.00（2026/11/02）",
+      "sourceHash": "a84cf378e0debe14a8fe431139bf8e8de61ee44481ddf6289e9d59a4636e6c29",
+      "translation": "ver1.00 (2026/11/02) ",
+      "contextHash": "a7fd20521e341f18faea4b49619167121940ddb05be74f2fc9e15e0a5573fa9f"
+    },
+    {
+      "id": "heading-003",
+      "type": "heading",
+      "source": "更新履歴（History）",
+      "sourceHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7",
+      "translation": "Update History (History)",
+      "contextHash": "5f6734086058838026416575c635cfc7e1074ad8b8757438df171ba1ac7963c7"
+    },
+    {
+      "id": "heading-004",
+      "type": "heading",
+      "source": "2026/11/02（ver1.00）",
+      "sourceHash": "ed54f390891eb399527a90cf82e44e2fb281ee5ef36306f16c46e86500c6c867",
+      "translation": "2026/11/02 (ver1.00) ",
+      "contextHash": "ed54f390891eb399527a90cf82e44e2fb281ee5ef36306f16c46e86500c6c867"
+    },
+    {
+      "id": "list-005",
+      "type": "list",
+      "source": "公開！",
+      "sourceHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664",
+      "translation": "Released!",
+      "contextHash": "db16b64ccc528b64a0ff8adf39553bdd72ca60eb32c274c6a2d0185b3be59664"
+    },
+    {
+      "id": "heading-005",
+      "type": "heading",
+      "source": "使用方法",
+      "sourceHash": "a6d0fc6c0ba3cdc4284359a6db437b609db0f8764bd70afc120896beef7520c5",
+      "translation": "How to Use",
+      "contextHash": "a6d0fc6c0ba3cdc4284359a6db437b609db0f8764bd70afc120896beef7520c5"
+    },
+    {
+      "id": "text-013",
+      "type": "text",
+      "source": "プラグインパラメータの保存フォルダを設定してください。空欄の場合は動作しません。相対パスはプロジェクト基準です。",
+      "sourceHash": "9091033e56026bd5948aef6c6a835be54870dfb233bd1a39e53caf0bad88f971",
+      "translation": "Set the save folder in the plugin parameters. The plugin won't work if this is blank. Relative paths are based on the project folder.",
+      "contextHash": "9091033e56026bd5948aef6c6a835be54870dfb233bd1a39e53caf0bad88f971"
+    },
+    {
+      "id": "text-014",
+      "type": "text",
+      "source": "テストプレイ時、「文章の表示」毎にキャプチャを自動実行します。",
+      "sourceHash": "aa41fbc92784fd1a75440965a8587f44ba81e697adad285c6c94c23cd8c7fa02",
+      "translation": "During test play, a screenshot is automatically captured each time “Show Text” is used.",
+      "contextHash": "aa41fbc92784fd1a75440965a8587f44ba81e697adad285c6c94c23cd8c7fa02"
+    },
+    {
+      "id": "text-015",
+      "type": "text",
+      "source": "製品版では自動で無効になります。",
+      "sourceHash": "677a4a346a90d77e6d0a2cb2796d429cba8fc7a9dd27951b83106fbf857e0fc7",
+      "translation": "It is automatically disabled in the released game.",
+      "contextHash": "677a4a346a90d77e6d0a2cb2796d429cba8fc7a9dd27951b83106fbf857e0fc7"
+    },
+    {
+      "id": "text-016",
+      "type": "text",
+      "source": "保存先/YYYYMMDD/0000.jpg の形式で保存します。",
+      "sourceHash": "ac5b86aa0192b1b618982a0fab7294f3c0ad4853ae4c522c6795126e329c60b7",
+      "translation": "Files are saved in the format [destination]/YYYYMMDD/0000.jpg.",
+      "contextHash": "ac5b86aa0192b1b618982a0fab7294f3c0ad4853ae4c522c6795126e329c60b7"
+    },
+    {
+      "id": "text-017",
+      "type": "text",
+      "source": "各画像には同名のJSONを保存します。『本文』『原文』『表示言語』『イベント位置』『撮影日時』『ページ番号』を記録するので、画像と一緒に参照できます。",
+      "sourceHash": "b56fce3b2e1886265617d4831fa6db1ecf4578f915b1f61b1ead68604c119f40",
+      "translation": "A JSON file with the same name is saved for each image. It records the message body, original text, display language, event location, capture date and time, and page number, so you can refer to it alongside the image.",
+      "contextHash": "b56fce3b2e1886265617d4831fa6db1ecf4578f915b1f61b1ead68604c119f40"
+    },
+    {
+      "id": "text-018",
+      "type": "text",
+      "source": "後は、ＡＩエージェントに該当のフォルダを参照させ、jpgとjsonをチェックするように指示すればＯＫです。",
+      "sourceHash": "739924f96eb35c7318059b35bf2605805f3064d03c443745e512dc6247eaeb51",
+      "translation": "After that, just have the AI agent refer to the relevant folder and instruct it to check the JPG and JSON files.",
+      "contextHash": "739924f96eb35c7318059b35bf2605805f3064d03c443745e512dc6247eaeb51"
+    },
+    {
+      "id": "text-019",
+      "type": "text",
+      "source": "ＡＩへの説明が面倒なら、このプラグインを読み込ませてしまうのが手っ取り早いです。",
+      "sourceHash": "974257880a37c992a290db82df3f396b23f512aa173af90fa180a7fd31768620",
+      "translation": "If explaining things to the AI is a hassle, the quickest option is to have it read this plugin.",
+      "contextHash": "974257880a37c992a290db82df3f396b23f512aa173af90fa180a7fd31768620"
+    },
+    {
+      "id": "text-020",
+      "type": "text",
+      "source": "なお、内容が重複したメッセージは保存対象から除外されます。",
+      "sourceHash": "e5419cee604f69e950f0a7500862354f64aa816fae347eb31897481a31ecd7f0",
+      "translation": "Messages with duplicate content are excluded from saving.",
+      "contextHash": "e5419cee604f69e950f0a7500862354f64aa816fae347eb31897481a31ecd7f0"
+    },
+    {
+      "id": "text-021",
+      "type": "text",
+      "source": "保存先直下の『capture-index.json』を削除すると重複情報をリセットできます。",
+      "sourceHash": "7a2710aff49e08b710fb3cb1d67d912eb1238aafa2b52e080c6543d55acf235e",
+      "translation": "You can reset duplicate tracking by deleting “capture-index.json” in the destination folder.",
+      "contextHash": "7a2710aff49e08b710fb3cb1d67d912eb1238aafa2b52e080c6543d55acf235e"
+    },
+    {
+      "id": "heading-006",
+      "type": "heading",
+      "source": "細かい仕様",
+      "sourceHash": "b50c78277a0382c52dab53d09e30ef80cbfa69e79fd64a5fcdf4388b78f591b0",
+      "translation": "Detailed Specifications",
+      "contextHash": "b50c78277a0382c52dab53d09e30ef80cbfa69e79fd64a5fcdf4388b78f591b0"
+    },
+    {
+      "id": "text-022",
+      "type": "text",
+      "source": "メッセージ送りの入力を受けた瞬間、画面が切り替わる前に撮影します。",
+      "sourceHash": "abd549552086786825ea0064589a8f20ae23e9671669f170c242da93d3a234c9",
+      "translation": "The screenshot is taken the moment input to advance the message is received, before the screen changes.",
+      "contextHash": "abd549552086786825ea0064589a8f20ae23e9671669f170c242da93d3a234c9"
+    },
+    {
+      "id": "text-023",
+      "type": "text",
+      "source": "『選択肢』については、確定またはキャンセル直前に撮影します。",
+      "sourceHash": "5e850dd341672cd09a7aba2dcd5f1a652ff3d56b381e447b1f9c43ad09b819dd",
+      "translation": "For choices, the screenshot is taken just before confirming or canceling.",
+      "contextHash": "5e850dd341672cd09a7aba2dcd5f1a652ff3d56b381e447b1f9c43ad09b819dd"
+    },
+    {
+      "id": "text-024",
+      "type": "text",
+      "source": "自動終了（\\^）にも対応しています。",
+      "sourceHash": "c5b4cafe62c6bb64d6b2d0aa38d3bd3aa1494101b4e3676e8484dadf9c9d9920",
+      "translation": "Automatic closing (\\^) is also supported.",
+      "contextHash": "c5b4cafe62c6bb64d6b2d0aa38d3bd3aa1494101b4e3676e8484dadf9c9d9920"
+    },
+    {
+      "id": "text-025",
+      "type": "text",
+      "source": "自動終了は表示完了から12フレーム以上待ち、描画後に撮影します。保存中はページ送りと自動終了を短時間保留します。",
+      "sourceHash": "d11d0f5cee6783172d096cdcdeeb375b6ddda904aa32d4b587a2d6189f6355cb",
+      "translation": "For automatic closing, the plugin waits at least 12 frames after the text finishes displaying, then takes the screenshot after drawing is complete. While saving, it briefly pauses page advancement and automatic closing.",
+      "contextHash": "d11d0f5cee6783172d096cdcdeeb375b6ddda904aa32d4b587a2d6189f6355cb"
+    },
+    {
+      "id": "text-026",
+      "type": "text",
+      "source": "重複判定は『マップＩＤ』『イベントＩＤ』『ページ』『コマンド位置』『言語』『名前欄』『本文』を使用します。",
+      "sourceHash": "437075938372bf953c012e2f69ba2a2934464f9e0abc284c426c3c35f0352a82",
+      "translation": "Duplicate detection uses the map ID, event ID, page, command position, language, name field, and message body.",
+      "contextHash": "437075938372bf953c012e2f69ba2a2934464f9e0abc284c426c3c35f0352a82"
+    },
+    {
+      "id": "text-027",
+      "type": "text",
+      "source": "同一の文章コマンドでも変数の値や言語が異なれば再保存します。",
+      "sourceHash": "69fd130c89db22ccc58e4b338aa46f1ba0f642da581922906b5f8d6ada5b367c",
+      "translation": "Even for the same Show Text command, the message is saved again if the variable values or language differ.",
+      "contextHash": "69fd130c89db22ccc58e4b338aa46f1ba0f642da581922906b5f8d6ada5b367c"
+    },
+    {
+      "id": "heading-007",
+      "type": "heading",
+      "source": "NRP_MultiLanguageとの連携",
+      "sourceHash": "0b7e2acb020f0d5dff470da5d957768dc5b47296969da7659e1cf8db9cee3134",
+      "translation": "Integration with NRP_MultiLanguage",
+      "contextHash": "0b7e2acb020f0d5dff470da5d957768dc5b47296969da7659e1cf8db9cee3134"
+    },
+    {
+      "id": "text-028",
+      "type": "text",
+      "source": "jpgに付属するjson内に関連データを自動で記録します。",
+      "sourceHash": "8e6130d67222f0ecae384ebc5d7ddeccf3aac700b31d9fb5b602ee156fd8b7c8",
+      "translation": "Related data is automatically recorded in the JSON file accompanying the JPG.",
+      "contextHash": "8e6130d67222f0ecae384ebc5d7ddeccf3aac700b31d9fb5b602ee156fd8b7c8"
+    },
+    {
+      "id": "text-029",
+      "type": "text",
+      "source": "原文は翻訳前のイベント文章を使用します。",
+      "sourceHash": "7410ca1d23c007f5b4d0eaa40878ad2cf5db120f1fbc7790de21ab94459c586e",
+      "translation": "The original text is taken from the event text before translation.",
+      "contextHash": "7410ca1d23c007f5b4d0eaa40878ad2cf5db120f1fbc7790de21ab94459c586e"
+    },
+    {
+      "id": "text-030",
+      "type": "text",
+      "source": "原文欄は制御文字を文字列として残します（翻訳・スクリプトは実行しません）。",
+      "sourceHash": "287ff88eeefb86deb18ff06a99771990346646f28dcb71a929af1dc60e57a7df",
+      "translation": "Control characters are retained as text in the original text field (translation and scripts are not executed).",
+      "contextHash": "287ff88eeefb86deb18ff06a99771990346646f28dcb71a929af1dc60e57a7df"
+    },
+    {
+      "id": "text-031",
+      "type": "text",
+      "source": "改ページがある場合も原文欄にはメッセージ全体を表示します。",
+      "sourceHash": "20f521a94dde7b7f3669a6a31d21425e589dce444e1378455836ab4feffd5a00",
+      "translation": "If there are page breaks, the original text field still shows the entire message.",
+      "contextHash": "20f521a94dde7b7f3669a6a31d21425e589dce444e1378455836ab4feffd5a00"
+    },
+    {
+      "id": "text-032",
+      "type": "text",
+      "source": "NRP_MultiLanguage.js以外の翻訳プラグインを使用している場合も、ある程度は対応できると思いますがプラグイン毎に処理が異なるので詳細は不明です。",
+      "sourceHash": "9daabf4829ddc1c7208c4f882fe999d10eb6dee29a9994d1438b93c0b5a6967f",
+      "translation": "Other than NRP_MultiLanguage.js, translation plugins should also work to some extent, but the details are unclear because processing differs between plugins.",
+      "contextHash": "9daabf4829ddc1c7208c4f882fe999d10eb6dee29a9994d1438b93c0b5a6967f"
+    },
+    {
+      "id": "heading-008",
+      "type": "heading",
+      "source": "プラグインパラメータ",
+      "sourceHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8",
+      "translation": "Plugin Parameters",
+      "contextHash": "356c245db542a792ed22807f25f0f5d6b8db3fbb2069ca24851ed2c2846610b8"
+    },
+    {
+      "id": "heading-009",
+      "type": "heading",
+      "source": "保存フォルダ（CaptureFolder）",
+      "sourceHash": "5ca6ecb8ff8a6d500c18f6b259e2d34344cc0efa09d7938387840263f1c61b30",
+      "translation": "Save Folder (CaptureFolder)",
+      "contextHash": "5ca6ecb8ff8a6d500c18f6b259e2d34344cc0efa09d7938387840263f1c61b30"
+    },
+    {
+      "id": "text-033",
+      "type": "text",
+      "source": "キャプチャ保存先。絶対パスまたはプロジェクトからの相対パス。",
+      "sourceHash": "428953d4699c8bfad5b874c5056a638195ab01b151fb1f58c967f2ea82c32bf6",
+      "translation": "Destination for saved screenshots. Use an absolute path or a path relative to the project.",
+      "contextHash": "428953d4699c8bfad5b874c5056a638195ab01b151fb1f58c967f2ea82c32bf6"
+    },
+    {
+      "id": "text-034",
+      "type": "text",
+      "source": "空欄なら無効。",
+      "sourceHash": "7b6c90a85974dffdb3ce33d3eed6fc80fde0d12da2b72f60940fb119cc73bc6e",
+      "translation": "Disabled if left blank.",
+      "contextHash": "7b6c90a85974dffdb3ce33d3eed6fc80fde0d12da2b72f60940fb119cc73bc6e"
+    },
+    {
+      "id": "heading-010",
+      "type": "heading",
+      "source": "画像サイズ倍率（ImageScale）",
+      "sourceHash": "76878db3f0f12b4cacfaa4c2594db7a7c01feea04234e572bf4f2a22cf958378",
+      "translation": "Image Scale (ImageScale)",
+      "contextHash": "76878db3f0f12b4cacfaa4c2594db7a7c01feea04234e572bf4f2a22cf958378"
+    },
+    {
+      "id": "text-035",
+      "type": "text",
+      "source": "ゲーム画面の拡大縮小倍率。",
+      "sourceHash": "35d5d88cbf4dede576e0d5f69e2e9cc9d7429289c13ff32d1848e69a2e31701c",
+      "translation": "Scale factor for enlarging or reducing the game screen.",
+      "contextHash": "35d5d88cbf4dede576e0d5f69e2e9cc9d7429289c13ff32d1848e69a2e31701c"
+    },
+    {
+      "id": "text-036",
+      "type": "text",
+      "source": "原文などの情報欄は縮小せず下部に追加します。",
+      "sourceHash": "4c771bc5f4dfca3431803b8a3a58299a0321220727580fffe8e01ec8fb41ecc7",
+      "translation": "Information such as the original text is added at the bottom without being scaled down.",
+      "contextHash": "4c771bc5f4dfca3431803b8a3a58299a0321220727580fffe8e01ec8fb41ecc7"
+    },
+    {
+      "id": "heading-011",
+      "type": "heading",
+      "source": "JPEG品質（JpegQuality）",
+      "sourceHash": "8f4230614f93f46bdee1a8b336410c8554fdc841ba7ccbc304435213b8f96daf",
+      "translation": "JPEG Quality (JpegQuality) ",
+      "contextHash": "8f4230614f93f46bdee1a8b336410c8554fdc841ba7ccbc304435213b8f96daf"
+    },
+    {
+      "id": "text-037",
+      "type": "text",
+      "source": "0.1～1。大きいほど高画質で容量が増えます。",
+      "sourceHash": "fa46781be1db0b25e6641cadb1874efa2c76e2b867dec8b99a1e8dc268589aa5",
+      "translation": "0.1–1. Higher values produce better image quality and larger file sizes.",
+      "contextHash": "fa46781be1db0b25e6641cadb1874efa2c76e2b867dec8b99a1e8dc268589aa5"
+    },
+    {
+      "id": "heading-012",
+      "type": "heading",
+      "source": "重複保存を防止（SkipDuplicates）",
+      "sourceHash": "bd683cc106621d1b521dd99da660f48eeaf1f7d5d113b2a020c4e76e94a99f7e",
+      "translation": "Prevent Duplicate Saves (SkipDuplicates) ",
+      "contextHash": "bd683cc106621d1b521dd99da660f48eeaf1f7d5d113b2a020c4e76e94a99f7e"
+    },
+    {
+      "id": "text-038",
+      "type": "text",
+      "source": "重複したメッセージの場合は保存を実行しません。",
+      "sourceHash": "3384397aa98e4bb34194cdc64e599c0421aba127a5f0f884f5230d8b6bd3a089",
+      "translation": "Saving is skipped for duplicate messages.",
+      "contextHash": "3384397aa98e4bb34194cdc64e599c0421aba127a5f0f884f5230d8b6bd3a089"
+    },
+    {
+      "id": "heading-013",
+      "type": "heading",
+      "source": "マップ名を追加（ShowMapName）",
+      "sourceHash": "638de86b3f45f59aa9213c0ccf782d862bc30807bd0f7dcbe77eb36aefd45e87",
+      "translation": "Add Map Name (ShowMapName) ",
+      "contextHash": "638de86b3f45f59aa9213c0ccf782d862bc30807bd0f7dcbe77eb36aefd45e87"
+    },
+    {
+      "id": "text-039",
+      "type": "text",
+      "source": "画像下に「マップID:管理用マップ名」を追加します。",
+      "sourceHash": "50412168e274035426ab94b2780eddd247c77beefb94258357ab97dd50947d89",
+      "translation": "Adds “Map ID:Internal Map Name” below the image.",
+      "contextHash": "50412168e274035426ab94b2780eddd247c77beefb94258357ab97dd50947d89"
+    },
+    {
+      "id": "heading-014",
+      "type": "heading",
+      "source": "原文を追加（ShowOriginal）",
+      "sourceHash": "bca306e9e8301c75061659c3af0831d6863654dbe1ee8045b43caa6f6a088118",
+      "translation": "Add Original Text (ShowOriginal) ",
+      "contextHash": "bca306e9e8301c75061659c3af0831d6863654dbe1ee8045b43caa6f6a088118"
+    },
+    {
+      "id": "text-040",
+      "type": "text",
+      "source": "画像下に翻訳前の名前欄と本文を追加します。",
+      "sourceHash": "d6d2fc218b41b3cbe571f04349274c6b262ef1a30ca15bd9e9dbaf9fff680003",
+      "translation": "Adds the pre-translation name field and message below the image.",
+      "contextHash": "d6d2fc218b41b3cbe571f04349274c6b262ef1a30ca15bd9e9dbaf9fff680003"
+    }
+  ],
+  "lines": [
+    {
+      "id": "line-001",
+      "type": "line",
+      "source": "[[LINK_1]]導入方法[[/LINK_1]]",
+      "sourceHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05",
+      "parts": [
+        {
+          "source": "導入方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Install[[/LINK_1]]",
+      "contextHash": "7639790b2db4bede2db05874eada6b6a66e4154094d927ab359af5ed91441c05"
+    },
+    {
+      "id": "line-002",
+      "type": "line",
+      "source": "[[LINK_1]]更新履歴[[/LINK_1]]",
+      "sourceHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036",
+      "parts": [
+        {
+          "source": "更新履歴",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Update History[[/LINK_1]]",
+      "contextHash": "15155ea78c21fcdefc46ecc6078734eb72941487efa3fc39f2d0941f05c65036"
+    },
+    {
+      "id": "line-003",
+      "type": "line",
+      "source": "[[LINK_1]]使用方法[[/LINK_1]]",
+      "sourceHash": "705d2683c1286fd797e87b0f9378dc0ce5276c95b882fda8f08135bf704445b9",
+      "parts": [
+        {
+          "source": "使用方法",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]How to Use[[/LINK_1]]",
+      "contextHash": "705d2683c1286fd797e87b0f9378dc0ce5276c95b882fda8f08135bf704445b9"
+    },
+    {
+      "id": "line-004",
+      "type": "line",
+      "source": "[[LINK_1]]細かい仕様[[/LINK_1]]",
+      "sourceHash": "e24a6c6d2d263b6133df72b05e5f8afdb6807b8511837e82d901735c2a9b84e2",
+      "parts": [
+        {
+          "source": "細かい仕様",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Additional Details[[/LINK_1]]",
+      "contextHash": "e24a6c6d2d263b6133df72b05e5f8afdb6807b8511837e82d901735c2a9b84e2"
+    },
+    {
+      "id": "line-005",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_MultiLanguageとの連携[[/LINK_1]]",
+      "sourceHash": "0c5596b521aeb5177de7c5030a8906db9be66c687389d63bcc307002abe0d92a",
+      "parts": [
+        {
+          "source": "NRP_MultiLanguageとの連携",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Integration with NRP_MultiLanguage[[/LINK_1]]",
+      "contextHash": "0c5596b521aeb5177de7c5030a8906db9be66c687389d63bcc307002abe0d92a"
+    },
+    {
+      "id": "line-006",
+      "type": "line",
+      "source": "[[LINK_1]]プラグインパラメータ[[/LINK_1]]",
+      "sourceHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc",
+      "parts": [
+        {
+          "source": "プラグインパラメータ",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Plugin Parameters[[/LINK_1]]",
+      "contextHash": "6a894b3455c527d7df03ac7bd7b20724e34c884a2259ce94670d8f7abc36a8cc"
+    },
+    {
+      "id": "line-007",
+      "type": "line",
+      "source": "[[LINK_1]]保存フォルダ（CaptureFolder）[[/LINK_1]]",
+      "sourceHash": "d88e2fac76785e27fbcb0cfd3496eccf6fb75623acdc86b1b2c4c11ab0967d84",
+      "parts": [
+        {
+          "source": "保存フォルダ（CaptureFolder）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Save Folder (CaptureFolder)[[/LINK_1]]",
+      "contextHash": "d88e2fac76785e27fbcb0cfd3496eccf6fb75623acdc86b1b2c4c11ab0967d84"
+    },
+    {
+      "id": "line-008",
+      "type": "line",
+      "source": "[[LINK_1]]画像サイズ倍率（ImageScale）[[/LINK_1]]",
+      "sourceHash": "ca8e99d03d5763ff7b4ac64f2b9c048d87c1f1900b7fed6595c3f84d11e8c032",
+      "parts": [
+        {
+          "source": "画像サイズ倍率（ImageScale）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Image Scale (ImageScale)[[/LINK_1]]",
+      "contextHash": "ca8e99d03d5763ff7b4ac64f2b9c048d87c1f1900b7fed6595c3f84d11e8c032"
+    },
+    {
+      "id": "line-009",
+      "type": "line",
+      "source": "[[LINK_1]]JPEG品質（JpegQuality）[[/LINK_1]]",
+      "sourceHash": "985fe5604ad590b7b1dfea27389fb357f3298e3e2bc098950b1803053b4b41ab",
+      "parts": [
+        {
+          "source": "JPEG品質（JpegQuality）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]JPEG Quality (JpegQuality)[[/LINK_1]]",
+      "contextHash": "985fe5604ad590b7b1dfea27389fb357f3298e3e2bc098950b1803053b4b41ab"
+    },
+    {
+      "id": "line-010",
+      "type": "line",
+      "source": "[[LINK_1]]重複保存を防止（SkipDuplicates）[[/LINK_1]]",
+      "sourceHash": "8278eaeae8a2446a0733e6a8365f0228ea9e48b05420cd6248d5ea6b6f7ab373",
+      "parts": [
+        {
+          "source": "重複保存を防止（SkipDuplicates）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Prevent Duplicate Saves (SkipDuplicates)[[/LINK_1]]",
+      "contextHash": "8278eaeae8a2446a0733e6a8365f0228ea9e48b05420cd6248d5ea6b6f7ab373"
+    },
+    {
+      "id": "line-011",
+      "type": "line",
+      "source": "[[LINK_1]]マップ名を追加（ShowMapName）[[/LINK_1]]",
+      "sourceHash": "4d317d06b6e499ebe35c80ce3da07fbaa131c3d3f70b3ac830990d03de328bb8",
+      "parts": [
+        {
+          "source": "マップ名を追加（ShowMapName）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Map Name (ShowMapName)[[/LINK_1]]",
+      "contextHash": "4d317d06b6e499ebe35c80ce3da07fbaa131c3d3f70b3ac830990d03de328bb8"
+    },
+    {
+      "id": "line-012",
+      "type": "line",
+      "source": "[[LINK_1]]原文を追加（ShowOriginal）[[/LINK_1]]",
+      "sourceHash": "49d841f075c56ea26685124f80d8a03282cd9bd1092a7ee71e8a37497960fe47",
+      "parts": [
+        {
+          "source": "原文を追加（ShowOriginal）",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]Add Original Text (ShowOriginal)[[/LINK_1]]",
+      "contextHash": "49d841f075c56ea26685124f80d8a03282cd9bd1092a7ee71e8a37497960fe47"
+    },
+    {
+      "id": "line-013",
+      "type": "line",
+      "source": "[[LINK_1]]NRP_MultiLanguage.js[[/LINK_1]]を使用している場合は自動で連携されます。",
+      "sourceHash": "8058689fa0bb4e800b2c2864d3c6c4096cd36a79ce87fdb6e415a03e7b4531a8",
+      "parts": [
+        {
+          "source": "NRP_MultiLanguage.js",
+          "link": true,
+          "linkIndex": 1
+        },
+        {
+          "source": "を使用している場合は自動で連携されます。",
+          "link": false
+        }
+      ],
+      "translation": "[[LINK_1]]NRP_MultiLanguage.js[[/LINK_1]] is used, integration happens automatically.",
+      "contextHash": "8058689fa0bb4e800b2c2864d3c6c4096cd36a79ce87fdb6e415a03e7b4531a8"
+    },
+    {
+      "id": "line-014",
+      "type": "line",
+      "source": "[[LINK_1]]＞RPGツクールMZ&MV目次に戻る[[/LINK_1]]",
+      "sourceHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890",
+      "parts": [
+        {
+          "source": "＞RPGツクールMZ&MV目次に戻る",
+          "link": true,
+          "linkIndex": 1
+        }
+      ],
+      "translation": "[[LINK_1]]>Return to RPG Maker MZ & MV Table of Contents[[/LINK_1]]",
+      "contextHash": "5592b135416b1f96965c93b65603b2cf8c3760df4a40d566c2b5d9feaab17890"
+    }
+  ],
+  "texts": {
+    "メッセージ画面を自動保存します。": "Automatically saves message screens.",
+    "CodexなどのＡＩエージェントと組み合わせることで、翻訳文をチェックする用途を想定しています。": "This is intended for checking translations in combination with AI agents such as Codex.",
+    "現在のＡＩ翻訳は極めて高性能ですが、文章だけで完全な翻訳をすることは非常に難しいです。": "AI translation is now extremely capable, but producing a complete translation based on text alone is very difficult.",
+    "例えば、日本語から英語に翻訳する場合、": "For example, when translating from Japanese into English, you need information such as:",
+    "省略されている主語や目的語": "The omitted subjects and objects",
+    "そのモノが単数か複数か？": "Whether something is singular or plural",
+    "その人物が男か女か？": "Whether a character is male or female",
+    "誰と誰が話しているのか？": "Who is speaking to whom",
+    "といった情報が必要になります。": "and other such details.",
+    "また多くの場合、文章データは格納順もバラバラなのでストーリーの時系列に沿って確認することが難しいです。": "Also, text data is often stored in a jumbled order, making it difficult to review it in the chronological order of the story.",
+    "そこでこのプラグインでは、ゲームをテストプレイした際に表示されたメッセージと画面を自動で順番に保存します。": "This plugin automatically saves, in sequence, the messages and screens shown during a test playthrough.",
+    "実際のゲーム画面を参照することで現在の状況と翻訳文に食い違いがないかを確認できるようになります。": "By referring to actual game screens, you can check whether the current situation and the translation match.",
+    "以下はキャプチャした画像をCodexに読み込ませて英訳をチェックさせた例です。実際のゲーム画面を参照できるので、文章だけでは分からない違和感を指摘してくれます。": "Below is an example of having Codex check an English translation using captured screenshots. Since it can refer to the actual game screens, it can point out awkwardness that isn't apparent from the text alone.",
+    "目次": "Table of Contents",
+    "導入方法": "Installation",
+    "以下のリンクを右クリックで保存し 、[プロジェクト]\\js\\plugins に放り込みます。ツクールのプラグイン管理から機能をONにしてください。": "Right-click the link below and save the file, then drop it into [project]\\js\\plugins. Enable it in the Plugin Manager in RPG Maker.",
+    "※このプラグインはＭＺ専用です。": "※This plugin is for MZ only.",
+    "NRP_MessageAutoCapture.js": "NRP_MessageAutoCapture.js ",
+    "ver1.00（2026/11/02）": "ver1.00 (2026/11/02) ",
+    "更新履歴（History）": "Update History (History)",
+    "2026/11/02（ver1.00）": "2026/11/02 (ver1.00) ",
+    "公開！": "Released!",
+    "使用方法": "How to Use",
+    "プラグインパラメータの保存フォルダを設定してください。空欄の場合は動作しません。相対パスはプロジェクト基準です。": "Set the save folder in the plugin parameters. The plugin won't work if this is blank. Relative paths are based on the project folder.",
+    "テストプレイ時、「文章の表示」毎にキャプチャを自動実行します。": "During test play, a screenshot is automatically captured each time “Show Text” is used.",
+    "製品版では自動で無効になります。": "It is automatically disabled in the released game.",
+    "保存先/YYYYMMDD/0000.jpg の形式で保存します。": "Files are saved in the format [destination]/YYYYMMDD/0000.jpg.",
+    "各画像には同名のJSONを保存します。『本文』『原文』『表示言語』『イベント位置』『撮影日時』『ページ番号』を記録するので、画像と一緒に参照できます。": "A JSON file with the same name is saved for each image. It records the message body, original text, display language, event location, capture date and time, and page number, so you can refer to it alongside the image.",
+    "後は、ＡＩエージェントに該当のフォルダを参照させ、jpgとjsonをチェックするように指示すればＯＫです。": "After that, just have the AI agent refer to the relevant folder and instruct it to check the JPG and JSON files.",
+    "ＡＩへの説明が面倒なら、このプラグインを読み込ませてしまうのが手っ取り早いです。": "If explaining things to the AI is a hassle, the quickest option is to have it read this plugin.",
+    "なお、内容が重複したメッセージは保存対象から除外されます。": "Messages with duplicate content are excluded from saving.",
+    "保存先直下の『capture-index.json』を削除すると重複情報をリセットできます。": "You can reset duplicate tracking by deleting “capture-index.json” in the destination folder.",
+    "細かい仕様": "Detailed Specifications",
+    "メッセージ送りの入力を受けた瞬間、画面が切り替わる前に撮影します。": "The screenshot is taken the moment input to advance the message is received, before the screen changes.",
+    "『選択肢』については、確定またはキャンセル直前に撮影します。": "For choices, the screenshot is taken just before confirming or canceling.",
+    "自動終了（\\^）にも対応しています。": "Automatic closing (\\^) is also supported.",
+    "自動終了は表示完了から12フレーム以上待ち、描画後に撮影します。保存中はページ送りと自動終了を短時間保留します。": "For automatic closing, the plugin waits at least 12 frames after the text finishes displaying, then takes the screenshot after drawing is complete. While saving, it briefly pauses page advancement and automatic closing.",
+    "重複判定は『マップＩＤ』『イベントＩＤ』『ページ』『コマンド位置』『言語』『名前欄』『本文』を使用します。": "Duplicate detection uses the map ID, event ID, page, command position, language, name field, and message body.",
+    "同一の文章コマンドでも変数の値や言語が異なれば再保存します。": "Even for the same Show Text command, the message is saved again if the variable values or language differ.",
+    "NRP_MultiLanguageとの連携": "Integration with NRP_MultiLanguage",
+    "jpgに付属するjson内に関連データを自動で記録します。": "Related data is automatically recorded in the JSON file accompanying the JPG.",
+    "原文は翻訳前のイベント文章を使用します。": "The original text is taken from the event text before translation.",
+    "原文欄は制御文字を文字列として残します（翻訳・スクリプトは実行しません）。": "Control characters are retained as text in the original text field (translation and scripts are not executed).",
+    "改ページがある場合も原文欄にはメッセージ全体を表示します。": "If there are page breaks, the original text field still shows the entire message.",
+    "NRP_MultiLanguage.js以外の翻訳プラグインを使用している場合も、ある程度は対応できると思いますがプラグイン毎に処理が異なるので詳細は不明です。": "Other than NRP_MultiLanguage.js, translation plugins should also work to some extent, but the details are unclear because processing differs between plugins.",
+    "プラグインパラメータ": "Plugin Parameters",
+    "保存フォルダ（CaptureFolder）": "Save Folder (CaptureFolder)",
+    "キャプチャ保存先。絶対パスまたはプロジェクトからの相対パス。": "Destination for saved screenshots. Use an absolute path or a path relative to the project.",
+    "空欄なら無効。": "Disabled if left blank.",
+    "画像サイズ倍率（ImageScale）": "Image Scale (ImageScale)",
+    "ゲーム画面の拡大縮小倍率。": "Scale factor for enlarging or reducing the game screen.",
+    "原文などの情報欄は縮小せず下部に追加します。": "Information such as the original text is added at the bottom without being scaled down.",
+    "JPEG品質（JpegQuality）": "JPEG Quality (JpegQuality) ",
+    "0.1～1。大きいほど高画質で容量が増えます。": "0.1–1. Higher values produce better image quality and larger file sizes.",
+    "重複保存を防止（SkipDuplicates）": "Prevent Duplicate Saves (SkipDuplicates) ",
+    "重複したメッセージの場合は保存を実行しません。": "Saving is skipped for duplicate messages.",
+    "マップ名を追加（ShowMapName）": "Add Map Name (ShowMapName) ",
+    "画像下に「マップID:管理用マップ名」を追加します。": "Adds “Map ID:Internal Map Name” below the image.",
+    "原文を追加（ShowOriginal）": "Add Original Text (ShowOriginal) ",
+    "画像下に翻訳前の名前欄と本文を追加します。": "Adds the pre-translation name field and message below the image."
+  }
+}
